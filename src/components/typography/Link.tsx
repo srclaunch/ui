@@ -1,6 +1,9 @@
+import { Link as RouterLink } from '@srclaunch/web-application-state';
 import { memo, ReactElement, useState } from 'react';
 import styled from 'styled-components';
-import { Link as RouterLink } from '@srclaunch/state';
+
+import { FocusedStyles } from '../../styles/focused';
+import { LayoutStyles } from '../../styles/layout';
 import {
   Align,
   Amount,
@@ -11,19 +14,19 @@ import {
 } from '../../types';
 import { Icon } from '../media/Icon';
 import { Text, TextProps } from './Text';
-import { FocusedStyles } from '../../styles/focused';
-import { LayoutStyles } from '../../styles/layout';
 
 type LinkProps<T = {}> = TextProps<
   HTMLAnchorElement,
   FocusProps<
     {
-      icon?: typeof Icon;
-      onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
-      prefetch?: boolean;
-      rel?: string;
-      target?: '_blank';
-      to: string;
+      readonly icon?: typeof Icon;
+      readonly onClick?: (
+        e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+      ) => void;
+      readonly prefetch?: boolean;
+      readonly rel?: string;
+      readonly target?: '_blank';
+      readonly to: string;
     } & T
   >
 >;

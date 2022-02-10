@@ -1,5 +1,5 @@
 import { DualLightIcons } from '@srclaunch/icons';
-import { useNavigate } from '@srclaunch/state';
+import { useNavigate } from '@srclaunch/web-application-state';
 
 import {
   Align,

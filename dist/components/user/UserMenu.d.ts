@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 declare type UserMenuProps = {
-    onLogoutSuccess?: () => unknown;
+    readonly onLogoutSuccess?: () => unknown;
 };
 export declare const UserMenu: import("react").MemoExoticComponent<({ onLogoutSuccess }: UserMenuProps) => ReactElement>;
 export {};

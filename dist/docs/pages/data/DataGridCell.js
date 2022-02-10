@@ -1,13 +1,13 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 // import CashFlowByDay from '../components/dashboard/CashFlowByDay';
-import { Amount, BackgroundColors, DataGrid, Depth, Workspace, } from '../../../index';
+import { Primitives } from '@srclaunch/types';
 import { memo } from 'react';
+import { Amount, BackgroundColors, DataGrid, Depth, Workspace, } from '../../../index';
 // import Muuri from 'muuri';
 // import { useEffect, useRef } from 'react';
 // import { connect } from 'react-redux';
 // import styled from 'styled-components';
 import { Documentation } from '../../layouts/Documentation';
-import { Primitives } from '@srclaunch/types';
 // import { getLocalizedStrings } from '../translations';
 export const DataGridCellPage = memo(() => {
     // const dispatch = useDispatch();
@@ -94,23 +94,23 @@ export const DataGridCellPage = memo(() => {
                 {
                     field: 'description',
                     label: 'Description',
-                    type: Primitives.LongText,
                     minWidth: 300,
+                    type: Primitives.LongText,
                 },
             ], data: [
                 {
                     date: new Date().toISOString(),
-                    name: 'Testing 123',
                     description: `Lorem ispum dolor sit amet, consectetur adipiscing elit. \
             Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus \
             accumsan et viverra justo commodo.`,
+                    name: 'Testing 123',
                 },
                 {
                     date: new Date().toISOString(),
-                    name: 'Testing 456',
                     description: `Lorem ispum dolor sit amet, consectetur adipiscing elit. \
             Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus \
             accumsan et viverra justo commodo.`,
+                    name: 'Testing 456',
                 },
             ] }, void 0) }, void 0));
 });

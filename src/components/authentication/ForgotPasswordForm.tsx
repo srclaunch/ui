@@ -1,15 +1,6 @@
-import React, { memo, ReactElement } from 'react';
 import { Condition, Primitives } from '@srclaunch/types';
-import { useSelector } from '@srclaunch/state';
-
-import { Container, ContainerProps } from '../layout/Container';
-import { ErrorNotification } from '../errors/ErrorNotification';
-import { Form } from '../forms/Form';
-import { Link } from '../typography/Link';
-import { LoadingOverlay } from '../progress/LoadingOverlay';
-import { Paragraph } from '../typography/Paragraph';
-import { Small } from '../typography/Small';
-import { Title } from '../typography/Title';
+import { useSelector } from '@srclaunch/web-application-state';
+import React, { memo, ReactElement } from 'react';
 
 import {
   Align,
@@ -18,15 +9,23 @@ import {
   BackgroundColors,
   DepthShadow,
 } from '../../types';
+import { ErrorNotification } from '../errors/ErrorNotification';
+import { Form } from '../forms/Form';
+import { Container, ContainerProps } from '../layout/Container';
+import { LoadingOverlay } from '../progress/LoadingOverlay';
+import { Link } from '../typography/Link';
+import { Paragraph } from '../typography/Paragraph';
+import { Small } from '../typography/Small';
+import { Title } from '../typography/Title';
 
 type ForgotPasswordFormProps = ContainerProps<
   HTMLDivElement,
   {
-    title?: string;
-    showSignupLink?: boolean;
-    signUpLinkLabel?: ReactElement;
-    signInButtonLabel?: ReactElement;
-    forgotPasswordLinkLabel?: ReactElement;
+    readonly title?: string;
+    readonly showSignupLink?: boolean;
+    readonly signUpLinkLabel?: ReactElement;
+    readonly signInButtonLabel?: ReactElement;
+    readonly forgotPasswordLinkLabel?: ReactElement;
   }
 >;
 

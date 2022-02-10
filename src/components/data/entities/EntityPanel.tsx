@@ -1,18 +1,14 @@
-import { memo, ReactElement, useEffect, useState } from 'react';
 // import { Model } from '@srclaunch/types';
-// import { RootState, useSearchParams, useSelector } from '@srclaunch/state';
+// import { RootState, useSearchParams, useSelector } from '@srclaunch/web-application-state';
 // import { Entity } from '@srclaunch/actions';
 import { HttpClient } from '@srclaunch/http-client';
-import { useDispatch, useSelector } from '@srclaunch/state';
 import { BasicIcons } from '@srclaunch/icons';
+import { useDispatch, useSelector } from '@srclaunch/web-application-state';
 import { camelCase, capitalCase } from 'change-case';
 import pluralize from 'pluralize';
+import { memo, ReactElement, useEffect, useState } from 'react';
+
 import { useEntityEditor } from '../../../hooks/use-entity-editor';
-import { Container } from '../../layout/Container';
-import { ModalHeader } from '../../modals/ModalHeader';
-import { SlidePanel } from '../../modals/SlidePanel';
-import { EntityEditor } from './EntityEditor';
-import { EntityPreview } from './EntityPreview';
 import {
   Amount,
   Colors,
@@ -20,13 +16,18 @@ import {
   Size,
   TextColors,
 } from '../../../types';
+import { Container } from '../../layout/Container';
+import { ModalHeader } from '../../modals/ModalHeader';
+import { SlidePanel } from '../../modals/SlidePanel';
 import { LoadingOverlay } from '../../progress/LoadingOverlay';
+import { EntityEditor } from './EntityEditor';
+import { EntityPreview } from './EntityPreview';
 
 type EntityPanelProps = ContainerProps<
   HTMLDivElement,
   {
-    actions?: Record<string, (...args: any[]) => any>;
-    httpClient?: typeof HttpClient;
+    readonly actions?: Record<string, (...args: readonly any[]) => any>;
+    readonly httpClient?: typeof HttpClient;
   }
 >;
 

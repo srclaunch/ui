@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-// import { PaymentMethodService } from "@srclaunch/services";
-import { memo, useState } from 'react';
-import { getPaymentMethods, useDispatch } from '@srclaunch/state';
+// import { PaymentMethodService } from "@srclaunch/http-services";
+import { getPaymentMethods, useDispatch, } from '@srclaunch/web-application-state';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { memo, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { Button } from '../../forms/buttons/Button';
 import { ProgressSpinner } from '../../progress/ProgressSpinner';

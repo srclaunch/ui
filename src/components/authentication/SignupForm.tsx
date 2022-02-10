@@ -1,16 +1,10 @@
-import { memo, ReactElement, useEffect } from 'react';
-import { signUp, useDispatch, useSelector } from '@srclaunch/state';
 import { Condition, Primitives } from '@srclaunch/types';
-
-import { ErrorNotification } from '../errors/ErrorNotification';
-import { Form } from '../forms/Form';
-import { Container, ContainerProps } from '../layout/Container';
-import { NotificationLabel } from '../notifications/NotificationLabel';
-import { Paragraph } from '../typography/Paragraph';
-import { Link } from '../typography/Link';
-import { Small } from '../typography/Small';
-import { Title } from '../typography/Title';
-import { LoadingOverlay } from '../progress/LoadingOverlay';
+import {
+  signUp,
+  useDispatch,
+  useSelector,
+} from '@srclaunch/web-application-state';
+import { memo, ReactElement, useEffect } from 'react';
 
 import {
   Align,
@@ -20,12 +14,25 @@ import {
   DepthShadow,
   Orientation,
 } from '../../types';
+import { ErrorNotification } from '../errors/ErrorNotification';
+import { Form } from '../forms/Form';
+import { Container, ContainerProps } from '../layout/Container';
+import { NotificationLabel } from '../notifications/NotificationLabel';
+import { LoadingOverlay } from '../progress/LoadingOverlay';
+import { Link } from '../typography/Link';
+import { Paragraph } from '../typography/Paragraph';
+import { Small } from '../typography/Small';
+import { Title } from '../typography/Title';
 
 type SignupFormProps = ContainerProps<
   HTMLDivElement,
   {
-    onSignupSuccess?: ({ userId }: { userId: string }) => unknown;
-    title?: string;
+    readonly onSignupSuccess?: ({
+      userId,
+    }: {
+      readonly userId: string;
+    }) => unknown;
+    readonly title?: string;
   }
 >;
 

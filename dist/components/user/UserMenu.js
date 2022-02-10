@@ -1,20 +1,18 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { memo, useEffect, useState } from 'react';
-import { logout, useDispatch, useSelector } from '@srclaunch/state';
 import { BasicIcons } from '@srclaunch/icons';
+import { logout, useDispatch, useSelector, } from '@srclaunch/web-application-state';
+import { memo, useEffect, useState } from 'react';
 import { Colors, Size, TextColors } from '../../types';
-import { MenuButton } from '../forms/buttons/MenuButton';
 import { ErrorLabel } from '../errors/ErrorLabel';
+import { MenuButton } from '../forms/buttons/MenuButton';
 export const UserMenu = memo(({ onLogoutSuccess }) => {
     const [loggingOut, setLoggingOut] = useState(false);
     const dispatch = useDispatch();
     const attributes = useSelector((state) => state.user.details.attributes);
     const loggedIn = useSelector((state) => state.user.authentication.state.loggedIn);
     useEffect(() => {
-        if (loggingOut && !loggedIn) {
-            if (onLogoutSuccess)
-                onLogoutSuccess();
-        }
+        if (loggingOut && !loggedIn && onLogoutSuccess)
+            onLogoutSuccess();
     }, [loggedIn]);
     if (!loggedIn) {
         return _jsx(ErrorLabel, { children: "Not logged in" }, void 0);

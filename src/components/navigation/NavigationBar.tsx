@@ -1,5 +1,8 @@
-import React, { ReactElement, memo } from 'react';
-import { useNavigate } from '@srclaunch/state';
+import { useNavigate } from '@srclaunch/web-application-state';
+import React, { memo, ReactElement } from 'react';
+
+import { Container } from '../../components/layout/Container';
+import { UserMenu } from '../../components/user/UserMenu';
 import {
   Align,
   Amount,
@@ -9,13 +12,11 @@ import {
   ContainerProps,
   Orientation,
 } from '../../types';
-import { Container } from '../../components/layout/Container';
-import { UserMenu } from '../../components/user/UserMenu';
 
 export type NavigationBarProps = ContainerProps<
   HTMLDivElement,
   {
-    logo?: ReactElement;
+    readonly logo?: ReactElement;
   }
 >;
 export const NavigationBar = memo(

@@ -82,7 +82,8 @@ export function useEntityEditor() {
     return () => {
       setMode({ edit: false, new: false, view: false });
       setModelName(null);
-      setEntity();
+      // eslint-disable-next-line unicorn/no-useless-undefined
+      setEntity(undefined);
     };
   }, [location.search]);
 

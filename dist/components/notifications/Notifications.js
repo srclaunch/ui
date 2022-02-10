@@ -1,9 +1,9 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useSelector } from '@srclaunch/web-application-state';
 import { memo } from 'react';
 import styled from 'styled-components';
-import { useSelector } from '@srclaunch/state';
-import { CloseButton } from '../modals/CloseButton';
 import { Icon } from '../media/Icon';
+import { CloseButton } from '../modals/CloseButton';
 export const Notifications = memo(() => {
     const notifications = useSelector((state) => state.app.notifications);
     // const dispatch = useDispatch();

@@ -1,10 +1,10 @@
+import { Notification } from '@srclaunch/types';
+import { RootState, useSelector } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
-import { RootState, useSelector } from '@srclaunch/state';
-import { Notification } from '@srclaunch/types';
 
-import { CloseButton } from '../modals/CloseButton';
 import { Icon } from '../media/Icon';
+import { CloseButton } from '../modals/CloseButton';
 
 export const Notifications = memo((): ReactElement => {
   const notifications: Notification[] = useSelector(
@@ -60,7 +60,7 @@ const NotificationContainer = styled.div`
   }
 `;
 
-const IconWrapper = styled.div<{ color?: string }>`
+const IconWrapper = styled.div<{ readonly color?: string }>`
   float: left;
   height: 60px;
   line-height: 64px;

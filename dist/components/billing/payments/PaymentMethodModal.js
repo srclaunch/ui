@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+import { getPaymentMethods, getSubscriptions, useDispatch, } from '@srclaunch/web-application-state';
 import { memo, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { getPaymentMethods, getSubscriptions, useDispatch, } from '@srclaunch/state';
 import { Size } from '../../../types';
 import { Button } from '../../forms/buttons/Button';
 import { CloseButton } from '../../modals/CloseButton';

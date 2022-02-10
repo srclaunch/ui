@@ -1,9 +1,11 @@
-// import { PaymentMethodService } from "@srclaunch/services";
-import { memo, ReactElement, useState } from 'react';
-
-import { getPaymentMethods, useDispatch } from '@srclaunch/state';
+// import { PaymentMethodService } from "@srclaunch/http-services";
+import {
+  getPaymentMethods,
+  useDispatch,
+} from '@srclaunch/web-application-state';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { PaymentMethod, StripeError } from '@stripe/stripe-js';
+import { memo, ReactElement, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Button } from '../../forms/buttons/Button';
@@ -14,8 +16,8 @@ export const AddPaymentMethodForm = memo(
     cancel,
     paymentMethodsCount,
   }: {
-    cancel: () => unknown;
-    paymentMethodsCount: number;
+    readonly cancel: () => unknown;
+    readonly paymentMethodsCount: number;
   }): ReactElement => {
     const dispatch = useDispatch();
 
@@ -158,7 +160,7 @@ const Error = styled.div`
 `;
 
 const CardInput = styled.div<{
-  disabled: boolean;
+  readonly disabled: boolean;
 }>`
   background: white;
   box-shadow: 0 0 0 transparent;

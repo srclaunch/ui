@@ -1,11 +1,12 @@
-import { memo, ReactElement, useEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
+import { PaymentMethod, User } from '@srclaunch/types';
 import {
   getPaymentMethods,
   getSubscriptions,
   useDispatch,
-} from '@srclaunch/state';
-import { PaymentMethod, User } from '@srclaunch/types';
+} from '@srclaunch/web-application-state';
+import { memo, ReactElement, useEffect, useState } from 'react';
+import styled, { css } from 'styled-components';
+
 import { Size } from '../../../types';
 import { Button } from '../../forms/buttons/Button';
 import { CloseButton } from '../../modals/CloseButton';
@@ -14,9 +15,9 @@ import { ProgressSpinner } from '../../progress/ProgressSpinner';
 // const stripePromise = loadStripe(config.stripe.publicKey);
 
 type PaymentMethodModalProps = {
-  paymentMethods: PaymentMethod[];
-  premium: User['membership'];
-  visible: boolean;
+  readonly paymentMethods: readonly PaymentMethod[];
+  readonly premium: User['membership'];
+  readonly visible: boolean;
 };
 
 export const PaymentMethodModal = memo(
@@ -261,7 +262,7 @@ export const PaymentMethodModal = memo(
 );
 
 const Container = styled.div<{
-  visible?: boolean;
+  readonly visible?: boolean;
 }>`
   background: rgba(0, 0, 0, 0.5);
   bottom: 0;
@@ -290,8 +291,8 @@ const Close = styled.div`
 `;
 
 const Content = styled.div<{
-  darkMode?: boolean;
-  visible?: boolean;
+  readonly darkMode?: boolean;
+  readonly visible?: boolean;
 }>`
   background: white;
   border-radius: 15px 15px 0 0;
@@ -332,7 +333,7 @@ const Content = styled.div<{
 `;
 
 const PaymentForm = styled.div<{
-  darkMode?: boolean;
+  readonly darkMode?: boolean;
 }>`
   background: #f2f2f2;
   border-radius: 15px;

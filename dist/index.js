@@ -150,7 +150,7 @@ export * from './types/index';
 // import Light from './themes/light';
 // import { CSSModule, Theme } from './types/theme';
 // import { getModels } from '@applab-io/models';
-// import { createStore, renderReduxWebApp } from '@srclaunch/state';
+// import { createStore, renderReduxWebApp } from '@srclaunch/web-application-state';
 // export { ThemeProvider };
 // export { CSSModule, Theme };
 // export { Light };

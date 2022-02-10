@@ -1,9 +1,9 @@
-import { ReactElement } from 'react';
 import { PaymentMethod, User } from '@srclaunch/types';
+import { ReactElement } from 'react';
 declare type PaymentMethodModalProps = {
-    paymentMethods: PaymentMethod[];
-    premium: User['membership'];
-    visible: boolean;
+    readonly paymentMethods: readonly PaymentMethod[];
+    readonly premium: User['membership'];
+    readonly visible: boolean;
 };
 export declare const PaymentMethodModal: import("react").MemoExoticComponent<({ paymentMethods, premium, visible, }: PaymentMethodModalProps) => ReactElement>;
 export {};

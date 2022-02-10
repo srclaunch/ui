@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { createStore, renderReduxWebApp } from '@srclaunch/state';
+import { createStore, renderReduxWebApp, } from '@srclaunch/web-application-state';
 // import { AppLabDarkTheme } from '@srclaunch/themes';
 import routes from './routes';
 import reducers from './state/index';

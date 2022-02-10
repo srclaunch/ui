@@ -1,5 +1,11 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+## 0.1.3
 
-## 0.0.2 (2021-07-18)
+### Patch Changes
+
+- Updating refs and deps
+- Updated dependencies
+  - @srclaunch/actions@0.1.3
+  - @srclaunch/http-services@0.1.3
+  - @srclaunch/web-application-state@0.1.3

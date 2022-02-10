@@ -1,18 +1,18 @@
-import { memo, ReactElement } from 'react';
+import { Theme } from '@srclaunch/types';
 import {
+  RootState,
+  setTheme,
   useDispatch,
   useSelector,
-  setTheme,
-  RootState,
-} from '@srclaunch/state';
+} from '@srclaunch/web-application-state';
+import { memo, ReactElement } from 'react';
+
 import {
   DropdownInput,
   DropdownInputProps,
 } from '../forms/inputs/menu/DropdownInput';
-import { Theme } from '@srclaunch/types';
-import { Container } from '../layout/Container';
 import { InputLabel } from '../forms/labels/InputLabel';
-import { ContainerProps } from '../layout/Container';
+import { Container, ContainerProps } from '../layout/Container';
 
 export type ThemeSelectorProps = ContainerProps<
   HTMLDivElement,
@@ -45,7 +45,7 @@ export const ThemeSelector = memo(
 
             dispatch(setTheme(newTheme.id));
           }}
-          placeholder={'Choose a theme'}
+          placeholder="Choose a theme"
           {...props}
         />
       </Container>

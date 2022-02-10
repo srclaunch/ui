@@ -5,7 +5,7 @@ export declare function useEntityEditor(): {
     } & {
         id?: string | undefined;
     }) | undefined;
-    model: Model | null;
+    hideEntityEditor: () => void;
     mode: {
         edit: false;
         new: false;
@@ -23,6 +23,7 @@ export declare function useEntityEditor(): {
         new: false;
         view: true;
     };
+    model: Model | null;
     showEntityEditor: ({ edit, new: new_, set, view, id, }: {
         edit?: string | undefined;
         new?: string | undefined;
@@ -30,6 +31,5 @@ export declare function useEntityEditor(): {
         set?: Record<string, string> | undefined;
         view?: string | undefined;
     }) => void;
-    hideEntityEditor: () => void;
 };
 //# sourceMappingURL=use-entity-editor.d.ts.map

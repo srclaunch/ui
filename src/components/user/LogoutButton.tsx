@@ -1,23 +1,26 @@
-import { logout, RootState, useDispatch, useSelector } from '@srclaunch/state';
-import { memo, ReactElement, useEffect } from 'react';
 import { BasicIcons } from '@srclaunch/icons';
+import {
+  logout,
+  RootState,
+  useDispatch,
+  useSelector,
+} from '@srclaunch/web-application-state';
+import { memo, ReactElement, useEffect } from 'react';
 
 import { Size, TextColors } from '../../types';
-
-import { Label, LabelProps } from '../typography/Label';
-import { Icon } from '../media/Icon';
-
 import { Button, ButtonProps } from '../forms/buttons/Button';
+import { Icon } from '../media/Icon';
+import { Label, LabelProps } from '../typography/Label';
 
 export type LogoutButtonProps<T = {}> = ButtonProps<
   HTMLButtonElement,
   LabelProps<
     HTMLLabelElement,
     {
-      label?: string;
-      onLogoutSuccess?: () => unknown;
-      showArrow?: boolean;
-      showUnderline?: boolean;
+      readonly label?: string;
+      readonly onLogoutSuccess?: () => unknown;
+      readonly showArrow?: boolean;
+      readonly showUnderline?: boolean;
     } & T
   >
 >;
@@ -37,9 +40,7 @@ export const LogoutButton = memo(
     );
 
     useEffect(() => {
-      if (!loggedIn) {
-        if (onLogoutSuccess) onLogoutSuccess();
-      }
+      if (!loggedIn && onLogoutSuccess) onLogoutSuccess();
     }, [loggedIn]);
 
     return (

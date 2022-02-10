@@ -1,17 +1,17 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { memo, useEffect } from 'react';
-import { signUp, useDispatch, useSelector } from '@srclaunch/state';
 import { Condition, Primitives } from '@srclaunch/types';
+import { signUp, useDispatch, useSelector, } from '@srclaunch/web-application-state';
+import { memo, useEffect } from 'react';
+import { Align, Amount, AutoComplete, BackgroundColors, DepthShadow, Orientation, } from '../../types';
 import { ErrorNotification } from '../errors/ErrorNotification';
 import { Form } from '../forms/Form';
 import { Container } from '../layout/Container';
 import { NotificationLabel } from '../notifications/NotificationLabel';
-import { Paragraph } from '../typography/Paragraph';
+import { LoadingOverlay } from '../progress/LoadingOverlay';
 import { Link } from '../typography/Link';
+import { Paragraph } from '../typography/Paragraph';
 import { Small } from '../typography/Small';
 import { Title } from '../typography/Title';
-import { LoadingOverlay } from '../progress/LoadingOverlay';
-import { Align, Amount, AutoComplete, BackgroundColors, DepthShadow, Orientation, } from '../../types';
 export const SignupForm = memo(({ backgroundColor = BackgroundColors.Darker, borderRadius = Amount.More, onSignupSuccess, title = 'Sign up', }) => {
     const dispatch = useDispatch();
     const signUpState = useSelector(state => state.user.authentication?.signup);

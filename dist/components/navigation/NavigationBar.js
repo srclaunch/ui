@@ -1,9 +1,9 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useNavigate } from '@srclaunch/web-application-state';
 import { memo } from 'react';
-import { useNavigate } from '@srclaunch/state';
-import { Align, Amount, BackgroundColors, BorderColors, BorderStyle, Orientation, } from '../../types';
 import { Container } from '../../components/layout/Container';
 import { UserMenu } from '../../components/user/UserMenu';
+import { Align, Amount, BackgroundColors, BorderColors, BorderStyle, Orientation, } from '../../types';
 export const NavigationBar = memo(({ backgroundColor = BackgroundColors.NavigationBar, logo, }) => {
     const navigate = useNavigate();
     return (_jsxs(Container, { backgroundColor: backgroundColor, border: {

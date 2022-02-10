@@ -1,10 +1,9 @@
-import { Property } from '@azorakapp/azorak-types';
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { Exception } from '@srclaunch/exceptions';
 import { RootState } from '@srclaunch/web-application-state';
 import { DateTime } from 'luxon';
 
-const propertyAdapter = createEntityAdapter<Property>();
+const propertyAdapter = createEntityAdapter<{}>();
 
 export const selectors = propertyAdapter.getSelectors(
   (state: RootState) => state.properties,

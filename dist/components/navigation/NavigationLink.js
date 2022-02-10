@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { NavLink, useLocation, useMatch, useResolvedPath, } from '@srclaunch/state';
+import { NavLink, useLocation, useMatch, useResolvedPath, } from '@srclaunch/web-application-state';
 import { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { AppearanceStyles } from '../../styles/appearance';

@@ -1,28 +1,29 @@
-import { memo, ReactElement, useEffect, useState } from 'react';
 import { Model } from '@srclaunch/types';
-import { useDispatch, useSelector } from '@srclaunch/state';
+import { useDispatch, useSelector } from '@srclaunch/web-application-state';
 import pluralize from 'pluralize';
+import { memo, ReactElement, useEffect, useState } from 'react';
+
+import { useEntityEditor } from '../../../hooks/use-entity-editor';
 import { getFormFieldsFromModel } from '../../../lib/forms/fields';
+import { Amount } from '../../../types';
+import { ErrorLabel } from '../../errors/ErrorLabel';
+import { Form } from '../../forms/Form';
 import { Container, ContainerProps } from '../../layout/Container';
 import { LoadingOverlay } from '../../progress/LoadingOverlay';
-import { Form } from '../../forms/Form';
-import { ErrorLabel } from '../../errors/ErrorLabel';
-import { Amount } from '../../../types';
-import { useEntityEditor } from '../../../hooks/use-entity-editor';
 
 type EntityEditorProps = ContainerProps<
   HTMLDivElement,
   {
-    actions?: Record<string, (...args: any[]) => any>;
-    id?: string;
-    model: Model;
+    readonly actions?: Record<string, (...args: readonly any[]) => any>;
+    readonly id?: string;
+    readonly model: Model;
   }
 >;
 
 export const EntityEditor = memo(
   ({ actions, className = '', id, model }: EntityEditorProps): ReactElement => {
     const dispatch = useDispatch();
-    const { entity: entityFields , hideEntityEditor } = useEntityEditor();
+    const { entity: entityFields, hideEntityEditor } = useEntityEditor();
     const [dispatched, setDispatched] = useState(false);
     const inProgress = useSelector(
       (state: any) => state[`${model?.name}.inProgress`],
@@ -58,12 +59,13 @@ export const EntityEditor = memo(
       <Container className={`${className} entity-editor`}>
         <Form
           fields={getFormFieldsFromModel({ model })}
-          entity={{ ...entity, ...entityFields,}}
+          entity={{ ...entity, ...entityFields }}
           inProgress={inProgress}
           model={model}
           name="entity-editor"
           onSubmit={async ({ fields, problems, validated }) => {
             let fieldData = {};
+
             for (const [key, props] of Object.entries(fields)) {
               fieldData = { ...fieldData, [key]: props.value };
             }

@@ -1,21 +1,26 @@
-import { memo, ReactElement, useEffect, useState } from 'react';
-import { Outlet, RootState, useSelector } from '@srclaunch/state';
-import { ThemeProvider } from '@srclaunch/themes';
 import { HttpClient } from '@srclaunch/http-client';
-import { ContainerProps, BackgroundColors } from '../../types';
+import { ThemeProvider } from '@srclaunch/themes';
+import {
+  Outlet,
+  RootState,
+  useSelector,
+} from '@srclaunch/web-application-state';
+import { memo, ReactElement, useEffect, useState } from 'react';
+
 import { useAuthentication } from '../../hooks/use-authentication';
-import { Container } from '../layout/Container';
-import { ErrorBoundary } from '../errors/ErrorBoundary';
+import { BackgroundColors, ContainerProps } from '../../types';
 import { EntityPanel } from '../data/entities/EntityPanel';
+import { ErrorBoundary } from '../errors/ErrorBoundary';
+import { Container } from '../layout/Container';
 import { Backdrop } from '../modals/Backdrop';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 
 type WebApplicationProps = ContainerProps<
   HTMLDivElement,
   {
-    authentication?: boolean;
-    actions?: Record<string, (...args: any[]) => any>;
-    httpClient?: typeof HttpClient;
+    readonly authentication?: boolean;
+    readonly actions?: Record<string, (...args: readonly any[]) => any>;
+    readonly httpClient?: typeof HttpClient;
   }
 >;
 

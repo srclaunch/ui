@@ -1,13 +1,13 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { memo, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from '@srclaunch/state';
+import { useDispatch, useSelector } from '@srclaunch/web-application-state';
 import pluralize from 'pluralize';
-import { getFormFieldsFromModel } from '../../../lib/forms/fields';
-import { Container } from '../../layout/Container';
-import { Form } from '../../forms/Form';
-import { ErrorLabel } from '../../errors/ErrorLabel';
-import { Amount } from '../../../types';
+import { memo, useEffect, useState } from 'react';
 import { useEntityEditor } from '../../../hooks/use-entity-editor';
+import { getFormFieldsFromModel } from '../../../lib/forms/fields';
+import { Amount } from '../../../types';
+import { ErrorLabel } from '../../errors/ErrorLabel';
+import { Form } from '../../forms/Form';
+import { Container } from '../../layout/Container';
 export const EntityEditor = memo(({ actions, className = '', id, model }) => {
     const dispatch = useDispatch();
     const { entity: entityFields, hideEntityEditor } = useEntityEditor();
@@ -25,7 +25,7 @@ export const EntityEditor = memo(({ actions, className = '', id, model }) => {
     if (id && !entity && !inProgress) {
         return (_jsx(Container, { className: `${className} entity-editor`, padding: Amount.More, children: _jsx(ErrorLabel, { children: "Entity not found" }, void 0) }, void 0));
     }
-    return (_jsx(Container, { className: `${className} entity-editor`, children: _jsx(Form, { fields: getFormFieldsFromModel({ model }), entity: { ...entity, ...entityFields, }, inProgress: inProgress, model: model, name: "entity-editor", onSubmit: async ({ fields, problems, validated }) => {
+    return (_jsx(Container, { className: `${className} entity-editor`, children: _jsx(Form, { fields: getFormFieldsFromModel({ model }), entity: { ...entity, ...entityFields }, inProgress: inProgress, model: model, name: "entity-editor", onSubmit: async ({ fields, problems, validated }) => {
                 let fieldData = {};
                 for (const [key, props] of Object.entries(fields)) {
                     fieldData = { ...fieldData, [key]: props.value };

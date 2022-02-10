@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useTitle } from '@srclaunch/react-hooks';
 import { cloneElement, memo } from 'react';
-import { useTitle } from '@srclaunch/hooks';
 import { Align } from '../../types';
-import { Container, } from '../layout/Container';
+import { Container } from '../layout/Container';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 export const Page = memo(({ alignContent = Align.Top, children, className = '', grow = false, layout: Layout, loading = false, title, ...props }) => {
     useTitle(title);

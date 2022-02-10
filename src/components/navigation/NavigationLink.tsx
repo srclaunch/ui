@@ -3,7 +3,7 @@ import {
   useLocation,
   useMatch,
   useResolvedPath,
-} from '@srclaunch/state';
+} from '@srclaunch/web-application-state';
 import { memo, ReactElement, useEffect, useState } from 'react';
 import styled from 'styled-components';
 

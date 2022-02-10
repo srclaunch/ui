@@ -1,5 +1,5 @@
+import { useSelector } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
-import { useSelector } from '@srclaunch/state';
 import styled, { css } from 'styled-components';
 
 // import CloseButton from '../common/CloseButton';
@@ -41,7 +41,7 @@ export const SubscriptionModal = memo((): ReactElement => {
               <Price>
                 $1.49 <span>/a month per account</span>
               </Price>
-              <ActionButton size="large" secondary={true}>
+              <ActionButton size="large" secondary>
                 Turn on
               </ActionButton>
             </BottomActions>
@@ -80,7 +80,7 @@ export const SubscriptionModal = memo((): ReactElement => {
 });
 
 const Container = styled.div<{
-  visible?: boolean;
+  readonly visible?: boolean;
 }>`
   background: rgba(0, 0, 0, 0.7);
   bottom: 0;
@@ -108,8 +108,8 @@ const Close = styled.div`
 `;
 
 const Content = styled.div<{
-  darkMode?: boolean;
-  visible?: boolean;
+  readonly darkMode?: boolean;
+  readonly visible?: boolean;
 }>`
   background: white;
   border-radius: 15px 15px 0 0;
@@ -168,7 +168,7 @@ const Options = styled.div`
 `;
 
 const Option = styled.div<{
-  darkMode?: boolean;
+  readonly darkMode?: boolean;
 }>`
   border: 2px solid #ddd;
   border-radius: 15px;
@@ -277,7 +277,7 @@ const BottomActions = styled.div`
 `;
 
 const Price = styled.div<{
-  darkMode?: boolean;
+  readonly darkMode?: boolean;
 }>`
   color: #3b3b3b;
   float: left;
@@ -296,10 +296,10 @@ const Price = styled.div<{
 `;
 
 const ActionButton = styled.div<{
-  darkMode?: boolean;
-  disabled?: boolean;
-  size?: string;
-  secondary?: boolean;
+  readonly darkMode?: boolean;
+  readonly disabled?: boolean;
+  readonly size?: string;
+  readonly secondary?: boolean;
 }>`
   background: rgba(60, 60, 60, 1);
   border: 2px solid transparent;

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { useSearchParams, useLocation, useSelector, } from '@srclaunch/state';
+import { useLocation, useSearchParams, useSelector, } from '@srclaunch/web-application-state';
 import queryString from 'query-string';
+import { useEffect, useState } from 'react';
 export function useEntityEditor() {
     const location = useLocation();
     const [searchParams, setSearchParams] = useSearchParams();
@@ -43,6 +43,7 @@ export function useEntityEditor() {
         return () => {
             setMode({ edit: false, new: false, view: false });
             setModelName(null);
+            // eslint-disable-next-line unicorn/no-useless-undefined
             setEntity(undefined);
         };
     }, [location.search]);
@@ -77,10 +78,10 @@ export function useEntityEditor() {
     };
     return {
         entity,
-        model: modelDef,
-        mode,
-        showEntityEditor,
         hideEntityEditor,
+        mode,
+        model: modelDef,
+        showEntityEditor,
     };
 }
 //# sourceMappingURL=use-entity-editor.js.map

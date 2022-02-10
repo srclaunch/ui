@@ -1,4 +1,4 @@
-// import { useDispatch } from '@srclaunch/state';
+// import { useDispatch } from '@srclaunch/web-application-state';
 // import moment from 'moment';
 import { memo, ReactElement, useState } from 'react';
 import styled, { css } from 'styled-components';

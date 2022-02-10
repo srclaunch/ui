@@ -1,16 +1,11 @@
-import { memo, ReactElement, useEffect } from 'react';
-import { login, RootState, useDispatch, useSelector } from '@srclaunch/state';
 import { Condition, Primitives } from '@srclaunch/types';
-
-import { ErrorNotification } from '../errors/ErrorNotification';
-import { Form } from '../forms/Form';
-import { Container } from '../layout/Container';
-import { NotificationLabel } from '../notifications/NotificationLabel';
-import { Paragraph } from '../typography/Paragraph';
-import { Link } from '../typography/Link';
-import { Small } from '../typography/Small';
-import { Title } from '../typography/Title';
-import { LoadingOverlay } from '../progress/LoadingOverlay';
+import {
+  login,
+  RootState,
+  useDispatch,
+  useSelector,
+} from '@srclaunch/web-application-state';
+import { memo, ReactElement, useEffect } from 'react';
 
 import {
   Align,
@@ -22,16 +17,25 @@ import {
   FormField,
   Orientation,
 } from '../../types';
+import { ErrorNotification } from '../errors/ErrorNotification';
+import { Form } from '../forms/Form';
+import { Container } from '../layout/Container';
+import { NotificationLabel } from '../notifications/NotificationLabel';
+import { LoadingOverlay } from '../progress/LoadingOverlay';
+import { Link } from '../typography/Link';
+import { Paragraph } from '../typography/Paragraph';
+import { Small } from '../typography/Small';
+import { Title } from '../typography/Title';
 
 type LoginFormProps = ContainerProps<
   HTMLDivElement,
   {
-    onLoginSuccess?: () => unknown;
-    title?: string;
-    showSignupLink?: boolean;
-    signUpLinkLabel?: ReactElement;
-    signInButtonLabel?: ReactElement;
-    forgotPasswordLinkLabel?: ReactElement;
+    readonly onLoginSuccess?: () => unknown;
+    readonly title?: string;
+    readonly showSignupLink?: boolean;
+    readonly signUpLinkLabel?: ReactElement;
+    readonly signInButtonLabel?: ReactElement;
+    readonly forgotPasswordLinkLabel?: ReactElement;
   }
 >;
 
@@ -154,11 +158,12 @@ export const LoginForm = memo(
             validated?: boolean;
           }) => {
             console.log('fields', fields);
+
             if (validated)
               dispatch(
                 login({
-                  username: fields.username?.value as string,
                   password: fields.password?.value as string,
+                  username: fields.username?.value as string,
                 }),
               );
           }}

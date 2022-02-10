@@ -1,7 +1,7 @@
 // import CashFlowByDay from '../components/dashboard/CashFlowByDay';
 import { Primitives } from '@srclaunch/types';
 // import { useTitle } from '@srclaunch/react-hooks';
-// import { useDispatch } from '@srclaunch/state';
+// import { useDispatch } from '@srclaunch/web-application-state';
 import { DateTime } from 'luxon';
 import { memo, ReactElement } from 'react';
 

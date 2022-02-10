@@ -1,5 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
-// import { useDispatch } from '@srclaunch/state';
+// import { useDispatch } from '@srclaunch/web-application-state';
 // import moment from 'moment';
 import { memo, useState } from 'react';
 import styled, { css } from 'styled-components';

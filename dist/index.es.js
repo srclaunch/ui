@@ -31,10 +31,10 @@ var __objRest = (source, exclude) => {
 };
 import React$1, { memo, useState, useEffect, useRef, Component, forwardRef, useMemo, createElement, useReducer, useCallback, useImperativeHandle, createContext, useContext, cloneElement, useLayoutEffect } from "react";
 import styled, { css as css$1 } from "styled-components";
-import { useNavigate as useNavigate$1, useDispatch, useSelector, getVerificationDetails, verifyCode, resendVerificationCode, useResolvedPath as useResolvedPath$1, useMatch, useLocation as useLocation$1, NavLink as NavLink$1, Link as Link$2, login, signUp, getPaymentMethods, getSubscriptions, useSearchParams, Outlet, logout, setTheme } from "@srclaunch/state";
 import { Condition, UserVerificationStatus, NotificationType, CountryCode, CurrencyCode, LanguageCode, Primitives, PageRole, Activities } from "@srclaunch/types";
+import { useNavigate as useNavigate$1, useDispatch, useSelector, getVerificationDetails, verifyCode, resendVerificationCode, useResolvedPath as useResolvedPath$1, useMatch, useLocation as useLocation$1, NavLink as NavLink$1, Link as Link$2, login, signUp, getPaymentMethods, getSubscriptions, useSearchParams, Outlet, logout, setTheme } from "@srclaunch/web-application-state";
 import { validate as validate$1 } from "@srclaunch/validation";
-import { AuthenticationService } from "@srclaunch/services";
+import { AuthenticationService } from "@srclaunch/http-services";
 import ReactDOM, { findDOMNode } from "react-dom";
 import { formatCurrency } from "@srclaunch/i18n";
 import { Logger } from "@srclaunch/logger";
@@ -4832,8 +4832,7 @@ const Label = memo((_i) => {
     })]
   }));
 });
-var ButtonType;
-(function(ButtonType2) {
+var ButtonType = /* @__PURE__ */ ((ButtonType2) => {
   ButtonType2["Default"] = "black";
   ButtonType2["Error"] = "error";
   ButtonType2["Info"] = "info";
@@ -4845,7 +4844,8 @@ var ButtonType;
   ButtonType2["Transparent"] = "transparent";
   ButtonType2["Warning"] = "warning";
   ButtonType2["White"] = "white";
-})(ButtonType || (ButtonType = {}));
+  return ButtonType2;
+})(ButtonType || {});
 const Wrapper$7 = styled.button`
   ${LayoutStyles};
   ${AppearanceStyles};
@@ -4869,7 +4869,7 @@ const Wrapper$7 = styled.button`
       }
     `};
 
-  ${(props) => props.type === ButtonType.Link && css$1`
+  ${(props) => props.type === "link" && css$1`
       padding-left: calc($ {props.size} / 5) !important;
       padding-right: calc($ {props.size} / 5) !important;
 
@@ -4939,57 +4939,57 @@ const Button$1 = memo((_k) => {
         textColor: TextColors.BlackContrast
       };
     switch (type) {
-      case ButtonType.Default:
+      case "black":
         return {
           backgroundColor: BackgroundColors.Default,
           textColor: TextColors.DefaultContrast
         };
-      case ButtonType.Error:
+      case "error":
         return {
           backgroundColor: BackgroundColors.Error,
           textColor: TextColors.ErrorContrast
         };
-      case ButtonType.Info:
+      case "info":
         return {
           backgroundColor: BackgroundColors.Info,
           textColor: TextColors.InfoContrast
         };
-      case ButtonType.Inline:
+      case "inline":
         return {
           backgroundColor: BackgroundColors.Transparent,
           textColor: TextColors.Default
         };
-      case ButtonType.Link:
+      case "link":
         return {
           backgroundColor: BackgroundColors.Transparent,
           textColor: TextColors.Primary
         };
-      case ButtonType.Primary:
+      case "primary":
         return {
           backgroundColor: BackgroundColors.Primary,
           textColor: TextColors.PrimaryContrast
         };
-      case ButtonType.Secondary:
+      case "secondary":
         return {
           backgroundColor: BackgroundColors.Secondary,
           textColor: TextColors.SecondaryContrast
         };
-      case ButtonType.Success:
+      case "success":
         return {
           backgroundColor: BackgroundColors.Success,
           textColor: TextColors.SuccessContrast
         };
-      case ButtonType.Transparent:
+      case "transparent":
         return {
           backgroundColor: BackgroundColors.Transparent,
           textColor: TextColors.Default
         };
-      case ButtonType.Warning:
+      case "warning":
         return {
           backgroundColor: BackgroundColors.Warning,
           textColor: TextColors.WarningContrast
         };
-      case ButtonType.White:
+      case "white":
         return {
           backgroundColor: BackgroundColors.White,
           textColor: TextColors.WhiteContrast
@@ -5050,15 +5050,14 @@ const Button$1 = memo((_k) => {
       textColor: updatedTextColor,
       textSize: convertSizeToTextSize(getSmallerSize(size)),
       textWeight: TextWeight.More,
-      underline: type === ButtonType.Link && hovered,
+      underline: type === "link" && hovered,
       children
     }) : /* @__PURE__ */ jsx(Fragment, {
       children
     })
   }));
 });
-var Colors;
-(function(Colors2) {
+var Colors = /* @__PURE__ */ ((Colors2) => {
   Colors2["Black"] = "var(--color-black-rgb)";
   Colors2["Default"] = "var(--color-default-rgb)";
   Colors2["Error"] = "var(--color-error-rgb)";
@@ -5070,9 +5069,9 @@ var Colors;
   Colors2["Transparent"] = "transparent";
   Colors2["Warning"] = "var(--color-warning-rgb)";
   Colors2["White"] = "var(--color-white-rgb)";
-})(Colors || (Colors = {}));
-var ContrastColors;
-(function(ContrastColors2) {
+  return Colors2;
+})(Colors || {});
+var ContrastColors = /* @__PURE__ */ ((ContrastColors2) => {
   ContrastColors2["Black"] = "var(--color-black-contrast-rgb)";
   ContrastColors2["Default"] = "var(--color-default-contrast-rgb)";
   ContrastColors2["Error"] = "var(--color-error-contrast-rgb)";
@@ -5082,29 +5081,9 @@ var ContrastColors;
   ContrastColors2["Success"] = "var(--color-success-contrast-rgb)";
   ContrastColors2["Warning"] = "var(--color-warning-contrast-rgb)";
   ContrastColors2["White"] = "var(--color-white-contrast-rgb)";
-})(ContrastColors || (ContrastColors = {}));
-var ElementBackgroundColors;
-(function(ElementBackgroundColors2) {
-  ElementBackgroundColors2["Card"] = "var(--bg-color-card-rgb)";
-  ElementBackgroundColors2["CloseButton"] = "var(--bg-color-close-button-rgb)";
-  ElementBackgroundColors2["DataGrid"] = "var(--bg-color-data-grid-rgb)";
-  ElementBackgroundColors2["DataGridHeader"] = "var(--bg-color-data-grid-header-rgb)";
-  ElementBackgroundColors2["DataGridColumnHeaders"] = "var(--bg-color-data-grid-column-headers-rgb)";
-  ElementBackgroundColors2["DataGridCell"] = "var(--bg-color-data-grid-cell-rgb)";
-  ElementBackgroundColors2["DataGridRow"] = "var(--bg-color-data-grid-row-rgb)";
-  ElementBackgroundColors2["DropdownMenu"] = "var(--bg-color-dropdown-menu-rgb)";
-  ElementBackgroundColors2["InputControl"] = "var(--bg-color-input-control-rgb)";
-  ElementBackgroundColors2["Button"] = "var(--bg-color-button-rgb)";
-  ElementBackgroundColors2["MenuButton"] = "var(--bg-color-menu-button-rgb)";
-  ElementBackgroundColors2["MenuItem"] = "var(--bg-color-menu-item-rgb)";
-  ElementBackgroundColors2["MoreMenu"] = "var(--bg-color-more-menu-rgb)";
-  ElementBackgroundColors2["NavigationBar"] = "var(--bg-color-navigation-bar-rgb)";
-  ElementBackgroundColors2["NavigationMenu"] = "var(--bg-color-navigation-menu-rgb)";
-  ElementBackgroundColors2["SlidePanel"] = "var(--bg-color-slide-panel-rgb)";
-  ElementBackgroundColors2["Workspace"] = "var(--bg-color-workspace-rgb)";
-})(ElementBackgroundColors || (ElementBackgroundColors = {}));
-var BackgroundColorShade;
-(function(BackgroundColorShade2) {
+  return ContrastColors2;
+})(ContrastColors || {});
+var BackgroundColorShade = /* @__PURE__ */ ((BackgroundColorShade2) => {
   BackgroundColorShade2["Lightest"] = "var(--bg-color-lightest-rgb)";
   BackgroundColorShade2["Lighter"] = "var(--bg-color-lighter-rgb)";
   BackgroundColorShade2["Light"] = "var(--bg-color-light-rgb)";
@@ -5113,33 +5092,33 @@ var BackgroundColorShade;
   BackgroundColorShade2["Darker"] = "var(--bg-color-darker-rgb)";
   BackgroundColorShade2["Darkest"] = "var(--bg-color-darkest-rgb)";
   BackgroundColorShade2["Transparent"] = "transparent";
-})(BackgroundColorShade || (BackgroundColorShade = {}));
-var BackgroundColors;
-(function(BackgroundColors2) {
-  BackgroundColors2[BackgroundColors2["Card"] = ElementBackgroundColors.Card] = "Card";
-  BackgroundColors2[BackgroundColors2["CloseButton"] = ElementBackgroundColors.CloseButton] = "CloseButton";
-  BackgroundColors2[BackgroundColors2["DataGrid"] = ElementBackgroundColors.DataGrid] = "DataGrid";
-  BackgroundColors2[BackgroundColors2["DataGridHeader"] = ElementBackgroundColors.DataGridHeader] = "DataGridHeader";
-  BackgroundColors2[BackgroundColors2["DataGridColumnHeaders"] = ElementBackgroundColors.DataGridColumnHeaders] = "DataGridColumnHeaders";
-  BackgroundColors2[BackgroundColors2["DataGridCell"] = ElementBackgroundColors.DataGridCell] = "DataGridCell";
-  BackgroundColors2[BackgroundColors2["DataGridRow"] = ElementBackgroundColors.DataGridRow] = "DataGridRow";
-  BackgroundColors2[BackgroundColors2["DropdownMenu"] = ElementBackgroundColors.DropdownMenu] = "DropdownMenu";
-  BackgroundColors2[BackgroundColors2["InputControl"] = ElementBackgroundColors.InputControl] = "InputControl";
-  BackgroundColors2[BackgroundColors2["Button"] = ElementBackgroundColors.Button] = "Button";
-  BackgroundColors2[BackgroundColors2["MenuButton"] = ElementBackgroundColors.MenuButton] = "MenuButton";
-  BackgroundColors2[BackgroundColors2["MenuItem"] = ElementBackgroundColors.MenuItem] = "MenuItem";
-  BackgroundColors2[BackgroundColors2["MoreMenu"] = ElementBackgroundColors.MoreMenu] = "MoreMenu";
-  BackgroundColors2[BackgroundColors2["NavigationBar"] = ElementBackgroundColors.NavigationBar] = "NavigationBar";
-  BackgroundColors2[BackgroundColors2["NavigationMenu"] = ElementBackgroundColors.NavigationMenu] = "NavigationMenu";
-  BackgroundColors2[BackgroundColors2["SlidePanel"] = ElementBackgroundColors.SlidePanel] = "SlidePanel";
-  BackgroundColors2[BackgroundColors2["Workspace"] = ElementBackgroundColors.Workspace] = "Workspace";
-  BackgroundColors2[BackgroundColors2["Lightest"] = BackgroundColorShade.Lightest] = "Lightest";
-  BackgroundColors2[BackgroundColors2["Lighter"] = BackgroundColorShade.Lighter] = "Lighter";
-  BackgroundColors2[BackgroundColors2["Light"] = BackgroundColorShade.Light] = "Light";
-  BackgroundColors2[BackgroundColors2["Default"] = BackgroundColorShade.Default] = "Default";
-  BackgroundColors2[BackgroundColors2["Dark"] = BackgroundColorShade.Dark] = "Dark";
-  BackgroundColors2[BackgroundColors2["Darker"] = BackgroundColorShade.Darker] = "Darker";
-  BackgroundColors2[BackgroundColors2["Darkest"] = BackgroundColorShade.Darkest] = "Darkest";
+  return BackgroundColorShade2;
+})(BackgroundColorShade || {});
+var BackgroundColors = ((BackgroundColors2) => {
+  BackgroundColors2["Card"] = "var(--bg-color-card-rgb)";
+  BackgroundColors2["CloseButton"] = "var(--bg-color-close-button-rgb)";
+  BackgroundColors2["DataGrid"] = "var(--bg-color-data-grid-rgb)";
+  BackgroundColors2["DataGridHeader"] = "var(--bg-color-data-grid-header-rgb)";
+  BackgroundColors2["DataGridColumnHeaders"] = "var(--bg-color-data-grid-column-headers-rgb)";
+  BackgroundColors2["DataGridCell"] = "var(--bg-color-data-grid-cell-rgb)";
+  BackgroundColors2["DataGridRow"] = "var(--bg-color-data-grid-row-rgb)";
+  BackgroundColors2["DropdownMenu"] = "var(--bg-color-dropdown-menu-rgb)";
+  BackgroundColors2["InputControl"] = "var(--bg-color-input-control-rgb)";
+  BackgroundColors2["Button"] = "var(--bg-color-button-rgb)";
+  BackgroundColors2["MenuButton"] = "var(--bg-color-menu-button-rgb)";
+  BackgroundColors2["MenuItem"] = "var(--bg-color-menu-item-rgb)";
+  BackgroundColors2["MoreMenu"] = "var(--bg-color-more-menu-rgb)";
+  BackgroundColors2["NavigationBar"] = "var(--bg-color-navigation-bar-rgb)";
+  BackgroundColors2["NavigationMenu"] = "var(--bg-color-navigation-menu-rgb)";
+  BackgroundColors2["SlidePanel"] = "var(--bg-color-slide-panel-rgb)";
+  BackgroundColors2["Workspace"] = "var(--bg-color-workspace-rgb)";
+  BackgroundColors2["Lightest"] = "var(--bg-color-lightest-rgb)";
+  BackgroundColors2["Lighter"] = "var(--bg-color-lighter-rgb)";
+  BackgroundColors2["Light"] = "var(--bg-color-light-rgb)";
+  BackgroundColors2["Default"] = "var(--bg-color-default-rgb)";
+  BackgroundColors2["Dark"] = "var(--bg-color-dark-rgb)";
+  BackgroundColors2["Darker"] = "var(--bg-color-darker-rgb)";
+  BackgroundColors2["Darkest"] = "var(--bg-color-darkest-rgb)";
   BackgroundColors2[BackgroundColors2["Black"] = Colors.Black] = "Black";
   BackgroundColors2[BackgroundColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
   BackgroundColors2[BackgroundColors2["Error"] = Colors.Error] = "Error";
@@ -5157,22 +5136,18 @@ var BackgroundColors;
   BackgroundColors2[BackgroundColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
   BackgroundColors2[BackgroundColors2["White"] = Colors.White] = "White";
   BackgroundColors2[BackgroundColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
-})(BackgroundColors || (BackgroundColors = {}));
-var BackgroundSize;
-(function(BackgroundSize2) {
+  return BackgroundColors2;
+})(BackgroundColors || {});
+var BackgroundSize = /* @__PURE__ */ ((BackgroundSize2) => {
   BackgroundSize2["Auto"] = "auto";
   BackgroundSize2["Cover"] = "cover";
   BackgroundSize2["Contain"] = "contain";
   BackgroundSize2["Fill"] = "fill";
   BackgroundSize2["FillHorizontal"] = "fill-horizontal";
   BackgroundSize2["FillVertical"] = "fill-vertical";
-})(BackgroundSize || (BackgroundSize = {}));
-var ElementBorderColors;
-(function(ElementBorderColors2) {
-  ElementBorderColors2["InputControl"] = "var(--border-color-input-control-rgb)";
-})(ElementBorderColors || (ElementBorderColors = {}));
-var BorderColorShade;
-(function(BorderColorShade2) {
+  return BackgroundSize2;
+})(BackgroundSize || {});
+var BorderColorShade = /* @__PURE__ */ ((BorderColorShade2) => {
   BorderColorShade2["Lightest"] = "var(--border-color-lightest-rgb)";
   BorderColorShade2["Lighter"] = "var(--border-color-lighter-rgb)";
   BorderColorShade2["Light"] = "var(--border-color-light-rgb)";
@@ -5180,17 +5155,17 @@ var BorderColorShade;
   BorderColorShade2["Dark"] = "var(--border-color-dark-rgb)";
   BorderColorShade2["Darker"] = "var(--border-color-darker-rgb)";
   BorderColorShade2["Darkest"] = "var(--border-color-darkest-rgb)";
-})(BorderColorShade || (BorderColorShade = {}));
-var BorderColors;
-(function(BorderColors2) {
-  BorderColors2[BorderColors2["InputControl"] = ElementBorderColors.InputControl] = "InputControl";
-  BorderColors2[BorderColors2["Lightest"] = BorderColorShade.Lightest] = "Lightest";
-  BorderColors2[BorderColors2["Lighter"] = BorderColorShade.Lighter] = "Lighter";
-  BorderColors2[BorderColors2["Light"] = BorderColorShade.Light] = "Light";
-  BorderColors2[BorderColors2["Default"] = BorderColorShade.Default] = "Default";
-  BorderColors2[BorderColors2["Dark"] = BorderColorShade.Dark] = "Dark";
-  BorderColors2[BorderColors2["Darker"] = BorderColorShade.Darker] = "Darker";
-  BorderColors2[BorderColors2["Darkest"] = BorderColorShade.Darkest] = "Darkest";
+  return BorderColorShade2;
+})(BorderColorShade || {});
+var BorderColors = ((BorderColors2) => {
+  BorderColors2["InputControl"] = "var(--border-color-input-control-rgb)";
+  BorderColors2["Lightest"] = "var(--border-color-lightest-rgb)";
+  BorderColors2["Lighter"] = "var(--border-color-lighter-rgb)";
+  BorderColors2["Light"] = "var(--border-color-light-rgb)";
+  BorderColors2["Default"] = "var(--border-color-default-rgb)";
+  BorderColors2["Dark"] = "var(--border-color-dark-rgb)";
+  BorderColors2["Darker"] = "var(--border-color-darker-rgb)";
+  BorderColors2["Darkest"] = "var(--border-color-darkest-rgb)";
   BorderColors2[BorderColors2["Black"] = Colors.Black] = "Black";
   BorderColors2[BorderColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
   BorderColors2[BorderColors2["Error"] = Colors.Error] = "Error";
@@ -5208,14 +5183,14 @@ var BorderColors;
   BorderColors2[BorderColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
   BorderColors2[BorderColors2["White"] = Colors.White] = "White";
   BorderColors2[BorderColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
-})(BorderColors || (BorderColors = {}));
-var BorderStyle;
-(function(BorderStyle2) {
+  return BorderColors2;
+})(BorderColors || {});
+var BorderStyle = /* @__PURE__ */ ((BorderStyle2) => {
   BorderStyle2["Dotted"] = "dotted";
   BorderStyle2["Solid"] = "solid";
-})(BorderStyle || (BorderStyle = {}));
-var Cursor;
-(function(Cursor2) {
+  return BorderStyle2;
+})(BorderStyle || {});
+var Cursor = /* @__PURE__ */ ((Cursor2) => {
   Cursor2["Auto"] = "auto";
   Cursor2["Crosshair"] = "crosshair";
   Cursor2["Default"] = "default";
@@ -5234,9 +5209,9 @@ var Cursor;
   Cursor2["ResizeLeft"] = "resize-left";
   Cursor2["Text"] = "text";
   Cursor2["Wait"] = "wait";
-})(Cursor || (Cursor = {}));
-var Depth;
-(function(Depth2) {
+  return Cursor2;
+})(Cursor || {});
+var Depth = /* @__PURE__ */ ((Depth2) => {
   Depth2["Lowest"] = "lowest";
   Depth2["Lower"] = "lower";
   Depth2["Low"] = "low";
@@ -5244,9 +5219,9 @@ var Depth;
   Depth2["High"] = "high";
   Depth2["Higher"] = "higher";
   Depth2["Highest"] = "highest";
-})(Depth || (Depth = {}));
-var DepthShadow;
-(function(DepthShadow2) {
+  return Depth2;
+})(Depth || {});
+var DepthShadow = /* @__PURE__ */ ((DepthShadow2) => {
   DepthShadow2["Lowest"] = "var(--shadow-depth-lowest)";
   DepthShadow2["Lower"] = "var(--shadow-depth-lower)";
   DepthShadow2["Low"] = "var(--shadow-depth-low)";
@@ -5254,14 +5229,9 @@ var DepthShadow;
   DepthShadow2["High"] = "var(--shadow-depth-high)";
   DepthShadow2["Higher"] = "var(--shadow-depth-higher)";
   DepthShadow2["Highest"] = "var(--shadow-depth-highest)";
-})(DepthShadow || (DepthShadow = {}));
-var ElementForegroundColors;
-(function(ElementForegroundColors2) {
-  ElementForegroundColors2["CloseButton"] = "var(--fg-color-close-button-rgb)";
-  ElementForegroundColors2["MoreMenu"] = "var(--fg-color-more-menu-rgb)";
-})(ElementForegroundColors || (ElementForegroundColors = {}));
-var ForegroundColorShade;
-(function(ForegroundColorShade2) {
+  return DepthShadow2;
+})(DepthShadow || {});
+var ForegroundColorShade = /* @__PURE__ */ ((ForegroundColorShade2) => {
   ForegroundColorShade2["Lightest"] = "var(--fg-color-lightest-rgb)";
   ForegroundColorShade2["Lighter"] = "var(--fg-color-lighter-rgb)";
   ForegroundColorShade2["Light"] = "var(--fg-color-light-rgb)";
@@ -5270,18 +5240,18 @@ var ForegroundColorShade;
   ForegroundColorShade2["Darker"] = "var(--fg-color-darker-rgb)";
   ForegroundColorShade2["Darkest"] = "var(--fg-color-darkest-rgb)";
   ForegroundColorShade2["Transparent"] = "transparent";
-})(ForegroundColorShade || (ForegroundColorShade = {}));
-var ForegroundColors;
-(function(ForegroundColors2) {
-  ForegroundColors2[ForegroundColors2["CloseButton"] = ElementForegroundColors.CloseButton] = "CloseButton";
-  ForegroundColors2[ForegroundColors2["MoreMenu"] = ElementForegroundColors.MoreMenu] = "MoreMenu";
-  ForegroundColors2[ForegroundColors2["Lightest"] = ForegroundColorShade.Lightest] = "Lightest";
-  ForegroundColors2[ForegroundColors2["Lighter"] = ForegroundColorShade.Lighter] = "Lighter";
-  ForegroundColors2[ForegroundColors2["Light"] = ForegroundColorShade.Light] = "Light";
-  ForegroundColors2[ForegroundColors2["Default"] = ForegroundColorShade.Default] = "Default";
-  ForegroundColors2[ForegroundColors2["Dark"] = ForegroundColorShade.Dark] = "Dark";
-  ForegroundColors2[ForegroundColors2["Darker"] = ForegroundColorShade.Darker] = "Darker";
-  ForegroundColors2[ForegroundColors2["Darkest"] = ForegroundColorShade.Darkest] = "Darkest";
+  return ForegroundColorShade2;
+})(ForegroundColorShade || {});
+var ForegroundColors = ((ForegroundColors2) => {
+  ForegroundColors2["CloseButton"] = "var(--fg-color-close-button-rgb)";
+  ForegroundColors2["MoreMenu"] = "var(--fg-color-more-menu-rgb)";
+  ForegroundColors2["Lightest"] = "var(--fg-color-lightest-rgb)";
+  ForegroundColors2["Lighter"] = "var(--fg-color-lighter-rgb)";
+  ForegroundColors2["Light"] = "var(--fg-color-light-rgb)";
+  ForegroundColors2["Default"] = "var(--fg-color-default-rgb)";
+  ForegroundColors2["Dark"] = "var(--fg-color-dark-rgb)";
+  ForegroundColors2["Darker"] = "var(--fg-color-darker-rgb)";
+  ForegroundColors2["Darkest"] = "var(--fg-color-darkest-rgb)";
   ForegroundColors2[ForegroundColors2["Black"] = Colors.Black] = "Black";
   ForegroundColors2[ForegroundColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
   ForegroundColors2[ForegroundColors2["Error"] = Colors.Error] = "Error";
@@ -5299,9 +5269,9 @@ var ForegroundColors;
   ForegroundColors2[ForegroundColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
   ForegroundColors2[ForegroundColors2["White"] = Colors.White] = "White";
   ForegroundColors2[ForegroundColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
-})(ForegroundColors || (ForegroundColors = {}));
-var Size;
-(function(Size2) {
+  return ForegroundColors2;
+})(ForegroundColors || {});
+var Size = /* @__PURE__ */ ((Size2) => {
   Size2["Smallest"] = "var(--size-smallest)";
   Size2["Smaller"] = "var(--size-smaller)";
   Size2["Small"] = "var(--size-small)";
@@ -5309,18 +5279,18 @@ var Size;
   Size2["Large"] = "var(--size-large)";
   Size2["Larger"] = "var(--size-larger)";
   Size2["Largest"] = "var(--size-largest)";
-})(Size || (Size = {}));
-var DataGridDisplayType;
-(function(DataGridDisplayType2) {
+  return Size2;
+})(Size || {});
+var DataGridDisplayType = /* @__PURE__ */ ((DataGridDisplayType2) => {
   DataGridDisplayType2["Card"] = "card";
   DataGridDisplayType2["Table"] = "table";
-})(DataGridDisplayType || (DataGridDisplayType = {}));
-var Formatter$1;
-(function(Formatter2) {
+  return DataGridDisplayType2;
+})(DataGridDisplayType || {});
+var Formatter$1 = /* @__PURE__ */ ((Formatter2) => {
   Formatter2["Currency"] = "currency";
-})(Formatter$1 || (Formatter$1 = {}));
-var AutoComplete;
-(function(AutoComplete2) {
+  return Formatter2;
+})(Formatter$1 || {});
+var AutoComplete = /* @__PURE__ */ ((AutoComplete2) => {
   AutoComplete2["Birthday"] = "bday";
   AutoComplete2["BirthdayDay"] = "bday-day";
   AutoComplete2["BirthdayMonth"] = "bday-month";
@@ -5347,9 +5317,9 @@ var AutoComplete;
   AutoComplete2["Sex"] = "sex";
   AutoComplete2["StreetAddress"] = "street-address";
   AutoComplete2["Username"] = "username";
-})(AutoComplete || (AutoComplete = {}));
-var Align;
-(function(Align2) {
+  return AutoComplete2;
+})(AutoComplete || {});
+var Align = /* @__PURE__ */ ((Align2) => {
   Align2["Bottom"] = "flex-end";
   Align2["Center"] = "center";
   Align2["Left"] = "flex-start";
@@ -5360,21 +5330,21 @@ var Align;
   Align2["Stretch"] = "stretch";
   Align2["Top"] = "flex-start";
   Align2["Justify"] = "justify";
-})(Align || (Align = {}));
-var Orientation;
-(function(Orientation2) {
+  return Align2;
+})(Align || {});
+var Orientation = /* @__PURE__ */ ((Orientation2) => {
   Orientation2["Diagonal"] = "diagonal";
   Orientation2["Horizontal"] = "horizontal";
   Orientation2["Vertical"] = "vertical";
-})(Orientation || (Orientation = {}));
-var FillBehavior;
-(function(FillBehavior2) {
+  return Orientation2;
+})(Orientation || {});
+var FillBehavior = /* @__PURE__ */ ((FillBehavior2) => {
   FillBehavior2["FillHorizontal"] = "fill_horizontal";
   FillBehavior2["FillVertical"] = "fill_vertical";
   FillBehavior2["FillBoth"] = "fill_both";
-})(FillBehavior || (FillBehavior = {}));
-var Overflow;
-(function(Overflow2) {
+  return FillBehavior2;
+})(FillBehavior || {});
+var Overflow = /* @__PURE__ */ ((Overflow2) => {
   Overflow2["Hidden"] = "hidden";
   Overflow2["Scroll"] = "scroll";
   Overflow2["ScrollVertical"] = "scroll_x";
@@ -5385,17 +5355,17 @@ var Overflow;
   Overflow2["ClipHorizontal"] = "clip_y";
   Overflow2["ClipBoth"] = "clip_both";
   Overflow2["Visible"] = "visible";
-})(Overflow || (Overflow = {}));
-var Position;
-(function(Position2) {
+  return Overflow2;
+})(Overflow || {});
+var Position = /* @__PURE__ */ ((Position2) => {
   Position2["Absolute"] = "absolute";
   Position2["Fixed"] = "fixed";
   Position2["Relative"] = "relative";
   Position2["Static"] = "static";
   Position2["Sticky"] = "sticky";
-})(Position || (Position = {}));
-var Amount;
-(function(Amount2) {
+  return Position2;
+})(Position || {});
+var Amount = /* @__PURE__ */ ((Amount2) => {
   Amount2["None"] = "var(--amount-none)";
   Amount2["Least"] = "var(--amount-least)";
   Amount2["Less"] = "var(--amount-less)";
@@ -5403,42 +5373,24 @@ var Amount;
   Amount2["More"] = "var(--amount-more)";
   Amount2["Most"] = "var(--amount-most)";
   Amount2["All"] = "var(--amount-all)";
-})(Amount || (Amount = {}));
-var ElementTextColors;
-(function(ElementTextColors2) {
-  ElementTextColors2["DataGridCell"] = "var(--text-color-data-grid-cell-rgb)";
-  ElementTextColors2["DataGridColumnHeaders"] = "var(--text-color-data-grid-column-headers-rgb)";
-  ElementTextColors2["DropdownMenu"] = "var(--text-color-dropdown-menu-rgb)";
-  ElementTextColors2["InputControl"] = "var(--text-color-input-control-rgb)";
-  ElementTextColors2["InputPlaceholder"] = "var(--text-color-input-placeholder-rgb)";
-  ElementTextColors2["Button"] = "var(--text-color-button-rgb)";
-  ElementTextColors2["InputLabel"] = "var(--text-color-input-label-rgb)";
-  ElementTextColors2["Link"] = "var(--text-color-link-rgb)";
-  ElementTextColors2["MenuButton"] = "var(--text-color-menu-button-rgb)";
-  ElementTextColors2["MenuItem"] = "var(--text-color-menu-item-rgb)";
-  ElementTextColors2["Paragraph"] = "var(--text-color-paragraph-rgb)";
-  ElementTextColors2["Text"] = "var(--text-color-text-rgb)";
-  ElementTextColors2["Title"] = "var(--text-color-title-rgb)";
-  ElementTextColors2["SubTitle"] = "var(--text-color-sub-title-rgb)";
-  ElementTextColors2["WorkspaceTitle"] = "var(--text-color-workspace-title-rgb)";
-})(ElementTextColors || (ElementTextColors = {}));
-var TextColors;
-(function(TextColors2) {
-  TextColors2[TextColors2["DataGridColumnHeaders"] = ElementTextColors.DataGridColumnHeaders] = "DataGridColumnHeaders";
-  TextColors2[TextColors2["DataGridCell"] = ElementTextColors.DataGridCell] = "DataGridCell";
-  TextColors2[TextColors2["DropdownMenu"] = ElementTextColors.DropdownMenu] = "DropdownMenu";
-  TextColors2[TextColors2["InputControl"] = ElementTextColors.InputControl] = "InputControl";
-  TextColors2[TextColors2["InputPlaceholder"] = ElementTextColors.InputPlaceholder] = "InputPlaceholder";
-  TextColors2[TextColors2["Button"] = ElementTextColors.Button] = "Button";
-  TextColors2[TextColors2["InputLabel"] = ElementTextColors.InputLabel] = "InputLabel";
-  TextColors2[TextColors2["Link"] = ElementTextColors.Link] = "Link";
-  TextColors2[TextColors2["MenuButton"] = ElementTextColors.MenuButton] = "MenuButton";
-  TextColors2[TextColors2["MenuItem"] = ElementTextColors.MenuItem] = "MenuItem";
-  TextColors2[TextColors2["Paragraph"] = ElementTextColors.Paragraph] = "Paragraph";
-  TextColors2[TextColors2["Text"] = ElementTextColors.Text] = "Text";
-  TextColors2[TextColors2["Title"] = ElementTextColors.Title] = "Title";
-  TextColors2[TextColors2["SubTitle"] = ElementTextColors.SubTitle] = "SubTitle";
-  TextColors2[TextColors2["WorkspaceTitle"] = ElementTextColors.WorkspaceTitle] = "WorkspaceTitle";
+  return Amount2;
+})(Amount || {});
+var TextColors = ((TextColors2) => {
+  TextColors2["DataGridColumnHeaders"] = "var(--text-color-data-grid-column-headers-rgb)";
+  TextColors2["DataGridCell"] = "var(--text-color-data-grid-cell-rgb)";
+  TextColors2["DropdownMenu"] = "var(--text-color-dropdown-menu-rgb)";
+  TextColors2["InputControl"] = "var(--text-color-input-control-rgb)";
+  TextColors2["InputPlaceholder"] = "var(--text-color-input-placeholder-rgb)";
+  TextColors2["Button"] = "var(--text-color-button-rgb)";
+  TextColors2["InputLabel"] = "var(--text-color-input-label-rgb)";
+  TextColors2["Link"] = "var(--text-color-link-rgb)";
+  TextColors2["MenuButton"] = "var(--text-color-menu-button-rgb)";
+  TextColors2["MenuItem"] = "var(--text-color-menu-item-rgb)";
+  TextColors2["Paragraph"] = "var(--text-color-paragraph-rgb)";
+  TextColors2["Text"] = "var(--text-color-text-rgb)";
+  TextColors2["Title"] = "var(--text-color-title-rgb)";
+  TextColors2["SubTitle"] = "var(--text-color-sub-title-rgb)";
+  TextColors2["WorkspaceTitle"] = "var(--text-color-workspace-title-rgb)";
   TextColors2[TextColors2["Lightest"] = ForegroundColors.Lightest] = "Lightest";
   TextColors2[TextColors2["Lighter"] = ForegroundColors.Lighter] = "Lighter";
   TextColors2[TextColors2["Light"] = ForegroundColors.Light] = "Light";
@@ -5464,22 +5416,22 @@ var TextColors;
   TextColors2[TextColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
   TextColors2[TextColors2["White"] = Colors.White] = "White";
   TextColors2[TextColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
-})(TextColors || (TextColors = {}));
-var TextOverflow;
-(function(TextOverflow2) {
+  return TextColors2;
+})(TextColors || {});
+var TextOverflow = /* @__PURE__ */ ((TextOverflow2) => {
   TextOverflow2["Clip"] = "clip";
   TextOverflow2["Ellipsis"] = "ellipsis";
-})(TextOverflow || (TextOverflow = {}));
-var TextWeight;
-(function(TextWeight2) {
+  return TextOverflow2;
+})(TextOverflow || {});
+var TextWeight = /* @__PURE__ */ ((TextWeight2) => {
   TextWeight2["Least"] = "var(--text-weight-least)";
   TextWeight2["Less"] = "var(--text-weight-less)";
   TextWeight2["Default"] = "var(--text-weight-default)";
   TextWeight2["More"] = "var(--text-weight-more)";
   TextWeight2["Most"] = "var(--text-weight-most)";
-})(TextWeight || (TextWeight = {}));
-var TextSize;
-(function(TextSize2) {
+  return TextWeight2;
+})(TextWeight || {});
+var TextSize = /* @__PURE__ */ ((TextSize2) => {
   TextSize2["Smallest"] = "var(--text-size-smallest)";
   TextSize2["Smaller"] = "var(--text-size-smaller)";
   TextSize2["Small"] = "var(--text-size-small)";
@@ -5487,15 +5439,16 @@ var TextSize;
   TextSize2["Large"] = "var(--text-size-large)";
   TextSize2["Larger"] = "var(--text-size-larger)";
   TextSize2["Largest"] = "var(--text-size-largest)";
-})(TextSize || (TextSize = {}));
-var WhiteSpace;
-(function(WhiteSpace2) {
+  return TextSize2;
+})(TextSize || {});
+var WhiteSpace = /* @__PURE__ */ ((WhiteSpace2) => {
   WhiteSpace2["Normal"] = "normal";
   WhiteSpace2["NoWrap"] = "nowrap";
   WhiteSpace2["Pre"] = "pre";
   WhiteSpace2["PreWrap"] = "pre-wrap";
   WhiteSpace2["PreLine"] = "pre-line";
-})(WhiteSpace || (WhiteSpace = {}));
+  return WhiteSpace2;
+})(WhiteSpace || {});
 const getBackgroundColor = (color, opacity) => {
   if (!color)
     return null;
@@ -5936,12 +5889,6 @@ const TextInputStyles = css$1`
     color: rgb(${TextColors.InputPlaceholder});
   }
 `;
-var VerificationCodeType;
-(function(VerificationCodeType2) {
-  VerificationCodeType2["Alpha"] = "alpha";
-  VerificationCodeType2["AlphaNumeric"] = "alphanumeric";
-  VerificationCodeType2["Numeric"] = "numeric";
-})(VerificationCodeType || (VerificationCodeType = {}));
 const VerificationCodeInput = memo((_s) => {
   var _t = _s, {
     as,
@@ -5955,7 +5902,7 @@ const VerificationCodeInput = memo((_s) => {
     placeholder = "",
     size = Size.Larger,
     textColor = TextColors.Dark,
-    codeType = VerificationCodeType.Numeric
+    codeType = "numeric"
   } = _t, props = __objRest(_t, [
     "as",
     "className",
@@ -5975,12 +5922,12 @@ const VerificationCodeInput = memo((_s) => {
   const code = Object.values(codeParts).join("");
   useEffect(() => {
     const typeCondition = () => {
-      if (codeType === VerificationCodeType.Alpha) {
+      if (codeType === "alpha") {
         return {
           [Condition.IsAlpha]: true
         };
       }
-      if (codeType === VerificationCodeType.AlphaNumeric) {
+      if (codeType === "alphanumeric") {
         return {
           [Condition.IsAlphanumeric]: true
         };
@@ -6016,8 +5963,8 @@ const VerificationCodeInput = memo((_s) => {
         children: /* @__PURE__ */ jsx(Input$5, {
           id: `${name2}-verification-code-input-${key}`,
           lineHeight: size,
-          max: codeType === VerificationCodeType.Numeric ? 9 : "unset",
-          min: codeType === VerificationCodeType.Numeric ? 0 : "unset",
+          max: codeType === "numeric" ? 9 : "unset",
+          min: codeType === "numeric" ? 0 : "unset",
           name: name2,
           onBlur: () => setFocusedKey(void 0),
           onChange: (e) => {
@@ -6070,7 +6017,7 @@ const VerificationCodeInput = memo((_s) => {
           },
           placeholder,
           textColor,
-          type: codeType === VerificationCodeType.Numeric ? "number" : "text",
+          type: codeType === "numeric" ? "number" : "text",
           value: (_a = codeParts == null ? void 0 : codeParts[key]) != null ? _a : ""
         })
       }, key);
@@ -6096,6 +6043,29 @@ const Input$5 = styled.input`
     -moz-appearance: textfield;
   }
 `;
+const InputRow = memo((_u) => {
+  var _v = _u, {
+    children,
+    className: className2 = "",
+    grow = false,
+    marginBottom = Amount.More,
+    orientation = Orientation.Vertical
+  } = _v, props = __objRest(_v, [
+    "children",
+    "className",
+    "grow",
+    "marginBottom",
+    "orientation"
+  ]);
+  return /* @__PURE__ */ jsx(Container$k, __spreadProps(__spreadValues({
+    className: `${className2} input-row`,
+    grow,
+    marginBottom,
+    orientation
+  }, props), {
+    children
+  }));
+});
 const ProgressSpinner = memo(({
   size = Size.Default
 }) => {
@@ -6133,14 +6103,14 @@ const Container$i = memo(styled.div`
     }
   }
 `);
-const LoadingOverlay = memo((_u) => {
-  var _v = _u, {
+const LoadingOverlay = memo((_w) => {
+  var _x = _w, {
     backgroundColor = BackgroundColors.Dark,
     borderRadius = Amount.None,
     className: className2 = "",
     spinnerSize,
     visible
-  } = _v, props = __objRest(_v, [
+  } = _x, props = __objRest(_x, [
     "backgroundColor",
     "borderRadius",
     "className",
@@ -6187,11 +6157,11 @@ const Wrapper$5 = memo(styled.div`
       pointer-events: all;
     `}
 `);
-const LineBreak = memo((_w) => {
-  var _x = _w, {
+const LineBreak = memo((_y) => {
+  var _z = _y, {
     className: className2 = "",
     size = Size.Default
-  } = _x, props = __objRest(_x, [
+  } = _z, props = __objRest(_z, [
     "className",
     "size"
   ]);
@@ -6200,15 +6170,15 @@ const LineBreak = memo((_w) => {
     height: size
   }, props));
 });
-const Paragraph = memo((_y) => {
-  var _z = _y, {
+const Paragraph = memo((_A) => {
+  var _B = _A, {
     as = "p",
     children,
     className: className2 = "",
     lineHeight = Size.Smaller,
     textColor = TextColors.Paragraph,
     textSize = TextSize.Default
-  } = _z, props = __objRest(_z, [
+  } = _B, props = __objRest(_B, [
     "as",
     "children",
     "className",
@@ -6225,8 +6195,8 @@ const Paragraph = memo((_y) => {
     children
   }));
 });
-const Title = memo((_A) => {
-  var _B = _A, {
+const Title = memo((_C) => {
+  var _D = _C, {
     as = "h1",
     children,
     className: className2 = "",
@@ -6234,7 +6204,7 @@ const Title = memo((_A) => {
     textSize = TextSize.Larger,
     textColor = TextColors.Title,
     textWeight = TextWeight.Most
-  } = _B, props = __objRest(_B, [
+  } = _D, props = __objRest(_D, [
     "as",
     "children",
     "className",
@@ -6251,29 +6221,6 @@ const Title = memo((_A) => {
     lineHeight,
     textSize,
     textWeight
-  }, props), {
-    children
-  }));
-});
-const InputRow = memo((_C) => {
-  var _D = _C, {
-    children,
-    className: className2 = "",
-    grow = false,
-    marginBottom = Amount.More,
-    orientation = Orientation.Vertical
-  } = _D, props = __objRest(_D, [
-    "children",
-    "className",
-    "grow",
-    "marginBottom",
-    "orientation"
-  ]);
-  return /* @__PURE__ */ jsx(Container$k, __spreadProps(__spreadValues({
-    className: `${className2} input-row`,
-    grow,
-    marginBottom,
-    orientation
   }, props), {
     children
   }));
@@ -6364,7 +6311,7 @@ const CodeVerificationForm = memo(({
               problems: problemos
             }) => {
               setProblems(problemos);
-              if (validated && problemos && !problemos.length)
+              if (validated && problemos && problemos.length === 0)
                 setCode(value2);
             },
             size: Size.Large
@@ -6775,13 +6722,13 @@ const ToggleSwitch = styled.span`
       /* */
     `}
 `;
-var TextInputType;
-(function(TextInputType2) {
+var TextInputType = /* @__PURE__ */ ((TextInputType2) => {
   TextInputType2["EmailAddress"] = "email";
   TextInputType2["Text"] = "text";
   TextInputType2["Password"] = "password";
   TextInputType2["Search"] = "search";
-})(TextInputType || (TextInputType = {}));
+  return TextInputType2;
+})(TextInputType || {});
 const TextInput = memo((_P) => {
   var _Q = _P, {
     autoComplete,
@@ -6800,7 +6747,7 @@ const TextInput = memo((_P) => {
     hidden = false,
     icon,
     inProgress = false,
-    inputType = TextInputType.Text,
+    inputType = "text",
     label,
     name: name2,
     onChange,
@@ -6972,7 +6919,7 @@ const EmailAddressInput = memo((_R) => {
       validated,
       value: value2
     }) => {
-      setError(void 0);
+      setError(problems);
       setEmailAddress(value2);
       if (onChange)
         onChange({
@@ -6980,29 +6927,27 @@ const EmailAddressInput = memo((_R) => {
           validated,
           value: value2
         });
-      if (Object.keys(validation).includes(Condition.IsUsernameAvailable)) {
-        if (validated && !(problems == null ? void 0 : problems.length) && value2 && value2 !== "") {
-          setInProgress(true);
-          const emailAvailable = await AuthenticationService.checkUsernameAvailability({
-            username: value2
-          });
-          setInProgress(false);
-          if (!emailAvailable) {
-            const problem = {
-              condition: Condition.IsUsernameAvailable,
-              message: {
-                short: "Email already in use",
-                long: "Email address is already in use"
-              }
-            };
-            setError([problem]);
-            if (onChange)
-              onChange({
-                problems: [problem],
-                validated: true,
-                value: value2
-              });
-          }
+      if (Object.keys(validation).includes(Condition.IsUsernameAvailable) && validated && !(problems == null ? void 0 : problems.length) && value2 && value2 !== "") {
+        setInProgress(true);
+        const emailAvailable = await AuthenticationService.checkUsernameAvailability({
+          username: value2
+        });
+        setInProgress(false);
+        if (!emailAvailable) {
+          const problem = {
+            condition: Condition.IsUsernameAvailable,
+            message: {
+              long: "Email address is already in use",
+              short: "Email already in use"
+            }
+          };
+          setError([problem]);
+          if (onChange)
+            onChange({
+              problems: [problem],
+              validated: true,
+              value: value2
+            });
         }
       }
     },
@@ -7618,12 +7563,12 @@ var CALENDAR_TYPE_LOCALES = (_CALENDAR_TYPE_LOCALE = {}, _defineProperty$h(_CALE
 var WEEKDAYS = _toConsumableArray$5(Array(7)).map(function(el, index) {
   return index;
 });
-var formatterCache = new Map();
+var formatterCache = /* @__PURE__ */ new Map();
 function getFormatter$1(options) {
   return function(locale, date) {
     var localeWithDefault = locale || getUserLocale();
     if (!formatterCache.has(localeWithDefault)) {
-      formatterCache.set(localeWithDefault, new Map());
+      formatterCache.set(localeWithDefault, /* @__PURE__ */ new Map());
     }
     var formatterCacheLocale = formatterCache.get(localeWithDefault);
     if (!formatterCacheLocale.has(options)) {
@@ -11027,8 +10972,8 @@ propTypes.isRef = isRef;
   function _getRequireWildcardCache(nodeInterop) {
     if (typeof WeakMap !== "function")
       return null;
-    var cacheBabelInterop = new WeakMap();
-    var cacheNodeInterop = new WeakMap();
+    var cacheBabelInterop = /* @__PURE__ */ new WeakMap();
+    var cacheNodeInterop = /* @__PURE__ */ new WeakMap();
     return (_getRequireWildcardCache = function _getRequireWildcardCache2(nodeInterop2) {
       return nodeInterop2 ? cacheNodeInterop : cacheBabelInterop;
     })(nodeInterop);
@@ -11860,8 +11805,8 @@ function getEnd(rangeType, date) {
   function _getRequireWildcardCache(nodeInterop) {
     if (typeof WeakMap !== "function")
       return null;
-    var cacheBabelInterop = new WeakMap();
-    var cacheNodeInterop = new WeakMap();
+    var cacheBabelInterop = /* @__PURE__ */ new WeakMap();
+    var cacheNodeInterop = /* @__PURE__ */ new WeakMap();
     return (_getRequireWildcardCache = function _getRequireWildcardCache2(nodeInterop2) {
       return nodeInterop2 ? cacheNodeInterop : cacheBabelInterop;
     })(nodeInterop);
@@ -12591,8 +12536,8 @@ function getEnd(rangeType, date) {
   function _getRequireWildcardCache(nodeInterop) {
     if (typeof WeakMap !== "function")
       return null;
-    var cacheBabelInterop = new WeakMap();
-    var cacheNodeInterop = new WeakMap();
+    var cacheBabelInterop = /* @__PURE__ */ new WeakMap();
+    var cacheNodeInterop = /* @__PURE__ */ new WeakMap();
     return (_getRequireWildcardCache = function _getRequireWildcardCache2(nodeInterop2) {
       return nodeInterop2 ? cacheNodeInterop : cacheBabelInterop;
     })(nodeInterop);
@@ -15031,18 +14976,6 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
-var __assign$1 = function() {
-  __assign$1 = Object.assign || function __assign2(t) {
-    for (var s2, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
-      s2 = arguments[i2];
-      for (var p2 in s2)
-        if (Object.prototype.hasOwnProperty.call(s2, p2))
-          t[p2] = s2[p2];
-    }
-    return t;
-  };
-  return __assign$1.apply(this, arguments);
-};
 function __awaiter(thisArg, _arguments, P2, generator) {
   function adopt(value2) {
     return value2 instanceof P2 ? value2 : new P2(function(resolve) {
@@ -15172,7 +15105,7 @@ function __spread() {
     ar = ar.concat(__read(arguments[i2]));
   return ar;
 }
-var COMMON_MIME_TYPES = new Map([
+var COMMON_MIME_TYPES = /* @__PURE__ */ new Map([
   ["aac", "audio/aac"],
   ["abw", "application/x-abiword"],
   ["arc", "application/x-freearc"],
@@ -17129,8 +17062,8 @@ function __extends(e, a) {
   }
   extendStatics(e, a), e.prototype = a === null ? Object.create(a) : (i2.prototype = a.prototype, new i2());
 }
-var BRUTEFORCE_CARDINALITY, MIN_GUESSES_BEFORE_GROWING_SEQUENCE, MIN_SUBMATCH_GUESSES_MULTI_CHAR, MIN_SUBMATCH_GUESSES_SINGLE_CHAR, adjacency_graphs$1, calc_average_degree, k, __assign = function() {
-  return (__assign = Object.assign || function(e) {
+var BRUTEFORCE_CARDINALITY, MIN_GUESSES_BEFORE_GROWING_SEQUENCE, MIN_SUBMATCH_GUESSES_MULTI_CHAR, MIN_SUBMATCH_GUESSES_SINGLE_CHAR, adjacency_graphs$1, calc_average_degree, k, __assign$1 = function() {
+  return (__assign$1 = Object.assign || function(e) {
     for (var a, i2 = 1, r2 = arguments.length; i2 < r2; i2++)
       for (var n2 in a = arguments[i2])
         Object.prototype.hasOwnProperty.call(a, n2) && (e[n2] = a[n2]);
@@ -17599,7 +17532,7 @@ var main = function(e, a) {
   return c2.feedback = feedback$1.get_feedback(c2.score, c2.sequence), c2;
 }, itemStyle = { flexBasis: 0, flexGrow: 1, position: "relative", maxWidth: "100%", width: "100%", height: 2 }, Item = function(e) {
   var a = e.score, i2 = e.itemNum, r2 = e.barColors, n2 = r2[0];
-  return i2 <= a && (n2 = r2[a]), React__default.createElement("div", { style: __assign(__assign({}, itemStyle), { backgroundColor: n2 }) });
+  return i2 <= a && (n2 = r2[a]), React__default.createElement("div", { style: __assign$1(__assign$1({}, itemStyle), { backgroundColor: n2 }) });
 }, rootStyle = { position: "relative" }, wrapStyle = { display: "flex", alignItems: "center", margin: "5px 0 0" }, spaceStyle = { width: 4 }, descStyle = { margin: "5px 0 0", color: "#898792", fontSize: 14, textAlign: "right" }, PasswordStrengthBar = function(e) {
   function a() {
     var l2 = e !== null && e.apply(this, arguments) || this;
@@ -17617,9 +17550,9 @@ var main = function(e, a) {
     e2.password !== a2 && this.setScore();
   }, a.prototype.render = function() {
     var e2 = this.props, a2 = e2.className, i2 = e2.style, r2 = e2.scoreWordClassName, n2 = e2.scoreWordStyle, s2 = e2.password, o = e2.barColors, t = e2.scoreWords, l2 = e2.minLength, c2 = e2.shortScoreWord, d2 = this.state.score, m2 = s2.length >= l2 ? t[d2] : c2;
-    return React__default.createElement("div", { className: a2, style: __assign(__assign({}, rootStyle), i2) }, React__default.createElement("div", { style: wrapStyle }, [1, 2, 3, 4].map(function(e3) {
+    return React__default.createElement("div", { className: a2, style: __assign$1(__assign$1({}, rootStyle), i2) }, React__default.createElement("div", { style: wrapStyle }, [1, 2, 3, 4].map(function(e3) {
       return React__default.createElement(React.Fragment, { key: "password-strength-bar-item-" + e3 }, 1 < e3 && React__default.createElement("div", { style: spaceStyle }), React__default.createElement(Item, { score: d2, itemNum: e3, barColors: o }));
-    })), React__default.createElement("p", { className: r2, style: __assign(__assign({}, descStyle), n2) }, m2));
+    })), React__default.createElement("p", { className: r2, style: __assign$1(__assign$1({}, descStyle), n2) }, m2));
   }, a.defaultProps = { className: void 0, style: void 0, scoreWordClassName: void 0, scoreWordStyle: void 0, password: "", userInputs: [], barColors: ["#ddd", "#ef4836", "#f6b44d", "#2b90ef", "#25c281"], scoreWords: ["weak", "weak", "okay", "good", "strong"], minLength: 4, shortScoreWord: "too short", onChangeScore: void 0 }, a;
 }(React__default.Component);
 var _default = dist.default = PasswordStrengthBar;
@@ -18280,8 +18213,8 @@ const LoginForm = memo((_Ca) => {
         console.log("fields", fields);
         if (validated)
           dispatch(login({
-            username: (_a2 = fields.username) == null ? void 0 : _a2.value,
-            password: (_b = fields.password) == null ? void 0 : _b.value
+            password: (_a2 = fields.password) == null ? void 0 : _a2.value,
+            username: (_b = fields.username) == null ? void 0 : _b.value
           }));
       },
       submitButton: {
@@ -22015,6 +21948,32 @@ function useAuthentication({
     loginRequired
   };
 }
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+var __assign = function() {
+  __assign = Object.assign || function __assign2(t) {
+    for (var s2, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
+      s2 = arguments[i2];
+      for (var p2 in s2)
+        if (Object.prototype.hasOwnProperty.call(s2, p2))
+          t[p2] = s2[p2];
+    }
+    return t;
+  };
+  return __assign.apply(this, arguments);
+};
 function lowerCase(str2) {
   return str2.toLowerCase();
 }
@@ -22053,7 +22012,7 @@ function pascalCase(input, options) {
   if (options === void 0) {
     options = {};
   }
-  return noCase(input, __assign$1({ delimiter: "", transform: pascalCaseTransform }, options));
+  return noCase(input, __assign({ delimiter: "", transform: pascalCaseTransform }, options));
 }
 function camelCaseTransform(input, index) {
   if (index === 0)
@@ -22064,7 +22023,7 @@ function camelCase(input, options) {
   if (options === void 0) {
     options = {};
   }
-  return pascalCase(input, __assign$1({ transform: camelCaseTransform }, options));
+  return pascalCase(input, __assign({ transform: camelCaseTransform }, options));
 }
 function upperCaseFirst(input) {
   return input.charAt(0).toUpperCase() + input.substr(1);
@@ -22076,7 +22035,7 @@ function capitalCase(input, options) {
   if (options === void 0) {
     options = {};
   }
-  return noCase(input, __assign$1({ delimiter: " ", transform: capitalCaseTransform }, options));
+  return noCase(input, __assign({ delimiter: " ", transform: capitalCaseTransform }, options));
 }
 var pluralize$1 = { exports: {} };
 (function(module, exports) {
@@ -22502,7 +22461,6 @@ var filterObj = function(obj, predicate) {
   const splitOnFirst$1 = splitOnFirst;
   const filterObject = filterObj;
   const isNullOrUndefined = (value2) => value2 === null || value2 === void 0;
-  const encodeFragmentIdentifier = Symbol("encodeFragmentIdentifier");
   function encoderForArrayFormat(options) {
     switch (options.arrayFormat) {
       case "index":
@@ -22529,31 +22487,17 @@ var filterObj = function(obj, predicate) {
           }
           return [...result, [encode(key, options), "[]=", encode(value2, options)].join("")];
         };
-      case "colon-list-separator":
-        return (key) => (result, value2) => {
-          if (value2 === void 0 || options.skipNull && value2 === null || options.skipEmptyString && value2 === "") {
-            return result;
-          }
-          if (value2 === null) {
-            return [...result, [encode(key, options), ":list="].join("")];
-          }
-          return [...result, [encode(key, options), ":list=", encode(value2, options)].join("")];
-        };
       case "comma":
       case "separator":
-      case "bracket-separator": {
-        const keyValueSep = options.arrayFormat === "bracket-separator" ? "[]=" : "=";
         return (key) => (result, value2) => {
-          if (value2 === void 0 || options.skipNull && value2 === null || options.skipEmptyString && value2 === "") {
+          if (value2 === null || value2 === void 0 || value2.length === 0) {
             return result;
           }
-          value2 = value2 === null ? "" : value2;
           if (result.length === 0) {
-            return [[encode(key, options), keyValueSep, encode(value2, options)].join("")];
+            return [[encode(key, options), "=", encode(value2, options)].join("")];
           }
           return [[result, encode(value2, options)].join(options.arrayFormatSeparator)];
         };
-      }
       default:
         return (key) => (result, value2) => {
           if (value2 === void 0 || options.skipNull && value2 === null || options.skipEmptyString && value2 === "") {
@@ -22596,20 +22540,6 @@ var filterObj = function(obj, predicate) {
           }
           accumulator[key] = [].concat(accumulator[key], value2);
         };
-      case "colon-list-separator":
-        return (key, value2, accumulator) => {
-          result = /(:list)$/.exec(key);
-          key = key.replace(/:list$/, "");
-          if (!result) {
-            accumulator[key] = value2;
-            return;
-          }
-          if (accumulator[key] === void 0) {
-            accumulator[key] = [value2];
-            return;
-          }
-          accumulator[key] = [].concat(accumulator[key], value2);
-        };
       case "comma":
       case "separator":
         return (key, value2, accumulator) => {
@@ -22618,21 +22548,6 @@ var filterObj = function(obj, predicate) {
           value2 = isEncodedArray ? decode2(value2, options) : value2;
           const newValue = isArray2 || isEncodedArray ? value2.split(options.arrayFormatSeparator).map((item) => decode2(item, options)) : value2 === null ? value2 : decode2(value2, options);
           accumulator[key] = newValue;
-        };
-      case "bracket-separator":
-        return (key, value2, accumulator) => {
-          const isArray2 = /(\[\])$/.test(key);
-          key = key.replace(/\[\]$/, "");
-          if (!isArray2) {
-            accumulator[key] = value2 ? decode2(value2, options) : value2;
-            return;
-          }
-          const arrayValue = value2 === null ? [] : value2.split(options.arrayFormatSeparator).map((item) => decode2(item, options));
-          if (accumulator[key] === void 0) {
-            accumulator[key] = arrayValue;
-            return;
-          }
-          accumulator[key] = [].concat(accumulator[key], arrayValue);
         };
       default:
         return (key, value2, accumulator) => {
@@ -22712,7 +22627,7 @@ var filterObj = function(obj, predicate) {
     }, options);
     validateArrayFormatSeparator(options.arrayFormatSeparator);
     const formatter = parserForArrayFormat(options);
-    const ret = Object.create(null);
+    const ret = /* @__PURE__ */ Object.create(null);
     if (typeof query !== "string") {
       return ret;
     }
@@ -22725,7 +22640,7 @@ var filterObj = function(obj, predicate) {
         continue;
       }
       let [key, value2] = splitOnFirst$1(options.decode ? param.replace(/\+/g, " ") : param, "=");
-      value2 = value2 === void 0 ? null : ["comma", "separator", "bracket-separator"].includes(options.arrayFormat) ? value2 : decode2(value2, options);
+      value2 = value2 === void 0 ? null : ["comma", "separator"].includes(options.arrayFormat) ? value2 : decode2(value2, options);
       formatter(decode2(key, options), value2, ret);
     }
     for (const key of Object.keys(ret)) {
@@ -22749,7 +22664,7 @@ var filterObj = function(obj, predicate) {
         result[key] = value2;
       }
       return result;
-    }, Object.create(null));
+    }, /* @__PURE__ */ Object.create(null));
   }
   exports.extract = extract;
   exports.parse = parse2;
@@ -22785,9 +22700,6 @@ var filterObj = function(obj, predicate) {
         return encode(key, options);
       }
       if (Array.isArray(value2)) {
-        if (value2.length === 0 && options.arrayFormat === "bracket-separator") {
-          return encode(key, options) + "[]";
-        }
         return value2.reduce(formatter(key), []).join("&");
       }
       return encode(key, options) + "=" + encode(value2, options);
@@ -22806,8 +22718,7 @@ var filterObj = function(obj, predicate) {
   exports.stringifyUrl = (object2, options) => {
     options = Object.assign({
       encode: true,
-      strict: true,
-      [encodeFragmentIdentifier]: true
+      strict: true
     }, options);
     const url = removeHash(object2.url).split("?")[0] || "";
     const queryFromUrl = exports.extract(object2.url);
@@ -22819,14 +22730,13 @@ var filterObj = function(obj, predicate) {
     }
     let hash = getHash(object2.url);
     if (object2.fragmentIdentifier) {
-      hash = `#${options[encodeFragmentIdentifier] ? encode(object2.fragmentIdentifier, options) : object2.fragmentIdentifier}`;
+      hash = `#${encode(object2.fragmentIdentifier, options)}`;
     }
     return `${url}${queryString2}${hash}`;
   };
   exports.pick = (input, filter, options) => {
     options = Object.assign({
-      parseFragmentIdentifier: true,
-      [encodeFragmentIdentifier]: false
+      parseFragmentIdentifier: true
     }, options);
     const { url, query, fragmentIdentifier } = exports.parseUrl(input, options);
     return exports.stringifyUrl({
@@ -22916,10 +22826,10 @@ function useEntityEditor() {
   };
   return {
     entity,
-    model: modelDef,
+    hideEntityEditor,
     mode,
-    showEntityEditor,
-    hideEntityEditor
+    model: modelDef,
+    showEntityEditor
   };
 }
 const HoverPanel = memo((_Ra) => {
@@ -31184,7 +31094,7 @@ var shim$5 = function(status) {
     value: status.level
   });
 }(function() {
-  var tmpObj1 = Object.create(null), tmpObj2 = {}, set, desc2 = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__");
+  var tmpObj1 = /* @__PURE__ */ Object.create(null), tmpObj2 = {}, set, desc2 = Object.getOwnPropertyDescriptor(Object.prototype, "__proto__");
   if (desc2) {
     try {
       set = desc2.set;
@@ -31210,7 +31120,7 @@ var validObject = function(value2) {
     throw new TypeError(value2 + " is not an Object");
   return value2;
 };
-var generated = Object.create(null), random = Math.random;
+var generated = /* @__PURE__ */ Object.create(null), random = Math.random;
 var randomUniq$1 = function() {
   var str2;
   do {
@@ -31511,7 +31421,7 @@ var standardSymbols = function(SymbolPolyfill2) {
   });
 };
 var d$6 = d$a.exports, validateSymbol$1 = validateSymbol$2;
-var registry = Object.create(null);
+var registry = /* @__PURE__ */ Object.create(null);
 var symbolRegistry = function(SymbolPolyfill2) {
   return Object.defineProperties(SymbolPolyfill2, {
     for: d$6(function(key) {
@@ -32110,14 +32020,14 @@ var forOf$1 = function(iterable2, cb) {
 var isNativeImplemented = function() {
   if (typeof WeakMap !== "function")
     return false;
-  return Object.prototype.toString.call(new WeakMap()) === "[object WeakMap]";
+  return Object.prototype.toString.call(/* @__PURE__ */ new WeakMap()) === "[object WeakMap]";
 }();
 var isValue = isValue$c, setPrototypeOf = setPrototypeOf$3, object = validObject, ensureValue = validValue$1, randomUniq = randomUniq$1, d$1 = d$a.exports, getIterator = get$1, forOf = forOf$1, toStringTagSymbol = es6Symbol.toStringTag, isNative = isNativeImplemented, isArray = Array.isArray, defineProperty = Object.defineProperty, objHasOwnProperty = Object.prototype.hasOwnProperty, getPrototypeOf = Object.getPrototypeOf, WeakMapPoly;
 var polyfill = WeakMapPoly = function() {
   var iterable2 = arguments[0], self2;
   if (!(this instanceof WeakMapPoly))
     throw new TypeError("Constructor requires 'new'");
-  self2 = isNative && setPrototypeOf && WeakMap !== WeakMapPoly ? setPrototypeOf(new WeakMap(), getPrototypeOf(this)) : this;
+  self2 = isNative && setPrototypeOf && WeakMap !== WeakMapPoly ? setPrototypeOf(/* @__PURE__ */ new WeakMap(), getPrototypeOf(this)) : this;
   if (isValue(iterable2)) {
     if (!isArray(iterable2))
       iterable2 = getIterator(iterable2);
@@ -39632,7 +39542,7 @@ function T(e, t, l2) {
 }
 var P = typeof window != "undefined" ? useLayoutEffect : useEffect, X = function() {
   return typeof __webpack_nonce__ != "undefined" ? __webpack_nonce__ : void 0;
-}, R = new Map(), V = function(e) {
+}, R = /* @__PURE__ */ new Map(), V = function(e) {
   P(function() {
     var r2 = e.current ? e.current.ownerDocument : document;
     if (r2 !== void 0 && !R.has(r2)) {
@@ -40464,10 +40374,8 @@ const UserMenu = memo(({
   const attributes = useSelector((state) => state.user.details.attributes);
   const loggedIn = useSelector((state) => state.user.authentication.state.loggedIn);
   useEffect(() => {
-    if (loggingOut && !loggedIn) {
-      if (onLogoutSuccess)
-        onLogoutSuccess();
-    }
+    if (loggingOut && !loggedIn && onLogoutSuccess)
+      onLogoutSuccess();
   }, [loggedIn]);
   if (!loggedIn) {
     return /* @__PURE__ */ jsx(ErrorLabel, {
@@ -41016,10 +40924,8 @@ const LogoutButton = memo((_uc) => {
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.authentication.loggedIn);
   useEffect(() => {
-    if (!loggedIn) {
-      if (onLogoutSuccess)
-        onLogoutSuccess();
-    }
+    if (!loggedIn && onLogoutSuccess)
+      onLogoutSuccess();
   }, [loggedIn]);
   return /* @__PURE__ */ jsxs(Button$1, __spreadProps(__spreadValues({
     onClick: () => dispatch(logout())

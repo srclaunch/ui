@@ -1,11 +1,11 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useTitle } from '@srclaunch/react-hooks';
 import React, { memo } from 'react';
-import { useTitle } from '@srclaunch/hooks';
-import { Container } from '../layout/Container';
-import { Title } from '../typography/Title';
-import { SubTitle } from '../typography/SubTitle';
-import { LoadingOverlay } from '../progress/LoadingOverlay';
 import { Align, Amount, BackgroundColors, Orientation, } from '../../types';
+import { Container } from '../layout/Container';
+import { LoadingOverlay } from '../progress/LoadingOverlay';
+import { SubTitle } from '../typography/SubTitle';
+import { Title } from '../typography/Title';
 export const Workspace = memo(({ alignContent = Align.Top, backgroundColor = BackgroundColors.Workspace, className = '', children, header, layout: Layout, loading = false, loginRequired = false, orientation = Orientation.Vertical, padding = Amount.Most, title, ...props }) => {
     useTitle(title);
     const headerTitle = header?.title ? (typeof header.title === 'string' ? (_jsx(Title, { marginTop: Amount.None, children: header.title }, void 0)) : (header.title)) : null;

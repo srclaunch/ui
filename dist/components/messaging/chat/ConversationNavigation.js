@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { DualLightIcons } from '@srclaunch/icons';
-import { useNavigate } from '@srclaunch/state';
+import { useNavigate } from '@srclaunch/web-application-state';
 import { memo } from 'react';
 import { Align, Amount, BackgroundColors, Size, } from '../../../types';
 import { Button, ButtonType } from '../../forms/buttons/Button';

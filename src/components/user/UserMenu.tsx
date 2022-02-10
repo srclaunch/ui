@@ -1,15 +1,19 @@
-import { memo, ReactElement, useEffect, useState } from 'react';
-import { logout, RootState, useDispatch, useSelector } from '@srclaunch/state';
 import { BasicIcons } from '@srclaunch/icons';
+import {
+  logout,
+  RootState,
+  useDispatch,
+  useSelector,
+} from '@srclaunch/web-application-state';
+import { memo, ReactElement, useEffect, useState } from 'react';
 
 import { Colors, Size, TextColors } from '../../types';
-
-import { MenuButton } from '../forms/buttons/MenuButton';
 import { ErrorLabel } from '../errors/ErrorLabel';
+import { MenuButton } from '../forms/buttons/MenuButton';
 import { Label } from '../typography/Label';
 
 type UserMenuProps = {
-  onLogoutSuccess?: () => unknown;
+  readonly onLogoutSuccess?: () => unknown;
 };
 
 export const UserMenu = memo(
@@ -25,14 +29,13 @@ export const UserMenu = memo(
     );
 
     useEffect(() => {
-      if (loggingOut && !loggedIn) {
-        if (onLogoutSuccess) onLogoutSuccess();
-      }
+      if (loggingOut && !loggedIn && onLogoutSuccess) onLogoutSuccess();
     }, [loggedIn]);
 
     if (!loggedIn) {
       return <ErrorLabel>Not logged in</ErrorLabel>;
     }
+
     return (
       <MenuButton
         menu={[

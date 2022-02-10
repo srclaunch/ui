@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { useSelector } from '@srclaunch/web-application-state';
 import { memo } from 'react';
-import { useSelector } from '@srclaunch/state';
 import styled, { css } from 'styled-components';
 // import CloseButton from '../common/CloseButton';
 export const SubscriptionModal = memo(() => {

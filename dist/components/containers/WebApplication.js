@@ -1,11 +1,11 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { memo } from 'react';
-import { Outlet, useSelector } from '@srclaunch/state';
 import { ThemeProvider } from '@srclaunch/themes';
-import { BackgroundColors } from '../../types';
+import { Outlet, useSelector, } from '@srclaunch/web-application-state';
+import { memo } from 'react';
 import { useAuthentication } from '../../hooks/use-authentication';
-import { Container } from '../layout/Container';
+import { BackgroundColors } from '../../types';
 import { EntityPanel } from '../data/entities/EntityPanel';
+import { Container } from '../layout/Container';
 import { Backdrop } from '../modals/Backdrop';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 export const WebApplication = memo(({ authentication = false, actions, backgroundColor = BackgroundColors.Dark, children, className = '', httpClient, ...props }) => {

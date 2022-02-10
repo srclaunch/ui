@@ -1,16 +1,16 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { memo } from 'react';
 import { Condition, Primitives } from '@srclaunch/types';
-import { useSelector } from '@srclaunch/state';
-import { Container } from '../layout/Container';
+import { useSelector } from '@srclaunch/web-application-state';
+import { memo } from 'react';
+import { Align, Amount, AutoComplete, BackgroundColors, DepthShadow, } from '../../types';
 import { ErrorNotification } from '../errors/ErrorNotification';
 import { Form } from '../forms/Form';
-import { Link } from '../typography/Link';
+import { Container } from '../layout/Container';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
+import { Link } from '../typography/Link';
 import { Paragraph } from '../typography/Paragraph';
 import { Small } from '../typography/Small';
 import { Title } from '../typography/Title';
-import { Align, Amount, AutoComplete, BackgroundColors, DepthShadow, } from '../../types';
 export const ForgotPasswordForm = memo(({ backgroundColor = BackgroundColors.Darker, title = 'Forgot your password?', showSignupLink, signUpLinkLabel, signInButtonLabel, forgotPasswordLinkLabel, }) => {
     // const dispatch = useDispatch();
     // const [emailAddress, setEmailAddress] = useState<string>();

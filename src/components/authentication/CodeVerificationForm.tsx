@@ -1,31 +1,20 @@
-import { memo, ReactElement, useEffect, useState } from 'react';
 import { BasicIcons } from '@srclaunch/icons';
-import {
-  getVerificationDetails,
-  resendVerificationCode,
-  useDispatch,
-  useSelector,
-  verifyCode,
-  // getVerificationDetails
-  RootState,
-  useNavigate,
-} from '@srclaunch/state';
 import {
   UserVerificationStatus,
   ValidationProblem,
   VerificationCode,
 } from '@srclaunch/types';
-
-// import ErrorContainer from '../errors/ErrorContainer';
-import { Button, ButtonType } from '../forms/buttons/Button';
-import { VerificationCodeInput } from '../forms/inputs/authentication/VerificationCodeInput';
-import { Container, ContainerProps } from '../layout/Container';
-import { LoadingOverlay } from '../progress/LoadingOverlay';
-import { LineBreak } from '../typography/LineBreak';
-import { Paragraph } from '../typography/Paragraph';
-import { Title } from '../typography/Title';
-import { Label } from '../typography/Label';
-import { InputRow } from '../forms/layout/InputRow';
+import {
+  getVerificationDetails,
+  resendVerificationCode,
+  // getVerificationDetails
+  RootState,
+  useDispatch,
+  useNavigate,
+  useSelector,
+  verifyCode,
+} from '@srclaunch/web-application-state';
+import { memo, ReactElement, useEffect, useState } from 'react';
 
 import {
   Align,
@@ -37,12 +26,22 @@ import {
   TextColors,
   TextWeight,
 } from '../../types';
+// import ErrorContainer from '../errors/ErrorContainer';
+import { Button, ButtonType } from '../forms/buttons/Button';
+import { VerificationCodeInput } from '../forms/inputs/authentication/VerificationCodeInput';
+import { InputRow } from '../forms/layout/InputRow';
+import { Container, ContainerProps } from '../layout/Container';
+import { LoadingOverlay } from '../progress/LoadingOverlay';
+import { Label } from '../typography/Label';
+import { LineBreak } from '../typography/LineBreak';
+import { Paragraph } from '../typography/Paragraph';
+import { Title } from '../typography/Title';
 
 type CodeVerificationFormProps = ContainerProps<
   HTMLDivElement,
   {
-    onVerificationSuccess?: () => unknown;
-    userId: string;
+    readonly onVerificationSuccess?: () => unknown;
+    readonly userId: string;
   }
 >;
 
@@ -80,7 +79,7 @@ export const CodeVerificationForm = memo(
         backgroundColor={backgroundColor}
         borderRadius={borderRadius}
         boxShadow={DepthShadow.Highest}
-        fadeIn={true}
+        fadeIn
         grow={false}
         padding={Amount.Most}
         paddingBottom={Amount.Default}
@@ -113,7 +112,7 @@ export const CodeVerificationForm = memo(
             </Container>
 
             <Button
-              fullWidth={true}
+              fullWidth
               onClick={() => navigate('/login')}
               size={Size.Large}
               type={ButtonType.Primary}
@@ -145,7 +144,7 @@ export const CodeVerificationForm = memo(
                   onChange={({ value, validated, problems: problemos }) => {
                     setProblems(problemos);
 
-                    if (validated && problemos && !problemos.length)
+                    if (validated && problemos && problemos.length === 0)
                       setCode(value);
                   }}
                   size={Size.Large}
@@ -161,7 +160,7 @@ export const CodeVerificationForm = memo(
                   verificationState.verify.inProgress ||
                   verificationState.resend.inProgress
                 }
-                fullWidth={true}
+                fullWidth
                 onClick={() => {
                   if (userId && code) {
                     dispatch(verifyCode({ code, userId }));

@@ -1,4 +1,4 @@
-import { AuthenticationService } from '@srclaunch/services';
+import { AuthenticationService } from '@srclaunch/http-services';
 import { Condition, EmailAddress, ValidationProblem } from '@srclaunch/types';
 import { memo, ReactElement, useState } from 'react';
 
@@ -9,7 +9,7 @@ export type EmailAddressInputProps = TextInputProps<
   HTMLInputElement,
   EmailAddress,
   {
-    autoComplete?: AutoComplete.Username | AutoComplete.EmailAddress;
+    readonly autoComplete?: AutoComplete.Username | AutoComplete.EmailAddress;
   }
 >;
 
@@ -36,40 +36,45 @@ export const EmailAddressInput = memo(
         error={error}
         inProgress={inProgress}
         onChange={async ({ problems, validated, value }) => {
-          setError(undefined);
+          setError(problems);
+
           setEmailAddress(value);
 
           if (onChange) onChange({ problems, validated, value });
 
-          if (Object.keys(validation).includes(Condition.IsUsernameAvailable)) {
-            if (validated && !problems?.length && value && value !== '') {
-              setInProgress(true);
+          if (
+            Object.keys(validation).includes(Condition.IsUsernameAvailable) &&
+            validated &&
+            !problems?.length &&
+            value &&
+            value !== ''
+          ) {
+            setInProgress(true);
 
-              const emailAvailable =
-                await AuthenticationService.checkUsernameAvailability({
-                  username: value,
+            const emailAvailable =
+              await AuthenticationService.checkUsernameAvailability({
+                username: value,
+              });
+
+            setInProgress(false);
+
+            if (!emailAvailable) {
+              const problem: ValidationProblem = {
+                condition: Condition.IsUsernameAvailable,
+                message: {
+                  long: 'Email address is already in use',
+                  short: 'Email already in use',
+                },
+              };
+
+              setError([problem]);
+
+              if (onChange)
+                onChange({
+                  problems: [problem],
+                  validated: true,
+                  value,
                 });
-
-              setInProgress(false);
-
-              if (!emailAvailable) {
-                const problem: ValidationProblem = {
-                  condition: Condition.IsUsernameAvailable,
-                  message: {
-                    short: 'Email already in use',
-                    long: 'Email address is already in use',
-                  },
-                };
-
-                setError([problem]);
-
-                if (onChange)
-                  onChange({
-                    problems: [problem],
-                    validated: true,
-                    value,
-                  });
-              }
             }
           }
         }}

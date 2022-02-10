@@ -1,4 +1,7 @@
-import { createStore, renderReduxWebApp } from '@srclaunch/state';
+import {
+  createStore,
+  renderReduxWebApp,
+} from '@srclaunch/web-application-state';
 import { WebApplicationConfig } from '@srclaunch/types';
 // import { AppLabDarkTheme } from '@srclaunch/themes';
 

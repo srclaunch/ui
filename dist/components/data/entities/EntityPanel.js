@@ -1,17 +1,17 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { memo, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from '@srclaunch/state';
 import { BasicIcons } from '@srclaunch/icons';
+import { useDispatch, useSelector } from '@srclaunch/web-application-state';
 import { camelCase, capitalCase } from 'change-case';
 import pluralize from 'pluralize';
+import { memo, useEffect, useState } from 'react';
 import { useEntityEditor } from '../../../hooks/use-entity-editor';
+import { Amount, Colors, Size, TextColors, } from '../../../types';
 import { Container } from '../../layout/Container';
 import { ModalHeader } from '../../modals/ModalHeader';
 import { SlidePanel } from '../../modals/SlidePanel';
+import { LoadingOverlay } from '../../progress/LoadingOverlay';
 import { EntityEditor } from './EntityEditor';
 import { EntityPreview } from './EntityPreview';
-import { Amount, Colors, Size, TextColors, } from '../../../types';
-import { LoadingOverlay } from '../../progress/LoadingOverlay';
 export const EntityPanel = memo(({ actions, ...props }) => {
     const dispatch = useDispatch();
     const [visible, setVisible] = useState(false);

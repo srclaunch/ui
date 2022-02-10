@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { matchPath } from 'react-router';
-import { useLocation, useSelector, useNavigate, } from '@srclaunch/state';
+import { useLocation, useSelector, useNavigate, } from '@srclaunch/web-application-state';
 import { PageRole } from '@srclaunch/types';
 export function useAuthentication({ enabled = true, redirect = true, }) {
     const [loginRequired, setLoginRequired] = useState(true);

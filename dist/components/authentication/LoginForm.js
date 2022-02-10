@@ -1,17 +1,17 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { memo, useEffect } from 'react';
-import { login, useDispatch, useSelector } from '@srclaunch/state';
 import { Condition, Primitives } from '@srclaunch/types';
+import { login, useDispatch, useSelector, } from '@srclaunch/web-application-state';
+import { memo, useEffect } from 'react';
+import { Align, Amount, AutoComplete, BackgroundColors, DepthShadow, Orientation, } from '../../types';
 import { ErrorNotification } from '../errors/ErrorNotification';
 import { Form } from '../forms/Form';
 import { Container } from '../layout/Container';
 import { NotificationLabel } from '../notifications/NotificationLabel';
-import { Paragraph } from '../typography/Paragraph';
+import { LoadingOverlay } from '../progress/LoadingOverlay';
 import { Link } from '../typography/Link';
+import { Paragraph } from '../typography/Paragraph';
 import { Small } from '../typography/Small';
 import { Title } from '../typography/Title';
-import { LoadingOverlay } from '../progress/LoadingOverlay';
-import { Align, Amount, AutoComplete, BackgroundColors, DepthShadow, Orientation, } from '../../types';
 export const LoginForm = memo(({ backgroundColor = BackgroundColors.Darker, borderRadius = Amount.More, onLoginSuccess, title = 'Login', showSignupLink, signUpLinkLabel, signInButtonLabel, forgotPasswordLinkLabel, ...props }) => {
     const dispatch = useDispatch();
     const loginState = useSelector((state) => state.user.authentication?.login);
@@ -53,8 +53,8 @@ export const LoginForm = memo(({ backgroundColor = BackgroundColors.Darker, bord
                     console.log('fields', fields);
                     if (validated)
                         dispatch(login({
-                            username: fields.username?.value,
                             password: fields.password?.value,
+                            username: fields.username?.value,
                         }));
                 }, submitButton: {
                     fullWidth: true,
