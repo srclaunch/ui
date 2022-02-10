@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { FocusEventProps, KeyboardEventProps, MouseEventProps, SizeProps } from '../../../types/index';
+import { FocusEventProps, KeyboardEventProps, MouseEventProps, SizeProps } from '../../../types';
 import { IconProps } from '../../media/Icon';
 import { LabelProps } from '../../typography/Label';
 export declare enum ButtonType {

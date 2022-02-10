@@ -13,18 +13,17 @@ import { LayoutStyles } from '../../../styles/layout';
 import {
   Align,
   Amount,
-  BackgroundColors,
   Cursor,
   FocusEventProps,
   KeyboardEventProps,
   MouseEventProps,
-  Orientation,
-  Overflow,
   Size,
   SizeProps,
-  TextColors,
-  TextWeight,
-} from '../../../types/index';
+} from '../../../types';
+import { BackgroundColors } from '../../../types/appearance/background.js';
+import { Orientation } from '../../../types/layout/alignment.js';
+import { Overflow } from '../../../types/layout/behavior.js';
+import { TextColors, TextWeight } from '../../../types/typography/text.js';
 import { IconProps } from '../../media/Icon';
 import { Label, LabelProps } from '../../typography/Label';
 

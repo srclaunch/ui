@@ -7,7 +7,11 @@ import { getSmallerSize } from '../../../lib/proportions/size';
 import { AppearanceStyles } from '../../../styles/appearance';
 import { FocusedStyles } from '../../../styles/focused';
 import { LayoutStyles } from '../../../styles/layout';
-import { Align, Amount, BackgroundColors, Cursor, Orientation, Overflow, Size, TextColors, TextWeight, } from '../../../types/index';
+import { Align, Amount, Cursor, Size, } from '../../../types';
+import { BackgroundColors } from '../../../types/appearance/background.js';
+import { Orientation } from '../../../types/layout/alignment.js';
+import { Overflow } from '../../../types/layout/behavior.js';
+import { TextColors, TextWeight } from '../../../types/typography/text.js';
 import { Label } from '../../typography/Label';
 export var ButtonType;
 (function (ButtonType) {
