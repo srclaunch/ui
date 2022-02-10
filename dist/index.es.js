@@ -5138,31 +5138,6 @@ const Wrapper$7 = styled.button`
   * {
     cursor: ${(props) => props.cursor};
   }
-
-  &:before {
-    border-color: rgb(${(props) => props.backgroundColor});
-    border-radius: ${(props) => `calc(${props.borderRadius} + 3px)`};
-  }
-
-  ${(props) => props.disabled && css$1`
-      cursor: default;
-      opacity: 0.5;
-
-      * {
-        cursor: default;
-      }
-    `};
-
-  ${(props) => props.type === "link" && css$1`
-      padding-left: calc(${props.size} / 5) !important;
-      padding-right: calc(${props.size} / 5) !important;
-
-      &:before {
-        border-radius: ${Amount.All};
-        left: -9px;
-        right: -9px;
-      }
-    `};
 `;
 const Button$1 = memo((_k) => {
   var _l = _k, {

@@ -74,6 +74,9 @@ const Wrapper = styled.button<ButtonProps>`
   * {
     cursor: ${props => props.cursor};
   }
+`;
+
+/*
 
   &:before {
     border-color: rgb(${props => props.backgroundColor});
@@ -103,8 +106,7 @@ const Wrapper = styled.button<ButtonProps>`
         right: -9px;
       }
     `};
-`;
-
+    */
 export const Button = memo(
   ({
     active,

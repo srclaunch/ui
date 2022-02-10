@@ -1,6 +1,6 @@
 import { jsx as _jsx, Fragment as _Fragment } from "react/jsx-runtime";
 import { memo, useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { getLargerAmount } from '../../../lib/proportions/amount';
 import { convertSizeToAmount, convertSizeToTextSize, } from '../../../lib/proportions/conversions';
 import { getSmallerSize } from '../../../lib/proportions/size';
@@ -35,14 +35,17 @@ const Wrapper = styled.button `
   * {
     cursor: ${props => props.cursor};
   }
+`;
+/*
 
   &:before {
     border-color: rgb(${props => props.backgroundColor});
     border-radius: ${props => `calc(${props.borderRadius} + 3px)`};
   }
 
-  ${props => props.disabled &&
-    css `
+  ${props =>
+    props.disabled &&
+    css`
       cursor: default;
       opacity: 0.5;
 
@@ -51,8 +54,9 @@ const Wrapper = styled.button `
       }
     `};
 
-  ${props => props.type === ButtonType.Link &&
-    css `
+  ${props =>
+    props.type === ButtonType.Link &&
+    css`
       padding-left: calc(${props.size} / 5) !important;
       padding-right: calc(${props.size} / 5) !important;
 
@@ -62,7 +66,7 @@ const Wrapper = styled.button `
         right: -9px;
       }
     `};
-`;
+    */
 export const Button = memo(({ active, alignItems = Align.Center, alignContent = Align.Center, backgroundColor, borderRadius = Amount.All, children, className = '', cursor = Cursor.Pointer, disabled = false, form, fullWidth, hover, icon, label, onClick, onMouseEnter, onMouseLeave, orientation = Orientation.Horizontal, size = Size.Default, textColor, textSize, textWeight, type, ...props }) => {
     const [hovered, setHovered] = useState(false);
     const getColors = () => {
