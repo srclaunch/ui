@@ -1,0 +1,1 @@
+{"version":3,"file":"focus.d.ts","sourceRoot":"","sources":["../../../src/types/events/focus.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,iBAAiB,EAAE,MAAM,OAAO,CAAC;AAE1C,oBAAY,eAAe,CAAC,CAAC,EAAE,CAAC,GAAG,EAAE,IAAI;IACvC,MAAM,CAAC,EAAE,iBAAiB,CAAC,CAAC,CAAC,CAAC;IAC9B,OAAO,CAAC,EAAE,iBAAiB,CAAC,CAAC,CAAC,CAAC;CAChC,GAAG,CAAC,CAAC"}

@@ -1,0 +1,2 @@
+export declare const store: import("@reduxjs/toolkit").EnhancedStore<any, import("redux").AnyAction, readonly import("redux").Middleware<{}, any, import("redux").Dispatch<import("redux").AnyAction>>[]>;
+//# sourceMappingURL=index.d.ts.map

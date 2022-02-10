@@ -1,0 +1,12 @@
+{
+  "extends": "@srclaunch/dx/tsconfig.ui.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "dist",
+    "emitDeclarationOnly": false,
+    "outDir": "dist",
+    "rootDir": "./src"
+  },
+  "include": ["src"],
+  "exclude": ["src/components/__deprecated__"]
+}

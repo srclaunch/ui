@@ -1,0 +1,1 @@
+{"version":3,"file":"Responsive.d.ts","sourceRoot":"","sources":["../../../src/components/layout/Responsive.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAQ,YAAY,EAAE,MAAM,OAAO,CAAC;AAG3C,aAAK,eAAe,GAAG;IACrB,QAAQ,EAAE,KAAK,CAAC,SAAS,CAAC;IAC1B,QAAQ,CAAC,EAAE,MAAM,CAAC;IAClB,QAAQ,CAAC,EAAE,MAAM,CAAC;CACnB,CAAC;AAEF,eAAO,MAAM,UAAU,qDACN,eAAe,KAAG,YAAY,CAG9C,CAAC"}
