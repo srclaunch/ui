@@ -5,13 +5,8 @@ import { getLargerAmount } from '../../../lib/proportions/amount';
 import { convertSizeToAmount, convertSizeToTextSize, } from '../../../lib/proportions/conversions';
 import { getSmallerSize } from '../../../lib/proportions/size';
 import { AppearanceStyles } from '../../../styles/appearance';
-import { FocusedStyles } from '../../../styles/focused';
 import { LayoutStyles } from '../../../styles/layout';
-import { Align, Amount, Cursor, Size, } from '../../../types';
-import { BackgroundColors } from '../../../types/appearance/background.js';
-import { Orientation } from '../../../types/layout/alignment.js';
-import { Overflow } from '../../../types/layout/behavior.js';
-import { TextColors, TextWeight } from '../../../types/typography/text.js';
+import { Align, Amount, BackgroundColors, Cursor, Orientation, Overflow, Size, TextColors, TextWeight, } from '../../../types';
 import { Label } from '../../typography/Label';
 export var ButtonType;
 (function (ButtonType) {
@@ -30,13 +25,13 @@ export var ButtonType;
 const Wrapper = styled.button `
   ${LayoutStyles};
   ${AppearanceStyles};
-  ${FocusedStyles};
 `;
 /*
+  ${FocusedStyles};
   * {
     cursor: ${props => props.cursor};
   }
-  
+
   &:before {
     border-color: rgb(${props => props.backgroundColor});
     border-radius: ${props => `calc(${props.borderRadius} + 3px)`};

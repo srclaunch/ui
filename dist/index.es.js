@@ -2415,102 +2415,6 @@ function getLargerSize(size) {
       return Size.Largest;
   }
 }
-var Colors = /* @__PURE__ */ ((Colors2) => {
-  Colors2["Black"] = "var(--color-black-rgb)";
-  Colors2["Default"] = "var(--color-default-rgb)";
-  Colors2["Error"] = "var(--color-error-rgb)";
-  Colors2["Info"] = "var(--color-info-rgb)";
-  Colors2["Inherit"] = "inherit";
-  Colors2["Primary"] = "var(--color-primary-rgb)";
-  Colors2["Secondary"] = "var(--color-secondary-rgb)";
-  Colors2["Success"] = "var(--color-success-rgb)";
-  Colors2["Transparent"] = "transparent";
-  Colors2["Warning"] = "var(--color-warning-rgb)";
-  Colors2["White"] = "var(--color-white-rgb)";
-  return Colors2;
-})(Colors || {});
-var ContrastColors = /* @__PURE__ */ ((ContrastColors2) => {
-  ContrastColors2["Black"] = "var(--color-black-contrast-rgb)";
-  ContrastColors2["Default"] = "var(--color-default-contrast-rgb)";
-  ContrastColors2["Error"] = "var(--color-error-contrast-rgb)";
-  ContrastColors2["Info"] = "var(--color-info-contrast-rgb)";
-  ContrastColors2["Primary"] = "var(--color-primary-contrast-rgb)";
-  ContrastColors2["Secondary"] = "var(--color-secondary-contrast-rgb)";
-  ContrastColors2["Success"] = "var(--color-success-contrast-rgb)";
-  ContrastColors2["Warning"] = "var(--color-warning-contrast-rgb)";
-  ContrastColors2["White"] = "var(--color-white-contrast-rgb)";
-  return ContrastColors2;
-})(ContrastColors || {});
-var BorderColorShade = /* @__PURE__ */ ((BorderColorShade2) => {
-  BorderColorShade2["Lightest"] = "var(--border-color-lightest-rgb)";
-  BorderColorShade2["Lighter"] = "var(--border-color-lighter-rgb)";
-  BorderColorShade2["Light"] = "var(--border-color-light-rgb)";
-  BorderColorShade2["Default"] = "var(--border-color-default-rgb)";
-  BorderColorShade2["Dark"] = "var(--border-color-dark-rgb)";
-  BorderColorShade2["Darker"] = "var(--border-color-darker-rgb)";
-  BorderColorShade2["Darkest"] = "var(--border-color-darkest-rgb)";
-  return BorderColorShade2;
-})(BorderColorShade || {});
-var BorderColors = ((BorderColors2) => {
-  BorderColors2["InputControl"] = "var(--border-color-input-control-rgb)";
-  BorderColors2["Lightest"] = "var(--border-color-lightest-rgb)";
-  BorderColors2["Lighter"] = "var(--border-color-lighter-rgb)";
-  BorderColors2["Light"] = "var(--border-color-light-rgb)";
-  BorderColors2["Default"] = "var(--border-color-default-rgb)";
-  BorderColors2["Dark"] = "var(--border-color-dark-rgb)";
-  BorderColors2["Darker"] = "var(--border-color-darker-rgb)";
-  BorderColors2["Darkest"] = "var(--border-color-darkest-rgb)";
-  BorderColors2[BorderColors2["Black"] = Colors.Black] = "Black";
-  BorderColors2[BorderColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
-  BorderColors2[BorderColors2["Error"] = Colors.Error] = "Error";
-  BorderColors2[BorderColors2["ErrorContrast"] = ContrastColors.Error] = "ErrorContrast";
-  BorderColors2[BorderColors2["Info"] = Colors.Info] = "Info";
-  BorderColors2[BorderColors2["InfoContrast"] = ContrastColors.Info] = "InfoContrast";
-  BorderColors2[BorderColors2["Primary"] = Colors.Primary] = "Primary";
-  BorderColors2[BorderColors2["PrimaryContrast"] = ContrastColors.Primary] = "PrimaryContrast";
-  BorderColors2[BorderColors2["Secondary"] = Colors.Primary] = "Secondary";
-  BorderColors2[BorderColors2["SecondaryContrast"] = ContrastColors.Secondary] = "SecondaryContrast";
-  BorderColors2[BorderColors2["Success"] = Colors.Success] = "Success";
-  BorderColors2[BorderColors2["SuccessContrast"] = ContrastColors.Success] = "SuccessContrast";
-  BorderColors2[BorderColors2["Transparent"] = Colors.Transparent] = "Transparent";
-  BorderColors2[BorderColors2["Warning"] = Colors.Warning] = "Warning";
-  BorderColors2[BorderColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
-  BorderColors2[BorderColors2["White"] = Colors.White] = "White";
-  BorderColors2[BorderColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
-  return BorderColors2;
-})(BorderColors || {});
-var BorderStyle = /* @__PURE__ */ ((BorderStyle2) => {
-  BorderStyle2["Dotted"] = "dotted";
-  BorderStyle2["Solid"] = "solid";
-  return BorderStyle2;
-})(BorderStyle || {});
-const FocusedStyles = css$1`
-  outline: none;
-
-  &:before {
-    bottom: -4px;
-    border-radius: calc(${(props) => props.borderRadius} + 3px);
-    content: '';
-    display: block;
-    border-color: rgb(${BorderColors.Primary});
-    border-style: solid;
-    border-width: 2px;
-    opacity: ${(props) => props.focused ? 1 : 0};
-    left: -4px;
-    position: absolute;
-    pointer-events: none;
-    right: -4px;
-    top: -4px;
-    transition: opacity 0.2s ease-in-out;
-    z-index: 0;
-  }
-
-  &:focus {
-    &:before {
-      opacity: 1;
-    }
-  }
-`;
 function getDepthZIndex(value2) {
   switch (value2) {
     case Depth.Lowest:
@@ -2746,222 +2650,6 @@ const LayoutStyles = css$1`
       top: 0;
     `};
 `;
-var BackgroundColorShade = /* @__PURE__ */ ((BackgroundColorShade2) => {
-  BackgroundColorShade2["Lightest"] = "var(--bg-color-lightest-rgb)";
-  BackgroundColorShade2["Lighter"] = "var(--bg-color-lighter-rgb)";
-  BackgroundColorShade2["Light"] = "var(--bg-color-light-rgb)";
-  BackgroundColorShade2["Default"] = "var(--bg-color-default-rgb)";
-  BackgroundColorShade2["Dark"] = "var(--bg-color-dark-rgb)";
-  BackgroundColorShade2["Darker"] = "var(--bg-color-darker-rgb)";
-  BackgroundColorShade2["Darkest"] = "var(--bg-color-darkest-rgb)";
-  BackgroundColorShade2["Transparent"] = "transparent";
-  return BackgroundColorShade2;
-})(BackgroundColorShade || {});
-var BackgroundColors = ((BackgroundColors2) => {
-  BackgroundColors2["Card"] = "var(--bg-color-card-rgb)";
-  BackgroundColors2["CloseButton"] = "var(--bg-color-close-button-rgb)";
-  BackgroundColors2["DataGrid"] = "var(--bg-color-data-grid-rgb)";
-  BackgroundColors2["DataGridHeader"] = "var(--bg-color-data-grid-header-rgb)";
-  BackgroundColors2["DataGridColumnHeaders"] = "var(--bg-color-data-grid-column-headers-rgb)";
-  BackgroundColors2["DataGridCell"] = "var(--bg-color-data-grid-cell-rgb)";
-  BackgroundColors2["DataGridRow"] = "var(--bg-color-data-grid-row-rgb)";
-  BackgroundColors2["DropdownMenu"] = "var(--bg-color-dropdown-menu-rgb)";
-  BackgroundColors2["InputControl"] = "var(--bg-color-input-control-rgb)";
-  BackgroundColors2["Button"] = "var(--bg-color-button-rgb)";
-  BackgroundColors2["MenuButton"] = "var(--bg-color-menu-button-rgb)";
-  BackgroundColors2["MenuItem"] = "var(--bg-color-menu-item-rgb)";
-  BackgroundColors2["MoreMenu"] = "var(--bg-color-more-menu-rgb)";
-  BackgroundColors2["NavigationBar"] = "var(--bg-color-navigation-bar-rgb)";
-  BackgroundColors2["NavigationMenu"] = "var(--bg-color-navigation-menu-rgb)";
-  BackgroundColors2["SlidePanel"] = "var(--bg-color-slide-panel-rgb)";
-  BackgroundColors2["Workspace"] = "var(--bg-color-workspace-rgb)";
-  BackgroundColors2["Lightest"] = "var(--bg-color-lightest-rgb)";
-  BackgroundColors2["Lighter"] = "var(--bg-color-lighter-rgb)";
-  BackgroundColors2["Light"] = "var(--bg-color-light-rgb)";
-  BackgroundColors2["Default"] = "var(--bg-color-default-rgb)";
-  BackgroundColors2["Dark"] = "var(--bg-color-dark-rgb)";
-  BackgroundColors2["Darker"] = "var(--bg-color-darker-rgb)";
-  BackgroundColors2["Darkest"] = "var(--bg-color-darkest-rgb)";
-  BackgroundColors2[BackgroundColors2["Black"] = Colors.Black] = "Black";
-  BackgroundColors2[BackgroundColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
-  BackgroundColors2[BackgroundColors2["Error"] = Colors.Error] = "Error";
-  BackgroundColors2[BackgroundColors2["ErrorContrast"] = ContrastColors.Error] = "ErrorContrast";
-  BackgroundColors2[BackgroundColors2["Info"] = Colors.Info] = "Info";
-  BackgroundColors2[BackgroundColors2["InfoContrast"] = ContrastColors.Info] = "InfoContrast";
-  BackgroundColors2[BackgroundColors2["Primary"] = Colors.Primary] = "Primary";
-  BackgroundColors2[BackgroundColors2["PrimaryContrast"] = ContrastColors.Primary] = "PrimaryContrast";
-  BackgroundColors2[BackgroundColors2["Secondary"] = Colors.Secondary] = "Secondary";
-  BackgroundColors2[BackgroundColors2["SecondaryContrast"] = ContrastColors.Secondary] = "SecondaryContrast";
-  BackgroundColors2[BackgroundColors2["Success"] = Colors.Success] = "Success";
-  BackgroundColors2[BackgroundColors2["SuccessContrast"] = ContrastColors.Success] = "SuccessContrast";
-  BackgroundColors2[BackgroundColors2["Transparent"] = Colors.Transparent] = "Transparent";
-  BackgroundColors2[BackgroundColors2["Warning"] = Colors.Warning] = "Warning";
-  BackgroundColors2[BackgroundColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
-  BackgroundColors2[BackgroundColors2["White"] = Colors.White] = "White";
-  BackgroundColors2[BackgroundColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
-  return BackgroundColors2;
-})(BackgroundColors || {});
-var BackgroundSize = /* @__PURE__ */ ((BackgroundSize2) => {
-  BackgroundSize2["Auto"] = "auto";
-  BackgroundSize2["Cover"] = "cover";
-  BackgroundSize2["Contain"] = "contain";
-  BackgroundSize2["Fill"] = "fill";
-  BackgroundSize2["FillHorizontal"] = "fill-horizontal";
-  BackgroundSize2["FillVertical"] = "fill-vertical";
-  return BackgroundSize2;
-})(BackgroundSize || {});
-var Align = /* @__PURE__ */ ((Align2) => {
-  Align2["Bottom"] = "flex-end";
-  Align2["Center"] = "center";
-  Align2["Left"] = "flex-start";
-  Align2["Right"] = "flex-end";
-  Align2["SpaceAround"] = "space-around";
-  Align2["SpaceBetween"] = "space-between";
-  Align2["SpaceEvenly"] = "space-evenly";
-  Align2["Stretch"] = "stretch";
-  Align2["Top"] = "flex-start";
-  Align2["Justify"] = "justify";
-  return Align2;
-})(Align || {});
-var Orientation = /* @__PURE__ */ ((Orientation2) => {
-  Orientation2["Diagonal"] = "diagonal";
-  Orientation2["Horizontal"] = "horizontal";
-  Orientation2["Vertical"] = "vertical";
-  return Orientation2;
-})(Orientation || {});
-var FillBehavior = /* @__PURE__ */ ((FillBehavior2) => {
-  FillBehavior2["FillHorizontal"] = "fill_horizontal";
-  FillBehavior2["FillVertical"] = "fill_vertical";
-  FillBehavior2["FillBoth"] = "fill_both";
-  return FillBehavior2;
-})(FillBehavior || {});
-var Overflow = /* @__PURE__ */ ((Overflow2) => {
-  Overflow2["Hidden"] = "hidden";
-  Overflow2["Scroll"] = "scroll";
-  Overflow2["ScrollVertical"] = "scroll_x";
-  Overflow2["ScrollHorizontal"] = "scroll_y";
-  Overflow2["ScrollBoth"] = "scroll_both";
-  Overflow2["Clip"] = "clip";
-  Overflow2["ClipVertical"] = "clip_x";
-  Overflow2["ClipHorizontal"] = "clip_y";
-  Overflow2["ClipBoth"] = "clip_both";
-  Overflow2["Visible"] = "visible";
-  return Overflow2;
-})(Overflow || {});
-var ForegroundColorShade = /* @__PURE__ */ ((ForegroundColorShade2) => {
-  ForegroundColorShade2["Lightest"] = "var(--fg-color-lightest-rgb)";
-  ForegroundColorShade2["Lighter"] = "var(--fg-color-lighter-rgb)";
-  ForegroundColorShade2["Light"] = "var(--fg-color-light-rgb)";
-  ForegroundColorShade2["Default"] = "var(--fg-color-default-rgb)";
-  ForegroundColorShade2["Dark"] = "var(--fg-color-dark-rgb)";
-  ForegroundColorShade2["Darker"] = "var(--fg-color-darker-rgb)";
-  ForegroundColorShade2["Darkest"] = "var(--fg-color-darkest-rgb)";
-  ForegroundColorShade2["Transparent"] = "transparent";
-  return ForegroundColorShade2;
-})(ForegroundColorShade || {});
-var ForegroundColors = ((ForegroundColors2) => {
-  ForegroundColors2["CloseButton"] = "var(--fg-color-close-button-rgb)";
-  ForegroundColors2["MoreMenu"] = "var(--fg-color-more-menu-rgb)";
-  ForegroundColors2["Lightest"] = "var(--fg-color-lightest-rgb)";
-  ForegroundColors2["Lighter"] = "var(--fg-color-lighter-rgb)";
-  ForegroundColors2["Light"] = "var(--fg-color-light-rgb)";
-  ForegroundColors2["Default"] = "var(--fg-color-default-rgb)";
-  ForegroundColors2["Dark"] = "var(--fg-color-dark-rgb)";
-  ForegroundColors2["Darker"] = "var(--fg-color-darker-rgb)";
-  ForegroundColors2["Darkest"] = "var(--fg-color-darkest-rgb)";
-  ForegroundColors2[ForegroundColors2["Black"] = Colors.Black] = "Black";
-  ForegroundColors2[ForegroundColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
-  ForegroundColors2[ForegroundColors2["Error"] = Colors.Error] = "Error";
-  ForegroundColors2[ForegroundColors2["ErrorContrast"] = ContrastColors.Error] = "ErrorContrast";
-  ForegroundColors2[ForegroundColors2["Info"] = Colors.Info] = "Info";
-  ForegroundColors2[ForegroundColors2["InfoContrast"] = ContrastColors.Info] = "InfoContrast";
-  ForegroundColors2[ForegroundColors2["Primary"] = Colors.Primary] = "Primary";
-  ForegroundColors2[ForegroundColors2["PrimaryContrast"] = ContrastColors.Primary] = "PrimaryContrast";
-  ForegroundColors2[ForegroundColors2["Secondary"] = Colors.Primary] = "Secondary";
-  ForegroundColors2[ForegroundColors2["SecondaryContrast"] = ContrastColors.Secondary] = "SecondaryContrast";
-  ForegroundColors2[ForegroundColors2["Success"] = Colors.Success] = "Success";
-  ForegroundColors2[ForegroundColors2["SuccessContrast"] = ContrastColors.Success] = "SuccessContrast";
-  ForegroundColors2[ForegroundColors2["Transparent"] = Colors.Transparent] = "Transparent";
-  ForegroundColors2[ForegroundColors2["Warning"] = Colors.Warning] = "Warning";
-  ForegroundColors2[ForegroundColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
-  ForegroundColors2[ForegroundColors2["White"] = Colors.White] = "White";
-  ForegroundColors2[ForegroundColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
-  return ForegroundColors2;
-})(ForegroundColors || {});
-var TextColors = ((TextColors2) => {
-  TextColors2["DataGridColumnHeaders"] = "var(--text-color-data-grid-column-headers-rgb)";
-  TextColors2["DataGridCell"] = "var(--text-color-data-grid-cell-rgb)";
-  TextColors2["DropdownMenu"] = "var(--text-color-dropdown-menu-rgb)";
-  TextColors2["InputControl"] = "var(--text-color-input-control-rgb)";
-  TextColors2["InputPlaceholder"] = "var(--text-color-input-placeholder-rgb)";
-  TextColors2["Button"] = "var(--text-color-button-rgb)";
-  TextColors2["InputLabel"] = "var(--text-color-input-label-rgb)";
-  TextColors2["Link"] = "var(--text-color-link-rgb)";
-  TextColors2["MenuButton"] = "var(--text-color-menu-button-rgb)";
-  TextColors2["MenuItem"] = "var(--text-color-menu-item-rgb)";
-  TextColors2["Paragraph"] = "var(--text-color-paragraph-rgb)";
-  TextColors2["Text"] = "var(--text-color-text-rgb)";
-  TextColors2["Title"] = "var(--text-color-title-rgb)";
-  TextColors2["SubTitle"] = "var(--text-color-sub-title-rgb)";
-  TextColors2["WorkspaceTitle"] = "var(--text-color-workspace-title-rgb)";
-  TextColors2[TextColors2["Lightest"] = ForegroundColors.Lightest] = "Lightest";
-  TextColors2[TextColors2["Lighter"] = ForegroundColors.Lighter] = "Lighter";
-  TextColors2[TextColors2["Light"] = ForegroundColors.Light] = "Light";
-  TextColors2[TextColors2["Default"] = ForegroundColors.Default] = "Default";
-  TextColors2[TextColors2["DefaultContrast"] = ContrastColors.Default] = "DefaultContrast";
-  TextColors2[TextColors2["Dark"] = ForegroundColors.Dark] = "Dark";
-  TextColors2[TextColors2["Darker"] = ForegroundColors.Darker] = "Darker";
-  TextColors2[TextColors2["Darkest"] = ForegroundColors.Darkest] = "Darkest";
-  TextColors2[TextColors2["Black"] = Colors.Black] = "Black";
-  TextColors2[TextColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
-  TextColors2[TextColors2["Error"] = Colors.Error] = "Error";
-  TextColors2[TextColors2["ErrorContrast"] = ContrastColors.Error] = "ErrorContrast";
-  TextColors2[TextColors2["Info"] = Colors.Info] = "Info";
-  TextColors2[TextColors2["InfoContrast"] = ContrastColors.Info] = "InfoContrast";
-  TextColors2[TextColors2["Inherit"] = Colors.Inherit] = "Inherit";
-  TextColors2[TextColors2["Primary"] = Colors.Primary] = "Primary";
-  TextColors2[TextColors2["PrimaryContrast"] = ContrastColors.Primary] = "PrimaryContrast";
-  TextColors2[TextColors2["Secondary"] = Colors.Primary] = "Secondary";
-  TextColors2[TextColors2["SecondaryContrast"] = ContrastColors.Secondary] = "SecondaryContrast";
-  TextColors2[TextColors2["Success"] = Colors.Success] = "Success";
-  TextColors2[TextColors2["SuccessContrast"] = ContrastColors.Success] = "SuccessContrast";
-  TextColors2[TextColors2["Warning"] = Colors.Warning] = "Warning";
-  TextColors2[TextColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
-  TextColors2[TextColors2["White"] = Colors.White] = "White";
-  TextColors2[TextColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
-  return TextColors2;
-})(TextColors || {});
-var TextOverflow = /* @__PURE__ */ ((TextOverflow2) => {
-  TextOverflow2["Clip"] = "clip";
-  TextOverflow2["Ellipsis"] = "ellipsis";
-  return TextOverflow2;
-})(TextOverflow || {});
-var TextWeight = /* @__PURE__ */ ((TextWeight2) => {
-  TextWeight2["Least"] = "var(--text-weight-least)";
-  TextWeight2["Less"] = "var(--text-weight-less)";
-  TextWeight2["Default"] = "var(--text-weight-default)";
-  TextWeight2["More"] = "var(--text-weight-more)";
-  TextWeight2["Most"] = "var(--text-weight-most)";
-  return TextWeight2;
-})(TextWeight || {});
-var TextSize = /* @__PURE__ */ ((TextSize2) => {
-  TextSize2["Smallest"] = "var(--text-size-smallest)";
-  TextSize2["Smaller"] = "var(--text-size-smaller)";
-  TextSize2["Small"] = "var(--text-size-small)";
-  TextSize2["Default"] = "var(--text-size-default)";
-  TextSize2["Large"] = "var(--text-size-large)";
-  TextSize2["Larger"] = "var(--text-size-larger)";
-  TextSize2["Largest"] = "var(--text-size-largest)";
-  return TextSize2;
-})(TextSize || {});
-var WhiteSpace = /* @__PURE__ */ ((WhiteSpace2) => {
-  WhiteSpace2["Normal"] = "normal";
-  WhiteSpace2["NoWrap"] = "nowrap";
-  WhiteSpace2["Pre"] = "pre";
-  WhiteSpace2["PreWrap"] = "pre-wrap";
-  WhiteSpace2["PreLine"] = "pre-line";
-  return WhiteSpace2;
-})(WhiteSpace || {});
 const getLineHeight = (lineHeight) => {
   if (typeof lineHeight === "number") {
     return `${lineHeight}px`;
@@ -5133,7 +4821,6 @@ var ButtonType = /* @__PURE__ */ ((ButtonType2) => {
 const Wrapper$7 = styled.button`
   ${LayoutStyles};
   ${AppearanceStyles};
-  ${FocusedStyles};
 `;
 const Button$1 = memo((_k) => {
   var _l = _k, {
@@ -5313,6 +5000,139 @@ const Button$1 = memo((_k) => {
     })
   }));
 });
+var Colors = /* @__PURE__ */ ((Colors2) => {
+  Colors2["Black"] = "var(--color-black-rgb)";
+  Colors2["Default"] = "var(--color-default-rgb)";
+  Colors2["Error"] = "var(--color-error-rgb)";
+  Colors2["Info"] = "var(--color-info-rgb)";
+  Colors2["Inherit"] = "inherit";
+  Colors2["Primary"] = "var(--color-primary-rgb)";
+  Colors2["Secondary"] = "var(--color-secondary-rgb)";
+  Colors2["Success"] = "var(--color-success-rgb)";
+  Colors2["Transparent"] = "transparent";
+  Colors2["Warning"] = "var(--color-warning-rgb)";
+  Colors2["White"] = "var(--color-white-rgb)";
+  return Colors2;
+})(Colors || {});
+var ContrastColors = /* @__PURE__ */ ((ContrastColors2) => {
+  ContrastColors2["Black"] = "var(--color-black-contrast-rgb)";
+  ContrastColors2["Default"] = "var(--color-default-contrast-rgb)";
+  ContrastColors2["Error"] = "var(--color-error-contrast-rgb)";
+  ContrastColors2["Info"] = "var(--color-info-contrast-rgb)";
+  ContrastColors2["Primary"] = "var(--color-primary-contrast-rgb)";
+  ContrastColors2["Secondary"] = "var(--color-secondary-contrast-rgb)";
+  ContrastColors2["Success"] = "var(--color-success-contrast-rgb)";
+  ContrastColors2["Warning"] = "var(--color-warning-contrast-rgb)";
+  ContrastColors2["White"] = "var(--color-white-contrast-rgb)";
+  return ContrastColors2;
+})(ContrastColors || {});
+var BackgroundColorShade = /* @__PURE__ */ ((BackgroundColorShade2) => {
+  BackgroundColorShade2["Lightest"] = "var(--bg-color-lightest-rgb)";
+  BackgroundColorShade2["Lighter"] = "var(--bg-color-lighter-rgb)";
+  BackgroundColorShade2["Light"] = "var(--bg-color-light-rgb)";
+  BackgroundColorShade2["Default"] = "var(--bg-color-default-rgb)";
+  BackgroundColorShade2["Dark"] = "var(--bg-color-dark-rgb)";
+  BackgroundColorShade2["Darker"] = "var(--bg-color-darker-rgb)";
+  BackgroundColorShade2["Darkest"] = "var(--bg-color-darkest-rgb)";
+  BackgroundColorShade2["Transparent"] = "transparent";
+  return BackgroundColorShade2;
+})(BackgroundColorShade || {});
+var BackgroundColors = ((BackgroundColors2) => {
+  BackgroundColors2["Card"] = "var(--bg-color-card-rgb)";
+  BackgroundColors2["CloseButton"] = "var(--bg-color-close-button-rgb)";
+  BackgroundColors2["DataGrid"] = "var(--bg-color-data-grid-rgb)";
+  BackgroundColors2["DataGridHeader"] = "var(--bg-color-data-grid-header-rgb)";
+  BackgroundColors2["DataGridColumnHeaders"] = "var(--bg-color-data-grid-column-headers-rgb)";
+  BackgroundColors2["DataGridCell"] = "var(--bg-color-data-grid-cell-rgb)";
+  BackgroundColors2["DataGridRow"] = "var(--bg-color-data-grid-row-rgb)";
+  BackgroundColors2["DropdownMenu"] = "var(--bg-color-dropdown-menu-rgb)";
+  BackgroundColors2["InputControl"] = "var(--bg-color-input-control-rgb)";
+  BackgroundColors2["Button"] = "var(--bg-color-button-rgb)";
+  BackgroundColors2["MenuButton"] = "var(--bg-color-menu-button-rgb)";
+  BackgroundColors2["MenuItem"] = "var(--bg-color-menu-item-rgb)";
+  BackgroundColors2["MoreMenu"] = "var(--bg-color-more-menu-rgb)";
+  BackgroundColors2["NavigationBar"] = "var(--bg-color-navigation-bar-rgb)";
+  BackgroundColors2["NavigationMenu"] = "var(--bg-color-navigation-menu-rgb)";
+  BackgroundColors2["SlidePanel"] = "var(--bg-color-slide-panel-rgb)";
+  BackgroundColors2["Workspace"] = "var(--bg-color-workspace-rgb)";
+  BackgroundColors2["Lightest"] = "var(--bg-color-lightest-rgb)";
+  BackgroundColors2["Lighter"] = "var(--bg-color-lighter-rgb)";
+  BackgroundColors2["Light"] = "var(--bg-color-light-rgb)";
+  BackgroundColors2["Default"] = "var(--bg-color-default-rgb)";
+  BackgroundColors2["Dark"] = "var(--bg-color-dark-rgb)";
+  BackgroundColors2["Darker"] = "var(--bg-color-darker-rgb)";
+  BackgroundColors2["Darkest"] = "var(--bg-color-darkest-rgb)";
+  BackgroundColors2[BackgroundColors2["Black"] = Colors.Black] = "Black";
+  BackgroundColors2[BackgroundColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
+  BackgroundColors2[BackgroundColors2["Error"] = Colors.Error] = "Error";
+  BackgroundColors2[BackgroundColors2["ErrorContrast"] = ContrastColors.Error] = "ErrorContrast";
+  BackgroundColors2[BackgroundColors2["Info"] = Colors.Info] = "Info";
+  BackgroundColors2[BackgroundColors2["InfoContrast"] = ContrastColors.Info] = "InfoContrast";
+  BackgroundColors2[BackgroundColors2["Primary"] = Colors.Primary] = "Primary";
+  BackgroundColors2[BackgroundColors2["PrimaryContrast"] = ContrastColors.Primary] = "PrimaryContrast";
+  BackgroundColors2[BackgroundColors2["Secondary"] = Colors.Secondary] = "Secondary";
+  BackgroundColors2[BackgroundColors2["SecondaryContrast"] = ContrastColors.Secondary] = "SecondaryContrast";
+  BackgroundColors2[BackgroundColors2["Success"] = Colors.Success] = "Success";
+  BackgroundColors2[BackgroundColors2["SuccessContrast"] = ContrastColors.Success] = "SuccessContrast";
+  BackgroundColors2[BackgroundColors2["Transparent"] = Colors.Transparent] = "Transparent";
+  BackgroundColors2[BackgroundColors2["Warning"] = Colors.Warning] = "Warning";
+  BackgroundColors2[BackgroundColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
+  BackgroundColors2[BackgroundColors2["White"] = Colors.White] = "White";
+  BackgroundColors2[BackgroundColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
+  return BackgroundColors2;
+})(BackgroundColors || {});
+var BackgroundSize = /* @__PURE__ */ ((BackgroundSize2) => {
+  BackgroundSize2["Auto"] = "auto";
+  BackgroundSize2["Cover"] = "cover";
+  BackgroundSize2["Contain"] = "contain";
+  BackgroundSize2["Fill"] = "fill";
+  BackgroundSize2["FillHorizontal"] = "fill-horizontal";
+  BackgroundSize2["FillVertical"] = "fill-vertical";
+  return BackgroundSize2;
+})(BackgroundSize || {});
+var BorderColorShade = /* @__PURE__ */ ((BorderColorShade2) => {
+  BorderColorShade2["Lightest"] = "var(--border-color-lightest-rgb)";
+  BorderColorShade2["Lighter"] = "var(--border-color-lighter-rgb)";
+  BorderColorShade2["Light"] = "var(--border-color-light-rgb)";
+  BorderColorShade2["Default"] = "var(--border-color-default-rgb)";
+  BorderColorShade2["Dark"] = "var(--border-color-dark-rgb)";
+  BorderColorShade2["Darker"] = "var(--border-color-darker-rgb)";
+  BorderColorShade2["Darkest"] = "var(--border-color-darkest-rgb)";
+  return BorderColorShade2;
+})(BorderColorShade || {});
+var BorderColors = ((BorderColors2) => {
+  BorderColors2["InputControl"] = "var(--border-color-input-control-rgb)";
+  BorderColors2["Lightest"] = "var(--border-color-lightest-rgb)";
+  BorderColors2["Lighter"] = "var(--border-color-lighter-rgb)";
+  BorderColors2["Light"] = "var(--border-color-light-rgb)";
+  BorderColors2["Default"] = "var(--border-color-default-rgb)";
+  BorderColors2["Dark"] = "var(--border-color-dark-rgb)";
+  BorderColors2["Darker"] = "var(--border-color-darker-rgb)";
+  BorderColors2["Darkest"] = "var(--border-color-darkest-rgb)";
+  BorderColors2[BorderColors2["Black"] = Colors.Black] = "Black";
+  BorderColors2[BorderColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
+  BorderColors2[BorderColors2["Error"] = Colors.Error] = "Error";
+  BorderColors2[BorderColors2["ErrorContrast"] = ContrastColors.Error] = "ErrorContrast";
+  BorderColors2[BorderColors2["Info"] = Colors.Info] = "Info";
+  BorderColors2[BorderColors2["InfoContrast"] = ContrastColors.Info] = "InfoContrast";
+  BorderColors2[BorderColors2["Primary"] = Colors.Primary] = "Primary";
+  BorderColors2[BorderColors2["PrimaryContrast"] = ContrastColors.Primary] = "PrimaryContrast";
+  BorderColors2[BorderColors2["Secondary"] = Colors.Primary] = "Secondary";
+  BorderColors2[BorderColors2["SecondaryContrast"] = ContrastColors.Secondary] = "SecondaryContrast";
+  BorderColors2[BorderColors2["Success"] = Colors.Success] = "Success";
+  BorderColors2[BorderColors2["SuccessContrast"] = ContrastColors.Success] = "SuccessContrast";
+  BorderColors2[BorderColors2["Transparent"] = Colors.Transparent] = "Transparent";
+  BorderColors2[BorderColors2["Warning"] = Colors.Warning] = "Warning";
+  BorderColors2[BorderColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
+  BorderColors2[BorderColors2["White"] = Colors.White] = "White";
+  BorderColors2[BorderColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
+  return BorderColors2;
+})(BorderColors || {});
+var BorderStyle = /* @__PURE__ */ ((BorderStyle2) => {
+  BorderStyle2["Dotted"] = "dotted";
+  BorderStyle2["Solid"] = "solid";
+  return BorderStyle2;
+})(BorderStyle || {});
 var Cursor = /* @__PURE__ */ ((Cursor2) => {
   Cursor2["Auto"] = "auto";
   Cursor2["Crosshair"] = "crosshair";
@@ -5354,6 +5174,46 @@ var DepthShadow = /* @__PURE__ */ ((DepthShadow2) => {
   DepthShadow2["Highest"] = "var(--shadow-depth-highest)";
   return DepthShadow2;
 })(DepthShadow || {});
+var ForegroundColorShade = /* @__PURE__ */ ((ForegroundColorShade2) => {
+  ForegroundColorShade2["Lightest"] = "var(--fg-color-lightest-rgb)";
+  ForegroundColorShade2["Lighter"] = "var(--fg-color-lighter-rgb)";
+  ForegroundColorShade2["Light"] = "var(--fg-color-light-rgb)";
+  ForegroundColorShade2["Default"] = "var(--fg-color-default-rgb)";
+  ForegroundColorShade2["Dark"] = "var(--fg-color-dark-rgb)";
+  ForegroundColorShade2["Darker"] = "var(--fg-color-darker-rgb)";
+  ForegroundColorShade2["Darkest"] = "var(--fg-color-darkest-rgb)";
+  ForegroundColorShade2["Transparent"] = "transparent";
+  return ForegroundColorShade2;
+})(ForegroundColorShade || {});
+var ForegroundColors = ((ForegroundColors2) => {
+  ForegroundColors2["CloseButton"] = "var(--fg-color-close-button-rgb)";
+  ForegroundColors2["MoreMenu"] = "var(--fg-color-more-menu-rgb)";
+  ForegroundColors2["Lightest"] = "var(--fg-color-lightest-rgb)";
+  ForegroundColors2["Lighter"] = "var(--fg-color-lighter-rgb)";
+  ForegroundColors2["Light"] = "var(--fg-color-light-rgb)";
+  ForegroundColors2["Default"] = "var(--fg-color-default-rgb)";
+  ForegroundColors2["Dark"] = "var(--fg-color-dark-rgb)";
+  ForegroundColors2["Darker"] = "var(--fg-color-darker-rgb)";
+  ForegroundColors2["Darkest"] = "var(--fg-color-darkest-rgb)";
+  ForegroundColors2[ForegroundColors2["Black"] = Colors.Black] = "Black";
+  ForegroundColors2[ForegroundColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
+  ForegroundColors2[ForegroundColors2["Error"] = Colors.Error] = "Error";
+  ForegroundColors2[ForegroundColors2["ErrorContrast"] = ContrastColors.Error] = "ErrorContrast";
+  ForegroundColors2[ForegroundColors2["Info"] = Colors.Info] = "Info";
+  ForegroundColors2[ForegroundColors2["InfoContrast"] = ContrastColors.Info] = "InfoContrast";
+  ForegroundColors2[ForegroundColors2["Primary"] = Colors.Primary] = "Primary";
+  ForegroundColors2[ForegroundColors2["PrimaryContrast"] = ContrastColors.Primary] = "PrimaryContrast";
+  ForegroundColors2[ForegroundColors2["Secondary"] = Colors.Primary] = "Secondary";
+  ForegroundColors2[ForegroundColors2["SecondaryContrast"] = ContrastColors.Secondary] = "SecondaryContrast";
+  ForegroundColors2[ForegroundColors2["Success"] = Colors.Success] = "Success";
+  ForegroundColors2[ForegroundColors2["SuccessContrast"] = ContrastColors.Success] = "SuccessContrast";
+  ForegroundColors2[ForegroundColors2["Transparent"] = Colors.Transparent] = "Transparent";
+  ForegroundColors2[ForegroundColors2["Warning"] = Colors.Warning] = "Warning";
+  ForegroundColors2[ForegroundColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
+  ForegroundColors2[ForegroundColors2["White"] = Colors.White] = "White";
+  ForegroundColors2[ForegroundColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
+  return ForegroundColors2;
+})(ForegroundColors || {});
 var Size = /* @__PURE__ */ ((Size2) => {
   Size2["Smallest"] = "var(--size-smallest)";
   Size2["Smaller"] = "var(--size-smaller)";
@@ -5402,6 +5262,44 @@ var AutoComplete = /* @__PURE__ */ ((AutoComplete2) => {
   AutoComplete2["Username"] = "username";
   return AutoComplete2;
 })(AutoComplete || {});
+var Align = /* @__PURE__ */ ((Align2) => {
+  Align2["Bottom"] = "flex-end";
+  Align2["Center"] = "center";
+  Align2["Left"] = "flex-start";
+  Align2["Right"] = "flex-end";
+  Align2["SpaceAround"] = "space-around";
+  Align2["SpaceBetween"] = "space-between";
+  Align2["SpaceEvenly"] = "space-evenly";
+  Align2["Stretch"] = "stretch";
+  Align2["Top"] = "flex-start";
+  Align2["Justify"] = "justify";
+  return Align2;
+})(Align || {});
+var Orientation = /* @__PURE__ */ ((Orientation2) => {
+  Orientation2["Diagonal"] = "diagonal";
+  Orientation2["Horizontal"] = "horizontal";
+  Orientation2["Vertical"] = "vertical";
+  return Orientation2;
+})(Orientation || {});
+var FillBehavior = /* @__PURE__ */ ((FillBehavior2) => {
+  FillBehavior2["FillHorizontal"] = "fill_horizontal";
+  FillBehavior2["FillVertical"] = "fill_vertical";
+  FillBehavior2["FillBoth"] = "fill_both";
+  return FillBehavior2;
+})(FillBehavior || {});
+var Overflow = /* @__PURE__ */ ((Overflow2) => {
+  Overflow2["Hidden"] = "hidden";
+  Overflow2["Scroll"] = "scroll";
+  Overflow2["ScrollVertical"] = "scroll_x";
+  Overflow2["ScrollHorizontal"] = "scroll_y";
+  Overflow2["ScrollBoth"] = "scroll_both";
+  Overflow2["Clip"] = "clip";
+  Overflow2["ClipVertical"] = "clip_x";
+  Overflow2["ClipHorizontal"] = "clip_y";
+  Overflow2["ClipBoth"] = "clip_both";
+  Overflow2["Visible"] = "visible";
+  return Overflow2;
+})(Overflow || {});
 var Position = /* @__PURE__ */ ((Position2) => {
   Position2["Absolute"] = "absolute";
   Position2["Fixed"] = "fixed";
@@ -5420,6 +5318,80 @@ var Amount = /* @__PURE__ */ ((Amount2) => {
   Amount2["All"] = "var(--amount-all)";
   return Amount2;
 })(Amount || {});
+var TextColors = ((TextColors2) => {
+  TextColors2["DataGridColumnHeaders"] = "var(--text-color-data-grid-column-headers-rgb)";
+  TextColors2["DataGridCell"] = "var(--text-color-data-grid-cell-rgb)";
+  TextColors2["DropdownMenu"] = "var(--text-color-dropdown-menu-rgb)";
+  TextColors2["InputControl"] = "var(--text-color-input-control-rgb)";
+  TextColors2["InputPlaceholder"] = "var(--text-color-input-placeholder-rgb)";
+  TextColors2["Button"] = "var(--text-color-button-rgb)";
+  TextColors2["InputLabel"] = "var(--text-color-input-label-rgb)";
+  TextColors2["Link"] = "var(--text-color-link-rgb)";
+  TextColors2["MenuButton"] = "var(--text-color-menu-button-rgb)";
+  TextColors2["MenuItem"] = "var(--text-color-menu-item-rgb)";
+  TextColors2["Paragraph"] = "var(--text-color-paragraph-rgb)";
+  TextColors2["Text"] = "var(--text-color-text-rgb)";
+  TextColors2["Title"] = "var(--text-color-title-rgb)";
+  TextColors2["SubTitle"] = "var(--text-color-sub-title-rgb)";
+  TextColors2["WorkspaceTitle"] = "var(--text-color-workspace-title-rgb)";
+  TextColors2[TextColors2["Lightest"] = ForegroundColors.Lightest] = "Lightest";
+  TextColors2[TextColors2["Lighter"] = ForegroundColors.Lighter] = "Lighter";
+  TextColors2[TextColors2["Light"] = ForegroundColors.Light] = "Light";
+  TextColors2[TextColors2["Default"] = ForegroundColors.Default] = "Default";
+  TextColors2[TextColors2["DefaultContrast"] = ContrastColors.Default] = "DefaultContrast";
+  TextColors2[TextColors2["Dark"] = ForegroundColors.Dark] = "Dark";
+  TextColors2[TextColors2["Darker"] = ForegroundColors.Darker] = "Darker";
+  TextColors2[TextColors2["Darkest"] = ForegroundColors.Darkest] = "Darkest";
+  TextColors2[TextColors2["Black"] = Colors.Black] = "Black";
+  TextColors2[TextColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
+  TextColors2[TextColors2["Error"] = Colors.Error] = "Error";
+  TextColors2[TextColors2["ErrorContrast"] = ContrastColors.Error] = "ErrorContrast";
+  TextColors2[TextColors2["Info"] = Colors.Info] = "Info";
+  TextColors2[TextColors2["InfoContrast"] = ContrastColors.Info] = "InfoContrast";
+  TextColors2[TextColors2["Inherit"] = Colors.Inherit] = "Inherit";
+  TextColors2[TextColors2["Primary"] = Colors.Primary] = "Primary";
+  TextColors2[TextColors2["PrimaryContrast"] = ContrastColors.Primary] = "PrimaryContrast";
+  TextColors2[TextColors2["Secondary"] = Colors.Primary] = "Secondary";
+  TextColors2[TextColors2["SecondaryContrast"] = ContrastColors.Secondary] = "SecondaryContrast";
+  TextColors2[TextColors2["Success"] = Colors.Success] = "Success";
+  TextColors2[TextColors2["SuccessContrast"] = ContrastColors.Success] = "SuccessContrast";
+  TextColors2[TextColors2["Warning"] = Colors.Warning] = "Warning";
+  TextColors2[TextColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
+  TextColors2[TextColors2["White"] = Colors.White] = "White";
+  TextColors2[TextColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
+  return TextColors2;
+})(TextColors || {});
+var TextOverflow = /* @__PURE__ */ ((TextOverflow2) => {
+  TextOverflow2["Clip"] = "clip";
+  TextOverflow2["Ellipsis"] = "ellipsis";
+  return TextOverflow2;
+})(TextOverflow || {});
+var TextWeight = /* @__PURE__ */ ((TextWeight2) => {
+  TextWeight2["Least"] = "var(--text-weight-least)";
+  TextWeight2["Less"] = "var(--text-weight-less)";
+  TextWeight2["Default"] = "var(--text-weight-default)";
+  TextWeight2["More"] = "var(--text-weight-more)";
+  TextWeight2["Most"] = "var(--text-weight-most)";
+  return TextWeight2;
+})(TextWeight || {});
+var TextSize = /* @__PURE__ */ ((TextSize2) => {
+  TextSize2["Smallest"] = "var(--text-size-smallest)";
+  TextSize2["Smaller"] = "var(--text-size-smaller)";
+  TextSize2["Small"] = "var(--text-size-small)";
+  TextSize2["Default"] = "var(--text-size-default)";
+  TextSize2["Large"] = "var(--text-size-large)";
+  TextSize2["Larger"] = "var(--text-size-larger)";
+  TextSize2["Largest"] = "var(--text-size-largest)";
+  return TextSize2;
+})(TextSize || {});
+var WhiteSpace = /* @__PURE__ */ ((WhiteSpace2) => {
+  WhiteSpace2["Normal"] = "normal";
+  WhiteSpace2["NoWrap"] = "nowrap";
+  WhiteSpace2["Pre"] = "pre";
+  WhiteSpace2["PreWrap"] = "pre-wrap";
+  WhiteSpace2["PreLine"] = "pre-line";
+  return WhiteSpace2;
+})(WhiteSpace || {});
 const getBackgroundColor = (color, opacity) => {
   if (!color)
     return null;
@@ -5772,6 +5744,33 @@ const AnimatedContainer = memo((_o) => {
     children
   }));
 });
+const FocusedStyles = css$1`
+  outline: none;
+
+  &:before {
+    bottom: -4px;
+    border-radius: calc(${(props) => props.borderRadius} + 3px);
+    content: '';
+    display: block;
+    border-color: rgb(${BorderColors.Primary});
+    border-style: solid;
+    border-width: 2px;
+    opacity: ${(props) => props.focused ? 1 : 0};
+    left: -4px;
+    position: absolute;
+    pointer-events: none;
+    right: -4px;
+    top: -4px;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 0;
+  }
+
+  &:focus {
+    &:before {
+      opacity: 1;
+    }
+  }
+`;
 const InputContainerStyles = css$1`
   ${LayoutStyles};
   ${FocusedStyles};

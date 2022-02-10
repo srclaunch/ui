@@ -13,17 +13,18 @@ import { LayoutStyles } from '../../../styles/layout';
 import {
   Align,
   Amount,
+  BackgroundColors,
   Cursor,
   FocusEventProps,
   KeyboardEventProps,
   MouseEventProps,
+  Orientation,
+  Overflow,
   Size,
   SizeProps,
+  TextColors,
+  TextWeight,
 } from '../../../types';
-import { BackgroundColors } from '../../../types/appearance/background.js';
-import { Orientation } from '../../../types/layout/alignment.js';
-import { Overflow } from '../../../types/layout/behavior.js';
-import { TextColors, TextWeight } from '../../../types/typography/text.js';
 import { IconProps } from '../../media/Icon';
 import { Label, LabelProps } from '../../typography/Label';
 
@@ -69,14 +70,14 @@ export type ButtonProps<
 const Wrapper = styled.button<ButtonProps>`
   ${LayoutStyles};
   ${AppearanceStyles};
-  ${FocusedStyles};
 `;
 
 /*
+  ${FocusedStyles};
   * {
     cursor: ${props => props.cursor};
   }
-  
+
   &:before {
     border-color: rgb(${props => props.backgroundColor});
     border-radius: ${props => `calc(${props.borderRadius} + 3px)`};
