@@ -70,14 +70,13 @@ const Wrapper = styled.button<ButtonProps>`
   ${LayoutStyles};
   ${AppearanceStyles};
   ${FocusedStyles};
-
-  * {
-    cursor: ${props => props.cursor};
-  }
 `;
 
 /*
-
+  * {
+    cursor: ${props => props.cursor};
+  }
+  
   &:before {
     border-color: rgb(${props => props.backgroundColor});
     border-radius: ${props => `calc(${props.borderRadius} + 3px)`};

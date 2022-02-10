@@ -5134,10 +5134,6 @@ const Wrapper$7 = styled.button`
   ${LayoutStyles};
   ${AppearanceStyles};
   ${FocusedStyles};
-
-  * {
-    cursor: ${(props) => props.cursor};
-  }
 `;
 const Button$1 = memo((_k) => {
   var _l = _k, {
