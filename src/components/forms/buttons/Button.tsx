@@ -68,11 +68,11 @@ export type ButtonProps<
   P;
 
 const Wrapper = styled.button<ButtonProps>`
-  ${LayoutStyles};
-  ${AppearanceStyles};
+  background-color: blue;
 `;
 
-/*
+/*  ${LayoutStyles};
+  ${AppearanceStyles};
   ${FocusedStyles};
   * {
     cursor: ${props => props.cursor};

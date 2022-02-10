@@ -4819,8 +4819,7 @@ var ButtonType = /* @__PURE__ */ ((ButtonType2) => {
   return ButtonType2;
 })(ButtonType || {});
 const Wrapper$7 = styled.button`
-  ${LayoutStyles};
-  ${AppearanceStyles};
+  background-color: blue;
 `;
 const Button$1 = memo((_k) => {
   var _l = _k, {
