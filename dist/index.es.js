@@ -5073,6 +5073,7 @@ const Button$1 = memo((_k) => {
     }, active),
     alignItems,
     alignContent,
+    as: "button",
     backgroundColor: updatedBackgroundColor,
     borderRadius: fullWidth && !borderRadius ? Amount.Least : borderRadius,
     boxShadow: {
@@ -5107,7 +5108,8 @@ const Button$1 = memo((_k) => {
     overflow: Overflow.Visible,
     paddingLeft: getLargerAmount(convertSizeToAmount(size)),
     paddingRight: getLargerAmount(convertSizeToAmount(size)),
-    size
+    size,
+    type
   }, props), {
     children: typeof children === "string" ? /* @__PURE__ */ jsx(Label, {
       alignContent: fullWidth ? Align.Center : alignContent,

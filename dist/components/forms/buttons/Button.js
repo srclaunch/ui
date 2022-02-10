@@ -139,9 +139,7 @@ export const Button = memo(({ active, alignItems = Align.Center, alignContent = 
     return (_jsx(Wrapper, { active: {
             backgroundOpacity: 80,
             ...active,
-        }, alignItems: alignItems, alignContent: alignContent, 
-        // as="button"
-        backgroundColor: updatedBackgroundColor, borderRadius: fullWidth && !borderRadius ? Amount.Least : borderRadius, boxShadow: {
+        }, alignItems: alignItems, alignContent: alignContent, as: "button", backgroundColor: updatedBackgroundColor, borderRadius: fullWidth && !borderRadius ? Amount.Least : borderRadius, boxShadow: {
             blurRadius: 8,
             color: colors?.backgroundColor,
             offsetX: 0,
@@ -159,7 +157,7 @@ export const Button = memo(({ active, alignItems = Align.Center, alignContent = 
             setHovered(false);
             if (onMouseLeave)
                 onMouseLeave(e);
-        }, orientation: orientation, overflow: Overflow.Visible, paddingLeft: getLargerAmount(convertSizeToAmount(size)), paddingRight: getLargerAmount(convertSizeToAmount(size)), size: size, ...props, children: typeof children === 'string' ? (_jsx(Label, { alignContent: fullWidth ? Align.Center : alignContent, icon: icon, lineHeight: size === Size.Smaller || size === Size.Smallest
+        }, orientation: orientation, overflow: Overflow.Visible, paddingLeft: getLargerAmount(convertSizeToAmount(size)), paddingRight: getLargerAmount(convertSizeToAmount(size)), size: size, type: type, ...props, children: typeof children === 'string' ? (_jsx(Label, { alignContent: fullWidth ? Align.Center : alignContent, icon: icon, lineHeight: size === Size.Smaller || size === Size.Smallest
                 ? Size.Small
                 : size, size: size, textColor: updatedTextColor, textSize: convertSizeToTextSize(getSmallerSize(size)), textWeight: TextWeight.More, underline: type === ButtonType.Link && hovered, children: children }, void 0)) : (_jsx(_Fragment, { children: children }, void 0)) }, void 0));
 });
