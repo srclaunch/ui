@@ -4818,7 +4818,7 @@ var ButtonType = /* @__PURE__ */ ((ButtonType2) => {
   ButtonType2["White"] = "white";
   return ButtonType2;
 })(ButtonType || {});
-const Wrapper$7 = styled.button`
+const Wrapper$7 = styled.div`
   ${AppearanceStyles};
 `;
 const Button$1 = memo((_k) => {
@@ -4940,7 +4940,7 @@ const Button$1 = memo((_k) => {
   const colors = getColors();
   const updatedBackgroundColor = hovered ? (hover == null ? void 0 : hover.backgroundColor) ? hover == null ? void 0 : hover.backgroundColor : (_a = colors == null ? void 0 : colors.backgroundColor) != null ? _a : backgroundColor : (_b = colors == null ? void 0 : colors.backgroundColor) != null ? _b : backgroundColor;
   const updatedTextColor = hovered ? (hover == null ? void 0 : hover.textColor) ? hover == null ? void 0 : hover.textColor : (_c = colors == null ? void 0 : colors.textColor) != null ? _c : textColor : (_d = colors == null ? void 0 : colors.textColor) != null ? _d : textColor;
-  return /* @__PURE__ */ jsx(Wrapper$7, {
+  return /* @__PURE__ */ jsx(Wrapper$7, __spreadProps(__spreadValues({
     active: __spreadValues({
       backgroundOpacity: 80
     }, active),
@@ -4981,7 +4981,8 @@ const Button$1 = memo((_k) => {
     paddingLeft: getLargerAmount(convertSizeToAmount(size)),
     paddingRight: getLargerAmount(convertSizeToAmount(size)),
     size,
-    type,
+    type
+  }, props), {
     children: typeof children === "string" ? /* @__PURE__ */ jsx(Label, {
       alignContent: fullWidth ? Align.Center : alignContent,
       icon,
@@ -4995,7 +4996,7 @@ const Button$1 = memo((_k) => {
     }) : /* @__PURE__ */ jsx(Fragment, {
       children
     })
-  });
+  }));
 });
 var Colors = /* @__PURE__ */ ((Colors2) => {
   Colors2["Black"] = "var(--color-black-rgb)";

@@ -1,5 +1,5 @@
 import { memo, MouseEvent, ReactElement, useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { getLargerAmount } from '../../../lib/proportions/amount';
 import {
@@ -7,7 +7,7 @@ import {
   convertSizeToTextSize,
 } from '../../../lib/proportions/conversions';
 import { getSmallerSize } from '../../../lib/proportions/size';
-import { AppearanceStyles } from '../../../styles/appearance/index';
+import { AppearanceStyles } from '../../../styles/appearance';
 import { FocusedStyles } from '../../../styles/focused';
 import { LayoutStyles } from '../../../styles/layout';
 import {
@@ -67,7 +67,7 @@ export type ButtonProps<
 > &
   P;
 
-const Wrapper = styled.button<ButtonProps>`
+const Wrapper = styled.div<ButtonProps>`
   ${AppearanceStyles};
 `;
 
@@ -262,7 +262,7 @@ export const Button = memo(
         paddingRight={getLargerAmount(convertSizeToAmount(size))}
         size={size}
         type={type}
-        // {...props}
+        {...props}
       >
         {typeof children === 'string' ? (
           <Label
