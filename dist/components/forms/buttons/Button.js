@@ -144,7 +144,9 @@ export const Button = memo(({ active, alignItems = Align.Center, alignContent = 
     return (_jsx(Wrapper, { active: {
             backgroundOpacity: 80,
             ...active,
-        }, alignItems: alignItems, alignContent: alignContent, as: "button", backgroundColor: updatedBackgroundColor, borderRadius: fullWidth && !borderRadius ? Amount.Least : borderRadius, boxShadow: {
+        }, alignItems: alignItems, alignContent: alignContent, 
+        // as="button"
+        backgroundColor: updatedBackgroundColor, borderRadius: fullWidth && !borderRadius ? Amount.Least : borderRadius, boxShadow: {
             blurRadius: 8,
             color: colors?.backgroundColor,
             offsetX: 0,

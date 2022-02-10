@@ -5044,7 +5044,6 @@ const Button$1 = memo((_k) => {
     }, active),
     alignItems,
     alignContent,
-    as: "button",
     backgroundColor: updatedBackgroundColor,
     borderRadius: fullWidth && !borderRadius ? Amount.Least : borderRadius,
     boxShadow: {
@@ -14926,6 +14925,18 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
+var __assign$1 = function() {
+  __assign$1 = Object.assign || function __assign2(t) {
+    for (var s2, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
+      s2 = arguments[i2];
+      for (var p2 in s2)
+        if (Object.prototype.hasOwnProperty.call(s2, p2))
+          t[p2] = s2[p2];
+    }
+    return t;
+  };
+  return __assign$1.apply(this, arguments);
+};
 function __awaiter(thisArg, _arguments, P2, generator) {
   function adopt(value2) {
     return value2 instanceof P2 ? value2 : new P2(function(resolve) {
@@ -17012,8 +17023,8 @@ function __extends(e, a) {
   }
   extendStatics(e, a), e.prototype = a === null ? Object.create(a) : (i2.prototype = a.prototype, new i2());
 }
-var BRUTEFORCE_CARDINALITY, MIN_GUESSES_BEFORE_GROWING_SEQUENCE, MIN_SUBMATCH_GUESSES_MULTI_CHAR, MIN_SUBMATCH_GUESSES_SINGLE_CHAR, adjacency_graphs$1, calc_average_degree, k, __assign$1 = function() {
-  return (__assign$1 = Object.assign || function(e) {
+var BRUTEFORCE_CARDINALITY, MIN_GUESSES_BEFORE_GROWING_SEQUENCE, MIN_SUBMATCH_GUESSES_MULTI_CHAR, MIN_SUBMATCH_GUESSES_SINGLE_CHAR, adjacency_graphs$1, calc_average_degree, k, __assign = function() {
+  return (__assign = Object.assign || function(e) {
     for (var a, i2 = 1, r = arguments.length; i2 < r; i2++)
       for (var n2 in a = arguments[i2])
         Object.prototype.hasOwnProperty.call(a, n2) && (e[n2] = a[n2]);
@@ -17482,7 +17493,7 @@ var main = function(e, a) {
   return c2.feedback = feedback$1.get_feedback(c2.score, c2.sequence), c2;
 }, itemStyle = { flexBasis: 0, flexGrow: 1, position: "relative", maxWidth: "100%", width: "100%", height: 2 }, Item = function(e) {
   var a = e.score, i2 = e.itemNum, r = e.barColors, n2 = r[0];
-  return i2 <= a && (n2 = r[a]), React__default.createElement("div", { style: __assign$1(__assign$1({}, itemStyle), { backgroundColor: n2 }) });
+  return i2 <= a && (n2 = r[a]), React__default.createElement("div", { style: __assign(__assign({}, itemStyle), { backgroundColor: n2 }) });
 }, rootStyle = { position: "relative" }, wrapStyle = { display: "flex", alignItems: "center", margin: "5px 0 0" }, spaceStyle = { width: 4 }, descStyle = { margin: "5px 0 0", color: "#898792", fontSize: 14, textAlign: "right" }, PasswordStrengthBar = function(e) {
   function a() {
     var l2 = e !== null && e.apply(this, arguments) || this;
@@ -17500,9 +17511,9 @@ var main = function(e, a) {
     e2.password !== a2 && this.setScore();
   }, a.prototype.render = function() {
     var e2 = this.props, a2 = e2.className, i2 = e2.style, r = e2.scoreWordClassName, n2 = e2.scoreWordStyle, s2 = e2.password, o = e2.barColors, t = e2.scoreWords, l2 = e2.minLength, c2 = e2.shortScoreWord, d2 = this.state.score, m2 = s2.length >= l2 ? t[d2] : c2;
-    return React__default.createElement("div", { className: a2, style: __assign$1(__assign$1({}, rootStyle), i2) }, React__default.createElement("div", { style: wrapStyle }, [1, 2, 3, 4].map(function(e3) {
+    return React__default.createElement("div", { className: a2, style: __assign(__assign({}, rootStyle), i2) }, React__default.createElement("div", { style: wrapStyle }, [1, 2, 3, 4].map(function(e3) {
       return React__default.createElement(React.Fragment, { key: "password-strength-bar-item-" + e3 }, 1 < e3 && React__default.createElement("div", { style: spaceStyle }), React__default.createElement(Item, { score: d2, itemNum: e3, barColors: o }));
-    })), React__default.createElement("p", { className: r, style: __assign$1(__assign$1({}, descStyle), n2) }, m2));
+    })), React__default.createElement("p", { className: r, style: __assign(__assign({}, descStyle), n2) }, m2));
   }, a.defaultProps = { className: void 0, style: void 0, scoreWordClassName: void 0, scoreWordStyle: void 0, password: "", userInputs: [], barColors: ["#ddd", "#ef4836", "#f6b44d", "#2b90ef", "#25c281"], scoreWords: ["weak", "weak", "okay", "good", "strong"], minLength: 4, shortScoreWord: "too short", onChangeScore: void 0 }, a;
 }(React__default.Component);
 var _default = dist.default = PasswordStrengthBar;
@@ -21558,32 +21569,6 @@ function useAuthentication({
     loginRequired
   };
 }
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-var __assign = function() {
-  __assign = Object.assign || function __assign2(t) {
-    for (var s2, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
-      s2 = arguments[i2];
-      for (var p2 in s2)
-        if (Object.prototype.hasOwnProperty.call(s2, p2))
-          t[p2] = s2[p2];
-    }
-    return t;
-  };
-  return __assign.apply(this, arguments);
-};
 function lowerCase(str2) {
   return str2.toLowerCase();
 }
@@ -21622,7 +21607,7 @@ function pascalCase(input, options) {
   if (options === void 0) {
     options = {};
   }
-  return noCase(input, __assign({ delimiter: "", transform: pascalCaseTransform }, options));
+  return noCase(input, __assign$1({ delimiter: "", transform: pascalCaseTransform }, options));
 }
 function camelCaseTransform(input, index) {
   if (index === 0)
@@ -21633,7 +21618,7 @@ function camelCase(input, options) {
   if (options === void 0) {
     options = {};
   }
-  return pascalCase(input, __assign({ transform: camelCaseTransform }, options));
+  return pascalCase(input, __assign$1({ transform: camelCaseTransform }, options));
 }
 function upperCaseFirst(input) {
   return input.charAt(0).toUpperCase() + input.substr(1);
@@ -21645,7 +21630,7 @@ function capitalCase(input, options) {
   if (options === void 0) {
     options = {};
   }
-  return noCase(input, __assign({ delimiter: " ", transform: capitalCaseTransform }, options));
+  return noCase(input, __assign$1({ delimiter: " ", transform: capitalCaseTransform }, options));
 }
 var pluralize$1 = { exports: {} };
 (function(module, exports) {

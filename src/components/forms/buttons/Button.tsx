@@ -226,7 +226,7 @@ export const Button = memo(
         }}
         alignItems={alignItems}
         alignContent={alignContent}
-        as="button"
+        // as="button"
         backgroundColor={updatedBackgroundColor}
         borderRadius={fullWidth && !borderRadius ? Amount.Least : borderRadius}
         boxShadow={{
