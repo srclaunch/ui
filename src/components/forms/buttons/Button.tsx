@@ -7,7 +7,7 @@ import {
   convertSizeToTextSize,
 } from '../../../lib/proportions/conversions';
 import { getSmallerSize } from '../../../lib/proportions/size';
-import { AppearanceStyles } from '../../../styles/appearance';
+import { AppearanceStyles } from '../../../styles/appearance/index';
 import { FocusedStyles } from '../../../styles/focused';
 import { LayoutStyles } from '../../../styles/layout';
 import {
