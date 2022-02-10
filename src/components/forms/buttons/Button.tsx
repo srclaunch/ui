@@ -68,9 +68,7 @@ export type ButtonProps<
   P;
 
 const Wrapper = styled.button<ButtonProps>`
-  ${LayoutStyles};
   ${AppearanceStyles};
-  ${FocusedStyles};
 `;
 
 /*  ${LayoutStyles};
@@ -264,7 +262,7 @@ export const Button = memo(
         paddingRight={getLargerAmount(convertSizeToAmount(size))}
         size={size}
         type={type}
-        {...props}
+        // {...props}
       >
         {typeof children === 'string' ? (
           <Label

@@ -2415,268 +2415,6 @@ function getLargerSize(size) {
       return Size.Largest;
   }
 }
-const FocusedStyles = css$1`
-  outline: none;
-
-  &:before {
-    bottom: -4px;
-    border-radius: calc(${(props) => props.borderRadius} + 3px);
-    content: '';
-    display: block;
-    border-color: rgb(${BorderColors.Primary});
-    border-style: solid;
-    border-width: 2px;
-    opacity: ${(props) => props.focused ? 1 : 0};
-    left: -4px;
-    position: absolute;
-    pointer-events: none;
-    right: -4px;
-    top: -4px;
-    transition: opacity 0.2s ease-in-out;
-    z-index: 0;
-  }
-
-  &:focus {
-    &:before {
-      opacity: 1;
-    }
-  }
-`;
-function getDepthZIndex(value2) {
-  switch (value2) {
-    case Depth.Lowest:
-      return -3;
-    case Depth.Lower:
-      return -2;
-    case Depth.Low:
-      return -1;
-    case Depth.Surface:
-      return 0;
-    case Depth.High:
-      return 1;
-    case Depth.Higher:
-      return 2;
-    case Depth.Highest:
-      return 3;
-    default:
-      return 0;
-  }
-}
-function getCSSMeasurementValue(val) {
-  if (typeof val === "string" && val.indexOf("var(") > -1) {
-    return val;
-  }
-  if (typeof val === "string" && val.indexOf("%") > -1) {
-    return val;
-  }
-  if (typeof val === "number") {
-    return `${val}px`;
-  }
-  return val;
-}
-const isBorderStyleProps$1 = (border) => {
-  return border.hasOwnProperty("color");
-};
-function getCSSBorderValue(val) {
-  var _a, _b, _c;
-  if (!val)
-    return null;
-  if (isBorderStyleProps$1(val)) {
-    return `${getCSSMeasurementValue((_a = val.width) != null ? _a : 1)} ${(_b = val.style) != null ? _b : ""} ${val.color === BorderColors.Transparent ? "transparent" : `rgb(${(_c = val.color) != null ? _c : BorderColors.Default})`}`;
-  }
-  return null;
-}
-function getCSSBoxShadowValue(val) {
-  if (!val)
-    return null;
-  const getString = (shadow) => {
-    var _a;
-    const offsetX = shadow.offsetX ? `${shadow.offsetX}px` : 0;
-    const offsetY = shadow.offsetY ? `${shadow.offsetY}px` : 0;
-    const blurRadius = shadow.blurRadius ? `${shadow.blurRadius}px` : "";
-    const spreadradius = shadow.spreadRadius ? `${shadow.spreadRadius}px` : "";
-    const color = ` rgba(${shadow.color}, ${(_a = shadow.opacity) != null ? _a : 100}%)`;
-    return `${offsetX} ${offsetY} ${blurRadius} ${spreadradius} ${color}`;
-  };
-  if (Array.isArray(val)) {
-    return val.map((s2) => getString(s2)).join(",");
-  }
-  if (typeof val === "string")
-    return val;
-  return getString(val);
-}
-function getOverflowStyle(value2) {
-  switch (value2) {
-    case Overflow.Clip:
-      return css$1`
-        overflow: clip;
-      `;
-    case Overflow.ClipBoth:
-      return css$1`
-        overflow: clip-both;
-      `;
-    case Overflow.ClipHorizontal:
-      return css$1`
-        overflow-x: clip;
-      `;
-    case Overflow.ClipVertical:
-      return css$1`
-        overflow-y: clip;
-      `;
-    case Overflow.Hidden:
-      return css$1`
-        overflow: hidden;
-      `;
-    case Overflow.Scroll:
-    case Overflow.ScrollBoth:
-      return css$1`
-        overflow: scroll;
-      `;
-    case Overflow.ScrollHorizontal:
-      return css$1`
-        overflow: hidden;
-        overflow-x: scroll;
-      `;
-    case Overflow.ScrollVertical:
-      return css$1`
-        overflow: hidden;
-        overflow-y: scroll;
-      `;
-    case Overflow.Visible:
-      return css$1`
-        overflow: visible;
-      `;
-    default:
-      return value2;
-  }
-}
-function getPositionProperty(value2) {
-  if (typeof value2 === "number") {
-    return getCSSMeasurementValue(value2);
-  }
-  return value2;
-}
-const LayoutStyles = css$1`
-  align-items: ${(props) => {
-  var _a;
-  return (_a = props.alignItems) != null ? _a : "center";
-}};
-  bottom: ${(props) => {
-  var _a;
-  return (_a = getPositionProperty(props.bottom)) != null ? _a : "auto";
-}};
-  display: flex;
-  flex: unset;
-  flex-grow: ${(props) => props.grow ? 1 : 0};
-  flex-direction: ${(props) => props.orientation ? props.orientation === Orientation.Horizontal ? "row" : "column" : "column"};
-  flex-shrink: ${(props) => props.shrink ? 1 : 0};
-  flex-wrap: ${(props) => props.lineWrap ? "wrap" : "nowrap"};
-  justify-content: ${(props) => {
-  var _a;
-  return (_a = props.alignContent) != null ? _a : "initial";
-}};
-  left: ${(props) => {
-  var _a;
-  return (_a = getPositionProperty(props.left)) != null ? _a : "auto";
-}};
-  place-self: ${(props) => {
-  var _a;
-  return (_a = props.alignSelf) != null ? _a : "initial";
-}};
-  position: ${(props) => {
-  var _a;
-  return (_a = props.position) != null ? _a : "relative";
-}};
-  pointer-events: ${(props) => props.events === false ? "none" : props.events === true ? "all" : "inherit"};
-  right: ${(props) => {
-  var _a;
-  return (_a = getPositionProperty(props.right)) != null ? _a : "auto";
-}};
-  top: ${(props) => {
-  var _a;
-  return (_a = getPositionProperty(props.top)) != null ? _a : "auto";
-}};
-  z-index: ${(props) => getDepthZIndex(props.depth) === 0 ? "auto" : getDepthZIndex(props.depth)};
-
-  ${(props) => props.fillBehavior === FillBehavior.FillVertical && Orientation.Vertical && css$1`
-      flex: 1 1 auto;
-    `};
-
-  ${(props) => props.fillBehavior === FillBehavior.FillHorizontal && Orientation.Horizontal && css$1`
-      flex: 1 1 auto;
-    `};
-
-  ${(props) => props.fillBehavior === FillBehavior.FillBoth && css$1`
-      flex: 1 1 auto;
-    `};
-
-  ${(props) => props.fillScreen && css$1`
-      display: flex;
-      bottom: 0;
-      left: 0;
-      position: fixed;
-      right: 0;
-      top: 0;
-    `};
-
-  ${(props) => {
-  var _a;
-  return props.margin && css$1`
-      margin: ${(_a = getCSSMeasurementValue(props.margin)) != null ? _a : 0};
-    `;
-}};
-
-  ${(props) => props.marginBottom && css$1`
-      margin-bottom: ${getCSSMeasurementValue(props.marginBottom)};
-    `};
-
-  ${(props) => props.marginLeft && css$1`
-      margin-left: ${getCSSMeasurementValue(props.marginLeft)};
-    `};
-
-  ${(props) => props.marginRight && css$1`
-      margin-right: ${getCSSMeasurementValue(props.marginRight)};
-    `};
-
-  ${(props) => props.marginTop && css$1`
-      margin-top: ${getCSSMeasurementValue(props.marginTop)};
-    `};
-
-  ${(props) => getOverflowStyle(props.overflow)};
-
-  ${(props) => {
-  var _a;
-  return props.padding && css$1`
-      padding: ${(_a = getCSSMeasurementValue(props.padding)) != null ? _a : 0};
-    `;
-}};
-
-  ${(props) => props.paddingBottom && css$1`
-      padding-bottom: ${getCSSMeasurementValue(props.paddingBottom)};
-    `};
-
-  ${(props) => props.paddingLeft && css$1`
-      padding-left: ${getCSSMeasurementValue(props.paddingLeft)};
-    `};
-
-  ${(props) => props.paddingRight && css$1`
-      padding-right: ${getCSSMeasurementValue(props.paddingRight)};
-    `};
-
-  ${(props) => props.paddingTop && css$1`
-      padding-top: ${getCSSMeasurementValue(props.paddingTop)};
-    `};
-
-  ${(props) => props.scrollable && css$1`
-      bottom: 0;
-      overflow: hidden;
-      overflow-y: scroll;
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-    `};
-`;
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
 /*
@@ -4549,6 +4287,241 @@ const DimensionStyles = css$1`
       min-width: ${getDimension(props.size)};
     `};
 `;
+function getDepthZIndex(value2) {
+  switch (value2) {
+    case Depth.Lowest:
+      return -3;
+    case Depth.Lower:
+      return -2;
+    case Depth.Low:
+      return -1;
+    case Depth.Surface:
+      return 0;
+    case Depth.High:
+      return 1;
+    case Depth.Higher:
+      return 2;
+    case Depth.Highest:
+      return 3;
+    default:
+      return 0;
+  }
+}
+function getCSSMeasurementValue(val) {
+  if (typeof val === "string" && val.indexOf("var(") > -1) {
+    return val;
+  }
+  if (typeof val === "string" && val.indexOf("%") > -1) {
+    return val;
+  }
+  if (typeof val === "number") {
+    return `${val}px`;
+  }
+  return val;
+}
+const isBorderStyleProps$1 = (border) => {
+  return border.hasOwnProperty("color");
+};
+function getCSSBorderValue(val) {
+  var _a, _b, _c;
+  if (!val)
+    return null;
+  if (isBorderStyleProps$1(val)) {
+    return `${getCSSMeasurementValue((_a = val.width) != null ? _a : 1)} ${(_b = val.style) != null ? _b : ""} ${val.color === BorderColors.Transparent ? "transparent" : `rgb(${(_c = val.color) != null ? _c : BorderColors.Default})`}`;
+  }
+  return null;
+}
+function getCSSBoxShadowValue(val) {
+  if (!val)
+    return null;
+  const getString = (shadow) => {
+    var _a;
+    const offsetX = shadow.offsetX ? `${shadow.offsetX}px` : 0;
+    const offsetY = shadow.offsetY ? `${shadow.offsetY}px` : 0;
+    const blurRadius = shadow.blurRadius ? `${shadow.blurRadius}px` : "";
+    const spreadradius = shadow.spreadRadius ? `${shadow.spreadRadius}px` : "";
+    const color = ` rgba(${shadow.color}, ${(_a = shadow.opacity) != null ? _a : 100}%)`;
+    return `${offsetX} ${offsetY} ${blurRadius} ${spreadradius} ${color}`;
+  };
+  if (Array.isArray(val)) {
+    return val.map((s2) => getString(s2)).join(",");
+  }
+  if (typeof val === "string")
+    return val;
+  return getString(val);
+}
+function getOverflowStyle(value2) {
+  switch (value2) {
+    case Overflow.Clip:
+      return css$1`
+        overflow: clip;
+      `;
+    case Overflow.ClipBoth:
+      return css$1`
+        overflow: clip-both;
+      `;
+    case Overflow.ClipHorizontal:
+      return css$1`
+        overflow-x: clip;
+      `;
+    case Overflow.ClipVertical:
+      return css$1`
+        overflow-y: clip;
+      `;
+    case Overflow.Hidden:
+      return css$1`
+        overflow: hidden;
+      `;
+    case Overflow.Scroll:
+    case Overflow.ScrollBoth:
+      return css$1`
+        overflow: scroll;
+      `;
+    case Overflow.ScrollHorizontal:
+      return css$1`
+        overflow: hidden;
+        overflow-x: scroll;
+      `;
+    case Overflow.ScrollVertical:
+      return css$1`
+        overflow: hidden;
+        overflow-y: scroll;
+      `;
+    case Overflow.Visible:
+      return css$1`
+        overflow: visible;
+      `;
+    default:
+      return value2;
+  }
+}
+function getPositionProperty(value2) {
+  if (typeof value2 === "number") {
+    return getCSSMeasurementValue(value2);
+  }
+  return value2;
+}
+const LayoutStyles = css$1`
+  align-items: ${(props) => {
+  var _a;
+  return (_a = props.alignItems) != null ? _a : "center";
+}};
+  bottom: ${(props) => {
+  var _a;
+  return (_a = getPositionProperty(props.bottom)) != null ? _a : "auto";
+}};
+  display: flex;
+  flex: unset;
+  flex-grow: ${(props) => props.grow ? 1 : 0};
+  flex-direction: ${(props) => props.orientation ? props.orientation === Orientation.Horizontal ? "row" : "column" : "column"};
+  flex-shrink: ${(props) => props.shrink ? 1 : 0};
+  flex-wrap: ${(props) => props.lineWrap ? "wrap" : "nowrap"};
+  justify-content: ${(props) => {
+  var _a;
+  return (_a = props.alignContent) != null ? _a : "initial";
+}};
+  left: ${(props) => {
+  var _a;
+  return (_a = getPositionProperty(props.left)) != null ? _a : "auto";
+}};
+  place-self: ${(props) => {
+  var _a;
+  return (_a = props.alignSelf) != null ? _a : "initial";
+}};
+  position: ${(props) => {
+  var _a;
+  return (_a = props.position) != null ? _a : "relative";
+}};
+  pointer-events: ${(props) => props.events === false ? "none" : props.events === true ? "all" : "inherit"};
+  right: ${(props) => {
+  var _a;
+  return (_a = getPositionProperty(props.right)) != null ? _a : "auto";
+}};
+  top: ${(props) => {
+  var _a;
+  return (_a = getPositionProperty(props.top)) != null ? _a : "auto";
+}};
+  z-index: ${(props) => getDepthZIndex(props.depth) === 0 ? "auto" : getDepthZIndex(props.depth)};
+
+  ${(props) => props.fillBehavior === FillBehavior.FillVertical && Orientation.Vertical && css$1`
+      flex: 1 1 auto;
+    `};
+
+  ${(props) => props.fillBehavior === FillBehavior.FillHorizontal && Orientation.Horizontal && css$1`
+      flex: 1 1 auto;
+    `};
+
+  ${(props) => props.fillBehavior === FillBehavior.FillBoth && css$1`
+      flex: 1 1 auto;
+    `};
+
+  ${(props) => props.fillScreen && css$1`
+      display: flex;
+      bottom: 0;
+      left: 0;
+      position: fixed;
+      right: 0;
+      top: 0;
+    `};
+
+  ${(props) => {
+  var _a;
+  return props.margin && css$1`
+      margin: ${(_a = getCSSMeasurementValue(props.margin)) != null ? _a : 0};
+    `;
+}};
+
+  ${(props) => props.marginBottom && css$1`
+      margin-bottom: ${getCSSMeasurementValue(props.marginBottom)};
+    `};
+
+  ${(props) => props.marginLeft && css$1`
+      margin-left: ${getCSSMeasurementValue(props.marginLeft)};
+    `};
+
+  ${(props) => props.marginRight && css$1`
+      margin-right: ${getCSSMeasurementValue(props.marginRight)};
+    `};
+
+  ${(props) => props.marginTop && css$1`
+      margin-top: ${getCSSMeasurementValue(props.marginTop)};
+    `};
+
+  ${(props) => getOverflowStyle(props.overflow)};
+
+  ${(props) => {
+  var _a;
+  return props.padding && css$1`
+      padding: ${(_a = getCSSMeasurementValue(props.padding)) != null ? _a : 0};
+    `;
+}};
+
+  ${(props) => props.paddingBottom && css$1`
+      padding-bottom: ${getCSSMeasurementValue(props.paddingBottom)};
+    `};
+
+  ${(props) => props.paddingLeft && css$1`
+      padding-left: ${getCSSMeasurementValue(props.paddingLeft)};
+    `};
+
+  ${(props) => props.paddingRight && css$1`
+      padding-right: ${getCSSMeasurementValue(props.paddingRight)};
+    `};
+
+  ${(props) => props.paddingTop && css$1`
+      padding-top: ${getCSSMeasurementValue(props.paddingTop)};
+    `};
+
+  ${(props) => props.scrollable && css$1`
+      bottom: 0;
+      overflow: hidden;
+      overflow-y: scroll;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    `};
+`;
 const Img = styled.img`
   ${LayoutStyles};
   ${AppearanceStyles};
@@ -4846,9 +4819,7 @@ var ButtonType = /* @__PURE__ */ ((ButtonType2) => {
   return ButtonType2;
 })(ButtonType || {});
 const Wrapper$7 = styled.button`
-  ${LayoutStyles};
   ${AppearanceStyles};
-  ${FocusedStyles};
 `;
 const Button$1 = memo((_k) => {
   var _l = _k, {
@@ -4969,7 +4940,7 @@ const Button$1 = memo((_k) => {
   const colors = getColors();
   const updatedBackgroundColor = hovered ? (hover == null ? void 0 : hover.backgroundColor) ? hover == null ? void 0 : hover.backgroundColor : (_a = colors == null ? void 0 : colors.backgroundColor) != null ? _a : backgroundColor : (_b = colors == null ? void 0 : colors.backgroundColor) != null ? _b : backgroundColor;
   const updatedTextColor = hovered ? (hover == null ? void 0 : hover.textColor) ? hover == null ? void 0 : hover.textColor : (_c = colors == null ? void 0 : colors.textColor) != null ? _c : textColor : (_d = colors == null ? void 0 : colors.textColor) != null ? _d : textColor;
-  return /* @__PURE__ */ jsx(Wrapper$7, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx(Wrapper$7, {
     active: __spreadValues({
       backgroundOpacity: 80
     }, active),
@@ -5010,8 +4981,7 @@ const Button$1 = memo((_k) => {
     paddingLeft: getLargerAmount(convertSizeToAmount(size)),
     paddingRight: getLargerAmount(convertSizeToAmount(size)),
     size,
-    type
-  }, props), {
+    type,
     children: typeof children === "string" ? /* @__PURE__ */ jsx(Label, {
       alignContent: fullWidth ? Align.Center : alignContent,
       icon,
@@ -5025,7 +4995,7 @@ const Button$1 = memo((_k) => {
     }) : /* @__PURE__ */ jsx(Fragment, {
       children
     })
-  }));
+  });
 });
 var Colors = /* @__PURE__ */ ((Colors2) => {
   Colors2["Black"] = "var(--color-black-rgb)";
@@ -5771,6 +5741,33 @@ const AnimatedContainer = memo((_o) => {
     children
   }));
 });
+const FocusedStyles = css$1`
+  outline: none;
+
+  &:before {
+    bottom: -4px;
+    border-radius: calc(${(props) => props.borderRadius} + 3px);
+    content: '';
+    display: block;
+    border-color: rgb(${BorderColors.Primary});
+    border-style: solid;
+    border-width: 2px;
+    opacity: ${(props) => props.focused ? 1 : 0};
+    left: -4px;
+    position: absolute;
+    pointer-events: none;
+    right: -4px;
+    top: -4px;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 0;
+  }
+
+  &:focus {
+    &:before {
+      opacity: 1;
+    }
+  }
+`;
 const InputContainerStyles = css$1`
   ${LayoutStyles};
   ${FocusedStyles};

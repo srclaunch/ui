@@ -5,8 +5,6 @@ import { getLargerAmount } from '../../../lib/proportions/amount';
 import { convertSizeToAmount, convertSizeToTextSize, } from '../../../lib/proportions/conversions';
 import { getSmallerSize } from '../../../lib/proportions/size';
 import { AppearanceStyles } from '../../../styles/appearance/index';
-import { FocusedStyles } from '../../../styles/focused';
-import { LayoutStyles } from '../../../styles/layout';
 import { Align, Amount, BackgroundColors, Cursor, Orientation, Overflow, Size, TextColors, TextWeight, } from '../../../types';
 import { Label } from '../../typography/Label';
 export var ButtonType;
@@ -24,9 +22,7 @@ export var ButtonType;
     ButtonType["White"] = "white";
 })(ButtonType || (ButtonType = {}));
 const Wrapper = styled.button `
-  ${LayoutStyles};
   ${AppearanceStyles};
-  ${FocusedStyles};
 `;
 /*  ${LayoutStyles};
   ${AppearanceStyles};
@@ -164,7 +160,7 @@ export const Button = memo(({ active, alignItems = Align.Center, alignContent = 
             setHovered(false);
             if (onMouseLeave)
                 onMouseLeave(e);
-        }, orientation: orientation, overflow: Overflow.Visible, paddingLeft: getLargerAmount(convertSizeToAmount(size)), paddingRight: getLargerAmount(convertSizeToAmount(size)), size: size, type: type, ...props, children: typeof children === 'string' ? (_jsx(Label, { alignContent: fullWidth ? Align.Center : alignContent, icon: icon, lineHeight: size === Size.Smaller || size === Size.Smallest
+        }, orientation: orientation, overflow: Overflow.Visible, paddingLeft: getLargerAmount(convertSizeToAmount(size)), paddingRight: getLargerAmount(convertSizeToAmount(size)), size: size, type: type, children: typeof children === 'string' ? (_jsx(Label, { alignContent: fullWidth ? Align.Center : alignContent, icon: icon, lineHeight: size === Size.Smaller || size === Size.Smallest
                 ? Size.Small
                 : size, size: size, textColor: updatedTextColor, textSize: convertSizeToTextSize(getSmallerSize(size)), textWeight: TextWeight.More, underline: type === ButtonType.Link && hovered, children: children }, void 0)) : (_jsx(_Fragment, { children: children }, void 0)) }, void 0));
 });
