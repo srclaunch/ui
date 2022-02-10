@@ -13,16 +13,21 @@ import {
   TextWeight,
   WhiteSpace,
 } from '../../types';
-
 import { Container, ContainerProps } from '../layout/Container';
-import { Text, TextProps } from '../typography/Text';
 import { Icon, IconProps } from '../media/Icon';
+import { Text, TextProps } from '../typography/Text';
 
-export type LabelProps<E = HTMLLabelElement, P = {}> = TextProps<
-  E,
-  SizeProps<{
-    icon?: IconProps;
-  }>
+export type LabelProps<
+  E = HTMLLabelElement,
+  P = Record<string, unknown>,
+> = ContainerProps<
+  HTMLLabelElement,
+  TextProps<
+    E,
+    SizeProps<{
+      readonly icon?: IconProps;
+    }>
+  >
 > &
   P;
 

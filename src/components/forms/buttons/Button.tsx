@@ -68,9 +68,9 @@ export type ButtonProps<
   P;
 
 const Wrapper = styled.button<ButtonProps>`
-  background-color: blue;
   ${LayoutStyles};
   ${AppearanceStyles};
+  ${FocusedStyles};
 `;
 
 /*  ${LayoutStyles};

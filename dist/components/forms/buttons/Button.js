@@ -5,6 +5,7 @@ import { getLargerAmount } from '../../../lib/proportions/amount';
 import { convertSizeToAmount, convertSizeToTextSize, } from '../../../lib/proportions/conversions';
 import { getSmallerSize } from '../../../lib/proportions/size';
 import { AppearanceStyles } from '../../../styles/appearance';
+import { FocusedStyles } from '../../../styles/focused';
 import { LayoutStyles } from '../../../styles/layout';
 import { Align, Amount, BackgroundColors, Cursor, Orientation, Overflow, Size, TextColors, TextWeight, } from '../../../types';
 import { Label } from '../../typography/Label';
@@ -23,9 +24,9 @@ export var ButtonType;
     ButtonType["White"] = "white";
 })(ButtonType || (ButtonType = {}));
 const Wrapper = styled.button `
-  background-color: blue;
   ${LayoutStyles};
   ${AppearanceStyles};
+  ${FocusedStyles};
 `;
 /*  ${LayoutStyles};
   ${AppearanceStyles};

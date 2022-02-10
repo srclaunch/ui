@@ -2415,6 +2415,102 @@ function getLargerSize(size) {
       return Size.Largest;
   }
 }
+var Colors = /* @__PURE__ */ ((Colors2) => {
+  Colors2["Black"] = "var(--color-black-rgb)";
+  Colors2["Default"] = "var(--color-default-rgb)";
+  Colors2["Error"] = "var(--color-error-rgb)";
+  Colors2["Info"] = "var(--color-info-rgb)";
+  Colors2["Inherit"] = "inherit";
+  Colors2["Primary"] = "var(--color-primary-rgb)";
+  Colors2["Secondary"] = "var(--color-secondary-rgb)";
+  Colors2["Success"] = "var(--color-success-rgb)";
+  Colors2["Transparent"] = "transparent";
+  Colors2["Warning"] = "var(--color-warning-rgb)";
+  Colors2["White"] = "var(--color-white-rgb)";
+  return Colors2;
+})(Colors || {});
+var ContrastColors = /* @__PURE__ */ ((ContrastColors2) => {
+  ContrastColors2["Black"] = "var(--color-black-contrast-rgb)";
+  ContrastColors2["Default"] = "var(--color-default-contrast-rgb)";
+  ContrastColors2["Error"] = "var(--color-error-contrast-rgb)";
+  ContrastColors2["Info"] = "var(--color-info-contrast-rgb)";
+  ContrastColors2["Primary"] = "var(--color-primary-contrast-rgb)";
+  ContrastColors2["Secondary"] = "var(--color-secondary-contrast-rgb)";
+  ContrastColors2["Success"] = "var(--color-success-contrast-rgb)";
+  ContrastColors2["Warning"] = "var(--color-warning-contrast-rgb)";
+  ContrastColors2["White"] = "var(--color-white-contrast-rgb)";
+  return ContrastColors2;
+})(ContrastColors || {});
+var BorderColorShade = /* @__PURE__ */ ((BorderColorShade2) => {
+  BorderColorShade2["Lightest"] = "var(--border-color-lightest-rgb)";
+  BorderColorShade2["Lighter"] = "var(--border-color-lighter-rgb)";
+  BorderColorShade2["Light"] = "var(--border-color-light-rgb)";
+  BorderColorShade2["Default"] = "var(--border-color-default-rgb)";
+  BorderColorShade2["Dark"] = "var(--border-color-dark-rgb)";
+  BorderColorShade2["Darker"] = "var(--border-color-darker-rgb)";
+  BorderColorShade2["Darkest"] = "var(--border-color-darkest-rgb)";
+  return BorderColorShade2;
+})(BorderColorShade || {});
+var BorderColors = ((BorderColors2) => {
+  BorderColors2["InputControl"] = "var(--border-color-input-control-rgb)";
+  BorderColors2["Lightest"] = "var(--border-color-lightest-rgb)";
+  BorderColors2["Lighter"] = "var(--border-color-lighter-rgb)";
+  BorderColors2["Light"] = "var(--border-color-light-rgb)";
+  BorderColors2["Default"] = "var(--border-color-default-rgb)";
+  BorderColors2["Dark"] = "var(--border-color-dark-rgb)";
+  BorderColors2["Darker"] = "var(--border-color-darker-rgb)";
+  BorderColors2["Darkest"] = "var(--border-color-darkest-rgb)";
+  BorderColors2[BorderColors2["Black"] = Colors.Black] = "Black";
+  BorderColors2[BorderColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
+  BorderColors2[BorderColors2["Error"] = Colors.Error] = "Error";
+  BorderColors2[BorderColors2["ErrorContrast"] = ContrastColors.Error] = "ErrorContrast";
+  BorderColors2[BorderColors2["Info"] = Colors.Info] = "Info";
+  BorderColors2[BorderColors2["InfoContrast"] = ContrastColors.Info] = "InfoContrast";
+  BorderColors2[BorderColors2["Primary"] = Colors.Primary] = "Primary";
+  BorderColors2[BorderColors2["PrimaryContrast"] = ContrastColors.Primary] = "PrimaryContrast";
+  BorderColors2[BorderColors2["Secondary"] = Colors.Primary] = "Secondary";
+  BorderColors2[BorderColors2["SecondaryContrast"] = ContrastColors.Secondary] = "SecondaryContrast";
+  BorderColors2[BorderColors2["Success"] = Colors.Success] = "Success";
+  BorderColors2[BorderColors2["SuccessContrast"] = ContrastColors.Success] = "SuccessContrast";
+  BorderColors2[BorderColors2["Transparent"] = Colors.Transparent] = "Transparent";
+  BorderColors2[BorderColors2["Warning"] = Colors.Warning] = "Warning";
+  BorderColors2[BorderColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
+  BorderColors2[BorderColors2["White"] = Colors.White] = "White";
+  BorderColors2[BorderColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
+  return BorderColors2;
+})(BorderColors || {});
+var BorderStyle = /* @__PURE__ */ ((BorderStyle2) => {
+  BorderStyle2["Dotted"] = "dotted";
+  BorderStyle2["Solid"] = "solid";
+  return BorderStyle2;
+})(BorderStyle || {});
+const FocusedStyles = css$1`
+  outline: none;
+
+  &:before {
+    bottom: -4px;
+    border-radius: calc(${(props) => props.borderRadius} + 3px);
+    content: '';
+    display: block;
+    border-color: rgb(${BorderColors.Primary});
+    border-style: solid;
+    border-width: 2px;
+    opacity: ${(props) => props.focused ? 1 : 0};
+    left: -4px;
+    position: absolute;
+    pointer-events: none;
+    right: -4px;
+    top: -4px;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 0;
+  }
+
+  &:focus {
+    &:before {
+      opacity: 1;
+    }
+  }
+`;
 function getDepthZIndex(value2) {
   switch (value2) {
     case Depth.Lowest:
@@ -2650,60 +2746,6 @@ const LayoutStyles = css$1`
       top: 0;
     `};
 `;
-const getLineHeight = (lineHeight) => {
-  if (typeof lineHeight === "number") {
-    return `${lineHeight}px`;
-  }
-  return lineHeight;
-};
-const getTextAlignmentFromAlign = (align) => {
-  switch (align) {
-    case Align.Center:
-      return "center";
-    case Align.Justify:
-      return "justify";
-    case Align.Left:
-      return "left";
-    case Align.Right:
-      return "right";
-    default:
-      return align != null ? align : "left";
-  }
-};
-const TextStyles = css$1`
-  color: ${(props) => {
-  var _a;
-  return props.textColor === TextColors.Inherit ? TextColors.Inherit : `rgb(${(_a = props.textColor) != null ? _a : TextColors.Default})`;
-}};
-  cursor: inherit;
-  display: ${(props) => props.inline ? "inline" : "flex"};
-  font-size: ${(props) => props.textSize};
-  font-weight: ${(props) => props.textWeight};
-  line-height: ${(props) => getLineHeight(props.lineHeight)};
-  text-align: ${(props) => getTextAlignmentFromAlign(props.alignText)};
-  text-decoration: ${(props) => props.underline ? "underline" : "none"};
-  text-decoration-color: ${(props) => {
-  var _a;
-  return props.underlineColor ? props.underlineColor : props.textColor === TextColors.Inherit ? TextColors.Inherit : `rgb(${(_a = props.textColor) != null ? _a : TextColors.Default})`;
-}};
-  transition: color 0.15s ease-in;
-
-  ${(props) => props.overflow && css$1`
-      overflow: ${props.overflow};
-    `};
-
-  ${(props) => props.textOverflow && css$1`
-      text-overflow: ${props.textOverflow};
-    `};
-
-  ${(props) => !props.selectable && css$1`
-      user-select: none;
-    `};
-
-  ${(props) => props.whiteSpace && css$1`
-      white-space: ${props.whiteSpace};
-    `};
-`;
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
 /*
@@ -2810,47 +2852,6 @@ reactJsxRuntime_production_min.jsxs = q$1;
 const jsx = jsxRuntime.exports.jsx;
 const jsxs = jsxRuntime.exports.jsxs;
 const Fragment = jsxRuntime.exports.Fragment;
-const Text = memo((_a) => {
-  var _b = _a, {
-    as = "span",
-    children,
-    className: className2 = "",
-    grow = false,
-    inline = true,
-    lineHeight = Size.Default,
-    selectable = true,
-    textColor = TextColors.Text,
-    textSize = TextSize.Default,
-    width
-  } = _b, props = __objRest(_b, [
-    "as",
-    "children",
-    "className",
-    "grow",
-    "inline",
-    "lineHeight",
-    "selectable",
-    "textColor",
-    "textSize",
-    "width"
-  ]);
-  return /* @__PURE__ */ jsx(Container$l, __spreadProps(__spreadValues({
-    as,
-    className: `${className2} text`,
-    grow,
-    inline,
-    lineHeight,
-    selectable,
-    textColor,
-    textSize
-  }, props), {
-    children
-  }));
-});
-const Container$l = styled.span`
-  ${LayoutStyles};
-  ${TextStyles};
-`;
 var BasicIcons = /* @__PURE__ */ ((BasicIcons2) => {
   BasicIcons2["Airplane"] = "basic/Airplane.svg";
   BasicIcons2["Alert"] = "basic/Alert.svg";
@@ -4622,8 +4623,8 @@ const Img = styled.img`
   ${AppearanceStyles};
   ${DimensionStyles};
 `;
-const Image = memo((_c) => {
-  var _d = _c, {
+const Image = memo((_a) => {
+  var _b = _a, {
     alt,
     className: className2 = "",
     description,
@@ -4631,7 +4632,7 @@ const Image = memo((_c) => {
     path,
     url,
     width = "auto"
-  } = _d, props = __objRest(_d, [
+  } = _b, props = __objRest(_b, [
     "alt",
     "className",
     "description",
@@ -4658,12 +4659,12 @@ const Wrapper$9 = styled.span`
     width: 100%;
   }
 `;
-const Svg = memo((_e) => {
-  var _f = _e, {
+const Svg = memo((_c) => {
+  var _d = _c, {
     as = "span",
     children,
     className: className2 = ""
-  } = _f, props = __objRest(_f, [
+  } = _d, props = __objRest(_d, [
     "as",
     "children",
     "className"
@@ -4689,8 +4690,8 @@ const Wrapper$8 = styled.span`
     width: ${(props) => props.size};
   }
 `;
-const Icon = memo((_g) => {
-  var _h = _g, {
+const Icon = memo((_e) => {
+  var _f = _e, {
     color = ForegroundColors.Default,
     className: className2 = "",
     component,
@@ -4699,7 +4700,7 @@ const Icon = memo((_g) => {
     size = Size.Default,
     svg,
     url
-  } = _h, props = __objRest(_h, [
+  } = _f, props = __objRest(_f, [
     "color",
     "className",
     "component",
@@ -4747,6 +4748,101 @@ const Icon = memo((_g) => {
     children: getElement()
   }));
 });
+const getLineHeight = (lineHeight) => {
+  if (typeof lineHeight === "number") {
+    return `${lineHeight}px`;
+  }
+  return lineHeight;
+};
+const getTextAlignmentFromAlign = (align) => {
+  switch (align) {
+    case Align.Center:
+      return "center";
+    case Align.Justify:
+      return "justify";
+    case Align.Left:
+      return "left";
+    case Align.Right:
+      return "right";
+    default:
+      return align != null ? align : "left";
+  }
+};
+const TextStyles = css$1`
+  color: ${(props) => {
+  var _a;
+  return props.textColor === TextColors.Inherit ? TextColors.Inherit : `rgb(${(_a = props.textColor) != null ? _a : TextColors.Default})`;
+}};
+  cursor: inherit;
+  display: ${(props) => props.inline ? "inline" : "flex"};
+  font-size: ${(props) => props.textSize};
+  font-weight: ${(props) => props.textWeight};
+  line-height: ${(props) => getLineHeight(props.lineHeight)};
+  text-align: ${(props) => getTextAlignmentFromAlign(props.alignText)};
+  text-decoration: ${(props) => props.underline ? "underline" : "none"};
+  text-decoration-color: ${(props) => {
+  var _a;
+  return props.underlineColor ? props.underlineColor : props.textColor === TextColors.Inherit ? TextColors.Inherit : `rgb(${(_a = props.textColor) != null ? _a : TextColors.Default})`;
+}};
+  transition: color 0.15s ease-in;
+
+  ${(props) => props.overflow && css$1`
+      overflow: ${props.overflow};
+    `};
+
+  ${(props) => props.textOverflow && css$1`
+      text-overflow: ${props.textOverflow};
+    `};
+
+  ${(props) => !props.selectable && css$1`
+      user-select: none;
+    `};
+
+  ${(props) => props.whiteSpace && css$1`
+      white-space: ${props.whiteSpace};
+    `};
+`;
+const Text = memo((_g) => {
+  var _h = _g, {
+    as = "span",
+    children,
+    className: className2 = "",
+    grow = false,
+    inline = true,
+    lineHeight = Size.Default,
+    selectable = true,
+    textColor = TextColors.Text,
+    textSize = TextSize.Default,
+    width
+  } = _h, props = __objRest(_h, [
+    "as",
+    "children",
+    "className",
+    "grow",
+    "inline",
+    "lineHeight",
+    "selectable",
+    "textColor",
+    "textSize",
+    "width"
+  ]);
+  return /* @__PURE__ */ jsx(Container$l, __spreadProps(__spreadValues({
+    as,
+    className: `${className2} text`,
+    grow,
+    inline,
+    lineHeight,
+    selectable,
+    textColor,
+    textSize
+  }, props), {
+    children
+  }));
+});
+const Container$l = styled.span`
+  ${LayoutStyles};
+  ${TextStyles};
+`;
 const Label = memo((_i) => {
   var _j = _i, {
     alignItems = Align.Center,
@@ -4819,9 +4915,9 @@ var ButtonType = /* @__PURE__ */ ((ButtonType2) => {
   return ButtonType2;
 })(ButtonType || {});
 const Wrapper$7 = styled.button`
-  background-color: blue;
   ${LayoutStyles};
   ${AppearanceStyles};
+  ${FocusedStyles};
 `;
 const Button$1 = memo((_k) => {
   var _l = _k, {
@@ -5001,32 +5097,6 @@ const Button$1 = memo((_k) => {
     })
   }));
 });
-var Colors = /* @__PURE__ */ ((Colors2) => {
-  Colors2["Black"] = "var(--color-black-rgb)";
-  Colors2["Default"] = "var(--color-default-rgb)";
-  Colors2["Error"] = "var(--color-error-rgb)";
-  Colors2["Info"] = "var(--color-info-rgb)";
-  Colors2["Inherit"] = "inherit";
-  Colors2["Primary"] = "var(--color-primary-rgb)";
-  Colors2["Secondary"] = "var(--color-secondary-rgb)";
-  Colors2["Success"] = "var(--color-success-rgb)";
-  Colors2["Transparent"] = "transparent";
-  Colors2["Warning"] = "var(--color-warning-rgb)";
-  Colors2["White"] = "var(--color-white-rgb)";
-  return Colors2;
-})(Colors || {});
-var ContrastColors = /* @__PURE__ */ ((ContrastColors2) => {
-  ContrastColors2["Black"] = "var(--color-black-contrast-rgb)";
-  ContrastColors2["Default"] = "var(--color-default-contrast-rgb)";
-  ContrastColors2["Error"] = "var(--color-error-contrast-rgb)";
-  ContrastColors2["Info"] = "var(--color-info-contrast-rgb)";
-  ContrastColors2["Primary"] = "var(--color-primary-contrast-rgb)";
-  ContrastColors2["Secondary"] = "var(--color-secondary-contrast-rgb)";
-  ContrastColors2["Success"] = "var(--color-success-contrast-rgb)";
-  ContrastColors2["Warning"] = "var(--color-warning-contrast-rgb)";
-  ContrastColors2["White"] = "var(--color-white-contrast-rgb)";
-  return ContrastColors2;
-})(ContrastColors || {});
 var BackgroundColorShade = /* @__PURE__ */ ((BackgroundColorShade2) => {
   BackgroundColorShade2["Lightest"] = "var(--bg-color-lightest-rgb)";
   BackgroundColorShade2["Lighter"] = "var(--bg-color-lighter-rgb)";
@@ -5091,49 +5161,6 @@ var BackgroundSize = /* @__PURE__ */ ((BackgroundSize2) => {
   BackgroundSize2["FillVertical"] = "fill-vertical";
   return BackgroundSize2;
 })(BackgroundSize || {});
-var BorderColorShade = /* @__PURE__ */ ((BorderColorShade2) => {
-  BorderColorShade2["Lightest"] = "var(--border-color-lightest-rgb)";
-  BorderColorShade2["Lighter"] = "var(--border-color-lighter-rgb)";
-  BorderColorShade2["Light"] = "var(--border-color-light-rgb)";
-  BorderColorShade2["Default"] = "var(--border-color-default-rgb)";
-  BorderColorShade2["Dark"] = "var(--border-color-dark-rgb)";
-  BorderColorShade2["Darker"] = "var(--border-color-darker-rgb)";
-  BorderColorShade2["Darkest"] = "var(--border-color-darkest-rgb)";
-  return BorderColorShade2;
-})(BorderColorShade || {});
-var BorderColors = ((BorderColors2) => {
-  BorderColors2["InputControl"] = "var(--border-color-input-control-rgb)";
-  BorderColors2["Lightest"] = "var(--border-color-lightest-rgb)";
-  BorderColors2["Lighter"] = "var(--border-color-lighter-rgb)";
-  BorderColors2["Light"] = "var(--border-color-light-rgb)";
-  BorderColors2["Default"] = "var(--border-color-default-rgb)";
-  BorderColors2["Dark"] = "var(--border-color-dark-rgb)";
-  BorderColors2["Darker"] = "var(--border-color-darker-rgb)";
-  BorderColors2["Darkest"] = "var(--border-color-darkest-rgb)";
-  BorderColors2[BorderColors2["Black"] = Colors.Black] = "Black";
-  BorderColors2[BorderColors2["BlackContrast"] = ContrastColors.Black] = "BlackContrast";
-  BorderColors2[BorderColors2["Error"] = Colors.Error] = "Error";
-  BorderColors2[BorderColors2["ErrorContrast"] = ContrastColors.Error] = "ErrorContrast";
-  BorderColors2[BorderColors2["Info"] = Colors.Info] = "Info";
-  BorderColors2[BorderColors2["InfoContrast"] = ContrastColors.Info] = "InfoContrast";
-  BorderColors2[BorderColors2["Primary"] = Colors.Primary] = "Primary";
-  BorderColors2[BorderColors2["PrimaryContrast"] = ContrastColors.Primary] = "PrimaryContrast";
-  BorderColors2[BorderColors2["Secondary"] = Colors.Primary] = "Secondary";
-  BorderColors2[BorderColors2["SecondaryContrast"] = ContrastColors.Secondary] = "SecondaryContrast";
-  BorderColors2[BorderColors2["Success"] = Colors.Success] = "Success";
-  BorderColors2[BorderColors2["SuccessContrast"] = ContrastColors.Success] = "SuccessContrast";
-  BorderColors2[BorderColors2["Transparent"] = Colors.Transparent] = "Transparent";
-  BorderColors2[BorderColors2["Warning"] = Colors.Warning] = "Warning";
-  BorderColors2[BorderColors2["WarningContrast"] = ContrastColors.Warning] = "WarningContrast";
-  BorderColors2[BorderColors2["White"] = Colors.White] = "White";
-  BorderColors2[BorderColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
-  return BorderColors2;
-})(BorderColors || {});
-var BorderStyle = /* @__PURE__ */ ((BorderStyle2) => {
-  BorderStyle2["Dotted"] = "dotted";
-  BorderStyle2["Solid"] = "solid";
-  return BorderStyle2;
-})(BorderStyle || {});
 var Cursor = /* @__PURE__ */ ((Cursor2) => {
   Cursor2["Auto"] = "auto";
   Cursor2["Crosshair"] = "crosshair";
@@ -5745,33 +5772,6 @@ const AnimatedContainer = memo((_o) => {
     children
   }));
 });
-const FocusedStyles = css$1`
-  outline: none;
-
-  &:before {
-    bottom: -4px;
-    border-radius: calc(${(props) => props.borderRadius} + 3px);
-    content: '';
-    display: block;
-    border-color: rgb(${BorderColors.Primary});
-    border-style: solid;
-    border-width: 2px;
-    opacity: ${(props) => props.focused ? 1 : 0};
-    left: -4px;
-    position: absolute;
-    pointer-events: none;
-    right: -4px;
-    top: -4px;
-    transition: opacity 0.2s ease-in-out;
-    z-index: 0;
-  }
-
-  &:focus {
-    &:before {
-      opacity: 1;
-    }
-  }
-`;
 const InputContainerStyles = css$1`
   ${LayoutStyles};
   ${FocusedStyles};
