@@ -5107,8 +5107,7 @@ const Button$1 = memo((_k) => {
     overflow: Overflow.Visible,
     paddingLeft: getLargerAmount(convertSizeToAmount(size)),
     paddingRight: getLargerAmount(convertSizeToAmount(size)),
-    size,
-    type
+    size
   }, props), {
     children: typeof children === "string" ? /* @__PURE__ */ jsx(Label, {
       alignContent: fullWidth ? Align.Center : alignContent,

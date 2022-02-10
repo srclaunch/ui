@@ -260,7 +260,6 @@ export const Button = memo(
         paddingLeft={getLargerAmount(convertSizeToAmount(size))}
         paddingRight={getLargerAmount(convertSizeToAmount(size))}
         size={size}
-        type={type}
         {...props}
       >
         {typeof children === 'string' ? (
