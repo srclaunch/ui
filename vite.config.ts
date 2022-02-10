@@ -71,7 +71,7 @@ export default defineConfig(({ command, mode }) => {
         rollupOptions: {
           // Externalize deps that shouldn't be bundled
           external: [
-            '@srclaunch/environment-web',
+            '@srclaunch/web-environment',
             '@srclaunch/exceptions',
             '@srclaunch/i18n',
             '@srclaunch/logger',
@@ -123,7 +123,7 @@ export default defineConfig(({ command, mode }) => {
         rollupOptions: {
           // Externalize deps that shouldn't be bundled
           external: [
-            '@srclaunch/environment-web',
+            '@srclaunch/web-environment',
             '@srclaunch/exceptions',
             '@srclaunch/i18n',
             '@srclaunch/logger',

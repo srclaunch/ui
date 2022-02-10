@@ -1,4 +1,4 @@
-import { AuthenticationService } from '@srclaunch/http-services';
+// import { AuthenticationService } from '@srclaunch/http-services';
 import { Condition, EmailAddress, ValidationProblem } from '@srclaunch/types';
 import { memo, ReactElement, useState } from 'react';
 
@@ -51,31 +51,31 @@ export const EmailAddressInput = memo(
           ) {
             setInProgress(true);
 
-            const emailAvailable =
-              await AuthenticationService.checkUsernameAvailability({
-                username: value,
-              });
+            // const emailAvailable =
+            //   await AuthenticationService.checkUsernameAvailability({
+            //     username: value,
+            //   });
 
             setInProgress(false);
 
-            if (!emailAvailable) {
-              const problem: ValidationProblem = {
-                condition: Condition.IsUsernameAvailable,
-                message: {
-                  long: 'Email address is already in use',
-                  short: 'Email already in use',
-                },
-              };
+            // if (!emailAvailable) {
+            //   const problem: ValidationProblem = {
+            //     condition: Condition.IsUsernameAvailable,
+            //     message: {
+            //       long: 'Email address is already in use',
+            //       short: 'Email already in use',
+            //     },
+            //   };
 
-              setError([problem]);
+            //   setError([problem]);
 
-              if (onChange)
-                onChange({
-                  problems: [problem],
-                  validated: true,
-                  value,
-                });
-            }
+            //   if (onChange)
+            //     onChange({
+            //       problems: [problem],
+            //       validated: true,
+            //       value,
+            //     });
+            // }
           }
         }}
         validation={validationProps}

@@ -1,5 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { AuthenticationService } from '@srclaunch/http-services';
+// import { AuthenticationService } from '@srclaunch/http-services';
 import { Condition } from '@srclaunch/types';
 import { memo, useState } from 'react';
 import { AutoComplete } from '../../../../types';
@@ -23,26 +23,27 @@ export const EmailAddressInput = memo(({ autoComplete, defaultValue, onChange, v
                 value &&
                 value !== '') {
                 setInProgress(true);
-                const emailAvailable = await AuthenticationService.checkUsernameAvailability({
-                    username: value,
-                });
+                // const emailAvailable =
+                //   await AuthenticationService.checkUsernameAvailability({
+                //     username: value,
+                //   });
                 setInProgress(false);
-                if (!emailAvailable) {
-                    const problem = {
-                        condition: Condition.IsUsernameAvailable,
-                        message: {
-                            long: 'Email address is already in use',
-                            short: 'Email already in use',
-                        },
-                    };
-                    setError([problem]);
-                    if (onChange)
-                        onChange({
-                            problems: [problem],
-                            validated: true,
-                            value,
-                        });
-                }
+                // if (!emailAvailable) {
+                //   const problem: ValidationProblem = {
+                //     condition: Condition.IsUsernameAvailable,
+                //     message: {
+                //       long: 'Email address is already in use',
+                //       short: 'Email already in use',
+                //     },
+                //   };
+                //   setError([problem]);
+                //   if (onChange)
+                //     onChange({
+                //       problems: [problem],
+                //       validated: true,
+                //       value,
+                //     });
+                // }
             }
         }, validation: validationProps, ...props }, void 0));
 });
