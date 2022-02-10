@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-import { AppearanceProps } from '../../types/index';
+import { AppearanceProps } from '../../types';
 import { AnimationStyles } from '../animation/index';
 import { BackgroundStyles } from './background';
 import { BorderStyles } from './border';

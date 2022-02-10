@@ -27,6 +27,42 @@ export var ButtonType;
     ButtonType["Warning"] = "warning";
     ButtonType["White"] = "white";
 })(ButtonType || (ButtonType = {}));
+const Wrapper = styled.button `
+  ${LayoutStyles};
+  ${AppearanceStyles};
+  ${FocusedStyles};
+
+  * {
+    cursor: ${props => props.cursor};
+  }
+
+  &:before {
+    border-color: rgb(${props => props.backgroundColor});
+    border-radius: ${props => `calc(${props.borderRadius} + 3px)`};
+  }
+
+  ${props => props.disabled &&
+    css `
+      cursor: default;
+      opacity: 0.5;
+
+      * {
+        cursor: default;
+      }
+    `};
+
+  ${props => props.type === ButtonType.Link &&
+    css `
+      padding-left: calc(${props.size} / 5) !important;
+      padding-right: calc(${props.size} / 5) !important;
+
+      &:before {
+        border-radius: ${Amount.All};
+        left: -9px;
+        right: -9px;
+      }
+    `};
+`;
 export const Button = memo(({ active, alignItems = Align.Center, alignContent = Align.Center, backgroundColor, borderRadius = Amount.All, children, className = '', cursor = Cursor.Pointer, disabled = false, form, fullWidth, hover, icon, label, onClick, onMouseEnter, onMouseLeave, orientation = Orientation.Horizontal, size = Size.Default, textColor, textSize, textWeight, type, ...props }) => {
     const [hovered, setHovered] = useState(false);
     const getColors = () => {
@@ -104,7 +140,6 @@ export const Button = memo(({ active, alignItems = Align.Center, alignContent = 
             ? hover?.textColor
             : colors?.textColor ?? textColor
         : colors?.textColor ?? textColor;
-    console.log('updatedBackgroundColor', updatedBackgroundColor);
     return (_jsx(Wrapper, { active: {
             backgroundOpacity: 80,
             ...active,
@@ -130,40 +165,4 @@ export const Button = memo(({ active, alignItems = Align.Center, alignContent = 
                 ? Size.Small
                 : size, size: size, textColor: updatedTextColor, textSize: convertSizeToTextSize(getSmallerSize(size)), textWeight: TextWeight.More, underline: type === ButtonType.Link && hovered, children: children }, void 0)) : (_jsx(_Fragment, { children: children }, void 0)) }, void 0));
 });
-const Wrapper = styled.button `
-  ${LayoutStyles};
-  ${AppearanceStyles};
-  ${FocusedStyles};
-
-  * {
-    cursor: ${props => props.cursor};
-  }
-
-  &:before {
-    border-color: rgb(${props => props.backgroundColor});
-    border-radius: ${props => `calc(${props.borderRadius} + 3px)`};
-  }
-
-  ${props => props.disabled &&
-    css `
-      cursor: default;
-      opacity: 0.5;
-
-      * {
-        cursor: default;
-      }
-    `};
-
-  ${props => props.type === ButtonType.Link &&
-    css `
-      padding-left: calc($ {props.size} / 5) !important;
-      padding-right: calc($ {props.size} / 5) !important;
-
-      &:before {
-        border-radius: ${Amount.All};
-        left: -9px;
-        right: -9px;
-      }
-    `};
-`;
 //# sourceMappingURL=Button.js.map
