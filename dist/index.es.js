@@ -5130,40 +5130,6 @@ var ButtonType = /* @__PURE__ */ ((ButtonType2) => {
   ButtonType2["White"] = "white";
   return ButtonType2;
 })(ButtonType || {});
-const Wrapper$7 = styled.button`
-  ${LayoutStyles};
-  ${AppearanceStyles};
-  ${FocusedStyles};
-
-  * {
-    cursor: ${(props) => props.cursor};
-  }
-
-  &:before {
-    border-color: rgb(${(props) => props.backgroundColor});
-    border-radius: ${(props) => `calc(${props.borderRadius} + 3px)`};
-  }
-
-  ${(props) => props.disabled && css$1`
-      cursor: default;
-      opacity: 0.5;
-
-      * {
-        cursor: default;
-      }
-    `};
-
-  ${(props) => props.type === "link" && css$1`
-      padding-left: calc($ {props.size} / 5) !important;
-      padding-right: calc($ {props.size} / 5) !important;
-
-      &:before {
-        border-radius: ${Amount.All};
-        left: -9px;
-        right: -9px;
-      }
-    `};
-`;
 const Button$1 = memo((_k) => {
   var _l = _k, {
     active,
@@ -5283,6 +5249,7 @@ const Button$1 = memo((_k) => {
   const colors = getColors();
   const updatedBackgroundColor = hovered ? (hover == null ? void 0 : hover.backgroundColor) ? hover == null ? void 0 : hover.backgroundColor : (_a = colors == null ? void 0 : colors.backgroundColor) != null ? _a : backgroundColor : (_b = colors == null ? void 0 : colors.backgroundColor) != null ? _b : backgroundColor;
   const updatedTextColor = hovered ? (hover == null ? void 0 : hover.textColor) ? hover == null ? void 0 : hover.textColor : (_c = colors == null ? void 0 : colors.textColor) != null ? _c : textColor : (_d = colors == null ? void 0 : colors.textColor) != null ? _d : textColor;
+  console.log("updatedBackgroundColor", updatedBackgroundColor);
   return /* @__PURE__ */ jsx(Wrapper$7, __spreadProps(__spreadValues({
     active: __spreadValues({
       backgroundOpacity: 80
@@ -5342,6 +5309,40 @@ const Button$1 = memo((_k) => {
     })
   }));
 });
+const Wrapper$7 = styled.button`
+  ${LayoutStyles};
+  ${AppearanceStyles};
+  ${FocusedStyles};
+
+  * {
+    cursor: ${(props) => props.cursor};
+  }
+
+  &:before {
+    border-color: rgb(${(props) => props.backgroundColor});
+    border-radius: ${(props) => `calc(${props.borderRadius} + 3px)`};
+  }
+
+  ${(props) => props.disabled && css$1`
+      cursor: default;
+      opacity: 0.5;
+
+      * {
+        cursor: default;
+      }
+    `};
+
+  ${(props) => props.type === "link" && css$1`
+      padding-left: calc($ {props.size} / 5) !important;
+      padding-right: calc($ {props.size} / 5) !important;
+
+      &:before {
+        border-radius: ${Amount.All};
+        left: -9px;
+        right: -9px;
+      }
+    `};
+`;
 var Cursor = /* @__PURE__ */ ((Cursor2) => {
   Cursor2["Auto"] = "auto";
   Cursor2["Crosshair"] = "crosshair";

@@ -66,45 +66,6 @@ export type ButtonProps<
 > &
   P;
 
-const Wrapper = styled.button<ButtonProps>`
-  ${LayoutStyles};
-  ${AppearanceStyles};
-  ${FocusedStyles};
-
-  * {
-    cursor: ${props => props.cursor};
-  }
-
-  &:before {
-    border-color: rgb(${props => props.backgroundColor});
-    border-radius: ${props => `calc(${props.borderRadius} + 3px)`};
-  }
-
-  ${props =>
-    props.disabled &&
-    css`
-      cursor: default;
-      opacity: 0.5;
-
-      * {
-        cursor: default;
-      }
-    `};
-
-  ${props =>
-    props.type === ButtonType.Link &&
-    css`
-      padding-left: calc($ {props.size} / 5) !important;
-      padding-right: calc($ {props.size} / 5) !important;
-
-      &:before {
-        border-radius: ${Amount.All};
-        left: -9px;
-        right: -9px;
-      }
-    `};
-`;
-
 export const Button = memo(
   ({
     active,
@@ -214,6 +175,8 @@ export const Button = memo(
         : colors?.textColor ?? textColor
       : colors?.textColor ?? textColor;
 
+    console.log('updatedBackgroundColor', updatedBackgroundColor);
+
     return (
       <Wrapper
         active={{
@@ -286,3 +249,42 @@ export const Button = memo(
     );
   },
 );
+
+const Wrapper = styled.button<ButtonProps>`
+  ${LayoutStyles};
+  ${AppearanceStyles};
+  ${FocusedStyles};
+
+  * {
+    cursor: ${props => props.cursor};
+  }
+
+  &:before {
+    border-color: rgb(${props => props.backgroundColor});
+    border-radius: ${props => `calc(${props.borderRadius} + 3px)`};
+  }
+
+  ${props =>
+    props.disabled &&
+    css`
+      cursor: default;
+      opacity: 0.5;
+
+      * {
+        cursor: default;
+      }
+    `};
+
+  ${props =>
+    props.type === ButtonType.Link &&
+    css`
+      padding-left: calc($ {props.size} / 5) !important;
+      padding-right: calc($ {props.size} / 5) !important;
+
+      &:before {
+        border-radius: ${Amount.All};
+        left: -9px;
+        right: -9px;
+      }
+    `};
+`;
