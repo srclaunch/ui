@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { BorderColors } from '../types/appearance/border.js';
+import { BorderColors } from '../types';
 export const FocusedStyles = css `
   outline: none;
 

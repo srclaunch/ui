@@ -1,7 +1,6 @@
 import { css } from 'styled-components';
 
-import { BorderProps, FocusProps } from '../types';
-import { BorderColors } from '../types/appearance/border.js';
+import { BorderColors, BorderProps, FocusProps } from '../types';
 
 export const FocusedStyles = css<
   FocusProps<{
