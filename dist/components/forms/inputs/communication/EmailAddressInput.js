@@ -17,17 +17,18 @@ export const EmailAddressInput = memo(({ autoComplete, defaultValue, onChange, v
             setEmailAddress(value);
             if (onChange)
                 onChange({ problems, validated, value });
+            // TODO: Figure out how to handle this
             if (Object.keys(validation).includes(Condition.IsUsernameAvailable) &&
                 validated &&
                 !problems?.length &&
                 value &&
                 value !== '') {
-                setInProgress(true);
+                // setInProgress(true);
                 // const emailAvailable =
                 //   await AuthenticationService.checkUsernameAvailability({
                 //     username: value,
                 //   });
-                setInProgress(false);
+                // setInProgress(false);
                 // if (!emailAvailable) {
                 //   const problem: ValidationProblem = {
                 //     condition: Condition.IsUsernameAvailable,

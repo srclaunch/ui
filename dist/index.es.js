@@ -6926,10 +6926,8 @@ const EmailAddressInput = memo((_R) => {
           validated,
           value: value2
         });
-      if (Object.keys(validation).includes(Condition.IsUsernameAvailable) && validated && !(problems == null ? void 0 : problems.length) && value2 && value2 !== "") {
-        setInProgress(true);
-        setInProgress(false);
-      }
+      if (Object.keys(validation).includes(Condition.IsUsernameAvailable) && validated && !(problems == null ? void 0 : problems.length) && value2 && value2 !== "")
+        ;
     },
     validation: validationProps
   }, props));

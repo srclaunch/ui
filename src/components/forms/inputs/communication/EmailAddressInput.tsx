@@ -42,6 +42,7 @@ export const EmailAddressInput = memo(
 
           if (onChange) onChange({ problems, validated, value });
 
+          // TODO: Figure out how to handle this
           if (
             Object.keys(validation).includes(Condition.IsUsernameAvailable) &&
             validated &&
@@ -49,15 +50,12 @@ export const EmailAddressInput = memo(
             value &&
             value !== ''
           ) {
-            setInProgress(true);
-
+            // setInProgress(true);
             // const emailAvailable =
             //   await AuthenticationService.checkUsernameAvailability({
             //     username: value,
             //   });
-
-            setInProgress(false);
-
+            // setInProgress(false);
             // if (!emailAvailable) {
             //   const problem: ValidationProblem = {
             //     condition: Condition.IsUsernameAvailable,
@@ -66,9 +64,7 @@ export const EmailAddressInput = memo(
             //       short: 'Email already in use',
             //     },
             //   };
-
             //   setError([problem]);
-
             //   if (onChange)
             //     onChange({
             //       problems: [problem],
