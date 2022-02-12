@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type EmailAddressLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type EmailAddressLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const EmailAddressLabel = memo(
   ({

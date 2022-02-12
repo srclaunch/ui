@@ -1,5 +1,5 @@
 import { memo, MouseEvent, ReactElement, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { getLargerAmount } from '../../../lib/proportions/amount';
 import {
@@ -7,9 +7,6 @@ import {
   convertSizeToTextSize,
 } from '../../../lib/proportions/conversions';
 import { getSmallerSize } from '../../../lib/proportions/size';
-import { AppearanceStyles } from '../../../styles/appearance';
-import { FocusedStyles } from '../../../styles/focused';
-import { LayoutStyles } from '../../../styles/layout';
 import {
   Align,
   Amount,
@@ -24,8 +21,9 @@ import {
   SizeProps,
   TextColors,
   TextWeight,
-} from '../../../types';
+} from '../../../types/index';
 import { IconProps } from '../../media/Icon';
+import { Container, ContainerProps } from '../../layout/Container';
 import { Label, LabelProps } from '../../typography/Label';
 
 export enum ButtonType {
@@ -42,71 +40,56 @@ export enum ButtonType {
   White = 'white',
 }
 
-export type ButtonProps<
-  E = HTMLButtonElement,
-  P = Record<string, unknown>,
-> = LabelProps<
-  E,
-  MouseEventProps<
-    E,
-    KeyboardEventProps<
-      E,
-      FocusEventProps<
-        E,
-        SizeProps<{
-          readonly disabled?: boolean;
-          readonly form?: string;
-          readonly fullWidth?: boolean;
-          readonly icon?: IconProps;
-          readonly label?: string;
-          readonly type?: ButtonType;
-        }>
-      >
-    >
-  >
-> &
-  P;
+export type ButtonProps = {
+  readonly disabled?: boolean;
+  readonly form?: string;
+  readonly fullWidth?: boolean;
+  readonly icon?: IconProps;
+  readonly label?: string;
+  readonly type?: ButtonType;
+} & ContainerProps<HTMLButtonElement> &
+  LabelProps &
+  SizeProps;
 
-const Wrapper = styled.div<ButtonProps>`
-  ${AppearanceStyles};
-`;
+// const Wrapper = styled.button<ButtonProps>`
+//   ${LayoutStyles};
+//   ${AppearanceStyles};
+//   ${FocusedStyles};
 
-/*  ${LayoutStyles};
-  ${AppearanceStyles};
-  ${FocusedStyles};
-  * {
-    cursor: ${props => props.cursor};
-  }
+//   * {
+//     cursor: ${props => props.cursor};
+//   }
 
-  &:before {
-    border-color: rgb(${props => props.backgroundColor});
-    border-radius: ${props => `calc(${props.borderRadius} + 3px)`};
-  }
+//   &:before {
+//     border-color: rgb(${props => props.backgroundColor});
+//     border-radius: ${props => `calc(${props.borderRadius} + 3px)`};
+//   }
 
-  ${props =>
-    props.disabled &&
-    css`
-      cursor: default;
-      opacity: 0.5;
+//   ${props =>
+//     props.disabled &&
+//     css`
+//       cursor: default;
+//       opacity: 0.5;
 
-      * {
-        cursor: default;
-      }
-    `};
+//       * {
+//         cursor: default;
+//       }
+//     `};
 
-  ${props =>
-    props.type === ButtonType.Link &&
-    css`
-      padding-left: calc(${props.size} / 5) !important;
-      padding-right: calc(${props.size} / 5) !important;
+//   ${props =>
+//     props.type === ButtonType.Link &&
+//     css`
+//       padding-left: calc($ {props.size} / 5) !important;
+//       padding-right: calc($ {props.size} / 5) !important;
 
-      &:before {
-        border-radius: ${Amount.All};
-        left: -9px;
-        right: -9px;
-      }
-    `};
-    */
+//       &:before {
+//         border-radius: ${Amount.All};
+//         left: -9px;
+//         right: -9px;
+//       }
+//     `};
+// `;
+
 export const Button = memo(
   ({
     active,
@@ -217,14 +200,14 @@ export const Button = memo(
       : colors?.textColor ?? textColor;
 
     return (
-      <Wrapper
+      <Container
         active={{
           backgroundOpacity: 80,
           ...active,
         }}
         alignItems={alignItems}
         alignContent={alignContent}
-        // as="button"
+        as="button"
         backgroundColor={updatedBackgroundColor}
         borderRadius={fullWidth && !borderRadius ? Amount.Least : borderRadius}
         boxShadow={{
@@ -239,7 +222,6 @@ export const Button = memo(
         cursor={cursor}
         disabled={disabled}
         form={form}
-        fullWidth={fullWidth}
         grow={fullWidth}
         hover={{
           backgroundOpacity: 90,
@@ -261,7 +243,6 @@ export const Button = memo(
         paddingLeft={getLargerAmount(convertSizeToAmount(size))}
         paddingRight={getLargerAmount(convertSizeToAmount(size))}
         size={size}
-        type={type}
         {...props}
       >
         {typeof children === 'string' ? (
@@ -284,7 +265,7 @@ export const Button = memo(
         ) : (
           <>{children}</>
         )}
-      </Wrapper>
+      </Container>
     );
   },
 );

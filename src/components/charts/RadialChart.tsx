@@ -1,20 +1,17 @@
 import { memo, ReactElement } from 'react';
 // import { PieChart } from 'react-minimal-pie-chart';
 import styled from 'styled-components';
-import { ContainerProps, DimensionProps } from '../../types';
+import { ContainerProps } from '../../types';
 
-type RadialChartProps = ContainerProps<
-  HTMLDivElement,
-  DimensionProps<{
-    data: {
-      title?: string | number;
-      color: string;
-      value: number;
-      key?: string | number;
-      [key: string]: any;
-    };
-  }>
->;
+type RadialChartProps = {
+  data: {
+    title?: string | number;
+    color: string;
+    value: number;
+    key?: string | number;
+    [key: string]: any;
+  };
+} & ContainerProps<HTMLDivElement>;
 
 export const RadialChart = memo(
   ({ data, ...props }: RadialChartProps): ReactElement => {

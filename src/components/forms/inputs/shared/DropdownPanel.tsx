@@ -11,23 +11,16 @@ import {
   Align,
   Amount,
   BackgroundColors,
-  BorderColors,
   BorderStyle,
   ContainerProps,
   Depth,
-  DepthShadow,
-  FocusProps,
   Orientation,
 } from '../../../../types';
 
-type DropdownPanelProps<T = {}> = ContainerProps<
-  FocusProps<
-    {
-      readonly visible?: boolean;
-      readonly setMenuVisible?: (visible: boolean) => unknown;
-    } & T
-  >
->;
+type DropdownPanelProps = {
+  readonly visible?: boolean;
+  readonly setMenuVisible?: (visible: boolean) => unknown;
+} & ContainerProps;
 
 export const DropdownPanel = memo(
   ({

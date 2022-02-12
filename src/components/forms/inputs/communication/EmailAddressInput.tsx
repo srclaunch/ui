@@ -5,13 +5,9 @@ import { memo, ReactElement, useState } from 'react';
 import { AutoComplete, InputValueChangeHandler } from '../../../../types';
 import { TextInput, TextInputProps } from '../text/TextInput';
 
-export type EmailAddressInputProps = TextInputProps<
-  HTMLInputElement,
-  EmailAddress,
-  {
-    readonly autoComplete?: AutoComplete.Username | AutoComplete.EmailAddress;
-  }
->;
+export type EmailAddressInputProps = {
+  readonly autoComplete?: AutoComplete.Username | AutoComplete.EmailAddress;
+} & TextInputProps<EmailAddress>;
 
 export const EmailAddressInput = memo(
   ({
@@ -23,7 +19,7 @@ export const EmailAddressInput = memo(
   }: EmailAddressInputProps): ReactElement => {
     const [inProgress, setInProgress] = useState(false);
     const [emailAddress, setEmailAddress] = useState(defaultValue);
-    const [error, setError] = useState<ValidationProblem[]>();
+    const [error, setError] = useState<readonly ValidationProblem[]>();
 
     const validationProps = {
       ...validation,

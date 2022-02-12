@@ -1,34 +1,34 @@
-import { TransformProps } from './transform';
 import { AnimatedAppearanceProps } from './appearance';
 import { AnimatedTextProps } from './text';
+import { TransformProps } from './transform';
 
 export type AnimationTiming = {
   /**
    * The duration of the animation.
    */
-  duration?: number;
+  readonly duration?: number;
   /**
    * The delay of the animation.
    */
-  delay?: number;
+  readonly delay?: number;
   /**
    * The easing of the animation.
    */
-  easing?: string;
+  readonly easing?: string;
 };
 
-export type AnimationTimingProps<T = {}> = {
-  timing?: AnimationTiming;
-} & T;
+export type AnimationTimingProps = {
+  readonly timing?: AnimationTiming;
+};
 
-export type Animation<T = {}> = AnimatedAppearanceProps<
-  AnimatedTextProps<AnimationTimingProps<TransformProps<T>>>
->;
+export type Animation = AnimatedTextProps &
+  AnimationTimingProps &
+  AnimatedAppearanceProps &
+  TransformProps;
 
-export type AnimationProps<T = {}> = TransformProps<{
+export type AnimationProps = {
   /**
    * The animation to apply to the component.
    */
-  animation?: Animation | Animation[];
-}> &
-  T;
+  readonly animation?: Animation | readonly Animation[];
+} & TransformProps;

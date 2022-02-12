@@ -1,9 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import React, { memo, useState } from 'react';
 import styled, { css } from 'styled-components';
-import { AppearanceStyles } from '../../../styles/appearance';
 import { FocusedStyles } from '../../../styles/focused';
-import { LayoutStyles } from '../../../styles/layout';
 import { Align, Amount, BackgroundColors, BorderColors, DepthShadow, Orientation, TextColors, } from '../../../types';
 import { Container } from '../../layout/Container';
 import { Label } from '../../typography/Label';
@@ -26,7 +24,7 @@ export const Tabs = memo(({ borderRadius = Amount.More, className = '', children
                         }, children: _jsx(Label, { textColor: currentTabIndex === key
                                 ? TextColors.Primary
                                 : TextColors.Default, children: c.props.label }, void 0) }, key));
-                }) }, void 0), _jsx(TabContent, { alignContent: Align.Top, backgroundColor: BackgroundColors.Default, borderRadius: borderRadius, boxShadow: DepthShadow.Highest, className: "tab-content", grow: false, orientation: Orientation.Vertical, padding: Amount.Most, paddingLeft: Amount.All, paddingRight: Amount.All, children: React.Children.map(children, (c, key) => {
+                }) }, void 0), _jsx(Container, { alignContent: Align.Top, backgroundColor: BackgroundColors.Default, borderRadius: borderRadius, boxShadow: DepthShadow.Highest, className: "tab-content", grow: false, orientation: Orientation.Vertical, padding: Amount.Most, paddingLeft: Amount.All, paddingRight: Amount.All, children: React.Children.map(children, (c, key) => {
                     if (key !== currentTabIndex)
                         return null;
                     // @ts-ignore
@@ -70,9 +68,5 @@ const TabButton = styled.button `
       border-bottom: 3px solid var(--color-primary);
       font-weight: 700;
     `}
-`;
-const TabContent = styled.div `
-  ${LayoutStyles};
-  ${AppearanceStyles};
 `;
 //# sourceMappingURL=index.js.map

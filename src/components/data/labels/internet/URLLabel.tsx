@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type URLLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type URLLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const URLLabel = memo(
   ({

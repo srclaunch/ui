@@ -1,4 +1,4 @@
-export declare type ProgressProps<P = {}> = {
-    inProgress?: boolean;
-} & P;
+export declare type ProgressProps = {
+    readonly inProgress?: boolean;
+};
 //# sourceMappingURL=progress-props.d.ts.map

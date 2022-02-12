@@ -6,12 +6,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type DueDateLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: [string?, string?, string?, string?, string?];
-  }
->;
+type DueDateLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const DueDateLabel = memo(
   ({

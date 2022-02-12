@@ -1,16 +1,9 @@
 import { memo, ReactElement } from 'react';
 
-import { Text } from './Text';
+import { Size, TextColors, TextSize } from '../../types';
+import { Label, LabelProps } from './Label';
 
-import {
-  CommonComponentProps,
-  Size,
-  TextColors,
-  TextProps,
-  TextSize,
-} from '../../types';
-
-type SmallProps = CommonComponentProps<TextProps>;
+type SmallProps = LabelProps;
 
 export const Small = memo(
   ({
@@ -23,7 +16,7 @@ export const Small = memo(
     ...props
   }: SmallProps): ReactElement => {
     return (
-      <Text
+      <Label
         as={as}
         className={`${className} small`}
         textColor={textColor}
@@ -31,7 +24,7 @@ export const Small = memo(
         {...props}
       >
         {children}
-      </Text>
+      </Label>
     );
   },
 );

@@ -16,8 +16,8 @@ export declare enum DepthShadow {
     Higher = "var(--shadow-depth-higher)",
     Highest = "var(--shadow-depth-highest)"
 }
-export declare type DepthProps<T = {}> = {
-    depth?: Depth;
-    flat?: boolean;
-} & T;
+export declare type DepthProps = {
+    readonly depth?: Depth;
+    readonly flat?: boolean;
+};
 //# sourceMappingURL=depth.d.ts.map

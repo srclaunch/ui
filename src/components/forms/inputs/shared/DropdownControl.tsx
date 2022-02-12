@@ -1,5 +1,5 @@
 import { BasicIcons } from '@srclaunch/icons';
-import { memo, ReactElement } from 'react';
+import { ComponentRef, ForwardedRef, memo, ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 
 import { DimensionStyles } from '../../../..';
@@ -14,7 +14,6 @@ import {
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  ContainerProps,
   Cursor,
   Depth,
   ForegroundColors,
@@ -31,26 +30,45 @@ import {
   TransformProps,
   WhiteSpace,
 } from '../../../../types';
+import { Container } from '../../../layout/Container';
 import { Icon } from '../../../media/Icon';
 import { Label } from '../../../typography/Label';
 
-type DropdownControlProps = InputContainerProps<
-  HTMLDivElement,
-  InputProps<
-    HTMLInputElement,
-    any,
-    TextProps<
-      HTMLSpanElement,
-      {
-        readonly component?: ReactElement;
-        readonly icon?: IconProps;
-        readonly label?: string;
-        readonly placeholderText?: string;
-        readonly menuVisible: boolean;
-      } & MouseEventProps<HTMLButtonElement>
-    >
-  >
->;
+type DropdownControlProps = {
+  readonly component?: ReactElement;
+  readonly icon?: IconProps;
+  readonly label?: string;
+  readonly placeholder?: string;
+  readonly menuVisible: boolean;
+  readonly ref?: ComponentRef<any>;
+} & InputContainerProps &
+  TextProps;
+
+const Wrapper = styled.button<DropdownControlProps>`
+  ${InputContainerStyles};
+
+  z-index: ${props =>
+    props.menuVisible
+      ? getDepthZIndex(props.depth ?? Depth.Surface) + 3
+      : 'auto'};
+
+  ${props =>
+    props.focused &&
+    props.menuVisible &&
+    css`
+      border-bottom-color: transparent;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+      &:before {
+        border-radius: calc(${Amount.Least} + 3px) calc(${Amount.Least} + 3px) 0
+          0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: none;
+      }
+    `};
+`;
 
 export const DropdownControl = memo(
   ({
@@ -87,7 +105,13 @@ export const DropdownControl = memo(
         border={{
           ...border,
           // @ts-ignore
-          color: error && (Array.isArray(error) && error.length > 0) ? BorderColors.Error : border?.color,
+          color:
+            error && Array.isArray(error) && error.length > 0
+              ? BorderColors.Error
+              : border.hasOwnProperty('color')
+              ? // @ts-ignore
+                border?.color
+              : BorderColors.InputControl,
         }}
         depth={menuVisible ? Depth.Higher : Depth.Surface}
         orientation={Orientation.Horizontal}
@@ -129,7 +153,7 @@ export const DropdownControl = memo(
           </Label>
         )}
 
-        <DownArrow
+        <Container
           alignItems={Align.Center}
           alignContent={Align.Center}
           border={{
@@ -141,7 +165,6 @@ export const DropdownControl = memo(
           }}
           className="down-arrow"
           grow={false}
-          menuVisible={menuVisible}
           height={Size.Small}
           width={size}
         >
@@ -156,47 +179,8 @@ export const DropdownControl = memo(
               rotate: menuVisible ? -180 : 0,
             }}
           />
-        </DownArrow>
+        </Container>
       </Wrapper>
     );
   },
 );
-
-const DownArrow = styled.div<
-  ContainerProps<
-    HTMLDivElement,
-    TransformProps<{
-      readonly menuVisible: boolean;
-    }>
-  >
->`
-  ${LayoutStyles};
-  ${AppearanceStyles};
-  ${DimensionStyles};
-`;
-
-const Wrapper = styled.button<DropdownControlProps>`
-  ${InputContainerStyles};
-
-  z-index: ${props =>
-    (props.menuVisible
-      ? getDepthZIndex(props.depth ?? Depth.Surface) + 3
-      : 'auto')};
-
-  ${props =>
-    props.focused &&
-    props.menuVisible &&
-    css`
-      border-bottom-color: transparent;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-
-      &:before {
-        border-radius: calc(${Amount.Least} + 3px) calc(${Amount.Least} + 3px) 0
-          0;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        border-bottom: none;
-      }
-    `};
-`;

@@ -1,31 +1,27 @@
+import { Exception } from '@srclaunch/exceptions';
 import { memo, ReactElement } from 'react';
-
-import { Container, ContainerProps } from '../../layout/Container';
-import { Label, LabelProps } from '../../typography/Label';
-import { ErrorLabel } from '../../errors/ErrorLabel';
 
 import {
   Align,
   Amount,
+  ErrorProps,
   Orientation,
   Size,
   TextColors,
   TextSize,
 } from '../../../types';
+import { ErrorLabel } from '../../errors/ErrorLabel';
+import { Container, ContainerProps } from '../../layout/Container';
+import { Label, LabelProps } from '../../typography/Label';
 
-type InputLabelProps<E = HTMLLabelElement> = LabelProps<
-  E,
-  {
-    errorMessage?: string;
-  }
->;
+type InputLabelProps = ErrorProps & LabelProps;
 
 export const InputLabel = memo(
   ({
     alignContent = Align.Left,
     children,
     className = '',
-    errorMessage,
+    error,
     lineHeight = Size.Smaller,
     marginBottom = Amount.Least,
     size = Size.Small,
@@ -49,9 +45,13 @@ export const InputLabel = memo(
           {children}
         </Label>
 
-        {errorMessage && (
+        {error && (
           <ErrorLabel alignContent={Align.Right} size={size}>
-            {errorMessage}
+            {error instanceof Exception
+              ? error.message
+              : error.length > 0
+              ? error[0]?.message.long
+              : null}
           </ErrorLabel>
         )}
       </Container>

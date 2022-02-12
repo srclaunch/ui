@@ -2,14 +2,14 @@ export declare type RotateProps = {
     /**
      * The x axis rotation.
      */
-    x?: number;
+    readonly x?: number;
     /**
      * The y axis rotation.
      */
-    y?: number;
+    readonly y?: number;
     /**
      * The z axis rotation.
      */
-    z?: number;
+    readonly z?: number;
 };
 //# sourceMappingURL=rotate.d.ts.map

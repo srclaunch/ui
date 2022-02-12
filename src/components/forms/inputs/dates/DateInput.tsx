@@ -2,9 +2,9 @@ import { BasicIcons } from '@srclaunch/icons';
 import { Condition, ISO8601String, ValidationProblem } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
 import { memo, ReactElement, useEffect, useState } from 'react';
-import DatePickerC from 'react-date-picker';
-import css from 'react-date-picker/dist/DatePicker.css';
-import styled from 'styled-components';
+// import DatePickerC from 'react-date-picker';
+// import css from 'react-date-picker/dist/DatePicker.css';
+import styled, { css } from 'styled-components';
 
 import { AppearanceStyles } from '../../../../styles/appearance';
 import { BoxShadowStyles } from '../../../../styles/appearance/box-shadow';
@@ -15,6 +15,7 @@ import { LayoutStyles } from '../../../../styles/layout';
 import {
   Align,
   Amount,
+  AppearanceProps,
   BackgroundColors,
   BorderColors,
   BorderStyle,
@@ -25,26 +26,21 @@ import {
   Orientation,
   Size,
   TextColors,
+  TextProps,
   TextSize,
   TextWeight,
   TransformProps,
 } from '../../../../types';
 import { ContainerProps } from '../../../layout/Container';
 import { Icon, IconProps } from '../../../media/Icon';
-import { TextProps } from '../../../typography/Text';
 import { InputLabel } from '../../labels/InputLabel';
 import { InputContainer } from '../shared/InputContainer';
 
-type DateInputProps<E = HTMLInputElement, V = ISO8601String> = InputProps<
-  E,
-  V,
-  TextProps<
-    E,
-    {
-      readonly resetIcon?: IconProps;
-    }
-  >
->;
+export type DateInputProps = {
+  readonly resetIcon?: IconProps;
+} & AppearanceProps &
+  InputProps<HTMLInputElement, ISO8601String> &
+  TextProps;
 
 const getBorderColor = ({
   focused,
@@ -71,7 +67,6 @@ const Wrapper = styled.div<{
   border: none;
   width: 100%;
   ${BoxShadowStyles};
-  ${css};
 
   .react-date-picker,
   .react-date-picker__wrapper {
@@ -230,12 +225,10 @@ const Wrapper = styled.div<{
 `;
 
 const DownArrow = styled.div<
-  ContainerProps<
-    HTMLDivElement,
-    TransformProps<{
-      readonly menuVisible: boolean;
-    }>
-  >
+  {
+    readonly menuVisible: boolean;
+  } & ContainerProps<HTMLDivElement> &
+    TransformProps
 >`
   cursor: ${Cursor.Pointer} !important;
 
@@ -295,9 +288,7 @@ export const DateInput = memo(
     return (
       <>
         {(label || problems.length > 0) && (
-          <InputLabel errorMessage={problems[0]?.message.short}>
-            {label}
-          </InputLabel>
+          <InputLabel error={problems}>{label}</InputLabel>
         )}
 
         <InputContainer
@@ -314,7 +305,7 @@ export const DateInput = memo(
           {...props}
         >
           <Wrapper error={problems} focused={focused} size={size}>
-            <DatePickerC
+            {/* <DatePickerC
               calendarType="ISO 8601"
               // calendarIcon={
               //   <CalendarIcon focused={focused}>
@@ -339,7 +330,7 @@ export const DateInput = memo(
                 setFocused(false);
               }}
               value={value ? new Date(value) : undefined}
-            />
+            /> */}
           </Wrapper>
 
           <DownArrow

@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type DayOfMonthLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type DayOfMonthLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const DayOfMonthLabel = memo(
   ({

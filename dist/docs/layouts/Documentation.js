@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Align, Amount, BackgroundColors, BorderColors, BorderStyle, Container, Label, NavigationMenu, Orientation, Overflow, TextColors, TextSize, TextWeight, } from '../../index';
 import { memo } from 'react';
+import { Align, Amount, BackgroundColors, BorderColors, BorderStyle, Container, Label, NavigationMenu, Orientation, Overflow, TextColors, TextSize, TextWeight, } from '../../index';
 {
     /* <Workspace>
             <WorkspaceFooter>

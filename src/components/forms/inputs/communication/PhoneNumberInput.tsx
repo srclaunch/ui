@@ -4,14 +4,9 @@ import { Condition, PhoneNumber } from '@srclaunch/types';
 import { AutoComplete, InputValueChangeHandler } from '../../../../types';
 import { TextInput, TextInputProps } from '../text/TextInput';
 
-type PhoneNumberInputProps<T = {}> = TextInputProps<
-  HTMLInputElement,
-  PhoneNumber,
-  {
-    autoComplete?: AutoComplete.PhoneNumber;
-  }
-> &
-  T;
+type PhoneNumberInputProps = {
+  autoComplete?: AutoComplete.PhoneNumber;
+} & TextInputProps<PhoneNumber>;
 
 export const PhoneNumberInput = memo(
   ({ ...props }: PhoneNumberInputProps): ReactElement => {

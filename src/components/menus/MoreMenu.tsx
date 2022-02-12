@@ -4,35 +4,30 @@ import styled from 'styled-components';
 import { AppearanceStyles } from '../../styles/appearance';
 import { DimensionStyles } from '../../styles/appearance/dimension';
 import { LayoutStyles } from '../../styles/layout';
-import { Cursor } from '../../types';
 import {
   Align,
   Amount,
   AppearanceProps,
   BackgroundColors,
   Color,
+  Cursor,
   Depth,
-  DimensionProps,
   ForegroundColors,
   MenuProps,
   Orientation,
   Size,
   SizeProps,
+  WidthProps,
 } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 import { HoverPanel } from '../modals/HoverPanel';
 import { Menu } from './Menu';
 
-export type MoreMenuProps<P = {}> = MenuProps<
-  HTMLDivElement,
-  any,
-  SizeProps<
-    DimensionProps<{
-      readonly dotColor?: Color;
-    }>
-  >
-> &
-  P;
+export type MoreMenuProps = {
+  readonly dotColor?: Color;
+} & MenuProps &
+  SizeProps &
+  WidthProps;
 
 export const MoreMenu = memo(
   ({
@@ -115,9 +110,9 @@ export const MoreMenu = memo(
 );
 
 const Dot = styled.span<
-  AppearanceProps<{
+  {
     readonly fillColor?: Color;
-  }>
+  } & AppearanceProps
 >`
   ${AppearanceStyles};
 

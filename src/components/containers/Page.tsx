@@ -5,15 +5,12 @@ import { Align, ContainerProps } from '../../types';
 import { Container } from '../layout/Container';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 
-type PageProps = ContainerProps<
-  HTMLDivElement,
-  {
-    readonly layout?: ElementType;
-    readonly loading?: boolean;
-    readonly loginRequired?: boolean;
-    readonly title?: string | null;
-  }
->;
+type PageProps = {
+  readonly layout?: ElementType;
+  readonly loading?: boolean;
+  readonly loginRequired?: boolean;
+  readonly title?: string | null;
+} & ContainerProps<HTMLDivElement>;
 
 export const Page = memo(
   ({

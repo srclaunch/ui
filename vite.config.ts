@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { name, version } from './package.json';
 import path from 'path';
+
 /*
 export default defineConfig(({
   build: {
@@ -61,7 +62,7 @@ export default defineConfig(({ command, mode }) => {
     return {
       build: {
         lib: {
-          entry: path.resolve(__dirname, 'src/index.ts'),
+          entry: path.resolve(__dirname, 'src/index.tsx'),
           fileName: 'index',
           formats: ['cjs', 'es'],
           name: 'ui',
@@ -113,7 +114,7 @@ export default defineConfig(({ command, mode }) => {
     return {
       build: {
         lib: {
-          entry: path.resolve(__dirname, 'src/docs/index.ts'),
+          entry: path.resolve(__dirname, 'src/docs/index.tsx'),
           fileName: 'index',
           formats: ['es'],
           name: 'ui',
@@ -155,13 +156,8 @@ export default defineConfig(({ command, mode }) => {
         },
       },
       optimizeDeps: {
-        exclude: ['@srclaunch/logger'],
-        include: [
-          'react/jsx-runtime',
-          'react-password-strength-bar',
-          'redux-logger',
-          'styled-components',
-        ],
+        exclude: ['@srclaunch/logger', 'styled-components'],
+        include: ['react/jsx-runtime', 'react-password-strength-bar'],
       },
       plugins: [
         react({

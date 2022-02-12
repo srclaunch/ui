@@ -17,9 +17,12 @@ export enum Orientation {
   Vertical = 'vertical',
 }
 
-export type AlignmentProps<T = {}> = {
-  alignContent?: Align;
-  alignItems?: Align;
-  alignSelf?: Align;
-  orientation?: Orientation.Horizontal | Orientation.Vertical;
-} & T;
+export type AlignmentProps = {
+  readonly alignContent?: Align;
+  readonly alignItems?: Align;
+  readonly alignSelf?: Align;
+  readonly grow?: boolean;
+  readonly lineWrap?: boolean;
+  readonly shrink?: boolean;
+  readonly orientation?: Orientation.Horizontal | Orientation.Vertical;
+};

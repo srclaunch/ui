@@ -2,13 +2,13 @@ export type SkewProps = {
   /**
    * The x axis skew.
    */
-  x?: number;
+  readonly x?: number;
   /**
    * The y axis skew.
    */
-  y?: number;
+  readonly y?: number;
   /**
    * The z axis skew.
    */
-  z?: number;
+  readonly z?: number;
 };

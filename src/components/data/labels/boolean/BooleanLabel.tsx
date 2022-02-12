@@ -10,12 +10,9 @@ import {
   TextSize,
 } from '../../../../types';
 
-type BooleanLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: boolean;
-  }
->;
+type BooleanLabelProps = {
+  value: boolean;
+} & LabelProps;
 
 export const BooleanLabel = memo(
   ({

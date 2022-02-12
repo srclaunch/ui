@@ -6,30 +6,24 @@ import {
   Amount,
   BackgroundColors,
   ContainerProps,
-  Depth,
   Orientation,
-  TextColor,
-  TextProps,
 } from '../../types';
 import { Container } from '../layout/Container';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 import { SubTitle } from '../typography/SubTitle';
 import { Title } from '../typography/Title';
 
-type WorkspaceProps = ContainerProps<
-  HTMLDivElement,
-  {
-    readonly header?: {
-      readonly actions?: ReactElement;
-      readonly title?: string | ReactElement;
-      readonly subTitle?: string;
-    };
-    readonly layout?: ElementType;
-    readonly loading?: boolean;
-    readonly loginRequired?: boolean;
-    readonly title?: string | null;
-  }
->;
+type WorkspaceProps = {
+  readonly header?: {
+    readonly actions?: ReactElement;
+    readonly title?: string | ReactElement;
+    readonly subTitle?: string;
+  };
+  readonly layout?: ElementType;
+  readonly loading?: boolean;
+  readonly loginRequired?: boolean;
+  readonly title?: string | null;
+} & ContainerProps<HTMLDivElement>;
 
 export const Workspace = memo(
   ({

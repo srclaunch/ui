@@ -4,12 +4,9 @@ import { Label } from '../../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../../types';
 
-type IBANLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type IBANLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const IBANLabel = memo(
   ({

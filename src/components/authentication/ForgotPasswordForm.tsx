@@ -18,16 +18,13 @@ import { Paragraph } from '../typography/Paragraph';
 import { Small } from '../typography/Small';
 import { Title } from '../typography/Title';
 
-type ForgotPasswordFormProps = ContainerProps<
-  HTMLDivElement,
-  {
-    readonly title?: string;
-    readonly showSignupLink?: boolean;
-    readonly signUpLinkLabel?: ReactElement;
-    readonly signInButtonLabel?: ReactElement;
-    readonly forgotPasswordLinkLabel?: ReactElement;
-  }
->;
+type ForgotPasswordFormProps = {
+  readonly title?: string;
+  readonly showSignupLink?: boolean;
+  readonly signUpLinkLabel?: ReactElement;
+  readonly signInButtonLabel?: ReactElement;
+  readonly forgotPasswordLinkLabel?: ReactElement;
+} & ContainerProps<HTMLDivElement>;
 
 export const ForgotPasswordForm = memo(
   ({

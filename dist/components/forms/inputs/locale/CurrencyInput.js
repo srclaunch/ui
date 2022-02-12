@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { memo } from 'react';
 import { CountryCode, CurrencyCode } from '@srclaunch/types';
+import { memo } from 'react';
 import ReactCountryFlag from 'react-country-flag';
 import { Size } from '../../../../types';
 import { DropdownInput, } from '../../inputs/menu/DropdownInput';
@@ -17,8 +17,8 @@ export const CurrencyInput = memo(({ defaultValue = CurrencyCode.UnitedStatesDol
     return (_jsx(DropdownInput, { defaultValue: defaultValue, menu: currencies, name: name, onChange: ({ problems, value, validated, }) => onChange &&
             onChange({
                 problems,
-                value,
                 validated,
+                value,
             }), placeholder: placeholder, ...props }, void 0));
 });
 //# sourceMappingURL=CurrencyInput.js.map

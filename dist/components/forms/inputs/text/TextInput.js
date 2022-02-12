@@ -50,7 +50,7 @@ export const TextInput = memo(({ autoComplete, backgroundColor = BackgroundColor
     useEffect(() => {
         setValue(defaultValue ?? value ?? '');
     }, [defaultValue]);
-    return (_jsxs(_Fragment, { children: [(label || problems.length > 0) && (_jsx(InputLabel, { errorMessage: problems[0]?.message.short, children: label }, void 0)), _jsxs(InputContainer, { backgroundColor: backgroundColor, border: border, boxShadow: boxShadow, className: `${className} text-input`, cursor: cursor, error: problems, focused: focused, flat: flat, onClick: () => {
+    return (_jsxs(_Fragment, { children: [(label || problems.length > 0) && (_jsx(InputLabel, { error: problems, children: label }, void 0)), _jsxs(InputContainer, { backgroundColor: backgroundColor, border: border, boxShadow: boxShadow, className: `${className} text-input`, cursor: cursor, error: problems, focused: focused, flat: flat, onClick: () => {
                     inputRef.current?.focus();
                 }, orientation: Orientation.Horizontal, size: size, ...props, children: [icon && (_jsx(Icon, { ...icon, color: value === ''
                             ? TextColors.InputPlaceholder

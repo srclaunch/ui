@@ -1,3 +1,3 @@
-import { TextProps } from '../../components/typography/Text';
+import { TextProps } from '../typography/text';
 
-export type AnimatedTextProps<T = {}> = TextProps<T>;
+export type AnimatedTextProps = TextProps;

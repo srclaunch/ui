@@ -1,5 +1,7 @@
 import { memo, ReactElement } from 'react';
+import styled from 'styled-components';
 
+import { TextStyles } from '../../styles/typography';
 import {
   Align,
   Amount,
@@ -9,27 +11,29 @@ import {
   SizeProps,
   TextColors,
   TextOverflow,
+  TextProps,
   TextSize,
   TextWeight,
   WhiteSpace,
 } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 import { Icon, IconProps } from '../media/Icon';
-import { Text, TextProps } from '../typography/Text';
 
 export type LabelProps<
-  E = HTMLLabelElement,
-  P = Record<string, unknown>,
-> = ContainerProps<
-  HTMLLabelElement,
-  TextProps<
-    E,
-    SizeProps<{
-      readonly icon?: IconProps;
-    }>
-  >
-> &
-  P;
+  E = HTMLLabelElement | HTMLHeadingElement | HTMLParagraphElement,
+> = {
+  readonly icon?: IconProps;
+} & {
+  readonly focus?: LabelProps;
+  readonly hover?: LabelProps;
+  readonly active?: LabelProps;
+} & ContainerProps<E> &
+  TextProps &
+  SizeProps;
+
+const TextContainer = styled.span<TextProps>`
+  ${TextStyles};
+`;
 
 export const Label = memo(
   ({
@@ -40,7 +44,10 @@ export const Label = memo(
     className = '',
     grow = false,
     icon,
+    inline = true,
+    lineHeight = Size.Default,
     orientation = Orientation.Horizontal,
+    selectable = true,
     size = Size.Default,
     textColor = TextColors.Default,
     textOverflow = TextOverflow.Ellipsis,
@@ -67,8 +74,13 @@ export const Label = memo(
             icon.url ||
             icon.svg) && <Icon marginRight={Amount.Least} {...icon} />}
 
-        <Text
-          lineHeight={size}
+        <TextContainer
+          as={as}
+          className={`${className} text`}
+          grow={grow}
+          inline={inline}
+          selectable={selectable}
+          lineHeight={lineHeight}
           overflow={Overflow.Hidden}
           textColor={textColor}
           textOverflow={textOverflow}
@@ -76,9 +88,10 @@ export const Label = memo(
           textWeight={textWeight}
           underline={underline}
           whiteSpace={whiteSpace}
+          {...props}
         >
           {children}
-        </Text>
+        </TextContainer>
       </Container>
     );
   },

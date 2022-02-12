@@ -1,8 +1,9 @@
 import { memo, ReactElement } from 'react';
-import { Amount, Size, TextColors, TextSize, TextWeight } from '../../types';
-import { Text, TextProps } from './Text';
 
-type SubTitleProps = TextProps<HTMLHeadingElement>;
+import { Amount, Size, TextColors, TextSize, TextWeight } from '../../types';
+import { Label, LabelProps } from './Label';
+
+type SubTitleProps = LabelProps<HTMLHeadingElement>;
 
 export const SubTitle = memo(
   ({
@@ -18,7 +19,7 @@ export const SubTitle = memo(
     ...props
   }: SubTitleProps): ReactElement => {
     return (
-      <Text
+      <Label
         as={as}
         className={`${className} title`}
         inline={false}
@@ -31,7 +32,7 @@ export const SubTitle = memo(
         {...props}
       >
         {children ?? ''}
-      </Text>
+      </Label>
     );
   },
 );

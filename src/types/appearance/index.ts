@@ -7,23 +7,16 @@ import { CursorProps } from './cursor';
 import { DepthProps } from './depth';
 import { TranslucencyProps } from './translucency';
 
-export type AppearanceProps<P = {}> = AnimationProps<
-  BackgroundProps<
-    BorderProps<
-      BoxShadowProps<
-        CursorProps<
-          DepthProps<
-            TransformProps<
-              TranslucencyProps<{
-                readonly focus?: AppearanceProps;
-                readonly hover?: AppearanceProps;
-                readonly active?: AppearanceProps;
-              }>
-            >
-          >
-        >
-      >
-    >
-  >
-> &
-  P;
+export type AppearanceProps = AnimationProps &
+  BackgroundProps &
+  BorderProps &
+  BoxShadowProps &
+  CursorProps &
+  DepthProps &
+  TransformProps &
+  TranslucencyProps & {
+    readonly active?: AppearanceProps;
+    readonly disabled?: boolean;
+    readonly focus?: AppearanceProps;
+    readonly hover?: AppearanceProps;
+  };

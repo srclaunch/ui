@@ -11,14 +11,15 @@ import {
   ContainerProps,
   Depth,
   DepthShadow,
-  DimensionProps,
+  HeightProps,
+  WidthProps,
 } from '../../types';
 
-type SlidePanelProps = ContainerProps<
-  DimensionProps<{
-    readonly visible?: boolean;
-  }>
->;
+type SlidePanelProps = {
+  readonly visible?: boolean;
+} & ContainerProps<HTMLDivElement> &
+  HeightProps &
+  WidthProps;
 
 export const SlidePanel = memo(
   ({

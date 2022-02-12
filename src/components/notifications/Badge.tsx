@@ -1,17 +1,17 @@
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
+
 import { ContainerProps } from '../../types';
 
-type BadgeProps = ContainerProps<
-  HTMLDivElement,
-  {
-    label?: string | number;
-  }
->;
+type BadgeProps = {
+  readonly label?: string | number;
+} & ContainerProps<HTMLDivElement>;
 
-export const Badge = memo(({ children, label }: BadgeProps): ReactElement => {
-  return <Container>{label?.toString() ?? children}</Container>;
-});
+export const Badge = memo(
+  ({ children, label, ...props }: BadgeProps): ReactElement => {
+    return <Container {...props}>{label?.toString() ?? children}</Container>;
+  },
+);
 
 const Container = styled.div`
   background: #f2f2f2;

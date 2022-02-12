@@ -79,7 +79,7 @@ export const Tabs = memo(
           })}
         </Container>
 
-        <TabContent
+        <Container
           alignContent={Align.Top}
           backgroundColor={BackgroundColors.Default}
           borderRadius={borderRadius}
@@ -97,7 +97,7 @@ export const Tabs = memo(
             // @ts-ignore
             return React.cloneElement(c);
           })}
-        </TabContent>
+        </Container>
       </Container>
     );
   },
@@ -143,9 +143,4 @@ const TabButton = styled.button<{
       border-bottom: 3px solid var(--color-primary);
       font-weight: 700;
     `}
-`;
-
-const TabContent = styled.div<LayoutProps<AppearanceProps>>`
-  ${LayoutStyles};
-  ${AppearanceStyles};
 `;

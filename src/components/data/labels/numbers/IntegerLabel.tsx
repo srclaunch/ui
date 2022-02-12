@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type IntegerLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: number;
-  }
->;
+type IntegerLabelProps = {
+  value: number;
+} & LabelProps;
 
 export const IntegerLabel = memo(
   ({

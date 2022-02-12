@@ -5,22 +5,22 @@ import {
   Amount,
   BackgroundColors,
   Color,
-  DimensionProps,
   Formatter,
   Orientation,
   Size,
+  SizeProps,
 } from '../../../types';
 import { ProgressMeter } from '../../charts/ProgressMeter';
 import { LinearGauge } from '../../charts/LinearGauge';
 import { formatCurrency } from '@srclaunch/i18n';
 import { CurrencyCode } from '@srclaunch/types';
 
-type ProgressivePaymentStatusProps = DimensionProps<{
+type ProgressivePaymentStatusProps = {
   amountPaid: number;
   currency?: CurrencyCode;
   color?: Color;
   totalDue: number;
-}>;
+} & SizeProps;
 
 export const ProgressivePaymentStatus = memo(
   ({
@@ -34,7 +34,11 @@ export const ProgressivePaymentStatus = memo(
         ? BackgroundColors.Success
         : BackgroundColors.Warning;
     return (
-      <Container orientation={Orientation.Vertical} paddingBottom={Amount.Default} grow={false}>
+      <Container
+        orientation={Orientation.Vertical}
+        paddingBottom={Amount.Default}
+        grow={false}
+      >
         <ProgressMeter
           alignContent={Align.Center}
           alignItems={Align.Center}

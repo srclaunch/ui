@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type WeekdayLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type WeekdayLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const WeekdayLabel = memo(
   ({

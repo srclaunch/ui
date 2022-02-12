@@ -2,14 +2,14 @@ export declare type TranslateProps = {
     /**
      * The x axis translation.
      */
-    x?: number;
+    readonly x?: number;
     /**
      * The y axis translation.
      */
-    y?: number;
+    readonly y?: number;
     /**
      * The z axis translation.
      */
-    z?: number;
+    readonly z?: number;
 };
 //# sourceMappingURL=translate.d.ts.map

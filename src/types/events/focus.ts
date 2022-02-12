@@ -1,6 +1,6 @@
 import { FocusEventHandler } from 'react';
 
-export type FocusEventProps<E, P = {}> = {
-  onBlur?: FocusEventHandler<E>;
-  onFocus?: FocusEventHandler<E>;
-} & P;
+export type FocusEventProps<E> = {
+  readonly onBlur?: FocusEventHandler<E>;
+  readonly onFocus?: FocusEventHandler<E>;
+};

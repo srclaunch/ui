@@ -1,10 +1,9 @@
 import { memo, ReactElement } from 'react';
 
+import { ContainerProps, Size, SizeProps } from '../../types';
 import { Container } from '../layout/Container';
 
-import { ContainerProps, Size, SizeProps } from '../../types';
-
-type LineBreakProps = ContainerProps<HTMLDivElement, SizeProps>;
+type LineBreakProps = ContainerProps<HTMLDivElement> & SizeProps;
 
 export const LineBreak = memo(
   ({

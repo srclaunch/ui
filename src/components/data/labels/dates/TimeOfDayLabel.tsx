@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type TimeOfDayLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type TimeOfDayLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const TimeOfDayLabel = memo(
   ({

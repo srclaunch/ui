@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type CountryLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type CountryLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const CountryLabel = memo(
   ({

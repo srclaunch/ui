@@ -4,12 +4,9 @@ import { Label } from '../../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../../types';
 
-type EthereumAddressLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type EthereumAddressLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const EthereumAddressLabel = memo(
   ({

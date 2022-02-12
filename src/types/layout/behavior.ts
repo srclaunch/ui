@@ -4,16 +4,13 @@ export enum FillBehavior {
   FillBoth = 'fill_both',
 }
 
-export type BehaviorProps<T = {}> = {
-  events?: boolean;
-  fillBehavior?: FillBehavior;
-  fillScreen?: boolean;
-  grow?: boolean;
-  lineWrap?: boolean;
-  overflow?: Overflow | string;
-  scrollable?: boolean;
-  shrink?: boolean;
-} & T;
+export type BehaviorProps = {
+  readonly fillBehavior?: FillBehavior;
+  readonly fillScreen?: boolean;
+  readonly lineWrap?: boolean;
+  readonly overflow?: Overflow | string;
+  readonly scrollable?: boolean;
+};
 
 export enum Overflow {
   Hidden = 'hidden',

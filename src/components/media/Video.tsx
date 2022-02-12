@@ -1,16 +1,17 @@
+import { Video as VideoType } from '@srclaunch/types';
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
-import { Container } from '../layout/Container';
-import { Video as VideoType } from '@srclaunch/types';
-import { DimensionProps } from '../../types';
-import { DimensionStyles } from '../../styles/appearance/dimension';
 
-type VideoProps = DimensionProps<
-  {
-    className?: string;
-    description?: string;
-  } & VideoType
->;
+import { DimensionStyles } from '../../styles/appearance/dimension';
+import { HeightProps, WidthProps } from '../../types';
+import { Container } from '../layout/Container';
+
+export type VideoProps = {
+  readonly className?: string;
+  readonly description?: string;
+} & HeightProps &
+  VideoType &
+  WidthProps;
 
 export const Video = memo(
   ({

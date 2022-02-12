@@ -1,15 +1,12 @@
 import { memo, ReactElement } from 'react';
 
 import { Amount, BackgroundColors, Color, Size, SizeProps } from '../../types';
-
 import { Container, ContainerProps } from '../layout/Container';
 
-type OrbProps = ContainerProps<
-  HTMLLabelElement,
-  SizeProps<{
-    color?: Color;
-  }>
->;
+type OrbProps = {
+  readonly color?: Color;
+} & ContainerProps<HTMLLabelElement> &
+  SizeProps;
 
 export const Orb = memo(
   ({

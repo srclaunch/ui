@@ -18,7 +18,7 @@ export declare enum Cursor {
     Text = "text",
     Wait = "wait"
 }
-export declare type CursorProps<T = {}> = {
-    cursor?: Cursor | string;
-} & T;
+export declare type CursorProps = {
+    readonly cursor?: Cursor | string;
+};
 //# sourceMappingURL=cursor.d.ts.map

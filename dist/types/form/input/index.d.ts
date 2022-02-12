@@ -1,11 +1,9 @@
-import { MutableRefObject, Ref } from 'react';
-import { FocusProps, InputValueChangeHandler } from '../..';
-import { DimensionProps } from '../../appearance/dimension';
+import { ForwardedRef } from 'react';
+import { InputValueChangeHandler } from '../..';
+import { HeightProps, WidthProps } from '../../appearance/dimension';
 import { SizeProps } from '../../appearance/size';
 import { CommonComponentProps } from '../../component';
-import { FocusEventProps } from '../../events/focus';
-import { KeyboardEventProps } from '../../events/keyboard';
-import { MouseEventProps } from '../../events/mouse';
+import { ClipboardEventProps } from '../../events/clipboard';
 import { ErrorProps } from '../../state/error-props';
 import { ProgressProps } from '../../state/progress-props';
 import { SuccessProps } from '../../state/success-props';
@@ -39,7 +37,7 @@ export declare enum AutoComplete {
     StreetAddress = "street-address",
     Username = "username"
 }
-export declare type InputProps<E = HTMLInputElement, V = string, P = {}> = CommonComponentProps<KeyboardEventProps<E, MouseEventProps<E, FocusEventProps<E, DimensionProps<FocusProps<ErrorProps<ProgressProps<SizeProps<SuccessProps<ValidationProps<WarningProps<{
+export declare type InputProps<E = HTMLInputElement, V = string> = {
     readonly autoComplete?: AutoComplete;
     readonly defaultValue?: V;
     readonly hidden?: boolean;
@@ -47,9 +45,9 @@ export declare type InputProps<E = HTMLInputElement, V = string, P = {}> = Commo
     readonly name?: string;
     readonly onChange?: InputValueChangeHandler<V>;
     readonly placeholder?: string;
-    readonly ref?: Ref<unknown> | MutableRefObject<any>;
+    readonly ref?: ForwardedRef<E>;
     readonly required?: boolean;
     readonly submitOnEnter?: boolean;
     readonly value?: V;
-}>>>>>>>>>>>> & P;
+} & CommonComponentProps<E> & ClipboardEventProps<E> & ErrorProps & HeightProps & ProgressProps & SizeProps & SuccessProps & ValidationProps & WarningProps & WidthProps;
 //# sourceMappingURL=index.d.ts.map

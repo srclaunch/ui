@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type RGBColorLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type RGBColorLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const RGBColorLabel = memo(
   ({

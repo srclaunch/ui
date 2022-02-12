@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { FocusedStyles } from '../../styles/focused';
 import { LayoutStyles } from '../../styles/layout';
 import { Align, Amount, Size, TextColors, TextWeight, } from '../../types';
-import { Text } from './Text';
+import { Label } from './Label';
 export const Link = memo(({ children, hover, size = Size.Small, textColor = TextColors.Link, textWeight = TextWeight.Default, to, underline = true, underlineColor = TextColors.Link, ...props }) => {
     const [focused, setFocused] = useState(false);
     const [hovered, setHovered] = useState(false);
@@ -19,7 +19,7 @@ export const Link = memo(({ children, hover, size = Size.Small, textColor = Text
             textDecoration: (underline || (hovered && hover?.underline)) && !focused
                 ? 'underline'
                 : 'none',
-        }, children: _jsx(Container, { alignContent: Align.Center, alignItems: Align.Center, focused: focused, grow: false, height: size, children: _jsx(Text, { lineHeight: size, textColor: textColor, textWeight: textWeight, underline: (underline || (hovered && hover?.underline)) && !focused, underlineColor: textColor, ...props, children: children }, void 0) }, void 0) }, void 0));
+        }, children: _jsx(Container, { alignContent: Align.Center, alignItems: Align.Center, focused: focused, grow: false, height: size, children: _jsx(Label, { lineHeight: size, textColor: textColor, textWeight: textWeight, underline: (underline || (hovered && hover?.underline)) && !focused, underlineColor: textColor, ...props, children: children }, void 0) }, void 0) }, void 0));
 });
 const Container = styled.span `
   ${LayoutStyles};

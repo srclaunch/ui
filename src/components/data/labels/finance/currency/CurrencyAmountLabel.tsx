@@ -3,13 +3,10 @@ import { CurrencyAmount, CurrencyCode } from '@srclaunch/types';
 import { Label } from '../../../../typography/Label';
 import { LabelProps } from '../../../../../types';
 
-type CurrencyAmountLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    amount: CurrencyAmount;
-    currency: CurrencyCode;
-  }
->;
+type CurrencyAmountLabelProps = {
+  amount: CurrencyAmount;
+  currency: CurrencyCode;
+} & LabelProps;
 
 export const CurrencyAmountLabel = memo(
   ({ amount, currency, ...props }: CurrencyAmountLabelProps): ReactElement => {

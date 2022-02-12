@@ -10,20 +10,14 @@ import { memo, ReactElement, useEffect } from 'react';
 import { Size, TextColors } from '../../types';
 import { Button, ButtonProps } from '../forms/buttons/Button';
 import { Icon } from '../media/Icon';
-import { Label, LabelProps } from '../typography/Label';
+import { Label } from '../typography/Label';
 
-export type LogoutButtonProps<T = {}> = ButtonProps<
-  HTMLButtonElement,
-  LabelProps<
-    HTMLLabelElement,
-    {
-      readonly label?: string;
-      readonly onLogoutSuccess?: () => unknown;
-      readonly showArrow?: boolean;
-      readonly showUnderline?: boolean;
-    } & T
-  >
->;
+export type LogoutButtonProps = {
+  readonly label?: string;
+  readonly onLogoutSuccess?: () => unknown;
+  readonly showArrow?: boolean;
+  readonly showUnderline?: boolean;
+} & ButtonProps;
 
 export const LogoutButton = memo(
   ({

@@ -15,10 +15,13 @@ export declare enum Orientation {
     Horizontal = "horizontal",
     Vertical = "vertical"
 }
-export declare type AlignmentProps<T = {}> = {
-    alignContent?: Align;
-    alignItems?: Align;
-    alignSelf?: Align;
-    orientation?: Orientation.Horizontal | Orientation.Vertical;
-} & T;
+export declare type AlignmentProps = {
+    readonly alignContent?: Align;
+    readonly alignItems?: Align;
+    readonly alignSelf?: Align;
+    readonly grow?: boolean;
+    readonly lineWrap?: boolean;
+    readonly shrink?: boolean;
+    readonly orientation?: Orientation.Horizontal | Orientation.Vertical;
+};
 //# sourceMappingURL=alignment.d.ts.map

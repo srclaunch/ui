@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type FloatLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type FloatLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const FloatLabel = memo(
   ({

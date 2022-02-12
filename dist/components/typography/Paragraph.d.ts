@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
-import { CommonComponentProps, TextProps } from '../../types';
-declare type ParagraphProps = CommonComponentProps<TextProps<HTMLParagraphElement>>;
+import { CommonComponentProps } from '../../types';
+import { LabelProps } from './Label';
+export declare type ParagraphProps = CommonComponentProps<HTMLParagraphElement> & LabelProps;
 export declare const Paragraph: import("react").MemoExoticComponent<({ as, children, className, lineHeight, textColor, textSize, ...props }: ParagraphProps) => ReactElement>;
-export {};
 //# sourceMappingURL=Paragraph.d.ts.map

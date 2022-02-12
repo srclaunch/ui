@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import { Align, TextColors } from '../types/index';
+import { Align, TextColors } from '../types';
 const getLineHeight = (lineHeight) => {
     if (typeof lineHeight === 'number') {
         return `${lineHeight}px`;

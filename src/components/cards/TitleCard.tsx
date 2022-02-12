@@ -35,7 +35,7 @@ export const TitleCards = memo(
     ...props
   }: TitleCardsProps): ReactElement => {
     return (
-      <Container 
+      <Container
         className={`${className} title-cards`}
         grow={grow}
         minHeight={minHeight}
@@ -43,7 +43,11 @@ export const TitleCards = memo(
         paddingBottom={Amount.Default}
         {...props}
       >
-        <Container orientation={orientation} overflow={Overflow.ScrollHorizontal} position={Position.Absolute}>
+        <Container
+          orientation={orientation}
+          overflow={Overflow.ScrollHorizontal}
+          position={Position.Absolute}
+        >
           {children}
         </Container>
       </Container>
@@ -51,15 +55,12 @@ export const TitleCards = memo(
   },
 );
 
-type TitleCardProps<T = {}> = ContainerProps<
-  HTMLDivElement,
-  {
-    icon?: IconProps;
-    label?: string;
-    loading?: boolean;
-    value?: number;
-  } & T
->;
+type TitleCardProps = {
+  icon?: IconProps;
+  label?: string;
+  loading?: boolean;
+  value?: number;
+} & ContainerProps<HTMLDivElement>;
 
 export const TitleCard = memo(
   ({
@@ -115,13 +116,9 @@ export const TitleCard = memo(
             alignItems={Align.Left}
             orientation={Orientation.Vertical}
           >
-            <Small>
-              {label}
-            </Small>
+            <Small>{label}</Small>
 
-            <Title>
-              {value}
-            </Title>
+            <Title>{value}</Title>
           </Container>
         )}
       </Container>

@@ -31,22 +31,12 @@ import { Label } from '../../../typography/Label';
 import { Button, ButtonProps, ButtonType } from '../../buttons/Button';
 import { InputLabel } from '../../labels/InputLabel';
 
-export type ImageInputProps<
-  E = HTMLDivElement,
-  P = Record<string, unknown>,
-> = ContainerProps<
-  E,
-  InputProps<
-    E,
-    readonly (File | ImageType)[],
-    {
-      readonly button?: ButtonProps;
-      readonly icon?: IconProps;
-      readonly maxImages?: number;
-    }
-  >
-> &
-  P;
+export type ImageInputProps = {
+  readonly button?: ButtonProps;
+  readonly icon?: IconProps;
+  readonly maxImages?: number;
+} & ContainerProps<HTMLDivElement> &
+  InputProps<HTMLInputElement, readonly (File | ImageType)[]>;
 
 export const ImageInput = memo(
   ({
@@ -193,7 +183,7 @@ export const ImageInput = memo(
     return (
       <>
         {(label || problems.length > 0) && (
-          <InputLabel errorMessage={problems[0]?.message.short}>
+          <InputLabel error={problems}>
             {label}
             {maxImages > 1 && ` (${previewImages.length} of ${maxImages})`}
           </InputLabel>
@@ -220,7 +210,7 @@ export const ImageInput = memo(
           padding={padding}
           {...rootProps}
         >
-          <Container grow={false} events={!isDragActive}>
+          <Container grow={false}>
             <Container
               alignItems={Align.Center}
               alignContent={Align.Center}
@@ -235,7 +225,7 @@ export const ImageInput = memo(
               {previewImages && previewImages.length > 0 ? (
                 <Container
                   alignItems={Align.Stretch}
-                  events={!isDragActive}
+                  // events={!isDragActive}
                   grow={false}
                   marginBottom={Amount.Less}
                 >
@@ -305,7 +295,7 @@ export const ImageInput = memo(
 
                 {button && (
                   <Button
-                    events={!isDragActive}
+                    // events={!isDragActive}
                     form="null"
                     onClick={open}
                     size={button.size ?? Size.Small}

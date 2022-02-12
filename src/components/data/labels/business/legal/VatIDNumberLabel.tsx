@@ -4,12 +4,9 @@ import { Label } from '../../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../../types';
 
-type VatIDNumberLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: number;
-  }
->;
+type VatIDNumberLabelProps = {
+  value: number;
+} & LabelProps;
 
 export const VatIDNumberLabel = memo(
   ({

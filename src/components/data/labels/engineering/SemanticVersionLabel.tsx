@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type SemanticVersionLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type SemanticVersionLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const SemanticVersionLabel = memo(
   ({

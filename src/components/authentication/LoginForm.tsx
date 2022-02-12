@@ -27,17 +27,14 @@ import { Paragraph } from '../typography/Paragraph';
 import { Small } from '../typography/Small';
 import { Title } from '../typography/Title';
 
-type LoginFormProps = ContainerProps<
-  HTMLDivElement,
-  {
-    readonly onLoginSuccess?: () => unknown;
-    readonly title?: string;
-    readonly showSignupLink?: boolean;
-    readonly signUpLinkLabel?: ReactElement;
-    readonly signInButtonLabel?: ReactElement;
-    readonly forgotPasswordLinkLabel?: ReactElement;
-  }
->;
+type LoginFormProps = {
+  readonly onLoginSuccess?: () => unknown;
+  readonly title?: string;
+  readonly showSignupLink?: boolean;
+  readonly signUpLinkLabel?: ReactElement;
+  readonly signInButtonLabel?: ReactElement;
+  readonly forgotPasswordLinkLabel?: ReactElement;
+} & ContainerProps<HTMLDivElement>;
 
 export const LoginForm = memo(
   ({

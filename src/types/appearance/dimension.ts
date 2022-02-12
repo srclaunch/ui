@@ -2,17 +2,14 @@ import { Size } from './size';
 
 export type DimensionValue = Size | string | number;
 
-export type HeightProps<P = {}> = {
-  height?: DimensionValue;
-  maxHeight?: DimensionValue;
-  minHeight?: DimensionValue;
-} & P;
+export type HeightProps = {
+  readonly height?: DimensionValue;
+  readonly maxHeight?: DimensionValue;
+  readonly minHeight?: DimensionValue;
+};
 
-export type WidthProps<P = {}> = {
-  maxWidth?: DimensionValue;
-  minWidth?: DimensionValue;
-  width?: DimensionValue;
-} & P;
-
-export type DimensionProps<P = {}> = HeightProps<WidthProps<{ size?: Size }>> &
-  P;
+export type WidthProps = {
+  readonly maxWidth?: DimensionValue;
+  readonly minWidth?: DimensionValue;
+  readonly width?: DimensionValue;
+};

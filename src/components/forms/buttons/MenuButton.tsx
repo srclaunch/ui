@@ -1,6 +1,5 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, ReactElement, useEffect, useState } from 'react';
 
-import { Container } from '../../layout/Container';
 import {
   Amount,
   BackgroundColors,
@@ -13,23 +12,17 @@ import {
   TextColors,
   TextProps,
 } from '../../../types';
-
-import { HoverPanel } from '../../modals/HoverPanel';
+import { Container, ContainerProps } from '../../layout/Container';
 import { Menu, MenuProps } from '../../menus/Menu';
 import { MenuItemProps } from '../../menus/MenuItem';
+import { HoverPanel } from '../../modals/HoverPanel';
 import { DropdownControl } from '../inputs/shared/DropdownControl';
 
-type MenuButtonProps<E = HTMLDivElement, P = {}> = MenuProps<
-  E,
-  any,
-  TextProps<
-    HTMLSpanElement,
-    {
-      label?: string;
-    }
-  >
-> &
-  P;
+export type MenuButtonProps = {
+  readonly label?: string;
+} & ContainerProps<HTMLDivElement> &
+  MenuProps &
+  TextProps;
 
 export const MenuButton = memo(
   ({
@@ -48,10 +41,9 @@ export const MenuButton = memo(
     textColor = TextColors.MenuButton,
     width,
     ...props
-  }: MenuButtonProps): React.ReactElement => {
+  }: MenuButtonProps): ReactElement => {
     const [focused, setFocused] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
-    const [item, setItem] = useState<MenuItemProps>();
 
     useEffect(() => {
       setFocused(menuVisible);
@@ -76,7 +68,7 @@ export const MenuButton = memo(
           borderRadius={borderRadius}
           border={border}
           depth={Depth.High}
-          label={label ?? item?.label ?? ''}
+          label={label ?? ''}
           focused={focused}
           lineHeight={size}
           menuVisible={menuVisible}
@@ -105,8 +97,7 @@ export const MenuButton = memo(
             borderRadius={borderRadius}
             // invertedColors={true}
             menu={menu}
-            onClick={i => {
-              // setItem(i);
+            onClick={e => {
               setMenuVisible(false);
             }}
           />

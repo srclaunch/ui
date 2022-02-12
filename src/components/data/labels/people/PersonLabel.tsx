@@ -1,31 +1,29 @@
-import { memo, ReactElement } from 'react';
 import { Image as ImageProps } from '@srclaunch/types';
-import { Container } from '../../../layout/Container';
+import { memo, ReactElement } from 'react';
+
+import { getSmallerAmount } from '../../../../lib/proportions/amount';
+import { convertSizeToAmount } from '../../../../lib/proportions/conversions';
 import {
   Align,
   Amount,
   ContainerProps,
   Orientation,
   Size,
+  SizeProps,
   TextProps,
   TextSize,
   TextWeight,
 } from '../../../../types';
+import { Container } from '../../../layout/Container';
 import { Image } from '../../../media/Image';
-import { Text } from '../../../typography/Text';
-import { convertSizeToAmount } from '../../../../lib/proportions/conversions';
-import { getSmallerAmount } from '../../../../lib/proportions/amount';
+import { Label } from '../../../typography/Label';
 
-export type PersonLabelProps<T = {}> = ContainerProps<
-  HTMLDivElement,
-  TextProps<
-    HTMLSpanElement,
-    {
-      image?: ImageProps;
-      name?: string;
-    } & T
-  >
->;
+export type PersonLabelProps = {
+  readonly image?: ImageProps;
+  readonly name?: string;
+} & ContainerProps<HTMLDivElement> &
+  SizeProps &
+  TextProps;
 
 export const PersonLabel = memo(
   ({
@@ -43,20 +41,19 @@ export const PersonLabel = memo(
       >
         <Image
           borderRadius={Amount.All}
-          grow={false}
           marginRight={getSmallerAmount(convertSizeToAmount(size))}
           path={image?.path}
           url={image?.url}
           size={size}
         />
 
-        <Text
+        <Label
           lineHeight={getSmallerAmount(convertSizeToAmount(size))}
           textWeight={TextWeight.More}
           textSize={textSize}
         >
           {name}
-        </Text>
+        </Label>
       </Container>
     );
   },

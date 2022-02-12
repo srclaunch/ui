@@ -10,21 +10,29 @@ import styled from 'styled-components';
 import { AppearanceStyles } from '../../styles/appearance';
 import { FocusedStyles } from '../../styles/focused';
 import { LayoutStyles } from '../../styles/layout';
-import { Align, Amount, LinkProps, Orientation, Size } from '../../types';
+import {
+  Align,
+  Amount,
+  CommonComponentProps,
+  LinkProps,
+  Orientation,
+  Size,
+} from '../../types';
 import { IconProps } from '../media/Icon';
 import { MenuItemProps } from '../menus/MenuItem';
 import { Label, LabelProps } from '../typography/Label';
+import { ContainerProps } from '../layout/Container';
 
-type NavigationLinkProps = LabelProps<
-  HTMLAnchorElement,
-  LinkProps<{
-    readonly activeClassName?: string;
-    readonly icon?: IconProps;
-    readonly inline?: boolean;
-    readonly menu?: readonly MenuItemProps[];
-    readonly size?: Size;
-  }>
->;
+export type NavigationLinkProps = {
+  readonly activeClassName?: string;
+  readonly icon?: IconProps;
+  readonly inline?: boolean;
+  readonly menu?: readonly MenuItemProps[];
+  readonly size?: Size;
+} & CommonComponentProps<HTMLAnchorElement> &
+  ContainerProps<HTMLAnchorElement> &
+  LabelProps &
+  LinkProps;
 
 export const NavigationLink = memo(
   ({

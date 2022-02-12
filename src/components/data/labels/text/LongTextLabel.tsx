@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type LongTextLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type LongTextLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const LongTextLabel = memo(
   ({

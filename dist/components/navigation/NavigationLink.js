@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { AppearanceStyles } from '../../styles/appearance';
 import { FocusedStyles } from '../../styles/focused';
 import { LayoutStyles } from '../../styles/layout';
-import { Align, Amount, Orientation } from '../../types';
+import { Align, Amount, Orientation, } from '../../types';
 import { Label } from '../typography/Label';
 export const NavigationLink = memo(({ active, activeClassName = 'active', alignContent, alignItems = Align.Left, backgroundColor, borderRadius = Amount.Less, children, className = '', focus, grow = true, hover, icon, margin, marginBottom, marginLeft, marginRight, marginTop, menu, onClick, onMouseEnter, onMouseLeave, orientation = Orientation.Horizontal, padding, paddingBottom, paddingLeft, paddingRight, paddingTop, rel, size, target, textColor, textSize, textWeight, to, width, ...props }) => {
     const [focused, setFocused] = useState(false);

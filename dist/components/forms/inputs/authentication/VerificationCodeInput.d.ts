@@ -6,10 +6,10 @@ export declare enum VerificationCodeType {
     Numeric = "numeric"
 }
 import { TextInputProps } from '../text/TextInput';
-declare type VerificationCodeInputProps = TextInputProps<HTMLInputElement, VerificationCode, {
+declare type VerificationCodeInputProps = {
     length?: number;
     codeType?: VerificationCodeType;
-}>;
+} & TextInputProps<VerificationCode>;
 export declare const VerificationCodeInput: import("react").MemoExoticComponent<({ as, className, defaultValue, hidden, length, name, onChange, onKeyPress, placeholder, size, textColor, codeType, ...props }: VerificationCodeInputProps) => React.ReactElement>;
 export {};
 //# sourceMappingURL=VerificationCodeInput.d.ts.map

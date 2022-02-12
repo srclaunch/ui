@@ -19,6 +19,7 @@ import { TextStyles } from '../../../../styles/typography';
 import {
   Align,
   Amount,
+  AppearanceProps,
   BackgroundColors,
   BackgroundProps,
   BorderColors,
@@ -26,6 +27,7 @@ import {
   BorderStyle,
   ClipboardEventProps,
   Cursor,
+  CursorProps,
   DepthShadow,
   FocusEventProps,
   InputProps,
@@ -37,6 +39,7 @@ import {
   SizeProps,
   TextColor,
   TextColors,
+  TextProps,
   TextSize,
   TextWeight,
 } from '../../../../types';
@@ -45,29 +48,14 @@ import { Container } from '../../../layout/Container';
 import { Icon } from '../../../media/Icon';
 import { ProgressSpinner } from '../../../progress/ProgressSpinner';
 import { Label } from '../../../typography/Label';
-import { TextProps } from '../../../typography/Text';
 import { InputLabel } from '../../labels/InputLabel';
 import { InputContainer } from '../shared/InputContainer';
 
-export type SSNInputProps<
-  E = HTMLInputElement,
-  V = SSN,
-  P = Record<string, unknown>,
-> = InputProps<
-  E,
-  V,
-  {
-    readonly icon?: typeof Icon;
-  } & BackgroundProps &
-    BorderProps &
-    ClipboardEventProps<HTMLInputElement> &
-    FocusEventProps<HTMLInputElement> &
-    KeyboardEventProps<HTMLInputElement> &
-    MouseEventProps<HTMLInputElement> &
-    SizeProps &
-    TextProps
-> &
-  P;
+export type SSNInputProps = {
+  readonly icon?: typeof Icon;
+} & InputProps<HTMLInputElement, SSN> &
+  AppearanceProps &
+  TextProps;
 
 export const SSNInput = memo(
   ({
@@ -189,6 +177,7 @@ export const SSNInput = memo(
                 e.preventDefault();
               }
             }}
+            // @ts-ignore
             ref={firstInputRef}
             textColor={textColor}
             type="number"
@@ -227,6 +216,7 @@ export const SSNInput = memo(
                 firstInputRef.current?.focus();
               }
             }}
+            // @ts-ignore
             ref={secondInputRef}
             textColor={textColor}
             type="number"
@@ -260,6 +250,7 @@ export const SSNInput = memo(
                 secondInputRef.current?.focus();
               }
             }}
+            // @ts-ignore
             ref={thirdInputRef}
             textColor={textColor}
             type="number"

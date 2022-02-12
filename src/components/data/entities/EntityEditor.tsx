@@ -11,14 +11,11 @@ import { Form } from '../../forms/Form';
 import { Container, ContainerProps } from '../../layout/Container';
 import { LoadingOverlay } from '../../progress/LoadingOverlay';
 
-type EntityEditorProps = ContainerProps<
-  HTMLDivElement,
-  {
-    readonly actions?: Record<string, (...args: readonly any[]) => any>;
-    readonly id?: string;
-    readonly model: Model;
-  }
->;
+type EntityEditorProps = {
+  readonly actions?: Record<string, (...args: readonly any[]) => any>;
+  readonly id?: string;
+  readonly model: Model;
+} & ContainerProps<HTMLDivElement>;
 
 export const EntityEditor = memo(
   ({ actions, className = '', id, model }: EntityEditorProps): ReactElement => {

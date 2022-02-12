@@ -20,17 +20,14 @@ import { Container } from '../../layout/Container';
 // import {NumberLabel }from '../labels/NumberLabel';
 // import { DateTime } from 'luxon';
 
-type DataGridCellProps = LabelProps<
-  HTMLLabelElement,
-  {
-    fieldName?: string;
-    lineHeight?: Size;
-    model?: ModelProps;
-    textColor?: TextColor;
-    type: Primitives;
-    value: any;
-  }
->;
+type DataGridCellProps = {
+  fieldName?: string;
+  lineHeight?: Size;
+  model?: ModelProps;
+  textColor?: TextColor;
+  type: Primitives;
+  value: any;
+} & LabelProps;
 
 export const DataGridCell = memo(
   ({

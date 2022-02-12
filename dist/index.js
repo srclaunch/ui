@@ -1,4 +1,7 @@
+import { jsx as _jsx } from "react/jsx-runtime";
+import { AppLabLightTheme } from '@srclaunch/themes';
 import countries from 'i18n-iso-countries';
+import reducers from './docs/state/index';
 async function init() {
     countries.registerLocale(await import('i18n-iso-countries/langs/en.json'));
 }
@@ -20,6 +23,7 @@ export { ProgressMeter } from './components/charts/ProgressMeter';
 export { RadialChart } from './components/charts/RadialChart';
 export { RadialGauge } from './components/charts/RadialGauge';
 export { Page } from './components/containers/Page';
+import { WebApplication } from './components/containers/WebApplication';
 export { WebApplication } from './components/containers/WebApplication';
 export { Workspace } from './components/containers/Workspace';
 export { DataGrid } from './components/data/DataGrid';
@@ -74,7 +78,6 @@ export { InputRow } from './components/forms/layout/InputRow';
 export { AlignLeft } from './components/layout/AlignLeft';
 export { AlignRight } from './components/layout/AlignRight';
 export { Container } from './components/layout/Container';
-export { Responsive } from './components/layout/Responsive';
 export { Icon } from './components/media/Icon';
 export { Image } from './components/media/Image';
 export { MediaGrid } from './components/media/MediaGrid/index';
@@ -118,7 +121,6 @@ export { Link } from './components/typography/Link';
 export { Paragraph } from './components/typography/Paragraph';
 export { Small } from './components/typography/Small';
 export { SubTitle } from './components/typography/SubTitle';
-export { Text } from './components/typography/Text';
 export { Title } from './components/typography/Title';
 export { LogoutButton } from './components/user/LogoutButton';
 export { UserMenu } from './components/user/UserMenu';
@@ -146,22 +148,25 @@ export { TextInputStyles } from './styles/forms/input/text-input';
 export { LayoutStyles } from './styles/layout';
 export { TextStyles } from './styles/typography';
 export * from './types/index';
-// import ThemeProvider from './components/themes/ThemeProvider';
-// import Light from './themes/light';
-// import { CSSModule, Theme } from './types/theme';
-// import { getModels } from '@applab-io/models';
-// import { createStore, renderReduxWebApp } from '@srclaunch/web-application-state';
-// export { ThemeProvider };
-// export { CSSModule, Theme };
-// export { Light };
-//
-// if (process.env.COMPONENT_LIBRARY_DEV) {
-//   const models = getModels();
-//   const store = createStore({ models, reducers: {} });
-//
-//   renderReduxWebApp({
-//     routes,
-//     store,
-//   });
-// }
+import { createStore, renderReduxWebApp, } from '@srclaunch/web-application-state';
+import routes from './docs/routes';
+if (process.env.NODE_ENV === 'development') {
+    const config = {
+        ui: {
+            themes: {
+                default: AppLabLightTheme.id,
+            },
+        },
+    };
+    const store = createStore({
+        reducers,
+    });
+    renderReduxWebApp({
+        authentication: false,
+        config,
+        container: _jsx(WebApplication, {}, void 0),
+        routes,
+        store,
+    });
+}
 //# sourceMappingURL=index.js.map

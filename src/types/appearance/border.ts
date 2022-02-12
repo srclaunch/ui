@@ -1,6 +1,6 @@
 import { Amount } from '../proportion';
-import { Size } from './size';
 import { Color, Colors, ContrastColors } from './color';
+import { Size } from './size';
 
 export enum ElementBorderColors {
   InputControl = 'var(--border-color-input-control-rgb)',
@@ -52,26 +52,26 @@ export enum BorderStyle {
 }
 
 export type BorderStyleProps = {
-  color: Color;
-  style?: BorderStyle;
-  width?: Amount | Size | number;
+  readonly color: Color;
+  readonly style?: BorderStyle;
+  readonly width?: Amount | Size | number;
 };
 
 export type BorderDirectionProps = {
-  bottom?: BorderStyleProps;
-  left?: BorderStyleProps;
-  right?: BorderStyleProps;
-  top?: BorderStyleProps;
+  readonly bottom?: BorderStyleProps;
+  readonly left?: BorderStyleProps;
+  readonly right?: BorderStyleProps;
+  readonly top?: BorderStyleProps;
 };
 
 export type BorderRadiusCornerProps = {
-  bottomLeft?: Amount | Size | number;
-  bottomRight?: Amount | Size | number;
-  topLeft?: Amount | Size | number;
-  topRight?: Amount | Size | number;
+  readonly bottomLeft?: Amount | Size | number;
+  readonly bottomRight?: Amount | Size | number;
+  readonly topLeft?: Amount | Size | number;
+  readonly topRight?: Amount | Size | number;
 };
 
-export type BorderProps<T = {}> = {
-  border?: BorderStyleProps | BorderDirectionProps;
-  borderRadius?: (Amount | Size | number) | BorderRadiusCornerProps;
-} & T;
+export type BorderProps = {
+  readonly border?: BorderStyleProps | BorderDirectionProps;
+  readonly borderRadius?: (Amount | Size | number) | BorderRadiusCornerProps;
+};

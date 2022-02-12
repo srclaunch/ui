@@ -25,14 +25,10 @@ export enum VerificationCodeType {
 import { TextInputProps } from '../text/TextInput';
 import { TextInputStyles } from '../../../../styles/forms/input/text-input';
 
-type VerificationCodeInputProps = TextInputProps<
-  HTMLInputElement,
-  VerificationCode,
-  {
-    length?: number;
-    codeType?: VerificationCodeType;
-  }
->;
+type VerificationCodeInputProps = {
+  length?: number;
+  codeType?: VerificationCodeType;
+} & TextInputProps<VerificationCode>;
 
 export const VerificationCodeInput = memo(
   ({

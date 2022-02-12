@@ -1,22 +1,18 @@
-import { memo, ReactElement } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { BasicIcons } from '@srclaunch/icons';
+import { Link } from '@srclaunch/web-application-state';
+import { memo, ReactElement } from 'react';
+import styled from 'styled-components';
 
-import { Size, LabelProps, LinkProps, TextColors } from '../../types';
-import { Label } from '../typography/Label';
+import { LabelProps, LinkProps, Size, TextColors } from '../../types';
 import { Icon } from '../media/Icon';
+import { Label } from '../typography/Label';
 
-type PageLinkProps<T = {}> = LabelProps<
-  HTMLLabelElement,
-  LinkProps<
-    {
-      label?: string;
-      showArrow?: boolean;
-      showUnderline?: boolean;
-    } & T
-  >
->;
+export type PageLinkProps = {
+  readonly label?: string;
+  readonly showArrow?: boolean;
+  readonly showUnderline?: boolean;
+} & LabelProps &
+  LinkProps;
 
 export const PageLink = memo(
   ({
@@ -50,7 +46,7 @@ export const PageLink = memo(
 );
 
 const Container = styled.div<{
-  showUnderline?: boolean;
+  readonly showUnderline?: boolean;
 }>`
   display: flex;
 

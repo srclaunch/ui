@@ -11,7 +11,12 @@ export const InputContainer = memo(({ backgroundColor = BackgroundColors.Lightes
     return (_jsx(Container, { backgroundColor: backgroundColor, borderRadius: borderRadius, border: {
             ...border,
             // @ts-ignore
-            color: error && (Array.isArray(error) && error.length > 0) ? BorderColors.Error : border?.color,
+            color: error && Array.isArray(error) && error.length > 0
+                ? BorderColors.Error
+                : border.hasOwnProperty('color')
+                    ? // @ts-ignore
+                        border?.color
+                    : BorderColors.InputControl,
         }, className: `${className} input-container`, error: error, grow: true, orientation: Orientation.Horizontal, success: success, ...props, children: children }, void 0));
 });
 const Container = styled.div `

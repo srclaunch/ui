@@ -1,11 +1,11 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { memo } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { BasicIcons } from '@srclaunch/icons';
+import { Link } from '@srclaunch/web-application-state';
+import { memo } from 'react';
+import styled from 'styled-components';
 import { Size, TextColors } from '../../types';
-import { Label } from '../typography/Label';
 import { Icon } from '../media/Icon';
+import { Label } from '../typography/Label';
 export const PageLink = memo(({ textColor, label, to, icon, showArrow = false, showUnderline = false, }) => {
     return (_jsx(Container, { showUnderline: showUnderline, children: _jsxs(Link, { to: to, children: [_jsx(IconWrapper, { children: icon }, void 0), _jsx(Label, { textColor: textColor ?? TextColors.Primary, size: Size.Small, children: label }, void 0), showArrow && (_jsx(Icon, { name: BasicIcons.ChevronRight, size: Size.Small, color: textColor }, void 0))] }, void 0) }, void 0));
 });

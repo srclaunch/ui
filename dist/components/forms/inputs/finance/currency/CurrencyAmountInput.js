@@ -38,7 +38,7 @@ export const CurrencyAmountInput = memo(({ backgroundColor = BackgroundColors.In
                 });
         }
     }, [value]);
-    return (_jsxs(_Fragment, { children: [(label || problems.length > 0) && (_jsx(InputLabel, { errorMessage: problems[0]?.message.short, children: label }, void 0)), _jsxs(InputContainer, { backgroundColor: backgroundColor, border: border, boxShadow: boxShadow, className: `${className} currency-amount-input`, onClick: () => {
+    return (_jsxs(_Fragment, { children: [(label || problems.length > 0) && (_jsx(InputLabel, { error: problems, children: label }, void 0)), _jsxs(InputContainer, { backgroundColor: backgroundColor, border: border, boxShadow: boxShadow, className: `${className} currency-amount-input`, onClick: () => {
                     if (inputRef.current)
                         inputRef.current.focus();
                 }, error: problems, focused: focused, children: [_jsx(Label, { marginLeft: Amount.Less, marginRight: Amount.Least, textColor: !value ? TextColors.InputPlaceholder : textColor, children: "$" }, void 0), _jsx(CurrencyInputField, { className: "currency-input", onBlur: () => setFocused(false), onFocus: () => setFocused(true), name: name, defaultValue: value ? Number(value).toFixed(2) : 0, 

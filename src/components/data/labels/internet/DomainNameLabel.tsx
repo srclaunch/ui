@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type DomainNameLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type DomainNameLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const DomainNameLabel = memo(
   ({

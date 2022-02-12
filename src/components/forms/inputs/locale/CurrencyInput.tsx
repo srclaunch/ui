@@ -1,6 +1,7 @@
-import { memo, ReactElement } from 'react';
 import { CountryCode, CurrencyCode, ValidationProblem } from '@srclaunch/types';
+import { memo, ReactElement } from 'react';
 import ReactCountryFlag from 'react-country-flag';
+
 import { Size } from '../../../../types';
 import {
   DropdownInput,
@@ -43,15 +44,15 @@ export const CurrencyInput = memo(
           value,
           validated,
         }: {
-          problems?: ValidationProblem[];
+          problems?: readonly ValidationProblem[];
           value?: CurrencyCode;
           validated?: boolean;
         }) =>
           onChange &&
           (onChange({
             problems,
-            value,
             validated,
+            value,
           }) as CurrencyInputProps['onChange'])
         }
         placeholder={placeholder}

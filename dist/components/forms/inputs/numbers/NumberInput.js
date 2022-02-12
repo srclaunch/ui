@@ -4,14 +4,14 @@ import {
 validate, } from '@srclaunch/validation';
 import { memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Align, Amount, BackgroundColors, BorderColors, BorderStyle, Cursor, DepthShadow, Orientation, Size, TextColors, TextWeight, } from '../../../../types';
-import { Container } from '../../../layout/Container';
-import { ErrorLabel } from '../../../errors/ErrorLabel';
-import { ProgressSpinner } from '../../../progress/ProgressSpinner';
-import { InputContainer } from '../shared/InputContainer';
-import { InputLabel } from '../../labels/InputLabel';
 import { FocusedStyles } from '../../../../styles/focused';
 import { TextStyles } from '../../../../styles/typography';
+import { Align, Amount, BackgroundColors, BorderColors, BorderStyle, Cursor, DepthShadow, Orientation, Size, TextColors, TextWeight, } from '../../../../types';
+import { ErrorLabel } from '../../../errors/ErrorLabel';
+import { Container } from '../../../layout/Container';
+import { ProgressSpinner } from '../../../progress/ProgressSpinner';
+import { InputLabel } from '../../labels/InputLabel';
+import { InputContainer } from '../shared/InputContainer';
 export const NumberInput = memo(({ as, backgroundColor = BackgroundColors.InputControl, boxShadow = DepthShadow.Low, border = {
     color: BorderColors.InputControl,
     style: BorderStyle.Solid,
@@ -30,12 +30,12 @@ export const NumberInput = memo(({ as, backgroundColor = BackgroundColors.InputC
             if (onChange && value)
                 onChange({
                     problems: probs,
-                    validated: !probs.length,
+                    validated: probs.length === 0,
                     value,
                 });
         }
     }, [value]);
-    return (_jsxs(_Fragment, { children: [_jsxs(Container, { orientation: Orientation.Horizontal, children: [label && _jsx(InputLabel, { children: label }, void 0), problems.length ? (_jsx(ErrorLabel, { alignContent: Align.Right, children: problems[0]?.message.short }, void 0)) : null] }, void 0), _jsxs(InputContainer, { backgroundColor: backgroundColor, border: border, boxShadow: boxShadow, cursor: cursor, className: `${className} number-input`, error: problems, focused: focused, onClick: () => {
+    return (_jsxs(_Fragment, { children: [_jsxs(Container, { orientation: Orientation.Horizontal, children: [label && _jsx(InputLabel, { children: label }, void 0), problems.length > 0 ? (_jsx(ErrorLabel, { alignContent: Align.Right, children: problems[0]?.message.short }, void 0)) : null] }, void 0), _jsxs(InputContainer, { backgroundColor: backgroundColor, border: border, boxShadow: boxShadow, cursor: cursor, className: `${className} number-input`, error: problems, focused: focused, onClick: () => {
                     inputRef.current?.focus();
                 }, orientation: Orientation.Horizontal, size: size, ...props, children: [icon && _jsx(_Fragment, { children: icon }, void 0), _jsx(Input, { defaultValue: defaultValue, hidden: hidden, name: name, onBlur: () => setFocused(false), 
                         // @ts-ignore
@@ -61,7 +61,6 @@ const Input = styled.input `
   outline: none;
   padding: 0 ${Amount.Less};
   width: 100%;
-
 
   &::placeholder {
     color: rgb(${TextColors.InputPlaceholder});

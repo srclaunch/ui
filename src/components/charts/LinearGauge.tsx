@@ -1,4 +1,6 @@
 import { memo, ReactElement } from 'react';
+
+import { FormatterProps, formatValue } from '../../lib/data/format';
 import {
   Align,
   Amount,
@@ -14,20 +16,19 @@ import {
   TextWeight,
 } from '../../types';
 import { Container } from '../layout/Container';
-import { Text } from '../typography/Text';
-import { FormatterProps, formatValue } from '../../lib/data/format';
+import { Label } from '../typography/Label';
 
 type LinearGaugeProps = {
-  amount: number;
-  color: Color;
-  formatter?: FormatterProps;
-  label?: string;
-  showTicks?: boolean;
-  showTickLabels?: boolean;
-  showValue?: boolean;
-  size?: Size;
-  tickCount?: number;
-  total: number;
+  readonly amount: number;
+  readonly color: Color;
+  readonly formatter?: FormatterProps;
+  readonly label?: string;
+  readonly showTicks?: boolean;
+  readonly showTickLabels?: boolean;
+  readonly showValue?: boolean;
+  readonly size?: Size;
+  readonly tickCount?: number;
+  readonly total: number;
 };
 
 export const LinearGauge = memo(
@@ -65,7 +66,7 @@ export const LinearGauge = memo(
                   top: '-3px',
                 }}
               >
-                <Text
+                <Label
                   alignText={Align.Center}
                   lineHeight={Amount.None}
                   textColor={color}
@@ -80,7 +81,7 @@ export const LinearGauge = memo(
                   }}
                 >
                   {formatter ? formatValue(amount, formatter) : amount}
-                </Text>
+                </Label>
               </Container>
             )}
 
@@ -104,7 +105,7 @@ export const LinearGauge = memo(
                   height={6}
                 >
                   {showTickLabels && (
-                    <Text
+                    <Label
                       alignText={Align.Left}
                       textColor={amount >= tickValue ? color : TextColors.Dark}
                       textSize={TextSize.Smallest}
@@ -115,7 +116,7 @@ export const LinearGauge = memo(
                       }}
                     >
                       {tickValueFormatted}
-                    </Text>
+                    </Label>
                   )}
                 </Container>
               );
@@ -136,14 +137,14 @@ export const LinearGauge = memo(
               }}
             >
               {showTickLabels && (
-                <Text
+                <Label
                   alignText={Align.Right}
                   textColor={TextColors.Dark}
                   textSize={TextSize.Small}
                   textWeight={TextWeight.More}
                 >
                   {formatter ? formatValue(total, formatter) : total}
-                </Text>
+                </Label>
               )}
             </Container>
           </Container>

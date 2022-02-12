@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type IMEILabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type IMEILabelProps = {
+  value: string;
+} & LabelProps;
 
 export const IMEILabel = memo(
   ({

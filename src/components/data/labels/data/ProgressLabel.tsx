@@ -4,20 +4,17 @@ import { Label } from '../../../typography/Label';
 import { ProgressMeter } from '../../../charts/ProgressMeter';
 
 import {
-  BackgroundColor,
+  Color,
   LabelProps,
   Size,
   TextColors,
   TextSize,
 } from '../../../../types';
 
-type ProgressLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    color?: BackgroundColor;
-    value: number[];
-  }
->;
+type ProgressLabelProps = {
+  color?: Color;
+  value: number[];
+} & LabelProps;
 
 export const ProgressLabel = memo(
   ({

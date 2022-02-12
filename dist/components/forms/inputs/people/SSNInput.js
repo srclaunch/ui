@@ -63,7 +63,9 @@ export const SSNInput = memo(({ as, backgroundColor = BackgroundColors.InputCont
                             if (e.target.value.length === 3) {
                                 e.preventDefault();
                             }
-                        }, ref: firstInputRef, textColor: textColor, type: "number" }, void 0), _jsx(Label, { textSize: TextSize.Larger, children: "-" }, void 0), _jsx(Input, { alignText: Align.Center, 
+                        }, 
+                        // @ts-ignore
+                        ref: firstInputRef, textColor: textColor, type: "number" }, void 0), _jsx(Label, { textSize: TextSize.Larger, children: "-" }, void 0), _jsx(Input, { alignText: Align.Center, 
                         // defaultValue={defaultValue}
                         hidden: hidden, max: 99, min: 1, name: name, onBlur: () => setFocused(false), 
                         // @ts-ignore
@@ -81,7 +83,9 @@ export const SSNInput = memo(({ as, backgroundColor = BackgroundColors.InputCont
                             if (e.key === 'Backspace' && e.target.value.length === 0) {
                                 firstInputRef.current?.focus();
                             }
-                        }, ref: secondInputRef, textColor: textColor, type: "number" }, void 0), _jsx(Label, { textSize: TextSize.Larger, children: "-" }, void 0), _jsx(Input, { alignText: Align.Center, 
+                        }, 
+                        // @ts-ignore
+                        ref: secondInputRef, textColor: textColor, type: "number" }, void 0), _jsx(Label, { textSize: TextSize.Larger, children: "-" }, void 0), _jsx(Input, { alignText: Align.Center, 
                         // defaultValue={defaultValue}
                         hidden: hidden, max: 9999, min: 1000, name: name, onBlur: () => setFocused(false), onChange: (e) => {
                             setValueChanged(true);
@@ -94,7 +98,9 @@ export const SSNInput = memo(({ as, backgroundColor = BackgroundColors.InputCont
                             if (e.key === 'Backspace' && e.target.value.length === 0) {
                                 secondInputRef.current?.focus();
                             }
-                        }, ref: thirdInputRef, textColor: textColor, type: "number" }, void 0), inProgress && (_jsx(Container, { grow: false, children: _jsx(ProgressSpinner, { size: Size.Small }, void 0) }, void 0))] }, void 0)] }, void 0));
+                        }, 
+                        // @ts-ignore
+                        ref: thirdInputRef, textColor: textColor, type: "number" }, void 0), inProgress && (_jsx(Container, { grow: false, children: _jsx(ProgressSpinner, { size: Size.Small }, void 0) }, void 0))] }, void 0)] }, void 0));
 });
 // const Container = styled.div<LayoutProps<AppearanceProps<null>>>`
 //   ${LayoutStyles};

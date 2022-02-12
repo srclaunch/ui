@@ -4,12 +4,9 @@ import { Label } from '../../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../../types';
 
-type TaxIDLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type TaxIDLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const TaxIDLabel = memo(
   ({

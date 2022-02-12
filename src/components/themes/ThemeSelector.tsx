@@ -14,10 +14,8 @@ import {
 import { InputLabel } from '../forms/labels/InputLabel';
 import { Container, ContainerProps } from '../layout/Container';
 
-export type ThemeSelectorProps = ContainerProps<
-  HTMLDivElement,
-  DropdownInputProps
->;
+export type ThemeSelectorProps = ContainerProps<HTMLDivElement> &
+  DropdownInputProps;
 
 export const ThemeSelector = memo(
   ({ ...props }: ThemeSelectorProps): ReactElement => {

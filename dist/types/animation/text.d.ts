@@ -1,3 +1,3 @@
-import { TextProps } from '../../components/typography/Text';
-export declare type AnimatedTextProps<T = {}> = TextProps<T>;
+import { TextProps } from '../typography/text';
+export declare type AnimatedTextProps = TextProps;
 //# sourceMappingURL=text.d.ts.map

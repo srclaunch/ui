@@ -1,5 +1,5 @@
-import { memo, MouseEventHandler, ReactElement } from 'react';
 import { Image as ImageType, Video as VideoType } from '@srclaunch/types';
+import { memo, MouseEventHandler, ReactElement } from 'react';
 
 import {
   Align,
@@ -12,26 +12,22 @@ import {
   TextSize,
   TextWeight,
 } from '../../../types';
-
 import { Card } from '../../cards/Card';
+import { Container, ContainerProps } from '../../layout/Container';
 import { Video } from '../../media/Video';
 import { MoreMenu, MoreMenuProps } from '../../menus/MoreMenu';
-import { Text } from '../../typography/Text';
-import { Container, ContainerProps } from '../../layout/Container';
+import { Label } from '../../typography/Label';
 
-export type MediaGridItem = ContainerProps<
-  HTMLDivElement,
-  {
-    description?: string | null;
-    element?: ReactElement;
-    images?: ImageType[];
-    minHeight?: Amount | number;
-    moreMenu?: MoreMenuProps;
-    title?: string;
-    url?: string;
-    video?: VideoType;
-  }
->;
+export type MediaGridItem = {
+  readonly description?: string | null;
+  readonly element?: ReactElement;
+  readonly images?: readonly ImageType[];
+  readonly minHeight?: Amount | number;
+  readonly moreMenu?: MoreMenuProps;
+  readonly title?: string;
+  readonly url?: string;
+  readonly video?: VideoType;
+} & ContainerProps<HTMLDivElement>;
 
 export const MediaGridItem = memo(
   ({
@@ -52,13 +48,13 @@ export const MediaGridItem = memo(
         orientation={Orientation.Horizontal}
         padding={Amount.Default}
       >
-        <Text
+        <Label
           textColor={TextColors.White}
           textSize={TextSize.Large}
           textWeight={TextWeight.Most}
         >
           {title}
-        </Text>
+        </Label>
 
         <Container />
 

@@ -5,6 +5,9 @@ import { MarginProps } from './margin';
 import { PaddingProps } from './padding';
 import { PositionProps } from './position';
 
-export type LayoutProps<T = {}> = AlignmentProps<
-  PositionProps<MarginProps<PaddingProps<BehaviorProps<DepthProps<T>>>>>
->;
+export type LayoutProps = AlignmentProps &
+  PositionProps &
+  MarginProps &
+  PaddingProps &
+  BehaviorProps &
+  DepthProps;

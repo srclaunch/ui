@@ -1,9 +1,9 @@
 import { Amount } from '../proportion';
 
-export type PaddingProps<T = {}> = {
-  padding?: Amount | number;
-  paddingBottom?: Amount | number;
-  paddingLeft?: Amount | number;
-  paddingRight?: Amount | number;
-  paddingTop?: Amount | number;
-} & T;
+export type PaddingProps = {
+  readonly padding?: Amount | number;
+  readonly paddingBottom?: Amount | number;
+  readonly paddingLeft?: Amount | number;
+  readonly paddingRight?: Amount | number;
+  readonly paddingTop?: Amount | number;
+};

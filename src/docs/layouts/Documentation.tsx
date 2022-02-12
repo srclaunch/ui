@@ -1,5 +1,6 @@
 import { DualLightIcons } from '@srclaunch/icons';
 import { useNavigate } from '@srclaunch/web-application-state';
+import { memo, ReactElement } from 'react';
 
 import {
   Align,
@@ -20,8 +21,6 @@ import {
   TextSize,
   TextWeight,
 } from '../../index';
-
-import { memo, ReactElement } from 'react';
 
 {
   /* <Workspace>
@@ -57,7 +56,7 @@ export const Documentation = memo(
     return (
       <Container
         backgroundColor={BackgroundColors.Darker}
-        fillScreen={true}
+        fillScreen
         orientation={Orientation.Vertical}
       >
         <Container
@@ -208,11 +207,11 @@ export const Documentation = memo(
                 },
               ]}
               overflow={Overflow.ScrollVertical}
-              scrollable={true}
+              scrollable
             />
           </Container>
 
-          <Container grow={true} orientation={Orientation.Vertical}>
+          <Container grow orientation={Orientation.Vertical}>
             {children}
           </Container>
         </Container>

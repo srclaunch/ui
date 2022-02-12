@@ -7,7 +7,6 @@ export type { IconProps } from '../components/media/Icon';
 export type { MenuProps } from '../components/menus/Menu';
 export type { MenuItemProps } from '../components/menus/MenuItem';
 export type { LabelProps } from '../components/typography/Label';
-export type { TextProps } from '../components/typography/Text';
 export type {
   Animation,
   AnimationProps,
@@ -48,9 +47,9 @@ export type { Color } from './appearance/color';
 export { Colors, ContrastColors } from './appearance/color';
 export type { CursorProps } from './appearance/cursor';
 export { Cursor } from './appearance/cursor';
+export type { DepthProps } from './appearance/depth';
 export { Depth, DepthShadow } from './appearance/depth';
 export type {
-  DimensionProps,
   DimensionValue,
   HeightProps,
   WidthProps,
@@ -91,7 +90,7 @@ export type { ErrorProps } from './state/error-props';
 export type { FocusProps } from './state/focus-props';
 export type { SuccessProps } from './state/success-props';
 export type { WarningProps } from './state/warning-props';
-export type { TextColor } from './typography/text';
+export type { TextColor, TextProps } from './typography/text';
 export {
   TextColors,
   TextOverflow,

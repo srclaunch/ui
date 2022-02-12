@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type ISBNLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type ISBNLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const ISBNLabel = memo(
   ({

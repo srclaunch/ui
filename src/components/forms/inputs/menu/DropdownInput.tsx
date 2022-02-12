@@ -1,4 +1,3 @@
-import { memo, ReactElement, useEffect, useState } from 'react';
 import {
   CountryCode,
   CurrencyCode,
@@ -9,6 +8,7 @@ import {
   ValidationProblem,
 } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
+import { memo, ReactElement, useEffect, useState } from 'react';
 
 import {
   Align,
@@ -16,29 +16,26 @@ import {
   BackgroundColors,
   BorderColors,
   BorderStyle,
+  CommonComponentProps,
   Depth,
   DepthShadow,
-  DimensionProps,
   InputProps,
   Orientation,
   Size,
   SizeProps,
   TextColors,
 } from '../../../../types';
+import { ErrorLabel } from '../../../errors/ErrorLabel';
 import { Container, ContainerProps } from '../../../layout/Container';
-import { DropdownPanel } from '../shared/DropdownPanel';
 import { Menu, MenuProps } from '../../../menus/Menu';
 import { MenuItemProps } from '../../../menus/MenuItem';
-import { DropdownControl } from '../shared/DropdownControl';
-import { TextProps } from '../../../typography/Text';
-import { ErrorLabel } from '../../../errors/ErrorLabel';
+import { LabelProps } from '../../../typography/Label';
 import { InputLabel } from '../../labels/InputLabel';
+import { DropdownControl } from '../shared/DropdownControl';
+import { DropdownPanel } from '../shared/DropdownPanel';
 
-export type DropdownInputProps<
-  E = HTMLElement,
-  T = any,
-  P = {},
-> = ContainerProps<E, InputProps<E, T, MenuProps<E, T, TextProps<E>>>> & P;
+export type DropdownInputProps<V = any> = InputProps<HTMLSelectElement, V> &
+  MenuProps;
 
 export const DropdownInput = memo(
   ({
@@ -60,16 +57,15 @@ export const DropdownInput = memo(
     padding = 5,
     placeholder,
     size = Size.Default,
-    textColor = TextColors.DropdownMenu,
     validation,
     ...props
-  }: DropdownInputProps<any>): ReactElement => {
+  }: DropdownInputProps): ReactElement => {
     // const [value, setValue] = useState(defaultValue);
     const [focused, setFocused] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
     const [problems, setProblems] = useState<ValidationProblem[]>([]);
-    const [item, setItem] = useState<MenuItemProps<any> | undefined>(
-      menu?.find((i: MenuItemProps<any>) => i.value === defaultValue),
+    const [item, setItem] = useState<MenuItemProps | undefined>(
+      menu?.find((i: MenuItemProps) => i.value === defaultValue),
     );
     const [valueChanged, setValueChanged] = useState(false);
 
@@ -104,10 +100,9 @@ export const DropdownInput = memo(
       }
     }, [item]);
 
-
     useEffect(() => {
       setItem(
-        menu?.find((i: MenuItemProps<Primitive>) => i.value === defaultValue) ??
+        menu?.find((i: MenuItemProps) => i.value === defaultValue) ??
           item ??
           undefined,
       );
@@ -116,9 +111,7 @@ export const DropdownInput = memo(
     return (
       <>
         {(label || problems.length > 0) && (
-          <InputLabel errorMessage={problems[0]?.message.short}>
-            {label}
-          </InputLabel>
+          <InputLabel error={problems}>{label}</InputLabel>
         )}
 
         <Container
@@ -152,7 +145,6 @@ export const DropdownInput = memo(
             onClick={() => setMenuVisible(!menuVisible)}
             placeholder={placeholder}
             size={size}
-            textColor={textColor}
           />
 
           <DropdownPanel

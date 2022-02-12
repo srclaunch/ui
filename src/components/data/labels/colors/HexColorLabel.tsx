@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type HexColorLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type HexColorLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const HexColorLabel = memo(
   ({

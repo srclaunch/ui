@@ -1,9 +1,9 @@
 import { BorderColors, } from '../../types';
 export function getCSSMeasurementValue(val) {
-    if (typeof val === 'string' && val.indexOf('var(') > -1) {
+    if (typeof val === 'string' && val.includes('var(')) {
         return val;
     }
-    if (typeof val === 'string' && val.indexOf('%') > -1) {
+    if (typeof val === 'string' && val.includes('%')) {
         return val;
     }
     if (typeof val === 'number') {
@@ -41,6 +41,7 @@ export function getCSSBoxShadowValue(val) {
     }
     if (typeof val === 'string')
         return val;
+    // @ts-ignore
     return getString(val);
 }
 //# sourceMappingURL=properties.js.map

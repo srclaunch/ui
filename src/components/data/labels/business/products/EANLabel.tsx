@@ -4,12 +4,9 @@ import { Label } from '../../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../../types';
 
-type EANLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type EANLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const EANLabel = memo(
   ({

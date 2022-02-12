@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type ISSNLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type ISSNLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const ISSNLabel = memo(
   ({

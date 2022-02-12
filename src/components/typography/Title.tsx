@@ -1,9 +1,9 @@
 import { memo, ReactElement } from 'react';
 import { Size, TextColors, TextSize, TextWeight } from '../../types';
 
-import { Text, TextProps } from './Text';
+import { Label, LabelProps } from './Label';
 
-export type TitleProps = TextProps<HTMLHeadingElement>;
+export type TitleProps = LabelProps<HTMLHeadingElement>;
 
 export const Title = memo(
   ({
@@ -17,7 +17,7 @@ export const Title = memo(
     ...props
   }: TitleProps): ReactElement => {
     return (
-      <Text
+      <Label
         as={as}
         className={`${className} title`}
         inline={false}
@@ -28,7 +28,7 @@ export const Title = memo(
         {...props}
       >
         {children}
-      </Text>
+      </Label>
     );
   },
 );

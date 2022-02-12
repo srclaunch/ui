@@ -98,7 +98,7 @@ export const FormFields = memo(
                   value,
                   validated,
                 }: {
-                  problems?: ValidationProblem[];
+                  problems?: readonly ValidationProblem[];
                   value?: any;
                   validated?: boolean;
                 }) =>

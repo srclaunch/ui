@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type TimeRangeLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type TimeRangeLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const TimeRangeLabel = memo(
   ({

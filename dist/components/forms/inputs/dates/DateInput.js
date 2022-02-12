@@ -3,8 +3,8 @@ import { BasicIcons } from '@srclaunch/icons';
 import { Condition } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
 import { memo, useEffect, useState } from 'react';
-import DatePickerC from 'react-date-picker';
-import css from 'react-date-picker/dist/DatePicker.css';
+// import DatePickerC from 'react-date-picker';
+// import css from 'react-date-picker/dist/DatePicker.css';
 import styled from 'styled-components';
 import { AppearanceStyles } from '../../../../styles/appearance';
 import { BoxShadowStyles } from '../../../../styles/appearance/box-shadow';
@@ -26,7 +26,6 @@ const Wrapper = styled.div `
   border: none;
   width: 100%;
   ${BoxShadowStyles};
-  ${css};
 
   .react-date-picker,
   .react-date-picker__wrapper {
@@ -219,26 +218,9 @@ export const DateInput = memo(({ backgroundColor = BackgroundColors.InputControl
                 });
         }
     }, [value]);
-    return (_jsxs(_Fragment, { children: [(label || problems.length > 0) && (_jsx(InputLabel, { errorMessage: problems[0]?.message.short, children: label }, void 0)), _jsxs(InputContainer, { backgroundColor: backgroundColor, border: border, boxShadow: !focused ? boxShadow : DepthShadow.Higher, className: `${className} date-input`, error: problems, focused: focused, onMouseLeave: () => setFocused(false), orientation: Orientation.Horizontal, 
+    return (_jsxs(_Fragment, { children: [(label || problems.length > 0) && (_jsx(InputLabel, { error: problems, children: label }, void 0)), _jsxs(InputContainer, { backgroundColor: backgroundColor, border: border, boxShadow: !focused ? boxShadow : DepthShadow.Higher, className: `${className} date-input`, error: problems, focused: focused, onMouseLeave: () => setFocused(false), orientation: Orientation.Horizontal, 
                 // onClick={() => setFocused(!focused)}
-                size: size, ...props, children: [_jsx(Wrapper, { error: problems, focused: focused, size: size, children: _jsx(DatePickerC, { calendarType: "ISO 8601", 
-                            // calendarIcon={
-                            //   <CalendarIcon focused={focused}>
-                            //     <Icon name={BasicIcons.Calendar} />
-                            //   </CalendarIcon>
-                            // }
-                            // clearIcon={<Icon {...resetIcon} />}
-                            calendarIcon: null, clearIcon: null, 
-                            // isOpen={focused}
-                            locale: "en-US", openCalendarOnFocus: true, onChange: (val) => {
-                                setValueChanged(true);
-                                if (val)
-                                    setValue(val.toISOString());
-                            }, onCalendarOpen: () => {
-                                setFocused(true);
-                            }, onCalendarClose: () => {
-                                setFocused(false);
-                            }, value: value ? new Date(value) : undefined }, void 0) }, void 0), _jsx(DownArrow, { alignItems: Align.Center, alignContent: Align.Center, border: {
+                size: size, ...props, children: [_jsx(Wrapper, { error: problems, focused: focused, size: size }, void 0), _jsx(DownArrow, { alignItems: Align.Center, alignContent: Align.Center, border: {
                             left: {
                                 color: BorderColors.InputControl,
                                 style: BorderStyle.Solid,

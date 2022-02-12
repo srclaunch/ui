@@ -1,11 +1,11 @@
-import { Primitive, ValidationProblem } from '@srclaunch/types';
+import { ValidationProblem } from '@srclaunch/types';
 
 export type InputValueChangeHandler<T = unknown> = ({
   problems,
   validated,
   value,
 }: {
-  problems?: ValidationProblem[];
-  validated?: boolean;
-  value: T | undefined;
-}) => unknown;
+  readonly problems?: readonly ValidationProblem[];
+  readonly validated?: boolean;
+  readonly value: T | undefined;
+}) => void;

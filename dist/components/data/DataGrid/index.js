@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { downloadDataAsFile } from '@srclaunch/actions';
 import { formatObjectToCSVData } from '@srclaunch/transform';
 import { Align, Amount, BackgroundColors, BorderColors, BorderStyle, Cursor, DataGridDisplayType, Depth, DepthShadow, Orientation, Overflow, Size, TextColors, } from '../../../types';
+import { fetchFromObject } from '../../../lib/data/object';
 import { Container } from '../../layout/Container';
 import { Label } from '../../typography/Label';
 import { LoadingOverlay } from '../../progress/LoadingOverlay';
@@ -11,16 +12,6 @@ import { DataGridCell } from './DataGridCell';
 import { SearchInput } from '../../forms/inputs/text/SearchInput';
 import { MenuButton } from '../../forms/buttons/MenuButton';
 import { Button, ButtonType } from '../../forms/buttons/Button';
-function fetchFromObject(obj, prop) {
-    if (typeof obj === 'undefined') {
-        return false;
-    }
-    var _index = prop.indexOf('.');
-    if (_index > -1) {
-        return fetchFromObject(obj[prop.substring(0, _index)], prop.substr(_index + 1));
-    }
-    return obj[prop];
-}
 export const DataGrid = memo(({ backgroundColor = BackgroundColors.DataGrid, borderRadius = Amount.Least, boxShadow = DepthShadow.Highest, className = '', columns, columnCount = 3, data, depth = Depth.Highest, display = DataGridDisplayType.Table, header, hideOnProp, loaded, loading, model, onItemClick, padding = Amount.Less, template, ...props }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [hoveredRow, setHoveredRow] = useState();

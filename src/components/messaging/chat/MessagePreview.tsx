@@ -1,5 +1,11 @@
-import { ReactElement, memo } from 'react';
 import { ChatMessage } from '@srclaunch/types';
+import { memo, ReactElement } from 'react';
+
+import { Container } from '../../../components/layout/Container';
+import { Image } from '../../../components/media/Image';
+import { Label } from '../../../components/typography/Label';
+import { Paragraph } from '../../../components/typography/Paragraph';
+import { Title } from '../../../components/typography/Title';
 import {
   Align,
   Amount,
@@ -11,15 +17,9 @@ import {
   TextSize,
   TextWeight,
 } from '../../../types';
-import { Container } from '../../../components/layout/Container';
-import { Text } from '../../../components/typography/Text';
-import { Title } from '../../../components/typography/Title';
-import { Paragraph } from '../../../components/typography/Paragraph';
-import { Image } from '../../../components/media/Image';
 import { DateLabel } from '../../data/labels/dates/DateLabel';
-import { Label } from '../../..';
 
-type MessagePreviewProps = ContainerProps<HTMLDivElement, ChatMessage>;
+export type MessagePreviewProps = ContainerProps<HTMLDivElement> & ChatMessage;
 
 export const MessagePreview = memo(
   ({
@@ -37,7 +37,7 @@ export const MessagePreview = memo(
         backgroundColor={backgroundColor}
         borderRadius={borderRadius}
         className={`${className} message-preview`}
-        grow={true}
+        grow
         orientation={Orientation.Vertical}
         padding={Amount.Default}
         paddingLeft={Amount.More}
@@ -46,7 +46,7 @@ export const MessagePreview = memo(
       >
         <Container
           alignItems={Align.Top}
-          grow={true}
+          grow
           orientation={Orientation.Horizontal}
           // marginTop={Amount.Less}
         >
@@ -59,7 +59,7 @@ export const MessagePreview = memo(
 
           <Label
             alignItems={Align.Left}
-            grow={true}
+            grow
             lineHeight={Amount.Default}
             marginBottom={Amount.None}
             textColor={TextColors.Light}
@@ -93,7 +93,7 @@ export const MessagePreview = memo(
           >
             <Title
               alignItems={Align.Left}
-              grow={true}
+              grow
               lineHeight={Amount.Less}
               marginTop={Amount.None}
               marginBottom={Amount.Less}

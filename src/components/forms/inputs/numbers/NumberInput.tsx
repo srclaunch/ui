@@ -5,9 +5,13 @@ import {
 } from '@srclaunch/validation';
 import { forwardRef, memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+
+import { FocusedStyles } from '../../../../styles/focused';
+import { TextStyles } from '../../../../styles/typography';
 import {
   Align,
   Amount,
+  AppearanceProps,
   BackgroundColors,
   BackgroundProps,
   BorderColors,
@@ -19,49 +23,33 @@ import {
   FocusEventProps,
   InputProps,
   InputValueChangeHandler,
-  Orientation,
-  MouseEventProps,
   KeyboardEventProps,
+  MouseEventProps,
+  Orientation,
   Size,
   SizeProps,
   TextColor,
   TextColors,
+  TextProps,
   TextWeight,
 } from '../../../../types';
-
-import { Icon } from '../../../media/Icon';
-import { Container } from '../../../layout/Container';
 import { ErrorLabel } from '../../../errors/ErrorLabel';
+import { Container } from '../../../layout/Container';
+import { Icon } from '../../../media/Icon';
 import { ProgressSpinner } from '../../../progress/ProgressSpinner';
-import { InputContainer } from '../shared/InputContainer';
 import { InputLabel } from '../../labels/InputLabel';
-import { TextProps } from '../../../typography/Text';
-import { FocusedStyles } from '../../../../styles/focused';
-import { TextStyles } from '../../../../styles/typography';
+import { InputContainer } from '../shared/InputContainer';
 
-export type NumberInputProps<
-  E = HTMLInputElement,
-  T = number,
-  P = {},
-> = InputProps<
-  E,
-  number,
-  {
-    icon?: typeof Icon;
-    placeholderTextColor?: TextColor;
-    prefix?: string;
-    spellCheck?: boolean;
-    suffix?: string;
-  } & BackgroundProps &
-    BorderProps &
-    ClipboardEventProps<HTMLInputElement> &
-    FocusEventProps<HTMLInputElement> &
-    KeyboardEventProps<HTMLInputElement> &
-    MouseEventProps<HTMLInputElement> &
-    SizeProps &
-    TextProps
-> &
-  P;
+export type NumberInputProps<T = HTMLInputElement, V = number> = {
+  readonly icon?: typeof Icon;
+  readonly placeholderTextColor?: TextColor;
+  readonly prefix?: string;
+  readonly spellCheck?: boolean;
+  readonly suffix?: string;
+} & AppearanceProps &
+  SizeProps &
+  TextProps &
+  InputProps<T, V>;
 
 export const NumberInput = memo(
   ({
@@ -111,7 +99,7 @@ export const NumberInput = memo(
         if (onChange && value)
           onChange({
             problems: probs,
-            validated: !probs.length,
+            validated: probs.length === 0,
             value,
           });
       }
@@ -122,7 +110,7 @@ export const NumberInput = memo(
         <Container orientation={Orientation.Horizontal}>
           {label && <InputLabel>{label}</InputLabel>}
 
-          {problems.length ? (
+          {problems.length > 0 ? (
             <ErrorLabel alignContent={Align.Right}>
               {problems[0]?.message.short}
             </ErrorLabel>
@@ -196,7 +184,6 @@ const Input = styled.input<NumberInputProps>`
   outline: none;
   padding: 0 ${Amount.Less};
   width: 100%;
-
 
   &::placeholder {
     color: rgb(${TextColors.InputPlaceholder});

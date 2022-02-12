@@ -1,3 +1,3 @@
-export type FocusProps<P = {}> = {
-  focused?: boolean;
-} & P;
+export type FocusProps = {
+  readonly focused?: boolean;
+};

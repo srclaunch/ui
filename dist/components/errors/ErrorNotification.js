@@ -1,6 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
-import { memo } from 'react';
 import { NotificationType } from '@srclaunch/types';
+import { memo } from 'react';
 import { Align } from '../../types';
 import { NotificationLabel, } from '../notifications/NotificationLabel';
 export const ErrorNotification = memo(({ label, showOrb = true, ...props }) => {

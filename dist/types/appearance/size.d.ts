@@ -7,7 +7,7 @@ export declare enum Size {
     Larger = "var(--size-larger)",
     Largest = "var(--size-largest)"
 }
-export declare type SizeProps<P = {}> = {
-    size?: Size;
-} & P;
+export declare type SizeProps = {
+    readonly size?: Size;
+};
 //# sourceMappingURL=size.d.ts.map

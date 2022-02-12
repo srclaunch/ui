@@ -1,15 +1,15 @@
 import { Color } from './color';
 import { DepthShadow } from './depth';
 export declare type BoxShadowDetails = {
-    blurRadius?: number;
-    color?: Color;
-    offsetX?: number;
-    offsetY?: number;
-    opacity?: number;
-    spreadRadius?: number;
+    readonly blurRadius?: number;
+    readonly color?: Color;
+    readonly offsetX?: number;
+    readonly offsetY?: number;
+    readonly opacity?: number;
+    readonly spreadRadius?: number;
 };
-export declare type BoxShadow = DepthShadow | BoxShadowDetails | BoxShadowDetails[];
-export declare type BoxShadowProps<T = {}> = {
-    boxShadow?: BoxShadow;
-} & T;
+export declare type BoxShadow = DepthShadow | BoxShadowDetails | readonly BoxShadowDetails[];
+export declare type BoxShadowProps = {
+    readonly boxShadow?: BoxShadow;
+};
 //# sourceMappingURL=box-shadow.d.ts.map

@@ -8,6 +8,6 @@ export enum Size {
   Largest = 'var(--size-largest)',
 }
 
-export type SizeProps<P = {}> = {
-  size?: Size;
-} & P;
+export type SizeProps = {
+  readonly size?: Size;
+};

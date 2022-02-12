@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type MarkdownDisplayProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type MarkdownDisplayProps = {
+  value: string;
+} & LabelProps;
 
 export const MarkdownDisplay = memo(
   ({

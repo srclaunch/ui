@@ -18,16 +18,12 @@ import {
   Orientation,
 } from '../../types';
 
-type HoverPanelProps<T = {}> = ContainerProps<
-  HTMLDivElement,
-  FocusProps<
-    {
-      readonly detached?: boolean;
-      readonly visible?: boolean;
-      readonly setMenuVisible?: (visible: boolean) => unknown;
-    } & T
-  >
->;
+type HoverPanelProps = {
+  readonly detached?: boolean;
+  readonly visible?: boolean;
+  readonly setMenuVisible?: (visible: boolean) => unknown;
+} & ContainerProps<HTMLDivElement> &
+  FocusProps;
 
 export const HoverPanel = memo(
   ({
@@ -82,33 +78,33 @@ const Wrapper = styled.div<HoverPanelProps>`
   ${VisibilityStyles};
 
   border-radius: ${props =>
-    (props.detached
+    props.detached
       ? props.borderRadius
-      : `0 0 ${props.borderRadius} ${props.borderRadius}`)};
+      : `0 0 ${props.borderRadius} ${props.borderRadius}`};
   left: ${props =>
-    (props.detached
+    props.detached
       ? props.alignContent === Align.Left
         ? '-10px'
         : 'auto'
-      : 0)};
+      : 0};
   position: absolute;
   right: ${props =>
-    (props.detached
+    props.detached
       ? props.alignContent === Align.Right
         ? '-10px'
         : 'auto'
-      : 0)};
+      : 0};
   top: ${props => (props.detached ? '80%' : 'calc(100% - 3px)')};
 
   &:before {
     border-top: 0;
     border-top-left-radius: ${props =>
-      (props.detached
+      props.detached
         ? props.borderRadius
-        : `0 0 ${props.borderRadius} ${props.borderRadius}`)};
+        : `0 0 ${props.borderRadius} ${props.borderRadius}`};
     border-top-right-radius: ${props =>
-      (props.detached
+      props.detached
         ? props.borderRadius
-        : `0 0 ${props.borderRadius} ${props.borderRadius}`)};
+        : `0 0 ${props.borderRadius} ${props.borderRadius}`};
   }
 `;

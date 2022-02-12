@@ -1,5 +1,5 @@
 import { Link as RouterLink } from '@srclaunch/web-application-state';
-import { memo, ReactElement, useState } from 'react';
+import { memo, MouseEvent, ReactElement, useState } from 'react';
 import styled from 'styled-components';
 
 import { FocusedStyles } from '../../styles/focused';
@@ -13,23 +13,17 @@ import {
   TextWeight,
 } from '../../types';
 import { Icon } from '../media/Icon';
-import { Text, TextProps } from './Text';
+import { Label, LabelProps } from './Label';
 
-type LinkProps<T = {}> = TextProps<
-  HTMLAnchorElement,
-  FocusProps<
-    {
-      readonly icon?: typeof Icon;
-      readonly onClick?: (
-        e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-      ) => void;
-      readonly prefetch?: boolean;
-      readonly rel?: string;
-      readonly target?: '_blank';
-      readonly to: string;
-    } & T
-  >
->;
+export type LinkProps = {
+  readonly icon?: typeof Icon;
+  readonly onClick?: (e: MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
+  readonly prefetch?: boolean;
+  readonly rel?: string;
+  readonly target?: '_blank';
+  readonly to: string;
+} & LabelProps &
+  FocusProps;
 
 export const Link = memo(
   ({
@@ -73,7 +67,7 @@ export const Link = memo(
           grow={false}
           height={size}
         >
-          <Text
+          <Label
             lineHeight={size}
             textColor={textColor}
             textWeight={textWeight}
@@ -82,7 +76,7 @@ export const Link = memo(
             {...props}
           >
             {children}
-          </Text>
+          </Label>
         </Container>
       </RouterLink>
     );

@@ -1,16 +1,16 @@
-import { TranslateProps } from './translate';
 import { ScaleProps } from './scale';
 import { SkewProps } from './skew';
+import { TranslateProps } from './translate';
 export declare type Transform = {
-    translate?: TranslateProps;
-    scale?: ScaleProps;
-    rotate?: number;
-    skew?: SkewProps;
+    readonly translate?: TranslateProps;
+    readonly scale?: ScaleProps;
+    readonly rotate?: number;
+    readonly skew?: SkewProps;
 };
-export declare type TransformProps<T = {}> = {
+export declare type TransformProps = {
     /**
      * The transform to apply to the component.
      */
-    transform?: Transform;
-} & T;
+    readonly transform?: Transform;
+};
 //# sourceMappingURL=transform.d.ts.map

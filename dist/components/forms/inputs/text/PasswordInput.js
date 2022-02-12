@@ -1,13 +1,13 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
-import PasswordStrengthBar from 'react-password-strength-bar';
 import { Condition } from '@srclaunch/types';
 import { 
 // getValidationProblemLabel,
 validate, } from '@srclaunch/validation';
 import { memo, useEffect, useState } from 'react';
-import { Amount, AutoComplete, } from '../../../../types';
-import { InputRow } from '../../layout/InputRow';
+import PasswordStrengthBar from 'react-password-strength-bar';
+import { Amount, AutoComplete } from '../../../../types';
 import { InputLabel } from '../../labels/InputLabel';
+import { InputRow } from '../../layout/InputRow';
 import { TextInput, TextInputType } from './TextInput';
 export const PasswordInput = memo(({ autoComplete = AutoComplete.CurrentPassword, confirmPasswordLabel = 'Confirm password', label = 'Password', name, onChange, showConfirmPassword = false, showPasswordStrength = false, validation = {
     [Condition.IsRequired]: true,
@@ -36,7 +36,7 @@ export const PasswordInput = memo(({ autoComplete = AutoComplete.CurrentPassword
             if (onChange)
                 onChange({
                     problems,
-                    validated: !problems.length,
+                    validated: problems.length === 0,
                     value: password,
                 });
         }
@@ -45,7 +45,7 @@ export const PasswordInput = memo(({ autoComplete = AutoComplete.CurrentPassword
             if (onChange)
                 onChange({
                     problems,
-                    validated: !problems.length,
+                    validated: problems.length === 0,
                     value: password,
                 });
         }

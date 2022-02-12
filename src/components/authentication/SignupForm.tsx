@@ -24,17 +24,14 @@ import { Paragraph } from '../typography/Paragraph';
 import { Small } from '../typography/Small';
 import { Title } from '../typography/Title';
 
-type SignupFormProps = ContainerProps<
-  HTMLDivElement,
-  {
-    readonly onSignupSuccess?: ({
-      userId,
-    }: {
-      readonly userId: string;
-    }) => unknown;
-    readonly title?: string;
-  }
->;
+type SignupFormProps = {
+  readonly onSignupSuccess?: ({
+    userId,
+  }: {
+    readonly userId: string;
+  }) => unknown;
+  readonly title?: string;
+} & ContainerProps<HTMLDivElement>;
 
 export const SignupForm = memo(
   ({

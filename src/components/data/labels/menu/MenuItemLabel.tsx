@@ -5,14 +5,11 @@ import { Label } from '../../../typography/Label';
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 import { ModelProps } from '@srclaunch/types';
 
-type MenuItemLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    fieldName?: string;
-    model?: ModelProps;
-    value: string;
-  }
->;
+type MenuItemLabelProps = {
+  fieldName?: string;
+  model?: ModelProps;
+  value: string;
+} & LabelProps;
 
 export const MenuItemLabel = memo(
   ({

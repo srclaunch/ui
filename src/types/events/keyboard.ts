@@ -1,7 +1,7 @@
 import { KeyboardEventHandler } from 'react';
 
-export type KeyboardEventProps<E, P = {}> = {
-  onKeyDown?: KeyboardEventHandler<E>;
-  onKeyPress?: KeyboardEventHandler<E>;
-  onKeyUp?: KeyboardEventHandler<E>;
-} & P;
+export type KeyboardEventProps<E> = {
+  readonly onKeyDown?: KeyboardEventHandler<E>;
+  readonly onKeyPress?: KeyboardEventHandler<E>;
+  readonly onKeyUp?: KeyboardEventHandler<E>;
+};

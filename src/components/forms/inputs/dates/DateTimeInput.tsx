@@ -14,14 +14,9 @@ import { InputProps, InputValueChangeHandler } from '../../../../types';
 
 // import { validate } from '@srclaunch/validation';
 
-type DateTimeInputProps = InputProps<
-  HTMLInputElement,
-  DateTime,
-  {
-    resetIcon?: typeof Icon;
-   
-  }
->;
+type DateTimeInputProps = {
+  resetIcon?: typeof Icon;
+} & InputProps<HTMLInputElement, DateTime>;
 
 export const DateTimeInput = memo(
   ({

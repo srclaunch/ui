@@ -1,6 +1,5 @@
 import { memo, ReactElement } from 'react';
 
-import { Container } from '../layout/Container';
 import {
   Align,
   Amount,
@@ -9,14 +8,11 @@ import {
   TextSize,
   TextWeight,
 } from '../../types';
-import { NavigationLink } from './NavigationLink';
-import { ContainerProps } from '../layout/Container';
+import { Container, ContainerProps } from '../layout/Container';
 import { Menu, MenuProps } from '../menus/Menu';
+import { NavigationLink } from './NavigationLink';
 
-type NavigationMenuProps = ContainerProps<
-  HTMLElement,
-  MenuProps<HTMLElement, any, {}>
->;
+export type NavigationMenuProps = ContainerProps<HTMLDivElement> & MenuProps;
 
 export const NavigationMenu = memo(
   ({
@@ -81,8 +77,7 @@ export const NavigationMenu = memo(
               grow={false}
               hover={menuItemProps?.hover ?? item.hover}
               icon={item.icon}
-              // @ts-ignore
-              onClick={e => item.onClick?.(item, e)}
+              onClick={e => item.onClick?.()}
               key={key}
               margin={menuItemProps.margin ?? Amount.None}
               marginBottom={menuItemProps.marginBottom ?? Amount.Least}
@@ -102,7 +97,7 @@ export const NavigationMenu = memo(
               textSize={menuItemProps.textSize ?? TextSize.Small}
               textWeight={TextWeight.More}
               to={item.to ?? '#'}
-              {...menuItemProps}
+              // {...menuItemProps}
             >
               {item.label ?? item.component}
             </NavigationLink>

@@ -1,8 +1,8 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { memo } from 'react';
 import styled from 'styled-components';
-export const Badge = memo(({ children, label }) => {
-    return _jsx(Container, { children: label?.toString() ?? children }, void 0);
+export const Badge = memo(({ children, label, ...props }) => {
+    return _jsx(Container, { ...props, children: label?.toString() ?? children }, void 0);
 });
 const Container = styled.div `
   background: #f2f2f2;

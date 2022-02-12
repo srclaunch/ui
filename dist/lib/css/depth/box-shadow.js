@@ -1,4 +1,4 @@
-import { DepthShadow, Depth } from '../../../types';
+import { Depth, DepthShadow } from '../../../types';
 export function getCSSBoxShadowFromDepth(depth) {
     switch (depth) {
         case Depth.Lowest:

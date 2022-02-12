@@ -1,4 +1,4 @@
-export declare type TranslucencyProps<T = {}> = {
+export declare type TranslucencyProps = {
     opacity?: number;
-} & T;
+};
 //# sourceMappingURL=translucency.d.ts.map

@@ -1,5 +1,5 @@
-import { Color, Colors, ContrastColors } from './color';
 import { Align } from '../layout/alignment';
+import { Color, Colors, ContrastColors } from './color';
 
 export enum ElementBackgroundColors {
   Card = 'var(--bg-color-card-rgb)',
@@ -31,6 +31,8 @@ export enum BackgroundColorShade {
   Darkest = 'var(--bg-color-darkest-rgb)',
   Transparent = 'transparent',
 }
+
+export type BackgroundColor = BackgroundColors | string;
 
 export enum BackgroundColors {
   Card = ElementBackgroundColors.Card,
@@ -85,15 +87,13 @@ export enum BackgroundSize {
   FillVertical = 'fill-vertical',
 }
 
-export type BackgroundProps<T = {}> = {
-  backgroundColor?: Color;
-  backgroundImage?: {
-    path?: string;
-    position?: Align | string;
-    size?: BackgroundSize | string;
-    url?: string;
+export type BackgroundProps = {
+  readonly backgroundColor?: Color;
+  readonly backgroundImage?: {
+    readonly path?: string;
+    readonly position?: Align | string;
+    readonly size?: BackgroundSize | string;
+    readonly url?: string;
   };
-  backgroundOpacity?: number;
-} & T;
-
-export type BackgroundColor = BackgroundColors | string;
+  readonly backgroundOpacity?: number;
+};

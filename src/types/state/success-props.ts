@@ -1,3 +1,3 @@
-export type SuccessProps<P = {}> = {
-  success?: boolean;
-} & P;
+export type SuccessProps = {
+  readonly success?: boolean;
+};

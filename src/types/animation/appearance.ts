@@ -1,3 +1,3 @@
 import { AppearanceProps } from '../appearance';
 
-export type AnimatedAppearanceProps<T = {}> = AppearanceProps<T>;
+export type AnimatedAppearanceProps = AppearanceProps;

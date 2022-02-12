@@ -10,41 +10,25 @@ import {
   AppearanceProps,
   BehaviorProps,
   CommonComponentProps,
-  DimensionProps,
-  FocusEventProps,
   FocusProps,
-  KeyboardEventProps,
+  HeightProps,
   LayoutProps,
-  MouseEventProps,
   Orientation,
+  SizeProps,
   VisibilityProps,
+  WidthProps,
 } from '../../types';
 
-export type ContainerProps<
-  E = HTMLElement,
-  P = Record<string, unknown>,
-> = CommonComponentProps<
-  PropsWithChildren<
-    LayoutProps<
-      AppearanceProps<
-        FocusProps<
-          DimensionProps<
-            VisibilityProps<
-              FocusEventProps<
-                E,
-                MouseEventProps<
-                  E,
-                  KeyboardEventProps<E, FocusEventProps<BehaviorProps>>
-                >
-              >
-            >
-          >
-        >
-      >
-    >
-  >
-> &
-  P;
+export type ContainerProps<E = HTMLElement> = PropsWithChildren<
+  LayoutProps &
+    AppearanceProps &
+    CommonComponentProps<E> &
+    FocusProps &
+    HeightProps &
+    SizeProps &
+    VisibilityProps &
+    WidthProps
+>;
 
 const Wrapper = styled.div<ContainerProps>`
   ${LayoutStyles};

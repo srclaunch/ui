@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type LicensePlateLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type LicensePlateLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const LicensePlateLabel = memo(
   ({

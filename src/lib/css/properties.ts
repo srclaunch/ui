@@ -1,8 +1,8 @@
 import {
-  BorderColors,
   Amount,
-  BorderStyleProps,
+  BorderColors,
   BorderDirectionProps,
+  BorderStyleProps,
   BoxShadow,
   BoxShadowDetails,
 } from '../../types';
@@ -10,11 +10,11 @@ import {
 export function getCSSMeasurementValue(
   val?: number | Amount | string,
 ): string | null | undefined {
-  if (typeof val === 'string' && val.indexOf('var(') > -1) {
+  if (typeof val === 'string' && val.includes('var(')) {
     return val;
   }
 
-  if (typeof val === 'string' && val.indexOf('%') > -1) {
+  if (typeof val === 'string' && val.includes('%')) {
     return val;
   }
 
@@ -67,5 +67,6 @@ export function getCSSBoxShadowValue(val?: BoxShadow): string | null {
 
   if (typeof val === 'string') return val;
 
+  // @ts-ignore
   return getString(val);
 }

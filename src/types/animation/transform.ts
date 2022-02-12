@@ -1,18 +1,17 @@
-import { TranslateProps } from './translate';
 import { ScaleProps } from './scale';
-import { RotateProps } from './rotate';
 import { SkewProps } from './skew';
+import { TranslateProps } from './translate';
 
 export type Transform = {
-  translate?: TranslateProps;
-  scale?: ScaleProps;
-  rotate?: number;
-  skew?: SkewProps;
+  readonly translate?: TranslateProps;
+  readonly scale?: ScaleProps;
+  readonly rotate?: number;
+  readonly skew?: SkewProps;
 };
 
-export type TransformProps<T = {}> = {
+export type TransformProps = {
   /**
    * The transform to apply to the component.
    */
-  transform?: Transform;
-} & T;
+  readonly transform?: Transform;
+};

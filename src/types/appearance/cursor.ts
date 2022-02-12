@@ -19,6 +19,6 @@ export enum Cursor {
   Wait = 'wait',
 }
 
-export type CursorProps<T = {}> = {
-  cursor?: Cursor | string;
-} & T;
+export type CursorProps = {
+  readonly cursor?: Cursor | string;
+};

@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type PostalCodeLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type PostalCodeLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const PostalCodeLabel = memo(
   ({

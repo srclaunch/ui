@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type PassportNumberLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type PassportNumberLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const PassportNumberLabel = memo(
   ({

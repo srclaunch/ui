@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type GeographicCoordinateLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type GeographicCoordinateLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const GeographicCoordinateLabel = memo(
   ({

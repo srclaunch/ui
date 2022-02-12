@@ -1,40 +1,46 @@
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 
+import { AnimationStyles } from '../../styles/animation';
+import { BorderRadiusStyles } from '../../styles/appearance/border-radius';
 import { DimensionStyles } from '../../styles/appearance/dimension';
-import { AppearanceStyles } from '../../styles/appearance/index';
-import { LayoutStyles } from '../../styles/layout';
+import { MarginStyles } from '../../styles/layout/margin';
 import {
-  AppearanceProps,
-  DimensionProps,
-  LayoutProps,
-} from '../../types/index';
+  BorderProps,
+  CommonComponentProps,
+  HeightProps,
+  MarginProps,
+  SizeProps,
+  WidthProps,
+} from '../../types';
+import { AnimationProps } from '../../types/appearance/animation';
 
 /**
  * Image component for displaying GIFs, JPGs or PNGs.
- *
  *
  * @param description - A description to be used for accessibility
  * @param url - A full URL path to an image
  * @param path - A relative path to an image located in the 'Assets" repo
  */
-export type ImageProps<P = Record<string, unknown>> = LayoutProps<
-  AppearanceProps<
-    DimensionProps<{
-      readonly alt?: string;
-      readonly className?: string;
-      readonly description?: string;
-      readonly url?: string;
-      readonly path?: string;
-    }>
-  >
-> &
-  P;
+export type ImageProps = {
+  readonly alt?: string;
+  readonly className?: string;
+  readonly description?: string;
+  readonly url?: string;
+  readonly path?: string;
+} & CommonComponentProps<HTMLImageElement> &
+  AnimationProps &
+  BorderProps &
+  HeightProps &
+  MarginProps &
+  WidthProps &
+  SizeProps;
 
 const Img = styled.img<ImageProps>`
-  ${LayoutStyles};
-  ${AppearanceStyles};
+  ${AnimationStyles};
   ${DimensionStyles};
+  ${BorderRadiusStyles};
+  ${MarginStyles};
 `;
 
 export const Image = memo(

@@ -20,12 +20,12 @@ import {
   Orientation,
   Size,
   TextColors,
+  TextProps,
   TextWeight,
 } from '../../../../types';
 import { Container } from '../../../layout/Container';
 import { Icon, IconProps } from '../../../media/Icon';
 import { ProgressSpinner } from '../../../progress/ProgressSpinner';
-import { TextProps } from '../../../typography/Text';
 import { InputLabel } from '../../labels/InputLabel';
 import { InputContainer } from '../shared/InputContainer';
 
@@ -36,37 +36,15 @@ export enum TextInputType {
   Search = 'search',
 }
 
-export type TextInputProps<
-  E = HTMLInputElement,
-  T = string,
-  P = Record<string, unknown>,
-> = InputProps<
-  E,
-  T,
-  TextProps<
-    E,
-    ClipboardEventProps<
-      E,
-      FocusEventProps<
-        E,
-        KeyboardEventProps<
-          E,
-          MouseEventProps<
-            E,
-            AppearanceProps<{
-              readonly icon?: IconProps;
-              readonly inputType?: TextInputType;
-              readonly prefix?: string;
-              readonly spellCheck?: boolean;
-              readonly suffix?: string;
-            }>
-          >
-        >
-      >
-    >
-  >
-> &
-  P;
+export type TextInputProps<V = string> = {
+  readonly icon?: IconProps;
+  readonly inputType?: TextInputType;
+  readonly prefix?: string;
+  readonly spellCheck?: boolean;
+  readonly suffix?: string;
+} & InputProps<HTMLInputElement, V> &
+  AppearanceProps &
+  TextProps;
 
 export const TextInput = memo(
   ({
@@ -137,9 +115,7 @@ export const TextInput = memo(
     return (
       <>
         {(label || problems.length > 0) && (
-          <InputLabel errorMessage={problems[0]?.message.short}>
-            {label}
-          </InputLabel>
+          <InputLabel error={problems}>{label}</InputLabel>
         )}
 
         <InputContainer
@@ -212,7 +188,7 @@ export const TextInput = memo(
 //   cursor: text;
 // `;
 
-const Input = styled.input<TextInputProps<HTMLInputElement, string>>`
+const Input = styled.input<TextInputProps>`
   ${TextInputStyles};
 
   background: transparent;

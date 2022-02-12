@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type MagnetURILabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type MagnetURILabelProps = {
+  value: string;
+} & LabelProps;
 
 export const MagnetURILabel = memo(
   ({

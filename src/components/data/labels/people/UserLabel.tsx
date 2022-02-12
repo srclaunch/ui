@@ -18,12 +18,12 @@ import { IconProps } from '../../../../types';
 import { convertSizeToAmount } from '../../../../lib/proportions/conversions';
 import { getSmallerAmount } from '../../../../lib/proportions/amount';
 
-type UserLabelProps = PersonLabelProps<{
+type UserLabelProps = {
   menu?: MoreMenuProps | null;
   id?: User['id'];
   to?: string;
   messageIcon?: IconProps;
-}>;
+} & PersonLabelProps;
 
 export const UserLabel = memo(
   ({

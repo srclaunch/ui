@@ -2,7 +2,6 @@ import { memo, ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 
 import { InputContainerStyles } from '../../../../styles/forms/input/container';
-
 import {
   Amount,
   BackgroundColors,
@@ -15,16 +14,13 @@ import {
   SuccessProps,
   WarningProps,
 } from '../../../../types';
-
 import { ContainerProps } from '../../../layout/Container';
 
-export type InputContainerProps<E = HTMLDivElement, P = {}> = ContainerProps<
-  E,
-  SizeProps<
-    FocusProps<ErrorProps<SuccessProps<WarningProps>>>
-  >
-> &
-  P;
+export type InputContainerProps = ContainerProps<HTMLDivElement> &
+  SizeProps &
+  ErrorProps &
+  SuccessProps &
+  WarningProps;
 
 export const InputContainer = memo(
   ({
@@ -49,11 +45,17 @@ export const InputContainer = memo(
         border={{
           ...border,
           // @ts-ignore
-          color: error && (Array.isArray(error) && error.length > 0) ? BorderColors.Error : border?.color,
+          color:
+            error && Array.isArray(error) && error.length > 0
+              ? BorderColors.Error
+              : border.hasOwnProperty('color')
+              ? // @ts-ignore
+                border?.color
+              : BorderColors.InputControl,
         }}
         className={`${className} input-container`}
         error={error}
-        grow={true}
+        grow
         orientation={Orientation.Horizontal}
         success={success}
         {...props}

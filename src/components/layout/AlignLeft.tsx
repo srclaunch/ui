@@ -1,8 +1,9 @@
 import { memo, ReactElement } from 'react';
-import { Container } from './Container';
-import { Align, ContainerProps, DimensionProps } from '../../types';
 
-type AlignLeftProps = ContainerProps<HTMLDivElement, DimensionProps<{}>>;
+import { Align, ContainerProps } from '../../types';
+import { Container } from './Container';
+
+type AlignLeftProps = ContainerProps<HTMLDivElement>;
 
 export const AlignLeft = memo(
   ({ children, ...props }: AlignLeftProps): ReactElement => {

@@ -1,11 +1,11 @@
 import { css } from 'styled-components';
 
-import { BorderColors, BorderProps, FocusProps } from '../types';
-
+import { BorderProps, FocusProps } from '../types';
+import { BorderColors } from '../types/appearance/border';
 export const FocusedStyles = css<
-  FocusProps<{
+  {
     readonly borderRadius?: BorderProps['borderRadius'];
-  }>
+  } & FocusProps
 >`
   outline: none;
 

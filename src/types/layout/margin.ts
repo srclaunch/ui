@@ -1,9 +1,9 @@
 import { Amount } from '../proportion';
 
-export type MarginProps<T = {}> = {
-  margin?: Amount | number;
-  marginBottom?: Amount | number;
-  marginLeft?: Amount | number;
-  marginRight?: Amount | number;
-  marginTop?: Amount | number;
-} & T;
+export type MarginProps = {
+  readonly margin?: Amount | number;
+  readonly marginBottom?: Amount | number;
+  readonly marginLeft?: Amount | number;
+  readonly marginRight?: Amount | number;
+  readonly marginTop?: Amount | number;
+};

@@ -6,11 +6,11 @@ export declare enum Position {
     Static = "static",
     Sticky = "sticky"
 }
-export declare type PositionProps<T = {}> = {
-    bottom?: Amount | number | string;
-    left?: Amount | number | string;
-    position?: Position;
-    right?: Amount | number | string;
-    top?: Amount | number | string;
-} & T;
+export declare type PositionProps = {
+    readonly bottom?: Amount | number | string;
+    readonly left?: Amount | number | string;
+    readonly position?: Position;
+    readonly right?: Amount | number | string;
+    readonly top?: Amount | number | string;
+};
 //# sourceMappingURL=position.d.ts.map

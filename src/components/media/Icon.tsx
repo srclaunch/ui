@@ -8,38 +8,27 @@ import { LayoutStyles } from '../../styles/layout';
 import {
   Align,
   Color,
-  ContainerProps,
   ForegroundColors,
+  HeightProps,
   Size,
   SizeProps,
+  WidthProps,
 } from '../../types';
+import { Container, ContainerProps } from '../layout/Container';
 import { Image } from './Image';
 import { Svg } from './Svg';
 
-export type IconProps<P = Record<string, unknown>> = SizeProps<{
+export type IconProps = {
   readonly color?: Color;
   readonly component?: ReactElement;
   readonly name?: IconType;
   readonly path?: string;
   readonly svg?: ReactElement;
   readonly url?: string;
-}> &
-  P;
-
-const Wrapper = styled.span<IconProps>`
-  ${LayoutStyles};
-  ${AppearanceStyles};
-  ${DimensionStyles};
-
-  img,
-  svg {
-    display: inherit;
-    height: ${props => props.size};
-    fill: ${props => `rgb(${props.color})`};
-    transition: fill 0.1s ease-in-out;
-    width: ${props => props.size};
-  }
-`;
+} & ContainerProps<HTMLSpanElement> &
+  HeightProps &
+  SizeProps &
+  WidthProps;
 
 export const Icon = memo(
   ({
@@ -52,17 +41,12 @@ export const Icon = memo(
     svg,
     url,
     ...props
-  }: ContainerProps<HTMLSpanElement, IconProps>): ReactElement => {
+  }: IconProps): ReactElement => {
     const getElement = () => {
       if (name) {
         const Ico = getIcon(name);
 
-        if (Ico)
-          return (
-            <Svg size={size} {...props}>
-              <Ico />
-            </Svg>
-          );
+        if (Ico) return <Ico />;
       }
 
       if (component) {
@@ -79,16 +63,14 @@ export const Icon = memo(
     };
 
     return (
-      <Wrapper
+      <Container
         alignItems={Align.Center}
         alignContent={Align.Center}
         as="span"
-        className={`${className} icon ${name ? `icon-${name}` : ''}`}
-        color={color}
         {...props}
       >
         {getElement()}
-      </Wrapper>
+      </Container>
     );
   },
 );

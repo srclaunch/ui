@@ -1,9 +1,10 @@
-import { MutableRefObject, Ref } from 'react';
+import { ForwardedRef, MutableRefObject, Ref } from 'react';
 
 import { FocusProps, InputValueChangeHandler } from '../..';
-import { DimensionProps } from '../../appearance/dimension';
+import { HeightProps, WidthProps } from '../../appearance/dimension';
 import { SizeProps } from '../../appearance/size';
 import { CommonComponentProps } from '../../component';
+import { ClipboardEventProps } from '../../events/clipboard';
 import { FocusEventProps } from '../../events/focus';
 import { KeyboardEventProps } from '../../events/keyboard';
 import { MouseEventProps } from '../../events/mouse';
@@ -44,46 +45,25 @@ export enum AutoComplete {
   Username = 'username',
 }
 
-export type InputProps<
-  E = HTMLInputElement,
-  V = string,
-  P = {},
-> = CommonComponentProps<
-  KeyboardEventProps<
-    E,
-    MouseEventProps<
-      E,
-      FocusEventProps<
-        E,
-        DimensionProps<
-          FocusProps<
-            ErrorProps<
-              ProgressProps<
-                SizeProps<
-                  SuccessProps<
-                    ValidationProps<
-                      WarningProps<{
-                        readonly autoComplete?: AutoComplete;
-                        readonly defaultValue?: V;
-                        readonly hidden?: boolean;
-                        readonly label?: string;
-                        readonly name?: string;
-                        readonly onChange?: InputValueChangeHandler<V>;
-                        readonly placeholder?: string;
-                        readonly ref?: Ref<unknown> | MutableRefObject<any>;
-                        readonly required?: boolean;
-                        readonly submitOnEnter?: boolean;
-                        readonly value?: V;
-                      }>
-                    >
-                  >
-                >
-              >
-            >
-          >
-        >
-      >
-    >
-  >
-> &
-  P;
+export type InputProps<E = HTMLInputElement, V = string> = {
+  readonly autoComplete?: AutoComplete;
+  readonly defaultValue?: V;
+  readonly hidden?: boolean;
+  readonly label?: string;
+  readonly name?: string;
+  readonly onChange?: InputValueChangeHandler<V>;
+  readonly placeholder?: string;
+  readonly ref?: ForwardedRef<E>;
+  readonly required?: boolean;
+  readonly submitOnEnter?: boolean;
+  readonly value?: V;
+} & CommonComponentProps<E> &
+  ClipboardEventProps<E> &
+  ErrorProps &
+  HeightProps &
+  ProgressProps &
+  SizeProps &
+  SuccessProps &
+  ValidationProps &
+  WarningProps &
+  WidthProps;

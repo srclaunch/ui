@@ -12,19 +12,16 @@ import {
   TextSize,
   TextWeight,
 } from '../../types';
-import { Text } from '../typography/Text';
 import { Container } from '../layout/Container';
+import { Label } from '../typography/Label';
 
-type ProgressMeterProps = ContainerProps<
-  HTMLDivElement,
-  {
-    amount?: number;
-    color?: Color;
-    label?: string;
-    size?: Size;
-    total?: number;
-  }
->;
+type ProgressMeterProps = {
+  readonly amount?: number;
+  readonly color?: Color;
+  readonly label?: string;
+  readonly size?: Size;
+  readonly total?: number;
+} & ContainerProps<HTMLDivElement>;
 
 export const ProgressMeter = memo(
   ({
@@ -81,14 +78,14 @@ export const ProgressMeter = memo(
           {children}
 
           {label && (
-            <Text
+            <Label
               alignText={Align.Center}
               textSize={TextSize.Larger}
               textColor={TextColors.Darkest}
               textWeight={TextWeight.More}
             >
               {label}
-            </Text>
+            </Label>
           )}
         </Container>
       </Container>

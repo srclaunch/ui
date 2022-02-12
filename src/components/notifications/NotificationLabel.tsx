@@ -1,7 +1,6 @@
-import { memo, ReactElement } from 'react';
 import { NotificationType } from '@srclaunch/types';
+import { memo, ReactElement } from 'react';
 
-import { Container } from '../layout/Container';
 import {
   Align,
   Amount,
@@ -12,20 +11,15 @@ import {
   TextColors,
   TextWeight,
 } from '../../types';
-
-import { Text } from '../typography/Text';
+import { Container, ContainerProps } from '../layout/Container';
+import { Label } from '../typography/Label';
 import { Orb } from './Orb';
-import { ContainerProps } from '../layout/Container';
 
-export type NotificationLabelProps<T = {}> = ContainerProps<
-  HTMLDivElement,
-  {
-    label?: string;
-    showOrb?: boolean;
-    type?: NotificationType;
-  }
-> &
-  T;
+export type NotificationLabelProps = {
+  readonly label?: string;
+  readonly showOrb?: boolean;
+  readonly type?: NotificationType;
+} & ContainerProps<HTMLDivElement>;
 
 export const NotificationLabel = memo(
   ({
@@ -91,13 +85,13 @@ export const NotificationLabel = memo(
         {showOrb && <Orb color={bgColor} marginRight={Amount.Less} />}
 
         {label && (
-          <Text
+          <Label
             textColor={textColor}
             lineHeight={Size.Small}
             textWeight={TextWeight.Default}
           >
             {label}
-          </Text>
+          </Label>
         )}
 
         {children}

@@ -4,12 +4,9 @@ import { Label } from '../../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../../types';
 
-type BankIDCodeLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type BankIDCodeLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const BankIDCodeLabel = memo(
   ({

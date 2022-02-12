@@ -8,13 +8,9 @@ export declare type DataGridColumn = {
     fallbackField?: string;
     field: string;
     fields?: string[];
-    maxWidth?: number | string;
-    minWidth?: number | string;
-    percentWidth?: number;
     type: Primitives;
-    width?: number | string;
-};
-declare type DataGridProps = ContainerProps<HTMLElement, {
+} & WidthProps;
+export declare type DataGridProps = {
     borderRadius?: BorderProps['borderRadius'];
     className?: string;
     columns: DataGridColumn[];
@@ -26,15 +22,15 @@ declare type DataGridProps = ContainerProps<HTMLElement, {
             label: string;
             onClick: (e: SyntheticEvent) => void;
         };
-        search?: WidthProps<{
+        search?: {
             placeholder?: string;
             onChange?: (event: SyntheticEvent<HTMLInputElement>) => void;
             value?: string;
-        }>;
-        export?: WidthProps<{
+        } & WidthProps;
+        export?: {
             label?: string;
             onClick?: (e: SyntheticEvent) => void;
-        }>;
+        } & WidthProps;
     };
     hideOnProp?: string;
     loading?: boolean;
@@ -42,16 +38,16 @@ declare type DataGridProps = ContainerProps<HTMLElement, {
     model?: Model;
     onItemClick?: (row: Record<string, unknown>) => unknown;
     template?: {
-        card?: ({ onClick, row, }: ContainerProps<HTMLDivElement, {
+        card?: ({ onClick, row, }: {
             onClick?: (row: Record<string, Primitives>) => unknown;
             row: Record<string, Primitives>;
-        }>) => ReactElement;
-        row?: ({ onClick, row, }: ContainerProps<HTMLDivElement, {
+        } & ContainerProps<HTMLDivElement>) => ReactElement;
+        row?: ({ onClick, row, }: {
             onClick?: (row: Record<string, Primitives>) => unknown;
             row: Record<string, Primitives>;
-        }>) => ReactElement;
+        } & ContainerProps<HTMLDivElement>) => ReactElement;
     };
-}>;
+} & ContainerProps<HTMLElement>;
 export declare const DataGrid: React.MemoExoticComponent<({ backgroundColor, borderRadius, boxShadow, className, columns, columnCount, data, depth, display, header, hideOnProp, loaded, loading, model, onItemClick, padding, template, ...props }: DataGridProps) => ReactElement>;
 export default DataGrid;
 //# sourceMappingURL=index.d.ts.map

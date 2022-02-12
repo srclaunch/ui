@@ -1,34 +1,32 @@
 import { PageRole, PageRoute } from '@srclaunch/types';
 
-import { PageNotFound } from './pages/PageNotFound';
-import { Introduction } from './pages/Introduction';
-
-import { Data } from './pages/data/index';
 import { DataGridPage } from './pages/data/DataGrid';
 import { DataGridCellPage } from './pages/data/DataGridCell';
 import { DataLabelPage } from './pages/data/DataLabel';
-import { Modals } from './pages/modals/index';
-
+import { Data } from './pages/data/index';
 import { Forms } from './pages/forms';
+import { MenuButtonPage } from './pages/forms/buttons/MenuButton';
+import { CountryInputPage } from './pages/forms/inputs/CountryInput';
+import { DropdownInputPage } from './pages/forms/inputs/DropdownInput';
+import { ImageInputPage } from './pages/forms/inputs/ImageInput';
 import { LongTextInputPage } from './pages/forms/inputs/LongTextInput';
 import { TextInputPage } from './pages/forms/inputs/TextInput';
-import { MenuButtonPage } from './pages/forms/buttons/MenuButton';
-import { MoreMenuPage } from './pages/menus/MoreMenu';
-import { DropdownInputPage } from './pages/forms/inputs/DropdownInput';
 import { ToggleInputPage } from './pages/forms/inputs/ToggleInput';
-import { SlidePanelPage } from './pages/modals/SlidePanel';
-import { ThemeSelectorPage } from './pages/themes/ThemeSelector';
-import { CountryInputPage } from './pages/forms/inputs/CountryInput';
+import { Introduction } from './pages/Introduction';
+import { MoreMenuPage } from './pages/menus/MoreMenu';
+import { ChatMessagingPage } from './pages/messaging/chat';
 import { ConversationListPage } from './pages/messaging/chat/ConversationList';
+import { ConversationNavigationPage } from './pages/messaging/chat/ConversationNavigation';
 import { MessagePage } from './pages/messaging/chat/Message';
 import { MessageComposerPage } from './pages/messaging/chat/MessageComposer';
 import { MessageListPage } from './pages/messaging/chat/MessageList';
 import { MessagePreviewPage } from './pages/messaging/chat/MessagePreview';
-import { ConversationNavigationPage } from './pages/messaging/chat/ConversationNavigation';
-import { ChatMessagingPage } from './pages/messaging/chat';
-import { ImageInputPage } from './pages/forms/inputs/ImageInput';
+import { Modals } from './pages/modals/index';
+import { SlidePanelPage } from './pages/modals/SlidePanel';
+import { PageNotFound } from './pages/PageNotFound';
+import { ThemeSelectorPage } from './pages/themes/ThemeSelector';
 
-const routes: PageRoute[] = [
+const routes: readonly PageRoute[] = [
   {
     component: PageNotFound,
     path: '*',

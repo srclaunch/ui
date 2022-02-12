@@ -1,11 +1,10 @@
 import { jsx as _jsx, Fragment as _Fragment } from "react/jsx-runtime";
 import { memo, useState } from 'react';
-import styled from 'styled-components';
 import { getLargerAmount } from '../../../lib/proportions/amount';
 import { convertSizeToAmount, convertSizeToTextSize, } from '../../../lib/proportions/conversions';
 import { getSmallerSize } from '../../../lib/proportions/size';
-import { AppearanceStyles } from '../../../styles/appearance';
-import { Align, Amount, BackgroundColors, Cursor, Orientation, Overflow, Size, TextColors, TextWeight, } from '../../../types';
+import { Align, Amount, BackgroundColors, Cursor, Orientation, Overflow, Size, TextColors, TextWeight, } from '../../../types/index';
+import { Container } from '../../layout/Container';
 import { Label } from '../../typography/Label';
 export var ButtonType;
 (function (ButtonType) {
@@ -21,45 +20,38 @@ export var ButtonType;
     ButtonType["Warning"] = "warning";
     ButtonType["White"] = "white";
 })(ButtonType || (ButtonType = {}));
-const Wrapper = styled.div `
-  ${AppearanceStyles};
-`;
-/*  ${LayoutStyles};
-  ${AppearanceStyles};
-  ${FocusedStyles};
-  * {
-    cursor: ${props => props.cursor};
-  }
-
-  &:before {
-    border-color: rgb(${props => props.backgroundColor});
-    border-radius: ${props => `calc(${props.borderRadius} + 3px)`};
-  }
-
-  ${props =>
-    props.disabled &&
-    css`
-      cursor: default;
-      opacity: 0.5;
-
-      * {
-        cursor: default;
-      }
-    `};
-
-  ${props =>
-    props.type === ButtonType.Link &&
-    css`
-      padding-left: calc(${props.size} / 5) !important;
-      padding-right: calc(${props.size} / 5) !important;
-
-      &:before {
-        border-radius: ${Amount.All};
-        left: -9px;
-        right: -9px;
-      }
-    `};
-    */
+// const Wrapper = styled.button<ButtonProps>`
+//   ${LayoutStyles};
+//   ${AppearanceStyles};
+//   ${FocusedStyles};
+//   * {
+//     cursor: ${props => props.cursor};
+//   }
+//   &:before {
+//     border-color: rgb(${props => props.backgroundColor});
+//     border-radius: ${props => `calc(${props.borderRadius} + 3px)`};
+//   }
+//   ${props =>
+//     props.disabled &&
+//     css`
+//       cursor: default;
+//       opacity: 0.5;
+//       * {
+//         cursor: default;
+//       }
+//     `};
+//   ${props =>
+//     props.type === ButtonType.Link &&
+//     css`
+//       padding-left: calc($ {props.size} / 5) !important;
+//       padding-right: calc($ {props.size} / 5) !important;
+//       &:before {
+//         border-radius: ${Amount.All};
+//         left: -9px;
+//         right: -9px;
+//       }
+//     `};
+// `;
 export const Button = memo(({ active, alignItems = Align.Center, alignContent = Align.Center, backgroundColor, borderRadius = Amount.All, children, className = '', cursor = Cursor.Pointer, disabled = false, form, fullWidth, hover, icon, label, onClick, onMouseEnter, onMouseLeave, orientation = Orientation.Horizontal, size = Size.Default, textColor, textSize, textWeight, type, ...props }) => {
     const [hovered, setHovered] = useState(false);
     const getColors = () => {
@@ -137,19 +129,17 @@ export const Button = memo(({ active, alignItems = Align.Center, alignContent = 
             ? hover?.textColor
             : colors?.textColor ?? textColor
         : colors?.textColor ?? textColor;
-    return (_jsx(Wrapper, { active: {
+    return (_jsx(Container, { active: {
             backgroundOpacity: 80,
             ...active,
-        }, alignItems: alignItems, alignContent: alignContent, 
-        // as="button"
-        backgroundColor: updatedBackgroundColor, borderRadius: fullWidth && !borderRadius ? Amount.Least : borderRadius, boxShadow: {
+        }, alignItems: alignItems, alignContent: alignContent, as: "button", backgroundColor: updatedBackgroundColor, borderRadius: fullWidth && !borderRadius ? Amount.Least : borderRadius, boxShadow: {
             blurRadius: 8,
             color: colors?.backgroundColor,
             offsetX: 0,
             offsetY: 2,
             opacity: 35,
             spreadRadius: 4,
-        }, className: `${className} button`, cursor: cursor, disabled: disabled, form: form, fullWidth: fullWidth, grow: fullWidth, hover: {
+        }, className: `${className} button`, cursor: cursor, disabled: disabled, form: form, grow: fullWidth, hover: {
             backgroundOpacity: 90,
             ...hover,
         }, onClick: onClick, onMouseEnter: (e) => {
@@ -160,7 +150,7 @@ export const Button = memo(({ active, alignItems = Align.Center, alignContent = 
             setHovered(false);
             if (onMouseLeave)
                 onMouseLeave(e);
-        }, orientation: orientation, overflow: Overflow.Visible, paddingLeft: getLargerAmount(convertSizeToAmount(size)), paddingRight: getLargerAmount(convertSizeToAmount(size)), size: size, type: type, ...props, children: typeof children === 'string' ? (_jsx(Label, { alignContent: fullWidth ? Align.Center : alignContent, icon: icon, lineHeight: size === Size.Smaller || size === Size.Smallest
+        }, orientation: orientation, overflow: Overflow.Visible, paddingLeft: getLargerAmount(convertSizeToAmount(size)), paddingRight: getLargerAmount(convertSizeToAmount(size)), size: size, ...props, children: typeof children === 'string' ? (_jsx(Label, { alignContent: fullWidth ? Align.Center : alignContent, icon: icon, lineHeight: size === Size.Smaller || size === Size.Smallest
                 ? Size.Small
                 : size, size: size, textColor: updatedTextColor, textSize: convertSizeToTextSize(getSmallerSize(size)), textWeight: TextWeight.More, underline: type === ButtonType.Link && hovered, children: children }, void 0)) : (_jsx(_Fragment, { children: children }, void 0)) }, void 0));
 });

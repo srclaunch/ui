@@ -14,7 +14,7 @@ export const Card = memo(({ backgroundColor = BackgroundColors.Card, borderRadiu
         return (_jsx(DragWrapper, { className: "draggable-card", ...props, children: content }, void 0));
     }
     if (linkTo) {
-        return (_jsx(NavigationLink, { borderRadius: borderRadius, grow: true, orientation: Orientation.Vertical, to: linkTo, width: width, ...props, children: content }, void 0));
+        return (_jsx(NavigationLink, { borderRadius: borderRadius, grow: true, orientation: Orientation.Vertical, to: linkTo, width: width, children: content }, void 0));
     }
     return content;
 });

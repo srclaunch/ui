@@ -2,9 +2,9 @@
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 
-import { ContainerProps, DimensionProps } from '../../types';
+import { ContainerProps } from '../../types';
 
-type PieChartProps = ContainerProps<HTMLDivElement, DimensionProps>;
+type PieChartProps = ContainerProps<HTMLDivElement>;
 
 export const PieChart = memo(({ ...props }: PieChartProps): ReactElement => {
   // const data = [

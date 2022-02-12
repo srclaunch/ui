@@ -1,11 +1,10 @@
-import { MouseEvent, ReactElement } from 'react';
-import { MenuItemProps } from './MenuItem';
+import { ReactElement } from 'react';
 import { ContainerProps } from '../layout/Container';
-export declare type MenuProps<E = HTMLElement, T = any, P = {}> = Omit<ContainerProps<E, {
-    menu?: MenuItemProps<T>[];
-    menuItemProps?: MenuItemProps;
-}>, 'onClick'> & {
-    onClick?: (menuItem?: MenuItemProps, event?: MouseEvent) => void;
-} & P;
+import { MenuItemProps } from './MenuItem';
+export declare type MenuProps = {
+    readonly menu?: readonly MenuItemProps[];
+    readonly menuItemProps?: MenuItemProps;
+    readonly onClick?: (i?: MenuItemProps) => void;
+} & Omit<ContainerProps, 'onClick'>;
 export declare const Menu: import("react").MemoExoticComponent<({ as, backgroundColor, borderRadius, boxShadow, className, menu, menuItemProps, maxHeight, onClick, orientation, minWidth, padding, ...props }: MenuProps) => ReactElement>;
 //# sourceMappingURL=Menu.d.ts.map

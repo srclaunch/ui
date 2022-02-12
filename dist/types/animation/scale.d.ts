@@ -2,14 +2,14 @@ export declare type ScaleProps = {
     /**
      * The x axis scale.
      */
-    x?: number;
+    readonly x?: number;
     /**
      * The y axis scale.
      */
-    y?: number;
+    readonly y?: number;
     /**
      * The z axis scale.
      */
-    z?: number;
+    readonly z?: number;
 };
 //# sourceMappingURL=scale.d.ts.map

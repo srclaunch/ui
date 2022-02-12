@@ -1,6 +1,6 @@
 import { Amount } from '../proportion';
-import { Size } from './size';
 import { Color } from './color';
+import { Size } from './size';
 export declare enum ElementBorderColors {
     InputControl = "var(--border-color-input-control-rgb)"
 }
@@ -46,24 +46,24 @@ export declare enum BorderStyle {
     Solid = "solid"
 }
 export declare type BorderStyleProps = {
-    color: Color;
-    style?: BorderStyle;
-    width?: Amount | Size | number;
+    readonly color: Color;
+    readonly style?: BorderStyle;
+    readonly width?: Amount | Size | number;
 };
 export declare type BorderDirectionProps = {
-    bottom?: BorderStyleProps;
-    left?: BorderStyleProps;
-    right?: BorderStyleProps;
-    top?: BorderStyleProps;
+    readonly bottom?: BorderStyleProps;
+    readonly left?: BorderStyleProps;
+    readonly right?: BorderStyleProps;
+    readonly top?: BorderStyleProps;
 };
 export declare type BorderRadiusCornerProps = {
-    bottomLeft?: Amount | Size | number;
-    bottomRight?: Amount | Size | number;
-    topLeft?: Amount | Size | number;
-    topRight?: Amount | Size | number;
+    readonly bottomLeft?: Amount | Size | number;
+    readonly bottomRight?: Amount | Size | number;
+    readonly topLeft?: Amount | Size | number;
+    readonly topRight?: Amount | Size | number;
 };
-export declare type BorderProps<T = {}> = {
-    border?: BorderStyleProps | BorderDirectionProps;
-    borderRadius?: (Amount | Size | number) | BorderRadiusCornerProps;
-} & T;
+export declare type BorderProps = {
+    readonly border?: BorderStyleProps | BorderDirectionProps;
+    readonly borderRadius?: (Amount | Size | number) | BorderRadiusCornerProps;
+};
 //# sourceMappingURL=border.d.ts.map

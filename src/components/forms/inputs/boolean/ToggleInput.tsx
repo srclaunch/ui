@@ -17,7 +17,6 @@ import {
   ContainerProps,
   Depth,
   DepthShadow,
-  DimensionProps,
   FocusProps,
   InputProps,
   InputValueChangeHandler,
@@ -33,15 +32,11 @@ import { Icon } from '../../../media/Icon';
 import { Label } from '../../../typography/Label';
 import { InputLabel } from '../../labels/InputLabel';
 
-export type ToggleInputProps<E = HTMLInputElement, P = {}> = InputProps<
-  E,
-  boolean,
-  AppearanceProps<{
-    readonly trueLabel?: string;
-    readonly falseLabel?: string;
-  }>
-> &
-  P;
+export type ToggleInputProps<E = HTMLInputElement> = {
+  readonly trueLabel?: string;
+  readonly falseLabel?: string;
+} & AppearanceProps &
+  InputProps<E, boolean>;
 
 export const ToggleInput = memo(
   ({
@@ -167,12 +162,9 @@ export const ToggleInput = memo(
 // `;
 
 const Toggle = styled.button<
-  ContainerProps<
-    HTMLButtonElement,
-    {
-      readonly toggleValue?: boolean;
-    }
-  >
+  {
+    readonly toggleValue: boolean;
+  } & ContainerProps<HTMLButtonElement>
 >`
   ${LayoutStyles};
   ${AppearanceStyles};
@@ -184,12 +176,10 @@ const Toggle = styled.button<
 `;
 
 const ToggleSwitch = styled.span<
-  ContainerProps<
-    HTMLSpanElement,
-    FocusProps<{
-      readonly toggleValue: boolean;
-    }>
-  >
+  {
+    readonly toggleValue: boolean;
+  } & ContainerProps<HTMLSpanElement> &
+    FocusProps
 >`
   ${LayoutStyles};
   ${AppearanceStyles};

@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components';
 import { Align, Amount, Depth, Orientation, Size, } from '../../types';
 import { SearchInput, } from '../forms/inputs/text/SearchInput';
 import { Container } from '../layout/Container';
-import { Heading } from '../typography/Heading';
 import { CloseButton } from '../modals/CloseButton';
+import { Heading } from '../typography/Heading';
 export const UniversalSearch = memo(({ ...props }) => {
     const [resultsVisible, setResultsVisible] = useState(false);
     const [searchValue, setSearchValue] = useState();

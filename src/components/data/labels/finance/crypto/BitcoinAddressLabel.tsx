@@ -4,12 +4,9 @@ import { Label } from '../../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../../types';
 
-type BitcoinAddressLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type BitcoinAddressLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const BitcoinAddressLabel = memo(
   ({

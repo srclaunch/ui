@@ -1,3 +1,3 @@
-export type AnimationProps<T = {}> = {
-  fadeIn?: boolean;
-} & T;
+export type AnimationProps = {
+  readonly fadeIn?: boolean;
+};

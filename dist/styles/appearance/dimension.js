@@ -46,7 +46,6 @@ export const DimensionStyles = css `
 
   ${props => props.size &&
     css `
-      /* flex-basis: ${getDimension(props.size)}; */
       height: ${getDimension(props.size)};
       max-height: ${getDimension(props.size)};
       min-height: ${getDimension(props.size)};

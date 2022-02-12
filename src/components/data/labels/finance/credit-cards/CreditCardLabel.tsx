@@ -4,12 +4,9 @@ import { Label } from '../../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../../types';
 
-type CreditCardLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type CreditCardLabelProps = {
+  value: string;
+} & LabelProps;
 
 export const CreditCardLabel = memo(
   ({

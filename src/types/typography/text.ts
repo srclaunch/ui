@@ -1,5 +1,11 @@
+import { PropsWithChildren } from 'react';
+
+import { Color, Colors, ContrastColors } from '../appearance/color';
 import { ForegroundColors } from '../appearance/foreground';
-import { Colors, ContrastColors } from '../appearance/color';
+import { Size } from '../appearance/size';
+import { Align } from '../layout/alignment';
+import { Overflow } from '../layout/behavior';
+import { Amount } from '../proportion';
 
 export enum ElementTextColors {
   DataGridCell = 'var(--text-color-data-grid-cell-rgb)',
@@ -94,3 +100,19 @@ export enum WhiteSpace {
 }
 
 export type TextColor = TextColors | string;
+
+export type TextProps = PropsWithChildren<{
+  readonly alignText?: Align | string;
+  readonly inline?: boolean;
+  readonly lineHeight?: Amount | Size | string | number;
+  readonly overflow?: Overflow | string;
+  readonly selectable?: boolean;
+  readonly textColor?: Color | string;
+  readonly textOverflow?: TextOverflow | string;
+  readonly textSize?: TextSize | string | number;
+  readonly textWeight?: TextWeight | string;
+  readonly underline?: boolean;
+  readonly underlineColor?: Color | string;
+  readonly whiteSpace?: WhiteSpace | string;
+  readonly width?: Amount | Size | string | number;
+}>;

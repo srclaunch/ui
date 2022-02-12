@@ -9,16 +9,15 @@ import {
   Orientation,
   Size,
 } from '../../types';
-
 import {
   SearchInput,
   SearchInputProps,
 } from '../forms/inputs/text/SearchInput';
 import { Container } from '../layout/Container';
-import { Heading } from '../typography/Heading';
 import { CloseButton } from '../modals/CloseButton';
+import { Heading } from '../typography/Heading';
 
-type UniversalSearchProps = AppearanceProps<SearchInputProps>;
+type UniversalSearchProps = AppearanceProps & SearchInputProps;
 
 export const UniversalSearch = memo(
   ({ ...props }: UniversalSearchProps): ReactElement => {
@@ -37,14 +36,14 @@ export const UniversalSearch = memo(
     return (
       <Container
         className="universal-search"
-        grow={true}
+        grow
         orientation={Orientation.Vertical}
         // onMouseLeave={() => setResultsVisible(false)}
         {...props}
       >
         <SearchInput
           name="universal-search"
-          flat={true}
+          flat
           placeholder="Search everything"
           onChange={({ value }) => setSearchValue(value)}
           onFocus={() => {
@@ -124,7 +123,7 @@ export const UniversalSearch = memo(
 // `;
 
 const SearchResults = styled.div<{
-  resultsVisible?: boolean;
+  readonly resultsVisible?: boolean;
 }>`
   backdrop-filter: blur(3px);
   background: var(--bg-color-depth-highest-opaque);

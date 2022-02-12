@@ -6,13 +6,10 @@ import { LayoutStyles } from '../../styles/layout';
 import { Amount, BackgroundColors, ContainerProps, Size } from '../../types';
 import { ProgressSpinner } from './ProgressSpinner';
 
-type LoadingOverlayProps = ContainerProps<
-  HTMLDivElement,
-  {
-    readonly spinnerSize?: Size;
-    readonly visible?: boolean;
-  }
->;
+type LoadingOverlayProps = {
+  readonly spinnerSize?: Size;
+  readonly visible?: boolean;
+} & ContainerProps<HTMLDivElement>;
 
 export const LoadingOverlay = memo(
   ({

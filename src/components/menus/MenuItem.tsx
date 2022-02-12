@@ -1,9 +1,5 @@
 import { memo, MouseEvent, ReactElement, useState } from 'react';
 
-import { Button, ButtonType } from '../forms/buttons/Button';
-import { Container } from '../layout/Container';
-import { NavigationLink } from '../navigation/NavigationLink';
-
 import {
   Align,
   Amount,
@@ -12,29 +8,26 @@ import {
   TextColors,
   TextSize,
 } from '../../types';
+import { Button, ButtonProps, ButtonType } from '../forms/buttons/Button';
+import { Container, ContainerProps } from '../layout/Container';
 import { IconProps } from '../media/Icon';
-
+import {
+  NavigationLink,
+  NavigationLinkProps,
+} from '../navigation/NavigationLink';
 import { Label, LabelProps } from '../typography/Label';
 
-export type MenuItemProps<
-  E = HTMLAnchorElement | HTMLButtonElement,
-  P = {},
-> = Omit<
-  LabelProps<
-    E,
-    {
-      component?: ReactElement;
-      icon?: IconProps;
-      label?: string;
-      title?: string;
-      to?: string;
-      value?: any;
-    }
-  >,
-  'onClick'
-> & {
-  onClick?: (menuItem?: MenuItemProps, event?: MouseEvent) => void;
-} & P;
+export type MenuItemProps = {
+  readonly component?: ReactElement;
+  readonly icon?: IconProps;
+  readonly label?: string;
+  readonly onClick?: (menuItem?: MenuItemProps) => void;
+  readonly title?: string;
+  readonly to?: string;
+  readonly value?: any;
+} & Omit<LabelProps<NavigationLinkProps | ButtonProps>, 'onClick'> & {
+    readonly onClick?: (menuItem?: MenuItemProps) => void;
+  };
 
 export const MenuItem = memo(
   ({
@@ -76,13 +69,12 @@ export const MenuItem = memo(
             hover={hover}
             icon={icon}
             onClick={e => {
-              if (onClick) onClick({ icon, label, value }, e);
+              if (onClick) onClick({ icon, label, value });
             }}
             paddingLeft={Amount.Less}
             paddingRight={Amount.Less}
             textColor={props.textColor ?? TextColors.Default}
             to={to}
-            {...props}
           >
             {component ?? label}
           </NavigationLink>
@@ -106,14 +98,13 @@ export const MenuItem = memo(
             e.preventDefault();
             e.stopPropagation();
 
-            if (onClick) onClick({ icon, label, value }, e);
+            if (onClick) onClick({ icon, label, value });
           }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           paddingLeft={Amount.Less}
           paddingRight={Amount.Less}
           type={hovered ? ButtonType.Primary : ButtonType.Transparent}
-          {...props}
         >
           {component ?? label}
         </Button>

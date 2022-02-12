@@ -1,7 +1,7 @@
-import { BackgroundColor } from './background';
-import { ForegroundColor } from './foreground';
 import { TextColor } from '../typography/text';
+import { BackgroundColor } from './background';
 import { BorderColor } from './border';
+import { ForegroundColor } from './foreground';
 
 export enum Colors {
   Black = 'var(--color-black-rgb)',

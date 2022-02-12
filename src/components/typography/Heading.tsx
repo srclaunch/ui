@@ -1,23 +1,9 @@
 import { memo, ReactElement } from 'react';
 
-import { Text } from './Text';
+import { Align, Amount, TextColors, TextSize, TextWeight } from '../../types';
+import { Label, LabelProps } from './Label';
 
-import {
-  Align,
-  Amount,
-  ContainerProps,
-  TextColors,
-  TextProps,
-  TextSize,
-  TextWeight,
-} from '../../types';
-
-import { Container } from '../layout/Container';
-
-type HeadingProps = ContainerProps<
-  HTMLHeadingElement,
-  TextProps<HTMLHeadElement>
->;
+type HeadingProps = LabelProps<HTMLHeadingElement>;
 
 export const Heading = memo(
   ({
@@ -33,23 +19,19 @@ export const Heading = memo(
     ...props
   }: HeadingProps): ReactElement => {
     return (
-      <Container
+      <Label
+        alignText={alignText}
         as={as}
         className={`${className} heading`}
         grow={grow}
         marginBottom={marginBottom}
+        textColor={textColor}
+        textWeight={textWeight}
+        textSize={textSize}
         {...props}
       >
-        <Text
-          alignText={alignText}
-          textColor={textColor}
-          textWeight={textWeight}
-          textSize={textSize}
-          {...props}
-        >
-          {children}
-        </Text>
-      </Container>
+        {children}
+      </Label>
     );
   },
 );

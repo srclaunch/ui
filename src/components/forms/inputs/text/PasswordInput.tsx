@@ -1,29 +1,24 @@
-import PasswordStrengthBar from 'react-password-strength-bar';
 import { Condition, Password } from '@srclaunch/types';
 import {
   // getValidationProblemLabel,
   validate,
 } from '@srclaunch/validation';
 import { memo, ReactElement, useEffect, useState } from 'react';
-import {
-  Amount,
-  AutoComplete,
-  InputValueChangeHandler,
-} from '../../../../types';
-import { InputRow } from '../../layout/InputRow';
+import PasswordStrengthBar from 'react-password-strength-bar';
+
+import { Amount, AutoComplete } from '../../../../types';
 import { InputLabel } from '../../labels/InputLabel';
+import { InputRow } from '../../layout/InputRow';
 import { TextInput, TextInputProps, TextInputType } from './TextInput';
 
-export type PasswordInputProps = TextInputProps<
-  HTMLInputElement,
-  Password,
-  {
-    autoComplete?: AutoComplete.CurrentPassword | AutoComplete.NewPassword;
-    confirmPasswordLabel?: string;
-    showConfirmPassword?: boolean;
-    showPasswordStrength?: boolean;
-  }
->;
+export type PasswordInputProps = {
+  readonly autoComplete?:
+    | AutoComplete.CurrentPassword
+    | AutoComplete.NewPassword;
+  readonly confirmPasswordLabel?: string;
+  readonly showConfirmPassword?: boolean;
+  readonly showPasswordStrength?: boolean;
+} & TextInputProps<Password>;
 
 export const PasswordInput = memo(
   ({
@@ -68,7 +63,7 @@ export const PasswordInput = memo(
         if (onChange)
           onChange({
             problems,
-            validated: !problems.length,
+            validated: problems.length === 0,
             value: password,
           });
       } else {
@@ -77,7 +72,7 @@ export const PasswordInput = memo(
         if (onChange)
           onChange({
             problems,
-            validated: !problems.length,
+            validated: problems.length === 0,
             value: password,
           });
       }

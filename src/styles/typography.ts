@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-import { Align, TextColors, TextProps } from '../types/index';
+import { Align, TextColors, TextProps } from '../types';
 
 const getLineHeight = (lineHeight: TextProps['lineHeight']) => {
   if (typeof lineHeight === 'number') {

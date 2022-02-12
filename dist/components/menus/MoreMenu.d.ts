@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
-import { Color, DimensionProps, MenuProps, SizeProps } from '../../types';
-export declare type MoreMenuProps<P = {}> = MenuProps<HTMLDivElement, any, SizeProps<DimensionProps<{
+import { Color, MenuProps, SizeProps, WidthProps } from '../../types';
+export declare type MoreMenuProps = {
     readonly dotColor?: Color;
-}>>> & P;
+} & MenuProps & SizeProps & WidthProps;
 export declare const MoreMenu: import("react").MemoExoticComponent<({ alignContent, backgroundColor, className, dotColor, orientation, size, menu, width, ...props }: MoreMenuProps) => ReactElement>;
 //# sourceMappingURL=MoreMenu.d.ts.map

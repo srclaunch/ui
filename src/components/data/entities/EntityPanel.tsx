@@ -23,13 +23,10 @@ import { LoadingOverlay } from '../../progress/LoadingOverlay';
 import { EntityEditor } from './EntityEditor';
 import { EntityPreview } from './EntityPreview';
 
-type EntityPanelProps = ContainerProps<
-  HTMLDivElement,
-  {
-    readonly actions?: Record<string, (...args: readonly any[]) => any>;
-    readonly httpClient?: typeof HttpClient;
-  }
->;
+type EntityPanelProps = {
+  readonly actions?: Record<string, (...args: readonly any[]) => any>;
+  readonly httpClient?: typeof HttpClient;
+} & ContainerProps<HTMLDivElement>;
 
 export const EntityPanel = memo(
   ({ actions, ...props }: EntityPanelProps): ReactElement => {

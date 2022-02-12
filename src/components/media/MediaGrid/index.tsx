@@ -1,20 +1,22 @@
 import { memo, ReactElement } from 'react';
 
-import { Align, Amount, BackgroundColors, FillBehavior, Orientation } from '../../../types';
-
+import {
+  Align,
+  Amount,
+  BackgroundColors,
+  FillBehavior,
+  Orientation,
+} from '../../../types';
 import { Container, ContainerProps } from '../../layout/Container';
-import { MediaGridItem } from './MediaGriditem';
 import { LoadingOverlay } from '../../progress/LoadingOverlay';
+import { MediaGridItem } from './MediaGriditem';
 
-export type MediaGridProps = ContainerProps<
-  HTMLDivElement,
-  {
-    className?: string;
-    columns?: number;
-    items: MediaGridItem[];
-    loading?: boolean;
-  }
->;
+export type MediaGridProps = {
+  readonly className?: string;
+  readonly columns?: number;
+  readonly items: readonly MediaGridItem[];
+  readonly loading?: boolean;
+} & ContainerProps<HTMLDivElement>;
 
 export const MediaGrid = memo(
   ({
@@ -26,7 +28,9 @@ export const MediaGrid = memo(
     loading,
     ...props
   }: MediaGridProps): ReactElement => {
-    const rows = new Array(Math.ceil(items.length / columns)).fill(0);
+    const rows = Array.from({ length: Math.ceil(items.length / columns) }).fill(
+      0,
+    );
 
     return (
       <Container
@@ -36,7 +40,11 @@ export const MediaGrid = memo(
         orientation={Orientation.Vertical}
         {...props}
       >
-        <LoadingOverlay backgroundColor={BackgroundColors.Transparent} borderRadius={borderRadius} visible={loading} />
+        <LoadingOverlay
+          backgroundColor={BackgroundColors.Transparent}
+          borderRadius={borderRadius}
+          visible={loading}
+        />
 
         {rows.map((x, row) => {
           return (
@@ -49,11 +57,11 @@ export const MediaGrid = memo(
               {items
                 .slice(columns * row, columns * row + columns)
                 .map((i, key) => (
-                  <MediaGridItem 
-                    marginRight={Amount.Default} 
-                    key={key}         
-                    width={`calc(100% / ${columns ?? 1} - ${Amount.Default})`} 
-                    {...i} 
+                  <MediaGridItem
+                    marginRight={Amount.Default}
+                    key={key}
+                    width={`calc(100% / ${columns ?? 1} - ${Amount.Default})`}
+                    {...i}
                   />
                 ))}
             </Container>

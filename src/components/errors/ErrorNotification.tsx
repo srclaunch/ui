@@ -1,12 +1,13 @@
-import { memo, ReactElement } from 'react';
 import { NotificationType } from '@srclaunch/types';
+import { memo, ReactElement } from 'react';
+
 import { Align } from '../../types';
 import {
   NotificationLabel,
   NotificationLabelProps,
 } from '../notifications/NotificationLabel';
 
-type ErrorContainerProps = NotificationLabelProps<{}>;
+type ErrorContainerProps = NotificationLabelProps;
 
 export const ErrorNotification = memo(
   ({ label, showOrb = true, ...props }: ErrorContainerProps): ReactElement => {

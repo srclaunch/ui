@@ -1,4 +1,4 @@
-export declare type FocusProps<P = {}> = {
-    focused?: boolean;
-} & P;
+export declare type FocusProps = {
+    readonly focused?: boolean;
+};
 //# sourceMappingURL=focus-props.d.ts.map

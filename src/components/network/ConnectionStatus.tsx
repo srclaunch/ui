@@ -2,7 +2,7 @@ import { memo, ReactElement } from 'react';
 import { NotificationLabel } from '../notifications/NotificationLabel';
 import { NotificationType } from '@srclaunch/types';
 
-type ConnectionStatusProps = {
+export type ConnectionStatusProps = {
   pollingInterval?: number;
   url?: string;
   successStatus?: number;

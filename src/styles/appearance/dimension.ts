@@ -1,6 +1,11 @@
 import { css } from 'styled-components';
 
-import { DimensionProps, DimensionValue } from '../../types';
+import {
+  DimensionValue,
+  HeightProps,
+  SizeProps,
+  WidthProps,
+} from '../../types';
 
 const getDimension = (dimension: DimensionValue) => {
   if (typeof dimension === 'number') {
@@ -10,7 +15,7 @@ const getDimension = (dimension: DimensionValue) => {
   return dimension;
 };
 
-export const DimensionStyles = css<DimensionProps>`
+export const DimensionStyles = css<HeightProps & SizeProps & WidthProps>`
   ${props =>
     props.maxHeight &&
     css`
@@ -58,7 +63,6 @@ export const DimensionStyles = css<DimensionProps>`
   ${props =>
     props.size &&
     css`
-      /* flex-basis: ${getDimension(props.size)}; */
       height: ${getDimension(props.size)};
       max-height: ${getDimension(props.size)};
       min-height: ${getDimension(props.size)};

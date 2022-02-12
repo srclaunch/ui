@@ -4,13 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type IPAddressRangeLabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
-
+type IPAddressRangeLabelProps = {
+  value: string;
+} & LabelProps;
 export const IPAddressRangeLabel = memo(
   ({
     icon,

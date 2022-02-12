@@ -13,12 +13,10 @@ import {
   Orientation,
 } from '../../types';
 
-export type NavigationBarProps = ContainerProps<
-  HTMLDivElement,
-  {
-    readonly logo?: ReactElement;
-  }
->;
+export type NavigationBarProps = {
+  readonly logo?: ReactElement;
+} & ContainerProps<HTMLDivElement>;
+
 export const NavigationBar = memo(
   ({
     backgroundColor = BackgroundColors.NavigationBar,

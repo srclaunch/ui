@@ -23,24 +23,19 @@ import { Label } from '../typography/Label';
 import { Link } from '../typography/Link';
 import { convertSizeToAmount } from '../../lib/proportions/conversions';
 
-type ActivityFeedProps = CommonComponentProps<
-  LayoutProps<
-    AppearanceProps<{
-      activities: Activity[];
-      dateFormat?: DateTimeFormatOptions;
-    }>
-  >
->;
+export type ActivityFeedProps = {
+  activities: Activity[];
+  dateFormat?: DateTimeFormatOptions;
+} & CommonComponentProps<HTMLDivElement> &
+  LayoutProps &
+  AppearanceProps;
 
-type ActivityFeedItemProps = CommonComponentProps<
-  LayoutProps<
-    AppearanceProps<
-      {
-        dateFormat?: DateTimeFormatOptions;
-      } & Activity
-    >
-  >
->;
+export type ActivityFeedItemProps = {
+  dateFormat?: DateTimeFormatOptions;
+} & Activity &
+  CommonComponentProps<HTMLDivElement> &
+  LayoutProps &
+  AppearanceProps;
 
 const ActivityFeedItem = memo(
   ({

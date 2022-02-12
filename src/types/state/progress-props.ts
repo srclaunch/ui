@@ -1,3 +1,3 @@
-export type ProgressProps<P = {}> = {
-  inProgress?: boolean;
-} & P;
+export type ProgressProps = {
+  readonly inProgress?: boolean;
+};

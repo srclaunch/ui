@@ -3,31 +3,37 @@ import { validate } from '@srclaunch/validation';
 import { memo, ReactElement, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { Container } from '../../../layout/Container';
-import { ErrorLabel } from '../../../errors/ErrorLabel';
-import { ProgressSpinner } from '../../../progress/ProgressSpinner';
-import { InputContainer } from '../shared/InputContainer';
-import { InputLabel } from '../../labels/InputLabel';
-
+import { TextStyles } from '../../../../styles/typography';
 import {
   Align,
   Amount,
+  AppearanceProps,
   BackgroundColors,
   BorderColors,
   BorderStyle,
   Color,
   Depth,
   DepthShadow,
+  InputProps,
   InputValueChangeHandler,
   Orientation,
   Size,
   TextColors,
+  TextProps,
 } from '../../../../types';
+import { ErrorLabel } from '../../../errors/ErrorLabel';
+import { Container } from '../../../layout/Container';
 import { Icon } from '../../../media/Icon';
-import { TextStyles } from '../../../../styles/typography';
+import { ProgressSpinner } from '../../../progress/ProgressSpinner';
+import { InputLabel } from '../../labels/InputLabel';
+import { InputContainer } from '../shared/InputContainer';
 import { TextInputProps } from './TextInput';
 
-type LongTextInputProps = TextInputProps<HTMLTextAreaElement, LongText>;
+export type LongTextInputProps<V = LongText> = {
+  readonly spellCheck?: boolean;
+} & InputProps<HTMLTextAreaElement, V> &
+  AppearanceProps &
+  TextProps;
 
 export const LongTextInput = memo(
   ({
@@ -43,17 +49,17 @@ export const LongTextInput = memo(
     error,
     flat = false,
     hidden = false,
-    icon,
+
     inProgress = false,
     label,
     lineHeight = Amount.More,
     name,
     onChange,
-    prefix = '',
+
     placeholder = '',
     size = Size.Default,
     spellCheck = true,
-    suffix = '',
+
     textColor = TextColors.InputControl,
     validation = {},
   }: LongTextInputProps): ReactElement => {
@@ -96,7 +102,7 @@ export const LongTextInput = memo(
         <Container orientation={Orientation.Horizontal}>
           {label && <InputLabel>{label}</InputLabel>}
 
-          {problems.length ? (
+          {problems.length > 0 ? (
             <ErrorLabel alignContent={Align.Right}>
               {problems[0]?.message.short}
             </ErrorLabel>
@@ -121,16 +127,6 @@ export const LongTextInput = memo(
           paddingRight={Amount.Least}
           size={size}
         >
-          {icon && (
-            <Icon
-              {...icon}
-              color={
-                value === '' ? TextColors.Lightest : icon.color ?? textColor
-              }
-              marginRight={Amount.Least}
-            />
-          )}
-
           <Input
             hidden={hidden}
             name={name}

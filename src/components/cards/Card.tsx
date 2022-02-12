@@ -15,16 +15,13 @@ import { ErrorBoundary } from '../errors/ErrorBoundary';
 import { Container } from '../layout/Container';
 import { NavigationLink } from '../navigation/NavigationLink';
 
-type CardProps = ContainerProps<
-  Omit<HTMLDivElement, 'align'>,
-  {
-    readonly draggable?: boolean;
-    readonly id?: string;
-    readonly linkTo?: string;
-    readonly onClick?: MouseEventHandler<any>;
-    readonly title?: string;
-  }
->;
+type CardProps = {
+  readonly draggable?: boolean;
+  readonly id?: string;
+  readonly linkTo?: string;
+  readonly onClick?: MouseEventHandler<any>;
+  readonly title?: string;
+} & ContainerProps<HTMLDivElement>;
 
 export const Card = memo(
   ({
@@ -72,7 +69,6 @@ export const Card = memo(
           orientation={Orientation.Vertical}
           to={linkTo}
           width={width}
-          {...props}
         >
           {content}
         </NavigationLink>

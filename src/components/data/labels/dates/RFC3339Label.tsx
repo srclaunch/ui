@@ -4,12 +4,9 @@ import { Label } from '../../../typography/Label';
 
 import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
 
-type RFC3339LabelProps = LabelProps<
-  HTMLLabelElement,
-  {
-    value: string;
-  }
->;
+type RFC3339LabelProps = {
+  value: string;
+} & LabelProps;
 
 export const RFC3339Label = memo(
   ({

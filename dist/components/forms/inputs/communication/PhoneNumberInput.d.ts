@@ -2,9 +2,9 @@ import { ReactElement } from 'react';
 import { PhoneNumber } from '@srclaunch/types';
 import { AutoComplete } from '../../../../types';
 import { TextInputProps } from '../text/TextInput';
-declare type PhoneNumberInputProps<T = {}> = TextInputProps<HTMLInputElement, PhoneNumber, {
+declare type PhoneNumberInputProps = {
     autoComplete?: AutoComplete.PhoneNumber;
-}> & T;
+} & TextInputProps<PhoneNumber>;
 export declare const PhoneNumberInput: import("react").MemoExoticComponent<({ ...props }: PhoneNumberInputProps) => ReactElement>;
 export {};
 //# sourceMappingURL=PhoneNumberInput.d.ts.map

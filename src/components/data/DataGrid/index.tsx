@@ -22,7 +22,7 @@ import {
   TextColors,
   WidthProps,
 } from '../../../types';
-
+import { fetchFromObject } from '../../../lib/data/object';
 import { Container, ContainerProps } from '../../layout/Container';
 import { Label } from '../../typography/Label';
 import { LoadingOverlay } from '../../progress/LoadingOverlay';
@@ -37,82 +37,53 @@ export type DataGridColumn = {
   fallbackField?: string;
   field: string;
   fields?: string[];
-  maxWidth?: number | string;
-  minWidth?: number | string;
-  percentWidth?: number;
   type: Primitives;
-  width?: number | string;
-};
+} & WidthProps;
 
-type DataGridProps = ContainerProps<
-  HTMLElement,
-  {
-    borderRadius?: BorderProps['borderRadius'];
-    className?: string;
-    columns: DataGridColumn[];
-    columnCount?: number;
-    data?: Record<string, Primitives | any>[];
-    display?: DataGridDisplayType;
-    header?: {
-      create?: {
-        label: string;
-        onClick: (e: SyntheticEvent) => void;
-      };
-      search?: WidthProps<{
-        placeholder?: string;
-        onChange?: (event: SyntheticEvent<HTMLInputElement>) => void;
-        value?: string;
-      }>;
-      export?: WidthProps<{
-        label?: string;
-        onClick?: (e: SyntheticEvent) => void;
-      }>;
+export type DataGridProps = {
+  borderRadius?: BorderProps['borderRadius'];
+  className?: string;
+  columns: DataGridColumn[];
+  columnCount?: number;
+  data?: Record<string, Primitives | any>[];
+  display?: DataGridDisplayType;
+  header?: {
+    create?: {
+      label: string;
+      onClick: (e: SyntheticEvent) => void;
     };
-    hideOnProp?: string;
-    loading?: boolean;
-    loaded?: boolean;
-    model?: Model;
-    onItemClick?: (row: Record<string, unknown>) => unknown;
-    template?: {
-      card?: ({
-        onClick,
-        row,
-      }: ContainerProps<
-        HTMLDivElement,
-        {
-          onClick?: (row: Record<string, Primitives>) => unknown;
-          row: Record<string, Primitives>;
-        }
-      >) => ReactElement;
-      row?: ({
-        onClick,
-        row,
-      }: ContainerProps<
-        HTMLDivElement,
-        {
-          onClick?: (row: Record<string, Primitives>) => unknown;
-          row: Record<string, Primitives>;
-        }
-      >) => ReactElement;
-    };
-  }
->;
-
-function fetchFromObject(obj: Record<string, any>, prop: string): any {
-  if (typeof obj === 'undefined') {
-    return false;
-  }
-
-  var _index = prop.indexOf('.');
-  if (_index > -1) {
-    return fetchFromObject(
-      obj[prop.substring(0, _index)],
-      prop.substr(_index + 1),
-    );
-  }
-
-  return obj[prop];
-}
+    search?: {
+      placeholder?: string;
+      onChange?: (event: SyntheticEvent<HTMLInputElement>) => void;
+      value?: string;
+    } & WidthProps;
+    export?: {
+      label?: string;
+      onClick?: (e: SyntheticEvent) => void;
+    } & WidthProps;
+  };
+  hideOnProp?: string;
+  loading?: boolean;
+  loaded?: boolean;
+  model?: Model;
+  onItemClick?: (row: Record<string, unknown>) => unknown;
+  template?: {
+    card?: ({
+      onClick,
+      row,
+    }: {
+      onClick?: (row: Record<string, Primitives>) => unknown;
+      row: Record<string, Primitives>;
+    } & ContainerProps<HTMLDivElement>) => ReactElement;
+    row?: ({
+      onClick,
+      row,
+    }: {
+      onClick?: (row: Record<string, Primitives>) => unknown;
+      row: Record<string, Primitives>;
+    } & ContainerProps<HTMLDivElement>) => ReactElement;
+  };
+} & ContainerProps<HTMLElement>;
 
 export const DataGrid = memo(
   ({
@@ -231,9 +202,9 @@ export const DataGrid = memo(
                 />
               </Container>
             )}
-            
+
             {header.create && (
-              <Button 
+              <Button
                 onClick={header.create.onClick}
                 size={Size.Small}
                 type={ButtonType.Secondary}

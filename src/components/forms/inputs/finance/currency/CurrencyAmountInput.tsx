@@ -5,6 +5,7 @@ import CurrencyInputField from 'react-currency-input-field';
 
 import {
   Amount,
+  AppearanceProps,
   BackgroundColors,
   BorderColors,
   BorderStyle,
@@ -12,18 +13,16 @@ import {
   InputProps,
   Size,
   TextColors,
+  TextProps,
   TextWeight,
 } from '../../../../../types';
 import { Label } from '../../../../typography/Label';
-import { TextProps } from '../../../../typography/Text';
 import { InputLabel } from '../../../labels/InputLabel';
 import { InputContainer } from '../../shared/InputContainer';
 
-type CurrencyAmountInputProps<
-  E = HTMLInputElement,
-  V = CurrencyAmount,
-  P = Record<string, unknown>,
-> = InputProps<E, V, TextProps<E>> & P;
+type CurrencyAmountInputProps = AppearanceProps &
+  InputProps<HTMLInputElement, CurrencyAmount> &
+  TextProps;
 
 export const CurrencyAmountInput = memo(
   ({
@@ -77,9 +76,7 @@ export const CurrencyAmountInput = memo(
     return (
       <>
         {(label || problems.length > 0) && (
-          <InputLabel errorMessage={problems[0]?.message.short}>
-            {label}
-          </InputLabel>
+          <InputLabel error={problems}>{label}</InputLabel>
         )}
 
         <InputContainer

@@ -1,10 +1,8 @@
 import { MouseEventProps } from '../events/mouse';
-import { FocusEventProps } from '../events/focus';
-import { FocusProps } from '../state/focus-props';
-export declare type LinkProps<T = {}> = MouseEventProps<HTMLAnchorElement, FocusEventProps<HTMLAnchorElement, FocusProps<{
-    prefetch?: boolean;
-    rel?: string;
-    target?: '_blank';
-    to: string;
-}>>> & T;
+export declare type LinkProps = {
+    readonly prefetch?: boolean;
+    readonly rel?: string;
+    readonly target?: '_blank';
+    readonly to: string;
+} & MouseEventProps<HTMLAnchorElement>;
 //# sourceMappingURL=link.d.ts.map

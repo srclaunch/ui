@@ -1,19 +1,14 @@
 import { css } from 'styled-components';
 
-import {
-  BackgroundColors,
-  BackgroundProps,
-} from '../../../types/appearance/background';
-import { TextColor, TextColors } from '../../../types/typography/text';
+// import { TextProps } from '../../../components/typography/Text';
 import { Amount } from '../../../types/proportion';
-
+import { FocusProps } from '../../../types/state/focus-props';
+import { TextColors } from '../../../types/typography/text';
 import { FocusedStyles } from '../../focused';
-import { TextStyles } from '../../typography';
-import { TextInputProps } from '../../../components/forms/inputs/text/TextInput';
 
-export const TextInputStyles = css<TextInputProps<HTMLInputElement, string>>`
+export const TextInputStyles = css<FocusProps>`
   ${FocusedStyles};
-  ${TextStyles};
+  /* $ {TextStyles}; */
 
   outline: none;
   padding: 0 ${Amount.Less};

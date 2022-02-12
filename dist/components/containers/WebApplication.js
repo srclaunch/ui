@@ -13,9 +13,11 @@ export const WebApplication = memo(({ authentication = false, actions, backgroun
         enabled: authentication,
     });
     const { current, list } = useSelector((state) => state.ui.themes);
-    const showOutlet = !inProgress &&
-        ((loggedIn && (loginRequired || !loginRequired)) ||
-            (!loggedIn && !loginRequired));
+    const loginCondition = authentication
+        ? (loggedIn && (loginRequired || !loginRequired)) ||
+            (!loggedIn && !loginRequired)
+        : true;
+    const showOutlet = !inProgress && loginCondition;
     return (_jsx(Container, { backgroundColor: backgroundColor, className: `${className} web-application`, ...props, children: _jsxs(ThemeProvider, { theme: current, themes: list, children: [_jsx(LoadingOverlay, { visible: inProgress || !showOutlet }, void 0), _jsx(Backdrop, { visible: false }, void 0), showOutlet && _jsx(Outlet, {}, void 0), _jsx(EntityPanel, { actions: actions, httpClient: httpClient }, void 0)] }, void 0) }, void 0));
 });
 //# sourceMappingURL=WebApplication.js.map

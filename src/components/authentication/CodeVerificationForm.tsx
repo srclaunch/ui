@@ -37,13 +37,10 @@ import { LineBreak } from '../typography/LineBreak';
 import { Paragraph } from '../typography/Paragraph';
 import { Title } from '../typography/Title';
 
-type CodeVerificationFormProps = ContainerProps<
-  HTMLDivElement,
-  {
-    readonly onVerificationSuccess?: () => unknown;
-    readonly userId: string;
-  }
->;
+type CodeVerificationFormProps = {
+  readonly onVerificationSuccess?: () => unknown;
+  readonly userId: string;
+} & ContainerProps<HTMLDivElement>;
 
 export const CodeVerificationForm = memo(
   ({
@@ -59,7 +56,7 @@ export const CodeVerificationForm = memo(
       (state: RootState) => state.user.authentication?.verification.code,
     );
     const [code, setCode] = useState<string | undefined>();
-    const [problems, setProblems] = useState<ValidationProblem[]>();
+    const [problems, setProblems] = useState<readonly ValidationProblem[]>();
 
     useEffect(() => {
       if (userId) {

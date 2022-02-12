@@ -1,3 +1,3 @@
-export type TranslucencyProps<T = {}> = {
+export type TranslucencyProps = {
   opacity?: number;
-} & T;
+};

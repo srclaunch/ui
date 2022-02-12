@@ -15,14 +15,11 @@ import { Container } from '../layout/Container';
 import { Backdrop } from '../modals/Backdrop';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 
-type WebApplicationProps = ContainerProps<
-  HTMLDivElement,
-  {
-    readonly authentication?: boolean;
-    readonly actions?: Record<string, (...args: readonly any[]) => any>;
-    readonly httpClient?: typeof HttpClient;
-  }
->;
+type WebApplicationProps = {
+  readonly authentication?: boolean;
+  readonly actions?: Record<string, (...args: readonly any[]) => any>;
+  readonly httpClient?: typeof HttpClient;
+} & ContainerProps<HTMLDivElement>;
 
 export const WebApplication = memo(
   ({
@@ -40,10 +37,12 @@ export const WebApplication = memo(
     const { current, list } = useSelector(
       (state: RootState) => state.ui.themes,
     );
-    const showOutlet =
-      !inProgress &&
-      ((loggedIn && (loginRequired || !loginRequired)) ||
-        (!loggedIn && !loginRequired));
+    const loginCondition = authentication
+      ? (loggedIn && (loginRequired || !loginRequired)) ||
+        (!loggedIn && !loginRequired)
+      : true;
+
+    const showOutlet = !inProgress && loginCondition;
 
     return (
       <Container

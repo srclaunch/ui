@@ -1,9 +1,9 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { memo, useState } from 'react';
+import { Align, Amount, BackgroundColors, DepthShadow, TextColors, TextSize, } from '../../types';
 import { Button, ButtonType } from '../forms/buttons/Button';
 import { Container } from '../layout/Container';
-import { NavigationLink } from '../navigation/NavigationLink';
-import { Align, Amount, BackgroundColors, DepthShadow, TextColors, TextSize, } from '../../types';
+import { NavigationLink, } from '../navigation/NavigationLink';
 import { Label } from '../typography/Label';
 export const MenuItem = memo(({ active, as = 'div', backgroundColor = BackgroundColors.Lightest, borderRadius = Amount.Less, boxShadow = DepthShadow.Surface, className = '', component, focus, hover, icon, label, onClick, title, to, value, ...props }) => {
     const [hovered, setHovered] = useState(false);
@@ -11,15 +11,15 @@ export const MenuItem = memo(({ active, as = 'div', backgroundColor = Background
     if (to) {
         return (_jsxs(Container, { children: [itemTitle, _jsx(NavigationLink, { active: active, borderRadius: Amount.Least, backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent, focus: focus, hover: hover, icon: icon, onClick: e => {
                         if (onClick)
-                            onClick({ icon, label, value }, e);
-                    }, paddingLeft: Amount.Less, paddingRight: Amount.Less, textColor: props.textColor ?? TextColors.Default, to: to, ...props, children: component ?? label }, void 0)] }, void 0));
+                            onClick({ icon, label, value });
+                    }, paddingLeft: Amount.Less, paddingRight: Amount.Less, textColor: props.textColor ?? TextColors.Default, to: to, children: component ?? label }, void 0)] }, void 0));
     }
     return (_jsxs(Container, { children: [itemTitle, _jsx(Button, { alignContent: Align.Left, borderRadius: Amount.Least, backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent, form: "null", icon: icon, onClick: e => {
                     e.preventDefault();
                     e.stopPropagation();
                     if (onClick)
-                        onClick({ icon, label, value }, e);
-                }, onMouseEnter: () => setHovered(true), onMouseLeave: () => setHovered(false), paddingLeft: Amount.Less, paddingRight: Amount.Less, type: hovered ? ButtonType.Primary : ButtonType.Transparent, ...props, children: component ?? label }, void 0)] }, void 0));
+                        onClick({ icon, label, value });
+                }, onMouseEnter: () => setHovered(true), onMouseLeave: () => setHovered(false), paddingLeft: Amount.Less, paddingRight: Amount.Less, type: hovered ? ButtonType.Primary : ButtonType.Transparent, children: component ?? label }, void 0)] }, void 0));
     // return (
     //   <Container
     //     as={as}

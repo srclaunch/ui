@@ -2,19 +2,18 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import { validate } from '@srclaunch/validation';
 import { memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Container } from '../../../layout/Container';
-import { ErrorLabel } from '../../../errors/ErrorLabel';
-import { ProgressSpinner } from '../../../progress/ProgressSpinner';
-import { InputContainer } from '../shared/InputContainer';
-import { InputLabel } from '../../labels/InputLabel';
-import { Align, Amount, BackgroundColors, BorderColors, BorderStyle, DepthShadow, Orientation, Size, TextColors, } from '../../../../types';
-import { Icon } from '../../../media/Icon';
 import { TextStyles } from '../../../../styles/typography';
+import { Align, Amount, BackgroundColors, BorderColors, BorderStyle, DepthShadow, Orientation, Size, TextColors, } from '../../../../types';
+import { ErrorLabel } from '../../../errors/ErrorLabel';
+import { Container } from '../../../layout/Container';
+import { ProgressSpinner } from '../../../progress/ProgressSpinner';
+import { InputLabel } from '../../labels/InputLabel';
+import { InputContainer } from '../shared/InputContainer';
 export const LongTextInput = memo(({ backgroundColor = BackgroundColors.InputControl, border = {
     color: BorderColors.InputControl,
     style: BorderStyle.Solid,
     width: 1,
-}, boxShadow = DepthShadow.Low, className = '', defaultValue, error, flat = false, hidden = false, icon, inProgress = false, label, lineHeight = Amount.More, name, onChange, prefix = '', placeholder = '', size = Size.Default, spellCheck = true, suffix = '', textColor = TextColors.InputControl, validation = {}, }) => {
+}, boxShadow = DepthShadow.Low, className = '', defaultValue, error, flat = false, hidden = false, inProgress = false, label, lineHeight = Amount.More, name, onChange, placeholder = '', size = Size.Default, spellCheck = true, textColor = TextColors.InputControl, validation = {}, }) => {
     const [value, setValue] = useState(defaultValue ?? '');
     const [focused, setFocused] = useState(false);
     const [problems, setProblems] = useState([]);
@@ -44,9 +43,9 @@ export const LongTextInput = memo(({ backgroundColor = BackgroundColors.InputCon
     useEffect(() => {
         setValue(defaultValue ?? value ?? '');
     }, [defaultValue]);
-    return (_jsxs(_Fragment, { children: [_jsxs(Container, { orientation: Orientation.Horizontal, children: [label && _jsx(InputLabel, { children: label }, void 0), problems.length ? (_jsx(ErrorLabel, { alignContent: Align.Right, children: problems[0]?.message.short }, void 0)) : null] }, void 0), _jsxs(InputContainer, { backgroundColor: backgroundColor, border: border, boxShadow: boxShadow, className: `${className} text-input`, error: problems, focused: focused, flat: flat, height: size, onClick: () => {
+    return (_jsxs(_Fragment, { children: [_jsxs(Container, { orientation: Orientation.Horizontal, children: [label && _jsx(InputLabel, { children: label }, void 0), problems.length > 0 ? (_jsx(ErrorLabel, { alignContent: Align.Right, children: problems[0]?.message.short }, void 0)) : null] }, void 0), _jsxs(InputContainer, { backgroundColor: backgroundColor, border: border, boxShadow: boxShadow, className: `${className} text-input`, error: problems, focused: focused, flat: flat, height: size, onClick: () => {
                     inputRef.current?.focus();
-                }, orientation: Orientation.Horizontal, padding: Amount.Least, paddingLeft: Amount.Less, paddingRight: Amount.Least, size: size, children: [icon && (_jsx(Icon, { ...icon, color: value === '' ? TextColors.Lightest : icon.color ?? textColor, marginRight: Amount.Least }, void 0)), _jsx(Input, { hidden: hidden, name: name, onBlur: () => setFocused(false), onChange: (e) => {
+                }, orientation: Orientation.Horizontal, padding: Amount.Least, paddingLeft: Amount.Less, paddingRight: Amount.Least, size: size, children: [_jsx(Input, { hidden: hidden, name: name, onBlur: () => setFocused(false), onChange: (e) => {
                             setValueChanged(true);
                             // @ts-ignore
                             setValue(prefix + e.target.value + suffix);

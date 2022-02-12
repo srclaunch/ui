@@ -1,29 +1,23 @@
-import { memo, MouseEvent, ReactElement } from 'react';
+import { memo, ReactElement } from 'react';
 
 import {
   Amount,
   BackgroundColors,
+  CommonComponentProps,
   DepthShadow,
   Orientation,
   Overflow,
-  Size,
   TextColors,
   TextSize,
 } from '../../types';
-import { MenuItem, MenuItemProps } from './MenuItem';
 import { Container, ContainerProps } from '../layout/Container';
-import { LabelProps } from '../typography/Label';
+import { MenuItem, MenuItemProps } from './MenuItem';
 
-export type MenuProps<E = HTMLElement, T = any, P = {}> = Omit<
-  ContainerProps<
-    E,
-    {
-      menu?: MenuItemProps<T>[];
-      menuItemProps?: MenuItemProps;
-    }
-  >,
-  'onClick'
-> & { onClick?: (menuItem?: MenuItemProps, event?: MouseEvent) => void } & P;
+export type MenuProps = {
+  readonly menu?: readonly MenuItemProps[];
+  readonly menuItemProps?: MenuItemProps;
+  readonly onClick?: (i?: MenuItemProps) => void;
+} & Omit<ContainerProps, 'onClick'>;
 
 export const Menu = memo(
   ({
@@ -85,7 +79,11 @@ export const Menu = memo(
             return (
               <MenuItem
                 key={key}
-                onClick={onClick}
+                onClick={() => {
+                  if (onClick) {
+                    onClick(item);
+                  }
+                }}
                 {...menuItemProps}
                 {...item}
               />
