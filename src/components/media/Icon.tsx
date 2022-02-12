@@ -46,7 +46,12 @@ export const Icon = memo(
       if (name) {
         const Ico = getIcon(name);
 
-        if (Ico) return <Ico />;
+        if (Ico)
+          return (
+            <Svg {...props}>
+              <Ico />
+            </Svg>
+          );
       }
 
       if (component) {
@@ -67,6 +72,8 @@ export const Icon = memo(
         alignItems={Align.Center}
         alignContent={Align.Center}
         as="span"
+        height={size}
+        width={size}
         {...props}
       >
         {getElement()}

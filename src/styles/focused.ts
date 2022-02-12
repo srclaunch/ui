@@ -2,6 +2,7 @@ import { css } from 'styled-components';
 
 import { BorderProps, FocusProps } from '../types';
 import { BorderColors } from '../types/appearance/border';
+
 export const FocusedStyles = css<
   {
     readonly borderRadius?: BorderProps['borderRadius'];

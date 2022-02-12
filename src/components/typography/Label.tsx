@@ -19,9 +19,7 @@ import {
 import { Container, ContainerProps } from '../layout/Container';
 import { Icon, IconProps } from '../media/Icon';
 
-export type LabelProps<
-  E = HTMLLabelElement | HTMLHeadingElement | HTMLParagraphElement,
-> = {
+export type LabelProps<E = HTMLElement> = {
   readonly icon?: IconProps;
 } & {
   readonly focus?: LabelProps;

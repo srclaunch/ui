@@ -21,13 +21,10 @@ export type MenuItemProps = {
   readonly component?: ReactElement;
   readonly icon?: IconProps;
   readonly label?: string;
-  readonly onClick?: (menuItem?: MenuItemProps) => void;
   readonly title?: string;
   readonly to?: string;
   readonly value?: any;
-} & Omit<LabelProps<NavigationLinkProps | ButtonProps>, 'onClick'> & {
-    readonly onClick?: (menuItem?: MenuItemProps) => void;
-  };
+} & LabelProps<HTMLAnchorElement | HTMLButtonElement>;
 
 export const MenuItem = memo(
   ({
@@ -69,7 +66,10 @@ export const MenuItem = memo(
             hover={hover}
             icon={icon}
             onClick={e => {
-              if (onClick) onClick({ icon, label, value });
+              e.preventDefault();
+              e.stopPropagation();
+
+              if (onClick) onClick(e);
             }}
             paddingLeft={Amount.Less}
             paddingRight={Amount.Less}
@@ -98,7 +98,8 @@ export const MenuItem = memo(
             e.preventDefault();
             e.stopPropagation();
 
-            if (onClick) onClick({ icon, label, value });
+            // @ts-ignore
+            if (onClick) onClick(e);
           }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}

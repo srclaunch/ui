@@ -12,9 +12,6 @@ import {
   Amount,
   BackgroundColors,
   Cursor,
-  FocusEventProps,
-  KeyboardEventProps,
-  MouseEventProps,
   Orientation,
   Overflow,
   Size,
@@ -22,8 +19,8 @@ import {
   TextColors,
   TextWeight,
 } from '../../../types/index';
-import { IconProps } from '../../media/Icon';
 import { Container, ContainerProps } from '../../layout/Container';
+import { IconProps } from '../../media/Icon';
 import { Label, LabelProps } from '../../typography/Label';
 
 export enum ButtonType {
@@ -257,7 +254,7 @@ export const Button = memo(
             size={size}
             textColor={updatedTextColor}
             textSize={convertSizeToTextSize(getSmallerSize(size))}
-            textWeight={TextWeight.More}
+            textWeight={textWeight}
             underline={type === ButtonType.Link && hovered}
           >
             {children}

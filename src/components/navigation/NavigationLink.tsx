@@ -5,11 +5,7 @@ import {
   useResolvedPath,
 } from '@srclaunch/web-application-state';
 import { memo, ReactElement, useEffect, useState } from 'react';
-import styled from 'styled-components';
 
-import { AppearanceStyles } from '../../styles/appearance';
-import { FocusedStyles } from '../../styles/focused';
-import { LayoutStyles } from '../../styles/layout';
 import {
   Align,
   Amount,
@@ -17,21 +13,21 @@ import {
   LinkProps,
   Orientation,
   Size,
+  TextColors,
 } from '../../types';
+import { Container, ContainerProps } from '../layout/Container';
 import { IconProps } from '../media/Icon';
 import { MenuItemProps } from '../menus/MenuItem';
 import { Label, LabelProps } from '../typography/Label';
-import { ContainerProps } from '../layout/Container';
 
 export type NavigationLinkProps = {
   readonly activeClassName?: string;
   readonly icon?: IconProps;
   readonly inline?: boolean;
+  readonly label?: string;
   readonly menu?: readonly MenuItemProps[];
   readonly size?: Size;
-} & CommonComponentProps<HTMLAnchorElement> &
-  ContainerProps<HTMLAnchorElement> &
-  LabelProps &
+} & LabelProps<HTMLAnchorElement> &
   LinkProps;
 
 export const NavigationLink = memo(
@@ -48,6 +44,7 @@ export const NavigationLink = memo(
     grow = true,
     hover,
     icon,
+    label,
     margin,
     marginBottom,
     marginLeft,
@@ -66,7 +63,7 @@ export const NavigationLink = memo(
     rel,
     size,
     target,
-    textColor,
+    textColor = TextColors.Default,
     textSize,
     textWeight,
     to,
@@ -113,51 +110,17 @@ export const NavigationLink = memo(
       setBackgroundColor();
     }, [hovered, focused, exactMatch]);
 
-    const content =
-      typeof children === 'string' ? (
-        <Label
-          grow
-          icon={{ ...icon, color: updatedTextColor }}
-          lineHeight={size}
-          // padding={Amount.None}
-          // paddingLeft={Amount.Less}
-          // paddingRight={Amount.Less}
-          textColor={updatedTextColor}
-          textSize={textSize}
-          textWeight={textWeight}
-        >
-          {children}
-        </Label>
-      ) : (
-        children
-      );
-
     return (
       <NavLink
         className={`${className} navigation-link`}
         onBlur={() => setFocused(false)}
-        onClick={onClick}
         onFocus={() => setFocused(true)}
-        // @ts-ignore
-        onMouseEnter={e => {
-          setHovered(true);
-
-          if (onMouseEnter) onMouseEnter(e);
-        }}
-        // @ts-ignore
-        onMouseLeave={e => {
-          setHovered(false);
-
-          if (onMouseLeave) onMouseLeave(e);
-        }}
         rel={rel}
-        style={{
-          display: 'inline-block',
-          textDecoration: 'none',
-          width,
-        }}
         target={target}
         to={to + location.search}
+        style={{
+          textDecoration: 'none',
+        }}
       >
         <Container
           alignContent={alignContent}
@@ -174,6 +137,7 @@ export const NavigationLink = memo(
             spreadRadius: 3,
           }}
           className={`${className} ${exactMatch ? activeClassName : ''} link`}
+          focus={focus}
           focused={focused}
           grow={grow}
           hover={hover}
@@ -182,33 +146,58 @@ export const NavigationLink = memo(
           marginLeft={marginLeft}
           marginRight={marginRight}
           marginTop={marginTop}
+          onClick={onClick}
+          onMouseEnter={e => {
+            setHovered(true);
+
+            // @ts-ignore
+            if (onMouseEnter) onMouseEnter(e);
+          }}
+          onMouseLeave={e => {
+            setHovered(false);
+
+            // @ts-ignore
+            if (onMouseLeave) onMouseLeave(e);
+          }}
           orientation={menu ? Orientation.Vertical : orientation}
           padding={padding}
           paddingBottom={menu ? paddingLeft : paddingBottom}
           paddingLeft={paddingLeft}
           paddingRight={paddingRight}
           paddingTop={paddingTop}
+          {...props}
         >
-          {content}
+          {label ? (
+            <Label
+              textColor={updatedTextColor}
+              textSize={textSize}
+              textWeight={textWeight}
+              {...props}
+            >
+              {label}
+            </Label>
+          ) : (
+            children
+          )}
         </Container>
       </NavLink>
     );
   },
 );
 
-const Container = styled.span<Omit<NavigationLinkProps, 'to'>>`
-  ${LayoutStyles};
-  ${AppearanceStyles};
-  ${FocusedStyles};
+// const Container = styled.span<Omit<NavigationLinkProps, 'to'>>`
+//   ${LayoutStyles};
+//   ${AppearanceStyles};
+//   ${FocusedStyles};
 
-  cursor: pointer;
-  text-decoration: none;
+//   cursor: pointer;
+//   text-decoration: none;
 
-  * {
-    cursor: pointer;
-  }
+//   * {
+//     cursor: pointer;
+//   }
 
-  &:before {
-    border-radius: calc(${props => props.borderRadius} + 3px);
-  }
-`;
+//   &:before {
+//     border-radius: calc(${props => props.borderRadius} + 3px);
+//   }
+// `;

@@ -1,8 +1,8 @@
 import { memo, ReactElement } from 'react';
-import { Amount, BackgroundColors, Depth } from '../../../types';
 
+import { NavigationLink, Workspace } from '../../..';
+import { Amount, BackgroundColors, Depth } from '../../../types';
 import { Documentation } from '../../layouts/Documentation';
-import { Workspace } from '../../../components/containers/Workspace';
 
 export const Forms = memo((): ReactElement => {
   return (
@@ -12,6 +12,12 @@ export const Forms = memo((): ReactElement => {
       layout={Documentation}
       padding={Amount.Most}
       title="Forms"
-    ></Workspace>
+    >
+      <ul>
+        <li>
+          <NavigationLink to="/forms/button">Buttons</NavigationLink>
+        </li>
+      </ul>
+    </Workspace>
   );
 });

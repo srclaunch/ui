@@ -10,7 +10,6 @@ async function init() {
 
 init();
 
-export { AnimatedContainer } from './components/animation/AnimatedContainer';
 export { CodeVerificationForm } from './components/authentication/CodeVerificationForm';
 export { ForgotPasswordForm } from './components/authentication/ForgotPasswordForm';
 export { LoginForm } from './components/authentication/LoginForm';

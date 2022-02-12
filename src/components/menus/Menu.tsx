@@ -14,10 +14,10 @@ import { Container, ContainerProps } from '../layout/Container';
 import { MenuItem, MenuItemProps } from './MenuItem';
 
 export type MenuProps = {
+  readonly onItemClick?: (item: MenuItemProps) => void;
   readonly menu?: readonly MenuItemProps[];
   readonly menuItemProps?: MenuItemProps;
-  readonly onClick?: (i?: MenuItemProps) => void;
-} & Omit<ContainerProps, 'onClick'>;
+} & ContainerProps;
 
 export const Menu = memo(
   ({
@@ -55,6 +55,7 @@ export const Menu = memo(
     },
     maxHeight = 120,
     onClick,
+    onItemClick,
     orientation = Orientation.Vertical,
     minWidth = 80,
     padding = Amount.Least,
@@ -80,8 +81,8 @@ export const Menu = memo(
               <MenuItem
                 key={key}
                 onClick={() => {
-                  if (onClick) {
-                    onClick(item);
+                  if (onItemClick) {
+                    onItemClick(item);
                   }
                 }}
                 {...menuItemProps}

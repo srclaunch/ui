@@ -158,7 +158,7 @@ export const DropdownInput = memo(
               backgroundColor={BackgroundColors.Light}
               borderRadius={borderRadius}
               menu={menu}
-              onClick={i => {
+              onItemClick={i => {
                 setValueChanged(true);
                 setItem(i);
                 setMenuVisible(false);

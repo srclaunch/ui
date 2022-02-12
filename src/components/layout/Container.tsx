@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { AppearanceStyles } from '../../styles/appearance';
 import { DimensionStyles } from '../../styles/appearance/dimension';
 import { VisibilityStyles } from '../../styles/appearance/visibility';
+import { FocusedStyles } from '../../styles/focused';
 import { LayoutStyles } from '../../styles/layout';
 import {
   Align,
   AppearanceProps,
-  BehaviorProps,
   CommonComponentProps,
   FocusProps,
   HeightProps,
@@ -33,6 +33,7 @@ export type ContainerProps<E = HTMLElement> = PropsWithChildren<
 const Wrapper = styled.div<ContainerProps>`
   ${LayoutStyles};
   ${AppearanceStyles};
+  ${FocusedStyles};
   ${DimensionStyles};
   ${VisibilityStyles};
 `;

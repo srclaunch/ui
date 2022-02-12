@@ -51,7 +51,7 @@ export const WebApplication = memo(
         {...props}
       >
         <ThemeProvider theme={current} themes={list}>
-          <LoadingOverlay visible={inProgress || !showOutlet} />
+          <LoadingOverlay visible={!showOutlet} />
 
           <Backdrop visible={false} />
 

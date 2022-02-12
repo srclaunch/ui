@@ -5,6 +5,8 @@ import { DataGridCellPage } from './pages/data/DataGridCell';
 import { DataLabelPage } from './pages/data/DataLabel';
 import { Data } from './pages/data/index';
 import { Forms } from './pages/forms';
+import { ButtonsPage } from './pages/forms/buttons';
+import { ButtonPage } from './pages/forms/buttons/Button';
 import { MenuButtonPage } from './pages/forms/buttons/MenuButton';
 import { CountryInputPage } from './pages/forms/inputs/CountryInput';
 import { DropdownInputPage } from './pages/forms/inputs/DropdownInput';
@@ -71,6 +73,14 @@ const routes: readonly PageRoute[] = [
   {
     component: Forms,
     path: '/forms',
+  },
+  {
+    component: ButtonsPage,
+    path: '/forms/buttons',
+  },
+  {
+    component: ButtonPage,
+    path: '/forms/buttons/button',
   },
   {
     component: MenuButtonPage,

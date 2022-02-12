@@ -1,5 +1,6 @@
 import { memo, ReactElement } from 'react';
 
+import { Label } from '../..';
 import {
   Align,
   Amount,
@@ -77,8 +78,8 @@ export const NavigationMenu = memo(
               grow={false}
               hover={menuItemProps?.hover ?? item.hover}
               icon={item.icon}
-              onClick={e => item.onClick?.()}
               key={key}
+              label={item.label}
               margin={menuItemProps.margin ?? Amount.None}
               marginBottom={menuItemProps.marginBottom ?? Amount.Least}
               marginLeft={menuItemProps.marginLeft ?? Amount.None}
@@ -91,16 +92,9 @@ export const NavigationMenu = memo(
               paddingLeft={menuItemProps.paddingLeft ?? menuItemProps.padding}
               paddingRight={menuItemProps.paddingRight ?? menuItemProps.padding}
               paddingTop={menuItemProps.paddingTop ?? menuItemProps.padding}
-              textColor={
-                menuItemProps.textColor ?? item.textColor ?? TextColors.Default
-              }
-              textSize={menuItemProps.textSize ?? TextSize.Small}
-              textWeight={TextWeight.More}
               to={item.to ?? '#'}
-              // {...menuItemProps}
-            >
-              {item.label ?? item.component}
-            </NavigationLink>
+              {...menuItemProps}
+            />
           );
         })}
       </Container>
