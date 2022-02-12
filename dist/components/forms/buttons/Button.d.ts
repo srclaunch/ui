@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { SizeProps } from '../../../types/index';
-import { IconProps } from '../../media/Icon';
 import { ContainerProps } from '../../layout/Container';
+import { IconProps } from '../../media/Icon';
 import { LabelProps } from '../../typography/Label';
 export declare enum ButtonType {
     Default = "black",

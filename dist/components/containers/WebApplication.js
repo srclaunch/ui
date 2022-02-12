@@ -18,6 +18,6 @@ export const WebApplication = memo(({ authentication = false, actions, backgroun
             (!loggedIn && !loginRequired)
         : true;
     const showOutlet = !inProgress && loginCondition;
-    return (_jsx(Container, { backgroundColor: backgroundColor, className: `${className} web-application`, ...props, children: _jsxs(ThemeProvider, { theme: current, themes: list, children: [_jsx(LoadingOverlay, { visible: inProgress || !showOutlet }, void 0), _jsx(Backdrop, { visible: false }, void 0), showOutlet && _jsx(Outlet, {}, void 0), _jsx(EntityPanel, { actions: actions, httpClient: httpClient }, void 0)] }, void 0) }, void 0));
+    return (_jsx(Container, { backgroundColor: backgroundColor, className: `${className} web-application`, ...props, children: _jsxs(ThemeProvider, { theme: current, themes: list, children: [_jsx(LoadingOverlay, { visible: !showOutlet }, void 0), _jsx(Backdrop, { visible: false }, void 0), showOutlet && _jsx(Outlet, {}, void 0), _jsx(EntityPanel, { actions: actions, httpClient: httpClient }, void 0)] }, void 0) }, void 0));
 });
 //# sourceMappingURL=WebApplication.js.map

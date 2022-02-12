@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { SizeProps, TextProps } from '../../types';
 import { ContainerProps } from '../layout/Container';
 import { IconProps } from '../media/Icon';
-export declare type LabelProps<E = HTMLLabelElement | HTMLHeadingElement | HTMLParagraphElement> = {
+export declare type LabelProps<E = HTMLElement> = {
     readonly icon?: IconProps;
 } & {
     readonly focus?: LabelProps;

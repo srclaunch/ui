@@ -28,12 +28,12 @@ export const Menu = memo(({ as = 'nav', backgroundColor = BackgroundColors.Light
     paddingLeft: Amount.Less,
     paddingRight: Amount.Less,
     textSize: TextSize.Small,
-}, maxHeight = 120, onClick, orientation = Orientation.Vertical, minWidth = 80, padding = Amount.Least, ...props }) => {
+}, maxHeight = 120, onClick, onItemClick, orientation = Orientation.Vertical, minWidth = 80, padding = Amount.Least, ...props }) => {
     return (_jsx(Container, { as: as, backgroundColor: backgroundColor, boxShadow: boxShadow, borderRadius: borderRadius, className: `${className} menu`, maxHeight: maxHeight, minWidth: minWidth, orientation: orientation, overflow: Overflow.ScrollVertical, padding: padding, ...props, children: menu &&
             menu.map((item, key) => {
                 return (_jsx(MenuItem, { onClick: () => {
-                        if (onClick) {
-                            onClick(item);
+                        if (onItemClick) {
+                            onItemClick(item);
                         }
                     }, ...menuItemProps, ...item }, key));
             }) }, void 0));

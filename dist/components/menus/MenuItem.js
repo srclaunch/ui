@@ -10,15 +10,18 @@ export const MenuItem = memo(({ active, as = 'div', backgroundColor = Background
     const itemTitle = title ? (_jsx(Label, { textSize: TextSize.Smaller, children: title }, void 0)) : null;
     if (to) {
         return (_jsxs(Container, { children: [itemTitle, _jsx(NavigationLink, { active: active, borderRadius: Amount.Least, backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent, focus: focus, hover: hover, icon: icon, onClick: e => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         if (onClick)
-                            onClick({ icon, label, value });
+                            onClick(e);
                     }, paddingLeft: Amount.Less, paddingRight: Amount.Less, textColor: props.textColor ?? TextColors.Default, to: to, children: component ?? label }, void 0)] }, void 0));
     }
     return (_jsxs(Container, { children: [itemTitle, _jsx(Button, { alignContent: Align.Left, borderRadius: Amount.Least, backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent, form: "null", icon: icon, onClick: e => {
                     e.preventDefault();
                     e.stopPropagation();
+                    // @ts-ignore
                     if (onClick)
-                        onClick({ icon, label, value });
+                        onClick(e);
                 }, onMouseEnter: () => setHovered(true), onMouseLeave: () => setHovered(false), paddingLeft: Amount.Less, paddingRight: Amount.Less, type: hovered ? ButtonType.Primary : ButtonType.Transparent, children: component ?? label }, void 0)] }, void 0));
     // return (
     //   <Container

@@ -14,6 +14,6 @@ export const Label = memo(({ alignItems = Align.Center, alignContent = Align.Str
                     icon.name ||
                     icon.path ||
                     icon.url ||
-                    icon.svg) && _jsx(Icon, { marginRight: Amount.Least, ...icon }, void 0), _jsx(TextContainer, { as: as, className: `${className} text`, grow: grow, inline: inline, selectable: selectable, lineHeight: lineHeight, overflow: Overflow.Hidden, textColor: textColor, textOverflow: textOverflow, textSize: textSize, textWeight: textWeight, underline: underline, whiteSpace: whiteSpace, ...props, children: children }, void 0)] }, void 0));
+                    icon.svg) && _jsx(Icon, { marginRight: Amount.Least, ...icon }, void 0), _jsx(TextContainer, { as: "span", className: `${className} text`, inline: inline, selectable: selectable, lineHeight: lineHeight, overflow: Overflow.Hidden, textColor: textColor, textOverflow: textOverflow, textSize: textSize, textWeight: textWeight, underline: underline, whiteSpace: whiteSpace, ...props, children: children }, void 0)] }, void 0));
 });
 //# sourceMappingURL=Label.js.map

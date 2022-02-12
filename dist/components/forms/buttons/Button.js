@@ -3,7 +3,7 @@ import { memo, useState } from 'react';
 import { getLargerAmount } from '../../../lib/proportions/amount';
 import { convertSizeToAmount, convertSizeToTextSize, } from '../../../lib/proportions/conversions';
 import { getSmallerSize } from '../../../lib/proportions/size';
-import { Align, Amount, BackgroundColors, Cursor, Orientation, Overflow, Size, TextColors, TextWeight, } from '../../../types/index';
+import { Align, Amount, BackgroundColors, Cursor, Orientation, Overflow, Size, TextColors, } from '../../../types/index';
 import { Container } from '../../layout/Container';
 import { Label } from '../../typography/Label';
 export var ButtonType;
@@ -152,6 +152,6 @@ export const Button = memo(({ active, alignItems = Align.Center, alignContent = 
                 onMouseLeave(e);
         }, orientation: orientation, overflow: Overflow.Visible, paddingLeft: getLargerAmount(convertSizeToAmount(size)), paddingRight: getLargerAmount(convertSizeToAmount(size)), size: size, ...props, children: typeof children === 'string' ? (_jsx(Label, { alignContent: fullWidth ? Align.Center : alignContent, icon: icon, lineHeight: size === Size.Smaller || size === Size.Smallest
                 ? Size.Small
-                : size, size: size, textColor: updatedTextColor, textSize: convertSizeToTextSize(getSmallerSize(size)), textWeight: TextWeight.More, underline: type === ButtonType.Link && hovered, children: children }, void 0)) : (_jsx(_Fragment, { children: children }, void 0)) }, void 0));
+                : size, size: size, textColor: updatedTextColor, textSize: convertSizeToTextSize(getSmallerSize(size)), textWeight: textWeight, underline: type === ButtonType.Link && hovered, children: children }, void 0)) : (_jsx(_Fragment, { children: children }, void 0)) }, void 0));
 });
 //# sourceMappingURL=Button.js.map

@@ -6,6 +6,20 @@ const getDimension = (dimension) => {
     return dimension;
 };
 export const DimensionStyles = css `
+  ${props => props.height &&
+    css `
+      max-height: ${getDimension(props.height)};
+      min-height: ${getDimension(props.height)};
+      height: ${getDimension(props.height)};
+    `};
+
+  ${props => props.width &&
+    css `
+      max-width: ${getDimension(props.width)};
+      min-width: ${getDimension(props.width)};
+      width: ${getDimension(props.width)};
+    `};
+
   ${props => props.maxHeight &&
     css `
       max-height: ${getDimension(props.maxHeight)};
@@ -18,40 +32,12 @@ export const DimensionStyles = css `
 
   ${props => props.minHeight &&
     css `
-      /* flex-basis: ${getDimension(props.minHeight)}; */
       min-height: ${getDimension(props.minHeight)};
     `};
 
   ${props => props.minWidth &&
     css `
-      /* flex-basis: ${getDimension(props.minWidth)}; */
       min-width: ${getDimension(props.minWidth)};
-    `};
-
-  ${props => props.height &&
-    css `
-      /* flex-basis: ${getDimension(props.height)}; */
-      height: ${getDimension(props.height)};
-      max-height: ${getDimension(props.height)};
-      min-height: ${getDimension(props.height)};
-    `};
-
-  ${props => props.width &&
-    css `
-      /* flex-basis: ${getDimension(props.width)}; */
-      width: ${getDimension(props.width)};
-      max-width: ${getDimension(props.width)};
-      min-width: ${getDimension(props.width)};
-    `};
-
-  ${props => props.size &&
-    css `
-      height: ${getDimension(props.size)};
-      max-height: ${getDimension(props.size)};
-      min-height: ${getDimension(props.size)};
-      width: ${getDimension(props.size)};
-      max-width: ${getDimension(props.size)};
-      min-width: ${getDimension(props.size)};
     `};
 `;
 //# sourceMappingURL=dimension.js.map

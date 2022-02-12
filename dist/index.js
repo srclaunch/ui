@@ -6,7 +6,6 @@ async function init() {
     countries.registerLocale(await import('i18n-iso-countries/langs/en.json'));
 }
 init();
-export { AnimatedContainer } from './components/animation/AnimatedContainer';
 export { CodeVerificationForm } from './components/authentication/CodeVerificationForm';
 export { ForgotPasswordForm } from './components/authentication/ForgotPasswordForm';
 export { LoginForm } from './components/authentication/LoginForm';
