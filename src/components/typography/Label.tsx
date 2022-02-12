@@ -75,9 +75,8 @@ export const Label = memo(
             icon.svg) && <Icon marginRight={Amount.Least} {...icon} />}
 
         <TextContainer
-          as={as}
+          as="span"
           className={`${className} text`}
-          grow={grow}
           inline={inline}
           selectable={selectable}
           lineHeight={lineHeight}
