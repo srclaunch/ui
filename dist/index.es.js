@@ -4975,11 +4975,12 @@ const Image = memo((_c) => {
 const SvgMedia = styled.svg`
   ${DimensionStyles};
   ${MarginStyles};
+  align-items: center;
+  display: flex;
+  justify-content: center;
 
   svg {
     fill: ${(props) => props.color};
-    height: ${(props) => props.size};
-    width: ${(props) => props.size};
   }
 `;
 const Svg = memo((_e) => {
@@ -4987,7 +4988,7 @@ const Svg = memo((_e) => {
     as = "span",
     children,
     className = "",
-    size = Size.Default
+    size = Size.Small
   } = _f, props = __objRest(_f, [
     "as",
     "children",

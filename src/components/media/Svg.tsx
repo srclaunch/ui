@@ -28,11 +28,12 @@ export type SvgProps = {
 const SvgMedia = styled.svg<SvgProps>`
   ${DimensionStyles};
   ${MarginStyles};
+  align-items: center;
+  display: flex;
+  justify-content: center;
 
   svg {
     fill: ${props => props.color};
-    height: ${props => props.size};
-    width: ${props => props.size};
   }
 `;
 
@@ -41,7 +42,7 @@ export const Svg = memo(
     as = 'span',
     children,
     className = '',
-    size = Size.Default,
+    size = Size.Small,
     ...props
   }: SvgProps): ReactElement => {
     return (

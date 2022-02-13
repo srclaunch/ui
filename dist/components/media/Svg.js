@@ -7,14 +7,15 @@ import { Size, } from '../../types';
 const SvgMedia = styled.svg `
   ${DimensionStyles};
   ${MarginStyles};
+  align-items: center;
+  display: flex;
+  justify-content: center;
 
   svg {
     fill: ${props => props.color};
-    height: ${props => props.size};
-    width: ${props => props.size};
   }
 `;
-export const Svg = memo(({ as = 'span', children, className = '', size = Size.Default, ...props }) => {
+export const Svg = memo(({ as = 'span', children, className = '', size = Size.Small, ...props }) => {
     return (_jsx(SvgMedia, { as: as, className: `${className} svg`, size: size, ...props, children: children }, void 0));
 });
 //# sourceMappingURL=Svg.js.map
