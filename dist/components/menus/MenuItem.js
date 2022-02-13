@@ -1,22 +1,22 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { memo, useState } from 'react';
-import { Align, Amount, BackgroundColors, DepthShadow, TextColors, TextSize, } from '../../types';
+import { Align, Amount, BackgroundColors, DepthShadow, Size, TextColors, TextSize, } from '../../types';
 import { Button, ButtonType } from '../forms/buttons/Button';
 import { Container } from '../layout/Container';
 import { NavigationLink, } from '../navigation/NavigationLink';
 import { Label } from '../typography/Label';
-export const MenuItem = memo(({ active, as = 'div', backgroundColor = BackgroundColors.Lightest, borderRadius = Amount.Less, boxShadow = DepthShadow.Surface, className = '', component, focus, hover, icon, label, onClick, title, to, value, ...props }) => {
+export const MenuItem = memo(({ active, as = 'div', backgroundColor = BackgroundColors.Lightest, borderRadius = Amount.Less, boxShadow = DepthShadow.Surface, className = '', component, focus, hover, icon, label, lineHeight = Size.Default, onClick, title, to, value, ...props }) => {
     const [hovered, setHovered] = useState(false);
     const itemTitle = title ? (_jsx(Label, { textSize: TextSize.Smaller, children: title }, void 0)) : null;
     if (to) {
-        return (_jsxs(Container, { children: [itemTitle, _jsx(NavigationLink, { active: active, borderRadius: Amount.Least, backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent, focus: focus, hover: hover, icon: icon, onClick: e => {
+        return (_jsxs(Container, { children: [itemTitle, _jsx(NavigationLink, { active: active, borderRadius: Amount.Least, backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent, focus: focus, hover: hover, icon: icon, lineHeight: lineHeight, onClick: e => {
                         e.preventDefault();
                         e.stopPropagation();
                         if (onClick)
                             onClick(e);
                     }, paddingLeft: Amount.Less, paddingRight: Amount.Less, textColor: props.textColor ?? TextColors.Default, to: to, children: component ?? label }, void 0)] }, void 0));
     }
-    return (_jsxs(Container, { children: [itemTitle, _jsx(Button, { alignContent: Align.Left, borderRadius: Amount.Least, backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent, form: "null", icon: icon, onClick: e => {
+    return (_jsxs(Container, { children: [itemTitle, _jsx(Button, { alignContent: Align.Left, borderRadius: Amount.Least, backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent, form: "null", icon: icon, lineHeight: lineHeight, onClick: e => {
                     e.preventDefault();
                     e.stopPropagation();
                     // @ts-ignore

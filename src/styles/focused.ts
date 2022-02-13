@@ -20,9 +20,7 @@ export const FocusedStyles = css<
     border-radius: calc(${props => props.borderRadius} + 3px);
     content: '';
     display: block;
-    border-color: rgb(
-      ${props => props.backgroundColor ?? BorderColors.Primary}
-    );
+    border-color: rgb(${BorderColors.Primary});
     border-style: solid;
     border-width: 2px;
     opacity: ${props => (props.focused ? 1 : 0)};

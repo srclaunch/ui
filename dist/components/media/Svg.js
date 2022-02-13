@@ -12,7 +12,7 @@ const SvgMedia = styled.svg `
   justify-content: center;
 
   svg {
-    fill: ${props => props.color};
+    fill: rgb(${props => props.color});
   }
 `;
 export const Svg = memo(({ as = 'span', children, className = '', size = Size.Small, ...props }) => {

@@ -5,6 +5,7 @@ import {
   Amount,
   BackgroundColors,
   DepthShadow,
+  Size,
   TextColors,
   TextSize,
 } from '../../types';
@@ -39,6 +40,7 @@ export const MenuItem = memo(
     hover,
     icon,
     label,
+    lineHeight = Size.Default,
     onClick,
     title,
     to,
@@ -65,6 +67,7 @@ export const MenuItem = memo(
             focus={focus}
             hover={hover}
             icon={icon}
+            lineHeight={lineHeight}
             onClick={e => {
               e.preventDefault();
               e.stopPropagation();
@@ -94,6 +97,7 @@ export const MenuItem = memo(
           }
           form="null"
           icon={icon}
+          lineHeight={lineHeight}
           onClick={e => {
             e.preventDefault();
             e.stopPropagation();

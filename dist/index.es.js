@@ -2363,6 +2363,101 @@ reactJsxRuntime_production_min.jsxs = q$1;
 const jsx = jsxRuntime.exports.jsx;
 const jsxs = jsxRuntime.exports.jsxs;
 const Fragment = jsxRuntime.exports.Fragment;
+var Alert = memo((props) => {
+  return /* @__PURE__ */ jsx("svg", __spreadProps(__spreadValues({
+    id: "applab-icon-basic-alert",
+    version: "1.1",
+    xmlns: "http://www.w3.org/2000/svg",
+    xmlnsXlink: "http://www.w3.org/1999/xlink",
+    x: "0px",
+    y: "0px",
+    viewBox: "0 0 485.811 485.811",
+    enableBackground: "new 0 0 485.811 485.811",
+    xmlSpace: "preserve"
+  }, props), {
+    children: /* @__PURE__ */ jsx("g", {
+      children: /* @__PURE__ */ jsx("path", {
+        d: "M476.099,353.968l-170.2-294.8c-27.8-48.7-98.1-48.7-125.8,0l-170.3,294.8c-27.8,48.7,6.8,109.2,62.9,109.2h339.9\nC468.699,463.168,503.899,402.068,476.099,353.968z M242.899,397.768c-14.8,0-27.1-12.3-27.1-27.1s12.3-27.1,27.1-27.1\nc14.8,0,27.1,12.3,26.5,27.8C270.099,385.468,257.099,397.768,242.899,397.768z M267.599,222.568c-1.2,21-2.5,41.9-3.7,62.9\nc-0.6,6.8-0.6,13-0.6,19.7c-0.6,11.1-9.3,19.7-20.4,19.7s-19.7-8-20.4-19.1c-1.8-32.7-3.7-64.8-5.5-97.5\nc-0.6-8.6-1.2-17.3-1.9-25.9c0-14.2,8-25.9,21-29.6c13-3.1,25.9,3.1,31.5,15.4c1.9,4.3,2.5,8.6,2.5,13.6\nC269.499,195.468,268.199,209.068,267.599,222.568z"
+      })
+    })
+  }));
+});
+var CaretDownArrow = memo((props) => {
+  return /* @__PURE__ */ e.createElement("svg", __spreadValues({
+    viewBox: "0 0 292.362 292.362",
+    width: "1em",
+    height: "1em"
+  }, props), /* @__PURE__ */ e.createElement("path", {
+    d: "M286.935 69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952 0-9.233 1.807-12.85 5.424C1.807 72.998 0 77.279 0 82.228c0 4.948 1.807 9.229 5.424 12.847l127.907 127.907c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428L286.935 95.074c3.613-3.617 5.427-7.898 5.427-12.847 0-4.948-1.814-9.229-5.427-12.85z"
+  }));
+});
+var Checkmark = memo((props) => {
+  return /* @__PURE__ */ e.createElement("svg", {
+    id: "applab-icon-basic-checkmark",
+    version: "1.1",
+    xmlns: "http://www.w3.org/2000/svg",
+    xmlnsXlink: "http://www.w3.org/1999/xlink",
+    x: "0px",
+    y: "0px",
+    width: "442.533px",
+    height: "442.533px",
+    viewBox: "0 0 442.533 442.533",
+    enableBackground: "new 0 0 442.533 442.533",
+    xmlSpace: "preserve"
+  }, /* @__PURE__ */ e.createElement("g", null, /* @__PURE__ */ e.createElement("path", {
+    d: "M434.539,98.499l-38.828-38.828c-5.324-5.328-11.799-7.993-19.41-7.993c-7.618,0-14.093,2.665-19.417,7.993L169.59,247.248\n      l-83.939-84.225c-5.33-5.33-11.801-7.992-19.412-7.992c-7.616,0-14.087,2.662-19.417,7.992L7.994,201.852\n      C2.664,207.181,0,213.654,0,221.269c0,7.609,2.664,14.088,7.994,19.416l103.351,103.349l38.831,38.828\n      c5.327,5.332,11.8,7.994,19.414,7.994c7.611,0,14.084-2.669,19.414-7.994l38.83-38.828L434.539,137.33\n      c5.325-5.33,7.994-11.802,7.994-19.417C442.537,110.302,439.864,103.829,434.539,98.499z"
+  })));
+});
+var Checkmark2 = memo((props) => {
+  return /* @__PURE__ */ e.createElement("svg", __spreadValues({
+    viewBox: "0 0 442.533 442.533",
+    width: "1em",
+    height: "1em"
+  }, props), /* @__PURE__ */ e.createElement("path", {
+    d: "M434.539 98.499l-38.828-38.828c-5.324-5.328-11.799-7.993-19.41-7.993-7.618 0-14.093 2.665-19.417 7.993L169.59 247.248l-83.939-84.225c-5.33-5.33-11.801-7.992-19.412-7.992-7.616 0-14.087 2.662-19.417 7.992L7.994 201.852C2.664 207.181 0 213.654 0 221.269c0 7.609 2.664 14.088 7.994 19.416l103.351 103.349 38.831 38.828c5.327 5.332 11.8 7.994 19.414 7.994 7.611 0 14.084-2.669 19.414-7.994l38.83-38.828L434.539 137.33c5.325-5.33 7.994-11.802 7.994-19.417.004-7.611-2.669-14.084-7.994-19.414z"
+  }));
+});
+var Close$3 = memo((props) => {
+  return /* @__PURE__ */ e.createElement("svg", {
+    id: "applab-icon-basic-close",
+    enableBackground: "new 0 0 492 492",
+    version: "1.1",
+    viewBox: "0 0 492 492",
+    xmlSpace: "preserve",
+    xmlns: "http://www.w3.org/2000/svg",
+    xmlnsXlink: "http://www.w3.org/1999/xlink"
+  }, /* @__PURE__ */ e.createElement("path", {
+    d: "M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872\n			c-5.068-5.076-11.824-7.856-19.036-7.856c-7.2,0-13.956,2.78-19.024,7.856L246.008,191.82L62.048,7.872\n			c-5.06-5.076-11.82-7.856-19.028-7.856c-7.2,0-13.96,2.78-19.02,7.856L7.872,23.988c-10.496,10.496-10.496,27.568,0,38.052\n			L191.828,246L7.872,429.952c-5.064,5.072-7.852,11.828-7.852,19.032c0,7.204,2.788,13.96,7.852,19.028l16.124,16.116\n			c5.06,5.072,11.824,7.856,19.02,7.856c7.208,0,13.968-2.784,19.028-7.856l183.96-183.952l183.952,183.952\n			c5.068,5.072,11.824,7.856,19.024,7.856h0.008c7.204,0,13.96-2.784,19.028-7.856l16.12-16.116\n			c5.06-5.064,7.852-11.824,7.852-19.028c0-7.204-2.792-13.96-7.852-19.028L300.188,246z"
+  }));
+});
+var Exit = memo((props) => {
+  return /* @__PURE__ */ e.createElement("svg", __spreadValues({
+    viewBox: "0 0 512 512",
+    width: "1em",
+    height: "1em"
+  }, props), /* @__PURE__ */ e.createElement("path", {
+    d: "M361 396c-11.046 0-20 8.954-20 20v56H55V40h286v56c0 11.046 8.954 20 20 20s20-8.954 20-20V20c0-11.046-8.954-20-20-20H35C23.954 0 15 8.954 15 20v472c0 11.046 8.954 20 20 20h326c11.046 0 20-8.954 20-20v-76c0-11.046-8.954-20-20-20z"
+  }), /* @__PURE__ */ e.createElement("path", {
+    d: "M491.141 241.858l-53.74-53.74c-7.81-7.811-20.473-7.81-28.284 0s-7.811 20.474 0 28.285L428.715 236l-165.678-.001c-11.045 0-20 8.954-20 20s8.954 20 20 20l165.68.001-19.599 19.599c-7.811 7.809-7.811 20.473 0 28.284 7.81 7.811 20.474 7.809 28.284-.001l53.74-53.74a.022.022 0 01.004-.005c4.024-4.027 5.709-8.682 5.854-14.137 0-5.392-2.291-10.576-5.859-14.142z"
+  }));
+});
+var FileUpload = memo((props) => {
+  return /* @__PURE__ */ e.createElement("svg", {
+    viewBox: "-64 0 512 512",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /* @__PURE__ */ e.createElement("path", {
+    d: "M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"
+  }));
+});
+var GearCog = memo((props) => {
+  return /* @__PURE__ */ e.createElement("svg", __spreadValues({
+    viewBox: "0 0 512 512",
+    width: "1em",
+    height: "1em"
+  }, props), /* @__PURE__ */ e.createElement("path", {
+    d: "M489.514 296.695l-21.3-17.534c-14.59-12.011-14.564-34.335.001-46.322l21.299-17.534a39.878 39.878 0 009.218-50.882l-42.058-72.846A39.88 39.88 0 00408 74.119l-25.835 9.679c-17.696 6.628-37.016-4.551-40.117-23.161l-4.535-27.214A39.874 39.874 0 00298.058 0h-84.115a39.874 39.874 0 00-39.456 33.424l-4.536 27.213c-3.107 18.643-22.453 29.778-40.116 23.162L104 74.119a39.88 39.88 0 00-48.674 17.458l-42.057 72.845a39.875 39.875 0 009.218 50.882l21.299 17.534c14.592 12.012 14.563 34.334 0 46.322l-21.3 17.534a39.876 39.876 0 00-9.218 50.882l42.058 72.846c9.818 17.003 30.286 24.344 48.674 17.458l25.834-9.679c17.699-6.631 37.015 4.556 40.116 23.161l4.536 27.212A39.875 39.875 0 00213.942 512h84.115a39.873 39.873 0 0039.455-33.424l4.535-27.212c3.106-18.638 22.451-29.781 40.117-23.161L408 437.881a39.876 39.876 0 0048.674-17.458l42.059-72.847a39.878 39.878 0 00-9.219-50.881zm-67.481 103.728l-25.835-9.679c-41.299-15.471-86.37 10.63-93.605 54.043L298.058 472h-84.115l-4.536-27.213c-7.249-43.497-52.386-69.484-93.605-54.043l-25.835 9.679-42.057-72.846 21.299-17.534c34.049-28.03 33.978-80.114 0-108.086L47.91 184.423l42.058-72.846 25.834 9.679c41.3 15.47 86.37-10.63 93.605-54.043L213.942 40h84.115l4.535 27.213c7.25 43.502 52.389 69.481 93.605 54.043l25.835-9.679 42.067 72.836-.011.009-21.298 17.534c-34.048 28.028-33.98 80.113-.001 108.086l21.3 17.534zM256 157.333c-54.405 0-98.667 44.262-98.667 98.667s44.262 98.667 98.667 98.667 98.667-44.262 98.667-98.667-44.262-98.667-98.667-98.667zm0 157.334c-32.349 0-58.667-26.318-58.667-58.667s26.318-58.667 58.667-58.667 58.667 26.318 58.667 58.667-26.318 58.667-58.667 58.667z"
+  }));
+});
 var BasicIcons = /* @__PURE__ */ ((BasicIcons2) => {
   BasicIcons2["Airplane"] = "basic/Airplane.svg";
   BasicIcons2["Alert"] = "basic/Alert.svg";
@@ -2462,362 +2557,6 @@ var BasicIcons = /* @__PURE__ */ ((BasicIcons2) => {
   BasicIcons2["WorldWideWeb"] = "basic/WorldWideWeb.svg";
   return BasicIcons2;
 })(BasicIcons || {});
-var DualLightIcons = /* @__PURE__ */ ((DualLightIcons2) => {
-  DualLightIcons2["Activity"] = "dual-light/activity.svg";
-  DualLightIcons2["AddCircle"] = "dual-light/add_circled.svg";
-  DualLightIcons2["Add"] = "dual-light/add.svg";
-  DualLightIcons2["Alarm"] = "dual-light/alarm.svg";
-  DualLightIcons2["AlertCircle"] = "dual-light/alert_circled.svg";
-  DualLightIcons2["Anchor"] = "dual-light/anchor.svg";
-  DualLightIcons2["Android"] = "dual-light/android.svg";
-  DualLightIcons2["Apple"] = "dual-light/apple.svg";
-  DualLightIcons2["Archive"] = "dual-light/archive.svg";
-  DualLightIcons2["ArrowBackward"] = "dual-light/arrow_backward.svg";
-  DualLightIcons2["ArrowDown"] = "dual-light/arrow_down.svg";
-  DualLightIcons2["ArrowForward"] = "dual-light/arrow_forward.svg";
-  DualLightIcons2["ArrowUpDown"] = "dual-light/arrow_up_down.svg";
-  DualLightIcons2["ArrowUp"] = "dual-light/arrow_up.svg";
-  DualLightIcons2["AtSign"] = "dual-light/at_sign.svg";
-  DualLightIcons2["Attachment"] = "dual-light/attachment.svg";
-  DualLightIcons2["Badge"] = "dual-light/badge.svg";
-  DualLightIcons2["Bank"] = "dual-light/bank.svg";
-  DualLightIcons2["BarChart"] = "dual-light/bar_chart.svg";
-  DualLightIcons2["Basket"] = "dual-light/basket.svg";
-  DualLightIcons2["BatteryCharging"] = "dual-light/battery_charging.svg";
-  DualLightIcons2["BatteryFull"] = "dual-light/battery_full.svg";
-  DualLightIcons2["BatteryHalf"] = "dual-light/battery_half.svg";
-  DualLightIcons2["BatteryLow"] = "dual-light/battery_low.svg";
-  DualLightIcons2["Battery"] = "dual-light/battery.svg";
-  DualLightIcons2["BluetoothOff"] = "dual-light/bluetooth_off.svg";
-  DualLightIcons2["Bluetooth"] = "dual-light/bluetooth.svg";
-  DualLightIcons2["Bold"] = "dual-light/bold.svg";
-  DualLightIcons2["Book"] = "dual-light/book.svg";
-  DualLightIcons2["Bookmark"] = "dual-light/bookmark.svg";
-  DualLightIcons2["Box"] = "dual-light/box.svg";
-  DualLightIcons2["Briefcase"] = "dual-light/briefcase.svg";
-  DualLightIcons2["Brush"] = "dual-light/brush.svg";
-  DualLightIcons2["Building"] = "dual-light/building.svg";
-  DualLightIcons2["Bulb"] = "dual-light/bulb.svg";
-  DualLightIcons2["Calendar"] = "dual-light/calendar.svg";
-  DualLightIcons2["Camera"] = "dual-light/camera.svg";
-  DualLightIcons2["Cart"] = "dual-light/cart.svg";
-  DualLightIcons2["Cast"] = "dual-light/cast.svg";
-  DualLightIcons2["Category"] = "dual-light/category.svg";
-  DualLightIcons2["CenterAlign"] = "dual-light/center_align.svg";
-  DualLightIcons2["CheckAll"] = "dual-light/check_all.svg";
-  DualLightIcons2["CheckCircle"] = "dual-light/check_circled.svg";
-  DualLightIcons2["Check"] = "dual-light/check.svg";
-  DualLightIcons2["ChevronBackward"] = "dual-light/chevron_backward.svg";
-  DualLightIcons2["ChevronDoubleBackward"] = "dual-light/chevron_double_backward.svg";
-  DualLightIcons2["ChevronDoubleForward"] = "dual-light/chevron_double_forward.svg";
-  DualLightIcons2["ChevronDoubleDown"] = "dual-light/chevron_double_down.svg";
-  DualLightIcons2["ChevronDoubleUp"] = "dual-light/chevron_double_up.svg";
-  DualLightIcons2["ChevronDown"] = "dual-light/chevron_down.svg";
-  DualLightIcons2["ChevronForward"] = "dual-light/chevron_forward.svg";
-  DualLightIcons2["ChevronUp"] = "dual-light/chevron_up.svg";
-  DualLightIcons2["Chip"] = "dual-light/chip.svg";
-  DualLightIcons2["Chrome"] = "dual-light/chrome.svg";
-  DualLightIcons2["Clipboard"] = "dual-light/clipboard.svg";
-  DualLightIcons2["Clock"] = "dual-light/clock.svg";
-  DualLightIcons2["CloseCircle"] = "dual-light/close_circled.svg";
-  DualLightIcons2["Close"] = "dual-light/close.svg";
-  DualLightIcons2["CloudDownload"] = "dual-light/cloud_download.svg";
-  DualLightIcons2["CloudOff"] = "dual-light/cloud_off.svg";
-  DualLightIcons2["CloudUpload"] = "dual-light/cloud_upload.svg";
-  DualLightIcons2["Cloud"] = "dual-light/cloud.svg";
-  DualLightIcons2["Code"] = "dual-light/code.svg";
-  DualLightIcons2["Coffee"] = "dual-light/coffee.svg";
-  DualLightIcons2["Collapse"] = "dual-light/collapse.svg";
-  DualLightIcons2["ColorPalette"] = "dual-light/color_palette.svg";
-  DualLightIcons2["Command"] = "dual-light/command.svg";
-  DualLightIcons2["Compass"] = "dual-light/compass.svg";
-  DualLightIcons2["Crop"] = "dual-light/crop.svg";
-  DualLightIcons2["Crosshairs"] = "dual-light/crosshairs.svg";
-  DualLightIcons2["Cursor"] = "dual-light/cursor.svg";
-  DualLightIcons2["Dashboard"] = "dual-light/dashboard.svg";
-  DualLightIcons2["Database"] = "dual-light/database.svg";
-  DualLightIcons2["Design"] = "dual-light/design.svg";
-  DualLightIcons2["Diamond"] = "dual-light/diamond.svg";
-  DualLightIcons2["Document"] = "dual-light/document.svg";
-  DualLightIcons2["Dollar"] = "dual-light/dollar.svg";
-  DualLightIcons2["DonutChart"] = "dual-light/donut_chart.svg";
-  DualLightIcons2["Download"] = "dual-light/download.svg";
-  DualLightIcons2["Drop"] = "dual-light/drop.svg";
-  DualLightIcons2["Edit"] = "dual-light/edit.svg";
-  DualLightIcons2["EventAdd"] = "dual-light/event_add.svg";
-  DualLightIcons2["EventScheduled"] = "dual-light/event_scheduled.svg";
-  DualLightIcons2["Expand"] = "dual-light/expand.svg";
-  DualLightIcons2["Facebook"] = "dual-light/facebook.svg";
-  DualLightIcons2["FastBackward"] = "dual-light/fast_backward.svg";
-  DualLightIcons2["FastForward"] = "dual-light/fast_forward.svg";
-  DualLightIcons2["Figma"] = "dual-light/figma.svg";
-  DualLightIcons2["FileAdd"] = "dual-light/file_add.svg";
-  DualLightIcons2["File"] = "dual-light/file.svg";
-  DualLightIcons2["Files"] = "dual-light/files.svg";
-  DualLightIcons2["Film"] = "dual-light/film.svg";
-  DualLightIcons2["Filter"] = "dual-light/filter.svg";
-  DualLightIcons2["Fire"] = "dual-light/fire.svg";
-  DualLightIcons2["Flag"] = "dual-light/flag.svg";
-  DualLightIcons2["Flashlight"] = "dual-light/flashlight.svg";
-  DualLightIcons2["Flight"] = "dual-light/flight.svg";
-  DualLightIcons2["FolderAdd"] = "dual-light/folder_add.svg";
-  DualLightIcons2["Folder"] = "dual-light/folder.svg";
-  DualLightIcons2["Frown"] = "dual-light/frown.svg";
-  DualLightIcons2["Fuel"] = "dual-light/fuel.svg";
-  DualLightIcons2["Gamepad"] = "dual-light/gamepad.svg";
-  DualLightIcons2["Gift"] = "dual-light/gift.svg";
-  DualLightIcons2["Grid"] = "dual-light/grid.svg";
-  DualLightIcons2["Group"] = "dual-light/group.svg";
-  DualLightIcons2["Growth"] = "dual-light/growth.svg";
-  DualLightIcons2["HandCursor"] = "dual-light/hand_cursor.svg";
-  DualLightIcons2["Headphone"] = "dual-light/headphone.svg";
-  DualLightIcons2["Heart"] = "dual-light/heart.svg";
-  DualLightIcons2["Help"] = "dual-light/help.svg";
-  DualLightIcons2["Hide"] = "dual-light/hide.svg";
-  DualLightIcons2["Home"] = "dual-light/home.svg";
-  DualLightIcons2["Hourglass"] = "dual-light/hourglass.svg";
-  DualLightIcons2["Image"] = "dual-light/image.svg";
-  DualLightIcons2["Inbox"] = "dual-light/inbox.svg";
-  DualLightIcons2["Info"] = "dual-light/info.svg";
-  DualLightIcons2["Instagram"] = "dual-light/instagram.svg";
-  DualLightIcons2["Internet"] = "dual-light/internet.svg";
-  DualLightIcons2["Italics"] = "dual-light/italics.svg";
-  DualLightIcons2["Justify"] = "dual-light/justify.svg";
-  DualLightIcons2["Key"] = "dual-light/key.svg";
-  DualLightIcons2["Laptop"] = "dual-light/laptop.svg";
-  DualLightIcons2["Laugh"] = "dual-light/laugh.svg";
-  DualLightIcons2["Layers"] = "dual-light/layers.svg";
-  DualLightIcons2["Layout"] = "dual-light/layout.svg";
-  DualLightIcons2["Leaderboard"] = "dual-light/leaderboard.svg";
-  DualLightIcons2["LeftAlign"] = "dual-light/left_align.svg";
-  DualLightIcons2["LineChart"] = "dual-light/line_chart.svg";
-  DualLightIcons2["Link"] = "dual-light/link.svg";
-  DualLightIcons2["LinkedIn"] = "dual-light/linkedin.svg";
-  DualLightIcons2["List"] = "dual-light/list.svg";
-  DualLightIcons2["Live"] = "dual-light/live.svg";
-  DualLightIcons2["Loader"] = "dual-light/loader.svg";
-  DualLightIcons2["Location"] = "dual-light/location.svg";
-  DualLightIcons2["Lock"] = "dual-light/lock.svg";
-  DualLightIcons2["Login"] = "dual-light/login.svg";
-  DualLightIcons2["Logout"] = "dual-light/logout.svg";
-  DualLightIcons2["Mail"] = "dual-light/mail.svg";
-  DualLightIcons2["Map"] = "dual-light/map.svg";
-  DualLightIcons2["Meh"] = "dual-light/meh.svg";
-  DualLightIcons2["Menu"] = "dual-light/menu.svg";
-  DualLightIcons2["Message"] = "dual-light/message.svg";
-  DualLightIcons2["Messages"] = "dual-light/messages.svg";
-  DualLightIcons2["MicOff"] = "dual-light/mic_off.svg";
-  DualLightIcons2["Mic"] = "dual-light/mic.svg";
-  DualLightIcons2["Mobile"] = "dual-light/mobile.svg";
-  DualLightIcons2["Moon"] = "dual-light/moon.svg";
-  DualLightIcons2["MoreHorizontal"] = "dual-light/more_horizontal.svg";
-  DualLightIcons2["MoreVertical"] = "dual-light/more_vertical.svg";
-  DualLightIcons2["Mouse"] = "dual-light/mouse.svg";
-  DualLightIcons2["Music"] = "dual-light/music.svg";
-  DualLightIcons2["New"] = "dual-light/new.svg";
-  DualLightIcons2["Next"] = "dual-light/next.svg";
-  DualLightIcons2["Note"] = "dual-light/note.svg";
-  DualLightIcons2["Notes"] = "dual-light/notes.svg";
-  DualLightIcons2["NotificationOff"] = "dual-light/notification_off.svg";
-  DualLightIcons2["Notification"] = "dual-light/notification.svg";
-  DualLightIcons2["Open"] = "dual-light/open.svg";
-  DualLightIcons2["PainRoller"] = "dual-light/pain_roller.svg";
-  DualLightIcons2["Pause"] = "dual-light/pause.svg";
-  DualLightIcons2["Payment"] = "dual-light/payment.svg";
-  DualLightIcons2["Pen"] = "dual-light/pen.svg";
-  DualLightIcons2["Percent"] = "dual-light/percent.svg";
-  DualLightIcons2["Person"] = "dual-light/person.svg";
-  DualLightIcons2["PhoneCallIncoming"] = "dual-light/phone_call_incoming.svg";
-  DualLightIcons2["PhoneCallOutgoing"] = "dual-light/phone_call_outgoing.svg";
-  DualLightIcons2["PhoneCallRejected"] = "dual-light/phone_call_rejected.svg";
-  DualLightIcons2["Phone"] = "dual-light/phone.svg";
-  DualLightIcons2["Photos"] = "dual-light/photos.svg";
-  DualLightIcons2["PieChart"] = "dual-light/pie_chart.svg";
-  DualLightIcons2["Pin"] = "dual-light/pin.svg";
-  DualLightIcons2["Pinterest"] = "dual-light/pinterest.svg";
-  DualLightIcons2["PlayCircle"] = "dual-light/play_circled.svg";
-  DualLightIcons2["Play"] = "dual-light/play.svg";
-  DualLightIcons2["Playlist"] = "dual-light/playlist.svg";
-  DualLightIcons2["Power"] = "dual-light/power.svg";
-  DualLightIcons2["Presentation"] = "dual-light/presentation.svg";
-  DualLightIcons2["Previous"] = "dual-light/previous.svg";
-  DualLightIcons2["Printer"] = "dual-light/printer.svg";
-  DualLightIcons2["ProfileCircle"] = "dual-light/profile_circled.svg";
-  DualLightIcons2["Promotion"] = "dual-light/promotion.svg";
-  DualLightIcons2["Rain"] = "dual-light/rain.svg";
-  DualLightIcons2["Receipt"] = "dual-light/receipt.svg";
-  DualLightIcons2["Reload"] = "dual-light/reload.svg";
-  DualLightIcons2["Remove"] = "dual-light/remove.svg";
-  DualLightIcons2["Repeat"] = "dual-light/repeat.svg";
-  DualLightIcons2["RightAlign"] = "dual-light/right_align.svg";
-  DualLightIcons2["Rocket"] = "dual-light/rocket.svg";
-  DualLightIcons2["Ruler"] = "dual-light/ruler.svg";
-  DualLightIcons2["Sad"] = "dual-light/sad.svg";
-  DualLightIcons2["Save"] = "dual-light/save.svg";
-  DualLightIcons2["Scan"] = "dual-light/scan.svg";
-  DualLightIcons2["Schedule"] = "dual-light/schedule.svg";
-  DualLightIcons2["Scissors"] = "dual-light/scissors.svg";
-  DualLightIcons2["Search"] = "dual-light/search.svg";
-  DualLightIcons2["Send"] = "dual-light/send.svg";
-  DualLightIcons2["Settings"] = "dual-light/settings.svg";
-  DualLightIcons2["Share"] = "dual-light/share.svg";
-  DualLightIcons2["ShieldCheck"] = "dual-light/shield_check.svg";
-  DualLightIcons2["Shield"] = "dual-light/shield.svg";
-  DualLightIcons2["Ship"] = "dual-light/ship.svg";
-  DualLightIcons2["ShoppingBag"] = "dual-light/shopping_bag.svg";
-  DualLightIcons2["Show"] = "dual-light/show.svg";
-  DualLightIcons2["Shuffle"] = "dual-light/shuffle.svg";
-  DualLightIcons2["Size"] = "dual-light/size.svg";
-  DualLightIcons2["Slack"] = "dual-light/slack.svg";
-  DualLightIcons2["Smile"] = "dual-light/smile.svg";
-  DualLightIcons2["Snapchat"] = "dual-light/snapchat.svg";
-  DualLightIcons2["Snowflake"] = "dual-light/snowflake.svg";
-  DualLightIcons2["Sort"] = "dual-light/sort.svg";
-  DualLightIcons2["Spotify"] = "dual-light/spotify.svg";
-  DualLightIcons2["Star"] = "dual-light/star.svg";
-  DualLightIcons2["Stop"] = "dual-light/stop.svg";
-  DualLightIcons2["Store"] = "dual-light/store.svg";
-  DualLightIcons2["Sun"] = "dual-light/sun.svg";
-  DualLightIcons2["Sync"] = "dual-light/sync.svg";
-  DualLightIcons2["Tablet"] = "dual-light/tablet.svg";
-  DualLightIcons2["Tag"] = "dual-light/tag.svg";
-  DualLightIcons2["Target"] = "dual-light/target.svg";
-  DualLightIcons2["Thermomter"] = "dual-light/thermomter.svg";
-  DualLightIcons2["ThumbsDown"] = "dual-light/thumbs_down.svg";
-  DualLightIcons2["ThumbsUp"] = "dual-light/thumbs_up.svg";
-  DualLightIcons2["Ticket"] = "dual-light/ticket.svg";
-  DualLightIcons2["Timer"] = "dual-light/timer.svg";
-  DualLightIcons2["ToggleOff"] = "dual-light/toggle_off.svg";
-  DualLightIcons2["ToggleOn"] = "dual-light/toggle_on.svg";
-  DualLightIcons2["Tool"] = "dual-light/tool.svg";
-  DualLightIcons2["Train"] = "dual-light/train.svg";
-  DualLightIcons2["Trash"] = "dual-light/trash.svg";
-  DualLightIcons2["TrendingDown"] = "dual-light/trending_down.svg";
-  DualLightIcons2["TrendingUp"] = "dual-light/trending_up.svg";
-  DualLightIcons2["Trophy"] = "dual-light/trophy.svg";
-  DualLightIcons2["Truck"] = "dual-light/truck.svg";
-  DualLightIcons2["TV"] = "dual-light/tv.svg";
-  DualLightIcons2["Twitch"] = "dual-light/twitch.svg";
-  DualLightIcons2["Twitter"] = "dual-light/twitter.svg";
-  DualLightIcons2["Umbrella"] = "dual-light/umbrella.svg";
-  DualLightIcons2["Underline"] = "dual-light/underline.svg";
-  DualLightIcons2["Unlock"] = "dual-light/unlock.svg";
-  DualLightIcons2["Update"] = "dual-light/update.svg";
-  DualLightIcons2["Upload"] = "dual-light/upload.svg";
-  DualLightIcons2["Utensils"] = "dual-light/utensils.svg";
-  DualLightIcons2["VideoOff"] = "dual-light/video_off.svg";
-  DualLightIcons2["VideoRecorder"] = "dual-light/video_recorder.svg";
-  DualLightIcons2["VolumeHigh"] = "dual-light/volume_high.svg";
-  DualLightIcons2["VolumeOff"] = "dual-light/volume_off.svg";
-  DualLightIcons2["Volume"] = "dual-light/volume.svg";
-  DualLightIcons2["Wallet"] = "dual-light/wallet.svg";
-  DualLightIcons2["Warning"] = "dual-light/warning.svg";
-  DualLightIcons2["Watch"] = "dual-light/watch.svg";
-  DualLightIcons2["WifiOff"] = "dual-light/wifi_off.svg";
-  DualLightIcons2["Wifi"] = "dual-light/wifi.svg";
-  DualLightIcons2["Wind"] = "dual-light/wind.svg";
-  DualLightIcons2["Window"] = "dual-light/window.svg";
-  DualLightIcons2["YouTube"] = "dual-light/youtube.svg";
-  DualLightIcons2["Zap"] = "dual-light/zap.svg";
-  DualLightIcons2["ZoomIn"] = "dual-light/zoom_in.svg";
-  DualLightIcons2["ZoomOut"] = "dual-light/zoom_out.svg";
-  return DualLightIcons2;
-})(DualLightIcons || {});
-var Alert = memo((props) => {
-  return /* @__PURE__ */ jsx("svg", __spreadProps(__spreadValues({
-    id: "applab-icon-basic-alert",
-    version: "1.1",
-    xmlns: "http://www.w3.org/2000/svg",
-    xmlnsXlink: "http://www.w3.org/1999/xlink",
-    x: "0px",
-    y: "0px",
-    viewBox: "0 0 485.811 485.811",
-    enableBackground: "new 0 0 485.811 485.811",
-    xmlSpace: "preserve"
-  }, props), {
-    children: /* @__PURE__ */ jsx("g", {
-      children: /* @__PURE__ */ jsx("path", {
-        d: "M476.099,353.968l-170.2-294.8c-27.8-48.7-98.1-48.7-125.8,0l-170.3,294.8c-27.8,48.7,6.8,109.2,62.9,109.2h339.9\nC468.699,463.168,503.899,402.068,476.099,353.968z M242.899,397.768c-14.8,0-27.1-12.3-27.1-27.1s12.3-27.1,27.1-27.1\nc14.8,0,27.1,12.3,26.5,27.8C270.099,385.468,257.099,397.768,242.899,397.768z M267.599,222.568c-1.2,21-2.5,41.9-3.7,62.9\nc-0.6,6.8-0.6,13-0.6,19.7c-0.6,11.1-9.3,19.7-20.4,19.7s-19.7-8-20.4-19.1c-1.8-32.7-3.7-64.8-5.5-97.5\nc-0.6-8.6-1.2-17.3-1.9-25.9c0-14.2,8-25.9,21-29.6c13-3.1,25.9,3.1,31.5,15.4c1.9,4.3,2.5,8.6,2.5,13.6\nC269.499,195.468,268.199,209.068,267.599,222.568z"
-      })
-    })
-  }));
-});
-var CaretDownArrow = memo((props) => {
-  return /* @__PURE__ */ e.createElement("svg", __spreadValues({
-    viewBox: "0 0 292.362 292.362",
-    width: "1em",
-    height: "1em"
-  }, props), /* @__PURE__ */ e.createElement("path", {
-    d: "M286.935 69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952 0-9.233 1.807-12.85 5.424C1.807 72.998 0 77.279 0 82.228c0 4.948 1.807 9.229 5.424 12.847l127.907 127.907c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428L286.935 95.074c3.613-3.617 5.427-7.898 5.427-12.847 0-4.948-1.814-9.229-5.427-12.85z"
-  }));
-});
-var Checkmark = memo((props) => {
-  return /* @__PURE__ */ e.createElement("svg", {
-    id: "applab-icon-basic-checkmark",
-    version: "1.1",
-    xmlns: "http://www.w3.org/2000/svg",
-    xmlnsXlink: "http://www.w3.org/1999/xlink",
-    x: "0px",
-    y: "0px",
-    width: "442.533px",
-    height: "442.533px",
-    viewBox: "0 0 442.533 442.533",
-    enableBackground: "new 0 0 442.533 442.533",
-    xmlSpace: "preserve"
-  }, /* @__PURE__ */ e.createElement("g", null, /* @__PURE__ */ e.createElement("path", {
-    d: "M434.539,98.499l-38.828-38.828c-5.324-5.328-11.799-7.993-19.41-7.993c-7.618,0-14.093,2.665-19.417,7.993L169.59,247.248\n      l-83.939-84.225c-5.33-5.33-11.801-7.992-19.412-7.992c-7.616,0-14.087,2.662-19.417,7.992L7.994,201.852\n      C2.664,207.181,0,213.654,0,221.269c0,7.609,2.664,14.088,7.994,19.416l103.351,103.349l38.831,38.828\n      c5.327,5.332,11.8,7.994,19.414,7.994c7.611,0,14.084-2.669,19.414-7.994l38.83-38.828L434.539,137.33\n      c5.325-5.33,7.994-11.802,7.994-19.417C442.537,110.302,439.864,103.829,434.539,98.499z"
-  })));
-});
-var Checkmark2 = memo((props) => {
-  return /* @__PURE__ */ e.createElement("svg", __spreadValues({
-    viewBox: "0 0 442.533 442.533",
-    width: "1em",
-    height: "1em"
-  }, props), /* @__PURE__ */ e.createElement("path", {
-    d: "M434.539 98.499l-38.828-38.828c-5.324-5.328-11.799-7.993-19.41-7.993-7.618 0-14.093 2.665-19.417 7.993L169.59 247.248l-83.939-84.225c-5.33-5.33-11.801-7.992-19.412-7.992-7.616 0-14.087 2.662-19.417 7.992L7.994 201.852C2.664 207.181 0 213.654 0 221.269c0 7.609 2.664 14.088 7.994 19.416l103.351 103.349 38.831 38.828c5.327 5.332 11.8 7.994 19.414 7.994 7.611 0 14.084-2.669 19.414-7.994l38.83-38.828L434.539 137.33c5.325-5.33 7.994-11.802 7.994-19.417.004-7.611-2.669-14.084-7.994-19.414z"
-  }));
-});
-var Close$3 = memo((props) => {
-  return /* @__PURE__ */ e.createElement("svg", {
-    id: "applab-icon-basic-close",
-    enableBackground: "new 0 0 492 492",
-    version: "1.1",
-    viewBox: "0 0 492 492",
-    xmlSpace: "preserve",
-    xmlns: "http://www.w3.org/2000/svg",
-    xmlnsXlink: "http://www.w3.org/1999/xlink"
-  }, /* @__PURE__ */ e.createElement("path", {
-    d: "M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872\n			c-5.068-5.076-11.824-7.856-19.036-7.856c-7.2,0-13.956,2.78-19.024,7.856L246.008,191.82L62.048,7.872\n			c-5.06-5.076-11.82-7.856-19.028-7.856c-7.2,0-13.96,2.78-19.02,7.856L7.872,23.988c-10.496,10.496-10.496,27.568,0,38.052\n			L191.828,246L7.872,429.952c-5.064,5.072-7.852,11.828-7.852,19.032c0,7.204,2.788,13.96,7.852,19.028l16.124,16.116\n			c5.06,5.072,11.824,7.856,19.02,7.856c7.208,0,13.968-2.784,19.028-7.856l183.96-183.952l183.952,183.952\n			c5.068,5.072,11.824,7.856,19.024,7.856h0.008c7.204,0,13.96-2.784,19.028-7.856l16.12-16.116\n			c5.06-5.064,7.852-11.824,7.852-19.028c0-7.204-2.792-13.96-7.852-19.028L300.188,246z"
-  }));
-});
-var Exit = memo((props) => {
-  return /* @__PURE__ */ e.createElement("svg", __spreadValues({
-    viewBox: "0 0 512 512",
-    width: "1em",
-    height: "1em"
-  }, props), /* @__PURE__ */ e.createElement("path", {
-    d: "M361 396c-11.046 0-20 8.954-20 20v56H55V40h286v56c0 11.046 8.954 20 20 20s20-8.954 20-20V20c0-11.046-8.954-20-20-20H35C23.954 0 15 8.954 15 20v472c0 11.046 8.954 20 20 20h326c11.046 0 20-8.954 20-20v-76c0-11.046-8.954-20-20-20z"
-  }), /* @__PURE__ */ e.createElement("path", {
-    d: "M491.141 241.858l-53.74-53.74c-7.81-7.811-20.473-7.81-28.284 0s-7.811 20.474 0 28.285L428.715 236l-165.678-.001c-11.045 0-20 8.954-20 20s8.954 20 20 20l165.68.001-19.599 19.599c-7.811 7.809-7.811 20.473 0 28.284 7.81 7.811 20.474 7.809 28.284-.001l53.74-53.74a.022.022 0 01.004-.005c4.024-4.027 5.709-8.682 5.854-14.137 0-5.392-2.291-10.576-5.859-14.142z"
-  }));
-});
-var FileUpload = memo((props) => {
-  return /* @__PURE__ */ e.createElement("svg", {
-    viewBox: "-64 0 512 512",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /* @__PURE__ */ e.createElement("path", {
-    d: "M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm65.18 216.01H224v80c0 8.84-7.16 16-16 16h-32c-8.84 0-16-7.16-16-16v-80H94.82c-14.28 0-21.41-17.29-11.27-27.36l96.42-95.7c6.65-6.61 17.39-6.61 24.04 0l96.42 95.7c10.15 10.07 3.03 27.36-11.25 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"
-  }));
-});
-var GearCog = memo((props) => {
-  return /* @__PURE__ */ e.createElement("svg", __spreadValues({
-    viewBox: "0 0 512 512",
-    width: "1em",
-    height: "1em"
-  }, props), /* @__PURE__ */ e.createElement("path", {
-    d: "M489.514 296.695l-21.3-17.534c-14.59-12.011-14.564-34.335.001-46.322l21.299-17.534a39.878 39.878 0 009.218-50.882l-42.058-72.846A39.88 39.88 0 00408 74.119l-25.835 9.679c-17.696 6.628-37.016-4.551-40.117-23.161l-4.535-27.214A39.874 39.874 0 00298.058 0h-84.115a39.874 39.874 0 00-39.456 33.424l-4.536 27.213c-3.107 18.643-22.453 29.778-40.116 23.162L104 74.119a39.88 39.88 0 00-48.674 17.458l-42.057 72.845a39.875 39.875 0 009.218 50.882l21.299 17.534c14.592 12.012 14.563 34.334 0 46.322l-21.3 17.534a39.876 39.876 0 00-9.218 50.882l42.058 72.846c9.818 17.003 30.286 24.344 48.674 17.458l25.834-9.679c17.699-6.631 37.015 4.556 40.116 23.161l4.536 27.212A39.875 39.875 0 00213.942 512h84.115a39.873 39.873 0 0039.455-33.424l4.535-27.212c3.106-18.638 22.451-29.781 40.117-23.161L408 437.881a39.876 39.876 0 0048.674-17.458l42.059-72.847a39.878 39.878 0 00-9.219-50.881zm-67.481 103.728l-25.835-9.679c-41.299-15.471-86.37 10.63-93.605 54.043L298.058 472h-84.115l-4.536-27.213c-7.249-43.497-52.386-69.484-93.605-54.043l-25.835 9.679-42.057-72.846 21.299-17.534c34.049-28.03 33.978-80.114 0-108.086L47.91 184.423l42.058-72.846 25.834 9.679c41.3 15.47 86.37-10.63 93.605-54.043L213.942 40h84.115l4.535 27.213c7.25 43.502 52.389 69.481 93.605 54.043l25.835-9.679 42.067 72.836-.011.009-21.298 17.534c-34.048 28.028-33.98 80.113-.001 108.086l21.3 17.534zM256 157.333c-54.405 0-98.667 44.262-98.667 98.667s44.262 98.667 98.667 98.667 98.667-44.262 98.667-98.667-44.262-98.667-98.667-98.667zm0 157.334c-32.349 0-58.667-26.318-58.667-58.667s26.318-58.667 58.667-58.667 58.667 26.318 58.667 58.667-26.318 58.667-58.667 58.667z"
-  }));
-});
 var Search = memo((props) => {
   return /* @__PURE__ */ e.createElement("svg", __spreadValues({
     viewBox: "0 0 30.239 30.239",
@@ -3442,6 +3181,267 @@ var Inbox = memo((props) => {
     stopColor: "#D1DAEE"
   }))));
 });
+var DualLightIcons = /* @__PURE__ */ ((DualLightIcons2) => {
+  DualLightIcons2["Activity"] = "dual-light/activity.svg";
+  DualLightIcons2["AddCircle"] = "dual-light/add_circled.svg";
+  DualLightIcons2["Add"] = "dual-light/add.svg";
+  DualLightIcons2["Alarm"] = "dual-light/alarm.svg";
+  DualLightIcons2["AlertCircle"] = "dual-light/alert_circled.svg";
+  DualLightIcons2["Anchor"] = "dual-light/anchor.svg";
+  DualLightIcons2["Android"] = "dual-light/android.svg";
+  DualLightIcons2["Apple"] = "dual-light/apple.svg";
+  DualLightIcons2["Archive"] = "dual-light/archive.svg";
+  DualLightIcons2["ArrowBackward"] = "dual-light/arrow_backward.svg";
+  DualLightIcons2["ArrowDown"] = "dual-light/arrow_down.svg";
+  DualLightIcons2["ArrowForward"] = "dual-light/arrow_forward.svg";
+  DualLightIcons2["ArrowUpDown"] = "dual-light/arrow_up_down.svg";
+  DualLightIcons2["ArrowUp"] = "dual-light/arrow_up.svg";
+  DualLightIcons2["AtSign"] = "dual-light/at_sign.svg";
+  DualLightIcons2["Attachment"] = "dual-light/attachment.svg";
+  DualLightIcons2["Badge"] = "dual-light/badge.svg";
+  DualLightIcons2["Bank"] = "dual-light/bank.svg";
+  DualLightIcons2["BarChart"] = "dual-light/bar_chart.svg";
+  DualLightIcons2["Basket"] = "dual-light/basket.svg";
+  DualLightIcons2["BatteryCharging"] = "dual-light/battery_charging.svg";
+  DualLightIcons2["BatteryFull"] = "dual-light/battery_full.svg";
+  DualLightIcons2["BatteryHalf"] = "dual-light/battery_half.svg";
+  DualLightIcons2["BatteryLow"] = "dual-light/battery_low.svg";
+  DualLightIcons2["Battery"] = "dual-light/battery.svg";
+  DualLightIcons2["BluetoothOff"] = "dual-light/bluetooth_off.svg";
+  DualLightIcons2["Bluetooth"] = "dual-light/bluetooth.svg";
+  DualLightIcons2["Bold"] = "dual-light/bold.svg";
+  DualLightIcons2["Book"] = "dual-light/book.svg";
+  DualLightIcons2["Bookmark"] = "dual-light/bookmark.svg";
+  DualLightIcons2["Box"] = "dual-light/box.svg";
+  DualLightIcons2["Briefcase"] = "dual-light/briefcase.svg";
+  DualLightIcons2["Brush"] = "dual-light/brush.svg";
+  DualLightIcons2["Building"] = "dual-light/building.svg";
+  DualLightIcons2["Bulb"] = "dual-light/bulb.svg";
+  DualLightIcons2["Calendar"] = "dual-light/calendar.svg";
+  DualLightIcons2["Camera"] = "dual-light/camera.svg";
+  DualLightIcons2["Cart"] = "dual-light/cart.svg";
+  DualLightIcons2["Cast"] = "dual-light/cast.svg";
+  DualLightIcons2["Category"] = "dual-light/category.svg";
+  DualLightIcons2["CenterAlign"] = "dual-light/center_align.svg";
+  DualLightIcons2["CheckAll"] = "dual-light/check_all.svg";
+  DualLightIcons2["CheckCircle"] = "dual-light/check_circled.svg";
+  DualLightIcons2["Check"] = "dual-light/check.svg";
+  DualLightIcons2["ChevronBackward"] = "dual-light/chevron_backward.svg";
+  DualLightIcons2["ChevronDoubleBackward"] = "dual-light/chevron_double_backward.svg";
+  DualLightIcons2["ChevronDoubleForward"] = "dual-light/chevron_double_forward.svg";
+  DualLightIcons2["ChevronDoubleDown"] = "dual-light/chevron_double_down.svg";
+  DualLightIcons2["ChevronDoubleUp"] = "dual-light/chevron_double_up.svg";
+  DualLightIcons2["ChevronDown"] = "dual-light/chevron_down.svg";
+  DualLightIcons2["ChevronForward"] = "dual-light/chevron_forward.svg";
+  DualLightIcons2["ChevronUp"] = "dual-light/chevron_up.svg";
+  DualLightIcons2["Chip"] = "dual-light/chip.svg";
+  DualLightIcons2["Chrome"] = "dual-light/chrome.svg";
+  DualLightIcons2["Clipboard"] = "dual-light/clipboard.svg";
+  DualLightIcons2["Clock"] = "dual-light/clock.svg";
+  DualLightIcons2["CloseCircle"] = "dual-light/close_circled.svg";
+  DualLightIcons2["Close"] = "dual-light/close.svg";
+  DualLightIcons2["CloudDownload"] = "dual-light/cloud_download.svg";
+  DualLightIcons2["CloudOff"] = "dual-light/cloud_off.svg";
+  DualLightIcons2["CloudUpload"] = "dual-light/cloud_upload.svg";
+  DualLightIcons2["Cloud"] = "dual-light/cloud.svg";
+  DualLightIcons2["Code"] = "dual-light/code.svg";
+  DualLightIcons2["Coffee"] = "dual-light/coffee.svg";
+  DualLightIcons2["Collapse"] = "dual-light/collapse.svg";
+  DualLightIcons2["ColorPalette"] = "dual-light/color_palette.svg";
+  DualLightIcons2["Command"] = "dual-light/command.svg";
+  DualLightIcons2["Compass"] = "dual-light/compass.svg";
+  DualLightIcons2["Crop"] = "dual-light/crop.svg";
+  DualLightIcons2["Crosshairs"] = "dual-light/crosshairs.svg";
+  DualLightIcons2["Cursor"] = "dual-light/cursor.svg";
+  DualLightIcons2["Dashboard"] = "dual-light/dashboard.svg";
+  DualLightIcons2["Database"] = "dual-light/database.svg";
+  DualLightIcons2["Design"] = "dual-light/design.svg";
+  DualLightIcons2["Diamond"] = "dual-light/diamond.svg";
+  DualLightIcons2["Document"] = "dual-light/document.svg";
+  DualLightIcons2["Dollar"] = "dual-light/dollar.svg";
+  DualLightIcons2["DonutChart"] = "dual-light/donut_chart.svg";
+  DualLightIcons2["Download"] = "dual-light/download.svg";
+  DualLightIcons2["Drop"] = "dual-light/drop.svg";
+  DualLightIcons2["Edit"] = "dual-light/edit.svg";
+  DualLightIcons2["EventAdd"] = "dual-light/event_add.svg";
+  DualLightIcons2["EventScheduled"] = "dual-light/event_scheduled.svg";
+  DualLightIcons2["Expand"] = "dual-light/expand.svg";
+  DualLightIcons2["Facebook"] = "dual-light/facebook.svg";
+  DualLightIcons2["FastBackward"] = "dual-light/fast_backward.svg";
+  DualLightIcons2["FastForward"] = "dual-light/fast_forward.svg";
+  DualLightIcons2["Figma"] = "dual-light/figma.svg";
+  DualLightIcons2["FileAdd"] = "dual-light/file_add.svg";
+  DualLightIcons2["File"] = "dual-light/file.svg";
+  DualLightIcons2["Files"] = "dual-light/files.svg";
+  DualLightIcons2["Film"] = "dual-light/film.svg";
+  DualLightIcons2["Filter"] = "dual-light/filter.svg";
+  DualLightIcons2["Fire"] = "dual-light/fire.svg";
+  DualLightIcons2["Flag"] = "dual-light/flag.svg";
+  DualLightIcons2["Flashlight"] = "dual-light/flashlight.svg";
+  DualLightIcons2["Flight"] = "dual-light/flight.svg";
+  DualLightIcons2["FolderAdd"] = "dual-light/folder_add.svg";
+  DualLightIcons2["Folder"] = "dual-light/folder.svg";
+  DualLightIcons2["Frown"] = "dual-light/frown.svg";
+  DualLightIcons2["Fuel"] = "dual-light/fuel.svg";
+  DualLightIcons2["Gamepad"] = "dual-light/gamepad.svg";
+  DualLightIcons2["Gift"] = "dual-light/gift.svg";
+  DualLightIcons2["Grid"] = "dual-light/grid.svg";
+  DualLightIcons2["Group"] = "dual-light/group.svg";
+  DualLightIcons2["Growth"] = "dual-light/growth.svg";
+  DualLightIcons2["HandCursor"] = "dual-light/hand_cursor.svg";
+  DualLightIcons2["Headphone"] = "dual-light/headphone.svg";
+  DualLightIcons2["Heart"] = "dual-light/heart.svg";
+  DualLightIcons2["Help"] = "dual-light/help.svg";
+  DualLightIcons2["Hide"] = "dual-light/hide.svg";
+  DualLightIcons2["Home"] = "dual-light/home.svg";
+  DualLightIcons2["Hourglass"] = "dual-light/hourglass.svg";
+  DualLightIcons2["Image"] = "dual-light/image.svg";
+  DualLightIcons2["Inbox"] = "dual-light/inbox.svg";
+  DualLightIcons2["Info"] = "dual-light/info.svg";
+  DualLightIcons2["Instagram"] = "dual-light/instagram.svg";
+  DualLightIcons2["Internet"] = "dual-light/internet.svg";
+  DualLightIcons2["Italics"] = "dual-light/italics.svg";
+  DualLightIcons2["Justify"] = "dual-light/justify.svg";
+  DualLightIcons2["Key"] = "dual-light/key.svg";
+  DualLightIcons2["Laptop"] = "dual-light/laptop.svg";
+  DualLightIcons2["Laugh"] = "dual-light/laugh.svg";
+  DualLightIcons2["Layers"] = "dual-light/layers.svg";
+  DualLightIcons2["Layout"] = "dual-light/layout.svg";
+  DualLightIcons2["Leaderboard"] = "dual-light/leaderboard.svg";
+  DualLightIcons2["LeftAlign"] = "dual-light/left_align.svg";
+  DualLightIcons2["LineChart"] = "dual-light/line_chart.svg";
+  DualLightIcons2["Link"] = "dual-light/link.svg";
+  DualLightIcons2["LinkedIn"] = "dual-light/linkedin.svg";
+  DualLightIcons2["List"] = "dual-light/list.svg";
+  DualLightIcons2["Live"] = "dual-light/live.svg";
+  DualLightIcons2["Loader"] = "dual-light/loader.svg";
+  DualLightIcons2["Location"] = "dual-light/location.svg";
+  DualLightIcons2["Lock"] = "dual-light/lock.svg";
+  DualLightIcons2["Login"] = "dual-light/login.svg";
+  DualLightIcons2["Logout"] = "dual-light/logout.svg";
+  DualLightIcons2["Mail"] = "dual-light/mail.svg";
+  DualLightIcons2["Map"] = "dual-light/map.svg";
+  DualLightIcons2["Meh"] = "dual-light/meh.svg";
+  DualLightIcons2["Menu"] = "dual-light/menu.svg";
+  DualLightIcons2["Message"] = "dual-light/message.svg";
+  DualLightIcons2["Messages"] = "dual-light/messages.svg";
+  DualLightIcons2["MicOff"] = "dual-light/mic_off.svg";
+  DualLightIcons2["Mic"] = "dual-light/mic.svg";
+  DualLightIcons2["Mobile"] = "dual-light/mobile.svg";
+  DualLightIcons2["Moon"] = "dual-light/moon.svg";
+  DualLightIcons2["MoreHorizontal"] = "dual-light/more_horizontal.svg";
+  DualLightIcons2["MoreVertical"] = "dual-light/more_vertical.svg";
+  DualLightIcons2["Mouse"] = "dual-light/mouse.svg";
+  DualLightIcons2["Music"] = "dual-light/music.svg";
+  DualLightIcons2["New"] = "dual-light/new.svg";
+  DualLightIcons2["Next"] = "dual-light/next.svg";
+  DualLightIcons2["Note"] = "dual-light/note.svg";
+  DualLightIcons2["Notes"] = "dual-light/notes.svg";
+  DualLightIcons2["NotificationOff"] = "dual-light/notification_off.svg";
+  DualLightIcons2["Notification"] = "dual-light/notification.svg";
+  DualLightIcons2["Open"] = "dual-light/open.svg";
+  DualLightIcons2["PainRoller"] = "dual-light/pain_roller.svg";
+  DualLightIcons2["Pause"] = "dual-light/pause.svg";
+  DualLightIcons2["Payment"] = "dual-light/payment.svg";
+  DualLightIcons2["Pen"] = "dual-light/pen.svg";
+  DualLightIcons2["Percent"] = "dual-light/percent.svg";
+  DualLightIcons2["Person"] = "dual-light/person.svg";
+  DualLightIcons2["PhoneCallIncoming"] = "dual-light/phone_call_incoming.svg";
+  DualLightIcons2["PhoneCallOutgoing"] = "dual-light/phone_call_outgoing.svg";
+  DualLightIcons2["PhoneCallRejected"] = "dual-light/phone_call_rejected.svg";
+  DualLightIcons2["Phone"] = "dual-light/phone.svg";
+  DualLightIcons2["Photos"] = "dual-light/photos.svg";
+  DualLightIcons2["PieChart"] = "dual-light/pie_chart.svg";
+  DualLightIcons2["Pin"] = "dual-light/pin.svg";
+  DualLightIcons2["Pinterest"] = "dual-light/pinterest.svg";
+  DualLightIcons2["PlayCircle"] = "dual-light/play_circled.svg";
+  DualLightIcons2["Play"] = "dual-light/play.svg";
+  DualLightIcons2["Playlist"] = "dual-light/playlist.svg";
+  DualLightIcons2["Power"] = "dual-light/power.svg";
+  DualLightIcons2["Presentation"] = "dual-light/presentation.svg";
+  DualLightIcons2["Previous"] = "dual-light/previous.svg";
+  DualLightIcons2["Printer"] = "dual-light/printer.svg";
+  DualLightIcons2["ProfileCircle"] = "dual-light/profile_circled.svg";
+  DualLightIcons2["Promotion"] = "dual-light/promotion.svg";
+  DualLightIcons2["Rain"] = "dual-light/rain.svg";
+  DualLightIcons2["Receipt"] = "dual-light/receipt.svg";
+  DualLightIcons2["Reload"] = "dual-light/reload.svg";
+  DualLightIcons2["Remove"] = "dual-light/remove.svg";
+  DualLightIcons2["Repeat"] = "dual-light/repeat.svg";
+  DualLightIcons2["RightAlign"] = "dual-light/right_align.svg";
+  DualLightIcons2["Rocket"] = "dual-light/rocket.svg";
+  DualLightIcons2["Ruler"] = "dual-light/ruler.svg";
+  DualLightIcons2["Sad"] = "dual-light/sad.svg";
+  DualLightIcons2["Save"] = "dual-light/save.svg";
+  DualLightIcons2["Scan"] = "dual-light/scan.svg";
+  DualLightIcons2["Schedule"] = "dual-light/schedule.svg";
+  DualLightIcons2["Scissors"] = "dual-light/scissors.svg";
+  DualLightIcons2["Search"] = "dual-light/search.svg";
+  DualLightIcons2["Send"] = "dual-light/send.svg";
+  DualLightIcons2["Settings"] = "dual-light/settings.svg";
+  DualLightIcons2["Share"] = "dual-light/share.svg";
+  DualLightIcons2["ShieldCheck"] = "dual-light/shield_check.svg";
+  DualLightIcons2["Shield"] = "dual-light/shield.svg";
+  DualLightIcons2["Ship"] = "dual-light/ship.svg";
+  DualLightIcons2["ShoppingBag"] = "dual-light/shopping_bag.svg";
+  DualLightIcons2["Show"] = "dual-light/show.svg";
+  DualLightIcons2["Shuffle"] = "dual-light/shuffle.svg";
+  DualLightIcons2["Size"] = "dual-light/size.svg";
+  DualLightIcons2["Slack"] = "dual-light/slack.svg";
+  DualLightIcons2["Smile"] = "dual-light/smile.svg";
+  DualLightIcons2["Snapchat"] = "dual-light/snapchat.svg";
+  DualLightIcons2["Snowflake"] = "dual-light/snowflake.svg";
+  DualLightIcons2["Sort"] = "dual-light/sort.svg";
+  DualLightIcons2["Spotify"] = "dual-light/spotify.svg";
+  DualLightIcons2["Star"] = "dual-light/star.svg";
+  DualLightIcons2["Stop"] = "dual-light/stop.svg";
+  DualLightIcons2["Store"] = "dual-light/store.svg";
+  DualLightIcons2["Sun"] = "dual-light/sun.svg";
+  DualLightIcons2["Sync"] = "dual-light/sync.svg";
+  DualLightIcons2["Tablet"] = "dual-light/tablet.svg";
+  DualLightIcons2["Tag"] = "dual-light/tag.svg";
+  DualLightIcons2["Target"] = "dual-light/target.svg";
+  DualLightIcons2["Thermomter"] = "dual-light/thermomter.svg";
+  DualLightIcons2["ThumbsDown"] = "dual-light/thumbs_down.svg";
+  DualLightIcons2["ThumbsUp"] = "dual-light/thumbs_up.svg";
+  DualLightIcons2["Ticket"] = "dual-light/ticket.svg";
+  DualLightIcons2["Timer"] = "dual-light/timer.svg";
+  DualLightIcons2["ToggleOff"] = "dual-light/toggle_off.svg";
+  DualLightIcons2["ToggleOn"] = "dual-light/toggle_on.svg";
+  DualLightIcons2["Tool"] = "dual-light/tool.svg";
+  DualLightIcons2["Train"] = "dual-light/train.svg";
+  DualLightIcons2["Trash"] = "dual-light/trash.svg";
+  DualLightIcons2["TrendingDown"] = "dual-light/trending_down.svg";
+  DualLightIcons2["TrendingUp"] = "dual-light/trending_up.svg";
+  DualLightIcons2["Trophy"] = "dual-light/trophy.svg";
+  DualLightIcons2["Truck"] = "dual-light/truck.svg";
+  DualLightIcons2["TV"] = "dual-light/tv.svg";
+  DualLightIcons2["Twitch"] = "dual-light/twitch.svg";
+  DualLightIcons2["Twitter"] = "dual-light/twitter.svg";
+  DualLightIcons2["Umbrella"] = "dual-light/umbrella.svg";
+  DualLightIcons2["Underline"] = "dual-light/underline.svg";
+  DualLightIcons2["Unlock"] = "dual-light/unlock.svg";
+  DualLightIcons2["Update"] = "dual-light/update.svg";
+  DualLightIcons2["Upload"] = "dual-light/upload.svg";
+  DualLightIcons2["Utensils"] = "dual-light/utensils.svg";
+  DualLightIcons2["VideoOff"] = "dual-light/video_off.svg";
+  DualLightIcons2["VideoRecorder"] = "dual-light/video_recorder.svg";
+  DualLightIcons2["VolumeHigh"] = "dual-light/volume_high.svg";
+  DualLightIcons2["VolumeOff"] = "dual-light/volume_off.svg";
+  DualLightIcons2["Volume"] = "dual-light/volume.svg";
+  DualLightIcons2["Wallet"] = "dual-light/wallet.svg";
+  DualLightIcons2["Warning"] = "dual-light/warning.svg";
+  DualLightIcons2["Watch"] = "dual-light/watch.svg";
+  DualLightIcons2["WifiOff"] = "dual-light/wifi_off.svg";
+  DualLightIcons2["Wifi"] = "dual-light/wifi.svg";
+  DualLightIcons2["Wind"] = "dual-light/wind.svg";
+  DualLightIcons2["Window"] = "dual-light/window.svg";
+  DualLightIcons2["YouTube"] = "dual-light/youtube.svg";
+  DualLightIcons2["Zap"] = "dual-light/zap.svg";
+  DualLightIcons2["ZoomIn"] = "dual-light/zoom_in.svg";
+  DualLightIcons2["ZoomOut"] = "dual-light/zoom_out.svg";
+  return DualLightIcons2;
+})(DualLightIcons || {});
 var Message$2 = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
     width: "1em",
@@ -3508,8 +3508,8 @@ var Message$2 = memo((props) => {
 });
 var Messages = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", {
-    width: "24",
-    height: "24",
+    width: "1em",
+    height: "1em",
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -3570,8 +3570,8 @@ var Messages = memo((props) => {
 });
 var Note = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", {
-    width: "24",
-    height: "24",
+    width: "1em",
+    height: "1em",
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -3630,6 +3630,52 @@ var Note = memo((props) => {
     })]
   });
 });
+var Open = memo((props) => {
+  return /* @__PURE__ */ jsxs("svg", {
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    children: [/* @__PURE__ */ jsx("path", {
+      d: "M19 9C19 9.55229 19.4477 10 20 10C20.5523 10 21 9.55229 21 9V5C21 3.89543 20.1046 3 19 3H15C14.4477 3 14 3.44772 14 4C14 4.55228 14.4477 5 15 5L17.5858 5L11.2929 11.2929C10.9024 11.6834 10.9024 12.3166 11.2929 12.7071C11.6834 13.0976 12.3166 13.0976 12.7071 12.7071L19 6.41421V9Z",
+      fill: "url(#paint0_linear)"
+    }), /* @__PURE__ */ jsx("path", {
+      fillRule: "evenodd",
+      clipRule: "evenodd",
+      d: "M3 6C3 4.34315 4.34315 3 6 3H11C11.5523 3 12 3.44772 12 4C12 4.55228 11.5523 5 11 5H6C5.44772 5 5 5.44772 5 6V18C5 18.5523 5.44772 19 6 19H18C18.5523 19 19 18.5523 19 18V13C19 12.4477 19.4477 12 20 12C20.5523 12 21 12.4477 21 13V18C21 19.6569 19.6569 21 18 21H6C4.34315 21 3 19.6569 3 18V6Z",
+      fill: "url(#paint1_linear)"
+    }), /* @__PURE__ */ jsxs("defs", {
+      children: [/* @__PURE__ */ jsxs("linearGradient", {
+        id: "paint0_linear",
+        x1: "16",
+        y1: "3",
+        x2: "16",
+        y2: "13",
+        gradientUnits: "userSpaceOnUse",
+        children: [/* @__PURE__ */ jsx("stop", {
+          stopColor: "white"
+        }), /* @__PURE__ */ jsx("stop", {
+          offset: "1",
+          stopColor: "#D1DAEE"
+        })]
+      }), /* @__PURE__ */ jsxs("linearGradient", {
+        id: "paint1_linear",
+        x1: "12",
+        y1: "3",
+        x2: "12",
+        y2: "21",
+        gradientUnits: "userSpaceOnUse",
+        children: [/* @__PURE__ */ jsx("stop", {
+          stopColor: "#6073D8"
+        }), /* @__PURE__ */ jsx("stop", {
+          offset: "1",
+          stopColor: "#5C5ACA"
+        })]
+      })]
+    })]
+  });
+});
 var Send = memo((props) => {
   return /* @__PURE__ */ e.createElement("svg", {
     width: "24",
@@ -3679,38 +3725,6 @@ var Send = memo((props) => {
     fill: "white"
   }))));
 });
-var Star = memo((props) => {
-  return /* @__PURE__ */ e.createElement("svg", {
-    width: "24",
-    height: "24",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /* @__PURE__ */ e.createElement("g", {
-    "clip-path": "url(#clip0)"
-  }, /* @__PURE__ */ e.createElement("path", {
-    d: "M10.1109 3.43478C10.7335 1.64366 13.2665 1.64366 13.8891 3.43478L14.8347 6.15493C15.1093 6.94508 15.8467 7.48082 16.683 7.49786L19.5622 7.55653C21.4581 7.59517 22.2409 10.0043 20.7298 11.1499L18.4349 12.8897C17.7683 13.3951 17.4867 14.2619 17.7289 15.0626L18.5628 17.819C19.112 19.634 17.0627 21.1229 15.5062 20.0398L13.1424 18.3949C12.4557 17.9171 11.5443 17.9171 10.8576 18.3949L8.49383 20.0398C6.93734 21.1229 4.88805 19.634 5.43715 17.819L6.27107 15.0626C6.51331 14.2619 6.23165 13.3951 5.56506 12.8897L3.27022 11.1499C1.75915 10.0043 2.54191 7.59517 4.43776 7.55653L7.31697 7.49786C8.15331 7.48082 8.89069 6.94508 9.16535 6.15494L10.1109 3.43478Z",
-    fill: "url(#paint0_linear)"
-  })), /* @__PURE__ */ e.createElement("defs", null, /* @__PURE__ */ e.createElement("linearGradient", {
-    id: "paint0_linear",
-    x1: "12",
-    y1: "-2",
-    x2: "12",
-    y2: "26",
-    gradientUnits: "userSpaceOnUse"
-  }, /* @__PURE__ */ e.createElement("stop", {
-    stopColor: "white"
-  }), /* @__PURE__ */ e.createElement("stop", {
-    offset: "1",
-    stopColor: "#D1DAEE"
-  })), /* @__PURE__ */ e.createElement("clipPath", {
-    id: "clip0"
-  }, /* @__PURE__ */ e.createElement("rect", {
-    width: "24",
-    height: "24",
-    fill: "white"
-  }))));
-});
 var Settings$1 = memo((props) => {
   return /* @__PURE__ */ e.createElement("svg", __spreadValues({
     width: "1em",
@@ -3749,6 +3763,38 @@ var Settings$1 = memo((props) => {
   }), /* @__PURE__ */ e.createElement("stop", {
     offset: 1,
     stopColor: "#5C5ACA"
+  }))));
+});
+var Star = memo((props) => {
+  return /* @__PURE__ */ e.createElement("svg", {
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /* @__PURE__ */ e.createElement("g", {
+    "clip-path": "url(#clip0)"
+  }, /* @__PURE__ */ e.createElement("path", {
+    d: "M10.1109 3.43478C10.7335 1.64366 13.2665 1.64366 13.8891 3.43478L14.8347 6.15493C15.1093 6.94508 15.8467 7.48082 16.683 7.49786L19.5622 7.55653C21.4581 7.59517 22.2409 10.0043 20.7298 11.1499L18.4349 12.8897C17.7683 13.3951 17.4867 14.2619 17.7289 15.0626L18.5628 17.819C19.112 19.634 17.0627 21.1229 15.5062 20.0398L13.1424 18.3949C12.4557 17.9171 11.5443 17.9171 10.8576 18.3949L8.49383 20.0398C6.93734 21.1229 4.88805 19.634 5.43715 17.819L6.27107 15.0626C6.51331 14.2619 6.23165 13.3951 5.56506 12.8897L3.27022 11.1499C1.75915 10.0043 2.54191 7.59517 4.43776 7.55653L7.31697 7.49786C8.15331 7.48082 8.89069 6.94508 9.16535 6.15494L10.1109 3.43478Z",
+    fill: "url(#paint0_linear)"
+  })), /* @__PURE__ */ e.createElement("defs", null, /* @__PURE__ */ e.createElement("linearGradient", {
+    id: "paint0_linear",
+    x1: "12",
+    y1: "-2",
+    x2: "12",
+    y2: "26",
+    gradientUnits: "userSpaceOnUse"
+  }, /* @__PURE__ */ e.createElement("stop", {
+    stopColor: "white"
+  }), /* @__PURE__ */ e.createElement("stop", {
+    offset: "1",
+    stopColor: "#D1DAEE"
+  })), /* @__PURE__ */ e.createElement("clipPath", {
+    id: "clip0"
+  }, /* @__PURE__ */ e.createElement("rect", {
+    width: "24",
+    height: "24",
+    fill: "white"
   }))));
 });
 var Tool = memo((props) => {
@@ -3864,6 +3910,47 @@ var Trash = memo((props) => {
     stopColor: "#5C5ACA"
   }))));
 });
+var Upload2 = memo((props) => {
+  return /* @__PURE__ */ e.createElement("svg", {
+    width: "1em",
+    height: "1em",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, /* @__PURE__ */ e.createElement("path", {
+    d: "M17.2071 9.2905C17.5976 9.68103 17.5976 10.3142 17.2071 10.7047C16.8166 11.0952 16.1834 11.0952 15.7929 10.7047L13.0019 7.91377V15C13.0019 15.5523 12.5542 16 12.0019 16C11.4496 16 11.0019 15.5523 11.0019 15V7.91368L8.20894 10.7067C7.81841 11.0972 7.18525 11.0972 6.79472 10.7067C6.4042 10.3161 6.4042 9.68298 6.79472 9.29245L11.2948 4.79241C11.4823 4.60487 11.7367 4.49951 12.0019 4.49951C12.2671 4.49951 12.5214 4.60487 12.709 4.79241L17.2071 9.2905Z",
+    fill: "url(#paint0_linear)"
+  }), /* @__PURE__ */ e.createElement("path", {
+    fillRule: "evenodd",
+    clipRule: "evenodd",
+    d: "M4 14C4.55228 14 5 14.4477 5 15V17C5 17.5523 5.44772 18 6 18H18C18.5523 18 19 17.5523 19 17V15C19 14.4477 19.4477 14 20 14C20.5523 14 21 14.4477 21 15V17C21 18.6569 19.6569 20 18 20H6C4.34315 20 3 18.6569 3 17V15C3 14.4477 3.44772 14 4 14Z",
+    fill: "url(#paint1_linear)"
+  }), /* @__PURE__ */ e.createElement("defs", null, /* @__PURE__ */ e.createElement("linearGradient", {
+    id: "paint0_linear",
+    x1: "12.0009",
+    y1: "4.49951",
+    x2: "12.0009",
+    y2: "16",
+    gradientUnits: "userSpaceOnUse"
+  }, /* @__PURE__ */ e.createElement("stop", {
+    stopColor: "white"
+  }), /* @__PURE__ */ e.createElement("stop", {
+    offset: "1",
+    stopColor: "#D1DAEE"
+  })), /* @__PURE__ */ e.createElement("linearGradient", {
+    id: "paint1_linear",
+    x1: "12",
+    y1: "14",
+    x2: "12",
+    y2: "20",
+    gradientUnits: "userSpaceOnUse"
+  }, /* @__PURE__ */ e.createElement("stop", {
+    stopColor: "#6073D8"
+  }), /* @__PURE__ */ e.createElement("stop", {
+    offset: "1",
+    stopColor: "#5C5ACA"
+  }))));
+});
 var Warning = memo((props) => {
   return /* @__PURE__ */ e.createElement("svg", __spreadValues({
     width: "1em",
@@ -3918,93 +4005,6 @@ var Warning = memo((props) => {
     stopColor: "#6073D8"
   }), /* @__PURE__ */ e.createElement("stop", {
     offset: 1,
-    stopColor: "#5C5ACA"
-  }))));
-});
-var Open = memo((props) => {
-  return /* @__PURE__ */ jsxs("svg", {
-    width: "24",
-    height: "24",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg",
-    children: [/* @__PURE__ */ jsx("path", {
-      d: "M19 9C19 9.55229 19.4477 10 20 10C20.5523 10 21 9.55229 21 9V5C21 3.89543 20.1046 3 19 3H15C14.4477 3 14 3.44772 14 4C14 4.55228 14.4477 5 15 5L17.5858 5L11.2929 11.2929C10.9024 11.6834 10.9024 12.3166 11.2929 12.7071C11.6834 13.0976 12.3166 13.0976 12.7071 12.7071L19 6.41421V9Z",
-      fill: "url(#paint0_linear)"
-    }), /* @__PURE__ */ jsx("path", {
-      fillRule: "evenodd",
-      clipRule: "evenodd",
-      d: "M3 6C3 4.34315 4.34315 3 6 3H11C11.5523 3 12 3.44772 12 4C12 4.55228 11.5523 5 11 5H6C5.44772 5 5 5.44772 5 6V18C5 18.5523 5.44772 19 6 19H18C18.5523 19 19 18.5523 19 18V13C19 12.4477 19.4477 12 20 12C20.5523 12 21 12.4477 21 13V18C21 19.6569 19.6569 21 18 21H6C4.34315 21 3 19.6569 3 18V6Z",
-      fill: "url(#paint1_linear)"
-    }), /* @__PURE__ */ jsxs("defs", {
-      children: [/* @__PURE__ */ jsxs("linearGradient", {
-        id: "paint0_linear",
-        x1: "16",
-        y1: "3",
-        x2: "16",
-        y2: "13",
-        gradientUnits: "userSpaceOnUse",
-        children: [/* @__PURE__ */ jsx("stop", {
-          stopColor: "white"
-        }), /* @__PURE__ */ jsx("stop", {
-          offset: "1",
-          stopColor: "#D1DAEE"
-        })]
-      }), /* @__PURE__ */ jsxs("linearGradient", {
-        id: "paint1_linear",
-        x1: "12",
-        y1: "3",
-        x2: "12",
-        y2: "21",
-        gradientUnits: "userSpaceOnUse",
-        children: [/* @__PURE__ */ jsx("stop", {
-          stopColor: "#6073D8"
-        }), /* @__PURE__ */ jsx("stop", {
-          offset: "1",
-          stopColor: "#5C5ACA"
-        })]
-      })]
-    })]
-  });
-});
-var Upload2 = memo((props) => {
-  return /* @__PURE__ */ e.createElement("svg", {
-    width: "1em",
-    height: "1em",
-    viewBox: "0 0 24 24",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, /* @__PURE__ */ e.createElement("path", {
-    d: "M17.2071 9.2905C17.5976 9.68103 17.5976 10.3142 17.2071 10.7047C16.8166 11.0952 16.1834 11.0952 15.7929 10.7047L13.0019 7.91377V15C13.0019 15.5523 12.5542 16 12.0019 16C11.4496 16 11.0019 15.5523 11.0019 15V7.91368L8.20894 10.7067C7.81841 11.0972 7.18525 11.0972 6.79472 10.7067C6.4042 10.3161 6.4042 9.68298 6.79472 9.29245L11.2948 4.79241C11.4823 4.60487 11.7367 4.49951 12.0019 4.49951C12.2671 4.49951 12.5214 4.60487 12.709 4.79241L17.2071 9.2905Z",
-    fill: "url(#paint0_linear)"
-  }), /* @__PURE__ */ e.createElement("path", {
-    fillRule: "evenodd",
-    clipRule: "evenodd",
-    d: "M4 14C4.55228 14 5 14.4477 5 15V17C5 17.5523 5.44772 18 6 18H18C18.5523 18 19 17.5523 19 17V15C19 14.4477 19.4477 14 20 14C20.5523 14 21 14.4477 21 15V17C21 18.6569 19.6569 20 18 20H6C4.34315 20 3 18.6569 3 17V15C3 14.4477 3.44772 14 4 14Z",
-    fill: "url(#paint1_linear)"
-  }), /* @__PURE__ */ e.createElement("defs", null, /* @__PURE__ */ e.createElement("linearGradient", {
-    id: "paint0_linear",
-    x1: "12.0009",
-    y1: "4.49951",
-    x2: "12.0009",
-    y2: "16",
-    gradientUnits: "userSpaceOnUse"
-  }, /* @__PURE__ */ e.createElement("stop", {
-    stopColor: "white"
-  }), /* @__PURE__ */ e.createElement("stop", {
-    offset: "1",
-    stopColor: "#D1DAEE"
-  })), /* @__PURE__ */ e.createElement("linearGradient", {
-    id: "paint1_linear",
-    x1: "12",
-    y1: "14",
-    x2: "12",
-    y2: "20",
-    gradientUnits: "userSpaceOnUse"
-  }, /* @__PURE__ */ e.createElement("stop", {
-    stopColor: "#6073D8"
-  }), /* @__PURE__ */ e.createElement("stop", {
-    offset: "1",
     stopColor: "#5C5ACA"
   }))));
 });
@@ -4620,12 +4620,7 @@ const FocusedStyles = css`
     border-radius: calc(${(props) => props.borderRadius} + 3px);
     content: '';
     display: block;
-    border-color: rgb(
-      ${(props) => {
-  var _a;
-  return (_a = props.backgroundColor) != null ? _a : BorderColors.Primary;
-}}
-    );
+    border-color: rgb(${BorderColors.Primary});
     border-style: solid;
     border-width: 2px;
     opacity: ${(props) => props.focused ? 1 : 0};
@@ -4980,7 +4975,7 @@ const SvgMedia = styled.svg`
   justify-content: center;
 
   svg {
-    fill: ${(props) => props.color};
+    fill: rgb(${(props) => props.color});
   }
 `;
 const Svg = memo((_e) => {
@@ -8083,6 +8078,7 @@ const MenuItem = memo((_U) => {
     hover,
     icon,
     label,
+    lineHeight = Size.Default,
     onClick,
     title,
     to,
@@ -8099,6 +8095,7 @@ const MenuItem = memo((_U) => {
     "hover",
     "icon",
     "label",
+    "lineHeight",
     "onClick",
     "title",
     "to",
@@ -8119,6 +8116,7 @@ const MenuItem = memo((_U) => {
         focus,
         hover,
         icon,
+        lineHeight,
         onClick: (e2) => {
           e2.preventDefault();
           e2.stopPropagation();
@@ -8140,6 +8138,7 @@ const MenuItem = memo((_U) => {
       backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent,
       form: "null",
       icon,
+      lineHeight,
       onClick: (e2) => {
         e2.preventDefault();
         e2.stopPropagation();

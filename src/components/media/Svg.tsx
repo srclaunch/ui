@@ -33,7 +33,7 @@ const SvgMedia = styled.svg<SvgProps>`
   justify-content: center;
 
   svg {
-    fill: ${props => props.color};
+    fill: rgb(${props => props.color});
   }
 `;
 
