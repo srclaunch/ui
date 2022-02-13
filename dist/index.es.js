@@ -4975,21 +4975,29 @@ const Image = memo((_c) => {
 const SvgMedia = styled.svg`
   ${DimensionStyles};
   ${MarginStyles};
-  fill: ${(props) => props.color};
+
+  svg {
+    fill: ${(props) => props.color};
+    height: ${(props) => props.size};
+    width: ${(props) => props.size};
+  }
 `;
 const Svg = memo((_e) => {
   var _f = _e, {
     as = "span",
     children,
-    className = ""
+    className = "",
+    size = Size.Default
   } = _f, props = __objRest(_f, [
     "as",
     "children",
-    "className"
+    "className",
+    "size"
   ]);
   return /* @__PURE__ */ jsx(SvgMedia, __spreadProps(__spreadValues({
     as,
-    className: `${className} svg`
+    className: `${className} svg`,
+    size
   }, props), {
     children
   }));
@@ -5001,6 +5009,7 @@ const Icon = memo((_g) => {
     component,
     name: name2,
     path,
+    size = Size.Default,
     svg,
     url
   } = _h, props = __objRest(_h, [
@@ -5009,6 +5018,7 @@ const Icon = memo((_g) => {
     "component",
     "name",
     "path",
+    "size",
     "svg",
     "url"
   ]);
@@ -5018,7 +5028,8 @@ const Icon = memo((_g) => {
       return /* @__PURE__ */ jsx(Svg, __spreadProps(__spreadValues({
         className: `${className} icon`,
         color,
-        size: Size.Default
+        height: size,
+        width: size
       }, props), {
         children: /* @__PURE__ */ jsx(Ico, {})
       }));
@@ -32730,10 +32741,7 @@ const Documentation = memo(({
         alignItems: Align.Center,
         grow: false,
         orientation: Orientation.Horizontal,
-        children: /* @__PURE__ */ jsx(Label, {
-          textColor: TextColors.Dark,
-          textSize: TextSize.Larger,
-          textWeight: TextWeight.Most,
+        children: /* @__PURE__ */ jsx(Title, {
           children: "AppLab Component Docs"
         })
       }), /* @__PURE__ */ jsx(Container$h, {}), /* @__PURE__ */ jsx(ThemeSelector, {

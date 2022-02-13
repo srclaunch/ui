@@ -10,6 +10,7 @@ import {
   Color,
   CommonComponentProps,
   HeightProps,
+  Size,
   SizeProps,
   WidthProps,
 } from '../../types';
@@ -24,10 +25,15 @@ export type SvgProps = {
   WidthProps &
   SizeProps;
 
-const SvgMedia = styled.svg`
+const SvgMedia = styled.svg<SvgProps>`
   ${DimensionStyles};
   ${MarginStyles};
-  fill: ${props => props.color};
+
+  svg {
+    fill: ${props => props.color};
+    height: ${props => props.size};
+    width: ${props => props.size};
+  }
 `;
 
 export const Svg = memo(
@@ -35,10 +41,11 @@ export const Svg = memo(
     as = 'span',
     children,
     className = '',
+    size = Size.Default,
     ...props
   }: SvgProps): ReactElement => {
     return (
-      <SvgMedia as={as} className={`${className} svg`} {...props}>
+      <SvgMedia as={as} className={`${className} svg`} size={size} {...props}>
         {children}
       </SvgMedia>
     );

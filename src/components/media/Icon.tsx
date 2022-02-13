@@ -37,6 +37,7 @@ export const Icon = memo(
     component,
     name,
     path,
+    size = Size.Default,
     svg,
     url,
     ...props
@@ -49,7 +50,8 @@ export const Icon = memo(
           <Svg
             className={`${className} icon`}
             color={color}
-            size={Size.Default}
+            height={size}
+            width={size}
             {...props}
           >
             <Ico />

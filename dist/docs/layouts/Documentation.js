@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { memo } from 'react';
-import { Align, Amount, BackgroundColors, BorderColors, BorderStyle, Container, Label, NavigationMenu, Orientation, Overflow, TextColors, TextSize, TextWeight, ThemeSelector, } from '../../index';
+import { Align, Amount, BackgroundColors, BorderColors, BorderStyle, Container, NavigationMenu, Orientation, Overflow, ThemeSelector, Title, } from '../../index';
 {
     /* <Workspace>
             <WorkspaceFooter>
@@ -34,11 +34,7 @@ export const Documentation = memo(({ children }) => {
                         style: BorderStyle.Solid,
                         width: 1,
                     },
-                }, grow: false, orientation: Orientation.Horizontal, padding: Amount.Default, children: [_jsx(Container, { alignContent: Align.Center, alignItems: Align.Center, grow: false, orientation: Orientation.Horizontal, children: _jsx(Label
-                        // alignContent={Align.Center}
-                        , { 
-                            // alignContent={Align.Center}
-                            textColor: TextColors.Dark, textSize: TextSize.Larger, textWeight: TextWeight.Most, children: "AppLab Component Docs" }, void 0) }, void 0), _jsx(Container, {}, void 0), _jsx(ThemeSelector, { width: 200, showLabel: false }, void 0)] }, void 0), _jsxs(Container, { orientation: Orientation.Horizontal, children: [_jsx(Container, { backgroundColor: BackgroundColors.Lightest, width: 260, children: _jsx(NavigationMenu
+                }, grow: false, orientation: Orientation.Horizontal, padding: Amount.Default, children: [_jsx(Container, { alignContent: Align.Center, alignItems: Align.Center, grow: false, orientation: Orientation.Horizontal, children: _jsx(Title, { children: "AppLab Component Docs" }, void 0) }, void 0), _jsx(Container, {}, void 0), _jsx(ThemeSelector, { width: 200, showLabel: false }, void 0)] }, void 0), _jsxs(Container, { orientation: Orientation.Horizontal, children: [_jsx(Container, { backgroundColor: BackgroundColors.Lightest, width: 260, children: _jsx(NavigationMenu
                         // itemProps={{
                         //   active: {
                         //     backgroundColor: BackgroundColor.Primary,

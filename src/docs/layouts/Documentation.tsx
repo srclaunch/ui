@@ -21,6 +21,7 @@ import {
   TextSize,
   TextWeight,
   ThemeSelector,
+  Title,
 } from '../../index';
 
 {
@@ -79,14 +80,7 @@ export const Documentation = memo(
             grow={false}
             orientation={Orientation.Horizontal}
           >
-            <Label
-              // alignContent={Align.Center}
-              textColor={TextColors.Dark}
-              textSize={TextSize.Larger}
-              textWeight={TextWeight.Most}
-            >
-              AppLab Component Docs
-            </Label>
+            <Title>AppLab Component Docs</Title>
           </Container>
 
           <Container />

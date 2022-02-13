@@ -10,5 +10,5 @@ export declare type IconProps = {
     readonly svg?: ReactElement;
     readonly url?: string;
 } & ContainerProps<HTMLSpanElement> & HeightProps & SizeProps & WidthProps;
-export declare const Icon: import("react").MemoExoticComponent<({ color, className, component, name, path, svg, url, ...props }: IconProps) => ReactElement>;
+export declare const Icon: import("react").MemoExoticComponent<({ color, className, component, name, path, size, svg, url, ...props }: IconProps) => ReactElement>;
 //# sourceMappingURL=Icon.d.ts.map

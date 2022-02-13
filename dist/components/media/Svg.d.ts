@@ -6,5 +6,5 @@ export declare type SvgProps = {
     readonly path?: string;
     readonly url?: string;
 } & ContainerProps<HTMLOrSVGElement> & HeightProps & WidthProps & SizeProps;
-export declare const Svg: import("react").MemoExoticComponent<({ as, children, className, ...props }: SvgProps) => ReactElement>;
+export declare const Svg: import("react").MemoExoticComponent<({ as, children, className, size, ...props }: SvgProps) => ReactElement>;
 //# sourceMappingURL=Svg.d.ts.map

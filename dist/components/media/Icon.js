@@ -4,11 +4,11 @@ import { memo } from 'react';
 import { ForegroundColors, Size, } from '../../types';
 import { Image } from './Image';
 import { Svg } from './Svg';
-export const Icon = memo(({ color = ForegroundColors.Default, className = '', component, name, path, svg, url, ...props }) => {
+export const Icon = memo(({ color = ForegroundColors.Default, className = '', component, name, path, size = Size.Default, svg, url, ...props }) => {
     if (name) {
         const Ico = getIcon(name);
         if (Ico)
-            return (_jsx(Svg, { className: `${className} icon`, color: color, size: Size.Default, ...props, children: _jsx(Ico, {}, void 0) }, void 0));
+            return (_jsx(Svg, { className: `${className} icon`, color: color, height: size, width: size, ...props, children: _jsx(Ico, {}, void 0) }, void 0));
     }
     if (component) {
         return component;
