@@ -267,7 +267,7 @@ C269.499,195.468,268.199,209.068,267.599,222.568z`})})}))),Rm=h.memo(e=>z.defaul
     border-radius: calc(${e=>e.borderRadius} + 3px);
     content: '';
     display: block;
-    border-color: rgb(${Oe.Primary});
+    border-color: rgb(${()=>Oe.Primary});
     border-style: solid;
     border-width: 2px;
     opacity: ${e=>e.focused?1:0};
