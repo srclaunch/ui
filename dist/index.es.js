@@ -4764,7 +4764,7 @@ function getDepthZIndex(value2) {
   }
 }
 const DepthStyles = css`
-  z-index: ${(props) => getDepthZIndex(props.depth)};
+  z-index: ${(props) => getDepthZIndex(props.depth) === 0 ? "auto" : getDepthZIndex(props.depth)};
 `;
 const MarginStyles = css`
   ${(props) => {
@@ -5769,7 +5769,7 @@ const Container$g = styled.div`
 `;
 const TextInputStyles = css`
   ${FocusedStyles};
-  /* $ {TextStyles}; */
+  ${TextStyles};
 
   outline: none;
   padding: 0 ${Amount.Less};
@@ -32619,14 +32619,20 @@ const SearchResults = styled.div`
   } */
 `;
 const ThemeSelector = memo((_xc) => {
-  var props = __objRest(_xc, []);
+  var _yc = _xc, {
+    showLabel = true
+  } = _yc, props = __objRest(_yc, [
+    "showLabel"
+  ]);
   const dispatch = useDispatch();
   const {
     current,
     list
   } = useSelector((state) => state.ui.themes);
   return /* @__PURE__ */ jsxs(Container$h, {
-    children: [/* @__PURE__ */ jsx(InputLabel, {
+    alignContent: Align.Center,
+    grow: false,
+    children: [showLabel && /* @__PURE__ */ jsx(InputLabel, {
       children: "Theme"
     }), /* @__PURE__ */ jsx(DropdownInput, __spreadValues({
       defaultValue: current,
@@ -32647,14 +32653,14 @@ const ThemeSelector = memo((_xc) => {
     }, props))]
   });
 });
-const LogoutButton = memo((_yc) => {
-  var _zc = _yc, {
+const LogoutButton = memo((_zc) => {
+  var _Ac = _zc, {
     icon,
     onLogoutSuccess,
     label,
     showArrow = false,
     textColor = TextColors.Error
-  } = _zc, props = __objRest(_zc, [
+  } = _Ac, props = __objRest(_Ac, [
     "icon",
     "onLogoutSuccess",
     "label",
@@ -32718,18 +32724,22 @@ const Documentation = memo(({
       },
       grow: false,
       orientation: Orientation.Horizontal,
+      padding: Amount.Default,
       children: [/* @__PURE__ */ jsx(Container$h, {
+        alignContent: Align.Center,
         alignItems: Align.Center,
         grow: false,
         orientation: Orientation.Horizontal,
-        padding: Amount.Default,
         children: /* @__PURE__ */ jsx(Label, {
           textColor: TextColors.Dark,
           textSize: TextSize.Larger,
           textWeight: TextWeight.Most,
           children: "AppLab Component Docs"
         })
-      }), /* @__PURE__ */ jsx(Container$h, {})]
+      }), /* @__PURE__ */ jsx(Container$h, {}), /* @__PURE__ */ jsx(ThemeSelector, {
+        width: 200,
+        showLabel: false
+      })]
     }), /* @__PURE__ */ jsxs(Container$h, {
       orientation: Orientation.Horizontal,
       children: [/* @__PURE__ */ jsx(Container$h, {

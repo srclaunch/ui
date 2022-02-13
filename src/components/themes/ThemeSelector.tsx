@@ -7,6 +7,7 @@ import {
 } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
 
+import { Align, Orientation } from '../../types';
 import {
   DropdownInput,
   DropdownInputProps,
@@ -14,11 +15,13 @@ import {
 import { InputLabel } from '../forms/labels/InputLabel';
 import { Container, ContainerProps } from '../layout/Container';
 
-export type ThemeSelectorProps = ContainerProps<HTMLDivElement> &
+export type ThemeSelectorProps = {
+  readonly showLabel?: boolean;
+} & ContainerProps<HTMLDivElement> &
   DropdownInputProps;
 
 export const ThemeSelector = memo(
-  ({ ...props }: ThemeSelectorProps): ReactElement => {
+  ({ showLabel = true, ...props }: ThemeSelectorProps): ReactElement => {
     const dispatch = useDispatch();
 
     const { current, list } = useSelector(
@@ -26,8 +29,8 @@ export const ThemeSelector = memo(
     );
 
     return (
-      <Container>
-        <InputLabel>Theme</InputLabel>
+      <Container alignContent={Align.Center} grow={false}>
+        {showLabel && <InputLabel>Theme</InputLabel>}
 
         <DropdownInput
           defaultValue={current}

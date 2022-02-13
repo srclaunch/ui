@@ -3,9 +3,10 @@ import { css } from 'styled-components';
 import { Amount } from '../../../types/proportion';
 import { TextColors } from '../../../types/typography/text';
 import { FocusedStyles } from '../../focused';
+import { TextStyles } from '../../typography';
 export const TextInputStyles = css `
   ${FocusedStyles};
-  /* $ {TextStyles}; */
+  ${TextStyles};
 
   outline: none;
   padding: 0 ${Amount.Less};

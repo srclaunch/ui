@@ -20,6 +20,7 @@ import {
   TextColors,
   TextSize,
   TextWeight,
+  ThemeSelector,
 } from '../../index';
 
 {
@@ -70,12 +71,13 @@ export const Documentation = memo(
           }}
           grow={false}
           orientation={Orientation.Horizontal}
+          padding={Amount.Default}
         >
           <Container
+            alignContent={Align.Center}
             alignItems={Align.Center}
             grow={false}
             orientation={Orientation.Horizontal}
-            padding={Amount.Default}
           >
             <Label
               // alignContent={Align.Center}
@@ -88,6 +90,8 @@ export const Documentation = memo(
           </Container>
 
           <Container />
+
+          <ThemeSelector width={200} showLabel={false} />
         </Container>
 
         <Container orientation={Orientation.Horizontal}>
