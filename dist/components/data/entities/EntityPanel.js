@@ -114,7 +114,7 @@ export const EntityPanel = memo(({ actions, ...props }) => {
                             ],
                         }
                         : undefined, title: getHeaderTitle() }, void 0), _jsx(Container, { padding: Amount.Default, scrollable: true, style: {
-                        top: 60,
+                        top: '60px !important',
                     }, children: getContent() }, void 0)] }, void 0) }, void 0));
 });
 //# sourceMappingURL=EntityPanel.js.map

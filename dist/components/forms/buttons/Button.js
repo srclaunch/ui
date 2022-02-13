@@ -52,7 +52,7 @@ export var ButtonType;
 //       }
 //     `};
 // `;
-export const Button = memo(({ active, alignItems = Align.Center, alignContent = Align.Center, backgroundColor, borderRadius = Amount.All, children, className = '', cursor = Cursor.Pointer, disabled = false, form, fullWidth, hover, icon, label, onClick, onMouseEnter, onMouseLeave, orientation = Orientation.Horizontal, size = Size.Default, textColor, textSize, textWeight, type, ...props }) => {
+export const Button = memo(({ active, alignItems = Align.Center, alignContent = Align.Center, backgroundColor, borderRadius = Amount.All, children, className = '', cursor = Cursor.Pointer, disabled = false, form, grow = false, hover, icon, label, onClick, onMouseEnter, onMouseLeave, orientation = Orientation.Horizontal, size = Size.Default, textColor, textSize, textWeight, type, ...props }) => {
     const [hovered, setHovered] = useState(false);
     const getColors = () => {
         if (!type)
@@ -132,14 +132,14 @@ export const Button = memo(({ active, alignItems = Align.Center, alignContent = 
     return (_jsx(Container, { active: {
             backgroundOpacity: 80,
             ...active,
-        }, alignItems: alignItems, alignContent: alignContent, as: "button", backgroundColor: updatedBackgroundColor, borderRadius: fullWidth && !borderRadius ? Amount.Least : borderRadius, boxShadow: {
+        }, alignItems: alignItems, alignContent: alignContent, as: "button", backgroundColor: updatedBackgroundColor, borderRadius: grow && !borderRadius ? Amount.Least : borderRadius, boxShadow: {
             blurRadius: 8,
             color: colors?.backgroundColor,
             offsetX: 0,
             offsetY: 2,
             opacity: 35,
             spreadRadius: 4,
-        }, className: `${className} button`, cursor: cursor, disabled: disabled, form: form, grow: fullWidth, hover: {
+        }, className: `${className} button`, cursor: cursor, disabled: disabled, form: form, grow: grow, hover: {
             backgroundOpacity: 90,
             ...hover,
         }, onClick: onClick, onMouseEnter: (e) => {
@@ -150,8 +150,8 @@ export const Button = memo(({ active, alignItems = Align.Center, alignContent = 
             setHovered(false);
             if (onMouseLeave)
                 onMouseLeave(e);
-        }, orientation: orientation, overflow: Overflow.Visible, paddingLeft: getLargerAmount(convertSizeToAmount(size)), paddingRight: getLargerAmount(convertSizeToAmount(size)), size: size, ...props, children: typeof children === 'string' ? (_jsx(Label, { alignContent: fullWidth ? Align.Center : alignContent, icon: icon, lineHeight: size === Size.Smaller || size === Size.Smallest
+        }, orientation: orientation, overflow: Overflow.Visible, paddingLeft: getLargerAmount(convertSizeToAmount(size)), paddingRight: getLargerAmount(convertSizeToAmount(size)), ...props, children: typeof children === 'string' ? (_jsx(Label, { alignContent: grow ? Align.Center : alignContent, grow: true, icon: icon, lineHeight: size === Size.Smaller || size === Size.Smallest
                 ? Size.Small
-                : size, size: size, textColor: updatedTextColor, textSize: convertSizeToTextSize(getSmallerSize(size)), textWeight: textWeight, underline: type === ButtonType.Link && hovered, children: children }, void 0)) : (_jsx(_Fragment, { children: children }, void 0)) }, void 0));
+                : size, textColor: updatedTextColor, textSize: convertSizeToTextSize(getSmallerSize(size)), textWeight: textWeight, underline: type === ButtonType.Link && hovered, children: children }, void 0)) : (_jsx(_Fragment, { children: children }, void 0)) }, void 0));
 });
 //# sourceMappingURL=Button.js.map

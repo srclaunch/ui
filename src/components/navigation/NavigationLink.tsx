@@ -36,6 +36,7 @@ export const NavigationLink = memo(
     activeClassName = 'active',
     alignContent,
     alignItems = Align.Left,
+    as = 'span',
     backgroundColor,
     borderRadius = Amount.Less,
     children,
@@ -43,8 +44,9 @@ export const NavigationLink = memo(
     focus,
     grow = true,
     hover,
-    icon,
+    inline = false,
     label,
+    lineHeight = Size.Smaller,
     margin,
     marginBottom,
     marginLeft,
@@ -61,13 +63,11 @@ export const NavigationLink = memo(
     paddingRight,
     paddingTop,
     rel,
-    size,
     target,
-    textColor = TextColors.Default,
+    textColor = TextColors.Primary,
     textSize,
     textWeight,
     to,
-    width,
     ...props
   }: NavigationLinkProps): ReactElement => {
     const [focused, setFocused] = useState(false);
@@ -119,6 +119,8 @@ export const NavigationLink = memo(
         target={target}
         to={to + location.search}
         style={{
+          display: inline ? 'inline-flex' : 'flex',
+          lineHeight: inline ? Size.Smaller : lineHeight,
           textDecoration: 'none',
         }}
       >
@@ -126,6 +128,7 @@ export const NavigationLink = memo(
           alignContent={alignContent}
           alignItems={menu ? Align.Stretch : alignItems}
           active={active}
+          as={as}
           backgroundColor={updatedBackgroundColor}
           borderRadius={borderRadius}
           boxShadow={{
@@ -169,6 +172,7 @@ export const NavigationLink = memo(
         >
           {label ? (
             <Label
+              lineHeight={lineHeight}
               textColor={updatedTextColor}
               textSize={textSize}
               textWeight={textWeight}

@@ -1,7 +1,7 @@
 import { useTitle } from '@srclaunch/react-hooks';
 import { cloneElement, ElementType, memo, ReactElement } from 'react';
 
-import { Align, ContainerProps } from '../../types';
+import { Align, BackgroundColors, ContainerProps } from '../../types';
 import { Container } from '../layout/Container';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 
@@ -15,9 +15,10 @@ type PageProps = {
 export const Page = memo(
   ({
     alignContent = Align.Top,
+    backgroundColor = BackgroundColors.Page,
     children,
     className = '',
-    grow = false,
+    grow = true,
     layout: Layout,
     loading = false,
     title,
@@ -28,6 +29,7 @@ export const Page = memo(
     const PageComp = () => (
       <Container
         alignContent={alignContent}
+        backgroundColor={backgroundColor}
         className={`${className} page`}
         grow={grow}
         {...props}

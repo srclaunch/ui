@@ -1,5 +1,6 @@
 export var Align;
 (function (Align) {
+    Align["Baseline"] = "baseline";
     Align["Bottom"] = "flex-end";
     Align["Center"] = "center";
     Align["Left"] = "flex-start";

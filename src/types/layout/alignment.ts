@@ -1,4 +1,5 @@
 export enum Align {
+  Baseline = 'baseline',
   Bottom = 'flex-end',
   Center = 'center',
   Left = 'flex-start',

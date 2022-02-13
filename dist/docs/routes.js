@@ -1,4 +1,8 @@
 import { PageRole } from '@srclaunch/types';
+import { Animation } from './pages/animation';
+import { Authentication } from './pages/authentication';
+import { Billing } from './pages/billing';
+import { BillingPayments } from './pages/billing/payments';
 import { DataGridPage } from './pages/data/DataGrid';
 import { DataGridCellPage } from './pages/data/DataGridCell';
 import { DataLabelPage } from './pages/data/DataLabel';
@@ -7,12 +11,13 @@ import { Forms } from './pages/forms';
 import { ButtonsPage } from './pages/forms/buttons';
 import { ButtonPage } from './pages/forms/buttons/Button';
 import { MenuButtonPage } from './pages/forms/buttons/MenuButton';
-import { CountryInputPage } from './pages/forms/inputs/CountryInput';
-import { DropdownInputPage } from './pages/forms/inputs/DropdownInput';
-import { ImageInputPage } from './pages/forms/inputs/ImageInput';
-import { LongTextInputPage } from './pages/forms/inputs/LongTextInput';
-import { TextInputPage } from './pages/forms/inputs/TextInput';
-import { ToggleInputPage } from './pages/forms/inputs/ToggleInput';
+import { FormInputsPage } from './pages/forms/inputs';
+import { ToggleInputPage } from './pages/forms/inputs/boolean/ToggleInput';
+import { CountryInputPage } from './pages/forms/inputs/locale/CountryInput';
+import { ImageInputPage } from './pages/forms/inputs/media/ImageInput';
+import { DropdownInputPage } from './pages/forms/inputs/menu/DropdownInput';
+import { LongTextInputPage } from './pages/forms/inputs/text/LongTextInput';
+import { TextInputPage } from './pages/forms/inputs/text/TextInput';
 import { Introduction } from './pages/Introduction';
 import { MoreMenuPage } from './pages/menus/MoreMenu';
 import { ChatMessagingPage } from './pages/messaging/chat';
@@ -35,6 +40,22 @@ const routes = [
     {
         component: Introduction,
         role: PageRole.Index,
+    },
+    {
+        component: Animation,
+        path: '/animation',
+    },
+    {
+        component: Authentication,
+        path: '/authentication',
+    },
+    {
+        component: Billing,
+        path: '/billing',
+    },
+    {
+        component: BillingPayments,
+        path: '/billing/payments',
     },
     {
         component: Data,
@@ -83,6 +104,10 @@ const routes = [
     {
         component: MenuButtonPage,
         path: '/forms/buttons/menu-button',
+    },
+    {
+        component: FormInputsPage,
+        path: '/forms/inputs',
     },
     {
         component: CountryInputPage,

@@ -1,10 +1,10 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { NavLink, useLocation, useMatch, useResolvedPath, } from '@srclaunch/web-application-state';
 import { memo, useEffect, useState } from 'react';
-import { Align, Amount, Orientation, TextColors, } from '../../types';
+import { Align, Amount, Orientation, Size, TextColors, } from '../../types';
 import { Container } from '../layout/Container';
 import { Label } from '../typography/Label';
-export const NavigationLink = memo(({ active, activeClassName = 'active', alignContent, alignItems = Align.Left, backgroundColor, borderRadius = Amount.Less, children, className = '', focus, grow = true, hover, icon, label, margin, marginBottom, marginLeft, marginRight, marginTop, menu, onClick, onMouseEnter, onMouseLeave, orientation = Orientation.Horizontal, padding, paddingBottom, paddingLeft, paddingRight, paddingTop, rel, size, target, textColor = TextColors.Default, textSize, textWeight, to, width, ...props }) => {
+export const NavigationLink = memo(({ active, activeClassName = 'active', alignContent, alignItems = Align.Left, as = 'span', backgroundColor, borderRadius = Amount.Less, children, className = '', focus, grow = true, hover, inline = false, label, lineHeight = Size.Smaller, margin, marginBottom, marginLeft, marginRight, marginTop, menu, onClick, onMouseEnter, onMouseLeave, orientation = Orientation.Horizontal, padding, paddingBottom, paddingLeft, paddingRight, paddingTop, rel, target, textColor = TextColors.Primary, textSize, textWeight, to, ...props }) => {
     const [focused, setFocused] = useState(false);
     const [hovered, setHovered] = useState(false);
     const [updatedBackgroundColor, setUpdatedBackgroundColor] = useState(backgroundColor);
@@ -46,8 +46,10 @@ export const NavigationLink = memo(({ active, activeClassName = 'active', alignC
         setBackgroundColor();
     }, [hovered, focused, exactMatch]);
     return (_jsx(NavLink, { className: `${className} navigation-link`, onBlur: () => setFocused(false), onFocus: () => setFocused(true), rel: rel, target: target, to: to + location.search, style: {
+            display: inline ? 'inline-flex' : 'flex',
+            lineHeight: inline ? Size.Smaller : lineHeight,
             textDecoration: 'none',
-        }, children: _jsx(Container, { alignContent: alignContent, alignItems: menu ? Align.Stretch : alignItems, active: active, backgroundColor: updatedBackgroundColor, borderRadius: borderRadius, boxShadow: {
+        }, children: _jsx(Container, { alignContent: alignContent, alignItems: menu ? Align.Stretch : alignItems, active: active, as: as, backgroundColor: updatedBackgroundColor, borderRadius: borderRadius, boxShadow: {
                 blurRadius: 8,
                 color: backgroundColor,
                 offsetX: 0,
@@ -64,6 +66,6 @@ export const NavigationLink = memo(({ active, activeClassName = 'active', alignC
                 // @ts-ignore
                 if (onMouseLeave)
                     onMouseLeave(e);
-            }, orientation: menu ? Orientation.Vertical : orientation, padding: padding, paddingBottom: menu ? paddingLeft : paddingBottom, paddingLeft: paddingLeft, paddingRight: paddingRight, paddingTop: paddingTop, ...props, children: label ? (_jsx(Label, { textColor: updatedTextColor, textSize: textSize, textWeight: textWeight, ...props, children: label }, void 0)) : (children) }, void 0) }, void 0));
+            }, orientation: menu ? Orientation.Vertical : orientation, padding: padding, paddingBottom: menu ? paddingLeft : paddingBottom, paddingLeft: paddingLeft, paddingRight: paddingRight, paddingTop: paddingTop, ...props, children: label ? (_jsx(Label, { lineHeight: lineHeight, textColor: updatedTextColor, textSize: textSize, textWeight: textWeight, ...props, children: label }, void 0)) : (children) }, void 0) }, void 0));
 });
 //# sourceMappingURL=NavigationLink.js.map

@@ -167,7 +167,7 @@ export const EntityPanel = memo(
             padding={Amount.Default}
             scrollable
             style={{
-              top: 60,
+              top: '60px !important',
             }}
           >
             {getContent()}

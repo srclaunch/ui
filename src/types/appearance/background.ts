@@ -17,6 +17,7 @@ export enum ElementBackgroundColors {
   MoreMenu = 'var(--bg-color-more-menu-rgb)',
   NavigationBar = 'var(--bg-color-navigation-bar-rgb)',
   NavigationMenu = 'var(--bg-color-navigation-menu-rgb)',
+  Page = 'var(--bg-color-page-rgb)',
   SlidePanel = 'var(--bg-color-slide-panel-rgb)',
   Workspace = 'var(--bg-color-workspace-rgb)',
 }
@@ -50,6 +51,7 @@ export enum BackgroundColors {
   MoreMenu = ElementBackgroundColors.MoreMenu,
   NavigationBar = ElementBackgroundColors.NavigationBar,
   NavigationMenu = ElementBackgroundColors.NavigationMenu,
+  Page = ElementBackgroundColors.Page,
   SlidePanel = ElementBackgroundColors.SlidePanel,
   Workspace = ElementBackgroundColors.Workspace,
   Lightest = BackgroundColorShade.Lightest,

@@ -16,6 +16,7 @@ export declare enum ElementBackgroundColors {
     MoreMenu = "var(--bg-color-more-menu-rgb)",
     NavigationBar = "var(--bg-color-navigation-bar-rgb)",
     NavigationMenu = "var(--bg-color-navigation-menu-rgb)",
+    Page = "var(--bg-color-page-rgb)",
     SlidePanel = "var(--bg-color-slide-panel-rgb)",
     Workspace = "var(--bg-color-workspace-rgb)"
 }
@@ -46,6 +47,7 @@ export declare enum BackgroundColors {
     MoreMenu = "var(--bg-color-more-menu-rgb)",
     NavigationBar = "var(--bg-color-navigation-bar-rgb)",
     NavigationMenu = "var(--bg-color-navigation-menu-rgb)",
+    Page = "var(--bg-color-page-rgb)",
     SlidePanel = "var(--bg-color-slide-panel-rgb)",
     Workspace = "var(--bg-color-workspace-rgb)",
     Lightest = "var(--bg-color-lightest-rgb)",

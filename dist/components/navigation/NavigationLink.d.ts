@@ -11,5 +11,5 @@ export declare type NavigationLinkProps = {
     readonly menu?: readonly MenuItemProps[];
     readonly size?: Size;
 } & LabelProps<HTMLAnchorElement> & LinkProps;
-export declare const NavigationLink: import("react").MemoExoticComponent<({ active, activeClassName, alignContent, alignItems, backgroundColor, borderRadius, children, className, focus, grow, hover, icon, label, margin, marginBottom, marginLeft, marginRight, marginTop, menu, onClick, onMouseEnter, onMouseLeave, orientation, padding, paddingBottom, paddingLeft, paddingRight, paddingTop, rel, size, target, textColor, textSize, textWeight, to, width, ...props }: NavigationLinkProps) => ReactElement>;
+export declare const NavigationLink: import("react").MemoExoticComponent<({ active, activeClassName, alignContent, alignItems, as, backgroundColor, borderRadius, children, className, focus, grow, hover, inline, label, lineHeight, margin, marginBottom, marginLeft, marginRight, marginTop, menu, onClick, onMouseEnter, onMouseLeave, orientation, padding, paddingBottom, paddingLeft, paddingRight, paddingTop, rel, target, textColor, textSize, textWeight, to, ...props }: NavigationLinkProps) => ReactElement>;
 //# sourceMappingURL=NavigationLink.d.ts.map

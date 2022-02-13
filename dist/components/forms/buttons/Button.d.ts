@@ -24,5 +24,5 @@ export declare type ButtonProps = {
     readonly label?: string;
     readonly type?: ButtonType;
 } & ContainerProps<HTMLButtonElement> & LabelProps & SizeProps;
-export declare const Button: import("react").MemoExoticComponent<({ active, alignItems, alignContent, backgroundColor, borderRadius, children, className, cursor, disabled, form, fullWidth, hover, icon, label, onClick, onMouseEnter, onMouseLeave, orientation, size, textColor, textSize, textWeight, type, ...props }: ButtonProps) => ReactElement>;
+export declare const Button: import("react").MemoExoticComponent<({ active, alignItems, alignContent, backgroundColor, borderRadius, children, className, cursor, disabled, form, grow, hover, icon, label, onClick, onMouseEnter, onMouseLeave, orientation, size, textColor, textSize, textWeight, type, ...props }: ButtonProps) => ReactElement>;
 //# sourceMappingURL=Button.d.ts.map

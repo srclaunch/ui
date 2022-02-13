@@ -37,47 +37,52 @@ export const Icon = memo(
     component,
     name,
     path,
-    size = Size.Default,
     svg,
     url,
     ...props
   }: IconProps): ReactElement => {
-    const getElement = () => {
-      if (name) {
-        const Ico = getIcon(name);
+    if (name) {
+      const Ico = getIcon(name);
 
-        if (Ico)
-          return (
-            <Svg {...props}>
-              <Ico />
-            </Svg>
-          );
-      }
+      if (Ico)
+        return (
+          <Svg
+            className={`${className} icon`}
+            color={color}
+            size={Size.Default}
+            {...props}
+          >
+            <Ico />
+          </Svg>
+        );
+    }
 
-      if (component) {
-        return component;
-      }
+    if (component) {
+      return component;
+    }
 
-      if (path) {
-        return <Image alt="icon" size={size} path={path} {...props} />;
-      }
+    if (path) {
+      return (
+        <Image
+          alt="icon"
+          className={`${className} icon`}
+          path={path}
+          {...props}
+        />
+      );
+    }
 
-      if (url) {
-        return <Image alt="icon" size={size} url={url} {...props} />;
-      }
-    };
+    if (url) {
+      return (
+        <Image
+          alt="icon"
+          className={`${className} icon`}
+          url={url}
+          {...props}
+        />
+      );
+    }
 
-    return (
-      <Container
-        alignItems={Align.Center}
-        alignContent={Align.Center}
-        as="span"
-        height={size}
-        width={size}
-        {...props}
-      >
-        {getElement()}
-      </Container>
-    );
+    return <></>;
   },
 );

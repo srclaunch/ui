@@ -1,8 +1,15 @@
-import { jsx as _jsx } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+import { DualLightIcons } from '@srclaunch/icons';
 import { memo } from 'react';
-import { Amount, BackgroundColors, Depth, Workspace, } from '../../../..';
+import { Align, Amount, BackgroundColors, Button, ButtonType, Container, Depth, Heading, Icon, NavigationLink, Paragraph, Size, TextColors, TextSize, TextWeight, Title, Workspace, } from '../../../..';
 import { Documentation } from '../../../layouts/Documentation';
 export const ButtonPage = memo(() => {
-    return (_jsx(Workspace, { backgroundColor: BackgroundColors.Default, depth: Depth.Low, layout: Documentation, padding: Amount.Most, title: "Button", children: "Button" }, void 0));
+    return (_jsxs(Workspace, { header: {
+            title: (_jsxs(_Fragment, { children: [_jsx(NavigationLink, { to: "/forms", hover: {
+                            underline: true,
+                        }, underline: false, children: _jsx(Title, { textColor: TextColors.Primary, textSize: TextSize.Larger, textWeight: TextWeight.Most, children: "Forms" }, void 0) }, void 0), _jsx(Icon, { name: DualLightIcons.ChevronDoubleForward, marginLeft: Amount.Less, marginRight: Amount.Less, size: Size.Smaller }, void 0), _jsx(NavigationLink, { to: "/forms/buttons", hover: {
+                            underline: true,
+                        }, underline: false, children: _jsx(Title, { textColor: TextColors.Primary, textSize: TextSize.Larger, textWeight: TextWeight.Most, children: "Buttons" }, void 0) }, void 0), _jsx(Icon, { name: DualLightIcons.ChevronDoubleForward, marginLeft: Amount.Less, marginRight: Amount.Less, size: Size.Smaller }, void 0), _jsx(Title, { textSize: TextSize.Larger, textWeight: TextWeight.Most, children: "Button" }, void 0)] }, void 0)),
+        }, layout: Documentation, padding: Amount.Most, title: "Button", children: [_jsxs(Container, { backgroundColor: BackgroundColors.Lightest, borderRadius: Amount.Least, depth: Depth.High, grow: false, marginBottom: Amount.Default, padding: Amount.Most, children: [_jsx(Heading, { lineHeight: Size.Smaller, children: "Description" }, void 0), _jsxs(Paragraph, { children: ["The ", _jsx("b", { children: "<Button>" }, void 0), " component is used to create a button."] }, void 0)] }, void 0), _jsxs(Container, { backgroundColor: BackgroundColors.Lightest, borderRadius: Amount.Least, depth: Depth.High, grow: false, marginBottom: Amount.Default, padding: Amount.Most, children: [_jsx(Heading, { lineHeight: Size.Smaller, children: "Default" }, void 0), _jsx(Container, { alignItems: Align.Baseline, backgroundColor: BackgroundColors.Lighter, borderRadius: Amount.Least, depth: Depth.Lower, grow: false, padding: Amount.Most, children: _jsx(Button, { grow: false, children: "Hello, world!" }, void 0) }, void 0)] }, void 0), _jsxs(Container, { backgroundColor: BackgroundColors.Lightest, borderRadius: Amount.Least, depth: Depth.High, grow: false, marginBottom: Amount.Default, padding: Amount.Most, children: [_jsx(Heading, { lineHeight: Size.Smaller, children: "Primary" }, void 0), _jsx(Container, { alignItems: Align.Baseline, backgroundColor: BackgroundColors.Lighter, borderRadius: Amount.Least, depth: Depth.Lower, grow: false, padding: Amount.Most, children: _jsx(Button, { type: ButtonType.Primary, children: "Primary" }, void 0) }, void 0)] }, void 0)] }, void 0));
 });
 //# sourceMappingURL=Button.js.map

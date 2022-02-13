@@ -1,10 +1,15 @@
 import { css } from 'styled-components';
 
-import { BorderProps, FocusProps } from '../types';
-import { BorderColors } from '../types/appearance/border';
+import {
+  BackgroundProps,
+  BorderColors,
+  BorderProps,
+  FocusProps,
+} from '../types';
 
 export const FocusedStyles = css<
   {
+    readonly backgroundColor?: BackgroundProps['backgroundColor'];
     readonly borderRadius?: BorderProps['borderRadius'];
   } & FocusProps
 >`
@@ -15,7 +20,9 @@ export const FocusedStyles = css<
     border-radius: calc(${props => props.borderRadius} + 3px);
     content: '';
     display: block;
-    border-color: rgb(${BorderColors.Primary});
+    border-color: rgb(
+      ${props => props.backgroundColor ?? BorderColors.Primary}
+    );
     border-style: solid;
     border-width: 2px;
     opacity: ${props => (props.focused ? 1 : 0)};

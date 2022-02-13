@@ -39,5 +39,15 @@ export const DimensionStyles = css `
     css `
       min-width: ${getDimension(props.minWidth)};
     `};
+
+  ${props => props.size &&
+    css `
+      max-height: ${props.size};
+      min-height: ${props.size};
+      height: ${props.size};
+      max-width: ${props.size};
+      min-width: ${props.size};
+      width: ${props.size};
+    `};
 `;
 //# sourceMappingURL=dimension.js.map

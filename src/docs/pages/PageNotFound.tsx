@@ -1,6 +1,6 @@
-import { Align, BackgroundColors, Page, Paragraph, Title } from '../../index';
-import { ReactElement, memo } from 'react';
+import { memo, ReactElement } from 'react';
 
+import { Align, BackgroundColors, Page, Paragraph, Title } from '../../index';
 // import { PageRole } from '@srclaunch/types';
 // import NotAuthenticated from '../layouts/NotAuthenticated';
 // import styled from 'styled-components';
@@ -11,16 +11,11 @@ export const PageNotFound = memo((): ReactElement => {
     <Page
       alignContent={Align.Center}
       alignItems={Align.Center}
-      backgroundColor={BackgroundColors.Lighter}
       layout={Documentation}
       title="AppLab - Page not found"
     >
       <Title>Page Not Found</Title>
-      <Paragraph
-      // alignText={Align.Center}
-      >
-        We couldn't find the page you're looking for.{' '}
-      </Paragraph>
+      <Paragraph>We couldn't find the page you're looking for. </Paragraph>
     </Page>
   );
 });

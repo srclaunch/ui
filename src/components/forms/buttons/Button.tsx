@@ -99,7 +99,7 @@ export const Button = memo(
     cursor = Cursor.Pointer,
     disabled = false,
     form,
-    fullWidth,
+    grow = false,
     hover,
     icon,
     label,
@@ -206,7 +206,7 @@ export const Button = memo(
         alignContent={alignContent}
         as="button"
         backgroundColor={updatedBackgroundColor}
-        borderRadius={fullWidth && !borderRadius ? Amount.Least : borderRadius}
+        borderRadius={grow && !borderRadius ? Amount.Least : borderRadius}
         boxShadow={{
           blurRadius: 8,
           color: colors?.backgroundColor,
@@ -219,7 +219,7 @@ export const Button = memo(
         cursor={cursor}
         disabled={disabled}
         form={form}
-        grow={fullWidth}
+        grow={grow}
         hover={{
           backgroundOpacity: 90,
           ...hover,
@@ -239,19 +239,18 @@ export const Button = memo(
         overflow={Overflow.Visible}
         paddingLeft={getLargerAmount(convertSizeToAmount(size))}
         paddingRight={getLargerAmount(convertSizeToAmount(size))}
-        size={size}
         {...props}
       >
         {typeof children === 'string' ? (
           <Label
-            alignContent={fullWidth ? Align.Center : alignContent}
+            alignContent={grow ? Align.Center : alignContent}
+            grow
             icon={icon}
             lineHeight={
               size === Size.Smaller || size === Size.Smallest
                 ? Size.Small
                 : size
             }
-            size={size}
             textColor={updatedTextColor}
             textSize={convertSizeToTextSize(getSmallerSize(size))}
             textWeight={textWeight}

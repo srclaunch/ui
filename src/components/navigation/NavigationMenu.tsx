@@ -5,6 +5,7 @@ import {
   Align,
   Amount,
   BackgroundColors,
+  Size,
   TextColors,
   TextSize,
   TextWeight,
@@ -27,12 +28,12 @@ export const NavigationMenu = memo(
       active: {
         backgroundColor: BackgroundColors.Primary,
         boxShadow: {
-          blurRadius: 7,
+          blurRadius: 5,
           color: BackgroundColors.Primary,
           offsetX: 0,
-          offsetY: 2,
+          offsetY: 1,
           opacity: 35,
-          spreadRadius: 4,
+          spreadRadius: 3,
         },
         textColor: TextColors.PrimaryContrast,
       },
@@ -44,9 +45,11 @@ export const NavigationMenu = memo(
         backgroundColor: BackgroundColors.Light,
         textColor: TextColors.Light,
       },
+      lineHeight: Size.Default,
       padding: Amount.Least,
       paddingLeft: Amount.Less,
       paddingRight: Amount.Less,
+      textColor: TextColors.Default,
       textSize: TextSize.Default,
     },
     ...props
@@ -75,7 +78,7 @@ export const NavigationMenu = memo(
               }
               className="navigation-menu-item"
               focus={menuItemProps?.focus ?? item.focus}
-              grow={false}
+              grow
               hover={menuItemProps?.hover ?? item.hover}
               icon={item.icon}
               key={key}
@@ -92,6 +95,7 @@ export const NavigationMenu = memo(
               paddingLeft={menuItemProps.paddingLeft ?? menuItemProps.padding}
               paddingRight={menuItemProps.paddingRight ?? menuItemProps.padding}
               paddingTop={menuItemProps.paddingTop ?? menuItemProps.padding}
+              textColor={menuItemProps.textColor ?? TextColors.Default}
               to={item.to ?? '#'}
               {...menuItemProps}
             />

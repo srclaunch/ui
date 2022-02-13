@@ -1,5 +1,12 @@
 import { memo, ReactElement } from 'react';
-import { Amount, BackgroundColors, Depth, Workspace } from '../../../index';
+
+import {
+  Amount,
+  BackgroundColors,
+  Depth,
+  NavigationLink,
+  Workspace,
+} from '../../..';
 import { Documentation } from '../../layouts/Documentation';
 
 export const Modals = memo((): ReactElement => {
@@ -10,6 +17,12 @@ export const Modals = memo((): ReactElement => {
       layout={Documentation}
       padding={Amount.Most}
       title="Modals"
-    ></Workspace>
+    >
+      <ul>
+        <li>
+          <NavigationLink to="/modals/slide-panel" label="SlidePanel" />
+        </li>
+      </ul>
+    </Workspace>
   );
 });
