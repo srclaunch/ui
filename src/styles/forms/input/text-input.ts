@@ -5,10 +5,11 @@ import { Amount } from '../../../types/proportion';
 import { FocusProps } from '../../../types/state/focus-props';
 import { TextColors } from '../../../types/typography/text';
 import { FocusedStyles } from '../../focused';
+import { TextStyles } from '../../typography';
 
 export const TextInputStyles = css<FocusProps>`
   ${FocusedStyles};
-  /* $ {TextStyles}; */
+  ${TextStyles};
 
   outline: none;
   padding: 0 ${Amount.Less};
