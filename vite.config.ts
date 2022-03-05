@@ -26,7 +26,7 @@ export default defineConfig({
         '@srclaunch/web-application-state',
         '@srclaunch/exceptions',
         '@srclaunch/icons',
-
+        'react-password-strength-bar',
         '@srclaunch/logger',
         'i18n-iso-countries',
       ],
