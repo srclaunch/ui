@@ -116,7 +116,6 @@
     "jest-junit": "^13.0.0",
     "prettier": "^2.5.1",
     "prettier-eslint": "^13.0.0",
-    "react-scripts": "^5.0.0",
     "rollup-plugin-typescript2": "^0.31.2",
     "standard-version": "^9.3.2",
     "storybook-addon-designs": "^6.2.1",
