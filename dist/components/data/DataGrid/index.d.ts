@@ -1,4 +1,4 @@
-import React, { ReactElement, SyntheticEvent } from 'react';
+import { ReactElement, SyntheticEvent } from 'react';
 import { Model, Primitives } from '@srclaunch/types';
 import { Align, BorderProps, DataGridDisplayType, WidthProps } from '../../../types';
 import { ContainerProps } from '../../layout/Container';
@@ -48,6 +48,6 @@ export declare type DataGridProps = {
         } & ContainerProps<HTMLDivElement>) => ReactElement;
     };
 } & ContainerProps<HTMLElement>;
-export declare const DataGrid: React.MemoExoticComponent<({ backgroundColor, borderRadius, boxShadow, className, columns, columnCount, data, depth, display, header, hideOnProp, loaded, loading, model, onItemClick, padding, template, ...props }: DataGridProps) => ReactElement>;
+export declare const DataGrid: import("react").MemoExoticComponent<({ backgroundColor, borderRadius, boxShadow, className, columns, columnCount, data, depth, display, header, hideOnProp, loaded, loading, model, onItemClick, padding, template, ...props }: DataGridProps) => ReactElement>;
 export default DataGrid;
 //# sourceMappingURL=index.d.ts.map

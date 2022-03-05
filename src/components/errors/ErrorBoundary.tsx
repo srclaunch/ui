@@ -1,14 +1,11 @@
-import React from 'react';
+import { Component } from 'react';
 import { Logger } from '@srclaunch/logger';
 import { Exception } from '@srclaunch/exceptions';
 
 type ComponentProps = Record<string, unknown>;
 type ComponentState = { exception?: Exception; hasError: boolean };
 
-export class ErrorBoundary extends React.Component<
-  ComponentProps,
-  ComponentState
-> {
+export class ErrorBoundary extends Component<ComponentProps, ComponentState> {
   constructor(props: ComponentProps | Readonly<ComponentState>) {
     super(props);
     this.state = { exception: undefined, hasError: false };

@@ -25,6 +25,7 @@ export default defineConfig({
         'styled-components',
         'amazon-cognito-identity-js',
         '@srclaunch/web-application-state',
+
         '@srclaunch/exceptions',
         '@srclaunch/icons',
         'react-password-strength-bar',
@@ -47,9 +48,9 @@ export default defineConfig({
   define: {
     pkgJson: { name, version },
   },
-  // esbuild: {
-  //   jsxInject: `import React from 'react'`,
-  // },
+  esbuild: {
+    jsxInject: `import React from 'react'`,
+  },
   plugins: [
     // react({
     //   babel: {

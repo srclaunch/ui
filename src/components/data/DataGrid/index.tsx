@@ -1,4 +1,10 @@
-import React, { memo, ReactElement, SyntheticEvent, useState } from 'react';
+import {
+  memo,
+  createElement,
+  ReactElement,
+  SyntheticEvent,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import { Model, Primitives } from '@srclaunch/types';
 
@@ -364,7 +370,7 @@ export const DataGrid = memo(
                 data &&
                 data.map((row, key) => {
                   if (template && template.card) {
-                    return React.createElement(template.card, {
+                    return createElement(template.card, {
                       key,
                       marginBottom: Amount.Default,
                       onClick: () => {

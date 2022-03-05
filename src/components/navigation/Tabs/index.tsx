@@ -1,4 +1,4 @@
-import React, { memo, ReactElement, useState } from 'react';
+import { Children, memo, ReactElement, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { AppearanceStyles } from '../../../styles/appearance';
@@ -91,7 +91,7 @@ export const Tabs = memo(
           paddingLeft={Amount.All}
           paddingRight={Amount.All}
         >
-          {React.Children.map(children, (c: React.ReactNode, key) => {
+          {Children.map(children, (c: React.ReactNode, key) => {
             if (key !== currentTabIndex) return null;
 
             // @ts-ignore

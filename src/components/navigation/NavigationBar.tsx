@@ -1,5 +1,5 @@
 import { useNavigate } from '@srclaunch/web-application-state';
-import React, { memo, ReactElement } from 'react';
+import { memo, ReactElement } from 'react';
 
 import { Container } from '../../components/layout/Container';
 import { UserMenu } from '../../components/user/UserMenu';
