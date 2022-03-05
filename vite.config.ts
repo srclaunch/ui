@@ -26,7 +26,7 @@ export default defineConfig({
         '@srclaunch/web-application-state',
         '@srclaunch/exceptions',
         '@srclaunch/icons',
-        '@srclaunch/validation',
+
         '@srclaunch/logger',
         'i18n-iso-countries',
       ],
@@ -40,8 +40,8 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ['@srclaunch/validation'],
-    include: [],
+    exclude: [],
+    include: ['@srclaunch/validation'],
   },
   define: {
     pkgJson: { name, version },
