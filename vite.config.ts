@@ -16,6 +16,7 @@ export default defineConfig({
     rollupOptions: {
       // Externalize deps that shouldn't be bundled
       external: [
+        'color-namer',
         'react',
         'react-dom',
         'react-redux',
