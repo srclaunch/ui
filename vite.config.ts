@@ -27,8 +27,7 @@ export default defineConfig({
         '@srclaunch/web-application-state',
         '@srclaunch/exceptions',
         '@srclaunch/icons',
-        'react-password-strength-bar',
-        'axe-core',
+        // 'react-password-strength-bar',
         '@srclaunch/logger',
         'i18n-iso-countries',
       ],
@@ -43,7 +42,7 @@ export default defineConfig({
   },
   optimizeDeps: {
     exclude: [],
-    include: ['@srclaunch/validation'],
+    include: ['@srclaunch/validation', 'react-password-strength-bar'],
   },
   define: {
     pkgJson: { name, version },
