@@ -25,6 +25,7 @@ export default defineConfig({
         'amazon-cognito-identity-js',
         '@srclaunch/web-application-state',
         '@srclaunch/exceptions',
+        '@srclaunch/icons',
         '@srclaunch/validation',
         '@srclaunch/logger',
         'i18n-iso-countries',
