@@ -8,7 +8,7 @@ async function init() {
 
 init();
 
-export { CodeVerificationForm } from './components/authentication/CodeVerificationForm.js';
+export { CodeVerificationForm } from './components/authentication/CodeVerificationForm';
 export { ForgotPasswordForm } from './components/authentication/ForgotPasswordForm';
 export { LoginForm } from './components/authentication/LoginForm';
 export { SignupForm } from './components/authentication/SignupForm';

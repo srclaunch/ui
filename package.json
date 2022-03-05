@@ -11,16 +11,16 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "main": "./dist/index.js",
+  "main": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "files": [
     "package.json",
     "dist"
   ],
-  "module": "./dist/index.js",
+  "module": "./dist/index.es.js",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.es.js",
       "require": "./dist/index.cjs.js"
     }
   },
@@ -30,7 +30,7 @@
     "dev2": "yarn vite",
     "build:types": "tsc --build --force",
     "build:applab": "yarn applab build",
-    "build": "yarn clean && yarn build:applab && yarn build:types",
+    "build": "yarn clean && yarn build:vite && yarn build:types",
     "clean": "rm -fr ./dist",
     "lint:eslint": "yarn eslint ./src --ext js,ts,tsx --max-warnings 0",
     "lint:stylelint": "yarn stylelint '**/*.ts[x]'",
@@ -61,7 +61,7 @@
   },
   "devDependencies": {
     "@microsoft/eslint-plugin-sdl": "^0.1.8",
-    "@srclaunch/cli": "^0.1.13",
+    "@srclaunch/cli": "^0.1.17",
     "@srclaunch/dx": "^0.1.2",
     "@srclaunch/types": "^0.1.2",
     "@stripe/stripe-js": "^1.22.0",

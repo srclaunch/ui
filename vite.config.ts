@@ -3,17 +3,16 @@ import react from '@vitejs/plugin-react';
 import { name, version } from './package.json';
 import path from 'path';
 
-/*
-export default defineConfig(({
+export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
+      entry: path.resolve(__dirname, 'src/index.tsx'),
       fileName: 'index',
-      formats: ['es'],
+      formats: ['es', 'cjs'],
       name: 'ui',
     },
     sourcemap: true,
-    outDir: './lib',
+    outDir: './dist',
     rollupOptions: {
       // Externalize deps that shouldn't be bundled
       external: [
@@ -24,7 +23,6 @@ export default defineConfig(({
         'react-router-dom',
         'styled-components',
         'amazon-cognito-identity-js',
-        'aws-sdk',
         '@srclaunch/web-application-state',
         '@srclaunch/logger',
       ],
@@ -37,6 +35,10 @@ export default defineConfig(({
       },
     },
   },
+  optimizeDeps: {
+    exclude: [],
+    include: [],
+  },
   define: {
     pkgJson: { name, version },
   },
@@ -44,19 +46,9 @@ export default defineConfig(({
     // jsxInject: `import React from 'react'`,
   },
   plugins: [react()],
-}) => ) => {
-  if (command === 'serve') {
-    return {
-      // dev specific config
-    }
-  } else {
-    // command === 'build'
-    return {
-      // build specific config
-    }
-  }
-};
-*/
+});
+
+/*
 export default defineConfig(({ command, mode }) => {
   if (command === 'build') {
     return {
@@ -89,7 +81,7 @@ export default defineConfig(({ command, mode }) => {
             'react-router-dom',
             'styled-components',
             'amazon-cognito-identity-js',
-            'aws-sdk',
+ 
             'isemail',
           ],
           output: {
@@ -177,3 +169,4 @@ export default defineConfig(({ command, mode }) => {
     };
   }
 });
+*/
