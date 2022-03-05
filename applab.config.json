@@ -6,7 +6,12 @@
       "buildTypes": false,
       "bundle": true,
       "codeSplitting": true,
-      "excludeLibs": ["react", "react-dom", "react-password-strength-bar"],
+      "excludeLibs": [
+        "react",
+        "react-dom",
+        "react-password-strength-bar",
+        "@stripe/react-stripe-js"
+      ],
       "define": {},
       "format": "esm",
       "inputScripts": ["src/index.tsx"],
@@ -23,7 +28,12 @@
       "buildTypes": false,
       "bundle": true,
       "codeSplitting": false,
-      "excludeLibs": ["react", "react-dom", "react-password-strength-bar"],
+      "excludeLibs": [
+        "react",
+        "react-dom",
+        "react-password-strength-bar",
+        "@stripe/react-stripe-js"
+      ],
       "define": {},
       "format": "cjs",
       "inputScripts": ["src/index.tsx"],
