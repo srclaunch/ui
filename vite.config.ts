@@ -40,7 +40,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: [],
+    exclude: ['@srclaunch/validation'],
     include: [],
   },
   define: {
