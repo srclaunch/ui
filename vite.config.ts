@@ -24,6 +24,7 @@ export default defineConfig({
         'styled-components',
         'amazon-cognito-identity-js',
         '@srclaunch/web-application-state',
+        '@srclaunch/exceptions',
         '@srclaunch/logger',
       ],
       output: {
