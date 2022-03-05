@@ -1,4 +1,4 @@
-export { CodeVerificationForm } from './components/authentication/CodeVerificationForm';
+export { CodeVerificationForm } from './components/authentication/CodeVerificationForm.js';
 export { ForgotPasswordForm } from './components/authentication/ForgotPasswordForm';
 export { LoginForm } from './components/authentication/LoginForm';
 export { SignupForm } from './components/authentication/SignupForm';

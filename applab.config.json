@@ -9,12 +9,12 @@
       "excludeLibs": ["react"],
       "define": {},
       "format": "esm",
-      "inputScripts": ["src/index.ts"],
+      "inputScripts": ["src/index.tsx"],
       "minify": false,
       "outDir": "dist",
       "platform": "browser",
       "sourceMap": true,
-      "target": "es2017",
+      "target": "es2015",
       "treeShaking": true
     },
     {
@@ -26,11 +26,11 @@
       "excludeLibs": [],
       "define": {},
       "format": "cjs",
-      "inputScripts": ["src/index.ts"],
+      "inputScripts": ["src/index.tsx"],
       "minify": false,
       "platform": "browser",
       "sourceMap": true,
-      "target": "es2017",
+      "target": "es2015",
       "treeShaking": true
     }
   ]

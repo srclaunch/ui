@@ -1,1 +1,0 @@
-{"version":3,"file":"JSONEditor.js","sourceRoot":"","sources":["../../../src/components/editors/JSONEditor.tsx"],"names":[],"mappings":";AAAA,OAAO,EAAE,IAAI,EAAgB,MAAM,OAAO,CAAC;AAM3C,MAAM,CAAC,MAAM,UAAU,GAAG,IAAI,CAC5B,CAAC,EAAE,GAAG,KAAK,EAAmB,EAAgB,EAAE;IAC9C,OAAO,wBAAM,YAAY,WAAO,CAAC;AACnC,CAAC,CACF,CAAC"}

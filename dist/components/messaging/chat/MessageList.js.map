@@ -1,1 +1,0 @@
-{"version":3,"file":"MessageList.js","sourceRoot":"","sources":["../../../../src/components/messaging/chat/MessageList.tsx"],"names":[],"mappings":";AAAA,OAAO,EAAgB,IAAI,EAAE,MAAM,OAAO,CAAC;AAC3C,OAAO,EAAE,SAAS,EAAE,MAAM,UAAU,CAAC;AAErC,MAAM,CAAC,MAAM,WAAW,GAAG,IAAI,CAAC,GAAiB,EAAE;IACjD,OAAO,KAAC,SAAS,aAAa,CAAC;AACjC,CAAC,CAAC,CAAC"}

@@ -1,8 +1,6 @@
-import { AppLabLightTheme } from '@srclaunch/themes';
-import { WebApplicationConfig } from '@srclaunch/types';
+// import { AppLabLightTheme } from '@srclaunch/themes';
+// import { WebApplicationConfig } from '@srclaunch/types';
 import countries from 'i18n-iso-countries';
-
-import reducers from './docs/state/index';
 
 async function init() {
   countries.registerLocale(await import('i18n-iso-countries/langs/en.json'));
@@ -10,7 +8,7 @@ async function init() {
 
 init();
 
-export { CodeVerificationForm } from './components/authentication/CodeVerificationForm';
+export { CodeVerificationForm } from './components/authentication/CodeVerificationForm.js';
 export { ForgotPasswordForm } from './components/authentication/ForgotPasswordForm';
 export { LoginForm } from './components/authentication/LoginForm';
 export { SignupForm } from './components/authentication/SignupForm';
@@ -26,7 +24,7 @@ export { ProgressMeter } from './components/charts/ProgressMeter';
 export { RadialChart } from './components/charts/RadialChart';
 export { RadialGauge } from './components/charts/RadialGauge';
 export { Page } from './components/containers/Page';
-import { WebApplication } from './components/containers/WebApplication';
+// import { WebApplication } from './components/containers/WebApplication';
 export { WebApplication } from './components/containers/WebApplication';
 export { Workspace } from './components/containers/Workspace';
 export { DataGrid } from './components/data/DataGrid';
@@ -163,31 +161,33 @@ export { LayoutStyles } from './styles/layout';
 export { TextStyles } from './styles/typography';
 export * from './types/index';
 
-import {
-  createStore,
-  renderReduxWebApp,
-} from '@srclaunch/web-application-state';
+// if (process.env.NODE_ENV === 'development') {
+//   const { createStore, renderReduxWebApp } = await import(
+//     '@srclaunch/web-application-state'
+//   );
 
-import routes from './docs/routes';
+//   const config: WebApplicationConfig = {
+//     ui: {
+//       themes: {
+//         default: AppLabLightTheme.id,
+//       },
+//     },
+//   };
 
-if (process.env.NODE_ENV === 'development') {
-  const config: WebApplicationConfig = {
-    ui: {
-      themes: {
-        default: AppLabLightTheme.id,
-      },
-    },
-  };
+//   const reducers = await import('./docs/state/index.js');
+//   const routes = await import('./docs/routes.js');
 
-  const store = createStore({
-    reducers,
-  });
+//   const store = createStore({
+//     // @ts-ignore
+//     reducers,
+//   });
 
-  renderReduxWebApp({
-    authentication: false,
-    config,
-    container: <WebApplication />,
-    routes,
-    store,
-  });
-}
+//   renderReduxWebApp({
+//     authentication: false,
+//     config,
+//     container: <WebApplication />,
+//     // @ts-ignore
+//     routes,
+//     store,
+//   });
+// }
