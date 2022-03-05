@@ -10,7 +10,8 @@
         "react",
         "react-dom",
         "react-password-strength-bar",
-        "@stripe/react-stripe-js"
+        "@stripe/react-stripe-js",
+        "styled-components"
       ],
       "define": {},
       "format": "esm",
@@ -32,7 +33,8 @@
         "react",
         "react-dom",
         "react-password-strength-bar",
-        "@stripe/react-stripe-js"
+        "@stripe/react-stripe-js",
+        "styled-components"
       ],
       "define": {},
       "format": "cjs",
