@@ -1,9 +1,10 @@
 // import { AppLabLightTheme } from '@srclaunch/themes';
 // import { WebApplicationConfig } from '@srclaunch/types';
 import countries from 'i18n-iso-countries';
+import englishLanguage from 'i18n-iso-countries/langs/en.json';
 
 async function init() {
-  countries.registerLocale(await import('i18n-iso-countries/langs/en.json'));
+  countries.registerLocale(englishLanguage);
 }
 
 init();
