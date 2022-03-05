@@ -1,4 +1,4 @@
-import "./chunk-SIV7NAOB.js";
+import "./chunk-IMOVGG62.js";
 
 // ../../node_modules/i18n-iso-countries/langs/en.json
 var locale = "en";
@@ -263,4 +263,4 @@ export {
   en_default as default,
   locale
 };
-//# sourceMappingURL=en-I5AOZFZI.js.map
+//# sourceMappingURL=en-JVUXTT7O.js.map

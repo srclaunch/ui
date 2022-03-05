@@ -6,7 +6,7 @@
       "buildTypes": false,
       "bundle": true,
       "codeSplitting": true,
-      "excludeLibs": ["react"],
+      "excludeLibs": [],
       "define": {},
       "format": "esm",
       "inputScripts": ["src/index.tsx"],
@@ -14,7 +14,7 @@
       "outDir": "dist",
       "platform": "browser",
       "sourceMap": true,
-      "target": "es2015",
+      "target": "es2020",
       "treeShaking": true
     },
     {
