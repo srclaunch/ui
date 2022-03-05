@@ -110,8 +110,6 @@
     "prettier-eslint": "^13.0.0",
     "rollup-plugin-typescript2": "^0.31.2",
     "standard-version": "^9.3.2",
-    "storybook-addon-designs": "^6.2.1",
-    "storybook-builder-vite": "^0.1.15",
     "stylelint": "^14.3.0",
     "stylelint-config-idiomatic-order": "^8.1.0",
     "stylelint-config-prettier": "^9.0.3",
