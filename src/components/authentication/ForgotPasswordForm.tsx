@@ -1,6 +1,6 @@
 import { Condition, Primitives } from '@srclaunch/types';
 import { useSelector } from '@srclaunch/web-application-state';
-import React, { memo, ReactElement } from 'react';
+import { memo, ReactElement } from 'react';
 
 import {
   Align,

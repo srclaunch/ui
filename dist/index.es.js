@@ -32,7 +32,7 @@ var __objRest = (source, exclude) => {
 import Countries from "i18n-iso-countries";
 import { getIcon, BasicIcons, DualLightIcons } from "@srclaunch/icons";
 import { useNavigate as useNavigate$1, useDispatch, useSelector, getVerificationDetails, verifyCode, resendVerificationCode, useResolvedPath as useResolvedPath$1, useMatch, useLocation as useLocation$1, NavLink as NavLink$1, Link as Link$2, login, signUp, getPaymentMethods, getSubscriptions, matchPath, useSearchParams, Outlet, logout, setTheme } from "@srclaunch/web-application-state";
-import e$1, { memo, useState, useEffect, useRef, forwardRef, useMemo, createElement, useReducer, useCallback, useImperativeHandle, createContext, useContext, cloneElement, useLayoutEffect } from "react";
+import React$1, { memo, useState, useEffect, useRef, forwardRef, useMemo, createElement, useReducer, useCallback, useImperativeHandle, Fragment, createContext, useContext, cloneElement, useLayoutEffect } from "react";
 import styled, { css, createGlobalStyle } from "styled-components";
 import { Exception } from "@srclaunch/exceptions";
 import PasswordStrengthBar from "react-password-strength-bar";
@@ -16010,10 +16010,14 @@ function getLargerSize(size) {
       return Size.Largest;
   }
 }
-const AnimationStyles = css(["", ";"], (props) => {
+const AnimationStyles = css`
+  ${(props) => {
   var _a2, _b, _c;
-  return ((_a2 = props.transform) == null ? void 0 : _a2.rotate) && css(["transform:rotate(", ");"], (_c = `${(_b = props.transform) == null ? void 0 : _b.rotate}deg`) != null ? _c : "none");
-});
+  return ((_a2 = props.transform) == null ? void 0 : _a2.rotate) && css`
+      transform: rotate(${(_c = `${(_b = props.transform) == null ? void 0 : _b.rotate}deg`) != null ? _c : "none"});
+    `;
+}};
+`;
 const getBackgroundColor = (color, opacity) => {
   if (!color)
     return null;
@@ -16044,31 +16048,79 @@ const getBackgroundSize = (size) => {
       return size;
   }
 };
-const BackgroundStyles = css(["", ";", ";", ";", ";", ";", ";", ";", ";"], (props) => {
+const BackgroundStyles = css`
+  ${(props) => {
   var _a2, _b;
-  return props.backgroundColor && css(["background:", ";"], (_b = getBackgroundColor(props.backgroundColor, (_a2 = props.backgroundOpacity) != null ? _a2 : 100)) != null ? _b : "transparent");
-}, (props) => {
+  return props.backgroundColor && css`
+      background: ${(_b = getBackgroundColor(props.backgroundColor, (_a2 = props.backgroundOpacity) != null ? _a2 : 100)) != null ? _b : "transparent"};
+    `;
+}};
+
+  ${(props) => {
   var _a2, _b, _c, _d;
-  return props.hover && ((_a2 = props.hover) == null ? void 0 : _a2.backgroundColor) && css(["&:hover{background:", ";}"], (_d = getBackgroundColor(props.hover.backgroundColor, (_c = (_b = props.hover) == null ? void 0 : _b.backgroundOpacity) != null ? _c : 100)) != null ? _d : "transparent");
-}, (props) => {
+  return props.hover && ((_a2 = props.hover) == null ? void 0 : _a2.backgroundColor) && css`
+      &:hover {
+        background: ${(_d = getBackgroundColor(props.hover.backgroundColor, (_c = (_b = props.hover) == null ? void 0 : _b.backgroundOpacity) != null ? _c : 100)) != null ? _d : "transparent"};
+      }
+    `;
+}};
+
+  ${(props) => {
   var _a2;
-  return props.backgroundImage && css(["background-position:", ";background-image:url(", ");background-size:", ";"], (_a2 = props.backgroundImage.position) != null ? _a2 : "center", props.backgroundImage.url, getBackgroundSize(props.backgroundImage.size));
-}, (props) => {
+  return props.backgroundImage && css`
+      background-position: ${(_a2 = props.backgroundImage.position) != null ? _a2 : "center"};
+      background-image: url(${props.backgroundImage.url});
+      background-size: ${getBackgroundSize(props.backgroundImage.size)};
+    `;
+}};
+
+  ${(props) => {
   var _a2, _b, _c;
-  return props.hover && ((_a2 = props.hover) == null ? void 0 : _a2.backgroundOpacity) && css(["&:hover{background:", ";}"], getBackgroundColor((_c = (_b = props.hover.backgroundColor) != null ? _b : props.backgroundColor) != null ? _c : "transparent", props.hover.backgroundOpacity));
-}, (props) => {
+  return props.hover && ((_a2 = props.hover) == null ? void 0 : _a2.backgroundOpacity) && css`
+      &:hover {
+        background: ${getBackgroundColor((_c = (_b = props.hover.backgroundColor) != null ? _b : props.backgroundColor) != null ? _c : "transparent", props.hover.backgroundOpacity)};
+      }
+    `;
+}};
+
+  ${(props) => {
   var _a2, _b, _c;
-  return props.focus && ((_a2 = props.focus) == null ? void 0 : _a2.backgroundColor) && css(["&:focus{background:", ";}"], (_c = getBackgroundColor(props.focus.backgroundColor, (_b = props.focus.backgroundOpacity) != null ? _b : 100)) != null ? _c : "transparent");
-}, (props) => {
+  return props.focus && ((_a2 = props.focus) == null ? void 0 : _a2.backgroundColor) && css`
+      &:focus {
+        background: ${(_c = getBackgroundColor(props.focus.backgroundColor, (_b = props.focus.backgroundOpacity) != null ? _b : 100)) != null ? _c : "transparent"};
+      }
+    `;
+}};
+
+  ${(props) => {
   var _a2, _b, _c, _d;
-  return props.focus && ((_a2 = props.focus) == null ? void 0 : _a2.backgroundOpacity) && css(["&:focus{background:", ";}"], (_d = getBackgroundColor((_b = props.focus.backgroundColor) != null ? _b : props.backgroundColor, (_c = props.focus) == null ? void 0 : _c.backgroundOpacity)) != null ? _d : "transparent");
-}, (props) => {
+  return props.focus && ((_a2 = props.focus) == null ? void 0 : _a2.backgroundOpacity) && css`
+      &:focus {
+        background: ${(_d = getBackgroundColor((_b = props.focus.backgroundColor) != null ? _b : props.backgroundColor, (_c = props.focus) == null ? void 0 : _c.backgroundOpacity)) != null ? _d : "transparent"};
+      }
+    `;
+}};
+
+  ${(props) => {
   var _a2, _b, _c;
-  return props.active && ((_a2 = props.active) == null ? void 0 : _a2.backgroundColor) && css(["&:active,&.active{background:", ";}"], (_c = getBackgroundColor(props.active.backgroundColor, (_b = props.active.backgroundOpacity) != null ? _b : 100)) != null ? _c : "transparent");
-}, (props) => {
+  return props.active && ((_a2 = props.active) == null ? void 0 : _a2.backgroundColor) && css`
+      &:active,
+      &.active {
+        background: ${(_c = getBackgroundColor(props.active.backgroundColor, (_b = props.active.backgroundOpacity) != null ? _b : 100)) != null ? _c : "transparent"};
+      }
+    `;
+}};
+
+  ${(props) => {
   var _a2, _b, _c;
-  return props.active && ((_a2 = props.active) == null ? void 0 : _a2.backgroundOpacity) && css(["&:active,&.active{background:", ";}"], (_c = getBackgroundColor((_b = props.active.backgroundColor) != null ? _b : props.backgroundColor, props.active.backgroundOpacity)) != null ? _c : "transparent");
-});
+  return props.active && ((_a2 = props.active) == null ? void 0 : _a2.backgroundOpacity) && css`
+      &:active,
+      &.active {
+        background: ${(_c = getBackgroundColor((_b = props.active.backgroundColor) != null ? _b : props.backgroundColor, props.active.backgroundOpacity)) != null ? _c : "transparent"};
+      }
+    `;
+}};
+`;
 function getCSSMeasurementValue(val) {
   if (typeof val === "string" && val.includes("var(")) {
     return val;
@@ -16115,10 +16167,63 @@ function getCSSBoxShadowValue(val) {
 const isBorderStyleProps = (border) => {
   return border.hasOwnProperty("color");
 };
-const BorderStyles = css(["", ";"], (props) => {
+const BorderStyles = css`
+  ${(props) => {
   var _a2, _b, _c, _d, _e2, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _A, _B, _C, _D, _E, _F, _G, _H, _I, _J;
-  return props.flat ? css(["border:1px solid transparent;"]) : css(["", ";", ";", ";", ";"], props.border && isBorderStyleProps(props.border) ? css(["border:", ";"], (_a2 = getCSSBorderValue(props.border)) != null ? _a2 : "none") : css(["border-bottom:", ";border-left:", ";border-right:", ";border-top:", ";"], (_c = getCSSBorderValue((_b = props.border) == null ? void 0 : _b.bottom)) != null ? _c : "initial", (_e2 = getCSSBorderValue((_d = props.border) == null ? void 0 : _d.left)) != null ? _e2 : "initial", (_g = getCSSBorderValue((_f = props.border) == null ? void 0 : _f.right)) != null ? _g : "initial", (_i = getCSSBorderValue((_h = props.border) == null ? void 0 : _h.top)) != null ? _i : "initial"), props.hover && props.hover.border && css(["&:hover{", ";}"], props.hover.border && isBorderStyleProps(props.hover.border) ? css(["border:", ";"], (_j = getCSSBorderValue(props.hover.border)) != null ? _j : "none") : css(["border-bottom:", ";border-left:", ";border-right:", ";border-top:", ";"], (_l = getCSSBorderValue((_k = props.hover.border) == null ? void 0 : _k.bottom)) != null ? _l : "initial", (_n = getCSSBorderValue((_m = props.hover.border) == null ? void 0 : _m.left)) != null ? _n : "initial", (_p = getCSSBorderValue((_o = props.hover.border) == null ? void 0 : _o.right)) != null ? _p : "initial", (_r = getCSSBorderValue((_q = props.hover.border) == null ? void 0 : _q.top)) != null ? _r : "initial")), props.active && props.active.border && css(["&:active,&.active{", ";}"], props.active.border && isBorderStyleProps(props.active.border) ? css(["border:", ";"], (_s = getCSSBorderValue(props.active.border)) != null ? _s : "none") : css(["border-bottom:", ";border-left:", ";border-right:", ";border-top:", ";"], (_u = getCSSBorderValue((_t = props.active.border) == null ? void 0 : _t.bottom)) != null ? _u : "initial", (_w = getCSSBorderValue((_v = props.active.border) == null ? void 0 : _v.left)) != null ? _w : "initial", (_y = getCSSBorderValue((_x = props.active.border) == null ? void 0 : _x.right)) != null ? _y : "initial", (_A = getCSSBorderValue((_z = props.active.border) == null ? void 0 : _z.top)) != null ? _A : "initial")), props.focus && props.focus.border && css(["&:focus{", ";}"], props.focus.border && isBorderStyleProps(props.focus.border) ? css(["border:", ";"], (_B = getCSSBorderValue(props.focus.border)) != null ? _B : "none") : css(["border-bottom:", ";border-left:", ";border-right:", ";border-top:", ";"], (_D = getCSSBorderValue((_C = props.focus.border) == null ? void 0 : _C.bottom)) != null ? _D : "initial", (_F = getCSSBorderValue((_E = props.focus.border) == null ? void 0 : _E.left)) != null ? _F : "initial", (_H = getCSSBorderValue((_G = props.focus.border) == null ? void 0 : _G.right)) != null ? _H : "initial", (_J = getCSSBorderValue((_I = props.focus.border) == null ? void 0 : _I.top)) != null ? _J : "initial")));
-});
+  return props.flat ? css`
+          border: 1px solid transparent;
+        ` : css`
+          ${props.border && isBorderStyleProps(props.border) ? css`
+                border: ${(_a2 = getCSSBorderValue(props.border)) != null ? _a2 : "none"};
+              ` : css`
+                border-bottom: ${(_c = getCSSBorderValue((_b = props.border) == null ? void 0 : _b.bottom)) != null ? _c : "initial"};
+                border-left: ${(_e2 = getCSSBorderValue((_d = props.border) == null ? void 0 : _d.left)) != null ? _e2 : "initial"};
+                border-right: ${(_g = getCSSBorderValue((_f = props.border) == null ? void 0 : _f.right)) != null ? _g : "initial"};
+                border-top: ${(_i = getCSSBorderValue((_h = props.border) == null ? void 0 : _h.top)) != null ? _i : "initial"};
+              `};
+
+          ${props.hover && props.hover.border && css`
+            &:hover {
+              ${props.hover.border && isBorderStyleProps(props.hover.border) ? css`
+                    border: ${(_j = getCSSBorderValue(props.hover.border)) != null ? _j : "none"};
+                  ` : css`
+                    border-bottom: ${(_l = getCSSBorderValue((_k = props.hover.border) == null ? void 0 : _k.bottom)) != null ? _l : "initial"};
+                    border-left: ${(_n = getCSSBorderValue((_m = props.hover.border) == null ? void 0 : _m.left)) != null ? _n : "initial"};
+                    border-right: ${(_p = getCSSBorderValue((_o = props.hover.border) == null ? void 0 : _o.right)) != null ? _p : "initial"};
+                    border-top: ${(_r = getCSSBorderValue((_q = props.hover.border) == null ? void 0 : _q.top)) != null ? _r : "initial"};
+                  `};
+            }
+          `};
+
+          ${props.active && props.active.border && css`
+            &:active,
+            &.active {
+              ${props.active.border && isBorderStyleProps(props.active.border) ? css`
+                    border: ${(_s = getCSSBorderValue(props.active.border)) != null ? _s : "none"};
+                  ` : css`
+                    border-bottom: ${(_u = getCSSBorderValue((_t = props.active.border) == null ? void 0 : _t.bottom)) != null ? _u : "initial"};
+                    border-left: ${(_w = getCSSBorderValue((_v = props.active.border) == null ? void 0 : _v.left)) != null ? _w : "initial"};
+                    border-right: ${(_y = getCSSBorderValue((_x = props.active.border) == null ? void 0 : _x.right)) != null ? _y : "initial"};
+                    border-top: ${(_A = getCSSBorderValue((_z = props.active.border) == null ? void 0 : _z.top)) != null ? _A : "initial"};
+                  `};
+            }
+          `};
+
+          ${props.focus && props.focus.border && css`
+            &:focus {
+              ${props.focus.border && isBorderStyleProps(props.focus.border) ? css`
+                    border: ${(_B = getCSSBorderValue(props.focus.border)) != null ? _B : "none"};
+                  ` : css`
+                    border-bottom: ${(_D = getCSSBorderValue((_C = props.focus.border) == null ? void 0 : _C.bottom)) != null ? _D : "initial"};
+                    border-left: ${(_F = getCSSBorderValue((_E = props.focus.border) == null ? void 0 : _E.left)) != null ? _F : "initial"};
+                    border-right: ${(_H = getCSSBorderValue((_G = props.focus.border) == null ? void 0 : _G.right)) != null ? _H : "initial"};
+                    border-top: ${(_J = getCSSBorderValue((_I = props.focus.border) == null ? void 0 : _I.top)) != null ? _J : "initial"};
+                  `};
+            }
+          `};
+        `;
+}};
+`;
 function getBorderRadius(borderRadius) {
   var _a2, _b, _c, _d;
   if (!borderRadius)
@@ -16135,16 +16240,39 @@ function getBorderRadius(borderRadius) {
   }
   return borderRadius;
 }
-const BorderRadiusStyles = css(["", " ", " ", " ", ""], (props) => props.borderRadius && css(["border-radius:", ";"], getBorderRadius(props.borderRadius)), (props) => {
+const BorderRadiusStyles = css`
+  ${(props) => props.borderRadius && css`
+      border-radius: ${getBorderRadius(props.borderRadius)};
+    `}
+
+  ${(props) => {
   var _a2;
-  return props.active && css(["&:active,&.active{border-radius:", ";}"], getBorderRadius((_a2 = props.active) == null ? void 0 : _a2.borderRadius));
-}, (props) => {
+  return props.active && css`
+      &:active,
+      &.active {
+        border-radius: ${getBorderRadius((_a2 = props.active) == null ? void 0 : _a2.borderRadius)};
+      }
+    `;
+}}
+
+  ${(props) => {
   var _a2;
-  return props.focus && css(["&:focus{border-radius:", ";}"], getBorderRadius((_a2 = props.focus) == null ? void 0 : _a2.borderRadius));
-}, (props) => {
+  return props.focus && css`
+      &:focus {
+        border-radius: ${getBorderRadius((_a2 = props.focus) == null ? void 0 : _a2.borderRadius)};
+      }
+    `;
+}}
+
+  ${(props) => {
   var _a2;
-  return props.hover && css(["&:hover{border-radius:", ";}"], getBorderRadius((_a2 = props.hover) == null ? void 0 : _a2.borderRadius));
-});
+  return props.hover && css`
+      &:hover {
+        border-radius: ${getBorderRadius((_a2 = props.hover) == null ? void 0 : _a2.borderRadius)};
+      }
+    `;
+}}
+`;
 function getCSSBoxShadowFromDepth(depth) {
   switch (depth) {
     case Depth.Lowest:
@@ -16163,61 +16291,253 @@ function getCSSBoxShadowFromDepth(depth) {
       return DepthShadow.Surface;
   }
 }
-const BoxShadowStyles = css(["box-shadow:", ";", ";"], (props) => props.boxShadow ? getCSSBoxShadowValue(props.boxShadow) : props.depth ? getCSSBoxShadowFromDepth(props.depth) : "0 0 0 0 transparent", (props) => {
+const BoxShadowStyles = css`
+  box-shadow: ${(props) => props.boxShadow ? getCSSBoxShadowValue(props.boxShadow) : props.depth ? getCSSBoxShadowFromDepth(props.depth) : "0 0 0 0 transparent"};
+
+  ${(props) => {
   var _a2, _b, _c, _d, _e2, _f, _g, _h, _i;
-  return props.flat ? css(["box-shadow:none;"]) : css(["", ";", ";", ";"], props.active && ((_a2 = props.active) == null ? void 0 : _a2.boxShadow) && css(["&:active,&.active{box-shadow:", ";}"], (_c = getCSSBoxShadowValue((_b = props.active) == null ? void 0 : _b.boxShadow)) != null ? _c : "0 0 0 0 transparent"), props.focus && ((_d = props.focus) == null ? void 0 : _d.boxShadow) && css(["&:focus{box-shadow:", ";}"], (_f = getCSSBoxShadowValue((_e2 = props.focus) == null ? void 0 : _e2.boxShadow)) != null ? _f : "0 0 0 0 transparent"), props.hover && ((_g = props.hover) == null ? void 0 : _g.boxShadow) && css(["&:hover{box-shadow:", ";}"], (_i = getCSSBoxShadowValue((_h = props.hover) == null ? void 0 : _h.boxShadow)) != null ? _i : "0 0 0 0 transparent"));
-});
-const CursorStyles = css(["cursor:", ";"], (props) => {
+  return props.flat ? css`
+          box-shadow: none;
+        ` : css`
+          ${props.active && ((_a2 = props.active) == null ? void 0 : _a2.boxShadow) && css`
+            &:active,
+            &.active {
+              box-shadow: ${(_c = getCSSBoxShadowValue((_b = props.active) == null ? void 0 : _b.boxShadow)) != null ? _c : "0 0 0 0 transparent"};
+            }
+          `};
+
+          ${props.focus && ((_d = props.focus) == null ? void 0 : _d.boxShadow) && css`
+            &:focus {
+              box-shadow: ${(_f = getCSSBoxShadowValue((_e2 = props.focus) == null ? void 0 : _e2.boxShadow)) != null ? _f : "0 0 0 0 transparent"};
+            }
+          `};
+
+          ${props.hover && ((_g = props.hover) == null ? void 0 : _g.boxShadow) && css`
+            &:hover {
+              box-shadow: ${(_i = getCSSBoxShadowValue((_h = props.hover) == null ? void 0 : _h.boxShadow)) != null ? _i : "0 0 0 0 transparent"};
+            }
+          `};
+        `;
+}};
+`;
+const CursorStyles = css`
+  cursor: ${(props) => {
   var _a2;
   return (_a2 = props.cursor) != null ? _a2 : "inherit";
-});
-const TranslucencyStyles = css(["opacity:", ";"], (props) => props.opacity ? props.opacity / 100 : 1);
-const AppearanceStyles = css(["", ";", ";", ";", ";", ";", ";", ";transition:opacity 0.13s ease-in-out,background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,transform 0.13s ease-in-out;"], AnimationStyles, BackgroundStyles, BorderStyles, BorderRadiusStyles, BoxShadowStyles, CursorStyles, TranslucencyStyles);
+}};
+`;
+const TranslucencyStyles = css`
+  opacity: ${(props) => props.opacity ? props.opacity / 100 : 1};
+`;
+const AppearanceStyles = css`
+  ${AnimationStyles};
+  ${BackgroundStyles};
+  ${BorderStyles};
+  ${BorderRadiusStyles};
+  ${BoxShadowStyles};
+  ${CursorStyles};
+  ${TranslucencyStyles};
+
+  transition: opacity 0.13s ease-in-out, background 0.13s ease-in-out,
+    background-color 0.13s ease-in-out, border-radius 0.13s ease-in-out,
+    border-bottom-left-radius 0.13s ease-in-out,
+    border-bottom-right-radius 0.13s ease-in-out,
+    border-top-left-radius 0.13s ease-in-out,
+    border-top-right-radius 0.13s ease-in-out, border 0.13s ease-in-out,
+    border-color 0.13s ease-in-out, box-shadow 0.13s ease-in-out,
+    color 0.13s ease-in, transform 0.13s ease-in-out;
+`;
 const getDimension = (dimension) => {
   if (typeof dimension === "number") {
     return `${dimension}px`;
   }
   return dimension;
 };
-const DimensionStyles = css(["", ";", ";", ";", ";", ";", ";", ";"], (props) => props.height && css(["max-height:", ";min-height:", ";height:", ";"], getDimension(props.height), getDimension(props.height), getDimension(props.height)), (props) => props.width && css(["max-width:", ";min-width:", ";width:", ";"], getDimension(props.width), getDimension(props.width), getDimension(props.width)), (props) => props.maxHeight && css(["max-height:", ";"], getDimension(props.maxHeight)), (props) => props.maxWidth && css(["max-width:", ";"], getDimension(props.maxWidth)), (props) => props.minHeight && css(["min-height:", ";"], getDimension(props.minHeight)), (props) => props.minWidth && css(["min-width:", ";"], getDimension(props.minWidth)), (props) => props.size && css(["max-height:", ";min-height:", ";height:", ";max-width:", ";min-width:", ";width:", ";"], props.size, props.size, props.size, props.size, props.size, props.size));
-const VisibilityStyles = css(["animation:", ";animation-iteration-count:", ";animation-fill-mode:", ";", ";@keyframes fadeInAnimation{0%{opacity:0;}100%{opacity:1;}}"], (props) => props.fadeIn ? "fadeInAnimation ease 0.13s" : "none", (props) => props.fadeIn ? 1 : "none", (props) => props.fadeIn ? "forwards" : "none", (props) => props.visible !== void 0 && css(["opacity:", ";pointer-events:", ";visibility:", ";"], props.visible ? 1 : 0, props.visible ? "all" : "none", props.visible ? "visible" : "hidden"));
-const FocusedStyles = css(["outline:none;&:before{bottom:-4px;border-radius:calc(", " + 3px);content:'';display:block;border-color:rgb(", ");border-style:solid;border-width:2px;opacity:", ";left:-4px;position:absolute;pointer-events:none;right:-4px;top:-4px;transition:opacity 0.2s ease-in-out;z-index:0;}&:focus{&:before{opacity:1;}}"], (props) => props.borderRadius, () => BorderColors.Primary, (props) => props.focused ? 1 : 0);
-const AlignmentStyles = css(["align-items:", ";display:flex;flex:unset;flex-grow:", ";flex-direction:", ";flex-shrink:", ";flex-wrap:", ";justify-content:", ";place-self:", ";"], (props) => {
+const DimensionStyles = css`
+  ${(props) => props.height && css`
+      max-height: ${getDimension(props.height)};
+      min-height: ${getDimension(props.height)};
+      height: ${getDimension(props.height)};
+    `};
+
+  ${(props) => props.width && css`
+      max-width: ${getDimension(props.width)};
+      min-width: ${getDimension(props.width)};
+      width: ${getDimension(props.width)};
+    `};
+
+  ${(props) => props.maxHeight && css`
+      max-height: ${getDimension(props.maxHeight)};
+    `};
+
+  ${(props) => props.maxWidth && css`
+      max-width: ${getDimension(props.maxWidth)};
+    `};
+
+  ${(props) => props.minHeight && css`
+      min-height: ${getDimension(props.minHeight)};
+    `};
+
+  ${(props) => props.minWidth && css`
+      min-width: ${getDimension(props.minWidth)};
+    `};
+
+  ${(props) => props.size && css`
+      max-height: ${props.size};
+      min-height: ${props.size};
+      height: ${props.size};
+      max-width: ${props.size};
+      min-width: ${props.size};
+      width: ${props.size};
+    `};
+`;
+const VisibilityStyles = css`
+  animation: ${(props) => props.fadeIn ? "fadeInAnimation ease 0.13s" : "none"};
+  animation-iteration-count: ${(props) => props.fadeIn ? 1 : "none"};
+  animation-fill-mode: ${(props) => props.fadeIn ? "forwards" : "none"};
+
+  ${(props) => props.visible !== void 0 && css`
+      opacity: ${props.visible ? 1 : 0};
+      pointer-events: ${props.visible ? "all" : "none"};
+      visibility: ${props.visible ? "visible" : "hidden"};
+    `};
+
+  @keyframes fadeInAnimation {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+`;
+const FocusedStyles = css`
+  outline: none;
+
+  &:before {
+    bottom: -4px;
+    border-radius: calc(${(props) => props.borderRadius} + 3px);
+    content: '';
+    display: block;
+    border-color: rgb(${() => BorderColors.Primary});
+    border-style: solid;
+    border-width: 2px;
+    opacity: ${(props) => props.focused ? 1 : 0};
+    left: -4px;
+    position: absolute;
+    pointer-events: none;
+    right: -4px;
+    top: -4px;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 0;
+  }
+
+  &:focus {
+    &:before {
+      opacity: 1;
+    }
+  }
+`;
+const AlignmentStyles = css`
+  align-items: ${(props) => {
   var _a2;
   return (_a2 = props.alignItems) != null ? _a2 : "center";
-}, (props) => props.grow ? 1 : 0, (props) => props.orientation && props.orientation === Orientation.Horizontal ? "row" : "column", (props) => props.shrink ? 1 : 0, (props) => props.lineWrap ? "wrap" : "nowrap", (props) => {
+}};
+  display: flex;
+  flex: unset;
+  flex-grow: ${(props) => props.grow ? 1 : 0};
+  flex-direction: ${(props) => props.orientation && props.orientation === Orientation.Horizontal ? "row" : "column"};
+  flex-shrink: ${(props) => props.shrink ? 1 : 0};
+  flex-wrap: ${(props) => props.lineWrap ? "wrap" : "nowrap"};
+  justify-content: ${(props) => {
   var _a2;
   return (_a2 = props.alignContent) != null ? _a2 : "initial";
-}, (props) => {
+}};
+  place-self: ${(props) => {
   var _a2;
   return (_a2 = props.alignSelf) != null ? _a2 : "initial";
-});
+}};
+`;
 function getOverflowStyle(value) {
   switch (value) {
     case Overflow.Clip:
-      return css(["overflow:clip;"]);
+      return css`
+        overflow: clip;
+      `;
     case Overflow.ClipBoth:
-      return css(["overflow:clip-both;"]);
+      return css`
+        overflow: clip-both;
+      `;
     case Overflow.ClipHorizontal:
-      return css(["overflow-x:clip;"]);
+      return css`
+        overflow-x: clip;
+      `;
     case Overflow.ClipVertical:
-      return css(["overflow-y:clip;"]);
+      return css`
+        overflow-y: clip;
+      `;
     case Overflow.Hidden:
-      return css(["overflow:hidden;"]);
+      return css`
+        overflow: hidden;
+      `;
     case Overflow.Scroll:
     case Overflow.ScrollBoth:
-      return css(["overflow:scroll;"]);
+      return css`
+        overflow: scroll;
+      `;
     case Overflow.ScrollHorizontal:
-      return css(["overflow:hidden;overflow-x:scroll;"]);
+      return css`
+        overflow: hidden;
+        overflow-x: scroll;
+      `;
     case Overflow.ScrollVertical:
-      return css(["overflow:hidden;overflow-y:scroll;"]);
+      return css`
+        overflow: hidden;
+        overflow-y: scroll;
+      `;
     case Overflow.Visible:
-      return css(["overflow:visible;"]);
+      return css`
+        overflow: visible;
+      `;
     default:
       return value;
   }
 }
-const BehaviorStyles = css(["", ";", ";", ";", ";", ";", ";"], (props) => props.fillBehavior === FillBehavior.FillVertical && Orientation.Vertical && css(["flex:1 1 auto;"]), (props) => props.fillBehavior === FillBehavior.FillHorizontal && Orientation.Horizontal && css(["flex:1 1 auto;"]), (props) => props.fillBehavior === FillBehavior.FillBoth && css(["flex:1 1 auto;"]), (props) => props.fillScreen && css(["display:flex;bottom:0 !important;left:0 !important;position:fixed !important;right:0 !important;top:0 !important;"]), (props) => getOverflowStyle(props.overflow), (props) => props.scrollable && css(["bottom:0 !important;overflow:hidden !important;overflow-y:scroll !important;left:0 !important;position:absolute !important;right:0 !important;top:0 !important;"]));
+const BehaviorStyles = css`
+  ${(props) => props.fillBehavior === FillBehavior.FillVertical && Orientation.Vertical && css`
+      flex: 1 1 auto;
+    `};
+
+  ${(props) => props.fillBehavior === FillBehavior.FillHorizontal && Orientation.Horizontal && css`
+      flex: 1 1 auto;
+    `};
+
+  ${(props) => props.fillBehavior === FillBehavior.FillBoth && css`
+      flex: 1 1 auto;
+    `};
+
+  ${(props) => props.fillScreen && css`
+      display: flex;
+      bottom: 0 !important;
+      left: 0 !important;
+      position: fixed !important;
+      right: 0 !important;
+      top: 0 !important;
+    `};
+
+  ${(props) => getOverflowStyle(props.overflow)};
+
+  ${(props) => props.scrollable && css`
+      bottom: 0 !important;
+      overflow: hidden !important;
+      overflow-y: scroll !important;
+      left: 0 !important;
+      position: absolute !important;
+      right: 0 !important;
+      top: 0 !important;
+    `};
+`;
 function getDepthZIndex(value) {
   switch (value) {
     case Depth.Lowest:
@@ -16238,152 +16558,100 @@ function getDepthZIndex(value) {
       return 0;
   }
 }
-const DepthStyles = css(["z-index:", ";"], (props) => getDepthZIndex(props.depth) === 0 ? "auto" : getDepthZIndex(props.depth));
-const MarginStyles = css(["", ";", ";", ";", ";", ";"], (props) => {
+const DepthStyles = css`
+  z-index: ${(props) => getDepthZIndex(props.depth) === 0 ? "auto" : getDepthZIndex(props.depth)};
+`;
+const MarginStyles = css`
+  ${(props) => {
   var _a2;
-  return props.margin && css(["margin:", ";"], (_a2 = getCSSMeasurementValue(props.margin)) != null ? _a2 : 0);
-}, (props) => props.marginBottom && css(["margin-bottom:", ";"], getCSSMeasurementValue(props.marginBottom)), (props) => props.marginLeft && css(["margin-left:", ";"], getCSSMeasurementValue(props.marginLeft)), (props) => props.marginRight && css(["margin-right:", ";"], getCSSMeasurementValue(props.marginRight)), (props) => props.marginTop && css(["margin-top:", ";"], getCSSMeasurementValue(props.marginTop)));
-const PaddingStyles = css(["", ";", ";", ";", ";", ";"], (props) => {
+  return props.margin && css`
+      margin: ${(_a2 = getCSSMeasurementValue(props.margin)) != null ? _a2 : 0};
+    `;
+}};
+
+  ${(props) => props.marginBottom && css`
+      margin-bottom: ${getCSSMeasurementValue(props.marginBottom)};
+    `};
+
+  ${(props) => props.marginLeft && css`
+      margin-left: ${getCSSMeasurementValue(props.marginLeft)};
+    `};
+
+  ${(props) => props.marginRight && css`
+      margin-right: ${getCSSMeasurementValue(props.marginRight)};
+    `};
+
+  ${(props) => props.marginTop && css`
+      margin-top: ${getCSSMeasurementValue(props.marginTop)};
+    `};
+`;
+const PaddingStyles = css`
+  ${(props) => {
   var _a2;
-  return props.padding && css(["padding:", ";"], (_a2 = getCSSMeasurementValue(props.padding)) != null ? _a2 : 0);
-}, (props) => props.paddingBottom && css(["padding-bottom:", ";"], getCSSMeasurementValue(props.paddingBottom)), (props) => props.paddingLeft && css(["padding-left:", ";"], getCSSMeasurementValue(props.paddingLeft)), (props) => props.paddingRight && css(["padding-right:", ";"], getCSSMeasurementValue(props.paddingRight)), (props) => props.paddingTop && css(["padding-top:", ";"], getCSSMeasurementValue(props.paddingTop)));
+  return props.padding && css`
+      padding: ${(_a2 = getCSSMeasurementValue(props.padding)) != null ? _a2 : 0};
+    `;
+}};
+
+  ${(props) => props.paddingBottom && css`
+      padding-bottom: ${getCSSMeasurementValue(props.paddingBottom)};
+    `};
+
+  ${(props) => props.paddingLeft && css`
+      padding-left: ${getCSSMeasurementValue(props.paddingLeft)};
+    `};
+
+  ${(props) => props.paddingRight && css`
+      padding-right: ${getCSSMeasurementValue(props.paddingRight)};
+    `};
+
+  ${(props) => props.paddingTop && css`
+      padding-top: ${getCSSMeasurementValue(props.paddingTop)};
+    `};
+`;
 function getPositionProperty(value) {
   if (typeof value === "number") {
     return getCSSMeasurementValue(value);
   }
   return value;
 }
-const PositionStyles = css(["bottom:", ";left:", ";position:", ";right:", ";top:", ";"], (props) => {
+const PositionStyles = css`
+  bottom: ${(props) => {
   var _a2;
   return (_a2 = getPositionProperty(props.bottom)) != null ? _a2 : "auto";
-}, (props) => {
+}};
+  left: ${(props) => {
   var _a2;
   return (_a2 = getPositionProperty(props.left)) != null ? _a2 : "auto";
-}, (props) => {
+}};
+  position: ${(props) => {
   var _a2;
   return (_a2 = props.position) != null ? _a2 : "relative";
-}, (props) => {
+}};
+  right: ${(props) => {
   var _a2;
   return (_a2 = getPositionProperty(props.right)) != null ? _a2 : "auto";
-}, (props) => {
+}};
+  top: ${(props) => {
   var _a2;
   return (_a2 = getPositionProperty(props.top)) != null ? _a2 : "auto";
-});
-const LayoutStyles = css(["", ";", ";", ";", ";", ";", ""], AlignmentStyles, BehaviorStyles, DepthStyles, MarginStyles, PaddingStyles, PositionStyles);
-var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
-function commonjsRequire(path) {
-  throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
-}
-var jsxRuntime = { exports: {} };
-var reactJsxRuntime_production_min = {};
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-function toObject(val) {
-  if (val === null || val === void 0) {
-    throw new TypeError("Object.assign cannot be called with null or undefined");
-  }
-  return Object(val);
-}
-function shouldUseNative() {
-  try {
-    if (!Object.assign) {
-      return false;
-    }
-    var test1 = new String("abc");
-    test1[5] = "de";
-    if (Object.getOwnPropertyNames(test1)[0] === "5") {
-      return false;
-    }
-    var test2 = {};
-    for (var i2 = 0; i2 < 10; i2++) {
-      test2["_" + String.fromCharCode(i2)] = i2;
-    }
-    var order2 = Object.getOwnPropertyNames(test2).map(function(n2) {
-      return test2[n2];
-    });
-    if (order2.join("") !== "0123456789") {
-      return false;
-    }
-    var test3 = {};
-    "abcdefghijklmnopqrst".split("").forEach(function(letter) {
-      test3[letter] = letter;
-    });
-    if (Object.keys(Object.assign({}, test3)).join("") !== "abcdefghijklmnopqrst") {
-      return false;
-    }
-    return true;
-  } catch (err) {
-    return false;
-  }
-}
-shouldUseNative() ? Object.assign : function(target, source) {
-  var from;
-  var to = toObject(target);
-  var symbols;
-  for (var s2 = 1; s2 < arguments.length; s2++) {
-    from = Object(arguments[s2]);
-    for (var key in from) {
-      if (hasOwnProperty$1.call(from, key)) {
-        to[key] = from[key];
-      }
-    }
-    if (getOwnPropertySymbols) {
-      symbols = getOwnPropertySymbols(from);
-      for (var i2 = 0; i2 < symbols.length; i2++) {
-        if (propIsEnumerable.call(from, symbols[i2])) {
-          to[symbols[i2]] = from[symbols[i2]];
-        }
-      }
-    }
-  }
-  return to;
-};
-/** @license React v17.0.2
- * react-jsx-runtime.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-var f$1 = e$1, g$1 = 60103;
-reactJsxRuntime_production_min.Fragment = 60107;
-if (typeof Symbol === "function" && Symbol.for) {
-  var h$2 = Symbol.for;
-  g$1 = h$2("react.element");
-  reactJsxRuntime_production_min.Fragment = h$2("react.fragment");
-}
-var m$2 = f$1.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner, n$2 = Object.prototype.hasOwnProperty, p$2 = { key: true, ref: true, __self: true, __source: true };
-function q$2(c2, a, k2) {
-  var b2, d2 = {}, e2 = null, l2 = null;
-  k2 !== void 0 && (e2 = "" + k2);
-  a.key !== void 0 && (e2 = "" + a.key);
-  a.ref !== void 0 && (l2 = a.ref);
-  for (b2 in a)
-    n$2.call(a, b2) && !p$2.hasOwnProperty(b2) && (d2[b2] = a[b2]);
-  if (c2 && c2.defaultProps)
-    for (b2 in a = c2.defaultProps, a)
-      d2[b2] === void 0 && (d2[b2] = a[b2]);
-  return { $$typeof: g$1, type: c2, key: e2, ref: l2, props: d2, _owner: m$2.current };
-}
-reactJsxRuntime_production_min.jsx = q$2;
-reactJsxRuntime_production_min.jsxs = q$2;
-{
-  jsxRuntime.exports = reactJsxRuntime_production_min;
-}
-const jsx = jsxRuntime.exports.jsx;
-const jsxs = jsxRuntime.exports.jsxs;
-const Fragment = jsxRuntime.exports.Fragment;
-const Wrapper$6 = styled.div.withConfig({
-  displayName: "Wrapper",
-  componentId: "sc-19tf6wk-0"
-})(["", ";", ";", ";", ";", ";"], LayoutStyles, AppearanceStyles, FocusedStyles, DimensionStyles, VisibilityStyles);
+}};
+`;
+const LayoutStyles = css`
+  ${AlignmentStyles};
+  ${BehaviorStyles};
+  ${DepthStyles};
+  ${MarginStyles};
+  ${PaddingStyles};
+  ${PositionStyles}
+`;
+const Wrapper$6 = styled.div`
+  ${LayoutStyles};
+  ${AppearanceStyles};
+  ${FocusedStyles};
+  ${DimensionStyles};
+  ${VisibilityStyles};
+`;
 const Container$h = memo((_a2) => {
   var _b = _a2, {
     alignItems = Align.Stretch,
@@ -16402,16 +16670,14 @@ const Container$h = memo((_a2) => {
     "grow",
     "orientation"
   ]);
-  return /* @__PURE__ */ jsx(Wrapper$6, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Wrapper$6, __spreadValues({
     alignItems,
     as,
     className: `${className} container`,
     fadeIn,
     grow,
     orientation
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
 const getLineHeight = (lineHeight) => {
   if (typeof lineHeight === "number") {
@@ -16433,17 +16699,46 @@ const getTextAlignmentFromAlign = (align) => {
       return align != null ? align : "left";
   }
 };
-const TextStyles = css(["color:", ";cursor:inherit;display:", ";font-size:", ";font-weight:", ";line-height:", ";text-align:", ";text-decoration:", ";text-decoration-color:", ";transition:color 0.15s ease-in;", ";", ";", ";", ";"], (props) => {
+const TextStyles = css`
+  color: ${(props) => {
   var _a2;
   return props.textColor === TextColors.Inherit ? TextColors.Inherit : `rgb(${(_a2 = props.textColor) != null ? _a2 : TextColors.Default})`;
-}, (props) => props.inline ? "inline" : "flex", (props) => props.textSize, (props) => props.textWeight, (props) => getLineHeight(props.lineHeight), (props) => getTextAlignmentFromAlign(props.alignText), (props) => props.underline ? "underline" : "none", (props) => {
+}};
+  cursor: inherit;
+  display: ${(props) => props.inline ? "inline" : "flex"};
+  font-size: ${(props) => props.textSize};
+  font-weight: ${(props) => props.textWeight};
+  line-height: ${(props) => getLineHeight(props.lineHeight)};
+  text-align: ${(props) => getTextAlignmentFromAlign(props.alignText)};
+  text-decoration: ${(props) => props.underline ? "underline" : "none"};
+  text-decoration-color: ${(props) => {
   var _a2;
   return props.underlineColor ? props.underlineColor : props.textColor === TextColors.Inherit ? TextColors.Inherit : `rgb(${(_a2 = props.textColor) != null ? _a2 : TextColors.Default})`;
-}, (props) => props.overflow && css(["overflow:", ";"], props.overflow), (props) => props.textOverflow && css(["text-overflow:", ";"], props.textOverflow), (props) => !props.selectable && css(["user-select:none;"]), (props) => props.whiteSpace && css(["white-space:", ";"], props.whiteSpace));
-const Img = styled.img.withConfig({
-  displayName: "Img",
-  componentId: "sc-152mfqb-0"
-})(["", ";", ";", ";", ";"], AnimationStyles, DimensionStyles, BorderRadiusStyles, MarginStyles);
+}};
+  transition: color 0.15s ease-in;
+
+  ${(props) => props.overflow && css`
+      overflow: ${props.overflow};
+    `};
+
+  ${(props) => props.textOverflow && css`
+      text-overflow: ${props.textOverflow};
+    `};
+
+  ${(props) => !props.selectable && css`
+      user-select: none;
+    `};
+
+  ${(props) => props.whiteSpace && css`
+      white-space: ${props.whiteSpace};
+    `};
+`;
+const Img = styled.img`
+  ${AnimationStyles};
+  ${DimensionStyles};
+  ${BorderRadiusStyles};
+  ${MarginStyles};
+`;
 const Image = memo((_c) => {
   var _d = _c, {
     alt,
@@ -16462,7 +16757,7 @@ const Image = memo((_c) => {
     "url",
     "width"
   ]);
-  return /* @__PURE__ */ jsx(Img, __spreadValues({
+  return /* @__PURE__ */ React.createElement(Img, __spreadValues({
     alt: alt != null ? alt : description,
     className: `${className} image`,
     height,
@@ -16470,10 +16765,17 @@ const Image = memo((_c) => {
     width
   }, props));
 });
-const SvgMedia = styled.svg.withConfig({
-  displayName: "SvgMedia",
-  componentId: "sc-1xm40ad-0"
-})(["", ";", ";align-items:center;display:flex;justify-content:center;svg{fill:rgb(", ");}"], DimensionStyles, MarginStyles, (props) => props.color);
+const SvgMedia = styled.svg`
+  ${DimensionStyles};
+  ${MarginStyles};
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  svg {
+    fill: rgb(${(props) => props.color});
+  }
+`;
 const Svg = memo((_e2) => {
   var _f = _e2, {
     as = "span",
@@ -16486,13 +16788,11 @@ const Svg = memo((_e2) => {
     "className",
     "size"
   ]);
-  return /* @__PURE__ */ jsx(SvgMedia, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(SvgMedia, __spreadValues({
     as,
     className: `${className} svg`,
     size
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
 const Icon = memo((_g) => {
   var _h = _g, {
@@ -16517,38 +16817,35 @@ const Icon = memo((_g) => {
   if (name) {
     const Ico = getIcon(name);
     if (Ico)
-      return /* @__PURE__ */ jsx(Svg, __spreadProps(__spreadValues({
+      return /* @__PURE__ */ React.createElement(Svg, __spreadValues({
         className: `${className} icon`,
         color,
         height: size,
         width: size
-      }, props), {
-        children: /* @__PURE__ */ jsx(Ico, {})
-      }));
+      }, props), /* @__PURE__ */ React.createElement(Ico, null));
   }
   if (component) {
     return component;
   }
   if (path) {
-    return /* @__PURE__ */ jsx(Image, __spreadValues({
+    return /* @__PURE__ */ React.createElement(Image, __spreadValues({
       alt: "icon",
       className: `${className} icon`,
       path
     }, props));
   }
   if (url) {
-    return /* @__PURE__ */ jsx(Image, __spreadValues({
+    return /* @__PURE__ */ React.createElement(Image, __spreadValues({
       alt: "icon",
       className: `${className} icon`,
       url
     }, props));
   }
-  return /* @__PURE__ */ jsx(Fragment, {});
+  return /* @__PURE__ */ React.createElement(React.Fragment, null);
 });
-const TextContainer = styled.span.withConfig({
-  displayName: "TextContainer",
-  componentId: "sc-1hiw5ca-0"
-})(["", ";"], TextStyles);
+const TextContainer = styled.span`
+  ${TextStyles};
+`;
 const Label = memo((_i) => {
   var _j = _i, {
     alignItems = Align.Center,
@@ -16589,33 +16886,29 @@ const Label = memo((_i) => {
     "underline",
     "whiteSpace"
   ]);
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     alignItems,
     alignContent,
     as,
     className: `${className} label`,
     grow,
     orientation
-  }, props), {
-    children: [icon && (icon.component || icon.name || icon.path || icon.url || icon.svg) && /* @__PURE__ */ jsx(Icon, __spreadValues({
-      marginRight: Amount.Least
-    }, icon)), /* @__PURE__ */ jsx(TextContainer, __spreadProps(__spreadValues({
-      as: "span",
-      className: `${className} text`,
-      inline,
-      selectable,
-      lineHeight,
-      overflow: Overflow.Hidden,
-      textColor,
-      textOverflow,
-      textSize,
-      textWeight,
-      underline,
-      whiteSpace
-    }, props), {
-      children
-    }))]
-  }));
+  }, props), icon && (icon.component || icon.name || icon.path || icon.url || icon.svg) && /* @__PURE__ */ React.createElement(Icon, __spreadValues({
+    marginRight: Amount.Least
+  }, icon)), /* @__PURE__ */ React.createElement(TextContainer, __spreadValues({
+    as: "span",
+    className: `${className} text`,
+    inline,
+    selectable,
+    lineHeight,
+    overflow: Overflow.Hidden,
+    textColor,
+    textOverflow,
+    textSize,
+    textWeight,
+    underline,
+    whiteSpace
+  }, props), children));
 });
 var ButtonType = /* @__PURE__ */ ((ButtonType2) => {
   ButtonType2["Default"] = "black";
@@ -16750,7 +17043,7 @@ const Button$1 = memo((_k) => {
   const colors = getColors();
   const updatedBackgroundColor = hovered ? (hover == null ? void 0 : hover.backgroundColor) ? hover == null ? void 0 : hover.backgroundColor : (_a2 = colors == null ? void 0 : colors.backgroundColor) != null ? _a2 : backgroundColor : (_b = colors == null ? void 0 : colors.backgroundColor) != null ? _b : backgroundColor;
   const updatedTextColor = hovered ? (hover == null ? void 0 : hover.textColor) ? hover == null ? void 0 : hover.textColor : (_c = colors == null ? void 0 : colors.textColor) != null ? _c : textColor : (_d = colors == null ? void 0 : colors.textColor) != null ? _d : textColor;
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     active: __spreadValues({
       backgroundOpacity: 80
     }, active),
@@ -16790,21 +17083,16 @@ const Button$1 = memo((_k) => {
     overflow: Overflow.Visible,
     paddingLeft: getLargerAmount(convertSizeToAmount(size)),
     paddingRight: getLargerAmount(convertSizeToAmount(size))
-  }, props), {
-    children: typeof children === "string" ? /* @__PURE__ */ jsx(Label, {
-      alignContent: grow ? Align.Center : alignContent,
-      grow: true,
-      icon,
-      lineHeight: size === Size.Smaller || size === Size.Smallest ? Size.Small : size,
-      textColor: updatedTextColor,
-      textSize: convertSizeToTextSize(getSmallerSize(size)),
-      textWeight,
-      underline: type === "link" && hovered,
-      children
-    }) : /* @__PURE__ */ jsx(Fragment, {
-      children
-    })
-  }));
+  }, props), typeof children === "string" ? /* @__PURE__ */ React.createElement(Label, {
+    alignContent: grow ? Align.Center : alignContent,
+    grow: true,
+    icon,
+    lineHeight: size === Size.Smaller || size === Size.Smallest ? Size.Small : size,
+    textColor: updatedTextColor,
+    textSize: convertSizeToTextSize(getSmallerSize(size)),
+    textWeight,
+    underline: type === "link" && hovered
+  }, children) : /* @__PURE__ */ React.createElement(React.Fragment, null, children));
 });
 var Colors = /* @__PURE__ */ ((Colors2) => {
   Colors2["Black"] = "var(--color-black-rgb)";
@@ -19221,7 +19509,31 @@ function Ti(a, l2) {
       return { long: "Not a valid year string.", short: "Invalid year" };
   }
 }
-const InputContainerStyles = css(["", ";", ";", ";", ";", ";", ";", ";"], LayoutStyles, FocusedStyles, AppearanceStyles, (props) => props.flat && css(["background-color:transparent;border:1px solid transparent;box-shadow:none;"]), (props) => props.focused && css(["box-shadow:none;"]), (props) => props.focused && props.border && css(["border:1px solid transparent;"]), (props) => props.focused && props.error && Array.isArray(props.error) && props.error.length > 0 && css(["&:before{border-color:rgb(", ");}"], BorderColors.Error));
+const InputContainerStyles = css`
+  ${LayoutStyles};
+  ${FocusedStyles};
+  ${AppearanceStyles};
+
+  ${(props) => props.flat && css`
+      background-color: transparent;
+      border: 1px solid transparent;
+      box-shadow: none;
+    `};
+
+  ${(props) => props.focused && css`
+      box-shadow: none;
+    `};
+
+  ${(props) => props.focused && props.border && css`
+      border: 1px solid transparent;
+    `};
+
+  ${(props) => props.focused && props.error && (Array.isArray(props.error) && props.error.length > 0) && css`
+      &:before {
+        border-color: rgb(${BorderColors.Error});
+      }
+    `};
+`;
 const InputContainer = memo((_m) => {
   var _n = _m, {
     backgroundColor = BackgroundColors.Lightest,
@@ -19246,7 +19558,7 @@ const InputContainer = memo((_m) => {
     "size",
     "success"
   ]);
-  return /* @__PURE__ */ jsx(Container$g, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$g, __spreadValues({
     backgroundColor,
     borderRadius,
     border: __spreadProps(__spreadValues({}, border), {
@@ -19257,15 +19569,32 @@ const InputContainer = memo((_m) => {
     grow: true,
     orientation: Orientation.Horizontal,
     success
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
-const Container$g = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-1vswffv-0"
-})(["", ";input{border:none;}"], InputContainerStyles);
-const TextInputStyles = css(["", ";", ";outline:none;padding:0 ", ";&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}"], FocusedStyles, TextStyles, Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
+const Container$g = styled.div`
+  ${InputContainerStyles};
+
+  input {
+    border: none;
+  }
+`;
+const TextInputStyles = css`
+  ${FocusedStyles};
+  ${TextStyles};
+
+  outline: none;
+  padding: 0 ${Amount.Less};
+
+  &::placeholder {
+    color: rgb(${TextColors.InputPlaceholder});
+  }
+  &::-webkit-input-placeholder {
+    color: rgb(${TextColors.InputPlaceholder});
+  }
+  &::-moz-placeholder {
+    color: rgb(${TextColors.InputPlaceholder});
+  }
+`;
 const VerificationCodeInput = memo((_o) => {
   var _p = _o, {
     as,
@@ -19325,86 +19654,94 @@ const VerificationCodeInput = memo((_o) => {
         value: code
       });
   }, [code]);
-  return /* @__PURE__ */ jsx(Container$h, {
+  return /* @__PURE__ */ React.createElement(Container$h, {
     orientation: Orientation.Horizontal,
-    alignContent: Align.Center,
-    children: Array.from(Array(length)).map((_, key) => {
-      var _a2;
-      return /* @__PURE__ */ jsx(InputContainer, {
-        backgroundColor: BackgroundColors.InputControl,
-        focused: focusedKey === key,
-        className: `${className} verification-code-input`,
-        marginLeft: Amount.Least,
-        marginRight: Amount.Least,
-        orientation: Orientation.Horizontal,
-        children: /* @__PURE__ */ jsx(Input$4, {
-          id: `${name}-verification-code-input-${key}`,
-          lineHeight: size,
-          max: codeType === "numeric" ? 9 : "unset",
-          min: codeType === "numeric" ? 0 : "unset",
-          name,
-          onBlur: () => setFocusedKey(void 0),
-          onChange: (e2) => {
-            if (e2.nativeEvent.inputType !== "insertFromPaste") {
-              const currentCodePart = codeParts == null ? void 0 : codeParts[key];
-              if (e2.target.value.length === 1 || e2.target.value.length === 0) {
-                setCodeParts(__spreadProps(__spreadValues({}, codeParts), {
-                  [key]: e2.target.value
-                }));
-              } else {
-                setCodeParts(__spreadProps(__spreadValues({}, codeParts), {
-                  [key]: void 0
-                }));
-              }
-              if (e2.target.value.length === 1 && !currentCodePart) {
-                const nextElem = document.getElementById(`${name}-verification-code-input-${key + 1}`);
-                if (nextElem) {
-                  nextElem.focus();
-                }
-              }
+    alignContent: Align.Center
+  }, Array.from(Array(length)).map((_, key) => {
+    var _a2;
+    return /* @__PURE__ */ React.createElement(InputContainer, {
+      backgroundColor: BackgroundColors.InputControl,
+      focused: focusedKey === key,
+      className: `${className} verification-code-input`,
+      key,
+      marginLeft: Amount.Least,
+      marginRight: Amount.Least,
+      orientation: Orientation.Horizontal
+    }, /* @__PURE__ */ React.createElement(Input$4, {
+      id: `${name}-verification-code-input-${key}`,
+      lineHeight: size,
+      max: codeType === "numeric" ? 9 : "unset",
+      min: codeType === "numeric" ? 0 : "unset",
+      name,
+      onBlur: () => setFocusedKey(void 0),
+      onChange: (e2) => {
+        if (e2.nativeEvent.inputType !== "insertFromPaste") {
+          const currentCodePart = codeParts == null ? void 0 : codeParts[key];
+          if (e2.target.value.length === 1 || e2.target.value.length === 0) {
+            setCodeParts(__spreadProps(__spreadValues({}, codeParts), { [key]: e2.target.value }));
+          } else {
+            setCodeParts(__spreadProps(__spreadValues({}, codeParts), { [key]: void 0 }));
+          }
+          if (e2.target.value.length === 1 && !currentCodePart) {
+            const nextElem = document.getElementById(`${name}-verification-code-input-${key + 1}`);
+            if (nextElem) {
+              nextElem.focus();
             }
-          },
-          onFocus: () => {
-            setFocusedKey(key);
-          },
-          onKeyDown: (e2) => {
-            if (e2.key === "Delete" || e2.key === "Backspace" && !e2.target.value) {
-              const lastElem = document.getElementById(`${name}-verification-code-input-${key - 1}`);
-              if (lastElem) {
-                lastElem.focus();
-              }
+          }
+        }
+      },
+      onFocus: () => {
+        setFocusedKey(key);
+      },
+      onKeyDown: (e2) => {
+        if (e2.key === "Delete" || e2.key === "Backspace" && !e2.target.value) {
+          const lastElem = document.getElementById(`${name}-verification-code-input-${key - 1}`);
+          if (lastElem) {
+            lastElem.focus();
+          }
+        }
+      },
+      onPaste: (e2) => {
+        if (key === 0) {
+          const pastedText = e2.clipboardData.getData("Text");
+          if (pastedText && pastedText.length === length && !Number.isNaN(pastedText)) {
+            let obj = {};
+            let i2 = 0;
+            for (const val of [...pastedText]) {
+              const prop = { [i2]: val };
+              obj = __spreadValues(__spreadValues({}, obj), prop);
+              i2 += 1;
             }
-          },
-          onPaste: (e2) => {
-            if (key === 0) {
-              const pastedText = e2.clipboardData.getData("Text");
-              if (pastedText && pastedText.length === length && !Number.isNaN(pastedText)) {
-                let obj = {};
-                let i2 = 0;
-                for (const val of [...pastedText]) {
-                  const prop = {
-                    [i2]: val
-                  };
-                  obj = __spreadValues(__spreadValues({}, obj), prop);
-                  i2 += 1;
-                }
-                setCodeParts(obj);
-              }
-            }
-          },
-          placeholder,
-          textColor,
-          type: codeType === "numeric" ? "number" : "text",
-          value: (_a2 = codeParts == null ? void 0 : codeParts[key]) != null ? _a2 : ""
-        })
-      }, key);
-    })
-  });
+            setCodeParts(obj);
+          }
+        }
+      },
+      placeholder,
+      textColor,
+      type: codeType === "numeric" ? "number" : "text",
+      value: (_a2 = codeParts == null ? void 0 : codeParts[key]) != null ? _a2 : ""
+    }));
+  }));
 });
-const Input$4 = styled.input.withConfig({
-  displayName: "Input",
-  componentId: "sc-1a4moks-0"
-})(["", ";background:transparent;border:none;padding:calc(", " / 5);text-align:center;width:100%;&::-webkit-outer-spin-button,&::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}&[type='number']{-moz-appearance:textfield;}"], TextInputStyles, (props) => props.size);
+const Input$4 = styled.input`
+  ${TextInputStyles};
+
+  background: transparent;
+  border: none;
+  padding: calc(${(props) => props.size} / 5);
+  text-align: center;
+  width: 100%;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+`;
 const InputRow = memo((_q) => {
   var _r = _q, {
     children,
@@ -19419,26 +19756,48 @@ const InputRow = memo((_q) => {
     "marginBottom",
     "orientation"
   ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     className: `${className} input-row`,
     grow,
     marginBottom,
     orientation
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
-const ProgressSpinner = memo(({
-  size = Size.Default
-}) => {
-  return /* @__PURE__ */ jsx(Container$f, {
+const ProgressSpinner = memo(({ size = Size.Default }) => {
+  return /* @__PURE__ */ React.createElement(Container$f, {
     size
   });
 });
-const Container$f = memo(styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-1w3nox1-0"
-})(["animation:loop 0.8s infinite linear;border-top:calc(", " / 5) solid rgba(200,200,200,0.2);border-right:calc(", " / 5) solid rgba(200,200,200,0.2);border-bottom:calc(", " / 5) solid rgba(200,200,200,0.2);border-left:calc(", " / 5) solid rgba(0,0,0,0.2);border-radius:50%;display:inline-block;font-size:10px;height:", ";position:relative;text-indent:-9999em;transform:translateZ(0);width:", ";&:after{border-radius:50%;width:calc(", " / 3);height:calc(", " / 3);}@keyframes loop{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}"], (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size));
+const Container$f = memo(styled.div`
+  animation: loop 0.8s infinite linear;
+  border-top: calc(${(props) => props.size} / 5) solid rgba(200, 200, 200, 0.2);
+  border-right: calc(${(props) => props.size} / 5) solid rgba(200, 200, 200, 0.2);
+  border-bottom: calc(${(props) => props.size} / 5) solid rgba(200, 200, 200, 0.2);
+  border-left: calc(${(props) => props.size} / 5) solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 10px;
+  height: ${(props) => props.size};
+  position: relative;
+  text-indent: -9999em;
+  transform: translateZ(0);
+  width: ${(props) => props.size};
+
+  &:after {
+    border-radius: 50%;
+    width: calc(${(props) => props.size} / 3);
+    height: calc(${(props) => props.size} / 3);
+  }
+
+  @keyframes loop {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+`);
 const LoadingOverlay = memo((_s) => {
   var _t = _s, {
     backgroundColor = BackgroundColors.Dark,
@@ -19453,22 +19812,44 @@ const LoadingOverlay = memo((_s) => {
     "spinnerSize",
     "visible"
   ]);
-  return /* @__PURE__ */ jsx(Wrapper$5, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Wrapper$5, __spreadValues({
     backgroundColor,
     backgroundOpacity: 85,
     borderRadius,
     className: `${className} loading-overlay`,
     visible
-  }, props), {
-    children: /* @__PURE__ */ jsx(ProgressSpinner, {
-      size: spinnerSize
-    })
+  }, props), /* @__PURE__ */ React.createElement(ProgressSpinner, {
+    size: spinnerSize
   }));
 });
-const Wrapper$5 = memo(styled.div.withConfig({
-  displayName: "Wrapper",
-  componentId: "sc-gr02k1-0"
-})(["", ";", ";align-items:center;backdrop-filter:blur(1px);border-radius:", ";bottom:0;display:flex;justify-content:center;min-height:", ";min-width:", ";opacity:0;pointer-events:none;position:absolute;left:0;right:0;text-align:center;top:0;transition:background 0.2s cubic-bezier(0.2,0.3,0.25,0.9),opacity 0.2s cubic-bezier(0.25,0.1,0.25,0.1);z-index:4;", ""], LayoutStyles, AppearanceStyles, (props) => props.borderRadius, Size.Largest, Size.Largest, (props) => props.visible && css(["opacity:1;pointer-events:all;"])));
+const Wrapper$5 = memo(styled.div`
+  ${LayoutStyles};
+  ${AppearanceStyles};
+
+  align-items: center;
+  backdrop-filter: blur(1px);
+  border-radius: ${(props) => props.borderRadius};
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  min-height: ${Size.Largest};
+  min-width: ${Size.Largest};
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  top: 0;
+  transition: background 0.2s cubic-bezier(0.2, 0.3, 0.25, 0.9),
+    opacity 0.2s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+  z-index: 4;
+
+  ${(props) => props.visible && css`
+      opacity: 1;
+      pointer-events: all;
+    `}
+`);
 const LineBreak = memo((_u) => {
   var _v = _u, {
     className = "",
@@ -19477,7 +19858,7 @@ const LineBreak = memo((_u) => {
     "className",
     "size"
   ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     className: `${className} link-break`,
     height: size
   }, props));
@@ -19498,15 +19879,13 @@ const Paragraph = memo((_w) => {
     "textColor",
     "textSize"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     as,
     className: `${className} paragraph`,
     textColor,
     lineHeight,
     textSize
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
 const Title = memo((_y) => {
   var _z = _y, {
@@ -19526,7 +19905,7 @@ const Title = memo((_y) => {
     "textColor",
     "textWeight"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     as,
     className: `${className} title`,
     inline: false,
@@ -19534,9 +19913,7 @@ const Title = memo((_y) => {
     lineHeight,
     textSize,
     textWeight
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
 const CodeVerificationForm = memo(({
   backgroundColor = BackgroundColors.Darker,
@@ -19555,9 +19932,7 @@ const CodeVerificationForm = memo(({
   const [problems, setProblems] = useState();
   useEffect(() => {
     if (userId) {
-      dispatch(getVerificationDetails({
-        userId
-      }));
+      dispatch(getVerificationDetails({ userId }));
     }
   }, []);
   useEffect(() => {
@@ -19565,7 +19940,7 @@ const CodeVerificationForm = memo(({
       onVerificationSuccess();
     }
   }, [verificationState.verify.success]);
-  return /* @__PURE__ */ jsxs(Container$h, {
+  return /* @__PURE__ */ React.createElement(Container$h, {
     className: "code-verification-form",
     backgroundColor,
     borderRadius,
@@ -19574,108 +19949,79 @@ const CodeVerificationForm = memo(({
     grow: false,
     padding: Amount.Most,
     paddingBottom: Amount.Default,
-    width: 420,
-    children: [/* @__PURE__ */ jsx(LoadingOverlay, {
-      borderRadius,
-      visible: verificationState.status.inProgress || verificationState.resend.inProgress || verificationState.verify.inProgress
-    }), verificationState.verify.success || verificationState.status.state === UserVerificationStatus.Confirmed ? /* @__PURE__ */ jsxs(Container$h, {
-      padding: Amount.Default,
-      paddingBottom: Amount.Most,
-      children: [/* @__PURE__ */ jsx(Title, {
-        alignText: Align.Center,
-        children: "You're verified!"
-      }), /* @__PURE__ */ jsx(Container$h, {
-        margin: Amount.More,
-        children: /* @__PURE__ */ jsx(Paragraph, {
-          alignText: Align.Center,
-          children: "Thank you for verifying your email address."
-        })
-      }), /* @__PURE__ */ jsx(Button$1, {
-        fullWidth: true,
-        onClick: () => navigate("/login"),
-        size: Size.Large,
-        type: ButtonType.Primary,
-        children: "Login"
-      })]
-    }) : /* @__PURE__ */ jsxs(Fragment, {
-      children: [/* @__PURE__ */ jsx(Title, {
-        alignText: Align.Center,
-        children: "Verification"
-      }), /* @__PURE__ */ jsx(Container$h, {
-        margin: Amount.More,
-        children: /* @__PURE__ */ jsxs(Paragraph, {
-          alignText: Align.Center,
-          children: ["Enter the confirmation code sent to", " ", /* @__PURE__ */ jsx("b", {
-            children: (_a2 = verificationState.delivery) == null ? void 0 : _a2.destination
-          }), "."]
-        })
-      }), /* @__PURE__ */ jsxs(Container$h, {
-        padding: Amount.Default,
-        paddingLeft: Amount.More,
-        paddingRight: Amount.More,
-        children: [/* @__PURE__ */ jsx(InputRow, {
-          children: /* @__PURE__ */ jsx(VerificationCodeInput, {
-            autoComplete: AutoComplete.OneTimeCode,
-            length: 6,
-            name: "verification_code",
-            onChange: ({
-              value,
-              validated,
-              problems: problemos
-            }) => {
-              setProblems(problemos);
-              if (validated && problemos && problemos.length === 0)
-                setCode(value);
-            },
-            size: Size.Large
-          })
-        }), /* @__PURE__ */ jsx(LineBreak, {
-          size: Size.Small
-        }), /* @__PURE__ */ jsx(Button$1, {
-          disabled: problems && problems.length > 0 || !code || verificationState.verify.inProgress || verificationState.resend.inProgress,
-          fullWidth: true,
-          onClick: () => {
-            if (userId && code) {
-              dispatch(verifyCode({
-                code,
-                userId
-              }));
-            }
-          },
-          size: Size.Large,
-          type: ButtonType.Primary,
-          children: "Verify"
-        })]
-      }), /* @__PURE__ */ jsx(Container$h, {
-        alignItems: Align.Center,
-        paddingLeft: Amount.Default,
-        paddingRight: Amount.Default,
-        paddingTop: Amount.Default,
-        children: !verificationState.resend.success ? /* @__PURE__ */ jsx(Button$1, {
-          onClick: () => {
-            if (userId) {
-              dispatch(resendVerificationCode({
-                userId
-              }));
-            }
-          },
-          size: Size.Smaller,
-          type: ButtonType.Link,
-          children: "Resend verification code"
-        }) : /* @__PURE__ */ jsx(Label, {
-          icon: {
-            name: BasicIcons.Checkmark2,
-            size: Size.Smaller
-          },
-          lineHeight: Size.Smaller,
-          size: Size.Default,
-          textColor: TextColors.Success,
-          textWeight: TextWeight.More,
-          children: "A new code has been sent"
-        })
-      })]
-    })]
-  });
+    width: 420
+  }, /* @__PURE__ */ React.createElement(LoadingOverlay, {
+    borderRadius,
+    visible: verificationState.status.inProgress || verificationState.resend.inProgress || verificationState.verify.inProgress
+  }), verificationState.verify.success || verificationState.status.state === UserVerificationStatus.Confirmed ? /* @__PURE__ */ React.createElement(Container$h, {
+    padding: Amount.Default,
+    paddingBottom: Amount.Most
+  }, /* @__PURE__ */ React.createElement(Title, {
+    alignText: Align.Center
+  }, "You're verified!"), /* @__PURE__ */ React.createElement(Container$h, {
+    margin: Amount.More
+  }, /* @__PURE__ */ React.createElement(Paragraph, {
+    alignText: Align.Center
+  }, "Thank you for verifying your email address.")), /* @__PURE__ */ React.createElement(Button$1, {
+    fullWidth: true,
+    onClick: () => navigate("/login"),
+    size: Size.Large,
+    type: ButtonType.Primary
+  }, "Login")) : /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Title, {
+    alignText: Align.Center
+  }, "Verification"), /* @__PURE__ */ React.createElement(Container$h, {
+    margin: Amount.More
+  }, /* @__PURE__ */ React.createElement(Paragraph, {
+    alignText: Align.Center
+  }, "Enter the confirmation code sent to", " ", /* @__PURE__ */ React.createElement("b", null, (_a2 = verificationState.delivery) == null ? void 0 : _a2.destination), ".")), /* @__PURE__ */ React.createElement(Container$h, {
+    padding: Amount.Default,
+    paddingLeft: Amount.More,
+    paddingRight: Amount.More
+  }, /* @__PURE__ */ React.createElement(InputRow, null, /* @__PURE__ */ React.createElement(VerificationCodeInput, {
+    autoComplete: AutoComplete.OneTimeCode,
+    length: 6,
+    name: "verification_code",
+    onChange: ({ value, validated, problems: problemos }) => {
+      setProblems(problemos);
+      if (validated && problemos && problemos.length === 0)
+        setCode(value);
+    },
+    size: Size.Large
+  })), /* @__PURE__ */ React.createElement(LineBreak, {
+    size: Size.Small
+  }), /* @__PURE__ */ React.createElement(Button$1, {
+    disabled: problems && problems.length > 0 || !code || verificationState.verify.inProgress || verificationState.resend.inProgress,
+    fullWidth: true,
+    onClick: () => {
+      if (userId && code) {
+        dispatch(verifyCode({ code, userId }));
+      }
+    },
+    size: Size.Large,
+    type: ButtonType.Primary
+  }, "Verify")), /* @__PURE__ */ React.createElement(Container$h, {
+    alignItems: Align.Center,
+    paddingLeft: Amount.Default,
+    paddingRight: Amount.Default,
+    paddingTop: Amount.Default
+  }, !verificationState.resend.success ? /* @__PURE__ */ React.createElement(Button$1, {
+    onClick: () => {
+      if (userId) {
+        dispatch(resendVerificationCode({ userId }));
+      }
+    },
+    size: Size.Smaller,
+    type: ButtonType.Link
+  }, "Resend verification code") : /* @__PURE__ */ React.createElement(Label, {
+    icon: {
+      name: BasicIcons.Checkmark2,
+      size: Size.Smaller
+    },
+    lineHeight: Size.Smaller,
+    size: Size.Default,
+    textColor: TextColors.Success,
+    textWeight: TextWeight.More
+  }, "A new code has been sent"))));
 });
 const Orb = memo((_A) => {
   var _B = _A, {
@@ -19687,7 +20033,7 @@ const Orb = memo((_A) => {
     "className",
     "size"
   ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     className: `${className} orb`,
     backgroundColor: color,
     borderRadius: Amount.All,
@@ -19745,7 +20091,7 @@ const NotificationLabel = memo((_C) => {
   };
   const bgColor = getBackgroundColor2();
   const textColor = getTextColor();
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     alignItems: Align.Center,
     alignContent: Align.Center,
     backgroundColor: bgColor,
@@ -19757,27 +20103,18 @@ const NotificationLabel = memo((_C) => {
     paddingBottom: Amount.Less,
     paddingTop: Amount.Less,
     grow
-  }, props), {
-    children: [showOrb && /* @__PURE__ */ jsx(Orb, {
-      color: bgColor,
-      marginRight: Amount.Less
-    }), label && /* @__PURE__ */ jsx(Label, {
-      textColor,
-      lineHeight: Size.Small,
-      textWeight: TextWeight.Default,
-      children: label
-    }), children]
-  }));
+  }, props), showOrb && /* @__PURE__ */ React.createElement(Orb, {
+    color: bgColor,
+    marginRight: Amount.Less
+  }), label && /* @__PURE__ */ React.createElement(Label, {
+    textColor,
+    lineHeight: Size.Small,
+    textWeight: TextWeight.Default
+  }, label), children);
 });
 const ErrorNotification = memo((_E) => {
-  var _F = _E, {
-    label,
-    showOrb = true
-  } = _F, props = __objRest(_F, [
-    "label",
-    "showOrb"
-  ]);
-  return /* @__PURE__ */ jsx(NotificationLabel, __spreadValues({
+  var _F = _E, { label, showOrb = true } = _F, props = __objRest(_F, ["label", "showOrb"]);
+  return /* @__PURE__ */ React.createElement(NotificationLabel, __spreadValues({
     alignItems: Align.Center,
     label,
     showOrb,
@@ -19785,26 +20122,18 @@ const ErrorNotification = memo((_E) => {
   }, props));
 });
 const FormActions = memo((_G) => {
-  var _H = _G, {
-    children
-  } = _H, props = __objRest(_H, [
-    "children"
-  ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  var _H = _G, { children } = _H, props = __objRest(_H, ["children"]);
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     alignContent: Align.SpaceBetween,
     className: "form-actions",
     marginTop: Amount.More,
     orientation: Orientation.Horizontal,
     grow: false
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
 const JSONEditor = memo((_I) => {
   var props = __objRest(_I, []);
-  return /* @__PURE__ */ jsx("div", {
-    children: "JSONEditor"
-  });
+  return /* @__PURE__ */ React.createElement("div", null, "JSONEditor");
 });
 const ErrorLabel = memo(({
   alignContent = Align.Center,
@@ -19823,7 +20152,7 @@ const ErrorLabel = memo(({
   textColor = TextColors.Error,
   textSize = TextSize.Small
 }) => {
-  return /* @__PURE__ */ jsx(Label, {
+  return /* @__PURE__ */ React.createElement(Label, {
     alignContent,
     alignText,
     className: `${className} error-label`,
@@ -19833,9 +20162,8 @@ const ErrorLabel = memo(({
     marginBottom,
     size,
     textColor,
-    textSize,
-    children
-  });
+    textSize
+  }, children);
 });
 const InputLabel = memo((_J) => {
   var _K = _J, {
@@ -19860,26 +20188,22 @@ const InputLabel = memo((_J) => {
     "textSize"
   ]);
   var _a2;
-  return /* @__PURE__ */ jsxs(Container$h, {
+  return /* @__PURE__ */ React.createElement(Container$h, {
     grow: false,
-    orientation: Orientation.Horizontal,
-    children: [/* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
-      alignContent,
-      className: `${className} input-label`,
-      grow: false,
-      lineHeight,
-      textSize,
-      textColor,
-      marginBottom,
-      size
-    }, props), {
-      children
-    })), error && /* @__PURE__ */ jsx(ErrorLabel, {
-      alignContent: Align.Right,
-      size,
-      children: error instanceof Exception ? error.message : error.length > 0 ? (_a2 = error[0]) == null ? void 0 : _a2.message.long : null
-    })]
-  });
+    orientation: Orientation.Horizontal
+  }, /* @__PURE__ */ React.createElement(Label, __spreadValues({
+    alignContent,
+    className: `${className} input-label`,
+    grow: false,
+    lineHeight,
+    textSize,
+    textColor,
+    marginBottom,
+    size
+  }, props), children), error && /* @__PURE__ */ React.createElement(ErrorLabel, {
+    alignContent: Align.Right,
+    size
+  }, error instanceof Exception ? error.message : error.length > 0 ? (_a2 = error[0]) == null ? void 0 : _a2.message.long : null));
 });
 const ToggleInput = memo(({
   backgroundColor = BackgroundColors.InputControl,
@@ -19903,89 +20227,123 @@ const ToggleInput = memo(({
   const [toggleValue, setToggleValue] = useState(defaultValue != null ? defaultValue : false);
   useEffect(() => {
     if (onChange)
-      onChange({
-        problems: [],
-        value: toggleValue
-      });
+      onChange({ problems: [], value: toggleValue });
   }, [toggleValue]);
   useEffect(() => {
     var _a3;
     setToggleValue((_a3 = defaultValue != null ? defaultValue : toggleValue) != null ? _a3 : "");
   }, [defaultValue]);
-  return /* @__PURE__ */ jsxs(Fragment, {
-    children: [/* @__PURE__ */ jsxs(Container$h, {
-      orientation: Orientation.Horizontal,
-      grow: false,
-      children: [label && /* @__PURE__ */ jsx(InputLabel, {
-        children: label
-      }), problems.length > 0 ? /* @__PURE__ */ jsx(ErrorLabel, {
-        alignContent: Align.Right,
-        children: (_a2 = problems[0]) == null ? void 0 : _a2.message.short
-      }) : null]
-    }), /* @__PURE__ */ jsxs(Container$h, {
-      alignContent: Align.Left,
-      alignItems: Align.Center,
-      orientation: Orientation.Horizontal,
-      className: `${className} toggle-input`,
-      grow: false,
-      children: [falseLabel && /* @__PURE__ */ jsx(Button$1, {
-        form: "null",
-        onClick: () => setToggleValue(false),
-        type: ButtonType.Inline,
-        children: /* @__PURE__ */ jsx(Label, {
-          className: "toggle-input-falsey-label",
-          textColor: !toggleValue ? TextColors.Light : TextColors.Lighter,
-          children: falseLabel
-        })
-      }), /* @__PURE__ */ jsx(Toggle, {
-        alignItems: Align.Center,
-        as: "button",
-        backgroundColor,
-        border,
-        borderRadius: Amount.All,
-        form: "null",
-        onClick: () => setToggleValue(!toggleValue),
-        onFocus: () => setFocused(true),
-        onBlur: () => setFocused(false),
-        orientation: Orientation.Horizontal,
-        padding: Amount.Least,
-        toggleValue,
-        size,
-        children: /* @__PURE__ */ jsx(ToggleSwitch, {
-          alignItems: Align.Center,
-          alignContent: Align.Center,
-          backgroundColor: toggleValue ? Colors.Primary : Colors.Error,
-          depth: Depth.High,
-          focused,
-          toggleValue,
-          size,
-          children: /* @__PURE__ */ jsx(Icon, {
-            color: BackgroundColors.Dark,
-            name: toggleValue ? BasicIcons.Checkmark2 : BasicIcons.Close,
-            size: Size.Smallest
-          })
-        })
-      }), trueLabel && /* @__PURE__ */ jsx(Button$1, {
-        form: "null",
-        onClick: () => setToggleValue(true),
-        type: ButtonType.Inline,
-        children: /* @__PURE__ */ jsx(Label, {
-          className: "toggle-input-truthy-label",
-          textColor: toggleValue ? TextColors.Light : TextColors.Lighter,
-          children: trueLabel
-        })
-      })]
-    })]
-  });
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Container$h, {
+    orientation: Orientation.Horizontal,
+    grow: false
+  }, label && /* @__PURE__ */ React.createElement(InputLabel, null, label), problems.length > 0 ? /* @__PURE__ */ React.createElement(ErrorLabel, {
+    alignContent: Align.Right
+  }, (_a2 = problems[0]) == null ? void 0 : _a2.message.short) : null), /* @__PURE__ */ React.createElement(Container$h, {
+    alignContent: Align.Left,
+    alignItems: Align.Center,
+    orientation: Orientation.Horizontal,
+    className: `${className} toggle-input`,
+    grow: false
+  }, falseLabel && /* @__PURE__ */ React.createElement(Button$1, {
+    form: "null",
+    onClick: () => setToggleValue(false),
+    type: ButtonType.Inline
+  }, /* @__PURE__ */ React.createElement(Label, {
+    className: "toggle-input-falsey-label",
+    textColor: !toggleValue ? TextColors.Light : TextColors.Lighter
+  }, falseLabel)), /* @__PURE__ */ React.createElement(Toggle, {
+    alignItems: Align.Center,
+    as: "button",
+    backgroundColor,
+    border,
+    borderRadius: Amount.All,
+    form: "null",
+    onClick: () => setToggleValue(!toggleValue),
+    onFocus: () => setFocused(true),
+    onBlur: () => setFocused(false),
+    orientation: Orientation.Horizontal,
+    padding: Amount.Least,
+    toggleValue,
+    size
+  }, /* @__PURE__ */ React.createElement(ToggleSwitch, {
+    alignItems: Align.Center,
+    alignContent: Align.Center,
+    backgroundColor: toggleValue ? Colors.Primary : Colors.Error,
+    depth: Depth.High,
+    focused,
+    toggleValue,
+    size
+  }, /* @__PURE__ */ React.createElement(Icon, {
+    color: BackgroundColors.Dark,
+    name: toggleValue ? BasicIcons.Checkmark2 : BasicIcons.Close,
+    size: Size.Smallest
+  }))), trueLabel && /* @__PURE__ */ React.createElement(Button$1, {
+    form: "null",
+    onClick: () => setToggleValue(true),
+    type: ButtonType.Inline
+  }, /* @__PURE__ */ React.createElement(Label, {
+    className: "toggle-input-truthy-label",
+    textColor: toggleValue ? TextColors.Light : TextColors.Lighter
+  }, trueLabel))));
 });
-const Toggle = styled.button.withConfig({
-  displayName: "Toggle",
-  componentId: "sc-5z4r9s-0"
-})(["", ";", ";box-shadow:", ";border:none;cursor:pointer;width:calc(", " * 2 - 2px);"], LayoutStyles, AppearanceStyles, DepthShadow.Low, (props) => props.size);
-const ToggleSwitch = styled.span.withConfig({
-  displayName: "ToggleSwitch",
-  componentId: "sc-5z4r9s-1"
-})(["", ";", ";", ";box-shadow:", ";border-radius:", ";height:", ";transform:translateX(0);transition:background 0.1s ease-in-out,transform 0.1s ease-in-out;width:", ";i.icon{opacity:0;transition:opacity 0.1s ease-in-out;}&:before{border-radius:100%;}", " ", ""], LayoutStyles, AppearanceStyles, FocusedStyles, DepthShadow.High, Amount.All, (props) => `calc(${props.size} - 8px)`, (props) => `calc(${props.size} - 8px)`, (props) => props.toggleValue === true && css(["transform:translateX(calc(", " - ", "));i.icon{opacity:1;}"], props.size, Amount.Least), (props) => props.toggleValue === false && css([""]));
+const Toggle = styled.button`
+  ${LayoutStyles};
+  ${AppearanceStyles};
+
+  box-shadow: ${DepthShadow.Low};
+  border: none;
+  cursor: pointer;
+  width: calc(${(props) => props.size} * 2 - 2px);
+`;
+const ToggleSwitch = styled.span`
+  ${LayoutStyles};
+  ${AppearanceStyles};
+  ${FocusedStyles};
+
+  box-shadow: ${DepthShadow.High};
+  border-radius: ${Amount.All};
+  height: ${(props) => `calc(${props.size} - 8px)`};
+  transform: translateX(0);
+  transition: background 0.1s ease-in-out, transform 0.1s ease-in-out;
+  width: ${(props) => `calc(${props.size} - 8px)`};
+
+  i.icon {
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+  }
+  /* 
+  @keyframes toggle-animation {
+    0% {
+      height: 100%;
+    }
+
+    50% {
+      height: 50%;
+      width: 50%;
+    }
+
+    100% {
+      height: 100%;
+    }
+  } */
+
+  &:before {
+    border-radius: 100%;
+  }
+
+  ${(props) => props.toggleValue === true && css`
+      transform: translateX(calc(${props.size} - ${Amount.Least}));
+      /* animation: toggle-animation 0.2s ease-in-out; */
+
+      i.icon {
+        opacity: 1;
+      }
+    `}
+
+  ${(props) => props.toggleValue === false && css`
+      /* */
+    `}
+`;
 var TextInputType = /* @__PURE__ */ ((TextInputType2) => {
   TextInputType2["EmailAddress"] = "email";
   TextInputType2["Text"] = "text";
@@ -20079,61 +20437,77 @@ const TextInput = memo((_L) => {
     var _a3;
     setValue((_a3 = defaultValue != null ? defaultValue : value) != null ? _a3 : "");
   }, [defaultValue]);
-  return /* @__PURE__ */ jsxs(Fragment, {
-    children: [(label || problems.length > 0) && /* @__PURE__ */ jsx(InputLabel, {
-      error: problems,
-      children: label
-    }), /* @__PURE__ */ jsxs(InputContainer, __spreadProps(__spreadValues({
-      backgroundColor,
-      border,
-      boxShadow,
-      className: `${className} text-input`,
-      cursor,
-      error: problems,
-      focused,
-      flat,
-      onClick: () => {
-        var _a3;
-        (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
-      },
-      orientation: Orientation.Horizontal,
-      size
-    }, props), {
-      children: [icon && /* @__PURE__ */ jsx(Icon, __spreadProps(__spreadValues({}, icon), {
-        color: value === "" ? TextColors.InputPlaceholder : (_a2 = icon.color) != null ? _a2 : textColor,
-        marginLeft: Amount.Less
-      })), /* @__PURE__ */ jsx(Input$3, {
-        autoComplete,
-        defaultValue,
-        hidden,
-        name,
-        onBlur: () => setFocused(false),
-        onChange: (e2) => {
-          setValueChanged(true);
-          setValue(prefix2 + e2.target.value + suffix2);
-        },
-        onFocus: () => setFocused(true),
-        lineHeight: size,
-        placeholder,
-        textColor,
-        textWeight,
-        type: inputType,
-        value,
-        ref: inputRef,
-        spellCheck
-      }), inProgress && /* @__PURE__ */ jsx(Container$h, {
-        grow: false,
-        children: /* @__PURE__ */ jsx(ProgressSpinner, {
-          size: Size.Small
-        })
-      })]
-    }))]
-  });
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, (label || problems.length > 0) && /* @__PURE__ */ React.createElement(InputLabel, {
+    error: problems
+  }, label), /* @__PURE__ */ React.createElement(InputContainer, __spreadValues({
+    backgroundColor,
+    border,
+    boxShadow,
+    className: `${className} text-input`,
+    cursor,
+    error: problems,
+    focused,
+    flat,
+    onClick: () => {
+      var _a3;
+      (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
+    },
+    orientation: Orientation.Horizontal,
+    size
+  }, props), icon && /* @__PURE__ */ React.createElement(Icon, __spreadProps(__spreadValues({}, icon), {
+    color: value === "" ? TextColors.InputPlaceholder : (_a2 = icon.color) != null ? _a2 : textColor,
+    marginLeft: Amount.Less
+  })), /* @__PURE__ */ React.createElement(Input$3, {
+    autoComplete,
+    defaultValue,
+    hidden,
+    name,
+    onBlur: () => setFocused(false),
+    onChange: (e2) => {
+      setValueChanged(true);
+      setValue(prefix2 + e2.target.value + suffix2);
+    },
+    onFocus: () => setFocused(true),
+    lineHeight: size,
+    placeholder,
+    textColor,
+    textWeight,
+    type: inputType,
+    value,
+    ref: inputRef,
+    spellCheck
+  }), inProgress && /* @__PURE__ */ React.createElement(Container$h, {
+    grow: false
+  }, /* @__PURE__ */ React.createElement(ProgressSpinner, {
+    size: Size.Small
+  }))));
 });
-const Input$3 = styled.input.withConfig({
-  displayName: "Input",
-  componentId: "sc-j32swv-0"
-})(["", ";background:transparent;border:none;width:100%;&::-ms-clear{display:none;width:0;height:0;}&::-ms-reveal{display:none;width:0;height:0;}&::-webkit-search-decoration,&::-webkit-search-cancel-button,&::-webkit-search-results-button,&::-webkit-search-results-decoration{display:none;}"], TextInputStyles);
+const Input$3 = styled.input`
+  ${TextInputStyles};
+
+  background: transparent;
+  border: none;
+  width: 100%;
+
+  /* clears the ‘X’ from Internet Explorer */
+  &::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  &::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  /* clears the ‘X’ from Chrome */
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
+`;
 const EmailAddressInput = memo((_N) => {
   var _O = _N, {
     autoComplete,
@@ -20152,23 +20526,15 @@ const EmailAddressInput = memo((_N) => {
   const validationProps = __spreadProps(__spreadValues({}, validation), {
     [Condition.IsEmailAddress]: Boolean(emailAddress)
   });
-  return /* @__PURE__ */ jsx(TextInput, __spreadValues({
+  return /* @__PURE__ */ React.createElement(TextInput, __spreadValues({
     autoComplete: autoComplete != null ? autoComplete : AutoComplete.EmailAddress,
     error,
     inProgress,
-    onChange: async ({
-      problems,
-      validated,
-      value
-    }) => {
+    onChange: async ({ problems, validated, value }) => {
       setError(problems);
       setEmailAddress(value);
       if (onChange)
-        onChange({
-          problems,
-          validated,
-          value
-        });
+        onChange({ problems, validated, value });
       if (Object.keys(validation).includes(Condition.IsUsernameAvailable) && validated && !(problems == null ? void 0 : problems.length) && value && value !== "")
         ;
     },
@@ -20177,10 +20543,8 @@ const EmailAddressInput = memo((_N) => {
 });
 const PhoneNumberInput = memo((_P) => {
   var props = __objRest(_P, []);
-  return /* @__PURE__ */ jsx(TextInput, __spreadValues({
-    validation: {
-      [Condition.IsPhoneNumber]: true
-    }
+  return /* @__PURE__ */ React.createElement(TextInput, __spreadValues({
+    validation: { [Condition.IsPhoneNumber]: true }
   }, props));
 });
 const getBorderColor = ({
@@ -20193,17 +20557,173 @@ const getBorderColor = ({
     return BorderColors.Primary;
   return BorderColors.InputControl;
 };
-const Wrapper$4 = styled.div.withConfig({
-  displayName: "Wrapper",
-  componentId: "sc-1k5smuz-0"
-})(["background:transparent;border:none;width:100%;", ";.react-date-picker,.react-date-picker__wrapper{width:100%;.react-calendar{color:rgb(", ");overflow:hidden;width:100%;}}.react-date-picker__wrapper{background:transparent;box-shadow:0 0 0 transparent;border:none;cursor:", ";width:100%;}.react-date-picker__inputGroup{line-height:26px;padding:0 ", ";}.react-date-picker__inputGroup__input,.react-date-picker__inputGroup__leadingZero{color:rgb(", ");font-size:14px;font-weight:500;}.react-date-picker__inputGroup__leadingZero{margin-right:4px;}input.react-date-picker__inputGroup__input,.react-date-picker__inputGroup__leadingZero{background:transparent;border:1px solid transparent;border-radius:4px;color:rgb(", ");height:initial;line-height:24px;padding:2px 6px 3px 6px;text-align:center;vertical-align:middle;&:hover{border:1px solid rgb(", ");}&:focus{box-shadow:0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06) !important;border:1px solid rgb(", ");}}.react-date-picker__inputGroup__divider{color:rgb(", ");}.react-date-picker__calendar{background-color:rgb(", ");border:2px solid rgb( ", " );border-top:none;border-radius:0 0 ", " ", ";height:auto !important;left:-4px !important;padding:", ";right:-1px !important;top:calc(", " - 3px) !important;transition:border 0.2s ease-in-out,opacity 0.2s ease-in-out,transform 0.2s ease-in-out;z-index:100500;width:calc(100% + (", " + 8px));}.react-date-picker__calendar.react-date-picker__calendar--closed{opacity:0;pointer-events:none;transform:translateY(-10px);}.react-calendar__navigation{display:flex;.react-calendar__navigation__arrow{background-color:rgb(", ");border:none;border-radius:", ";color:rgb(", ");cursor:", ";height:", ";margin:0 ", ";text-align:center;width:", ";&:hover{background-color:rgb(", ");}}.react-calendar__navigation__label{background-color:transparent;border:none;border-radius:", ";color:rgb(", ");cursor:", ";font-weight:", ";padding:", " 0;&:hover{background-color:rgb(", ");}}}.react-calendar__tile{background:transparent;border:none;border-radius:", ";color:rgb(", ");padding:", " 0;&:hover{background-color:rgb(", ");color:rgb(", ");cursor:", ";}}.react-calendar__tile--active,.react-calendar__tile--hasActive{background:rgb(", ") !important;color:rgb(", ");}.react-calendar__month-view__weekdays__weekday{border:none;font-size:", ";padding:", " 0;text-align:center;text-decoration:none;}.react-calendar__month-view__days__day--neighboringMonth{color:rgb(", ");}"], BoxShadowStyles, TextColors.Lighter, Cursor.Pointer, Amount.Least, TextColors.InputControl, TextColors.InputControl, BorderColors.InputControl, BorderColors.Primary, ForegroundColors.Default, BackgroundColors.InputControl, (props) => getBorderColor({
-  error: props.error,
-  focused: props.focused
-}), Amount.Least, Amount.Least, Amount.Least, (props) => props.size, (props) => props.size, BackgroundColors.Dark, Size.Default, TextColors.Lighter, Cursor.Pointer, Size.Default, Amount.Least, Size.Default, BackgroundColors.Darker, Amount.All, TextColors.Default, Cursor.Pointer, TextWeight.More, Amount.Least, BackgroundColors.Darker, Amount.Least, TextColors.Default, Amount.Less, BackgroundColors.Darker, TextColors.Light, Cursor.Pointer, BackgroundColors.Primary, TextColors.InputControl, TextSize.Small, Amount.Least, TextColors.Darker);
-const DownArrow = styled.div.withConfig({
-  displayName: "DownArrow",
-  componentId: "sc-1k5smuz-1"
-})(["cursor:", " !important;", ";", ";", ";"], Cursor.Pointer, LayoutStyles, AppearanceStyles, DimensionStyles);
+const Wrapper$4 = styled.div`
+  background: transparent;
+  border: none;
+  width: 100%;
+  ${BoxShadowStyles};
+
+  .react-date-picker,
+  .react-date-picker__wrapper {
+    width: 100%;
+
+    .react-calendar {
+      color: rgb(${TextColors.Lighter});
+      overflow: hidden;
+      width: 100%;
+    }
+  }
+
+  .react-date-picker__wrapper {
+    background: transparent;
+    box-shadow: 0 0 0 transparent;
+    border: none;
+    cursor: ${Cursor.Pointer};
+    width: 100%;
+  }
+
+  .react-date-picker__inputGroup {
+    line-height: 26px;
+    padding: 0 ${Amount.Least};
+  }
+
+  .react-date-picker__inputGroup__input,
+  .react-date-picker__inputGroup__leadingZero {
+    color: rgb(${TextColors.InputControl});
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .react-date-picker__inputGroup__leadingZero {
+    margin-right: 4px;
+  }
+
+  input.react-date-picker__inputGroup__input,
+  .react-date-picker__inputGroup__leadingZero {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: rgb(${TextColors.InputControl});
+    height: initial;
+    line-height: 24px;
+    padding: 2px 6px 3px 6px;
+    text-align: center;
+    vertical-align: middle;
+
+    &:hover {
+      border: 1px solid rgb(${BorderColors.InputControl});
+    }
+
+    &:focus {
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+        0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+      border: 1px solid rgb(${BorderColors.Primary});
+    }
+  }
+
+  .react-date-picker__inputGroup__divider {
+    color: rgb(${ForegroundColors.Default});
+  }
+
+  .react-date-picker__calendar {
+    background-color: rgb(${BackgroundColors.InputControl});
+    border: 2px solid
+      rgb(
+        ${(props) => getBorderColor({ error: props.error, focused: props.focused })}
+      );
+    border-top: none;
+    border-radius: 0 0 ${Amount.Least} ${Amount.Least};
+    /* box-shadow: $ {DepthShadow.Higher}; */
+    height: auto !important;
+    left: -4px !important;
+    padding: ${Amount.Least};
+    right: -1px !important;
+    top: calc(${(props) => props.size} - 3px) !important;
+    transition: border 0.2s ease-in-out, opacity 0.2s ease-in-out,
+      transform 0.2s ease-in-out;
+    z-index: 100500;
+    width: calc(100% + (${(props) => props.size} + 8px));
+  }
+
+  .react-date-picker__calendar.react-date-picker__calendar--closed {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+  }
+
+  .react-calendar__navigation {
+    display: flex;
+
+    .react-calendar__navigation__arrow {
+      background-color: rgb(${BackgroundColors.Dark});
+      border: none;
+      border-radius: ${Size.Default};
+      color: rgb(${TextColors.Lighter});
+      cursor: ${Cursor.Pointer};
+      height: ${Size.Default};
+      margin: 0 ${Amount.Least};
+      text-align: center;
+      width: ${Size.Default};
+
+      &:hover {
+        background-color: rgb(${BackgroundColors.Darker});
+      }
+    }
+
+    .react-calendar__navigation__label {
+      background-color: transparent;
+      border: none;
+      border-radius: ${Amount.All};
+      color: rgb(${TextColors.Default});
+      cursor: ${Cursor.Pointer};
+      font-weight: ${TextWeight.More};
+      padding: ${Amount.Least} 0;
+
+      &:hover {
+        background-color: rgb(${BackgroundColors.Darker});
+      }
+    }
+  }
+
+  .react-calendar__tile {
+    background: transparent;
+    border: none;
+    border-radius: ${Amount.Least};
+    color: rgb(${TextColors.Default});
+    padding: ${Amount.Less} 0;
+
+    &:hover {
+      background-color: rgb(${BackgroundColors.Darker});
+      color: rgb(${TextColors.Light});
+      cursor: ${Cursor.Pointer};
+    }
+  }
+
+  .react-calendar__tile--active,
+  .react-calendar__tile--hasActive {
+    background: rgb(${BackgroundColors.Primary}) !important;
+    color: rgb(${TextColors.InputControl});
+  }
+
+  .react-calendar__month-view__weekdays__weekday {
+    border: none;
+    font-size: ${TextSize.Small};
+    padding: ${Amount.Least} 0;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .react-calendar__month-view__days__day--neighboringMonth {
+    color: rgb(${TextColors.Darker});
+  }
+`;
+const DownArrow = styled.div`
+  cursor: ${Cursor.Pointer} !important;
+
+  ${LayoutStyles};
+  ${AppearanceStyles};
+  ${DimensionStyles};
+`;
 const DateInput = memo((_Q) => {
   var _R = _Q, {
     backgroundColor = BackgroundColors.InputControl,
@@ -20220,9 +20740,7 @@ const DateInput = memo((_Q) => {
     label,
     onChange,
     size = Size.Default,
-    validation = {
-      [Condition.IsDate]: true
-    }
+    validation = { [Condition.IsDate]: true }
   } = _R, props = __objRest(_R, [
     "backgroundColor",
     "boxShadow",
@@ -20260,70 +20778,156 @@ const DateInput = memo((_Q) => {
         });
     }
   }, [value]);
-  return /* @__PURE__ */ jsxs(Fragment, {
-    children: [(label || problems.length > 0) && /* @__PURE__ */ jsx(InputLabel, {
-      error: problems,
-      children: label
-    }), /* @__PURE__ */ jsxs(InputContainer, __spreadProps(__spreadValues({
-      backgroundColor,
-      border,
-      boxShadow: !focused ? boxShadow : DepthShadow.Higher,
-      className: `${className} date-input`,
-      error: problems,
-      focused,
-      onMouseLeave: () => setFocused(false),
-      orientation: Orientation.Horizontal,
-      size
-    }, props), {
-      children: [/* @__PURE__ */ jsx(Wrapper$4, {
-        error: problems,
-        focused,
-        size
-      }), /* @__PURE__ */ jsx(DownArrow, {
-        alignItems: Align.Center,
-        alignContent: Align.Center,
-        border: {
-          left: {
-            color: BorderColors.InputControl,
-            style: BorderStyle.Solid,
-            width: 1
-          }
-        },
-        className: "down-arrow",
-        grow: false,
-        menuVisible: focused,
-        height: Size.Small,
-        width: size,
-        children: /* @__PURE__ */ jsx(Icon, {
-          color: focused ? ForegroundColors.Lightest : ForegroundColors.Lighter,
-          name: BasicIcons.CaretDownArrow,
-          className: focused ? "up" : "down",
-          size: Size.Smallest,
-          transform: {
-            rotate: focused ? 0 : 0
-          }
-        })
-      })]
-    }))]
-  });
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, (label || problems.length > 0) && /* @__PURE__ */ React.createElement(InputLabel, {
+    error: problems
+  }, label), /* @__PURE__ */ React.createElement(InputContainer, __spreadValues({
+    backgroundColor,
+    border,
+    boxShadow: !focused ? boxShadow : DepthShadow.Higher,
+    className: `${className} date-input`,
+    error: problems,
+    focused,
+    onMouseLeave: () => setFocused(false),
+    orientation: Orientation.Horizontal,
+    size
+  }, props), /* @__PURE__ */ React.createElement(Wrapper$4, {
+    error: problems,
+    focused,
+    size
+  }), /* @__PURE__ */ React.createElement(DownArrow, {
+    alignItems: Align.Center,
+    alignContent: Align.Center,
+    border: {
+      left: {
+        color: BorderColors.InputControl,
+        style: BorderStyle.Solid,
+        width: 1
+      }
+    },
+    className: "down-arrow",
+    grow: false,
+    menuVisible: focused,
+    height: Size.Small,
+    width: size
+  }, /* @__PURE__ */ React.createElement(Icon, {
+    color: focused ? ForegroundColors.Lightest : ForegroundColors.Lighter,
+    name: BasicIcons.CaretDownArrow,
+    className: focused ? "up" : "down",
+    size: Size.Smallest,
+    transform: {
+      rotate: focused ? 0 : 0
+    }
+  }))));
 });
 const DateTimeInput = memo(({
   error,
   resetIcon,
   defaultValue = new Date().toISOString(),
   onChange,
-  validation = {
-    [Condition.IsDate]: true
-  }
+  validation = { [Condition.IsDate]: true }
 }) => {
-  return /* @__PURE__ */ jsx(InputContainer, {
-    children: /* @__PURE__ */ jsx(Wrapper$3, {})
-  });
+  return /* @__PURE__ */ React.createElement(InputContainer, null, /* @__PURE__ */ React.createElement(Wrapper$3, null));
 });
-const Wrapper$3 = styled.div.withConfig({
-  displayName: "Wrapper",
-  componentId: "sc-v3l8eb-0"
-})(["cursor:pointer;.react-date-picker,.react-date-picker__wrapper{border-radius:6px;width:100%;.react-calendar{border-radius:15px;box-shadow:0 5px 25px rgba(0,0,0,0.1);overflow:hidden;width:100%;}}.react-date-picker__wrapper{background:white;box-shadow:0 0 0 transparent;border:none;padding:6px;}.react-date-picker__inputGroup{line-height:26px;}.react-date-picker__inputGroup__input,.react-date-picker__inputGroup__leadingZero{color:#5b5b5b;font-size:14px;font-weight:500;}.react-date-picker__inputGroup__leadingZero{margin-right:4px;}input.react-date-picker__inputGroup__input,.react-date-picker__inputGroup__leadingZero{border:1px solid transparent;border-radius:4px;color:#5b5b5b;height:initial;line-height:24px;padding:2px 6px 3px 6px;text-align:center;vertical-align:middle;&:hover{border:1px solid #bbb;}&:focus{box-shadow:0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06) !important;border:1px solid rgba(65,145,6,1);}}select.react-date-picker__inputGroup__input{height:27px;}.react-date-picker__inputGroup__divider{color:#aaa;}.react-date-picker__calendar{top:45px !important;z-index:100500;}.react-calendar__tile{border-radius:50px;&:hover{background:#f2f2f2;}}.react-calendar__tile--active,.react-calendar__tile--hasActive{background:rgba(65,145,63,1) !important;color:white;}"]);
+const Wrapper$3 = styled.div`
+  cursor: pointer;
+
+  .react-date-picker,
+  .react-date-picker__wrapper {
+    border-radius: 6px;
+    width: 100%;
+
+    .react-calendar {
+      border-radius: 15px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 100%;
+    }
+  }
+
+  .react-date-picker__wrapper {
+    background: white;
+    box-shadow: 0 0 0 transparent;
+    border: none;
+    padding: 6px;
+  }
+
+  .react-date-picker__inputGroup {
+    line-height: 26px;
+  }
+
+  .react-date-picker__inputGroup__input,
+  .react-date-picker__inputGroup__leadingZero {
+    color: #5b5b5b;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .react-date-picker__inputGroup__leadingZero {
+    margin-right: 4px;
+  }
+  input.react-date-picker__inputGroup__input,
+  .react-date-picker__inputGroup__leadingZero {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #5b5b5b;
+    height: initial;
+    line-height: 24px;
+    padding: 2px 6px 3px 6px;
+    text-align: center;
+    vertical-align: middle;
+
+    &:hover {
+      border: 1px solid #bbb;
+    }
+
+    &:focus {
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+        0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+      border: 1px solid rgba(65, 145, 6, 1);
+    }
+  }
+
+  select.react-date-picker__inputGroup__input {
+    height: 27px;
+  }
+
+  .react-date-picker__inputGroup__divider {
+    color: #aaa;
+  }
+
+  .react-date-picker__calendar {
+    top: 45px !important;
+    z-index: 100500;
+  }
+
+  .react-calendar__tile {
+    border-radius: 50px;
+
+    &:hover {
+      background: #f2f2f2;
+    }
+  }
+
+  .react-calendar__tile--active,
+  .react-calendar__tile--hasActive {
+    background: rgba(65, 145, 63, 1) !important;
+    color: white;
+  }
+`;
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
 var __assign$1 = function() {
   __assign$1 = Object.assign || function __assign2(t2) {
     for (var s2, i2 = 1, n2 = arguments.length; i2 < n2; i2++) {
@@ -20362,11 +20966,7 @@ function __spreadArray(to, from, pack) {
 var escapeRegExp = function(stringToGoIntoTheRegex) {
   return stringToGoIntoTheRegex.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
 };
-var abbrMap = {
-  k: 1e3,
-  m: 1e6,
-  b: 1e9
-};
+var abbrMap = { k: 1e3, m: 1e6, b: 1e9 };
 var parseAbbrValue = function(value, decimalSeparator) {
   if (decimalSeparator === void 0) {
     decimalSeparator = ".";
@@ -20406,7 +21006,10 @@ var cleanValue = function(_a2) {
   var _k = RegExp("(\\d+)-?" + escapeRegExp(prefix2)).exec(value) || [], prefixWithValue = _k[0], preValue = _k[1];
   var withoutPrefix = prefix2 ? prefixWithValue ? transformedValue.replace(prefixWithValue, "").concat(preValue) : transformedValue.replace(prefix2, "") : transformedValue;
   var withoutSeparators = removeSeparators(withoutPrefix, groupSeparator);
-  var withoutInvalidChars = removeInvalidChars(withoutSeparators, __spreadArray([groupSeparator, decimalSeparator], abbreviations));
+  var withoutInvalidChars = removeInvalidChars(withoutSeparators, __spreadArray([
+    groupSeparator,
+    decimalSeparator
+  ], abbreviations));
   var valueOnly = withoutInvalidChars;
   if (!disableAbbreviations) {
     if (abbreviations.some(function(letter) {
@@ -20547,33 +21150,20 @@ var defaultConfig = {
 };
 var getLocaleConfig = function(intlConfig) {
   var _a2 = intlConfig || {}, locale2 = _a2.locale, currency = _a2.currency;
-  var numberFormatter = locale2 ? new Intl.NumberFormat(locale2, currency ? {
-    currency,
-    style: "currency"
-  } : void 0) : new Intl.NumberFormat();
+  var numberFormatter = locale2 ? new Intl.NumberFormat(locale2, currency ? { currency, style: "currency" } : void 0) : new Intl.NumberFormat();
   return numberFormatter.formatToParts(1000.1).reduce(function(prev, curr, i2) {
     if (curr.type === "currency") {
       if (i2 === 0) {
-        return __assign$1(__assign$1({}, prev), {
-          currencySymbol: curr.value,
-          prefix: curr.value
-        });
+        return __assign$1(__assign$1({}, prev), { currencySymbol: curr.value, prefix: curr.value });
       } else {
-        return __assign$1(__assign$1({}, prev), {
-          currencySymbol: curr.value,
-          suffix: curr.value
-        });
+        return __assign$1(__assign$1({}, prev), { currencySymbol: curr.value, suffix: curr.value });
       }
     }
     if (curr.type === "group") {
-      return __assign$1(__assign$1({}, prev), {
-        groupSeparator: curr.value
-      });
+      return __assign$1(__assign$1({}, prev), { groupSeparator: curr.value });
     }
     if (curr.type === "decimal") {
-      return __assign$1(__assign$1({}, prev), {
-        decimalSeparator: curr.value
-      });
+      return __assign$1(__assign$1({}, prev), { decimalSeparator: curr.value });
     }
     return prev;
   }, defaultConfig);
@@ -20620,15 +21210,9 @@ var repositionCursor = function(_a2) {
       cursorPosition += 1;
     }
     modifiedValue = splitValue.join("");
-    return {
-      modifiedValue,
-      cursorPosition
-    };
+    return { modifiedValue, cursorPosition };
   }
-  return {
-    modifiedValue,
-    cursorPosition: selectionStart
-  };
+  return { modifiedValue, cursorPosition: selectionStart };
 };
 var CurrencyInput$1 = forwardRef(function(_a2, ref) {
   var _b = _a2.allowDecimals, allowDecimals = _b === void 0 ? true : _b, _c = _a2.allowNegativeValue, allowNegativeValue = _c === void 0 ? true : _c, id = _a2.id, name = _a2.name, className = _a2.className, customInput = _a2.customInput, decimalsLimit = _a2.decimalsLimit, defaultValue = _a2.defaultValue, _d = _a2.disabled, disabled = _d === void 0 ? false : _d, userMaxLength = _a2.maxLength, userValue = _a2.value, onValueChange = _a2.onValueChange, fixedDecimalLength = _a2.fixedDecimalLength, placeholder = _a2.placeholder, decimalScale = _a2.decimalScale, prefix2 = _a2.prefix, suffix2 = _a2.suffix, intlConfig = _a2.intlConfig, step = _a2.step, min = _a2.min, max = _a2.max, _e2 = _a2.disableGroupSeparators, disableGroupSeparators = _e2 === void 0 ? false : _e2, _f = _a2.disableAbbreviations, disableAbbreviations = _f === void 0 ? false : _f, _decimalSeparator = _a2.decimalSeparator, _groupSeparator = _a2.groupSeparator, onChange = _a2.onChange, onFocus = _a2.onFocus, onBlur = _a2.onBlur, onKeyDown = _a2.onKeyDown, onKeyUp = _a2.onKeyUp, transformRawValue = _a2.transformRawValue, props = __rest(_a2, ["allowDecimals", "allowNegativeValue", "id", "name", "className", "customInput", "decimalsLimit", "defaultValue", "disabled", "maxLength", "value", "onValueChange", "fixedDecimalLength", "placeholder", "decimalScale", "prefix", "suffix", "intlConfig", "step", "min", "max", "disableGroupSeparators", "disableAbbreviations", "decimalSeparator", "groupSeparator", "onChange", "onFocus", "onBlur", "onKeyDown", "onKeyUp", "transformRawValue"]);
@@ -20664,13 +21248,7 @@ var CurrencyInput$1 = forwardRef(function(_a2, ref) {
     prefix: prefix2 || localeConfig.prefix,
     transformRawValue
   };
-  var formattedStateValue = defaultValue !== void 0 && defaultValue !== null ? formatValue$1(__assign$1(__assign$1({}, formatValueOptions), {
-    decimalScale,
-    value: String(defaultValue)
-  })) : userValue !== void 0 && userValue !== null ? formatValue$1(__assign$1(__assign$1({}, formatValueOptions), {
-    decimalScale,
-    value: String(userValue)
-  })) : "";
+  var formattedStateValue = defaultValue !== void 0 && defaultValue !== null ? formatValue$1(__assign$1(__assign$1({}, formatValueOptions), { decimalScale, value: String(defaultValue) })) : userValue !== void 0 && userValue !== null ? formatValue$1(__assign$1(__assign$1({}, formatValueOptions), { decimalScale, value: String(userValue) })) : "";
   var _g = useState(formattedStateValue), stateValue = _g[0], setStateValue = _g[1];
   var _h = useState(false), dirty = _h[0], setDirty = _h[1];
   var _j = useState(0), cursor = _j[0], setCursor = _j[1];
@@ -20686,25 +21264,17 @@ var CurrencyInput$1 = forwardRef(function(_a2, ref) {
       stateValue,
       groupSeparator
     }), modifiedValue = _a3.modifiedValue, cursorPosition = _a3.cursorPosition;
-    var stringValue = cleanValue(__assign$1({
-      value: modifiedValue
-    }, cleanValueOptions));
+    var stringValue = cleanValue(__assign$1({ value: modifiedValue }, cleanValueOptions));
     if (userMaxLength && stringValue.replace(/-/g, "").length > userMaxLength) {
       return;
     }
     if (stringValue === "" || stringValue === "-" || stringValue === decimalSeparator) {
-      onValueChange && onValueChange(void 0, name, {
-        float: null,
-        formatted: "",
-        value: ""
-      });
+      onValueChange && onValueChange(void 0, name, { float: null, formatted: "", value: "" });
       setStateValue(stringValue);
       return;
     }
     var numberValue = parseFloat(stringValue.replace(decimalSeparator, "."));
-    var formattedValue = formatValue$1(__assign$1({
-      value: stringValue
-    }, formatValueOptions));
+    var formattedValue = formatValue$1(__assign$1({ value: stringValue }, formatValueOptions));
     if (cursorPosition !== void 0 && cursorPosition !== null) {
       var newCursor = cursorPosition + (formattedValue.length - value.length);
       newCursor = newCursor <= 0 ? prefix2 ? prefix2.length : 0 : newCursor;
@@ -20732,9 +21302,7 @@ var CurrencyInput$1 = forwardRef(function(_a2, ref) {
   };
   var handleOnBlur = function(event) {
     var value = event.target.value;
-    var valueOnly = cleanValue(__assign$1({
-      value
-    }, cleanValueOptions));
+    var valueOnly = cleanValue(__assign$1({ value }, cleanValueOptions));
     if (valueOnly === "-" || !valueOnly) {
       setStateValue("");
       onBlur && onBlur(event);
@@ -20743,9 +21311,7 @@ var CurrencyInput$1 = forwardRef(function(_a2, ref) {
     var fixedDecimals = fixedDecimalValue(valueOnly, decimalSeparator, fixedDecimalLength);
     var newValue = padTrimValue(fixedDecimals, decimalSeparator, decimalScale !== void 0 ? decimalScale : fixedDecimalLength);
     var numberValue = parseFloat(newValue.replace(decimalSeparator, "."));
-    var formattedValue = formatValue$1(__assign$1(__assign$1({}, formatValueOptions), {
-      value: newValue
-    }));
+    var formattedValue = formatValue$1(__assign$1(__assign$1({}, formatValueOptions), { value: newValue }));
     if (onValueChange) {
       onValueChange(newValue, name, {
         float: numberValue,
@@ -20762,9 +21328,7 @@ var CurrencyInput$1 = forwardRef(function(_a2, ref) {
     if (step && (key === "ArrowUp" || key === "ArrowDown")) {
       event.preventDefault();
       setCursor(stateValue.length);
-      var currentValue = parseFloat(userValue !== void 0 && userValue !== null ? String(userValue).replace(decimalSeparator, ".") : cleanValue(__assign$1({
-        value: stateValue
-      }, cleanValueOptions))) || 0;
+      var currentValue = parseFloat(userValue !== void 0 && userValue !== null ? String(userValue).replace(decimalSeparator, ".") : cleanValue(__assign$1({ value: stateValue }, cleanValueOptions))) || 0;
       var newValue = key === "ArrowUp" ? currentValue + step : currentValue - step;
       if (min !== void 0 && newValue < min) {
         return;
@@ -20780,10 +21344,7 @@ var CurrencyInput$1 = forwardRef(function(_a2, ref) {
   var handleOnKeyUp = function(event) {
     var key = event.key, selectionStart = event.currentTarget.selectionStart;
     if (key !== "ArrowUp" && key !== "ArrowDown" && stateValue !== "-") {
-      var suffix_1 = getSuffix(stateValue, {
-        groupSeparator,
-        decimalSeparator
-      });
+      var suffix_1 = getSuffix(stateValue, { groupSeparator, decimalSeparator });
       if (suffix_1 && selectionStart && selectionStart > stateValue.length - suffix_1.length) {
         if (inputRef && typeof inputRef === "object" && inputRef.current) {
           var newCursor = stateValue.length - suffix_1.length;
@@ -20800,10 +21361,7 @@ var CurrencyInput$1 = forwardRef(function(_a2, ref) {
   }, [stateValue, cursor, inputRef, dirty, changeCount]);
   var getRenderValue = function() {
     if (userValue !== void 0 && userValue !== null && stateValue !== "-" && (!decimalSeparator || stateValue !== decimalSeparator)) {
-      return formatValue$1(__assign$1(__assign$1({}, formatValueOptions), {
-        decimalScale: dirty ? void 0 : decimalScale,
-        value: String(userValue)
-      }));
+      return formatValue$1(__assign$1(__assign$1({}, formatValueOptions), { decimalScale: dirty ? void 0 : decimalScale, value: String(userValue) }));
     }
     return stateValue;
   };
@@ -20825,9 +21383,9 @@ var CurrencyInput$1 = forwardRef(function(_a2, ref) {
   }, props);
   if (customInput) {
     var CustomInput = customInput;
-    return /* @__PURE__ */ jsx(CustomInput, __spreadValues({}, __assign$1({}, inputProps)));
+    return React$1.createElement(CustomInput, __assign$1({}, inputProps));
   }
-  return /* @__PURE__ */ jsx("input", __spreadValues({}, __assign$1({}, inputProps)));
+  return React$1.createElement("input", __assign$1({}, inputProps));
 });
 CurrencyInput$1.displayName = "CurrencyInput";
 const CurrencyAmountInput = memo(({
@@ -20846,9 +21404,7 @@ const CurrencyAmountInput = memo(({
   size = Size.Default,
   textColor = TextColors.InputControl,
   textWeight = TextWeight.Default,
-  validation = {
-    [Condition.IsCurrency]: true
-  }
+  validation = { [Condition.IsCurrency]: true }
 }) => {
   const [value, setValue] = useState(defaultValue != null ? defaultValue : 0);
   const [focused, setFocused] = useState(false);
@@ -20875,47 +21431,42 @@ const CurrencyAmountInput = memo(({
         });
     }
   }, [value]);
-  return /* @__PURE__ */ jsxs(Fragment, {
-    children: [(label || problems.length > 0) && /* @__PURE__ */ jsx(InputLabel, {
-      error: problems,
-      children: label
-    }), /* @__PURE__ */ jsxs(InputContainer, {
-      backgroundColor,
-      border,
-      boxShadow,
-      className: `${className} currency-amount-input`,
-      onClick: () => {
-        if (inputRef.current)
-          inputRef.current.focus();
-      },
-      error: problems,
-      focused,
-      children: [/* @__PURE__ */ jsx(Label, {
-        marginLeft: Amount.Less,
-        marginRight: Amount.Least,
-        textColor: !value ? TextColors.InputPlaceholder : textColor,
-        children: "$"
-      }), /* @__PURE__ */ jsx(CurrencyInput$1, {
-        className: "currency-input",
-        onBlur: () => setFocused(false),
-        onFocus: () => setFocused(true),
-        name,
-        defaultValue: value ? Number(value).toFixed(2) : 0,
-        onValueChange: (v2) => {
-          setValueChanged(true);
-          setValue(Number.parseInt(v2 != null ? v2 : "0"));
-        },
-        style: {
-          backgroundColor: "transparent",
-          border: "none",
-          color: !value ? `rgb(${TextColors.InputPlaceholder})` : `rgb(${TextColors.InputControl})`,
-          flexGrow: 1,
-          fontWeight: textWeight,
-          lineHeight: size
-        }
-      })]
-    })]
-  });
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, (label || problems.length > 0) && /* @__PURE__ */ React.createElement(InputLabel, {
+    error: problems
+  }, label), /* @__PURE__ */ React.createElement(InputContainer, {
+    backgroundColor,
+    border,
+    boxShadow,
+    className: `${className} currency-amount-input`,
+    onClick: () => {
+      if (inputRef.current)
+        inputRef.current.focus();
+    },
+    error: problems,
+    focused
+  }, /* @__PURE__ */ React.createElement(Label, {
+    marginLeft: Amount.Less,
+    marginRight: Amount.Least,
+    textColor: !value ? TextColors.InputPlaceholder : textColor
+  }, "$"), /* @__PURE__ */ React.createElement(CurrencyInput$1, {
+    className: "currency-input",
+    onBlur: () => setFocused(false),
+    onFocus: () => setFocused(true),
+    name,
+    defaultValue: value ? Number(value).toFixed(2) : 0,
+    onValueChange: (v2) => {
+      setValueChanged(true);
+      setValue(Number.parseInt(v2 != null ? v2 : "0"));
+    },
+    style: {
+      backgroundColor: "transparent",
+      border: "none",
+      color: !value ? `rgb(${TextColors.InputPlaceholder})` : `rgb(${TextColors.InputControl})`,
+      flexGrow: 1,
+      fontWeight: textWeight,
+      lineHeight: size
+    }
+  })));
 });
 function _extends() {
   _extends = Object.assign || function(target) {
@@ -21061,14 +21612,8 @@ const NavigationLink = memo((_S) => {
   const [updatedBackgroundColor, setUpdatedBackgroundColor] = useState(backgroundColor);
   const [updatedTextColor, setUpdatedTextColor] = useState(textColor);
   const resolved = useResolvedPath$1(to);
-  const exactMatch = useMatch({
-    end: true,
-    path: resolved.pathname
-  });
-  useMatch({
-    end: false,
-    path: resolved.pathname
-  });
+  const exactMatch = useMatch({ end: true, path: resolved.pathname });
+  useMatch({ end: false, path: resolved.pathname });
   const location = useLocation$1();
   const setTextColor = () => {
     if (focused && (focus == null ? void 0 : focus.textColor)) {
@@ -21096,7 +21641,7 @@ const NavigationLink = memo((_S) => {
     setTextColor();
     setBackgroundColor();
   }, [hovered, focused, exactMatch]);
-  return /* @__PURE__ */ jsx(NavLink$1, {
+  return /* @__PURE__ */ React.createElement(NavLink$1, {
     className: `${className} navigation-link`,
     onBlur: () => setFocused(false),
     onFocus: () => setFocused(true),
@@ -21107,60 +21652,55 @@ const NavigationLink = memo((_S) => {
       display: inline ? "inline-flex" : "flex",
       lineHeight: inline ? Size.Smaller : lineHeight,
       textDecoration: "none"
+    }
+  }, /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
+    alignContent,
+    alignItems: menu ? Align.Stretch : alignItems,
+    active,
+    as,
+    backgroundColor: updatedBackgroundColor,
+    borderRadius,
+    boxShadow: {
+      blurRadius: 8,
+      color: backgroundColor,
+      offsetX: 0,
+      offsetY: 3,
+      opacity: 35,
+      spreadRadius: 3
     },
-    children: /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
-      alignContent,
-      alignItems: menu ? Align.Stretch : alignItems,
-      active,
-      as,
-      backgroundColor: updatedBackgroundColor,
-      borderRadius,
-      boxShadow: {
-        blurRadius: 8,
-        color: backgroundColor,
-        offsetX: 0,
-        offsetY: 3,
-        opacity: 35,
-        spreadRadius: 3
-      },
-      className: `${className} ${exactMatch ? activeClassName : ""} link`,
-      focus,
-      focused,
-      grow,
-      hover,
-      margin,
-      marginBottom,
-      marginLeft,
-      marginRight,
-      marginTop,
-      onClick,
-      onMouseEnter: (e2) => {
-        setHovered(true);
-        if (onMouseEnter)
-          onMouseEnter(e2);
-      },
-      onMouseLeave: (e2) => {
-        setHovered(false);
-        if (onMouseLeave)
-          onMouseLeave(e2);
-      },
-      orientation: menu ? Orientation.Vertical : orientation,
-      padding,
-      paddingBottom: menu ? paddingLeft : paddingBottom,
-      paddingLeft,
-      paddingRight,
-      paddingTop
-    }, props), {
-      children: label ? /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
-        lineHeight,
-        textColor: updatedTextColor,
-        textSize,
-        textWeight
-      }, props), {
-        children: label
-      })) : children
-    }))
-  });
+    className: `${className} ${exactMatch ? activeClassName : ""} link`,
+    focus,
+    focused,
+    grow,
+    hover,
+    margin,
+    marginBottom,
+    marginLeft,
+    marginRight,
+    marginTop,
+    onClick,
+    onMouseEnter: (e2) => {
+      setHovered(true);
+      if (onMouseEnter)
+        onMouseEnter(e2);
+    },
+    onMouseLeave: (e2) => {
+      setHovered(false);
+      if (onMouseLeave)
+        onMouseLeave(e2);
+    },
+    orientation: menu ? Orientation.Vertical : orientation,
+    padding,
+    paddingBottom: menu ? paddingLeft : paddingBottom,
+    paddingLeft,
+    paddingRight,
+    paddingTop
+  }, props), label ? /* @__PURE__ */ React.createElement(Label, __spreadValues({
+    lineHeight,
+    textColor: updatedTextColor,
+    textSize,
+    textWeight
+  }, props), label) : children));
 });
 const MenuItem = memo((_U) => {
   var _V = _U, {
@@ -21200,40 +21740,16 @@ const MenuItem = memo((_U) => {
   ]);
   var _a2;
   const [hovered, setHovered] = useState(false);
-  const itemTitle = title ? /* @__PURE__ */ jsx(Label, {
-    textSize: TextSize.Smaller,
-    children: title
-  }) : null;
+  const itemTitle = title ? /* @__PURE__ */ React.createElement(Label, {
+    textSize: TextSize.Smaller
+  }, title) : null;
   if (to) {
-    return /* @__PURE__ */ jsxs(Container$h, {
-      children: [itemTitle, /* @__PURE__ */ jsx(NavigationLink, {
-        active,
-        borderRadius: Amount.Least,
-        backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent,
-        focus,
-        hover,
-        icon,
-        lineHeight,
-        onClick: (e2) => {
-          e2.preventDefault();
-          e2.stopPropagation();
-          if (onClick)
-            onClick(e2);
-        },
-        paddingLeft: Amount.Less,
-        paddingRight: Amount.Less,
-        textColor: (_a2 = props.textColor) != null ? _a2 : TextColors.Default,
-        to,
-        children: component != null ? component : label
-      })]
-    });
-  }
-  return /* @__PURE__ */ jsxs(Container$h, {
-    children: [itemTitle, /* @__PURE__ */ jsx(Button$1, {
-      alignContent: Align.Left,
+    return /* @__PURE__ */ React.createElement(Container$h, null, itemTitle, /* @__PURE__ */ React.createElement(NavigationLink, {
+      active,
       borderRadius: Amount.Least,
       backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent,
-      form: "null",
+      focus,
+      hover,
       icon,
       lineHeight,
       onClick: (e2) => {
@@ -21242,14 +21758,31 @@ const MenuItem = memo((_U) => {
         if (onClick)
           onClick(e2);
       },
-      onMouseEnter: () => setHovered(true),
-      onMouseLeave: () => setHovered(false),
       paddingLeft: Amount.Less,
       paddingRight: Amount.Less,
-      type: hovered ? ButtonType.Primary : ButtonType.Transparent,
-      children: component != null ? component : label
-    })]
-  });
+      textColor: (_a2 = props.textColor) != null ? _a2 : TextColors.Default,
+      to
+    }, component != null ? component : label));
+  }
+  return /* @__PURE__ */ React.createElement(Container$h, null, itemTitle, /* @__PURE__ */ React.createElement(Button$1, {
+    alignContent: Align.Left,
+    borderRadius: Amount.Least,
+    backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent,
+    form: "null",
+    icon,
+    lineHeight,
+    onClick: (e2) => {
+      e2.preventDefault();
+      e2.stopPropagation();
+      if (onClick)
+        onClick(e2);
+    },
+    onMouseEnter: () => setHovered(true),
+    onMouseLeave: () => setHovered(false),
+    paddingLeft: Amount.Less,
+    paddingRight: Amount.Less,
+    type: hovered ? ButtonType.Primary : ButtonType.Transparent
+  }, component != null ? component : label));
 });
 const Menu = memo((_W) => {
   var _X = _W, {
@@ -21306,7 +21839,7 @@ const Menu = memo((_W) => {
     "minWidth",
     "padding"
   ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     as,
     backgroundColor,
     boxShadow,
@@ -21317,25 +21850,39 @@ const Menu = memo((_W) => {
     orientation,
     overflow: Overflow.ScrollVertical,
     padding
-  }, props), {
-    children: menu && menu.map((item, key) => {
-      return /* @__PURE__ */ jsx(MenuItem, __spreadValues(__spreadValues({
-        onClick: () => {
-          if (onItemClick) {
-            onItemClick(item);
-          }
+  }, props), menu && menu.map((item, key) => {
+    return /* @__PURE__ */ React.createElement(MenuItem, __spreadValues(__spreadValues({
+      key,
+      onClick: () => {
+        if (onItemClick) {
+          onItemClick(item);
         }
-      }, menuItemProps), item), key);
-    })
+      }
+    }, menuItemProps), item));
   }));
 });
-const Wrapper$2 = styled.button.withConfig({
-  displayName: "Wrapper",
-  componentId: "sc-f4sg9u-0"
-})(["", ";z-index:", ";", ";"], InputContainerStyles, (props) => {
+const Wrapper$2 = styled.button`
+  ${InputContainerStyles};
+
+  z-index: ${(props) => {
   var _a2;
   return props.menuVisible ? getDepthZIndex((_a2 = props.depth) != null ? _a2 : Depth.Surface) + 3 : "auto";
-}, (props) => props.focused && props.menuVisible && css(["border-bottom-color:transparent;border-bottom-left-radius:0;border-bottom-right-radius:0;&:before{border-radius:calc(", " + 3px) calc(", " + 3px) 0 0;border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom:none;}"], Amount.Least, Amount.Least));
+}};
+
+  ${(props) => props.focused && props.menuVisible && css`
+      border-bottom-color: transparent;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+
+      &:before {
+        border-radius: calc(${Amount.Least} + 3px) calc(${Amount.Least} + 3px) 0
+          0;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: none;
+      }
+    `};
+`;
 const DropdownControl = memo((_Y) => {
   var _Z = _Y, {
     backgroundColor = BackgroundColors.DropdownMenu,
@@ -21379,7 +21926,7 @@ const DropdownControl = memo((_Y) => {
     "textColor"
   ]);
   var _a2;
-  return /* @__PURE__ */ jsxs(Wrapper$2, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Wrapper$2, __spreadValues({
     as: "button",
     alignContent: Align.Stretch,
     alignItems: Align.Center,
@@ -21401,48 +21948,44 @@ const DropdownControl = memo((_Y) => {
     onFocus,
     onClick,
     ref
-  }, props), {
-    children: [component ? component : /* @__PURE__ */ jsx(Label, {
-      alignItems: Align.Center,
-      alignContent: Align.Stretch,
-      grow: true,
-      icon,
-      overflow: Overflow.Hidden,
-      marginLeft: Amount.None,
-      marginRight: Amount.None,
-      paddingLeft: Amount.Less,
-      paddingRight: Amount.Least,
-      size,
-      textColor: !label && placeholder ? TextColors.InputPlaceholder : textColor,
-      textOverflow: TextOverflow.Ellipsis,
-      whiteSpace: WhiteSpace.NoWrap,
-      width: "auto",
-      children: (_a2 = label != null ? label : placeholder) != null ? _a2 : ""
-    }), /* @__PURE__ */ jsx(Container$h, {
-      alignItems: Align.Center,
-      alignContent: Align.Center,
-      border: {
-        left: {
-          color: BorderColors.InputControl,
-          style: BorderStyle.Solid,
-          width: 1
-        }
-      },
-      className: "down-arrow",
-      grow: false,
-      height: Size.Small,
-      width: size,
-      children: /* @__PURE__ */ jsx(Icon, {
-        color: menuVisible ? ForegroundColors.Lightest : ForegroundColors.Lighter,
-        name: BasicIcons.CaretDownArrow,
-        className: menuVisible ? "up" : "down",
-        size: Size.Smallest,
-        transform: {
-          rotate: menuVisible ? -180 : 0
-        }
-      })
-    })]
-  }));
+  }, props), component ? component : /* @__PURE__ */ React.createElement(Label, {
+    alignItems: Align.Center,
+    alignContent: Align.Stretch,
+    grow: true,
+    icon,
+    overflow: Overflow.Hidden,
+    marginLeft: Amount.None,
+    marginRight: Amount.None,
+    paddingLeft: Amount.Less,
+    paddingRight: Amount.Least,
+    size,
+    textColor: !label && placeholder ? TextColors.InputPlaceholder : textColor,
+    textOverflow: TextOverflow.Ellipsis,
+    whiteSpace: WhiteSpace.NoWrap,
+    width: "auto"
+  }, (_a2 = label != null ? label : placeholder) != null ? _a2 : ""), /* @__PURE__ */ React.createElement(Container$h, {
+    alignItems: Align.Center,
+    alignContent: Align.Center,
+    border: {
+      left: {
+        color: BorderColors.InputControl,
+        style: BorderStyle.Solid,
+        width: 1
+      }
+    },
+    className: "down-arrow",
+    grow: false,
+    height: Size.Small,
+    width: size
+  }, /* @__PURE__ */ React.createElement(Icon, {
+    color: menuVisible ? ForegroundColors.Lightest : ForegroundColors.Lighter,
+    name: BasicIcons.CaretDownArrow,
+    className: menuVisible ? "up" : "down",
+    size: Size.Smallest,
+    transform: {
+      rotate: menuVisible ? -180 : 0
+    }
+  })));
 });
 const DropdownPanel = memo((__) => {
   var _$ = __, {
@@ -21472,7 +22015,7 @@ const DropdownPanel = memo((__) => {
     "orientation",
     "visible"
   ]);
-  return /* @__PURE__ */ jsx(Wrapper$1, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Wrapper$1, __spreadValues({
     alignItems,
     backgroundColor,
     border,
@@ -21482,14 +22025,26 @@ const DropdownPanel = memo((__) => {
     focused,
     orientation,
     visible
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
-const Wrapper$1 = styled.div.withConfig({
-  displayName: "Wrapper",
-  componentId: "sc-lb5hvp-0"
-})(["", ";", ";", ";", ";border-radius:", ";left:0;opacity:", ";position:absolute;right:0;top:calc(100% - 3px);&:before{border-radius:0 0 calc(", " + 3px) calc(", " + 3px);border-top-color:transparent;}"], LayoutStyles, AppearanceStyles, FocusedStyles, VisibilityStyles, (props) => `0 0 ${props.borderRadius} ${props.borderRadius}`, (props) => props.visible ? 1 : 0, Amount.Least, Amount.Least);
+const Wrapper$1 = styled.div`
+  ${LayoutStyles};
+  ${AppearanceStyles};
+  ${FocusedStyles};
+  ${VisibilityStyles};
+
+  border-radius: ${(props) => `0 0 ${props.borderRadius} ${props.borderRadius}`}; //flex-basis: 115px;
+  left: 0;
+  opacity: ${(props) => props.visible ? 1 : 0};
+  position: absolute;
+  right: 0;
+  top: calc(100% - 3px);
+
+  &:before {
+    border-radius: 0 0 calc(${Amount.Least} + 3px) calc(${Amount.Least} + 3px);
+    border-top-color: transparent;
+  }
+`;
 const DropdownInput = memo((_aa) => {
   var _ba = _aa, {
     backgroundColor = BackgroundColors.DropdownMenu,
@@ -21557,78 +22112,67 @@ const DropdownInput = memo((_aa) => {
     var _a2, _b;
     setItem((_b = (_a2 = menu == null ? void 0 : menu.find((i2) => i2.value === defaultValue)) != null ? _a2 : item) != null ? _b : void 0);
   }, [defaultValue]);
-  return /* @__PURE__ */ jsxs(Fragment, {
-    children: [(label || problems.length > 0) && /* @__PURE__ */ jsx(InputLabel, {
-      error: problems,
-      children: label
-    }), /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
-      boxShadow: menuVisible ? DepthShadow.Higher : DepthShadow.Surface,
-      borderRadius,
-      className: `${className} dropdown-input`,
-      depth: menuVisible ? Depth.Higher : Depth.Surface,
-      grow: false,
-      minWidth,
-      orientation: Orientation.Vertical,
-      onMouseLeave: () => setMenuVisible(false),
-      height: size
-    }, props), {
-      children: [/* @__PURE__ */ jsx(DropdownControl, {
-        backgroundColor,
-        border,
-        boxShadow: DepthShadow.Low,
-        component: item == null ? void 0 : item.component,
-        depth: Depth.High,
-        error: problems,
-        focused,
-        icon: item == null ? void 0 : item.icon,
-        label: item == null ? void 0 : item.label,
-        menuVisible,
-        name,
-        onBlur: () => {
-          setFocused(false);
-        },
-        onFocus: () => setFocused(true),
-        onClick: () => setMenuVisible(!menuVisible),
-        placeholder,
-        size
-      }), /* @__PURE__ */ jsx(DropdownPanel, {
-        backgroundColor,
-        borderRadius,
-        focused,
-        padding,
-        visible: menuVisible,
-        children: /* @__PURE__ */ jsx(Menu, {
-          backgroundColor: BackgroundColors.Light,
-          borderRadius,
-          menu,
-          onItemClick: (i2) => {
-            setValueChanged(true);
-            setItem(i2);
-            setMenuVisible(false);
-          },
-          padding
-        })
-      })]
-    }))]
-  });
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, (label || problems.length > 0) && /* @__PURE__ */ React.createElement(InputLabel, {
+    error: problems
+  }, label), /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
+    boxShadow: menuVisible ? DepthShadow.Higher : DepthShadow.Surface,
+    borderRadius,
+    className: `${className} dropdown-input`,
+    depth: menuVisible ? Depth.Higher : Depth.Surface,
+    grow: false,
+    minWidth,
+    orientation: Orientation.Vertical,
+    onMouseLeave: () => setMenuVisible(false),
+    height: size
+  }, props), /* @__PURE__ */ React.createElement(DropdownControl, {
+    backgroundColor,
+    border,
+    boxShadow: DepthShadow.Low,
+    component: item == null ? void 0 : item.component,
+    depth: Depth.High,
+    error: problems,
+    focused,
+    icon: item == null ? void 0 : item.icon,
+    label: item == null ? void 0 : item.label,
+    menuVisible,
+    name,
+    onBlur: () => {
+      setFocused(false);
+    },
+    onFocus: () => setFocused(true),
+    onClick: () => setMenuVisible(!menuVisible),
+    placeholder,
+    size
+  }), /* @__PURE__ */ React.createElement(DropdownPanel, {
+    backgroundColor,
+    borderRadius,
+    focused,
+    padding,
+    visible: menuVisible
+  }, /* @__PURE__ */ React.createElement(Menu, {
+    backgroundColor: BackgroundColors.Light,
+    borderRadius,
+    menu,
+    onItemClick: (i2) => {
+      setValueChanged(true);
+      setItem(i2);
+      setMenuVisible(false);
+    },
+    padding
+  }))));
 });
 const CountryInput = memo((_ca) => {
   var _da = _ca, {
     defaultValue = CountryCode.UnitedStates,
     menu = Object.entries(Countries.getAlpha2Codes()).map(([alpha2, alpha3]) => ({
       icon: {
-        component: /* @__PURE__ */ jsx(ReactCountryFlag, {
+        component: /* @__PURE__ */ React.createElement(ReactCountryFlag, {
           svg: true,
           countryCode: alpha2,
-          style: {
-            height: Size.Smaller,
-            width: "auto"
-          }
+          style: { height: Size.Smaller, width: "auto" }
         })
       },
-      label: Countries.getName(alpha2, "en", {
-        select: "official"
-      }),
+      label: Countries.getName(alpha2, "en", { select: "official" }),
       value: alpha2
     })),
     name = "country",
@@ -21641,7 +22185,7 @@ const CountryInput = memo((_ca) => {
     "onChange",
     "placeholder"
   ]);
-  return /* @__PURE__ */ jsx(DropdownInput, __spreadValues({
+  return /* @__PURE__ */ React.createElement(DropdownInput, __spreadValues({
     defaultValue,
     menu,
     name,
@@ -21669,21 +22213,20 @@ const CurrencyInput = memo((_ea) => {
     "onChange",
     "placeholder"
   ]);
-  const currencies = [{
-    icon: {
-      component: /* @__PURE__ */ jsx(ReactCountryFlag, {
-        svg: true,
-        countryCode: CountryCode.UnitedStates,
-        style: {
-          height: Size.Smaller,
-          width: "auto"
-        }
-      })
-    },
-    label: "US Dollar (USD)",
-    value: CurrencyCode.UnitedStatesDollar
-  }];
-  return /* @__PURE__ */ jsx(DropdownInput, __spreadValues({
+  const currencies = [
+    {
+      icon: {
+        component: /* @__PURE__ */ React.createElement(ReactCountryFlag, {
+          svg: true,
+          countryCode: CountryCode.UnitedStates,
+          style: { height: Size.Smaller, width: "auto" }
+        })
+      },
+      label: "US Dollar (USD)",
+      value: CurrencyCode.UnitedStatesDollar
+    }
+  ];
+  return /* @__PURE__ */ React.createElement(DropdownInput, __spreadValues({
     defaultValue,
     menu: currencies,
     name,
@@ -21711,21 +22254,20 @@ const LanguageInput = memo((_ga) => {
     "onChange",
     "placeholder"
   ]);
-  const languages = [{
-    icon: {
-      component: /* @__PURE__ */ jsx(ReactCountryFlag, {
-        svg: true,
-        countryCode: CountryCode.UnitedStates,
-        style: {
-          height: Size.Smaller,
-          width: "auto"
-        }
-      })
-    },
-    label: "English (US)",
-    value: LanguageCode.English
-  }];
-  return /* @__PURE__ */ jsx(DropdownInput, __spreadValues({
+  const languages = [
+    {
+      icon: {
+        component: /* @__PURE__ */ React.createElement(ReactCountryFlag, {
+          svg: true,
+          countryCode: CountryCode.UnitedStates,
+          style: { height: Size.Smaller, width: "auto" }
+        })
+      },
+      label: "English (US)",
+      value: LanguageCode.English
+    }
+  ];
+  return /* @__PURE__ */ React.createElement(DropdownInput, __spreadValues({
     defaultValue,
     menu: languages,
     name,
@@ -21733,6 +22275,10 @@ const LanguageInput = memo((_ga) => {
     placeholder
   }, props));
 });
+var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+function commonjsRequire(path) {
+  throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
+}
 var propTypes = { exports: {} };
 var ReactPropTypesSecret$1 = "SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED";
 var ReactPropTypesSecret_1 = ReactPropTypesSecret$1;
@@ -22558,12 +23104,7 @@ function _objectSpread(target) {
 }
 function _defineProperty$1(obj, key, value) {
   if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
+    Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
     obj[key] = value;
   }
@@ -22609,11 +23150,9 @@ var Dropzone = /* @__PURE__ */ forwardRef(function(_ref, ref) {
       open
     };
   }, [open]);
-  return /* @__PURE__ */ jsx(Fragment, {
-    children: children(_objectSpread(_objectSpread({}, props), {}, {
-      open
-    }))
-  });
+  return /* @__PURE__ */ React$1.createElement(Fragment, null, children(_objectSpread(_objectSpread({}, props), {}, {
+    open
+  })));
 });
 Dropzone.displayName = "Dropzone";
 var defaultProps = {
@@ -23038,7 +23577,7 @@ const CloseButton = memo((_ia) => {
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const iconHoverColor = hovered ? ForegroundColors.PrimaryContrast : iconColor;
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     alignContent: Align.Center,
     alignItems: Align.Center,
     as: "button",
@@ -23056,12 +23595,10 @@ const CloseButton = memo((_ia) => {
     onMouseEnter: () => setHovered(true),
     onMouseLeave: () => setHovered(false),
     width: size
-  }, props), {
-    children: /* @__PURE__ */ jsx(Icon, {
-      color: iconHoverColor,
-      name: BasicIcons.Close,
-      size: Size.Smallest
-    })
+  }, props), /* @__PURE__ */ React.createElement(Icon, {
+    color: iconHoverColor,
+    name: BasicIcons.Close,
+    size: Size.Smallest
   }));
 });
 const ImageInput = memo(({
@@ -23092,7 +23629,13 @@ const ImageInput = memo(({
   const [previewImages, setPreviewImages] = useState([]);
   const [problems, setProblems] = useState([]);
   const validateFileType = (file) => {
-    const validTypes = ["image/jpeg", "image/jpg", "image/png", "image/gif", "image/x-icon"];
+    const validTypes = [
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/gif",
+      "image/x-icon"
+    ];
     if (!validTypes.includes(file.type)) {
       return false;
     }
@@ -23126,12 +23669,7 @@ const ImageInput = memo(({
       }
     }
   }, []);
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    open
-  } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     maxFiles: maxImages,
     noClick: true,
     onDrop,
@@ -23144,9 +23682,7 @@ const ImageInput = memo(({
     }
     const objectUrls = images.map((image) => {
       if ("size" in image && image.size > 0) {
-        return __spreadValues({
-          url: URL.createObjectURL(image)
-        }, image);
+        return __spreadValues({ url: URL.createObjectURL(image) }, image);
       }
       return image;
     });
@@ -23161,114 +23697,90 @@ const ImageInput = memo(({
   }, [images]);
   useEffect(() => {
     if (onChange)
-      onChange({
-        value: images
-      });
+      onChange({ value: images });
   }, [previewImages]);
   const dragLabel = `Drag ${maxImages > 1 ? "images" : "an image"} here...`;
   const buttonLabel = `Browse files`;
-  const _a2 = getInputProps(), {
-    ref: inputRef
-  } = _a2, inputProps = __objRest(_a2, [
-    "ref"
-  ]);
-  const _b = getRootProps(), {
-    ref: rootRef
-  } = _b, rootProps = __objRest(_b, [
-    "ref"
-  ]);
-  return /* @__PURE__ */ jsxs(Fragment, {
-    children: [(label || problems.length > 0) && /* @__PURE__ */ jsxs(InputLabel, {
-      error: problems,
-      children: [label, maxImages > 1 && ` (${previewImages.length} of ${maxImages})`]
-    }), /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
-      alignItems: Align.Center,
-      alignContent: Align.Center,
-      backgroundColor: isDragActive ? BackgroundColors.Darker : backgroundColor,
-      border: __spreadProps(__spreadValues({}, border), {
-        color: problems && Array.isArray(problems) && problems.length > 0 ? BorderColors.Error : border == null ? void 0 : border.color
-      }),
-      borderRadius,
-      boxShadow: DepthShadow.Low,
-      grow: false,
-      padding
-    }, rootProps), {
-      children: /* @__PURE__ */ jsx(Container$h, {
-        grow: false,
-        children: /* @__PURE__ */ jsxs(Container$h, {
-          alignItems: Align.Center,
-          alignContent: Align.Center,
-          grow: false,
-          padding: Amount.Default,
-          paddingTop: Amount.Least,
-          children: [/* @__PURE__ */ jsx("input", __spreadValues({
-            name
-          }, inputProps)), errorMessage && /* @__PURE__ */ jsx(ErrorLabel, {
-            children: errorMessage
-          }), previewImages && previewImages.length > 0 ? /* @__PURE__ */ jsx(Container$h, {
-            alignItems: Align.Stretch,
-            grow: false,
-            marginBottom: Amount.Less,
-            children: /* @__PURE__ */ jsx(Container$h, {
-              alignItems: Align.Stretch,
-              alignContent: Align.Center,
-              backgroundColor: BackgroundColors.Lightest,
-              borderRadius: Amount.Least,
-              lineWrap: true,
-              opacity: isDragActive ? 50 : 100,
-              orientation: Orientation.Horizontal,
-              paddingBottom: Amount.Least,
-              paddingLeft: Amount.Least,
-              paddingRight: Amount.Least,
-              paddingTop: Amount.Least,
-              children: previewImages.map((image, index) => /* @__PURE__ */ jsxs(Container$h, {
-                grow: false,
-                marginBottom: Amount.Least,
-                marginLeft: Amount.Least,
-                marginRight: Amount.Least,
-                marginTop: Amount.Least,
-                children: [/* @__PURE__ */ jsx(CloseButton, {
-                  onClick: () => {
-                    setImages((files) => files == null ? void 0 : files.filter((e2, i2) => i2 !== index));
-                  },
-                  position: Position.Absolute,
-                  right: -7,
-                  size: Size.Small,
-                  top: -7
-                }), /* @__PURE__ */ jsx(Image, {
-                  alt: "preview",
-                  borderRadius: Amount.Least,
-                  fadeIn: true,
-                  height: 70,
-                  width: 70,
-                  url: image.url
-                }, index)]
-              }, index))
-            })
-          }) : /* @__PURE__ */ jsx(Icon, {
-            marginBottom: Amount.Less,
-            name: (_c = icon == null ? void 0 : icon.name) != null ? _c : BasicIcons.FileUpload,
-            size: (_d = icon == null ? void 0 : icon.size) != null ? _d : Size.Default
-          }), /* @__PURE__ */ jsxs(Container$h, {
-            alignItems: Align.Center,
-            orientation: Orientation.Vertical,
-            children: [/* @__PURE__ */ jsx(Label, {
-              marginBottom: Amount.Least,
-              size: Size.Small,
-              children: dragLabel
-            }), button && /* @__PURE__ */ jsx(Button$1, __spreadProps(__spreadValues({
-              form: "null",
-              onClick: open,
-              size: (_e2 = button.size) != null ? _e2 : Size.Small,
-              type: (_f = button.type) != null ? _f : ButtonType.Primary
-            }, button), {
-              children: buttonLabel
-            }))]
-          })]
-        })
-      })
-    }))]
-  });
+  const _a2 = getInputProps(), { ref: inputRef } = _a2, inputProps = __objRest(_a2, ["ref"]);
+  const _b = getRootProps(), { ref: rootRef } = _b, rootProps = __objRest(_b, ["ref"]);
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, (label || problems.length > 0) && /* @__PURE__ */ React.createElement(InputLabel, {
+    error: problems
+  }, label, maxImages > 1 && ` (${previewImages.length} of ${maxImages})`), /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
+    alignItems: Align.Center,
+    alignContent: Align.Center,
+    backgroundColor: isDragActive ? BackgroundColors.Darker : backgroundColor,
+    border: __spreadProps(__spreadValues({}, border), {
+      color: problems && Array.isArray(problems) && problems.length > 0 ? BorderColors.Error : border == null ? void 0 : border.color
+    }),
+    borderRadius,
+    boxShadow: DepthShadow.Low,
+    grow: false,
+    padding
+  }, rootProps), /* @__PURE__ */ React.createElement(Container$h, {
+    grow: false
+  }, /* @__PURE__ */ React.createElement(Container$h, {
+    alignItems: Align.Center,
+    alignContent: Align.Center,
+    grow: false,
+    padding: Amount.Default,
+    paddingTop: Amount.Least
+  }, /* @__PURE__ */ React.createElement("input", __spreadValues({
+    name
+  }, inputProps)), errorMessage && /* @__PURE__ */ React.createElement(ErrorLabel, null, errorMessage), previewImages && previewImages.length > 0 ? /* @__PURE__ */ React.createElement(Container$h, {
+    alignItems: Align.Stretch,
+    grow: false,
+    marginBottom: Amount.Less
+  }, /* @__PURE__ */ React.createElement(Container$h, {
+    alignItems: Align.Stretch,
+    alignContent: Align.Center,
+    backgroundColor: BackgroundColors.Lightest,
+    borderRadius: Amount.Least,
+    lineWrap: true,
+    opacity: isDragActive ? 50 : 100,
+    orientation: Orientation.Horizontal,
+    paddingBottom: Amount.Least,
+    paddingLeft: Amount.Least,
+    paddingRight: Amount.Least,
+    paddingTop: Amount.Least
+  }, previewImages.map((image, index) => /* @__PURE__ */ React.createElement(Container$h, {
+    grow: false,
+    key: index,
+    marginBottom: Amount.Least,
+    marginLeft: Amount.Least,
+    marginRight: Amount.Least,
+    marginTop: Amount.Least
+  }, /* @__PURE__ */ React.createElement(CloseButton, {
+    onClick: () => {
+      setImages((files) => files == null ? void 0 : files.filter((e2, i2) => i2 !== index));
+    },
+    position: Position.Absolute,
+    right: -7,
+    size: Size.Small,
+    top: -7
+  }), /* @__PURE__ */ React.createElement(Image, {
+    alt: "preview",
+    borderRadius: Amount.Least,
+    fadeIn: true,
+    key: index,
+    height: 70,
+    width: 70,
+    url: image.url
+  }))))) : /* @__PURE__ */ React.createElement(Icon, {
+    marginBottom: Amount.Less,
+    name: (_c = icon == null ? void 0 : icon.name) != null ? _c : BasicIcons.FileUpload,
+    size: (_d = icon == null ? void 0 : icon.size) != null ? _d : Size.Default
+  }), /* @__PURE__ */ React.createElement(Container$h, {
+    alignItems: Align.Center,
+    orientation: Orientation.Vertical
+  }, /* @__PURE__ */ React.createElement(Label, {
+    marginBottom: Amount.Least,
+    size: Size.Small
+  }, dragLabel), button && /* @__PURE__ */ React.createElement(Button$1, __spreadValues({
+    form: "null",
+    onClick: open,
+    size: (_e2 = button.size) != null ? _e2 : Size.Small,
+    type: (_f = button.type) != null ? _f : ButtonType.Primary
+  }, button), buttonLabel))))));
 });
 const NumberInput = memo((_ka) => {
   var _la = _ka, {
@@ -23341,62 +23853,86 @@ const NumberInput = memo((_ka) => {
         });
     }
   }, [value]);
-  return /* @__PURE__ */ jsxs(Fragment, {
-    children: [/* @__PURE__ */ jsxs(Container$h, {
-      orientation: Orientation.Horizontal,
-      children: [label && /* @__PURE__ */ jsx(InputLabel, {
-        children: label
-      }), problems.length > 0 ? /* @__PURE__ */ jsx(ErrorLabel, {
-        alignContent: Align.Right,
-        children: (_a2 = problems[0]) == null ? void 0 : _a2.message.short
-      }) : null]
-    }), /* @__PURE__ */ jsxs(InputContainer, __spreadProps(__spreadValues({
-      backgroundColor,
-      border,
-      boxShadow,
-      cursor,
-      className: `${className} number-input`,
-      error: problems,
-      focused,
-      onClick: () => {
-        var _a3;
-        (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
-      },
-      orientation: Orientation.Horizontal,
-      size
-    }, props), {
-      children: [icon && /* @__PURE__ */ jsx(Fragment, {
-        children: icon
-      }), /* @__PURE__ */ jsx(Input$2, {
-        defaultValue,
-        hidden,
-        name,
-        onBlur: () => setFocused(false),
-        onChange: (e2) => {
-          setValueChanged(true);
-          setValue(e2.target.value);
-        },
-        onFocus: () => setFocused(true),
-        lineHeight: size,
-        placeholder,
-        onKeyPress: (e2) => e2.key,
-        ref: inputRef,
-        textColor,
-        type: "number",
-        value
-      }), inProgress && /* @__PURE__ */ jsx(Container$h, {
-        grow: false,
-        children: /* @__PURE__ */ jsx(ProgressSpinner, {
-          size: Size.Small
-        })
-      })]
-    }))]
-  });
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Container$h, {
+    orientation: Orientation.Horizontal
+  }, label && /* @__PURE__ */ React.createElement(InputLabel, null, label), problems.length > 0 ? /* @__PURE__ */ React.createElement(ErrorLabel, {
+    alignContent: Align.Right
+  }, (_a2 = problems[0]) == null ? void 0 : _a2.message.short) : null), /* @__PURE__ */ React.createElement(InputContainer, __spreadValues({
+    backgroundColor,
+    border,
+    boxShadow,
+    cursor,
+    className: `${className} number-input`,
+    error: problems,
+    focused,
+    onClick: () => {
+      var _a3;
+      (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
+    },
+    orientation: Orientation.Horizontal,
+    size
+  }, props), icon && /* @__PURE__ */ React.createElement(React.Fragment, null, icon), /* @__PURE__ */ React.createElement(Input$2, {
+    defaultValue,
+    hidden,
+    name,
+    onBlur: () => setFocused(false),
+    onChange: (e2) => {
+      setValueChanged(true);
+      setValue(e2.target.value);
+    },
+    onFocus: () => setFocused(true),
+    lineHeight: size,
+    placeholder,
+    onKeyPress: (e2) => e2.key,
+    ref: inputRef,
+    textColor,
+    type: "number",
+    value
+  }), inProgress && /* @__PURE__ */ React.createElement(Container$h, {
+    grow: false
+  }, /* @__PURE__ */ React.createElement(ProgressSpinner, {
+    size: Size.Small
+  }))));
 });
-const Input$2 = styled.input.withConfig({
-  displayName: "Input",
-  componentId: "sc-wxjtmr-0"
-})(["", ";", ";background:transparent;border:none;outline:none;padding:0 ", ";width:100%;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}&::-ms-clear{display:none;width:0;height:0;}&::-ms-reveal{display:none;width:0;height:0;}&::-webkit-search-decoration,&::-webkit-search-cancel-button,&::-webkit-search-results-button,&::-webkit-search-results-decoration{display:none;}"], FocusedStyles, TextStyles, Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
+const Input$2 = styled.input`
+  ${FocusedStyles};
+  ${TextStyles};
+
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0 ${Amount.Less};
+  width: 100%;
+
+  &::placeholder {
+    color: rgb(${TextColors.InputPlaceholder});
+  }
+  &::-webkit-input-placeholder {
+    color: rgb(${TextColors.InputPlaceholder});
+  }
+  &::-moz-placeholder {
+    color: rgb(${TextColors.InputPlaceholder});
+  }
+
+  /* clears the ‘X’ from Internet Explorer */
+  &::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  &::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  /* clears the ‘X’ from Chrome */
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
+`;
 const SSNInput = memo((_ma) => {
   var _na = _ma, {
     as,
@@ -23422,9 +23958,7 @@ const SSNInput = memo((_ma) => {
     size = Size.Default,
     textColor = TextColors.InputControl,
     textWeight = TextWeight.Default,
-    validation = {
-      [Condition.IsSSN]: true
-    }
+    validation = { [Condition.IsSSN]: true }
   } = _na, props = __objRest(_na, [
     "as",
     "backgroundColor",
@@ -23448,7 +23982,11 @@ const SSNInput = memo((_ma) => {
     "validation"
   ]);
   var _a2;
-  const [value, setValue] = useState(defaultValue ? [Number.parseInt((defaultValue == null ? void 0 : defaultValue.toString().slice(0, 3)) || "000"), Number.parseInt((defaultValue == null ? void 0 : defaultValue.toString().slice(3, 5)) || "00"), Number.parseInt((defaultValue == null ? void 0 : defaultValue.toString().slice(5)) || "0000")] : []);
+  const [value, setValue] = useState(defaultValue ? [
+    Number.parseInt((defaultValue == null ? void 0 : defaultValue.toString().slice(0, 3)) || "000"),
+    Number.parseInt((defaultValue == null ? void 0 : defaultValue.toString().slice(3, 5)) || "00"),
+    Number.parseInt((defaultValue == null ? void 0 : defaultValue.toString().slice(5)) || "0000")
+  ] : []);
   const [valueChanged, setValueChanged] = useState(false);
   const [focused, setFocused] = useState(false);
   const [problems, setProblems] = useState([]);
@@ -23468,140 +24006,149 @@ const SSNInput = memo((_ma) => {
         });
     }
   }, [value]);
-  return /* @__PURE__ */ jsxs(Fragment, {
-    children: [/* @__PURE__ */ jsxs(Container$h, {
-      orientation: Orientation.Horizontal,
-      children: [label && /* @__PURE__ */ jsx(InputLabel, {
-        children: label
-      }), problems.length > 0 ? /* @__PURE__ */ jsx(ErrorLabel, {
-        alignContent: Align.Right,
-        children: (_a2 = problems[0]) == null ? void 0 : _a2.message.short
-      }) : null]
-    }), /* @__PURE__ */ jsxs(InputContainer, __spreadProps(__spreadValues({
-      backgroundColor,
-      border,
-      boxShadow,
-      cursor,
-      className: `${className} ssn-input`,
-      error: problems,
-      focused,
-      onClick: () => {
-        if (!focused && firstInputRef.current) {
-          firstInputRef.current.focus();
-        }
-      },
-      orientation: Orientation.Horizontal,
-      paddingLeft: Amount.Least,
-      paddingRight: Amount.Least,
-      size
-    }, props), {
-      children: [icon && /* @__PURE__ */ jsx(Fragment, {
-        children: icon
-      }), /* @__PURE__ */ jsx(Input$1, {
-        alignText: Align.Center,
-        hidden,
-        max: 999,
-        min: 100,
-        name,
-        onBlur: () => setFocused(false),
-        onChange: (e2) => {
-          var _a3;
-          setValueChanged(true);
-          setValue([e2.target.value, value[1], value[2]]);
-          if (e2.target.value.length === 3 && secondInputRef.current) {
-            (_a3 = secondInputRef.current) == null ? void 0 : _a3.focus();
-          }
-        },
-        onFocus: () => setFocused(true),
-        lineHeight: size,
-        placeholder: "123",
-        onKeyPress: (e2) => {
-          if (e2.target.value.length === 3) {
-            e2.preventDefault();
-          }
-        },
-        ref: firstInputRef,
-        textColor,
-        type: "number"
-      }), /* @__PURE__ */ jsx(Label, {
-        textSize: TextSize.Larger,
-        children: "-"
-      }), /* @__PURE__ */ jsx(Input$1, {
-        alignText: Align.Center,
-        hidden,
-        max: 99,
-        min: 1,
-        name,
-        onBlur: () => setFocused(false),
-        onChange: (e2) => {
-          var _a3;
-          setValueChanged(true);
-          setValue([value[0], e2.target.value, value[2]]);
-          if (e2.target.value.length === 2) {
-            (_a3 = thirdInputRef.current) == null ? void 0 : _a3.focus();
-          }
-        },
-        onFocus: () => setFocused(true),
-        lineHeight: size,
-        placeholder: "45",
-        onKeyPress: (e2) => {
-          if (e2.target.value.length === 2) {
-            e2.preventDefault();
-          }
-        },
-        onKeyDown: (e2) => {
-          var _a3;
-          if (e2.key === "Backspace" && e2.target.value.length === 0) {
-            (_a3 = firstInputRef.current) == null ? void 0 : _a3.focus();
-          }
-        },
-        ref: secondInputRef,
-        textColor,
-        type: "number"
-      }), /* @__PURE__ */ jsx(Label, {
-        textSize: TextSize.Larger,
-        children: "-"
-      }), /* @__PURE__ */ jsx(Input$1, {
-        alignText: Align.Center,
-        hidden,
-        max: 9999,
-        min: 1e3,
-        name,
-        onBlur: () => setFocused(false),
-        onChange: (e2) => {
-          setValueChanged(true);
-          setValue([value[0], value[1], e2.target.value]);
-        },
-        onFocus: () => setFocused(true),
-        lineHeight: size,
-        placeholder: "6789",
-        onKeyPress: (e2) => {
-          if (e2.target.value.length === 4) {
-            e2.preventDefault();
-          }
-        },
-        onKeyDown: (e2) => {
-          var _a3;
-          if (e2.key === "Backspace" && e2.target.value.length === 0) {
-            (_a3 = secondInputRef.current) == null ? void 0 : _a3.focus();
-          }
-        },
-        ref: thirdInputRef,
-        textColor,
-        type: "number"
-      }), inProgress && /* @__PURE__ */ jsx(Container$h, {
-        grow: false,
-        children: /* @__PURE__ */ jsx(ProgressSpinner, {
-          size: Size.Small
-        })
-      })]
-    }))]
-  });
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Container$h, {
+    orientation: Orientation.Horizontal
+  }, label && /* @__PURE__ */ React.createElement(InputLabel, null, label), problems.length > 0 ? /* @__PURE__ */ React.createElement(ErrorLabel, {
+    alignContent: Align.Right
+  }, (_a2 = problems[0]) == null ? void 0 : _a2.message.short) : null), /* @__PURE__ */ React.createElement(InputContainer, __spreadValues({
+    backgroundColor,
+    border,
+    boxShadow,
+    cursor,
+    className: `${className} ssn-input`,
+    error: problems,
+    focused,
+    onClick: () => {
+      if (!focused && firstInputRef.current) {
+        firstInputRef.current.focus();
+      }
+    },
+    orientation: Orientation.Horizontal,
+    paddingLeft: Amount.Least,
+    paddingRight: Amount.Least,
+    size
+  }, props), icon && /* @__PURE__ */ React.createElement(React.Fragment, null, icon), /* @__PURE__ */ React.createElement(Input$1, {
+    alignText: Align.Center,
+    hidden,
+    max: 999,
+    min: 100,
+    name,
+    onBlur: () => setFocused(false),
+    onChange: (e2) => {
+      var _a3;
+      setValueChanged(true);
+      setValue([e2.target.value, value[1], value[2]]);
+      if (e2.target.value.length === 3 && secondInputRef.current) {
+        (_a3 = secondInputRef.current) == null ? void 0 : _a3.focus();
+      }
+    },
+    onFocus: () => setFocused(true),
+    lineHeight: size,
+    placeholder: "123",
+    onKeyPress: (e2) => {
+      if (e2.target.value.length === 3) {
+        e2.preventDefault();
+      }
+    },
+    ref: firstInputRef,
+    textColor,
+    type: "number"
+  }), /* @__PURE__ */ React.createElement(Label, {
+    textSize: TextSize.Larger
+  }, "-"), /* @__PURE__ */ React.createElement(Input$1, {
+    alignText: Align.Center,
+    hidden,
+    max: 99,
+    min: 1,
+    name,
+    onBlur: () => setFocused(false),
+    onChange: (e2) => {
+      var _a3;
+      setValueChanged(true);
+      setValue([value[0], e2.target.value, value[2]]);
+      if (e2.target.value.length === 2) {
+        (_a3 = thirdInputRef.current) == null ? void 0 : _a3.focus();
+      }
+    },
+    onFocus: () => setFocused(true),
+    lineHeight: size,
+    placeholder: "45",
+    onKeyPress: (e2) => {
+      if (e2.target.value.length === 2) {
+        e2.preventDefault();
+      }
+    },
+    onKeyDown: (e2) => {
+      var _a3;
+      if (e2.key === "Backspace" && e2.target.value.length === 0) {
+        (_a3 = firstInputRef.current) == null ? void 0 : _a3.focus();
+      }
+    },
+    ref: secondInputRef,
+    textColor,
+    type: "number"
+  }), /* @__PURE__ */ React.createElement(Label, {
+    textSize: TextSize.Larger
+  }, "-"), /* @__PURE__ */ React.createElement(Input$1, {
+    alignText: Align.Center,
+    hidden,
+    max: 9999,
+    min: 1e3,
+    name,
+    onBlur: () => setFocused(false),
+    onChange: (e2) => {
+      setValueChanged(true);
+      setValue([value[0], value[1], e2.target.value]);
+    },
+    onFocus: () => setFocused(true),
+    lineHeight: size,
+    placeholder: "6789",
+    onKeyPress: (e2) => {
+      if (e2.target.value.length === 4) {
+        e2.preventDefault();
+      }
+    },
+    onKeyDown: (e2) => {
+      var _a3;
+      if (e2.key === "Backspace" && e2.target.value.length === 0) {
+        (_a3 = secondInputRef.current) == null ? void 0 : _a3.focus();
+      }
+    },
+    ref: thirdInputRef,
+    textColor,
+    type: "number"
+  }), inProgress && /* @__PURE__ */ React.createElement(Container$h, {
+    grow: false
+  }, /* @__PURE__ */ React.createElement(ProgressSpinner, {
+    size: Size.Small
+  }))));
 });
-const Input$1 = styled.input.withConfig({
-  displayName: "Input",
-  componentId: "sc-1kwp1c5-0"
-})(["", ";", ";background:transparent;border:none;outline:none;padding:0 ", ";-moz-appearance:textfield;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}&::-webkit-outer-spin-button,&::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}"], FocusedStyles, TextStyles, Amount.Least, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
+const Input$1 = styled.input`
+  ${FocusedStyles};
+  ${TextStyles};
+
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0 ${Amount.Least};
+  -moz-appearance: textfield;
+
+  &::placeholder {
+    color: rgb(${TextColors.InputPlaceholder});
+  }
+  &::-webkit-input-placeholder {
+    color: rgb(${TextColors.InputPlaceholder});
+  }
+  &::-moz-placeholder {
+    color: rgb(${TextColors.InputPlaceholder});
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`;
 const LongTextInput = memo(({
   backgroundColor = BackgroundColors.InputControl,
   border = {
@@ -23656,61 +24203,81 @@ const LongTextInput = memo(({
     var _a3;
     setValue((_a3 = defaultValue != null ? defaultValue : value) != null ? _a3 : "");
   }, [defaultValue]);
-  return /* @__PURE__ */ jsxs(Fragment, {
-    children: [/* @__PURE__ */ jsxs(Container$h, {
-      orientation: Orientation.Horizontal,
-      children: [label && /* @__PURE__ */ jsx(InputLabel, {
-        children: label
-      }), problems.length > 0 ? /* @__PURE__ */ jsx(ErrorLabel, {
-        alignContent: Align.Right,
-        children: (_a2 = problems[0]) == null ? void 0 : _a2.message.short
-      }) : null]
-    }), /* @__PURE__ */ jsxs(InputContainer, {
-      backgroundColor,
-      border,
-      boxShadow,
-      className: `${className} text-input`,
-      error: problems,
-      focused,
-      flat,
-      height: size,
-      onClick: () => {
-        var _a3;
-        (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
-      },
-      orientation: Orientation.Horizontal,
-      padding: Amount.Least,
-      paddingLeft: Amount.Less,
-      paddingRight: Amount.Least,
-      size,
-      children: [/* @__PURE__ */ jsx(Input, {
-        hidden,
-        name,
-        onBlur: () => setFocused(false),
-        onChange: (e2) => {
-          setValueChanged(true);
-          setValue(prefix + e2.target.value + suffix);
-        },
-        onFocus: () => setFocused(true),
-        placeholder,
-        ref: inputRef,
-        lineHeight,
-        textColor,
-        value,
-        spellCheck
-      }), inProgress && /* @__PURE__ */ jsx(Container$h, {
-        grow: false,
-        children: /* @__PURE__ */ jsx(ProgressSpinner, {
-          size: Size.Small
-        })
-      })]
-    })]
-  });
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement(Container$h, {
+    orientation: Orientation.Horizontal
+  }, label && /* @__PURE__ */ React.createElement(InputLabel, null, label), problems.length > 0 ? /* @__PURE__ */ React.createElement(ErrorLabel, {
+    alignContent: Align.Right
+  }, (_a2 = problems[0]) == null ? void 0 : _a2.message.short) : null), /* @__PURE__ */ React.createElement(InputContainer, {
+    backgroundColor,
+    border,
+    boxShadow,
+    className: `${className} text-input`,
+    error: problems,
+    focused,
+    flat,
+    height: size,
+    onClick: () => {
+      var _a3;
+      (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
+    },
+    orientation: Orientation.Horizontal,
+    padding: Amount.Least,
+    paddingLeft: Amount.Less,
+    paddingRight: Amount.Least,
+    size
+  }, /* @__PURE__ */ React.createElement(Input, {
+    hidden,
+    name,
+    onBlur: () => setFocused(false),
+    onChange: (e2) => {
+      setValueChanged(true);
+      setValue(prefix + e2.target.value + suffix);
+    },
+    onFocus: () => setFocused(true),
+    placeholder,
+    ref: inputRef,
+    lineHeight,
+    textColor,
+    value,
+    spellCheck
+  }), inProgress && /* @__PURE__ */ React.createElement(Container$h, {
+    grow: false
+  }, /* @__PURE__ */ React.createElement(ProgressSpinner, {
+    size: Size.Small
+  }))));
 });
-const Input = styled.textarea.withConfig({
-  displayName: "Input",
-  componentId: "sc-a7ikmp-0"
-})(["", ";background:transparent;border:none;width:100%;&::-ms-clear{display:none;width:0;height:0;}&::-ms-reveal{display:none;width:0;height:0;}&::-webkit-search-decoration,&::-webkit-search-cancel-button,&::-webkit-search-results-button,&::-webkit-search-results-decoration{display:none;}"], TextStyles);
+const Input = styled.textarea`
+  ${TextStyles};
+
+  background: transparent;
+  border: none;
+  width: 100%;
+
+  // &::placeholder,
+  // &::-webkit-input-placeholder,
+  // &::-moz-placeholder {
+  //   );
+  // }
+
+  /* clears the ‘X’ from Internet Explorer */
+  &::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  &::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  /* clears the ‘X’ from Chrome */
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
+`;
 const PasswordInput = memo((_oa) => {
   var _pa = _oa, {
     autoComplete = AutoComplete.CurrentPassword,
@@ -23770,150 +24337,137 @@ const PasswordInput = memo((_oa) => {
         });
     }
   }, [password, confirmPassword]);
-  return /* @__PURE__ */ jsxs(Fragment, {
-    children: [showPasswordStrength && /* @__PURE__ */ jsx(PasswordStrengthBar, {
-      className: "password-strength-label",
-      password
-    }), /* @__PURE__ */ jsx(TextInput, __spreadValues({
-      autoComplete: showConfirmPassword ? AutoComplete.NewPassword : AutoComplete.CurrentPassword,
-      label,
-      name,
-      onChange: ({
-        problems,
-        validated,
-        value
-      }) => {
-        setPassword(value);
-      },
-      inputType: TextInputType.Password,
-      validation
-    }, props)), showConfirmPassword && /* @__PURE__ */ jsxs(InputRow, {
-      marginTop: Amount.More,
-      marginBottom: Amount.None,
-      children: [/* @__PURE__ */ jsx(InputLabel, {
-        children: confirmPasswordLabel
-      }), /* @__PURE__ */ jsx(TextInput, {
-        autoComplete,
-        inputType: TextInputType.Password,
-        name: "confirmPassword",
-        onChange: ({
-          value
-        }) => {
-          setConfirmPassword(value);
-        },
-        validation: {
-          [Condition.IsEqual]: password
-        }
-      })]
-    })]
-  });
+  return /* @__PURE__ */ React.createElement(React.Fragment, null, showPasswordStrength && /* @__PURE__ */ React.createElement(PasswordStrengthBar, {
+    className: "password-strength-label",
+    password
+  }), /* @__PURE__ */ React.createElement(TextInput, __spreadValues({
+    autoComplete: showConfirmPassword ? AutoComplete.NewPassword : AutoComplete.CurrentPassword,
+    label,
+    name,
+    onChange: ({ problems, validated, value }) => {
+      setPassword(value);
+    },
+    inputType: TextInputType.Password,
+    validation
+  }, props)), showConfirmPassword && /* @__PURE__ */ React.createElement(InputRow, {
+    marginTop: Amount.More,
+    marginBottom: Amount.None
+  }, /* @__PURE__ */ React.createElement(InputLabel, null, confirmPasswordLabel), /* @__PURE__ */ React.createElement(TextInput, {
+    autoComplete,
+    inputType: TextInputType.Password,
+    name: "confirmPassword",
+    onChange: ({ value }) => {
+      setConfirmPassword(value);
+    },
+    validation: {
+      [Condition.IsEqual]: password
+    }
+  })));
 });
 function getInputElementByFieldType(field) {
   if (field.system)
     return null;
   switch (field.type) {
     case Primitives.Boolean:
-      return /* @__PURE__ */ jsx(ToggleInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(ToggleInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.CountryCode:
-      return /* @__PURE__ */ jsx(CountryInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(CountryInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.CurrencyAmount:
-      return /* @__PURE__ */ jsx(CurrencyAmountInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(CurrencyAmountInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.CurrencyCode:
-      return /* @__PURE__ */ jsx(CurrencyInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(CurrencyInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.Date:
-      return /* @__PURE__ */ jsx(DateInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(DateInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.DateTime:
-      return /* @__PURE__ */ jsx(DateTimeInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(DateTimeInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.EmailAddress:
-      return /* @__PURE__ */ jsx(EmailAddressInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(EmailAddressInput, __spreadValues({
         autoComplete: field.autoComplete,
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.Image:
-      return /* @__PURE__ */ jsx(ImageInput, __spreadValues(__spreadValues({
+      return /* @__PURE__ */ React.createElement(ImageInput, __spreadValues(__spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field.properties), field));
     case Primitives.JSON:
-      return /* @__PURE__ */ jsx(JSONEditor, __spreadValues({
+      return /* @__PURE__ */ React.createElement(JSONEditor, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.LanguageCode:
-      return /* @__PURE__ */ jsx(LanguageInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(LanguageInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.LongText:
-      return /* @__PURE__ */ jsx(LongTextInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(LongTextInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.Menu:
-      return /* @__PURE__ */ jsx(DropdownInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(DropdownInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.Number:
-      return /* @__PURE__ */ jsx(NumberInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(NumberInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.Password:
-      return /* @__PURE__ */ jsx(PasswordInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(PasswordInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.PhoneNumber:
-      return /* @__PURE__ */ jsx(PhoneNumberInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(PhoneNumberInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.SSN:
-      return /* @__PURE__ */ jsx(SSNInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(SSNInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.String:
-      return /* @__PURE__ */ jsx(TextInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(TextInput, __spreadValues({
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     case Primitives.UUID:
-      return /* @__PURE__ */ jsx(TextInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(TextInput, __spreadValues({
         defaultValue: field.value,
         hidden: true,
         onChange: field.onChange
       }, field));
     case Primitives.VerificationCode:
-      return /* @__PURE__ */ jsx(VerificationCodeInput, __spreadValues({
+      return /* @__PURE__ */ React.createElement(VerificationCodeInput, __spreadValues({
         autoComplete: AutoComplete.OneTimeCode,
         defaultValue: field.value,
         onChange: field.onChange
       }, field));
     default:
-      return /* @__PURE__ */ jsxs(Fragment, {
-        children: [field.type, " is not supported at this time."]
-      });
+      return /* @__PURE__ */ React.createElement(React.Fragment, null, field.type, " is not supported at this time.");
   }
 }
 const FormFields = memo((_qa) => {
@@ -23929,12 +24483,18 @@ const FormFields = memo((_qa) => {
   var _a2;
   const [fieldValues, setFieldValues] = useState(Object.fromEntries(fields.map((field) => {
     var _a3, _b;
-    return [field.name, __spreadProps(__spreadValues({}, field), {
-      value: (_b = (_a3 = entity == null ? void 0 : entity[field.name]) != null ? _a3 : field.value) != null ? _b : field.defaultValue
-    })];
+    return [
+      field.name,
+      __spreadProps(__spreadValues({}, field), {
+        value: (_b = (_a3 = entity == null ? void 0 : entity[field.name]) != null ? _a3 : field.value) != null ? _b : field.defaultValue
+      })
+    ];
   })));
   useEffect(() => {
-    setFieldValues(Object.fromEntries(fields.map((field) => [field.name, __spreadValues(__spreadValues({}, field), fieldValues[field.name])])));
+    setFieldValues(Object.fromEntries(fields.map((field) => [
+      field.name,
+      __spreadValues(__spreadValues({}, field), fieldValues[field.name])
+    ])));
   }, [entity, fields]);
   useEffect(() => {
     if (onChange)
@@ -23943,40 +24503,37 @@ const FormFields = memo((_qa) => {
   useEffect(() => {
     setFieldValues(Object.fromEntries(fields.map((field) => {
       var _a3, _b;
-      return [field.name, __spreadProps(__spreadValues({}, field), {
-        value: (_b = (_a3 = entity == null ? void 0 : entity[field.name]) != null ? _a3 : field.value) != null ? _b : field.defaultValue
-      })];
+      return [
+        field.name,
+        __spreadProps(__spreadValues({}, field), {
+          value: (_b = (_a3 = entity == null ? void 0 : entity[field.name]) != null ? _a3 : field.value) != null ? _b : field.defaultValue
+        })
+      ];
     })));
   }, [entity]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     className: "form-fields",
     borderRadius: Amount.More,
     orientation: Orientation.Vertical
-  }, props), {
-    children: (_a2 = Object.entries(fieldValues)) == null ? void 0 : _a2.map(([fieldName, field]) => {
-      if (field.name === "created_date" || field.name === "updated_date")
-        return null;
-      return /* @__PURE__ */ jsx(InputRow, {
-        style: {
-          height: field.type === Primitives.UUID ? 0 : void 0,
-          marginBottom: field.type === Primitives.UUID ? 0 : void 0,
-          visibility: field.type === Primitives.UUID ? "hidden" : "visible"
-        },
-        children: getInputElementByFieldType(__spreadProps(__spreadValues({}, field), {
-          onChange: ({
-            problems,
-            value,
-            validated
-          }) => setFieldValues(__spreadProps(__spreadValues({}, fieldValues), {
-            [field.name]: __spreadProps(__spreadValues({}, field), {
-              problems,
-              validated,
-              value
-            })
-          }))
-        }))
-      }, field.name);
-    })
+  }, props), (_a2 = Object.entries(fieldValues)) == null ? void 0 : _a2.map(([fieldName, field]) => {
+    if (field.name === "created_date" || field.name === "updated_date")
+      return null;
+    return /* @__PURE__ */ React.createElement(InputRow, {
+      key: field.name,
+      style: {
+        height: field.type === Primitives.UUID ? 0 : void 0,
+        marginBottom: field.type === Primitives.UUID ? 0 : void 0,
+        visibility: field.type === Primitives.UUID ? "hidden" : "visible"
+      }
+    }, getInputElementByFieldType(__spreadProps(__spreadValues({}, field), {
+      onChange: ({
+        problems,
+        value,
+        validated
+      }) => setFieldValues(__spreadProps(__spreadValues({}, fieldValues), {
+        [field.name]: __spreadProps(__spreadValues({}, field), { problems, validated, value })
+      }))
+    })));
   }));
 });
 const Form = memo((_sa) => {
@@ -24030,13 +24587,9 @@ const Form = memo((_sa) => {
     const validated = requiresValidation && Object.values(fieldValues).filter((field) => field.validation && !field.validated).length === 0;
     setValidated(validated);
     if (onChange)
-      onChange({
-        fields: fieldValues,
-        problems,
-        validated
-      });
+      onChange({ fields: fieldValues, problems, validated });
   }, [fieldValues]);
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     as: "form",
     borderRadius: Amount.More,
     className: `${className} form`,
@@ -24044,42 +24597,37 @@ const Form = memo((_sa) => {
     orientation: Orientation.Vertical,
     name,
     padding
-  }, props), {
-    children: [fields && /* @__PURE__ */ jsx(FormFields, {
-      entity,
-      fields,
-      onChange: (ff) => setFieldValues(ff)
-    }), submitButton && /* @__PURE__ */ jsx(FormActions, {
-      children: /* @__PURE__ */ jsx(Button$1, {
-        disabled: requiresValidation && !isValidated || inProgress,
-        form: name,
-        fullWidth: submitButtonProps.fullWidth,
-        onClick: (e2) => {
-          e2.preventDefault();
-          if (onSubmit)
-            onSubmit({
-              fields: fieldValues,
-              problems: validationProblems,
-              validated: isValidated,
-              values: Object.entries(fieldValues).map(([fieldName, field]) => ({
-                [fieldName]: field.value
-              }))
-            });
-        },
-        onKeyPress: (e2) => {
-          if (e2.key === "Enter" && onSubmit)
-            onSubmit({
-              fields: fieldValues,
-              problems: validationProblems,
-              validated: isValidated
-            });
-        },
-        size: (_a2 = submitButtonProps.size) != null ? _a2 : Size.Large,
-        type: (_b = submitButtonProps.type) != null ? _b : ButtonType.Primary,
-        children: submitButton.label
-      })
-    })]
-  }));
+  }, props), fields && /* @__PURE__ */ React.createElement(FormFields, {
+    entity,
+    fields,
+    onChange: (ff) => setFieldValues(ff)
+  }), submitButton && /* @__PURE__ */ React.createElement(FormActions, null, /* @__PURE__ */ React.createElement(Button$1, {
+    disabled: requiresValidation && !isValidated || inProgress,
+    form: name,
+    fullWidth: submitButtonProps.fullWidth,
+    onClick: (e2) => {
+      e2.preventDefault();
+      if (onSubmit)
+        onSubmit({
+          fields: fieldValues,
+          problems: validationProblems,
+          validated: isValidated,
+          values: Object.entries(fieldValues).map(([fieldName, field]) => ({
+            [fieldName]: field.value
+          }))
+        });
+    },
+    onKeyPress: (e2) => {
+      if (e2.key === "Enter" && onSubmit)
+        onSubmit({
+          fields: fieldValues,
+          problems: validationProblems,
+          validated: isValidated
+        });
+    },
+    size: (_a2 = submitButtonProps.size) != null ? _a2 : Size.Large,
+    type: (_b = submitButtonProps.type) != null ? _b : ButtonType.Primary
+  }, submitButton.label)));
 });
 const Link$1 = memo((_ua) => {
   var _va = _ua, {
@@ -24103,7 +24651,7 @@ const Link$1 = memo((_ua) => {
   ]);
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
-  return /* @__PURE__ */ jsx(Link$2, {
+  return /* @__PURE__ */ React.createElement(Link$2, {
     to,
     onFocus: () => setFocused(true),
     onBlur: () => setFocused(false),
@@ -24117,29 +24665,34 @@ const Link$1 = memo((_ua) => {
       justifyContent: Align.Center,
       outline: "none",
       textDecoration: (underline || hovered && (hover == null ? void 0 : hover.underline)) && !focused ? "underline" : "none"
-    },
-    children: /* @__PURE__ */ jsx(Container$e, {
-      alignContent: Align.Center,
-      alignItems: Align.Center,
-      focused,
-      grow: false,
-      height: size,
-      children: /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
-        lineHeight: size,
-        textColor,
-        textWeight,
-        underline: (underline || hovered && (hover == null ? void 0 : hover.underline)) && !focused,
-        underlineColor: textColor
-      }, props), {
-        children
-      }))
-    })
-  });
+    }
+  }, /* @__PURE__ */ React.createElement(Container$e, {
+    alignContent: Align.Center,
+    alignItems: Align.Center,
+    focused,
+    grow: false,
+    height: size
+  }, /* @__PURE__ */ React.createElement(Label, __spreadValues({
+    lineHeight: size,
+    textColor,
+    textWeight,
+    underline: (underline || hovered && (hover == null ? void 0 : hover.underline)) && !focused,
+    underlineColor: textColor
+  }, props), children)));
 });
-const Container$e = styled.span.withConfig({
-  displayName: "Container",
-  componentId: "sc-doc9uk-0"
-})(["", ";", ";cursor:pointer;position:relative;&:before{border-radius:", ";left:-9px;right:-9px;}"], LayoutStyles, FocusedStyles, Amount.All);
+const Container$e = styled.span`
+  ${LayoutStyles};
+  ${FocusedStyles};
+
+  cursor: pointer;
+  position: relative;
+
+  &:before {
+    border-radius: ${Amount.All};
+    left: -9px;
+    right: -9px;
+  }
+`;
 const Small = memo((_wa) => {
   var _xa = _wa, {
     as = "small",
@@ -24156,14 +24709,12 @@ const Small = memo((_wa) => {
     "textColor",
     "textSize"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     as,
     className: `${className} small`,
     textColor,
     lineHeight
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
 const ForgotPasswordForm = memo(({
   backgroundColor = BackgroundColors.Darker,
@@ -24183,7 +24734,7 @@ const ForgotPasswordForm = memo(({
   });
   const startPasswordReset = async (email) => {
   };
-  return /* @__PURE__ */ jsxs(Container$h, {
+  return /* @__PURE__ */ React.createElement(Container$h, {
     className: "forgot-password-form",
     backgroundColor,
     borderRadius: Amount.More,
@@ -24191,24 +24742,22 @@ const ForgotPasswordForm = memo(({
     grow: false,
     padding: Amount.Most,
     paddingBottom: Amount.Default,
-    width: 420,
-    children: [/* @__PURE__ */ jsx(LoadingOverlay, {
-      visible: inProgress
-    }), /* @__PURE__ */ jsx(Title, {
-      alignText: Align.Center,
-      children: title
-    }), /* @__PURE__ */ jsx(Container$h, {
-      marginBottom: Amount.More,
-      marginTop: Amount.More,
-      children: /* @__PURE__ */ jsx(Paragraph, {
-        alignText: Align.Center,
-        children: "Enter the email address associated with your account and we'll send instructions on how to reset your password."
-      })
-    }), authError && /* @__PURE__ */ jsx(ErrorNotification, {
-      label: authError.userFriendlyMessage
-    }), /* @__PURE__ */ jsx(Form, {
-      name: "forgot-password-form",
-      fields: [{
+    width: 420
+  }, /* @__PURE__ */ React.createElement(LoadingOverlay, {
+    visible: inProgress
+  }), /* @__PURE__ */ React.createElement(Title, {
+    alignText: Align.Center
+  }, title), /* @__PURE__ */ React.createElement(Container$h, {
+    marginBottom: Amount.More,
+    marginTop: Amount.More
+  }, /* @__PURE__ */ React.createElement(Paragraph, {
+    alignText: Align.Center
+  }, "Enter the email address associated with your account and we'll send instructions on how to reset your password.")), authError && /* @__PURE__ */ React.createElement(ErrorNotification, {
+    label: authError.userFriendlyMessage
+  }), /* @__PURE__ */ React.createElement(Form, {
+    name: "forgot-password-form",
+    fields: [
+      {
         autoComplete: AutoComplete.Username,
         label: "Email address",
         name: "emailAddress",
@@ -24217,36 +24766,28 @@ const ForgotPasswordForm = memo(({
           [Condition.IsRequired]: true,
           [Condition.IsEmailAddress]: true
         }
-      }],
-      inProgress,
-      onSubmit: ({
-        fields,
-        validated
-      }) => {
-        if (validated)
-          startPasswordReset(fields.emailAddress.value);
-      },
-      submitButton: {
-        fullWidth: true,
-        label: "Send instructions"
       }
-    }), /* @__PURE__ */ jsx(Container$h, {
-      paddingLeft: Amount.Default,
-      paddingRight: Amount.Default,
-      paddingTop: Amount.Default,
-      children: /* @__PURE__ */ jsx(Small, {
-        alignText: Align.Center,
-        children: /* @__PURE__ */ jsx(Link$1, {
-          hover: {
-            underline: true
-          },
-          to: "/login",
-          underline: false,
-          children: "Login"
-        })
-      })
-    })]
-  });
+    ],
+    inProgress,
+    onSubmit: ({ fields, validated }) => {
+      if (validated)
+        startPasswordReset(fields.emailAddress.value);
+    },
+    submitButton: {
+      fullWidth: true,
+      label: "Send instructions"
+    }
+  }), /* @__PURE__ */ React.createElement(Container$h, {
+    paddingLeft: Amount.Default,
+    paddingRight: Amount.Default,
+    paddingTop: Amount.Default
+  }, /* @__PURE__ */ React.createElement(Small, {
+    alignText: Align.Center
+  }, /* @__PURE__ */ React.createElement(Link$1, {
+    hover: { underline: true },
+    to: "/login",
+    underline: false
+  }, "Login"))));
 });
 const LoginForm = memo((_ya) => {
   var _za = _ya, {
@@ -24276,17 +24817,13 @@ const LoginForm = memo((_ya) => {
   });
   const state = useSelector((state2) => state2);
   console.log("state2", state);
-  const {
-    error,
-    inProgress,
-    success
-  } = loginState;
+  const { error, inProgress, success } = loginState;
   useEffect(() => {
     if (onLoginSuccess && success) {
       onLoginSuccess();
     }
   }, [success]);
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     className: "login-form",
     backgroundColor,
     borderRadius,
@@ -24295,37 +24832,31 @@ const LoginForm = memo((_ya) => {
     padding: Amount.Most,
     paddingBottom: Amount.Default,
     width: 420
-  }, props), {
-    children: [/* @__PURE__ */ jsx(LoadingOverlay, {
-      borderRadius,
-      visible: inProgress
-    }), /* @__PURE__ */ jsx(Title, {
-      alignContent: Align.Center,
-      children: title
-    }), /* @__PURE__ */ jsx(NotificationLabel, {
-      alignItems: Align.Center,
-      alignSelf: Align.Center,
-      backgroundColor: BackgroundColors.Darkest,
-      marginTop: Amount.Default,
-      marginBottom: Amount.All,
-      orientation: Orientation.Vertical,
-      grow: false,
-      showOrb: false,
-      children: /* @__PURE__ */ jsxs(Paragraph, {
-        alignText: Align.Center,
-        children: ["Don't have an account yet?", /* @__PURE__ */ jsx("br", {}), /* @__PURE__ */ jsx(Link$1, {
-          to: "/signup",
-          hover: {
-            underline: true
-          },
-          underline: false,
-          children: "Sign up for free!"
-        })]
-      })
-    }), error && /* @__PURE__ */ jsx(ErrorNotification, {
-      label: (_a2 = error == null ? void 0 : error.friendlyMessage) != null ? _a2 : "An error occurred unfortunately."
-    }), /* @__PURE__ */ jsx(Form, {
-      fields: [{
+  }, props), /* @__PURE__ */ React.createElement(LoadingOverlay, {
+    borderRadius,
+    visible: inProgress
+  }), /* @__PURE__ */ React.createElement(Title, {
+    alignContent: Align.Center
+  }, title), /* @__PURE__ */ React.createElement(NotificationLabel, {
+    alignItems: Align.Center,
+    alignSelf: Align.Center,
+    backgroundColor: BackgroundColors.Darkest,
+    marginTop: Amount.Default,
+    marginBottom: Amount.All,
+    orientation: Orientation.Vertical,
+    grow: false,
+    showOrb: false
+  }, /* @__PURE__ */ React.createElement(Paragraph, {
+    alignText: Align.Center
+  }, "Don't have an account yet?", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement(Link$1, {
+    to: "/signup",
+    hover: { underline: true },
+    underline: false
+  }, "Sign up for free!"))), error && /* @__PURE__ */ React.createElement(ErrorNotification, {
+    label: (_a2 = error == null ? void 0 : error.friendlyMessage) != null ? _a2 : "An error occurred unfortunately."
+  }), /* @__PURE__ */ React.createElement(Form, {
+    fields: [
+      {
         autoComplete: AutoComplete.Username,
         label: "Email address",
         name: "username",
@@ -24333,7 +24864,8 @@ const LoginForm = memo((_ya) => {
         validation: {
           [Condition.IsRequired]: true
         }
-      }, {
+      },
+      {
         autoComplete: AutoComplete.CurrentPassword,
         label: "Password",
         name: "password",
@@ -24348,42 +24880,37 @@ const LoginForm = memo((_ya) => {
           [Condition.IsLengthGreaterThanOrEqual]: 8,
           [Condition.IsLengthLessThanOrEqual]: 99
         }
-      }],
-      inProgress,
-      name: "login-form",
-      onSubmit: ({
-        fields,
-        validated
-      }) => {
-        var _a3, _b;
-        console.log("fields", fields);
-        if (validated)
-          dispatch(login({
-            password: (_a3 = fields.password) == null ? void 0 : _a3.value,
-            username: (_b = fields.username) == null ? void 0 : _b.value
-          }));
-      },
-      submitButton: {
-        fullWidth: true,
-        label: "Login"
       }
-    }), /* @__PURE__ */ jsx(Container$h, {
-      paddingLeft: Amount.Default,
-      paddingRight: Amount.Default,
-      paddingTop: Amount.Default,
-      children: /* @__PURE__ */ jsx(Small, {
-        alignText: Align.Center,
-        children: /* @__PURE__ */ jsx(Link$1, {
-          hover: {
-            underline: true
-          },
-          to: "/forgot-password",
-          underline: false,
-          children: "Forgot your password?"
-        })
-      })
-    })]
-  }));
+    ],
+    inProgress,
+    name: "login-form",
+    onSubmit: ({
+      fields,
+      validated
+    }) => {
+      var _a3, _b;
+      console.log("fields", fields);
+      if (validated)
+        dispatch(login({
+          password: (_a3 = fields.password) == null ? void 0 : _a3.value,
+          username: (_b = fields.username) == null ? void 0 : _b.value
+        }));
+    },
+    submitButton: {
+      fullWidth: true,
+      label: "Login"
+    }
+  }), /* @__PURE__ */ React.createElement(Container$h, {
+    paddingLeft: Amount.Default,
+    paddingRight: Amount.Default,
+    paddingTop: Amount.Default
+  }, /* @__PURE__ */ React.createElement(Small, {
+    alignText: Align.Center
+  }, /* @__PURE__ */ React.createElement(Link$1, {
+    hover: { underline: true },
+    to: "/forgot-password",
+    underline: false
+  }, "Forgot your password?"))));
 });
 const SignupForm = memo(({
   backgroundColor = BackgroundColors.Darker,
@@ -24397,19 +24924,13 @@ const SignupForm = memo(({
     var _a3;
     return (_a3 = state.user.authentication) == null ? void 0 : _a3.signup;
   });
-  const {
-    error,
-    inProgress,
-    success
-  } = signUpState;
+  const { error, inProgress, success } = signUpState;
   useEffect(() => {
     if (onSignupSuccess && success) {
-      onSignupSuccess({
-        userId: signUpState.userId
-      });
+      onSignupSuccess({ userId: signUpState.userId });
     }
   }, [success]);
-  return /* @__PURE__ */ jsxs(Container$h, {
+  return /* @__PURE__ */ React.createElement(Container$h, {
     className: "signup-form",
     backgroundColor,
     borderRadius,
@@ -24417,37 +24938,32 @@ const SignupForm = memo(({
     grow: false,
     padding: Amount.Most,
     paddingBottom: Amount.Default,
-    width: 420,
-    children: [/* @__PURE__ */ jsx(LoadingOverlay, {
-      borderRadius,
-      visible: inProgress
-    }), /* @__PURE__ */ jsx(Title, {
-      alignText: Align.Center,
-      children: title
-    }), /* @__PURE__ */ jsx(NotificationLabel, {
-      alignItems: Align.Center,
-      alignSelf: Align.Center,
-      backgroundColor: BackgroundColors.Darkest,
-      marginTop: Amount.Default,
-      marginBottom: Amount.All,
-      orientation: Orientation.Vertical,
-      grow: false,
-      showOrb: false,
-      children: /* @__PURE__ */ jsxs(Paragraph, {
-        alignText: Align.Center,
-        children: ["Already have an account?", /* @__PURE__ */ jsx("br", {}), /* @__PURE__ */ jsx(Link$1, {
-          to: "/login",
-          hover: {
-            underline: true
-          },
-          underline: false,
-          children: "Sign in"
-        })]
-      })
-    }), error && /* @__PURE__ */ jsx(ErrorNotification, {
-      label: (_a2 = error == null ? void 0 : error.friendlyMessage) != null ? _a2 : "An error occurred unfortunately."
-    }), /* @__PURE__ */ jsx(Form, {
-      fields: [{
+    width: 420
+  }, /* @__PURE__ */ React.createElement(LoadingOverlay, {
+    borderRadius,
+    visible: inProgress
+  }), /* @__PURE__ */ React.createElement(Title, {
+    alignText: Align.Center
+  }, title), /* @__PURE__ */ React.createElement(NotificationLabel, {
+    alignItems: Align.Center,
+    alignSelf: Align.Center,
+    backgroundColor: BackgroundColors.Darkest,
+    marginTop: Amount.Default,
+    marginBottom: Amount.All,
+    orientation: Orientation.Vertical,
+    grow: false,
+    showOrb: false
+  }, /* @__PURE__ */ React.createElement(Paragraph, {
+    alignText: Align.Center
+  }, "Already have an account?", /* @__PURE__ */ React.createElement("br", null), /* @__PURE__ */ React.createElement(Link$1, {
+    to: "/login",
+    hover: { underline: true },
+    underline: false
+  }, "Sign in"))), error && /* @__PURE__ */ React.createElement(ErrorNotification, {
+    label: (_a2 = error == null ? void 0 : error.friendlyMessage) != null ? _a2 : "An error occurred unfortunately."
+  }), /* @__PURE__ */ React.createElement(Form, {
+    fields: [
+      {
         autoComplete: AutoComplete.GivenName,
         label: "First name",
         name: "firstName",
@@ -24455,7 +24971,8 @@ const SignupForm = memo(({
         validation: {
           [Condition.IsRequired]: true
         }
-      }, {
+      },
+      {
         autoComplete: AutoComplete.FamilyName,
         label: "Last name",
         name: "lastName",
@@ -24463,7 +24980,8 @@ const SignupForm = memo(({
         validation: {
           [Condition.IsRequired]: true
         }
-      }, {
+      },
+      {
         autoComplete: AutoComplete.Username,
         label: "Email address",
         name: "username",
@@ -24472,7 +24990,8 @@ const SignupForm = memo(({
           [Condition.IsRequired]: true,
           [Condition.IsEmailAddress]: true
         }
-      }, {
+      },
+      {
         autoComplete: AutoComplete.NewPassword,
         label: "Password",
         name: "password",
@@ -24487,43 +25006,35 @@ const SignupForm = memo(({
           [Condition.IsLengthGreaterThanOrEqual]: 8,
           [Condition.IsLengthLessThanOrEqual]: 99
         }
-      }],
-      inProgress,
-      name: "signup-form",
-      onSubmit: ({
-        fields,
-        validated
-      }) => {
-        var _a3, _b, _c, _d;
-        if (validated)
-          dispatch(signUp({
-            firstName: (_a3 = fields.firstName) == null ? void 0 : _a3.value,
-            lastName: (_b = fields.lastName) == null ? void 0 : _b.value,
-            password: (_c = fields.password) == null ? void 0 : _c.value,
-            username: (_d = fields.username) == null ? void 0 : _d.value
-          }));
-      },
-      submitButton: {
-        fullWidth: true,
-        label: "Sign up"
       }
-    }), /* @__PURE__ */ jsx(Container$h, {
-      paddingLeft: Amount.Default,
-      paddingRight: Amount.Default,
-      paddingTop: Amount.Default,
-      children: /* @__PURE__ */ jsxs(Small, {
-        alignText: Align.Center,
-        children: ['By clicking the "Sign up" button you agree to the', " ", /* @__PURE__ */ jsx(Link$1, {
-          hover: {
-            underline: true
-          },
-          to: "/privacy",
-          underline: false,
-          children: "Privacy Policy"
-        }), "."]
-      })
-    })]
-  });
+    ],
+    inProgress,
+    name: "signup-form",
+    onSubmit: ({ fields, validated }) => {
+      var _a3, _b, _c, _d;
+      if (validated)
+        dispatch(signUp({
+          firstName: (_a3 = fields.firstName) == null ? void 0 : _a3.value,
+          lastName: (_b = fields.lastName) == null ? void 0 : _b.value,
+          password: (_c = fields.password) == null ? void 0 : _c.value,
+          username: (_d = fields.username) == null ? void 0 : _d.value
+        }));
+    },
+    submitButton: {
+      fullWidth: true,
+      label: "Sign up"
+    }
+  }), /* @__PURE__ */ React.createElement(Container$h, {
+    paddingLeft: Amount.Default,
+    paddingRight: Amount.Default,
+    paddingTop: Amount.Default
+  }, /* @__PURE__ */ React.createElement(Small, {
+    alignText: Align.Center
+  }, 'By clicking the "Sign up" button you agree to the', " ", /* @__PURE__ */ React.createElement(Link$1, {
+    hover: { underline: true },
+    to: "/privacy",
+    underline: false
+  }, "Privacy Policy"), ".")));
 });
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -24581,8 +25092,8 @@ function _objectSpread2(target) {
   return target;
 }
 var usePrevious = function usePrevious2(value) {
-  var ref = e$1.useRef(value);
-  e$1.useEffect(function() {
+  var ref = React$1.useRef(value);
+  React$1.useEffect(function() {
     ref.current = value;
   }, [value]);
   return ref.current;
@@ -24645,7 +25156,7 @@ var extractAllowedOptionsUpdates = function extractAllowedOptionsUpdates2(option
     return _objectSpread2(_objectSpread2({}, newOptions || {}), {}, _defineProperty({}, key, options[key]));
   }, null);
 };
-var ElementsContext = /* @__PURE__ */ e$1.createContext(null);
+var ElementsContext = /* @__PURE__ */ React$1.createContext(null);
 ElementsContext.displayName = "ElementsContext";
 var parseElementsContext = function parseElementsContext2(ctx, useCase) {
   if (!ctx) {
@@ -24658,7 +25169,7 @@ var parseElementsContext = function parseElementsContext2(ctx, useCase) {
   options: PropTypes.object
 });
 var useElementsContextWithUseCase = function useElementsContextWithUseCase2(useCaseMessage) {
-  var ctx = e$1.useContext(ElementsContext);
+  var ctx = React$1.useContext(ElementsContext);
   return parseElementsContext(ctx, useCaseMessage);
 };
 var useElements = function useElements2() {
@@ -24673,8 +25184,8 @@ var useStripe = function useStripe2() {
   children: PropTypes.func.isRequired
 });
 var useCallbackReference = function useCallbackReference2(cb) {
-  var ref = e$1.useRef(cb);
-  e$1.useEffect(function() {
+  var ref = React$1.useRef(cb);
+  React$1.useEffect(function() {
     ref.current = cb;
   }, [cb]);
   return function() {
@@ -24693,15 +25204,15 @@ var createElementComponent = function createElementComponent2(type, isServer2) {
   var ClientElement = function ClientElement2(_ref) {
     var id = _ref.id, className = _ref.className, _ref$options = _ref.options, options = _ref$options === void 0 ? {} : _ref$options, _ref$onBlur = _ref.onBlur, onBlur = _ref$onBlur === void 0 ? noop : _ref$onBlur, _ref$onFocus = _ref.onFocus, onFocus = _ref$onFocus === void 0 ? noop : _ref$onFocus, _ref$onReady = _ref.onReady, onReady = _ref$onReady === void 0 ? noop : _ref$onReady, _ref$onChange = _ref.onChange, onChange = _ref$onChange === void 0 ? noop : _ref$onChange, _ref$onEscape = _ref.onEscape, onEscape = _ref$onEscape === void 0 ? noop : _ref$onEscape, _ref$onClick = _ref.onClick, onClick = _ref$onClick === void 0 ? noop : _ref$onClick;
     var _useElementsContextWi = useElementsContextWithUseCase("mounts <".concat(displayName, ">")), elements = _useElementsContextWi.elements;
-    var elementRef = e$1.useRef(null);
-    var domNode = e$1.useRef(null);
+    var elementRef = React$1.useRef(null);
+    var domNode = React$1.useRef(null);
     var callOnReady = useCallbackReference(onReady);
     var callOnBlur = useCallbackReference(onBlur);
     var callOnFocus = useCallbackReference(onFocus);
     var callOnClick = useCallbackReference(onClick);
     var callOnChange = useCallbackReference(onChange);
     var callOnEscape = useCallbackReference(onEscape);
-    e$1.useLayoutEffect(function() {
+    React$1.useLayoutEffect(function() {
       if (elementRef.current == null && elements && domNode.current != null) {
         var element = elements.create(type, options);
         elementRef.current = element;
@@ -24717,7 +25228,7 @@ var createElementComponent = function createElementComponent2(type, isServer2) {
       }
     });
     var prevOptions = usePrevious(options);
-    e$1.useEffect(function() {
+    React$1.useEffect(function() {
       if (!elementRef.current) {
         return;
       }
@@ -24726,14 +25237,14 @@ var createElementComponent = function createElementComponent2(type, isServer2) {
         elementRef.current.update(updates);
       }
     }, [options, prevOptions]);
-    e$1.useLayoutEffect(function() {
+    React$1.useLayoutEffect(function() {
       return function() {
         if (elementRef.current) {
           elementRef.current.destroy();
         }
       };
     }, []);
-    return /* @__PURE__ */ e$1.createElement("div", {
+    return /* @__PURE__ */ React$1.createElement("div", {
       id,
       className,
       ref: domNode
@@ -24742,7 +25253,7 @@ var createElementComponent = function createElementComponent2(type, isServer2) {
   var ServerElement = function ServerElement2(props) {
     useElementsContextWithUseCase("mounts <".concat(displayName, ">"));
     var id = props.id, className = props.className;
-    return /* @__PURE__ */ e$1.createElement("div", {
+    return /* @__PURE__ */ React$1.createElement("div", {
       id,
       className
     });
@@ -24813,61 +25324,82 @@ const AddPaymentMethodForm = memo(({
     }
     setInProgress(false);
   };
-  return /* @__PURE__ */ jsxs("form", {
-    onSubmit: handleFormSubmit,
-    children: [hasError && /* @__PURE__ */ jsx(Error$1, {
-      children: errorMessage
-    }), /* @__PURE__ */ jsx(CardInput, {
-      disabled: inProgress,
-      children: /* @__PURE__ */ jsx(CardElement, {
-        onChange: () => {
-          setHasError(false);
-          setInProgress(false);
-          setErrorMessage("");
+  return /* @__PURE__ */ React.createElement("form", {
+    onSubmit: handleFormSubmit
+  }, hasError && /* @__PURE__ */ React.createElement(Error$1, null, errorMessage), /* @__PURE__ */ React.createElement(CardInput, {
+    disabled: inProgress
+  }, /* @__PURE__ */ React.createElement(CardElement, {
+    onChange: () => {
+      setHasError(false);
+      setInProgress(false);
+      setErrorMessage("");
+    },
+    options: {
+      iconStyle: "solid",
+      style: {
+        base: {
+          "::placeholder": {
+            color: "#aab7c4"
+          },
+          color: "#424770",
+          fontSize: "16px"
         },
-        options: {
-          iconStyle: "solid",
-          style: {
-            base: {
-              "::placeholder": {
-                color: "#aab7c4"
-              },
-              color: "#424770",
-              fontSize: "16px"
-            },
-            invalid: {
-              color: "#9e2146"
-            }
-          }
+        invalid: {
+          color: "#9e2146"
         }
-      })
-    }), inProgress && /* @__PURE__ */ jsx(Progress$1, {
-      children: /* @__PURE__ */ jsx(ProgressSpinner, {})
-    }), paymentMethodsCount > 0 && /* @__PURE__ */ jsx(GoBack, {
-      children: /* @__PURE__ */ jsx(Button$1, {
-        disabled: inProgress,
-        onClick: cancel,
-        children: "Cancel"
-      })
-    })]
-  });
+      }
+    }
+  })), inProgress && /* @__PURE__ */ React.createElement(Progress$1, null, /* @__PURE__ */ React.createElement(ProgressSpinner, null)), paymentMethodsCount > 0 && /* @__PURE__ */ React.createElement(GoBack, null, /* @__PURE__ */ React.createElement(Button$1, {
+    disabled: inProgress,
+    onClick: cancel
+  }, "Cancel")));
 });
-const Error$1 = styled.div.withConfig({
-  displayName: "Error",
-  componentId: "sc-3ujpxx-0"
-})(["background:rgba(255,65,54,0.1);border-radius:8px;color:rgba(255,65,54,1);font-size:13px;font-weight:600;margin:0 0 25px 0;padding:15px 20px;"]);
-const CardInput = styled.div.withConfig({
-  displayName: "CardInput",
-  componentId: "sc-3ujpxx-1"
-})(["background:white;box-shadow:0 0 0 transparent;border:1px solid #ddd;border-radius:4px;color:#5b5b5b;font-size:13px;font-weight:600;outline:none;margin:0 0 25px 0;padding:9px;transition:border 0.2s ease-in-out;width:100%;&:hover{border:1px solid #bbb;}&:focus{border:1px solid #0074d9 !important;}&::placeholder{color:#9b9b9b;}", ";"], (props) => props.disabled && css(["pointer-events:none;"]));
-const Progress$1 = styled.div.withConfig({
-  displayName: "Progress",
-  componentId: "sc-3ujpxx-2"
-})(["float:right;padding:0;"]);
-const GoBack = styled.div.withConfig({
-  displayName: "GoBack",
-  componentId: "sc-3ujpxx-3"
-})(["float:right;"]);
+const Error$1 = styled.div`
+  background: rgba(255, 65, 54, 0.1);
+  border-radius: 8px;
+  color: rgba(255, 65, 54, 1);
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 25px 0;
+  padding: 15px 20px;
+`;
+const CardInput = styled.div`
+  background: white;
+  box-shadow: 0 0 0 transparent;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #5b5b5b;
+  font-size: 13px;
+  font-weight: 600;
+  outline: none;
+  margin: 0 0 25px 0;
+  padding: 9px;
+  transition: border 0.2s ease-in-out;
+  width: 100%;
+
+  &:hover {
+    border: 1px solid #bbb;
+  }
+
+  &:focus {
+    border: 1px solid #0074d9 !important;
+  }
+
+  &::placeholder {
+    color: #9b9b9b;
+  }
+
+  ${(props) => props.disabled && css`
+      pointer-events: none;
+    `};
+`;
+const Progress$1 = styled.div`
+  float: right;
+  padding: 0;
+`;
+const GoBack = styled.div`
+  float: right;
+`;
 const PaymentMethodModal = memo(({
   paymentMethods,
   premium,
@@ -24890,170 +25422,215 @@ const PaymentMethodModal = memo(({
       setInProgress(false);
     }
   };
-  return /* @__PURE__ */ jsx(Container$d, {
-    visible,
-    children: /* @__PURE__ */ jsxs(Content$3, {
-      visible,
-      children: [/* @__PURE__ */ jsx(Close$2, {
-        children: /* @__PURE__ */ jsx(CloseButton, {
-          onClick: () => {
-            setReviewOrder(false);
-            setPaymentSuccess(false);
-            setPaymentMethod(null);
-          }
-        })
-      }), paymentSuccess && /* @__PURE__ */ jsxs(PaymentSuccess, {
-        children: [/* @__PURE__ */ jsx("h3", {
-          children: "Payment Success"
-        }), /* @__PURE__ */ jsx("p", {
-          children: /* @__PURE__ */ jsxs("b", {
-            children: ["Thank you for subscribing to", " "]
-          })
-        }), /* @__PURE__ */ jsx(Button$1, {
-          onClick: () => {
-            setReviewOrder(false);
-            setPaymentSuccess(false);
-            setPaymentMethod(null);
-          },
-          children: "Close"
-        })]
-      }), reviewOrder && paymentMethod && !paymentSuccess ? /* @__PURE__ */ jsxs(Fragment, {
-        children: [/* @__PURE__ */ jsx("h3", {
-          children: "Review order"
-        }), /* @__PURE__ */ jsxs(ReviewOrder, {
-          children: [premium && /* @__PURE__ */ jsxs(Summary, {
-            children: [/* @__PURE__ */ jsx("b", {
-              children: "$14.99/a month"
-            }), " will be billed now and every month on", " ", /* @__PURE__ */ jsx("b", {
-              children: "???"
-            }), " using your", " ", /* @__PURE__ */ jsx("b", {
-              className: "capitalize",
-              children: paymentMethod == null ? void 0 : paymentMethod.brand
-            }), " ending in ", /* @__PURE__ */ jsx("b", {
-              children: paymentMethod.last_four_digits
-            }), "."]
-          }), inProgress && /* @__PURE__ */ jsx(Progress, {
-            children: /* @__PURE__ */ jsx(ProgressSpinner, {})
-          }), /* @__PURE__ */ jsxs(Actions, {
-            children: [/* @__PURE__ */ jsx(Button$1, {
-              disabled: inProgress,
-              id: "cancel",
-              onClick: () => {
-                setReviewOrder(false);
-                setPaymentMethod(null);
-              },
-              children: "Cancel"
-            }), /* @__PURE__ */ jsx(Button$1, {
-              id: "confirm",
-              onClick: confirmPurchase,
-              children: "Confirm order"
-            })]
-          })]
-        })]
-      }) : /* @__PURE__ */ jsx(Fragment, {
-        children: paymentMethods.length === 0 || showAddPaymentForm || premium === null && !paymentSuccess ? /* @__PURE__ */ jsxs(Fragment, {
-          children: [/* @__PURE__ */ jsx("h3", {
-            children: "Payment"
-          }), /* @__PURE__ */ jsx(PaymentForm, {
-            children: /* @__PURE__ */ jsx("h4", {
-              children: "Add a Credit Card"
-            })
-          })]
-        }) : !paymentSuccess && !paymentMethod ? /* @__PURE__ */ jsxs(PaymentMethods, {
-          children: [/* @__PURE__ */ jsx("h4", {
-            children: "Select a payment method"
-          }), paymentMethods.map((paymentMethod2) => {
-            return /* @__PURE__ */ jsxs(PaymentMethodItem, {
-              children: [/* @__PURE__ */ jsx(UseCard, {
-                children: /* @__PURE__ */ jsx(Button$1, {
-                  onClick: () => {
-                    setPaymentMethod(paymentMethod2);
-                    setReviewOrder(true);
-                  },
-                  size: Size.Small,
-                  children: "Use this card"
-                })
-              }), /* @__PURE__ */ jsxs(Brand, {
-                children: [/* @__PURE__ */ jsx("img", {
-                  alt: paymentMethod2.brand,
-                  src: `/stripe_networks/${paymentMethod2.brand}.svg`
-                }), /* @__PURE__ */ jsxs("span", {
-                  children: [paymentMethod2.brand, " ending in", " ", paymentMethod2.last_four_digits]
-                })]
-              }), /* @__PURE__ */ jsxs(Expiry, {
-                children: ["Expires", " ", /* @__PURE__ */ jsxs("span", {
-                  children: [paymentMethod2.exp_month, "/", paymentMethod2.exp_year]
-                })]
-              })]
-            }, paymentMethod2.id);
-          }), !showAddPaymentForm && /* @__PURE__ */ jsx(Button$1, {
-            id: "show-add-form",
-            onClick: () => {
-              setShowAddPaymentForm(true);
-            },
-            children: "Add new card"
-          })]
-        }) : null
-      })]
-    })
-  });
+  return /* @__PURE__ */ React.createElement(Container$d, {
+    visible
+  }, /* @__PURE__ */ React.createElement(Content$3, {
+    visible
+  }, /* @__PURE__ */ React.createElement(Close$2, null, /* @__PURE__ */ React.createElement(CloseButton, {
+    onClick: () => {
+      setReviewOrder(false);
+      setPaymentSuccess(false);
+      setPaymentMethod(null);
+    }
+  })), paymentSuccess && /* @__PURE__ */ React.createElement(PaymentSuccess, null, /* @__PURE__ */ React.createElement("h3", null, "Payment Success"), /* @__PURE__ */ React.createElement("p", null, /* @__PURE__ */ React.createElement("b", null, "Thank you for subscribing to", " ")), /* @__PURE__ */ React.createElement(Button$1, {
+    onClick: () => {
+      setReviewOrder(false);
+      setPaymentSuccess(false);
+      setPaymentMethod(null);
+    }
+  }, "Close")), reviewOrder && paymentMethod && !paymentSuccess ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h3", null, "Review order"), /* @__PURE__ */ React.createElement(ReviewOrder, null, premium && /* @__PURE__ */ React.createElement(Summary, null, /* @__PURE__ */ React.createElement("b", null, "$14.99/a month"), " will be billed now and every month on", " ", /* @__PURE__ */ React.createElement("b", null, "???"), " using your", " ", /* @__PURE__ */ React.createElement("b", {
+    className: "capitalize"
+  }, paymentMethod == null ? void 0 : paymentMethod.brand), " ending in ", /* @__PURE__ */ React.createElement("b", null, paymentMethod.last_four_digits), "."), inProgress && /* @__PURE__ */ React.createElement(Progress, null, /* @__PURE__ */ React.createElement(ProgressSpinner, null)), /* @__PURE__ */ React.createElement(Actions, null, /* @__PURE__ */ React.createElement(Button$1, {
+    disabled: inProgress,
+    id: "cancel",
+    onClick: () => {
+      setReviewOrder(false);
+      setPaymentMethod(null);
+    }
+  }, "Cancel"), /* @__PURE__ */ React.createElement(Button$1, {
+    id: "confirm",
+    onClick: confirmPurchase
+  }, "Confirm order")))) : /* @__PURE__ */ React.createElement(React.Fragment, null, paymentMethods.length === 0 || showAddPaymentForm || premium === null && !paymentSuccess ? /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("h3", null, "Payment"), /* @__PURE__ */ React.createElement(PaymentForm, null, /* @__PURE__ */ React.createElement("h4", null, "Add a Credit Card"))) : !paymentSuccess && !paymentMethod ? /* @__PURE__ */ React.createElement(PaymentMethods, null, /* @__PURE__ */ React.createElement("h4", null, "Select a payment method"), paymentMethods.map((paymentMethod2) => {
+    return /* @__PURE__ */ React.createElement(PaymentMethodItem, {
+      key: paymentMethod2.id
+    }, /* @__PURE__ */ React.createElement(UseCard, null, /* @__PURE__ */ React.createElement(Button$1, {
+      onClick: () => {
+        setPaymentMethod(paymentMethod2);
+        setReviewOrder(true);
+      },
+      size: Size.Small
+    }, "Use this card")), /* @__PURE__ */ React.createElement(Brand, null, /* @__PURE__ */ React.createElement("img", {
+      alt: paymentMethod2.brand,
+      src: `/stripe_networks/${paymentMethod2.brand}.svg`
+    }), /* @__PURE__ */ React.createElement("span", null, paymentMethod2.brand, " ending in", " ", paymentMethod2.last_four_digits)), /* @__PURE__ */ React.createElement(Expiry, null, "Expires", " ", /* @__PURE__ */ React.createElement("span", null, paymentMethod2.exp_month, "/", paymentMethod2.exp_year)));
+  }), !showAddPaymentForm && /* @__PURE__ */ React.createElement(Button$1, {
+    id: "show-add-form",
+    onClick: () => {
+      setShowAddPaymentForm(true);
+    }
+  }, "Add new card")) : null)));
 });
-const Container$d = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-1cgis25-0"
-})(["background:rgba(0,0,0,0.5);bottom:0;left:0;opacity:0;pointer-events:none;position:fixed;right:0;top:0;transition:opacity 0.2s ease-out;z-index:500000;", ";"], (props) => props.visible && css(["opacity:1;pointer-events:auto;"]));
-const Close$2 = styled.div.withConfig({
-  displayName: "Close",
-  componentId: "sc-1cgis25-1"
-})(["position:absolute;right:16px;top:16px;z-index:1000;"]);
-const Content$3 = styled.div.withConfig({
-  displayName: "Content",
-  componentId: "sc-1cgis25-2"
-})(["background:white;border-radius:15px 15px 0 0;bottom:0;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);left:0;padding:20px;position:absolute;right:0;top:15%;transform:translate(0,1900px);transition:transform 0.3s ease-in-out;z-index:1;h3{margin:0 0 25px 0;}", ";"], (props) => props.visible && css(["transform:translate(0,0);@media (min-width:992px){transform:translate(-50%,-50%);}"]));
-const PaymentForm = styled.div.withConfig({
-  displayName: "PaymentForm",
-  componentId: "sc-1cgis25-3"
-})(["background:#f2f2f2;border-radius:15px;padding:25px;h4{margin:0 0 25px 0;}"]);
-const PaymentMethods = styled.div.withConfig({
-  displayName: "PaymentMethods",
-  componentId: "sc-1cgis25-4"
-})(["h4{margin:0 0 25px 0;}button#show-add-form{margin:20px 0 0 0;}"]);
-const PaymentMethodItem = styled.div.withConfig({
-  displayName: "PaymentMethodItem",
-  componentId: "sc-1cgis25-5"
-})(["background:white;border:1px solid #ddd;line-height:26px;margin-bottom:6px;padding:15px;&:after{clear:both;content:'';display:block;}"]);
-const UseCard = styled.div.withConfig({
-  displayName: "UseCard",
-  componentId: "sc-1cgis25-6"
-})(["float:right;"]);
-const Brand = styled.div.withConfig({
-  displayName: "Brand",
-  componentId: "sc-1cgis25-7"
-})(["float:left;text-transform:capitalize;img{height:16px;margin:0 6px 0 0;position:relative;top:3px;}span{color:#3b3b3b;font-size:14px;font-weight:600;}"]);
-const Expiry = styled.div.withConfig({
-  displayName: "Expiry",
-  componentId: "sc-1cgis25-8"
-})(["color:#9b9b9b;font-size:14px;font-weight:600;float:left;line-height:27px;margin:0 25px;"]);
-const ReviewOrder = styled.div.withConfig({
-  displayName: "ReviewOrder",
-  componentId: "sc-1cgis25-9"
-})(["padding:25px 0 0 0;button#confirm{margin:0 0 0 0;}button#cancel{margin:0 15px 0 0;}"]);
-const Summary = styled.div.withConfig({
-  displayName: "Summary",
-  componentId: "sc-1cgis25-10"
-})(["color:#8b8b8b;font-size:18px;font-weight:600;line-height:28px;margin:0 0 50px 0;b{color:#1b1b1b;&.capitalize{text-transform:capitalize;}}"]);
-const PaymentSuccess = styled.div.withConfig({
-  displayName: "PaymentSuccess",
-  componentId: "sc-1cgis25-11"
-})(["p{line-height:26px;margin:0 0 15px 0;}button{margin:35px 15px 0 0;}"]);
-const Actions = styled.div.withConfig({
-  displayName: "Actions",
-  componentId: "sc-1cgis25-12"
-})(["float:left;"]);
-const Progress = styled.div.withConfig({
-  displayName: "Progress",
-  componentId: "sc-1cgis25-13"
-})(["float:right;padding:0;"]);
+const Container$d = styled.div`
+  background: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: opacity 0.2s ease-out;
+  z-index: 500000;
+
+  ${(props) => props.visible && css`
+      opacity: 1;
+      pointer-events: auto;
+    `};
+`;
+const Close$2 = styled.div`
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 1000;
+`;
+const Content$3 = styled.div`
+  background: white;
+  border-radius: 15px 15px 0 0;
+  bottom: 0;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  left: 0;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  top: 15%;
+  transform: translate(0, 1900px);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1;
+
+  h3 {
+    margin: 0 0 25px 0;
+  }
+
+  ${(props) => props.visible && css`
+      transform: translate(0, 0);
+
+      @media (min-width: 992px) {
+        transform: translate(-50%, -50%);
+      }
+    `};
+  /* 
+  @media (min-width: 992px) {
+    border-radius: 15px;
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 690px;
+  } */
+`;
+const PaymentForm = styled.div`
+  background: #f2f2f2;
+  border-radius: 15px;
+  padding: 25px;
+
+  h4 {
+    margin: 0 0 25px 0;
+  }
+`;
+const PaymentMethods = styled.div`
+  h4 {
+    margin: 0 0 25px 0;
+  }
+
+  button#show-add-form {
+    margin: 20px 0 0 0;
+  }
+`;
+const PaymentMethodItem = styled.div`
+  background: white;
+  border: 1px solid #ddd;
+  line-height: 26px;
+  margin-bottom: 6px;
+  padding: 15px;
+
+  &:after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+`;
+const UseCard = styled.div`
+  float: right;
+`;
+const Brand = styled.div`
+  float: left;
+  text-transform: capitalize;
+
+  img {
+    height: 16px;
+    margin: 0 6px 0 0;
+    position: relative;
+    top: 3px;
+  }
+
+  span {
+    color: #3b3b3b;
+    font-size: 14px;
+    font-weight: 600;
+  }
+`;
+const Expiry = styled.div`
+  color: #9b9b9b;
+  font-size: 14px;
+  font-weight: 600;
+  float: left;
+  line-height: 27px;
+  margin: 0 25px;
+`;
+const ReviewOrder = styled.div`
+  padding: 25px 0 0 0;
+
+  button#confirm {
+    margin: 0 0 0 0;
+  }
+
+  button#cancel {
+    margin: 0 15px 0 0;
+  }
+`;
+const Summary = styled.div`
+  color: #8b8b8b;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+  margin: 0 0 50px 0;
+
+  b {
+    color: #1b1b1b;
+
+    &.capitalize {
+      text-transform: capitalize;
+    }
+  }
+`;
+const PaymentSuccess = styled.div`
+  p {
+    line-height: 26px;
+    margin: 0 0 15px 0;
+  }
+
+  button {
+    margin: 35px 15px 0 0;
+  }
+`;
+const Actions = styled.div`
+  float: left;
+`;
+const Progress = styled.div`
+  float: right;
+  padding: 0;
+`;
 const ProgressMeter = memo((_Aa) => {
   var _Ba = _Aa, {
     amount,
@@ -25085,7 +25662,7 @@ const ProgressMeter = memo((_Aa) => {
     "total"
   ]);
   const progressPercent = amount === 0 ? 0 : Number.parseInt(((amount != null ? amount : 0) / (total != null ? total : 0) * 100).toFixed(0));
-  return /* @__PURE__ */ jsx(Container$h, {
+  return /* @__PURE__ */ React.createElement(Container$h, {
     backgroundColor: BackgroundColors.Lighter,
     borderRadius,
     grow: false,
@@ -25097,30 +25674,26 @@ const ProgressMeter = memo((_Aa) => {
     padding,
     style: {
       borderRadius: `calc(${borderRadius} + 3px)`
+    }
+  }, /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
+    backgroundColor: color,
+    borderRadius,
+    boxShadow: {
+      blurRadius: 8,
+      color,
+      offsetX: 0,
+      offsetY: 2,
+      opacity: 35,
+      spreadRadius: 4
     },
-    children: /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
-      backgroundColor: color,
-      borderRadius,
-      boxShadow: {
-        blurRadius: 8,
-        color,
-        offsetX: 0,
-        offsetY: 2,
-        opacity: 35,
-        spreadRadius: 4
-      },
-      height,
-      width: `${progressPercent}%`
-    }, props), {
-      children: [children, label && /* @__PURE__ */ jsx(Label, {
-        alignText: Align.Center,
-        textSize: TextSize.Larger,
-        textColor: TextColors.Darkest,
-        textWeight: TextWeight.More,
-        children: label
-      })]
-    }))
-  });
+    height,
+    width: `${progressPercent}%`
+  }, props), children, label && /* @__PURE__ */ React.createElement(Label, {
+    alignText: Align.Center,
+    textSize: TextSize.Larger,
+    textColor: TextColors.Darkest,
+    textWeight: TextWeight.More
+  }, label)));
 });
 function formatCurrency({ amount, currency }) {
   switch (currency) {
@@ -25130,10 +25703,7 @@ function formatCurrency({ amount, currency }) {
       return `$${amount.toFixed(amount % 1 !== 0 ? 2 : 0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
   }
 }
-function formatValue(value, {
-  formatter,
-  options
-}) {
+function formatValue(value, { formatter, options }) {
   var _a2;
   switch (formatter) {
     case Formatter$1.Currency:
@@ -25157,95 +25727,86 @@ const LinearGauge = memo(({
 }) => {
   const progressPercent = amount === 0 ? 0 : Number.parseInt((amount / total * 100).toFixed(0));
   const tickPercent = total / tickCount;
-  return /* @__PURE__ */ jsxs(Container$h, {
-    children: [showTicks && /* @__PURE__ */ jsxs(Container$h, {
-      orientation: Orientation.Horizontal,
-      children: [showValue && /* @__PURE__ */ jsx(Container$h, {
-        border: {
-          left: {
-            color,
-            style: BorderStyle.Solid,
-            width: 3
-          }
-        },
-        height: 9,
-        style: {
-          left: `calc(${progressPercent}% - 3px)`,
-          position: "absolute",
-          top: "-3px"
-        },
-        children: /* @__PURE__ */ jsx(Label, {
-          alignText: Align.Center,
-          lineHeight: Amount.None,
-          textColor: color,
-          textSize: TextSize.Small,
-          textWeight: TextWeight.More,
-          style: {
-            background: `linear-gradient(45deg, transparent 20%, rgba(var(--bg-color-darker-rgb), 0.5) 80%, transparent 20%)`,
-            position: "absolute",
-            top: 19,
-            transform: "translateX(-50%)",
-            zIndex: 5
-          },
-          children: formatter ? formatValue(amount, formatter) : amount
-        })
-      }), new Array(tickCount).fill(0).map((_, index) => {
-        const tickValue = tickPercent * index;
-        const tickValueFormatted = formatter ? formatValue(tickValue, formatter) : tickValue;
-        return /* @__PURE__ */ jsx(Container$h, {
-          border: {
-            left: {
-              color: amount >= tickValue ? color : BackgroundColors.Lightest,
-              style: BorderStyle.Solid,
-              width: 1
-            }
-          },
-          height: 6,
-          children: showTickLabels && /* @__PURE__ */ jsx(Label, {
-            alignText: Align.Left,
-            textColor: amount >= tickValue ? color : TextColors.Dark,
-            textSize: TextSize.Smallest,
-            textWeight: TextWeight.More,
-            style: {
-              position: "absolute",
-              transform: "translateX(calc(100% / 2 - 100%))"
-            },
-            children: tickValueFormatted
-          })
-        }, index);
-      }), /* @__PURE__ */ jsx(Container$h, {
-        border: {
-          right: {
-            color: amount >= total ? color : BackgroundColors.Lightest,
-            style: BorderStyle.Solid,
-            width: 1
-          }
-        },
-        height: 6,
-        style: {
-          position: "absolute",
-          right: 0
-        },
-        children: showTickLabels && /* @__PURE__ */ jsx(Label, {
-          alignText: Align.Right,
-          textColor: TextColors.Dark,
-          textSize: TextSize.Small,
-          textWeight: TextWeight.More,
-          children: formatter ? formatValue(total, formatter) : total
-        })
-      })]
-    }), /* @__PURE__ */ jsx(Container$h, {
-      backgroundColor: BackgroundColors.Lightest,
-      grow: false,
-      height: 1,
-      children: /* @__PURE__ */ jsx(Container$h, {
-        backgroundColor: color,
-        height: 1,
-        grow: false,
-        width: `${progressPercent}%`
-      })
-    })]
-  });
+  return /* @__PURE__ */ React.createElement(Container$h, null, showTicks && /* @__PURE__ */ React.createElement(Container$h, {
+    orientation: Orientation.Horizontal
+  }, showValue && /* @__PURE__ */ React.createElement(Container$h, {
+    border: {
+      left: {
+        color,
+        style: BorderStyle.Solid,
+        width: 3
+      }
+    },
+    height: 9,
+    style: {
+      left: `calc(${progressPercent}% - 3px)`,
+      position: "absolute",
+      top: "-3px"
+    }
+  }, /* @__PURE__ */ React.createElement(Label, {
+    alignText: Align.Center,
+    lineHeight: Amount.None,
+    textColor: color,
+    textSize: TextSize.Small,
+    textWeight: TextWeight.More,
+    style: {
+      background: `linear-gradient(45deg, transparent 20%, rgba(var(--bg-color-darker-rgb), 0.5) 80%, transparent 20%)`,
+      position: "absolute",
+      top: 19,
+      transform: "translateX(-50%)",
+      zIndex: 5
+    }
+  }, formatter ? formatValue(amount, formatter) : amount)), new Array(tickCount).fill(0).map((_, index) => {
+    const tickValue = tickPercent * index;
+    const tickValueFormatted = formatter ? formatValue(tickValue, formatter) : tickValue;
+    return /* @__PURE__ */ React.createElement(Container$h, {
+      key: index,
+      border: {
+        left: {
+          color: amount >= tickValue ? color : BackgroundColors.Lightest,
+          style: BorderStyle.Solid,
+          width: 1
+        }
+      },
+      height: 6
+    }, showTickLabels && /* @__PURE__ */ React.createElement(Label, {
+      alignText: Align.Left,
+      textColor: amount >= tickValue ? color : TextColors.Dark,
+      textSize: TextSize.Smallest,
+      textWeight: TextWeight.More,
+      style: {
+        position: "absolute",
+        transform: "translateX(calc(100% / 2 - 100%))"
+      }
+    }, tickValueFormatted));
+  }), /* @__PURE__ */ React.createElement(Container$h, {
+    border: {
+      right: {
+        color: amount >= total ? color : BackgroundColors.Lightest,
+        style: BorderStyle.Solid,
+        width: 1
+      }
+    },
+    height: 6,
+    style: {
+      position: "absolute",
+      right: 0
+    }
+  }, showTickLabels && /* @__PURE__ */ React.createElement(Label, {
+    alignText: Align.Right,
+    textColor: TextColors.Dark,
+    textSize: TextSize.Small,
+    textWeight: TextWeight.More
+  }, formatter ? formatValue(total, formatter) : total))), /* @__PURE__ */ React.createElement(Container$h, {
+    backgroundColor: BackgroundColors.Lightest,
+    grow: false,
+    height: 1
+  }, /* @__PURE__ */ React.createElement(Container$h, {
+    backgroundColor: color,
+    height: 1,
+    grow: false,
+    width: `${progressPercent}%`
+  })));
 });
 const ProgressivePaymentStatus = memo(({
   amountPaid = 0,
@@ -25254,127 +25815,344 @@ const ProgressivePaymentStatus = memo(({
   size = Size.Default
 }) => {
   const backgroundColor = amountPaid >= totalDue ? BackgroundColors.Success : BackgroundColors.Warning;
-  return /* @__PURE__ */ jsxs(Container$h, {
+  return /* @__PURE__ */ React.createElement(Container$h, {
     orientation: Orientation.Vertical,
     paddingBottom: Amount.Default,
-    grow: false,
-    children: [/* @__PURE__ */ jsx(ProgressMeter, {
-      alignContent: Align.Center,
-      alignItems: Align.Center,
-      amount: amountPaid,
-      color: backgroundColor,
-      borderRadius: Amount.Default,
-      height: size,
-      label: formatCurrency({
-        amount: amountPaid,
+    grow: false
+  }, /* @__PURE__ */ React.createElement(ProgressMeter, {
+    alignContent: Align.Center,
+    alignItems: Align.Center,
+    amount: amountPaid,
+    color: backgroundColor,
+    borderRadius: Amount.Default,
+    height: size,
+    label: formatCurrency({ amount: amountPaid, currency }),
+    marginBottom: Amount.Less,
+    total: totalDue
+  }), /* @__PURE__ */ React.createElement(LinearGauge, {
+    amount: amountPaid,
+    color: BackgroundColors.Warning,
+    formatter: {
+      formatter: Formatter$1.Currency,
+      options: {
         currency
-      }),
-      marginBottom: Amount.Less,
-      total: totalDue
-    }), /* @__PURE__ */ jsx(LinearGauge, {
-      amount: amountPaid,
-      color: BackgroundColors.Warning,
-      formatter: {
-        formatter: Formatter$1.Currency,
-        options: {
-          currency
-        }
-      },
-      total: totalDue
-    })]
-  });
+      }
+    },
+    total: totalDue
+  }));
 });
 const SubscriptionModal = memo(() => {
   const visible = useSelector((state) => state.app.subscriptionBillingModalVisible);
-  return /* @__PURE__ */ jsx(Container$c, {
-    visible,
-    children: /* @__PURE__ */ jsxs(Content$2, {
-      visible,
-      children: [/* @__PURE__ */ jsx(Close$1, {}), /* @__PURE__ */ jsx("h3", {
-        children: "Subscription Options"
-      }), /* @__PURE__ */ jsxs(Options, {
-        children: [/* @__PURE__ */ jsx(Option, {
-          onClick: () => {
-          },
-          children: /* @__PURE__ */ jsxs(BottomActions, {
-            children: [/* @__PURE__ */ jsxs(Price, {
-              children: ["$1.49 ", /* @__PURE__ */ jsx("span", {
-                children: "/a month per account"
-              })]
-            }), /* @__PURE__ */ jsx(ActionButton, {
-              size: "large",
-              secondary: true,
-              children: "Turn on"
-            })]
-          })
-        }), /* @__PURE__ */ jsxs(Option, {
-          className: "premium",
-          onClick: () => {
-          },
-          children: [/* @__PURE__ */ jsx("h4", {
-            children: "Premium"
-          }), /* @__PURE__ */ jsx("p", {
-            children: "Account Sync available on all of your accounts, and access to additional premium features."
-          }), /* @__PURE__ */ jsxs("ul", {
-            children: [/* @__PURE__ */ jsx("li", {
-              children: "Sync all of your financial accounts"
-            }), /* @__PURE__ */ jsx("li", {
-              children: "All future Premium features included"
-            })]
-          }), /* @__PURE__ */ jsxs(BottomActions, {
-            children: [/* @__PURE__ */ jsxs(Price, {
-              children: ["$14.99 ", /* @__PURE__ */ jsx("span", {
-                children: "a/ month"
-              })]
-            }), /* @__PURE__ */ jsx(ActionButton, {
-              size: "large",
-              children: "Upgrade"
-            })]
-          })]
-        })]
-      })]
-    })
-  });
+  return /* @__PURE__ */ React.createElement(Container$c, {
+    visible
+  }, /* @__PURE__ */ React.createElement(Content$2, {
+    visible
+  }, /* @__PURE__ */ React.createElement(Close$1, null), /* @__PURE__ */ React.createElement("h3", null, "Subscription Options"), /* @__PURE__ */ React.createElement(Options, null, /* @__PURE__ */ React.createElement(Option, {
+    onClick: () => {
+    }
+  }, /* @__PURE__ */ React.createElement(BottomActions, null, /* @__PURE__ */ React.createElement(Price, null, "$1.49 ", /* @__PURE__ */ React.createElement("span", null, "/a month per account")), /* @__PURE__ */ React.createElement(ActionButton, {
+    size: "large",
+    secondary: true
+  }, "Turn on"))), /* @__PURE__ */ React.createElement(Option, {
+    className: "premium",
+    onClick: () => {
+    }
+  }, /* @__PURE__ */ React.createElement("h4", null, "Premium"), /* @__PURE__ */ React.createElement("p", null, "Account Sync available on all of your accounts, and access to additional premium features."), /* @__PURE__ */ React.createElement("ul", null, /* @__PURE__ */ React.createElement("li", null, "Sync all of your financial accounts"), /* @__PURE__ */ React.createElement("li", null, "All future Premium features included")), /* @__PURE__ */ React.createElement(BottomActions, null, /* @__PURE__ */ React.createElement(Price, null, "$14.99 ", /* @__PURE__ */ React.createElement("span", null, "a/ month")), /* @__PURE__ */ React.createElement(ActionButton, {
+    size: "large"
+  }, "Upgrade"))))));
 });
-const Container$c = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-1gc8te9-0"
-})(["background:rgba(0,0,0,0.7);bottom:0;left:0;opacity:0;pointer-events:none;position:fixed;right:0;top:0;transition:opacity 0.2s ease-out;z-index:500000;", ";"], (props) => props.visible && css(["opacity:1;pointer-events:auto;"]));
-const Close$1 = styled.div.withConfig({
-  displayName: "Close",
-  componentId: "sc-1gc8te9-1"
-})(["position:absolute;right:16px;top:16px;"]);
-const Content$2 = styled.div.withConfig({
-  displayName: "Content",
-  componentId: "sc-1gc8te9-2"
-})(["background:white;border-radius:15px 15px 0 0;bottom:0;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);left:0;padding:20px;position:absolute;right:0;top:15%;transform:translate(0,1900px);transition:transform 0.3s ease-in-out;z-index:1;", ";h3{margin:0 0 25px 0;}@media (min-width:480px){}@media (min-width:768px){}@media (min-width:992px){border-radius:15px;bottom:auto;left:50%;right:auto;top:50%;transform:translate(-50%,-50%);width:600px;}@media (min-width:1200px){}"], (props) => props.visible && css(["transform:translate(0px,0px);@media (min-width:992px){transform:translate(-50%,-50%);}"]));
-const Options = styled.div.withConfig({
-  displayName: "Options",
-  componentId: "sc-1gc8te9-3"
-})(["&:after{clear:both;content:'';display:block;}"]);
-const Option = styled.div.withConfig({
-  displayName: "Option",
-  componentId: "sc-1gc8te9-4"
-})(["border:2px solid #ddd;border-radius:15px;cursor:pointer;margin:0 0 15px 0;padding:15px;position:relative;text-align:left;transition:background 0.2s ease-in-out,border 0.2s ease-in-out;width:100%;&:first-child{margin-right:10px;}&:hover{background:#fafafa;border:2px solid #7b7b7b;}&.premium{border:2px solid rgba(65,145,64,1);&:hover{background:rgba(65,145,64,0.1);}}h4{font-size:18px;margin:0 0 25px 0;}p{color:#7b7b7b;display:none;font-size:14px;margin:0 0 15px 0;line-height:20px;}ul{padding:0 25px;li{color:#3b3b3b;font-size:13px;line-height:18px;margin:0 0 8px 0;}}@media (min-width:480px){}@media (min-width:768px){}@media (min-width:992px){float:left;height:400px;margin:0;width:calc(100% / 2 - 5px);h4{margin:0 0 25px 0;}p{display:block;margin:0 0 25px 0;}}@media (min-width:1200px){}"]);
-const BottomActions = styled.div.withConfig({
-  displayName: "BottomActions",
-  componentId: "sc-1gc8te9-5"
-})(["bottom:0;left:0;margin:50px 0 0 0;right:0;&:after{clear:both;content:'';display:block;}@media (min-width:480px){}@media (min-width:768px){}@media (min-width:992px){padding:15px;position:absolute;}@media (min-width:1200px){}"]);
-const Price = styled.div.withConfig({
-  displayName: "Price",
-  componentId: "sc-1gc8te9-6"
-})(["color:#3b3b3b;float:left;font-size:32px;font-weight:700;line-height:26px;padding:0 0 0 5px;span{color:#aaa;display:block;font-size:12px;font-weight:500;}"]);
-const ActionButton = styled.div.withConfig({
-  displayName: "ActionButton",
-  componentId: "sc-1gc8te9-7"
-})(["background:rgba(60,60,60,1);border:2px solid transparent;border-radius:50px;color:white;cursor:pointer;float:right;font-size:13px;font-weight:600;padding:10px 17px;transition:background 0.2s ease-in-out;&:hover{background:rgba(0,0,0,0.9);}&:active{background:rgba(0,0,0,1);}", ";", ";", ";", ";", ";@media (min-width:480px){}@media (min-width:768px){}@media (min-width:992px){}@media (min-width:1200px){}"], (props) => props.disabled && css(["pointer-events:none;opacity:0.8;"]), (props) => props.secondary && css(["background:white;border:2px solid rgba(220,220,220,1);color:rgba(120,120,120,1);font-weight:600;&:hover{background:transparent;border:2px solid rgba(160,160,160,1);color:rgba(100,100,100,1);}&:active{background:transparent;border:2px solid rgba(130,130,130,1);color:rgba(80,80,80,1);}"]), (props) => props.size === "small" && css(["font-size:11px;padding:7px 12px;@media (min-width:992px){font-size:12px;padding:10px 17px;}"]), (props) => props.size === "large" && css(["font-size:13px;padding:10px 17px;@media (min-width:992px){font-size:15px;padding:15px 22px;}"]), (props) => props.darkMode && props.secondary && css(["background:transparent !important;border:2px solid rgba(143,231,0,0.7) !important;color:rgba(143,231,0,1) !important;&:hover{background:rgba(143,231,0,0.1) !important;border:2px solid rgba(143,231,0,0.7) !important;color:#1b1b1b;}&:active{background:rgba(143,231,0,0.6) !important;}"]));
-class ErrorBoundary extends e$1.Component {
+const Container$c = styled.div`
+  background: rgba(0, 0, 0, 0.7);
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: opacity 0.2s ease-out;
+  z-index: 500000;
+
+  ${(props) => props.visible && css`
+      opacity: 1;
+      pointer-events: auto;
+    `};
+`;
+const Close$1 = styled.div`
+  position: absolute;
+  right: 16px;
+  top: 16px;
+`;
+const Content$2 = styled.div`
+  background: white;
+  border-radius: 15px 15px 0 0;
+  bottom: 0;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  left: 0;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+  top: 15%;
+  transform: translate(0, 1900px);
+  transition: transform 0.3s ease-in-out;
+  z-index: 1;
+
+  ${(props) => props.visible && css`
+      transform: translate(0px, 0px);
+
+      @media (min-width: 992px) {
+        transform: translate(-50%, -50%);
+      }
+    `};
+
+  h3 {
+    margin: 0 0 25px 0;
+  }
+
+  @media (min-width: 480px) {
+  }
+
+  @media (min-width: 768px) {
+  }
+
+  @media (min-width: 992px) {
+    border-radius: 15px;
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    //width: calc(690px / 2);
+    width: 600px;
+  }
+
+  @media (min-width: 1200px) {
+  }
+`;
+const Options = styled.div`
+  &:after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+`;
+const Option = styled.div`
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 0 0 15px 0;
+  padding: 15px;
+  position: relative;
+  text-align: left;
+  transition: background 0.2s ease-in-out, border 0.2s ease-in-out;
+
+  width: 100%;
+
+  &:first-child {
+    margin-right: 10px;
+  }
+
+  &:hover {
+    background: #fafafa;
+    border: 2px solid #7b7b7b;
+  }
+
+  &.premium {
+    border: 2px solid rgba(65, 145, 64, 1);
+
+    &:hover {
+      background: rgba(65, 145, 64, 0.1);
+    }
+  }
+
+  h4 {
+    font-size: 18px;
+    margin: 0 0 25px 0;
+  }
+
+  p {
+    color: #7b7b7b;
+    display: none;
+    font-size: 14px;
+    margin: 0 0 15px 0;
+    line-height: 20px;
+  }
+
+  ul {
+    padding: 0 25px;
+
+    li {
+      color: #3b3b3b;
+      font-size: 13px;
+      line-height: 18px;
+      margin: 0 0 8px 0;
+    }
+  }
+
+  @media (min-width: 480px) {
+  }
+
+  @media (min-width: 768px) {
+  }
+
+  @media (min-width: 992px) {
+    float: left;
+    height: 400px;
+    margin: 0;
+    width: calc(100% / 2 - 5px);
+
+    h4 {
+      margin: 0 0 25px 0;
+    }
+
+    p {
+      display: block;
+      margin: 0 0 25px 0;
+    }
+  }
+
+  @media (min-width: 1200px) {
+  }
+`;
+const BottomActions = styled.div`
+  bottom: 0;
+  left: 0;
+  margin: 50px 0 0 0;
+
+  right: 0;
+
+  &:after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+
+  @media (min-width: 480px) {
+  }
+
+  @media (min-width: 768px) {
+  }
+
+  @media (min-width: 992px) {
+    padding: 15px;
+    position: absolute;
+  }
+
+  @media (min-width: 1200px) {
+  }
+`;
+const Price = styled.div`
+  color: #3b3b3b;
+  float: left;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 26px;
+  padding: 0 0 0 5px;
+  //width: calc(100% - 110px);
+
+  span {
+    color: #aaa;
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+  }
+`;
+const ActionButton = styled.div`
+  background: rgba(60, 60, 60, 1);
+  border: 2px solid transparent;
+  border-radius: 50px;
+  color: white;
+  cursor: pointer;
+  float: right;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 17px;
+  transition: background 0.2s ease-in-out;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  &:active {
+    background: rgba(0, 0, 0, 1);
+  }
+
+  ${(props) => props.disabled && css`
+      pointer-events: none;
+      opacity: 0.8;
+    `};
+
+  ${(props) => props.secondary && css`
+      background: white;
+      border: 2px solid rgba(220, 220, 220, 1);
+      color: rgba(120, 120, 120, 1);
+      font-weight: 600;
+
+      &:hover {
+        background: transparent;
+        border: 2px solid rgba(160, 160, 160, 1);
+        color: rgba(100, 100, 100, 1);
+      }
+
+      &:active {
+        background: transparent;
+        border: 2px solid rgba(130, 130, 130, 1);
+        color: rgba(80, 80, 80, 1);
+      }
+    `};
+
+  ${(props) => props.size === "small" && css`
+      font-size: 11px;
+      padding: 7px 12px;
+
+      @media (min-width: 992px) {
+        font-size: 12px;
+        padding: 10px 17px;
+      }
+    `};
+
+  ${(props) => props.size === "large" && css`
+      font-size: 13px;
+      padding: 10px 17px;
+
+      @media (min-width: 992px) {
+        font-size: 15px;
+        padding: 15px 22px;
+      }
+    `};
+
+  ${(props) => props.darkMode && props.secondary && css`
+      background: transparent !important;
+      border: 2px solid rgba(143, 231, 0, 0.7) !important;
+      color: rgba(143, 231, 0, 1) !important;
+
+      &:hover {
+        background: rgba(143, 231, 0, 0.1) !important;
+        border: 2px solid rgba(143, 231, 0, 0.7) !important;
+        color: #1b1b1b;
+      }
+
+      &:active {
+        background: rgba(143, 231, 0, 0.6) !important;
+      }
+    `};
+
+  @media (min-width: 480px) {
+  }
+
+  @media (min-width: 768px) {
+  }
+
+  @media (min-width: 992px) {
+  }
+
+  @media (min-width: 1200px) {
+  }
+`;
+class ErrorBoundary extends React$1.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      exception: void 0,
-      hasError: false
-    };
+    this.state = { exception: void 0, hasError: false };
   }
   static getDerivedStateFromError(err) {
     const logger = new Logger();
@@ -25382,20 +26160,13 @@ class ErrorBoundary extends e$1.Component {
       cause: err
     });
     logger.exception(exception.toJSON());
-    return {
-      exception,
-      hasError: true
-    };
+    return { exception, hasError: true };
   }
   componentDidCatch(err) {
   }
   render() {
     var _a2;
-    return this.state.hasError ? /* @__PURE__ */ jsx(Fragment, {
-      children: (_a2 = this.state.exception) == null ? void 0 : _a2.message
-    }) : /* @__PURE__ */ jsx(Fragment, {
-      children: this.props.children
-    });
+    return this.state.hasError ? /* @__PURE__ */ React$1.createElement(React$1.Fragment, null, (_a2 = this.state.exception) == null ? void 0 : _a2.message) : /* @__PURE__ */ React$1.createElement(React$1.Fragment, null, this.props.children);
   }
 }
 const Card = memo((_Ca) => {
@@ -25422,43 +26193,40 @@ const Card = memo((_Ca) => {
     "title",
     "width"
   ]);
-  const content = /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  const content = /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     borderRadius,
     boxShadow,
     className: `card${id ? `-${id}` : ""}`,
     grow: true,
     onClick,
     width: linkTo ? "100%" : width != null ? width : "auto"
-  }, props), {
-    children: [title && /* @__PURE__ */ jsx("h4", {
-      children: title
-    }), /* @__PURE__ */ jsx(ErrorBoundary, {
-      children
-    })]
-  }));
+  }, props), title && /* @__PURE__ */ React.createElement("h4", null, title), /* @__PURE__ */ React.createElement(ErrorBoundary, null, children));
   if (draggable) {
-    return /* @__PURE__ */ jsx(DragWrapper, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ React.createElement(DragWrapper, __spreadValues({
       className: "draggable-card"
-    }, props), {
-      children: content
-    }));
+    }, props), content);
   }
   if (linkTo) {
-    return /* @__PURE__ */ jsx(NavigationLink, {
+    return /* @__PURE__ */ React.createElement(NavigationLink, {
       borderRadius,
       grow: true,
       orientation: Orientation.Vertical,
       to: linkTo,
-      width,
-      children: content
-    });
+      width
+    }, content);
   }
   return content;
 });
-const DragWrapper = styled.div.withConfig({
-  displayName: "DragWrapper",
-  componentId: "sc-vglho4-0"
-})(["", ";", ";", ";transition:box-shadow 0.3s ease-in-out;"], LayoutStyles, AppearanceStyles, DimensionStyles);
+const DragWrapper = styled.div`
+  ${LayoutStyles};
+  ${AppearanceStyles};
+  ${DimensionStyles};
+
+  //position: absolute;
+  //margin: 0 0 25px 0;
+  transition: box-shadow 0.3s ease-in-out;
+  //width: 100%;
+`;
 const TitleCards = memo((_Ea) => {
   var _Fa = _Ea, {
     children,
@@ -25473,20 +26241,17 @@ const TitleCards = memo((_Ea) => {
     "minHeight",
     "orientation"
   ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     className: `${className} title-cards`,
     grow,
     minHeight,
     overflow: Overflow.ScrollHorizontal,
     paddingBottom: Amount.Default
-  }, props), {
-    children: /* @__PURE__ */ jsx(Container$h, {
-      orientation,
-      overflow: Overflow.ScrollHorizontal,
-      position: Position.Absolute,
-      children
-    })
-  }));
+  }, props), /* @__PURE__ */ React.createElement(Container$h, {
+    orientation,
+    overflow: Overflow.ScrollHorizontal,
+    position: Position.Absolute
+  }, children));
 });
 const TitleCard = memo((_Ga) => {
   var _Ha = _Ga, {
@@ -25520,7 +26285,7 @@ const TitleCard = memo((_Ga) => {
     "icon",
     "width"
   ]);
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     backgroundColor,
     borderRadius,
     boxShadow,
@@ -25531,84 +26296,88 @@ const TitleCard = memo((_Ga) => {
     orientation,
     padding,
     width
-  }, props), {
-    children: [/* @__PURE__ */ jsx(LoadingOverlay, {
-      visible: loading,
-      spinnerSize: Size.Small
-    }), icon && /* @__PURE__ */ jsx(Container$h, {
-      alignItems: Align.Center,
-      alignContent: Align.Center,
-      borderRadius: Amount.All,
-      grow: false,
-      marginRight: Amount.Default,
-      paddingLeft: Amount.Less,
-      paddingRight: Amount.Less,
-      children: /* @__PURE__ */ jsx(Icon, __spreadValues({}, icon))
-    }), !loading && /* @__PURE__ */ jsxs(Container$h, {
-      alignContent: Align.Center,
-      alignItems: Align.Left,
-      orientation: Orientation.Vertical,
-      children: [/* @__PURE__ */ jsx(Small, {
-        children: label
-      }), /* @__PURE__ */ jsx(Title, {
-        children: value
-      })]
-    })]
-  }));
+  }, props), /* @__PURE__ */ React.createElement(LoadingOverlay, {
+    visible: loading,
+    spinnerSize: Size.Small
+  }), icon && /* @__PURE__ */ React.createElement(Container$h, {
+    alignItems: Align.Center,
+    alignContent: Align.Center,
+    borderRadius: Amount.All,
+    grow: false,
+    marginRight: Amount.Default,
+    paddingLeft: Amount.Less,
+    paddingRight: Amount.Less
+  }, /* @__PURE__ */ React.createElement(Icon, __spreadValues({}, icon))), !loading && /* @__PURE__ */ React.createElement(Container$h, {
+    alignContent: Align.Center,
+    alignItems: Align.Left,
+    orientation: Orientation.Vertical
+  }, /* @__PURE__ */ React.createElement(Small, null, label), /* @__PURE__ */ React.createElement(Title, null, value)));
 });
 const PieChart = memo((_Ia) => {
   var props = __objRest(_Ia, []);
-  return /* @__PURE__ */ jsx(Container$b, __spreadValues({}, props));
+  return /* @__PURE__ */ React.createElement(Container$b, __spreadValues({}, props));
 });
-const Container$b = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-1vyo5kj-0"
-})(["height:200px;"]);
+const Container$b = styled.div`
+  height: 200px;
+`;
 const RadialChart = memo((_Ja) => {
-  var _Ka = _Ja, {
-    data
-  } = _Ka, props = __objRest(_Ka, [
-    "data"
-  ]);
-  return /* @__PURE__ */ jsx(Container$a, __spreadValues({}, props));
+  var _Ka = _Ja, { data } = _Ka, props = __objRest(_Ka, ["data"]);
+  return /* @__PURE__ */ React.createElement(Container$a, __spreadValues({}, props));
 });
-const Container$a = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-yt8yoj-0"
-})([""]);
-const RadialGauge = memo(({
-  color,
-  size,
-  value
-}) => {
+const Container$a = styled.div``;
+const RadialGauge = memo(({ color, size, value }) => {
   const getGaugePercent = () => {
     const normalized = 198 - value * 1.98;
     return normalized >= 0 ? normalized : 0;
   };
   const gaugePercent = getGaugePercent();
-  return /* @__PURE__ */ jsx(Container$9, {
+  return /* @__PURE__ */ React.createElement(Container$9, {
     color,
     size,
-    value: gaugePercent,
-    children: /* @__PURE__ */ jsxs("svg", {
-      viewBox: "0 0 105 105",
-      children: [/* @__PURE__ */ jsx("path", {
-        className: "grey",
-        d: "M30,90 A40,40 0 1,1 80,90",
-        fill: "none"
-      }), /* @__PURE__ */ jsx("path", {
-        id: "value",
-        fill: "none",
-        className: "value",
-        d: "M30,90 A40,40 0 1,1 80,90"
-      })]
-    })
-  });
+    value: gaugePercent
+  }, /* @__PURE__ */ React.createElement("svg", {
+    viewBox: "0 0 105 105"
+  }, /* @__PURE__ */ React.createElement("path", {
+    className: "grey",
+    d: "M30,90 A40,40 0 1,1 80,90",
+    fill: "none"
+  }), /* @__PURE__ */ React.createElement("path", {
+    id: "value",
+    fill: "none",
+    className: "value",
+    d: "M30,90 A40,40 0 1,1 80,90"
+  })));
 });
-const Container$9 = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-1yzhota-0"
-})(["margin:0 auto;position:relative;width:", "px;svg{display:inline-block;height:", "px;position:relative;top:-4px;width:", "px;}path{stroke-linecap:round;stroke-width:12;}path.grey{stroke:#eee;}path.value{stroke:rgba(162,192,80,1);stroke:rgba(", ");stroke-dasharray:198;stroke-dashoffset:", ";transition:all 0.3s ease-out;}"], (props) => props.size + 9, (props) => props.size, (props) => props.size, (props) => props.color, (props) => props.value);
+const Container$9 = styled.div`
+  margin: 0 auto;
+  position: relative;
+  width: ${(props) => props.size + 9}px;
+
+  svg {
+    display: inline-block;
+    height: ${(props) => props.size}px;
+    position: relative;
+    top: -4px;
+    width: ${(props) => props.size}px;
+  }
+
+  path {
+    stroke-linecap: round;
+    stroke-width: 12;
+  }
+
+  path.grey {
+    stroke: #eee;
+  }
+
+  path.value {
+    stroke: rgba(162, 192, 80, 1);
+    stroke: rgba(${(props) => props.color});
+    stroke-dasharray: 198;
+    stroke-dashoffset: ${(props) => props.value};
+    transition: all 0.3s ease-out;
+  }
+`;
 var __create = Object.create;
 var __defProp2 = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -25632,16 +26401,16 @@ var __toESM = (module, isNodeMode) => {
 };
 var require_object_assign = __commonJS({
   "../../node_modules/object-assign/index.js"(exports, module) {
-    var getOwnPropertySymbols2 = Object.getOwnPropertySymbols;
+    var getOwnPropertySymbols = Object.getOwnPropertySymbols;
     var hasOwnProperty2 = Object.prototype.hasOwnProperty;
-    var propIsEnumerable2 = Object.prototype.propertyIsEnumerable;
-    function toObject2(val) {
+    var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+    function toObject(val) {
       if (val === null || val === void 0) {
         throw new TypeError("Object.assign cannot be called with null or undefined");
       }
       return Object(val);
     }
-    function shouldUseNative2() {
+    function shouldUseNative() {
       try {
         if (!Object.assign) {
           return false;
@@ -25673,9 +26442,9 @@ var require_object_assign = __commonJS({
         return false;
       }
     }
-    module.exports = shouldUseNative2() ? Object.assign : function(target, source) {
+    module.exports = shouldUseNative() ? Object.assign : function(target, source) {
       var from;
-      var to = toObject2(target);
+      var to = toObject(target);
       var symbols;
       for (var s2 = 1; s2 < arguments.length; s2++) {
         from = Object(arguments[s2]);
@@ -25684,10 +26453,10 @@ var require_object_assign = __commonJS({
             to[key] = from[key];
           }
         }
-        if (getOwnPropertySymbols2) {
-          symbols = getOwnPropertySymbols2(from);
+        if (getOwnPropertySymbols) {
+          symbols = getOwnPropertySymbols(from);
           for (var i2 = 0; i2 < symbols.length; i2++) {
-            if (propIsEnumerable2.call(from, symbols[i2])) {
+            if (propIsEnumerable.call(from, symbols[i2])) {
               to[symbols[i2]] = from[symbols[i2]];
             }
           }
@@ -27625,18 +28394,16 @@ const Page = memo((_La) => {
     "title"
   ]);
   useTitle(title);
-  const PageComp = () => /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  const PageComp = () => /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     alignContent,
     backgroundColor,
     className: `${className} page`,
     grow
-  }, props), {
-    children: [/* @__PURE__ */ jsx(LoadingOverlay, {
-      visible: loading
-    }), children]
-  }));
-  const Child = () => Layout ? cloneElement(/* @__PURE__ */ jsx(Layout, __spreadValues({}, props)), props, /* @__PURE__ */ jsx(PageComp, {})) : /* @__PURE__ */ jsx(PageComp, {});
-  return /* @__PURE__ */ jsx(Child, {});
+  }, props), /* @__PURE__ */ React.createElement(LoadingOverlay, {
+    visible: loading
+  }), children);
+  const Child = () => Layout ? cloneElement(/* @__PURE__ */ React.createElement(Layout, __spreadValues({}, props)), props, /* @__PURE__ */ React.createElement(PageComp, null)) : /* @__PURE__ */ React.createElement(PageComp, null);
+  return /* @__PURE__ */ React.createElement(Child, null);
 });
 var styles$1 = "html,\nbody,\n#root {\n  background-color: var(--bg-color-default);\n\n  /* Proportions */\n  --amount-none: 0px;\n  --amount-least: 5.5px;\n  --amount-less: 11px;\n  --amount-default: 16.5px;\n  --amount-more: 22px;\n  --amount-most: 27.5px;\n  --amount-all: 33px;\n\n  --size-smallest: 10px;\n  --size-smaller: 14px;\n  --size-small: 24px;\n  --size-default: 32px;\n  --size-large: 42px;\n  --size-larger: 52px;\n  --size-largest: 56px;\n\n  /* Colors */\n  --color-primary-rgb: 76, 62, 196;\n  --color-primary: rgb(var(--color-primary-rgb));\n  --color-primary-contrast-rgb: 255, 255, 255;\n  --color-primary-contrast: rgb(var(--color-primary-contrast-rgb));\n  --color-default-rgb: var(--color-black-rgb);\n  --color-default: rgb(var(--color-default-rgb));\n  --color-default-contrast-rgb: var(--color-default-rgb);\n  --color-default-contrast: var(--color-default-rgb);\n  --color-secondary-rgb: 230, 232, 235;\n  --color-secondary: rgb(var(--color-secondary-rgb));\n  --color-secondary-contrast-rgb: 35, 37, 40;\n  --color-secondary-contrast: rgb(var(--color-secondary-contrast-rgb));\n  --color-black-rgb: 50, 52, 55;\n  --color-black: rgb(var(--color-black-rgb));\n  --color-black-contrast-rgb: var(--color-white-rgb);\n  --color-black-contrast: rgb(var(--color-black-contrast-rgb));\n  --color-white-rgb: 238, 240, 243;\n  --color-white: rgb(var(--color-white-rgb));\n  --color-white-contrast-rgb: var(--color-white-rgb);\n  --color-white-contrast: rgb(var(--color-white-contrast-rgb));\n  --color-error-rgb: 236, 79, 79;\n  --color-error: rgb(var(--color-error-rgb));\n  --color-error-contrast-rgb: var(--color-white-rgb);\n  --color-error-contrast: rgb(var(--color-error-contrast-rgb));\n  --color-info-rgb: 15, 193, 223;\n  --color-info: rgb(var(--color-info-rgb));\n  --color-info-contrast-rgb: var(--color-white-rgb);\n  --color-info-contrast: rgb(var(--color-info-contrast-rgb));\n  --color-success-rgb: 131, 210, 126;\n  --color-success: rgb(var(--color-success-rgb));\n  --color-success-contrast-rgb: var(--color-white-rgb);\n  --color-success-contrast: rgb(var(--color-success-contrast-rgb));\n  --color-warning-rgb: 255, 209, 0;\n  --color-warning: rgb(var(--color-warning-rgb));\n  --color-warning-contrast-rgb: var(--color-white-rgb);\n  --color-warning-contrast: rgb(var(--color-warning-contrast-rgb));\n\n  --bg-color-lightest-rgb: 245, 245, 245;\n  --bg-color-lightest: rgb(var(--bg-color-lightest-rgb));\n  --bg-color-lighter-rgb: 235, 235, 235;\n  --bg-color-lighter: rgb(var(--bg-color-lighter-rgb));\n  --bg-color-light-rgb: 225, 225, 225;\n  --bg-color-light: rgb(var(--bg-color-light-rgb));\n  --bg-color-default-rgb: 220, 220, 220;\n  --bg-color-default: rgb(var(--bg-color-default-rgb));\n  --bg-color-dark-rgb: 200, 200, 200;\n  --bg-color-dark: rgb(var(--bg-color-dark-rgb));\n  --bg-color-darker-rgb: 190, 190, 190;\n  --bg-color-darker: rgb(var(--bg-color-darker-rgb));\n  --bg-color-darkest-rgb: 180, 180, 180;\n  --bg-color-darkest: rgb(var(--bg-color-darkest-rgb));\n\n  --border-color-lightest-rgb: 240, 243, 247;\n  --border-color-lightest: rgb(var(--border-color-lightest-rgb));\n  --border-color-lighter-rgb: 230, 233, 237;\n  --border-color-lighter: rgb(var(--border-color-lighter-rgb));\n  --border-color-light-rgb: 220, 223, 227;\n  --border-color-light: rgb(var(--border-color-light-rgb));\n  --border-color-default-rgb: 210, 213, 217;\n  --border-color-default: rgb(var(--border-color-default-rgb));\n  --border-color-dark-rgb: 200, 203, 207;\n  --border-color-dark: rgb(var(--border-color-dark-rgb));\n  --border-color-darker-rgb: 190, 193, 197;\n  --border-color-darker: rgb(var(--border-color-darker-rgb));\n  --border-color-darkest-rgb: 180, 183, 187;\n  --border-color-darkest: rgb(var(--border-color-darkest-rgb));\n\n  --fg-color-lightest-rgb: 210, 212, 215;\n  --fg-color-lightest: rgb(var(--fg-color-lightest-rgb));\n  --fg-color-lighter-rgb: 190, 192, 195;\n  --fg-color-lighter: rgb(var(--fg-color-lighter-rgb));\n  --fg-color-light-rgb: 160, 162, 165;\n  --fg-color-light: rgb(var(--fg-color-light-rgb));\n  --fg-color-default-rgb: 130, 132, 135;\n  --fg-color-default: rgb(var(--fg-color-default-rgb));\n  --fg-color-dark-rgb: 100, 102, 105;\n  --fg-color-dark: rgb(var(--fg-color-dark-rgb));\n  --fg-color-darker-rgb: 60, 62, 65;\n  --fg-color-darker: rgb(var(--fg-color-darker-rgb));\n  --fg-color-darkest-rgb: var(--color-black-rgb);\n  --fg-color-darkest: rgb(var(--fg-color-darkest-rgb));\n\n  /* Text */\n  --text-color-lightest-rgb: var(--color-white-rgb);\n  --text-color-lightest: rgb(var(--text-color-lightest-rgb));\n  --text-color-lighter-rgb: 170, 172, 175;\n  --text-color-lighter: rgb(var(--text-color-lighter-rgb));\n  --text-color-light-rgb: 140, 142, 145;\n  --text-color-light: rgb(var(--text-color-light-rgb));\n  --text-color-default-rgb: 90, 92, 95;\n  --text-color-default: rgb(var(--text-color-default-rgb));\n  --text-color-dark-rgb: 70, 72, 75;\n  --text-color-dark: rgb(var(--text-color-dark-rgb));\n  --text-color-darker-rgb: 50, 52, 55;\n  --text-color-darker: rgb(var(--text-color-darker-rgb));\n  --text-color-darkest-rgb: var(--color-black-rgb);\n  --text-color-darkest: rgb(var(--text-color-darkest-rgb));\n\n  --text-font-button: 'Helvetica Neue', -apple-system, blinkmacsystemfont,\n    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',\n    'Droid Sans', sans-serif;\n  --text-font-text: 'Helvetica Neue', -apple-system, blinkmacsystemfont,\n    'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',\n    'Droid Sans', sans-serif;\n\n  /* Text sizes */\n  --text-size-smallest: 9px;\n  --text-size-smaller: 11px;\n  --text-size-small: 12px;\n  --text-size-default: 13px;\n  --text-size-large: 18px;\n  --text-size-larger: 20px;\n  --text-size-largest: 24px;\n\n  --text-weight-least: 300;\n  --text-weight-less: 400;\n  --text-weight-default: 500;\n  --text-weight-more: 600;\n  --text-weight-most: 700;\n\n  /* Shadows */\n  --shadow-depth-lowest: inset 0 -20px 60px rgba(0, 0, 0, 0.1);\n  --shadow-depth-lower: inset 0 2px 5px rgba(0, 0, 0, 0.1);\n  --shadow-depth-low: inset 0 1px 3px rgba(0, 0, 0, 0.1);\n  --shadow-depth-surface: none;\n  --shadow-depth-high: 0 1px 3px rgba(0, 0, 0, 0.05);\n  --shadow-depth-higher: 0 4px 27px rgba(0, 0, 0, 0.16);\n  --shadow-depth-highest: 0 10px 62px rgba(0, 0, 0, 0.1);\n\n  /* Layout */\n  --z-index-depth-lowest: -300;\n  --z-index-depth-lower: -200;\n  --z-index-depth-low: -100;\n  --z-index-depth-surface: 0;\n  --z-index-depth-high: 100;\n  --z-index-depth-higher: 200;\n  --z-index-depth-highest: 300;\n\n  /* Element styles */\n  --bg-color-card-rgb: var(--bg-color-lightest-rgb);\n  --bg-color-close-button-rgb: var(--bg-color-default-rgb);\n  --bg-color-data-grid-rgb: var(--bg-color-default-rgb);\n  --bg-color-data-grid-header-rgb: var(--bg-color-default-rgb);\n  --bg-color-data-grid-column-headers-rgb: var(--bg-color-lighter-rgb);\n  --bg-color-data-grid-cell-rgb: var(--bg-color-lightest-rgb);\n  --bg-color-data-grid-row-rgb: var(--bg-color-lighter-rgb);\n  --bg-color-dropdown-menu-rgb: var(--bg-color-lightest-rgb);\n  --bg-color-input-control-rgb: var(--bg-color-lightest-rgb);\n  --bg-color-menu-button-rgb: var(--bg-color-lightest-rgb);\n  --bg-color-more-menu-rgb: var(--bg-color-default-rgb);\n  --bg-color-navigation-bar-rgb: var(--bg-color-lightest-rgb);\n  --bg-color-navigation-menu-rgb: var(--bg-color-lightest-rgb);\n  --bg-color-page-rgb: var(--bg-color-lighter-rgb);\n  --bg-color-slide-panel-rgb: var(--bg-color-lightest-rgb);\n  --bg-color-workspace-rgb: var(--bg-color-lighter-rgb);\n\n  --border-color-input-control-rgb: var(--border-color-default-rgb);\n\n  --fg-color-close-button-rgb: var(--fg-color-dark-rgb);\n  --fg-color-more-menu-rgb: var(--fg-color-dark-rgb);\n\n  --text-color-data-grid-column-headers-rgb: var(--text-color-lighter-rgb);\n  --text-color-data-grid-cell-rgb: var(--text-color-light-rgb);\n  --text-color-dropdown-menu-rgb: var(--text-color-light-rgb);\n  --text-color-input-control-rgb: var(--text-color-default-rgb);\n  --text-color-input-label-rgb: var(--text-color-light-rgb);\n  --text-color-input-placeholder-rgb: var(--text-color-lighter-rgb);\n  --text-color-link-rgb: var(--color-primary-rgb);\n  --text-color-menu-button-rgb: var(--text-color-light-rgb);\n  --text-color-paragraph-rgb: var(--text-color-lighter-rgb);\n  --text-color-text-rgb: var(--text-color-default-rgb);\n  --text-color-title-rgb: var(--text-color-dark-rgb);\n  --text-color-sub-title-rgb: var(--text-color-default-rgb);\n}\n";
 const AppLabLightTheme = {
@@ -27665,12 +28432,11 @@ const ThemeProvider = memo(({
       setTheme2(AppLabLightTheme);
     }
   }, [theme]);
-  return /* @__PURE__ */ jsxs("div", {
-    className: `${currentTheme.id} ${className} theme-provider`,
-    children: [/* @__PURE__ */ jsx(GlobalStyle, {
-      theme: currentTheme
-    }), children]
-  });
+  return /* @__PURE__ */ React.createElement("div", {
+    className: `${currentTheme.id} ${className} theme-provider`
+  }, /* @__PURE__ */ React.createElement(GlobalStyle, {
+    theme: currentTheme
+  }), children);
 });
 const GlobalStyle = createGlobalStyle`
   ${(props) => props.theme.css};
@@ -28568,52 +29334,28 @@ function useEntityEditor() {
     const edit = searchParams.get("edit");
     const view = searchParams.get("view");
     if (new_) {
-      setMode({
-        edit: false,
-        new: true,
-        view: false
-      });
+      setMode({ edit: false, new: true, view: false });
       setModelName(new_);
       const params = queryString.parse(location.search);
-      const _a2 = params, {
-        new: _new
-      } = _a2, props = __objRest(_a2, [
-        "new"
-      ]);
+      const _a2 = params, { new: _new } = _a2, props = __objRest(_a2, ["new"]);
       setEntity(props);
     } else if (edit) {
       const id = searchParams.get("id");
       setModelName(edit);
       if (id) {
-        setEntity({
-          id
-        });
+        setEntity({ id });
       }
-      setMode({
-        edit: true,
-        new: false,
-        view: false
-      });
+      setMode({ edit: true, new: false, view: false });
     } else if (view) {
       const id = searchParams.get("id");
       setModelName(view);
       if (id) {
-        setEntity({
-          id
-        });
+        setEntity({ id });
       }
-      setMode({
-        edit: false,
-        new: false,
-        view: true
-      });
+      setMode({ edit: false, new: false, view: true });
     }
     return () => {
-      setMode({
-        edit: false,
-        new: false,
-        view: false
-      });
+      setMode({ edit: false, new: false, view: false });
       setModelName(null);
       setEntity(void 0);
     };
@@ -28639,19 +29381,11 @@ function useEntityEditor() {
     id
   }) => {
     if (id && edit) {
-      setSearchParams({
-        edit,
-        id
-      });
+      setSearchParams({ edit, id });
     } else if (id && view) {
-      setSearchParams({
-        id,
-        view
-      });
+      setSearchParams({ id, view });
     } else if (new_) {
-      setSearchParams(__spreadValues({
-        new: new_
-      }, set));
+      setSearchParams(__spreadValues({ new: new_ }, set));
     }
   };
   const hideEntityEditor = () => {
@@ -28701,7 +29435,7 @@ const HoverPanel = memo((_Na) => {
     "visible",
     "setMenuVisible"
   ]);
-  return /* @__PURE__ */ jsx(Wrapper, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Wrapper, __spreadValues({
     alignItems,
     alignContent,
     backgroundColor,
@@ -28716,14 +29450,26 @@ const HoverPanel = memo((_Na) => {
     marginTop: 0,
     orientation,
     visible
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
-const Wrapper = styled.div.withConfig({
-  displayName: "Wrapper",
-  componentId: "sc-1nu60i0-0"
-})(["", ";", ";", ";", ";border-radius:", ";left:", ";position:absolute;right:", ";top:", ";&:before{border-top:0;border-top-left-radius:", ";border-top-right-radius:", ";}"], LayoutStyles, AppearanceStyles, FocusedStyles, VisibilityStyles, (props) => props.detached ? props.borderRadius : `0 0 ${props.borderRadius} ${props.borderRadius}`, (props) => props.detached ? props.alignContent === Align.Left ? "-10px" : "auto" : 0, (props) => props.detached ? props.alignContent === Align.Right ? "-10px" : "auto" : 0, (props) => props.detached ? "80%" : "calc(100% - 3px)", (props) => props.detached ? props.borderRadius : `0 0 ${props.borderRadius} ${props.borderRadius}`, (props) => props.detached ? props.borderRadius : `0 0 ${props.borderRadius} ${props.borderRadius}`);
+const Wrapper = styled.div`
+  ${LayoutStyles};
+  ${AppearanceStyles};
+  ${FocusedStyles};
+  ${VisibilityStyles};
+
+  border-radius: ${(props) => props.detached ? props.borderRadius : `0 0 ${props.borderRadius} ${props.borderRadius}`};
+  left: ${(props) => props.detached ? props.alignContent === Align.Left ? "-10px" : "auto" : 0};
+  position: absolute;
+  right: ${(props) => props.detached ? props.alignContent === Align.Right ? "-10px" : "auto" : 0};
+  top: ${(props) => props.detached ? "80%" : "calc(100% - 3px)"};
+
+  &:before {
+    border-top: 0;
+    border-top-left-radius: ${(props) => props.detached ? props.borderRadius : `0 0 ${props.borderRadius} ${props.borderRadius}`};
+    border-top-right-radius: ${(props) => props.detached ? props.borderRadius : `0 0 ${props.borderRadius} ${props.borderRadius}`};
+  }
+`;
 const MoreMenu = memo((_Pa) => {
   var _Qa = _Pa, {
     alignContent = Align.Left,
@@ -28748,67 +29494,67 @@ const MoreMenu = memo((_Pa) => {
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
   const dotFillColor = menuVisible || hovered ? ForegroundColors.PrimaryContrast : dotColor;
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     className: `${className} more-menu`,
     grow: false,
     onMouseLeave: () => setMenuVisible(false)
-  }, props), {
-    children: [/* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
-      alignContent: Align.Center,
-      alignItems: Align.Center,
-      as: "button",
-      cursor: Cursor.Pointer,
-      backgroundColor: menuVisible ? BackgroundColors.Primary : backgroundColor,
-      backgroundOpacity: menuVisible ? 70 : 100,
-      borderRadius: size,
-      focused,
-      depth: Depth.Surface,
-      grow: false,
-      hover: {
-        backgroundColor: BackgroundColors.Primary
-      },
-      onClick: (e2) => {
-        e2.stopPropagation();
-        e2.preventDefault();
-        setMenuVisible(!menuVisible);
-      },
-      onFocus: () => setFocused(true),
-      onBlur: () => {
-        setFocused(false);
-      },
-      onMouseEnter: () => setHovered(true),
-      onMouseLeave: () => setHovered(false),
-      orientation,
-      height: size,
-      width: size
-    }, props), {
-      children: [/* @__PURE__ */ jsx(Dot, {
-        borderRadius: Amount.All,
-        backgroundColor: dotFillColor
-      }), /* @__PURE__ */ jsx(Dot, {
-        borderRadius: Amount.All,
-        backgroundColor: dotFillColor
-      }), /* @__PURE__ */ jsx(Dot, {
-        borderRadius: Amount.All,
-        backgroundColor: dotFillColor
-      })]
-    })), /* @__PURE__ */ jsx(HoverPanel, {
-      alignContent,
-      orientation: Orientation.Vertical,
-      visible: menuVisible,
-      setMenuVisible,
-      width,
-      children: /* @__PURE__ */ jsx(Menu, {
-        menu,
-        onClick: () => setMenuVisible(false)
-      })
-    })]
-  }));
+  }, props), /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
+    alignContent: Align.Center,
+    alignItems: Align.Center,
+    as: "button",
+    cursor: Cursor.Pointer,
+    backgroundColor: menuVisible ? BackgroundColors.Primary : backgroundColor,
+    backgroundOpacity: menuVisible ? 70 : 100,
+    borderRadius: size,
+    focused,
+    depth: Depth.Surface,
+    grow: false,
+    hover: {
+      backgroundColor: BackgroundColors.Primary
+    },
+    onClick: (e2) => {
+      e2.stopPropagation();
+      e2.preventDefault();
+      setMenuVisible(!menuVisible);
+    },
+    onFocus: () => setFocused(true),
+    onBlur: () => {
+      setFocused(false);
+    },
+    onMouseEnter: () => setHovered(true),
+    onMouseLeave: () => setHovered(false),
+    orientation,
+    height: size,
+    width: size
+  }, props), /* @__PURE__ */ React.createElement(Dot, {
+    borderRadius: Amount.All,
+    backgroundColor: dotFillColor
+  }), /* @__PURE__ */ React.createElement(Dot, {
+    borderRadius: Amount.All,
+    backgroundColor: dotFillColor
+  }), /* @__PURE__ */ React.createElement(Dot, {
+    borderRadius: Amount.All,
+    backgroundColor: dotFillColor
+  })), /* @__PURE__ */ React.createElement(HoverPanel, {
+    alignContent,
+    orientation: Orientation.Vertical,
+    visible: menuVisible,
+    setMenuVisible,
+    width
+  }, /* @__PURE__ */ React.createElement(Menu, {
+    menu,
+    onClick: () => setMenuVisible(false)
+  })));
 });
-const Dot = styled.span.withConfig({
-  displayName: "Dot",
-  componentId: "sc-ycayhd-0"
-})(["", ";background-color:rgb(", ");display:inline-block;height:4px;margin:0 1px;width:4px;"], AppearanceStyles, (props) => props.fillColor);
+const Dot = styled.span`
+  ${AppearanceStyles};
+
+  background-color: rgb(${(props) => props.fillColor});
+  display: inline-block;
+  height: 4px;
+  margin: 0 1px;
+  width: 4px;
+`;
 const ModalHeader = memo(({
   alignItems = Align.Center,
   className = "",
@@ -28819,23 +29565,20 @@ const ModalHeader = memo(({
   padding = Amount.Default,
   title
 }) => {
-  return /* @__PURE__ */ jsxs(Container$h, {
+  return /* @__PURE__ */ React.createElement(Container$h, {
     alignItems,
     className: `${className} modal-header`,
     grow: false,
     flat: true,
     marginBottom,
     orientation,
-    padding,
-    children: [/* @__PURE__ */ jsx(Title, {
-      children: title
-    }), /* @__PURE__ */ jsx(Container$h, {}), moreMenu && /* @__PURE__ */ jsx(MoreMenu, __spreadValues({
-      alignContent: Align.Right
-    }, moreMenu)), /* @__PURE__ */ jsx(CloseButton, {
-      marginLeft: Amount.Less,
-      onClick: onCloseClick
-    })]
-  });
+    padding
+  }, /* @__PURE__ */ React.createElement(Title, null, title), /* @__PURE__ */ React.createElement(Container$h, null), moreMenu && /* @__PURE__ */ React.createElement(MoreMenu, __spreadValues({
+    alignContent: Align.Right
+  }, moreMenu)), /* @__PURE__ */ React.createElement(CloseButton, {
+    marginLeft: Amount.Less,
+    onClick: onCloseClick
+  }));
 });
 const SlidePanel = memo((_Ra) => {
   var _Sa = _Ra, {
@@ -28861,7 +29604,7 @@ const SlidePanel = memo((_Ra) => {
     "visible",
     "width"
   ]);
-  return /* @__PURE__ */ jsx(Container$8, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$8, __spreadValues({
     alignItems,
     backgroundColor,
     boxShadow,
@@ -28872,14 +29615,23 @@ const SlidePanel = memo((_Ra) => {
     padding,
     visible,
     width
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
-const Container$8 = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-dorncl-0"
-})(["", ";", ";", ";bottom:", ";opacity:", ";position:fixed;right:", ";top:", ";transform:", ";transition:all 0.3s ease-in-out;transform:", ";z-index:6;"], LayoutStyles, AppearanceStyles, DimensionStyles, Amount.Default, (props) => props.visible ? "1" : "0", Amount.Default, Amount.Default, (props) => props.visible ? "translate(0, 0)" : "translate(0, 1900px)", (props) => props.visible ? "translate(0, 0)" : "translate(1600px, 0)");
+const Container$8 = styled.div`
+  ${LayoutStyles};
+  ${AppearanceStyles};
+  ${DimensionStyles};
+
+  bottom: ${Amount.Default};
+  opacity: ${(props) => props.visible ? "1" : "0"};
+  position: fixed;
+  right: ${Amount.Default};
+  top: ${Amount.Default};
+  transform: ${(props) => props.visible ? "translate(0, 0)" : "translate(0, 1900px)"};
+  transition: all 0.3s ease-in-out;
+  transform: ${(props) => props.visible ? "translate(0, 0)" : "translate(1600px, 0)"};
+  z-index: 6;
+`;
 function getFormFieldsFromModel({
   entity,
   model
@@ -28901,18 +29653,10 @@ function getFormFieldsFromModel({
   }
   return fields;
 }
-const EntityEditor = memo(({
-  actions,
-  className = "",
-  id,
-  model
-}) => {
+const EntityEditor = memo(({ actions, className = "", id, model }) => {
   var _a2, _b;
   const dispatch = useDispatch();
-  const {
-    entity: entityFields,
-    hideEntityEditor
-  } = useEntityEditor();
+  const { entity: entityFields, hideEntityEditor } = useEntityEditor();
   const [dispatched, setDispatched] = useState(false);
   const inProgress = useSelector((state) => state[`${model == null ? void 0 : model.name}.inProgress`]);
   const pluralizedCamel = pluralize(((_b = (_a2 = model == null ? void 0 : model.name) == null ? void 0 : _a2[0]) == null ? void 0 : _b.toLowerCase()) + (model == null ? void 0 : model.name.slice(1)));
@@ -28926,80 +29670,53 @@ const EntityEditor = memo(({
     }
   }, [id, entity]);
   if (id && !entity && !inProgress) {
-    return /* @__PURE__ */ jsx(Container$h, {
+    return /* @__PURE__ */ React.createElement(Container$h, {
       className: `${className} entity-editor`,
-      padding: Amount.More,
-      children: /* @__PURE__ */ jsx(ErrorLabel, {
-        children: "Entity not found"
-      })
-    });
+      padding: Amount.More
+    }, /* @__PURE__ */ React.createElement(ErrorLabel, null, "Entity not found"));
   }
-  return /* @__PURE__ */ jsx(Container$h, {
-    className: `${className} entity-editor`,
-    children: /* @__PURE__ */ jsx(Form, {
-      fields: getFormFieldsFromModel({
-        model
-      }),
-      entity: __spreadValues(__spreadValues({}, entity), entityFields),
-      inProgress,
-      model,
-      name: "entity-editor",
-      onSubmit: async ({
-        fields,
-        problems,
-        validated
-      }) => {
-        let fieldData = {};
-        for (const [key, props] of Object.entries(fields)) {
-          fieldData = __spreadProps(__spreadValues({}, fieldData), {
-            [key]: props.value
-          });
-        }
-        if (id) {
-          const editFunction = actions == null ? void 0 : actions[`update${model.name}`];
-          if (editFunction)
-            await dispatch(editFunction(__spreadValues({
-              id
-            }, fieldData)));
-          hideEntityEditor();
-        } else {
-          const createFunction = actions == null ? void 0 : actions[`create${model.name}`];
-          if (createFunction)
-            await dispatch(createFunction(fieldData));
-          hideEntityEditor();
-        }
-      },
-      submitButton: {
-        label: id ? "Update" : "Create"
+  return /* @__PURE__ */ React.createElement(Container$h, {
+    className: `${className} entity-editor`
+  }, /* @__PURE__ */ React.createElement(Form, {
+    fields: getFormFieldsFromModel({ model }),
+    entity: __spreadValues(__spreadValues({}, entity), entityFields),
+    inProgress,
+    model,
+    name: "entity-editor",
+    onSubmit: async ({ fields, problems, validated }) => {
+      let fieldData = {};
+      for (const [key, props] of Object.entries(fields)) {
+        fieldData = __spreadProps(__spreadValues({}, fieldData), { [key]: props.value });
       }
-    })
-  });
+      if (id) {
+        const editFunction = actions == null ? void 0 : actions[`update${model.name}`];
+        if (editFunction)
+          await dispatch(editFunction(__spreadValues({ id }, fieldData)));
+        hideEntityEditor();
+      } else {
+        const createFunction = actions == null ? void 0 : actions[`create${model.name}`];
+        if (createFunction)
+          await dispatch(createFunction(fieldData));
+        hideEntityEditor();
+      }
+    },
+    submitButton: {
+      label: id ? "Update" : "Create"
+    }
+  }));
 });
-const EntityPreview = memo(({
-  id,
-  model
-}) => {
-  return /* @__PURE__ */ jsx(Container$h, {
-    "data-testid": "account-pane",
-    children: /* @__PURE__ */ jsx(LoadingOverlay, {
-      visible: false
-    })
-  });
+const EntityPreview = memo(({ id, model }) => {
+  return /* @__PURE__ */ React.createElement(Container$h, {
+    "data-testid": "account-pane"
+  }, /* @__PURE__ */ React.createElement(LoadingOverlay, {
+    visible: false
+  }));
 });
 const EntityPanel = memo((_Ta) => {
-  var _Ua = _Ta, {
-    actions
-  } = _Ua, props = __objRest(_Ua, [
-    "actions"
-  ]);
+  var _Ua = _Ta, { actions } = _Ua, props = __objRest(_Ua, ["actions"]);
   const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
-  const {
-    entity,
-    model,
-    mode,
-    hideEntityEditor
-  } = useEntityEditor();
+  const { entity, model, mode, hideEntityEditor } = useEntityEditor();
   const entityState = useSelector((state) => {
     var _a2;
     return state[`${camelCase(pluralize((_a2 = model == null ? void 0 : model.name) != null ? _a2 : ""))}`];
@@ -29014,20 +29731,20 @@ const EntityPanel = memo((_Ta) => {
   }, [model]);
   const getContent = () => {
     if (model && (entity == null ? void 0 : entity.id) && mode.edit) {
-      return /* @__PURE__ */ jsx(EntityEditor, {
+      return /* @__PURE__ */ React.createElement(EntityEditor, {
         actions,
         model,
         id: entity.id
       });
     }
     if (model && (entity == null ? void 0 : entity.id) && mode.view) {
-      return /* @__PURE__ */ jsx(EntityPreview, {
+      return /* @__PURE__ */ React.createElement(EntityPreview, {
         model,
         id: entity.id
       });
     }
     if (model && !(entity == null ? void 0 : entity.id)) {
-      return /* @__PURE__ */ jsx(EntityEditor, {
+      return /* @__PURE__ */ React.createElement(EntityEditor, {
         actions,
         model
       });
@@ -29046,44 +29763,42 @@ const EntityPanel = memo((_Ta) => {
     }
     return "";
   };
-  return /* @__PURE__ */ jsx(SlidePanel, {
-    visible,
-    children: /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
-      borderRadius: Amount.Default
-    }, props), {
-      children: [/* @__PURE__ */ jsx(LoadingOverlay, {
-        visible: inProgress
-      }), /* @__PURE__ */ jsx(ModalHeader, {
-        onCloseClick: () => hideEntityEditor(),
-        moreMenu: (entity == null ? void 0 : entity.id) ? {
-          menu: [{
-            icon: {
-              color: Colors.Error,
-              name: BasicIcons.TrashCan,
-              size: Size.Smaller
-            },
-            label: "Delete",
-            onClick: () => {
-              if (model && (entity == null ? void 0 : entity.id)) {
-                const deleteFunction = actions == null ? void 0 : actions[`delete${model.name}`];
-                if (deleteFunction)
-                  dispatch(deleteFunction(entity.id));
-              }
-            },
-            textColor: TextColors.Error
-          }]
-        } : void 0,
-        title: getHeaderTitle()
-      }), /* @__PURE__ */ jsx(Container$h, {
-        padding: Amount.Default,
-        scrollable: true,
-        style: {
-          top: "60px !important"
-        },
-        children: getContent()
-      })]
-    }))
-  });
+  return /* @__PURE__ */ React.createElement(SlidePanel, {
+    visible
+  }, /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
+    borderRadius: Amount.Default
+  }, props), /* @__PURE__ */ React.createElement(LoadingOverlay, {
+    visible: inProgress
+  }), /* @__PURE__ */ React.createElement(ModalHeader, {
+    onCloseClick: () => hideEntityEditor(),
+    moreMenu: (entity == null ? void 0 : entity.id) ? {
+      menu: [
+        {
+          icon: {
+            color: Colors.Error,
+            name: BasicIcons.TrashCan,
+            size: Size.Smaller
+          },
+          label: "Delete",
+          onClick: () => {
+            if (model && (entity == null ? void 0 : entity.id)) {
+              const deleteFunction = actions == null ? void 0 : actions[`delete${model.name}`];
+              if (deleteFunction)
+                dispatch(deleteFunction(entity.id));
+            }
+          },
+          textColor: TextColors.Error
+        }
+      ]
+    } : void 0,
+    title: getHeaderTitle()
+  }), /* @__PURE__ */ React.createElement(Container$h, {
+    padding: Amount.Default,
+    scrollable: true,
+    style: {
+      top: "60px !important"
+    }
+  }, getContent())));
 });
 const Backdrop = memo((_Va) => {
   var _Wa = _Va, {
@@ -29099,19 +29814,30 @@ const Backdrop = memo((_Va) => {
     "onClick",
     "visible"
   ]);
-  return /* @__PURE__ */ jsx(Container$7, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$7, __spreadValues({
     as,
     className: `${className} backdrop`,
     onClick,
     visible
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
-const Container$7 = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-1hfexhv-0"
-})(["background:var(--bg-color-backdrop-hidden);bottom:0;display:block;left:0;position:absolute;pointer-events:none;right:0;top:0;transition:background 0.3s ease-in-out;z-index:6000;", ""], (props) => props.visible && css(["background:var(--bg-color-backdrop-visible);pointer-events:all;"]));
+const Container$7 = styled.div`
+  background: var(--bg-color-backdrop-hidden);
+  bottom: 0;
+  display: block;
+  left: 0;
+  position: absolute;
+  pointer-events: none;
+  right: 0;
+  top: 0;
+  transition: background 0.3s ease-in-out;
+  z-index: 6000;
+
+  ${(props) => props.visible && css`
+      background: var(--bg-color-backdrop-visible);
+      pointer-events: all;
+    `}
+`;
 const WebApplication = memo((_Xa) => {
   var _Ya = _Xa, {
     authentication = false,
@@ -29128,36 +29854,26 @@ const WebApplication = memo((_Xa) => {
     "className",
     "httpClient"
   ]);
-  const {
-    inProgress,
-    loggedIn,
-    loginRequired
-  } = useAuthentication({
+  const { inProgress, loggedIn, loginRequired } = useAuthentication({
     enabled: authentication
   });
-  const {
-    current,
-    list
-  } = useSelector((state) => state.ui.themes);
+  const { current, list } = useSelector((state) => state.ui.themes);
   const loginCondition = authentication ? loggedIn && (loginRequired || !loginRequired) || !loggedIn && !loginRequired : true;
   const showOutlet = !inProgress && loginCondition;
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     backgroundColor,
     className: `${className} web-application`
-  }, props), {
-    children: /* @__PURE__ */ jsxs(ThemeProvider, {
-      theme: current,
-      themes: list,
-      children: [/* @__PURE__ */ jsx(LoadingOverlay, {
-        visible: !showOutlet
-      }), /* @__PURE__ */ jsx(Backdrop, {
-        visible: false
-      }), showOutlet && /* @__PURE__ */ jsx(Outlet, {}), /* @__PURE__ */ jsx(EntityPanel, {
-        actions,
-        httpClient
-      })]
-    })
-  }));
+  }, props), /* @__PURE__ */ React.createElement(ThemeProvider, {
+    theme: current,
+    themes: list
+  }, /* @__PURE__ */ React.createElement(LoadingOverlay, {
+    visible: !showOutlet
+  }), /* @__PURE__ */ React.createElement(Backdrop, {
+    visible: false
+  }), showOutlet && /* @__PURE__ */ React.createElement(Outlet, null), /* @__PURE__ */ React.createElement(EntityPanel, {
+    actions,
+    httpClient
+  })));
 });
 const SubTitle = memo((_Za) => {
   var __a = _Za, {
@@ -29181,7 +29897,7 @@ const SubTitle = memo((_Za) => {
     "textColor",
     "textWeight"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     as,
     className: `${className} title`,
     inline: false,
@@ -29191,9 +29907,7 @@ const SubTitle = memo((_Za) => {
     textWeight,
     textColor,
     textSize
-  }, props), {
-    children: children != null ? children : ""
-  }));
+  }, props), children != null ? children : "");
 });
 const Workspace = memo((_$a) => {
   var _ab = _$a, {
@@ -29222,11 +29936,10 @@ const Workspace = memo((_$a) => {
     "title"
   ]);
   useTitle(title);
-  const headerTitle = (header == null ? void 0 : header.title) ? typeof header.title === "string" ? /* @__PURE__ */ jsx(Title, {
-    marginTop: Amount.None,
-    children: header.title
-  }) : header.title : null;
-  const WorkspaceComp = (props2) => /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues(__spreadValues({
+  const headerTitle = (header == null ? void 0 : header.title) ? typeof header.title === "string" ? /* @__PURE__ */ React.createElement(Title, {
+    marginTop: Amount.None
+  }, header.title) : header.title : null;
+  const WorkspaceComp = (props2) => /* @__PURE__ */ React.createElement(Container$h, __spreadValues(__spreadValues({
     alignContent,
     backgroundColor,
     className: `${className} workspace`,
@@ -29234,38 +29947,29 @@ const Workspace = memo((_$a) => {
     orientation,
     padding,
     scrollable: true
-  }, props), props2), {
-    children: [((header == null ? void 0 : header.title) || (header == null ? void 0 : header.actions)) && /* @__PURE__ */ jsxs(Container$h, {
-      alignItems: Align.Center,
-      grow: false,
-      marginBottom: Amount.All,
-      orientation: Orientation.Horizontal,
-      children: [/* @__PURE__ */ jsxs(Container$h, {
-        children: [/* @__PURE__ */ jsx(Container$h, {
-          alignItems: Align.Center,
-          className: "workspace-title",
-          orientation: Orientation.Horizontal,
-          children: headerTitle
-        }), /* @__PURE__ */ jsx(Container$h, {
-          className: "workspace-sub-title",
-          orientation: Orientation.Horizontal,
-          children: (header == null ? void 0 : header.subTitle) && /* @__PURE__ */ jsx(SubTitle, {
-            marginTop: Amount.None,
-            children: header.subTitle
-          })
-        })]
-      }), (header == null ? void 0 : header.actions) && /* @__PURE__ */ jsx(Container$h, {
-        className: "workspace-actions",
-        children: header.actions
-      })]
-    }), /* @__PURE__ */ jsx(LoadingOverlay, {
-      visible: loading
-    }), children]
-  }));
-  const Child = () => Layout ? e$1.cloneElement(/* @__PURE__ */ jsx(Layout, __spreadValues({
+  }, props), props2), ((header == null ? void 0 : header.title) || (header == null ? void 0 : header.actions)) && /* @__PURE__ */ React.createElement(Container$h, {
+    alignItems: Align.Center,
+    grow: false,
+    marginBottom: Amount.All,
+    orientation: Orientation.Horizontal
+  }, /* @__PURE__ */ React.createElement(Container$h, null, /* @__PURE__ */ React.createElement(Container$h, {
+    alignItems: Align.Center,
+    className: "workspace-title",
+    orientation: Orientation.Horizontal
+  }, headerTitle), /* @__PURE__ */ React.createElement(Container$h, {
+    className: "workspace-sub-title",
+    orientation: Orientation.Horizontal
+  }, (header == null ? void 0 : header.subTitle) && /* @__PURE__ */ React.createElement(SubTitle, {
+    marginTop: Amount.None
+  }, header.subTitle))), (header == null ? void 0 : header.actions) && /* @__PURE__ */ React.createElement(Container$h, {
+    className: "workspace-actions"
+  }, header.actions)), /* @__PURE__ */ React.createElement(LoadingOverlay, {
+    visible: loading
+  }), children);
+  const Child = () => Layout ? cloneElement(/* @__PURE__ */ React.createElement(Layout, __spreadValues({
     scrollable: true
-  }, props)), props, /* @__PURE__ */ jsx(WorkspaceComp, __spreadValues({}, props))) : /* @__PURE__ */ jsx(WorkspaceComp, __spreadValues({}, props));
-  return /* @__PURE__ */ jsx(Child, {});
+  }, props)), props, /* @__PURE__ */ React.createElement(WorkspaceComp, __spreadValues({}, props))) : /* @__PURE__ */ React.createElement(WorkspaceComp, __spreadValues({}, props));
+  return /* @__PURE__ */ React.createElement(Child, null);
 });
 var fileDownload = function(data, filename, mime, bom) {
   var blobData = typeof bom !== "undefined" ? [bom, data] : [data];
@@ -29329,14 +30033,12 @@ const StringLabel = memo((_bb) => {
     "textSize",
     "value"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     icon,
     lineHeight,
     textColor,
     textSize
-  }, props), {
-    children: value
-  }));
+  }, props), value);
 });
 const NumberLabel = memo((_db) => {
   var _eb = _db, {
@@ -29352,36 +30054,20 @@ const NumberLabel = memo((_db) => {
     "textSize",
     "value"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     icon,
     lineHeight,
     textColor,
     textSize
-  }, props), {
-    children: value
-  }));
+  }, props), value);
 });
 const CurrencyAmountLabel = memo((_fb) => {
-  var _gb = _fb, {
-    amount,
-    currency
-  } = _gb, props = __objRest(_gb, [
-    "amount",
-    "currency"
-  ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({}, props), {
-    children: amount === 0 ? "$0" : amount ? `$${amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ""
-  }));
+  var _gb = _fb, { amount, currency } = _gb, props = __objRest(_gb, ["amount", "currency"]);
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({}, props), amount === 0 ? "$0" : amount ? `$${amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : "");
 });
 const PercentLabel = memo((_hb) => {
-  var _ib = _hb, {
-    value
-  } = _ib, props = __objRest(_ib, [
-    "value"
-  ]);
-  return /* @__PURE__ */ jsxs(Label, __spreadProps(__spreadValues({}, props), {
-    children: [value, "%"]
-  }));
+  var _ib = _hb, { value } = _ib, props = __objRest(_ib, ["value"]);
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({}, props), value, "%");
 });
 class LuxonError extends Error {
 }
@@ -33217,15 +33903,13 @@ const DateLabel = memo((_jb) => {
     "textSize",
     "value"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     className: `${className} date-label`,
     grow: false,
     icon,
     textColor,
     textSize
-  }, props), {
-    children: DateTime.fromISO(value).toLocaleString(format)
-  }));
+  }, props), DateTime.fromISO(value).toLocaleString(format));
 });
 const MenuItemLabel = memo((_lb) => {
   var _mb = _lb, {
@@ -33246,14 +33930,12 @@ const MenuItemLabel = memo((_lb) => {
     "value"
   ]);
   var _a2, _b, _c, _d;
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     icon,
     lineHeight,
     textColor,
     textSize
-  }, props), {
-    children: !fieldName || !model ? value : (_d = (_c = (_b = (_a2 = model.fields[fieldName]) == null ? void 0 : _a2.items) == null ? void 0 : _b.find((i2) => i2.value === value)) == null ? void 0 : _c.label) != null ? _d : value
-  }));
+  }, props), !fieldName || !model ? value : (_d = (_c = (_b = (_a2 = model.fields[fieldName]) == null ? void 0 : _a2.items) == null ? void 0 : _b.find((i2) => i2.value === value)) == null ? void 0 : _c.label) != null ? _d : value);
 });
 function getLabelByFieldType({
   fieldName,
@@ -33264,40 +33946,40 @@ function getLabelByFieldType({
 }) {
   switch (type) {
     case Primitives.Boolean:
-      return /* @__PURE__ */ jsx(BooleanLabel, __spreadValues({
+      return /* @__PURE__ */ React.createElement(BooleanLabel, __spreadValues({
         grow: false,
         value
       }, props));
     case Primitives.CurrencyAmount:
-      return /* @__PURE__ */ jsx(CurrencyAmountLabel, __spreadValues({
+      return /* @__PURE__ */ React.createElement(CurrencyAmountLabel, __spreadValues({
         amount: value,
         currency: CurrencyCode.UnitedStatesDollar
       }, props));
     case Primitives.Date:
-      return /* @__PURE__ */ jsx(DateLabel, __spreadValues({
+      return /* @__PURE__ */ React.createElement(DateLabel, __spreadValues({
         value
       }, props));
     case Primitives.Percent:
-      return /* @__PURE__ */ jsx(PercentLabel, __spreadValues({
+      return /* @__PURE__ */ React.createElement(PercentLabel, __spreadValues({
         value
       }, props));
     case Primitives.Menu:
-      return /* @__PURE__ */ jsx(MenuItemLabel, __spreadValues({
+      return /* @__PURE__ */ React.createElement(MenuItemLabel, __spreadValues({
         fieldName,
         model,
         value
       }, props));
     case Primitives.Number:
-      return /* @__PURE__ */ jsx(NumberLabel, __spreadValues({
+      return /* @__PURE__ */ React.createElement(NumberLabel, __spreadValues({
         value
       }, props));
     case Primitives.String:
-      return /* @__PURE__ */ jsx(StringLabel, __spreadValues({
+      return /* @__PURE__ */ React.createElement(StringLabel, __spreadValues({
         grow: false,
         value
       }, props));
     default:
-      return /* @__PURE__ */ jsx(StringLabel, __spreadValues({
+      return /* @__PURE__ */ React.createElement(StringLabel, __spreadValues({
         grow: false,
         value
       }, props));
@@ -33325,7 +34007,7 @@ const DataGridCell = memo((_nb) => {
     minWidth,
     width
   } = props;
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     orientation: Orientation.Horizontal,
     overflow: Overflow.Hidden,
     maxWidth,
@@ -33333,30 +34015,24 @@ const DataGridCell = memo((_nb) => {
     paddingLeft: Amount.Less,
     paddingRight: Amount.Less,
     width
-  }, props), {
-    children: getLabelByFieldType({
-      fieldName,
-      model,
-      props: {
-        alignContent,
-        overflow: Overflow.Hidden,
-        textColor,
-        textOverflow,
-        textSize,
-        textWeight
-      },
-      type,
-      value
-    })
+  }, props), getLabelByFieldType({
+    fieldName,
+    model,
+    props: {
+      alignContent,
+      overflow: Overflow.Hidden,
+      textColor,
+      textOverflow,
+      textSize,
+      textWeight
+    },
+    type,
+    value
   }));
 });
 const SearchInput = memo((_pb) => {
-  var _qb = _pb, {
-    onChange
-  } = _qb, props = __objRest(_qb, [
-    "onChange"
-  ]);
-  return /* @__PURE__ */ jsx(TextInput, __spreadValues({
+  var _qb = _pb, { onChange } = _qb, props = __objRest(_qb, ["onChange"]);
+  return /* @__PURE__ */ React.createElement(TextInput, __spreadValues({
     icon: {
       name: BasicIcons.Search,
       size: Size.Smaller
@@ -33399,7 +34075,7 @@ const MenuButton = memo((_rb) => {
   useEffect(() => {
     setFocused(menuVisible);
   }, [menuVisible]);
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     boxShadow: menuVisible ? DepthShadow.Higher : DepthShadow.Surface,
     borderRadius,
     className: `${className} menu-button`,
@@ -33410,43 +34086,40 @@ const MenuButton = memo((_rb) => {
       setMenuVisible(false);
     },
     width
-  }, props), {
-    children: [/* @__PURE__ */ jsx(DropdownControl, {
-      backgroundColor,
-      borderRadius,
-      border,
-      depth: Depth.High,
-      label: label != null ? label : "",
-      focused,
-      lineHeight: size,
-      menuVisible,
-      name: "menu-button-dropdown-control",
-      onBlur: () => {
-        if (!menuVisible)
-          setFocused(false);
-      },
-      onFocus: () => setFocused(true),
-      onClick: () => setMenuVisible(!menuVisible),
-      textColor
-    }), /* @__PURE__ */ jsx(HoverPanel, {
-      backgroundColor,
-      borderRadius,
-      detached: false,
-      focused,
-      padding,
-      visible: menuVisible,
-      setMenuVisible,
-      width,
-      children: /* @__PURE__ */ jsx(Menu, {
-        backgroundColor: BackgroundColors.Light,
-        borderRadius,
-        menu,
-        onClick: (e2) => {
-          setMenuVisible(false);
-        }
-      })
-    })]
-  }));
+  }, props), /* @__PURE__ */ React.createElement(DropdownControl, {
+    backgroundColor,
+    borderRadius,
+    border,
+    depth: Depth.High,
+    label: label != null ? label : "",
+    focused,
+    lineHeight: size,
+    menuVisible,
+    name: "menu-button-dropdown-control",
+    onBlur: () => {
+      if (!menuVisible)
+        setFocused(false);
+    },
+    onFocus: () => setFocused(true),
+    onClick: () => setMenuVisible(!menuVisible),
+    textColor
+  }), /* @__PURE__ */ React.createElement(HoverPanel, {
+    backgroundColor,
+    borderRadius,
+    detached: false,
+    focused,
+    padding,
+    visible: menuVisible,
+    setMenuVisible,
+    width
+  }, /* @__PURE__ */ React.createElement(Menu, {
+    backgroundColor: BackgroundColors.Light,
+    borderRadius,
+    menu,
+    onClick: (e2) => {
+      setMenuVisible(false);
+    }
+  })));
 });
 const DataGrid = memo((_tb) => {
   var _ub = _tb, {
@@ -33491,7 +34164,7 @@ const DataGrid = memo((_tb) => {
   const MIN_COLUMN_WIDTH = 150;
   const MAX_COLUMN_WIDTH = 300;
   if (!columns) {
-    return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ React$1.createElement(Container$h, __spreadValues({
       alignContent: Align.Top,
       backgroundColor,
       borderRadius,
@@ -33499,13 +34172,9 @@ const DataGrid = memo((_tb) => {
       className: `${className} data-grid`,
       grow: true,
       overflow: Overflow.Hidden
-    }, props), {
-      children: /* @__PURE__ */ jsx(Label, {
-        children: "No columns defined"
-      })
-    }));
+    }, props), /* @__PURE__ */ React$1.createElement(Label, null, "No columns defined"));
   }
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React$1.createElement(Container$h, __spreadValues({
     alignContent: Align.Top,
     backgroundColor,
     borderRadius,
@@ -33513,183 +34182,167 @@ const DataGrid = memo((_tb) => {
     className: `${className} data-grid`,
     grow: false,
     overflow: Overflow.Hidden
-  }, props), {
-    children: [/* @__PURE__ */ jsx(LoadingOverlay, {
-      borderRadius,
-      visible: loading
-    }), header && Object.keys(header).length > 0 && /* @__PURE__ */ jsxs(Container$h, {
-      backgroundColor: BackgroundColors.DataGridHeader,
-      borderRadius: {
-        topLeft: Amount.Less,
-        topRight: Amount.Less
-      },
-      className: "data-grid-header",
+  }, props), /* @__PURE__ */ React$1.createElement(LoadingOverlay, {
+    borderRadius,
+    visible: loading
+  }), header && Object.keys(header).length > 0 && /* @__PURE__ */ React$1.createElement(Container$h, {
+    backgroundColor: BackgroundColors.DataGridHeader,
+    borderRadius: {
+      topLeft: Amount.Less,
+      topRight: Amount.Less
+    },
+    className: "data-grid-header",
+    orientation: Orientation.Horizontal,
+    padding: Amount.Less,
+    grow: false
+  }, header.search && /* @__PURE__ */ React$1.createElement(Container$h, {
+    width: header.search.width
+  }, /* @__PURE__ */ React$1.createElement(SearchInput, {
+    name: "search-input",
+    onChange: ({ value }) => {
+      setSearchTerm(value != null ? value : "");
+    },
+    placeholder: header.search.placeholder,
+    width: header.search.width
+  })), /* @__PURE__ */ React$1.createElement(Container$h, {
+    alignSelf: Align.Stretch
+  }), header.export && /* @__PURE__ */ React$1.createElement(Container$h, {
+    width: header.export.width
+  }, /* @__PURE__ */ React$1.createElement(MenuButton, {
+    menu: [
+      {
+        label: "Export to CSV",
+        onClick: () => downloadDataAsFile({
+          data: formatObjectToCSVData({
+            objectType: "EXPENSE"
+          }),
+          fileName: "expenses"
+        })
+      }
+    ],
+    label: "Export"
+  })), header.create && /* @__PURE__ */ React$1.createElement(Button$1, {
+    onClick: header.create.onClick,
+    size: Size.Small,
+    type: ButtonType.Secondary
+  }, header.create.label)), /* @__PURE__ */ React$1.createElement(Container$h, {
+    borderRadius: !header ? borderRadius : void 0,
+    className: "data-grid-grid",
+    onScroll: (e2) => e2.preventDefault(),
+    overflow: Overflow.Scroll
+  }, display === DataGridDisplayType.Table ? /* @__PURE__ */ React$1.createElement(React$1.Fragment, null, /* @__PURE__ */ React$1.createElement(Container$h, {
+    alignItems: Align.Left,
+    backgroundColor: BackgroundColors.DataGridColumnHeaders,
+    className: "data-grid-headers",
+    orientation: Orientation.Horizontal,
+    paddingBottom: Amount.Least,
+    paddingTop: Amount.Least,
+    grow: false
+  }, columns.map((column, key) => {
+    var _a2;
+    return /* @__PURE__ */ React$1.createElement(Container$h, {
+      alignContent: column.align,
+      alignItems: Align.Center,
+      backgroundColor: BackgroundColors.DataGridColumnHeaders,
+      border: key !== columns.length - 1 ? {
+        right: {
+          color: BorderColors.Default,
+          style: BorderStyle.Solid,
+          width: 1
+        }
+      } : void 0,
+      borderRadius: !header ? {
+        topLeft: header ? 0 : Amount.Default,
+        topRight: header ? 0 : Amount.Default
+      } : void 0,
+      className: "data-grid-header-cell",
+      shrink: false,
+      key,
       orientation: Orientation.Horizontal,
-      padding: Amount.Less,
-      grow: false,
-      children: [header.search && /* @__PURE__ */ jsx(Container$h, {
-        width: header.search.width,
-        children: /* @__PURE__ */ jsx(SearchInput, {
-          name: "search-input",
-          onChange: ({
-            value
-          }) => {
-            setSearchTerm(value != null ? value : "");
-          },
-          placeholder: header.search.placeholder,
-          width: header.search.width
-        })
-      }), /* @__PURE__ */ jsx(Container$h, {
-        alignSelf: Align.Stretch
-      }), header.export && /* @__PURE__ */ jsx(Container$h, {
-        width: header.export.width,
-        children: /* @__PURE__ */ jsx(MenuButton, {
-          menu: [{
-            label: "Export to CSV",
-            onClick: () => downloadDataAsFile({
-              data: formatObjectToCSVData({
-                objectType: "EXPENSE"
-              }),
-              fileName: "expenses"
-            })
-          }],
-          label: "Export"
-        })
-      }), header.create && /* @__PURE__ */ jsx(Button$1, {
-        onClick: header.create.onClick,
-        size: Size.Small,
-        type: ButtonType.Secondary,
-        children: header.create.label
-      })]
-    }), /* @__PURE__ */ jsx(Container$h, {
-      borderRadius: !header ? borderRadius : void 0,
-      className: "data-grid-grid",
-      onScroll: (e2) => e2.preventDefault(),
-      overflow: Overflow.Scroll,
-      children: display === DataGridDisplayType.Table ? /* @__PURE__ */ jsxs(Fragment, {
-        children: [/* @__PURE__ */ jsx(Container$h, {
-          alignItems: Align.Left,
-          backgroundColor: BackgroundColors.DataGridColumnHeaders,
-          className: "data-grid-headers",
-          orientation: Orientation.Horizontal,
-          paddingBottom: Amount.Least,
-          paddingTop: Amount.Least,
-          grow: false,
-          children: columns.map((column, key) => {
-            var _a2;
-            return /* @__PURE__ */ jsx(Container$h, {
-              alignContent: column.align,
-              alignItems: Align.Center,
-              backgroundColor: BackgroundColors.DataGridColumnHeaders,
-              border: key !== columns.length - 1 ? {
-                right: {
-                  color: BorderColors.Default,
-                  style: BorderStyle.Solid,
-                  width: 1
-                }
-              } : void 0,
-              borderRadius: !header ? {
-                topLeft: header ? 0 : Amount.Default,
-                topRight: header ? 0 : Amount.Default
-              } : void 0,
-              className: "data-grid-header-cell",
-              shrink: false,
-              orientation: Orientation.Horizontal,
-              paddingLeft: Amount.Default,
-              paddingRight: Amount.Default,
-              maxWidth: (_a2 = column.maxWidth) != null ? _a2 : MAX_COLUMN_WIDTH,
-              minWidth: column.minWidth ? column.minWidth : MIN_COLUMN_WIDTH,
-              width: column.width,
-              children: /* @__PURE__ */ jsx(Label, {
-                alignContent: column.align,
-                alignItems: Align.Center,
-                height: Size.Large,
-                textColor: TextColors.DataGridColumnHeaders,
-                size: Size.Smaller,
-                children: column.label
-              })
-            }, key);
-          })
-        }), /* @__PURE__ */ jsx(Container$h, {
-          backgroundColor: BackgroundColors.DataGridRow,
-          borderRadius: {
-            bottomLeft: Amount.Default,
-            bottomRight: Amount.Default
-          },
-          className: "data-grid-rows",
-          grow: true,
-          lineWrap: true,
-          orientation: Orientation.Vertical,
-          children: data && data.map((row, key) => {
-            return /* @__PURE__ */ jsx(Container$h, {
-              backgroundColor: BackgroundColors.DataGridCell,
-              borderRadius: Amount.None,
-              className: "data-grid-row",
-              cursor: Cursor.Pointer,
-              grow: true,
-              hover: {
-                backgroundColor: BackgroundColors.Primary
-              },
-              orientation: Orientation.Horizontal,
-              onClick: () => {
-                if (onItemClick)
-                  onItemClick(row);
-              },
-              onMouseEnter: () => setHoveredRow(key),
-              onMouseLeave: () => setHoveredRow(void 0),
-              padding: Amount.Least,
-              paddingLeft: Amount.Least,
-              paddingRight: Amount.Least,
-              children: columns.map((column, columnKey) => {
-                var _a2;
-                return /* @__PURE__ */ jsx(DataGridCell, {
-                  alignContent: column.align,
-                  alignItems: Align.Center,
-                  fieldName: column.field,
-                  height: Size.Large,
-                  model,
-                  textColor: hoveredRow === key ? TextColors.PrimaryContrast : TextColors.DataGridCell,
-                  type: column.type,
-                  value: fetchFromObject(row, column.field),
-                  maxWidth: (_a2 = column.maxWidth) != null ? _a2 : MAX_COLUMN_WIDTH,
-                  minWidth: column.minWidth ? column.minWidth : MIN_COLUMN_WIDTH,
-                  width: column.width
-                });
-              })
-            }, key);
-          })
-        })]
-      }) : /* @__PURE__ */ jsx(Container$h, {
-        children: !loading && loaded && data && data.length === 0 ? /* @__PURE__ */ jsx(NoResults, {
-          as: Container$h,
-          children: /* @__PURE__ */ jsx(Label, {
-            children: "No results"
-          })
-        }) : data && data.map((row, key) => {
-          if (template && template.card) {
-            return e$1.createElement(template.card, {
-              key,
-              marginBottom: Amount.Default,
-              onClick: () => {
-                if (onItemClick)
-                  onItemClick(row);
-              },
-              row
-            });
-          } else {
-            return /* @__PURE__ */ jsx(Fragment, {
-              children: "Need a card template here"
-            });
-          }
-        })
-      })
-    })]
-  }));
+      paddingLeft: Amount.Default,
+      paddingRight: Amount.Default,
+      maxWidth: (_a2 = column.maxWidth) != null ? _a2 : MAX_COLUMN_WIDTH,
+      minWidth: column.minWidth ? column.minWidth : MIN_COLUMN_WIDTH,
+      width: column.width
+    }, /* @__PURE__ */ React$1.createElement(Label, {
+      alignContent: column.align,
+      alignItems: Align.Center,
+      height: Size.Large,
+      textColor: TextColors.DataGridColumnHeaders,
+      size: Size.Smaller
+    }, column.label));
+  })), /* @__PURE__ */ React$1.createElement(Container$h, {
+    backgroundColor: BackgroundColors.DataGridRow,
+    borderRadius: {
+      bottomLeft: Amount.Default,
+      bottomRight: Amount.Default
+    },
+    className: "data-grid-rows",
+    grow: true,
+    lineWrap: true,
+    orientation: Orientation.Vertical
+  }, data && data.map((row, key) => {
+    return /* @__PURE__ */ React$1.createElement(Container$h, {
+      backgroundColor: BackgroundColors.DataGridCell,
+      borderRadius: Amount.None,
+      className: "data-grid-row",
+      cursor: Cursor.Pointer,
+      grow: true,
+      hover: {
+        backgroundColor: BackgroundColors.Primary
+      },
+      orientation: Orientation.Horizontal,
+      key,
+      onClick: () => {
+        if (onItemClick)
+          onItemClick(row);
+      },
+      onMouseEnter: () => setHoveredRow(key),
+      onMouseLeave: () => setHoveredRow(void 0),
+      padding: Amount.Least,
+      paddingLeft: Amount.Least,
+      paddingRight: Amount.Least
+    }, columns.map((column, columnKey) => {
+      var _a2;
+      return /* @__PURE__ */ React$1.createElement(DataGridCell, {
+        alignContent: column.align,
+        alignItems: Align.Center,
+        fieldName: column.field,
+        height: Size.Large,
+        model,
+        textColor: hoveredRow === key ? TextColors.PrimaryContrast : TextColors.DataGridCell,
+        type: column.type,
+        value: fetchFromObject(row, column.field),
+        maxWidth: (_a2 = column.maxWidth) != null ? _a2 : MAX_COLUMN_WIDTH,
+        minWidth: column.minWidth ? column.minWidth : MIN_COLUMN_WIDTH,
+        width: column.width
+      });
+    }));
+  }))) : /* @__PURE__ */ React$1.createElement(Container$h, null, !loading && loaded && data && data.length === 0 ? /* @__PURE__ */ React$1.createElement(NoResults, {
+    as: Container$h
+  }, /* @__PURE__ */ React$1.createElement(Label, null, "No results")) : data && data.map((row, key) => {
+    if (template && template.card) {
+      return React$1.createElement(template.card, {
+        key,
+        marginBottom: Amount.Default,
+        onClick: () => {
+          if (onItemClick)
+            onItemClick(row);
+        },
+        row
+      });
+    } else {
+      return /* @__PURE__ */ React$1.createElement(React$1.Fragment, null, "Need a card template here");
+    }
+  }))));
 });
-const NoResults = styled.div.withConfig({
-  displayName: "NoResults",
-  componentId: "sc-s798s5-0"
-})(["color:#9b9b9b;font-size:13px;font-weight:500;padding:50px 0;text-align:center;"]);
+const NoResults = styled.div`
+  color: #9b9b9b;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 50px 0;
+  text-align: center;
+`;
 const BooleanLabel = memo((_vb) => {
   var _wb = _vb, {
     icon,
@@ -33704,18 +34357,16 @@ const BooleanLabel = memo((_vb) => {
     "textSize",
     "value"
   ]);
-  return /* @__PURE__ */ jsxs(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     icon,
     lineHeight,
     textColor,
     textSize
-  }, props), {
-    children: [/* @__PURE__ */ jsx(Icon, {
-      color: value ? Colors.Primary : Colors.Error,
-      name: value ? BasicIcons.Checkmark2 : BasicIcons.Close,
-      size: Size.Smaller
-    }), value]
-  }));
+  }, props), /* @__PURE__ */ React.createElement(Icon, {
+    color: value ? Colors.Primary : Colors.Error,
+    name: value ? BasicIcons.Checkmark2 : BasicIcons.Close,
+    size: Size.Smaller
+  }), value);
 });
 const ColorLabel = memo((_xb) => {
   var _yb = _xb, {
@@ -33731,14 +34382,12 @@ const ColorLabel = memo((_xb) => {
     "textSize",
     "value"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     icon,
     lineHeight,
     textColor,
     textSize
-  }, props), {
-    children: value
-  }));
+  }, props), value);
 });
 const EmailAddressLabel = memo((_zb) => {
   var _Ab = _zb, {
@@ -33754,14 +34403,12 @@ const EmailAddressLabel = memo((_zb) => {
     "textSize",
     "value"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     icon,
     lineHeight,
     textColor,
     textSize
-  }, props), {
-    children: value
-  }));
+  }, props), value);
 });
 const PhoneNumberLabel = memo((_Bb) => {
   var _Cb = _Bb, {
@@ -33777,14 +34424,12 @@ const PhoneNumberLabel = memo((_Bb) => {
     "textSize",
     "value"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     icon,
     lineHeight,
     textColor,
     textSize
-  }, props), {
-    children: value
-  }));
+  }, props), value);
 });
 const ProgressLabel = memo((_Db) => {
   var _Eb = _Db, {
@@ -33804,17 +34449,15 @@ const ProgressLabel = memo((_Db) => {
   ]);
   const spent = value[1];
   const total = value[2];
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     icon,
     lineHeight,
     textColor,
     textSize
-  }, props), {
-    children: /* @__PURE__ */ jsx(ProgressMeter, {
-      amount: spent,
-      backgroundColor: color,
-      total
-    })
+  }, props), /* @__PURE__ */ React.createElement(ProgressMeter, {
+    amount: spent,
+    backgroundColor: color,
+    total
   }));
 });
 const CountryLabel = memo((_Fb) => {
@@ -33831,14 +34474,12 @@ const CountryLabel = memo((_Fb) => {
     "textSize",
     "value"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     icon,
     lineHeight,
     textColor,
     textSize
-  }, props), {
-    children: value
-  }));
+  }, props), value);
 });
 const LanguageLabel = memo((_Hb) => {
   var _Ib = _Hb, {
@@ -33854,14 +34495,12 @@ const LanguageLabel = memo((_Hb) => {
     "textSize",
     "value"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     icon,
     lineHeight,
     textColor,
     textSize
-  }, props), {
-    children: value
-  }));
+  }, props), value);
 });
 const PersonLabel = memo((_Jb) => {
   var _Kb = _Jb, {
@@ -33875,38 +34514,35 @@ const PersonLabel = memo((_Jb) => {
     "size",
     "textSize"
   ]);
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     alignItems: Align.Center,
     orientation: Orientation.Horizontal
-  }, props), {
-    children: [/* @__PURE__ */ jsx(Image, {
-      borderRadius: Amount.All,
-      marginRight: getSmallerAmount(convertSizeToAmount(size)),
-      path: image == null ? void 0 : image.path,
-      url: image == null ? void 0 : image.url,
-      size
-    }), /* @__PURE__ */ jsx(Label, {
-      lineHeight: getSmallerAmount(convertSizeToAmount(size)),
-      textWeight: TextWeight.More,
-      textSize,
-      children: name
-    })]
-  }));
+  }, props), /* @__PURE__ */ React.createElement(Image, {
+    borderRadius: Amount.All,
+    marginRight: getSmallerAmount(convertSizeToAmount(size)),
+    path: image == null ? void 0 : image.path,
+    url: image == null ? void 0 : image.url,
+    size
+  }), /* @__PURE__ */ React.createElement(Label, {
+    lineHeight: getSmallerAmount(convertSizeToAmount(size)),
+    textWeight: TextWeight.More,
+    textSize
+  }, name));
 });
 const UserLabel = memo(({
   className = "",
   to,
   id,
   menu = {
-    menu: [{
-      label: "Send message",
-      onClick: () => {
-        console.log("sendEmail");
-      }
-    }, {
-      label: "View Profile",
-      to: `/people/${id}`
-    }]
+    menu: [
+      {
+        label: "Send message",
+        onClick: () => {
+          console.log("sendEmail");
+        }
+      },
+      { label: "View Profile", to: `/people/${id}` }
+    ]
   },
   messageIcon = {
     name: BasicIcons.BillEnvelope
@@ -33916,7 +34552,7 @@ const UserLabel = memo(({
   size = Size.Default,
   textSize = TextSize.Default
 }) => {
-  return /* @__PURE__ */ jsxs(NavigationLink, {
+  return /* @__PURE__ */ React.createElement(NavigationLink, {
     borderRadius: Amount.All,
     className: `${className} user-label`,
     active: {
@@ -33935,22 +34571,21 @@ const UserLabel = memo(({
     style: {
       position: "relative",
       zIndex: 5
-    },
-    children: [/* @__PURE__ */ jsx(PersonLabel, {
-      name,
-      image,
-      lineHeight: size,
-      size,
-      textSize
-    }), messageIcon && /* @__PURE__ */ jsx(Icon, __spreadValues({
-      grow: false,
-      size
-    }, messageIcon)), menu && /* @__PURE__ */ jsx(MoreMenu, __spreadValues({}, menu))]
-  });
+    }
+  }, /* @__PURE__ */ React.createElement(PersonLabel, {
+    name,
+    image,
+    lineHeight: size,
+    size,
+    textSize
+  }), messageIcon && /* @__PURE__ */ React.createElement(Icon, __spreadValues({
+    grow: false,
+    size
+  }, messageIcon)), menu && /* @__PURE__ */ React.createElement(MoreMenu, __spreadValues({}, menu)));
 });
 const MarkdownEditor = memo((_Lb) => {
   var props = __objRest(_Lb, []);
-  return /* @__PURE__ */ jsx("div", {});
+  return /* @__PURE__ */ React.createElement("div", null);
 });
 function getActivityLabel(activity) {
   switch (activity) {
@@ -33995,51 +34630,45 @@ const ActivityFeedItem = memo(({
   what,
   where
 }) => {
-  return /* @__PURE__ */ jsxs(Container$h, {
+  return /* @__PURE__ */ React.createElement(Container$h, {
     className: "activity-item",
     grow: false,
-    orientation: Orientation.Horizontal,
-    children: [who && /* @__PURE__ */ jsx(UserLabel, {
-      grow: false,
-      image: who.image,
-      menu: null,
-      name: who.name,
-      size: Size.Small,
-      to: who.to
-    }), what && /* @__PURE__ */ jsxs(Container$h, {
-      grow: false,
-      marginLeft: -2,
-      orientation: Orientation.Horizontal,
-      children: [/* @__PURE__ */ jsx(Label, {
-        textSize: TextSize.Default,
-        children: getActivityLabel(what.name)
-      }), what.to ? /* @__PURE__ */ jsx(Link$1, {
-        to: what.to,
-        hover: {
-          underline: true
-        },
-        marginLeft: 3,
-        underline: false,
-        children: what.label
-      }) : what.label]
-    }), where && /* @__PURE__ */ jsx(Label, {
-      alignItems: Align.Center,
-      grow: false,
-      marginLeft: -2,
-      textSize: TextSize.Default,
-      children: where
-    }), /* @__PURE__ */ jsx(Label, {
-      grow: false,
-      marginLeft: 3,
-      children: "on"
-    }), when && /* @__PURE__ */ jsx(DateLabel, {
-      format: dateFormat,
-      grow: false,
-      marginLeft: 3,
-      textSize: TextSize.Default,
-      value: when
-    })]
-  });
+    orientation: Orientation.Horizontal
+  }, who && /* @__PURE__ */ React.createElement(UserLabel, {
+    grow: false,
+    image: who.image,
+    menu: null,
+    name: who.name,
+    size: Size.Small,
+    to: who.to
+  }), what && /* @__PURE__ */ React.createElement(Container$h, {
+    grow: false,
+    marginLeft: -2,
+    orientation: Orientation.Horizontal
+  }, /* @__PURE__ */ React.createElement(Label, {
+    textSize: TextSize.Default
+  }, getActivityLabel(what.name)), what.to ? /* @__PURE__ */ React.createElement(Link$1, {
+    to: what.to,
+    hover: {
+      underline: true
+    },
+    marginLeft: 3,
+    underline: false
+  }, what.label) : what.label), where && /* @__PURE__ */ React.createElement(Label, {
+    alignItems: Align.Center,
+    grow: false,
+    marginLeft: -2,
+    textSize: TextSize.Default
+  }, where), /* @__PURE__ */ React.createElement(Label, {
+    grow: false,
+    marginLeft: 3
+  }, "on"), when && /* @__PURE__ */ React.createElement(DateLabel, {
+    format: dateFormat,
+    grow: false,
+    marginLeft: 3,
+    textSize: TextSize.Default,
+    value: when
+  }));
 });
 const ActivityFeed = memo((_Mb) => {
   var _Nb = _Mb, {
@@ -34051,79 +34680,102 @@ const ActivityFeed = memo((_Mb) => {
     "className",
     "dateFormat"
   ]);
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     className: `${className} activity-feed`
-  }, props), {
-    children: [activities.map((activity, key) => {
-      return /* @__PURE__ */ jsxs(Container$h, {
-        children: [key !== 0 && key !== activities.length && /* @__PURE__ */ jsx(Container$h, {
-          backgroundColor: BackgroundColors.Lighter,
-          borderRadius: Amount.Default,
-          height: 12,
-          marginLeft: convertSizeToAmount(Size.Default),
-          marginBottom: 5,
-          marginTop: 5,
-          style: {
-            transform: "translateX(-2px)"
-          },
-          width: 5
-        }), /* @__PURE__ */ jsx(ActivityFeedItem, __spreadValues({}, activity))]
-      }, key);
-    }), /* @__PURE__ */ jsx(Container$h, {
-      alignContent: Align.Center,
-      alignItems: Align.Center,
-      border: {
-        top: {
-          color: BorderColors.Light,
-          style: BorderStyle.Solid,
-          width: 1
-        }
+  }, props), activities.map((activity, key) => {
+    return /* @__PURE__ */ React.createElement(Container$h, {
+      key
+    }, key !== 0 && key !== activities.length && /* @__PURE__ */ React.createElement(Container$h, {
+      backgroundColor: BackgroundColors.Lighter,
+      borderRadius: Amount.Default,
+      height: 12,
+      marginLeft: convertSizeToAmount(Size.Default),
+      marginBottom: 5,
+      marginTop: 5,
+      style: {
+        transform: "translateX(-2px)"
       },
-      marginTop: Amount.Default,
-      padding: Amount.Default,
-      paddingBottom: Amount.None,
-      children: /* @__PURE__ */ jsx(Button$1, {
-        type: ButtonType.Primary,
-        size: Size.Small,
-        children: "Load more"
-      })
-    })]
-  }));
+      width: 5
+    }), /* @__PURE__ */ React.createElement(ActivityFeedItem, __spreadValues({}, activity)));
+  }), /* @__PURE__ */ React.createElement(Container$h, {
+    alignContent: Align.Center,
+    alignItems: Align.Center,
+    border: {
+      top: {
+        color: BorderColors.Light,
+        style: BorderStyle.Solid,
+        width: 1
+      }
+    },
+    marginTop: Amount.Default,
+    padding: Amount.Default,
+    paddingBottom: Amount.None
+  }, /* @__PURE__ */ React.createElement(Button$1, {
+    type: ButtonType.Primary,
+    size: Size.Small
+  }, "Load more")));
 });
-const HelperButton = memo(({
-  content
-}) => {
+const HelperButton = memo(({ content }) => {
   const [contentVisible, setContentVisible] = useState(false);
-  return /* @__PURE__ */ jsxs(Container$6, {
-    children: [/* @__PURE__ */ jsx(Button, {
-      onClick: () => {
-      },
-      secondary: true,
-      onMouseEnter: () => setContentVisible(true),
-      onMouseLeave: () => setContentVisible(false),
-      children: /* @__PURE__ */ jsx(Icon, {
-        name: BasicIcons.HelpBubble
-      })
-    }), /* @__PURE__ */ jsx(Content$1, {
-      visible: contentVisible,
-      children: content
-    })]
-  });
+  return /* @__PURE__ */ React.createElement(Container$6, null, /* @__PURE__ */ React.createElement(Button, {
+    onClick: () => {
+    },
+    secondary: true,
+    onMouseEnter: () => setContentVisible(true),
+    onMouseLeave: () => setContentVisible(false)
+  }, /* @__PURE__ */ React.createElement(Icon, {
+    name: BasicIcons.HelpBubble
+  })), /* @__PURE__ */ React.createElement(Content$1, {
+    visible: contentVisible
+  }, content));
 });
-const Container$6 = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-4iqdq5-0"
-})(["position:relative;&:hover{z-index:50000;}"]);
-const Button = styled.button.withConfig({
-  displayName: "Button",
-  componentId: "sc-4iqdq5-1"
-})(["background:transparent;border:none;line-height:22px;svg{fill:rgba(162,192,80,1);height:24px;vertical-align:middle;width:24px;}"]);
-const Content$1 = styled.div.withConfig({
-  displayName: "Content",
-  componentId: "sc-4iqdq5-2"
-})(["background:white;border:10px solid rgba(203,226,90,1);border-radius:25px;bottom:30px;box-shadow:0 15px 25px rgba(65,146,64,0.3);color:rgba(120,120,120,1);font-size:14px;opacity:0;padding:15px;pointer-events:none;position:absolute;transition:all 0.2s ease-in;transform:translateX(-100px);width:220px;b{font-weight:700;}", ""], (props) => props.visible && css(["opacity:1;pointer-events:all;"]));
+const Container$6 = styled.div`
+  position: relative;
+
+  &:hover {
+    z-index: 50000;
+  }
+`;
+const Button = styled.button`
+  background: transparent;
+  border: none;
+  line-height: 22px;
+
+  svg {
+    fill: rgba(162, 192, 80, 1);
+    height: 24px;
+    vertical-align: middle;
+    width: 24px;
+  }
+`;
+const Content$1 = styled.div`
+  background: white;
+  border: 10px solid rgba(203, 226, 90, 1);
+  border-radius: 25px;
+  bottom: 30px;
+  box-shadow: 0 15px 25px rgba(65, 146, 64, 0.3);
+  // color: rgba(65, 146, 64, 1);
+  color: rgba(120, 120, 120, 1);
+  font-size: 14px;
+  opacity: 0;
+  padding: 15px;
+  pointer-events: none;
+  position: absolute;
+  transition: all 0.2s ease-in;
+  transform: translateX(-100px);
+  width: 220px;
+
+  b {
+    font-weight: 700;
+  }
+
+  ${(props) => props.visible && css`
+      opacity: 1;
+      pointer-events: all;
+    `}
+`;
 const InputHelper = memo(() => {
-  return /* @__PURE__ */ jsx(Fragment, {});
+  return /* @__PURE__ */ React.createElement(React.Fragment, null);
 });
 const Checkbox = memo((_Ob) => {
   var _Pb = _Ob, {
@@ -34152,7 +34804,7 @@ const Checkbox = memo((_Ob) => {
         value
       });
   }, [value]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     alignContent: Align.Center,
     as: "button",
     backgroundColor: BackgroundColors.Transparent,
@@ -34164,22 +34816,43 @@ const Checkbox = memo((_Ob) => {
     onClick: () => setValue(!value),
     onFocus: () => setFocused(true),
     orientation: Orientation.Horizontal
-  }, props), {
-    children: /* @__PURE__ */ jsx(Box, {
-      size,
-      focused,
-      children: /* @__PURE__ */ jsx(Icon, {
-        color: value ? Colors.Success : Colors.White,
-        name: BasicIcons.Checkmark2,
-        size: Size.Smaller
-      })
-    })
-  }));
+  }, props), /* @__PURE__ */ React.createElement(Box, {
+    size,
+    focused
+  }, /* @__PURE__ */ React.createElement(Icon, {
+    color: value ? Colors.Success : Colors.White,
+    name: BasicIcons.Checkmark2,
+    size: Size.Smaller
+  })));
 });
-const Box = styled.span.withConfig({
-  displayName: "Box",
-  componentId: "sc-1afvykv-0"
-})(["", ";align-items:center;background:white;border:1px solid rgba(230,230,230,1);border-radius:4px;color:#7b7b7b;cursor:pointer;display:flex;height:", ";justify-content:center;margin-right:5px;position:relative;text-align:center;transition:background 0.2s ease-in-out;width:", ";&:before{border-radius:", ";}", ""], FocusedStyles, (props) => props.size, (props) => props.size, Amount.Least, (props) => !props.fixed && css(["&:hover{background:rgba(220,220,220,0.1);}"]));
+const Box = styled.span`
+  ${FocusedStyles};
+
+  align-items: center;
+  background: white;
+  border: 1px solid rgba(230, 230, 230, 1);
+  border-radius: 4px;
+  color: #7b7b7b;
+  cursor: pointer;
+  display: flex;
+  height: ${(props) => props.size};
+  justify-content: center;
+  margin-right: 5px;
+  position: relative;
+  text-align: center;
+  transition: background 0.2s ease-in-out;
+  width: ${(props) => props.size};
+
+  &:before {
+    border-radius: ${Amount.Least};
+  }
+
+  ${(props) => !props.fixed && css`
+      &:hover {
+        background: rgba(220, 220, 220, 0.1);
+      }
+    `}
+`;
 const hexCharacters = "a-f\\d";
 const match3or4Hex = `#?[${hexCharacters}]{3}[${hexCharacters}]?`;
 const match6or8Hex = `#?[${hexCharacters}]{6}([${hexCharacters}]{2})?`;
@@ -34256,7 +34929,7 @@ var s = function(e2, r2, t2) {
   return { left: s((o.pageX - (n2.left + v(e2).pageXOffset)) / n2.width), top: s((o.pageY - (n2.top + v(e2).pageYOffset)) / n2.height) };
 }, h = function(e2) {
   !f(e2) && e2.preventDefault();
-}, m = e$1.memo(function(o) {
+}, m = React$1.memo(function(o) {
   var a = o.onMove, l2 = o.onKey, s2 = c(o, ["onMove", "onKey"]), m2 = useRef(null), g2 = i(a), p2 = i(l2), b2 = useRef(null), _ = useRef(false), x2 = useMemo(function() {
     var e2 = function(e3) {
       h(e3), (f(e3) ? e3.touches.length > 0 : e3.buttons > 0) && m2.current ? g2(d(m2.current, e3, b2.current)) : t2(false);
@@ -34286,12 +34959,12 @@ var s = function(e2, r2, t2) {
   }, [p2, g2]), C2 = x2[0], E = x2[1], H2 = x2[2];
   return useEffect(function() {
     return H2;
-  }, [H2]), e$1.createElement("div", u({}, s2, { onTouchStart: C2, onMouseDown: C2, className: "react-colorful__interactive", ref: m2, onKeyDown: E, tabIndex: 0, role: "slider" }));
+  }, [H2]), React$1.createElement("div", u({}, s2, { onTouchStart: C2, onMouseDown: C2, className: "react-colorful__interactive", ref: m2, onKeyDown: E, tabIndex: 0, role: "slider" }));
 }), g = function(e2) {
   return e2.filter(Boolean).join(" ");
 }, p = function(r2) {
   var t2 = r2.color, n2 = r2.left, o = r2.top, a = o === void 0 ? 0.5 : o, l2 = g(["react-colorful__pointer", r2.className]);
-  return e$1.createElement("div", { className: l2, style: { top: 100 * a + "%", left: 100 * n2 + "%" } }, e$1.createElement("div", { className: "react-colorful__pointer-fill", style: { backgroundColor: t2 } }));
+  return React$1.createElement("div", { className: l2, style: { top: 100 * a + "%", left: 100 * n2 + "%" } }, React$1.createElement("div", { className: "react-colorful__pointer-fill", style: { backgroundColor: t2 } }));
 }, b = function(e2, r2, t2) {
   return r2 === void 0 && (r2 = 0), t2 === void 0 && (t2 = Math.pow(10, r2)), Math.round(t2 * e2) / t2;
 }, x = function(e2) {
@@ -34313,20 +34986,20 @@ var s = function(e2, r2, t2) {
 }, B = function(e2) {
   var r2 = e2.r, t2 = e2.g, n2 = e2.b, o = e2.a, a = Math.max(r2, t2, n2), l2 = a - Math.min(r2, t2, n2), u2 = l2 ? a === r2 ? (t2 - n2) / l2 : a === t2 ? 2 + (n2 - r2) / l2 : 4 + (r2 - t2) / l2 : 0;
   return { h: b(60 * (u2 < 0 ? u2 + 6 : u2)), s: b(a ? l2 / a * 100 : 0), v: b(a / 255 * 100), a: o };
-}, K = e$1.memo(function(r2) {
+}, K = React$1.memo(function(r2) {
   var t2 = r2.hue, n2 = r2.onChange, o = g(["react-colorful__hue", r2.className]);
-  return e$1.createElement("div", { className: o }, e$1.createElement(m, { onMove: function(e2) {
+  return React$1.createElement("div", { className: o }, React$1.createElement(m, { onMove: function(e2) {
     n2({ h: 360 * e2.left });
   }, onKey: function(e2) {
     n2({ h: s(t2 + 360 * e2.left, 0, 360) });
-  }, "aria-label": "Hue", "aria-valuetext": b(t2) }, e$1.createElement(p, { className: "react-colorful__hue-pointer", left: t2 / 360, color: w({ h: t2, s: 100, v: 100, a: 1 }) })));
-}), L = e$1.memo(function(r2) {
+  }, "aria-label": "Hue", "aria-valuetext": b(t2) }, React$1.createElement(p, { className: "react-colorful__hue-pointer", left: t2 / 360, color: w({ h: t2, s: 100, v: 100, a: 1 }) })));
+}), L = React$1.memo(function(r2) {
   var t2 = r2.hsva, n2 = r2.onChange, o = { backgroundColor: w({ h: t2.h, s: 100, v: 100, a: 1 }) };
-  return e$1.createElement("div", { className: "react-colorful__saturation", style: o }, e$1.createElement(m, { onMove: function(e2) {
+  return React$1.createElement("div", { className: "react-colorful__saturation", style: o }, React$1.createElement(m, { onMove: function(e2) {
     n2({ s: 100 * e2.left, v: 100 - 100 * e2.top });
   }, onKey: function(e2) {
     n2({ s: s(t2.s + 100 * e2.left, 0, 100), v: s(t2.v - 100 * e2.top, 0, 100) });
-  }, "aria-label": "Color", "aria-valuetext": "Saturation " + b(t2.s) + "%, Brightness " + b(t2.v) + "%" }, e$1.createElement(p, { className: "react-colorful__saturation-pointer", top: 1 - t2.v / 100, left: t2.s / 100, color: w(t2) })));
+  }, "aria-label": "Color", "aria-valuetext": "Saturation " + b(t2.s) + "%, Brightness " + b(t2.v) + "%" }, React$1.createElement(p, { className: "react-colorful__saturation-pointer", top: 1 - t2.v / 100, left: t2.s / 100, color: w(t2) })));
 }), A = function(e2, r2) {
   if (e2 === r2)
     return true;
@@ -34371,7 +35044,7 @@ var P = typeof window != "undefined" ? useLayoutEffect : useEffect, X = function
   var n2 = t2.className, o = t2.colorModel, a = t2.color, l2 = a === void 0 ? o.defaultColor : a, i2 = t2.onChange, s2 = c(t2, ["className", "colorModel", "color", "onChange"]), f2 = useRef(null);
   V(f2);
   var v2 = T(o, l2, i2), d2 = v2[0], h2 = v2[1], m2 = g(["react-colorful", n2]);
-  return e$1.createElement("div", u({}, s2, { ref: f2, className: m2 }), e$1.createElement(L, { hsva: d2, onChange: h2 }), e$1.createElement(K, { hue: d2.h, onChange: h2, className: "react-colorful__last-control" }));
+  return React$1.createElement("div", u({}, s2, { ref: f2, className: m2 }), React$1.createElement(L, { hsva: d2, onChange: h2 }), React$1.createElement(K, { hue: d2.h, onChange: h2, className: "react-colorful__last-control" }));
 }, G = { defaultColor: "000", toHsva: function(e2) {
   return B(x(e2));
 }, fromHsva: function(e2) {
@@ -34380,7 +35053,7 @@ var P = typeof window != "undefined" ? useLayoutEffect : useEffect, X = function
 }, equal: function(e2, r2) {
   return e2.toLowerCase() === r2.toLowerCase() || A(x(e2), x(r2));
 } }, J = function(r2) {
-  return e$1.createElement($, u({}, r2, { colorModel: G }));
+  return React$1.createElement($, u({}, r2, { colorModel: G }));
 };
 function rgbHex(red, green, blue, alpha) {
   const isPercent = (red + (alpha || "")).toString().includes("%");
@@ -34406,11 +35079,27 @@ function rgbHex(red, green, blue, alpha) {
   }
   return (blue | green << 8 | red << 16 | 1 << 24).toString(16).slice(1) + alpha;
 }
-const defaultColors = ["244,67,54", "233,30,99", "156,39,176", "103,58,183", "63,81,181", "33,150,243", "3,169,244", "0,188,212", "0,150,136", "76,175,80", "139,195,74", "205,220,57", "255,235,59", "255,193,7", "255,152,0", "255,87,34", "121,85,72", "96,125,139"];
-const ColorInput = memo(({
-  defaultValue,
-  onChange
-}) => {
+const defaultColors = [
+  "244,67,54",
+  "233,30,99",
+  "156,39,176",
+  "103,58,183",
+  "63,81,181",
+  "33,150,243",
+  "3,169,244",
+  "0,188,212",
+  "0,150,136",
+  "76,175,80",
+  "139,195,74",
+  "205,220,57",
+  "255,235,59",
+  "255,193,7",
+  "255,152,0",
+  "255,87,34",
+  "121,85,72",
+  "96,125,139"
+];
+const ColorInput = memo(({ defaultValue, onChange }) => {
   var _a2;
   const [value, setValue] = useState(defaultValue);
   const [colorName, setColorName] = useState(null);
@@ -34418,148 +35107,167 @@ const ColorInput = memo(({
     setColorName(colorNamer(`rgb(${value})`).pantone[0].name);
     if (value !== defaultValue) {
       if (onChange)
-        onChange({
-          value
-        });
+        onChange({ value });
     }
   }, [value]);
-  return /* @__PURE__ */ jsx(Container$5, {
-    "data-testid": "color-picker",
-    children: /* @__PURE__ */ jsxs(ColorMenu, {
-      children: [/* @__PURE__ */ jsx(ColorName, {
-        children: colorName
-      }), /* @__PURE__ */ jsx(PresetColors, {
-        children: defaultColors.map((color, key) => {
-          return /* @__PURE__ */ jsx(PresetColor, {
-            onClick: () => setValue(color),
-            color,
-            selected: color === value
-          }, key);
-        })
-      }), /* @__PURE__ */ jsx(ColorMixer, {
-        children: /* @__PURE__ */ jsx(J, {
-          color: rgbHex((_a2 = value == null ? void 0 : value.toString()) != null ? _a2 : ""),
-          onChange: (color) => {
-            const rgb = hexRgb(color);
-            setValue(`${rgb.red},${rgb.green},${rgb.blue}`);
-          }
-        })
-      })]
-    })
-  });
+  return /* @__PURE__ */ React.createElement(Container$5, {
+    "data-testid": "color-picker"
+  }, /* @__PURE__ */ React.createElement(ColorMenu, null, /* @__PURE__ */ React.createElement(ColorName, null, colorName), /* @__PURE__ */ React.createElement(PresetColors, null, defaultColors.map((color, key) => {
+    return /* @__PURE__ */ React.createElement(PresetColor, {
+      onClick: () => setValue(color),
+      color,
+      key,
+      selected: color === value
+    });
+  })), /* @__PURE__ */ React.createElement(ColorMixer, null, /* @__PURE__ */ React.createElement(J, {
+    color: rgbHex((_a2 = value == null ? void 0 : value.toString()) != null ? _a2 : ""),
+    onChange: (color) => {
+      const rgb = hexRgb(color);
+      setValue(`${rgb.red},${rgb.green},${rgb.blue}`);
+    }
+  }))));
 });
-const ColorPreview = styled.div.withConfig({
-  displayName: "ColorPreview",
-  componentId: "sc-56hg3p-0"
-})(["border-radius:4px 4px 0 0;padding:8px;"]);
-const ColorMenu = styled.div.withConfig({
-  displayName: "ColorMenu",
-  componentId: "sc-56hg3p-1"
-})(["background:white;border-radius:12px 0 12px 12px;height:250px;overflow:hidden;"]);
-const Container$5 = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-56hg3p-2"
-})(["position:relative;", ";"], (props) => props.modal && css(["&:hover{", "{display:block;}", "{background:white;box-shadow:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);}}"], ColorMenu, ColorPreview));
-const ColorName = styled.div.withConfig({
-  displayName: "ColorName",
-  componentId: "sc-56hg3p-3"
-})(["color:#5b5b5b;font-size:12px;font-weight:600;height:20px;padding:8px 0;text-align:center;"]);
-const PresetColors = styled.div.withConfig({
-  displayName: "PresetColors",
-  componentId: "sc-56hg3p-4"
-})(["height:60px;padding:9px 4px 9px 9px;"]);
-const PresetColor = styled.button.withConfig({
-  displayName: "PresetColor",
-  componentId: "sc-56hg3p-5"
-})(["background:transparent;border-radius:18px;border:", ";cursor:pointer;float:left;height:18px;outline:none;margin:0 5px 5px 0;transform:scale(1);transition:border 0.2s ease-in-out,transform 0.2s ease-in-out;width:18px;&:hover{transform:scale(1.2);}"], (props) => props.selected ? `4px solid rgba(${props.color}, 1)` : `9px solid rgba(${props.color}, 1)`);
-const ColorMixer = styled.div.withConfig({
-  displayName: "ColorMixer",
-  componentId: "sc-56hg3p-6"
-})(["height:190px;width:100%;.react-colorful{height:170px;width:220px;}.react-colorful__saturation{border-radius:3px 3px 0 0;}.react-colorful__hue{height:30px;border-radius:0 0 3px 3px;}.react-colorful__saturation-pointer{border-radius:15px;height:15px;width:15px;}.react-colorful__hue-pointer{border-radius:15px;height:15px;width:15px;}"]);
-const DynamicInput = memo(({
-  label,
-  type
-}) => {
+const ColorPreview = styled.div`
+  border-radius: 4px 4px 0 0;
+  padding: 8px;
+`;
+const ColorMenu = styled.div`
+  background: white;
+
+  border-radius: 12px 0 12px 12px;
+  height: 250px;
+  overflow: hidden;
+
+  /* ${(props) => props.modal && css`
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      display: none;
+      position: absolute;
+      right: 0;
+      width: 220px;
+      z-index: 10001;
+    `}; */
+`;
+const Container$5 = styled.div`
+  position: relative;
+
+  ${(props) => props.modal && css`
+      &:hover {
+        ${ColorMenu} {
+          display: block;
+        }
+
+        ${ColorPreview} {
+          background: white;
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+            0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+      }
+    `};
+`;
+const ColorName = styled.div`
+  color: #5b5b5b;
+  font-size: 12px;
+  font-weight: 600;
+  height: 20px;
+  padding: 8px 0;
+  text-align: center;
+`;
+const PresetColors = styled.div`
+  height: 60px;
+  padding: 9px 4px 9px 9px;
+`;
+const PresetColor = styled.button`
+  background: transparent;
+  border-radius: 18px;
+  border: ${(props) => props.selected ? `4px solid rgba(${props.color}, 1)` : `9px solid rgba(${props.color}, 1)`};
+  cursor: pointer;
+  float: left;
+  height: 18px;
+  outline: none;
+  margin: 0 5px 5px 0;
+  transform: scale(1);
+  transition: border 0.2s ease-in-out, transform 0.2s ease-in-out;
+  width: 18px;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+`;
+const ColorMixer = styled.div`
+  height: 190px;
+  width: 100%;
+
+  .react-colorful {
+    height: 170px;
+    width: 220px;
+  }
+  .react-colorful__saturation {
+    border-radius: 3px 3px 0 0;
+  }
+  .react-colorful__hue {
+    height: 30px;
+    border-radius: 0 0 3px 3px;
+  }
+  .react-colorful__saturation-pointer {
+    border-radius: 15px;
+    height: 15px;
+    width: 15px;
+  }
+  .react-colorful__hue-pointer {
+    border-radius: 15px;
+    height: 15px;
+    width: 15px;
+  }
+`;
+const DynamicInput = memo(({ label, type }) => {
   const getInputComponentByType = () => {
     switch (type) {
       case Primitives.String:
-        return /* @__PURE__ */ jsx(InputRow, {
-          children: /* @__PURE__ */ jsx(InputLabel, {
-            children: label
-          })
-        });
+        return /* @__PURE__ */ React.createElement(InputRow, null, /* @__PURE__ */ React.createElement(InputLabel, null, label));
       case Primitives.Menu:
-        return /* @__PURE__ */ jsx(InputRow, {});
+        return /* @__PURE__ */ React.createElement(InputRow, null);
       default:
-        return /* @__PURE__ */ jsx(NotificationLabel, {
-          type: NotificationType.Error,
-          children: `Unimplemented field type! ${label} : ${type}`
-        });
+        return /* @__PURE__ */ React.createElement(NotificationLabel, {
+          type: NotificationType.Error
+        }, `Unimplemented field type! ${label} : ${type}`);
     }
   };
   return getInputComponentByType();
 });
 const StreetAddressInput = memo((_Qb) => {
   var props = __objRest(_Qb, []);
-  return /* @__PURE__ */ jsx(TextInput, __spreadValues({}, props));
+  return /* @__PURE__ */ React.createElement(TextInput, __spreadValues({}, props));
 });
 const AlignLeft = memo((_Rb) => {
-  var _Sb = _Rb, {
-    children
-  } = _Sb, props = __objRest(_Sb, [
-    "children"
-  ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  var _Sb = _Rb, { children } = _Sb, props = __objRest(_Sb, ["children"]);
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     alignItems: Align.Left,
     className: "align-left"
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
 const AlignRight = memo((_Tb) => {
-  var _Ub = _Tb, {
-    children
-  } = _Ub, props = __objRest(_Ub, [
-    "children"
-  ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  var _Ub = _Tb, { children } = _Ub, props = __objRest(_Ub, ["children"]);
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     alignItems: Align.Right,
     className: "right"
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
 const ListItem = memo((_Vb) => {
-  var _Wb = _Vb, {
-    as = "li",
-    children
-  } = _Wb, props = __objRest(_Wb, [
-    "as",
-    "children"
-  ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  var _Wb = _Vb, { as = "li", children } = _Wb, props = __objRest(_Wb, ["as", "children"]);
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     as,
     style: {
       display: as === "li" ? "list-item" : "flex"
     },
     orientation: Orientation.Horizontal
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
 const OrderedList = memo((_Xb) => {
-  var _Yb = _Xb, {
-    as = "ul",
-    children
-  } = _Yb, props = __objRest(_Yb, [
-    "as",
-    "children"
-  ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  var _Yb = _Xb, { as = "ul", children } = _Yb, props = __objRest(_Yb, ["as", "children"]);
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     as
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
 const UnorderedList = memo((_Zb) => {
   var __b = _Zb, {
@@ -34573,25 +35281,22 @@ const UnorderedList = memo((_Zb) => {
     "items",
     "marginLeft"
   ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     as,
     grow,
     orientation: Orientation.Vertical
-  }, props), {
-    children: items.map((item, index) => item.props.items ? /* @__PURE__ */ jsx(Container$h, {
-      grow,
-      marginLeft,
-      paddingBottom: Amount.Least,
-      paddingTop: Amount.Least,
-      children: item
-    }) : /* @__PURE__ */ jsx(ListItem, {
-      grow: false,
-      marginLeft,
-      paddingBottom: Amount.Least,
-      paddingTop: Amount.Least,
-      children: item
-    }, index))
-  }));
+  }, props), items.map((item, index) => item.props.items ? /* @__PURE__ */ React.createElement(Container$h, {
+    grow,
+    marginLeft,
+    paddingBottom: Amount.Least,
+    paddingTop: Amount.Least
+  }, item) : /* @__PURE__ */ React.createElement(ListItem, {
+    grow: false,
+    key: index,
+    marginLeft,
+    paddingBottom: Amount.Least,
+    paddingTop: Amount.Least
+  }, item)));
 });
 const Video = memo((_$b) => {
   var _ac = _$b, {
@@ -34605,20 +35310,17 @@ const Video = memo((_$b) => {
     "url",
     "width"
   ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     className: `${className} video`
-  }, props), {
-    children: /* @__PURE__ */ jsx(VideoElement, __spreadValues({
-      height,
-      src: url,
-      width
-    }, props))
-  }));
+  }, props), /* @__PURE__ */ React.createElement(VideoElement, __spreadValues({
+    height,
+    src: url,
+    width
+  }, props)));
 });
-const VideoElement = styled.video.withConfig({
-  displayName: "VideoElement",
-  componentId: "sc-1ai2qam-0"
-})(["", ";"], DimensionStyles);
+const VideoElement = styled.video`
+  ${DimensionStyles};
+`;
 const MediaGridItem = memo((_bc) => {
   var _cc = _bc, {
     borderRadius = Amount.Default,
@@ -34642,25 +35344,21 @@ const MediaGridItem = memo((_bc) => {
     "video"
   ]);
   var _a2, _b, _c;
-  const content = images ? /* @__PURE__ */ jsxs(Container$h, {
+  const content = images ? /* @__PURE__ */ React.createElement(Container$h, {
     alignItems: Align.Bottom,
     orientation: Orientation.Horizontal,
-    padding: Amount.Default,
-    children: [/* @__PURE__ */ jsx(Label, {
-      textColor: TextColors.White,
-      textSize: TextSize.Large,
-      textWeight: TextWeight.Most,
-      children: title
-    }), /* @__PURE__ */ jsx(Container$h, {}), moreMenu && /* @__PURE__ */ jsx(MoreMenu, __spreadValues({}, moreMenu))]
-  }) : video ? /* @__PURE__ */ jsx(Video, {
+    padding: Amount.Default
+  }, /* @__PURE__ */ React.createElement(Label, {
+    textColor: TextColors.White,
+    textSize: TextSize.Large,
+    textWeight: TextWeight.Most
+  }, title), /* @__PURE__ */ React.createElement(Container$h, null), moreMenu && /* @__PURE__ */ React.createElement(MoreMenu, __spreadValues({}, moreMenu))) : video ? /* @__PURE__ */ React.createElement(Video, {
     className: "media-grid-video",
     description: video.description,
     path: video.path,
     url: video.url
-  }) : /* @__PURE__ */ jsx(Container$h, {
-    children: "Image not found"
-  });
-  return /* @__PURE__ */ jsx(Card, __spreadProps(__spreadValues({
+  }) : /* @__PURE__ */ React.createElement(Container$h, null, "Image not found");
+  return /* @__PURE__ */ React.createElement(Card, __spreadValues({
     alignItems: Align.Stretch,
     alignContent: Align.Stretch,
     backgroundColor: BackgroundColors.Dark,
@@ -34674,9 +35372,7 @@ const MediaGridItem = memo((_bc) => {
     linkTo: url,
     minHeight: minHeight != null ? minHeight : 220,
     onClick
-  }, props), {
-    children: content
-  }));
+  }, props), content);
 });
 const MediaGrid = memo((_dc) => {
   var _ec = _dc, {
@@ -34694,30 +35390,27 @@ const MediaGrid = memo((_dc) => {
     "items",
     "loading"
   ]);
-  const rows = Array.from({
-    length: Math.ceil(items.length / columns)
-  }).fill(0);
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  const rows = Array.from({ length: Math.ceil(items.length / columns) }).fill(0);
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     borderRadius,
     className: `${className} media-grid`,
     marginBottom: Amount.Default,
     orientation: Orientation.Vertical
-  }, props), {
-    children: [/* @__PURE__ */ jsx(LoadingOverlay, {
-      backgroundColor: BackgroundColors.Transparent,
-      borderRadius,
-      visible: loading
-    }), rows.map((x2, row) => {
-      return /* @__PURE__ */ jsx(Container$h, {
-        className: "media-grid-row",
-        marginBottom: Amount.Default,
-        orientation: Orientation.Horizontal,
-        children: items.slice(columns * row, columns * row + columns).map((i2, key) => /* @__PURE__ */ jsx(MediaGridItem, __spreadValues({
-          marginRight: Amount.Default,
-          width: `calc(100% / ${columns != null ? columns : 1} - ${Amount.Default})`
-        }, i2), key))
-      }, row);
-    })]
+  }, props), /* @__PURE__ */ React.createElement(LoadingOverlay, {
+    backgroundColor: BackgroundColors.Transparent,
+    borderRadius,
+    visible: loading
+  }), rows.map((x2, row) => {
+    return /* @__PURE__ */ React.createElement(Container$h, {
+      className: "media-grid-row",
+      key: row,
+      marginBottom: Amount.Default,
+      orientation: Orientation.Horizontal
+    }, items.slice(columns * row, columns * row + columns).map((i2, key) => /* @__PURE__ */ React.createElement(MediaGridItem, __spreadValues({
+      marginRight: Amount.Default,
+      key,
+      width: `calc(100% / ${columns != null ? columns : 1} - ${Amount.Default})`
+    }, i2))));
   }));
 });
 const MediaPreview = memo((_fc) => {
@@ -34736,37 +35429,33 @@ const MediaPreview = memo((_fc) => {
   ]);
   var _a2, _b;
   if (!media || media.length === 0)
-    return /* @__PURE__ */ jsx(Container$h, {
-      children: "No media"
-    });
+    return /* @__PURE__ */ React.createElement(Container$h, null, "No media");
   console.log("media", media);
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     className: `${className} media-preview`,
     height: orientation === Orientation.Horizontal ? height : "auto",
     orientation
-  }, props), {
-    children: [media && media.length > 0 && media[0] && /* @__PURE__ */ jsx(Image, {
-      alt: media[0].description,
-      borderRadius,
-      maxWidth: orientation === Orientation.Horizontal ? 300 : "auto",
-      url: (_b = media[0].url) != null ? _b : (_a2 = media == null ? void 0 : media[0]) == null ? void 0 : _a2.path
-    }), media && media.slice(1).length > 0 && /* @__PURE__ */ jsx(Container$h, {
-      alignContent: Align.SpaceBetween,
-      orientation: orientation === Orientation.Horizontal ? Orientation.Vertical : Orientation.Horizontal,
-      lineWrap: true,
-      children: media.slice(1).map((item, k2) => {
-        return /* @__PURE__ */ jsx(Image, {
-          alt: item.description,
-          borderRadius: Amount.Least,
-          height: orientation === Orientation.Horizontal ? "47%" : "auto",
-          marginLeft: orientation === Orientation.Horizontal ? Amount.Less : Amount.None,
-          marginTop: orientation === Orientation.Vertical ? Amount.Less : Amount.None,
-          url: item.url,
-          width: orientation === Orientation.Vertical ? "31%" : "auto"
-        }, k2);
-      })
-    })]
-  }));
+  }, props), media && media.length > 0 && media[0] && /* @__PURE__ */ React.createElement(Image, {
+    alt: media[0].description,
+    borderRadius,
+    maxWidth: orientation === Orientation.Horizontal ? 300 : "auto",
+    url: (_b = media[0].url) != null ? _b : (_a2 = media == null ? void 0 : media[0]) == null ? void 0 : _a2.path
+  }), media && media.slice(1).length > 0 && /* @__PURE__ */ React.createElement(Container$h, {
+    alignContent: Align.SpaceBetween,
+    orientation: orientation === Orientation.Horizontal ? Orientation.Vertical : Orientation.Horizontal,
+    lineWrap: true
+  }, media.slice(1).map((item, k2) => {
+    return /* @__PURE__ */ React.createElement(Image, {
+      alt: item.description,
+      borderRadius: Amount.Least,
+      height: orientation === Orientation.Horizontal ? "47%" : "auto",
+      key: k2,
+      marginLeft: orientation === Orientation.Horizontal ? Amount.Less : Amount.None,
+      marginTop: orientation === Orientation.Vertical ? Amount.Less : Amount.None,
+      url: item.url,
+      width: orientation === Orientation.Vertical ? "31%" : "auto"
+    });
+  })));
 });
 const MessagePreview = memo((_hc) => {
   var _ic = _hc, {
@@ -34786,7 +35475,7 @@ const MessagePreview = memo((_hc) => {
     "subject",
     "sender"
   ]);
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     backgroundColor,
     borderRadius,
     className: `${className} message-preview`,
@@ -34795,60 +35484,52 @@ const MessagePreview = memo((_hc) => {
     padding: Amount.Default,
     paddingLeft: Amount.More,
     paddingRight: Amount.More
-  }, props), {
-    children: [/* @__PURE__ */ jsxs(Container$h, {
-      alignItems: Align.Top,
-      grow: true,
-      orientation: Orientation.Horizontal,
-      children: [/* @__PURE__ */ jsx(Image, {
-        borderRadius: Amount.All,
-        marginRight: Amount.More,
-        url: "http://localhost:3000/public/assets/images/placeholders/people/person1.png",
-        size: Size.Default
-      }), /* @__PURE__ */ jsx(Label, {
-        alignItems: Align.Left,
-        grow: true,
-        lineHeight: Amount.Default,
-        marginBottom: Amount.None,
-        textColor: TextColors.Light,
-        textSize: TextSize.Small,
-        textWeight: TextWeight.Default,
-        children: "Samanatha Baskin"
-      }), /* @__PURE__ */ jsx(DateLabel, {
-        alignContent: Align.Right,
-        grow: false,
-        lineHeight: Amount.Default,
-        value: date,
-        textColor: TextColors.Lighter,
-        textSize: TextSize.Smaller
-      })]
-    }), /* @__PURE__ */ jsxs(Container$h, {
-      grow: false,
-      orientation: Orientation.Horizontal,
-      children: [/* @__PURE__ */ jsx(Container$h, {
-        borderRadius: Amount.All,
-        marginRight: Amount.More,
-        size: Size.Default
-      }), /* @__PURE__ */ jsxs(Container$h, {
-        alignContent: Align.Top,
-        alignItems: Align.Left,
-        orientation: Orientation.Vertical,
-        children: [/* @__PURE__ */ jsx(Title, {
-          alignItems: Align.Left,
-          grow: true,
-          lineHeight: Amount.Less,
-          marginTop: Amount.None,
-          marginBottom: Amount.Less,
-          textSize: TextSize.Large,
-          textWeight: TextWeight.More,
-          children: subject
-        }), /* @__PURE__ */ jsx(Paragraph, {
-          marginBottom: Amount.None,
-          children: body
-        })]
-      })]
-    })]
-  }));
+  }, props), /* @__PURE__ */ React.createElement(Container$h, {
+    alignItems: Align.Top,
+    grow: true,
+    orientation: Orientation.Horizontal
+  }, /* @__PURE__ */ React.createElement(Image, {
+    borderRadius: Amount.All,
+    marginRight: Amount.More,
+    url: "http://localhost:3000/public/assets/images/placeholders/people/person1.png",
+    size: Size.Default
+  }), /* @__PURE__ */ React.createElement(Label, {
+    alignItems: Align.Left,
+    grow: true,
+    lineHeight: Amount.Default,
+    marginBottom: Amount.None,
+    textColor: TextColors.Light,
+    textSize: TextSize.Small,
+    textWeight: TextWeight.Default
+  }, "Samanatha Baskin"), /* @__PURE__ */ React.createElement(DateLabel, {
+    alignContent: Align.Right,
+    grow: false,
+    lineHeight: Amount.Default,
+    value: date,
+    textColor: TextColors.Lighter,
+    textSize: TextSize.Smaller
+  })), /* @__PURE__ */ React.createElement(Container$h, {
+    grow: false,
+    orientation: Orientation.Horizontal
+  }, /* @__PURE__ */ React.createElement(Container$h, {
+    borderRadius: Amount.All,
+    marginRight: Amount.More,
+    size: Size.Default
+  }), /* @__PURE__ */ React.createElement(Container$h, {
+    alignContent: Align.Top,
+    alignItems: Align.Left,
+    orientation: Orientation.Vertical
+  }, /* @__PURE__ */ React.createElement(Title, {
+    alignItems: Align.Left,
+    grow: true,
+    lineHeight: Amount.Less,
+    marginTop: Amount.None,
+    marginBottom: Amount.Less,
+    textSize: TextSize.Large,
+    textWeight: TextWeight.More
+  }, subject), /* @__PURE__ */ React.createElement(Paragraph, {
+    marginBottom: Amount.None
+  }, body))));
 });
 const ConversationList = memo((_jc) => {
   var _kc = _jc, {
@@ -34865,7 +35546,7 @@ const ConversationList = memo((_jc) => {
     "width"
   ]);
   const items = new Array(5).fill(0);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     backgroundColor,
     borderRadius,
     className: `${className} conversation-list`,
@@ -34873,30 +35554,27 @@ const ConversationList = memo((_jc) => {
     orientation: Orientation.Vertical,
     overflow,
     width
-  }, props), {
-    children: items.map((_, index) => {
-      return /* @__PURE__ */ jsx(NavigationLink, {
-        to: `conversation/${index}`,
-        children: /* @__PURE__ */ jsx(MessagePreview, {
-          backgroundColor: BackgroundColors.Default,
-          body: "Lorem ipsum",
-          border: index !== items.length - 1 ? {
-            bottom: {
-              color: BorderColors.Light,
-              style: BorderStyle.Solid,
-              width: 1
-            }
-          } : void 0,
-          borderRadius: Amount.None,
-          date: new Date().toISOString(),
-          sender: {
-            id: "0",
-            name: "Yippy James"
-          },
-          subject: "Lorem ipsum "
-        })
-      });
-    })
+  }, props), items.map((_, index) => {
+    return /* @__PURE__ */ React.createElement(NavigationLink, {
+      to: `conversation/${index}`
+    }, /* @__PURE__ */ React.createElement(MessagePreview, {
+      backgroundColor: BackgroundColors.Default,
+      body: "Lorem ipsum",
+      border: index !== items.length - 1 ? {
+        bottom: {
+          color: BorderColors.Light,
+          style: BorderStyle.Solid,
+          width: 1
+        }
+      } : void 0,
+      borderRadius: Amount.None,
+      date: new Date().toISOString(),
+      sender: {
+        id: "0",
+        name: "Yippy James"
+      },
+      subject: "Lorem ipsum "
+    }));
   }));
 });
 const NavigationMenu = memo((_lc) => {
@@ -34944,203 +35622,192 @@ const NavigationMenu = memo((_lc) => {
     "menu",
     "menuItemProps"
   ]);
-  return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     alignItems: Align.Stretch,
     alignContent: Align.Top,
     as: "nav",
     backgroundColor,
     className: `${className} navigation-menu`,
     padding: Amount.Less
-  }, props), {
-    children: menu.map((item, key) => {
-      var _a2, _b, _c, _d, _e2, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r;
-      return /* @__PURE__ */ jsx(NavigationLink, __spreadValues({
-        active: (_a2 = menuItemProps == null ? void 0 : menuItemProps.active) != null ? _a2 : item.active,
-        backgroundColor: (_b = menuItemProps == null ? void 0 : menuItemProps.backgroundColor) != null ? _b : BackgroundColors.Transparent,
-        borderRadius: (_d = (_c = menuItemProps.borderRadius) != null ? _c : item.borderRadius) != null ? _d : Amount.Default,
-        className: "navigation-menu-item",
-        focus: (_e2 = menuItemProps == null ? void 0 : menuItemProps.focus) != null ? _e2 : item.focus,
-        grow: true,
-        hover: (_f = menuItemProps == null ? void 0 : menuItemProps.hover) != null ? _f : item.hover,
-        icon: item.icon,
-        label: item.label,
-        margin: (_g = menuItemProps.margin) != null ? _g : Amount.None,
-        marginBottom: (_h = menuItemProps.marginBottom) != null ? _h : Amount.Least,
-        marginLeft: (_i = menuItemProps.marginLeft) != null ? _i : Amount.None,
-        marginRight: (_j = menuItemProps.marginRight) != null ? _j : Amount.None,
-        marginTop: (_k = menuItemProps.marginTop) != null ? _k : Amount.None,
-        padding: (_l = menuItemProps.padding) != null ? _l : Amount.None,
-        paddingBottom: (_m = menuItemProps.paddingBottom) != null ? _m : menuItemProps.padding,
-        paddingLeft: (_n = menuItemProps.paddingLeft) != null ? _n : menuItemProps.padding,
-        paddingRight: (_o = menuItemProps.paddingRight) != null ? _o : menuItemProps.padding,
-        paddingTop: (_p = menuItemProps.paddingTop) != null ? _p : menuItemProps.padding,
-        textColor: (_q = menuItemProps.textColor) != null ? _q : TextColors.Default,
-        to: (_r = item.to) != null ? _r : "#"
-      }, menuItemProps), key);
-    })
+  }, props), menu.map((item, key) => {
+    var _a2, _b, _c, _d, _e2, _f, _g, _h, _i, _j, _k, _l, _m, _n, _o, _p, _q, _r;
+    return /* @__PURE__ */ React.createElement(NavigationLink, __spreadValues({
+      active: (_a2 = menuItemProps == null ? void 0 : menuItemProps.active) != null ? _a2 : item.active,
+      backgroundColor: (_b = menuItemProps == null ? void 0 : menuItemProps.backgroundColor) != null ? _b : BackgroundColors.Transparent,
+      borderRadius: (_d = (_c = menuItemProps.borderRadius) != null ? _c : item.borderRadius) != null ? _d : Amount.Default,
+      className: "navigation-menu-item",
+      focus: (_e2 = menuItemProps == null ? void 0 : menuItemProps.focus) != null ? _e2 : item.focus,
+      grow: true,
+      hover: (_f = menuItemProps == null ? void 0 : menuItemProps.hover) != null ? _f : item.hover,
+      icon: item.icon,
+      key,
+      label: item.label,
+      margin: (_g = menuItemProps.margin) != null ? _g : Amount.None,
+      marginBottom: (_h = menuItemProps.marginBottom) != null ? _h : Amount.Least,
+      marginLeft: (_i = menuItemProps.marginLeft) != null ? _i : Amount.None,
+      marginRight: (_j = menuItemProps.marginRight) != null ? _j : Amount.None,
+      marginTop: (_k = menuItemProps.marginTop) != null ? _k : Amount.None,
+      padding: (_l = menuItemProps.padding) != null ? _l : Amount.None,
+      paddingBottom: (_m = menuItemProps.paddingBottom) != null ? _m : menuItemProps.padding,
+      paddingLeft: (_n = menuItemProps.paddingLeft) != null ? _n : menuItemProps.padding,
+      paddingRight: (_o = menuItemProps.paddingRight) != null ? _o : menuItemProps.padding,
+      paddingTop: (_p = menuItemProps.paddingTop) != null ? _p : menuItemProps.padding,
+      textColor: (_q = menuItemProps.textColor) != null ? _q : TextColors.Default,
+      to: (_r = item.to) != null ? _r : "#"
+    }, menuItemProps));
   }));
 });
 const ConversationNavigation = memo((_nc) => {
   var props = __objRest(_nc, []);
   const navigate = useNavigate$1();
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({}, props), {
-    children: [/* @__PURE__ */ jsx(Button$1, {
-      alignContent: Align.Center,
-      borderRadius: Amount.Least,
-      fullWidth: true,
-      grow: false,
-      icon: {
-        name: DualLightIcons.AddCircle,
-        size: Size.Small
-      },
-      marginBottom: Amount.Default,
-      onClick: () => navigate("/messages/new"),
-      size: Size.Large,
-      type: ButtonType.Primary,
-      children: "New Message"
-    }), /* @__PURE__ */ jsx(NavigationMenu, {
-      backgroundColor: BackgroundColors.Transparent,
-      menu: [{
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({}, props), /* @__PURE__ */ React.createElement(Button$1, {
+    alignContent: Align.Center,
+    borderRadius: Amount.Least,
+    fullWidth: true,
+    grow: false,
+    icon: {
+      name: DualLightIcons.AddCircle,
+      size: Size.Small
+    },
+    marginBottom: Amount.Default,
+    onClick: () => navigate("/messages/new"),
+    size: Size.Large,
+    type: ButtonType.Primary
+  }, "New Message"), /* @__PURE__ */ React.createElement(NavigationMenu, {
+    backgroundColor: BackgroundColors.Transparent,
+    menu: [
+      {
         icon: {
           name: DualLightIcons.Inbox,
           size: Size.Small
         },
         label: "Inbox",
         to: "/messages/inbox"
-      }, {
+      },
+      {
         icon: {
           name: DualLightIcons.Star,
           size: Size.Small
         },
         label: "Starred",
         to: "/messages/starred"
-      }, {
+      },
+      {
         icon: {
           name: DualLightIcons.Send,
           size: Size.Small
         },
         label: "Sent",
         to: "/messages/sent"
-      }, {
+      },
+      {
         icon: {
           name: DualLightIcons.Note,
           size: Size.Small
         },
         label: "Drafts",
         to: "/messages/drafts"
-      }, {
+      },
+      {
         icon: {
           name: DualLightIcons.Trash,
           size: Size.Small
         },
         label: "Trash",
         to: "/messages/trash"
-      }]
-    })]
+      }
+    ]
   }));
 });
-const Message$1 = memo(({
-  body,
-  subject,
-  sender
-}) => {
-  return /* @__PURE__ */ jsx(Container$h, {});
+const Message$1 = memo(({ body, subject, sender }) => {
+  return /* @__PURE__ */ React.createElement(Container$h, null);
 });
 const MessageComposer = memo((_oc) => {
   var props = __objRest(_oc, []);
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     backgroundColor: BackgroundColors.Default
-  }, props), {
-    children: [/* @__PURE__ */ jsx(Container$h, {
-      alignContent: Align.Center,
-      border: {
-        bottom: {
-          color: BorderColors.Dark,
-          style: BorderStyle.Solid,
-          width: 1
-        }
-      },
-      grow: false,
-      padding: Amount.More,
-      children: /* @__PURE__ */ jsx(Label, {
-        children: "Title"
-      })
-    }), /* @__PURE__ */ jsx(Container$h, {
-      alignContent: Align.Center,
-      border: {
-        bottom: {
-          color: BorderColors.Dark,
-          style: BorderStyle.Solid,
-          width: 1
-        }
-      },
-      grow: false,
-      padding: Amount.More,
-      children: /* @__PURE__ */ jsx(Label, {
-        children: "Recipients"
-      })
-    }), /* @__PURE__ */ jsx(Container$h, {
-      alignContent: Align.Center,
-      border: {
-        bottom: {
-          color: BorderColors.Dark,
-          style: BorderStyle.Solid,
-          width: 1
-        }
-      },
-      grow: false,
-      padding: Amount.More,
-      children: /* @__PURE__ */ jsx(Label, {
-        children: "Subject"
-      })
-    }), /* @__PURE__ */ jsx(Container$h, {
-      alignItems: Align.Top,
-      alignContent: Align.Top,
-      padding: Amount.More,
-      children: /* @__PURE__ */ jsx(Label, {
-        grow: false,
-        children: "Message"
-      })
-    }), /* @__PURE__ */ jsx(Container$h, {
-      alignItems: Align.Left,
-      alignContent: Align.Top,
-      grow: false,
-      padding: Amount.More,
-      children: /* @__PURE__ */ jsx(Button$1, {
-        grow: false,
-        type: ButtonType.Primary,
-        children: "Send"
-      })
-    })]
-  }));
+  }, props), /* @__PURE__ */ React.createElement(Container$h, {
+    alignContent: Align.Center,
+    border: {
+      bottom: {
+        color: BorderColors.Dark,
+        style: BorderStyle.Solid,
+        width: 1
+      }
+    },
+    grow: false,
+    padding: Amount.More
+  }, /* @__PURE__ */ React.createElement(Label, null, "Title")), /* @__PURE__ */ React.createElement(Container$h, {
+    alignContent: Align.Center,
+    border: {
+      bottom: {
+        color: BorderColors.Dark,
+        style: BorderStyle.Solid,
+        width: 1
+      }
+    },
+    grow: false,
+    padding: Amount.More
+  }, /* @__PURE__ */ React.createElement(Label, null, "Recipients")), /* @__PURE__ */ React.createElement(Container$h, {
+    alignContent: Align.Center,
+    border: {
+      bottom: {
+        color: BorderColors.Dark,
+        style: BorderStyle.Solid,
+        width: 1
+      }
+    },
+    grow: false,
+    padding: Amount.More
+  }, /* @__PURE__ */ React.createElement(Label, null, "Subject")), /* @__PURE__ */ React.createElement(Container$h, {
+    alignItems: Align.Top,
+    alignContent: Align.Top,
+    padding: Amount.More
+  }, /* @__PURE__ */ React.createElement(Label, {
+    grow: false
+  }, "Message")), /* @__PURE__ */ React.createElement(Container$h, {
+    alignItems: Align.Left,
+    alignContent: Align.Top,
+    grow: false,
+    padding: Amount.More
+  }, /* @__PURE__ */ React.createElement(Button$1, {
+    grow: false,
+    type: ButtonType.Primary
+  }, "Send")));
 });
-const Modal = memo(({
-  children,
-  visible,
-  setVisible
-}) => {
-  return ReactDOM.createPortal(/* @__PURE__ */ jsx(Container$4, {
+const Modal = memo(({ children, visible, setVisible }) => {
+  return ReactDOM.createPortal(/* @__PURE__ */ React.createElement(Container$4, {
     className: "modal-container",
     visible,
     onClick: () => {
       setVisible(false);
-    },
-    children: /* @__PURE__ */ jsx(Content, {
-      children
-    })
-  }), document.getElementById("root"));
+    }
+  }, /* @__PURE__ */ React.createElement(Content, null, children)), document.getElementById("root"));
 });
-const Container$4 = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-gk61f6-0"
-})(["background:rgba(0,0,0,0.3);bottom:0;left:0;opacity:", ";pointer-events:", ";position:fixed;right:0;top:0;transition:opacity 0.2s ease-out;z-index:500000;"], (props) => props.visible ? "1" : "0", (props) => props.visible ? "auto" : "none");
-const Content = styled.div.withConfig({
-  displayName: "Content",
-  componentId: "sc-gk61f6-1"
-})(["background:white;border-radius:15px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);padding:20px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;"]);
-const UserMenu = memo(({
-  onLogoutSuccess
-}) => {
+const Container$4 = styled.div`
+  background: rgba(0, 0, 0, 0.3);
+  bottom: 0;
+  left: 0;
+  opacity: ${(props) => props.visible ? "1" : "0"};
+  pointer-events: ${(props) => props.visible ? "auto" : "none"};
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: opacity 0.2s ease-out;
+  z-index: 500000;
+`;
+const Content = styled.div`
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+`;
+const UserMenu = memo(({ onLogoutSuccess }) => {
   const [loggingOut, setLoggingOut] = useState(false);
   const dispatch = useDispatch();
   const attributes = useSelector((state) => state.user.details.attributes);
@@ -35150,31 +35817,32 @@ const UserMenu = memo(({
       onLogoutSuccess();
   }, [loggedIn]);
   if (!loggedIn) {
-    return /* @__PURE__ */ jsx(ErrorLabel, {
-      children: "Not logged in"
-    });
+    return /* @__PURE__ */ React.createElement(ErrorLabel, null, "Not logged in");
   }
-  return /* @__PURE__ */ jsx(MenuButton, {
-    menu: [{
-      icon: {
-        name: BasicIcons.GearCog,
-        size: Size.Smaller
+  return /* @__PURE__ */ React.createElement(MenuButton, {
+    menu: [
+      {
+        icon: {
+          name: BasicIcons.GearCog,
+          size: Size.Smaller
+        },
+        label: "Settings",
+        to: "/settings"
       },
-      label: "Settings",
-      to: "/settings"
-    }, {
-      icon: {
-        color: Colors.Error,
-        name: BasicIcons.Exit,
-        size: Size.Smaller
-      },
-      label: "Logout",
-      onClick: () => {
-        setLoggingOut(true);
-        dispatch(logout());
-      },
-      textColor: TextColors.Error
-    }],
+      {
+        icon: {
+          color: Colors.Error,
+          name: BasicIcons.Exit,
+          size: Size.Smaller
+        },
+        label: "Logout",
+        onClick: () => {
+          setLoggingOut(true);
+          dispatch(logout());
+        },
+        textColor: TextColors.Error
+      }
+    ],
     label: `${attributes == null ? void 0 : attributes.given_name} ${attributes == null ? void 0 : attributes.family_name}`
   });
 });
@@ -35183,7 +35851,7 @@ const NavigationBar = memo(({
   logo
 }) => {
   const navigate = useNavigate$1();
-  return /* @__PURE__ */ jsxs(Container$h, {
+  return /* @__PURE__ */ React$1.createElement(Container$h, {
     backgroundColor,
     border: {
       bottom: {
@@ -35196,20 +35864,17 @@ const NavigationBar = memo(({
     orientation: Orientation.Horizontal,
     padding: Amount.Default,
     paddingLeft: Amount.More,
-    paddingRight: Amount.Most,
-    children: [/* @__PURE__ */ jsx(Container$h, {
-      alignItems: Align.Center,
-      grow: false,
-      orientation: Orientation.Horizontal,
-      children: logo
-    }), /* @__PURE__ */ jsx(Container$h, {}), /* @__PURE__ */ jsx(Container$h, {
-      alignContent: Align.Center,
-      width: 200,
-      children: /* @__PURE__ */ jsx(UserMenu, {
-        onLogoutSuccess: () => navigate("/login")
-      })
-    })]
-  });
+    paddingRight: Amount.Most
+  }, /* @__PURE__ */ React$1.createElement(Container$h, {
+    alignItems: Align.Center,
+    grow: false,
+    orientation: Orientation.Horizontal
+  }, logo), /* @__PURE__ */ React$1.createElement(Container$h, null), /* @__PURE__ */ React$1.createElement(Container$h, {
+    alignContent: Align.Center,
+    width: 200
+  }, /* @__PURE__ */ React$1.createElement(UserMenu, {
+    onLogoutSuccess: () => navigate("/login")
+  })));
 });
 const ObjectLink = memo((_pc) => {
   var _qc = _pc, {
@@ -35221,16 +35886,37 @@ const ObjectLink = memo((_pc) => {
     "disabled",
     "onClick"
   ]);
-  return /* @__PURE__ */ jsx(Container$3, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$3, __spreadValues({
     onClick
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
-const Container$3 = styled.button.withConfig({
-  displayName: "Container",
-  componentId: "sc-1q42v1w-0"
-})(["background:transparent;border:1px solid transparent;border-radius:6px;display:block;width:100%;&:after{clear:both;content:'';display:block;}&:hover{border:1px solid #eee;cursor:pointer !important;}&:active{border:1px solid rgba(65,145,63,1);}&.disabled{cursor:default !important;border:none;}"]);
+const Container$3 = styled.button`
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  display: block;
+  width: 100%;
+
+  &:after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+
+  &:hover {
+    border: 1px solid #eee;
+    cursor: pointer !important;
+  }
+
+  &:active {
+    border: 1px solid rgba(65, 145, 63, 1);
+  }
+
+  &.disabled {
+    cursor: default !important;
+    border: none;
+  }
+`;
 const PageLink = memo(({
   textColor,
   label,
@@ -35239,172 +35925,240 @@ const PageLink = memo(({
   showArrow = false,
   showUnderline = false
 }) => {
-  return /* @__PURE__ */ jsx(Container$2, {
-    showUnderline,
-    children: /* @__PURE__ */ jsxs(Link$2, {
-      to,
-      children: [/* @__PURE__ */ jsx(IconWrapper$1, {
-        children: icon
-      }), /* @__PURE__ */ jsx(Label, {
-        textColor: textColor != null ? textColor : TextColors.Primary,
-        size: Size.Small,
-        children: label
-      }), showArrow && /* @__PURE__ */ jsx(Icon, {
-        name: BasicIcons.ChevronRight,
-        size: Size.Small,
-        color: textColor
-      })]
-    })
-  });
+  return /* @__PURE__ */ React.createElement(Container$2, {
+    showUnderline
+  }, /* @__PURE__ */ React.createElement(Link$2, {
+    to
+  }, /* @__PURE__ */ React.createElement(IconWrapper$1, null, icon), /* @__PURE__ */ React.createElement(Label, {
+    textColor: textColor != null ? textColor : TextColors.Primary,
+    size: Size.Small
+  }, label), showArrow && /* @__PURE__ */ React.createElement(Icon, {
+    name: BasicIcons.ChevronRight,
+    size: Size.Small,
+    color: textColor
+  })));
 });
-const Container$2 = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-10hsjyi-0"
-})(["display:flex;a{border:", ";text-decoration:none;}@media (min-width:480px){}@media (min-width:768px){}@media (min-width:992px){a{font-size:18px;}svg{height:12px;width:12px;}}@media (min-width:1200px){}"], (props) => props.showUnderline ? `2px solid var(--color-primary)` : "none");
-const IconWrapper$1 = styled.div.withConfig({
-  displayName: "IconWrapper",
-  componentId: "sc-10hsjyi-1"
-})(["flex-basis:20px;"]);
+const Container$2 = styled.div`
+  display: flex;
+
+  a {
+    border: ${(props) => props.showUnderline ? `2px solid var(--color-primary)` : "none"};
+    text-decoration: none;
+
+    /* &:hover {
+      border-bottom: 2px solid rgba(65, 145, 64, 1);
+    } */
+  }
+
+  @media (min-width: 480px) {
+  }
+
+  @media (min-width: 768px) {
+  }
+
+  @media (min-width: 992px) {
+    a {
+      font-size: 18px;
+    }
+
+    svg {
+      height: 12px;
+      width: 12px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+  }
+`;
+const IconWrapper$1 = styled.div`
+  flex-basis: 20px;
+`;
 const Tabs = memo(({
   borderRadius = Amount.More,
   className = "",
   children
 }) => {
   let initialIndex = 0;
-  e$1.Children.forEach(children, (child, key) => {
+  React$1.Children.forEach(children, (child, key) => {
     var _a2;
     if ((_a2 = child.props) == null ? void 0 : _a2.selected)
       initialIndex = key;
   });
   const [currentTabIndex, setTabIndex] = useState(initialIndex);
-  return /* @__PURE__ */ jsxs(Container$h, {
+  return /* @__PURE__ */ React$1.createElement(Container$h, {
     alignContent: Align.Stretch,
     className: `${className} tabs`,
+    orientation: Orientation.Vertical
+  }, /* @__PURE__ */ React$1.createElement(Container$h, {
+    alignContent: Align.Center,
+    marginBottom: Amount.Default,
+    orientation: Orientation.Horizontal,
+    grow: false
+  }, React$1.Children.map(children, (c2, key) => {
+    if (c2.props.visible === false)
+      return null;
+    return /* @__PURE__ */ React$1.createElement(TabButton, {
+      className: c2.props.className,
+      current: currentTabIndex === key,
+      onClick: () => {
+        setTabIndex(key);
+        if (c2.props.onClick && typeof c2.props.onClick === "function")
+          c2.props.onClick();
+      },
+      key
+    }, /* @__PURE__ */ React$1.createElement(Label, {
+      textColor: currentTabIndex === key ? TextColors.Primary : TextColors.Default
+    }, c2.props.label));
+  })), /* @__PURE__ */ React$1.createElement(Container$h, {
+    alignContent: Align.Top,
+    backgroundColor: BackgroundColors.Default,
+    borderRadius,
+    boxShadow: DepthShadow.Highest,
+    className: "tab-content",
+    grow: false,
     orientation: Orientation.Vertical,
-    children: [/* @__PURE__ */ jsx(Container$h, {
-      alignContent: Align.Center,
-      marginBottom: Amount.Default,
-      orientation: Orientation.Horizontal,
-      grow: false,
-      children: e$1.Children.map(children, (c2, key) => {
-        if (c2.props.visible === false)
-          return null;
-        return /* @__PURE__ */ jsx(TabButton, {
-          className: c2.props.className,
-          current: currentTabIndex === key,
-          onClick: () => {
-            setTabIndex(key);
-            if (c2.props.onClick && typeof c2.props.onClick === "function")
-              c2.props.onClick();
-          },
-          children: /* @__PURE__ */ jsx(Label, {
-            textColor: currentTabIndex === key ? TextColors.Primary : TextColors.Default,
-            children: c2.props.label
-          })
-        }, key);
-      })
-    }), /* @__PURE__ */ jsx(Container$h, {
-      alignContent: Align.Top,
-      backgroundColor: BackgroundColors.Default,
-      borderRadius,
-      boxShadow: DepthShadow.Highest,
-      className: "tab-content",
-      grow: false,
-      orientation: Orientation.Vertical,
-      padding: Amount.Most,
-      paddingLeft: Amount.All,
-      paddingRight: Amount.All,
-      children: e$1.Children.map(children, (c2, key) => {
-        if (key !== currentTabIndex)
-          return null;
-        return e$1.cloneElement(c2);
-      })
-    })]
-  });
+    padding: Amount.Most,
+    paddingLeft: Amount.All,
+    paddingRight: Amount.All
+  }, React$1.Children.map(children, (c2, key) => {
+    if (key !== currentTabIndex)
+      return null;
+    return React$1.cloneElement(c2);
+  })));
 });
-const TabButton = styled.button.withConfig({
-  displayName: "TabButton",
-  componentId: "sc-1qraht0-0"
-})(["", ";background:transparent;border:none;border-bottom:3px solid rgba(", ",0.5);color:var(--text-color-light);cursor:pointer;display:inline-block;font-size:14px;font-weight:600;height:var(--amount-all);line-height:var(--amount-all);padding:0 var(--amount-default);position:relative;text-align:center;transition:background 0.2s ease-out,border 0.2s ease-out,color 0.2s ease-out;user-select:none;&:before{border-radius:", ";top:-2px;left:-2px;right:-2px;bottom:-2px;}*{cursor:pointer;}", ""], FocusedStyles, BorderColors.Light, Amount.Least, (props) => props.current && css(["border-bottom:3px solid var(--color-primary);font-weight:700;"]));
-const Tab = memo(({
-  className = "",
-  children,
-  label,
-  onClick
-}) => {
-  return /* @__PURE__ */ jsx(Container$h, {
+const TabButton = styled.button`
+  ${FocusedStyles};
+
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid rgba(${BorderColors.Light}, 0.5);
+  color: var(--text-color-light);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  height: var(--amount-all);
+  line-height: var(--amount-all);
+  padding: 0 var(--amount-default);
+  position: relative;
+  text-align: center;
+  transition: background 0.2s ease-out, border 0.2s ease-out,
+    color 0.2s ease-out;
+  user-select: none;
+
+  &:before {
+    border-radius: ${Amount.Least};
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+  }
+
+  * {
+    cursor: pointer;
+  }
+
+  ${(props) => props.current && css`
+      border-bottom: 3px solid var(--color-primary);
+      font-weight: 700;
+    `}
+`;
+const Tab = memo(({ className = "", children, label, onClick }) => {
+  return /* @__PURE__ */ React.createElement(Container$h, {
     className: `${className} tab`,
     "data-label": label,
-    fadeIn: true,
-    children
-  });
+    fadeIn: true
+  }, children);
 });
 const ConnectionStatus = memo((_rc) => {
   var props = __objRest(_rc, []);
-  return /* @__PURE__ */ jsx(NotificationLabel, __spreadValues({
+  return /* @__PURE__ */ React.createElement(NotificationLabel, __spreadValues({
     type: NotificationType.Success,
     label: "Connected"
   }, props));
 });
 const Badge = memo((_sc) => {
-  var _tc = _sc, {
-    children,
-    label
-  } = _tc, props = __objRest(_tc, [
-    "children",
-    "label"
-  ]);
+  var _tc = _sc, { children, label } = _tc, props = __objRest(_tc, ["children", "label"]);
   var _a2;
-  return /* @__PURE__ */ jsx(Container$1, __spreadProps(__spreadValues({}, props), {
-    children: (_a2 = label == null ? void 0 : label.toString()) != null ? _a2 : children
-  }));
+  return /* @__PURE__ */ React.createElement(Container$1, __spreadValues({}, props), (_a2 = label == null ? void 0 : label.toString()) != null ? _a2 : children);
 });
-const Container$1 = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-z85zdo-0"
-})(["background:#f2f2f2;color:#7b7b7b;border-radius:4px;float:left;font-size:9px;margin:0 10px 0 0;padding:4px 6px 5px 6px;position:relative;text-transform:capitalize;"]);
+const Container$1 = styled.div`
+  background: #f2f2f2;
+  color: #7b7b7b;
+  border-radius: 4px;
+  float: left;
+  font-size: 9px;
+  margin: 0 10px 0 0;
+  padding: 4px 6px 5px 6px;
+  position: relative;
+  text-transform: capitalize;
+`;
 const Notifications = memo(() => {
   const notifications = useSelector((state) => state.app.notifications);
-  return /* @__PURE__ */ jsx(Container, {
-    children: notifications.map((notification) => {
-      return /* @__PURE__ */ jsxs(NotificationContainer, {
-        children: [/* @__PURE__ */ jsx(IconWrapper, {
-          color: notification.color,
-          children: /* @__PURE__ */ jsx(Icon, {
-            name: notification.icon
-          })
-        }), /* @__PURE__ */ jsx(Close, {
-          children: /* @__PURE__ */ jsx(CloseButton, {
-            onClick: () => {
-            }
-          })
-        }), /* @__PURE__ */ jsx(Message, {
-          children: notification.message
-        })]
-      }, notification.id);
-    })
-  });
+  return /* @__PURE__ */ React.createElement(Container, null, notifications.map((notification) => {
+    return /* @__PURE__ */ React.createElement(NotificationContainer, {
+      key: notification.id
+    }, /* @__PURE__ */ React.createElement(IconWrapper, {
+      color: notification.color
+    }, /* @__PURE__ */ React.createElement(Icon, {
+      name: notification.icon
+    })), /* @__PURE__ */ React.createElement(Close, null, /* @__PURE__ */ React.createElement(CloseButton, {
+      onClick: () => {
+      }
+    })), /* @__PURE__ */ React.createElement(Message, null, notification.message));
+  }));
 });
-const Container = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-hj2572-0"
-})(["left:0;margin:0 auto;position:absolute;right:0;top:15px;width:475px;z-index:50000;"]);
-const NotificationContainer = styled.div.withConfig({
-  displayName: "NotificationContainer",
-  componentId: "sc-hj2572-1"
-})(["background:#2b2b2b;border-radius:60px;box-shadow:0 9px 25px rgba(0,0,0,0.3);height:60px;margin:0 0 25px 0;overflow:hidden;&:after{clear:both;content:'';display:block;}"]);
-const IconWrapper = styled.div.withConfig({
-  displayName: "IconWrapper",
-  componentId: "sc-hj2572-2"
-})(["float:left;height:60px;line-height:64px;text-align:center;width:64px;svg{fill:rgb(", ");height:18px;width:18px;}"], (props) => props.color || "235, 235, 235");
-const Message = styled.div.withConfig({
-  displayName: "Message",
-  componentId: "sc-hj2572-3"
-})(["color:#eee;font-size:14px;font-weight:500;float:left;line-height:58px;width:291px;"]);
-const Close = styled.div.withConfig({
-  displayName: "Close",
-  componentId: "sc-hj2572-4"
-})(["float:right;height:60px;line-height:49px;text-align:center;width:60px;"]);
+const Container = styled.div`
+  left: 0;
+  margin: 0 auto;
+  position: absolute;
+  right: 0;
+  top: 15px;
+  width: 475px;
+  z-index: 50000;
+`;
+const NotificationContainer = styled.div`
+  background: #2b2b2b;
+  border-radius: 60px;
+  box-shadow: 0 9px 25px rgba(0, 0, 0, 0.3);
+  height: 60px;
+  margin: 0 0 25px 0;
+  overflow: hidden;
+
+  &:after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+`;
+const IconWrapper = styled.div`
+  float: left;
+  height: 60px;
+  line-height: 64px;
+  text-align: center;
+  width: 64px;
+
+  svg {
+    fill: rgb(${(props) => props.color || "235, 235, 235"});
+    height: 18px;
+    width: 18px;
+  }
+`;
+const Message = styled.div`
+  color: #eee;
+  font-size: 14px;
+  font-weight: 500;
+  float: left;
+  line-height: 58px;
+  width: 291px;
+`;
+const Close = styled.div`
+  float: right;
+  height: 60px;
+  line-height: 49px;
+  text-align: center;
+  width: 60px;
+`;
 const Heading = memo((_uc) => {
   var _vc = _uc, {
     as = "h3",
@@ -35427,7 +36181,7 @@ const Heading = memo((_uc) => {
     "textColor",
     "textSize"
   ]);
-  return /* @__PURE__ */ jsx(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Label, __spreadValues({
     alignText,
     as,
     className: `${className} heading`,
@@ -35436,9 +36190,7 @@ const Heading = memo((_uc) => {
     textColor,
     textWeight,
     textSize
-  }, props), {
-    children
-  }));
+  }, props), children);
 });
 const UniversalSearch = memo((_wc) => {
   var props = __objRest(_wc, []);
@@ -35452,78 +36204,95 @@ const UniversalSearch = memo((_wc) => {
       setResultsVisible(false);
     }
   }, [isFocused, searchValue]);
-  return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Container$h, __spreadValues({
     className: "universal-search",
     grow: true,
     orientation: Orientation.Vertical
-  }, props), {
-    children: [/* @__PURE__ */ jsx(SearchInput, {
-      name: "universal-search",
-      flat: true,
-      placeholder: "Search everything",
-      onChange: ({
-        value
-      }) => setSearchValue(value),
-      onFocus: () => {
-        setFocused(true);
-      },
-      onBlur: () => {
-        setFocused(false);
-      },
-      spellCheck: false
-    }), /* @__PURE__ */ jsxs(SearchResults, {
-      as: Container$h,
-      resultsVisible,
-      depth: Depth.Highest,
-      padding: Amount.More,
-      children: [/* @__PURE__ */ jsx(CloseButton, {
-        alignSelf: Align.Right,
-        onClick: () => setResultsVisible(false),
-        size: Size.Small
-      }), /* @__PURE__ */ jsx(Heading, {
-        children: "Search Results"
-      })]
-    })]
-  }));
+  }, props), /* @__PURE__ */ React.createElement(SearchInput, {
+    name: "universal-search",
+    flat: true,
+    placeholder: "Search everything",
+    onChange: ({ value }) => setSearchValue(value),
+    onFocus: () => {
+      setFocused(true);
+    },
+    onBlur: () => {
+      setFocused(false);
+    },
+    spellCheck: false
+  }), /* @__PURE__ */ React.createElement(SearchResults, {
+    as: Container$h,
+    resultsVisible,
+    depth: Depth.Highest,
+    padding: Amount.More
+  }, /* @__PURE__ */ React.createElement(CloseButton, {
+    alignSelf: Align.Right,
+    onClick: () => setResultsVisible(false),
+    size: Size.Small
+  }), /* @__PURE__ */ React.createElement(Heading, null, "Search Results")));
 });
-const SearchResults = styled.div.withConfig({
-  displayName: "SearchResults",
-  componentId: "sc-1rpv9xw-0"
-})(["backdrop-filter:blur(3px);background:var(--bg-color-depth-highest-opaque);border-radius:var(--border-radius);cursor:default;display:none;overflow:hidden;overflow-y:scroll;left:20px;max-height:390px;min-height:300px;position:absolute;opacity:0;pointer-events:none;top:80%;transform:translateY(-300px);transition:opacity 0.18s ease-in-out,transform 0.18s ease-in-out;min-width:500px;max-width:500px;z-index:3;.result{margin-bottom:3px;}", ";"], (props) => props.resultsVisible && css(["display:flex;opacity:1;pointer-events:all;transform:translateY(0);"]));
+const SearchResults = styled.div`
+  backdrop-filter: blur(3px);
+  background: var(--bg-color-depth-highest-opaque);
+  /* box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2); */
+  border-radius: var(--border-radius);
+  cursor: default;
+  display: none;
+  overflow: hidden;
+  overflow-y: scroll;
+  left: 20px;
+  max-height: 390px;
+  min-height: 300px;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  top: 80%;
+  transform: translateY(-300px);
+  transition: opacity 0.18s ease-in-out, transform 0.18s ease-in-out;
+  min-width: 500px;
+  max-width: 500px;
+  z-index: 3;
+
+  .result {
+    margin-bottom: 3px;
+  }
+
+  ${(props) => props.resultsVisible && css`
+      display: flex;
+      opacity: 1;
+      pointer-events: all;
+      transform: translateY(0);
+    `};
+
+  /* @media (min-width: 992px) {
+    border-radius: 0 0 8px 0;
+    left: 15px;
+    top: 60px;
+    width: 480px;
+  } */
+`;
 const ThemeSelector = memo((_xc) => {
-  var _yc = _xc, {
-    showLabel = true
-  } = _yc, props = __objRest(_yc, [
-    "showLabel"
-  ]);
+  var _yc = _xc, { showLabel = true } = _yc, props = __objRest(_yc, ["showLabel"]);
   const dispatch = useDispatch();
-  const {
-    current,
-    list
-  } = useSelector((state) => state.ui.themes);
-  return /* @__PURE__ */ jsxs(Container$h, {
+  const { current, list } = useSelector((state) => state.ui.themes);
+  return /* @__PURE__ */ React.createElement(Container$h, {
     alignContent: Align.Center,
-    grow: false,
-    children: [showLabel && /* @__PURE__ */ jsx(InputLabel, {
-      children: "Theme"
-    }), /* @__PURE__ */ jsx(DropdownInput, __spreadValues({
-      defaultValue: current,
-      name: "theme",
-      menu: list.map((i2) => {
-        return {
-          label: i2.name,
-          value: i2.id
-        };
-      }),
-      onChange: ({
-        value
-      }) => {
-        const newTheme = list.find((t2) => t2.id === value);
-        dispatch(setTheme(newTheme.id));
-      },
-      placeholder: "Choose a theme"
-    }, props))]
-  });
+    grow: false
+  }, showLabel && /* @__PURE__ */ React.createElement(InputLabel, null, "Theme"), /* @__PURE__ */ React.createElement(DropdownInput, __spreadValues({
+    defaultValue: current,
+    name: "theme",
+    menu: list.map((i2) => {
+      return {
+        label: i2.name,
+        value: i2.id
+      };
+    }),
+    onChange: ({ value }) => {
+      const newTheme = list.find((t2) => t2.id === value);
+      dispatch(setTheme(newTheme.id));
+    },
+    placeholder: "Choose a theme"
+  }, props)));
 });
 const LogoutButton = memo((_zc) => {
   var _Ac = _zc, {
@@ -35545,21 +36314,36 @@ const LogoutButton = memo((_zc) => {
     if (!loggedIn && onLogoutSuccess)
       onLogoutSuccess();
   }, [loggedIn]);
-  return /* @__PURE__ */ jsxs(Button$1, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ React.createElement(Button$1, __spreadValues({
     onClick: () => dispatch(logout())
-  }, props), {
-    children: [icon && /* @__PURE__ */ jsx(Icon, __spreadValues({}, icon)), /* @__PURE__ */ jsx(Label, {
-      textColor,
-      size: Size.Small,
-      children: label != null ? label : "Logout"
-    }), showArrow && /* @__PURE__ */ jsx(Icon, {
-      color: textColor,
-      name: BasicIcons.ChevronRight,
-      size: Size.Small
-    })]
+  }, props), icon && /* @__PURE__ */ React.createElement(Icon, __spreadValues({}, icon)), /* @__PURE__ */ React.createElement(Label, {
+    textColor,
+    size: Size.Small
+  }, label != null ? label : "Logout"), showArrow && /* @__PURE__ */ React.createElement(Icon, {
+    color: textColor,
+    name: BasicIcons.ChevronRight,
+    size: Size.Small
   }));
 });
-const ButtonStyles = css(["background-color:", ";border:1px solid ", ";padding:0 calc(", " / 3);"], BackgroundColors.Lightest, BorderColors.Light, (props) => props.size);
+const ButtonStyles = css`
+  background-color: ${BackgroundColors.Lightest};
+  border: 1px solid ${BorderColors.Light};
+  /* border-radius: props.borderRadius}; */
+  /* box-shadow:  Shadows.Low : 'none'}; */
+  padding: 0 calc(${(props) => props.size} / 3);
+
+  /* props 
+    props.focused &&
+    css
+      border 1px solid transparent !important;
+    };
+
+  props =>
+    props.error &&
+    css
+      border: 1px solid rgb({BorderColors.Error});
+    }; */
+`;
 async function init() {
   Countries.registerLocale(englishLanguage);
 }

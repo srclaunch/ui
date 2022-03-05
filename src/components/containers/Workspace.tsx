@@ -1,5 +1,5 @@
 import { useTitle } from '@srclaunch/react-hooks';
-import React, { ElementType, memo, ReactElement } from 'react';
+import { cloneElement, ElementType, memo, ReactElement } from 'react';
 
 import {
   Align,
@@ -103,7 +103,7 @@ export const Workspace = memo(
 
     const Child = () =>
       Layout ? (
-        React.cloneElement(
+        cloneElement(
           <Layout scrollable {...props} />,
           props,
           <WorkspaceComp {...props} />,

@@ -7,5 +7,5 @@
     "rootDir": "./src"
   },
   "include": ["src"],
-  "exclude": ["src/components/__deprecated__"]
+  "exclude": ["src/components/__deprecated__", "src/docs"]
 }
