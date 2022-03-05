@@ -27,6 +27,7 @@ export default defineConfig({
         '@srclaunch/exceptions',
         '@srclaunch/icons',
         'react-password-strength-bar',
+        'axe-core',
         '@srclaunch/logger',
         'i18n-iso-countries',
       ],
@@ -49,7 +50,21 @@ export default defineConfig({
   esbuild: {
     // jsxInject: `import React from 'react'`,
   },
-  plugins: [react()],
+  plugins: [
+    react({
+      babel: {
+        plugins: [
+          [
+            'babel-plugin-styled-components',
+            {
+              displayName: true,
+              fileName: false,
+            },
+          ],
+        ],
+      },
+    }),
+  ],
 });
 
 /*
