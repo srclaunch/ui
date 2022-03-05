@@ -27,6 +27,7 @@ export default defineConfig({
         '@srclaunch/exceptions',
         '@srclaunch/validation',
         '@srclaunch/logger',
+        'i18n-iso-countries',
       ],
       output: {
         // Global vars to use in UMD build for externalized deps
