@@ -2095,7 +2095,7 @@ __metadata:
     "@srclaunch/transform": ^0.1.2
     "@srclaunch/types": ^0.1.2
     "@srclaunch/validation": ^0.1.2
-    "@srclaunch/web-application-state": ^0.1.17
+    "@srclaunch/web-application-state": ^0.1.19
     "@stripe/react-stripe-js": ^1.7.0
     "@stripe/stripe-js": ^1.22.0
     "@testing-library/jest-dom": ^5.16.2
@@ -2189,9 +2189,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/web-application-state@npm:^0.1.17":
-  version: 0.1.17
-  resolution: "@srclaunch/web-application-state@npm:0.1.17"
+"@srclaunch/web-application-state@npm:^0.1.19":
+  version: 0.1.19
+  resolution: "@srclaunch/web-application-state@npm:0.1.19"
   dependencies:
     "@reduxjs/toolkit": ^1.7.2
     "@srclaunch/exceptions": ^0.1.6
@@ -2213,7 +2213,7 @@ __metadata:
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: fc4b213833b232655d73a742fa60349b7d65846cf43c657f6243031f03a1ac8d1b9323a33fd55de982e7faee6b005c5574a02bb73db5a3ba2605026469cea69a
+  checksum: d1a3f2dd071b48703966ecf2271cc134debb53d78a5940ccf5172845b813391e0beb73b5483c165b9f026bd9a5149210d6ba0c45801622303a4f5eb7c8ee9489
   languageName: node
   linkType: hard
 

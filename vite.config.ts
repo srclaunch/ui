@@ -21,6 +21,7 @@ export default defineConfig({
         'react-dom',
         'react-redux',
         'react-router',
+        '@srclaunch/types',
         'react-router-dom',
         'styled-components',
         'amazon-cognito-identity-js',
