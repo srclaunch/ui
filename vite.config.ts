@@ -59,22 +59,22 @@ export default defineConfig({
   esbuild: {
     // jsxFactory: 'h',
     // jsxFragment: 'Fragment',
-    // jsxInject: `import React from 'react'`,
+    jsxInject: `import React from 'react'`,
   },
   plugins: [
-    react({
-      babel: {
-        plugins: [
-          [
-            'babel-plugin-styled-components',
-            {
-              displayName: true,
-              fileName: false,
-            },
-          ],
-        ],
-      },
-    }),
+    // react({
+    //   babel: {
+    //     plugins: [
+    //       [
+    //         'babel-plugin-styled-components',
+    //         {
+    //           displayName: true,
+    //           fileName: false,
+    //         },
+    //       ],
+    //     ],
+    //   },
+    // }),
   ],
 });
 
