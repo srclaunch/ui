@@ -49,8 +49,8 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: [],
-    include: ['@srclaunch/validation', 'react-password-strength-bar'],
+    exclude: ['react', 'react-dom', 'styled-components'],
+    include: [],
   },
   define: {
     pkgJson: { name, version },
