@@ -29,7 +29,7 @@ var __objRest = (source, exclude) => {
     }
   return target;
 };
-import React, { memo, useState, useEffect, useRef, forwardRef, useMemo, useReducer, useCallback, useImperativeHandle, Fragment, Component, cloneElement, createElement, Children } from "react";
+import React, { memo, useState, useEffect, useRef, useMemo, useReducer, useCallback, forwardRef, useImperativeHandle, Fragment, Component, cloneElement, createElement, Children } from "react";
 import Countries from "i18n-iso-countries";
 import { getIcon, BasicIcons, DualLightIcons } from "@srclaunch/icons";
 import { Condition, UserVerificationStatus, NotificationType, CountryCode, CurrencyCode, LanguageCode, Primitives, PageRole, Activities } from "@srclaunch/types";
@@ -37,8 +37,10 @@ import { useNavigate, useDispatch, useSelector, getVerificationDetails, verifyCo
 import styled, { css } from "styled-components";
 import { validate } from "@srclaunch/validation";
 import { Exception } from "@srclaunch/exceptions";
+import CurrencyInputField from "react-currency-input-field";
 import ReactCountryFlag from "react-country-flag";
 import PasswordStrengthBar from "react-password-strength-bar";
+import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import { formatCurrency } from "@srclaunch/i18n";
 import { Logger } from "@srclaunch/logger";
 import { useTitle } from "@srclaunch/react-hooks";
@@ -3357,480 +3359,6 @@ const Wrapper$3 = styled.div`
     color: white;
   }
 `;
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-var __assign$1 = function() {
-  __assign$1 = Object.assign || function __assign2(t) {
-    for (var s2, i = 1, n2 = arguments.length; i < n2; i++) {
-      s2 = arguments[i];
-      for (var p in s2)
-        if (Object.prototype.hasOwnProperty.call(s2, p))
-          t[p] = s2[p];
-    }
-    return t;
-  };
-  return __assign$1.apply(this, arguments);
-};
-function __rest(s2, e) {
-  var t = {};
-  for (var p in s2)
-    if (Object.prototype.hasOwnProperty.call(s2, p) && e.indexOf(p) < 0)
-      t[p] = s2[p];
-  if (s2 != null && typeof Object.getOwnPropertySymbols === "function")
-    for (var i = 0, p = Object.getOwnPropertySymbols(s2); i < p.length; i++) {
-      if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s2, p[i]))
-        t[p[i]] = s2[p[i]];
-    }
-  return t;
-}
-function __spreadArray(to, from, pack) {
-  if (pack || arguments.length === 2)
-    for (var i = 0, l2 = from.length, ar; i < l2; i++) {
-      if (ar || !(i in from)) {
-        if (!ar)
-          ar = Array.prototype.slice.call(from, 0, i);
-        ar[i] = from[i];
-      }
-    }
-  return to.concat(ar || from);
-}
-var escapeRegExp = function(stringToGoIntoTheRegex) {
-  return stringToGoIntoTheRegex.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
-};
-var abbrMap = { k: 1e3, m: 1e6, b: 1e9 };
-var parseAbbrValue = function(value, decimalSeparator) {
-  if (decimalSeparator === void 0) {
-    decimalSeparator = ".";
-  }
-  var reg = new RegExp("(\\d+(" + escapeRegExp(decimalSeparator) + "\\d*)?)([kmb])$", "i");
-  var match2 = value.match(reg);
-  if (match2) {
-    var digits = match2[1], abbr = match2[3];
-    var multiplier = abbrMap[abbr.toLowerCase()];
-    return Number(digits.replace(decimalSeparator, ".")) * multiplier;
-  }
-  return void 0;
-};
-var removeSeparators = function(value, separator) {
-  if (separator === void 0) {
-    separator = ",";
-  }
-  var reg = new RegExp(escapeRegExp(separator), "g");
-  return value.replace(reg, "");
-};
-var removeInvalidChars = function(value, validChars) {
-  var chars = escapeRegExp(validChars.join(""));
-  var reg = new RegExp("[^\\d" + chars + "]", "gi");
-  return value.replace(reg, "");
-};
-var cleanValue = function(_a) {
-  var value = _a.value, _b = _a.groupSeparator, groupSeparator = _b === void 0 ? "," : _b, _c = _a.decimalSeparator, decimalSeparator = _c === void 0 ? "." : _c, _d = _a.allowDecimals, allowDecimals = _d === void 0 ? true : _d, _e = _a.decimalsLimit, decimalsLimit = _e === void 0 ? 2 : _e, _f = _a.allowNegativeValue, allowNegativeValue = _f === void 0 ? true : _f, _g = _a.disableAbbreviations, disableAbbreviations = _g === void 0 ? false : _g, _h = _a.prefix, prefix2 = _h === void 0 ? "" : _h, _j = _a.transformRawValue, transformRawValue = _j === void 0 ? function(rawValue) {
-    return rawValue;
-  } : _j;
-  var transformedValue = transformRawValue(value);
-  if (transformedValue === "-") {
-    return transformedValue;
-  }
-  var abbreviations = disableAbbreviations ? [] : ["k", "m", "b"];
-  var reg = new RegExp("((^|\\D)-\\d)|(-" + escapeRegExp(prefix2) + ")");
-  var isNegative = reg.test(transformedValue);
-  var _k = RegExp("(\\d+)-?" + escapeRegExp(prefix2)).exec(value) || [], prefixWithValue = _k[0], preValue = _k[1];
-  var withoutPrefix = prefix2 ? prefixWithValue ? transformedValue.replace(prefixWithValue, "").concat(preValue) : transformedValue.replace(prefix2, "") : transformedValue;
-  var withoutSeparators = removeSeparators(withoutPrefix, groupSeparator);
-  var withoutInvalidChars = removeInvalidChars(withoutSeparators, __spreadArray([
-    groupSeparator,
-    decimalSeparator
-  ], abbreviations));
-  var valueOnly = withoutInvalidChars;
-  if (!disableAbbreviations) {
-    if (abbreviations.some(function(letter) {
-      return letter === withoutInvalidChars.toLowerCase();
-    })) {
-      return "";
-    }
-    var parsed = parseAbbrValue(withoutInvalidChars, decimalSeparator);
-    if (parsed) {
-      valueOnly = String(parsed);
-    }
-  }
-  var includeNegative = isNegative && allowNegativeValue ? "-" : "";
-  if (decimalSeparator && valueOnly.includes(decimalSeparator)) {
-    var _l = withoutInvalidChars.split(decimalSeparator), int2 = _l[0], decimals = _l[1];
-    var trimmedDecimals = decimalsLimit && decimals ? decimals.slice(0, decimalsLimit) : decimals;
-    var includeDecimals = allowDecimals ? "" + decimalSeparator + trimmedDecimals : "";
-    return "" + includeNegative + int2 + includeDecimals;
-  }
-  return "" + includeNegative + valueOnly;
-};
-var fixedDecimalValue = function(value, decimalSeparator, fixedDecimalLength) {
-  if (fixedDecimalLength && value.length > 1) {
-    if (value.includes(decimalSeparator)) {
-      var _a = value.split(decimalSeparator), int2 = _a[0], decimals = _a[1];
-      if (decimals.length > fixedDecimalLength) {
-        return "" + int2 + decimalSeparator + decimals.slice(0, fixedDecimalLength);
-      }
-    }
-    var reg = value.length > fixedDecimalLength ? new RegExp("(\\d+)(\\d{" + fixedDecimalLength + "})") : new RegExp("(\\d)(\\d+)");
-    var match2 = value.match(reg);
-    if (match2) {
-      var int2 = match2[1], decimals = match2[2];
-      return "" + int2 + decimalSeparator + decimals;
-    }
-  }
-  return value;
-};
-var getSuffix = function(value, _a) {
-  var _b = _a.groupSeparator, groupSeparator = _b === void 0 ? "," : _b, _c = _a.decimalSeparator, decimalSeparator = _c === void 0 ? "." : _c;
-  var suffixReg = new RegExp("\\d([^" + escapeRegExp(groupSeparator) + escapeRegExp(decimalSeparator) + "0-9]+)");
-  var suffixMatch = value.match(suffixReg);
-  return suffixMatch ? suffixMatch[1] : void 0;
-};
-var formatValue$1 = function(options) {
-  var _value = options.value, decimalSeparator = options.decimalSeparator, intlConfig = options.intlConfig, decimalScale = options.decimalScale, _a = options.prefix, prefix2 = _a === void 0 ? "" : _a, _b = options.suffix, suffix2 = _b === void 0 ? "" : _b;
-  if (_value === "" || _value === void 0) {
-    return "";
-  }
-  if (_value === "-") {
-    return "-";
-  }
-  var isNegative = new RegExp("^\\d?-" + (prefix2 ? escapeRegExp(prefix2) + "?" : "") + "\\d").test(_value);
-  var value = decimalSeparator !== "." ? replaceDecimalSeparator(_value, decimalSeparator, isNegative) : _value;
-  var numberFormatter = intlConfig ? new Intl.NumberFormat(intlConfig.locale, intlConfig.currency ? {
-    style: "currency",
-    currency: intlConfig.currency,
-    minimumFractionDigits: decimalScale || 0,
-    maximumFractionDigits: 20
-  } : void 0) : new Intl.NumberFormat(void 0, {
-    minimumFractionDigits: decimalScale || 0,
-    maximumFractionDigits: 20
-  });
-  var parts = numberFormatter.formatToParts(Number(value));
-  var formatted = replaceParts(parts, options);
-  var intlSuffix = getSuffix(formatted, __assign$1({}, options));
-  var includeDecimalSeparator = _value.slice(-1) === decimalSeparator ? decimalSeparator : "";
-  var _c = value.match(RegExp("\\d+\\.(\\d+)")) || [], decimals = _c[1];
-  if (decimalScale === void 0 && decimals && decimalSeparator) {
-    if (formatted.includes(decimalSeparator)) {
-      formatted = formatted.replace(RegExp("(\\d+)(" + escapeRegExp(decimalSeparator) + ")(\\d+)", "g"), "$1$2" + decimals);
-    } else {
-      if (intlSuffix && !suffix2) {
-        formatted = formatted.replace(intlSuffix, "" + decimalSeparator + decimals + intlSuffix);
-      } else {
-        formatted = "" + formatted + decimalSeparator + decimals;
-      }
-    }
-  }
-  if (suffix2 && includeDecimalSeparator) {
-    return "" + formatted + includeDecimalSeparator + suffix2;
-  }
-  if (intlSuffix && includeDecimalSeparator) {
-    return formatted.replace(intlSuffix, "" + includeDecimalSeparator + intlSuffix);
-  }
-  if (intlSuffix && suffix2) {
-    return formatted.replace(intlSuffix, "" + includeDecimalSeparator + suffix2);
-  }
-  return [formatted, includeDecimalSeparator, suffix2].join("");
-};
-var replaceDecimalSeparator = function(value, decimalSeparator, isNegative) {
-  var newValue = value;
-  if (decimalSeparator && decimalSeparator !== ".") {
-    newValue = newValue.replace(RegExp(escapeRegExp(decimalSeparator), "g"), ".");
-    if (isNegative && decimalSeparator === "-") {
-      newValue = "-" + newValue.slice(1);
-    }
-  }
-  return newValue;
-};
-var replaceParts = function(parts, _a) {
-  var prefix2 = _a.prefix, groupSeparator = _a.groupSeparator, decimalSeparator = _a.decimalSeparator, decimalScale = _a.decimalScale, _b = _a.disableGroupSeparators, disableGroupSeparators = _b === void 0 ? false : _b;
-  return parts.reduce(function(prev, _a2, i) {
-    var type = _a2.type, value = _a2.value;
-    if (i === 0 && prefix2) {
-      if (type === "minusSign") {
-        return [value, prefix2];
-      }
-      if (type === "currency") {
-        return __spreadArray(__spreadArray([], prev), [prefix2]);
-      }
-      return [prefix2, value];
-    }
-    if (type === "currency") {
-      return prefix2 ? prev : __spreadArray(__spreadArray([], prev), [value]);
-    }
-    if (type === "group") {
-      return !disableGroupSeparators ? __spreadArray(__spreadArray([], prev), [groupSeparator !== void 0 ? groupSeparator : value]) : prev;
-    }
-    if (type === "decimal") {
-      if (decimalScale !== void 0 && decimalScale === 0) {
-        return prev;
-      }
-      return __spreadArray(__spreadArray([], prev), [decimalSeparator !== void 0 ? decimalSeparator : value]);
-    }
-    if (type === "fraction") {
-      return __spreadArray(__spreadArray([], prev), [decimalScale !== void 0 ? value.slice(0, decimalScale) : value]);
-    }
-    return __spreadArray(__spreadArray([], prev), [value]);
-  }, [""]).join("");
-};
-var defaultConfig = {
-  currencySymbol: "",
-  groupSeparator: "",
-  decimalSeparator: "",
-  prefix: "",
-  suffix: ""
-};
-var getLocaleConfig = function(intlConfig) {
-  var _a = intlConfig || {}, locale2 = _a.locale, currency = _a.currency;
-  var numberFormatter = locale2 ? new Intl.NumberFormat(locale2, currency ? { currency, style: "currency" } : void 0) : new Intl.NumberFormat();
-  return numberFormatter.formatToParts(1000.1).reduce(function(prev, curr, i) {
-    if (curr.type === "currency") {
-      if (i === 0) {
-        return __assign$1(__assign$1({}, prev), { currencySymbol: curr.value, prefix: curr.value });
-      } else {
-        return __assign$1(__assign$1({}, prev), { currencySymbol: curr.value, suffix: curr.value });
-      }
-    }
-    if (curr.type === "group") {
-      return __assign$1(__assign$1({}, prev), { groupSeparator: curr.value });
-    }
-    if (curr.type === "decimal") {
-      return __assign$1(__assign$1({}, prev), { decimalSeparator: curr.value });
-    }
-    return prev;
-  }, defaultConfig);
-};
-var isNumber$1 = function(input) {
-  return RegExp(/\d/, "gi").test(input);
-};
-var padTrimValue = function(value, decimalSeparator, decimalScale) {
-  if (decimalSeparator === void 0) {
-    decimalSeparator = ".";
-  }
-  if (decimalScale === void 0 || value === "" || value === void 0) {
-    return value;
-  }
-  if (!value.match(/\d/g)) {
-    return "";
-  }
-  var _a = value.split(decimalSeparator), int2 = _a[0], decimals = _a[1];
-  if (decimalScale === 0) {
-    return int2;
-  }
-  var newValue = decimals || "";
-  if (newValue.length < decimalScale) {
-    while (newValue.length < decimalScale) {
-      newValue += "0";
-    }
-  } else {
-    newValue = newValue.slice(0, decimalScale);
-  }
-  return "" + int2 + decimalSeparator + newValue;
-};
-var repositionCursor = function(_a) {
-  var selectionStart = _a.selectionStart, value = _a.value, lastKeyStroke = _a.lastKeyStroke, stateValue = _a.stateValue, groupSeparator = _a.groupSeparator;
-  var cursorPosition = selectionStart;
-  var modifiedValue = value;
-  if (stateValue && cursorPosition) {
-    var splitValue = value.split("");
-    if (lastKeyStroke === "Backspace" && stateValue[cursorPosition] === groupSeparator) {
-      splitValue.splice(cursorPosition - 1, 1);
-      cursorPosition -= 1;
-    }
-    if (lastKeyStroke === "Delete" && stateValue[cursorPosition] === groupSeparator) {
-      splitValue.splice(cursorPosition, 1);
-      cursorPosition += 1;
-    }
-    modifiedValue = splitValue.join("");
-    return { modifiedValue, cursorPosition };
-  }
-  return { modifiedValue, cursorPosition: selectionStart };
-};
-var CurrencyInput$1 = forwardRef(function(_a, ref) {
-  var _b = _a.allowDecimals, allowDecimals = _b === void 0 ? true : _b, _c = _a.allowNegativeValue, allowNegativeValue = _c === void 0 ? true : _c, id = _a.id, name = _a.name, className = _a.className, customInput = _a.customInput, decimalsLimit = _a.decimalsLimit, defaultValue = _a.defaultValue, _d = _a.disabled, disabled = _d === void 0 ? false : _d, userMaxLength = _a.maxLength, userValue = _a.value, onValueChange = _a.onValueChange, fixedDecimalLength = _a.fixedDecimalLength, placeholder = _a.placeholder, decimalScale = _a.decimalScale, prefix2 = _a.prefix, suffix2 = _a.suffix, intlConfig = _a.intlConfig, step = _a.step, min = _a.min, max = _a.max, _e = _a.disableGroupSeparators, disableGroupSeparators = _e === void 0 ? false : _e, _f = _a.disableAbbreviations, disableAbbreviations = _f === void 0 ? false : _f, _decimalSeparator = _a.decimalSeparator, _groupSeparator = _a.groupSeparator, onChange = _a.onChange, onFocus = _a.onFocus, onBlur = _a.onBlur, onKeyDown = _a.onKeyDown, onKeyUp = _a.onKeyUp, transformRawValue = _a.transformRawValue, props = __rest(_a, ["allowDecimals", "allowNegativeValue", "id", "name", "className", "customInput", "decimalsLimit", "defaultValue", "disabled", "maxLength", "value", "onValueChange", "fixedDecimalLength", "placeholder", "decimalScale", "prefix", "suffix", "intlConfig", "step", "min", "max", "disableGroupSeparators", "disableAbbreviations", "decimalSeparator", "groupSeparator", "onChange", "onFocus", "onBlur", "onKeyDown", "onKeyUp", "transformRawValue"]);
-  if (_decimalSeparator && isNumber$1(_decimalSeparator)) {
-    throw new Error("decimalSeparator cannot be a number");
-  }
-  if (_groupSeparator && isNumber$1(_groupSeparator)) {
-    throw new Error("groupSeparator cannot be a number");
-  }
-  var localeConfig = useMemo(function() {
-    return getLocaleConfig(intlConfig);
-  }, [intlConfig]);
-  var decimalSeparator = _decimalSeparator || localeConfig.decimalSeparator || "";
-  var groupSeparator = _groupSeparator || localeConfig.groupSeparator || "";
-  if (decimalSeparator && groupSeparator && decimalSeparator === groupSeparator && disableGroupSeparators === false) {
-    throw new Error("decimalSeparator cannot be the same as groupSeparator");
-  }
-  var formatValueOptions = {
-    decimalSeparator,
-    groupSeparator,
-    disableGroupSeparators,
-    intlConfig,
-    prefix: prefix2 || localeConfig.prefix,
-    suffix: suffix2
-  };
-  var cleanValueOptions = {
-    decimalSeparator,
-    groupSeparator,
-    allowDecimals,
-    decimalsLimit: decimalsLimit || fixedDecimalLength || 2,
-    allowNegativeValue,
-    disableAbbreviations,
-    prefix: prefix2 || localeConfig.prefix,
-    transformRawValue
-  };
-  var formattedStateValue = defaultValue !== void 0 && defaultValue !== null ? formatValue$1(__assign$1(__assign$1({}, formatValueOptions), { decimalScale, value: String(defaultValue) })) : userValue !== void 0 && userValue !== null ? formatValue$1(__assign$1(__assign$1({}, formatValueOptions), { decimalScale, value: String(userValue) })) : "";
-  var _g = useState(formattedStateValue), stateValue = _g[0], setStateValue = _g[1];
-  var _h = useState(false), dirty = _h[0], setDirty = _h[1];
-  var _j = useState(0), cursor = _j[0], setCursor = _j[1];
-  var _k = useState(0), changeCount = _k[0], setChangeCount = _k[1];
-  var _l = useState(null), lastKeyStroke = _l[0], setLastKeyStroke = _l[1];
-  var inputRef = ref || useRef(null);
-  var processChange = function(value, selectionStart) {
-    setDirty(true);
-    var _a2 = repositionCursor({
-      selectionStart,
-      value,
-      lastKeyStroke,
-      stateValue,
-      groupSeparator
-    }), modifiedValue = _a2.modifiedValue, cursorPosition = _a2.cursorPosition;
-    var stringValue = cleanValue(__assign$1({ value: modifiedValue }, cleanValueOptions));
-    if (userMaxLength && stringValue.replace(/-/g, "").length > userMaxLength) {
-      return;
-    }
-    if (stringValue === "" || stringValue === "-" || stringValue === decimalSeparator) {
-      onValueChange && onValueChange(void 0, name, { float: null, formatted: "", value: "" });
-      setStateValue(stringValue);
-      return;
-    }
-    var numberValue = parseFloat(stringValue.replace(decimalSeparator, "."));
-    var formattedValue = formatValue$1(__assign$1({ value: stringValue }, formatValueOptions));
-    if (cursorPosition !== void 0 && cursorPosition !== null) {
-      var newCursor = cursorPosition + (formattedValue.length - value.length);
-      newCursor = newCursor <= 0 ? prefix2 ? prefix2.length : 0 : newCursor;
-      setCursor(newCursor);
-      setChangeCount(changeCount + 1);
-    }
-    setStateValue(formattedValue);
-    if (onValueChange) {
-      var values = {
-        float: numberValue,
-        formatted: formattedValue,
-        value: stringValue
-      };
-      onValueChange(stringValue, name, values);
-    }
-  };
-  var handleOnChange = function(event) {
-    var _a2 = event.target, value = _a2.value, selectionStart = _a2.selectionStart;
-    processChange(value, selectionStart);
-    onChange && onChange(event);
-  };
-  var handleOnFocus = function(event) {
-    onFocus && onFocus(event);
-    return stateValue ? stateValue.length : 0;
-  };
-  var handleOnBlur = function(event) {
-    var value = event.target.value;
-    var valueOnly = cleanValue(__assign$1({ value }, cleanValueOptions));
-    if (valueOnly === "-" || !valueOnly) {
-      setStateValue("");
-      onBlur && onBlur(event);
-      return;
-    }
-    var fixedDecimals = fixedDecimalValue(valueOnly, decimalSeparator, fixedDecimalLength);
-    var newValue = padTrimValue(fixedDecimals, decimalSeparator, decimalScale !== void 0 ? decimalScale : fixedDecimalLength);
-    var numberValue = parseFloat(newValue.replace(decimalSeparator, "."));
-    var formattedValue = formatValue$1(__assign$1(__assign$1({}, formatValueOptions), { value: newValue }));
-    if (onValueChange) {
-      onValueChange(newValue, name, {
-        float: numberValue,
-        formatted: formattedValue,
-        value: newValue
-      });
-    }
-    setStateValue(formattedValue);
-    onBlur && onBlur(event);
-  };
-  var handleOnKeyDown = function(event) {
-    var key = event.key;
-    setLastKeyStroke(key);
-    if (step && (key === "ArrowUp" || key === "ArrowDown")) {
-      event.preventDefault();
-      setCursor(stateValue.length);
-      var currentValue = parseFloat(userValue !== void 0 && userValue !== null ? String(userValue).replace(decimalSeparator, ".") : cleanValue(__assign$1({ value: stateValue }, cleanValueOptions))) || 0;
-      var newValue = key === "ArrowUp" ? currentValue + step : currentValue - step;
-      if (min !== void 0 && newValue < min) {
-        return;
-      }
-      if (max !== void 0 && newValue > max) {
-        return;
-      }
-      var fixedLength = String(step).includes(".") ? Number(String(step).split(".")[1].length) : void 0;
-      processChange(String(fixedLength ? newValue.toFixed(fixedLength) : newValue).replace(".", decimalSeparator));
-    }
-    onKeyDown && onKeyDown(event);
-  };
-  var handleOnKeyUp = function(event) {
-    var key = event.key, selectionStart = event.currentTarget.selectionStart;
-    if (key !== "ArrowUp" && key !== "ArrowDown" && stateValue !== "-") {
-      var suffix_1 = getSuffix(stateValue, { groupSeparator, decimalSeparator });
-      if (suffix_1 && selectionStart && selectionStart > stateValue.length - suffix_1.length) {
-        if (inputRef && typeof inputRef === "object" && inputRef.current) {
-          var newCursor = stateValue.length - suffix_1.length;
-          inputRef.current.setSelectionRange(newCursor, newCursor);
-        }
-      }
-    }
-    onKeyUp && onKeyUp(event);
-  };
-  useEffect(function() {
-    if (dirty && stateValue !== "-" && inputRef && typeof inputRef === "object" && inputRef.current) {
-      inputRef.current.setSelectionRange(cursor, cursor);
-    }
-  }, [stateValue, cursor, inputRef, dirty, changeCount]);
-  var getRenderValue = function() {
-    if (userValue !== void 0 && userValue !== null && stateValue !== "-" && (!decimalSeparator || stateValue !== decimalSeparator)) {
-      return formatValue$1(__assign$1(__assign$1({}, formatValueOptions), { decimalScale: dirty ? void 0 : decimalScale, value: String(userValue) }));
-    }
-    return stateValue;
-  };
-  var inputProps = __assign$1({
-    type: "text",
-    inputMode: "decimal",
-    id,
-    name,
-    className,
-    onChange: handleOnChange,
-    onBlur: handleOnBlur,
-    onFocus: handleOnFocus,
-    onKeyDown: handleOnKeyDown,
-    onKeyUp: handleOnKeyUp,
-    placeholder,
-    disabled,
-    value: getRenderValue(),
-    ref: inputRef
-  }, props);
-  if (customInput) {
-    var CustomInput = customInput;
-    return React.createElement(CustomInput, __assign$1({}, inputProps));
-  }
-  return React.createElement("input", __assign$1({}, inputProps));
-});
-CurrencyInput$1.displayName = "CurrencyInput";
 const CurrencyAmountInput = memo(({
   backgroundColor = BackgroundColors.InputControl,
   boxShadow = DepthShadow.Low,
@@ -3891,7 +3419,7 @@ const CurrencyAmountInput = memo(({
     marginLeft: Amount.Less,
     marginRight: Amount.Least,
     textColor: !value ? TextColors.InputPlaceholder : textColor
-  }, "$"), /* @__PURE__ */ React.createElement(CurrencyInput$1, {
+  }, "$"), /* @__PURE__ */ React.createElement(CurrencyInputField, {
     className: "currency-input",
     onBlur: () => setFocused(false),
     onFocus: () => setFocused(true),
@@ -5180,7 +4708,7 @@ var _default = function(file, acceptedFiles) {
   }
   return true;
 };
-function ownKeys$2(object, enumerableOnly) {
+function ownKeys$1(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
@@ -5193,15 +4721,15 @@ function ownKeys$2(object, enumerableOnly) {
 function _objectSpread$1(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
-    i % 2 ? ownKeys$2(Object(source), true).forEach(function(key) {
-      _defineProperty$2(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function(key) {
+    i % 2 ? ownKeys$1(Object(source), true).forEach(function(key) {
+      _defineProperty$1(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function(key) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
     });
   }
   return target;
 }
-function _defineProperty$2(obj, key, value) {
+function _defineProperty$1(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -5383,7 +4911,7 @@ function filePickerOptionsTypes(accept) {
     accept: Array.isArray(accept) ? accept.filter(function(item) {
       return item === "audio/*" || item === "video/*" || item === "image/*" || item === "text/*" || /\w+\/[-+.\w]+/g.test(item);
     }).reduce(function(a, b) {
-      return _objectSpread$1(_objectSpread$1({}, a), {}, _defineProperty$2({}, b, []));
+      return _objectSpread$1(_objectSpread$1({}, a), {}, _defineProperty$1({}, b, []));
     }, {}) : {}
   }];
 }
@@ -5461,7 +4989,7 @@ function _arrayWithHoles(arr) {
   if (Array.isArray(arr))
     return arr;
 }
-function ownKeys$1(object, enumerableOnly) {
+function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
   if (Object.getOwnPropertySymbols) {
     var symbols = Object.getOwnPropertySymbols(object);
@@ -5474,15 +5002,15 @@ function ownKeys$1(object, enumerableOnly) {
 function _objectSpread(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
-    i % 2 ? ownKeys$1(Object(source), true).forEach(function(key) {
-      _defineProperty$1(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function(key) {
+    i % 2 ? ownKeys(Object(source), true).forEach(function(key) {
+      _defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
       Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
     });
   }
   return target;
 }
-function _defineProperty$1(obj, key, value) {
+function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, { value, enumerable: true, configurable: true, writable: true });
   } else {
@@ -5590,10 +5118,10 @@ function useDropzone() {
   var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
   var _defaultProps$options = _objectSpread(_objectSpread({}, defaultProps), options), accept = _defaultProps$options.accept, disabled = _defaultProps$options.disabled, getFilesFromEvent = _defaultProps$options.getFilesFromEvent, maxSize = _defaultProps$options.maxSize, minSize = _defaultProps$options.minSize, multiple = _defaultProps$options.multiple, maxFiles = _defaultProps$options.maxFiles, onDragEnter = _defaultProps$options.onDragEnter, onDragLeave = _defaultProps$options.onDragLeave, onDragOver = _defaultProps$options.onDragOver, onDrop = _defaultProps$options.onDrop, onDropAccepted = _defaultProps$options.onDropAccepted, onDropRejected = _defaultProps$options.onDropRejected, onFileDialogCancel = _defaultProps$options.onFileDialogCancel, onFileDialogOpen = _defaultProps$options.onFileDialogOpen, useFsAccessApi = _defaultProps$options.useFsAccessApi, preventDropOnDocument = _defaultProps$options.preventDropOnDocument, noClick = _defaultProps$options.noClick, noKeyboard = _defaultProps$options.noKeyboard, noDrag = _defaultProps$options.noDrag, noDragEventsBubbling = _defaultProps$options.noDragEventsBubbling, validator = _defaultProps$options.validator;
   var onFileDialogOpenCb = useMemo(function() {
-    return typeof onFileDialogOpen === "function" ? onFileDialogOpen : noop$1;
+    return typeof onFileDialogOpen === "function" ? onFileDialogOpen : noop;
   }, [onFileDialogOpen]);
   var onFileDialogCancelCb = useMemo(function() {
-    return typeof onFileDialogCancel === "function" ? onFileDialogCancel : noop$1;
+    return typeof onFileDialogCancel === "function" ? onFileDialogCancel : noop;
   }, [onFileDialogCancel]);
   var rootRef = useRef(null);
   var inputRef = useRef(null);
@@ -5846,7 +5374,7 @@ function useDropzone() {
   var getRootProps = useMemo(function() {
     return function() {
       var _ref2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, _ref2$refKey = _ref2.refKey, refKey = _ref2$refKey === void 0 ? "ref" : _ref2$refKey, role = _ref2.role, onKeyDown = _ref2.onKeyDown, onFocus = _ref2.onFocus, onBlur = _ref2.onBlur, onClick = _ref2.onClick, onDragEnter2 = _ref2.onDragEnter, onDragOver2 = _ref2.onDragOver, onDragLeave2 = _ref2.onDragLeave, onDrop2 = _ref2.onDrop, rest = _objectWithoutProperties(_ref2, _excluded3);
-      return _objectSpread(_objectSpread(_defineProperty$1({
+      return _objectSpread(_objectSpread(_defineProperty({
         onKeyDown: composeKeyboardHandler(composeEventHandlers(onKeyDown, onKeyDownCb)),
         onFocus: composeKeyboardHandler(composeEventHandlers(onFocus, onFocusCb)),
         onBlur: composeKeyboardHandler(composeEventHandlers(onBlur, onBlurCb)),
@@ -5867,7 +5395,7 @@ function useDropzone() {
   var getInputProps = useMemo(function() {
     return function() {
       var _ref3 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, _ref3$refKey = _ref3.refKey, refKey = _ref3$refKey === void 0 ? "ref" : _ref3$refKey, onChange = _ref3.onChange, onClick = _ref3.onClick, rest = _objectWithoutProperties(_ref3, _excluded4);
-      var inputProps = _defineProperty$1({
+      var inputProps = _defineProperty({
         accept,
         multiple,
         type: "file",
@@ -5938,7 +5466,7 @@ function reducer(state, action) {
       return state;
   }
 }
-function noop$1() {
+function noop() {
 }
 const CloseButton = memo((_ia) => {
   var _ja = _ia, {
@@ -7416,260 +6944,6 @@ const SignupForm = memo(({
     underline: false
   }, "Privacy Policy"), ".")));
 });
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function(obj2) {
-      return typeof obj2;
-    };
-  } else {
-    _typeof = function(obj2) {
-      return obj2 && typeof Symbol === "function" && obj2.constructor === Symbol && obj2 !== Symbol.prototype ? "symbol" : typeof obj2;
-    };
-  }
-  return _typeof(obj);
-}
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly)
-      symbols = symbols.filter(function(sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    keys.push.apply(keys, symbols);
-  }
-  return keys;
-}
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function(key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function(key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-  }
-  return target;
-}
-var usePrevious = function usePrevious2(value) {
-  var ref = React.useRef(value);
-  React.useEffect(function() {
-    ref.current = value;
-  }, [value]);
-  return ref.current;
-};
-var isUnknownObject = function isUnknownObject2(raw) {
-  return raw !== null && _typeof(raw) === "object";
-};
-var PLAIN_OBJECT_STR = "[object Object]";
-var isEqual = function isEqual2(left, right) {
-  if (!isUnknownObject(left) || !isUnknownObject(right)) {
-    return left === right;
-  }
-  var leftArray = Array.isArray(left);
-  var rightArray = Array.isArray(right);
-  if (leftArray !== rightArray)
-    return false;
-  var leftPlainObject = Object.prototype.toString.call(left) === PLAIN_OBJECT_STR;
-  var rightPlainObject = Object.prototype.toString.call(right) === PLAIN_OBJECT_STR;
-  if (leftPlainObject !== rightPlainObject)
-    return false;
-  if (!leftPlainObject && !leftArray)
-    return left === right;
-  var leftKeys = Object.keys(left);
-  var rightKeys = Object.keys(right);
-  if (leftKeys.length !== rightKeys.length)
-    return false;
-  var keySet = {};
-  for (var i = 0; i < leftKeys.length; i += 1) {
-    keySet[leftKeys[i]] = true;
-  }
-  for (var _i = 0; _i < rightKeys.length; _i += 1) {
-    keySet[rightKeys[_i]] = true;
-  }
-  var allKeys = Object.keys(keySet);
-  if (allKeys.length !== leftKeys.length) {
-    return false;
-  }
-  var l2 = left;
-  var r = right;
-  var pred = function pred2(key) {
-    return isEqual2(l2[key], r[key]);
-  };
-  return allKeys.every(pred);
-};
-var extractAllowedOptionsUpdates = function extractAllowedOptionsUpdates2(options, prevOptions, immutableKeys) {
-  if (!isUnknownObject(options)) {
-    return null;
-  }
-  return Object.keys(options).reduce(function(newOptions, key) {
-    var isUpdated = !isUnknownObject(prevOptions) || !isEqual(options[key], prevOptions[key]);
-    if (immutableKeys.includes(key)) {
-      if (isUpdated) {
-        console.warn("Unsupported prop change: options.".concat(key, " is not a mutable property."));
-      }
-      return newOptions;
-    }
-    if (!isUpdated) {
-      return newOptions;
-    }
-    return _objectSpread2(_objectSpread2({}, newOptions || {}), {}, _defineProperty({}, key, options[key]));
-  }, null);
-};
-var ElementsContext = /* @__PURE__ */ React.createContext(null);
-ElementsContext.displayName = "ElementsContext";
-var parseElementsContext = function parseElementsContext2(ctx, useCase) {
-  if (!ctx) {
-    throw new Error("Could not find Elements context; You need to wrap the part of your app that ".concat(useCase, " in an <Elements> provider."));
-  }
-  return ctx;
-};
-({
-  stripe: PropTypes.any,
-  options: PropTypes.object
-});
-var useElementsContextWithUseCase = function useElementsContextWithUseCase2(useCaseMessage) {
-  var ctx = React.useContext(ElementsContext);
-  return parseElementsContext(ctx, useCaseMessage);
-};
-var useElements = function useElements2() {
-  var _useElementsContextWi = useElementsContextWithUseCase("calls useElements()"), elements = _useElementsContextWi.elements;
-  return elements;
-};
-var useStripe = function useStripe2() {
-  var _useElementsContextWi2 = useElementsContextWithUseCase("calls useStripe()"), stripe = _useElementsContextWi2.stripe;
-  return stripe;
-};
-({
-  children: PropTypes.func.isRequired
-});
-var useCallbackReference = function useCallbackReference2(cb) {
-  var ref = React.useRef(cb);
-  React.useEffect(function() {
-    ref.current = cb;
-  }, [cb]);
-  return function() {
-    if (ref.current) {
-      ref.current.apply(ref, arguments);
-    }
-  };
-};
-var noop = function noop2() {
-};
-var capitalized = function capitalized2(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
-var createElementComponent = function createElementComponent2(type, isServer2) {
-  var displayName = "".concat(capitalized(type), "Element");
-  var ClientElement = function ClientElement2(_ref) {
-    var id = _ref.id, className = _ref.className, _ref$options = _ref.options, options = _ref$options === void 0 ? {} : _ref$options, _ref$onBlur = _ref.onBlur, onBlur = _ref$onBlur === void 0 ? noop : _ref$onBlur, _ref$onFocus = _ref.onFocus, onFocus = _ref$onFocus === void 0 ? noop : _ref$onFocus, _ref$onReady = _ref.onReady, onReady = _ref$onReady === void 0 ? noop : _ref$onReady, _ref$onChange = _ref.onChange, onChange = _ref$onChange === void 0 ? noop : _ref$onChange, _ref$onEscape = _ref.onEscape, onEscape = _ref$onEscape === void 0 ? noop : _ref$onEscape, _ref$onClick = _ref.onClick, onClick = _ref$onClick === void 0 ? noop : _ref$onClick;
-    var _useElementsContextWi = useElementsContextWithUseCase("mounts <".concat(displayName, ">")), elements = _useElementsContextWi.elements;
-    var elementRef = React.useRef(null);
-    var domNode = React.useRef(null);
-    var callOnReady = useCallbackReference(onReady);
-    var callOnBlur = useCallbackReference(onBlur);
-    var callOnFocus = useCallbackReference(onFocus);
-    var callOnClick = useCallbackReference(onClick);
-    var callOnChange = useCallbackReference(onChange);
-    var callOnEscape = useCallbackReference(onEscape);
-    React.useLayoutEffect(function() {
-      if (elementRef.current == null && elements && domNode.current != null) {
-        var element = elements.create(type, options);
-        elementRef.current = element;
-        element.mount(domNode.current);
-        element.on("ready", function() {
-          return callOnReady(element);
-        });
-        element.on("change", callOnChange);
-        element.on("blur", callOnBlur);
-        element.on("focus", callOnFocus);
-        element.on("escape", callOnEscape);
-        element.on("click", callOnClick);
-      }
-    });
-    var prevOptions = usePrevious(options);
-    React.useEffect(function() {
-      if (!elementRef.current) {
-        return;
-      }
-      var updates = extractAllowedOptionsUpdates(options, prevOptions, ["paymentRequest"]);
-      if (updates) {
-        elementRef.current.update(updates);
-      }
-    }, [options, prevOptions]);
-    React.useLayoutEffect(function() {
-      return function() {
-        if (elementRef.current) {
-          elementRef.current.destroy();
-        }
-      };
-    }, []);
-    return /* @__PURE__ */ React.createElement("div", {
-      id,
-      className,
-      ref: domNode
-    });
-  };
-  var ServerElement = function ServerElement2(props) {
-    useElementsContextWithUseCase("mounts <".concat(displayName, ">"));
-    var id = props.id, className = props.className;
-    return /* @__PURE__ */ React.createElement("div", {
-      id,
-      className
-    });
-  };
-  var Element = isServer2 ? ServerElement : ClientElement;
-  Element.propTypes = {
-    id: PropTypes.string,
-    className: PropTypes.string,
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func,
-    onFocus: PropTypes.func,
-    onReady: PropTypes.func,
-    onClick: PropTypes.func,
-    options: PropTypes.object
-  };
-  Element.displayName = displayName;
-  Element.__elementType = type;
-  return Element;
-};
-var isServer = typeof window === "undefined";
-createElementComponent("auBankAccount", isServer);
-var CardElement = createElementComponent("card", isServer);
-createElementComponent("cardNumber", isServer);
-createElementComponent("cardExpiry", isServer);
-createElementComponent("cardCvc", isServer);
-createElementComponent("fpxBank", isServer);
-createElementComponent("iban", isServer);
-createElementComponent("idealBank", isServer);
-createElementComponent("p24Bank", isServer);
-createElementComponent("epsBank", isServer);
-createElementComponent("payment", isServer);
-createElementComponent("paymentRequestButton", isServer);
-createElementComponent("linkAuthentication", isServer);
-createElementComponent("shippingAddress", isServer);
-createElementComponent("affirmMessage", isServer);
-createElementComponent("afterpayClearpayMessage", isServer);
 const AddPaymentMethodForm = memo(({
   cancel,
   paymentMethodsCount
