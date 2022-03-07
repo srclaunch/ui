@@ -17,25 +17,25 @@ export default defineConfig({
       // Externalize deps that shouldn't be bundled
       external: [
         // '@srclaunch/actions',
-        '@srclaunch/exceptions',
-        '@srclaunch/i18n',
-        '@srclaunch/icons',
-        '@srclaunch/logger',
+        // '@srclaunch/exceptions',
+        // '@srclaunch/i18n',
+        // '@srclaunch/icons',
+        // '@srclaunch/logger',
         // '@srclaunch/react-hooks',
-        '@srclaunch/themes',
+        // '@srclaunch/themes',
         // '@srclaunch/transform',
-        '@srclaunch/types',
-        '@srclaunch/web-application-state',
+        // '@srclaunch/types',
+        // '@srclaunch/web-application-state',
         // 'amazon-cognito-identity-js',
         // 'color-namer',
-        'i18n-iso-countries',
+        // 'i18n-iso-countries',
         'react',
-        'react-date-picker',
+        // 'react-date-picker',
         'react-dom',
-        'react-password-strength-bar',
-        'react-redux',
-        'react-router',
-        'react-router-dom',
+        // 'react-password-strength-bar',
+        // 'react-redux',
+        // 'react-router',
+        // 'react-router-dom',
         'styled-components',
       ],
       output: {
@@ -43,7 +43,7 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          // 'styled-components': 'styled',
+          'styled-components': 'styled',
         },
       },
     },
@@ -59,22 +59,22 @@ export default defineConfig({
   esbuild: {
     // jsxFactory: 'h',
     // jsxFragment: 'Fragment',
-    jsxInject: `import React from 'react'`,
+    // jsxInject: `import React from 'react'`,
   },
   plugins: [
-    // react({
-    //   babel: {
-    //     plugins: [
-    //       [
-    //         'babel-plugin-styled-components',
-    //         {
-    //           displayName: true,
-    //           fileName: false,
-    //         },
-    //       ],
-    //     ],
-    //   },
-    // }),
+    react({
+      babel: {
+        plugins: [
+          [
+            'babel-plugin-styled-components',
+            {
+              displayName: true,
+              fileName: false,
+            },
+          ],
+        ],
+      },
+    }),
   ],
 });
 

@@ -2049,14 +2049,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/icons@npm:^0.1.6":
-  version: 0.1.6
-  resolution: "@srclaunch/icons@npm:0.1.6"
+"@srclaunch/icons@npm:^0.1.7":
+  version: 0.1.7
+  resolution: "@srclaunch/icons@npm:0.1.7"
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
     styled-components: ^5.3.3
-  checksum: d189486cf10ecdfc734a8e16bfbcf50d3de489847da1c0f4cd9af2613fed258a5f4cdd1ef37f22b063f0bb7728830535c9fd3532a18e1fb01ea93fa9ee0da6c4
+  checksum: 51e5c8e1bbd96b51c47e3241aeb1772952ba72731377d67ca0bdc6b6f91129c3069db624e1b3a36230b35c22bb975187741323a0aed7402339fce69f3a52c89b
   languageName: node
   linkType: hard
 
@@ -2081,6 +2081,17 @@ __metadata:
     react: ^17.0.2
     react-router-dom: ^6.2.1
   checksum: 81a7902e70f9d7fdc482ffd363c3b44eace2d36579bb4b1f79c186c53cb6828029b6f887c26a4297702e86bf41b859f91248871a8dc5e52179cf36e98c084b34
+  languageName: node
+  linkType: hard
+
+"@srclaunch/themes@npm:^0.1.10":
+  version: 0.1.10
+  resolution: "@srclaunch/themes@npm:0.1.10"
+  peerDependencies:
+    react: ^17.0.2
+    react-dom: ^17.0.2
+    styled-components: ^5.3.3
+  checksum: 17e68756f734ab1393cf23d6b1aff1ee2f4e2fd21fbd5b821f84e4c276640e07c406363c3c4bd5656dbdd16351fa865bcad043dd755da7f654021de0dc42379a
   languageName: node
   linkType: hard
 
@@ -2119,14 +2130,14 @@ __metadata:
     "@srclaunch/dx": ^0.1.2
     "@srclaunch/exceptions": ^0.1.6
     "@srclaunch/i18n": ^0.1.2
-    "@srclaunch/icons": ^0.1.6
+    "@srclaunch/icons": ^0.1.7
     "@srclaunch/logger": ^0.1.2
     "@srclaunch/react-hooks": ^0.1.2
-    "@srclaunch/themes": ^0.1.6
+    "@srclaunch/themes": ^0.1.10
     "@srclaunch/transform": ^0.1.2
     "@srclaunch/types": ^0.1.2
     "@srclaunch/validation": ^0.1.2
-    "@srclaunch/web-application-state": ^0.1.27
+    "@srclaunch/web-application-state": ^0.1.28
     "@stripe/react-stripe-js": ^1.7.0
     "@stripe/stripe-js": ^1.22.0
     "@testing-library/jest-dom": ^5.16.2
@@ -2226,9 +2237,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/web-application-state@npm:^0.1.27":
-  version: 0.1.27
-  resolution: "@srclaunch/web-application-state@npm:0.1.27"
+"@srclaunch/web-application-state@npm:^0.1.28":
+  version: 0.1.28
+  resolution: "@srclaunch/web-application-state@npm:0.1.28"
   dependencies:
     "@reduxjs/toolkit": ^1.7.2
     "@srclaunch/exceptions": ^0.1.6
@@ -2250,7 +2261,7 @@ __metadata:
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: c87754bfec9f7ec5b449f6ffacaeb1ed8a756ce9c92288d5d0403f09d7370014af9a1ff73772bda4560ccdacb0f2904a4cc6e27020e1f0cd1cee01d6d82fe070
+  checksum: 25e819c4f3770fb8695e0fc5cd9b935aa2c0a26cb70ca77f7adf68e5c3126d229620b4c8f8c1d58c9c67330855825ef91851ab8eec760f880a0d84a5bbcb1e2e
   languageName: node
   linkType: hard
 
