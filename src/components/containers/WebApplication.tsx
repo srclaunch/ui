@@ -2,12 +2,15 @@ import { HttpClient } from '@srclaunch/http-client';
 import { ThemeProvider } from '@srclaunch/themes';
 import {
   Outlet,
+  useLocation,
+  matchPath,
+  useNavigate,
   RootState,
   useSelector,
 } from '@srclaunch/web-application-state';
 import { memo, ReactElement, useEffect, useState } from 'react';
+import { PageRole, PageRoute } from '@srclaunch/types';
 
-import { useAuthentication } from '../../hooks/use-authentication';
 import { BackgroundColors, ContainerProps } from '../../types';
 import { EntityPanel } from '../data/entities/EntityPanel';
 import { ErrorBoundary } from '../errors/ErrorBoundary';
@@ -31,9 +34,72 @@ export const WebApplication = memo(
     httpClient,
     ...props
   }: WebApplicationProps): ReactElement => {
-    const { inProgress, loggedIn, loginRequired } = useAuthentication({
-      enabled: authentication,
-    });
+    const [loginRequired, setLoginRequired] = useState(true);
+
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const inProgress = useSelector(
+      (state: RootState) => state.user.authentication.login.inProgress,
+    );
+    const loggedIn = useSelector(
+      (state: RootState) => state.user.authentication.state.loggedIn,
+    );
+    const routes: PageRoute[] = useSelector(
+      (state: RootState) => state.app.routes.list,
+    );
+
+    const indexPagePath =
+      routes.find(r => r.role === PageRole.Index)?.path ?? '/';
+    const loginPagePath =
+      routes.find(r => r.role === PageRole.Login)?.path ?? 'login';
+
+    const checkAuth = () => {
+      routes.forEach(route => {
+        const routePath = route?.path ?? '';
+        const match = matchPath(route?.path ?? '', location.pathname);
+
+        if (match) {
+          setLoginRequired(route?.loginRequired ?? false);
+        }
+
+        if (
+          loginPagePath &&
+          match &&
+          routePath === loginPagePath &&
+          loggedIn &&
+          !inProgress
+        ) {
+          navigate(indexPagePath);
+        } else if (
+          loginPagePath &&
+          routePath !== loginPagePath &&
+          match &&
+          route.loginRequired &&
+          !loggedIn &&
+          !inProgress
+        ) {
+          navigate(loginPagePath);
+        }
+      });
+    };
+
+    useEffect(() => {
+      if (authentication) checkAuth();
+    }, [location.pathname]);
+
+    useEffect(() => {
+      if (authentication) checkAuth();
+    }, [loggedIn]);
+
+    useEffect(() => {
+      if (authentication) checkAuth();
+    }, [inProgress]);
+
+    useEffect(() => {
+      if (authentication) checkAuth();
+    }, []);
+
     const { current, list } = useSelector(
       (state: RootState) => state.ui.themes,
     );
