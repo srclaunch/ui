@@ -1,0 +1,33 @@
+{
+  "name": "@srclaunch/dx",
+  "description": "Linter config and other developer experience related configs",
+  "author": "Steven Bennett <steven@srclaunch.com>",
+  "license": "MIT",
+  "version": "0.1.2",
+  "engines": {
+    "node": ">=16"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    ".commitlintrc.js",
+    ".eslintrc.js",
+    ".eslintrc.ui.js",
+    ".prettierrc.js",
+    ".stylelintrc.js",
+    ".stylelintrc.ui.js",
+    ".versionrc.js",
+    "jest.config.js",
+    "tsconfig.json",
+    "tsconfig.ui.json"
+  ],
+  "scripts": {
+    "release": "standard-version && git push --follow-tags origin main",
+    "yui": "yarn upgrade-interactive"
+  },
+  "devDependencies": {
+    "standard-version": "^9.3.2"
+  }
+}
