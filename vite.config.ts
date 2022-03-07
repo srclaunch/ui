@@ -30,6 +30,7 @@ export default defineConfig({
         // 'color-namer',
         'i18n-iso-countries',
         'react',
+        'react-date-picker',
         'react-dom',
         'react-password-strength-bar',
         'react-redux',
