@@ -33,6 +33,7 @@ import Countries from "i18n-iso-countries";
 import { getIcon, BasicIcons, DualLightIcons } from "@srclaunch/icons";
 import { Condition, UserVerificationStatus, NotificationType, CountryCode, CurrencyCode, LanguageCode, Primitives, PageRole, Activities } from "@srclaunch/types";
 import { useNavigate as useNavigate$1, useDispatch, useSelector, getVerificationDetails, verifyCode, resendVerificationCode, useResolvedPath as useResolvedPath$1, useMatch, useLocation as useLocation$1, NavLink as NavLink$1, Link as Link$2, login, signUp, getPaymentMethods, getSubscriptions, matchPath, useSearchParams, Outlet, logout, setTheme } from "@srclaunch/web-application-state";
+import e$1, { memo, useState, useEffect, useRef, forwardRef, useMemo, createElement, useReducer, useCallback, useImperativeHandle, Component, createContext, useContext, cloneElement, useLayoutEffect, Children } from "react";
 import styled, { css } from "styled-components";
 import { Exception } from "@srclaunch/exceptions";
 import PasswordStrengthBar from "react-password-strength-bar";
@@ -336,373 +337,6 @@ var englishLanguage = {
   locale,
   countries
 };
-var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
-function commonjsRequire(path) {
-  throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
-}
-var react = { exports: {} };
-var react_production_min = {};
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty$3 = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-function toObject(val) {
-  if (val === null || val === void 0) {
-    throw new TypeError("Object.assign cannot be called with null or undefined");
-  }
-  return Object(val);
-}
-function shouldUseNative() {
-  try {
-    if (!Object.assign) {
-      return false;
-    }
-    var test1 = new String("abc");
-    test1[5] = "de";
-    if (Object.getOwnPropertyNames(test1)[0] === "5") {
-      return false;
-    }
-    var test2 = {};
-    for (var i2 = 0; i2 < 10; i2++) {
-      test2["_" + String.fromCharCode(i2)] = i2;
-    }
-    var order2 = Object.getOwnPropertyNames(test2).map(function(n2) {
-      return test2[n2];
-    });
-    if (order2.join("") !== "0123456789") {
-      return false;
-    }
-    var test3 = {};
-    "abcdefghijklmnopqrst".split("").forEach(function(letter) {
-      test3[letter] = letter;
-    });
-    if (Object.keys(Object.assign({}, test3)).join("") !== "abcdefghijklmnopqrst") {
-      return false;
-    }
-    return true;
-  } catch (err) {
-    return false;
-  }
-}
-var objectAssign = shouldUseNative() ? Object.assign : function(target, source) {
-  var from2;
-  var to = toObject(target);
-  var symbols;
-  for (var s2 = 1; s2 < arguments.length; s2++) {
-    from2 = Object(arguments[s2]);
-    for (var key in from2) {
-      if (hasOwnProperty$3.call(from2, key)) {
-        to[key] = from2[key];
-      }
-    }
-    if (getOwnPropertySymbols) {
-      symbols = getOwnPropertySymbols(from2);
-      for (var i2 = 0; i2 < symbols.length; i2++) {
-        if (propIsEnumerable.call(from2, symbols[i2])) {
-          to[symbols[i2]] = from2[symbols[i2]];
-        }
-      }
-    }
-  }
-  return to;
-};
-/** @license React v17.0.2
- * react.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-var l$1 = objectAssign, n$3 = 60103, p$3 = 60106;
-react_production_min.Fragment = 60107;
-react_production_min.StrictMode = 60108;
-react_production_min.Profiler = 60114;
-var q$3 = 60109, r$2 = 60110, t$1 = 60112;
-react_production_min.Suspense = 60113;
-var u$2 = 60115, v$2 = 60116;
-if (typeof Symbol === "function" && Symbol.for) {
-  var w$2 = Symbol.for;
-  n$3 = w$2("react.element");
-  p$3 = w$2("react.portal");
-  react_production_min.Fragment = w$2("react.fragment");
-  react_production_min.StrictMode = w$2("react.strict_mode");
-  react_production_min.Profiler = w$2("react.profiler");
-  q$3 = w$2("react.provider");
-  r$2 = w$2("react.context");
-  t$1 = w$2("react.forward_ref");
-  react_production_min.Suspense = w$2("react.suspense");
-  u$2 = w$2("react.memo");
-  v$2 = w$2("react.lazy");
-}
-var x$2 = typeof Symbol === "function" && Symbol.iterator;
-function y$1(a) {
-  if (a === null || typeof a !== "object")
-    return null;
-  a = x$2 && a[x$2] || a["@@iterator"];
-  return typeof a === "function" ? a : null;
-}
-function z$2(a) {
-  for (var b2 = "https://reactjs.org/docs/error-decoder.html?invariant=" + a, c2 = 1; c2 < arguments.length; c2++)
-    b2 += "&args[]=" + encodeURIComponent(arguments[c2]);
-  return "Minified React error #" + a + "; visit " + b2 + " for the full message or use the non-minified dev environment for full errors and additional helpful warnings.";
-}
-var A$1 = { isMounted: function() {
-  return false;
-}, enqueueForceUpdate: function() {
-}, enqueueReplaceState: function() {
-}, enqueueSetState: function() {
-} }, B$2 = {};
-function C$1(a, b2, c2) {
-  this.props = a;
-  this.context = b2;
-  this.refs = B$2;
-  this.updater = c2 || A$1;
-}
-C$1.prototype.isReactComponent = {};
-C$1.prototype.setState = function(a, b2) {
-  if (typeof a !== "object" && typeof a !== "function" && a != null)
-    throw Error(z$2(85));
-  this.updater.enqueueSetState(this, a, b2, "setState");
-};
-C$1.prototype.forceUpdate = function(a) {
-  this.updater.enqueueForceUpdate(this, a, "forceUpdate");
-};
-function D$1() {
-}
-D$1.prototype = C$1.prototype;
-function E(a, b2, c2) {
-  this.props = a;
-  this.context = b2;
-  this.refs = B$2;
-  this.updater = c2 || A$1;
-}
-var F$1 = E.prototype = new D$1();
-F$1.constructor = E;
-l$1(F$1, C$1.prototype);
-F$1.isPureReactComponent = true;
-var G$2 = { current: null }, H$1 = Object.prototype.hasOwnProperty, I$1 = { key: true, ref: true, __self: true, __source: true };
-function J$3(a, b2, c2) {
-  var e2, d2 = {}, k2 = null, h2 = null;
-  if (b2 != null)
-    for (e2 in b2.ref !== void 0 && (h2 = b2.ref), b2.key !== void 0 && (k2 = "" + b2.key), b2)
-      H$1.call(b2, e2) && !I$1.hasOwnProperty(e2) && (d2[e2] = b2[e2]);
-  var g2 = arguments.length - 2;
-  if (g2 === 1)
-    d2.children = c2;
-  else if (1 < g2) {
-    for (var f2 = Array(g2), m2 = 0; m2 < g2; m2++)
-      f2[m2] = arguments[m2 + 2];
-    d2.children = f2;
-  }
-  if (a && a.defaultProps)
-    for (e2 in g2 = a.defaultProps, g2)
-      d2[e2] === void 0 && (d2[e2] = g2[e2]);
-  return { $$typeof: n$3, type: a, key: k2, ref: h2, props: d2, _owner: G$2.current };
-}
-function K$2(a, b2) {
-  return { $$typeof: n$3, type: a.type, key: b2, ref: a.ref, props: a.props, _owner: a._owner };
-}
-function L$2(a) {
-  return typeof a === "object" && a !== null && a.$$typeof === n$3;
-}
-function escape(a) {
-  var b2 = { "=": "=0", ":": "=2" };
-  return "$" + a.replace(/[=:]/g, function(a2) {
-    return b2[a2];
-  });
-}
-var M = /\/+/g;
-function N$2(a, b2) {
-  return typeof a === "object" && a !== null && a.key != null ? escape("" + a.key) : b2.toString(36);
-}
-function O$1(a, b2, c2, e2, d2) {
-  var k2 = typeof a;
-  if (k2 === "undefined" || k2 === "boolean")
-    a = null;
-  var h2 = false;
-  if (a === null)
-    h2 = true;
-  else
-    switch (k2) {
-      case "string":
-      case "number":
-        h2 = true;
-        break;
-      case "object":
-        switch (a.$$typeof) {
-          case n$3:
-          case p$3:
-            h2 = true;
-        }
-    }
-  if (h2)
-    return h2 = a, d2 = d2(h2), a = e2 === "" ? "." + N$2(h2, 0) : e2, Array.isArray(d2) ? (c2 = "", a != null && (c2 = a.replace(M, "$&/") + "/"), O$1(d2, b2, c2, "", function(a2) {
-      return a2;
-    })) : d2 != null && (L$2(d2) && (d2 = K$2(d2, c2 + (!d2.key || h2 && h2.key === d2.key ? "" : ("" + d2.key).replace(M, "$&/") + "/") + a)), b2.push(d2)), 1;
-  h2 = 0;
-  e2 = e2 === "" ? "." : e2 + ":";
-  if (Array.isArray(a))
-    for (var g2 = 0; g2 < a.length; g2++) {
-      k2 = a[g2];
-      var f2 = e2 + N$2(k2, g2);
-      h2 += O$1(k2, b2, c2, f2, d2);
-    }
-  else if (f2 = y$1(a), typeof f2 === "function")
-    for (a = f2.call(a), g2 = 0; !(k2 = a.next()).done; )
-      k2 = k2.value, f2 = e2 + N$2(k2, g2++), h2 += O$1(k2, b2, c2, f2, d2);
-  else if (k2 === "object")
-    throw b2 = "" + a, Error(z$2(31, b2 === "[object Object]" ? "object with keys {" + Object.keys(a).join(", ") + "}" : b2));
-  return h2;
-}
-function P$2(a, b2, c2) {
-  if (a == null)
-    return a;
-  var e2 = [], d2 = 0;
-  O$1(a, e2, "", "", function(a2) {
-    return b2.call(c2, a2, d2++);
-  });
-  return e2;
-}
-function Q$1(a) {
-  if (a._status === -1) {
-    var b2 = a._result;
-    b2 = b2();
-    a._status = 0;
-    a._result = b2;
-    b2.then(function(b3) {
-      a._status === 0 && (b3 = b3.default, a._status = 1, a._result = b3);
-    }, function(b3) {
-      a._status === 0 && (a._status = 2, a._result = b3);
-    });
-  }
-  if (a._status === 1)
-    return a._result;
-  throw a._result;
-}
-var R$2 = { current: null };
-function S() {
-  var a = R$2.current;
-  if (a === null)
-    throw Error(z$2(321));
-  return a;
-}
-var T$2 = { ReactCurrentDispatcher: R$2, ReactCurrentBatchConfig: { transition: 0 }, ReactCurrentOwner: G$2, IsSomeRendererActing: { current: false }, assign: l$1 };
-react_production_min.Children = { map: P$2, forEach: function(a, b2, c2) {
-  P$2(a, function() {
-    b2.apply(this, arguments);
-  }, c2);
-}, count: function(a) {
-  var b2 = 0;
-  P$2(a, function() {
-    b2++;
-  });
-  return b2;
-}, toArray: function(a) {
-  return P$2(a, function(a2) {
-    return a2;
-  }) || [];
-}, only: function(a) {
-  if (!L$2(a))
-    throw Error(z$2(143));
-  return a;
-} };
-react_production_min.Component = C$1;
-react_production_min.PureComponent = E;
-react_production_min.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = T$2;
-react_production_min.cloneElement = function(a, b2, c2) {
-  if (a === null || a === void 0)
-    throw Error(z$2(267, a));
-  var e2 = l$1({}, a.props), d2 = a.key, k2 = a.ref, h2 = a._owner;
-  if (b2 != null) {
-    b2.ref !== void 0 && (k2 = b2.ref, h2 = G$2.current);
-    b2.key !== void 0 && (d2 = "" + b2.key);
-    if (a.type && a.type.defaultProps)
-      var g2 = a.type.defaultProps;
-    for (f2 in b2)
-      H$1.call(b2, f2) && !I$1.hasOwnProperty(f2) && (e2[f2] = b2[f2] === void 0 && g2 !== void 0 ? g2[f2] : b2[f2]);
-  }
-  var f2 = arguments.length - 2;
-  if (f2 === 1)
-    e2.children = c2;
-  else if (1 < f2) {
-    g2 = Array(f2);
-    for (var m2 = 0; m2 < f2; m2++)
-      g2[m2] = arguments[m2 + 2];
-    e2.children = g2;
-  }
-  return {
-    $$typeof: n$3,
-    type: a.type,
-    key: d2,
-    ref: k2,
-    props: e2,
-    _owner: h2
-  };
-};
-react_production_min.createContext = function(a, b2) {
-  b2 === void 0 && (b2 = null);
-  a = { $$typeof: r$2, _calculateChangedBits: b2, _currentValue: a, _currentValue2: a, _threadCount: 0, Provider: null, Consumer: null };
-  a.Provider = { $$typeof: q$3, _context: a };
-  return a.Consumer = a;
-};
-react_production_min.createElement = J$3;
-react_production_min.createFactory = function(a) {
-  var b2 = J$3.bind(null, a);
-  b2.type = a;
-  return b2;
-};
-react_production_min.createRef = function() {
-  return { current: null };
-};
-react_production_min.forwardRef = function(a) {
-  return { $$typeof: t$1, render: a };
-};
-react_production_min.isValidElement = L$2;
-react_production_min.lazy = function(a) {
-  return { $$typeof: v$2, _payload: { _status: -1, _result: a }, _init: Q$1 };
-};
-react_production_min.memo = function(a, b2) {
-  return { $$typeof: u$2, type: a, compare: b2 === void 0 ? null : b2 };
-};
-react_production_min.useCallback = function(a, b2) {
-  return S().useCallback(a, b2);
-};
-react_production_min.useContext = function(a, b2) {
-  return S().useContext(a, b2);
-};
-react_production_min.useDebugValue = function() {
-};
-react_production_min.useEffect = function(a, b2) {
-  return S().useEffect(a, b2);
-};
-react_production_min.useImperativeHandle = function(a, b2, c2) {
-  return S().useImperativeHandle(a, b2, c2);
-};
-react_production_min.useLayoutEffect = function(a, b2) {
-  return S().useLayoutEffect(a, b2);
-};
-react_production_min.useMemo = function(a, b2) {
-  return S().useMemo(a, b2);
-};
-react_production_min.useReducer = function(a, b2, c2) {
-  return S().useReducer(a, b2, c2);
-};
-react_production_min.useRef = function(a) {
-  return S().useRef(a);
-};
-react_production_min.useState = function(a) {
-  return S().useState(a);
-};
-react_production_min.version = "17.0.2";
-{
-  react.exports = react_production_min;
-}
-var e$1 = react.exports;
 function getSmallerAmount(amount) {
   switch (amount) {
     case Amount.All:
@@ -1093,8 +727,80 @@ const PositionStyles = css(["bottom:", ";left:", ";position:", ";right:", ";top:
   return (_a2 = getPositionProperty(props.top)) != null ? _a2 : "auto";
 });
 const LayoutStyles = css(["", ";", ";", ";", ";", ";", ""], AlignmentStyles, BehaviorStyles, DepthStyles, MarginStyles, PaddingStyles, PositionStyles);
+var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+function commonjsRequire(path) {
+  throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
+}
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production_min = {};
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty$3 = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+function toObject(val) {
+  if (val === null || val === void 0) {
+    throw new TypeError("Object.assign cannot be called with null or undefined");
+  }
+  return Object(val);
+}
+function shouldUseNative() {
+  try {
+    if (!Object.assign) {
+      return false;
+    }
+    var test1 = new String("abc");
+    test1[5] = "de";
+    if (Object.getOwnPropertyNames(test1)[0] === "5") {
+      return false;
+    }
+    var test2 = {};
+    for (var i2 = 0; i2 < 10; i2++) {
+      test2["_" + String.fromCharCode(i2)] = i2;
+    }
+    var order2 = Object.getOwnPropertyNames(test2).map(function(n2) {
+      return test2[n2];
+    });
+    if (order2.join("") !== "0123456789") {
+      return false;
+    }
+    var test3 = {};
+    "abcdefghijklmnopqrst".split("").forEach(function(letter) {
+      test3[letter] = letter;
+    });
+    if (Object.keys(Object.assign({}, test3)).join("") !== "abcdefghijklmnopqrst") {
+      return false;
+    }
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+shouldUseNative() ? Object.assign : function(target, source) {
+  var from2;
+  var to = toObject(target);
+  var symbols;
+  for (var s2 = 1; s2 < arguments.length; s2++) {
+    from2 = Object(arguments[s2]);
+    for (var key in from2) {
+      if (hasOwnProperty$3.call(from2, key)) {
+        to[key] = from2[key];
+      }
+    }
+    if (getOwnPropertySymbols) {
+      symbols = getOwnPropertySymbols(from2);
+      for (var i2 = 0; i2 < symbols.length; i2++) {
+        if (propIsEnumerable.call(from2, symbols[i2])) {
+          to[symbols[i2]] = from2[symbols[i2]];
+        }
+      }
+    }
+  }
+  return to;
+};
 /** @license React v17.0.2
  * react-jsx-runtime.production.min.js
  *
@@ -1103,7 +809,7 @@ var reactJsxRuntime_production_min = {};
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-var f$1 = react.exports, g$1 = 60103;
+var f$1 = e$1, g$1 = 60103;
 reactJsxRuntime_production_min.Fragment = 60107;
 if (typeof Symbol === "function" && Symbol.for) {
   var h$2 = Symbol.for;
@@ -1135,7 +841,7 @@ const Wrapper$6 = styled.div.withConfig({
   displayName: "Wrapper",
   componentId: "sc-19tf6wk-0"
 })(["", ";", ";", ";", ";", ";"], LayoutStyles, AppearanceStyles, FocusedStyles, DimensionStyles, VisibilityStyles);
-const Container$h = react.exports.memo((_a2) => {
+const Container$h = memo((_a2) => {
   var _b = _a2, {
     alignItems = Align.Stretch,
     as = "div",
@@ -1195,7 +901,7 @@ const Img = styled.img.withConfig({
   displayName: "Img",
   componentId: "sc-152mfqb-0"
 })(["", ";", ";", ";", ";"], AnimationStyles, DimensionStyles, BorderRadiusStyles, MarginStyles);
-const Image = react.exports.memo((_c) => {
+const Image = memo((_c) => {
   var _d = _c, {
     alt,
     className = "",
@@ -1225,7 +931,7 @@ const SvgMedia = styled.svg.withConfig({
   displayName: "SvgMedia",
   componentId: "sc-1xm40ad-0"
 })(["", ";", ";align-items:center;display:flex;justify-content:center;svg{fill:rgb(", ");}"], DimensionStyles, MarginStyles, (props) => props.color);
-const Svg = react.exports.memo((_e2) => {
+const Svg = memo((_e2) => {
   var _f = _e2, {
     as = "span",
     children,
@@ -1245,7 +951,7 @@ const Svg = react.exports.memo((_e2) => {
     children
   }));
 });
-const Icon = react.exports.memo((_g) => {
+const Icon = memo((_g) => {
   var _h = _g, {
     color = ForegroundColors.Default,
     className = "",
@@ -1300,7 +1006,7 @@ const TextContainer = styled.span.withConfig({
   displayName: "TextContainer",
   componentId: "sc-1hiw5ca-0"
 })(["", ";"], TextStyles);
-const Label = react.exports.memo((_i) => {
+const Label = memo((_i) => {
   var _j = _i, {
     alignItems = Align.Center,
     alignContent = Align.Stretch,
@@ -1382,7 +1088,7 @@ var ButtonType = /* @__PURE__ */ ((ButtonType2) => {
   ButtonType2["White"] = "white";
   return ButtonType2;
 })(ButtonType || {});
-const Button$1 = react.exports.memo((_k) => {
+const Button$1 = memo((_k) => {
   var _l = _k, {
     active,
     alignItems = Align.Center,
@@ -1433,7 +1139,7 @@ const Button$1 = react.exports.memo((_k) => {
     "type"
   ]);
   var _a2, _b, _c, _d;
-  const [hovered, setHovered] = react.exports.useState(false);
+  const [hovered, setHovered] = useState(false);
   const getColors = () => {
     if (!type)
       return {
@@ -1987,7 +1693,7 @@ var F = U((c_, we) => {
   we.exports = { error: { length: "Length should be a valid positive number", password: "Password should be a valid string" }, regex: { digits: "(\\d.*)", letters: "([a-zA-Z].*)", symbols: "([`~\\!@#\\$%\\^\\&\\*\\(\\)\\-_\\=\\+\\[\\{\\}\\]\\\\|;:\\'\",<.>\\/\\?\u20AC\xA3\xA5\u20B9\xA7\xB1].*)", spaces: "([\\s].*)" } };
 });
 var xe = U((A_, Ke) => {
-  var M2 = F().regex;
+  var M = F().regex;
   function B2(a, l2) {
     if (l2 && l2 > 1) {
       let c2 = parseInt(l2, 10);
@@ -2006,9 +1712,9 @@ var xe = U((A_, Ke) => {
   }, max: function(l2) {
     return this.password.length <= l2;
   }, digits: function(l2) {
-    return B2.call(this, M2.digits, l2);
+    return B2.call(this, M.digits, l2);
   }, letters: function(l2) {
-    return B2.call(this, M2.letters, l2);
+    return B2.call(this, M.letters, l2);
   }, uppercase: function(l2) {
     if (l2 && l2 > 1) {
       let c2 = 0, A2 = 0;
@@ -2030,9 +1736,9 @@ var xe = U((A_, Ke) => {
     }
     return this.password !== this.password.toUpperCase() === this.positive;
   }, symbols: function(l2) {
-    return B2.call(this, M2.symbols, l2);
+    return B2.call(this, M.symbols, l2);
   }, spaces: function(l2) {
-    return B2.call(this, M2.spaces, l2);
+    return B2.call(this, M.spaces, l2);
   }, oneOf: function(l2) {
     return l2.indexOf(this.password) >= 0 === this.positive;
   } };
@@ -2049,7 +1755,7 @@ var He = U((d_, Oe) => {
 });
 var We = U((I_, ze) => {
   var fi = xe(), _i = F().error, Ei = He();
-  function S2(a) {
+  function S(a) {
     let l2 = Number(a);
     if (isNaN(l2) || !Number.isInteger(l2) || l2 < 1)
       throw new Error(_i.length);
@@ -2079,28 +1785,28 @@ var We = U((I_, ze) => {
       }, []) : this.properties.every(je.bind(this));
     }
     letters(l2) {
-      return l2 && S2(l2), _.call(this, "letters", arguments);
+      return l2 && S(l2), _.call(this, "letters", arguments);
     }
     digits(l2) {
-      return l2 && S2(l2), _.call(this, "digits", arguments);
+      return l2 && S(l2), _.call(this, "digits", arguments);
     }
     symbols(l2) {
-      return l2 && S2(l2), _.call(this, "symbols", arguments);
+      return l2 && S(l2), _.call(this, "symbols", arguments);
     }
     min(l2) {
-      return S2(l2), _.call(this, "min", arguments);
+      return S(l2), _.call(this, "min", arguments);
     }
     max(l2) {
-      return S2(l2), _.call(this, "max", arguments);
+      return S(l2), _.call(this, "max", arguments);
     }
     lowercase(l2) {
-      return l2 && S2(l2), _.call(this, "lowercase", arguments);
+      return l2 && S(l2), _.call(this, "lowercase", arguments);
     }
     uppercase(l2) {
-      return l2 && S2(l2), _.call(this, "uppercase", arguments);
+      return l2 && S(l2), _.call(this, "uppercase", arguments);
     }
     spaces(l2) {
-      return l2 && S2(l2), _.call(this, "spaces", arguments);
+      return l2 && S(l2), _.call(this, "spaces", arguments);
     }
     has() {
       return _.call(this, "has", arguments);
@@ -3529,14 +3235,14 @@ var Ai = [{ property: "name", enumerable: false }, { property: "message", enumer
     return d2;
   if (typeof a.toJSON == "function" && a[y] !== true)
     return di(a);
-  for (let [g2, E2] of Object.entries(a)) {
-    if (typeof Buffer == "function" && Buffer.isBuffer(E2)) {
+  for (let [g2, E] of Object.entries(a)) {
+    if (typeof Buffer == "function" && Buffer.isBuffer(E)) {
       d2[g2] = "[object Buffer]";
       continue;
     }
-    if (typeof E2 != "function") {
-      if (!E2 || typeof E2 != "object") {
-        d2[g2] = E2;
+    if (typeof E != "function") {
+      if (!E || typeof E != "object") {
+        d2[g2] = E;
         continue;
       }
       if (!l2.includes(a[g2])) {
@@ -3546,8 +3252,8 @@ var Ai = [{ property: "name", enumerable: false }, { property: "message", enumer
       d2[g2] = "[Circular]";
     }
   }
-  for (let { property: g2, enumerable: E2 } of Ai)
-    typeof a[g2] == "string" && Object.defineProperty(d2, g2, { value: a[g2], enumerable: A2 ? true : E2, configurable: true, writable: true });
+  for (let { property: g2, enumerable: E } of Ai)
+    typeof a[g2] == "string" && Object.defineProperty(d2, g2, { value: a[g2], enumerable: A2 ? true : E, configurable: true, writable: true });
   return d2;
 };
 function Le(a, l2 = {}) {
@@ -3585,8 +3291,8 @@ var D = class extends Error {
     var o, I2, d2, g2;
     let A2 = new.target.prototype;
     if (this.__proto__ = A2, Error.captureStackTrace && Error.captureStackTrace((o = c2 == null ? void 0 : c2.cause) != null ? o : this, D), this.id = ye(), this.name = this.constructor.name, this.created = new Date().toString(), this.description = (I2 = c2 == null ? void 0 : c2.description) != null ? I2 : this.description, this.remediation = (d2 = c2 == null ? void 0 : c2.remediation) != null ? d2 : this.remediation, this.scope = (g2 = c2 == null ? void 0 : c2.scope) != null ? g2 : this.scope, c2) {
-      let { cause: E2, context: Je, data: Ze, model: Ye, form: $e, origin: Qe, pii: Xe, request: Ce, response: ai, tags: ei, task: ii, user: ni } = c2;
-      this.cause = E2, this.context = Je, this.data = Ze, this.model = Ye, this.form = $e, this.origin = Qe, this.pii = Xe, this.request = Ce, this.response = ai, this.task = ii, this.tags = ei, this.user = ni;
+      let { cause: E, context: Je, data: Ze, model: Ye, form: $e, origin: Qe, pii: Xe, request: Ce, response: ai, tags: ei, task: ii, user: ni } = c2;
+      this.cause = E, this.context = Je, this.data = Ze, this.model = Ye, this.form = $e, this.origin = Qe, this.pii = Xe, this.request = Ce, this.response = ai, this.task = ii, this.tags = ei, this.user = ni;
     }
   }
   toJSON() {
@@ -3973,7 +3679,7 @@ function Ti(a, l2) {
   }
 }
 const InputContainerStyles = css(["", ";", ";", ";", ";", ";", ";", ";"], LayoutStyles, FocusedStyles, AppearanceStyles, (props) => props.flat && css(["background-color:transparent;border:1px solid transparent;box-shadow:none;"]), (props) => props.focused && css(["box-shadow:none;"]), (props) => props.focused && props.border && css(["border:1px solid transparent;"]), (props) => props.focused && props.error && Array.isArray(props.error) && props.error.length > 0 && css(["&:before{border-color:rgb(", ");}"], BorderColors.Error));
-const InputContainer = react.exports.memo((_m) => {
+const InputContainer = memo((_m) => {
   var _n = _m, {
     backgroundColor = BackgroundColors.Lightest,
     borderRadius = Amount.Least,
@@ -4017,7 +3723,7 @@ const Container$g = styled.div.withConfig({
   componentId: "sc-1vswffv-0"
 })(["", ";input{border:none;}"], InputContainerStyles);
 const TextInputStyles = css(["", ";", ";outline:none;padding:0 ", ";&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}"], FocusedStyles, TextStyles, Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
-const VerificationCodeInput = react.exports.memo((_o) => {
+const VerificationCodeInput = memo((_o) => {
   var _p = _o, {
     as,
     className = "",
@@ -4045,10 +3751,10 @@ const VerificationCodeInput = react.exports.memo((_o) => {
     "textColor",
     "codeType"
   ]);
-  const [codeParts, setCodeParts] = react.exports.useState({});
-  const [focusedKey, setFocusedKey] = react.exports.useState(void 0);
+  const [codeParts, setCodeParts] = useState({});
+  const [focusedKey, setFocusedKey] = useState(void 0);
   const code = Object.values(codeParts).join("");
-  react.exports.useEffect(() => {
+  useEffect(() => {
     const typeCondition = () => {
       if (codeType === "alpha") {
         return {
@@ -4156,7 +3862,7 @@ const Input$4 = styled.input.withConfig({
   displayName: "Input",
   componentId: "sc-1a4moks-0"
 })(["", ";background:transparent;border:none;padding:calc(", " / 5);text-align:center;width:100%;&::-webkit-outer-spin-button,&::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}&[type='number']{-moz-appearance:textfield;}"], TextInputStyles, (props) => props.size);
-const InputRow = react.exports.memo((_q) => {
+const InputRow = memo((_q) => {
   var _r = _q, {
     children,
     className = "",
@@ -4179,18 +3885,18 @@ const InputRow = react.exports.memo((_q) => {
     children
   }));
 });
-const ProgressSpinner = react.exports.memo(({
+const ProgressSpinner = memo(({
   size = Size.Default
 }) => {
   return /* @__PURE__ */ jsx(Container$f, {
     size
   });
 });
-const Container$f = react.exports.memo(styled.div.withConfig({
+const Container$f = memo(styled.div.withConfig({
   displayName: "Container",
   componentId: "sc-1w3nox1-0"
 })(["animation:loop 0.8s infinite linear;border-top:calc(", " / 5) solid rgba(200,200,200,0.2);border-right:calc(", " / 5) solid rgba(200,200,200,0.2);border-bottom:calc(", " / 5) solid rgba(200,200,200,0.2);border-left:calc(", " / 5) solid rgba(0,0,0,0.2);border-radius:50%;display:inline-block;font-size:10px;height:", ";position:relative;text-indent:-9999em;transform:translateZ(0);width:", ";&:after{border-radius:50%;width:calc(", " / 3);height:calc(", " / 3);}@keyframes loop{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}"], (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size));
-const LoadingOverlay = react.exports.memo((_s) => {
+const LoadingOverlay = memo((_s) => {
   var _t = _s, {
     backgroundColor = BackgroundColors.Dark,
     borderRadius = Amount.None,
@@ -4216,11 +3922,11 @@ const LoadingOverlay = react.exports.memo((_s) => {
     })
   }));
 });
-const Wrapper$5 = react.exports.memo(styled.div.withConfig({
+const Wrapper$5 = memo(styled.div.withConfig({
   displayName: "Wrapper",
   componentId: "sc-gr02k1-0"
 })(["", ";", ";align-items:center;backdrop-filter:blur(1px);border-radius:", ";bottom:0;display:flex;justify-content:center;min-height:", ";min-width:", ";opacity:0;pointer-events:none;position:absolute;left:0;right:0;text-align:center;top:0;transition:background 0.2s cubic-bezier(0.2,0.3,0.25,0.9),opacity 0.2s cubic-bezier(0.25,0.1,0.25,0.1);z-index:4;", ""], LayoutStyles, AppearanceStyles, (props) => props.borderRadius, Size.Largest, Size.Largest, (props) => props.visible && css(["opacity:1;pointer-events:all;"])));
-const LineBreak = react.exports.memo((_u) => {
+const LineBreak = memo((_u) => {
   var _v = _u, {
     className = "",
     size = Size.Default
@@ -4233,7 +3939,7 @@ const LineBreak = react.exports.memo((_u) => {
     height: size
   }, props));
 });
-const Paragraph = react.exports.memo((_w) => {
+const Paragraph = memo((_w) => {
   var _x = _w, {
     as = "p",
     children,
@@ -4259,7 +3965,7 @@ const Paragraph = react.exports.memo((_w) => {
     children
   }));
 });
-const Title = react.exports.memo((_y) => {
+const Title = memo((_y) => {
   var _z = _y, {
     as = "h1",
     children,
@@ -4289,7 +3995,7 @@ const Title = react.exports.memo((_y) => {
     children
   }));
 });
-const CodeVerificationForm = react.exports.memo(({
+const CodeVerificationForm = memo(({
   backgroundColor = BackgroundColors.Darker,
   borderRadius = Amount.More,
   onVerificationSuccess,
@@ -4302,16 +4008,16 @@ const CodeVerificationForm = react.exports.memo(({
     var _a3;
     return (_a3 = state.user.authentication) == null ? void 0 : _a3.verification.code;
   });
-  const [code, setCode] = react.exports.useState();
-  const [problems, setProblems] = react.exports.useState();
-  react.exports.useEffect(() => {
+  const [code, setCode] = useState();
+  const [problems, setProblems] = useState();
+  useEffect(() => {
     if (userId) {
       dispatch(getVerificationDetails({
         userId
       }));
     }
   }, []);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (onVerificationSuccess && verificationState.verify.success) {
       onVerificationSuccess();
     }
@@ -4428,7 +4134,7 @@ const CodeVerificationForm = react.exports.memo(({
     })]
   });
 });
-const Orb = react.exports.memo((_A) => {
+const Orb = memo((_A) => {
   var _B = _A, {
     color = BackgroundColors.Default,
     className = "",
@@ -4446,7 +4152,7 @@ const Orb = react.exports.memo((_A) => {
     width: size
   }, props));
 });
-const NotificationLabel = react.exports.memo((_C) => {
+const NotificationLabel = memo((_C) => {
   var _D = _C, {
     backgroundColor = BackgroundColors.Dark,
     children,
@@ -4520,7 +4226,7 @@ const NotificationLabel = react.exports.memo((_C) => {
     }), children]
   }));
 });
-const ErrorNotification = react.exports.memo((_E) => {
+const ErrorNotification = memo((_E) => {
   var _F = _E, {
     label,
     showOrb = true
@@ -4535,7 +4241,7 @@ const ErrorNotification = react.exports.memo((_E) => {
     type: NotificationType.Error
   }, props));
 });
-const FormActions = react.exports.memo((_G) => {
+const FormActions = memo((_G) => {
   var _H = _G, {
     children
   } = _H, props = __objRest(_H, [
@@ -4551,13 +4257,13 @@ const FormActions = react.exports.memo((_G) => {
     children
   }));
 });
-const JSONEditor = react.exports.memo((_I) => {
+const JSONEditor = memo((_I) => {
   var props = __objRest(_I, []);
   return /* @__PURE__ */ jsx("div", {
     children: "JSONEditor"
   });
 });
-const ErrorLabel = react.exports.memo(({
+const ErrorLabel = memo(({
   alignContent = Align.Center,
   alignText = Align.Center,
   children,
@@ -4588,7 +4294,7 @@ const ErrorLabel = react.exports.memo(({
     children
   });
 });
-const InputLabel = react.exports.memo((_J) => {
+const InputLabel = memo((_J) => {
   var _K = _J, {
     alignContent = Align.Left,
     children,
@@ -4632,7 +4338,7 @@ const InputLabel = react.exports.memo((_J) => {
     })]
   });
 });
-const ToggleInput = react.exports.memo(({
+const ToggleInput = memo(({
   backgroundColor = BackgroundColors.InputControl,
   border = {
     color: BorderColors.InputControl,
@@ -4649,17 +4355,17 @@ const ToggleInput = react.exports.memo(({
   width = 55
 }) => {
   var _a2;
-  const [focused, setFocused] = react.exports.useState(false);
-  const [problems, setProblems] = react.exports.useState([]);
-  const [toggleValue, setToggleValue] = react.exports.useState(defaultValue != null ? defaultValue : false);
-  react.exports.useEffect(() => {
+  const [focused, setFocused] = useState(false);
+  const [problems, setProblems] = useState([]);
+  const [toggleValue, setToggleValue] = useState(defaultValue != null ? defaultValue : false);
+  useEffect(() => {
     if (onChange)
       onChange({
         problems: [],
         value: toggleValue
       });
   }, [toggleValue]);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     var _a3;
     setToggleValue((_a3 = defaultValue != null ? defaultValue : toggleValue) != null ? _a3 : "");
   }, [defaultValue]);
@@ -4744,7 +4450,7 @@ var TextInputType = /* @__PURE__ */ ((TextInputType2) => {
   TextInputType2["Search"] = "search";
   return TextInputType2;
 })(TextInputType || {});
-const TextInput = react.exports.memo((_L) => {
+const TextInput = memo((_L) => {
   var _M = _L, {
     autoComplete,
     backgroundColor = BackgroundColors.InputControl,
@@ -4801,12 +4507,12 @@ const TextInput = react.exports.memo((_L) => {
     "validation"
   ]);
   var _a2;
-  const [value2, setValue] = react.exports.useState(defaultValue != null ? defaultValue : "");
-  const [focused, setFocused] = react.exports.useState(false);
-  const [problems, setProblems] = react.exports.useState([]);
-  const [valueChanged, setValueChanged] = react.exports.useState(false);
-  const inputRef = react.exports.useRef(null);
-  react.exports.useEffect(() => {
+  const [value2, setValue] = useState(defaultValue != null ? defaultValue : "");
+  const [focused, setFocused] = useState(false);
+  const [problems, setProblems] = useState([]);
+  const [valueChanged, setValueChanged] = useState(false);
+  const inputRef = useRef(null);
+  useEffect(() => {
     if (validation && valueChanged) {
       const probs = Si(value2, validation);
       setProblems(probs);
@@ -4826,7 +4532,7 @@ const TextInput = react.exports.memo((_L) => {
         });
     }
   }, [value2]);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     var _a3;
     setValue((_a3 = defaultValue != null ? defaultValue : value2) != null ? _a3 : "");
   }, [defaultValue]);
@@ -4885,7 +4591,7 @@ const Input$3 = styled.input.withConfig({
   displayName: "Input",
   componentId: "sc-j32swv-0"
 })(["", ";background:transparent;border:none;width:100%;&::-ms-clear{display:none;width:0;height:0;}&::-ms-reveal{display:none;width:0;height:0;}&::-webkit-search-decoration,&::-webkit-search-cancel-button,&::-webkit-search-results-button,&::-webkit-search-results-decoration{display:none;}"], TextInputStyles);
-const EmailAddressInput = react.exports.memo((_N) => {
+const EmailAddressInput = memo((_N) => {
   var _O = _N, {
     autoComplete,
     defaultValue,
@@ -4897,9 +4603,9 @@ const EmailAddressInput = react.exports.memo((_N) => {
     "onChange",
     "validation"
   ]);
-  const [inProgress, setInProgress] = react.exports.useState(false);
-  const [emailAddress, setEmailAddress] = react.exports.useState(defaultValue);
-  const [error, setError] = react.exports.useState();
+  const [inProgress, setInProgress] = useState(false);
+  const [emailAddress, setEmailAddress] = useState(defaultValue);
+  const [error, setError] = useState();
   const validationProps = __spreadProps(__spreadValues({}, validation), {
     [Condition.IsEmailAddress]: Boolean(emailAddress)
   });
@@ -4926,7 +4632,7 @@ const EmailAddressInput = react.exports.memo((_N) => {
     validation: validationProps
   }, props));
 });
-const PhoneNumberInput = react.exports.memo((_P) => {
+const PhoneNumberInput = memo((_P) => {
   var props = __objRest(_P, []);
   return /* @__PURE__ */ jsx(TextInput, __spreadValues({
     validation: {
@@ -4955,7 +4661,7 @@ const DownArrow = styled.div.withConfig({
   displayName: "DownArrow",
   componentId: "sc-1k5smuz-1"
 })(["cursor:", " !important;", ";", ";", ";"], Cursor.Pointer, LayoutStyles, AppearanceStyles, DimensionStyles);
-const DateInput = react.exports.memo((_Q) => {
+const DateInput = memo((_Q) => {
   var _R = _Q, {
     backgroundColor = BackgroundColors.InputControl,
     boxShadow = DepthShadow.Low,
@@ -4987,11 +4693,11 @@ const DateInput = react.exports.memo((_Q) => {
     "size",
     "validation"
   ]);
-  const [value2, setValue] = react.exports.useState(defaultValue);
-  const [focused, setFocused] = react.exports.useState(false);
-  const [problems, setProblems] = react.exports.useState([]);
-  const [valueChanged, setValueChanged] = react.exports.useState(false);
-  react.exports.useEffect(() => {
+  const [value2, setValue] = useState(defaultValue);
+  const [focused, setFocused] = useState(false);
+  const [problems, setProblems] = useState([]);
+  const [valueChanged, setValueChanged] = useState(false);
+  useEffect(() => {
     if (validation && valueChanged) {
       const probs = Si(value2, validation);
       setProblems(probs);
@@ -5058,7 +4764,7 @@ const DateInput = react.exports.memo((_Q) => {
     }))]
   });
 });
-const DateTimeInput = react.exports.memo(({
+const DateTimeInput = memo(({
   error,
   resetIcon,
   defaultValue = new Date().toISOString(),
@@ -5381,7 +5087,7 @@ var repositionCursor = function(_a2) {
     cursorPosition: selectionStart
   };
 };
-var CurrencyInput$1 = react.exports.forwardRef(function(_a2, ref) {
+var CurrencyInput$1 = forwardRef(function(_a2, ref) {
   var _b = _a2.allowDecimals, allowDecimals = _b === void 0 ? true : _b, _c = _a2.allowNegativeValue, allowNegativeValue = _c === void 0 ? true : _c, id2 = _a2.id, name = _a2.name, className = _a2.className, customInput = _a2.customInput, decimalsLimit = _a2.decimalsLimit, defaultValue = _a2.defaultValue, _d = _a2.disabled, disabled = _d === void 0 ? false : _d, userMaxLength = _a2.maxLength, userValue = _a2.value, onValueChange = _a2.onValueChange, fixedDecimalLength = _a2.fixedDecimalLength, placeholder = _a2.placeholder, decimalScale = _a2.decimalScale, prefix2 = _a2.prefix, suffix2 = _a2.suffix, intlConfig = _a2.intlConfig, step = _a2.step, min = _a2.min, max2 = _a2.max, _e2 = _a2.disableGroupSeparators, disableGroupSeparators = _e2 === void 0 ? false : _e2, _f = _a2.disableAbbreviations, disableAbbreviations = _f === void 0 ? false : _f, _decimalSeparator = _a2.decimalSeparator, _groupSeparator = _a2.groupSeparator, onChange = _a2.onChange, onFocus = _a2.onFocus, onBlur = _a2.onBlur, onKeyDown = _a2.onKeyDown, onKeyUp = _a2.onKeyUp, transformRawValue = _a2.transformRawValue, props = __rest(_a2, ["allowDecimals", "allowNegativeValue", "id", "name", "className", "customInput", "decimalsLimit", "defaultValue", "disabled", "maxLength", "value", "onValueChange", "fixedDecimalLength", "placeholder", "decimalScale", "prefix", "suffix", "intlConfig", "step", "min", "max", "disableGroupSeparators", "disableAbbreviations", "decimalSeparator", "groupSeparator", "onChange", "onFocus", "onBlur", "onKeyDown", "onKeyUp", "transformRawValue"]);
   if (_decimalSeparator && isNumber$1(_decimalSeparator)) {
     throw new Error("decimalSeparator cannot be a number");
@@ -5389,7 +5095,7 @@ var CurrencyInput$1 = react.exports.forwardRef(function(_a2, ref) {
   if (_groupSeparator && isNumber$1(_groupSeparator)) {
     throw new Error("groupSeparator cannot be a number");
   }
-  var localeConfig = react.exports.useMemo(function() {
+  var localeConfig = useMemo(function() {
     return getLocaleConfig(intlConfig);
   }, [intlConfig]);
   var decimalSeparator = _decimalSeparator || localeConfig.decimalSeparator || "";
@@ -5422,12 +5128,12 @@ var CurrencyInput$1 = react.exports.forwardRef(function(_a2, ref) {
     decimalScale,
     value: String(userValue)
   })) : "";
-  var _g = react.exports.useState(formattedStateValue), stateValue = _g[0], setStateValue = _g[1];
-  var _h = react.exports.useState(false), dirty = _h[0], setDirty = _h[1];
-  var _j = react.exports.useState(0), cursor = _j[0], setCursor = _j[1];
-  var _k = react.exports.useState(0), changeCount = _k[0], setChangeCount = _k[1];
-  var _l = react.exports.useState(null), lastKeyStroke = _l[0], setLastKeyStroke = _l[1];
-  var inputRef = ref || react.exports.useRef(null);
+  var _g = useState(formattedStateValue), stateValue = _g[0], setStateValue = _g[1];
+  var _h = useState(false), dirty = _h[0], setDirty = _h[1];
+  var _j = useState(0), cursor = _j[0], setCursor = _j[1];
+  var _k = useState(0), changeCount = _k[0], setChangeCount = _k[1];
+  var _l = useState(null), lastKeyStroke = _l[0], setLastKeyStroke = _l[1];
+  var inputRef = ref || useRef(null);
   var processChange = function(value2, selectionStart) {
     setDirty(true);
     var _a3 = repositionCursor({
@@ -5544,7 +5250,7 @@ var CurrencyInput$1 = react.exports.forwardRef(function(_a2, ref) {
     }
     onKeyUp && onKeyUp(event);
   };
-  react.exports.useEffect(function() {
+  useEffect(function() {
     if (dirty && stateValue !== "-" && inputRef && typeof inputRef === "object" && inputRef.current) {
       inputRef.current.setSelectionRange(cursor, cursor);
     }
@@ -5581,7 +5287,7 @@ var CurrencyInput$1 = react.exports.forwardRef(function(_a2, ref) {
   return /* @__PURE__ */ jsx("input", __spreadValues({}, __assign$1({}, inputProps)));
 });
 CurrencyInput$1.displayName = "CurrencyInput";
-const CurrencyAmountInput = react.exports.memo(({
+const CurrencyAmountInput = memo(({
   backgroundColor = BackgroundColors.InputControl,
   boxShadow = DepthShadow.Low,
   border = {
@@ -5601,12 +5307,12 @@ const CurrencyAmountInput = react.exports.memo(({
     [Condition.IsCurrency]: true
   }
 }) => {
-  const [value2, setValue] = react.exports.useState(defaultValue != null ? defaultValue : 0);
-  const [focused, setFocused] = react.exports.useState(false);
-  const [problems, setProblems] = react.exports.useState([]);
-  const inputRef = react.exports.useRef(null);
-  const [valueChanged, setValueChanged] = react.exports.useState(false);
-  react.exports.useEffect(() => {
+  const [value2, setValue] = useState(defaultValue != null ? defaultValue : 0);
+  const [focused, setFocused] = useState(false);
+  const [problems, setProblems] = useState([]);
+  const inputRef = useRef(null);
+  const [valueChanged, setValueChanged] = useState(false);
+  useEffect(() => {
     if (validation && valueChanged) {
       const probs = Si(value2, validation);
       setProblems(probs);
@@ -5707,7 +5413,7 @@ var ReactCountryFlag = function ReactCountryFlag2(_ref) {
   }
   if (svg) {
     var flagUrl = "" + cdnUrl + countryCode.toLowerCase() + "." + cdnSuffix;
-    return react.exports.createElement("img", Object.assign({}, props, {
+    return createElement("img", Object.assign({}, props, {
       src: flagUrl,
       style: _extends({
         display: "inline-block",
@@ -5720,7 +5426,7 @@ var ReactCountryFlag = function ReactCountryFlag2(_ref) {
   var emoji = countryCode.toUpperCase().replace(/./g, function(_char) {
     return String.fromCodePoint(_char.charCodeAt(0) + OFFSET);
   });
-  return react.exports.createElement("span", Object.assign({
+  return createElement("span", Object.assign({
     role: "img"
   }, props, {
     style: _extends({
@@ -5731,7 +5437,7 @@ var ReactCountryFlag = function ReactCountryFlag2(_ref) {
     }, style)
   }), emoji);
 };
-const NavigationLink = react.exports.memo((_S) => {
+const NavigationLink = memo((_S) => {
   var _T = _S, {
     active,
     activeClassName = "active",
@@ -5807,10 +5513,10 @@ const NavigationLink = react.exports.memo((_S) => {
     "textWeight",
     "to"
   ]);
-  const [focused, setFocused] = react.exports.useState(false);
-  const [hovered, setHovered] = react.exports.useState(false);
-  const [updatedBackgroundColor, setUpdatedBackgroundColor] = react.exports.useState(backgroundColor);
-  const [updatedTextColor, setUpdatedTextColor] = react.exports.useState(textColor);
+  const [focused, setFocused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [updatedBackgroundColor, setUpdatedBackgroundColor] = useState(backgroundColor);
+  const [updatedTextColor, setUpdatedTextColor] = useState(textColor);
   const resolved = useResolvedPath$1(to);
   const exactMatch = useMatch({
     end: true,
@@ -5843,7 +5549,7 @@ const NavigationLink = react.exports.memo((_S) => {
       setUpdatedBackgroundColor(backgroundColor);
     }
   };
-  react.exports.useEffect(() => {
+  useEffect(() => {
     setTextColor();
     setBackgroundColor();
   }, [hovered, focused, exactMatch]);
@@ -5913,7 +5619,7 @@ const NavigationLink = react.exports.memo((_S) => {
     }))
   });
 });
-const MenuItem = react.exports.memo((_U) => {
+const MenuItem = memo((_U) => {
   var _V = _U, {
     active,
     as = "div",
@@ -5950,7 +5656,7 @@ const MenuItem = react.exports.memo((_U) => {
     "value"
   ]);
   var _a2;
-  const [hovered, setHovered] = react.exports.useState(false);
+  const [hovered, setHovered] = useState(false);
   const itemTitle = title ? /* @__PURE__ */ jsx(Label, {
     textSize: TextSize.Smaller,
     children: title
@@ -6002,7 +5708,7 @@ const MenuItem = react.exports.memo((_U) => {
     })]
   });
 });
-const Menu = react.exports.memo((_W) => {
+const Menu = memo((_W) => {
   var _X = _W, {
     as = "nav",
     backgroundColor = BackgroundColors.Lightest,
@@ -6087,7 +5793,7 @@ const Wrapper$2 = styled.button.withConfig({
   var _a2;
   return props.menuVisible ? getDepthZIndex((_a2 = props.depth) != null ? _a2 : Depth.Surface) + 3 : "auto";
 }, (props) => props.focused && props.menuVisible && css(["border-bottom-color:transparent;border-bottom-left-radius:0;border-bottom-right-radius:0;&:before{border-radius:calc(", " + 3px) calc(", " + 3px) 0 0;border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom:none;}"], Amount.Least, Amount.Least));
-const DropdownControl = react.exports.memo((_Y) => {
+const DropdownControl = memo((_Y) => {
   var _Z = _Y, {
     backgroundColor = BackgroundColors.DropdownMenu,
     border = {
@@ -6195,7 +5901,7 @@ const DropdownControl = react.exports.memo((_Y) => {
     })]
   }));
 });
-const DropdownPanel = react.exports.memo((__) => {
+const DropdownPanel = memo((__) => {
   var _$ = __, {
     alignItems = Align.Stretch,
     backgroundColor = BackgroundColors.Lightest,
@@ -6241,7 +5947,7 @@ const Wrapper$1 = styled.div.withConfig({
   displayName: "Wrapper",
   componentId: "sc-lb5hvp-0"
 })(["", ";", ";", ";", ";border-radius:", ";left:0;opacity:", ";position:absolute;right:0;top:calc(100% - 3px);&:before{border-radius:0 0 calc(", " + 3px) calc(", " + 3px);border-top-color:transparent;}"], LayoutStyles, AppearanceStyles, FocusedStyles, VisibilityStyles, (props) => `0 0 ${props.borderRadius} ${props.borderRadius}`, (props) => props.visible ? 1 : 0, Amount.Least, Amount.Least);
-const DropdownInput = react.exports.memo((_aa) => {
+const DropdownInput = memo((_aa) => {
   var _ba = _aa, {
     backgroundColor = BackgroundColors.DropdownMenu,
     border = {
@@ -6279,12 +5985,12 @@ const DropdownInput = react.exports.memo((_aa) => {
     "size",
     "validation"
   ]);
-  const [focused, setFocused] = react.exports.useState(false);
-  const [menuVisible, setMenuVisible] = react.exports.useState(false);
-  const [problems, setProblems] = react.exports.useState([]);
-  const [item, setItem] = react.exports.useState(menu == null ? void 0 : menu.find((i2) => i2.value === defaultValue));
-  const [valueChanged, setValueChanged] = react.exports.useState(false);
-  react.exports.useEffect(() => {
+  const [focused, setFocused] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [problems, setProblems] = useState([]);
+  const [item, setItem] = useState(menu == null ? void 0 : menu.find((i2) => i2.value === defaultValue));
+  const [valueChanged, setValueChanged] = useState(false);
+  useEffect(() => {
     if (validation && valueChanged) {
       const probs = Si(item, validation);
       setProblems(probs);
@@ -6304,7 +6010,7 @@ const DropdownInput = react.exports.memo((_aa) => {
         });
     }
   }, [item]);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     var _a2, _b;
     setItem((_b = (_a2 = menu == null ? void 0 : menu.find((i2) => i2.value === defaultValue)) != null ? _a2 : item) != null ? _b : void 0);
   }, [defaultValue]);
@@ -6363,7 +6069,7 @@ const DropdownInput = react.exports.memo((_aa) => {
     }))]
   });
 });
-const CountryInput = react.exports.memo((_ca) => {
+const CountryInput = memo((_ca) => {
   var _da = _ca, {
     defaultValue = CountryCode.UnitedStates,
     menu = Object.entries(Countries.getAlpha2Codes()).map(([alpha2, alpha3]) => ({
@@ -6408,7 +6114,7 @@ const CountryInput = react.exports.memo((_ca) => {
     placeholder
   }, props));
 });
-const CurrencyInput = react.exports.memo((_ea) => {
+const CurrencyInput = memo((_ea) => {
   var _fa = _ea, {
     defaultValue = CurrencyCode.UnitedStatesDollar,
     name = "language",
@@ -6450,7 +6156,7 @@ const CurrencyInput = react.exports.memo((_ea) => {
     placeholder
   }, props));
 });
-const LanguageInput = react.exports.memo((_ga) => {
+const LanguageInput = memo((_ga) => {
   var _ha = _ga, {
     defaultValue = LanguageCode.English,
     name,
@@ -7352,10 +7058,10 @@ function _objectWithoutPropertiesLoose$1(source, excluded) {
   }
   return target;
 }
-var Dropzone = /* @__PURE__ */ react.exports.forwardRef(function(_ref, ref) {
+var Dropzone = /* @__PURE__ */ forwardRef(function(_ref, ref) {
   var children = _ref.children, params = _objectWithoutProperties(_ref, _excluded$1);
   var _useDropzone = useDropzone(params), open = _useDropzone.open, props = _objectWithoutProperties(_useDropzone, _excluded2$1);
-  react.exports.useImperativeHandle(ref, function() {
+  useImperativeHandle(ref, function() {
     return {
       open
     };
@@ -7421,15 +7127,15 @@ var initialState = {
 function useDropzone() {
   var options = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
   var _defaultProps$options = _objectSpread(_objectSpread({}, defaultProps), options), accept = _defaultProps$options.accept, disabled = _defaultProps$options.disabled, getFilesFromEvent = _defaultProps$options.getFilesFromEvent, maxSize = _defaultProps$options.maxSize, minSize = _defaultProps$options.minSize, multiple = _defaultProps$options.multiple, maxFiles = _defaultProps$options.maxFiles, onDragEnter = _defaultProps$options.onDragEnter, onDragLeave = _defaultProps$options.onDragLeave, onDragOver = _defaultProps$options.onDragOver, onDrop = _defaultProps$options.onDrop, onDropAccepted = _defaultProps$options.onDropAccepted, onDropRejected = _defaultProps$options.onDropRejected, onFileDialogCancel = _defaultProps$options.onFileDialogCancel, onFileDialogOpen = _defaultProps$options.onFileDialogOpen, useFsAccessApi = _defaultProps$options.useFsAccessApi, preventDropOnDocument = _defaultProps$options.preventDropOnDocument, noClick = _defaultProps$options.noClick, noKeyboard = _defaultProps$options.noKeyboard, noDrag = _defaultProps$options.noDrag, noDragEventsBubbling = _defaultProps$options.noDragEventsBubbling, validator = _defaultProps$options.validator;
-  var onFileDialogOpenCb = react.exports.useMemo(function() {
+  var onFileDialogOpenCb = useMemo(function() {
     return typeof onFileDialogOpen === "function" ? onFileDialogOpen : noop$2;
   }, [onFileDialogOpen]);
-  var onFileDialogCancelCb = react.exports.useMemo(function() {
+  var onFileDialogCancelCb = useMemo(function() {
     return typeof onFileDialogCancel === "function" ? onFileDialogCancel : noop$2;
   }, [onFileDialogCancel]);
-  var rootRef = react.exports.useRef(null);
-  var inputRef = react.exports.useRef(null);
-  var _useReducer = react.exports.useReducer(reducer, initialState), _useReducer2 = _slicedToArray(_useReducer, 2), state = _useReducer2[0], dispatch = _useReducer2[1];
+  var rootRef = useRef(null);
+  var inputRef = useRef(null);
+  var _useReducer = useReducer(reducer, initialState), _useReducer2 = _slicedToArray(_useReducer, 2), state = _useReducer2[0], dispatch = _useReducer2[1];
   var isFocused = state.isFocused, isFileDialogActive = state.isFileDialogActive, draggedFiles = state.draggedFiles;
   var onWindowFocus = function onWindowFocus2() {
     if (isFileDialogActive) {
@@ -7446,7 +7152,7 @@ function useDropzone() {
       }, 300);
     }
   };
-  react.exports.useEffect(function() {
+  useEffect(function() {
     if (useFsAccessApi && canUseFileSystemAccessAPI()) {
       return function() {
       };
@@ -7456,7 +7162,7 @@ function useDropzone() {
       window.removeEventListener("focus", onWindowFocus, false);
     };
   }, [inputRef, isFileDialogActive, onFileDialogCancelCb, useFsAccessApi]);
-  var dragTargetsRef = react.exports.useRef([]);
+  var dragTargetsRef = useRef([]);
   var onDocumentDrop = function onDocumentDrop2(event) {
     if (rootRef.current && rootRef.current.contains(event.target)) {
       return;
@@ -7464,7 +7170,7 @@ function useDropzone() {
     event.preventDefault();
     dragTargetsRef.current = [];
   };
-  react.exports.useEffect(function() {
+  useEffect(function() {
     if (preventDropOnDocument) {
       document.addEventListener("dragover", onDocumentDragOver, false);
       document.addEventListener("drop", onDocumentDrop, false);
@@ -7476,7 +7182,7 @@ function useDropzone() {
       }
     };
   }, [rootRef, preventDropOnDocument]);
-  var onDragEnterCb = react.exports.useCallback(function(event) {
+  var onDragEnterCb = useCallback(function(event) {
     event.preventDefault();
     event.persist();
     stopPropagation(event);
@@ -7497,7 +7203,7 @@ function useDropzone() {
       });
     }
   }, [getFilesFromEvent, onDragEnter, noDragEventsBubbling]);
-  var onDragOverCb = react.exports.useCallback(function(event) {
+  var onDragOverCb = useCallback(function(event) {
     event.preventDefault();
     event.persist();
     stopPropagation(event);
@@ -7513,7 +7219,7 @@ function useDropzone() {
     }
     return false;
   }, [onDragOver, noDragEventsBubbling]);
-  var onDragLeaveCb = react.exports.useCallback(function(event) {
+  var onDragLeaveCb = useCallback(function(event) {
     event.preventDefault();
     event.persist();
     stopPropagation(event);
@@ -7537,7 +7243,7 @@ function useDropzone() {
       onDragLeave(event);
     }
   }, [rootRef, onDragLeave, noDragEventsBubbling]);
-  var setFiles = react.exports.useCallback(function(files, event) {
+  var setFiles = useCallback(function(files, event) {
     var acceptedFiles = [];
     var fileRejections = [];
     files.forEach(function(file) {
@@ -7583,7 +7289,7 @@ function useDropzone() {
       onDropAccepted(acceptedFiles, event);
     }
   }, [dispatch, multiple, accept, minSize, maxSize, maxFiles, onDrop, onDropAccepted, onDropRejected, validator]);
-  var onDropCb = react.exports.useCallback(function(event) {
+  var onDropCb = useCallback(function(event) {
     event.preventDefault();
     event.persist();
     stopPropagation(event);
@@ -7600,7 +7306,7 @@ function useDropzone() {
       type: "reset"
     });
   }, [getFilesFromEvent, setFiles, noDragEventsBubbling]);
-  var openFileDialog = react.exports.useCallback(function() {
+  var openFileDialog = useCallback(function() {
     if (useFsAccessApi && canUseFileSystemAccessAPI()) {
       dispatch({
         type: "openDialog"
@@ -7632,7 +7338,7 @@ function useDropzone() {
       inputRef.current.click();
     }
   }, [dispatch, onFileDialogOpenCb, onFileDialogCancelCb, useFsAccessApi, setFiles, accept, multiple]);
-  var onKeyDownCb = react.exports.useCallback(function(event) {
+  var onKeyDownCb = useCallback(function(event) {
     if (!rootRef.current || !rootRef.current.isEqualNode(event.target)) {
       return;
     }
@@ -7641,17 +7347,17 @@ function useDropzone() {
       openFileDialog();
     }
   }, [rootRef, inputRef, openFileDialog]);
-  var onFocusCb = react.exports.useCallback(function() {
+  var onFocusCb = useCallback(function() {
     dispatch({
       type: "focus"
     });
   }, []);
-  var onBlurCb = react.exports.useCallback(function() {
+  var onBlurCb = useCallback(function() {
     dispatch({
       type: "blur"
     });
   }, []);
-  var onClickCb = react.exports.useCallback(function() {
+  var onClickCb = useCallback(function() {
     if (noClick) {
       return;
     }
@@ -7675,7 +7381,7 @@ function useDropzone() {
       event.stopPropagation();
     }
   };
-  var getRootProps = react.exports.useMemo(function() {
+  var getRootProps = useMemo(function() {
     return function() {
       var _ref2 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, _ref2$refKey = _ref2.refKey, refKey = _ref2$refKey === void 0 ? "ref" : _ref2$refKey, role = _ref2.role, onKeyDown = _ref2.onKeyDown, onFocus = _ref2.onFocus, onBlur = _ref2.onBlur, onClick = _ref2.onClick, onDragEnter2 = _ref2.onDragEnter, onDragOver2 = _ref2.onDragOver, onDragLeave2 = _ref2.onDragLeave, onDrop2 = _ref2.onDrop, rest = _objectWithoutProperties(_ref2, _excluded3);
       return _objectSpread(_objectSpread(_defineProperty$1({
@@ -7693,10 +7399,10 @@ function useDropzone() {
       } : {}), rest);
     };
   }, [rootRef, onKeyDownCb, onFocusCb, onBlurCb, onClickCb, onDragEnterCb, onDragOverCb, onDragLeaveCb, onDropCb, noKeyboard, noDrag, disabled]);
-  var onInputElementClick = react.exports.useCallback(function(event) {
+  var onInputElementClick = useCallback(function(event) {
     event.stopPropagation();
   }, []);
-  var getInputProps = react.exports.useMemo(function() {
+  var getInputProps = useMemo(function() {
     return function() {
       var _ref3 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, _ref3$refKey = _ref3.refKey, refKey = _ref3$refKey === void 0 ? "ref" : _ref3$refKey, onChange = _ref3.onChange, onClick = _ref3.onClick, rest = _objectWithoutProperties(_ref3, _excluded4);
       var inputProps = _defineProperty$1({
@@ -7772,7 +7478,7 @@ function reducer(state, action) {
 }
 function noop$2() {
 }
-const CloseButton = react.exports.memo((_ia) => {
+const CloseButton = memo((_ia) => {
   var _ja = _ia, {
     backgroundColor = BackgroundColors.CloseButton,
     iconColor = ForegroundColors.CloseButton,
@@ -7786,8 +7492,8 @@ const CloseButton = react.exports.memo((_ia) => {
     "onClick",
     "size"
   ]);
-  const [hovered, setHovered] = react.exports.useState(false);
-  const [focused, setFocused] = react.exports.useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
   const iconHoverColor = hovered ? ForegroundColors.PrimaryContrast : iconColor;
   return /* @__PURE__ */ jsx(Container$h, __spreadProps(__spreadValues({
     alignContent: Align.Center,
@@ -7815,7 +7521,7 @@ const CloseButton = react.exports.memo((_ia) => {
     })
   }));
 });
-const ImageInput = react.exports.memo(({
+const ImageInput = memo(({
   backgroundColor = BackgroundColors.InputControl,
   border = {
     color: BorderColors.Default,
@@ -7838,10 +7544,10 @@ const ImageInput = react.exports.memo(({
   padding = Amount.Default
 }) => {
   var _c, _d, _e2, _f;
-  const [images, setImages] = react.exports.useState(defaultValue);
-  const [errorMessage, setErrorMessage] = react.exports.useState();
-  const [previewImages, setPreviewImages] = react.exports.useState([]);
-  const [problems, setProblems] = react.exports.useState([]);
+  const [images, setImages] = useState(defaultValue);
+  const [errorMessage, setErrorMessage] = useState();
+  const [previewImages, setPreviewImages] = useState([]);
+  const [problems, setProblems] = useState([]);
   const validateFileType = (file) => {
     const validTypes2 = ["image/jpeg", "image/jpg", "image/png", "image/gif", "image/x-icon"];
     if (!validTypes2.includes(file.type)) {
@@ -7863,7 +7569,7 @@ const ImageInput = react.exports.memo(({
     setErrorMessage(null);
     return null;
   };
-  const onDrop = react.exports.useCallback((files) => {
+  const onDrop = useCallback((files) => {
     for (const file of files) {
       if (validateFileType(file)) {
         if (maxImages > 1) {
@@ -7888,7 +7594,7 @@ const ImageInput = react.exports.memo(({
     onDrop,
     validator: validateNotAdded
   });
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (!images || images.length === 0) {
       setPreviewImages([]);
       return;
@@ -7910,7 +7616,7 @@ const ImageInput = react.exports.memo(({
       }
     };
   }, [images]);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (onChange)
       onChange({
         value: images
@@ -8021,7 +7727,7 @@ const ImageInput = react.exports.memo(({
     }))]
   });
 });
-const NumberInput = react.exports.memo((_ka) => {
+const NumberInput = memo((_ka) => {
   var _la = _ka, {
     as,
     backgroundColor = BackgroundColors.InputControl,
@@ -8074,12 +7780,12 @@ const NumberInput = react.exports.memo((_ka) => {
     "validation"
   ]);
   var _a2;
-  const [value2, setValue] = react.exports.useState(defaultValue);
-  const [valueChanged, setValueChanged] = react.exports.useState(false);
-  const [focused, setFocused] = react.exports.useState(false);
-  const [problems, setProblems] = react.exports.useState([]);
-  const inputRef = react.exports.useRef(null);
-  react.exports.useEffect(() => {
+  const [value2, setValue] = useState(defaultValue);
+  const [valueChanged, setValueChanged] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [problems, setProblems] = useState([]);
+  const inputRef = useRef(null);
+  useEffect(() => {
     setValueChanged(true);
     if (valueChanged) {
       const probs = Si(value2, validation);
@@ -8148,7 +7854,7 @@ const Input$2 = styled.input.withConfig({
   displayName: "Input",
   componentId: "sc-wxjtmr-0"
 })(["", ";", ";background:transparent;border:none;outline:none;padding:0 ", ";width:100%;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}&::-ms-clear{display:none;width:0;height:0;}&::-ms-reveal{display:none;width:0;height:0;}&::-webkit-search-decoration,&::-webkit-search-cancel-button,&::-webkit-search-results-button,&::-webkit-search-results-decoration{display:none;}"], FocusedStyles, TextStyles, Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
-const SSNInput = react.exports.memo((_ma) => {
+const SSNInput = memo((_ma) => {
   var _na = _ma, {
     as,
     backgroundColor = BackgroundColors.InputControl,
@@ -8199,14 +7905,14 @@ const SSNInput = react.exports.memo((_ma) => {
     "validation"
   ]);
   var _a2;
-  const [value2, setValue] = react.exports.useState(defaultValue ? [Number.parseInt((defaultValue == null ? void 0 : defaultValue.toString().slice(0, 3)) || "000"), Number.parseInt((defaultValue == null ? void 0 : defaultValue.toString().slice(3, 5)) || "00"), Number.parseInt((defaultValue == null ? void 0 : defaultValue.toString().slice(5)) || "0000")] : []);
-  const [valueChanged, setValueChanged] = react.exports.useState(false);
-  const [focused, setFocused] = react.exports.useState(false);
-  const [problems, setProblems] = react.exports.useState([]);
-  const firstInputRef = react.exports.useRef();
-  const secondInputRef = react.exports.useRef();
-  const thirdInputRef = react.exports.useRef();
-  react.exports.useEffect(() => {
+  const [value2, setValue] = useState(defaultValue ? [Number.parseInt((defaultValue == null ? void 0 : defaultValue.toString().slice(0, 3)) || "000"), Number.parseInt((defaultValue == null ? void 0 : defaultValue.toString().slice(3, 5)) || "00"), Number.parseInt((defaultValue == null ? void 0 : defaultValue.toString().slice(5)) || "0000")] : []);
+  const [valueChanged, setValueChanged] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [problems, setProblems] = useState([]);
+  const firstInputRef = useRef();
+  const secondInputRef = useRef();
+  const thirdInputRef = useRef();
+  useEffect(() => {
     setValueChanged(true);
     if (valueChanged) {
       const probs = Si(value2, validation);
@@ -8353,7 +8059,7 @@ const Input$1 = styled.input.withConfig({
   displayName: "Input",
   componentId: "sc-1kwp1c5-0"
 })(["", ";", ";background:transparent;border:none;outline:none;padding:0 ", ";-moz-appearance:textfield;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}&::-webkit-outer-spin-button,&::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}"], FocusedStyles, TextStyles, Amount.Least, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
-const LongTextInput = react.exports.memo(({
+const LongTextInput = memo(({
   backgroundColor = BackgroundColors.InputControl,
   border = {
     color: BorderColors.InputControl,
@@ -8378,12 +8084,12 @@ const LongTextInput = react.exports.memo(({
   validation = {}
 }) => {
   var _a2;
-  const [value2, setValue] = react.exports.useState(defaultValue != null ? defaultValue : "");
-  const [focused, setFocused] = react.exports.useState(false);
-  const [problems, setProblems] = react.exports.useState([]);
-  const [valueChanged, setValueChanged] = react.exports.useState(false);
-  const inputRef = react.exports.useRef(null);
-  react.exports.useEffect(() => {
+  const [value2, setValue] = useState(defaultValue != null ? defaultValue : "");
+  const [focused, setFocused] = useState(false);
+  const [problems, setProblems] = useState([]);
+  const [valueChanged, setValueChanged] = useState(false);
+  const inputRef = useRef(null);
+  useEffect(() => {
     if (validation && valueChanged) {
       const probs = Si(value2, validation);
       setProblems(probs);
@@ -8403,7 +8109,7 @@ const LongTextInput = react.exports.memo(({
         });
     }
   }, [value2]);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     var _a3;
     setValue((_a3 = defaultValue != null ? defaultValue : value2) != null ? _a3 : "");
   }, [defaultValue]);
@@ -8462,7 +8168,7 @@ const Input = styled.textarea.withConfig({
   displayName: "Input",
   componentId: "sc-a7ikmp-0"
 })(["", ";background:transparent;border:none;width:100%;&::-ms-clear{display:none;width:0;height:0;}&::-ms-reveal{display:none;width:0;height:0;}&::-webkit-search-decoration,&::-webkit-search-cancel-button,&::-webkit-search-results-button,&::-webkit-search-results-decoration{display:none;}"], TextStyles);
-const PasswordInput = react.exports.memo((_oa) => {
+const PasswordInput = memo((_oa) => {
   var _pa = _oa, {
     autoComplete = AutoComplete.CurrentPassword,
     confirmPasswordLabel = "Confirm password",
@@ -8491,9 +8197,9 @@ const PasswordInput = react.exports.memo((_oa) => {
     "showPasswordStrength",
     "validation"
   ]);
-  const [password, setPassword] = react.exports.useState();
-  const [confirmPassword, setConfirmPassword] = react.exports.useState();
-  react.exports.useEffect(() => {
+  const [password, setPassword] = useState();
+  const [confirmPassword, setConfirmPassword] = useState();
+  useEffect(() => {
     if (showConfirmPassword) {
       const problems = Si(password, validation);
       if (password !== confirmPassword) {
@@ -8667,7 +8373,7 @@ function getInputElementByFieldType(field) {
       });
   }
 }
-const FormFields = react.exports.memo((_qa) => {
+const FormFields = memo((_qa) => {
   var _ra = _qa, {
     entity,
     fields,
@@ -8678,20 +8384,20 @@ const FormFields = react.exports.memo((_qa) => {
     "onChange"
   ]);
   var _a2;
-  const [fieldValues, setFieldValues] = react.exports.useState(Object.fromEntries(fields.map((field) => {
+  const [fieldValues, setFieldValues] = useState(Object.fromEntries(fields.map((field) => {
     var _a3, _b;
     return [field.name, __spreadProps(__spreadValues({}, field), {
       value: (_b = (_a3 = entity == null ? void 0 : entity[field.name]) != null ? _a3 : field.value) != null ? _b : field.defaultValue
     })];
   })));
-  react.exports.useEffect(() => {
+  useEffect(() => {
     setFieldValues(Object.fromEntries(fields.map((field) => [field.name, __spreadValues(__spreadValues({}, field), fieldValues[field.name])])));
   }, [entity, fields]);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (onChange)
       onChange(fieldValues);
   }, [fieldValues]);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     setFieldValues(Object.fromEntries(fields.map((field) => {
       var _a3, _b;
       return [field.name, __spreadProps(__spreadValues({}, field), {
@@ -8730,7 +8436,7 @@ const FormFields = react.exports.memo((_qa) => {
     })
   }));
 });
-const Form = react.exports.memo((_sa) => {
+const Form = memo((_sa) => {
   var _ta = _sa, {
     className = "",
     entity,
@@ -8755,17 +8461,17 @@ const Form = react.exports.memo((_sa) => {
     "submitButton"
   ]);
   var _a2, _b;
-  const [fieldValues, setFieldValues] = react.exports.useState({});
-  const [validationProblems, setValidationProblems] = react.exports.useState();
-  const [isValidated, setValidated] = react.exports.useState(false);
-  const [requiresValidation, setRequiresValidation] = react.exports.useState(false);
+  const [fieldValues, setFieldValues] = useState({});
+  const [validationProblems, setValidationProblems] = useState();
+  const [isValidated, setValidated] = useState(false);
+  const [requiresValidation, setRequiresValidation] = useState(false);
   const submitButtonProps = __spreadValues({
     fullWidth: false,
     label: "Submit",
     size: Size.Large,
     type: ButtonType.Primary
   }, submitButton);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     let problems = [];
     let validationRequired = false;
     for (const field of Object.entries(fieldValues)) {
@@ -8832,7 +8538,7 @@ const Form = react.exports.memo((_sa) => {
     })]
   }));
 });
-const Link$1 = react.exports.memo((_ua) => {
+const Link$1 = memo((_ua) => {
   var _va = _ua, {
     children,
     hover,
@@ -8852,8 +8558,8 @@ const Link$1 = react.exports.memo((_ua) => {
     "underline",
     "underlineColor"
   ]);
-  const [focused, setFocused] = react.exports.useState(false);
-  const [hovered, setHovered] = react.exports.useState(false);
+  const [focused, setFocused] = useState(false);
+  const [hovered, setHovered] = useState(false);
   return /* @__PURE__ */ jsx(Link$2, {
     to,
     onFocus: () => setFocused(true),
@@ -8891,7 +8597,7 @@ const Container$e = styled.span.withConfig({
   displayName: "Container",
   componentId: "sc-doc9uk-0"
 })(["", ";", ";cursor:pointer;position:relative;&:before{border-radius:", ";left:-9px;right:-9px;}"], LayoutStyles, FocusedStyles, Amount.All);
-const Small = react.exports.memo((_wa) => {
+const Small = memo((_wa) => {
   var _xa = _wa, {
     as = "small",
     className = "",
@@ -8916,7 +8622,7 @@ const Small = react.exports.memo((_wa) => {
     children
   }));
 });
-const ForgotPasswordForm = react.exports.memo(({
+const ForgotPasswordForm = memo(({
   backgroundColor = BackgroundColors.Darker,
   title = "Forgot your password?",
   showSignupLink,
@@ -8999,7 +8705,7 @@ const ForgotPasswordForm = react.exports.memo(({
     })]
   });
 });
-const LoginForm = react.exports.memo((_ya) => {
+const LoginForm = memo((_ya) => {
   var _za = _ya, {
     backgroundColor = BackgroundColors.Darker,
     borderRadius = Amount.More,
@@ -9032,7 +8738,7 @@ const LoginForm = react.exports.memo((_ya) => {
     inProgress,
     success
   } = loginState;
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (onLoginSuccess && success) {
       onLoginSuccess();
     }
@@ -9136,7 +8842,7 @@ const LoginForm = react.exports.memo((_ya) => {
     })]
   }));
 });
-const SignupForm = react.exports.memo(({
+const SignupForm = memo(({
   backgroundColor = BackgroundColors.Darker,
   borderRadius = Amount.More,
   onSignupSuccess,
@@ -9153,7 +8859,7 @@ const SignupForm = react.exports.memo(({
     inProgress,
     success
   } = signUpState;
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (onSignupSuccess && success) {
       onSignupSuccess({
         userId: signUpState.userId
@@ -9530,14 +9236,14 @@ createElementComponent("linkAuthentication", isServer);
 createElementComponent("shippingAddress", isServer);
 createElementComponent("affirmMessage", isServer);
 createElementComponent("afterpayClearpayMessage", isServer);
-const AddPaymentMethodForm = react.exports.memo(({
+const AddPaymentMethodForm = memo(({
   cancel,
   paymentMethodsCount
 }) => {
   const dispatch = useDispatch();
-  const [hasError, setHasError] = react.exports.useState(false);
-  const [inProgress, setInProgress] = react.exports.useState(false);
-  const [errorMessage, setErrorMessage] = react.exports.useState("");
+  const [hasError, setHasError] = useState(false);
+  const [inProgress, setInProgress] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const stripe = useStripe();
   const elements = useElements();
   const handleFormSubmit = async (e2) => {
@@ -9619,18 +9325,18 @@ const GoBack = styled.div.withConfig({
   displayName: "GoBack",
   componentId: "sc-3ujpxx-3"
 })(["float:right;"]);
-const PaymentMethodModal = react.exports.memo(({
+const PaymentMethodModal = memo(({
   paymentMethods,
   premium,
   visible
 }) => {
   const dispatch = useDispatch();
-  const [inProgress, setInProgress] = react.exports.useState(false);
-  const [showAddPaymentForm, setShowAddPaymentForm] = react.exports.useState(false);
-  const [reviewOrder, setReviewOrder] = react.exports.useState(false);
-  const [paymentMethod, setPaymentMethod] = react.exports.useState(null);
-  const [paymentSuccess, setPaymentSuccess] = react.exports.useState(false);
-  react.exports.useEffect(() => {
+  const [inProgress, setInProgress] = useState(false);
+  const [showAddPaymentForm, setShowAddPaymentForm] = useState(false);
+  const [reviewOrder, setReviewOrder] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(null);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  useEffect(() => {
     dispatch(getPaymentMethods());
   }, []);
   const confirmPurchase = async () => {
@@ -9805,7 +9511,7 @@ const Progress = styled.div.withConfig({
   displayName: "Progress",
   componentId: "sc-1cgis25-13"
 })(["float:right;padding:0;"]);
-const ProgressMeter = react.exports.memo((_Aa) => {
+const ProgressMeter = memo((_Aa) => {
   var _Ba = _Aa, {
     amount,
     borderRadius = Amount.Less,
@@ -9888,7 +9594,7 @@ function formatValue(value2, {
       return value2;
   }
 }
-const LinearGauge = react.exports.memo(({
+const LinearGauge = memo(({
   amount,
   color,
   formatter,
@@ -9990,7 +9696,7 @@ const LinearGauge = react.exports.memo(({
     })]
   });
 });
-const ProgressivePaymentStatus = react.exports.memo(({
+const ProgressivePaymentStatus = memo(({
   amountPaid = 0,
   currency = CurrencyCode.UnitedStatesDollar,
   totalDue = 0,
@@ -10027,7 +9733,7 @@ const ProgressivePaymentStatus = react.exports.memo(({
     })]
   });
 });
-const SubscriptionModal = react.exports.memo(() => {
+const SubscriptionModal = memo(() => {
   const visible = useSelector((state) => state.app.subscriptionBillingModalVisible);
   return /* @__PURE__ */ jsx(Container$c, {
     visible,
@@ -10111,7 +9817,7 @@ const ActionButton = styled.div.withConfig({
   displayName: "ActionButton",
   componentId: "sc-1gc8te9-7"
 })(["background:rgba(60,60,60,1);border:2px solid transparent;border-radius:50px;color:white;cursor:pointer;float:right;font-size:13px;font-weight:600;padding:10px 17px;transition:background 0.2s ease-in-out;&:hover{background:rgba(0,0,0,0.9);}&:active{background:rgba(0,0,0,1);}", ";", ";", ";", ";", ";@media (min-width:480px){}@media (min-width:768px){}@media (min-width:992px){}@media (min-width:1200px){}"], (props) => props.disabled && css(["pointer-events:none;opacity:0.8;"]), (props) => props.secondary && css(["background:white;border:2px solid rgba(220,220,220,1);color:rgba(120,120,120,1);font-weight:600;&:hover{background:transparent;border:2px solid rgba(160,160,160,1);color:rgba(100,100,100,1);}&:active{background:transparent;border:2px solid rgba(130,130,130,1);color:rgba(80,80,80,1);}"]), (props) => props.size === "small" && css(["font-size:11px;padding:7px 12px;@media (min-width:992px){font-size:12px;padding:10px 17px;}"]), (props) => props.size === "large" && css(["font-size:13px;padding:10px 17px;@media (min-width:992px){font-size:15px;padding:15px 22px;}"]), (props) => props.darkMode && props.secondary && css(["background:transparent !important;border:2px solid rgba(143,231,0,0.7) !important;color:rgba(143,231,0,1) !important;&:hover{background:rgba(143,231,0,0.1) !important;border:2px solid rgba(143,231,0,0.7) !important;color:#1b1b1b;}&:active{background:rgba(143,231,0,0.6) !important;}"]));
-class ErrorBoundary extends react.exports.Component {
+class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10141,7 +9847,7 @@ class ErrorBoundary extends react.exports.Component {
     });
   }
 }
-const Card = react.exports.memo((_Ca) => {
+const Card = memo((_Ca) => {
   var _Da = _Ca, {
     backgroundColor = BackgroundColors.Card,
     borderRadius = Amount.Less,
@@ -10202,7 +9908,7 @@ const DragWrapper = styled.div.withConfig({
   displayName: "DragWrapper",
   componentId: "sc-vglho4-0"
 })(["", ";", ";", ";transition:box-shadow 0.3s ease-in-out;"], LayoutStyles, AppearanceStyles, DimensionStyles);
-const TitleCards = react.exports.memo((_Ea) => {
+const TitleCards = memo((_Ea) => {
   var _Fa = _Ea, {
     children,
     className = "title-cards",
@@ -10231,7 +9937,7 @@ const TitleCards = react.exports.memo((_Ea) => {
     })
   }));
 });
-const TitleCard = react.exports.memo((_Ga) => {
+const TitleCard = memo((_Ga) => {
   var _Ha = _Ga, {
     backgroundColor = BackgroundColors.Card,
     borderRadius = Amount.Least,
@@ -10299,7 +10005,7 @@ const TitleCard = react.exports.memo((_Ga) => {
     })]
   }));
 });
-const PieChart = react.exports.memo((_Ia) => {
+const PieChart = memo((_Ia) => {
   var props = __objRest(_Ia, []);
   return /* @__PURE__ */ jsx(Container$b, __spreadValues({}, props));
 });
@@ -10307,7 +10013,7 @@ const Container$b = styled.div.withConfig({
   displayName: "Container",
   componentId: "sc-1vyo5kj-0"
 })(["height:200px;"]);
-const RadialChart = react.exports.memo((_Ja) => {
+const RadialChart = memo((_Ja) => {
   var _Ka = _Ja, {
     data
   } = _Ka, props = __objRest(_Ka, [
@@ -10319,7 +10025,7 @@ const Container$a = styled.div.withConfig({
   displayName: "Container",
   componentId: "sc-yt8yoj-0"
 })([""]);
-const RadialGauge = react.exports.memo(({
+const RadialGauge = memo(({
   color,
   size,
   value: value2
@@ -10608,14 +10314,14 @@ var require_react_development = __commonJS({
         {
           Object.freeze(emptyObject);
         }
-        function Component(props, context, updater) {
+        function Component2(props, context, updater) {
           this.props = props;
           this.context = context;
           this.refs = emptyObject;
           this.updater = updater || ReactNoopUpdateQueue;
         }
-        Component.prototype.isReactComponent = {};
-        Component.prototype.setState = function(partialState, callback) {
+        Component2.prototype.isReactComponent = {};
+        Component2.prototype.setState = function(partialState, callback) {
           if (!(typeof partialState === "object" || typeof partialState === "function" || partialState == null)) {
             {
               throw Error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.");
@@ -10623,7 +10329,7 @@ var require_react_development = __commonJS({
           }
           this.updater.enqueueSetState(this, partialState, callback, "setState");
         };
-        Component.prototype.forceUpdate = function(callback) {
+        Component2.prototype.forceUpdate = function(callback) {
           this.updater.enqueueForceUpdate(this, callback, "forceUpdate");
         };
         {
@@ -10632,7 +10338,7 @@ var require_react_development = __commonJS({
             replaceState: ["replaceState", "Refactor your code to use setState instead (see https://github.com/facebook/react/issues/3236)."]
           };
           var defineDeprecationWarning = function(methodName, info) {
-            Object.defineProperty(Component.prototype, methodName, {
+            Object.defineProperty(Component2.prototype, methodName, {
               get: function() {
                 warn("%s(...) is deprecated in plain JavaScript React classes. %s", info[0], info[1]);
                 return void 0;
@@ -10647,7 +10353,7 @@ var require_react_development = __commonJS({
         }
         function ComponentDummy() {
         }
-        ComponentDummy.prototype = Component.prototype;
+        ComponentDummy.prototype = Component2.prototype;
         function PureComponent(props, context, updater) {
           this.props = props;
           this.context = context;
@@ -10656,7 +10362,7 @@ var require_react_development = __commonJS({
         }
         var pureComponentPrototype = PureComponent.prototype = new ComponentDummy();
         pureComponentPrototype.constructor = PureComponent;
-        _assign(pureComponentPrototype, Component.prototype);
+        _assign(pureComponentPrototype, Component2.prototype);
         pureComponentPrototype.isPureReactComponent = true;
         function createRef() {
           var refObject = {
@@ -10906,7 +10612,7 @@ var require_react_development = __commonJS({
           var newElement = ReactElement(oldElement.type, newKey, oldElement.ref, oldElement._self, oldElement._source, oldElement._owner, oldElement.props);
           return newElement;
         }
-        function cloneElement(element, config, children) {
+        function cloneElement2(element, config, children) {
           if (!!(element === null || element === void 0)) {
             {
               throw Error("React.cloneElement(...): The argument must be a React element, but you passed " + element + ".");
@@ -10958,7 +10664,7 @@ var require_react_development = __commonJS({
         }
         var SEPARATOR = ".";
         var SUBSEPARATOR = ":";
-        function escape2(key) {
+        function escape(key) {
           var escapeRegex = /[=:]/g;
           var escaperLookup = {
             "=": "=0",
@@ -10976,7 +10682,7 @@ var require_react_development = __commonJS({
         }
         function getElementKey(element, index) {
           if (typeof element === "object" && element !== null && element.key != null) {
-            return escape2("" + element.key);
+            return escape("" + element.key);
           }
           return index.toString(36);
         }
@@ -11332,7 +11038,7 @@ var require_react_development = __commonJS({
           }
           return false;
         }
-        function memo(type, compare) {
+        function memo2(type, compare) {
           {
             if (!isValidElementType(type)) {
               error("memo: The first argument must be a component. Instead received: %s", type === null ? "null" : typeof type);
@@ -11391,7 +11097,7 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useState(initialState2);
         }
-        function useReducer(reducer2, initialArg, init2) {
+        function useReducer2(reducer2, initialArg, init2) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useReducer(reducer2, initialArg, init2);
         }
@@ -11415,7 +11121,7 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useMemo(create2, deps);
         }
-        function useImperativeHandle(ref, create2, deps) {
+        function useImperativeHandle2(ref, create2, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useImperativeHandle(ref, create2, deps);
         }
@@ -11629,8 +11335,8 @@ var require_react_development = __commonJS({
             return describeNativeComponentFrame(fn, false);
           }
         }
-        function shouldConstruct(Component2) {
-          var prototype = Component2.prototype;
+        function shouldConstruct(Component22) {
+          var prototype = Component22.prototype;
           return !!(prototype && prototype.isReactComponent);
         }
         function describeUnknownElementTypeFrameInDEV(type, source, ownerFn) {
@@ -11928,7 +11634,7 @@ var require_react_development = __commonJS({
           return validatedFactory;
         }
         function cloneElementWithValidation(element, props, children) {
-          var newElement = cloneElement.apply(this, arguments);
+          var newElement = cloneElement2.apply(this, arguments);
           for (var i2 = 2; i2 < arguments.length; i2++) {
             validateChildKeys(arguments[i2], newElement.type);
           }
@@ -11954,7 +11660,7 @@ var require_react_development = __commonJS({
           only: onlyChild
         };
         exports.Children = Children2;
-        exports.Component = Component;
+        exports.Component = Component2;
         exports.PureComponent = PureComponent;
         exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals;
         exports.cloneElement = cloneElement$1;
@@ -11965,15 +11671,15 @@ var require_react_development = __commonJS({
         exports.forwardRef = forwardRef2;
         exports.isValidElement = isValidElement2;
         exports.lazy = lazy;
-        exports.memo = memo;
+        exports.memo = memo2;
         exports.useCallback = useCallback3;
         exports.useContext = useContext2;
         exports.useDebugValue = useDebugValue;
         exports.useEffect = useEffect5;
-        exports.useImperativeHandle = useImperativeHandle;
+        exports.useImperativeHandle = useImperativeHandle2;
         exports.useLayoutEffect = useLayoutEffect3;
         exports.useMemo = useMemo3;
-        exports.useReducer = useReducer;
+        exports.useReducer = useReducer2;
         exports.useRef = useRef4;
         exports.useState = useState5;
         exports.version = ReactVersion;
@@ -11989,7 +11695,7 @@ var require_React = __commonJS({
   }
 });
 function useTitle(title) {
-  react.exports.useEffect(() => {
+  useEffect(() => {
     document.title = title;
   }, []);
 }
@@ -12034,15 +11740,15 @@ function warning(cond, message) {
     }
   }
 }
-var NavigationContext = /* @__PURE__ */ react.exports.createContext(null);
+var NavigationContext = /* @__PURE__ */ createContext(null);
 {
   NavigationContext.displayName = "Navigation";
 }
-var LocationContext = /* @__PURE__ */ react.exports.createContext(null);
+var LocationContext = /* @__PURE__ */ createContext(null);
 {
   LocationContext.displayName = "Location";
 }
-var RouteContext = /* @__PURE__ */ react.exports.createContext({
+var RouteContext = /* @__PURE__ */ createContext({
   outlet: null,
   matches: []
 });
@@ -12054,7 +11760,7 @@ function useHref(to) {
   let {
     basename,
     navigator
-  } = react.exports.useContext(NavigationContext);
+  } = useContext(NavigationContext);
   let {
     hash,
     pathname,
@@ -12073,30 +11779,30 @@ function useHref(to) {
   });
 }
 function useInRouterContext() {
-  return react.exports.useContext(LocationContext) != null;
+  return useContext(LocationContext) != null;
 }
 function useLocation() {
   !useInRouterContext() ? invariant(false, "useLocation() may be used only in the context of a <Router> component.") : void 0;
-  return react.exports.useContext(LocationContext).location;
+  return useContext(LocationContext).location;
 }
 function useNavigate() {
   !useInRouterContext() ? invariant(false, "useNavigate() may be used only in the context of a <Router> component.") : void 0;
   let {
     basename,
     navigator
-  } = react.exports.useContext(NavigationContext);
+  } = useContext(NavigationContext);
   let {
     matches
-  } = react.exports.useContext(RouteContext);
+  } = useContext(RouteContext);
   let {
     pathname: locationPathname
   } = useLocation();
   let routePathnamesJson = JSON.stringify(matches.map((match2) => match2.pathnameBase));
-  let activeRef = react.exports.useRef(false);
-  react.exports.useEffect(() => {
+  let activeRef = useRef(false);
+  useEffect(() => {
     activeRef.current = true;
   });
-  let navigate = react.exports.useCallback(function(to, options) {
+  let navigate = useCallback(function(to, options) {
     if (options === void 0) {
       options = {};
     }
@@ -12118,12 +11824,12 @@ function useNavigate() {
 function useResolvedPath(to) {
   let {
     matches
-  } = react.exports.useContext(RouteContext);
+  } = useContext(RouteContext);
   let {
     pathname: locationPathname
   } = useLocation();
   let routePathnamesJson = JSON.stringify(matches.map((match2) => match2.pathnameBase));
-  return react.exports.useMemo(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname), [to, routePathnamesJson, locationPathname]);
+  return useMemo(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname), [to, routePathnamesJson, locationPathname]);
 }
 function resolvePath(to, fromPathname) {
   if (fromPathname === void 0) {
@@ -12217,7 +11923,7 @@ var _excluded2 = ["aria-current", "caseSensitive", "className", "end", "style", 
 function isModifiedEvent(event) {
   return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
 }
-var Link = /* @__PURE__ */ react.exports.forwardRef(function LinkWithRef(_ref4, ref) {
+var Link = /* @__PURE__ */ forwardRef(function LinkWithRef(_ref4, ref) {
   let {
     onClick,
     reloadDocument,
@@ -12239,7 +11945,7 @@ var Link = /* @__PURE__ */ react.exports.forwardRef(function LinkWithRef(_ref4, 
       internalOnClick(event);
     }
   }
-  return /* @__PURE__ */ react.exports.createElement("a", _extends2({}, rest, {
+  return /* @__PURE__ */ createElement("a", _extends2({}, rest, {
     href,
     onClick: handleClick,
     ref,
@@ -12249,7 +11955,7 @@ var Link = /* @__PURE__ */ react.exports.forwardRef(function LinkWithRef(_ref4, 
 {
   Link.displayName = "Link";
 }
-var NavLink = /* @__PURE__ */ react.exports.forwardRef(function NavLinkWithRef(_ref5, ref) {
+var NavLink = /* @__PURE__ */ forwardRef(function NavLinkWithRef(_ref5, ref) {
   let {
     "aria-current": ariaCurrentProp = "page",
     caseSensitive = false,
@@ -12280,7 +11986,7 @@ var NavLink = /* @__PURE__ */ react.exports.forwardRef(function NavLinkWithRef(_
   let style = typeof styleProp === "function" ? styleProp({
     isActive
   }) : styleProp;
-  return /* @__PURE__ */ react.exports.createElement(Link, _extends2({}, rest, {
+  return /* @__PURE__ */ createElement(Link, _extends2({}, rest, {
     "aria-current": ariaCurrent,
     className,
     ref,
@@ -12302,7 +12008,7 @@ function useLinkClickHandler(to, _temp) {
   let navigate = useNavigate();
   let location = useLocation();
   let path = useResolvedPath(to);
-  return react.exports.useCallback((event) => {
+  return useCallback((event) => {
     if (event.button === 0 && (!target || target === "_self") && !isModifiedEvent(event)) {
       event.preventDefault();
       let replace2 = !!replaceProp || I(location) === I(path);
@@ -12347,7 +12053,7 @@ object-assign
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-const Page = react.exports.memo((_La) => {
+const Page = memo((_La) => {
   var _Ma = _La, {
     alignContent = Align.Top,
     backgroundColor = BackgroundColors.Page,
@@ -12378,7 +12084,7 @@ const Page = react.exports.memo((_La) => {
       visible: loading
     }), children]
   }));
-  const Child = () => Layout ? react.exports.cloneElement(/* @__PURE__ */ jsx(Layout, __spreadValues({}, props)), props, /* @__PURE__ */ jsx(PageComp, {})) : /* @__PURE__ */ jsx(PageComp, {});
+  const Child = () => Layout ? cloneElement(/* @__PURE__ */ jsx(Layout, __spreadValues({}, props)), props, /* @__PURE__ */ jsx(PageComp, {})) : /* @__PURE__ */ jsx(PageComp, {});
   return /* @__PURE__ */ jsx(Child, {});
 });
 function useAuthentication({
@@ -12386,7 +12092,7 @@ function useAuthentication({
   redirect = true
 }) {
   var _a2, _b, _c, _d;
-  const [loginRequired, setLoginRequired] = react.exports.useState(true);
+  const [loginRequired, setLoginRequired] = useState(true);
   const location = useLocation$1();
   const navigate = useNavigate$1();
   const inProgress = useSelector((state) => state.user.authentication.login.inProgress);
@@ -12409,19 +12115,19 @@ function useAuthentication({
       }
     });
   };
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (enabled)
       checkAuth();
   }, [location.pathname]);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (enabled)
       checkAuth();
   }, [loggedIn]);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (enabled)
       checkAuth();
   }, [inProgress]);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (enabled)
       checkAuth();
   }, []);
@@ -13259,16 +12965,16 @@ var filterObj = function(obj, predicate) {
 function useEntityEditor() {
   const location = useLocation$1();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [modelName, setModelName] = react.exports.useState(null);
-  const [entity, setEntity] = react.exports.useState();
-  const [mode, setMode] = react.exports.useState({
+  const [modelName, setModelName] = useState(null);
+  const [entity, setEntity] = useState();
+  const [mode, setMode] = useState({
     edit: false,
     new: false,
     view: false
   });
-  const [modelDef, setModelDef] = react.exports.useState(null);
+  const [modelDef, setModelDef] = useState(null);
   const models = useSelector((state) => state.models.models);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     const new_ = searchParams.get("new");
     const edit = searchParams.get("edit");
     const view = searchParams.get("view");
@@ -13323,7 +13029,7 @@ function useEntityEditor() {
       setEntity(void 0);
     };
   }, [location.search]);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (models && modelName) {
       const model = models[modelName];
       if (model) {
@@ -13370,7 +13076,7 @@ function useEntityEditor() {
     showEntityEditor
   };
 }
-const HoverPanel = react.exports.memo((_Na) => {
+const HoverPanel = memo((_Na) => {
   var _Oa = _Na, {
     alignItems = Align.Stretch,
     alignContent = Align.Stretch,
@@ -13429,7 +13135,7 @@ const Wrapper = styled.div.withConfig({
   displayName: "Wrapper",
   componentId: "sc-1nu60i0-0"
 })(["", ";", ";", ";", ";border-radius:", ";left:", ";position:absolute;right:", ";top:", ";&:before{border-top:0;border-top-left-radius:", ";border-top-right-radius:", ";}"], LayoutStyles, AppearanceStyles, FocusedStyles, VisibilityStyles, (props) => props.detached ? props.borderRadius : `0 0 ${props.borderRadius} ${props.borderRadius}`, (props) => props.detached ? props.alignContent === Align.Left ? "-10px" : "auto" : 0, (props) => props.detached ? props.alignContent === Align.Right ? "-10px" : "auto" : 0, (props) => props.detached ? "80%" : "calc(100% - 3px)", (props) => props.detached ? props.borderRadius : `0 0 ${props.borderRadius} ${props.borderRadius}`, (props) => props.detached ? props.borderRadius : `0 0 ${props.borderRadius} ${props.borderRadius}`);
-const MoreMenu = react.exports.memo((_Pa) => {
+const MoreMenu = memo((_Pa) => {
   var _Qa = _Pa, {
     alignContent = Align.Left,
     backgroundColor = BackgroundColors.MoreMenu,
@@ -13449,9 +13155,9 @@ const MoreMenu = react.exports.memo((_Pa) => {
     "menu",
     "width"
   ]);
-  const [menuVisible, setMenuVisible] = react.exports.useState(false);
-  const [focused, setFocused] = react.exports.useState(false);
-  const [hovered, setHovered] = react.exports.useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const dotFillColor = menuVisible || hovered ? ForegroundColors.PrimaryContrast : dotColor;
   return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
     className: `${className} more-menu`,
@@ -13514,7 +13220,7 @@ const Dot = styled.span.withConfig({
   displayName: "Dot",
   componentId: "sc-ycayhd-0"
 })(["", ";background-color:rgb(", ");display:inline-block;height:4px;margin:0 1px;width:4px;"], AppearanceStyles, (props) => props.fillColor);
-const ModalHeader = react.exports.memo(({
+const ModalHeader = memo(({
   alignItems = Align.Center,
   className = "",
   onCloseClick,
@@ -13542,7 +13248,7 @@ const ModalHeader = react.exports.memo(({
     })]
   });
 });
-const SlidePanel = react.exports.memo((_Ra) => {
+const SlidePanel = memo((_Ra) => {
   var _Sa = _Ra, {
     alignItems = Align.Stretch,
     backgroundColor = BackgroundColors.SlidePanel,
@@ -13606,7 +13312,7 @@ function getFormFieldsFromModel({
   }
   return fields;
 }
-const EntityEditor = react.exports.memo(({
+const EntityEditor = memo(({
   actions,
   className = "",
   id: id2,
@@ -13618,11 +13324,11 @@ const EntityEditor = react.exports.memo(({
     entity: entityFields,
     hideEntityEditor
   } = useEntityEditor();
-  const [dispatched, setDispatched] = react.exports.useState(false);
+  const [dispatched, setDispatched] = useState(false);
   const inProgress = useSelector((state) => state[`${model == null ? void 0 : model.name}.inProgress`]);
   const pluralizedCamel = pluralize(((_b = (_a2 = model == null ? void 0 : model.name) == null ? void 0 : _a2[0]) == null ? void 0 : _b.toLowerCase()) + (model == null ? void 0 : model.name.slice(1)));
   const entity = useSelector((state) => state[pluralizedCamel].entities[id2 != null ? id2 : ""]);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     var _a3;
     if (actions && id2 && !entity && !dispatched) {
       const action = (_a3 = actions[`get${model.name}`]) == null ? void 0 : _a3.call(actions, id2);
@@ -13680,7 +13386,7 @@ const EntityEditor = react.exports.memo(({
     })
   });
 });
-const EntityPreview = react.exports.memo(({
+const EntityPreview = memo(({
   id: id2,
   model
 }) => {
@@ -13691,14 +13397,14 @@ const EntityPreview = react.exports.memo(({
     })
   });
 });
-const EntityPanel = react.exports.memo((_Ta) => {
+const EntityPanel = memo((_Ta) => {
   var _Ua = _Ta, {
     actions
   } = _Ua, props = __objRest(_Ua, [
     "actions"
   ]);
   const dispatch = useDispatch();
-  const [visible, setVisible] = react.exports.useState(false);
+  const [visible, setVisible] = useState(false);
   const {
     entity,
     model,
@@ -13710,7 +13416,7 @@ const EntityPanel = react.exports.memo((_Ta) => {
     return state[`${camelCase(pluralize((_a2 = model == null ? void 0 : model.name) != null ? _a2 : ""))}`];
   });
   const inProgress = (entityState == null ? void 0 : entityState.action[`create${model == null ? void 0 : model.name}`].inProgress) || (entityState == null ? void 0 : entityState.action[`delete${model == null ? void 0 : model.name}`].inProgress) || (entityState == null ? void 0 : entityState.action[`get${model == null ? void 0 : model.name}`].inProgress) || (entityState == null ? void 0 : entityState.action[`update${model == null ? void 0 : model.name}`].inProgress);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (model) {
       setVisible(true);
     } else {
@@ -13790,7 +13496,7 @@ const EntityPanel = react.exports.memo((_Ta) => {
     }))
   });
 });
-const Backdrop = react.exports.memo((_Va) => {
+const Backdrop = memo((_Va) => {
   var _Wa = _Va, {
     as = "div",
     children,
@@ -13817,7 +13523,7 @@ const Container$7 = styled.div.withConfig({
   displayName: "Container",
   componentId: "sc-1hfexhv-0"
 })(["background:var(--bg-color-backdrop-hidden);bottom:0;display:block;left:0;position:absolute;pointer-events:none;right:0;top:0;transition:background 0.3s ease-in-out;z-index:6000;", ""], (props) => props.visible && css(["background:var(--bg-color-backdrop-visible);pointer-events:all;"]));
-const WebApplication = react.exports.memo((_Xa) => {
+const WebApplication = memo((_Xa) => {
   var _Ya = _Xa, {
     authentication = false,
     actions,
@@ -13864,7 +13570,7 @@ const WebApplication = react.exports.memo((_Xa) => {
     })
   }));
 });
-const SubTitle = react.exports.memo((_Za) => {
+const SubTitle = memo((_Za) => {
   var __a = _Za, {
     as = "h2",
     children,
@@ -13900,7 +13606,7 @@ const SubTitle = react.exports.memo((_Za) => {
     children: children != null ? children : ""
   }));
 });
-const Workspace = react.exports.memo((_$a) => {
+const Workspace = memo((_$a) => {
   var _ab = _$a, {
     alignContent = Align.Top,
     backgroundColor = BackgroundColors.Workspace,
@@ -13967,7 +13673,7 @@ const Workspace = react.exports.memo((_$a) => {
       visible: loading
     }), children]
   }));
-  const Child = () => Layout ? react.exports.cloneElement(/* @__PURE__ */ jsx(Layout, __spreadValues({
+  const Child = () => Layout ? cloneElement(/* @__PURE__ */ jsx(Layout, __spreadValues({
     scrollable: true
   }, props)), props, /* @__PURE__ */ jsx(WorkspaceComp, __spreadValues({}, props))) : /* @__PURE__ */ jsx(WorkspaceComp, __spreadValues({}, props));
   return /* @__PURE__ */ jsx(Child, {});
@@ -14020,7 +13726,7 @@ function fetchFromObject(obj, prop) {
   }
   return obj[prop];
 }
-const StringLabel = react.exports.memo((_bb) => {
+const StringLabel = memo((_bb) => {
   var _cb = _bb, {
     icon,
     lineHeight = Size.Default,
@@ -14043,7 +13749,7 @@ const StringLabel = react.exports.memo((_bb) => {
     children: value2
   }));
 });
-const NumberLabel = react.exports.memo((_db) => {
+const NumberLabel = memo((_db) => {
   var _eb = _db, {
     icon,
     lineHeight = Size.Default,
@@ -14066,7 +13772,7 @@ const NumberLabel = react.exports.memo((_db) => {
     children: value2
   }));
 });
-const CurrencyAmountLabel = react.exports.memo((_fb) => {
+const CurrencyAmountLabel = memo((_fb) => {
   var _gb = _fb, {
     amount,
     currency
@@ -14078,7 +13784,7 @@ const CurrencyAmountLabel = react.exports.memo((_fb) => {
     children: amount === 0 ? "$0" : amount ? `$${amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ""
   }));
 });
-const PercentLabel = react.exports.memo((_hb) => {
+const PercentLabel = memo((_hb) => {
   var _ib = _hb, {
     value: value2
   } = _ib, props = __objRest(_ib, [
@@ -17904,7 +17610,7 @@ function friendlyDateTime(dateTimeish) {
     throw new InvalidArgumentError(`Unknown datetime argument: ${dateTimeish}, of type ${typeof dateTimeish}`);
   }
 }
-const DateLabel = react.exports.memo((_jb) => {
+const DateLabel = memo((_jb) => {
   var _kb = _jb, {
     className = "",
     grow = false,
@@ -17932,7 +17638,7 @@ const DateLabel = react.exports.memo((_jb) => {
     children: DateTime.fromISO(value2).toLocaleString(format)
   }));
 });
-const MenuItemLabel = react.exports.memo((_lb) => {
+const MenuItemLabel = memo((_lb) => {
   var _mb = _lb, {
     fieldName,
     icon,
@@ -18008,7 +17714,7 @@ function getLabelByFieldType({
       }, props));
   }
 }
-const DataGridCell = react.exports.memo((_nb) => {
+const DataGridCell = memo((_nb) => {
   var _ob = _nb, {
     fieldName,
     model,
@@ -18055,7 +17761,7 @@ const DataGridCell = react.exports.memo((_nb) => {
     })
   }));
 });
-const SearchInput = react.exports.memo((_pb) => {
+const SearchInput = memo((_pb) => {
   var _qb = _pb, {
     onChange
   } = _qb, props = __objRest(_qb, [
@@ -18071,7 +17777,7 @@ const SearchInput = react.exports.memo((_pb) => {
     spellCheck: false
   }, props));
 });
-const MenuButton = react.exports.memo((_rb) => {
+const MenuButton = memo((_rb) => {
   var _sb = _rb, {
     backgroundColor = BackgroundColors.MenuButton,
     border = {
@@ -18099,9 +17805,9 @@ const MenuButton = react.exports.memo((_rb) => {
     "textColor",
     "width"
   ]);
-  const [focused, setFocused] = react.exports.useState(false);
-  const [menuVisible, setMenuVisible] = react.exports.useState(false);
-  react.exports.useEffect(() => {
+  const [focused, setFocused] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+  useEffect(() => {
     setFocused(menuVisible);
   }, [menuVisible]);
   return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
@@ -18153,7 +17859,7 @@ const MenuButton = react.exports.memo((_rb) => {
     })]
   }));
 });
-const DataGrid = react.exports.memo((_tb) => {
+const DataGrid = memo((_tb) => {
   var _ub = _tb, {
     backgroundColor = BackgroundColors.DataGrid,
     borderRadius = Amount.Least,
@@ -18191,8 +17897,8 @@ const DataGrid = react.exports.memo((_tb) => {
     "padding",
     "template"
   ]);
-  const [searchTerm, setSearchTerm] = react.exports.useState("");
-  const [hoveredRow, setHoveredRow] = react.exports.useState();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [hoveredRow, setHoveredRow] = useState();
   const MIN_COLUMN_WIDTH = 150;
   const MAX_COLUMN_WIDTH = 300;
   if (!columns) {
@@ -18372,7 +18078,7 @@ const DataGrid = react.exports.memo((_tb) => {
           })
         }) : data && data.map((row, key) => {
           if (template && template.card) {
-            return react.exports.createElement(template.card, {
+            return createElement(template.card, {
               key,
               marginBottom: Amount.Default,
               onClick: () => {
@@ -18395,7 +18101,7 @@ const NoResults = styled.div.withConfig({
   displayName: "NoResults",
   componentId: "sc-s798s5-0"
 })(["color:#9b9b9b;font-size:13px;font-weight:500;padding:50px 0;text-align:center;"]);
-const BooleanLabel = react.exports.memo((_vb) => {
+const BooleanLabel = memo((_vb) => {
   var _wb = _vb, {
     icon,
     lineHeight = Size.Default,
@@ -18422,7 +18128,7 @@ const BooleanLabel = react.exports.memo((_vb) => {
     }), value2]
   }));
 });
-const ColorLabel = react.exports.memo((_xb) => {
+const ColorLabel = memo((_xb) => {
   var _yb = _xb, {
     icon,
     lineHeight = Size.Default,
@@ -18445,7 +18151,7 @@ const ColorLabel = react.exports.memo((_xb) => {
     children: value2
   }));
 });
-const EmailAddressLabel = react.exports.memo((_zb) => {
+const EmailAddressLabel = memo((_zb) => {
   var _Ab = _zb, {
     icon,
     lineHeight = Size.Default,
@@ -18468,7 +18174,7 @@ const EmailAddressLabel = react.exports.memo((_zb) => {
     children: value2
   }));
 });
-const PhoneNumberLabel = react.exports.memo((_Bb) => {
+const PhoneNumberLabel = memo((_Bb) => {
   var _Cb = _Bb, {
     icon,
     lineHeight = Size.Default,
@@ -18491,7 +18197,7 @@ const PhoneNumberLabel = react.exports.memo((_Bb) => {
     children: value2
   }));
 });
-const ProgressLabel = react.exports.memo((_Db) => {
+const ProgressLabel = memo((_Db) => {
   var _Eb = _Db, {
     color,
     icon,
@@ -18522,7 +18228,7 @@ const ProgressLabel = react.exports.memo((_Db) => {
     })
   }));
 });
-const CountryLabel = react.exports.memo((_Fb) => {
+const CountryLabel = memo((_Fb) => {
   var _Gb = _Fb, {
     icon,
     lineHeight = Size.Default,
@@ -18545,7 +18251,7 @@ const CountryLabel = react.exports.memo((_Fb) => {
     children: value2
   }));
 });
-const LanguageLabel = react.exports.memo((_Hb) => {
+const LanguageLabel = memo((_Hb) => {
   var _Ib = _Hb, {
     icon,
     lineHeight = Size.Default,
@@ -18568,7 +18274,7 @@ const LanguageLabel = react.exports.memo((_Hb) => {
     children: value2
   }));
 });
-const PersonLabel = react.exports.memo((_Jb) => {
+const PersonLabel = memo((_Jb) => {
   var _Kb = _Jb, {
     image,
     name,
@@ -18598,7 +18304,7 @@ const PersonLabel = react.exports.memo((_Jb) => {
     })]
   }));
 });
-const UserLabel = react.exports.memo(({
+const UserLabel = memo(({
   className = "",
   to,
   id: id2,
@@ -18653,7 +18359,7 @@ const UserLabel = react.exports.memo(({
     }, messageIcon)), menu && /* @__PURE__ */ jsx(MoreMenu, __spreadValues({}, menu))]
   });
 });
-const MarkdownEditor = react.exports.memo((_Lb) => {
+const MarkdownEditor = memo((_Lb) => {
   var props = __objRest(_Lb, []);
   return /* @__PURE__ */ jsx("div", {});
 });
@@ -18693,7 +18399,7 @@ function getActivityLabel(activity) {
       return activity;
   }
 }
-const ActivityFeedItem = react.exports.memo(({
+const ActivityFeedItem = memo(({
   dateFormat = DateTime.DATE_FULL,
   who,
   when,
@@ -18746,7 +18452,7 @@ const ActivityFeedItem = react.exports.memo(({
     })]
   });
 });
-const ActivityFeed = react.exports.memo((_Mb) => {
+const ActivityFeed = memo((_Mb) => {
   var _Nb = _Mb, {
     activities,
     className = "",
@@ -18795,10 +18501,10 @@ const ActivityFeed = react.exports.memo((_Mb) => {
     })]
   }));
 });
-const HelperButton = react.exports.memo(({
+const HelperButton = memo(({
   content
 }) => {
-  const [contentVisible, setContentVisible] = react.exports.useState(false);
+  const [contentVisible, setContentVisible] = useState(false);
   return /* @__PURE__ */ jsxs(Container$6, {
     children: [/* @__PURE__ */ jsx(Button, {
       onClick: () => {
@@ -18827,10 +18533,10 @@ const Content$1 = styled.div.withConfig({
   displayName: "Content",
   componentId: "sc-4iqdq5-2"
 })(["background:white;border:10px solid rgba(203,226,90,1);border-radius:25px;bottom:30px;box-shadow:0 15px 25px rgba(65,146,64,0.3);color:rgba(120,120,120,1);font-size:14px;opacity:0;padding:15px;pointer-events:none;position:absolute;transition:all 0.2s ease-in;transform:translateX(-100px);width:220px;b{font-weight:700;}", ""], (props) => props.visible && css(["opacity:1;pointer-events:all;"]));
-const InputHelper = react.exports.memo(() => {
+const InputHelper = memo(() => {
   return /* @__PURE__ */ jsx(Fragment, {});
 });
-const Checkbox = react.exports.memo((_Ob) => {
+const Checkbox = memo((_Ob) => {
   var _Pb = _Ob, {
     className = "",
     defaultValue = false,
@@ -18844,10 +18550,10 @@ const Checkbox = react.exports.memo((_Ob) => {
     "size",
     "validation"
   ]);
-  const [focused, setFocused] = react.exports.useState(false);
-  const [problems, setProblems] = react.exports.useState([]);
-  const [value2, setValue] = react.exports.useState(defaultValue);
-  react.exports.useEffect(() => {
+  const [focused, setFocused] = useState(false);
+  const [problems, setProblems] = useState([]);
+  const [value2, setValue] = useState(defaultValue);
+  useEffect(() => {
     const probs = Si(value2, validation);
     setProblems(probs);
     if (onChange)
@@ -29855,7 +29561,7 @@ function c(e2, r2) {
   return o;
 }
 function i(e2) {
-  var t2 = react.exports.useRef(e2), n2 = react.exports.useRef(function(e3) {
+  var t2 = useRef(e2), n2 = useRef(function(e3) {
     t2.current && t2.current(e3);
   });
   return t2.current = e2, n2.current;
@@ -29877,7 +29583,7 @@ var s = function(e2, r2, t2) {
 }, h = function(e2) {
   !f(e2) && e2.preventDefault();
 }, m = e$1.memo(function(o) {
-  var a = o.onMove, l2 = o.onKey, s2 = c(o, ["onMove", "onKey"]), m2 = react.exports.useRef(null), g2 = i(a), p2 = i(l2), b2 = react.exports.useRef(null), _ = react.exports.useRef(false), x2 = react.exports.useMemo(function() {
+  var a = o.onMove, l2 = o.onKey, s2 = c(o, ["onMove", "onKey"]), m2 = useRef(null), g2 = i(a), p2 = i(l2), b2 = useRef(null), _ = useRef(false), x2 = useMemo(function() {
     var e2 = function(e3) {
       h(e3), (f(e3) ? e3.touches.length > 0 : e3.buttons > 0) && m2.current ? g2(d(m2.current, e3, b2.current)) : t2(false);
     }, r2 = function() {
@@ -29903,10 +29609,10 @@ var s = function(e2, r2, t2) {
       var r3 = e3.which || e3.keyCode;
       r3 < 37 || r3 > 40 || (e3.preventDefault(), p2({ left: r3 === 39 ? 0.05 : r3 === 37 ? -0.05 : 0, top: r3 === 40 ? 0.05 : r3 === 38 ? -0.05 : 0 }));
     }, t2];
-  }, [p2, g2]), C2 = x2[0], E2 = x2[1], H2 = x2[2];
-  return react.exports.useEffect(function() {
+  }, [p2, g2]), C2 = x2[0], E = x2[1], H2 = x2[2];
+  return useEffect(function() {
     return H2;
-  }, [H2]), e$1.createElement("div", u({}, s2, { onTouchStart: C2, onMouseDown: C2, className: "react-colorful__interactive", ref: m2, onKeyDown: E2, tabIndex: 0, role: "slider" }));
+  }, [H2]), e$1.createElement("div", u({}, s2, { onTouchStart: C2, onMouseDown: C2, className: "react-colorful__interactive", ref: m2, onKeyDown: E, tabIndex: 0, role: "slider" }));
 }), g = function(e2) {
   return e2.filter(Boolean).join(" ");
 }, p = function(r2) {
@@ -29956,26 +29662,26 @@ var s = function(e2, r2, t2) {
   return true;
 };
 function T(e2, t2, l2) {
-  var u2 = i(l2), c2 = react.exports.useState(function() {
+  var u2 = i(l2), c2 = useState(function() {
     return e2.toHsva(t2);
-  }), s2 = c2[0], f2 = c2[1], v2 = react.exports.useRef({ color: t2, hsva: s2 });
-  react.exports.useEffect(function() {
+  }), s2 = c2[0], f2 = c2[1], v2 = useRef({ color: t2, hsva: s2 });
+  useEffect(function() {
     if (!e2.equal(t2, v2.current.color)) {
       var r2 = e2.toHsva(t2);
       v2.current = { hsva: r2, color: t2 }, f2(r2);
     }
-  }, [t2, e2]), react.exports.useEffect(function() {
+  }, [t2, e2]), useEffect(function() {
     var r2;
     A(s2, v2.current.hsva) || e2.equal(r2 = e2.fromHsva(s2), v2.current.color) || (v2.current = { hsva: s2, color: r2 }, u2(r2));
   }, [s2, e2, u2]);
-  var d2 = react.exports.useCallback(function(e3) {
+  var d2 = useCallback(function(e3) {
     f2(function(r2) {
       return Object.assign({}, r2, e3);
     });
   }, []);
   return [s2, d2];
 }
-var P = typeof window != "undefined" ? react.exports.useLayoutEffect : react.exports.useEffect, X = function() {
+var P = typeof window != "undefined" ? useLayoutEffect : useEffect, X = function() {
   return typeof __webpack_nonce__ != "undefined" ? __webpack_nonce__ : void 0;
 }, R = /* @__PURE__ */ new Map(), V = function(e2) {
   P(function() {
@@ -29988,7 +29694,7 @@ var P = typeof window != "undefined" ? react.exports.useLayoutEffect : react.exp
     }
   }, []);
 }, $ = function(t2) {
-  var n2 = t2.className, o = t2.colorModel, a = t2.color, l2 = a === void 0 ? o.defaultColor : a, i2 = t2.onChange, s2 = c(t2, ["className", "colorModel", "color", "onChange"]), f2 = react.exports.useRef(null);
+  var n2 = t2.className, o = t2.colorModel, a = t2.color, l2 = a === void 0 ? o.defaultColor : a, i2 = t2.onChange, s2 = c(t2, ["className", "colorModel", "color", "onChange"]), f2 = useRef(null);
   V(f2);
   var v2 = T(o, l2, i2), d2 = v2[0], h2 = v2[1], m2 = g(["react-colorful", n2]);
   return e$1.createElement("div", u({}, s2, { ref: f2, className: m2 }), e$1.createElement(L, { hsva: d2, onChange: h2 }), e$1.createElement(K, { hue: d2.h, onChange: h2, className: "react-colorful__last-control" }));
@@ -30027,14 +29733,14 @@ function rgbHex(red, green, blue, alpha) {
   return (blue | green << 8 | red << 16 | 1 << 24).toString(16).slice(1) + alpha;
 }
 const defaultColors = ["244,67,54", "233,30,99", "156,39,176", "103,58,183", "63,81,181", "33,150,243", "3,169,244", "0,188,212", "0,150,136", "76,175,80", "139,195,74", "205,220,57", "255,235,59", "255,193,7", "255,152,0", "255,87,34", "121,85,72", "96,125,139"];
-const ColorInput = react.exports.memo(({
+const ColorInput = memo(({
   defaultValue,
   onChange
 }) => {
   var _a2;
-  const [value2, setValue] = react.exports.useState(defaultValue);
-  const [colorName, setColorName] = react.exports.useState(null);
-  react.exports.useEffect(() => {
+  const [value2, setValue] = useState(defaultValue);
+  const [colorName, setColorName] = useState(null);
+  useEffect(() => {
     setColorName(colorNamer(`rgb(${value2})`).pantone[0].name);
     if (value2 !== defaultValue) {
       if (onChange)
@@ -30096,7 +29802,7 @@ const ColorMixer = styled.div.withConfig({
   displayName: "ColorMixer",
   componentId: "sc-56hg3p-6"
 })(["height:190px;width:100%;.react-colorful{height:170px;width:220px;}.react-colorful__saturation{border-radius:3px 3px 0 0;}.react-colorful__hue{height:30px;border-radius:0 0 3px 3px;}.react-colorful__saturation-pointer{border-radius:15px;height:15px;width:15px;}.react-colorful__hue-pointer{border-radius:15px;height:15px;width:15px;}"]);
-const DynamicInput = react.exports.memo(({
+const DynamicInput = memo(({
   label,
   type
 }) => {
@@ -30119,11 +29825,11 @@ const DynamicInput = react.exports.memo(({
   };
   return getInputComponentByType();
 });
-const StreetAddressInput = react.exports.memo((_Qb) => {
+const StreetAddressInput = memo((_Qb) => {
   var props = __objRest(_Qb, []);
   return /* @__PURE__ */ jsx(TextInput, __spreadValues({}, props));
 });
-const AlignLeft = react.exports.memo((_Rb) => {
+const AlignLeft = memo((_Rb) => {
   var _Sb = _Rb, {
     children
   } = _Sb, props = __objRest(_Sb, [
@@ -30136,7 +29842,7 @@ const AlignLeft = react.exports.memo((_Rb) => {
     children
   }));
 });
-const AlignRight = react.exports.memo((_Tb) => {
+const AlignRight = memo((_Tb) => {
   var _Ub = _Tb, {
     children
   } = _Ub, props = __objRest(_Ub, [
@@ -30149,7 +29855,7 @@ const AlignRight = react.exports.memo((_Tb) => {
     children
   }));
 });
-const ListItem = react.exports.memo((_Vb) => {
+const ListItem = memo((_Vb) => {
   var _Wb = _Vb, {
     as = "li",
     children
@@ -30167,7 +29873,7 @@ const ListItem = react.exports.memo((_Vb) => {
     children
   }));
 });
-const OrderedList = react.exports.memo((_Xb) => {
+const OrderedList = memo((_Xb) => {
   var _Yb = _Xb, {
     as = "ul",
     children
@@ -30181,7 +29887,7 @@ const OrderedList = react.exports.memo((_Xb) => {
     children
   }));
 });
-const UnorderedList = react.exports.memo((_Zb) => {
+const UnorderedList = memo((_Zb) => {
   var __b = _Zb, {
     as = "ul",
     grow = false,
@@ -30213,7 +29919,7 @@ const UnorderedList = react.exports.memo((_Zb) => {
     }, index))
   }));
 });
-const Video = react.exports.memo((_$b) => {
+const Video = memo((_$b) => {
   var _ac = _$b, {
     className = "",
     height = "100%",
@@ -30239,7 +29945,7 @@ const VideoElement = styled.video.withConfig({
   displayName: "VideoElement",
   componentId: "sc-1ai2qam-0"
 })(["", ";"], DimensionStyles);
-const MediaGridItem = react.exports.memo((_bc) => {
+const MediaGridItem = memo((_bc) => {
   var _cc = _bc, {
     borderRadius = Amount.Default,
     description,
@@ -30298,7 +30004,7 @@ const MediaGridItem = react.exports.memo((_bc) => {
     children: content
   }));
 });
-const MediaGrid = react.exports.memo((_dc) => {
+const MediaGrid = memo((_dc) => {
   var _ec = _dc, {
     borderRadius = Amount.Default,
     children,
@@ -30340,7 +30046,7 @@ const MediaGrid = react.exports.memo((_dc) => {
     })]
   }));
 });
-const MediaPreview = react.exports.memo((_fc) => {
+const MediaPreview = memo((_fc) => {
   var _gc = _fc, {
     borderRadius = Amount.Less,
     className = "",
@@ -30388,7 +30094,7 @@ const MediaPreview = react.exports.memo((_fc) => {
     })]
   }));
 });
-const MessagePreview = react.exports.memo((_hc) => {
+const MessagePreview = memo((_hc) => {
   var _ic = _hc, {
     backgroundColor = BackgroundColors.Light,
     body,
@@ -30470,7 +30176,7 @@ const MessagePreview = react.exports.memo((_hc) => {
     })]
   }));
 });
-const ConversationList = react.exports.memo((_jc) => {
+const ConversationList = memo((_jc) => {
   var _kc = _jc, {
     backgroundColor = BackgroundColors.Default,
     borderRadius = Amount.Least,
@@ -30519,7 +30225,7 @@ const ConversationList = react.exports.memo((_jc) => {
     })
   }));
 });
-const NavigationMenu = react.exports.memo((_lc) => {
+const NavigationMenu = memo((_lc) => {
   var _mc = _lc, {
     alignContent = Align.Left,
     alignItems = Align.Center,
@@ -30600,7 +30306,7 @@ const NavigationMenu = react.exports.memo((_lc) => {
     })
   }));
 });
-const ConversationNavigation = react.exports.memo((_nc) => {
+const ConversationNavigation = memo((_nc) => {
   var props = __objRest(_nc, []);
   const navigate = useNavigate$1();
   return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({}, props), {
@@ -30659,14 +30365,14 @@ const ConversationNavigation = react.exports.memo((_nc) => {
     })]
   }));
 });
-const Message$1 = react.exports.memo(({
+const Message$1 = memo(({
   body,
   subject,
   sender
 }) => {
   return /* @__PURE__ */ jsx(Container$h, {});
 });
-const MessageComposer = react.exports.memo((_oc) => {
+const MessageComposer = memo((_oc) => {
   var props = __objRest(_oc, []);
   return /* @__PURE__ */ jsxs(Container$h, __spreadProps(__spreadValues({
     backgroundColor: BackgroundColors.Default
@@ -30734,7 +30440,7 @@ const MessageComposer = react.exports.memo((_oc) => {
     })]
   }));
 });
-const Modal = react.exports.memo(({
+const Modal = memo(({
   children,
   visible,
   setVisible
@@ -30758,14 +30464,14 @@ const Content = styled.div.withConfig({
   displayName: "Content",
   componentId: "sc-gk61f6-1"
 })(["background:white;border-radius:15px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);padding:20px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;"]);
-const UserMenu = react.exports.memo(({
+const UserMenu = memo(({
   onLogoutSuccess
 }) => {
-  const [loggingOut, setLoggingOut] = react.exports.useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
   const dispatch = useDispatch();
   const attributes = useSelector((state) => state.user.details.attributes);
   const loggedIn = useSelector((state) => state.user.authentication.state.loggedIn);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (loggingOut && !loggedIn && onLogoutSuccess)
       onLogoutSuccess();
   }, [loggedIn]);
@@ -30798,7 +30504,7 @@ const UserMenu = react.exports.memo(({
     label: `${attributes == null ? void 0 : attributes.given_name} ${attributes == null ? void 0 : attributes.family_name}`
   });
 });
-const NavigationBar = react.exports.memo(({
+const NavigationBar = memo(({
   backgroundColor = BackgroundColors.NavigationBar,
   logo
 }) => {
@@ -30831,7 +30537,7 @@ const NavigationBar = react.exports.memo(({
     })]
   });
 });
-const ObjectLink = react.exports.memo((_pc) => {
+const ObjectLink = memo((_pc) => {
   var _qc = _pc, {
     children,
     disabled,
@@ -30851,7 +30557,7 @@ const Container$3 = styled.button.withConfig({
   displayName: "Container",
   componentId: "sc-1q42v1w-0"
 })(["background:transparent;border:1px solid transparent;border-radius:6px;display:block;width:100%;&:after{clear:both;content:'';display:block;}&:hover{border:1px solid #eee;cursor:pointer !important;}&:active{border:1px solid rgba(65,145,63,1);}&.disabled{cursor:default !important;border:none;}"]);
-const PageLink = react.exports.memo(({
+const PageLink = memo(({
   textColor,
   label,
   to,
@@ -30885,7 +30591,7 @@ const IconWrapper$1 = styled.div.withConfig({
   displayName: "IconWrapper",
   componentId: "sc-10hsjyi-1"
 })(["flex-basis:20px;"]);
-const Tabs = react.exports.memo(({
+const Tabs = memo(({
   borderRadius = Amount.More,
   className = "",
   children
@@ -30896,7 +30602,7 @@ const Tabs = react.exports.memo(({
     if ((_a2 = child.props) == null ? void 0 : _a2.selected)
       initialIndex = key;
   });
-  const [currentTabIndex, setTabIndex] = react.exports.useState(initialIndex);
+  const [currentTabIndex, setTabIndex] = useState(initialIndex);
   return /* @__PURE__ */ jsxs(Container$h, {
     alignContent: Align.Stretch,
     className: `${className} tabs`,
@@ -30934,7 +30640,7 @@ const Tabs = react.exports.memo(({
       padding: Amount.Most,
       paddingLeft: Amount.All,
       paddingRight: Amount.All,
-      children: react.exports.Children.map(children, (c2, key) => {
+      children: Children.map(children, (c2, key) => {
         if (key !== currentTabIndex)
           return null;
         return React.cloneElement(c2);
@@ -30946,7 +30652,7 @@ const TabButton = styled.button.withConfig({
   displayName: "TabButton",
   componentId: "sc-1qraht0-0"
 })(["", ";background:transparent;border:none;border-bottom:3px solid rgba(", ",0.5);color:var(--text-color-light);cursor:pointer;display:inline-block;font-size:14px;font-weight:600;height:var(--amount-all);line-height:var(--amount-all);padding:0 var(--amount-default);position:relative;text-align:center;transition:background 0.2s ease-out,border 0.2s ease-out,color 0.2s ease-out;user-select:none;&:before{border-radius:", ";top:-2px;left:-2px;right:-2px;bottom:-2px;}*{cursor:pointer;}", ""], FocusedStyles, BorderColors.Light, Amount.Least, (props) => props.current && css(["border-bottom:3px solid var(--color-primary);font-weight:700;"]));
-const Tab = react.exports.memo(({
+const Tab = memo(({
   className = "",
   children,
   label,
@@ -30959,14 +30665,14 @@ const Tab = react.exports.memo(({
     children
   });
 });
-const ConnectionStatus = react.exports.memo((_rc) => {
+const ConnectionStatus = memo((_rc) => {
   var props = __objRest(_rc, []);
   return /* @__PURE__ */ jsx(NotificationLabel, __spreadValues({
     type: NotificationType.Success,
     label: "Connected"
   }, props));
 });
-const Badge = react.exports.memo((_sc) => {
+const Badge = memo((_sc) => {
   var _tc = _sc, {
     children,
     label
@@ -30983,7 +30689,7 @@ const Container$1 = styled.div.withConfig({
   displayName: "Container",
   componentId: "sc-z85zdo-0"
 })(["background:#f2f2f2;color:#7b7b7b;border-radius:4px;float:left;font-size:9px;margin:0 10px 0 0;padding:4px 6px 5px 6px;position:relative;text-transform:capitalize;"]);
-const Notifications = react.exports.memo(() => {
+const Notifications = memo(() => {
   const notifications = useSelector((state) => state.app.notifications);
   return /* @__PURE__ */ jsx(Container, {
     children: notifications.map((notification) => {
@@ -31025,7 +30731,7 @@ const Close = styled.div.withConfig({
   displayName: "Close",
   componentId: "sc-hj2572-4"
 })(["float:right;height:60px;line-height:49px;text-align:center;width:60px;"]);
-const Heading = react.exports.memo((_uc) => {
+const Heading = memo((_uc) => {
   var _vc = _uc, {
     as = "h3",
     alignText = Align.Left,
@@ -31060,12 +30766,12 @@ const Heading = react.exports.memo((_uc) => {
     children
   }));
 });
-const UniversalSearch = react.exports.memo((_wc) => {
+const UniversalSearch = memo((_wc) => {
   var props = __objRest(_wc, []);
-  const [resultsVisible, setResultsVisible] = react.exports.useState(false);
-  const [searchValue, setSearchValue] = react.exports.useState();
-  const [isFocused, setFocused] = react.exports.useState(false);
-  react.exports.useEffect(() => {
+  const [resultsVisible, setResultsVisible] = useState(false);
+  const [searchValue, setSearchValue] = useState();
+  const [isFocused, setFocused] = useState(false);
+  useEffect(() => {
     if (isFocused && searchValue) {
       setResultsVisible(true);
     } else {
@@ -31110,7 +30816,7 @@ const SearchResults = styled.div.withConfig({
   displayName: "SearchResults",
   componentId: "sc-1rpv9xw-0"
 })(["backdrop-filter:blur(3px);background:var(--bg-color-depth-highest-opaque);border-radius:var(--border-radius);cursor:default;display:none;overflow:hidden;overflow-y:scroll;left:20px;max-height:390px;min-height:300px;position:absolute;opacity:0;pointer-events:none;top:80%;transform:translateY(-300px);transition:opacity 0.18s ease-in-out,transform 0.18s ease-in-out;min-width:500px;max-width:500px;z-index:3;.result{margin-bottom:3px;}", ";"], (props) => props.resultsVisible && css(["display:flex;opacity:1;pointer-events:all;transform:translateY(0);"]));
-const ThemeSelector = react.exports.memo((_xc) => {
+const ThemeSelector = memo((_xc) => {
   var _yc = _xc, {
     showLabel = true
   } = _yc, props = __objRest(_yc, [
@@ -31145,7 +30851,7 @@ const ThemeSelector = react.exports.memo((_xc) => {
     }, props))]
   });
 });
-const LogoutButton = react.exports.memo((_zc) => {
+const LogoutButton = memo((_zc) => {
   var _Ac = _zc, {
     icon,
     onLogoutSuccess,
@@ -31161,7 +30867,7 @@ const LogoutButton = react.exports.memo((_zc) => {
   ]);
   const dispatch = useDispatch();
   const loggedIn = useSelector((state) => state.authentication.loggedIn);
-  react.exports.useEffect(() => {
+  useEffect(() => {
     if (!loggedIn && onLogoutSuccess)
       onLogoutSuccess();
   }, [loggedIn]);

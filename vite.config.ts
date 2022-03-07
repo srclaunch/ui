@@ -29,7 +29,7 @@ export default defineConfig({
         // 'amazon-cognito-identity-js',
         // 'color-namer',
         'i18n-iso-countries',
-        // 'react',
+        'react',
         'react-dom',
         'react-password-strength-bar',
         'react-redux',
@@ -53,6 +53,7 @@ export default defineConfig({
   },
   define: {
     pkgJson: { name, version },
+    // window: {},
   },
   esbuild: {
     // jsxFactory: 'h',
