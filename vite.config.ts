@@ -25,7 +25,7 @@ export default defineConfig({
         // '@srclaunch/themes',
         // '@srclaunch/transform',
         // '@srclaunch/types',
-        // '@srclaunch/web-application-state',
+        '@srclaunch/web-application-state',
         // 'amazon-cognito-identity-js',
         // 'color-namer',
         // 'i18n-iso-countries',
