@@ -16,27 +16,20 @@ export default defineConfig({
     rollupOptions: {
       // Externalize deps that shouldn't be bundled
       external: [
-        '@srclaunch/actions',
+        // '@srclaunch/actions',
         '@srclaunch/exceptions',
         '@srclaunch/i18n',
         '@srclaunch/icons',
         '@srclaunch/logger',
-        '@srclaunch/react-hooks',
+        // '@srclaunch/react-hooks',
         '@srclaunch/themes',
-        '@srclaunch/transform',
+        // '@srclaunch/transform',
         '@srclaunch/types',
-        '@srclaunch/validation',
         '@srclaunch/web-application-state',
-        '@stripe/react-stripe-js',
-        'amazon-cognito-identity-js',
-        'color-namer',
-        'currency-code',
+        // 'amazon-cognito-identity-js',
+        // 'color-namer',
         'i18n-iso-countries',
-        'react-colorful',
-        'react-country-flag',
-        'react-currency-input-field',
-        'react-date-picker',
-        'react',
+        // 'react',
         'react-dom',
         'react-password-strength-bar',
         'react-redux',
@@ -49,6 +42,7 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          // 'styled-components': 'styled',
         },
       },
     },
@@ -61,22 +55,24 @@ export default defineConfig({
     pkgJson: { name, version },
   },
   esbuild: {
-    jsxInject: `import React from 'react'`,
+    // jsxFactory: 'h',
+    // jsxFragment: 'Fragment',
+    // jsxInject: `import React from 'react'`,
   },
   plugins: [
-    // react({
-    //   babel: {
-    //     plugins: [
-    //       [
-    //         'babel-plugin-styled-components',
-    //         {
-    //           displayName: true,
-    //           fileName: false,
-    //         },
-    //       ],
-    //     ],
-    //   },
-    // }),
+    react({
+      babel: {
+        plugins: [
+          [
+            'babel-plugin-styled-components',
+            {
+              displayName: true,
+              fileName: false,
+            },
+          ],
+        ],
+      },
+    }),
   ],
 });
 
