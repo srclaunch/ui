@@ -7,8 +7,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/index.tsx'),
-      fileName: 'index',
-      formats: ['es', 'cjs'],
+      fileName: format => `index${format === 'es' ? '' : '.' + format}.js`,
+      formats: ['es', 'cjs', 'umd'],
       name: 'ui',
     },
     sourcemap: true,

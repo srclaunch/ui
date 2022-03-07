@@ -2049,14 +2049,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/icons@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "@srclaunch/icons@npm:0.1.3"
+"@srclaunch/icons@npm:^0.1.6":
+  version: 0.1.6
+  resolution: "@srclaunch/icons@npm:0.1.6"
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
     styled-components: ^5.3.3
-  checksum: 03a71fde71be06d414449b4d66118d0a18f274b532842f42fb0af4c9c931f6825f5addd8b4b26c2db2a444706e0e60bb535ac5ab0400657fc6a5156acc03070d
+  checksum: d189486cf10ecdfc734a8e16bfbcf50d3de489847da1c0f4cd9af2613fed258a5f4cdd1ef37f22b063f0bb7728830535c9fd3532a18e1fb01ea93fa9ee0da6c4
   languageName: node
   linkType: hard
 
@@ -2084,13 +2084,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/themes@npm:^0.1.5":
-  version: 0.1.5
-  resolution: "@srclaunch/themes@npm:0.1.5"
+"@srclaunch/themes@npm:^0.1.6":
+  version: 0.1.6
+  resolution: "@srclaunch/themes@npm:0.1.6"
   peerDependencies:
     react: ^17.0.2
+    react-dom: ^17.0.2
     styled-components: ^5.3.3
-  checksum: 0099648462dc5dfd3f09bdc2128aa731b9b418882cd3ede0b08f7c1ef9651f9f6c7005dcbf7defaadbcf90d92eec6f9133ca0233d29ec1e4df7b0b0c9903147c
+  checksum: adbc756a5278aa5f9144fc8e4732646825a3a2bfbf4a59a905c63a8acbbf767b277c6d88b21b10d43fe8613182c93aff4f5de786326436cfa82112caf8e9e4f2
   languageName: node
   linkType: hard
 
@@ -2118,14 +2119,14 @@ __metadata:
     "@srclaunch/dx": ^0.1.2
     "@srclaunch/exceptions": ^0.1.6
     "@srclaunch/i18n": ^0.1.2
-    "@srclaunch/icons": ^0.1.3
+    "@srclaunch/icons": ^0.1.6
     "@srclaunch/logger": ^0.1.2
     "@srclaunch/react-hooks": ^0.1.2
-    "@srclaunch/themes": ^0.1.5
+    "@srclaunch/themes": ^0.1.6
     "@srclaunch/transform": ^0.1.2
     "@srclaunch/types": ^0.1.2
     "@srclaunch/validation": ^0.1.2
-    "@srclaunch/web-application-state": ^0.1.25
+    "@srclaunch/web-application-state": ^0.1.26
     "@stripe/react-stripe-js": ^1.7.0
     "@stripe/stripe-js": ^1.22.0
     "@testing-library/jest-dom": ^5.16.2
@@ -2225,16 +2226,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/web-application-state@npm:^0.1.25":
-  version: 0.1.25
-  resolution: "@srclaunch/web-application-state@npm:0.1.25"
+"@srclaunch/web-application-state@npm:^0.1.26":
+  version: 0.1.26
+  resolution: "@srclaunch/web-application-state@npm:0.1.26"
   dependencies:
     "@reduxjs/toolkit": ^1.7.2
     "@srclaunch/exceptions": ^0.1.6
     "@srclaunch/http-client": ^0.1.2
     "@srclaunch/i18n": ^0.1.2
     "@srclaunch/logger": ^0.1.2
-    "@srclaunch/themes": ^0.1.5
+    "@srclaunch/themes": ^0.1.6
     "@srclaunch/validation": ^0.1.2
     "@srclaunch/web-environment": ^0.1.2
     amazon-cognito-identity-js: ^5.2.7
@@ -2249,7 +2250,7 @@ __metadata:
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: 4276498324e310918b93667bffc8107e858fc3e2c5d3244ee457218a28378220d44c275df8d4ce8db0cce21dd072e68fe7d8022dc5f038572a326e02d8249ed0
+  checksum: 5ce33e29ba5b3ad38d8a4ad7c1f9f2c1bb1d0b9cbdb95401bbc5f5dda00b815e99790ae9a8fee79bc7a077c029005d8318304bc5d30a15017e71bf135fd76fe3
   languageName: node
   linkType: hard
 
