@@ -1,6 +1,0 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { memo } from 'react';
-export const ChevronDoubleForward = memo((props) => {
-    return (_jsxs("svg", { width: "1em", height: "1em", viewBox: "0 0 24 24", fill: "none", ...props, children: [_jsx("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M11.543 19.207a1 1 0 010-1.414L17.336 12l-5.793-5.793a1 1 0 011.414-1.414l5.793 5.793a2 2 0 010 2.828l-5.793 5.793a1 1 0 01-1.414 0z", fill: "url(#prefix__paint0_linear)" }), _jsx("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M5.293 19.207a1 1 0 010-1.414L11.086 12 5.293 6.207a1 1 0 011.414-1.414l5.793 5.793a2 2 0 010 2.828l-5.793 5.793a1 1 0 01-1.414 0z", fill: "url(#prefix__paint1_linear)" }), _jsxs("defs", { children: [_jsxs("linearGradient", { id: "prefix__paint0_linear", x1: 11.25, y1: 12, x2: 19.336, y2: 12, gradientUnits: "userSpaceOnUse", children: [_jsx("stop", { stopColor: "#6073D8" }), _jsx("stop", { offset: 1, stopColor: "#5C5ACA" })] }), _jsxs("linearGradient", { id: "prefix__paint1_linear", x1: 5, y1: 12, x2: 13.086, y2: 12, gradientUnits: "userSpaceOnUse", children: [_jsx("stop", { stopColor: "#fff" }), _jsx("stop", { offset: 1, stopColor: "#D1DAEE" })] })] })] }));
-});
-//# sourceMappingURL=ChevronDoubleForward.js.map

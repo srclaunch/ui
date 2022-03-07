@@ -1,6 +1,0 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { memo } from 'react';
-export const Home = memo((props) => {
-    return (_jsxs("svg", { width: "1em", height: "1em", viewBox: "0 0 24 24", fill: "none", ...props, children: [_jsx("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M2 11.336a3 3 0 01.993-2.23l7-6.3a3 3 0 014.014 0l7 6.3a3 3 0 01.993 2.23V19a3 3 0 01-3 3H5a3 3 0 01-3-3v-7.664z", fill: "url(#prefix__paint0_linear)" }), _jsx("path", { d: "M9 16a2 2 0 012-2h2a2 2 0 012 2v6H9v-6z", fill: "url(#prefix__paint1_linear)" }), _jsxs("defs", { children: [_jsxs("linearGradient", { id: "prefix__paint0_linear", x1: 12, y1: 2.036, x2: 12, y2: 22, gradientUnits: "userSpaceOnUse", children: [_jsx("stop", { stopColor: "#fff" }), _jsx("stop", { offset: 1, stopColor: "#D1DAEE" })] }), _jsxs("linearGradient", { id: "prefix__paint1_linear", x1: 12, y1: 14, x2: 12, y2: 22, gradientUnits: "userSpaceOnUse", children: [_jsx("stop", { stopColor: "#6073D8" }), _jsx("stop", { offset: 1, stopColor: "#5C5ACA" })] })] })] }));
-});
-//# sourceMappingURL=Home.js.map

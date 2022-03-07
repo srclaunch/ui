@@ -29,25 +29,20 @@ var __objRest = (source, exclude) => {
     }
   return target;
 };
-import { createStore as createStore$1, combineReducers, applyMiddleware, compose } from "redux";
-import require$$0$1, { StrictMode } from "react";
-import ReactDOM from "react-dom";
-import { useDispatch, useSelector, Provider } from "react-redux";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-export { Link, NavLink, Navigate, Outlet, Route, Router, Routes, useLocation, useMatch, useNavigate, useParams, useResolvedPath, useSearchParams } from "react-router-dom";
+import React, { useLayoutEffect, useEffect, useMemo, useContext, useDebugValue, useReducer, useRef, createElement, useCallback, Children, isValidElement, Fragment, createContext, forwardRef, useState, StrictMode } from "react";
+import ReactDOM, { unstable_batchedUpdates } from "react-dom";
 import { AppLabLightTheme, AppLabDarkTheme } from "@srclaunch/themes";
-export { matchPath, matchRoutes } from "react-router";
-function n$4(n2) {
+function n$6(n2) {
   for (var r2 = arguments.length, t2 = Array(r2 > 1 ? r2 - 1 : 0), e2 = 1; e2 < r2; e2++)
     t2[e2 - 1] = arguments[e2];
   throw Error("[Immer] minified error nr: " + n2 + (t2.length ? " " + t2.map(function(n3) {
     return "'" + n3 + "'";
   }).join(",") : "") + ". Find the full error at: https://bit.ly/3cXEKWf");
 }
-function r$4(n2) {
+function r$6(n2) {
   return !!n2 && !!n2[Q$1];
 }
-function t$3(n2) {
+function t$4(n2) {
   return !!n2 && (function(n3) {
     if (!n3 || typeof n3 != "object")
       return false;
@@ -56,7 +51,7 @@ function t$3(n2) {
       return true;
     var t2 = Object.hasOwnProperty.call(r2, "constructor") && r2.constructor;
     return t2 === Object || typeof t2 == "function" && Function.toString.call(t2) === Z$1;
-  }(n2) || Array.isArray(n2) || !!n2[L$1] || !!n2.constructor[L$1] || s$4(n2) || v$1(n2));
+  }(n2) || Array.isArray(n2) || !!n2[L$1] || !!n2.constructor[L$1] || s$4(n2) || v$3(n2));
 }
 function i$4(n2, r2, t2) {
   t2 === void 0 && (t2 = false), o$2(n2) === 0 ? (t2 ? Object.keys : nn)(n2).forEach(function(e2) {
@@ -67,31 +62,31 @@ function i$4(n2, r2, t2) {
 }
 function o$2(n2) {
   var r2 = n2[Q$1];
-  return r2 ? r2.i > 3 ? r2.i - 4 : r2.i : Array.isArray(n2) ? 1 : s$4(n2) ? 2 : v$1(n2) ? 3 : 0;
+  return r2 ? r2.i > 3 ? r2.i - 4 : r2.i : Array.isArray(n2) ? 1 : s$4(n2) ? 2 : v$3(n2) ? 3 : 0;
 }
-function u$1(n2, r2) {
+function u$2(n2, r2) {
   return o$2(n2) === 2 ? n2.has(r2) : Object.prototype.hasOwnProperty.call(n2, r2);
 }
 function a(n2, r2) {
   return o$2(n2) === 2 ? n2.get(r2) : n2[r2];
 }
-function f$1(n2, r2, t2) {
+function f$3(n2, r2, t2) {
   var e2 = o$2(n2);
   e2 === 2 ? n2.set(r2, t2) : e2 === 3 ? (n2.delete(r2), n2.add(t2)) : n2[r2] = t2;
 }
-function c$1(n2, r2) {
+function c$3(n2, r2) {
   return n2 === r2 ? n2 !== 0 || 1 / n2 == 1 / r2 : n2 != n2 && r2 != r2;
 }
 function s$4(n2) {
   return X$1 && n2 instanceof Map;
 }
-function v$1(n2) {
-  return q$2 && n2 instanceof Set;
+function v$3(n2) {
+  return q$4 && n2 instanceof Set;
 }
-function p$4(n2) {
+function p$6(n2) {
   return n2.o || n2.t;
 }
-function l$2(n2) {
+function l$4(n2) {
   if (Array.isArray(n2))
     return Array.prototype.slice.call(n2);
   var r2 = rn(n2);
@@ -102,37 +97,37 @@ function l$2(n2) {
   }
   return Object.create(Object.getPrototypeOf(n2), r2);
 }
-function d$1(n2, e2) {
-  return e2 === void 0 && (e2 = false), y$1(n2) || r$4(n2) || !t$3(n2) ? n2 : (o$2(n2) > 1 && (n2.set = n2.add = n2.clear = n2.delete = h$2), Object.freeze(n2), e2 && i$4(n2, function(n3, r2) {
-    return d$1(r2, true);
+function d$3(n2, e2) {
+  return e2 === void 0 && (e2 = false), y$3(n2) || r$6(n2) || !t$4(n2) ? n2 : (o$2(n2) > 1 && (n2.set = n2.add = n2.clear = n2.delete = h$4), Object.freeze(n2), e2 && i$4(n2, function(n3, r2) {
+    return d$3(r2, true);
   }, true), n2);
 }
-function h$2() {
-  n$4(2);
+function h$4() {
+  n$6(2);
 }
-function y$1(n2) {
+function y$3(n2) {
   return n2 == null || typeof n2 != "object" || Object.isFrozen(n2);
 }
-function b$1(r2) {
+function b$3(r2) {
   var t2 = tn[r2];
-  return t2 || n$4(18, r2), t2;
+  return t2 || n$6(18, r2), t2;
 }
-function m$2(n2, r2) {
+function m$4(n2, r2) {
   tn[n2] || (tn[n2] = r2);
 }
 function _() {
   return U$1;
 }
 function j$1(n2, r2) {
-  r2 && (b$1("Patches"), n2.u = [], n2.s = [], n2.v = r2);
+  r2 && (b$3("Patches"), n2.u = [], n2.s = [], n2.v = r2);
 }
 function O$1(n2) {
-  g$2(n2), n2.p.forEach(S), n2.p = null;
+  g$4(n2), n2.p.forEach(S), n2.p = null;
 }
-function g$2(n2) {
+function g$4(n2) {
   n2 === U$1 && (U$1 = n2.l);
 }
-function w$1(n2) {
+function w$3(n2) {
   return U$1 = { p: [], l: U$1, h: n2, m: true, _: 0 };
 }
 function S(n2) {
@@ -142,50 +137,50 @@ function S(n2) {
 function P$1(r2, e2) {
   e2._ = e2.p.length;
   var i = e2.p[0], o2 = r2 !== void 0 && r2 !== i;
-  return e2.h.g || b$1("ES5").S(e2, r2, o2), o2 ? (i[Q$1].P && (O$1(e2), n$4(4)), t$3(r2) && (r2 = M(e2, r2), e2.l || x$2(e2, r2)), e2.u && b$1("Patches").M(i[Q$1].t, r2, e2.u, e2.s)) : r2 = M(e2, i, []), O$1(e2), e2.u && e2.v(e2.u, e2.s), r2 !== H$2 ? r2 : void 0;
+  return e2.h.g || b$3("ES5").S(e2, r2, o2), o2 ? (i[Q$1].P && (O$1(e2), n$6(4)), t$4(r2) && (r2 = M(e2, r2), e2.l || x$4(e2, r2)), e2.u && b$3("Patches").M(i[Q$1].t, r2, e2.u, e2.s)) : r2 = M(e2, i, []), O$1(e2), e2.u && e2.v(e2.u, e2.s), r2 !== H$3 ? r2 : void 0;
 }
 function M(n2, r2, t2) {
-  if (y$1(r2))
+  if (y$3(r2))
     return r2;
   var e2 = r2[Q$1];
   if (!e2)
     return i$4(r2, function(i, o3) {
-      return A(n2, e2, r2, i, o3, t2);
+      return A$2(n2, e2, r2, i, o3, t2);
     }, true), r2;
   if (e2.A !== n2)
     return r2;
   if (!e2.P)
-    return x$2(n2, e2.t, true), e2.t;
+    return x$4(n2, e2.t, true), e2.t;
   if (!e2.I) {
     e2.I = true, e2.A._--;
-    var o2 = e2.i === 4 || e2.i === 5 ? e2.o = l$2(e2.k) : e2.o;
+    var o2 = e2.i === 4 || e2.i === 5 ? e2.o = l$4(e2.k) : e2.o;
     i$4(e2.i === 3 ? new Set(o2) : o2, function(r3, i) {
-      return A(n2, e2, o2, r3, i, t2);
-    }), x$2(n2, o2, false), t2 && n2.u && b$1("Patches").R(e2, t2, n2.u, n2.s);
+      return A$2(n2, e2, o2, r3, i, t2);
+    }), x$4(n2, o2, false), t2 && n2.u && b$3("Patches").R(e2, t2, n2.u, n2.s);
   }
   return e2.o;
 }
-function A(e2, i, o2, a2, c2, s2) {
-  if (r$4(c2)) {
-    var v2 = M(e2, c2, s2 && i && i.i !== 3 && !u$1(i.D, a2) ? s2.concat(a2) : void 0);
-    if (f$1(o2, a2, v2), !r$4(v2))
+function A$2(e2, i, o2, a2, c2, s2) {
+  if (r$6(c2)) {
+    var v2 = M(e2, c2, s2 && i && i.i !== 3 && !u$2(i.D, a2) ? s2.concat(a2) : void 0);
+    if (f$3(o2, a2, v2), !r$6(v2))
       return;
     e2.m = false;
   }
-  if (t$3(c2) && !y$1(c2)) {
+  if (t$4(c2) && !y$3(c2)) {
     if (!e2.h.F && e2._ < 1)
       return;
-    M(e2, c2), i && i.A.l || x$2(e2, c2);
+    M(e2, c2), i && i.A.l || x$4(e2, c2);
   }
 }
-function x$2(n2, r2, t2) {
-  t2 === void 0 && (t2 = false), n2.h.F && n2.m && d$1(r2, t2);
+function x$4(n2, r2, t2) {
+  t2 === void 0 && (t2 = false), n2.h.F && n2.m && d$3(r2, t2);
 }
-function z$2(n2, r2) {
+function z$4(n2, r2) {
   var t2 = n2[Q$1];
-  return (t2 ? p$4(t2) : n2)[r2];
+  return (t2 ? p$6(t2) : n2)[r2];
 }
-function I$2(n2, r2) {
+function I$3(n2, r2) {
   if (r2 in n2)
     for (var t2 = Object.getPrototypeOf(n2); t2; ) {
       var e2 = Object.getOwnPropertyDescriptor(t2, r2);
@@ -194,45 +189,45 @@ function I$2(n2, r2) {
       t2 = Object.getPrototypeOf(t2);
     }
 }
-function k$1(n2) {
-  n2.P || (n2.P = true, n2.l && k$1(n2.l));
+function k$3(n2) {
+  n2.P || (n2.P = true, n2.l && k$3(n2.l));
 }
-function E$1(n2) {
-  n2.o || (n2.o = l$2(n2.t));
+function E$2(n2) {
+  n2.o || (n2.o = l$4(n2.t));
 }
 function R$1(n2, r2, t2) {
-  var e2 = s$4(r2) ? b$1("MapSet").N(r2, t2) : v$1(r2) ? b$1("MapSet").T(r2, t2) : n2.g ? function(n3, r3) {
+  var e2 = s$4(r2) ? b$3("MapSet").N(r2, t2) : v$3(r2) ? b$3("MapSet").T(r2, t2) : n2.g ? function(n3, r3) {
     var t3 = Array.isArray(n3), e3 = { i: t3 ? 1 : 0, A: r3 ? r3.A : _(), P: false, I: false, D: {}, l: r3, t: n3, k: null, o: null, j: null, C: false }, i = e3, o2 = en;
     t3 && (i = [e3], o2 = on);
     var u2 = Proxy.revocable(i, o2), a2 = u2.revoke, f2 = u2.proxy;
     return e3.k = f2, e3.j = a2, f2;
-  }(r2, t2) : b$1("ES5").J(r2, t2);
+  }(r2, t2) : b$3("ES5").J(r2, t2);
   return (t2 ? t2.A : _()).p.push(e2), e2;
 }
-function D$1(e2) {
-  return r$4(e2) || n$4(22, e2), function n2(r2) {
-    if (!t$3(r2))
+function D$2(e2) {
+  return r$6(e2) || n$6(22, e2), function n2(r2) {
+    if (!t$4(r2))
       return r2;
     var e3, u2 = r2[Q$1], c2 = o$2(r2);
     if (u2) {
-      if (!u2.P && (u2.i < 4 || !b$1("ES5").K(u2)))
+      if (!u2.P && (u2.i < 4 || !b$3("ES5").K(u2)))
         return u2.t;
-      u2.I = true, e3 = F$2(r2, c2), u2.I = false;
+      u2.I = true, e3 = F$3(r2, c2), u2.I = false;
     } else
-      e3 = F$2(r2, c2);
+      e3 = F$3(r2, c2);
     return i$4(e3, function(r3, t2) {
-      u2 && a(u2.t, r3) === t2 || f$1(e3, r3, n2(t2));
+      u2 && a(u2.t, r3) === t2 || f$3(e3, r3, n2(t2));
     }), c2 === 3 ? new Set(e3) : e3;
   }(e2);
 }
-function F$2(n2, r2) {
+function F$3(n2, r2) {
   switch (r2) {
     case 2:
       return new Map(n2);
     case 3:
       return Array.from(n2);
   }
-  return l$2(n2);
+  return l$4(n2);
 }
 function N$1() {
   function t2(n2, r2) {
@@ -251,10 +246,10 @@ function N$1() {
       if (!t3.P)
         switch (t3.i) {
           case 5:
-            a2(t3) && k$1(t3);
+            a2(t3) && k$3(t3);
             break;
           case 4:
-            o2(t3) && k$1(t3);
+            o2(t3) && k$3(t3);
         }
     }
   }
@@ -263,10 +258,10 @@ function N$1() {
       var o3 = e3[i];
       if (o3 !== Q$1) {
         var a3 = r2[o3];
-        if (a3 === void 0 && !u$1(r2, o3))
+        if (a3 === void 0 && !u$2(r2, o3))
           return true;
         var f2 = t3[o3], s3 = f2 && f2[Q$1];
-        if (s3 ? s3.t !== a3 : !c$1(f2, a3))
+        if (s3 ? s3.t !== a3 : !c$3(f2, a3))
           return true;
       }
     }
@@ -286,7 +281,7 @@ function N$1() {
     return false;
   }
   var s2 = {};
-  m$2("ES5", { J: function(n2, r2) {
+  m$4("ES5", { J: function(n2, r2) {
     var e3 = Array.isArray(n2), i = function(n3, r3) {
       if (n3) {
         for (var e4 = Array(r3.length), i2 = 0; i2 < r3.length; i2++)
@@ -303,19 +298,19 @@ function N$1() {
     }(e3, n2), o3 = { i: e3 ? 5 : 4, A: r2 ? r2.A : _(), P: false, I: false, D: {}, l: r2, t: n2, k: i, o: null, O: false, C: false };
     return Object.defineProperty(i, Q$1, { value: o3, writable: true }), i;
   }, S: function(n2, t3, o3) {
-    o3 ? r$4(t3) && t3[Q$1].A === n2 && e2(n2.p) : (n2.u && function n3(r2) {
+    o3 ? r$6(t3) && t3[Q$1].A === n2 && e2(n2.p) : (n2.u && function n3(r2) {
       if (r2 && typeof r2 == "object") {
         var t4 = r2[Q$1];
         if (t4) {
           var e3 = t4.t, o4 = t4.k, f2 = t4.D, c2 = t4.i;
           if (c2 === 4)
             i$4(o4, function(r3) {
-              r3 !== Q$1 && (e3[r3] !== void 0 || u$1(e3, r3) ? f2[r3] || n3(o4[r3]) : (f2[r3] = true, k$1(t4)));
+              r3 !== Q$1 && (e3[r3] !== void 0 || u$2(e3, r3) ? f2[r3] || n3(o4[r3]) : (f2[r3] = true, k$3(t4)));
             }), i$4(e3, function(n4) {
-              o4[n4] !== void 0 || u$1(o4, n4) || (f2[n4] = false, k$1(t4));
+              o4[n4] !== void 0 || u$2(o4, n4) || (f2[n4] = false, k$3(t4));
             });
           else if (c2 === 5) {
-            if (a2(t4) && (k$1(t4), f2.length = true), o4.length < e3.length)
+            if (a2(t4) && (k$3(t4), f2.length = true), o4.length < e3.length)
               for (var s3 = o4.length; s3 < e3.length; s3++)
                 f2[s3] = false;
             else
@@ -331,7 +326,7 @@ function N$1() {
     return n2.i === 4 ? o2(n2) : a2(n2);
   } });
 }
-var G$2, U$1, W$1 = typeof Symbol != "undefined" && typeof Symbol("x") == "symbol", X$1 = typeof Map != "undefined", q$2 = typeof Set != "undefined", B$1 = typeof Proxy != "undefined" && Proxy.revocable !== void 0 && typeof Reflect != "undefined", H$2 = W$1 ? Symbol.for("immer-nothing") : ((G$2 = {})["immer-nothing"] = true, G$2), L$1 = W$1 ? Symbol.for("immer-draftable") : "__$immer_draftable", Q$1 = W$1 ? Symbol.for("immer-state") : "__$immer_state", Z$1 = "" + Object.prototype.constructor, nn = typeof Reflect != "undefined" && Reflect.ownKeys ? Reflect.ownKeys : Object.getOwnPropertySymbols !== void 0 ? function(n2) {
+var G$3, U$1, W$1 = typeof Symbol != "undefined" && typeof Symbol("x") == "symbol", X$1 = typeof Map != "undefined", q$4 = typeof Set != "undefined", B$2 = typeof Proxy != "undefined" && Proxy.revocable !== void 0 && typeof Reflect != "undefined", H$3 = W$1 ? Symbol.for("immer-nothing") : ((G$3 = {})["immer-nothing"] = true, G$3), L$1 = W$1 ? Symbol.for("immer-draftable") : "__$immer_draftable", Q$1 = W$1 ? Symbol.for("immer-state") : "__$immer_state", Z$1 = "" + Object.prototype.constructor, nn = typeof Reflect != "undefined" && Reflect.ownKeys ? Reflect.ownKeys : Object.getOwnPropertySymbols !== void 0 ? function(n2) {
   return Object.getOwnPropertyNames(n2).concat(Object.getOwnPropertySymbols(n2));
 } : Object.getOwnPropertyNames, rn = Object.getOwnPropertyDescriptors || function(n2) {
   var r2 = {};
@@ -341,42 +336,42 @@ var G$2, U$1, W$1 = typeof Symbol != "undefined" && typeof Symbol("x") == "symbo
 }, tn = {}, en = { get: function(n2, r2) {
   if (r2 === Q$1)
     return n2;
-  var e2 = p$4(n2);
-  if (!u$1(e2, r2))
+  var e2 = p$6(n2);
+  if (!u$2(e2, r2))
     return function(n3, r3, t2) {
-      var e3, i2 = I$2(r3, t2);
+      var e3, i2 = I$3(r3, t2);
       return i2 ? "value" in i2 ? i2.value : (e3 = i2.get) === null || e3 === void 0 ? void 0 : e3.call(n3.k) : void 0;
     }(n2, e2, r2);
   var i = e2[r2];
-  return n2.I || !t$3(i) ? i : i === z$2(n2.t, r2) ? (E$1(n2), n2.o[r2] = R$1(n2.A.h, i, n2)) : i;
+  return n2.I || !t$4(i) ? i : i === z$4(n2.t, r2) ? (E$2(n2), n2.o[r2] = R$1(n2.A.h, i, n2)) : i;
 }, has: function(n2, r2) {
-  return r2 in p$4(n2);
+  return r2 in p$6(n2);
 }, ownKeys: function(n2) {
-  return Reflect.ownKeys(p$4(n2));
+  return Reflect.ownKeys(p$6(n2));
 }, set: function(n2, r2, t2) {
-  var e2 = I$2(p$4(n2), r2);
+  var e2 = I$3(p$6(n2), r2);
   if (e2 == null ? void 0 : e2.set)
     return e2.set.call(n2.k, t2), true;
   if (!n2.P) {
-    var i = z$2(p$4(n2), r2), o2 = i == null ? void 0 : i[Q$1];
+    var i = z$4(p$6(n2), r2), o2 = i == null ? void 0 : i[Q$1];
     if (o2 && o2.t === t2)
       return n2.o[r2] = t2, n2.D[r2] = false, true;
-    if (c$1(t2, i) && (t2 !== void 0 || u$1(n2.t, r2)))
+    if (c$3(t2, i) && (t2 !== void 0 || u$2(n2.t, r2)))
       return true;
-    E$1(n2), k$1(n2);
+    E$2(n2), k$3(n2);
   }
   return n2.o[r2] === t2 && typeof t2 != "number" && (t2 !== void 0 || r2 in n2.o) || (n2.o[r2] = t2, n2.D[r2] = true, true);
 }, deleteProperty: function(n2, r2) {
-  return z$2(n2.t, r2) !== void 0 || r2 in n2.t ? (n2.D[r2] = false, E$1(n2), k$1(n2)) : delete n2.D[r2], n2.o && delete n2.o[r2], true;
+  return z$4(n2.t, r2) !== void 0 || r2 in n2.t ? (n2.D[r2] = false, E$2(n2), k$3(n2)) : delete n2.D[r2], n2.o && delete n2.o[r2], true;
 }, getOwnPropertyDescriptor: function(n2, r2) {
-  var t2 = p$4(n2), e2 = Reflect.getOwnPropertyDescriptor(t2, r2);
+  var t2 = p$6(n2), e2 = Reflect.getOwnPropertyDescriptor(t2, r2);
   return e2 ? { writable: true, configurable: n2.i !== 1 || r2 !== "length", enumerable: e2.enumerable, value: t2[r2] } : e2;
 }, defineProperty: function() {
-  n$4(11);
+  n$6(11);
 }, getPrototypeOf: function(n2) {
   return Object.getPrototypeOf(n2.t);
 }, setPrototypeOf: function() {
-  n$4(12);
+  n$6(12);
 } }, on = {};
 i$4(en, function(n2, r2) {
   on[n2] = function() {
@@ -390,7 +385,7 @@ i$4(en, function(n2, r2) {
 var un$1 = function() {
   function e2(r2) {
     var e3 = this;
-    this.g = B$1, this.F = true, this.produce = function(r3, i2, o2) {
+    this.g = B$2, this.F = true, this.produce = function(r3, i2, o2) {
       if (typeof r3 == "function" && typeof i2 != "function") {
         var u2 = i2;
         i2 = r3;
@@ -407,12 +402,12 @@ var un$1 = function() {
         };
       }
       var f2;
-      if (typeof i2 != "function" && n$4(6), o2 !== void 0 && typeof o2 != "function" && n$4(7), t$3(r3)) {
-        var c2 = w$1(e3), s2 = R$1(e3, r3, void 0), v2 = true;
+      if (typeof i2 != "function" && n$6(6), o2 !== void 0 && typeof o2 != "function" && n$6(7), t$4(r3)) {
+        var c2 = w$3(e3), s2 = R$1(e3, r3, void 0), v2 = true;
         try {
           f2 = i2(s2), v2 = false;
         } finally {
-          v2 ? O$1(c2) : g$2(c2);
+          v2 ? O$1(c2) : g$4(c2);
         }
         return typeof Promise != "undefined" && f2 instanceof Promise ? f2.then(function(n2) {
           return j$1(c2, o2), P$1(n2, c2);
@@ -421,13 +416,13 @@ var un$1 = function() {
         }) : (j$1(c2, o2), P$1(f2, c2));
       }
       if (!r3 || typeof r3 != "object") {
-        if ((f2 = i2(r3)) === void 0 && (f2 = r3), f2 === H$2 && (f2 = void 0), e3.F && d$1(f2, true), o2) {
+        if ((f2 = i2(r3)) === void 0 && (f2 = r3), f2 === H$3 && (f2 = void 0), e3.F && d$3(f2, true), o2) {
           var p2 = [], l2 = [];
-          b$1("Patches").M(r3, f2, p2, l2), o2(p2, l2);
+          b$3("Patches").M(r3, f2, p2, l2), o2(p2, l2);
         }
         return f2;
       }
-      n$4(21, r3);
+      n$6(21, r3);
     }, this.produceWithPatches = function(n2, r3) {
       if (typeof n2 == "function")
         return function(r4) {
@@ -447,9 +442,9 @@ var un$1 = function() {
   }
   var i = e2.prototype;
   return i.createDraft = function(e3) {
-    t$3(e3) || n$4(8), r$4(e3) && (e3 = D$1(e3));
-    var i2 = w$1(this), o2 = R$1(this, e3, void 0);
-    return o2[Q$1].C = true, g$2(i2), o2;
+    t$4(e3) || n$6(8), r$6(e3) && (e3 = D$2(e3));
+    var i2 = w$3(this), o2 = R$1(this, e3, void 0);
+    return o2[Q$1].C = true, g$4(i2), o2;
   }, i.finishDraft = function(r2, t2) {
     var e3 = r2 && r2[Q$1];
     var i2 = e3.A;
@@ -457,7 +452,7 @@ var un$1 = function() {
   }, i.setAutoFreeze = function(n2) {
     this.F = n2;
   }, i.setUseProxies = function(r2) {
-    r2 && !B$1 && n$4(20), this.g = r2;
+    r2 && !B$2 && n$6(20), this.g = r2;
   }, i.applyPatches = function(n2, t2) {
     var e3;
     for (e3 = t2.length - 1; e3 >= 0; e3--) {
@@ -468,8 +463,8 @@ var un$1 = function() {
       }
     }
     e3 > -1 && (t2 = t2.slice(e3 + 1));
-    var o2 = b$1("Patches").$;
-    return r$4(n2) ? o2(n2, t2) : this.produce(n2, function(n3) {
+    var o2 = b$3("Patches").$;
+    return r$6(n2) ? o2(n2, t2) : this.produce(n2, function(n3) {
       return o2(n3, t2);
     });
   }, e2;
@@ -481,11 +476,294 @@ an.applyPatches.bind(an);
 an.createDraft.bind(an);
 an.finishDraft.bind(an);
 var createNextState2 = fn$1;
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly && (symbols = symbols.filter(function(sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    i % 2 ? ownKeys(Object(source), true).forEach(function(key) {
+      _defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function(key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
+  }
+  return target;
+}
+function formatProdErrorMessage(code2) {
+  return "Minified Redux error #" + code2 + "; visit https://redux.js.org/Errors?code=" + code2 + " for the full message or use the non-minified dev environment for full errors. ";
+}
+var $$observable = function() {
+  return typeof Symbol === "function" && Symbol.observable || "@@observable";
+}();
+var randomString = function randomString2() {
+  return Math.random().toString(36).substring(7).split("").join(".");
+};
+var ActionTypes = {
+  INIT: "@@redux/INIT" + randomString(),
+  REPLACE: "@@redux/REPLACE" + randomString(),
+  PROBE_UNKNOWN_ACTION: function PROBE_UNKNOWN_ACTION() {
+    return "@@redux/PROBE_UNKNOWN_ACTION" + randomString();
+  }
+};
+function isPlainObject$1(obj) {
+  if (typeof obj !== "object" || obj === null)
+    return false;
+  var proto = obj;
+  while (Object.getPrototypeOf(proto) !== null) {
+    proto = Object.getPrototypeOf(proto);
+  }
+  return Object.getPrototypeOf(obj) === proto;
+}
+function createStore$1(reducer, preloadedState, enhancer) {
+  var _ref2;
+  if (typeof preloadedState === "function" && typeof enhancer === "function" || typeof enhancer === "function" && typeof arguments[3] === "function") {
+    throw new Error(formatProdErrorMessage(0));
+  }
+  if (typeof preloadedState === "function" && typeof enhancer === "undefined") {
+    enhancer = preloadedState;
+    preloadedState = void 0;
+  }
+  if (typeof enhancer !== "undefined") {
+    if (typeof enhancer !== "function") {
+      throw new Error(formatProdErrorMessage(1));
+    }
+    return enhancer(createStore$1)(reducer, preloadedState);
+  }
+  if (typeof reducer !== "function") {
+    throw new Error(formatProdErrorMessage(2));
+  }
+  var currentReducer = reducer;
+  var currentState = preloadedState;
+  var currentListeners = [];
+  var nextListeners = currentListeners;
+  var isDispatching = false;
+  function ensureCanMutateNextListeners() {
+    if (nextListeners === currentListeners) {
+      nextListeners = currentListeners.slice();
+    }
+  }
+  function getState() {
+    if (isDispatching) {
+      throw new Error(formatProdErrorMessage(3));
+    }
+    return currentState;
+  }
+  function subscribe(listener) {
+    if (typeof listener !== "function") {
+      throw new Error(formatProdErrorMessage(4));
+    }
+    if (isDispatching) {
+      throw new Error(formatProdErrorMessage(5));
+    }
+    var isSubscribed = true;
+    ensureCanMutateNextListeners();
+    nextListeners.push(listener);
+    return function unsubscribe() {
+      if (!isSubscribed) {
+        return;
+      }
+      if (isDispatching) {
+        throw new Error(formatProdErrorMessage(6));
+      }
+      isSubscribed = false;
+      ensureCanMutateNextListeners();
+      var index = nextListeners.indexOf(listener);
+      nextListeners.splice(index, 1);
+      currentListeners = null;
+    };
+  }
+  function dispatch(action) {
+    if (!isPlainObject$1(action)) {
+      throw new Error(formatProdErrorMessage(7));
+    }
+    if (typeof action.type === "undefined") {
+      throw new Error(formatProdErrorMessage(8));
+    }
+    if (isDispatching) {
+      throw new Error(formatProdErrorMessage(9));
+    }
+    try {
+      isDispatching = true;
+      currentState = currentReducer(currentState, action);
+    } finally {
+      isDispatching = false;
+    }
+    var listeners = currentListeners = nextListeners;
+    for (var i = 0; i < listeners.length; i++) {
+      var listener = listeners[i];
+      listener();
+    }
+    return action;
+  }
+  function replaceReducer(nextReducer) {
+    if (typeof nextReducer !== "function") {
+      throw new Error(formatProdErrorMessage(10));
+    }
+    currentReducer = nextReducer;
+    dispatch({
+      type: ActionTypes.REPLACE
+    });
+  }
+  function observable() {
+    var _ref;
+    var outerSubscribe = subscribe;
+    return _ref = {
+      subscribe: function subscribe2(observer) {
+        if (typeof observer !== "object" || observer === null) {
+          throw new Error(formatProdErrorMessage(11));
+        }
+        function observeState() {
+          if (observer.next) {
+            observer.next(getState());
+          }
+        }
+        observeState();
+        var unsubscribe = outerSubscribe(observeState);
+        return {
+          unsubscribe
+        };
+      }
+    }, _ref[$$observable] = function() {
+      return this;
+    }, _ref;
+  }
+  dispatch({
+    type: ActionTypes.INIT
+  });
+  return _ref2 = {
+    dispatch,
+    subscribe,
+    getState,
+    replaceReducer
+  }, _ref2[$$observable] = observable, _ref2;
+}
+function assertReducerShape(reducers) {
+  Object.keys(reducers).forEach(function(key) {
+    var reducer = reducers[key];
+    var initialState2 = reducer(void 0, {
+      type: ActionTypes.INIT
+    });
+    if (typeof initialState2 === "undefined") {
+      throw new Error(formatProdErrorMessage(12));
+    }
+    if (typeof reducer(void 0, {
+      type: ActionTypes.PROBE_UNKNOWN_ACTION()
+    }) === "undefined") {
+      throw new Error(formatProdErrorMessage(13));
+    }
+  });
+}
+function combineReducers(reducers) {
+  var reducerKeys = Object.keys(reducers);
+  var finalReducers = {};
+  for (var i = 0; i < reducerKeys.length; i++) {
+    var key = reducerKeys[i];
+    if (typeof reducers[key] === "function") {
+      finalReducers[key] = reducers[key];
+    }
+  }
+  var finalReducerKeys = Object.keys(finalReducers);
+  var shapeAssertionError;
+  try {
+    assertReducerShape(finalReducers);
+  } catch (e2) {
+    shapeAssertionError = e2;
+  }
+  return function combination(state, action) {
+    if (state === void 0) {
+      state = {};
+    }
+    if (shapeAssertionError) {
+      throw shapeAssertionError;
+    }
+    var hasChanged = false;
+    var nextState = {};
+    for (var _i2 = 0; _i2 < finalReducerKeys.length; _i2++) {
+      var _key = finalReducerKeys[_i2];
+      var reducer = finalReducers[_key];
+      var previousStateForKey = state[_key];
+      var nextStateForKey = reducer(previousStateForKey, action);
+      if (typeof nextStateForKey === "undefined") {
+        action && action.type;
+        throw new Error(formatProdErrorMessage(14));
+      }
+      nextState[_key] = nextStateForKey;
+      hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
+    }
+    hasChanged = hasChanged || finalReducerKeys.length !== Object.keys(state).length;
+    return hasChanged ? nextState : state;
+  };
+}
+function compose() {
+  for (var _len = arguments.length, funcs = new Array(_len), _key = 0; _key < _len; _key++) {
+    funcs[_key] = arguments[_key];
+  }
+  if (funcs.length === 0) {
+    return function(arg) {
+      return arg;
+    };
+  }
+  if (funcs.length === 1) {
+    return funcs[0];
+  }
+  return funcs.reduce(function(a2, b2) {
+    return function() {
+      return a2(b2.apply(void 0, arguments));
+    };
+  });
+}
+function applyMiddleware() {
+  for (var _len = arguments.length, middlewares = new Array(_len), _key = 0; _key < _len; _key++) {
+    middlewares[_key] = arguments[_key];
+  }
+  return function(createStore2) {
+    return function() {
+      var store = createStore2.apply(void 0, arguments);
+      var _dispatch = function dispatch() {
+        throw new Error(formatProdErrorMessage(15));
+      };
+      var middlewareAPI = {
+        getState: store.getState,
+        dispatch: function dispatch() {
+          return _dispatch.apply(void 0, arguments);
+        }
+      };
+      var chain = middlewares.map(function(middleware) {
+        return middleware(middlewareAPI);
+      });
+      _dispatch = compose.apply(void 0, chain)(store.dispatch);
+      return _objectSpread2(_objectSpread2({}, store), {}, {
+        dispatch: _dispatch
+      });
+    };
+  };
+}
 var NOT_FOUND = "NOT_FOUND";
 function createSingletonCache(equals) {
   var entry;
   return {
-    get: function get(key) {
+    get: function get2(key) {
       if (entry && equals(entry.key, key)) {
         return entry.value;
       }
@@ -507,7 +785,7 @@ function createSingletonCache(equals) {
 }
 function createLruCache(maxSize, equals) {
   var entries = [];
-  function get(key) {
+  function get2(key) {
     var cacheIndex = entries.findIndex(function(entry2) {
       return equals(key, entry2.key);
     });
@@ -522,7 +800,7 @@ function createLruCache(maxSize, equals) {
     return NOT_FOUND;
   }
   function put(key, value) {
-    if (get(key) === NOT_FOUND) {
+    if (get2(key) === NOT_FOUND) {
       entries.unshift({
         key,
         value
@@ -539,7 +817,7 @@ function createLruCache(maxSize, equals) {
     entries = [];
   }
   return {
-    get,
+    get: get2,
     put,
     getEntries,
     clear
@@ -808,7 +1086,7 @@ var createDraftSafeSelector = function() {
     for (var _i3 = 1; _i3 < arguments.length; _i3++) {
       rest[_i3 - 1] = arguments[_i3];
     }
-    return selector.apply(void 0, __spreadArray([r$4(value) ? D$1(value) : value], rest));
+    return selector.apply(void 0, __spreadArray([r$6(value) ? D$2(value) : value], rest));
   };
   return wrappedSelector;
 };
@@ -1024,14 +1302,14 @@ function createReducer(initialState2, mapOrBuilderCallback, actionMatchers, defa
     }
     return caseReducers.reduce(function(previousState, caseReducer) {
       if (caseReducer) {
-        if (r$4(previousState)) {
+        if (r$6(previousState)) {
           var draft = previousState;
           var result = caseReducer(draft, action);
           if (typeof result === "undefined") {
             return previousState;
           }
           return result;
-        } else if (!t$3(previousState)) {
+        } else if (!t$4(previousState)) {
           var result = caseReducer(previousState, action);
           if (typeof result === "undefined") {
             if (previousState === null) {
@@ -1181,7 +1459,7 @@ function createStateOperator(mutator) {
         mutator(arg, draft);
       }
     };
-    if (r$4(state)) {
+    if (r$6(state)) {
       runMutator(state);
       return state;
     } else {
@@ -17002,16 +17280,16 @@ var SubRegion;
   offset: TimezoneOffset.UTC_PLUS_10,
   timezone: Timezones.ChuukTime
 });
-const o$1 = { id: "dev", type: EnvironmentType.Development, public: false, name: "Development", description: "Development environment" }, t$2 = { id: "test", type: EnvironmentType.NonProduction, public: false, name: "Test", description: "Test environment" }, i$3 = { id: "prod", type: EnvironmentType.Production, public: true, name: "Production", description: "Production environment" };
+const o$1 = { id: "dev", type: EnvironmentType.Development, public: false, name: "Development", description: "Development environment" }, t$3 = { id: "test", type: EnvironmentType.NonProduction, public: false, name: "Test", description: "Test environment" }, i$3 = { id: "prod", type: EnvironmentType.Production, public: true, name: "Production", description: "Production environment" };
 function s$3() {
   if (window) {
     const n2 = window.location.hostname;
-    return n2.includes("localhost") || n2.includes("127.0.0.1") ? o$1 : n2.includes("test") ? t$2 : i$3;
+    return n2.includes("localhost") || n2.includes("127.0.0.1") ? o$1 : n2.includes("test") ? t$3 : i$3;
   }
-  return t$2;
+  return t$3;
 }
-function _extends() {
-  _extends = Object.assign || function(target) {
+function _extends$1() {
+  _extends$1 = Object.assign || function(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
       for (var key in source) {
@@ -17022,76 +17300,76 @@ function _extends() {
     }
     return target;
   };
-  return _extends.apply(this, arguments);
+  return _extends$1.apply(this, arguments);
 }
-var r$3, B = r$3 || (r$3 = {});
-B.Pop = "POP";
-B.Push = "PUSH";
-B.Replace = "REPLACE";
-var C$1 = function(b2) {
+var r$5, B$1 = r$5 || (r$5 = {});
+B$1.Pop = "POP";
+B$1.Push = "PUSH";
+B$1.Replace = "REPLACE";
+var C$2 = function(b2) {
   return b2;
 };
-function E(b2) {
+function E$1(b2) {
   b2.preventDefault();
   b2.returnValue = "";
 }
-function F$1() {
+function F$2() {
   var b2 = [];
   return { get length() {
     return b2.length;
-  }, push: function(h) {
-    b2.push(h);
+  }, push: function(h2) {
+    b2.push(h2);
     return function() {
       b2 = b2.filter(function(e2) {
-        return e2 !== h;
+        return e2 !== h2;
       });
     };
-  }, call: function(h) {
+  }, call: function(h2) {
     b2.forEach(function(e2) {
-      return e2 && e2(h);
+      return e2 && e2(h2);
     });
   } };
 }
-function H$1() {
+function H$2() {
   return Math.random().toString(36).substr(2, 8);
 }
-function I$1(b2) {
-  var h = b2.pathname;
-  h = h === void 0 ? "/" : h;
+function I$2(b2) {
+  var h2 = b2.pathname;
+  h2 = h2 === void 0 ? "/" : h2;
   var e2 = b2.search;
   e2 = e2 === void 0 ? "" : e2;
   b2 = b2.hash;
   b2 = b2 === void 0 ? "" : b2;
-  e2 && e2 !== "?" && (h += e2.charAt(0) === "?" ? e2 : "?" + e2);
-  b2 && b2 !== "#" && (h += b2.charAt(0) === "#" ? b2 : "#" + b2);
-  return h;
+  e2 && e2 !== "?" && (h2 += e2.charAt(0) === "?" ? e2 : "?" + e2);
+  b2 && b2 !== "#" && (h2 += b2.charAt(0) === "#" ? b2 : "#" + b2);
+  return h2;
 }
 function J$1(b2) {
-  var h = {};
+  var h2 = {};
   if (b2) {
     var e2 = b2.indexOf("#");
-    0 <= e2 && (h.hash = b2.substr(e2), b2 = b2.substr(0, e2));
+    0 <= e2 && (h2.hash = b2.substr(e2), b2 = b2.substr(0, e2));
     e2 = b2.indexOf("?");
-    0 <= e2 && (h.search = b2.substr(e2), b2 = b2.substr(0, e2));
-    b2 && (h.pathname = b2);
+    0 <= e2 && (h2.search = b2.substr(e2), b2 = b2.substr(0, e2));
+    b2 && (h2.pathname = b2);
   }
-  return h;
+  return h2;
 }
-function createBrowserHistory(b2) {
-  function h() {
+function createBrowserHistory$1(b2) {
+  function h2() {
     var c2 = p2.location, a2 = m2.state || {};
-    return [a2.idx, C$1({ pathname: c2.pathname, search: c2.search, hash: c2.hash, state: a2.usr || null, key: a2.key || "default" })];
+    return [a2.idx, C$2({ pathname: c2.pathname, search: c2.search, hash: c2.hash, state: a2.usr || null, key: a2.key || "default" })];
   }
   function e2(c2) {
-    return typeof c2 === "string" ? c2 : I$1(c2);
+    return typeof c2 === "string" ? c2 : I$2(c2);
   }
   function x2(c2, a2) {
     a2 === void 0 && (a2 = null);
-    return C$1(_extends({ pathname: q2.pathname, hash: "", search: "" }, typeof c2 === "string" ? J$1(c2) : c2, { state: a2, key: H$1() }));
+    return C$2(_extends$1({ pathname: q2.pathname, hash: "", search: "" }, typeof c2 === "string" ? J$1(c2) : c2, { state: a2, key: H$2() }));
   }
   function z2(c2) {
     t2 = c2;
-    c2 = h();
+    c2 = h2();
     v2 = c2[0];
     q2 = c2[1];
     d2.call({ action: t2, location: q2 });
@@ -17100,7 +17378,7 @@ function createBrowserHistory(b2) {
     function f2() {
       A2(c2, a2);
     }
-    var l2 = r$3.Push, k2 = x2(c2, a2);
+    var l2 = r$5.Push, k2 = x2(c2, a2);
     if (!g2.length || (g2.call({ action: l2, location: k2, retry: f2 }), false)) {
       var n2 = [{ usr: k2.state, key: k2.key, idx: v2 + 1 }, e2(k2)];
       k2 = n2[0];
@@ -17117,7 +17395,7 @@ function createBrowserHistory(b2) {
     function f2() {
       y2(c2, a2);
     }
-    var l2 = r$3.Replace, k2 = x2(c2, a2);
+    var l2 = r$5.Replace, k2 = x2(c2, a2);
     g2.length && (g2.call({ action: l2, location: k2, retry: f2 }), 1) || (k2 = [{ usr: k2.state, key: k2.key, idx: v2 }, e2(k2)], m2.replaceState(k2[0], "", k2[1]), z2(l2));
   }
   function w2(c2) {
@@ -17130,7 +17408,7 @@ function createBrowserHistory(b2) {
     if (u2)
       g2.call(u2), u2 = null;
     else {
-      var c2 = r$3.Pop, a2 = h(), f2 = a2[0];
+      var c2 = r$5.Pop, a2 = h2(), f2 = a2[0];
       a2 = a2[1];
       if (g2.length)
         if (f2 != null) {
@@ -17144,10 +17422,10 @@ function createBrowserHistory(b2) {
         z2(c2);
     }
   });
-  var t2 = r$3.Pop;
-  b2 = h();
-  var v2 = b2[0], q2 = b2[1], d2 = F$1(), g2 = F$1();
-  v2 == null && (v2 = 0, m2.replaceState(_extends({}, m2.state, { idx: v2 }), ""));
+  var t2 = r$5.Pop;
+  b2 = h2();
+  var v2 = b2[0], q2 = b2[1], d2 = F$2(), g2 = F$2();
+  v2 == null && (v2 = 0, m2.replaceState(_extends$1({}, m2.state, { idx: v2 }), ""));
   return { get action() {
     return t2;
   }, get location() {
@@ -17160,12 +17438,1593 @@ function createBrowserHistory(b2) {
     return d2.push(c2);
   }, block: function(c2) {
     var a2 = g2.push(c2);
-    g2.length === 1 && p2.addEventListener("beforeunload", E);
+    g2.length === 1 && p2.addEventListener("beforeunload", E$1);
     return function() {
       a2();
-      g2.length || p2.removeEventListener("beforeunload", E);
+      g2.length || p2.removeEventListener("beforeunload", E$1);
     };
   } };
+}
+var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+function getAugmentedNamespace(n2) {
+  if (n2.__esModule)
+    return n2;
+  var a2 = Object.defineProperty({}, "__esModule", { value: true });
+  Object.keys(n2).forEach(function(k2) {
+    var d2 = Object.getOwnPropertyDescriptor(n2, k2);
+    Object.defineProperty(a2, k2, d2.get ? d2 : {
+      enumerable: true,
+      get: function() {
+        return n2[k2];
+      }
+    });
+  });
+  return a2;
+}
+function commonjsRequire(path) {
+  throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
+}
+var ReactReduxContext = /* @__PURE__ */ React.createContext(null);
+function defaultNoopBatch(callback) {
+  callback();
+}
+var batch = defaultNoopBatch;
+var setBatch = function setBatch2(newBatch) {
+  return batch = newBatch;
+};
+var getBatch = function getBatch2() {
+  return batch;
+};
+function createListenerCollection() {
+  var batch2 = getBatch();
+  var first = null;
+  var last = null;
+  return {
+    clear: function clear() {
+      first = null;
+      last = null;
+    },
+    notify: function notify2() {
+      batch2(function() {
+        var listener = first;
+        while (listener) {
+          listener.callback();
+          listener = listener.next;
+        }
+      });
+    },
+    get: function get2() {
+      var listeners = [];
+      var listener = first;
+      while (listener) {
+        listeners.push(listener);
+        listener = listener.next;
+      }
+      return listeners;
+    },
+    subscribe: function subscribe(callback) {
+      var isSubscribed = true;
+      var listener = last = {
+        callback,
+        next: null,
+        prev: last
+      };
+      if (listener.prev) {
+        listener.prev.next = listener;
+      } else {
+        first = listener;
+      }
+      return function unsubscribe() {
+        if (!isSubscribed || first === null)
+          return;
+        isSubscribed = false;
+        if (listener.next) {
+          listener.next.prev = listener.prev;
+        } else {
+          last = listener.prev;
+        }
+        if (listener.prev) {
+          listener.prev.next = listener.next;
+        } else {
+          first = listener.next;
+        }
+      };
+    }
+  };
+}
+var nullListeners = {
+  notify: function notify() {
+  },
+  get: function get() {
+    return [];
+  }
+};
+function createSubscription(store, parentSub) {
+  var unsubscribe;
+  var listeners = nullListeners;
+  function addNestedSub(listener) {
+    trySubscribe();
+    return listeners.subscribe(listener);
+  }
+  function notifyNestedSubs() {
+    listeners.notify();
+  }
+  function handleChangeWrapper() {
+    if (subscription.onStateChange) {
+      subscription.onStateChange();
+    }
+  }
+  function isSubscribed() {
+    return Boolean(unsubscribe);
+  }
+  function trySubscribe() {
+    if (!unsubscribe) {
+      unsubscribe = parentSub ? parentSub.addNestedSub(handleChangeWrapper) : store.subscribe(handleChangeWrapper);
+      listeners = createListenerCollection();
+    }
+  }
+  function tryUnsubscribe() {
+    if (unsubscribe) {
+      unsubscribe();
+      unsubscribe = void 0;
+      listeners.clear();
+      listeners = nullListeners;
+    }
+  }
+  var subscription = {
+    addNestedSub,
+    notifyNestedSubs,
+    handleChangeWrapper,
+    isSubscribed,
+    trySubscribe,
+    tryUnsubscribe,
+    getListeners: function getListeners() {
+      return listeners;
+    }
+  };
+  return subscription;
+}
+var useIsomorphicLayoutEffect = typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined" ? useLayoutEffect : useEffect;
+var jsxRuntime = { exports: {} };
+var reactJsxRuntime_production_min = {};
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+function toObject(val) {
+  if (val === null || val === void 0) {
+    throw new TypeError("Object.assign cannot be called with null or undefined");
+  }
+  return Object(val);
+}
+function shouldUseNative() {
+  try {
+    if (!Object.assign) {
+      return false;
+    }
+    var test1 = new String("abc");
+    test1[5] = "de";
+    if (Object.getOwnPropertyNames(test1)[0] === "5") {
+      return false;
+    }
+    var test2 = {};
+    for (var i = 0; i < 10; i++) {
+      test2["_" + String.fromCharCode(i)] = i;
+    }
+    var order2 = Object.getOwnPropertyNames(test2).map(function(n2) {
+      return test2[n2];
+    });
+    if (order2.join("") !== "0123456789") {
+      return false;
+    }
+    var test3 = {};
+    "abcdefghijklmnopqrst".split("").forEach(function(letter) {
+      test3[letter] = letter;
+    });
+    if (Object.keys(Object.assign({}, test3)).join("") !== "abcdefghijklmnopqrst") {
+      return false;
+    }
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+shouldUseNative() ? Object.assign : function(target, source) {
+  var from;
+  var to = toObject(target);
+  var symbols;
+  for (var s2 = 1; s2 < arguments.length; s2++) {
+    from = Object(arguments[s2]);
+    for (var key in from) {
+      if (hasOwnProperty$1.call(from, key)) {
+        to[key] = from[key];
+      }
+    }
+    if (getOwnPropertySymbols) {
+      symbols = getOwnPropertySymbols(from);
+      for (var i = 0; i < symbols.length; i++) {
+        if (propIsEnumerable.call(from, symbols[i])) {
+          to[symbols[i]] = from[symbols[i]];
+        }
+      }
+    }
+  }
+  return to;
+};
+/** @license React v17.0.2
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+var f$2 = React, g$3 = 60103;
+reactJsxRuntime_production_min.Fragment = 60107;
+if (typeof Symbol === "function" && Symbol.for) {
+  var h$3 = Symbol.for;
+  g$3 = h$3("react.element");
+  reactJsxRuntime_production_min.Fragment = h$3("react.fragment");
+}
+var m$3 = f$2.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner, n$5 = Object.prototype.hasOwnProperty, p$5 = { key: true, ref: true, __self: true, __source: true };
+function q$3(c2, a2, k2) {
+  var b2, d2 = {}, e2 = null, l2 = null;
+  k2 !== void 0 && (e2 = "" + k2);
+  a2.key !== void 0 && (e2 = "" + a2.key);
+  a2.ref !== void 0 && (l2 = a2.ref);
+  for (b2 in a2)
+    n$5.call(a2, b2) && !p$5.hasOwnProperty(b2) && (d2[b2] = a2[b2]);
+  if (c2 && c2.defaultProps)
+    for (b2 in a2 = c2.defaultProps, a2)
+      d2[b2] === void 0 && (d2[b2] = a2[b2]);
+  return { $$typeof: g$3, type: c2, key: e2, ref: l2, props: d2, _owner: m$3.current };
+}
+reactJsxRuntime_production_min.jsx = q$3;
+reactJsxRuntime_production_min.jsxs = q$3;
+{
+  jsxRuntime.exports = reactJsxRuntime_production_min;
+}
+const jsx = jsxRuntime.exports.jsx;
+function Provider(_ref) {
+  var store = _ref.store, context = _ref.context, children = _ref.children;
+  var contextValue = useMemo(function() {
+    var subscription = createSubscription(store);
+    subscription.onStateChange = subscription.notifyNestedSubs;
+    return {
+      store,
+      subscription
+    };
+  }, [store]);
+  var previousState = useMemo(function() {
+    return store.getState();
+  }, [store]);
+  useIsomorphicLayoutEffect(function() {
+    var subscription = contextValue.subscription;
+    subscription.trySubscribe();
+    if (previousState !== store.getState()) {
+      subscription.notifyNestedSubs();
+    }
+    return function() {
+      subscription.tryUnsubscribe();
+      subscription.onStateChange = null;
+    };
+  }, [contextValue, previousState]);
+  var Context = context || ReactReduxContext;
+  return /* @__PURE__ */ jsx(Context.Provider, {
+    value: contextValue,
+    children
+  });
+}
+var reactIs$1 = { exports: {} };
+var reactIs_production_min$1 = {};
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+var b$2 = typeof Symbol === "function" && Symbol.for, c$2 = b$2 ? Symbol.for("react.element") : 60103, d$2 = b$2 ? Symbol.for("react.portal") : 60106, e$4 = b$2 ? Symbol.for("react.fragment") : 60107, f$1 = b$2 ? Symbol.for("react.strict_mode") : 60108, g$2 = b$2 ? Symbol.for("react.profiler") : 60114, h$2 = b$2 ? Symbol.for("react.provider") : 60109, k$2 = b$2 ? Symbol.for("react.context") : 60110, l$3 = b$2 ? Symbol.for("react.async_mode") : 60111, m$2 = b$2 ? Symbol.for("react.concurrent_mode") : 60111, n$4 = b$2 ? Symbol.for("react.forward_ref") : 60112, p$4 = b$2 ? Symbol.for("react.suspense") : 60113, q$2 = b$2 ? Symbol.for("react.suspense_list") : 60120, r$4 = b$2 ? Symbol.for("react.memo") : 60115, t$2 = b$2 ? Symbol.for("react.lazy") : 60116, v$2 = b$2 ? Symbol.for("react.block") : 60121, w$2 = b$2 ? Symbol.for("react.fundamental") : 60117, x$3 = b$2 ? Symbol.for("react.responder") : 60118, y$2 = b$2 ? Symbol.for("react.scope") : 60119;
+function z$3(a2) {
+  if (typeof a2 === "object" && a2 !== null) {
+    var u2 = a2.$$typeof;
+    switch (u2) {
+      case c$2:
+        switch (a2 = a2.type, a2) {
+          case l$3:
+          case m$2:
+          case e$4:
+          case g$2:
+          case f$1:
+          case p$4:
+            return a2;
+          default:
+            switch (a2 = a2 && a2.$$typeof, a2) {
+              case k$2:
+              case n$4:
+              case t$2:
+              case r$4:
+              case h$2:
+                return a2;
+              default:
+                return u2;
+            }
+        }
+      case d$2:
+        return u2;
+    }
+  }
+}
+function A$1(a2) {
+  return z$3(a2) === m$2;
+}
+reactIs_production_min$1.AsyncMode = l$3;
+reactIs_production_min$1.ConcurrentMode = m$2;
+reactIs_production_min$1.ContextConsumer = k$2;
+reactIs_production_min$1.ContextProvider = h$2;
+reactIs_production_min$1.Element = c$2;
+reactIs_production_min$1.ForwardRef = n$4;
+reactIs_production_min$1.Fragment = e$4;
+reactIs_production_min$1.Lazy = t$2;
+reactIs_production_min$1.Memo = r$4;
+reactIs_production_min$1.Portal = d$2;
+reactIs_production_min$1.Profiler = g$2;
+reactIs_production_min$1.StrictMode = f$1;
+reactIs_production_min$1.Suspense = p$4;
+reactIs_production_min$1.isAsyncMode = function(a2) {
+  return A$1(a2) || z$3(a2) === l$3;
+};
+reactIs_production_min$1.isConcurrentMode = A$1;
+reactIs_production_min$1.isContextConsumer = function(a2) {
+  return z$3(a2) === k$2;
+};
+reactIs_production_min$1.isContextProvider = function(a2) {
+  return z$3(a2) === h$2;
+};
+reactIs_production_min$1.isElement = function(a2) {
+  return typeof a2 === "object" && a2 !== null && a2.$$typeof === c$2;
+};
+reactIs_production_min$1.isForwardRef = function(a2) {
+  return z$3(a2) === n$4;
+};
+reactIs_production_min$1.isFragment = function(a2) {
+  return z$3(a2) === e$4;
+};
+reactIs_production_min$1.isLazy = function(a2) {
+  return z$3(a2) === t$2;
+};
+reactIs_production_min$1.isMemo = function(a2) {
+  return z$3(a2) === r$4;
+};
+reactIs_production_min$1.isPortal = function(a2) {
+  return z$3(a2) === d$2;
+};
+reactIs_production_min$1.isProfiler = function(a2) {
+  return z$3(a2) === g$2;
+};
+reactIs_production_min$1.isStrictMode = function(a2) {
+  return z$3(a2) === f$1;
+};
+reactIs_production_min$1.isSuspense = function(a2) {
+  return z$3(a2) === p$4;
+};
+reactIs_production_min$1.isValidElementType = function(a2) {
+  return typeof a2 === "string" || typeof a2 === "function" || a2 === e$4 || a2 === m$2 || a2 === g$2 || a2 === f$1 || a2 === p$4 || a2 === q$2 || typeof a2 === "object" && a2 !== null && (a2.$$typeof === t$2 || a2.$$typeof === r$4 || a2.$$typeof === h$2 || a2.$$typeof === k$2 || a2.$$typeof === n$4 || a2.$$typeof === w$2 || a2.$$typeof === x$3 || a2.$$typeof === y$2 || a2.$$typeof === v$2);
+};
+reactIs_production_min$1.typeOf = z$3;
+{
+  reactIs$1.exports = reactIs_production_min$1;
+}
+var reactIs = reactIs$1.exports;
+var FORWARD_REF_STATICS = {
+  "$$typeof": true,
+  render: true,
+  defaultProps: true,
+  displayName: true,
+  propTypes: true
+};
+var MEMO_STATICS = {
+  "$$typeof": true,
+  compare: true,
+  defaultProps: true,
+  displayName: true,
+  propTypes: true,
+  type: true
+};
+var TYPE_STATICS = {};
+TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
+TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
+var reactIs_production_min = {};
+/** @license React v17.0.2
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+var b$1 = 60103, c$1 = 60106, d$1 = 60107, e$3 = 60108, f = 60114, g$1 = 60109, h$1 = 60110, k$1 = 60112, l$2 = 60113, m$1 = 60120, n$3 = 60115, p$3 = 60116, q$1 = 60121, r$3 = 60122, u$1 = 60117, v$1 = 60129, w$1 = 60131;
+if (typeof Symbol === "function" && Symbol.for) {
+  var x$2 = Symbol.for;
+  b$1 = x$2("react.element");
+  c$1 = x$2("react.portal");
+  d$1 = x$2("react.fragment");
+  e$3 = x$2("react.strict_mode");
+  f = x$2("react.profiler");
+  g$1 = x$2("react.provider");
+  h$1 = x$2("react.context");
+  k$1 = x$2("react.forward_ref");
+  l$2 = x$2("react.suspense");
+  m$1 = x$2("react.suspense_list");
+  n$3 = x$2("react.memo");
+  p$3 = x$2("react.lazy");
+  q$1 = x$2("react.block");
+  r$3 = x$2("react.server.block");
+  u$1 = x$2("react.fundamental");
+  v$1 = x$2("react.debug_trace_mode");
+  w$1 = x$2("react.legacy_hidden");
+}
+function y$1(a2) {
+  if (typeof a2 === "object" && a2 !== null) {
+    var t2 = a2.$$typeof;
+    switch (t2) {
+      case b$1:
+        switch (a2 = a2.type, a2) {
+          case d$1:
+          case f:
+          case e$3:
+          case l$2:
+          case m$1:
+            return a2;
+          default:
+            switch (a2 = a2 && a2.$$typeof, a2) {
+              case h$1:
+              case k$1:
+              case p$3:
+              case n$3:
+              case g$1:
+                return a2;
+              default:
+                return t2;
+            }
+        }
+      case c$1:
+        return t2;
+    }
+  }
+}
+var z$2 = g$1, A = b$1, B = k$1, C$1 = d$1, D$1 = p$3, E = n$3, F$1 = c$1, G$2 = f, H$1 = e$3, I$1 = l$2;
+reactIs_production_min.ContextConsumer = h$1;
+reactIs_production_min.ContextProvider = z$2;
+reactIs_production_min.Element = A;
+reactIs_production_min.ForwardRef = B;
+reactIs_production_min.Fragment = C$1;
+reactIs_production_min.Lazy = D$1;
+reactIs_production_min.Memo = E;
+reactIs_production_min.Portal = F$1;
+reactIs_production_min.Profiler = G$2;
+reactIs_production_min.StrictMode = H$1;
+reactIs_production_min.Suspense = I$1;
+reactIs_production_min.isAsyncMode = function() {
+  return false;
+};
+reactIs_production_min.isConcurrentMode = function() {
+  return false;
+};
+reactIs_production_min.isContextConsumer = function(a2) {
+  return y$1(a2) === h$1;
+};
+reactIs_production_min.isContextProvider = function(a2) {
+  return y$1(a2) === g$1;
+};
+reactIs_production_min.isElement = function(a2) {
+  return typeof a2 === "object" && a2 !== null && a2.$$typeof === b$1;
+};
+reactIs_production_min.isForwardRef = function(a2) {
+  return y$1(a2) === k$1;
+};
+reactIs_production_min.isFragment = function(a2) {
+  return y$1(a2) === d$1;
+};
+reactIs_production_min.isLazy = function(a2) {
+  return y$1(a2) === p$3;
+};
+reactIs_production_min.isMemo = function(a2) {
+  return y$1(a2) === n$3;
+};
+reactIs_production_min.isPortal = function(a2) {
+  return y$1(a2) === c$1;
+};
+reactIs_production_min.isProfiler = function(a2) {
+  return y$1(a2) === f;
+};
+reactIs_production_min.isStrictMode = function(a2) {
+  return y$1(a2) === e$3;
+};
+reactIs_production_min.isSuspense = function(a2) {
+  return y$1(a2) === l$2;
+};
+reactIs_production_min.isValidElementType = function(a2) {
+  return typeof a2 === "string" || typeof a2 === "function" || a2 === d$1 || a2 === f || a2 === v$1 || a2 === e$3 || a2 === l$2 || a2 === m$1 || a2 === w$1 || typeof a2 === "object" && a2 !== null && (a2.$$typeof === p$3 || a2.$$typeof === n$3 || a2.$$typeof === g$1 || a2.$$typeof === h$1 || a2.$$typeof === k$1 || a2.$$typeof === u$1 || a2.$$typeof === q$1 || a2[0] === r$3) ? true : false;
+};
+reactIs_production_min.typeOf = y$1;
+function useReduxContext() {
+  var contextValue = useContext(ReactReduxContext);
+  return contextValue;
+}
+function createStoreHook(context) {
+  if (context === void 0) {
+    context = ReactReduxContext;
+  }
+  var useReduxContext$1 = context === ReactReduxContext ? useReduxContext : function() {
+    return useContext(context);
+  };
+  return function useStore2() {
+    var _useReduxContext = useReduxContext$1(), store = _useReduxContext.store;
+    return store;
+  };
+}
+var useStore = /* @__PURE__ */ createStoreHook();
+function createDispatchHook(context) {
+  if (context === void 0) {
+    context = ReactReduxContext;
+  }
+  var useStore$1 = context === ReactReduxContext ? useStore : createStoreHook(context);
+  return function useDispatch2() {
+    var store = useStore$1();
+    return store.dispatch;
+  };
+}
+var useDispatch = /* @__PURE__ */ createDispatchHook();
+var refEquality = function refEquality2(a2, b2) {
+  return a2 === b2;
+};
+function useSelectorWithStoreAndSubscription(selector, equalityFn, store, contextSub) {
+  var _useReducer = useReducer(function(s2) {
+    return s2 + 1;
+  }, 0), forceRender = _useReducer[1];
+  var subscription = useMemo(function() {
+    return createSubscription(store, contextSub);
+  }, [store, contextSub]);
+  var latestSubscriptionCallbackError = useRef();
+  var latestSelector = useRef();
+  var latestStoreState = useRef();
+  var latestSelectedState = useRef();
+  var storeState = store.getState();
+  var selectedState;
+  try {
+    if (selector !== latestSelector.current || storeState !== latestStoreState.current || latestSubscriptionCallbackError.current) {
+      var newSelectedState = selector(storeState);
+      if (latestSelectedState.current === void 0 || !equalityFn(newSelectedState, latestSelectedState.current)) {
+        selectedState = newSelectedState;
+      } else {
+        selectedState = latestSelectedState.current;
+      }
+    } else {
+      selectedState = latestSelectedState.current;
+    }
+  } catch (err) {
+    if (latestSubscriptionCallbackError.current) {
+      err.message += "\nThe error may be correlated with this previous error:\n" + latestSubscriptionCallbackError.current.stack + "\n\n";
+    }
+    throw err;
+  }
+  useIsomorphicLayoutEffect(function() {
+    latestSelector.current = selector;
+    latestStoreState.current = storeState;
+    latestSelectedState.current = selectedState;
+    latestSubscriptionCallbackError.current = void 0;
+  });
+  useIsomorphicLayoutEffect(function() {
+    function checkForUpdates() {
+      try {
+        var newStoreState = store.getState();
+        if (newStoreState === latestStoreState.current) {
+          return;
+        }
+        var _newSelectedState = latestSelector.current(newStoreState);
+        if (equalityFn(_newSelectedState, latestSelectedState.current)) {
+          return;
+        }
+        latestSelectedState.current = _newSelectedState;
+        latestStoreState.current = newStoreState;
+      } catch (err) {
+        latestSubscriptionCallbackError.current = err;
+      }
+      forceRender();
+    }
+    subscription.onStateChange = checkForUpdates;
+    subscription.trySubscribe();
+    checkForUpdates();
+    return function() {
+      return subscription.tryUnsubscribe();
+    };
+  }, [store, subscription]);
+  return selectedState;
+}
+function createSelectorHook(context) {
+  if (context === void 0) {
+    context = ReactReduxContext;
+  }
+  var useReduxContext$1 = context === ReactReduxContext ? useReduxContext : function() {
+    return useContext(context);
+  };
+  return function useSelector2(selector, equalityFn) {
+    if (equalityFn === void 0) {
+      equalityFn = refEquality;
+    }
+    var _useReduxContext = useReduxContext$1(), store = _useReduxContext.store, contextSub = _useReduxContext.subscription;
+    var selectedState = useSelectorWithStoreAndSubscription(selector, equalityFn, store, contextSub);
+    useDebugValue(selectedState);
+    return selectedState;
+  };
+}
+var useSelector = /* @__PURE__ */ createSelectorHook();
+setBatch(unstable_batchedUpdates);
+var Action$1;
+(function(Action2) {
+  Action2["Pop"] = "POP";
+  Action2["Push"] = "PUSH";
+  Action2["Replace"] = "REPLACE";
+})(Action$1 || (Action$1 = {}));
+var readOnly = function(obj) {
+  return obj;
+};
+var BeforeUnloadEventType = "beforeunload";
+var PopStateEventType = "popstate";
+function createBrowserHistory(options) {
+  if (options === void 0) {
+    options = {};
+  }
+  var _options = options, _options$window = _options.window, window2 = _options$window === void 0 ? document.defaultView : _options$window;
+  var globalHistory = window2.history;
+  function getIndexAndLocation() {
+    var _window$location = window2.location, pathname = _window$location.pathname, search = _window$location.search, hash = _window$location.hash;
+    var state = globalHistory.state || {};
+    return [state.idx, readOnly({
+      pathname,
+      search,
+      hash,
+      state: state.usr || null,
+      key: state.key || "default"
+    })];
+  }
+  var blockedPopTx = null;
+  function handlePop() {
+    if (blockedPopTx) {
+      blockers.call(blockedPopTx);
+      blockedPopTx = null;
+    } else {
+      var nextAction = Action$1.Pop;
+      var _getIndexAndLocation = getIndexAndLocation(), nextIndex = _getIndexAndLocation[0], nextLocation = _getIndexAndLocation[1];
+      if (blockers.length) {
+        if (nextIndex != null) {
+          var delta = index - nextIndex;
+          if (delta) {
+            blockedPopTx = {
+              action: nextAction,
+              location: nextLocation,
+              retry: function retry2() {
+                go(delta * -1);
+              }
+            };
+            go(delta);
+          }
+        }
+      } else {
+        applyTx(nextAction);
+      }
+    }
+  }
+  window2.addEventListener(PopStateEventType, handlePop);
+  var action = Action$1.Pop;
+  var _getIndexAndLocation2 = getIndexAndLocation(), index = _getIndexAndLocation2[0], location = _getIndexAndLocation2[1];
+  var listeners = createEvents();
+  var blockers = createEvents();
+  if (index == null) {
+    index = 0;
+    globalHistory.replaceState(_extends$1({}, globalHistory.state, {
+      idx: index
+    }), "");
+  }
+  function createHref(to) {
+    return typeof to === "string" ? to : createPath$1(to);
+  }
+  function getNextLocation(to, state) {
+    if (state === void 0) {
+      state = null;
+    }
+    return readOnly(_extends$1({
+      pathname: location.pathname,
+      hash: "",
+      search: ""
+    }, typeof to === "string" ? parsePath$1(to) : to, {
+      state,
+      key: createKey()
+    }));
+  }
+  function getHistoryStateAndUrl(nextLocation, index2) {
+    return [{
+      usr: nextLocation.state,
+      key: nextLocation.key,
+      idx: index2
+    }, createHref(nextLocation)];
+  }
+  function allowTx(action2, location2, retry2) {
+    return !blockers.length || (blockers.call({
+      action: action2,
+      location: location2,
+      retry: retry2
+    }), false);
+  }
+  function applyTx(nextAction) {
+    action = nextAction;
+    var _getIndexAndLocation3 = getIndexAndLocation();
+    index = _getIndexAndLocation3[0];
+    location = _getIndexAndLocation3[1];
+    listeners.call({
+      action,
+      location
+    });
+  }
+  function push(to, state) {
+    var nextAction = Action$1.Push;
+    var nextLocation = getNextLocation(to, state);
+    function retry2() {
+      push(to, state);
+    }
+    if (allowTx(nextAction, nextLocation, retry2)) {
+      var _getHistoryStateAndUr = getHistoryStateAndUrl(nextLocation, index + 1), historyState = _getHistoryStateAndUr[0], url = _getHistoryStateAndUr[1];
+      try {
+        globalHistory.pushState(historyState, "", url);
+      } catch (error) {
+        window2.location.assign(url);
+      }
+      applyTx(nextAction);
+    }
+  }
+  function replace(to, state) {
+    var nextAction = Action$1.Replace;
+    var nextLocation = getNextLocation(to, state);
+    function retry2() {
+      replace(to, state);
+    }
+    if (allowTx(nextAction, nextLocation, retry2)) {
+      var _getHistoryStateAndUr2 = getHistoryStateAndUrl(nextLocation, index), historyState = _getHistoryStateAndUr2[0], url = _getHistoryStateAndUr2[1];
+      globalHistory.replaceState(historyState, "", url);
+      applyTx(nextAction);
+    }
+  }
+  function go(delta) {
+    globalHistory.go(delta);
+  }
+  var history2 = {
+    get action() {
+      return action;
+    },
+    get location() {
+      return location;
+    },
+    createHref,
+    push,
+    replace,
+    go,
+    back: function back() {
+      go(-1);
+    },
+    forward: function forward() {
+      go(1);
+    },
+    listen: function listen(listener) {
+      return listeners.push(listener);
+    },
+    block: function block(blocker) {
+      var unblock = blockers.push(blocker);
+      if (blockers.length === 1) {
+        window2.addEventListener(BeforeUnloadEventType, promptBeforeUnload);
+      }
+      return function() {
+        unblock();
+        if (!blockers.length) {
+          window2.removeEventListener(BeforeUnloadEventType, promptBeforeUnload);
+        }
+      };
+    }
+  };
+  return history2;
+}
+function promptBeforeUnload(event) {
+  event.preventDefault();
+  event.returnValue = "";
+}
+function createEvents() {
+  var handlers = [];
+  return {
+    get length() {
+      return handlers.length;
+    },
+    push: function push(fn2) {
+      handlers.push(fn2);
+      return function() {
+        handlers = handlers.filter(function(handler) {
+          return handler !== fn2;
+        });
+      };
+    },
+    call: function call(arg) {
+      handlers.forEach(function(fn2) {
+        return fn2 && fn2(arg);
+      });
+    }
+  };
+}
+function createKey() {
+  return Math.random().toString(36).substr(2, 8);
+}
+function createPath$1(_ref) {
+  var _ref$pathname = _ref.pathname, pathname = _ref$pathname === void 0 ? "/" : _ref$pathname, _ref$search = _ref.search, search = _ref$search === void 0 ? "" : _ref$search, _ref$hash = _ref.hash, hash = _ref$hash === void 0 ? "" : _ref$hash;
+  if (search && search !== "?")
+    pathname += search.charAt(0) === "?" ? search : "?" + search;
+  if (hash && hash !== "#")
+    pathname += hash.charAt(0) === "#" ? hash : "#" + hash;
+  return pathname;
+}
+function parsePath$1(path) {
+  var parsedPath = {};
+  if (path) {
+    var hashIndex = path.indexOf("#");
+    if (hashIndex >= 0) {
+      parsedPath.hash = path.substr(hashIndex);
+      path = path.substr(0, hashIndex);
+    }
+    var searchIndex = path.indexOf("?");
+    if (searchIndex >= 0) {
+      parsedPath.search = path.substr(searchIndex);
+      path = path.substr(0, searchIndex);
+    }
+    if (path) {
+      parsedPath.pathname = path;
+    }
+  }
+  return parsedPath;
+}
+var Action;
+(function(Action2) {
+  Action2["Pop"] = "POP";
+  Action2["Push"] = "PUSH";
+  Action2["Replace"] = "REPLACE";
+})(Action || (Action = {}));
+function createPath(_ref) {
+  var _ref$pathname = _ref.pathname, pathname = _ref$pathname === void 0 ? "/" : _ref$pathname, _ref$search = _ref.search, search = _ref$search === void 0 ? "" : _ref$search, _ref$hash = _ref.hash, hash = _ref$hash === void 0 ? "" : _ref$hash;
+  if (search && search !== "?")
+    pathname += search.charAt(0) === "?" ? search : "?" + search;
+  if (hash && hash !== "#")
+    pathname += hash.charAt(0) === "#" ? hash : "#" + hash;
+  return pathname;
+}
+function parsePath(path) {
+  var parsedPath = {};
+  if (path) {
+    var hashIndex = path.indexOf("#");
+    if (hashIndex >= 0) {
+      parsedPath.hash = path.substr(hashIndex);
+      path = path.substr(0, hashIndex);
+    }
+    var searchIndex = path.indexOf("?");
+    if (searchIndex >= 0) {
+      parsedPath.search = path.substr(searchIndex);
+      path = path.substr(0, searchIndex);
+    }
+    if (path) {
+      parsedPath.pathname = path;
+    }
+  }
+  return parsedPath;
+}
+/**
+ * React Router v6.2.2
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+function invariant(cond, message) {
+  if (!cond)
+    throw new Error(message);
+}
+const NavigationContext = /* @__PURE__ */ createContext(null);
+const LocationContext = /* @__PURE__ */ createContext(null);
+const RouteContext = /* @__PURE__ */ createContext({
+  outlet: null,
+  matches: []
+});
+function Navigate(_ref2) {
+  let {
+    to,
+    replace,
+    state
+  } = _ref2;
+  !useInRouterContext() ? invariant(false) : void 0;
+  let navigate = useNavigate();
+  useEffect(() => {
+    navigate(to, {
+      replace,
+      state
+    });
+  });
+  return null;
+}
+function Outlet(props) {
+  return useOutlet(props.context);
+}
+function Route(_props) {
+  invariant(false);
+}
+function Router(_ref3) {
+  let {
+    basename: basenameProp = "/",
+    children = null,
+    location: locationProp,
+    navigationType = Action.Pop,
+    navigator: navigator2,
+    static: staticProp = false
+  } = _ref3;
+  !!useInRouterContext() ? invariant(false) : void 0;
+  let basename = normalizePathname(basenameProp);
+  let navigationContext = useMemo(() => ({
+    basename,
+    navigator: navigator2,
+    static: staticProp
+  }), [basename, navigator2, staticProp]);
+  if (typeof locationProp === "string") {
+    locationProp = parsePath(locationProp);
+  }
+  let {
+    pathname = "/",
+    search = "",
+    hash = "",
+    state = null,
+    key = "default"
+  } = locationProp;
+  let location = useMemo(() => {
+    let trailingPathname = stripBasename(pathname, basename);
+    if (trailingPathname == null) {
+      return null;
+    }
+    return {
+      pathname: trailingPathname,
+      search,
+      hash,
+      state,
+      key
+    };
+  }, [basename, pathname, search, hash, state, key]);
+  if (location == null) {
+    return null;
+  }
+  return /* @__PURE__ */ createElement(NavigationContext.Provider, {
+    value: navigationContext
+  }, /* @__PURE__ */ createElement(LocationContext.Provider, {
+    children,
+    value: {
+      location,
+      navigationType
+    }
+  }));
+}
+function Routes(_ref4) {
+  let {
+    children,
+    location
+  } = _ref4;
+  return useRoutes(createRoutesFromChildren(children), location);
+}
+function useHref(to) {
+  !useInRouterContext() ? invariant(false) : void 0;
+  let {
+    basename,
+    navigator: navigator2
+  } = useContext(NavigationContext);
+  let {
+    hash,
+    pathname,
+    search
+  } = useResolvedPath(to);
+  let joinedPathname = pathname;
+  if (basename !== "/") {
+    let toPathname = getToPathname(to);
+    let endsWithSlash = toPathname != null && toPathname.endsWith("/");
+    joinedPathname = pathname === "/" ? basename + (endsWithSlash ? "/" : "") : joinPaths([basename, pathname]);
+  }
+  return navigator2.createHref({
+    pathname: joinedPathname,
+    search,
+    hash
+  });
+}
+function useInRouterContext() {
+  return useContext(LocationContext) != null;
+}
+function useLocation() {
+  !useInRouterContext() ? invariant(false) : void 0;
+  return useContext(LocationContext).location;
+}
+function useMatch(pattern) {
+  !useInRouterContext() ? invariant(false) : void 0;
+  let {
+    pathname
+  } = useLocation();
+  return useMemo(() => matchPath(pattern, pathname), [pathname, pattern]);
+}
+function useNavigate() {
+  !useInRouterContext() ? invariant(false) : void 0;
+  let {
+    basename,
+    navigator: navigator2
+  } = useContext(NavigationContext);
+  let {
+    matches
+  } = useContext(RouteContext);
+  let {
+    pathname: locationPathname
+  } = useLocation();
+  let routePathnamesJson = JSON.stringify(matches.map((match2) => match2.pathnameBase));
+  let activeRef = useRef(false);
+  useEffect(() => {
+    activeRef.current = true;
+  });
+  let navigate = useCallback(function(to, options) {
+    if (options === void 0) {
+      options = {};
+    }
+    if (!activeRef.current)
+      return;
+    if (typeof to === "number") {
+      navigator2.go(to);
+      return;
+    }
+    let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname);
+    if (basename !== "/") {
+      path.pathname = joinPaths([basename, path.pathname]);
+    }
+    (!!options.replace ? navigator2.replace : navigator2.push)(path, options.state);
+  }, [basename, navigator2, routePathnamesJson, locationPathname]);
+  return navigate;
+}
+const OutletContext = /* @__PURE__ */ createContext(null);
+function useOutlet(context) {
+  let outlet = useContext(RouteContext).outlet;
+  if (outlet) {
+    return /* @__PURE__ */ createElement(OutletContext.Provider, {
+      value: context
+    }, outlet);
+  }
+  return outlet;
+}
+function useParams() {
+  let {
+    matches
+  } = useContext(RouteContext);
+  let routeMatch = matches[matches.length - 1];
+  return routeMatch ? routeMatch.params : {};
+}
+function useResolvedPath(to) {
+  let {
+    matches
+  } = useContext(RouteContext);
+  let {
+    pathname: locationPathname
+  } = useLocation();
+  let routePathnamesJson = JSON.stringify(matches.map((match2) => match2.pathnameBase));
+  return useMemo(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname), [to, routePathnamesJson, locationPathname]);
+}
+function useRoutes(routes2, locationArg) {
+  !useInRouterContext() ? invariant(false) : void 0;
+  let {
+    matches: parentMatches
+  } = useContext(RouteContext);
+  let routeMatch = parentMatches[parentMatches.length - 1];
+  let parentParams = routeMatch ? routeMatch.params : {};
+  routeMatch ? routeMatch.pathname : "/";
+  let parentPathnameBase = routeMatch ? routeMatch.pathnameBase : "/";
+  routeMatch && routeMatch.route;
+  let locationFromContext = useLocation();
+  let location;
+  if (locationArg) {
+    var _parsedLocationArg$pa;
+    let parsedLocationArg = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
+    !(parentPathnameBase === "/" || ((_parsedLocationArg$pa = parsedLocationArg.pathname) == null ? void 0 : _parsedLocationArg$pa.startsWith(parentPathnameBase))) ? invariant(false) : void 0;
+    location = parsedLocationArg;
+  } else {
+    location = locationFromContext;
+  }
+  let pathname = location.pathname || "/";
+  let remainingPathname = parentPathnameBase === "/" ? pathname : pathname.slice(parentPathnameBase.length) || "/";
+  let matches = matchRoutes(routes2, {
+    pathname: remainingPathname
+  });
+  return _renderMatches(matches && matches.map((match2) => Object.assign({}, match2, {
+    params: Object.assign({}, parentParams, match2.params),
+    pathname: joinPaths([parentPathnameBase, match2.pathname]),
+    pathnameBase: match2.pathnameBase === "/" ? parentPathnameBase : joinPaths([parentPathnameBase, match2.pathnameBase])
+  })), parentMatches);
+}
+function createRoutesFromChildren(children) {
+  let routes2 = [];
+  Children.forEach(children, (element) => {
+    if (!/* @__PURE__ */ isValidElement(element)) {
+      return;
+    }
+    if (element.type === Fragment) {
+      routes2.push.apply(routes2, createRoutesFromChildren(element.props.children));
+      return;
+    }
+    !(element.type === Route) ? invariant(false) : void 0;
+    let route = {
+      caseSensitive: element.props.caseSensitive,
+      element: element.props.element,
+      index: element.props.index,
+      path: element.props.path
+    };
+    if (element.props.children) {
+      route.children = createRoutesFromChildren(element.props.children);
+    }
+    routes2.push(route);
+  });
+  return routes2;
+}
+function matchRoutes(routes2, locationArg, basename) {
+  if (basename === void 0) {
+    basename = "/";
+  }
+  let location = typeof locationArg === "string" ? parsePath(locationArg) : locationArg;
+  let pathname = stripBasename(location.pathname || "/", basename);
+  if (pathname == null) {
+    return null;
+  }
+  let branches = flattenRoutes(routes2);
+  rankRouteBranches(branches);
+  let matches = null;
+  for (let i = 0; matches == null && i < branches.length; ++i) {
+    matches = matchRouteBranch(branches[i], pathname);
+  }
+  return matches;
+}
+function flattenRoutes(routes2, branches, parentsMeta, parentPath) {
+  if (branches === void 0) {
+    branches = [];
+  }
+  if (parentsMeta === void 0) {
+    parentsMeta = [];
+  }
+  if (parentPath === void 0) {
+    parentPath = "";
+  }
+  routes2.forEach((route, index) => {
+    let meta = {
+      relativePath: route.path || "",
+      caseSensitive: route.caseSensitive === true,
+      childrenIndex: index,
+      route
+    };
+    if (meta.relativePath.startsWith("/")) {
+      !meta.relativePath.startsWith(parentPath) ? invariant(false) : void 0;
+      meta.relativePath = meta.relativePath.slice(parentPath.length);
+    }
+    let path = joinPaths([parentPath, meta.relativePath]);
+    let routesMeta = parentsMeta.concat(meta);
+    if (route.children && route.children.length > 0) {
+      !(route.index !== true) ? invariant(false) : void 0;
+      flattenRoutes(route.children, branches, routesMeta, path);
+    }
+    if (route.path == null && !route.index) {
+      return;
+    }
+    branches.push({
+      path,
+      score: computeScore(path, route.index),
+      routesMeta
+    });
+  });
+  return branches;
+}
+function rankRouteBranches(branches) {
+  branches.sort((a2, b2) => a2.score !== b2.score ? b2.score - a2.score : compareIndexes(a2.routesMeta.map((meta) => meta.childrenIndex), b2.routesMeta.map((meta) => meta.childrenIndex)));
+}
+const paramRe = /^:\w+$/;
+const dynamicSegmentValue = 3;
+const indexRouteValue = 2;
+const emptySegmentValue = 1;
+const staticSegmentValue = 10;
+const splatPenalty = -2;
+const isSplat = (s2) => s2 === "*";
+function computeScore(path, index) {
+  let segments = path.split("/");
+  let initialScore = segments.length;
+  if (segments.some(isSplat)) {
+    initialScore += splatPenalty;
+  }
+  if (index) {
+    initialScore += indexRouteValue;
+  }
+  return segments.filter((s2) => !isSplat(s2)).reduce((score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue), initialScore);
+}
+function compareIndexes(a2, b2) {
+  let siblings = a2.length === b2.length && a2.slice(0, -1).every((n2, i) => n2 === b2[i]);
+  return siblings ? a2[a2.length - 1] - b2[b2.length - 1] : 0;
+}
+function matchRouteBranch(branch, pathname) {
+  let {
+    routesMeta
+  } = branch;
+  let matchedParams = {};
+  let matchedPathname = "/";
+  let matches = [];
+  for (let i = 0; i < routesMeta.length; ++i) {
+    let meta = routesMeta[i];
+    let end = i === routesMeta.length - 1;
+    let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
+    let match2 = matchPath({
+      path: meta.relativePath,
+      caseSensitive: meta.caseSensitive,
+      end
+    }, remainingPathname);
+    if (!match2)
+      return null;
+    Object.assign(matchedParams, match2.params);
+    let route = meta.route;
+    matches.push({
+      params: matchedParams,
+      pathname: joinPaths([matchedPathname, match2.pathname]),
+      pathnameBase: normalizePathname(joinPaths([matchedPathname, match2.pathnameBase])),
+      route
+    });
+    if (match2.pathnameBase !== "/") {
+      matchedPathname = joinPaths([matchedPathname, match2.pathnameBase]);
+    }
+  }
+  return matches;
+}
+function _renderMatches(matches, parentMatches) {
+  if (parentMatches === void 0) {
+    parentMatches = [];
+  }
+  if (matches == null)
+    return null;
+  return matches.reduceRight((outlet, match2, index) => {
+    return /* @__PURE__ */ createElement(RouteContext.Provider, {
+      children: match2.route.element !== void 0 ? match2.route.element : outlet,
+      value: {
+        outlet,
+        matches: parentMatches.concat(matches.slice(0, index + 1))
+      }
+    });
+  }, null);
+}
+function matchPath(pattern, pathname) {
+  if (typeof pattern === "string") {
+    pattern = {
+      path: pattern,
+      caseSensitive: false,
+      end: true
+    };
+  }
+  let [matcher, paramNames] = compilePath(pattern.path, pattern.caseSensitive, pattern.end);
+  let match2 = pathname.match(matcher);
+  if (!match2)
+    return null;
+  let matchedPathname = match2[0];
+  let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
+  let captureGroups = match2.slice(1);
+  let params = paramNames.reduce((memo, paramName, index) => {
+    if (paramName === "*") {
+      let splatValue = captureGroups[index] || "";
+      pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
+    }
+    memo[paramName] = safelyDecodeURIComponent(captureGroups[index] || "");
+    return memo;
+  }, {});
+  return {
+    params,
+    pathname: matchedPathname,
+    pathnameBase,
+    pattern
+  };
+}
+function compilePath(path, caseSensitive, end) {
+  if (caseSensitive === void 0) {
+    caseSensitive = false;
+  }
+  if (end === void 0) {
+    end = true;
+  }
+  let paramNames = [];
+  let regexpSource = "^" + path.replace(/\/*\*?$/, "").replace(/^\/*/, "/").replace(/[\\.*+^$?{}|()[\]]/g, "\\$&").replace(/:(\w+)/g, (_2, paramName) => {
+    paramNames.push(paramName);
+    return "([^\\/]+)";
+  });
+  if (path.endsWith("*")) {
+    paramNames.push("*");
+    regexpSource += path === "*" || path === "/*" ? "(.*)$" : "(?:\\/(.+)|\\/*)$";
+  } else {
+    regexpSource += end ? "\\/*$" : "(?:(?=[.~-]|%[0-9A-F]{2})|\\b|\\/|$)";
+  }
+  let matcher = new RegExp(regexpSource, caseSensitive ? void 0 : "i");
+  return [matcher, paramNames];
+}
+function safelyDecodeURIComponent(value, paramName) {
+  try {
+    return decodeURIComponent(value);
+  } catch (error) {
+    return value;
+  }
+}
+function resolvePath(to, fromPathname) {
+  if (fromPathname === void 0) {
+    fromPathname = "/";
+  }
+  let {
+    pathname: toPathname,
+    search = "",
+    hash = ""
+  } = typeof to === "string" ? parsePath(to) : to;
+  let pathname = toPathname ? toPathname.startsWith("/") ? toPathname : resolvePathname(toPathname, fromPathname) : fromPathname;
+  return {
+    pathname,
+    search: normalizeSearch(search),
+    hash: normalizeHash(hash)
+  };
+}
+function resolvePathname(relativePath, fromPathname) {
+  let segments = fromPathname.replace(/\/+$/, "").split("/");
+  let relativeSegments = relativePath.split("/");
+  relativeSegments.forEach((segment) => {
+    if (segment === "..") {
+      if (segments.length > 1)
+        segments.pop();
+    } else if (segment !== ".") {
+      segments.push(segment);
+    }
+  });
+  return segments.length > 1 ? segments.join("/") : "/";
+}
+function resolveTo(toArg, routePathnames, locationPathname) {
+  let to = typeof toArg === "string" ? parsePath(toArg) : toArg;
+  let toPathname = toArg === "" || to.pathname === "" ? "/" : to.pathname;
+  let from;
+  if (toPathname == null) {
+    from = locationPathname;
+  } else {
+    let routePathnameIndex = routePathnames.length - 1;
+    if (toPathname.startsWith("..")) {
+      let toSegments = toPathname.split("/");
+      while (toSegments[0] === "..") {
+        toSegments.shift();
+        routePathnameIndex -= 1;
+      }
+      to.pathname = toSegments.join("/");
+    }
+    from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : "/";
+  }
+  let path = resolvePath(to, from);
+  if (toPathname && toPathname !== "/" && toPathname.endsWith("/") && !path.pathname.endsWith("/")) {
+    path.pathname += "/";
+  }
+  return path;
+}
+function getToPathname(to) {
+  return to === "" || to.pathname === "" ? "/" : typeof to === "string" ? parsePath(to).pathname : to.pathname;
+}
+function stripBasename(pathname, basename) {
+  if (basename === "/")
+    return pathname;
+  if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) {
+    return null;
+  }
+  let nextChar = pathname.charAt(basename.length);
+  if (nextChar && nextChar !== "/") {
+    return null;
+  }
+  return pathname.slice(basename.length) || "/";
+}
+const joinPaths = (paths) => paths.join("/").replace(/\/\/+/g, "/");
+const normalizePathname = (pathname) => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
+const normalizeSearch = (search) => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
+const normalizeHash = (hash) => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash;
+/**
+ * React Router DOM v6.2.2
+ *
+ * Copyright (c) Remix Software Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE.md file in the root directory of this source tree.
+ *
+ * @license MIT
+ */
+function _extends() {
+  _extends = Object.assign || function(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+    return target;
+  };
+  return _extends.apply(this, arguments);
+}
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null)
+    return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0)
+      continue;
+    target[key] = source[key];
+  }
+  return target;
+}
+const _excluded = ["onClick", "reloadDocument", "replace", "state", "target", "to"], _excluded2 = ["aria-current", "caseSensitive", "className", "end", "style", "to", "children"];
+function BrowserRouter(_ref) {
+  let {
+    basename,
+    children,
+    window: window2
+  } = _ref;
+  let historyRef = useRef();
+  if (historyRef.current == null) {
+    historyRef.current = createBrowserHistory({
+      window: window2
+    });
+  }
+  let history2 = historyRef.current;
+  let [state, setState] = useState({
+    action: history2.action,
+    location: history2.location
+  });
+  useLayoutEffect(() => history2.listen(setState), [history2]);
+  return /* @__PURE__ */ createElement(Router, {
+    basename,
+    children,
+    location: state.location,
+    navigationType: state.action,
+    navigator: history2
+  });
+}
+function isModifiedEvent(event) {
+  return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+}
+const Link = /* @__PURE__ */ forwardRef(function LinkWithRef(_ref4, ref) {
+  let {
+    onClick,
+    reloadDocument,
+    replace = false,
+    state,
+    target,
+    to
+  } = _ref4, rest = _objectWithoutPropertiesLoose(_ref4, _excluded);
+  let href = useHref(to);
+  let internalOnClick = useLinkClickHandler(to, {
+    replace,
+    state,
+    target
+  });
+  function handleClick(event) {
+    if (onClick)
+      onClick(event);
+    if (!event.defaultPrevented && !reloadDocument) {
+      internalOnClick(event);
+    }
+  }
+  return /* @__PURE__ */ createElement("a", _extends({}, rest, {
+    href,
+    onClick: handleClick,
+    ref,
+    target
+  }));
+});
+const NavLink = /* @__PURE__ */ forwardRef(function NavLinkWithRef(_ref5, ref) {
+  let {
+    "aria-current": ariaCurrentProp = "page",
+    caseSensitive = false,
+    className: classNameProp = "",
+    end = false,
+    style: styleProp,
+    to,
+    children
+  } = _ref5, rest = _objectWithoutPropertiesLoose(_ref5, _excluded2);
+  let location = useLocation();
+  let path = useResolvedPath(to);
+  let locationPathname = location.pathname;
+  let toPathname = path.pathname;
+  if (!caseSensitive) {
+    locationPathname = locationPathname.toLowerCase();
+    toPathname = toPathname.toLowerCase();
+  }
+  let isActive = locationPathname === toPathname || !end && locationPathname.startsWith(toPathname) && locationPathname.charAt(toPathname.length) === "/";
+  let ariaCurrent = isActive ? ariaCurrentProp : void 0;
+  let className;
+  if (typeof classNameProp === "function") {
+    className = classNameProp({
+      isActive
+    });
+  } else {
+    className = [classNameProp, isActive ? "active" : null].filter(Boolean).join(" ");
+  }
+  let style = typeof styleProp === "function" ? styleProp({
+    isActive
+  }) : styleProp;
+  return /* @__PURE__ */ createElement(Link, _extends({}, rest, {
+    "aria-current": ariaCurrent,
+    className,
+    ref,
+    style,
+    to
+  }), typeof children === "function" ? children({
+    isActive
+  }) : children);
+});
+function useLinkClickHandler(to, _temp) {
+  let {
+    target,
+    replace: replaceProp,
+    state
+  } = _temp === void 0 ? {} : _temp;
+  let navigate = useNavigate();
+  let location = useLocation();
+  let path = useResolvedPath(to);
+  return useCallback((event) => {
+    if (event.button === 0 && (!target || target === "_self") && !isModifiedEvent(event)) {
+      event.preventDefault();
+      let replace = !!replaceProp || createPath(location) === createPath(path);
+      navigate(to, {
+        replace,
+        state
+      });
+    }
+  }, [location, navigate, path, replaceProp, state, target, to]);
+}
+function useSearchParams(defaultInit) {
+  let defaultSearchParamsRef = useRef(createSearchParams(defaultInit));
+  let location = useLocation();
+  let searchParams = useMemo(() => {
+    let searchParams2 = createSearchParams(location.search);
+    for (let key of defaultSearchParamsRef.current.keys()) {
+      if (!searchParams2.has(key)) {
+        defaultSearchParamsRef.current.getAll(key).forEach((value) => {
+          searchParams2.append(key, value);
+        });
+      }
+    }
+    return searchParams2;
+  }, [location.search]);
+  let navigate = useNavigate();
+  let setSearchParams = useCallback((nextInit, navigateOptions) => {
+    navigate("?" + createSearchParams(nextInit), navigateOptions);
+  }, [navigate]);
+  return [searchParams, setSearchParams];
+}
+function createSearchParams(init) {
+  if (init === void 0) {
+    init = "";
+  }
+  return new URLSearchParams(typeof init === "string" || Array.isArray(init) || init instanceof URLSearchParams ? init : Object.keys(init).reduce((memo, key) => {
+    let value = init[key];
+    return memo.concat(Array.isArray(value) ? value.map((v2) => [key, v2]) : [[key, value]]);
+  }, []));
 }
 const contextMiddleware = (store) => (next) => (action) => {
   return next(action);
@@ -17626,217 +19485,217 @@ var i$2;
 (function(a2) {
   a2.UTC_MINUS_12 = "UTC-12", a2.UTC_MINUS_11_30 = "UTC-11:30", a2.UTC_MINUS_11 = "UTC-11", a2.UTC_MINUS_10_30 = "UTC-10:30", a2.UTC_MINUS_10 = "UTC-10", a2.UTC_MINUS_9_30 = "UTC-9:30", a2.UTC_MINUS_9 = "UTC-09", a2.UTC_MINUS_8_45 = "UTC-8:45", a2.UTC_MINUS_8 = "UTC-08", a2.UTC_MINUS_7 = "UTC-07", a2.UTC_MINUS_6_30 = "UTC-6:30", a2.UTC_MINUS_6 = "UTC-06", a2.UTC_MINUS_5_45 = "UTC-5:45", a2.UTC_MINUS_5_30 = "UTC-5:30", a2.UTC_MINUS_5 = "UTC-05", a2.UTC_MINUS_4_30 = "UTC-4:30", a2.UTC_MINUS_4 = "UTC-04", a2.UTC_MINUS_3_30 = "UTC-3:30", a2.UTC_MINUS_3 = "UTC-03", a2.UTC_MINUS_2_30 = "UTC-2:30", a2.UTC_MINUS_2 = "UTC-02", a2.UTC_MINUS_1 = "UTC-01", a2.UTC_0 = "UTC+00", a2.UTC_PLUS_1 = "UTC+01", a2.UTC_PLUS_2 = "UTC+02", a2.UTC_PLUS_3 = "UTC+03", a2.UTC_PLUS_3_30 = "UTC+3:30", a2.UTC_PLUS_4 = "UTC+04", a2.UTC_PLUS_4_30 = "UTC+4:30", a2.UTC_PLUS_5 = "UTC+05", a2.UTC_PLUS_5_30 = "UTC+5:30", a2.UTC_PLUS_5_45 = "UTC+5:45", a2.UTC_PLUS_6 = "UTC+06", a2.UTC_PLUS_6_30 = "UTC+6:30", a2.UTC_PLUS_7 = "UTC+07", a2.UTC_PLUS_8 = "UTC+08", a2.UTC_PLUS_8_45 = "UTC+8:45", a2.UTC_PLUS_9 = "UTC+09", a2.UTC_PLUS_9_30 = "UTC+9:30", a2.UTC_PLUS_10 = "UTC+10", a2.UTC_PLUS_10_30 = "UTC+10:30", a2.UTC_PLUS_11 = "UTC+11", a2.UTC_PLUS_11_30 = "UTC+11:30", a2.UTC_PLUS_12 = "UTC+12", a2.UTC_PLUS_12_45 = "UTC+12:45", a2.UTC_PLUS_13 = "UTC+13", a2.UTC_PLUS_13_45 = "UTC+13:45", a2.UTC_PLUS_14 = "UTC+14";
 })(i$2 || (i$2 = {}));
-var n$3;
+var n$2;
 (function(a2) {
   a2.AcreTime = "ACT", a2.AfghanistanTime = "AFT", a2.AIXCentralEuropeanTime = "DFT", a2.AlaskaDaylightTime = "AKDT", a2.AlaskaStandardTime = "AKST", a2.AlmaAtaTime = "ALMT", a2.AmazonSummerTime = "AMST", a2.AmazonTime = "AMT", a2.AnadyrTime = "ANAT", a2.AqtobeTime = "AQTT", a2.ArabiaStandardTime = "AST", a2.ArgentinaTime = "ART", a2.ArmeniaTime = "AMT", a2.ASEANCommonTime = "ASEAN", a2.AtlanticDaylightTime = "ADT", a2.AtlanticStandardTime = "AST", a2.AustralianCentralDaylightSavingTime = "ACDT", a2.AustralianCentralStandardTime = "ACST", a2.AustralianCentralWesternStandardTime = "ACWST", a2.AustralianEasternDaylightSavingTime = "AEDT", a2.AustralianEasternStandardTime = "AEST", a2.AustralianEasternTime = "AET", a2.AustralianWesternStandardTime = "AWST", a2.AzerbaijanTime = "AZT", a2.AzoresStandardTime = "AZOT", a2.AzoresSummerTime = "AZOST", a2.BakerIslandTime = "BIT", a2.BangladeshStandardTime = "BST", a2.BhutanTime = "BTT", a2.BoliviaTime = "BOT", a2.BougainvilleStandardTime = "BST", a2.BrasiliaSummerTime = "BRST", a2.BrasiliaTime = "BRT", a2.BritishIndianOceanTime = "BIOT", a2.BritishSummerTime = "BST", a2.BruneiTime = "BNT", a2.CapeVerdeTime = "CVT", a2.CentralAfricaTime = "CAT", a2.CentralDaylightTime = "CDT", a2.CentralEuropeanSummerTime = "CEST", a2.CentralEuropeanTime = "CET", a2.CentralIndonesiaTime = "WITA", a2.CentralStandardTime = "CST", a2.CentralTime = "CT", a2.CentralWesternStandardTime = "CWST", a2.ChamorroStandardTime = "CHST", a2.ChathamDaylightTime = "CHADT", a2.ChathamStandardTime = "CHAST", a2.ChileStandardTime = "CLT", a2.ChileSummerTime = "CLST", a2.ChinaStandardTime = "CST", a2.ChoibalsanStandardTime = "CHOT", a2.ChoibalsanSummerTime = "CHOST", a2.ChristmasIslandTime = "CXT", a2.ChuukTime = "CHUT", a2.ClipptertonIslandStandardTime = "CIST", a2.CocosIslandsTime = "CCT", a2.ColombiaSummerTime = "COST", a2.ColombiaTime = "COT", a2.CookIslandTime = "CKT", a2.CoordinatedUniversalTime = "UTC", a2.CubaDaylightTime = "CDT", a2.CubaStandardTime = "CST", a2.DavisTime = "DAVT", a2.DumontDUrvilleTime = "DDUT", a2.EastAfricaTime = "EAT", a2.EasterIslandStandardTime = "EAST", a2.EasterIslandSummerTime = "EASST", a2.EasternCaribbeanTime = "ECT", a2.EasternDaylightTime = "EDT", a2.EasternEuropeanSummerTime = "EEST", a2.EasternEuropeanTime = "EET", a2.EasternGreenlandSummerTime = "EGST", a2.EasternGreenlandTime = "EGT", a2.EasternIndonesianTime = "WIT", a2.EasternStandardTime = "EST", a2.EasternTime = "ET", a2.EcuadorTime = "ECT", a2.FalklandIslandsSummerTime = "FKST", a2.FalklandIslandsTime = "FKT", a2.FernandoDeNoronhaTime = "FNT", a2.FijiTime = "FJT", a2.FrenchGuianaTime = "GFT", a2.FrenchSouthernAndAntarcticTime = "TFT", a2.FurtherEasternEuropeanTime = "FET", a2.GalapagosTime = "GALT", a2.GambierIslandTime = "GIT", a2.GambierIslandsTime = "GAMT", a2.GeorgiaStandardTime = "GET", a2.GilbertIslandTime = "GILT", a2.GreenwichMeanTime = "GMT", a2.GulfStandardTime = "GST", a2.GuyanaTime = "GYT", a2.HawaiiAleutianDaylightTime = "HDT", a2.HawaiiAleutianStandardTime = "HST", a2.HeardAndMcDonaldIslandsTime = "HMT", a2.HeureAvanceeDEuropeCentraleTime = "HAEC", a2.HongKongTime = "HKT", a2.HovdSummerTime = "HOVST", a2.HovdTime = "HOVT", a2.IndianOceanTime = "IOT", a2.IndianStandardTime = "IST", a2.IndochinaTime = "ICT", a2.InternationalDayLineWestTime = "IDLW", a2.IranDaylightTime = "IRDT", a2.IranStandardTime = "IRST", a2.IrishStandardTime = "IST", a2.IrkutskSummerTime = "IRKST", a2.IrkutskTime = "IRKT", a2.IsraelDaylightTime = "IDT", a2.IsraelStandardTime = "IST", a2.JapanStandardTime = "JST", a2.KaliningradTime = "KALT", a2.KamchatkaTime = "KAMT", a2.KoreaStandardTime = "KST", a2.KosraeTime = "KOST", a2.KrasnoyarskSummerTime = "KRAST", a2.KrasnoyarskTime = "KRAT", a2.KyrgyzstanTime = "KGT", a2.LineIslandsTime = "LINT", a2.KazakhstanStandardTime = "KAST", a2.LordHoweStandardTime = "LHST", a2.LordHoweSummerTime = "LHST", a2.MacquarieIslandStationTime = "MIST", a2.MagadanTime = "MAGT", a2.MalaysiaStandardTime = "MST", a2.MalaysiaTime = "MYT", a2.MaldivesTime = "MVT", a2.MarquesasIslandsTime = "MART", a2.MarshallIslandsTime = "MHT", a2.MauritiusTime = "MUT", a2.MawsonStationTime = "MAWT", a2.MiddleEuropeanSummerTime = "MEDT", a2.MiddleEuropeanTime = "MET", a2.MoscowTime = "MSK", a2.MountainDaylightTime = "MDT", a2.MountainStandardTime = "MST", a2.MyanmarStandardTime = "MMT", a2.NepalTime = "NCT", a2.NauruTime = "NRT", a2.NewCaledoniaTime = "NCT", a2.NewZealandDaylightTime = "NZDT", a2.NewZealandStandardTime = "NZST", a2.NewfoundlandDaylightTime = "NDT", a2.NewfoundlandStandardTime = "NST", a2.NewfoundlandTime = "NT", a2.NiueTime = "NUT", a2.NorfolkIslandTime = "NFT", a2.NovosibirskTime = "NOVT", a2.OmskTime = "OMST", a2.OralTime = "ORAT", a2.PacificDaylightTime = "PDT", a2.PacificStandardTime = "PST", a2.PakistanStandardTime = "PKT", a2.PalauTime = "PWT", a2.PapuaNewGuineaTime = "PGT", a2.ParaguaySummerTime = "PYST", a2.ParaguayTime = "PYT", a2.PeruTime = "PET", a2.PhilippineStandardTime = "PHST", a2.PhilippineTime = "PHT", a2.PhoenixIslandTime = "PHOT", a2.PitcairnTime = "PST", a2.PohnpeiStandardTime = "PONT", a2.ReunionTime = "RET", a2.RotheraResearchStationTime = "ROTT", a2.SaintPierreAndMiquelonDaylightTime = "PMDT", a2.SaintPierreAndMiquelonStandardTime = "PMST", a2.SakhalinIslandTime = "SAKT", a2.SamaraTime = "SAMT", a2.SamoaDaylightTime = "SDT", a2.SamoaStandardTime = "SST", a2.SeychellesTime = "SCT", a2.ShowaStationTime = "SYOT", a2.SingaporeStandardTime = "SST", a2.SingaporeTime = "SGT", a2.SolomonIslandsTime = "SBT", a2.SouthAfricanStandardTime = "SAST", a2.SouthGeorgiaAndTheSouthSandwichIslandsTime = "GST", a2.SrednekolymskTime = "SRET", a2.SriLankaStandardTime = "SLST", a2.SurinameTime = "SRT", a2.TahitiTime = "TAHT", a2.TajikistanTime = "TJT", a2.ThailandStandardTime = "THA", a2.TimorLesteTime = "TLT", a2.TokelauTime = "TKT", a2.TongaTime = "TOT", a2.TurkeyTime = "TRT", a2.TurkmenistanTime = "TMT", a2.TuvaluTime = "TVT", a2.UlaanbaatarStandardTime = "ULAT", a2.UlaanbaatarSummerTime = "ULAST", a2.UruguayStandardTime = "UYT", a2.UruguaySummerTime = "UYST", a2.UzbekistanTime = "UZT", a2.VanuatuTime = "VUT", a2.VenezuelaStandardTime = "VET", a2.VladivostokTime = "VLAT", a2.VolgogradTime = "VOLT", a2.VostokStationTime = "VOST", a2.WakeIslandTime = "WAKT", a2.WestAfricaSummerTime = "WAST", a2.WestAfricaTime = "WAT", a2.WestGreenlandSummerTime = "WGST", a2.WestGreenlandTime = "WGT", a2.WestKazakhstanTime = "WKT", a2.WesternEuropeanSummerTime = "WEDT", a2.WesternEuropeanTime = "WET", a2.WesternIndonesianTime = "WIT", a2.WesternStandardTime = "WST", a2.YakutskTime = "YAKT", a2.YekaterinburgTime = "YEKT";
-})(n$3 || (n$3 = {}));
-({ dst: { is: false, uses: true }, id: n$3.AcreTime, name: "Acre Time", offset: i$2.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.AfghanistanTime, name: "Afghanistan Time", offset: i$2.UTC_PLUS_4_30 });
-({ dst: { is: false, uses: true }, id: n$3.AIXCentralEuropeanTime, name: "AIX Central European Time", offset: i$2.UTC_PLUS_1 });
-({ dst: { is: true, uses: true }, id: n$3.AlaskaDaylightTime, name: "Alaska Daylight Time", offset: i$2.UTC_MINUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.AlaskaStandardTime, name: "Alaska Standard Time", offset: i$2.UTC_MINUS_9 });
-({ dst: { is: false, uses: true }, id: n$3.AlmaAtaTime, name: "Alma-Ata Time", offset: i$2.UTC_PLUS_6 });
-({ dst: { is: false, uses: true }, id: n$3.AmazonSummerTime, name: "Amazon Summer Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.AmazonTime, name: "Amazon Time", offset: i$2.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.AnadyrTime, name: "Anadyr Time", offset: i$2.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: n$3.AqtobeTime, name: "Aqtobe Time", offset: i$2.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.ArabiaStandardTime, name: "Arabia Standard Time", offset: i$2.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.ArgentinaTime, name: "Argentina Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.ArmeniaTime, name: "Armenia Time", offset: i$2.UTC_PLUS_4 });
-({ dst: { is: true, uses: true }, id: n$3.AtlanticDaylightTime, name: "Atlantic Daylight Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.AtlanticStandardTime, name: "Atlantic Standard Time", offset: i$2.UTC_MINUS_4 });
-({ dst: { is: true, uses: true }, id: n$3.AustralianCentralDaylightSavingTime, name: "Australian Central Daylight Saving Time", offset: i$2.UTC_PLUS_10_30 });
-({ dst: { is: false, uses: true }, id: n$3.AustralianCentralStandardTime, name: "Australian Central Standard Time", offset: i$2.UTC_PLUS_9_30 });
-({ dst: { is: false, uses: true }, id: n$3.AustralianCentralWesternStandardTime, name: "Australian Central Western Standard Time", offset: i$2.UTC_PLUS_8_45 });
-({ dst: { is: true, uses: true }, id: n$3.AustralianEasternDaylightSavingTime, name: "Australian Eastern Daylight Saving Time", offset: i$2.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.AustralianEasternStandardTime, name: "Australian Eastern Standard Time", offset: i$2.UTC_PLUS_10 });
-({ dst: { is: false, uses: true }, id: n$3.AustralianEasternTime, name: "Australian Eastern Time", offset: i$2.UTC_PLUS_10 });
-({ dst: { is: false, uses: true }, id: n$3.AustralianWesternStandardTime, name: "Australian Western Standard Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.AzerbaijanTime, name: "Azerbaijan Time", offset: i$2.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.AzoresStandardTime, name: "Azores Standard Time", offset: i$2.UTC_MINUS_1 });
-({ dst: { is: true, uses: true }, id: n$3.AzoresSummerTime, name: "Azores Summer Time", offset: i$2.UTC_0 });
-({ dst: { is: false, uses: true }, id: n$3.BakerIslandTime, name: "Baker Island Time", offset: i$2.UTC_MINUS_12 });
-({ dst: { is: false, uses: true }, id: n$3.BangladeshStandardTime, name: "Bangladesh Standard Time", offset: i$2.UTC_PLUS_6 });
-({ dst: { is: false, uses: true }, id: n$3.BhutanTime, name: "Bhutan Time", offset: i$2.UTC_PLUS_6 });
-({ dst: { is: false, uses: true }, id: n$3.BoliviaTime, name: "Bolivia Time", offset: i$2.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.BougainvilleStandardTime, name: "Bougainville Standard Time", offset: i$2.UTC_PLUS_11 });
-({ dst: { is: true, uses: true }, id: n$3.BrasiliaSummerTime, name: "Brasilia Summer Time", offset: i$2.UTC_MINUS_2 });
-({ dst: { is: false, uses: true }, id: n$3.BrasiliaTime, name: "Brasilia Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.BritishIndianOceanTime, name: "British Indian Ocean Time", offset: i$2.UTC_PLUS_6 });
-({ dst: { is: true, uses: true }, id: n$3.BritishSummerTime, name: "British Summer Time", offset: i$2.UTC_PLUS_1 });
-({ dst: { is: false, uses: true }, id: n$3.BruneiTime, name: "Brunei Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.CapeVerdeTime, name: "Cape Verde Time", offset: i$2.UTC_MINUS_1 });
-({ dst: { is: false, uses: true }, id: n$3.CentralAfricaTime, name: "Central Africa Time", offset: i$2.UTC_PLUS_2 });
-({ dst: { is: true, uses: true }, id: n$3.CentralDaylightTime, name: "Central Daylight Time", offset: i$2.UTC_MINUS_5 });
-({ dst: { is: true, uses: true }, id: n$3.CentralEuropeanSummerTime, name: "Central European Summer Time", offset: i$2.UTC_PLUS_2 });
-({ dst: { is: false, uses: true }, id: n$3.CentralEuropeanTime, name: "Central European Time", offset: i$2.UTC_PLUS_1 });
-({ dst: { is: false, uses: true }, id: n$3.CentralIndonesiaTime, name: "Central Indonesia Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.CentralStandardTime, name: "Central Standard Time", offset: i$2.UTC_MINUS_6 });
-({ dst: { is: false, uses: true }, id: n$3.CentralTime, name: "Central Time", offset: i$2.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.CentralWesternStandardTime, name: "Central Western Standard Time", offset: i$2.UTC_PLUS_8_45 });
-({ dst: { is: false, uses: true }, id: n$3.ChamorroStandardTime, name: "Chamorro Standard Time", offset: i$2.UTC_PLUS_10 });
-({ dst: { is: true, uses: true }, id: n$3.ChathamDaylightTime, name: "Chatham Daylight Time", offset: i$2.UTC_PLUS_13_45 });
-({ dst: { is: false, uses: true }, id: n$3.ChathamStandardTime, name: "Chatham Standard Time", offset: i$2.UTC_PLUS_12_45 });
-({ dst: { is: false, uses: true }, id: n$3.ChileStandardTime, name: "Chile Standard Time", offset: i$2.UTC_MINUS_4 });
-({ dst: { is: true, uses: true }, id: n$3.ChileSummerTime, name: "Chile Summer Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.ChinaStandardTime, name: "China Standard Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.ChoibalsanStandardTime, name: "Choibalsan Standard Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: true, uses: true }, id: n$3.ChoibalsanSummerTime, name: "Choibalsan Summer Time", offset: i$2.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: n$3.ChristmasIslandTime, name: "Christmas Island Time", offset: i$2.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: n$3.ChuukTime, name: "Chuuk Time", offset: i$2.UTC_PLUS_10 });
-({ dst: { is: false, uses: true }, id: n$3.ClipptertonIslandStandardTime, name: "Clippterton Island Standard Time", offset: i$2.UTC_MINUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.CocosIslandsTime, name: "Cocos Standard Time", offset: i$2.UTC_PLUS_6_30 });
-({ dst: { is: true, uses: true }, id: n$3.ColombiaSummerTime, name: "Colombia Summer Time", offset: i$2.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.ColombiaTime, name: "Colombia Time", offset: i$2.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.CookIslandTime, name: "Cook Island Time", offset: i$2.UTC_MINUS_10 });
-({ dst: { is: false, uses: true }, id: n$3.CoordinatedUniversalTime, name: "Coordinated Universal Time", offset: i$2.UTC_0 });
-({ dst: { is: true, uses: true }, id: n$3.CubaDaylightTime, name: "Cuba Daylight Time", offset: i$2.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.CubaStandardTime, name: "Cuba Standard Time", offset: i$2.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.DavisTime, name: "Davis Time", offset: i$2.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: n$3.DumontDUrvilleTime, name: "Dumont D'Urville Time", offset: i$2.UTC_PLUS_10 });
-({ dst: { is: false, uses: true }, id: n$3.EastAfricaTime, name: "East Africa Time", offset: i$2.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.EasterIslandStandardTime, name: "Easter Island Standard Time", offset: i$2.UTC_MINUS_6 });
-({ dst: { is: true, uses: true }, id: n$3.EasterIslandSummerTime, name: "Easter Island Summer Time", offset: i$2.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.EasternCaribbeanTime, name: "Eastern Caribbean Time", offset: i$2.UTC_MINUS_4 });
-({ dst: { is: true, uses: true }, id: n$3.EasternDaylightTime, name: "Eastern Daylight Time", offset: i$2.UTC_MINUS_4 });
-({ dst: { is: true, uses: true }, id: n$3.EasternEuropeanSummerTime, name: "Eastern European Summer Time", offset: i$2.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.EasternEuropeanTime, name: "Eastern European Time", offset: i$2.UTC_PLUS_2 });
-({ dst: { is: true, uses: true }, id: n$3.EasternGreenlandSummerTime, name: "Eastern Greenland Summer Time", offset: i$2.UTC_0 });
-({ dst: { is: false, uses: true }, id: n$3.EasternGreenlandTime, name: "Eastern Greenland Time", offset: i$2.UTC_MINUS_1 });
-({ dst: { is: false, uses: true }, id: n$3.EasternIndonesianTime, name: "Eastern Indonesian Time", offset: i$2.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: n$3.EasternStandardTime, name: "Eastern Standard Time", offset: i$2.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.EasternTime, name: "Eastern Time", offset: i$2.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.EcuadorTime, name: "Ecuador Time", offset: i$2.UTC_MINUS_5 });
-({ dst: { is: true, uses: true }, id: n$3.FalklandIslandsSummerTime, name: "Falkland Islands Summer Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.FalklandIslandsTime, name: "Falkland Islands Time", offset: i$2.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.FernandoDeNoronhaTime, name: "Fernando de Noronha Time", offset: i$2.UTC_MINUS_2 });
-({ dst: { is: false, uses: true }, id: n$3.FijiTime, name: "Fiji Time", offset: i$2.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: n$3.FrenchGuianaTime, name: "French Guiana Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.FrenchSouthernAndAntarcticTime, name: "French Southern and Antarctic Time", offset: i$2.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.FurtherEasternEuropeanTime, name: "Further Eastern European Time", offset: i$2.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.GalapagosTime, name: "Galapagos Time", offset: i$2.UTC_MINUS_6 });
-({ dst: { is: false, uses: true }, id: n$3.GambierIslandTime, name: "Gambier Island Time", offset: i$2.UTC_MINUS_9 });
-({ dst: { is: false, uses: true }, id: n$3.GambierIslandsTime, name: "Gambier Islands Time", offset: i$2.UTC_MINUS_9 });
-({ dst: { is: false, uses: true }, id: n$3.GeorgiaStandardTime, name: "Georgia Standard Time", offset: i$2.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.GilbertIslandTime, name: "Gilbert Island Time", offset: i$2.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: n$3.GreenwichMeanTime, name: "Greenwich Mean Time", offset: i$2.UTC_0 });
-({ dst: { is: false, uses: true }, id: n$3.GulfStandardTime, name: "Gulf Standard Time", offset: i$2.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.GuyanaTime, name: "Guyana Time", offset: i$2.UTC_MINUS_4 });
-({ dst: { is: true, uses: true }, id: n$3.HawaiiAleutianDaylightTime, name: "Hawaii-Aleutian Daylight Time", offset: i$2.UTC_MINUS_9 });
-({ dst: { is: false, uses: true }, id: n$3.HawaiiAleutianStandardTime, name: "Hawaii-Aleutian Standard Time", offset: i$2.UTC_MINUS_10 });
-({ dst: { is: false, uses: true }, id: n$3.HeardAndMcDonaldIslandsTime, name: "Heard and McDonald Islands Time", offset: i$2.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.HongKongTime, name: "Hong Kong Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: true, uses: true }, id: n$3.HovdSummerTime, name: "Hovd Summer Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.HovdTime, name: "Hovd Time", offset: i$2.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: n$3.IndianOceanTime, name: "Indian Ocean Time", offset: i$2.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.IndianStandardTime, name: "Indian Standard Time", offset: i$2.UTC_PLUS_5_30 });
-({ dst: { is: false, uses: true }, id: n$3.IndochinaTime, name: "Indochina Time", offset: i$2.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: n$3.InternationalDayLineWestTime, name: "International Day Line West Time", offset: i$2.UTC_MINUS_12 });
-({ dst: { is: true, uses: true }, id: n$3.IranDaylightTime, name: "Iran Daylight Time", offset: i$2.UTC_PLUS_4_30 });
-({ dst: { is: false, uses: true }, id: n$3.IranStandardTime, name: "Iran Standard Time", offset: i$2.UTC_PLUS_3_30 });
-({ dst: { is: false, uses: true }, id: n$3.IrishStandardTime, name: "Irish Standard Time", offset: i$2.UTC_PLUS_1 });
-({ dst: { is: false, uses: true }, id: n$3.IrkutskTime, name: "Irkutsk Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: true, uses: true }, id: n$3.IsraelDaylightTime, name: "Israel Daylight Time", offset: i$2.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.IsraelStandardTime, name: "Israel Standard Time", offset: i$2.UTC_PLUS_2 });
-({ dst: { is: false, uses: true }, id: n$3.JapanStandardTime, name: "Japan Standard Time", offset: i$2.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: n$3.KaliningradTime, name: "Kaliningrad Time", offset: i$2.UTC_PLUS_2 });
-({ dst: { is: false, uses: true }, id: n$3.KamchatkaTime, name: "Kamchatka Time", offset: i$2.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: n$3.KoreaStandardTime, name: "Korea Standard Time", offset: i$2.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: n$3.KosraeTime, name: "Kosrae Time", offset: i$2.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.KrasnoyarskTime, name: "Krasnoyarsk Time", offset: i$2.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: n$3.KyrgyzstanTime, name: "Kyrgyzstan Time", offset: i$2.UTC_PLUS_6 });
-({ dst: { is: false, uses: true }, id: n$3.LineIslandsTime, name: "Line Islands Time", offset: i$2.UTC_PLUS_14 });
-({ dst: { is: false, uses: true }, id: n$3.LordHoweStandardTime, name: "Lord Howe Standard Time", offset: i$2.UTC_PLUS_10_30 });
-({ dst: { is: false, uses: true }, id: n$3.LordHoweSummerTime, name: "Lord Howe Summer Time", offset: i$2.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.MacquarieIslandStationTime, name: "Macquarie Island Station Time", offset: i$2.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.MagadanTime, name: "Magadan Time", offset: i$2.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: n$3.MalaysiaStandardTime, name: "Malaysia Standard Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.MalaysiaTime, name: "Malaysia Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.MaldivesTime, name: "Maldives Time", offset: i$2.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.MarquesasIslandsTime, name: "Marquesas Islands Time", offset: i$2.UTC_PLUS_9_30 });
-({ dst: { is: false, uses: true }, id: n$3.MarshallIslandsTime, name: "Marshall Islands Time", offset: i$2.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: n$3.MauritiusTime, name: "Mauritius Time", offset: i$2.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.MawsonStationTime, name: "Mawson Station Time", offset: i$2.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.MiddleEuropeanSummerTime, name: "Middle European Summer Time", offset: i$2.UTC_PLUS_2 });
-({ dst: { is: false, uses: true }, id: n$3.MiddleEuropeanTime, name: "Middle European Time", offset: i$2.UTC_PLUS_1 });
-({ dst: { is: false, uses: true }, id: n$3.MoscowTime, name: "Moscow Time", offset: i$2.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.MountainDaylightTime, name: "Mountain Daylight Time", offset: i$2.UTC_MINUS_6 });
-({ dst: { is: false, uses: true }, id: n$3.MountainStandardTime, name: "Mountain Standard Time", offset: i$2.UTC_MINUS_7 });
-({ dst: { is: false, uses: true }, id: n$3.MyanmarStandardTime, name: "Myanmar Standard Time", offset: i$2.UTC_PLUS_6_30 });
-({ dst: { is: false, uses: true }, id: n$3.NepalTime, name: "Nepal Time", offset: i$2.UTC_PLUS_5_45 });
-({ dst: { is: false, uses: true }, id: n$3.NauruTime, name: "Nauru Time", offset: i$2.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: n$3.NewCaledoniaTime, name: "New Caledonia Time", offset: i$2.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.NewZealandDaylightTime, name: "New Zealand Daylight Time", offset: i$2.UTC_PLUS_13 });
-({ dst: { is: false, uses: true }, id: n$3.NewZealandStandardTime, name: "New Zealand Standard Time", offset: i$2.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: n$3.NewfoundlandDaylightTime, name: "Newfoundland Daylight Time", offset: i$2.UTC_MINUS_2_30 });
-({ dst: { is: false, uses: true }, id: n$3.NewfoundlandTime, name: "Newfoundland Time", offset: i$2.UTC_MINUS_3_30 });
-({ dst: { is: false, uses: true }, id: n$3.NiueTime, name: "Niue Time", offset: i$2.UTC_MINUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.NorfolkIslandTime, name: "Norfolk Island Time", offset: i$2.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.NovosibirskTime, name: "Novosibirsk Time", offset: i$2.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: n$3.OmskTime, name: "Omsk Time", offset: i$2.UTC_PLUS_6 });
-({ dst: { is: false, uses: true }, id: n$3.OralTime, name: "Oral Time", offset: i$2.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.PacificDaylightTime, name: "Pacific Daylight Time", offset: i$2.UTC_MINUS_7 });
-({ dst: { is: false, uses: true }, id: n$3.PacificStandardTime, name: "Pacific Standard Time", offset: i$2.UTC_MINUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.PakistanStandardTime, name: "Pakistan Standard Time", offset: i$2.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.PalauTime, name: "Palau Time", offset: i$2.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: n$3.PapuaNewGuineaTime, name: "Papua New Guinea Time", offset: i$2.UTC_PLUS_10 });
-({ dst: { is: false, uses: true }, id: n$3.ParaguaySummerTime, name: "Paraguay Summer Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.ParaguayTime, name: "Paraguay Time", offset: i$2.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.PeruTime, name: "Peru Time", offset: i$2.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.PhilippineStandardTime, name: "Philippine Standard Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.PhilippineTime, name: "Philippine Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.PhoenixIslandTime, name: "Phoenix Island Time", offset: i$2.UTC_PLUS_13 });
-({ dst: { is: false, uses: true }, id: n$3.PitcairnTime, name: "Pitcairn Time", offset: i$2.UTC_MINUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.PohnpeiStandardTime, name: "Pohnpei Standard Time", offset: i$2.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.ReunionTime, name: "Reunion Time", offset: i$2.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.RotheraResearchStationTime, name: "Rothera Research Station Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.SaintPierreAndMiquelonDaylightTime, name: "Saint Pierre and Miquelon Daylight Time", offset: i$2.UTC_MINUS_2 });
-({ dst: { is: false, uses: true }, id: n$3.SaintPierreAndMiquelonStandardTime, name: "Saint Pierre and Miquelon Standard Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.SakhalinIslandTime, name: "Sakhalin Island Time", offset: i$2.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.SamaraTime, name: "Samara Time", offset: i$2.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.SamoaDaylightTime, name: "Samoa Daylight Time", offset: i$2.UTC_MINUS_10 });
-({ dst: { is: false, uses: true }, id: n$3.SamoaStandardTime, name: "Samoa Standard Time", offset: i$2.UTC_MINUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.SeychellesTime, name: "Seychelles Time", offset: i$2.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.ShowaStationTime, name: "Showa Station Time", offset: i$2.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.SingaporeStandardTime, name: "Singapore Standard Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.SingaporeTime, name: "Singapore Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.SolomonIslandsTime, name: "Solomon Islands Time", offset: i$2.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.SouthAfricanStandardTime, name: "South African Standard Time", offset: i$2.UTC_PLUS_2 });
-({ dst: { is: false, uses: true }, id: n$3.SouthGeorgiaAndTheSouthSandwichIslandsTime, name: "South Georgia and the South Sandwich Islands Time", offset: i$2.UTC_MINUS_2 });
-({ dst: { is: false, uses: true }, id: n$3.SrednekolymskTime, name: "Srednekolymsk Time", offset: i$2.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.SriLankaStandardTime, name: "Sri Lanka Standard Time", offset: i$2.UTC_PLUS_5_30 });
-({ dst: { is: false, uses: true }, id: n$3.SurinameTime, name: "Suriname Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.TahitiTime, name: "Tahiti Time", offset: i$2.UTC_MINUS_10 });
-({ dst: { is: false, uses: true }, id: n$3.TajikistanTime, name: "Tajikistan Time", offset: i$2.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.ThailandStandardTime, name: "Thailand Standard Time", offset: i$2.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: n$3.TimorLesteTime, name: "Timor-Leste Time", offset: i$2.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: n$3.TokelauTime, name: "Tokelau Time", offset: i$2.UTC_PLUS_13 });
-({ dst: { is: false, uses: true }, id: n$3.TongaTime, name: "Tonga Time", offset: i$2.UTC_PLUS_13 });
-({ dst: { is: false, uses: true }, id: n$3.TurkeyTime, name: "Turkey Time", offset: i$2.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.TurkmenistanTime, name: "Turkmenistan Time", offset: i$2.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.TuvaluTime, name: "Tuvalu Time", offset: i$2.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: n$3.UlaanbaatarStandardTime, name: "Ulaanbaatar Standard Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.UlaanbaatarSummerTime, name: "Ulaanbaatar Summer Time", offset: i$2.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: n$3.UruguayStandardTime, name: "Uruguay Standard Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.UruguaySummerTime, name: "Uruguay Summer Time", offset: i$2.UTC_MINUS_2 });
-({ dst: { is: false, uses: true }, id: n$3.UzbekistanTime, name: "Uzbekistan Time", offset: i$2.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.VanuatuTime, name: "Vanuatu Time", offset: i$2.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: n$3.VenezuelaStandardTime, name: "Venezuela Standard Time", offset: i$2.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.VladivostokTime, name: "Vladivostok Time", offset: i$2.UTC_PLUS_10 });
-({ dst: { is: false, uses: true }, id: n$3.VolgogradTime, name: "Volgograd Time", offset: i$2.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: n$3.VostokStationTime, name: "Vostok Station Time", offset: i$2.UTC_PLUS_6 });
-({ dst: { is: false, uses: true }, id: n$3.WakeIslandTime, name: "Wake Island Time", offset: i$2.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: n$3.WestAfricaSummerTime, name: "West Africa Summer Time", offset: i$2.UTC_PLUS_2 });
-({ dst: { is: false, uses: true }, id: n$3.WestAfricaTime, name: "West Africa Time", offset: i$2.UTC_PLUS_1 });
-({ dst: { is: false, uses: true }, id: n$3.WestGreenlandSummerTime, name: "West Greenland Summer Time", offset: i$2.UTC_MINUS_2 });
-({ dst: { is: false, uses: true }, id: n$3.WestGreenlandTime, name: "West Greenland Time", offset: i$2.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: n$3.WestKazakhstanTime, name: "West Kazakhstan Time", offset: i$2.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: n$3.WesternEuropeanSummerTime, name: "Western European Summer Time", offset: i$2.UTC_PLUS_1 });
-({ dst: { is: false, uses: true }, id: n$3.WesternEuropeanTime, name: "Western European Time", offset: i$2.UTC_0 });
-({ dst: { is: false, uses: true }, id: n$3.WesternIndonesianTime, name: "Western Indonesian Time", offset: i$2.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: n$3.WesternStandardTime, name: "Western Standard Time", offset: i$2.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: n$3.YakutskTime, name: "Yakutsk Time", offset: i$2.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: n$3.YekaterinburgTime, name: "Yekaterinburg Time", offset: i$2.UTC_PLUS_5 });
+})(n$2 || (n$2 = {}));
+({ dst: { is: false, uses: true }, id: n$2.AcreTime, name: "Acre Time", offset: i$2.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.AfghanistanTime, name: "Afghanistan Time", offset: i$2.UTC_PLUS_4_30 });
+({ dst: { is: false, uses: true }, id: n$2.AIXCentralEuropeanTime, name: "AIX Central European Time", offset: i$2.UTC_PLUS_1 });
+({ dst: { is: true, uses: true }, id: n$2.AlaskaDaylightTime, name: "Alaska Daylight Time", offset: i$2.UTC_MINUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.AlaskaStandardTime, name: "Alaska Standard Time", offset: i$2.UTC_MINUS_9 });
+({ dst: { is: false, uses: true }, id: n$2.AlmaAtaTime, name: "Alma-Ata Time", offset: i$2.UTC_PLUS_6 });
+({ dst: { is: false, uses: true }, id: n$2.AmazonSummerTime, name: "Amazon Summer Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.AmazonTime, name: "Amazon Time", offset: i$2.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.AnadyrTime, name: "Anadyr Time", offset: i$2.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: n$2.AqtobeTime, name: "Aqtobe Time", offset: i$2.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.ArabiaStandardTime, name: "Arabia Standard Time", offset: i$2.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.ArgentinaTime, name: "Argentina Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.ArmeniaTime, name: "Armenia Time", offset: i$2.UTC_PLUS_4 });
+({ dst: { is: true, uses: true }, id: n$2.AtlanticDaylightTime, name: "Atlantic Daylight Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.AtlanticStandardTime, name: "Atlantic Standard Time", offset: i$2.UTC_MINUS_4 });
+({ dst: { is: true, uses: true }, id: n$2.AustralianCentralDaylightSavingTime, name: "Australian Central Daylight Saving Time", offset: i$2.UTC_PLUS_10_30 });
+({ dst: { is: false, uses: true }, id: n$2.AustralianCentralStandardTime, name: "Australian Central Standard Time", offset: i$2.UTC_PLUS_9_30 });
+({ dst: { is: false, uses: true }, id: n$2.AustralianCentralWesternStandardTime, name: "Australian Central Western Standard Time", offset: i$2.UTC_PLUS_8_45 });
+({ dst: { is: true, uses: true }, id: n$2.AustralianEasternDaylightSavingTime, name: "Australian Eastern Daylight Saving Time", offset: i$2.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.AustralianEasternStandardTime, name: "Australian Eastern Standard Time", offset: i$2.UTC_PLUS_10 });
+({ dst: { is: false, uses: true }, id: n$2.AustralianEasternTime, name: "Australian Eastern Time", offset: i$2.UTC_PLUS_10 });
+({ dst: { is: false, uses: true }, id: n$2.AustralianWesternStandardTime, name: "Australian Western Standard Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.AzerbaijanTime, name: "Azerbaijan Time", offset: i$2.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.AzoresStandardTime, name: "Azores Standard Time", offset: i$2.UTC_MINUS_1 });
+({ dst: { is: true, uses: true }, id: n$2.AzoresSummerTime, name: "Azores Summer Time", offset: i$2.UTC_0 });
+({ dst: { is: false, uses: true }, id: n$2.BakerIslandTime, name: "Baker Island Time", offset: i$2.UTC_MINUS_12 });
+({ dst: { is: false, uses: true }, id: n$2.BangladeshStandardTime, name: "Bangladesh Standard Time", offset: i$2.UTC_PLUS_6 });
+({ dst: { is: false, uses: true }, id: n$2.BhutanTime, name: "Bhutan Time", offset: i$2.UTC_PLUS_6 });
+({ dst: { is: false, uses: true }, id: n$2.BoliviaTime, name: "Bolivia Time", offset: i$2.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.BougainvilleStandardTime, name: "Bougainville Standard Time", offset: i$2.UTC_PLUS_11 });
+({ dst: { is: true, uses: true }, id: n$2.BrasiliaSummerTime, name: "Brasilia Summer Time", offset: i$2.UTC_MINUS_2 });
+({ dst: { is: false, uses: true }, id: n$2.BrasiliaTime, name: "Brasilia Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.BritishIndianOceanTime, name: "British Indian Ocean Time", offset: i$2.UTC_PLUS_6 });
+({ dst: { is: true, uses: true }, id: n$2.BritishSummerTime, name: "British Summer Time", offset: i$2.UTC_PLUS_1 });
+({ dst: { is: false, uses: true }, id: n$2.BruneiTime, name: "Brunei Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.CapeVerdeTime, name: "Cape Verde Time", offset: i$2.UTC_MINUS_1 });
+({ dst: { is: false, uses: true }, id: n$2.CentralAfricaTime, name: "Central Africa Time", offset: i$2.UTC_PLUS_2 });
+({ dst: { is: true, uses: true }, id: n$2.CentralDaylightTime, name: "Central Daylight Time", offset: i$2.UTC_MINUS_5 });
+({ dst: { is: true, uses: true }, id: n$2.CentralEuropeanSummerTime, name: "Central European Summer Time", offset: i$2.UTC_PLUS_2 });
+({ dst: { is: false, uses: true }, id: n$2.CentralEuropeanTime, name: "Central European Time", offset: i$2.UTC_PLUS_1 });
+({ dst: { is: false, uses: true }, id: n$2.CentralIndonesiaTime, name: "Central Indonesia Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.CentralStandardTime, name: "Central Standard Time", offset: i$2.UTC_MINUS_6 });
+({ dst: { is: false, uses: true }, id: n$2.CentralTime, name: "Central Time", offset: i$2.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.CentralWesternStandardTime, name: "Central Western Standard Time", offset: i$2.UTC_PLUS_8_45 });
+({ dst: { is: false, uses: true }, id: n$2.ChamorroStandardTime, name: "Chamorro Standard Time", offset: i$2.UTC_PLUS_10 });
+({ dst: { is: true, uses: true }, id: n$2.ChathamDaylightTime, name: "Chatham Daylight Time", offset: i$2.UTC_PLUS_13_45 });
+({ dst: { is: false, uses: true }, id: n$2.ChathamStandardTime, name: "Chatham Standard Time", offset: i$2.UTC_PLUS_12_45 });
+({ dst: { is: false, uses: true }, id: n$2.ChileStandardTime, name: "Chile Standard Time", offset: i$2.UTC_MINUS_4 });
+({ dst: { is: true, uses: true }, id: n$2.ChileSummerTime, name: "Chile Summer Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.ChinaStandardTime, name: "China Standard Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.ChoibalsanStandardTime, name: "Choibalsan Standard Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: true, uses: true }, id: n$2.ChoibalsanSummerTime, name: "Choibalsan Summer Time", offset: i$2.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: n$2.ChristmasIslandTime, name: "Christmas Island Time", offset: i$2.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: n$2.ChuukTime, name: "Chuuk Time", offset: i$2.UTC_PLUS_10 });
+({ dst: { is: false, uses: true }, id: n$2.ClipptertonIslandStandardTime, name: "Clippterton Island Standard Time", offset: i$2.UTC_MINUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.CocosIslandsTime, name: "Cocos Standard Time", offset: i$2.UTC_PLUS_6_30 });
+({ dst: { is: true, uses: true }, id: n$2.ColombiaSummerTime, name: "Colombia Summer Time", offset: i$2.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.ColombiaTime, name: "Colombia Time", offset: i$2.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.CookIslandTime, name: "Cook Island Time", offset: i$2.UTC_MINUS_10 });
+({ dst: { is: false, uses: true }, id: n$2.CoordinatedUniversalTime, name: "Coordinated Universal Time", offset: i$2.UTC_0 });
+({ dst: { is: true, uses: true }, id: n$2.CubaDaylightTime, name: "Cuba Daylight Time", offset: i$2.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.CubaStandardTime, name: "Cuba Standard Time", offset: i$2.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.DavisTime, name: "Davis Time", offset: i$2.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: n$2.DumontDUrvilleTime, name: "Dumont D'Urville Time", offset: i$2.UTC_PLUS_10 });
+({ dst: { is: false, uses: true }, id: n$2.EastAfricaTime, name: "East Africa Time", offset: i$2.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.EasterIslandStandardTime, name: "Easter Island Standard Time", offset: i$2.UTC_MINUS_6 });
+({ dst: { is: true, uses: true }, id: n$2.EasterIslandSummerTime, name: "Easter Island Summer Time", offset: i$2.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.EasternCaribbeanTime, name: "Eastern Caribbean Time", offset: i$2.UTC_MINUS_4 });
+({ dst: { is: true, uses: true }, id: n$2.EasternDaylightTime, name: "Eastern Daylight Time", offset: i$2.UTC_MINUS_4 });
+({ dst: { is: true, uses: true }, id: n$2.EasternEuropeanSummerTime, name: "Eastern European Summer Time", offset: i$2.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.EasternEuropeanTime, name: "Eastern European Time", offset: i$2.UTC_PLUS_2 });
+({ dst: { is: true, uses: true }, id: n$2.EasternGreenlandSummerTime, name: "Eastern Greenland Summer Time", offset: i$2.UTC_0 });
+({ dst: { is: false, uses: true }, id: n$2.EasternGreenlandTime, name: "Eastern Greenland Time", offset: i$2.UTC_MINUS_1 });
+({ dst: { is: false, uses: true }, id: n$2.EasternIndonesianTime, name: "Eastern Indonesian Time", offset: i$2.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: n$2.EasternStandardTime, name: "Eastern Standard Time", offset: i$2.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.EasternTime, name: "Eastern Time", offset: i$2.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.EcuadorTime, name: "Ecuador Time", offset: i$2.UTC_MINUS_5 });
+({ dst: { is: true, uses: true }, id: n$2.FalklandIslandsSummerTime, name: "Falkland Islands Summer Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.FalklandIslandsTime, name: "Falkland Islands Time", offset: i$2.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.FernandoDeNoronhaTime, name: "Fernando de Noronha Time", offset: i$2.UTC_MINUS_2 });
+({ dst: { is: false, uses: true }, id: n$2.FijiTime, name: "Fiji Time", offset: i$2.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: n$2.FrenchGuianaTime, name: "French Guiana Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.FrenchSouthernAndAntarcticTime, name: "French Southern and Antarctic Time", offset: i$2.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.FurtherEasternEuropeanTime, name: "Further Eastern European Time", offset: i$2.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.GalapagosTime, name: "Galapagos Time", offset: i$2.UTC_MINUS_6 });
+({ dst: { is: false, uses: true }, id: n$2.GambierIslandTime, name: "Gambier Island Time", offset: i$2.UTC_MINUS_9 });
+({ dst: { is: false, uses: true }, id: n$2.GambierIslandsTime, name: "Gambier Islands Time", offset: i$2.UTC_MINUS_9 });
+({ dst: { is: false, uses: true }, id: n$2.GeorgiaStandardTime, name: "Georgia Standard Time", offset: i$2.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.GilbertIslandTime, name: "Gilbert Island Time", offset: i$2.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: n$2.GreenwichMeanTime, name: "Greenwich Mean Time", offset: i$2.UTC_0 });
+({ dst: { is: false, uses: true }, id: n$2.GulfStandardTime, name: "Gulf Standard Time", offset: i$2.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.GuyanaTime, name: "Guyana Time", offset: i$2.UTC_MINUS_4 });
+({ dst: { is: true, uses: true }, id: n$2.HawaiiAleutianDaylightTime, name: "Hawaii-Aleutian Daylight Time", offset: i$2.UTC_MINUS_9 });
+({ dst: { is: false, uses: true }, id: n$2.HawaiiAleutianStandardTime, name: "Hawaii-Aleutian Standard Time", offset: i$2.UTC_MINUS_10 });
+({ dst: { is: false, uses: true }, id: n$2.HeardAndMcDonaldIslandsTime, name: "Heard and McDonald Islands Time", offset: i$2.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.HongKongTime, name: "Hong Kong Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: true, uses: true }, id: n$2.HovdSummerTime, name: "Hovd Summer Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.HovdTime, name: "Hovd Time", offset: i$2.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: n$2.IndianOceanTime, name: "Indian Ocean Time", offset: i$2.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.IndianStandardTime, name: "Indian Standard Time", offset: i$2.UTC_PLUS_5_30 });
+({ dst: { is: false, uses: true }, id: n$2.IndochinaTime, name: "Indochina Time", offset: i$2.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: n$2.InternationalDayLineWestTime, name: "International Day Line West Time", offset: i$2.UTC_MINUS_12 });
+({ dst: { is: true, uses: true }, id: n$2.IranDaylightTime, name: "Iran Daylight Time", offset: i$2.UTC_PLUS_4_30 });
+({ dst: { is: false, uses: true }, id: n$2.IranStandardTime, name: "Iran Standard Time", offset: i$2.UTC_PLUS_3_30 });
+({ dst: { is: false, uses: true }, id: n$2.IrishStandardTime, name: "Irish Standard Time", offset: i$2.UTC_PLUS_1 });
+({ dst: { is: false, uses: true }, id: n$2.IrkutskTime, name: "Irkutsk Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: true, uses: true }, id: n$2.IsraelDaylightTime, name: "Israel Daylight Time", offset: i$2.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.IsraelStandardTime, name: "Israel Standard Time", offset: i$2.UTC_PLUS_2 });
+({ dst: { is: false, uses: true }, id: n$2.JapanStandardTime, name: "Japan Standard Time", offset: i$2.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: n$2.KaliningradTime, name: "Kaliningrad Time", offset: i$2.UTC_PLUS_2 });
+({ dst: { is: false, uses: true }, id: n$2.KamchatkaTime, name: "Kamchatka Time", offset: i$2.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: n$2.KoreaStandardTime, name: "Korea Standard Time", offset: i$2.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: n$2.KosraeTime, name: "Kosrae Time", offset: i$2.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.KrasnoyarskTime, name: "Krasnoyarsk Time", offset: i$2.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: n$2.KyrgyzstanTime, name: "Kyrgyzstan Time", offset: i$2.UTC_PLUS_6 });
+({ dst: { is: false, uses: true }, id: n$2.LineIslandsTime, name: "Line Islands Time", offset: i$2.UTC_PLUS_14 });
+({ dst: { is: false, uses: true }, id: n$2.LordHoweStandardTime, name: "Lord Howe Standard Time", offset: i$2.UTC_PLUS_10_30 });
+({ dst: { is: false, uses: true }, id: n$2.LordHoweSummerTime, name: "Lord Howe Summer Time", offset: i$2.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.MacquarieIslandStationTime, name: "Macquarie Island Station Time", offset: i$2.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.MagadanTime, name: "Magadan Time", offset: i$2.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: n$2.MalaysiaStandardTime, name: "Malaysia Standard Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.MalaysiaTime, name: "Malaysia Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.MaldivesTime, name: "Maldives Time", offset: i$2.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.MarquesasIslandsTime, name: "Marquesas Islands Time", offset: i$2.UTC_PLUS_9_30 });
+({ dst: { is: false, uses: true }, id: n$2.MarshallIslandsTime, name: "Marshall Islands Time", offset: i$2.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: n$2.MauritiusTime, name: "Mauritius Time", offset: i$2.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.MawsonStationTime, name: "Mawson Station Time", offset: i$2.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.MiddleEuropeanSummerTime, name: "Middle European Summer Time", offset: i$2.UTC_PLUS_2 });
+({ dst: { is: false, uses: true }, id: n$2.MiddleEuropeanTime, name: "Middle European Time", offset: i$2.UTC_PLUS_1 });
+({ dst: { is: false, uses: true }, id: n$2.MoscowTime, name: "Moscow Time", offset: i$2.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.MountainDaylightTime, name: "Mountain Daylight Time", offset: i$2.UTC_MINUS_6 });
+({ dst: { is: false, uses: true }, id: n$2.MountainStandardTime, name: "Mountain Standard Time", offset: i$2.UTC_MINUS_7 });
+({ dst: { is: false, uses: true }, id: n$2.MyanmarStandardTime, name: "Myanmar Standard Time", offset: i$2.UTC_PLUS_6_30 });
+({ dst: { is: false, uses: true }, id: n$2.NepalTime, name: "Nepal Time", offset: i$2.UTC_PLUS_5_45 });
+({ dst: { is: false, uses: true }, id: n$2.NauruTime, name: "Nauru Time", offset: i$2.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: n$2.NewCaledoniaTime, name: "New Caledonia Time", offset: i$2.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.NewZealandDaylightTime, name: "New Zealand Daylight Time", offset: i$2.UTC_PLUS_13 });
+({ dst: { is: false, uses: true }, id: n$2.NewZealandStandardTime, name: "New Zealand Standard Time", offset: i$2.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: n$2.NewfoundlandDaylightTime, name: "Newfoundland Daylight Time", offset: i$2.UTC_MINUS_2_30 });
+({ dst: { is: false, uses: true }, id: n$2.NewfoundlandTime, name: "Newfoundland Time", offset: i$2.UTC_MINUS_3_30 });
+({ dst: { is: false, uses: true }, id: n$2.NiueTime, name: "Niue Time", offset: i$2.UTC_MINUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.NorfolkIslandTime, name: "Norfolk Island Time", offset: i$2.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.NovosibirskTime, name: "Novosibirsk Time", offset: i$2.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: n$2.OmskTime, name: "Omsk Time", offset: i$2.UTC_PLUS_6 });
+({ dst: { is: false, uses: true }, id: n$2.OralTime, name: "Oral Time", offset: i$2.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.PacificDaylightTime, name: "Pacific Daylight Time", offset: i$2.UTC_MINUS_7 });
+({ dst: { is: false, uses: true }, id: n$2.PacificStandardTime, name: "Pacific Standard Time", offset: i$2.UTC_MINUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.PakistanStandardTime, name: "Pakistan Standard Time", offset: i$2.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.PalauTime, name: "Palau Time", offset: i$2.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: n$2.PapuaNewGuineaTime, name: "Papua New Guinea Time", offset: i$2.UTC_PLUS_10 });
+({ dst: { is: false, uses: true }, id: n$2.ParaguaySummerTime, name: "Paraguay Summer Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.ParaguayTime, name: "Paraguay Time", offset: i$2.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.PeruTime, name: "Peru Time", offset: i$2.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.PhilippineStandardTime, name: "Philippine Standard Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.PhilippineTime, name: "Philippine Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.PhoenixIslandTime, name: "Phoenix Island Time", offset: i$2.UTC_PLUS_13 });
+({ dst: { is: false, uses: true }, id: n$2.PitcairnTime, name: "Pitcairn Time", offset: i$2.UTC_MINUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.PohnpeiStandardTime, name: "Pohnpei Standard Time", offset: i$2.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.ReunionTime, name: "Reunion Time", offset: i$2.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.RotheraResearchStationTime, name: "Rothera Research Station Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.SaintPierreAndMiquelonDaylightTime, name: "Saint Pierre and Miquelon Daylight Time", offset: i$2.UTC_MINUS_2 });
+({ dst: { is: false, uses: true }, id: n$2.SaintPierreAndMiquelonStandardTime, name: "Saint Pierre and Miquelon Standard Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.SakhalinIslandTime, name: "Sakhalin Island Time", offset: i$2.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.SamaraTime, name: "Samara Time", offset: i$2.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.SamoaDaylightTime, name: "Samoa Daylight Time", offset: i$2.UTC_MINUS_10 });
+({ dst: { is: false, uses: true }, id: n$2.SamoaStandardTime, name: "Samoa Standard Time", offset: i$2.UTC_MINUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.SeychellesTime, name: "Seychelles Time", offset: i$2.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.ShowaStationTime, name: "Showa Station Time", offset: i$2.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.SingaporeStandardTime, name: "Singapore Standard Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.SingaporeTime, name: "Singapore Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.SolomonIslandsTime, name: "Solomon Islands Time", offset: i$2.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.SouthAfricanStandardTime, name: "South African Standard Time", offset: i$2.UTC_PLUS_2 });
+({ dst: { is: false, uses: true }, id: n$2.SouthGeorgiaAndTheSouthSandwichIslandsTime, name: "South Georgia and the South Sandwich Islands Time", offset: i$2.UTC_MINUS_2 });
+({ dst: { is: false, uses: true }, id: n$2.SrednekolymskTime, name: "Srednekolymsk Time", offset: i$2.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.SriLankaStandardTime, name: "Sri Lanka Standard Time", offset: i$2.UTC_PLUS_5_30 });
+({ dst: { is: false, uses: true }, id: n$2.SurinameTime, name: "Suriname Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.TahitiTime, name: "Tahiti Time", offset: i$2.UTC_MINUS_10 });
+({ dst: { is: false, uses: true }, id: n$2.TajikistanTime, name: "Tajikistan Time", offset: i$2.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.ThailandStandardTime, name: "Thailand Standard Time", offset: i$2.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: n$2.TimorLesteTime, name: "Timor-Leste Time", offset: i$2.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: n$2.TokelauTime, name: "Tokelau Time", offset: i$2.UTC_PLUS_13 });
+({ dst: { is: false, uses: true }, id: n$2.TongaTime, name: "Tonga Time", offset: i$2.UTC_PLUS_13 });
+({ dst: { is: false, uses: true }, id: n$2.TurkeyTime, name: "Turkey Time", offset: i$2.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.TurkmenistanTime, name: "Turkmenistan Time", offset: i$2.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.TuvaluTime, name: "Tuvalu Time", offset: i$2.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: n$2.UlaanbaatarStandardTime, name: "Ulaanbaatar Standard Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.UlaanbaatarSummerTime, name: "Ulaanbaatar Summer Time", offset: i$2.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: n$2.UruguayStandardTime, name: "Uruguay Standard Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.UruguaySummerTime, name: "Uruguay Summer Time", offset: i$2.UTC_MINUS_2 });
+({ dst: { is: false, uses: true }, id: n$2.UzbekistanTime, name: "Uzbekistan Time", offset: i$2.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.VanuatuTime, name: "Vanuatu Time", offset: i$2.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: n$2.VenezuelaStandardTime, name: "Venezuela Standard Time", offset: i$2.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.VladivostokTime, name: "Vladivostok Time", offset: i$2.UTC_PLUS_10 });
+({ dst: { is: false, uses: true }, id: n$2.VolgogradTime, name: "Volgograd Time", offset: i$2.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: n$2.VostokStationTime, name: "Vostok Station Time", offset: i$2.UTC_PLUS_6 });
+({ dst: { is: false, uses: true }, id: n$2.WakeIslandTime, name: "Wake Island Time", offset: i$2.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: n$2.WestAfricaSummerTime, name: "West Africa Summer Time", offset: i$2.UTC_PLUS_2 });
+({ dst: { is: false, uses: true }, id: n$2.WestAfricaTime, name: "West Africa Time", offset: i$2.UTC_PLUS_1 });
+({ dst: { is: false, uses: true }, id: n$2.WestGreenlandSummerTime, name: "West Greenland Summer Time", offset: i$2.UTC_MINUS_2 });
+({ dst: { is: false, uses: true }, id: n$2.WestGreenlandTime, name: "West Greenland Time", offset: i$2.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: n$2.WestKazakhstanTime, name: "West Kazakhstan Time", offset: i$2.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: n$2.WesternEuropeanSummerTime, name: "Western European Summer Time", offset: i$2.UTC_PLUS_1 });
+({ dst: { is: false, uses: true }, id: n$2.WesternEuropeanTime, name: "Western European Time", offset: i$2.UTC_0 });
+({ dst: { is: false, uses: true }, id: n$2.WesternIndonesianTime, name: "Western Indonesian Time", offset: i$2.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: n$2.WesternStandardTime, name: "Western Standard Time", offset: i$2.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: n$2.YakutskTime, name: "Yakutsk Time", offset: i$2.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: n$2.YekaterinburgTime, name: "Yekaterinburg Time", offset: i$2.UTC_PLUS_5 });
 var I;
 (function(a2) {
   a2.Africa = "Africa", a2.Americas = "Americas", a2.Asia = "Asia", a2.Europe = "Europe", a2.Oceania = "Oceania", a2.Polar = "Polar";
@@ -17845,7 +19704,7 @@ var x$1;
 (function(a2) {
   a2.CentralAmerica = "Central America", a2.EasternAsia = "Eastern Asia", a2.EasternEurope = "Eastern Europe", a2.EasternAfrica = "Eastern Africa", a2.MiddleAfrica = "Middle Africa", a2.MiddleEast = "Middle East", a2.NorthernAfrica = "Northern Africa", a2.NorthernAmerica = "Northern America", a2.NorthernEurope = "Northern Europe", a2.Polynesia = "Polynesia", a2.SouthAmerica = "South America", a2.SouthernAfrica = "Southern Africa", a2.SouthernAsia = "Southern Asia", a2.SouthernEurope = "Southern Europe", a2.WesternAfrica = "Western Africa", a2.WesternAsia = "Western Asia", a2.WesternEurope = "Western Europe", a2.WesternAustralia = "Western Australia";
 })(x$1 || (x$1 = {}));
-({ Afghanistan: { i18n: { calling_codes: [93], currencies: [l$1.AfghanistanAfghani], languages: [e$2.Pashto, e$2.Dari, e$2.Turkmen, e$2.Uzbek], tz: { offsets: [i$2.UTC_PLUS_4_30], regions: [t$1.AsiaKabul], timezones: [n$3.AfghanistanTime] } }, id: r$2.Afghanistan, info: { flag: { emoji: "\u{1F1E6}\u{1F1EB}", emoji_unicode: "U+1F1E6 U+1F1EB", svg: "https://www.countryflags.io/af/flat/64.svg" }, tld: [".af"] }, iso: { alpha2: r$2.Afghanistan, alpha3: "AFG", numeric: "004" }, name: { alt_spellings: ["AF", "Af\u0121\u0101nist\u0101n"], demonym: "Afghan", native: { endonym: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646" }, official: "Islamic Republic of Afghanistan", short: "Afghanistan", translations: { [e$2.Afrikaans]: "Afghanistan", [e$2.Albanian]: "Shqip\xEBri", [e$2.Amharic]: "\u12A0\u134D\u130B\u1295", [e$2.Arabic]: "\u0623\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e$2.Armenian]: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576", [e$2.Azerbaijani]: "Az\u0259rbaycan", [e$2.Bashkir]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Basque]: "Afganist\xE1n", [e$2.Belarusian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Bengali]: "\u0986\u09AB\u0997\u09BE\u09A8\u09BF\u09B8\u09CD\u09A4\u09BE\u09A8", [e$2.Berber]: "\u0623\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e$2.Bhutani]: "\u0F60\u0F56\u0FB2\u0F74\u0F42\u0F0B\u0F61\u0F74\u0F63\u0F0B\u0F66\u0FA4\u0FB2\u0F7C\u0F51\u0F0B\u0F40\u0FB1\u0F72\u0F0B\u0F51\u0F7C\u0F53\u0F0B\u0F63\u0F7A\u0F0B\u0F66\u0F90\u0F51\u0F0B\u0F46\u0F0D", [e$2.Bosnian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Breton]: "Afganistan", [e$2.Bulgarian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Burmese]: "\u1021\u102C\u1019\u1001\u103B\u1004\u103A\u1010\u1031\u102C\u103A", [e$2.Catalan]: "Afganistan", [e$2.Chinese]: "\u963F\u5BCC\u6C57", [e$2.Croatian]: "Afganistan", [e$2.Czech]: "Afganistan", [e$2.Danish]: "Afghanistan", [e$2.Dutch]: "Afghanistan", [e$2.English]: "Afghanistan", [e$2.Esperanto]: "Afganistan", [e$2.Estonian]: "Afganistan", [e$2.Finnish]: "Afghanistan", [e$2.French]: "Afghanistan", [e$2.Frisian]: "Afghanistan", [e$2.Galician]: "Afganist\xE1n", [e$2.Georgian]: "\u10D0\u10D5\u10E6\u10D0\u10DC\u10D4\u10D7\u10D8", [e$2.German]: "Afghanistan", [e$2.Greenlandic]: "Afghanistan", [e$2.Greek]: "\u0391\u03C6\u03B3\u03B1\u03BD\u03B9\u03C3\u03C4\u03AC\u03BD", [e$2.Gujarati]: "\u0A85\u0AAB\u0A97\u0ABE\u0AA8\u0ABF\u0AB8\u0ACD\u0AA4\u0ABE\u0AA8", [e$2.Haitian]: "Afghanistan", [e$2.Hausa]: "Afghanistan", [e$2.Hebrew]: "\u05D0\u05E4\u05D2\u05E0\u05D9\u05E1\u05D8\u05DF", [e$2.Hindi]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e$2.Hungarian]: "Afganistan", [e$2.Icelandic]: "Afghanistan", [e$2.Igbo]: "Afghanistan", [e$2.Indonesian]: "Afghanistan", [e$2.Irish]: "Afghanistan", [e$2.Italian]: "Afghanistan", [e$2.Japanese]: "\u30A2\u30D5\u30AC\u30CB\u30B9\u30BF\u30F3", [e$2.Javanese]: "Afghanistan", [e$2.Kannada]: "\u0C85\u0CAB\u0C97\u0CBE\u0CA8\u0CBF\u0CB8\u0CCD\u0CA4\u0CBE\u0CA8", [e$2.Kazakh]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Khmer]: "\u17A2\u17B6\u17A0\u17D2\u179C\u17D2\u179A\u17B7\u1780", [e$2.Korean]: "\uC544\uD504\uAC00\uB2C8\uC2A4\uD0C4", [e$2.Kurdish]: "Afghanistan", [e$2.Kyrgyz]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Lao]: "\u0EAD\u0EB2\u0E9F\u0EB2\u0EA5\u0EBD\u0E99", [e$2.Latin]: "Afghanistan", [e$2.Latvian]: "Afghanistan", [e$2.Lithuanian]: "Afganistanas", [e$2.Luxembourgish]: "Afghanistan", [e$2.Macedonian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Malagasy]: "Afghanistan", [e$2.Malay]: "Afghanistan", [e$2.Malayalam]: "\u0D05\u0D2B\u0D17\u0D3E\u0D28\u0D3F\u0D38\u0D4D\u0D24\u0D3E\u0D28", [e$2.Maltese]: "Afghanistan", [e$2.Maori]: "Afghanistan", [e$2.Marathi]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e$2.Mongolian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Nepali]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e$2.Norwegian]: "Afghanistan", [e$2.Pashto]: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e$2.Persian]: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e$2.Polish]: "Afganistan", [e$2.Portuguese]: "Afghanistan", [e$2.Punjabi]: "Afghanistan", [e$2.Romanian]: "Afghanistan", [e$2.Polish]: "Afganistan", [e$2.Russian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Samoan]: "Afghanistan", [e$2.Sanskrit]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e$2.Scots]: "Afghanistan", [e$2.Serbian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Sesotho]: "Afghanistan", [e$2.Shona]: "Afghanistan", [e$2.Sindhi]: "Afghanistan", [e$2.Sinhala]: "\u0D86\u0D9C\u0DCA\u200D\u0DBB\u0DDC\u0D9A\u0DCA\u0D9A\u0DD2\u0DBA\u0DCF\u0DC0", [e$2.Slovak]: "Afganistan", [e$2.Slovenian]: "Afganistan", [e$2.Somali]: "Afghanistan", [e$2.Spanish]: "Afganist\xE1n", [e$2.Sudanese]: "Afghanistan", [e$2.Swahili]: "Afghanistan", [e$2.Swedish]: "Afghanistan", [e$2.Tagalog]: "Afghanistan", [e$2.Tajik]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Tatar]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Tamil]: "\u0B86\u0BAA\u0BCD\u0BAA\u0B95\u0BBE\u0BA9\u0BBF\u0BB8\u0BCD\u0BA4\u0BBE\u0BA9\u0BCD", [e$2.Telugu]: "\u0C06\u0C2B\u0C4D\u0C18\u0C28\u0C3F\u0C38\u0C4D\u0C24\u0C3E\u0C28\u0C4D", [e$2.Thai]: "\u0E2D\u0E31\u0E1F\u0E01\u0E32\u0E19\u0E34\u0E2A\u0E16\u0E32\u0E19", [e$2.Tibetan]: "\u0F68\u0F55\u0F0B\u0F42\u0F7A\u0F0B\u0F53\u0F72\u0F66\u0F72\u0F0B\u0F4F\u0F7A\u0F53\u0F66\u0F72\u0F0D", [e$2.Turkish]: "Afganistan", [e$2.Ukrainian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Urdu]: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e$2.Uzbek]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Vietnamese]: "Afghanistan", [e$2.Welsh]: "Afghanistan", [e$2.Xhosa]: "Afghanistan", [e$2.Yiddish]: "Afghanistan", [e$2.Yoruba]: "Afghanistan", [e$2.Zulu]: "Afghanistan" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Kabul", total: 341e5 } }, geography: { area: 652230, region: I.Asia, sub_region: x$1.SouthernAsia }, government: { capital: "Kabul", type: "Islamic Emirate" } } }, Albania: { i18n: { calling_codes: [355], currencies: [l$1.AlbaniaLek], languages: [e$2.Albanian, e$2.Greek, e$2.Turkish], tz: { offsets: [i$2.UTC_PLUS_1], regions: [t$1.EuropeBrussels], timezones: [n$3.CentralEuropeanTime] } }, id: r$2.Albania, info: { flag: { emoji: "\u{1F1E6}\u{1F1F1}", emoji_unicode: "U+1F1E6 U+1F1F1", svg: "https://www.countryflags.io/al/flat/64.svg" }, tld: [".al"] }, iso: { alpha2: r$2.Albania, alpha3: "ALB", numeric: "008" }, name: { alt_spellings: ["AL", "Shqip\xEBri", "Shqip\xEBria", "Shqipnia"], demonym: "Albanian", native: { endonym: "Shqip\xEBri" }, official: "Republic of Albania", short: "Albania", translations: { [e$2.Afrikaans]: "Albania", [e$2.Albanian]: "Albania", [e$2.Amharic]: "\u12A0\u120D\u1263\u1295\u12EB", [e$2.Arabic]: "\u0623\u0644\u0628\u0627\u0646\u064A\u0627", [e$2.Armenian]: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576", [e$2.Azerbaijani]: "Az\u0259rbaycan", [e$2.Bashkir]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Basque]: "Albania", [e$2.Belarusian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Bengali]: "\u0986\u09B2\u09AC\u09BE\u09A8\u09BF\u09AF\u09BC\u09BE", [e$2.Berber]: "\u0623\u0644\u0628\u0627\u0646\u064A\u0627", [e$2.Bhutani]: "\u0F60\u0F56\u0FB2\u0F74\u0F42\u0F0B\u0F61\u0F74\u0F63\u0F0B", [e$2.Bosnian]: "Albanija", [e$2.Breton]: "Albania", [e$2.Bulgarian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Burmese]: "\u1021\u102C\u1019\u1001\u103B\u1004\u103A\u1010\u1031\u102C\u103A", [e$2.Catalan]: "Alb\xE0nia", [e$2.Chinese]: "\u963F\u5C14\u5DF4\u5C3C\u4E9A", [e$2.Croatian]: "Albanija", [e$2.Czech]: "Alb\xE1nie", [e$2.Danish]: "Albanien", [e$2.Dutch]: "Albani\xEB", [e$2.English]: "Albania", [e$2.Esperanto]: "Albanio", [e$2.Estonian]: "Albaania", [e$2.Finnish]: "Albania", [e$2.French]: "Albanie", [e$2.Frisian]: "Albani\xEB", [e$2.Galician]: "Alb\xE2nia", [e$2.Georgian]: "\u10D0\u10DA\u10D1\u10D0\u10DC\u10D8\u10D0", [e$2.German]: "Albanien", [e$2.Greenlandic]: "Albania", [e$2.Greek]: "\u0391\u03BB\u03B2\u03B1\u03BD\u03AF\u03B1", [e$2.Gujarati]: "\u0A85\u0AB2\u0AAC\u0AA8\u0ABF\u0AAF\u0ABE", [e$2.Haitian]: "Albanais", [e$2.Hausa]: "Albania", [e$2.Hebrew]: "\u05D0\u05DC\u05D1\u05E0\u05D9\u05D4", [e$2.Hindi]: "\u0905\u0932\u094D\u092C\u093E\u0928\u093F\u092F\u093E", [e$2.Hungarian]: "Alb\xE1nia", [e$2.Icelandic]: "Alb\xFAnir", [e$2.Igbo]: "Albania", [e$2.Indonesian]: "Albania", [e$2.Irish]: "Alb\xE1in", [e$2.Italian]: "Albania", [e$2.Japanese]: "\u30A2\u30EB\u30D0\u30CB\u30A2", [e$2.Javanese]: "Albania", [e$2.Kannada]: "\u0C85\u0CB2\u0CCD\u0CAC\u0CBE\u0CA8\u0CBF\u0CAF\u0CBE", [e$2.Kazakh]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Khmer]: "\u17A2\u17B6\u17A0\u17D2\u179C\u17D2\u179A\u17C1\u179F\u17CA\u17B8", [e$2.Korean]: "\uC54C\uBC14\uB2C8\uC544", [e$2.Kurdish]: "\u0622\u0644\u0628\u0627\u0646\u06CC\u0627", [e$2.Kyrgyz]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Lao]: "\u0EAD\u0EB2\u0EA5\u0EB2\u0E99\u0EB5", [e$2.Latin]: "Albania", [e$2.Latvian]: "Alb\u0101nija", [e$2.Lithuanian]: "Albanija", [e$2.Luxembourgish]: "Albani\xEB", [e$2.Macedonian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u0458\u0430", [e$2.Malagasy]: "Albania", [e$2.Malay]: "Albania", [e$2.Malayalam]: "\u0D05\u0D32\u0D4D\u0D2C\u0D3E\u0D28\u0D3F\u0D2F\u0D3E", [e$2.Maltese]: "Albania", [e$2.Maori]: "Albania", [e$2.Marathi]: "\u0905\u0932\u094D\u092C\u093E\u0928\u093F\u092F\u093E", [e$2.Mongolian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Nepali]: "\u0905\u0932\u094D\u092C\u093E\u0928\u093F\u092F\u093E", [e$2.Norwegian]: "Albania", [e$2.Pashto]: "\u0627\u0627\u0644\u0628\u0627\u0646\u06CC", [e$2.Persian]: "\u0622\u0644\u0628\u0627\u0646\u06CC", [e$2.Polish]: "Albania", [e$2.Portuguese]: "Alb\xE2nia", [e$2.Punjabi]: "\u0A05\u0A32\u0A2C\u0A28\u0A40\u0A06", [e$2.Romanian]: "Alb\u0103n", [e$2.Russian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Samoan]: "Albania", [e$2.Sanskrit]: "Albani", [e$2.Scots]: "Alb\xE0inia", [e$2.Serbian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u0458\u0430", [e$2.Sesotho]: "Albania", [e$2.Shona]: "Albania", [e$2.Sindhi]: "Albania", [e$2.Sinhala]: "\u0D87\u0DBD\u0DCA\u0DB6\u0DCF\u0DB1\u0DD2\u0DBA", [e$2.Slovak]: "Alb\xE1nsko", [e$2.Slovenian]: "Albanija", [e$2.Somali]: "Albania", [e$2.Spanish]: "Albania", [e$2.Sudanese]: "Albania", [e$2.Swahili]: "Albania", [e$2.Swedish]: "Albanien", [e$2.Tagalog]: "Albania", [e$2.Tajik]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Tamil]: "\u0B85\u0BB2\u0BCD\u0BAA\u0BBE\u0BA9\u0BBF\u0BAF\u0BBE", [e$2.Tatar]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Telugu]: "\u0C05\u0C32\u0C4D\u0C2C\u0C3E\u0C28\u0C3F\u0C2F\u0C3E", [e$2.Thai]: "\u0E2D\u0E31\u0E25\u0E41\u0E1A\u0E19\u0E34\u0E19\u0E35", [e$2.Tibetan]: "\u0F68\u0F63\u0F0B\u0F56\u0F72\u0F0B\u0F53\u0F72\u0F0B\u0F61\u0F72", [e$2.Turkish]: "Albaniye", [e$2.Ukrainian]: "\u0410\u043B\u0431\u0430\u043D\u0456\u044F", [e$2.Urdu]: "\u0622\u0644\u0628\u0627\u0646\u06CC", [e$2.Uzbek]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Vietnamese]: "Albanie", [e$2.Welsh]: "Albania", [e$2.Xhosa]: "Albania", [e$2.Yiddish]: "\u05D0\u05DC\u05D1\u05E0\u05D9\u05E9", [e$2.Yoruba]: "Albania", [e$2.Zulu]: "Albania" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Tirana", total: 2853e3 } }, geography: { area: 28748, region: I.Europe, sub_region: x$1.SouthernEurope }, government: { capital: "Tirana", type: "Republic" } } }, Algeria: { i18n: { calling_codes: [213], currencies: [l$1.AlgeriaDinar], languages: [e$2.Arabic, e$2.French, e$2.Berber, e$2.Tamazight], tz: { offsets: [i$2.UTC_PLUS_1, i$2.UTC_PLUS_2], regions: [t$1.AfricaAlgiers], timezones: [n$3.CentralEuropeanTime] } }, id: r$2.Algeria, info: { flag: { emoji: "\u{1F1E9}\u{1F1FF}", emoji_unicode: "U+1F1E9 U+1F1FF", svg: "https://www.countryflags.io/dz/flat/64.svg" }, tld: [".dz", ".\u062C\u0632\u0627\u0626\u0631"] }, iso: { alpha2: r$2.Algeria, alpha3: "DZA", numeric: "012" }, name: { alt_spellings: ["DZ", "Dzayer", "Alg\xE9rie"], demonym: "Algerian", native: { endonym: "\u0627\u0644\u062C\u0632\u0627\u0626\u0631" }, official: "People's Democratic Republic of Algeria", short: "Algeria", translations: { [e$2.Afrikaans]: "Algerije", [e$2.Albanian]: "Algeria", [e$2.Amharic]: "\u12A0\u120D\u1300\u122D\u1235", [e$2.Arabic]: "\u0627\u0644\u062C\u0632\u0627\u0626\u0631", [e$2.Armenian]: "\u0531\u056C\u0563\u0578\u0580\u056B\u0561", [e$2.Azerbaijani]: "Az\u0259rbaycan", [e$2.Bashkir]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Basque]: "Algeria", [e$2.Belarusian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Bengali]: "\u0986\u09B2\u099C\u09C7\u09B0", [e$2.Berber]: "\u062C\u0632\u0627\u0626\u0631", [e$2.Bhutani]: "\u0F62\u0FAB\u0F7C\u0F44\u0F0B\u0F41", [e$2.Bosnian]: "Al\u017Eir", [e$2.Breton]: "Algeria", [e$2.Bulgarian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Burmese]: "\u1021\u102C\u101B\u1015\u103A", [e$2.Catalan]: "Alg\xE8ria", [e$2.Chinese]: "\u963F\u5C14\u53CA\u5229\u4E9A", [e$2.Croatian]: "Al\u017Eir", [e$2.Czech]: "Al\u017E\xEDrsko", [e$2.Danish]: "Algeriet", [e$2.Dutch]: "Algerije", [e$2.English]: "Algeria", [e$2.Esperanto]: "Al\u011Derio", [e$2.Estonian]: "Al\u017Eira", [e$2.Finnish]: "Algeria", [e$2.French]: "Alg\xE9rie", [e$2.Frisian]: "Algeri\xEB", [e$2.Galician]: "Alxeria", [e$2.Georgian]: "\u10D0\u10DA\u10D2\u10D8\u10E3\u10E0\u10D8", [e$2.German]: "Algerien", [e$2.Greenlandic]: "Algeria", [e$2.Greek]: "\u0391\u03BB\u03B3\u03B5\u03C1\u03AF\u03B1", [e$2.Gujarati]: "\u0A86\u0AB2\u0AC7\u0A97\u0AB0\u0ABF\u0AAF\u0ABE", [e$2.Haitian]: "Alg\xE9rie", [e$2.Hausa]: "Algeria", [e$2.Hebrew]: "\u05D0\u05DC\u05D2\u05F3\u05D9\u05E8\u05D9\u05D4", [e$2.Hindi]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e$2.Hungarian]: "Alg\xE1r", [e$2.Icelandic]: "Alg\xFAra", [e$2.Igbo]: "Algeria", [e$2.Indonesian]: "Aljir", [e$2.Irish]: "Alg\xE9rie", [e$2.Italian]: "Algeria", [e$2.Japanese]: "\u30A2\u30EB\u30B8\u30A7\u30EA\u30A2", [e$2.Javanese]: "Aljir", [e$2.Kannada]: "\u0C86\u0CB2\u0CCD\u0C97\u0CC7\u0CB0\u0CBF\u0CAF\u0CA8\u0CCD", [e$2.Kazakh]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Khmer]: "\u17A2\u17B6\u179B\u17CB\u1794\u17B6\u1793\u17B8", [e$2.Korean]: "\uC54C\uC81C\uB9AC", [e$2.Kurdish]: "\u062C\u0632\u0627\u06CC\u0631 \u0627\u0644\u062C\u0632\u0627\u06CC\u0631", [e$2.Kyrgyz]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Lao]: "\u0EAD\u0EB2\u0EA5\u0EB2\u0E88\u0EB5\u0E99", [e$2.Latin]: "Algeria", [e$2.Latvian]: "Al\u017E\u012Brija", [e$2.Lithuanian]: "Al\u017Eyras", [e$2.Luxembourgish]: "Algeria", [e$2.Macedonian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Malagasy]: "Alg\xE9rie", [e$2.Malay]: "Aljir", [e$2.Malayalam]: "\u0D06\u0D32\u0D02\u0D17\u0D47\u0D30\u0D3F\u0D2F\u0D7B", [e$2.Maltese]: "Alg\xE9rie", [e$2.Maori]: "Algeria", [e$2.Marathi]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e$2.Mongolian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Nepali]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e$2.Norwegian]: "Algeria", [e$2.Pashto]: "\u0627\u0644\u062C\u0632\u0627\u0626\u0631", [e$2.Persian]: "\u062C\u0632\u0627\u06CC\u0631 \u0627\u0644\u0639\u0631\u0628", [e$2.Polish]: "Algieria", [e$2.Portuguese]: "Alg\xE9ria", [e$2.Punjabi]: "\u0A06\u0A32\u0A47\u0A17\u0A40\u0A06", [e$2.Romanian]: "Algeria", [e$2.Russian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Samoan]: "Algeria", [e$2.Sanskrit]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e$2.Scots]: "Algeria", [e$2.Serbian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Sesotho]: "Algeria", [e$2.Shona]: "Algeria", [e$2.Sindhi]: "Algeria", [e$2.Sinhala]: "\u0D86\u0DBD\u0DCA\u0DB6\u0DCF\u0DB1\u0DD2\u0DBA", [e$2.Slovak]: "Al\u017E\xEDrsko", [e$2.Slovenian]: "Al\u017Eir", [e$2.Somali]: "Algeria", [e$2.Spanish]: "Algeria", [e$2.Sudanese]: "Aljir", [e$2.Swahili]: "Aljir", [e$2.Swedish]: "Algeriet", [e$2.Tagalog]: "Algeria", [e$2.Tajik]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Tamil]: "\u0B86\u0BB2\u0BCD\u0B95\u0BC7\u0BB0\u0BBF\u0BAF\u0BBE", [e$2.Tatar]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Telugu]: "\u0C06\u0C32\u0C4D\u0C17\u0C47\u0C30\u0C3F\u0C2F\u0C3E", [e$2.Thai]: "\u0E2D\u0E32\u0E23\u0E32\u0E01\u0E2D\u0E19", [e$2.Tibetan]: "\u0F68\u0F63\u0F9F\u0F72\u0F0B\u0F62\u0F72\u0F0B\u0F61\u0F72", [e$2.Turkish]: "Cezayir", [e$2.Ukrainian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Urdu]: "\u0622\u0644\u062C\u06CC\u0631", [e$2.Uzbek]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Vietnamese]: "\u1EA2\u0301\u1EA1\u1EA3\u1EAD\u1EB5", [e$2.Welsh]: "Algeria", [e$2.Xhosa]: "Algeria", [e$2.Yiddish]: "\u05D0\u05DC\u05D2\u05F3\u05D9\u05E8\u05D9\u05D4", [e$2.Yoruba]: "Algeria", [e$2.Zulu]: "Algeria" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Oran", total: 371e5 } }, geography: { area: 2381740, region: I.Africa, sub_region: x$1.NorthernAfrica }, government: { capital: "Algiers", type: "Republic" } } }, AmericanSamoa: { i18n: { calling_codes: [1684], currencies: [l$1.AmericanSamoaTala], languages: [e$2.English, e$2.Samoan], tz: { offsets: [i$2.UTC_MINUS_11], regions: [t$1.PacificSamoa], timezones: [n$3.SamoaStandardTime] } }, id: r$2.AmericanSamoa, info: { flag: { emoji: "\u{1F1E6}\u{1F1F8}", emoji_unicode: "U+1F1E6 U+1F1F8", svg: "https://www.countryflags.io/as/flat/64.svg" }, tld: [".as"] }, iso: { alpha2: r$2.AmericanSamoa, alpha3: "ASM", numeric: "016" }, name: { alt_spellings: ["AS", "Amerika S\u0101moa", "Amelika S\u0101moa", "S\u0101moa Amelika"], demonym: "American Samoan", native: { endonym: "American Samoa" }, official: "American Samoa", short: "American Samoa", translations: { [e$2.Afrikaans]: "Amerikaans Samoa", [e$2.Albanian]: "Samoa Amerikane", [e$2.Amharic]: "\u1233\u121E\u12A0\u122D", [e$2.Arabic]: "\u0633\u0627\u0645\u0648\u0627 \u0627\u0644\u0623\u0645\u0631\u064A\u0643\u064A\u0629", [e$2.Armenian]: "\u054D\u0561\u0570\u0561\u0574\u0561\u056C\u056B\u0561", [e$2.Azerbaijani]: "Samoa Amerikana", [e$2.Bashkir]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0421\u0430\u043C\u043E\u0430", [e$2.Basque]: "Samoa Amerikana", [e$2.Belarusian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430\u044F \u0421\u0430\u043C\u043E\u0430", [e$2.Bengali]: "\u0986\u09AE\u09C7\u09B0\u09BF\u0995\u09BE\u09A8 \u09B8\u09BE\u09AE\u09CB\u09AF\u09BC\u09BE", [e$2.Berber]: "\u062C\u0632\u0631 \u0633\u0627\u0645\u0648\u0627 \u0627\u0644\u0623\u0645\u0631\u064A\u0643\u064A\u0629", [e$2.Bhutani]: "\u0F68\u0F62\u0F92\u0FB1\u0F0B\u0F58\u0F72\u0F0B\u0F51\u0F58\u0F44\u0F66\u0F0B\u0F66\u0FA4\u0FB2\u0F7C\u0F51\u0F0B\u0F40\u0FB1\u0F72\u0F0B\u0F66\u0F90\u0F56\u0F66\u0F0B\u0F62\u0F92\u0FB1\u0F74\u0F51\u0F0B\u0F46\u0F7A\u0F53\u0F0B\u0F54\u0F7C\u0F0D", [e$2.Bosnian]: "Ameri\u010Dka Samoa", [e$2.Breton]: "Samoa Amerikan", [e$2.Bulgarian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e$2.Burmese]: "\u1021\u1019\u1039\u1038\u1019\u101B\u102D\u102F\u1018\u102C\u101E\u102C", [e$2.Catalan]: "Samoa Americana", [e$2.Chinese]: "\u7F8E\u5C5E\u8428\u6469\u4E9A", [e$2.Croatian]: "Ameri\u010Dka Samoa", [e$2.Czech]: "Americk\xE1 Samoa", [e$2.Danish]: "Amerikansk Samoa", [e$2.Dutch]: "Amerikaans Samoa", [e$2.English]: "American Samoa", [e$2.Esperanto]: "Samoa Amerika", [e$2.Estonian]: "Ameerika Samoa", [e$2.Finnish]: "Amerikka Samoa", [e$2.French]: "American Samoa", [e$2.Frisian]: "Amerikaans Samoa", [e$2.Galician]: "Samoa Americana", [e$2.Georgian]: "\u10D0\u10DB\u10D4\u10E0\u10D8\u10D9\u10D8\u10E1 \u10E1\u10D0\u10DB\u10DD\u10D0", [e$2.German]: "Amerikanisch-Samoa", [e$2.Greenlandic]: "Amerikaans Samoa", [e$2.Greek]: "\u0391\u03BC\u03B5\u03C1\u03B9\u03BA\u03B1\u03BD\u03B9\u03BA\u03AE \u03A3\u03B1\u03BC\u03CC\u03B1", [e$2.Gujarati]: "\u0A86\u0AAE\u0AC7\u0AB0\u0ABF\u0A95\u0AA8 \u0AB8\u0ABE\u0AAE\u0ACB\u0AAF\u0ABE", [e$2.Haitian]: "Amerikaans Samoa", [e$2.Hausa]: "Amerikaans Samoa", [e$2.Hebrew]: "\u05D0\u05DE\u05E8\u05D9\u05E7\u05E0\u05D9\u05D4 \u05E1\u05DE\u05D5\u05D0\u05D4", [e$2.Hindi]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e$2.Hungarian]: "Amerikai Szamoa", [e$2.Icelandic]: "Amerikai Szamoa", [e$2.Igbo]: "Ikina Amerika", [e$2.Indonesian]: "Samoa Amerika", [e$2.Irish]: "Samoa Amerikana", [e$2.Italian]: "Samoa Americane", [e$2.Japanese]: "\u30A2\u30E1\u30EA\u30AB\u9818\u30B5\u30E2\u30A2", [e$2.Javanese]: "Samoa Amerika", [e$2.Kannada]: "\u0C85\u0CAE\u0CC7\u0CB0\u0CBF\u0C95\u0CA8\u0CCD \u0CB8\u0CAE\u0CCB\u0C86", [e$2.Kazakh]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0421\u0430\u043C\u043E\u0430", [e$2.Khmer]: "\u17A2\u17B6\u1798\u17C9\u17B6\u179A\u17B8\u179F\u17D2\u178F\u1784\u17CB", [e$2.Korean]: "\uC544\uBA54\uB9AC\uCE74 \uC0AC\uBAA8\uC544", [e$2.Kurdish]: "Amerikaans Samoa", [e$2.Kyrgyz]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0421\u0430\u043C\u043E\u0430", [e$2.Lao]: "\u0EAD\u0EB2\u0EA1\u0EB2\u0E99\u0EB2\u0E94\u0EB2\u0EA1\u0EB2\u0E99\u0EB2\u0E94", [e$2.Latin]: "Samoa Amerikana", [e$2.Latvian]: "Amerikas Samoa", [e$2.Lithuanian]: "Amerikos Samoa", [e$2.Luxembourgish]: "Amerikaans Samoa", [e$2.Macedonian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e$2.Malagasy]: "Samoa Amerika", [e$2.Malay]: "Amerika Samo", [e$2.Malayalam]: "\u0D05\u0D2E\u0D47\u0D30\u0D3F\u0D15\u0D4D\u0D15\u0D28\u0D4D\u0D31\u0D4D \u0D38\u0D2E\u0D4B\u0D06", [e$2.Maltese]: "Samoa Amerika", [e$2.Maori]: "Samoa Amerika", [e$2.Marathi]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e$2.Mongolian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0421\u0430\u043C\u043E\u0430", [e$2.Nepali]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e$2.Norwegian]: "Amerikansk Samoa", [e$2.Pashto]: "\u0627\u0645\u0631\u06CC\u06A9\u0627\u06CC \u0633\u0645\u0648\u0627", [e$2.Persian]: "\u0622\u0645\u0631\u06CC\u06A9\u0627\u06CC \u0633\u0645\u0648\u0627", [e$2.Polish]: "Samoa Ameryka\u0144skie", [e$2.Portuguese]: "Samoa Americana", [e$2.Punjabi]: "\u0A05\u0A2E\u0A30\u0A40\u0A15\u0A40 \u0A38\u0A3E\u0A2E\u0A4B\u0A06", [e$2.Romanian]: "Samoa americane", [e$2.Russian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430\u044F \u0421\u0430\u043C\u043E\u0430", [e$2.Samoan]: "Samoa Amerika", [e$2.Sanskrit]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e$2.Scots]: "Amerikaans Samoa", [e$2.Serbian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e$2.Sesotho]: "Amerikaans Samoa", [e$2.Shona]: "Amerikaans Samoa", [e$2.Sindhi]: "Amerikaans Samoa", [e$2.Sinhala]: "\u0D86\u0DBB\u0DCA\u0DA2\u0DD2\u0DB1\u0DCF\u0DB1\u0DD4 \u0DC3\u0DD0\u0DB8\u0DD0\u0DBD\u0DCA\u0DC0", [e$2.Slovak]: "Amerikaans Samoa", [e$2.Slovenian]: "Amerikaans Samoa", [e$2.Somali]: "Amerikaans Samoa", [e$2.Spanish]: "Samoa Americana", [e$2.Sudanese]: "Amerikaans Samoa", [e$2.Swahili]: "Amerikaans Samoa", [e$2.Swedish]: "Amerikansk Samoa", [e$2.Tagalog]: "Amerikaans Samoa", [e$2.Tajik]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0441\u0430\u043C\u043E\u0430", [e$2.Tamil]: "\u0B85\u0BAE\u0BC6\u0BB0\u0BBF\u0B95\u0BCD \u0B9A\u0BAE\u0BCB\u0BB5\u0BBE", [e$2.Tatar]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0441\u0430\u043C\u043E\u0430", [e$2.Telugu]: "\u0C05\u0C2E\u0C46\u0C30\u0C3F\u0C15\u0C4D \u0C38\u0C2E\u0C4B\u0C35\u0C3E", [e$2.Thai]: "\u0E2A\u0E2B\u0E23\u0E32\u0E0A\u0E2D\u0E32\u0E13\u0E32\u0E08\u0E31\u0E01\u0E23\u0E41\u0E2D\u0E1F\u0E23\u0E34\u0E01\u0E32", [e$2.Tibetan]: "\u0F68\u0F7A\u0F0B\u0F62\u0F72\u0F0B\u0F40\u0F0B\u0F68\u0F7A\u0F0B\u0F58\u0F72\u0F0B\u0F51\u0F74\u0F0B\u0F61\u0F72\u0F0B\u0F62\u0F72\u0F0B\u0F40", [e$2.Turkish]: "Amerikan Samoas\u0131", [e$2.Ukrainian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u044C\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e$2.Urdu]: "\u0627\u0645\u0631\u06CC\u06A9\u06CC \u0633\u0645\u0648\u0627", [e$2.Uzbek]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0441\u0430\u043C\u043E\u0430", [e$2.Vietnamese]: "Amerikaans Samoa", [e$2.Welsh]: "Amerikaans Samoa", [e$2.Xhosa]: "Amerikaans Samoa", [e$2.Yiddish]: "Amerikaans Samoa", [e$2.Yoruba]: "Amerikaans Samoa", [e$2.Zulu]: "Amerikaans Samoa" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Pago Pago", total: 558e3 } }, geography: { area: 199, region: I.Oceania, sub_region: x$1.Polynesia }, government: { capital: "Pago Pago", type: "Nonmetropolitan Territory of the US" } } }, Andorra: { i18n: { calling_codes: [376], currencies: [l$1.Euro], languages: [e$2.Catalan, e$2.Spanish], tz: { offsets: [i$2.UTC_PLUS_1, i$2.UTC_PLUS_2], regions: [t$1.EuropeAndorra], timezones: [n$3.CentralEuropeanTime] } }, id: r$2.Andorra, info: { flag: { emoji: "\u{1F1E6}\u{1F1F4}", emoji_unicode: "U+1F1E6 U+1F1F4", svg: "https://www.countryflags.io/ad/flat/64.svg" }, tld: [".ad"] }, iso: { alpha2: r$2.Andorra, alpha3: "AND", numeric: "020" }, name: { alt_spellings: ["AD", "Principality of Andorra", "Principat d'Andorra"], demonym: "Andorran", native: { endonym: "Andorra" }, official: "Principality of Andorra", short: "Andorra", translations: { [e$2.Afrikaans]: "Andorra", [e$2.Albanian]: "Andorra", [e$2.Amharic]: "\u12A0\u1295\u12F6\u122B", [e$2.Arabic]: "\u0623\u0646\u062F\u0648\u0631\u0627", [e$2.Armenian]: "\u0540\u0561\u0576\u0564\u0561\u0580\u0561\u057E\u0561\u0575\u0584", [e$2.Azerbaijani]: "Andorra", [e$2.Bashkir]: "\u0410\u043D\u0434\u043E\u0440\u0430", [e$2.Basque]: "Andorra", [e$2.Belarusian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Bengali]: "\u0985\u09A8\u09CD\u09A1\u09CB\u09B0\u09BE", [e$2.Berber]: "\u0623\u0646\u062F\u0648\u0631\u0627", [e$2.Bhutani]: "\u0F68\u0F53\u0F0B\u0F4C\u0F7C\u0F0B", [e$2.Bosnian]: "Andora", [e$2.Breton]: "Andorra", [e$2.Bulgarian]: "\u0410\u043D\u0434\u043E\u0440\u0430", [e$2.Burmese]: "\u1021\u1014\u1039\u1010\u102C\u101B\u102D\u102F\u1038", [e$2.Catalan]: "Andorra", [e$2.Chinese]: "\u5B89\u9053\u5C14", [e$2.Croatian]: "Andora", [e$2.Czech]: "Andorra", [e$2.Danish]: "Andorra", [e$2.Dutch]: "Andorra", [e$2.English]: "Andorra", [e$2.Esperanto]: "Andora", [e$2.Estonian]: "Andorra", [e$2.Finnish]: "Andorra", [e$2.French]: "Andorra", [e$2.Frisian]: "Andorra", [e$2.Galician]: "Andorra", [e$2.Georgian]: "\u12A0\u1295\u12F6\u122B", [e$2.German]: "Andorra", [e$2.Greek]: "\u0391\u03BD\u03B4\u03CC\u03C1\u03B1", [e$2.Hebrew]: "\u05D0\u05E0\u05D3\u05D5\u05E8\u05D4", [e$2.Hindi]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e$2.Hungarian]: "Andorra", [e$2.Icelandic]: "Andorra", [e$2.Igbo]: "Andorra", [e$2.Indonesian]: "Andorra", [e$2.Irish]: "Andorra", [e$2.Italian]: "Andorra", [e$2.Japanese]: "\u30A2\u30F3\u30C9\u30E9", [e$2.Javanese]: "Andorra", [e$2.Kannada]: "\u0C85\u0C82\u0CA1\u0CCB\u0CB0\u0CBF\u0CAF\u0CA8\u0CCD", [e$2.Kazakh]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Khmer]: "\u17A2\u1784\u17CB\u178A\u17B6\u179A\u17B6", [e$2.Korean]: "\uC548\uB3C4\uB77C", [e$2.Kurdish]: "Andorra", [e$2.Kyrgyz]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Lao]: "\u0EAD\u0EB1\u0E99\u0EC2\u0E94\u0EA3\u0EB2", [e$2.Latin]: "Andorra", [e$2.Latvian]: "Andora", [e$2.Lithuanian]: "Andora", [e$2.Luxembourgish]: "Andorra", [e$2.Macedonian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Malagasy]: "Andorra", [e$2.Malay]: "Andorra", [e$2.Malayalam]: "\u0D05\u0D02\u0D21\u0D4B\u0D30\u0D3F\u0D2F\u0D28\u0D4D", [e$2.Maltese]: "Andorra", [e$2.Maori]: "Andorra", [e$2.Marathi]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e$2.Mongolian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Nepali]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e$2.Norwegian]: "Andorra", [e$2.Pashto]: "\u0622\u0646\u062F\u0648\u0631\u0627", [e$2.Persian]: "\u0622\u0646\u062F\u0648\u0631\u0627", [e$2.Polish]: "Andora", [e$2.Portuguese]: "Andorra", [e$2.Punjabi]: "\u0A05\u0A70\u0A21\u0A4B\u0A30\u0A3E", [e$2.Romanian]: "Andorra", [e$2.Russian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Samoan]: "Andorra", [e$2.Sanskrit]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e$2.Scots]: "Andorra", [e$2.Serbian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Sesotho]: "Andorra", [e$2.Shona]: "Andorra", [e$2.Sindhi]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e$2.Sinhala]: "\u0D86\u0DB1\u0DCA\u0DAF\u0DDA", [e$2.Slovak]: "Andorra", [e$2.Slovenian]: "Andora", [e$2.Somali]: "Andorra", [e$2.Spanish]: "Andorra", [e$2.Sudanese]: "Andorra", [e$2.Swahili]: "Andorra", [e$2.Swedish]: "Andorra", [e$2.Tagalog]: "Andorra", [e$2.Tajik]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Tamil]: "\u0B85\u0BA9\u0BCB\u0BB0\u0BCD\u0B9F\u0BBE", [e$2.Tatar]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Telugu]: "\u0C05\u0C02\u0C21\u0C4B\u0C30\u0C4D\u0C30\u0C3E", [e$2.Thai]: "\u0E2D\u0E31\u0E19\u0E14\u0E2D\u0E23\u0E4C\u0E23\u0E32", [e$2.Tibetan]: "\u0F68\u0F53\u0F0B\u0F4C\u0F7C\u0F0B", [e$2.Turkish]: "Andora", [e$2.Ukrainian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Urdu]: "\u0622\u0646\u062F\u0648\u0631\u0627", [e$2.Uzbek]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Vietnamese]: "Andorra", [e$2.Welsh]: "Andorra", [e$2.Xhosa]: "Andorra", [e$2.Yiddish]: "\u05D0\u05E0\u05D3\u05D5\u05E8\u05D4", [e$2.Yoruba]: "Andorra", [e$2.Zulu]: "Andorra" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Andorra la Vella", total: 78e3 } }, geography: { area: 468, region: I.Europe, sub_region: x$1.SouthernEurope }, government: { capital: "Andorra la Vella", type: "Constitutional Monarchy" } } }, Angola: { i18n: { calling_codes: [244], currencies: [l$1.AngolaKwanza], languages: [e$2.Portuguese, e$2.Spanish, e$2.French, e$2.Italian, e$2.German, e$2.English], tz: { offsets: [i$2.UTC_0, i$2.UTC_PLUS_1, i$2.UTC_PLUS_2], regions: [t$1.AfricaLuanda], timezones: [n$3.WestAfricaTime] } }, id: r$2.Angola, info: { flag: { emoji: "\u{1F1E6}\u{1F1EC}", emoji_unicode: "U+1F1E6 U+1F1EC", svg: "https://www.countryflags.io/ao/flat/64.svg" }, tld: [".ao"] }, iso: { alpha2: r$2.Angola, alpha3: "AGO", numeric: "024" }, name: { alt_spellings: ["AO", "Rep\xFAblica de Angola", "\u0281\u025Bpublika de an"], demonym: "Angolan", native: { endonym: "Angola" }, official: "Republic of Angola", short: "Angola", translations: { [e$2.Afrikaans]: "Angola", [e$2.Albanian]: "Ang\xF2la", [e$2.Amharic]: "\u12A0\u1295\u130E\u120A\u12EB", [e$2.Arabic]: "\u0623\u0646\u063A\u0648\u0644\u0627", [e$2.Armenian]: "\u0540\u0561\u0576\u0563\u0561\u056C\u0561\u056F\u0561", [e$2.Azerbaijani]: "Ang\u0259l", [e$2.Bashkir]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Basque]: "Angola", [e$2.Belarusian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Bengali]: "\u0985\u0999\u09CD\u0997\u09B2\u09BE", [e$2.Berber]: "Angola", [e$2.Bhutani]: "\u0F60\u0F56\u0FB2\u0F74\u0F42", [e$2.Bosnian]: "Angola", [e$2.Breton]: "Angola", [e$2.Bulgarian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Burmese]: "\u1021\u1004\u103A\u1039\u1002\u101C\u102D\u1010\u103A", [e$2.Catalan]: "Angola", [e$2.Chinese]: "\u5B89\u54E5\u62C9", [e$2.Croatian]: "Angola", [e$2.Czech]: "Angola", [e$2.Danish]: "Angola", [e$2.Dutch]: "Angola", [e$2.English]: "Angola", [e$2.Esperanto]: "Angolo", [e$2.Estonian]: "Angola", [e$2.Finnish]: "Angola", [e$2.French]: "Angola", [e$2.Frisian]: "Angola", [e$2.Galician]: "Angola", [e$2.Georgian]: "\u10D0\u10DC\u10D2\u10DD\u10DA\u10D0", [e$2.German]: "Angola", [e$2.Greenlandic]: "Angola", [e$2.Greek]: "\u0391\u03B3\u03BA\u03CC\u03BB\u03B1", [e$2.Gujarati]: "\u0A85\u0A82\u0A97\u0ACB\u0AB2\u0ABE", [e$2.Haitian]: "Angola", [e$2.Hausa]: "Angola", [e$2.Hebrew]: "\u05D0\u05E0\u05D2\u05D5\u05DC\u05D4", [e$2.Hindi]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e$2.Hungarian]: "Angola", [e$2.Icelandic]: "Angola", [e$2.Igbo]: "Angola", [e$2.Indonesian]: "Angola", [e$2.Irish]: "Angola", [e$2.Italian]: "Angola", [e$2.Japanese]: "\u30A2\u30F3\u30B4\u30E9", [e$2.Javanese]: "Anggol", [e$2.Kannada]: "\u0C85\u0C82\u0C97\u0CCB\u0CB2\u0CBE", [e$2.Kazakh]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Khmer]: "\u17A2\u1784\u17CB\u1780\u17B6\u179B\u17A2\u1784\u17CB\u1782\u17D2\u179B\u17C1\u179F", [e$2.Korean]: "\uC559\uACE8\uB77C", [e$2.Kurdish]: "Angola", [e$2.Kyrgyz]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Lao]: "\u0EAD\u0EB0\u0E99\u0EB2\u0E94\u0EB2", [e$2.Latin]: "Angola", [e$2.Latvian]: "Angola", [e$2.Lithuanian]: "Angola", [e$2.Luxembourgish]: "Angola", [e$2.Macedonian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Malagasy]: "Angola", [e$2.Malay]: "Angola", [e$2.Malayalam]: "\u0D05\u0D02\u0D17\u0D4B\u0D33\u0D3E", [e$2.Maltese]: "Angola", [e$2.Maori]: "Angola", [e$2.Marathi]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e$2.Mongolian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Nepali]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e$2.Norwegian]: "Angola", [e$2.Pashto]: "\u0627\u0646\u06AB\u0648\u0644\u0627", [e$2.Persian]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e$2.Polish]: "Angola", [e$2.Portuguese]: "Angola", [e$2.Punjabi]: "\u0A05\u0A19\u0A4D\u0A17\u0A4B\u0A32\u0A3E", [e$2.Romanian]: "Angole", [e$2.Russian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Samoan]: "Angola", [e$2.Sanskrit]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e$2.Scots]: "Angola", [e$2.Serbian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Sesotho]: "Angola", [e$2.Shona]: "Angola", [e$2.Sindhi]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e$2.Sinhala]: "\u0D86\u0D9C\u0DBD\u0DD2\u0DBA\u0DCF\u0DC0", [e$2.Slovak]: "Angola", [e$2.Slovenian]: "Angola", [e$2.Somali]: "Angola", [e$2.Spanish]: "Angola", [e$2.Sudanese]: "Angola", [e$2.Swahili]: "Angola", [e$2.Swedish]: "Angola", [e$2.Tagalog]: "Angola", [e$2.Tajik]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Tamil]: "\u0B85\u0B99\u0BCD\u0B95\u0BCB\u0BB2\u0BBE", [e$2.Tatar]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Telugu]: "\u0C05\u0C02\u0C17\u0C4B\u0C32\u0C3E", [e$2.Thai]: "\u0E2D\u0E07\u0E04\u0E4C\u0E01\u0E32\u0E23\u0E2D\u0E32\u0E19\u0E32\u0E21\u0E34\u0E2A\u0E16\u0E32\u0E19", [e$2.Tibetan]: "\u0F68\u0F44\u0F0B\u0F63\u0F7C\u0F0B", [e$2.Turkish]: "Angola", [e$2.Ukrainian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Urdu]: "\u0627\u0646\u06AF\u0648\u0644\u0627", [e$2.Uzbek]: "Angola", [e$2.Vietnamese]: "Angola", [e$2.Xhosa]: "Angola", [e$2.Welsh]: "Angola", [e$2.Yiddish]: "\u05D0\u05E0\u05D2\u05D5\u05DC\u05D4", [e$2.Yoruba]: "Angola", [e$2.Zulu]: "Angola" } } }, Anguilla: { i18n: { calling_codes: [1264], currencies: [l$1.DominicaDollar, l$1.EastCaribbeanDollar, l$1.Euro, l$1.UnitedStatesDollar, l$1.BritishPound], languages: [e$2.English, e$2.Spanish], tz: { offsets: [i$2.UTC_MINUS_4], regions: [t$1.AmericaAnguilla], timezones: [n$3.AtlanticStandardTime] } }, id: r$2.Anguilla, info: { flag: { emoji: "\u{1F1E6}\u{1F1EC}", emoji_unicode: "U+1F1E6 U+1F1EC", svg: "https://www.countryflags.io/ai/flat/64.svg" }, tld: [".ai"] }, iso: { alpha2: r$2.Anguilla, alpha3: "AIA", numeric: "660" }, name: { alt_spellings: ["AI"], demonym: "Anguillian", native: { endonym: "Anguilla" }, official: "Anguilla", short: "Anguilla", translations: { [e$2.Afrikaans]: "Anguilla", [e$2.Albanian]: "Anguilla", [e$2.Amharic]: "\u12A0\u1295\u1309\u120B", [e$2.Arabic]: "\u0623\u0646\u063A\u0648\u064A\u0644\u0627", [e$2.Armenian]: "\u0531\u0576\u0563\u056B\u056C\u0561", [e$2.Azerbaijani]: "Az\u0259rbaycan", [e$2.Bashkir]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Basque]: "Angila", [e$2.Belarusian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Bengali]: "\u0985\u0999\u09CD\u0997\u09C0\u09B2\u09BE", [e$2.Berber]: "\u0623\u0646\u063A\u0648\u064A\u0644\u0627", [e$2.Bhutani]: "\u0F68\u0F44\u0F0B\u0F63\u0F7C\u0F0B", [e$2.Bosnian]: "Angila", [e$2.Breton]: "Angila", [e$2.Bulgarian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Burmese]: "\u1021\u1004\u103A\u1039\u1002\u101C\u102D\u1010\u103A", [e$2.Catalan]: "Angilla", [e$2.Chinese]: "\u5B89\u572D\u62C9", [e$2.Croatian]: "Angila", [e$2.Czech]: "Anguilla", [e$2.Danish]: "Anguilla", [e$2.Dutch]: "Anguilla", [e$2.English]: "Anguilla", [e$2.Esperanto]: "Angila", [e$2.Estonian]: "Anguilla", [e$2.Finnish]: "Anguilla", [e$2.French]: "Anguilla", [e$2.Frisian]: "Angila", [e$2.Galician]: "Anguilla", [e$2.Georgian]: "\u10D0\u10DC\u10D2\u10D8\u10DA\u10D0", [e$2.German]: "Anguilla", [e$2.Greenlandic]: "Anguilla", [e$2.Greek]: "\u0391\u03BD\u03B3\u03BA\u03C5\u03BB\u03AC", [e$2.Gujarati]: "\u0A85\u0A82\u0A97\u0ACD\u0AAF\u0ABE\u0AB2\u0ABE", [e$2.Haitian]: "Anguilla", [e$2.Hausa]: "Anguilla", [e$2.Hebrew]: "\u05D0\u05E0\u05D2\u05D5\u05D9\u05D0\u05DC\u05D4", [e$2.Hindi]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e$2.Hungarian]: "Anguilla", [e$2.Icelandic]: "Anguilla", [e$2.Igbo]: "Anguilla", [e$2.Indonesian]: "Anguilla", [e$2.Irish]: "Anguilla", [e$2.Italian]: "Anguilla", [e$2.Japanese]: "\u30A2\u30F3\u30AE\u30E9", [e$2.Javanese]: "Anguilla", [e$2.Kannada]: "\u0C85\u0C82\u0C97\u0CCD\u0CB5\u0CC7\u0CB2\u0CBE", [e$2.Kazakh]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Khmer]: "\u17A2\u1784\u17CB\u1780\u17B6\u179A\u17A0\u17D2\u1782\u17B8\u1798", [e$2.Korean]: "\uC575\uADC8\uB77C", [e$2.Kurdish]: "Anguilla", [e$2.Kyrgyz]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Lao]: "\u0EAD\u0EB0\u0E99\u0EB0\u0E88\u0EB3", [e$2.Latin]: "Anguilla", [e$2.Latvian]: "Anguilla", [e$2.Lithuanian]: "Anguilla", [e$2.Luxembourgish]: "Angilla", [e$2.Macedonian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Malagasy]: "Angila", [e$2.Malay]: "Anguilla", [e$2.Malayalam]: "\u0D05\u0D02\u0D17\u0D4D\u0D35\u0D47\u0D32\u0D3E", [e$2.Maltese]: "Anguilla", [e$2.Maori]: "Anguilla", [e$2.Marathi]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e$2.Mongolian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Nepali]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e$2.Norwegian]: "Anguilla", [e$2.Pashto]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e$2.Persian]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e$2.Polish]: "Anguilla", [e$2.Portuguese]: "Anguilla", [e$2.Punjabi]: "\u0A05\u0A02\u0A17\u0A40\u0A32\u0A3E", [e$2.Romanian]: "Anguilla", [e$2.Russian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Samoan]: "Anguilla", [e$2.Sanskrit]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e$2.Scots]: "Anguilla", [e$2.Serbian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Sesotho]: "Anguilla", [e$2.Shona]: "Anguilla", [e$2.Sindhi]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e$2.Sinhala]: "\u0D86\u0D82\u0D9C\u0DD2\u0DBD\u0DCF\u0DC0", [e$2.Slovak]: "Anguilla", [e$2.Slovenian]: "Anguilla", [e$2.Somali]: "Anguilla", [e$2.Spanish]: "Anguilla", [e$2.Sudanese]: "Anguilla", [e$2.Swahili]: "Anguilla", [e$2.Swedish]: "Anguilla", [e$2.Tagalog]: "Anguilla", [e$2.Tajik]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Tamil]: "\u0B85\u0B99\u0BCD\u0B95\u0BC8\u0BB2\u0BBE", [e$2.Tatar]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Telugu]: "\u0C05\u0C02\u0C17\u0C4D\u0C35\u0C47\u0C32\u0C3E", [e$2.Thai]: "\u0E2D\u0E31\u0E07\u0E01\u0E32\u0E25\u0E32", [e$2.Tibetan]: "\u0F68\u0F44\u0F0B\u0F63\u0F72\u0F0B", [e$2.Turkish]: "Anguilla", [e$2.Ukrainian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Urdu]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e$2.Uzbek]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Vietnamese]: "Anguilla", [e$2.Welsh]: "Anguilla", [e$2.Xhosa]: "Anguilla", [e$2.Yiddish]: "Anguilla", [e$2.Yoruba]: "Anguilla", [e$2.Zulu]: "Anguilla" } } }, Antarctica: { i18n: { calling_codes: [672], currencies: [l$1.UnitedStatesDollar, l$1.Euro], languages: [e$2.English, e$2.Spanish, e$2.French, e$2.Portuguese, e$2.Italian, e$2.Dutch, e$2.German, e$2.Swedish, e$2.Norwegian, e$2.Danish, e$2.Finnish], tz: { offsets: [i$2.UTC_PLUS_1, i$2.UTC_PLUS_2], regions: [t$1.AntarcticaCasey, t$1.AntarcticaDavis, t$1.AntarcticaMcMurdo, t$1.AntarcticaPalmer, t$1.AntarcticaRothera], timezones: [n$3.AtlanticStandardTime, n$3.CentralTime, n$3.EasternTime, n$3.AtlanticStandardTime, n$3.AzoresStandardTime, n$3.NewfoundlandStandardTime] } }, id: r$2.Antarctica, info: { flag: { emoji: "\u{1F1E6}\u{1F1F6}", emoji_unicode: "U+1F1E6 U+1F1F6", svg: "https://www.countryflags.io/aq/flat/64.svg" }, tld: [".aq"] }, iso: { alpha2: r$2.Antarctica, alpha3: "ATA", numeric: "010" }, name: { alt_spellings: ["AQ"], demonym: "Antarctican", native: { endonym: "Antarctica" }, official: "Antarctica", short: "Antarctica", translations: { [e$2.Afrikaans]: "Antarctica", [e$2.Albanian]: "Antarktika", [e$2.Amharic]: "\u12A0\u1295\u1272\u120D\u12AB\u1293", [e$2.Arabic]: "\u0623\u0646\u062A\u0627\u0631\u0643\u062A\u064A\u0643\u0627", [e$2.Armenian]: "\u0540\u0561\u0576\u0561\u0580\u0561\u057F\u056F\u0578", [e$2.Azerbaijani]: "Az\u0259rbaycan", [e$2.Bashkir]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Basque]: "Antarktika", [e$2.Belarusian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Bengali]: "\u0985\u09A8\u09CD\u09A4\u09B0\u09BE\u09B6\u09CD\u09AC\u09C0", [e$2.Berber]: "\u0623\u0646\u062A\u0627\u0631\u0643\u062A\u064A\u0643\u0627", [e$2.Bhutani]: "\u0F68\u0F44\u0F0B\u0F63\u0F72\u0F0B", [e$2.Bosnian]: "Antarktika", [e$2.Breton]: "Antarktika", [e$2.Bulgarian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Burmese]: "\u1021\u1014\u1039\u1010\u102C\u101B\u102E\u1038\u101A\u102C\u1038", [e$2.Catalan]: "Ant\xE0rtida", [e$2.Chinese]: "\u5357\u6781\u6D32", [e$2.Croatian]: "Antarktika", [e$2.Czech]: "Antarktida", [e$2.Danish]: "Antarktis", [e$2.Dutch]: "Antarctica", [e$2.English]: "Antarctica", [e$2.Esperanto]: "Antarktika", [e$2.Estonian]: "Antarktika", [e$2.Finnish]: "Antarktis", [e$2.French]: "Antarctica", [e$2.Frisian]: "Antarktis", [e$2.Galician]: "Ant\xE1rtida", [e$2.Georgian]: "\u10D0\u10DC\u10E2\u10D0\u10E0\u10E5\u10E2\u10D8\u10D9\u10D0", [e$2.German]: "Antarktis", [e$2.Greenlandic]: "Antarktis", [e$2.Greek]: "\u0391\u03BD\u03C4\u03B1\u03C1\u03BA\u03C4\u03B9\u03BA\u03AE", [e$2.Gujarati]: "\u0A85\u0AA8\u0ACD\u0AA4\u0AB0\u0ABE\u0AB6\u0ACD\u0AB5\u0AC0", [e$2.Haitian]: "Antarctica", [e$2.Hausa]: "Antarktika", [e$2.Hebrew]: "\u05D0\u05E0\u05D8\u05E8\u05E7\u05D8\u05D9\u05E7\u05D4", [e$2.Hindi]: "\u0905\u0928\u094D\u0924\u0930\u0915\u094D\u0937\u0947\u0924\u094D\u0930", [e$2.Hungarian]: "Antarktika", [e$2.Icelandic]: "Antarktis", [e$2.Igbo]: "Antarktika", [e$2.Indonesian]: "Antarktika", [e$2.Irish]: "Antarktika", [e$2.Italian]: "Antartide", [e$2.Japanese]: "\u5357\u6975", [e$2.Javanese]: "Antarktika", [e$2.Kannada]: "\u0C85\u0CA8\u0CCD\u0CA4\u0CB0\u0CBE\u0CB6\u0CCD\u0CB5\u0CBF", [e$2.Kazakh]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Khmer]: "\u17A2\u1784\u17CB\u179F\u17D2\u1780\u179A\u17A2\u17B6\u1798\u17C9\u17BB\u1799", [e$2.Korean]: "\uC564\uD2F0\uCE74\uD1A0\uB2C9", [e$2.Kurdish]: "Antarktika", [e$2.Kyrgyz]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Lao]: "\u0EAD\u0EB0\u0E99\u0EAD\u0EA5\u0EB2\u0E81\u0EB4\u0EAA\u0EB0", [e$2.Latin]: "Antarctica", [e$2.Latvian]: "Antarktika", [e$2.Lithuanian]: "Antarktis", [e$2.Luxembourgish]: "Antarktis", [e$2.Macedonian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Malagasy]: "Antarctica", [e$2.Malay]: "Antarktika", [e$2.Malayalam]: "\u0D05\u0D28\u0D4D\u0D24\u0D30\u0D3E\u0D36\u0D4D\u0D35\u0D3F", [e$2.Maltese]: "Antarktika", [e$2.Maori]: "Antarktika", [e$2.Marathi]: "\u0905\u0928\u094D\u0924\u0930\u093E\u0936\u094D\u0935\u093F\u0915\u093E", [e$2.Mongolian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Nepali]: "\u0905\u0928\u094D\u0924\u0930\u093E\u0936\u094D\u0935\u093F\u0915\u093E", [e$2.Norwegian]: "Antarktis", [e$2.Pashto]: "\u0627\u0646\u062A\u0627\u0631\u0643\u062A\u064A\u0643\u0627", [e$2.Persian]: "\u0622\u0646\u062A\u0627\u0631\u06A9\u062A\u06CC\u06A9\u0627", [e$2.Polish]: "Antarktyka", [e$2.Portuguese]: "Ant\xE1rtida", [e$2.Punjabi]: "\u0A05\u0A28\u0A4D\u0A24\u0A30\u0A3E\u0A36\u0A3F\u0A15\u0A3E", [e$2.Romanian]: "Antarctica", [e$2.Russian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Samoan]: "Antarktika", [e$2.Sanskrit]: "\u0905\u0928\u094D\u0924\u0930\u093E\u0936\u094D\u0935\u093F\u0915\u093E", [e$2.Scots]: "Antarktika", [e$2.Serbian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Sesotho]: "Antarktika", [e$2.Shona]: "Antarktika", [e$2.Sindhi]: "Antarktika", [e$2.Sinhala]: "\u0D86\u0DB1\u0DCA\u0DA7\u0DCA\u0DA7\u0DD2\u0D9A\u0DCF\u0DC0", [e$2.Slovak]: "Antarktika", [e$2.Slovenian]: "Antarktika", [e$2.Somali]: "Antarktika", [e$2.Spanish]: "Ant\xE1rtida", [e$2.Sudanese]: "Antarktika", [e$2.Swahili]: "Antarktika", [e$2.Swedish]: "Antarktis", [e$2.Tagalog]: "Antarktika", [e$2.Tajik]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Tamil]: "\u0B85\u0BA9\u0BCD\u0BA4\u0BBE\u0BB0\u0BCD\u0B95\u0BCD\u0B95\u0BBF\u0B95\u0BCD", [e$2.Tatar]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Telugu]: "\u0C05\u0C28\u0C4D\u0C24\u0C30\u0C3E\u0C36\u0C4D\u0C35\u0C3F\u0C15\u0C3E", [e$2.Thai]: "\u0E20\u0E39\u0E21\u0E34\u0E20\u0E32\u0E04\u0E2D\u0E32\u0E19\u0E31\u0E19\u0E15\u0E34\u0E01\u0E32", [e$2.Tibetan]: "\u0F68\u0F7A\u0F53\u0F0B\u0F4A\u0F72\u0F4A\u0F7A\u0F53\u0F0B\u0F40\u0F72\u0F66\u0F72\u0F0B\u0F68\u0F7A\u0F53\u0F0B\u0F4A\u0F72\u0F4A\u0F7A\u0F53\u0F0B\u0F40\u0F72\u0F66\u0F72", [e$2.Turkish]: "Antarktika", [e$2.Ukrainian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Urdu]: "\u0627\u0646\u062A\u0627\u0631\u06A9\u062A\u06CC\u06A9\u0627", [e$2.Uzbek]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Vietnamese]: "\u0110\u1EA5t Antarktik", [e$2.Welsh]: "Antarktika", [e$2.Xhosa]: "Antarktika", [e$2.Yiddish]: "Antarktika", [e$2.Yoruba]: "Antarktika", [e$2.Zulu]: "Antarktika" } } }, Armenia: { i18n: { calling_codes: [374], currencies: [l$1.ArmeniaDram], languages: [e$2.Armenian], tz: { offsets: [i$2.UTC_PLUS_4], regions: [t$1.AsiaJakarta], timezones: [n$3.ArmeniaTime] } }, id: r$2.Armenia, info: { flag: { emoji: "\u{1F1E6}\u{1F1F2}", emoji_unicode: "U+1F1E6 U+1F1F2", svg: "https://www.countryflags.io/am/flat/64.svg" }, tld: [".am"] }, iso: { alpha2: r$2.Armenia, alpha3: "ARM", numeric: "051" }, name: { alt_spellings: ["AM", "Hayastan", "Republic of Armenia", "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576"], demonym: "Armenian", native: { endonym: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576" }, official: "Republic of Armenia", short: "Armenia", translations: { [e$2.Afrikaans]: "Armeni\xEB", [e$2.Albanian]: "Armenia", [e$2.Amharic]: "\u12A0\u121B\u122D\u129B", [e$2.Arabic]: "\u0623\u0631\u0645\u064A\u0646\u064A\u0627", [e$2.Armenian]: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576", [e$2.Azerbaijani]: "Az\u0259rbaycan", [e$2.Bashkir]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Basque]: "Arm\xE9nia", [e$2.Belarusian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Bengali]: "\u0986\u09B0\u09CD\u09AE\u09C7\u09A8\u09BF", [e$2.Berber]: "\u0623\u0631\u0645\u064A\u0646\u064A\u0627", [e$2.Bhutani]: "\u0F62\u0F92\u0FB1\u0F0B\u0F53\u0F42", [e$2.Bosnian]: "Armenija", [e$2.Breton]: "Armeni\xEB", [e$2.Bulgarian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Burmese]: "\u1021\u102C\u1019\u1010\u102D\u1010\u1039", [e$2.Catalan]: "Arm\xE8nia", [e$2.Chinese]: "\u4E9A\u7F8E\u5C3C\u4E9A", [e$2.Croatian]: "Armenija", [e$2.Czech]: "Arm\xE9nie", [e$2.Danish]: "Armenien", [e$2.Dutch]: "Armeni\xEB", [e$2.English]: "Armenia", [e$2.Esperanto]: "Armenia", [e$2.Estonian]: "Armeenia", [e$2.Finnish]: "Armenia", [e$2.French]: "Armenia", [e$2.Frisian]: "Armeenia", [e$2.Galician]: "Arm\xE9nia", [e$2.Georgian]: "\u10D0\u10E0\u10DB\u10DD\u10DC\u10D8", [e$2.German]: "Armenien", [e$2.Greenlandic]: "Armenia", [e$2.Greek]: "\u0391\u03C1\u03BC\u03B5\u03BD\u03AF\u03B1", [e$2.Gujarati]: "\u0A85\u0AB0\u0ACD\u0AAE\u0AC7\u0AA8\u0ABF", [e$2.Haitian]: "Armenia", [e$2.Hausa]: "Armenia", [e$2.Hebrew]: "\u05D0\u05E8\u05DE\u05E0\u05D9\u05D4", [e$2.Hindi]: "\u0905\u05E8\u05DE\u05E0\u093F\u092F\u093E", [e$2.Hungarian]: "\xD6rm\xE9nyorsz\xE1g", [e$2.Icelandic]: "Armenia", [e$2.Igbo]: "Armenia", [e$2.Indonesian]: "Armenia", [e$2.Irish]: "Armenia", [e$2.Italian]: "Armenia", [e$2.Japanese]: "\u30A2\u30EB\u30E1\u30CB\u30A2", [e$2.Javanese]: "Armenia", [e$2.Kannada]: "\u0C85\u0CB0\u0CCD\u0CAE\u0CC7\u0CA8\u0CBF", [e$2.Kazakh]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Khmer]: "\u17A2\u17B6\u1798\u17C9\u17C1\u179A\u17B8", [e$2.Korean]: "\uC544\uB974\uBA54\uB2C8\uC544", [e$2.Kurdish]: "Armenia", [e$2.Kyrgyz]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Lao]: "\u0EAD\u0EB2\u0EAB\u0EBC\u0E99\u0EB2", [e$2.Latin]: "Armenia", [e$2.Latvian]: "Armeenia", [e$2.Lithuanian]: "Arm\u0117nija", [e$2.Luxembourgish]: "Armenien", [e$2.Macedonian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u0458\u0430", [e$2.Malagasy]: "Armenia", [e$2.Malay]: "Armenia", [e$2.Malayalam]: "\u0D05\u0D30\u0D4D\u200D\u0D2E\u0D47\u0D28\u0D3F", [e$2.Maltese]: "Armenia", [e$2.Maori]: "Armenia", [e$2.Marathi]: "\u0905\u0930\u094D\u092E\u0947\u0928\u093F", [e$2.Mongolian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Nepali]: "\u0905\u0930\u094D\u092E\u0947\u0928\u093F", [e$2.Norwegian]: "Armenia", [e$2.Pashto]: "\u0622\u0631\u0645\u06CC\u0646\u06CC\u0627", [e$2.Persian]: "\u0627\u0631\u0645\u0646\u0633\u062A\u0627\u0646", [e$2.Polish]: "Armenia", [e$2.Portuguese]: "Armenia", [e$2.Punjabi]: "\u0A05\u0A30\u0A2E\u0A40\u0A28\u0A40", [e$2.Romanian]: "Armenia", [e$2.Russian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Samoan]: "Armenia", [e$2.Sanskrit]: "Armenia", [e$2.Scots]: "Armenia", [e$2.Serbian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u0458\u0430", [e$2.Sesotho]: "Armenia", [e$2.Shona]: "Armenia", [e$2.Sindhi]: "Armenia", [e$2.Sinhala]: "\u0D86\u0DBB\u0DCA\u0DB8\u0DD3\u0DB1\u0DD2", [e$2.Slovak]: "Armenia", [e$2.Slovenian]: "Armenija", [e$2.Somali]: "Armenia", [e$2.Spanish]: "Armenia", [e$2.Sudanese]: "Armenia", [e$2.Swahili]: "Armenia", [e$2.Swedish]: "Armenien", [e$2.Tagalog]: "Armenia", [e$2.Tajik]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Tamil]: "\u0B85\u0BB0\u0BCD\u0BAE\u0BC7\u0BA9\u0BBF\u0BAF\u0BA9\u0BCD", [e$2.Tatar]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Telugu]: "\u0C05\u0C30\u0C4D\u0C2E\u0C47\u0C28\u0C3F", [e$2.Thai]: "\u0E2D\u0E32\u0E23\u0E4C\u0E40\u0E21\u0E19\u0E34\u0E2A\u0E16\u0E32\u0E19", [e$2.Tibetan]: "\u0F68\u0F62\u0F0B\u0F58\u0F7A\u0F0B\u0F53\u0F72\u0F0B\u0F61\u0F74\u0F0D", [e$2.Turkish]: "Ermenistan", [e$2.Ukrainian]: "\u0410\u0440\u043C\u0435\u043D\u0456\u044F", [e$2.Urdu]: "\u0627\u0631\u0645\u0646\u0633\u062A\u0627\u0646", [e$2.Uzbek]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Vietnamese]: "Armenia", [e$2.Welsh]: "Armenia", [e$2.Xhosa]: "Armenia", [e$2.Yiddish]: "\u05D0\u05E8\u05DE\u05E0\u05D9\u05D4", [e$2.Yoruba]: "Armenia", [e$2.Zulu]: "Armenia" } } }, SomeCountry: { i18n: { calling_codes: [], currencies: [], languages: [], tz: { offsets: [], regions: [], timezones: [] } }, id: r$2.AmericanSamoa, info: { flag: { emoji: "", emoji_unicode: "", svg: "" }, tld: [] }, iso: { alpha2: r$2.AmericanSamoa, alpha3: "", numeric: "" }, name: { alt_spellings: [], demonym: "", native: { endonym: "" }, official: "", short: "", translations: { [e$2.Afrikaans]: "", [e$2.Albanian]: "", [e$2.Amharic]: "", [e$2.Arabic]: "", [e$2.Armenian]: "", [e$2.Azerbaijani]: "", [e$2.Bashkir]: "", [e$2.Basque]: "", [e$2.Belarusian]: "", [e$2.Bengali]: "", [e$2.Berber]: "", [e$2.Bhutani]: "", [e$2.Bosnian]: "", [e$2.Breton]: "", [e$2.Bulgarian]: "", [e$2.Burmese]: "", [e$2.Catalan]: "", [e$2.Chinese]: "", [e$2.Croatian]: "", [e$2.Czech]: "", [e$2.Danish]: "", [e$2.Dutch]: "", [e$2.English]: "", [e$2.Esperanto]: "", [e$2.Estonian]: "", [e$2.Finnish]: "", [e$2.French]: "", [e$2.Frisian]: "", [e$2.Galician]: "", [e$2.Georgian]: "", [e$2.German]: "", [e$2.Greenlandic]: "", [e$2.Greek]: "", [e$2.Gujarati]: "", [e$2.Haitian]: "", [e$2.Hausa]: "", [e$2.Hebrew]: "", [e$2.Hindi]: "", [e$2.Hungarian]: "", [e$2.Icelandic]: "", [e$2.Igbo]: "", [e$2.Indonesian]: "", [e$2.Irish]: "", [e$2.Italian]: "", [e$2.Japanese]: "", [e$2.Javanese]: "", [e$2.Kannada]: "", [e$2.Kazakh]: "", [e$2.Khmer]: "", [e$2.Korean]: "", [e$2.Kurdish]: "", [e$2.Kyrgyz]: "", [e$2.Lao]: "", [e$2.Latin]: "", [e$2.Latvian]: "", [e$2.Lithuanian]: "", [e$2.Luxembourgish]: "", [e$2.Macedonian]: "", [e$2.Malagasy]: "", [e$2.Malay]: "", [e$2.Malayalam]: "", [e$2.Maltese]: "", [e$2.Maori]: "", [e$2.Marathi]: "", [e$2.Mongolian]: "", [e$2.Nepali]: "", [e$2.Norwegian]: "", [e$2.Pashto]: "", [e$2.Persian]: "", [e$2.Polish]: "", [e$2.Portuguese]: "", [e$2.Punjabi]: "", [e$2.Romanian]: "", [e$2.Russian]: "", [e$2.Samoan]: "", [e$2.Sanskrit]: "", [e$2.Scots]: "", [e$2.Serbian]: "", [e$2.Sesotho]: "", [e$2.Shona]: "", [e$2.Sindhi]: "", [e$2.Sinhala]: "", [e$2.Slovak]: "", [e$2.Slovenian]: "", [e$2.Somali]: "", [e$2.Spanish]: "", [e$2.Sudanese]: "", [e$2.Swahili]: "", [e$2.Swedish]: "", [e$2.Tagalog]: "", [e$2.Tajik]: "", [e$2.Tamil]: "", [e$2.Tatar]: "", [e$2.Telugu]: "", [e$2.Thai]: "", [e$2.Tibetan]: "", [e$2.Turkish]: "", [e$2.Ukrainian]: "", [e$2.Urdu]: "", [e$2.Uzbek]: "", [e$2.Vietnamese]: "", [e$2.Welsh]: "", [e$2.Xhosa]: "", [e$2.Yiddish]: "", [e$2.Yoruba]: "", [e$2.Zulu]: "" } } } });
+({ Afghanistan: { i18n: { calling_codes: [93], currencies: [l$1.AfghanistanAfghani], languages: [e$2.Pashto, e$2.Dari, e$2.Turkmen, e$2.Uzbek], tz: { offsets: [i$2.UTC_PLUS_4_30], regions: [t$1.AsiaKabul], timezones: [n$2.AfghanistanTime] } }, id: r$2.Afghanistan, info: { flag: { emoji: "\u{1F1E6}\u{1F1EB}", emoji_unicode: "U+1F1E6 U+1F1EB", svg: "https://www.countryflags.io/af/flat/64.svg" }, tld: [".af"] }, iso: { alpha2: r$2.Afghanistan, alpha3: "AFG", numeric: "004" }, name: { alt_spellings: ["AF", "Af\u0121\u0101nist\u0101n"], demonym: "Afghan", native: { endonym: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646" }, official: "Islamic Republic of Afghanistan", short: "Afghanistan", translations: { [e$2.Afrikaans]: "Afghanistan", [e$2.Albanian]: "Shqip\xEBri", [e$2.Amharic]: "\u12A0\u134D\u130B\u1295", [e$2.Arabic]: "\u0623\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e$2.Armenian]: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576", [e$2.Azerbaijani]: "Az\u0259rbaycan", [e$2.Bashkir]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Basque]: "Afganist\xE1n", [e$2.Belarusian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Bengali]: "\u0986\u09AB\u0997\u09BE\u09A8\u09BF\u09B8\u09CD\u09A4\u09BE\u09A8", [e$2.Berber]: "\u0623\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e$2.Bhutani]: "\u0F60\u0F56\u0FB2\u0F74\u0F42\u0F0B\u0F61\u0F74\u0F63\u0F0B\u0F66\u0FA4\u0FB2\u0F7C\u0F51\u0F0B\u0F40\u0FB1\u0F72\u0F0B\u0F51\u0F7C\u0F53\u0F0B\u0F63\u0F7A\u0F0B\u0F66\u0F90\u0F51\u0F0B\u0F46\u0F0D", [e$2.Bosnian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Breton]: "Afganistan", [e$2.Bulgarian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Burmese]: "\u1021\u102C\u1019\u1001\u103B\u1004\u103A\u1010\u1031\u102C\u103A", [e$2.Catalan]: "Afganistan", [e$2.Chinese]: "\u963F\u5BCC\u6C57", [e$2.Croatian]: "Afganistan", [e$2.Czech]: "Afganistan", [e$2.Danish]: "Afghanistan", [e$2.Dutch]: "Afghanistan", [e$2.English]: "Afghanistan", [e$2.Esperanto]: "Afganistan", [e$2.Estonian]: "Afganistan", [e$2.Finnish]: "Afghanistan", [e$2.French]: "Afghanistan", [e$2.Frisian]: "Afghanistan", [e$2.Galician]: "Afganist\xE1n", [e$2.Georgian]: "\u10D0\u10D5\u10E6\u10D0\u10DC\u10D4\u10D7\u10D8", [e$2.German]: "Afghanistan", [e$2.Greenlandic]: "Afghanistan", [e$2.Greek]: "\u0391\u03C6\u03B3\u03B1\u03BD\u03B9\u03C3\u03C4\u03AC\u03BD", [e$2.Gujarati]: "\u0A85\u0AAB\u0A97\u0ABE\u0AA8\u0ABF\u0AB8\u0ACD\u0AA4\u0ABE\u0AA8", [e$2.Haitian]: "Afghanistan", [e$2.Hausa]: "Afghanistan", [e$2.Hebrew]: "\u05D0\u05E4\u05D2\u05E0\u05D9\u05E1\u05D8\u05DF", [e$2.Hindi]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e$2.Hungarian]: "Afganistan", [e$2.Icelandic]: "Afghanistan", [e$2.Igbo]: "Afghanistan", [e$2.Indonesian]: "Afghanistan", [e$2.Irish]: "Afghanistan", [e$2.Italian]: "Afghanistan", [e$2.Japanese]: "\u30A2\u30D5\u30AC\u30CB\u30B9\u30BF\u30F3", [e$2.Javanese]: "Afghanistan", [e$2.Kannada]: "\u0C85\u0CAB\u0C97\u0CBE\u0CA8\u0CBF\u0CB8\u0CCD\u0CA4\u0CBE\u0CA8", [e$2.Kazakh]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Khmer]: "\u17A2\u17B6\u17A0\u17D2\u179C\u17D2\u179A\u17B7\u1780", [e$2.Korean]: "\uC544\uD504\uAC00\uB2C8\uC2A4\uD0C4", [e$2.Kurdish]: "Afghanistan", [e$2.Kyrgyz]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Lao]: "\u0EAD\u0EB2\u0E9F\u0EB2\u0EA5\u0EBD\u0E99", [e$2.Latin]: "Afghanistan", [e$2.Latvian]: "Afghanistan", [e$2.Lithuanian]: "Afganistanas", [e$2.Luxembourgish]: "Afghanistan", [e$2.Macedonian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Malagasy]: "Afghanistan", [e$2.Malay]: "Afghanistan", [e$2.Malayalam]: "\u0D05\u0D2B\u0D17\u0D3E\u0D28\u0D3F\u0D38\u0D4D\u0D24\u0D3E\u0D28", [e$2.Maltese]: "Afghanistan", [e$2.Maori]: "Afghanistan", [e$2.Marathi]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e$2.Mongolian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Nepali]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e$2.Norwegian]: "Afghanistan", [e$2.Pashto]: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e$2.Persian]: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e$2.Polish]: "Afganistan", [e$2.Portuguese]: "Afghanistan", [e$2.Punjabi]: "Afghanistan", [e$2.Romanian]: "Afghanistan", [e$2.Polish]: "Afganistan", [e$2.Russian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Samoan]: "Afghanistan", [e$2.Sanskrit]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e$2.Scots]: "Afghanistan", [e$2.Serbian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Sesotho]: "Afghanistan", [e$2.Shona]: "Afghanistan", [e$2.Sindhi]: "Afghanistan", [e$2.Sinhala]: "\u0D86\u0D9C\u0DCA\u200D\u0DBB\u0DDC\u0D9A\u0DCA\u0D9A\u0DD2\u0DBA\u0DCF\u0DC0", [e$2.Slovak]: "Afganistan", [e$2.Slovenian]: "Afganistan", [e$2.Somali]: "Afghanistan", [e$2.Spanish]: "Afganist\xE1n", [e$2.Sudanese]: "Afghanistan", [e$2.Swahili]: "Afghanistan", [e$2.Swedish]: "Afghanistan", [e$2.Tagalog]: "Afghanistan", [e$2.Tajik]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Tatar]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Tamil]: "\u0B86\u0BAA\u0BCD\u0BAA\u0B95\u0BBE\u0BA9\u0BBF\u0BB8\u0BCD\u0BA4\u0BBE\u0BA9\u0BCD", [e$2.Telugu]: "\u0C06\u0C2B\u0C4D\u0C18\u0C28\u0C3F\u0C38\u0C4D\u0C24\u0C3E\u0C28\u0C4D", [e$2.Thai]: "\u0E2D\u0E31\u0E1F\u0E01\u0E32\u0E19\u0E34\u0E2A\u0E16\u0E32\u0E19", [e$2.Tibetan]: "\u0F68\u0F55\u0F0B\u0F42\u0F7A\u0F0B\u0F53\u0F72\u0F66\u0F72\u0F0B\u0F4F\u0F7A\u0F53\u0F66\u0F72\u0F0D", [e$2.Turkish]: "Afganistan", [e$2.Ukrainian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Urdu]: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e$2.Uzbek]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e$2.Vietnamese]: "Afghanistan", [e$2.Welsh]: "Afghanistan", [e$2.Xhosa]: "Afghanistan", [e$2.Yiddish]: "Afghanistan", [e$2.Yoruba]: "Afghanistan", [e$2.Zulu]: "Afghanistan" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Kabul", total: 341e5 } }, geography: { area: 652230, region: I.Asia, sub_region: x$1.SouthernAsia }, government: { capital: "Kabul", type: "Islamic Emirate" } } }, Albania: { i18n: { calling_codes: [355], currencies: [l$1.AlbaniaLek], languages: [e$2.Albanian, e$2.Greek, e$2.Turkish], tz: { offsets: [i$2.UTC_PLUS_1], regions: [t$1.EuropeBrussels], timezones: [n$2.CentralEuropeanTime] } }, id: r$2.Albania, info: { flag: { emoji: "\u{1F1E6}\u{1F1F1}", emoji_unicode: "U+1F1E6 U+1F1F1", svg: "https://www.countryflags.io/al/flat/64.svg" }, tld: [".al"] }, iso: { alpha2: r$2.Albania, alpha3: "ALB", numeric: "008" }, name: { alt_spellings: ["AL", "Shqip\xEBri", "Shqip\xEBria", "Shqipnia"], demonym: "Albanian", native: { endonym: "Shqip\xEBri" }, official: "Republic of Albania", short: "Albania", translations: { [e$2.Afrikaans]: "Albania", [e$2.Albanian]: "Albania", [e$2.Amharic]: "\u12A0\u120D\u1263\u1295\u12EB", [e$2.Arabic]: "\u0623\u0644\u0628\u0627\u0646\u064A\u0627", [e$2.Armenian]: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576", [e$2.Azerbaijani]: "Az\u0259rbaycan", [e$2.Bashkir]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Basque]: "Albania", [e$2.Belarusian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Bengali]: "\u0986\u09B2\u09AC\u09BE\u09A8\u09BF\u09AF\u09BC\u09BE", [e$2.Berber]: "\u0623\u0644\u0628\u0627\u0646\u064A\u0627", [e$2.Bhutani]: "\u0F60\u0F56\u0FB2\u0F74\u0F42\u0F0B\u0F61\u0F74\u0F63\u0F0B", [e$2.Bosnian]: "Albanija", [e$2.Breton]: "Albania", [e$2.Bulgarian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Burmese]: "\u1021\u102C\u1019\u1001\u103B\u1004\u103A\u1010\u1031\u102C\u103A", [e$2.Catalan]: "Alb\xE0nia", [e$2.Chinese]: "\u963F\u5C14\u5DF4\u5C3C\u4E9A", [e$2.Croatian]: "Albanija", [e$2.Czech]: "Alb\xE1nie", [e$2.Danish]: "Albanien", [e$2.Dutch]: "Albani\xEB", [e$2.English]: "Albania", [e$2.Esperanto]: "Albanio", [e$2.Estonian]: "Albaania", [e$2.Finnish]: "Albania", [e$2.French]: "Albanie", [e$2.Frisian]: "Albani\xEB", [e$2.Galician]: "Alb\xE2nia", [e$2.Georgian]: "\u10D0\u10DA\u10D1\u10D0\u10DC\u10D8\u10D0", [e$2.German]: "Albanien", [e$2.Greenlandic]: "Albania", [e$2.Greek]: "\u0391\u03BB\u03B2\u03B1\u03BD\u03AF\u03B1", [e$2.Gujarati]: "\u0A85\u0AB2\u0AAC\u0AA8\u0ABF\u0AAF\u0ABE", [e$2.Haitian]: "Albanais", [e$2.Hausa]: "Albania", [e$2.Hebrew]: "\u05D0\u05DC\u05D1\u05E0\u05D9\u05D4", [e$2.Hindi]: "\u0905\u0932\u094D\u092C\u093E\u0928\u093F\u092F\u093E", [e$2.Hungarian]: "Alb\xE1nia", [e$2.Icelandic]: "Alb\xFAnir", [e$2.Igbo]: "Albania", [e$2.Indonesian]: "Albania", [e$2.Irish]: "Alb\xE1in", [e$2.Italian]: "Albania", [e$2.Japanese]: "\u30A2\u30EB\u30D0\u30CB\u30A2", [e$2.Javanese]: "Albania", [e$2.Kannada]: "\u0C85\u0CB2\u0CCD\u0CAC\u0CBE\u0CA8\u0CBF\u0CAF\u0CBE", [e$2.Kazakh]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Khmer]: "\u17A2\u17B6\u17A0\u17D2\u179C\u17D2\u179A\u17C1\u179F\u17CA\u17B8", [e$2.Korean]: "\uC54C\uBC14\uB2C8\uC544", [e$2.Kurdish]: "\u0622\u0644\u0628\u0627\u0646\u06CC\u0627", [e$2.Kyrgyz]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Lao]: "\u0EAD\u0EB2\u0EA5\u0EB2\u0E99\u0EB5", [e$2.Latin]: "Albania", [e$2.Latvian]: "Alb\u0101nija", [e$2.Lithuanian]: "Albanija", [e$2.Luxembourgish]: "Albani\xEB", [e$2.Macedonian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u0458\u0430", [e$2.Malagasy]: "Albania", [e$2.Malay]: "Albania", [e$2.Malayalam]: "\u0D05\u0D32\u0D4D\u0D2C\u0D3E\u0D28\u0D3F\u0D2F\u0D3E", [e$2.Maltese]: "Albania", [e$2.Maori]: "Albania", [e$2.Marathi]: "\u0905\u0932\u094D\u092C\u093E\u0928\u093F\u092F\u093E", [e$2.Mongolian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Nepali]: "\u0905\u0932\u094D\u092C\u093E\u0928\u093F\u092F\u093E", [e$2.Norwegian]: "Albania", [e$2.Pashto]: "\u0627\u0627\u0644\u0628\u0627\u0646\u06CC", [e$2.Persian]: "\u0622\u0644\u0628\u0627\u0646\u06CC", [e$2.Polish]: "Albania", [e$2.Portuguese]: "Alb\xE2nia", [e$2.Punjabi]: "\u0A05\u0A32\u0A2C\u0A28\u0A40\u0A06", [e$2.Romanian]: "Alb\u0103n", [e$2.Russian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Samoan]: "Albania", [e$2.Sanskrit]: "Albani", [e$2.Scots]: "Alb\xE0inia", [e$2.Serbian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u0458\u0430", [e$2.Sesotho]: "Albania", [e$2.Shona]: "Albania", [e$2.Sindhi]: "Albania", [e$2.Sinhala]: "\u0D87\u0DBD\u0DCA\u0DB6\u0DCF\u0DB1\u0DD2\u0DBA", [e$2.Slovak]: "Alb\xE1nsko", [e$2.Slovenian]: "Albanija", [e$2.Somali]: "Albania", [e$2.Spanish]: "Albania", [e$2.Sudanese]: "Albania", [e$2.Swahili]: "Albania", [e$2.Swedish]: "Albanien", [e$2.Tagalog]: "Albania", [e$2.Tajik]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Tamil]: "\u0B85\u0BB2\u0BCD\u0BAA\u0BBE\u0BA9\u0BBF\u0BAF\u0BBE", [e$2.Tatar]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Telugu]: "\u0C05\u0C32\u0C4D\u0C2C\u0C3E\u0C28\u0C3F\u0C2F\u0C3E", [e$2.Thai]: "\u0E2D\u0E31\u0E25\u0E41\u0E1A\u0E19\u0E34\u0E19\u0E35", [e$2.Tibetan]: "\u0F68\u0F63\u0F0B\u0F56\u0F72\u0F0B\u0F53\u0F72\u0F0B\u0F61\u0F72", [e$2.Turkish]: "Albaniye", [e$2.Ukrainian]: "\u0410\u043B\u0431\u0430\u043D\u0456\u044F", [e$2.Urdu]: "\u0622\u0644\u0628\u0627\u0646\u06CC", [e$2.Uzbek]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e$2.Vietnamese]: "Albanie", [e$2.Welsh]: "Albania", [e$2.Xhosa]: "Albania", [e$2.Yiddish]: "\u05D0\u05DC\u05D1\u05E0\u05D9\u05E9", [e$2.Yoruba]: "Albania", [e$2.Zulu]: "Albania" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Tirana", total: 2853e3 } }, geography: { area: 28748, region: I.Europe, sub_region: x$1.SouthernEurope }, government: { capital: "Tirana", type: "Republic" } } }, Algeria: { i18n: { calling_codes: [213], currencies: [l$1.AlgeriaDinar], languages: [e$2.Arabic, e$2.French, e$2.Berber, e$2.Tamazight], tz: { offsets: [i$2.UTC_PLUS_1, i$2.UTC_PLUS_2], regions: [t$1.AfricaAlgiers], timezones: [n$2.CentralEuropeanTime] } }, id: r$2.Algeria, info: { flag: { emoji: "\u{1F1E9}\u{1F1FF}", emoji_unicode: "U+1F1E9 U+1F1FF", svg: "https://www.countryflags.io/dz/flat/64.svg" }, tld: [".dz", ".\u062C\u0632\u0627\u0626\u0631"] }, iso: { alpha2: r$2.Algeria, alpha3: "DZA", numeric: "012" }, name: { alt_spellings: ["DZ", "Dzayer", "Alg\xE9rie"], demonym: "Algerian", native: { endonym: "\u0627\u0644\u062C\u0632\u0627\u0626\u0631" }, official: "People's Democratic Republic of Algeria", short: "Algeria", translations: { [e$2.Afrikaans]: "Algerije", [e$2.Albanian]: "Algeria", [e$2.Amharic]: "\u12A0\u120D\u1300\u122D\u1235", [e$2.Arabic]: "\u0627\u0644\u062C\u0632\u0627\u0626\u0631", [e$2.Armenian]: "\u0531\u056C\u0563\u0578\u0580\u056B\u0561", [e$2.Azerbaijani]: "Az\u0259rbaycan", [e$2.Bashkir]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Basque]: "Algeria", [e$2.Belarusian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Bengali]: "\u0986\u09B2\u099C\u09C7\u09B0", [e$2.Berber]: "\u062C\u0632\u0627\u0626\u0631", [e$2.Bhutani]: "\u0F62\u0FAB\u0F7C\u0F44\u0F0B\u0F41", [e$2.Bosnian]: "Al\u017Eir", [e$2.Breton]: "Algeria", [e$2.Bulgarian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Burmese]: "\u1021\u102C\u101B\u1015\u103A", [e$2.Catalan]: "Alg\xE8ria", [e$2.Chinese]: "\u963F\u5C14\u53CA\u5229\u4E9A", [e$2.Croatian]: "Al\u017Eir", [e$2.Czech]: "Al\u017E\xEDrsko", [e$2.Danish]: "Algeriet", [e$2.Dutch]: "Algerije", [e$2.English]: "Algeria", [e$2.Esperanto]: "Al\u011Derio", [e$2.Estonian]: "Al\u017Eira", [e$2.Finnish]: "Algeria", [e$2.French]: "Alg\xE9rie", [e$2.Frisian]: "Algeri\xEB", [e$2.Galician]: "Alxeria", [e$2.Georgian]: "\u10D0\u10DA\u10D2\u10D8\u10E3\u10E0\u10D8", [e$2.German]: "Algerien", [e$2.Greenlandic]: "Algeria", [e$2.Greek]: "\u0391\u03BB\u03B3\u03B5\u03C1\u03AF\u03B1", [e$2.Gujarati]: "\u0A86\u0AB2\u0AC7\u0A97\u0AB0\u0ABF\u0AAF\u0ABE", [e$2.Haitian]: "Alg\xE9rie", [e$2.Hausa]: "Algeria", [e$2.Hebrew]: "\u05D0\u05DC\u05D2\u05F3\u05D9\u05E8\u05D9\u05D4", [e$2.Hindi]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e$2.Hungarian]: "Alg\xE1r", [e$2.Icelandic]: "Alg\xFAra", [e$2.Igbo]: "Algeria", [e$2.Indonesian]: "Aljir", [e$2.Irish]: "Alg\xE9rie", [e$2.Italian]: "Algeria", [e$2.Japanese]: "\u30A2\u30EB\u30B8\u30A7\u30EA\u30A2", [e$2.Javanese]: "Aljir", [e$2.Kannada]: "\u0C86\u0CB2\u0CCD\u0C97\u0CC7\u0CB0\u0CBF\u0CAF\u0CA8\u0CCD", [e$2.Kazakh]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Khmer]: "\u17A2\u17B6\u179B\u17CB\u1794\u17B6\u1793\u17B8", [e$2.Korean]: "\uC54C\uC81C\uB9AC", [e$2.Kurdish]: "\u062C\u0632\u0627\u06CC\u0631 \u0627\u0644\u062C\u0632\u0627\u06CC\u0631", [e$2.Kyrgyz]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Lao]: "\u0EAD\u0EB2\u0EA5\u0EB2\u0E88\u0EB5\u0E99", [e$2.Latin]: "Algeria", [e$2.Latvian]: "Al\u017E\u012Brija", [e$2.Lithuanian]: "Al\u017Eyras", [e$2.Luxembourgish]: "Algeria", [e$2.Macedonian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Malagasy]: "Alg\xE9rie", [e$2.Malay]: "Aljir", [e$2.Malayalam]: "\u0D06\u0D32\u0D02\u0D17\u0D47\u0D30\u0D3F\u0D2F\u0D7B", [e$2.Maltese]: "Alg\xE9rie", [e$2.Maori]: "Algeria", [e$2.Marathi]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e$2.Mongolian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Nepali]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e$2.Norwegian]: "Algeria", [e$2.Pashto]: "\u0627\u0644\u062C\u0632\u0627\u0626\u0631", [e$2.Persian]: "\u062C\u0632\u0627\u06CC\u0631 \u0627\u0644\u0639\u0631\u0628", [e$2.Polish]: "Algieria", [e$2.Portuguese]: "Alg\xE9ria", [e$2.Punjabi]: "\u0A06\u0A32\u0A47\u0A17\u0A40\u0A06", [e$2.Romanian]: "Algeria", [e$2.Russian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Samoan]: "Algeria", [e$2.Sanskrit]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e$2.Scots]: "Algeria", [e$2.Serbian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Sesotho]: "Algeria", [e$2.Shona]: "Algeria", [e$2.Sindhi]: "Algeria", [e$2.Sinhala]: "\u0D86\u0DBD\u0DCA\u0DB6\u0DCF\u0DB1\u0DD2\u0DBA", [e$2.Slovak]: "Al\u017E\xEDrsko", [e$2.Slovenian]: "Al\u017Eir", [e$2.Somali]: "Algeria", [e$2.Spanish]: "Algeria", [e$2.Sudanese]: "Aljir", [e$2.Swahili]: "Aljir", [e$2.Swedish]: "Algeriet", [e$2.Tagalog]: "Algeria", [e$2.Tajik]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Tamil]: "\u0B86\u0BB2\u0BCD\u0B95\u0BC7\u0BB0\u0BBF\u0BAF\u0BBE", [e$2.Tatar]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Telugu]: "\u0C06\u0C32\u0C4D\u0C17\u0C47\u0C30\u0C3F\u0C2F\u0C3E", [e$2.Thai]: "\u0E2D\u0E32\u0E23\u0E32\u0E01\u0E2D\u0E19", [e$2.Tibetan]: "\u0F68\u0F63\u0F9F\u0F72\u0F0B\u0F62\u0F72\u0F0B\u0F61\u0F72", [e$2.Turkish]: "Cezayir", [e$2.Ukrainian]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Urdu]: "\u0622\u0644\u062C\u06CC\u0631", [e$2.Uzbek]: "\u0410\u043B\u0436\u0438\u0440", [e$2.Vietnamese]: "\u1EA2\u0301\u1EA1\u1EA3\u1EAD\u1EB5", [e$2.Welsh]: "Algeria", [e$2.Xhosa]: "Algeria", [e$2.Yiddish]: "\u05D0\u05DC\u05D2\u05F3\u05D9\u05E8\u05D9\u05D4", [e$2.Yoruba]: "Algeria", [e$2.Zulu]: "Algeria" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Oran", total: 371e5 } }, geography: { area: 2381740, region: I.Africa, sub_region: x$1.NorthernAfrica }, government: { capital: "Algiers", type: "Republic" } } }, AmericanSamoa: { i18n: { calling_codes: [1684], currencies: [l$1.AmericanSamoaTala], languages: [e$2.English, e$2.Samoan], tz: { offsets: [i$2.UTC_MINUS_11], regions: [t$1.PacificSamoa], timezones: [n$2.SamoaStandardTime] } }, id: r$2.AmericanSamoa, info: { flag: { emoji: "\u{1F1E6}\u{1F1F8}", emoji_unicode: "U+1F1E6 U+1F1F8", svg: "https://www.countryflags.io/as/flat/64.svg" }, tld: [".as"] }, iso: { alpha2: r$2.AmericanSamoa, alpha3: "ASM", numeric: "016" }, name: { alt_spellings: ["AS", "Amerika S\u0101moa", "Amelika S\u0101moa", "S\u0101moa Amelika"], demonym: "American Samoan", native: { endonym: "American Samoa" }, official: "American Samoa", short: "American Samoa", translations: { [e$2.Afrikaans]: "Amerikaans Samoa", [e$2.Albanian]: "Samoa Amerikane", [e$2.Amharic]: "\u1233\u121E\u12A0\u122D", [e$2.Arabic]: "\u0633\u0627\u0645\u0648\u0627 \u0627\u0644\u0623\u0645\u0631\u064A\u0643\u064A\u0629", [e$2.Armenian]: "\u054D\u0561\u0570\u0561\u0574\u0561\u056C\u056B\u0561", [e$2.Azerbaijani]: "Samoa Amerikana", [e$2.Bashkir]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0421\u0430\u043C\u043E\u0430", [e$2.Basque]: "Samoa Amerikana", [e$2.Belarusian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430\u044F \u0421\u0430\u043C\u043E\u0430", [e$2.Bengali]: "\u0986\u09AE\u09C7\u09B0\u09BF\u0995\u09BE\u09A8 \u09B8\u09BE\u09AE\u09CB\u09AF\u09BC\u09BE", [e$2.Berber]: "\u062C\u0632\u0631 \u0633\u0627\u0645\u0648\u0627 \u0627\u0644\u0623\u0645\u0631\u064A\u0643\u064A\u0629", [e$2.Bhutani]: "\u0F68\u0F62\u0F92\u0FB1\u0F0B\u0F58\u0F72\u0F0B\u0F51\u0F58\u0F44\u0F66\u0F0B\u0F66\u0FA4\u0FB2\u0F7C\u0F51\u0F0B\u0F40\u0FB1\u0F72\u0F0B\u0F66\u0F90\u0F56\u0F66\u0F0B\u0F62\u0F92\u0FB1\u0F74\u0F51\u0F0B\u0F46\u0F7A\u0F53\u0F0B\u0F54\u0F7C\u0F0D", [e$2.Bosnian]: "Ameri\u010Dka Samoa", [e$2.Breton]: "Samoa Amerikan", [e$2.Bulgarian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e$2.Burmese]: "\u1021\u1019\u1039\u1038\u1019\u101B\u102D\u102F\u1018\u102C\u101E\u102C", [e$2.Catalan]: "Samoa Americana", [e$2.Chinese]: "\u7F8E\u5C5E\u8428\u6469\u4E9A", [e$2.Croatian]: "Ameri\u010Dka Samoa", [e$2.Czech]: "Americk\xE1 Samoa", [e$2.Danish]: "Amerikansk Samoa", [e$2.Dutch]: "Amerikaans Samoa", [e$2.English]: "American Samoa", [e$2.Esperanto]: "Samoa Amerika", [e$2.Estonian]: "Ameerika Samoa", [e$2.Finnish]: "Amerikka Samoa", [e$2.French]: "American Samoa", [e$2.Frisian]: "Amerikaans Samoa", [e$2.Galician]: "Samoa Americana", [e$2.Georgian]: "\u10D0\u10DB\u10D4\u10E0\u10D8\u10D9\u10D8\u10E1 \u10E1\u10D0\u10DB\u10DD\u10D0", [e$2.German]: "Amerikanisch-Samoa", [e$2.Greenlandic]: "Amerikaans Samoa", [e$2.Greek]: "\u0391\u03BC\u03B5\u03C1\u03B9\u03BA\u03B1\u03BD\u03B9\u03BA\u03AE \u03A3\u03B1\u03BC\u03CC\u03B1", [e$2.Gujarati]: "\u0A86\u0AAE\u0AC7\u0AB0\u0ABF\u0A95\u0AA8 \u0AB8\u0ABE\u0AAE\u0ACB\u0AAF\u0ABE", [e$2.Haitian]: "Amerikaans Samoa", [e$2.Hausa]: "Amerikaans Samoa", [e$2.Hebrew]: "\u05D0\u05DE\u05E8\u05D9\u05E7\u05E0\u05D9\u05D4 \u05E1\u05DE\u05D5\u05D0\u05D4", [e$2.Hindi]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e$2.Hungarian]: "Amerikai Szamoa", [e$2.Icelandic]: "Amerikai Szamoa", [e$2.Igbo]: "Ikina Amerika", [e$2.Indonesian]: "Samoa Amerika", [e$2.Irish]: "Samoa Amerikana", [e$2.Italian]: "Samoa Americane", [e$2.Japanese]: "\u30A2\u30E1\u30EA\u30AB\u9818\u30B5\u30E2\u30A2", [e$2.Javanese]: "Samoa Amerika", [e$2.Kannada]: "\u0C85\u0CAE\u0CC7\u0CB0\u0CBF\u0C95\u0CA8\u0CCD \u0CB8\u0CAE\u0CCB\u0C86", [e$2.Kazakh]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0421\u0430\u043C\u043E\u0430", [e$2.Khmer]: "\u17A2\u17B6\u1798\u17C9\u17B6\u179A\u17B8\u179F\u17D2\u178F\u1784\u17CB", [e$2.Korean]: "\uC544\uBA54\uB9AC\uCE74 \uC0AC\uBAA8\uC544", [e$2.Kurdish]: "Amerikaans Samoa", [e$2.Kyrgyz]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0421\u0430\u043C\u043E\u0430", [e$2.Lao]: "\u0EAD\u0EB2\u0EA1\u0EB2\u0E99\u0EB2\u0E94\u0EB2\u0EA1\u0EB2\u0E99\u0EB2\u0E94", [e$2.Latin]: "Samoa Amerikana", [e$2.Latvian]: "Amerikas Samoa", [e$2.Lithuanian]: "Amerikos Samoa", [e$2.Luxembourgish]: "Amerikaans Samoa", [e$2.Macedonian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e$2.Malagasy]: "Samoa Amerika", [e$2.Malay]: "Amerika Samo", [e$2.Malayalam]: "\u0D05\u0D2E\u0D47\u0D30\u0D3F\u0D15\u0D4D\u0D15\u0D28\u0D4D\u0D31\u0D4D \u0D38\u0D2E\u0D4B\u0D06", [e$2.Maltese]: "Samoa Amerika", [e$2.Maori]: "Samoa Amerika", [e$2.Marathi]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e$2.Mongolian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0421\u0430\u043C\u043E\u0430", [e$2.Nepali]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e$2.Norwegian]: "Amerikansk Samoa", [e$2.Pashto]: "\u0627\u0645\u0631\u06CC\u06A9\u0627\u06CC \u0633\u0645\u0648\u0627", [e$2.Persian]: "\u0622\u0645\u0631\u06CC\u06A9\u0627\u06CC \u0633\u0645\u0648\u0627", [e$2.Polish]: "Samoa Ameryka\u0144skie", [e$2.Portuguese]: "Samoa Americana", [e$2.Punjabi]: "\u0A05\u0A2E\u0A30\u0A40\u0A15\u0A40 \u0A38\u0A3E\u0A2E\u0A4B\u0A06", [e$2.Romanian]: "Samoa americane", [e$2.Russian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430\u044F \u0421\u0430\u043C\u043E\u0430", [e$2.Samoan]: "Samoa Amerika", [e$2.Sanskrit]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e$2.Scots]: "Amerikaans Samoa", [e$2.Serbian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e$2.Sesotho]: "Amerikaans Samoa", [e$2.Shona]: "Amerikaans Samoa", [e$2.Sindhi]: "Amerikaans Samoa", [e$2.Sinhala]: "\u0D86\u0DBB\u0DCA\u0DA2\u0DD2\u0DB1\u0DCF\u0DB1\u0DD4 \u0DC3\u0DD0\u0DB8\u0DD0\u0DBD\u0DCA\u0DC0", [e$2.Slovak]: "Amerikaans Samoa", [e$2.Slovenian]: "Amerikaans Samoa", [e$2.Somali]: "Amerikaans Samoa", [e$2.Spanish]: "Samoa Americana", [e$2.Sudanese]: "Amerikaans Samoa", [e$2.Swahili]: "Amerikaans Samoa", [e$2.Swedish]: "Amerikansk Samoa", [e$2.Tagalog]: "Amerikaans Samoa", [e$2.Tajik]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0441\u0430\u043C\u043E\u0430", [e$2.Tamil]: "\u0B85\u0BAE\u0BC6\u0BB0\u0BBF\u0B95\u0BCD \u0B9A\u0BAE\u0BCB\u0BB5\u0BBE", [e$2.Tatar]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0441\u0430\u043C\u043E\u0430", [e$2.Telugu]: "\u0C05\u0C2E\u0C46\u0C30\u0C3F\u0C15\u0C4D \u0C38\u0C2E\u0C4B\u0C35\u0C3E", [e$2.Thai]: "\u0E2A\u0E2B\u0E23\u0E32\u0E0A\u0E2D\u0E32\u0E13\u0E32\u0E08\u0E31\u0E01\u0E23\u0E41\u0E2D\u0E1F\u0E23\u0E34\u0E01\u0E32", [e$2.Tibetan]: "\u0F68\u0F7A\u0F0B\u0F62\u0F72\u0F0B\u0F40\u0F0B\u0F68\u0F7A\u0F0B\u0F58\u0F72\u0F0B\u0F51\u0F74\u0F0B\u0F61\u0F72\u0F0B\u0F62\u0F72\u0F0B\u0F40", [e$2.Turkish]: "Amerikan Samoas\u0131", [e$2.Ukrainian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u044C\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e$2.Urdu]: "\u0627\u0645\u0631\u06CC\u06A9\u06CC \u0633\u0645\u0648\u0627", [e$2.Uzbek]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0441\u0430\u043C\u043E\u0430", [e$2.Vietnamese]: "Amerikaans Samoa", [e$2.Welsh]: "Amerikaans Samoa", [e$2.Xhosa]: "Amerikaans Samoa", [e$2.Yiddish]: "Amerikaans Samoa", [e$2.Yoruba]: "Amerikaans Samoa", [e$2.Zulu]: "Amerikaans Samoa" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Pago Pago", total: 558e3 } }, geography: { area: 199, region: I.Oceania, sub_region: x$1.Polynesia }, government: { capital: "Pago Pago", type: "Nonmetropolitan Territory of the US" } } }, Andorra: { i18n: { calling_codes: [376], currencies: [l$1.Euro], languages: [e$2.Catalan, e$2.Spanish], tz: { offsets: [i$2.UTC_PLUS_1, i$2.UTC_PLUS_2], regions: [t$1.EuropeAndorra], timezones: [n$2.CentralEuropeanTime] } }, id: r$2.Andorra, info: { flag: { emoji: "\u{1F1E6}\u{1F1F4}", emoji_unicode: "U+1F1E6 U+1F1F4", svg: "https://www.countryflags.io/ad/flat/64.svg" }, tld: [".ad"] }, iso: { alpha2: r$2.Andorra, alpha3: "AND", numeric: "020" }, name: { alt_spellings: ["AD", "Principality of Andorra", "Principat d'Andorra"], demonym: "Andorran", native: { endonym: "Andorra" }, official: "Principality of Andorra", short: "Andorra", translations: { [e$2.Afrikaans]: "Andorra", [e$2.Albanian]: "Andorra", [e$2.Amharic]: "\u12A0\u1295\u12F6\u122B", [e$2.Arabic]: "\u0623\u0646\u062F\u0648\u0631\u0627", [e$2.Armenian]: "\u0540\u0561\u0576\u0564\u0561\u0580\u0561\u057E\u0561\u0575\u0584", [e$2.Azerbaijani]: "Andorra", [e$2.Bashkir]: "\u0410\u043D\u0434\u043E\u0440\u0430", [e$2.Basque]: "Andorra", [e$2.Belarusian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Bengali]: "\u0985\u09A8\u09CD\u09A1\u09CB\u09B0\u09BE", [e$2.Berber]: "\u0623\u0646\u062F\u0648\u0631\u0627", [e$2.Bhutani]: "\u0F68\u0F53\u0F0B\u0F4C\u0F7C\u0F0B", [e$2.Bosnian]: "Andora", [e$2.Breton]: "Andorra", [e$2.Bulgarian]: "\u0410\u043D\u0434\u043E\u0440\u0430", [e$2.Burmese]: "\u1021\u1014\u1039\u1010\u102C\u101B\u102D\u102F\u1038", [e$2.Catalan]: "Andorra", [e$2.Chinese]: "\u5B89\u9053\u5C14", [e$2.Croatian]: "Andora", [e$2.Czech]: "Andorra", [e$2.Danish]: "Andorra", [e$2.Dutch]: "Andorra", [e$2.English]: "Andorra", [e$2.Esperanto]: "Andora", [e$2.Estonian]: "Andorra", [e$2.Finnish]: "Andorra", [e$2.French]: "Andorra", [e$2.Frisian]: "Andorra", [e$2.Galician]: "Andorra", [e$2.Georgian]: "\u12A0\u1295\u12F6\u122B", [e$2.German]: "Andorra", [e$2.Greek]: "\u0391\u03BD\u03B4\u03CC\u03C1\u03B1", [e$2.Hebrew]: "\u05D0\u05E0\u05D3\u05D5\u05E8\u05D4", [e$2.Hindi]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e$2.Hungarian]: "Andorra", [e$2.Icelandic]: "Andorra", [e$2.Igbo]: "Andorra", [e$2.Indonesian]: "Andorra", [e$2.Irish]: "Andorra", [e$2.Italian]: "Andorra", [e$2.Japanese]: "\u30A2\u30F3\u30C9\u30E9", [e$2.Javanese]: "Andorra", [e$2.Kannada]: "\u0C85\u0C82\u0CA1\u0CCB\u0CB0\u0CBF\u0CAF\u0CA8\u0CCD", [e$2.Kazakh]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Khmer]: "\u17A2\u1784\u17CB\u178A\u17B6\u179A\u17B6", [e$2.Korean]: "\uC548\uB3C4\uB77C", [e$2.Kurdish]: "Andorra", [e$2.Kyrgyz]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Lao]: "\u0EAD\u0EB1\u0E99\u0EC2\u0E94\u0EA3\u0EB2", [e$2.Latin]: "Andorra", [e$2.Latvian]: "Andora", [e$2.Lithuanian]: "Andora", [e$2.Luxembourgish]: "Andorra", [e$2.Macedonian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Malagasy]: "Andorra", [e$2.Malay]: "Andorra", [e$2.Malayalam]: "\u0D05\u0D02\u0D21\u0D4B\u0D30\u0D3F\u0D2F\u0D28\u0D4D", [e$2.Maltese]: "Andorra", [e$2.Maori]: "Andorra", [e$2.Marathi]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e$2.Mongolian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Nepali]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e$2.Norwegian]: "Andorra", [e$2.Pashto]: "\u0622\u0646\u062F\u0648\u0631\u0627", [e$2.Persian]: "\u0622\u0646\u062F\u0648\u0631\u0627", [e$2.Polish]: "Andora", [e$2.Portuguese]: "Andorra", [e$2.Punjabi]: "\u0A05\u0A70\u0A21\u0A4B\u0A30\u0A3E", [e$2.Romanian]: "Andorra", [e$2.Russian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Samoan]: "Andorra", [e$2.Sanskrit]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e$2.Scots]: "Andorra", [e$2.Serbian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Sesotho]: "Andorra", [e$2.Shona]: "Andorra", [e$2.Sindhi]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e$2.Sinhala]: "\u0D86\u0DB1\u0DCA\u0DAF\u0DDA", [e$2.Slovak]: "Andorra", [e$2.Slovenian]: "Andora", [e$2.Somali]: "Andorra", [e$2.Spanish]: "Andorra", [e$2.Sudanese]: "Andorra", [e$2.Swahili]: "Andorra", [e$2.Swedish]: "Andorra", [e$2.Tagalog]: "Andorra", [e$2.Tajik]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Tamil]: "\u0B85\u0BA9\u0BCB\u0BB0\u0BCD\u0B9F\u0BBE", [e$2.Tatar]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Telugu]: "\u0C05\u0C02\u0C21\u0C4B\u0C30\u0C4D\u0C30\u0C3E", [e$2.Thai]: "\u0E2D\u0E31\u0E19\u0E14\u0E2D\u0E23\u0E4C\u0E23\u0E32", [e$2.Tibetan]: "\u0F68\u0F53\u0F0B\u0F4C\u0F7C\u0F0B", [e$2.Turkish]: "Andora", [e$2.Ukrainian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Urdu]: "\u0622\u0646\u062F\u0648\u0631\u0627", [e$2.Uzbek]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e$2.Vietnamese]: "Andorra", [e$2.Welsh]: "Andorra", [e$2.Xhosa]: "Andorra", [e$2.Yiddish]: "\u05D0\u05E0\u05D3\u05D5\u05E8\u05D4", [e$2.Yoruba]: "Andorra", [e$2.Zulu]: "Andorra" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Andorra la Vella", total: 78e3 } }, geography: { area: 468, region: I.Europe, sub_region: x$1.SouthernEurope }, government: { capital: "Andorra la Vella", type: "Constitutional Monarchy" } } }, Angola: { i18n: { calling_codes: [244], currencies: [l$1.AngolaKwanza], languages: [e$2.Portuguese, e$2.Spanish, e$2.French, e$2.Italian, e$2.German, e$2.English], tz: { offsets: [i$2.UTC_0, i$2.UTC_PLUS_1, i$2.UTC_PLUS_2], regions: [t$1.AfricaLuanda], timezones: [n$2.WestAfricaTime] } }, id: r$2.Angola, info: { flag: { emoji: "\u{1F1E6}\u{1F1EC}", emoji_unicode: "U+1F1E6 U+1F1EC", svg: "https://www.countryflags.io/ao/flat/64.svg" }, tld: [".ao"] }, iso: { alpha2: r$2.Angola, alpha3: "AGO", numeric: "024" }, name: { alt_spellings: ["AO", "Rep\xFAblica de Angola", "\u0281\u025Bpublika de an"], demonym: "Angolan", native: { endonym: "Angola" }, official: "Republic of Angola", short: "Angola", translations: { [e$2.Afrikaans]: "Angola", [e$2.Albanian]: "Ang\xF2la", [e$2.Amharic]: "\u12A0\u1295\u130E\u120A\u12EB", [e$2.Arabic]: "\u0623\u0646\u063A\u0648\u0644\u0627", [e$2.Armenian]: "\u0540\u0561\u0576\u0563\u0561\u056C\u0561\u056F\u0561", [e$2.Azerbaijani]: "Ang\u0259l", [e$2.Bashkir]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Basque]: "Angola", [e$2.Belarusian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Bengali]: "\u0985\u0999\u09CD\u0997\u09B2\u09BE", [e$2.Berber]: "Angola", [e$2.Bhutani]: "\u0F60\u0F56\u0FB2\u0F74\u0F42", [e$2.Bosnian]: "Angola", [e$2.Breton]: "Angola", [e$2.Bulgarian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Burmese]: "\u1021\u1004\u103A\u1039\u1002\u101C\u102D\u1010\u103A", [e$2.Catalan]: "Angola", [e$2.Chinese]: "\u5B89\u54E5\u62C9", [e$2.Croatian]: "Angola", [e$2.Czech]: "Angola", [e$2.Danish]: "Angola", [e$2.Dutch]: "Angola", [e$2.English]: "Angola", [e$2.Esperanto]: "Angolo", [e$2.Estonian]: "Angola", [e$2.Finnish]: "Angola", [e$2.French]: "Angola", [e$2.Frisian]: "Angola", [e$2.Galician]: "Angola", [e$2.Georgian]: "\u10D0\u10DC\u10D2\u10DD\u10DA\u10D0", [e$2.German]: "Angola", [e$2.Greenlandic]: "Angola", [e$2.Greek]: "\u0391\u03B3\u03BA\u03CC\u03BB\u03B1", [e$2.Gujarati]: "\u0A85\u0A82\u0A97\u0ACB\u0AB2\u0ABE", [e$2.Haitian]: "Angola", [e$2.Hausa]: "Angola", [e$2.Hebrew]: "\u05D0\u05E0\u05D2\u05D5\u05DC\u05D4", [e$2.Hindi]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e$2.Hungarian]: "Angola", [e$2.Icelandic]: "Angola", [e$2.Igbo]: "Angola", [e$2.Indonesian]: "Angola", [e$2.Irish]: "Angola", [e$2.Italian]: "Angola", [e$2.Japanese]: "\u30A2\u30F3\u30B4\u30E9", [e$2.Javanese]: "Anggol", [e$2.Kannada]: "\u0C85\u0C82\u0C97\u0CCB\u0CB2\u0CBE", [e$2.Kazakh]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Khmer]: "\u17A2\u1784\u17CB\u1780\u17B6\u179B\u17A2\u1784\u17CB\u1782\u17D2\u179B\u17C1\u179F", [e$2.Korean]: "\uC559\uACE8\uB77C", [e$2.Kurdish]: "Angola", [e$2.Kyrgyz]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Lao]: "\u0EAD\u0EB0\u0E99\u0EB2\u0E94\u0EB2", [e$2.Latin]: "Angola", [e$2.Latvian]: "Angola", [e$2.Lithuanian]: "Angola", [e$2.Luxembourgish]: "Angola", [e$2.Macedonian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Malagasy]: "Angola", [e$2.Malay]: "Angola", [e$2.Malayalam]: "\u0D05\u0D02\u0D17\u0D4B\u0D33\u0D3E", [e$2.Maltese]: "Angola", [e$2.Maori]: "Angola", [e$2.Marathi]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e$2.Mongolian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Nepali]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e$2.Norwegian]: "Angola", [e$2.Pashto]: "\u0627\u0646\u06AB\u0648\u0644\u0627", [e$2.Persian]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e$2.Polish]: "Angola", [e$2.Portuguese]: "Angola", [e$2.Punjabi]: "\u0A05\u0A19\u0A4D\u0A17\u0A4B\u0A32\u0A3E", [e$2.Romanian]: "Angole", [e$2.Russian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Samoan]: "Angola", [e$2.Sanskrit]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e$2.Scots]: "Angola", [e$2.Serbian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Sesotho]: "Angola", [e$2.Shona]: "Angola", [e$2.Sindhi]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e$2.Sinhala]: "\u0D86\u0D9C\u0DBD\u0DD2\u0DBA\u0DCF\u0DC0", [e$2.Slovak]: "Angola", [e$2.Slovenian]: "Angola", [e$2.Somali]: "Angola", [e$2.Spanish]: "Angola", [e$2.Sudanese]: "Angola", [e$2.Swahili]: "Angola", [e$2.Swedish]: "Angola", [e$2.Tagalog]: "Angola", [e$2.Tajik]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Tamil]: "\u0B85\u0B99\u0BCD\u0B95\u0BCB\u0BB2\u0BBE", [e$2.Tatar]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Telugu]: "\u0C05\u0C02\u0C17\u0C4B\u0C32\u0C3E", [e$2.Thai]: "\u0E2D\u0E07\u0E04\u0E4C\u0E01\u0E32\u0E23\u0E2D\u0E32\u0E19\u0E32\u0E21\u0E34\u0E2A\u0E16\u0E32\u0E19", [e$2.Tibetan]: "\u0F68\u0F44\u0F0B\u0F63\u0F7C\u0F0B", [e$2.Turkish]: "Angola", [e$2.Ukrainian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e$2.Urdu]: "\u0627\u0646\u06AF\u0648\u0644\u0627", [e$2.Uzbek]: "Angola", [e$2.Vietnamese]: "Angola", [e$2.Xhosa]: "Angola", [e$2.Welsh]: "Angola", [e$2.Yiddish]: "\u05D0\u05E0\u05D2\u05D5\u05DC\u05D4", [e$2.Yoruba]: "Angola", [e$2.Zulu]: "Angola" } } }, Anguilla: { i18n: { calling_codes: [1264], currencies: [l$1.DominicaDollar, l$1.EastCaribbeanDollar, l$1.Euro, l$1.UnitedStatesDollar, l$1.BritishPound], languages: [e$2.English, e$2.Spanish], tz: { offsets: [i$2.UTC_MINUS_4], regions: [t$1.AmericaAnguilla], timezones: [n$2.AtlanticStandardTime] } }, id: r$2.Anguilla, info: { flag: { emoji: "\u{1F1E6}\u{1F1EC}", emoji_unicode: "U+1F1E6 U+1F1EC", svg: "https://www.countryflags.io/ai/flat/64.svg" }, tld: [".ai"] }, iso: { alpha2: r$2.Anguilla, alpha3: "AIA", numeric: "660" }, name: { alt_spellings: ["AI"], demonym: "Anguillian", native: { endonym: "Anguilla" }, official: "Anguilla", short: "Anguilla", translations: { [e$2.Afrikaans]: "Anguilla", [e$2.Albanian]: "Anguilla", [e$2.Amharic]: "\u12A0\u1295\u1309\u120B", [e$2.Arabic]: "\u0623\u0646\u063A\u0648\u064A\u0644\u0627", [e$2.Armenian]: "\u0531\u0576\u0563\u056B\u056C\u0561", [e$2.Azerbaijani]: "Az\u0259rbaycan", [e$2.Bashkir]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Basque]: "Angila", [e$2.Belarusian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Bengali]: "\u0985\u0999\u09CD\u0997\u09C0\u09B2\u09BE", [e$2.Berber]: "\u0623\u0646\u063A\u0648\u064A\u0644\u0627", [e$2.Bhutani]: "\u0F68\u0F44\u0F0B\u0F63\u0F7C\u0F0B", [e$2.Bosnian]: "Angila", [e$2.Breton]: "Angila", [e$2.Bulgarian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Burmese]: "\u1021\u1004\u103A\u1039\u1002\u101C\u102D\u1010\u103A", [e$2.Catalan]: "Angilla", [e$2.Chinese]: "\u5B89\u572D\u62C9", [e$2.Croatian]: "Angila", [e$2.Czech]: "Anguilla", [e$2.Danish]: "Anguilla", [e$2.Dutch]: "Anguilla", [e$2.English]: "Anguilla", [e$2.Esperanto]: "Angila", [e$2.Estonian]: "Anguilla", [e$2.Finnish]: "Anguilla", [e$2.French]: "Anguilla", [e$2.Frisian]: "Angila", [e$2.Galician]: "Anguilla", [e$2.Georgian]: "\u10D0\u10DC\u10D2\u10D8\u10DA\u10D0", [e$2.German]: "Anguilla", [e$2.Greenlandic]: "Anguilla", [e$2.Greek]: "\u0391\u03BD\u03B3\u03BA\u03C5\u03BB\u03AC", [e$2.Gujarati]: "\u0A85\u0A82\u0A97\u0ACD\u0AAF\u0ABE\u0AB2\u0ABE", [e$2.Haitian]: "Anguilla", [e$2.Hausa]: "Anguilla", [e$2.Hebrew]: "\u05D0\u05E0\u05D2\u05D5\u05D9\u05D0\u05DC\u05D4", [e$2.Hindi]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e$2.Hungarian]: "Anguilla", [e$2.Icelandic]: "Anguilla", [e$2.Igbo]: "Anguilla", [e$2.Indonesian]: "Anguilla", [e$2.Irish]: "Anguilla", [e$2.Italian]: "Anguilla", [e$2.Japanese]: "\u30A2\u30F3\u30AE\u30E9", [e$2.Javanese]: "Anguilla", [e$2.Kannada]: "\u0C85\u0C82\u0C97\u0CCD\u0CB5\u0CC7\u0CB2\u0CBE", [e$2.Kazakh]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Khmer]: "\u17A2\u1784\u17CB\u1780\u17B6\u179A\u17A0\u17D2\u1782\u17B8\u1798", [e$2.Korean]: "\uC575\uADC8\uB77C", [e$2.Kurdish]: "Anguilla", [e$2.Kyrgyz]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Lao]: "\u0EAD\u0EB0\u0E99\u0EB0\u0E88\u0EB3", [e$2.Latin]: "Anguilla", [e$2.Latvian]: "Anguilla", [e$2.Lithuanian]: "Anguilla", [e$2.Luxembourgish]: "Angilla", [e$2.Macedonian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Malagasy]: "Angila", [e$2.Malay]: "Anguilla", [e$2.Malayalam]: "\u0D05\u0D02\u0D17\u0D4D\u0D35\u0D47\u0D32\u0D3E", [e$2.Maltese]: "Anguilla", [e$2.Maori]: "Anguilla", [e$2.Marathi]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e$2.Mongolian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Nepali]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e$2.Norwegian]: "Anguilla", [e$2.Pashto]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e$2.Persian]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e$2.Polish]: "Anguilla", [e$2.Portuguese]: "Anguilla", [e$2.Punjabi]: "\u0A05\u0A02\u0A17\u0A40\u0A32\u0A3E", [e$2.Romanian]: "Anguilla", [e$2.Russian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Samoan]: "Anguilla", [e$2.Sanskrit]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e$2.Scots]: "Anguilla", [e$2.Serbian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Sesotho]: "Anguilla", [e$2.Shona]: "Anguilla", [e$2.Sindhi]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e$2.Sinhala]: "\u0D86\u0D82\u0D9C\u0DD2\u0DBD\u0DCF\u0DC0", [e$2.Slovak]: "Anguilla", [e$2.Slovenian]: "Anguilla", [e$2.Somali]: "Anguilla", [e$2.Spanish]: "Anguilla", [e$2.Sudanese]: "Anguilla", [e$2.Swahili]: "Anguilla", [e$2.Swedish]: "Anguilla", [e$2.Tagalog]: "Anguilla", [e$2.Tajik]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Tamil]: "\u0B85\u0B99\u0BCD\u0B95\u0BC8\u0BB2\u0BBE", [e$2.Tatar]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Telugu]: "\u0C05\u0C02\u0C17\u0C4D\u0C35\u0C47\u0C32\u0C3E", [e$2.Thai]: "\u0E2D\u0E31\u0E07\u0E01\u0E32\u0E25\u0E32", [e$2.Tibetan]: "\u0F68\u0F44\u0F0B\u0F63\u0F72\u0F0B", [e$2.Turkish]: "Anguilla", [e$2.Ukrainian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Urdu]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e$2.Uzbek]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e$2.Vietnamese]: "Anguilla", [e$2.Welsh]: "Anguilla", [e$2.Xhosa]: "Anguilla", [e$2.Yiddish]: "Anguilla", [e$2.Yoruba]: "Anguilla", [e$2.Zulu]: "Anguilla" } } }, Antarctica: { i18n: { calling_codes: [672], currencies: [l$1.UnitedStatesDollar, l$1.Euro], languages: [e$2.English, e$2.Spanish, e$2.French, e$2.Portuguese, e$2.Italian, e$2.Dutch, e$2.German, e$2.Swedish, e$2.Norwegian, e$2.Danish, e$2.Finnish], tz: { offsets: [i$2.UTC_PLUS_1, i$2.UTC_PLUS_2], regions: [t$1.AntarcticaCasey, t$1.AntarcticaDavis, t$1.AntarcticaMcMurdo, t$1.AntarcticaPalmer, t$1.AntarcticaRothera], timezones: [n$2.AtlanticStandardTime, n$2.CentralTime, n$2.EasternTime, n$2.AtlanticStandardTime, n$2.AzoresStandardTime, n$2.NewfoundlandStandardTime] } }, id: r$2.Antarctica, info: { flag: { emoji: "\u{1F1E6}\u{1F1F6}", emoji_unicode: "U+1F1E6 U+1F1F6", svg: "https://www.countryflags.io/aq/flat/64.svg" }, tld: [".aq"] }, iso: { alpha2: r$2.Antarctica, alpha3: "ATA", numeric: "010" }, name: { alt_spellings: ["AQ"], demonym: "Antarctican", native: { endonym: "Antarctica" }, official: "Antarctica", short: "Antarctica", translations: { [e$2.Afrikaans]: "Antarctica", [e$2.Albanian]: "Antarktika", [e$2.Amharic]: "\u12A0\u1295\u1272\u120D\u12AB\u1293", [e$2.Arabic]: "\u0623\u0646\u062A\u0627\u0631\u0643\u062A\u064A\u0643\u0627", [e$2.Armenian]: "\u0540\u0561\u0576\u0561\u0580\u0561\u057F\u056F\u0578", [e$2.Azerbaijani]: "Az\u0259rbaycan", [e$2.Bashkir]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Basque]: "Antarktika", [e$2.Belarusian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Bengali]: "\u0985\u09A8\u09CD\u09A4\u09B0\u09BE\u09B6\u09CD\u09AC\u09C0", [e$2.Berber]: "\u0623\u0646\u062A\u0627\u0631\u0643\u062A\u064A\u0643\u0627", [e$2.Bhutani]: "\u0F68\u0F44\u0F0B\u0F63\u0F72\u0F0B", [e$2.Bosnian]: "Antarktika", [e$2.Breton]: "Antarktika", [e$2.Bulgarian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Burmese]: "\u1021\u1014\u1039\u1010\u102C\u101B\u102E\u1038\u101A\u102C\u1038", [e$2.Catalan]: "Ant\xE0rtida", [e$2.Chinese]: "\u5357\u6781\u6D32", [e$2.Croatian]: "Antarktika", [e$2.Czech]: "Antarktida", [e$2.Danish]: "Antarktis", [e$2.Dutch]: "Antarctica", [e$2.English]: "Antarctica", [e$2.Esperanto]: "Antarktika", [e$2.Estonian]: "Antarktika", [e$2.Finnish]: "Antarktis", [e$2.French]: "Antarctica", [e$2.Frisian]: "Antarktis", [e$2.Galician]: "Ant\xE1rtida", [e$2.Georgian]: "\u10D0\u10DC\u10E2\u10D0\u10E0\u10E5\u10E2\u10D8\u10D9\u10D0", [e$2.German]: "Antarktis", [e$2.Greenlandic]: "Antarktis", [e$2.Greek]: "\u0391\u03BD\u03C4\u03B1\u03C1\u03BA\u03C4\u03B9\u03BA\u03AE", [e$2.Gujarati]: "\u0A85\u0AA8\u0ACD\u0AA4\u0AB0\u0ABE\u0AB6\u0ACD\u0AB5\u0AC0", [e$2.Haitian]: "Antarctica", [e$2.Hausa]: "Antarktika", [e$2.Hebrew]: "\u05D0\u05E0\u05D8\u05E8\u05E7\u05D8\u05D9\u05E7\u05D4", [e$2.Hindi]: "\u0905\u0928\u094D\u0924\u0930\u0915\u094D\u0937\u0947\u0924\u094D\u0930", [e$2.Hungarian]: "Antarktika", [e$2.Icelandic]: "Antarktis", [e$2.Igbo]: "Antarktika", [e$2.Indonesian]: "Antarktika", [e$2.Irish]: "Antarktika", [e$2.Italian]: "Antartide", [e$2.Japanese]: "\u5357\u6975", [e$2.Javanese]: "Antarktika", [e$2.Kannada]: "\u0C85\u0CA8\u0CCD\u0CA4\u0CB0\u0CBE\u0CB6\u0CCD\u0CB5\u0CBF", [e$2.Kazakh]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Khmer]: "\u17A2\u1784\u17CB\u179F\u17D2\u1780\u179A\u17A2\u17B6\u1798\u17C9\u17BB\u1799", [e$2.Korean]: "\uC564\uD2F0\uCE74\uD1A0\uB2C9", [e$2.Kurdish]: "Antarktika", [e$2.Kyrgyz]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Lao]: "\u0EAD\u0EB0\u0E99\u0EAD\u0EA5\u0EB2\u0E81\u0EB4\u0EAA\u0EB0", [e$2.Latin]: "Antarctica", [e$2.Latvian]: "Antarktika", [e$2.Lithuanian]: "Antarktis", [e$2.Luxembourgish]: "Antarktis", [e$2.Macedonian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Malagasy]: "Antarctica", [e$2.Malay]: "Antarktika", [e$2.Malayalam]: "\u0D05\u0D28\u0D4D\u0D24\u0D30\u0D3E\u0D36\u0D4D\u0D35\u0D3F", [e$2.Maltese]: "Antarktika", [e$2.Maori]: "Antarktika", [e$2.Marathi]: "\u0905\u0928\u094D\u0924\u0930\u093E\u0936\u094D\u0935\u093F\u0915\u093E", [e$2.Mongolian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Nepali]: "\u0905\u0928\u094D\u0924\u0930\u093E\u0936\u094D\u0935\u093F\u0915\u093E", [e$2.Norwegian]: "Antarktis", [e$2.Pashto]: "\u0627\u0646\u062A\u0627\u0631\u0643\u062A\u064A\u0643\u0627", [e$2.Persian]: "\u0622\u0646\u062A\u0627\u0631\u06A9\u062A\u06CC\u06A9\u0627", [e$2.Polish]: "Antarktyka", [e$2.Portuguese]: "Ant\xE1rtida", [e$2.Punjabi]: "\u0A05\u0A28\u0A4D\u0A24\u0A30\u0A3E\u0A36\u0A3F\u0A15\u0A3E", [e$2.Romanian]: "Antarctica", [e$2.Russian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Samoan]: "Antarktika", [e$2.Sanskrit]: "\u0905\u0928\u094D\u0924\u0930\u093E\u0936\u094D\u0935\u093F\u0915\u093E", [e$2.Scots]: "Antarktika", [e$2.Serbian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Sesotho]: "Antarktika", [e$2.Shona]: "Antarktika", [e$2.Sindhi]: "Antarktika", [e$2.Sinhala]: "\u0D86\u0DB1\u0DCA\u0DA7\u0DCA\u0DA7\u0DD2\u0D9A\u0DCF\u0DC0", [e$2.Slovak]: "Antarktika", [e$2.Slovenian]: "Antarktika", [e$2.Somali]: "Antarktika", [e$2.Spanish]: "Ant\xE1rtida", [e$2.Sudanese]: "Antarktika", [e$2.Swahili]: "Antarktika", [e$2.Swedish]: "Antarktis", [e$2.Tagalog]: "Antarktika", [e$2.Tajik]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Tamil]: "\u0B85\u0BA9\u0BCD\u0BA4\u0BBE\u0BB0\u0BCD\u0B95\u0BCD\u0B95\u0BBF\u0B95\u0BCD", [e$2.Tatar]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Telugu]: "\u0C05\u0C28\u0C4D\u0C24\u0C30\u0C3E\u0C36\u0C4D\u0C35\u0C3F\u0C15\u0C3E", [e$2.Thai]: "\u0E20\u0E39\u0E21\u0E34\u0E20\u0E32\u0E04\u0E2D\u0E32\u0E19\u0E31\u0E19\u0E15\u0E34\u0E01\u0E32", [e$2.Tibetan]: "\u0F68\u0F7A\u0F53\u0F0B\u0F4A\u0F72\u0F4A\u0F7A\u0F53\u0F0B\u0F40\u0F72\u0F66\u0F72\u0F0B\u0F68\u0F7A\u0F53\u0F0B\u0F4A\u0F72\u0F4A\u0F7A\u0F53\u0F0B\u0F40\u0F72\u0F66\u0F72", [e$2.Turkish]: "Antarktika", [e$2.Ukrainian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Urdu]: "\u0627\u0646\u062A\u0627\u0631\u06A9\u062A\u06CC\u06A9\u0627", [e$2.Uzbek]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e$2.Vietnamese]: "\u0110\u1EA5t Antarktik", [e$2.Welsh]: "Antarktika", [e$2.Xhosa]: "Antarktika", [e$2.Yiddish]: "Antarktika", [e$2.Yoruba]: "Antarktika", [e$2.Zulu]: "Antarktika" } } }, Armenia: { i18n: { calling_codes: [374], currencies: [l$1.ArmeniaDram], languages: [e$2.Armenian], tz: { offsets: [i$2.UTC_PLUS_4], regions: [t$1.AsiaJakarta], timezones: [n$2.ArmeniaTime] } }, id: r$2.Armenia, info: { flag: { emoji: "\u{1F1E6}\u{1F1F2}", emoji_unicode: "U+1F1E6 U+1F1F2", svg: "https://www.countryflags.io/am/flat/64.svg" }, tld: [".am"] }, iso: { alpha2: r$2.Armenia, alpha3: "ARM", numeric: "051" }, name: { alt_spellings: ["AM", "Hayastan", "Republic of Armenia", "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576"], demonym: "Armenian", native: { endonym: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576" }, official: "Republic of Armenia", short: "Armenia", translations: { [e$2.Afrikaans]: "Armeni\xEB", [e$2.Albanian]: "Armenia", [e$2.Amharic]: "\u12A0\u121B\u122D\u129B", [e$2.Arabic]: "\u0623\u0631\u0645\u064A\u0646\u064A\u0627", [e$2.Armenian]: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576", [e$2.Azerbaijani]: "Az\u0259rbaycan", [e$2.Bashkir]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Basque]: "Arm\xE9nia", [e$2.Belarusian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Bengali]: "\u0986\u09B0\u09CD\u09AE\u09C7\u09A8\u09BF", [e$2.Berber]: "\u0623\u0631\u0645\u064A\u0646\u064A\u0627", [e$2.Bhutani]: "\u0F62\u0F92\u0FB1\u0F0B\u0F53\u0F42", [e$2.Bosnian]: "Armenija", [e$2.Breton]: "Armeni\xEB", [e$2.Bulgarian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Burmese]: "\u1021\u102C\u1019\u1010\u102D\u1010\u1039", [e$2.Catalan]: "Arm\xE8nia", [e$2.Chinese]: "\u4E9A\u7F8E\u5C3C\u4E9A", [e$2.Croatian]: "Armenija", [e$2.Czech]: "Arm\xE9nie", [e$2.Danish]: "Armenien", [e$2.Dutch]: "Armeni\xEB", [e$2.English]: "Armenia", [e$2.Esperanto]: "Armenia", [e$2.Estonian]: "Armeenia", [e$2.Finnish]: "Armenia", [e$2.French]: "Armenia", [e$2.Frisian]: "Armeenia", [e$2.Galician]: "Arm\xE9nia", [e$2.Georgian]: "\u10D0\u10E0\u10DB\u10DD\u10DC\u10D8", [e$2.German]: "Armenien", [e$2.Greenlandic]: "Armenia", [e$2.Greek]: "\u0391\u03C1\u03BC\u03B5\u03BD\u03AF\u03B1", [e$2.Gujarati]: "\u0A85\u0AB0\u0ACD\u0AAE\u0AC7\u0AA8\u0ABF", [e$2.Haitian]: "Armenia", [e$2.Hausa]: "Armenia", [e$2.Hebrew]: "\u05D0\u05E8\u05DE\u05E0\u05D9\u05D4", [e$2.Hindi]: "\u0905\u05E8\u05DE\u05E0\u093F\u092F\u093E", [e$2.Hungarian]: "\xD6rm\xE9nyorsz\xE1g", [e$2.Icelandic]: "Armenia", [e$2.Igbo]: "Armenia", [e$2.Indonesian]: "Armenia", [e$2.Irish]: "Armenia", [e$2.Italian]: "Armenia", [e$2.Japanese]: "\u30A2\u30EB\u30E1\u30CB\u30A2", [e$2.Javanese]: "Armenia", [e$2.Kannada]: "\u0C85\u0CB0\u0CCD\u0CAE\u0CC7\u0CA8\u0CBF", [e$2.Kazakh]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Khmer]: "\u17A2\u17B6\u1798\u17C9\u17C1\u179A\u17B8", [e$2.Korean]: "\uC544\uB974\uBA54\uB2C8\uC544", [e$2.Kurdish]: "Armenia", [e$2.Kyrgyz]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Lao]: "\u0EAD\u0EB2\u0EAB\u0EBC\u0E99\u0EB2", [e$2.Latin]: "Armenia", [e$2.Latvian]: "Armeenia", [e$2.Lithuanian]: "Arm\u0117nija", [e$2.Luxembourgish]: "Armenien", [e$2.Macedonian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u0458\u0430", [e$2.Malagasy]: "Armenia", [e$2.Malay]: "Armenia", [e$2.Malayalam]: "\u0D05\u0D30\u0D4D\u200D\u0D2E\u0D47\u0D28\u0D3F", [e$2.Maltese]: "Armenia", [e$2.Maori]: "Armenia", [e$2.Marathi]: "\u0905\u0930\u094D\u092E\u0947\u0928\u093F", [e$2.Mongolian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Nepali]: "\u0905\u0930\u094D\u092E\u0947\u0928\u093F", [e$2.Norwegian]: "Armenia", [e$2.Pashto]: "\u0622\u0631\u0645\u06CC\u0646\u06CC\u0627", [e$2.Persian]: "\u0627\u0631\u0645\u0646\u0633\u062A\u0627\u0646", [e$2.Polish]: "Armenia", [e$2.Portuguese]: "Armenia", [e$2.Punjabi]: "\u0A05\u0A30\u0A2E\u0A40\u0A28\u0A40", [e$2.Romanian]: "Armenia", [e$2.Russian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Samoan]: "Armenia", [e$2.Sanskrit]: "Armenia", [e$2.Scots]: "Armenia", [e$2.Serbian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u0458\u0430", [e$2.Sesotho]: "Armenia", [e$2.Shona]: "Armenia", [e$2.Sindhi]: "Armenia", [e$2.Sinhala]: "\u0D86\u0DBB\u0DCA\u0DB8\u0DD3\u0DB1\u0DD2", [e$2.Slovak]: "Armenia", [e$2.Slovenian]: "Armenija", [e$2.Somali]: "Armenia", [e$2.Spanish]: "Armenia", [e$2.Sudanese]: "Armenia", [e$2.Swahili]: "Armenia", [e$2.Swedish]: "Armenien", [e$2.Tagalog]: "Armenia", [e$2.Tajik]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Tamil]: "\u0B85\u0BB0\u0BCD\u0BAE\u0BC7\u0BA9\u0BBF\u0BAF\u0BA9\u0BCD", [e$2.Tatar]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Telugu]: "\u0C05\u0C30\u0C4D\u0C2E\u0C47\u0C28\u0C3F", [e$2.Thai]: "\u0E2D\u0E32\u0E23\u0E4C\u0E40\u0E21\u0E19\u0E34\u0E2A\u0E16\u0E32\u0E19", [e$2.Tibetan]: "\u0F68\u0F62\u0F0B\u0F58\u0F7A\u0F0B\u0F53\u0F72\u0F0B\u0F61\u0F74\u0F0D", [e$2.Turkish]: "Ermenistan", [e$2.Ukrainian]: "\u0410\u0440\u043C\u0435\u043D\u0456\u044F", [e$2.Urdu]: "\u0627\u0631\u0645\u0646\u0633\u062A\u0627\u0646", [e$2.Uzbek]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e$2.Vietnamese]: "Armenia", [e$2.Welsh]: "Armenia", [e$2.Xhosa]: "Armenia", [e$2.Yiddish]: "\u05D0\u05E8\u05DE\u05E0\u05D9\u05D4", [e$2.Yoruba]: "Armenia", [e$2.Zulu]: "Armenia" } } }, SomeCountry: { i18n: { calling_codes: [], currencies: [], languages: [], tz: { offsets: [], regions: [], timezones: [] } }, id: r$2.AmericanSamoa, info: { flag: { emoji: "", emoji_unicode: "", svg: "" }, tld: [] }, iso: { alpha2: r$2.AmericanSamoa, alpha3: "", numeric: "" }, name: { alt_spellings: [], demonym: "", native: { endonym: "" }, official: "", short: "", translations: { [e$2.Afrikaans]: "", [e$2.Albanian]: "", [e$2.Amharic]: "", [e$2.Arabic]: "", [e$2.Armenian]: "", [e$2.Azerbaijani]: "", [e$2.Bashkir]: "", [e$2.Basque]: "", [e$2.Belarusian]: "", [e$2.Bengali]: "", [e$2.Berber]: "", [e$2.Bhutani]: "", [e$2.Bosnian]: "", [e$2.Breton]: "", [e$2.Bulgarian]: "", [e$2.Burmese]: "", [e$2.Catalan]: "", [e$2.Chinese]: "", [e$2.Croatian]: "", [e$2.Czech]: "", [e$2.Danish]: "", [e$2.Dutch]: "", [e$2.English]: "", [e$2.Esperanto]: "", [e$2.Estonian]: "", [e$2.Finnish]: "", [e$2.French]: "", [e$2.Frisian]: "", [e$2.Galician]: "", [e$2.Georgian]: "", [e$2.German]: "", [e$2.Greenlandic]: "", [e$2.Greek]: "", [e$2.Gujarati]: "", [e$2.Haitian]: "", [e$2.Hausa]: "", [e$2.Hebrew]: "", [e$2.Hindi]: "", [e$2.Hungarian]: "", [e$2.Icelandic]: "", [e$2.Igbo]: "", [e$2.Indonesian]: "", [e$2.Irish]: "", [e$2.Italian]: "", [e$2.Japanese]: "", [e$2.Javanese]: "", [e$2.Kannada]: "", [e$2.Kazakh]: "", [e$2.Khmer]: "", [e$2.Korean]: "", [e$2.Kurdish]: "", [e$2.Kyrgyz]: "", [e$2.Lao]: "", [e$2.Latin]: "", [e$2.Latvian]: "", [e$2.Lithuanian]: "", [e$2.Luxembourgish]: "", [e$2.Macedonian]: "", [e$2.Malagasy]: "", [e$2.Malay]: "", [e$2.Malayalam]: "", [e$2.Maltese]: "", [e$2.Maori]: "", [e$2.Marathi]: "", [e$2.Mongolian]: "", [e$2.Nepali]: "", [e$2.Norwegian]: "", [e$2.Pashto]: "", [e$2.Persian]: "", [e$2.Polish]: "", [e$2.Portuguese]: "", [e$2.Punjabi]: "", [e$2.Romanian]: "", [e$2.Russian]: "", [e$2.Samoan]: "", [e$2.Sanskrit]: "", [e$2.Scots]: "", [e$2.Serbian]: "", [e$2.Sesotho]: "", [e$2.Shona]: "", [e$2.Sindhi]: "", [e$2.Sinhala]: "", [e$2.Slovak]: "", [e$2.Slovenian]: "", [e$2.Somali]: "", [e$2.Spanish]: "", [e$2.Sudanese]: "", [e$2.Swahili]: "", [e$2.Swedish]: "", [e$2.Tagalog]: "", [e$2.Tajik]: "", [e$2.Tamil]: "", [e$2.Tatar]: "", [e$2.Telugu]: "", [e$2.Thai]: "", [e$2.Tibetan]: "", [e$2.Turkish]: "", [e$2.Ukrainian]: "", [e$2.Urdu]: "", [e$2.Uzbek]: "", [e$2.Vietnamese]: "", [e$2.Welsh]: "", [e$2.Xhosa]: "", [e$2.Yiddish]: "", [e$2.Yoruba]: "", [e$2.Zulu]: "" } } } });
 ({ id: e$2.Afrikaans, language: { code: o.Afrikaans, name: "Afrikaans", native: "Afrikaans" }, name: "Afrikaans", native_name: "Afrikaans", rtl: false });
 ({ country: { code: r$2.SouthAfrica, name: "South Africa", native: "South Africa" }, id: e$2.AfrikaansSouthAfrica, language: { code: o.Afrikaans, name: "Afrikaans", native: "Afrikaans" }, name: "Afrikaans (South Africa)", native_name: "Afrikaans (Suid-Afrika)", rtl: false });
 ({ id: e$2.Albanian, language: { code: o.Albanian, name: "Albanian", native: "Shqip" }, name: "Albanian", native_name: "Shqip", rtl: false });
@@ -18143,430 +20002,430 @@ var x$1;
 ({ country: { code: r$2.Nigeria, name: "Nigeria", native: "Nigeria" }, id: e$2.YorubaNigeria, language: { code: o.Yoruba, name: "Yoruba", native: "Yor\xF9b\xE1" }, name: "Yoruba (Nigeria)", native_name: "Yor\xF9b\xE1 (Nigeria)", rtl: false });
 ({ id: e$2.Zulu, language: { code: o.Zulu, name: "Zulu", native: "isiZulu" }, name: "Zulu", native_name: "isiZulu", rtl: false });
 ({ country: { code: r$2.SouthAfrica, name: "South Africa", native: "South Africa" }, id: e$2.ZuluSouthAfrica, language: { code: o.Zulu, name: "Zulu", native: "isiZulu" }, name: "Zulu (South Africa)", native_name: "isiZulu (South Africa)", rtl: false });
-({ id: t$1.AfricaAbidjan, name: "Africa/Abidjan", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaAccra, name: "Africa/Accra", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaAddisAbaba, name: "Africa/Addis_Ababa", offset: i$2.UTC_PLUS_3, timezone: n$3.EastAfricaTime });
-({ id: t$1.AfricaAlgiers, name: "Africa/Algiers", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.AfricaAsmara, name: "Africa/Asmara", offset: i$2.UTC_PLUS_3, timezone: n$3.EastAfricaTime });
-({ id: t$1.AfricaBamako, name: "Africa/Bamako", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaBangui, name: "Africa/Bangui", offset: i$2.UTC_PLUS_1, timezone: n$3.WestAfricaTime });
-({ id: t$1.AfricaBanjul, name: "Africa/Banjul", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaBissau, name: "Africa/Bissau", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaBlantyre, name: "Africa/Blantyre", offset: i$2.UTC_PLUS_2, timezone: n$3.CentralAfricaTime });
-({ id: t$1.AfricaBrazzaville, name: "Africa/Brazzaville", offset: i$2.UTC_PLUS_1, timezone: n$3.WestAfricaTime });
-({ id: t$1.AfricaBujumbura, name: "Africa/Bujumbura", offset: i$2.UTC_PLUS_2, timezone: n$3.CentralAfricaTime });
-({ id: t$1.AfricaCairo, name: "Africa/Cairo", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.AfricaCasablanca, name: "Africa/Casablanca", offset: i$2.UTC_PLUS_1, timezone: n$3.WesternEuropeanTime });
-({ id: t$1.AfricaCeuta, name: "Africa/Ceuta", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.AfricaConakry, name: "Africa/Conakry", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaDakar, name: "Africa/Dakar", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaDarEsSalaam, name: "Africa/Dar_es_Salaam", offset: i$2.UTC_PLUS_3, timezone: n$3.EastAfricaTime });
-({ id: t$1.AfricaDjibouti, name: "Africa/Djibouti", offset: i$2.UTC_PLUS_3, timezone: n$3.EastAfricaTime });
-({ id: t$1.AfricaDouala, name: "Africa/Douala", offset: i$2.UTC_PLUS_1, timezone: n$3.WestAfricaTime });
-({ id: t$1.AfricaElAaiun, name: "Africa/El_Aaiun", offset: i$2.UTC_PLUS_1, timezone: n$3.WestAfricaTime });
-({ id: t$1.AfricaFreetown, name: "Africa/Freetown", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaGaborone, name: "Africa/Gaborone", offset: i$2.UTC_PLUS_2, timezone: n$3.CentralAfricaTime });
-({ id: t$1.AfricaHarare, name: "Africa/Harare", offset: i$2.UTC_PLUS_2, timezone: n$3.CentralAfricaTime });
-({ id: t$1.AfricaJohannesburg, name: "Africa/Johannesburg", offset: i$2.UTC_PLUS_2, timezone: n$3.SouthAfricanStandardTime });
-({ id: t$1.AfricaJuba, name: "Africa/Juba", offset: i$2.UTC_PLUS_3, timezone: n$3.EastAfricaTime });
-({ id: t$1.AfricaKampala, name: "Africa/Kampala", offset: i$2.UTC_PLUS_3, timezone: n$3.EastAfricaTime });
-({ id: t$1.AfricaKhartoum, name: "Africa/Khartoum", offset: i$2.UTC_PLUS_2, timezone: n$3.EastAfricaTime });
-({ id: t$1.AfricaKigali, name: "Africa/Kigali", offset: i$2.UTC_PLUS_2, timezone: n$3.CentralAfricaTime });
-({ id: t$1.AfricaKinshasa, name: "Africa/Kinshasa", offset: i$2.UTC_PLUS_1, timezone: n$3.WestAfricaTime });
-({ id: t$1.AfricaLagos, name: "Africa/Lagos", offset: i$2.UTC_PLUS_1, timezone: n$3.WestAfricaTime });
-({ id: t$1.AfricaLibreville, name: "Africa/Libreville", offset: i$2.UTC_PLUS_1, timezone: n$3.WestAfricaTime });
-({ id: t$1.AfricaLome, name: "Africa/Lome", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaLuanda, name: "Africa/Luanda", offset: i$2.UTC_PLUS_1, timezone: n$3.WestAfricaTime });
-({ id: t$1.AfricaLubumbashi, name: "Africa/Lubumbashi", offset: i$2.UTC_PLUS_2, timezone: n$3.CentralAfricaTime });
-({ id: t$1.AfricaLusaka, name: "Africa/Lusaka", offset: i$2.UTC_PLUS_2, timezone: n$3.CentralAfricaTime });
-({ id: t$1.AfricaMalabo, name: "Africa/Malabo", offset: i$2.UTC_PLUS_1, timezone: n$3.WestAfricaTime });
-({ id: t$1.AfricaMaputo, name: "Africa/Maputo", offset: i$2.UTC_PLUS_2, timezone: n$3.CentralAfricaTime });
-({ id: t$1.AfricaMaseru, name: "Africa/Maseru", offset: i$2.UTC_PLUS_2, timezone: n$3.SouthAfricanStandardTime });
-({ id: t$1.AfricaMbabane, name: "Africa/Mbabane", offset: i$2.UTC_PLUS_2, timezone: n$3.SouthAfricanStandardTime });
-({ id: t$1.AfricaMogadishu, name: "Africa/Mogadishu", offset: i$2.UTC_PLUS_3, timezone: n$3.EastAfricaTime });
-({ id: t$1.AfricaMonrovia, name: "Africa/Monrovia", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaNairobi, name: "Africa/Nairobi", offset: i$2.UTC_PLUS_3, timezone: n$3.EastAfricaTime });
-({ id: t$1.AfricaNdjamena, name: "Africa/Ndjamena", offset: i$2.UTC_PLUS_1, timezone: n$3.WestAfricaTime });
-({ id: t$1.AfricaNiamey, name: "Africa/Niamey", offset: i$2.UTC_PLUS_1, timezone: n$3.WestAfricaTime });
-({ id: t$1.AfricaNouakchott, name: "Africa/Nouakchott", offset: i$2.UTC_0, timezone: n$3.GreenwichMeanTime });
-({ id: t$1.AfricaOuagadougou, name: "Africa/Ouagadougou", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaPortoNovo, name: "Africa/Porto-Novo", offset: i$2.UTC_PLUS_1, timezone: n$3.WestAfricaTime });
-({ id: t$1.AfricaSaoTome, name: "Africa/SaoTome", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaTripoli, name: "Africa/Tripoli", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaTunis, name: "Africa/Tunis", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AfricaWindhoek, name: "Africa/Windhoek", offset: i$2.UTC_PLUS_2, timezone: n$3.WestAfricaTime });
-({ id: t$1.AmericaAdak, name: "America/Adak", offset: i$2.UTC_PLUS_10, timezone: n$3.HawaiiAleutianStandardTime });
-({ id: t$1.AmericaAnchorage, name: "America/Anchorage", offset: i$2.UTC_PLUS_9, timezone: n$3.AlaskaStandardTime });
-({ id: t$1.AmericaAnguilla, name: "America/Anguilla", offset: i$2.UTC_0, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaAntigua, name: "America/Antigua", offset: i$2.UTC_0, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaAraguaina, name: "America/Araguaina", offset: i$2.UTC_MINUS_3, timezone: n$3.BrasiliaTime });
-({ id: t$1.AmericaArgentinaBuenosAires, name: "America/Argentina/Buenos_Aires", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaArgentinaCatamarca, name: "America/Argentina/Catamarca", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaArgentinaCordoba, name: "America/Argentina/Cordoba", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaArgentinaJujuy, name: "America/Argentina/Jujuy", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaArgentinaLaRioja, name: "America/Argentina/La_Rioja", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaArgentinaMendoza, name: "America/Argentina/Mendoza", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaArgentinaRioGallegos, name: "America/Argentina/Rio_Gallegos", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaArgentinaSalta, name: "America/Argentina/Salta", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaArgentinaSanJuan, name: "America/Argentina/San_Juan", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaArgentinaSanLuis, name: "America/Argentina/San_Luis", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaArgentinaTucuman, name: "America/Argentina/Tucuman", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaArgentinaUshuaia, name: "America/Argentina/Ushuaia", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaAruba, name: "America/Aruba", offset: i$2.UTC_0, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaAsuncion, name: "America/Asuncion", offset: i$2.UTC_MINUS_4, timezone: n$3.ParaguayTime });
-({ id: t$1.AmericaAtikokan, name: "America/Atikokan", offset: i$2.UTC_0, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaAtka, name: "America/Atka", offset: i$2.UTC_MINUS_10, timezone: n$3.HawaiiAleutianStandardTime });
-({ id: t$1.AmericaBahia, name: "America/Bahia", offset: i$2.UTC_MINUS_3, timezone: n$3.BrasiliaTime });
-({ id: t$1.AmericaBahiaBanderas, name: "America/Bahia_Banderas", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaBarbados, name: "America/Barbados", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaBelem, name: "America/Belem", offset: i$2.UTC_MINUS_3, timezone: n$3.BrasiliaTime });
-({ id: t$1.AmericaBelize, name: "America/Belize", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaBlancSablon, name: "America/Blanc-Sablon", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaBoaVista, name: "America/Boa_Vista", offset: i$2.UTC_MINUS_4, timezone: n$3.AmazonTime });
-({ id: t$1.AmericaBogota, name: "America/Bogota", offset: i$2.UTC_MINUS_5, timezone: n$3.ColombiaTime });
-({ id: t$1.AmericaBoise, name: "America/Boise", offset: i$2.UTC_MINUS_7, timezone: n$3.MountainStandardTime });
-({ id: t$1.AmericaCambridgeBay, name: "America/Cambridge_Bay", offset: i$2.UTC_MINUS_7, timezone: n$3.MountainStandardTime });
-({ id: t$1.AmericaCampoGrande, name: "America/Campo_Grande", offset: i$2.UTC_MINUS_4, timezone: n$3.AmazonTime });
-({ id: t$1.AmericaCancun, name: "America/Cancun", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaCaracas, name: "America/Caracas", offset: i$2.UTC_MINUS_4, timezone: n$3.VenezuelaStandardTime });
-({ id: t$1.AmericaCayenne, name: "America/Cayenne", offset: i$2.UTC_MINUS_3, timezone: n$3.FrenchGuianaTime });
-({ id: t$1.AmericaCayman, name: "America/Cayman", offset: i$2.UTC_0, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaChicago, name: "America/Chicago", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaChihuahua, name: "America/Chihuahua", offset: i$2.UTC_MINUS_7, timezone: n$3.MountainStandardTime });
-({ id: t$1.AmericaCoralHarbour, name: "America/Coral_Harbour", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaCordoba, name: "America/Cordoba", offset: i$2.UTC_MINUS_3, timezone: n$3.ArgentinaTime });
-({ id: t$1.AmericaCostaRica, name: "America/Costa_Rica", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaCreston, name: "America/Creston", offset: i$2.UTC_MINUS_7, timezone: n$3.MountainStandardTime });
-({ id: t$1.AmericaCuiaba, name: "America/Cuiaba", offset: i$2.UTC_MINUS_4, timezone: n$3.AmazonTime });
-({ id: t$1.AmericaCuracao, name: "America/Curacao", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaDanmarkshavn, name: "America/Danmarkshavn", offset: i$2.UTC_0, timezone: n$3.GreenwichMeanTime });
-({ id: t$1.AmericaDawson, name: "America/Dawson", offset: i$2.UTC_MINUS_8, timezone: n$3.PacificStandardTime });
-({ id: t$1.AmericaDawsonCreek, name: "America/Dawson_Creek", offset: i$2.UTC_MINUS_8, timezone: n$3.PacificStandardTime });
-({ id: t$1.AmericaDenver, name: "America/Denver", offset: i$2.UTC_MINUS_7, timezone: n$3.MountainStandardTime });
-({ id: t$1.AmericaDetroit, name: "America/Detroit", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaDominica, name: "America/Dominica", offset: i$2.UTC_0, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaEdmonton, name: "America/Edmonton", offset: i$2.UTC_MINUS_7, timezone: n$3.MountainStandardTime });
-({ id: t$1.AmericaEirunepe, name: "America/Eirunepe", offset: i$2.UTC_MINUS_5, timezone: n$3.AcreTime });
-({ id: t$1.AmericaElSalvador, name: "America/El_Salvador", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaFortaleza, name: "America/Fortaleza", offset: i$2.UTC_MINUS_3, timezone: n$3.BrasiliaTime });
-({ id: t$1.AmericaGlaceBay, name: "America/Glace_Bay", offset: i$2.UTC_0, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaGodthab, name: "America/Godthab", offset: i$2.UTC_MINUS_3, timezone: n$3.WestGreenlandTime });
-({ id: t$1.AmericaGooseBay, name: "America/Goose_Bay", offset: i$2.UTC_0, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaGrandTurk, name: "America/Grand_Turk", offset: i$2.UTC_0, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaGrenada, name: "America/Grenada", offset: i$2.UTC_0, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaGuadeloupe, name: "America/Guadeloupe", offset: i$2.UTC_0, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaGuatemala, name: "America/Guatemala", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaGuayaquil, name: "America/Guayaquil", offset: i$2.UTC_MINUS_5, timezone: n$3.EcuadorTime });
-({ id: t$1.AmericaGuyana, name: "America/Guyana", offset: i$2.UTC_0, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaHalifax, name: "America/Halifax", offset: i$2.UTC_0, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaHavana, name: "America/Havana", offset: i$2.UTC_MINUS_5, timezone: n$3.CubaStandardTime });
-({ id: t$1.AmericaHermosillo, name: "America/Hermosillo", offset: i$2.UTC_MINUS_7, timezone: n$3.MountainStandardTime });
-({ id: t$1.AmericaIndianaIndianapolis, name: "America/Indiana/Indianapolis", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaIndianaKnox, name: "America/Indiana/Knox", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaIndianaMarengo, name: "America/Indiana/Marengo", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaIndianaPetersburg, name: "America/Indiana/Petersburg", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaIndianaTellCity, name: "America/Indiana/Tell_City", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaIndianaVevay, name: "America/Indiana/Vevay", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaIndianaVincennes, name: "America/Indiana/Vincennes", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaIndianaWinamac, name: "America/Indiana/Winamac", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaInuvik, name: "America/Inuvik", offset: i$2.UTC_MINUS_7, timezone: n$3.MountainStandardTime });
-({ id: t$1.AmericaIqaluit, name: "America/Iqaluit", offset: i$2.UTC_0, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaJamaica, name: "America/Jamaica", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaJuneau, name: "America/Juneau", offset: i$2.UTC_MINUS_9, timezone: n$3.AlaskaStandardTime });
-({ id: t$1.AmericaKentuckyLouisville, name: "America/Kentucky/Louisville", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaKentuckyMonticello, name: "America/Kentucky/Monticello", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaKralendijk, name: "America/Kralendijk", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaLaPaz, name: "America/La_Paz", offset: i$2.UTC_MINUS_4, timezone: n$3.BoliviaTime });
-({ id: t$1.AmericaLima, name: "America/Lima", offset: i$2.UTC_MINUS_5, timezone: n$3.PeruTime });
-({ id: t$1.AmericaLosAngeles, name: "America/Los_Angeles", offset: i$2.UTC_MINUS_8, timezone: n$3.PacificStandardTime });
-({ id: t$1.AmericaLouisville, name: "America/Louisville", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaLowerPrinces, name: "America/Lower_Princes", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaMaceio, name: "America/Maceio", offset: i$2.UTC_MINUS_3, timezone: n$3.BrasiliaTime });
-({ id: t$1.AmericaManagua, name: "America/Managua", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaManaus, name: "America/Manaus", offset: i$2.UTC_MINUS_4, timezone: n$3.AmazonTime });
-({ id: t$1.AmericaMarigot, name: "America/Marigot", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaMartinique, name: "America/Martinique", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaMatamoros, name: "America/Matamoros", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaMazatlan, name: "America/Mazatlan", offset: i$2.UTC_MINUS_7, timezone: n$3.MountainStandardTime });
-({ id: t$1.AmericaMenominee, name: "America/Menominee", offset: i$2.UTC_MINUS_5, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaMerida, name: "America/Merida", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaMetlakatla, name: "America/Metlakatla", offset: i$2.UTC_MINUS_9, timezone: n$3.AlaskaStandardTime });
-({ id: t$1.AmericaMexicoCity, name: "America/Mexico_City", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaMiquelon, name: "America/Miquelon", offset: i$2.UTC_MINUS_3, timezone: n$3.SaintPierreAndMiquelonStandardTime });
-({ id: t$1.AmericaMoncton, name: "America/Moncton", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaMonterrey, name: "America/Monterrey", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaMontevideo, name: "America/Montevideo", offset: i$2.UTC_MINUS_3, timezone: n$3.UruguayStandardTime });
-({ id: t$1.AmericaMontreal, name: "America/Montreal", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaMontserrat, name: "America/Montserrat", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaNassau, name: "America/Nassau", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaNewYork, name: "America/New_York", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaNipigon, name: "America/Nipigon", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaNome, name: "America/Nome", offset: i$2.UTC_MINUS_9, timezone: n$3.AlaskaStandardTime });
-({ id: t$1.AmericaNoronha, name: "America/Noronha", offset: i$2.UTC_MINUS_2, timezone: n$3.FernandoDeNoronhaTime });
-({ id: t$1.AmericaNorthDakotaBeulah, name: "America/North_Dakota/Beulah", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaNorthDakotaCenter, name: "America/North_Dakota/Center", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaNorthDakotaNewSalem, name: "America/North_Dakota/New_Salem", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaOjinaga, name: "America/Ojinaga", offset: i$2.UTC_MINUS_7, timezone: n$3.MountainStandardTime });
-({ id: t$1.AmericaPanama, name: "America/Panama", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaPangnirtung, name: "America/Pangnirtung", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaParamaribo, name: "America/Paramaribo", offset: i$2.UTC_MINUS_3, timezone: n$3.SurinameTime });
-({ id: t$1.AmericaPhoenix, name: "America/Phoenix", offset: i$2.UTC_MINUS_7, timezone: n$3.MountainStandardTime });
-({ id: t$1.AmericaPortAuPrince, name: "America/Port-au-Prince", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaPortOfSpain, name: "America/Port_of_Spain", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaPortoVelho, name: "America/Porto_Velho", offset: i$2.UTC_MINUS_4, timezone: n$3.AmazonTime });
-({ id: t$1.AmericaPuertoRico, name: "America/Puerto_Rico", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaRainyRiver, name: "America/Rainy_River", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaRankinInlet, name: "America/Rankin_Inlet", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaRecife, name: "America/Recife", offset: i$2.UTC_MINUS_3, timezone: n$3.BrasiliaTime });
-({ id: t$1.AmericaRegina, name: "America/Regina", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaResolute, name: "America/Resolute", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaRioBranco, name: "America/Rio_Branco", offset: i$2.UTC_MINUS_5, timezone: n$3.AcreTime });
-({ id: t$1.AmericaSantaIsabel, name: "America/Santa_Isabel", offset: i$2.UTC_MINUS_8, timezone: n$3.PacificStandardTime });
-({ id: t$1.AmericaSantarem, name: "America/Santarem", offset: i$2.UTC_MINUS_3, timezone: n$3.BrasiliaTime });
-({ id: t$1.AmericaSantiago, name: "America/Santiago", offset: i$2.UTC_MINUS_4, timezone: n$3.ChileStandardTime });
-({ id: t$1.AmericaSantoDomingo, name: "America/Santo_Domingo", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaSaoPaulo, name: "America/Sao_Paulo", offset: i$2.UTC_MINUS_3, timezone: n$3.BrasiliaTime });
-({ id: t$1.AmericaScoresbysund, name: "America/Scoresbysund", offset: i$2.UTC_MINUS_1, timezone: n$3.EasternGreenlandTime });
-({ id: t$1.AmericaShiprock, name: "America/Shiprock", offset: i$2.UTC_MINUS_7, timezone: n$3.MountainStandardTime });
-({ id: t$1.AmericaSitka, name: "America/Sitka", offset: i$2.UTC_MINUS_9, timezone: n$3.AlaskaStandardTime });
-({ id: t$1.AmericaStBarthelemy, name: "America/St_Barthelemy", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaStJohns, name: "America/St_Johns", offset: i$2.UTC_MINUS_3, timezone: n$3.NewfoundlandStandardTime });
-({ id: t$1.AmericaStKitts, name: "America/St_Kitts", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaStLucia, name: "America/St_Lucia", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaStThomas, name: "America/St_Thomas", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaStVincent, name: "America/St_Vincent", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaSwiftCurrent, name: "America/Swift_Current", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaTegucigalpa, name: "America/Tegucigalpa", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaThule, name: "America/Thule", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaThunderBay, name: "America/Thunder_Bay", offset: i$2.UTC_MINUS_4, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaTijuana, name: "America/Tijuana", offset: i$2.UTC_MINUS_8, timezone: n$3.PacificStandardTime });
-({ id: t$1.AmericaToronto, name: "America/Toronto", offset: i$2.UTC_MINUS_5, timezone: n$3.EasternStandardTime });
-({ id: t$1.AmericaTortola, name: "America/Tortola", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AmericaVancouver, name: "America/Vancouver", offset: i$2.UTC_MINUS_8, timezone: n$3.PacificStandardTime });
-({ id: t$1.AmericaWhitehorse, name: "America/Whitehorse", offset: i$2.UTC_MINUS_8, timezone: n$3.PacificStandardTime });
-({ id: t$1.AmericaWinnipeg, name: "America/Winnipeg", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AmericaYakutat, name: "America/Yakutat", offset: i$2.UTC_MINUS_9, timezone: n$3.AlaskaStandardTime });
-({ id: t$1.AmericaYellowknife, name: "America/Yellowknife", offset: i$2.UTC_MINUS_6, timezone: n$3.MountainStandardTime });
-({ id: t$1.AntarcticaCasey, name: "Antarctica/Casey", offset: i$2.UTC_MINUS_8, timezone: n$3.WesternStandardTime });
-({ id: t$1.AntarcticaDavis, name: "Antarctica/Davis", offset: i$2.UTC_MINUS_7, timezone: n$3.NewfoundlandStandardTime });
-({ id: t$1.AntarcticaDumontDUrville, name: "Antarctica/DumontDUrville", offset: i$2.UTC_MINUS_10, timezone: n$3.CentralStandardTime });
-({ id: t$1.AntarcticaMacquarie, name: "Antarctica/Macquarie", offset: i$2.UTC_MINUS_11, timezone: n$3.CentralStandardTime });
-({ id: t$1.AntarcticaMawson, name: "Antarctica/Mawson", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.AntarcticaMcMurdo, name: "Antarctica/McMurdo", offset: i$2.UTC_MINUS_12, timezone: n$3.NewZealandStandardTime });
-({ id: t$1.AntarcticaPalmer, name: "Antarctica/Palmer", offset: i$2.UTC_MINUS_4, timezone: n$3.ChathamStandardTime });
-({ id: t$1.AntarcticaRothera, name: "Antarctica/Rothera", offset: i$2.UTC_MINUS_3, timezone: n$3.RotheraResearchStationTime });
-({ id: t$1.AntarcticaSyowa, name: "Antarctica/Syowa", offset: i$2.UTC_MINUS_3, timezone: n$3.ShowaStationTime });
-({ id: t$1.AntarcticaTroll, name: "Antarctica/Troll", offset: i$2.UTC_MINUS_2, timezone: n$3.CentralStandardTime });
-({ id: t$1.AntarcticaVostok, name: "Antarctica/Vostok", offset: i$2.UTC_MINUS_6, timezone: n$3.CentralStandardTime });
-({ id: t$1.ArcticLongyearbyen, name: "Arctic/Longyearbyen", offset: i$2.UTC_MINUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.AsiaAden, name: "Asia/Aden", offset: i$2.UTC_PLUS_3, timezone: n$3.ArabiaStandardTime });
-({ id: t$1.AsiaAlmaty, name: "Asia/Almaty", offset: i$2.UTC_PLUS_6, timezone: n$3.AlmaAtaTime });
-({ id: t$1.AsiaAmman, name: "Asia/Amman", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.AsiaAnadyr, name: "Asia/Anadyr", offset: i$2.UTC_PLUS_12, timezone: n$3.NewCaledoniaTime });
-({ id: t$1.AsiaAqtau, name: "Asia/Aqtau", offset: i$2.UTC_PLUS_5, timezone: n$3.AqtobeTime });
-({ id: t$1.AsiaAqtobe, name: "Asia/Aqtobe", offset: i$2.UTC_PLUS_5, timezone: n$3.AqtobeTime });
-({ id: t$1.AsiaAshgabat, name: "Asia/Ashgabat", offset: i$2.UTC_PLUS_5, timezone: n$3.TurkmenistanTime });
-({ id: t$1.AsiaBaghdad, name: "Asia/Baghdad", offset: i$2.UTC_PLUS_3, timezone: n$3.ArabiaStandardTime });
-({ id: t$1.AsiaBahrain, name: "Asia/Bahrain", offset: i$2.UTC_PLUS_3, timezone: n$3.ArabiaStandardTime });
-({ id: t$1.AsiaBaku, name: "Asia/Baku", offset: i$2.UTC_PLUS_4, timezone: n$3.AzerbaijanTime });
-({ id: t$1.AsiaBangkok, name: "Asia/Bangkok", offset: i$2.UTC_PLUS_7, timezone: n$3.IndochinaTime });
-({ id: t$1.AsiaBarnaul, name: "Asia/Barnaul", offset: i$2.UTC_PLUS_7, timezone: n$3.KrasnoyarskTime });
-({ id: t$1.AsiaBeirut, name: "Asia/Beirut", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.AsiaBishkek, name: "Asia/Bishkek", offset: i$2.UTC_PLUS_6, timezone: n$3.KyrgyzstanTime });
-({ id: t$1.AsiaBrunei, name: "Asia/Brunei", offset: i$2.UTC_PLUS_8, timezone: n$3.BruneiTime });
-({ id: t$1.AsiaChita, name: "Asia/Chita", offset: i$2.UTC_PLUS_9, timezone: n$3.YakutskTime });
-({ id: t$1.AsiaChoibalsan, name: "Asia/Choibalsan", offset: i$2.UTC_PLUS_8, timezone: n$3.ChoibalsanStandardTime });
-({ id: t$1.AsiaColombo, name: "Asia/Colombo", offset: i$2.UTC_PLUS_5, timezone: n$3.IndianStandardTime });
-({ id: t$1.AsiaDamascus, name: "Asia/Damascus", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.AsiaDhaka, name: "Asia/Dhaka", offset: i$2.UTC_PLUS_6, timezone: n$3.BangladeshStandardTime });
-({ id: t$1.AsiaDili, name: "Asia/Dili", offset: i$2.UTC_PLUS_9, timezone: n$3.JapanStandardTime });
-({ id: t$1.AsiaDubai, name: "Asia/Dubai", offset: i$2.UTC_PLUS_4, timezone: n$3.GulfStandardTime });
-({ id: t$1.AsiaDushanbe, name: "Asia/Dushanbe", offset: i$2.UTC_PLUS_5, timezone: n$3.TajikistanTime });
-({ id: t$1.AsiaFamagusta, name: "Asia/Famagusta", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.AsiaGaza, name: "Asia/Gaza", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.AsiaHebron, name: "Asia/Hebron", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.AsiaHoChiMinh, name: "Asia/Ho_Chi_Minh", offset: i$2.UTC_PLUS_7, timezone: n$3.IndochinaTime });
-({ id: t$1.AsiaHongKong, name: "Asia/Hong_Kong", offset: i$2.UTC_PLUS_8, timezone: n$3.HongKongTime });
-({ id: t$1.AsiaHovd, name: "Asia/Hovd", offset: i$2.UTC_PLUS_7, timezone: n$3.HovdTime });
-({ id: t$1.AsiaIrkutsk, name: "Asia/Irkutsk", offset: i$2.UTC_PLUS_8, timezone: n$3.IrkutskTime });
-({ id: t$1.AsiaJakarta, name: "Asia/Jakarta", offset: i$2.UTC_PLUS_7, timezone: n$3.WesternIndonesianTime });
-({ id: t$1.AsiaJayapura, name: "Asia/Jayapura", offset: i$2.UTC_PLUS_9, timezone: n$3.JapanStandardTime });
-({ id: t$1.AsiaJerusalem, name: "Asia/Jerusalem", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.AsiaKabul, name: "Asia/Kabul", offset: i$2.UTC_PLUS_4, timezone: n$3.AfghanistanTime });
-({ id: t$1.AsiaKamchatka, name: "Asia/Kamchatka", offset: i$2.UTC_PLUS_12, timezone: n$3.KamchatkaTime });
-({ id: t$1.AsiaKarachi, name: "Asia/Karachi", offset: i$2.UTC_PLUS_5, timezone: n$3.PakistanStandardTime });
-({ id: t$1.AsiaKathmandu, name: "Asia/Kathmandu", offset: i$2.UTC_PLUS_5, timezone: n$3.NepalTime });
-({ id: t$1.AsiaKhandyga, name: "Asia/Khandyga", offset: i$2.UTC_PLUS_9, timezone: n$3.YakutskTime });
-({ id: t$1.AsiaKolkata, name: "Asia/Kolkata", offset: i$2.UTC_PLUS_5, timezone: n$3.IndianStandardTime });
-({ id: t$1.AsiaKrasnoyarsk, name: "Asia/Krasnoyarsk", offset: i$2.UTC_PLUS_7, timezone: n$3.KrasnoyarskTime });
-({ id: t$1.AsiaKualaLumpur, name: "Asia/Kuala_Lumpur", offset: i$2.UTC_PLUS_8, timezone: n$3.MalaysiaStandardTime });
-({ id: t$1.AsiaKuching, name: "Asia/Kuching", offset: i$2.UTC_PLUS_8, timezone: n$3.MalaysiaStandardTime });
-({ id: t$1.AsiaKuwait, name: "Asia/Kuwait", offset: i$2.UTC_PLUS_3, timezone: n$3.ArabiaStandardTime });
-({ id: t$1.AsiaMacau, name: "Asia/Macau", offset: i$2.UTC_PLUS_8, timezone: n$3.ChinaStandardTime });
-({ id: t$1.AsiaMagadan, name: "Asia/Magadan", offset: i$2.UTC_PLUS_11, timezone: n$3.MagadanTime });
-({ id: t$1.AsiaMakassar, name: "Asia/Makassar", offset: i$2.UTC_PLUS_8, timezone: n$3.MalaysiaTime });
-({ id: t$1.AsiaManila, name: "Asia/Manila", offset: i$2.UTC_PLUS_8, timezone: n$3.PhilippineTime });
-({ id: t$1.AsiaMuscat, name: "Asia/Muscat", offset: i$2.UTC_PLUS_4, timezone: n$3.GulfStandardTime });
-({ id: t$1.AsiaNovokuznetsk, name: "Asia/Novokuznetsk", offset: i$2.UTC_PLUS_6, timezone: n$3.NovosibirskTime });
-({ id: t$1.AsiaNovosibirsk, name: "Asia/Novosibirsk", offset: i$2.UTC_PLUS_6, timezone: n$3.NovosibirskTime });
-({ id: t$1.AsiaOmsk, name: "Asia/Omsk", offset: i$2.UTC_PLUS_6, timezone: n$3.OmskTime });
-({ id: t$1.AsiaOral, name: "Asia/Oral", offset: i$2.UTC_PLUS_5, timezone: n$3.OralTime });
-({ id: t$1.AsiaPhnomPenh, name: "Asia/Phnom_Penh", offset: i$2.UTC_PLUS_7, timezone: n$3.IndochinaTime });
-({ id: t$1.AsiaPontianak, name: "Asia/Pontianak", offset: i$2.UTC_PLUS_7, timezone: n$3.WesternIndonesianTime });
-({ id: t$1.AsiaPyongyang, name: "Asia/Pyongyang", offset: i$2.UTC_PLUS_9, timezone: n$3.KoreaStandardTime });
-({ id: t$1.AsiaQatar, name: "Asia/Qatar", offset: i$2.UTC_PLUS_3, timezone: n$3.ArabiaStandardTime });
-({ id: t$1.AsiaQyzylorda, name: "Asia/Qyzylorda", offset: i$2.UTC_PLUS_5, timezone: n$3.WestKazakhstanTime });
-({ id: t$1.AsiaRangoon, name: "Asia/Rangoon", offset: i$2.UTC_PLUS_6, timezone: n$3.MyanmarStandardTime });
-({ id: t$1.AsiaRiyadh, name: "Asia/Riyadh", offset: i$2.UTC_PLUS_3, timezone: n$3.ArabiaStandardTime });
-({ id: t$1.AsiaSakhalin, name: "Asia/Sakhalin", offset: i$2.UTC_PLUS_11, timezone: n$3.SakhalinIslandTime });
-({ id: t$1.AsiaSamarkand, name: "Asia/Samarkand", offset: i$2.UTC_PLUS_5, timezone: n$3.UzbekistanTime });
-({ id: t$1.AsiaSeoul, name: "Asia/Seoul", offset: i$2.UTC_PLUS_9, timezone: n$3.KoreaStandardTime });
-({ id: t$1.AsiaShanghai, name: "Asia/Shanghai", offset: i$2.UTC_PLUS_8, timezone: n$3.ChinaStandardTime });
-({ id: t$1.AsiaSingapore, name: "Asia/Singapore", offset: i$2.UTC_PLUS_8, timezone: n$3.SingaporeStandardTime });
-({ id: t$1.AsiaSrednekolymsk, name: "Asia/Srednekolymsk", offset: i$2.UTC_PLUS_11, timezone: n$3.SrednekolymskTime });
-({ id: t$1.AsiaTaipei, name: "Asia/Taipei", offset: i$2.UTC_PLUS_8, timezone: n$3.ChinaStandardTime });
-({ id: t$1.AsiaTashkent, name: "Asia/Tashkent", offset: i$2.UTC_PLUS_5, timezone: n$3.UzbekistanTime });
-({ id: t$1.AsiaTbilisi, name: "Asia/Tbilisi", offset: i$2.UTC_PLUS_4, timezone: n$3.GeorgiaStandardTime });
-({ id: t$1.AsiaTehran, name: "Asia/Tehran", offset: i$2.UTC_PLUS_3, timezone: n$3.IranStandardTime });
-({ id: t$1.AsiaThimphu, name: "Asia/Thimphu", offset: i$2.UTC_PLUS_6, timezone: n$3.BhutanTime });
-({ id: t$1.AsiaTokyo, name: "Asia/Tokyo", offset: i$2.UTC_PLUS_9, timezone: n$3.JapanStandardTime });
-({ id: t$1.AsiaTomsk, name: "Asia/Tomsk", offset: i$2.UTC_PLUS_6, timezone: n$3.KrasnoyarskTime });
-({ id: t$1.AsiaUlaanbaatar, name: "Asia/Ulaanbaatar", offset: i$2.UTC_PLUS_8, timezone: n$3.UlaanbaatarStandardTime });
-({ id: t$1.AsiaUrumqi, name: "Asia/Urumqi", offset: i$2.UTC_PLUS_8, timezone: n$3.ChinaStandardTime });
-({ id: t$1.AsiaUstNera, name: "Asia/Ust-Nera", offset: i$2.UTC_PLUS_10, timezone: n$3.VladivostokTime });
-({ id: t$1.AsiaVientiane, name: "Asia/Vientiane", offset: i$2.UTC_PLUS_7, timezone: n$3.IndochinaTime });
-({ id: t$1.AsiaVladivostok, name: "Asia/Vladivostok", offset: i$2.UTC_PLUS_10, timezone: n$3.VladivostokTime });
-({ id: t$1.AsiaYakutsk, name: "Asia/Yakutsk", offset: i$2.UTC_PLUS_9, timezone: n$3.YakutskTime });
-({ id: t$1.AsiaYekaterinburg, name: "Asia/Yekaterinburg", offset: i$2.UTC_PLUS_5, timezone: n$3.YekaterinburgTime });
-({ id: t$1.AsiaYerevan, name: "Asia/Yerevan", offset: i$2.UTC_PLUS_4, timezone: n$3.ArmeniaTime });
-({ id: t$1.AtlanticAzores, name: "Atlantic/Azores", offset: i$2.UTC_MINUS_1, timezone: n$3.AzoresStandardTime });
-({ id: t$1.AtlanticBermuda, name: "Atlantic/Bermuda", offset: i$2.UTC_MINUS_4, timezone: n$3.AtlanticStandardTime });
-({ id: t$1.AtlanticCanary, name: "Atlantic/Canary", offset: i$2.UTC_MINUS_1, timezone: n$3.WesternEuropeanTime });
-({ id: t$1.AtlanticCapeVerde, name: "Atlantic/Cape_Verde", offset: i$2.UTC_0, timezone: n$3.CapeVerdeTime });
-({ id: t$1.AtlanticFaroe, name: "Atlantic/Faroe", offset: i$2.UTC_0, timezone: n$3.GreenwichMeanTime });
-({ id: t$1.AtlanticMadeira, name: "Atlantic/Madeira", offset: i$2.UTC_0, timezone: n$3.WesternEuropeanTime });
-({ id: t$1.AtlanticReykjavik, name: "Atlantic/Reykjavik", offset: i$2.UTC_0, timezone: n$3.GreenwichMeanTime });
-({ id: t$1.AtlanticSouthGeorgia, name: "Atlantic/South_Georgia", offset: i$2.UTC_0, timezone: n$3.CoordinatedUniversalTime });
-({ id: t$1.AtlanticStHelena, name: "Atlantic/St_Helena", offset: i$2.UTC_0, timezone: n$3.GreenwichMeanTime });
-({ id: t$1.AtlanticStanley, name: "Atlantic/Stanley", offset: i$2.UTC_0, timezone: n$3.FalklandIslandsTime });
-({ id: t$1.AustraliaAdelaide, name: "Australia/Adelaide", offset: i$2.UTC_PLUS_9_30, timezone: n$3.AustralianCentralStandardTime });
-({ id: t$1.AustraliaBrisbane, name: "Australia/Brisbane", offset: i$2.UTC_PLUS_10, timezone: n$3.AustralianEasternStandardTime });
-({ id: t$1.AustraliaBrokenHill, name: "Australia/Broken_Hill", offset: i$2.UTC_PLUS_9_30, timezone: n$3.AustralianCentralStandardTime });
-({ id: t$1.AustraliaCanberra, name: "Australia/Canberra", offset: i$2.UTC_PLUS_10, timezone: n$3.AustralianEasternStandardTime });
-({ id: t$1.AustraliaCurrie, name: "Australia/Currie", offset: i$2.UTC_PLUS_10, timezone: n$3.AustralianEasternStandardTime });
-({ id: t$1.AustraliaDarwin, name: "Australia/Darwin", offset: i$2.UTC_PLUS_9_30, timezone: n$3.AustralianCentralStandardTime });
-({ id: t$1.AustraliaEucla, name: "Australia/Eucla", offset: i$2.UTC_PLUS_8_45, timezone: n$3.AustralianCentralWesternStandardTime });
-({ id: t$1.AustraliaHobart, name: "Australia/Hobart", offset: i$2.UTC_PLUS_10, timezone: n$3.AustralianEasternStandardTime });
-({ id: t$1.AustraliaLindeman, name: "Australia/Lindeman", offset: i$2.UTC_PLUS_10, timezone: n$3.AustralianEasternStandardTime });
-({ id: t$1.AustraliaLordHowe, name: "Australia/Lord_Howe", offset: i$2.UTC_PLUS_10_30, timezone: n$3.LordHoweStandardTime });
-({ id: t$1.AustraliaMelbourne, name: "Australia/Melbourne", offset: i$2.UTC_PLUS_10, timezone: n$3.AustralianEasternStandardTime });
-({ id: t$1.AustraliaPerth, name: "Australia/Perth", offset: i$2.UTC_PLUS_8, timezone: n$3.AustralianWesternStandardTime });
-({ id: t$1.AustraliaSydney, name: "Australia/Sydney", offset: i$2.UTC_PLUS_10, timezone: n$3.AustralianEasternStandardTime });
-({ id: t$1.EuropeAmsterdam, name: "Europe/Amsterdam", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeAndorra, name: "Europe/Andorra", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeAthens, name: "Europe/Athens", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeBelgrade, name: "Europe/Belgrade", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeBerlin, name: "Europe/Berlin", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeBratislava, name: "Europe/Bratislava", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeBrussels, name: "Europe/Brussels", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeBucharest, name: "Europe/Bucharest", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeBudapest, name: "Europe/Budapest", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeBusingen, name: "Europe/Busingen", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeChisinau, name: "Europe/Chisinau", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeCopenhagen, name: "Europe/Copenhagen", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeDublin, name: "Europe/Dublin", offset: i$2.UTC_0, timezone: n$3.GreenwichMeanTime });
-({ id: t$1.EuropeGibraltar, name: "Europe/Gibraltar", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeGuernsey, name: "Europe/Guernsey", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeHelsinki, name: "Europe/Helsinki", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeIsleOfMan, name: "Europe/Isle_of_Man", offset: i$2.UTC_0, timezone: n$3.GreenwichMeanTime });
-({ id: t$1.EuropeIstanbul, name: "Europe/Istanbul", offset: i$2.UTC_PLUS_3, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeJersey, name: "Europe/Jersey", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeKaliningrad, name: "Europe/Kaliningrad", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeKiev, name: "Europe/Kiev", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeLisbon, name: "Europe/Lisbon", offset: i$2.UTC_0, timezone: n$3.GreenwichMeanTime });
-({ id: t$1.EuropeLjubljana, name: "Europe/Ljubljana", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeLondon, name: "Europe/London", offset: i$2.UTC_0, timezone: n$3.GreenwichMeanTime });
-({ id: t$1.EuropeLuxembourg, name: "Europe/Luxembourg", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeMadrid, name: "Europe/Madrid", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeMalta, name: "Europe/Malta", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeMariehamn, name: "Europe/Mariehamn", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeMinsk, name: "Europe/Minsk", offset: i$2.UTC_PLUS_3, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeMonaco, name: "Europe/Monaco", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeMoscow, name: "Europe/Moscow", offset: i$2.UTC_PLUS_3, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeOslo, name: "Europe/Oslo", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeParis, name: "Europe/Paris", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropePodgorica, name: "Europe/Podgorica", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropePrague, name: "Europe/Prague", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeRiga, name: "Europe/Riga", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeRome, name: "Europe/Rome", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeSamara, name: "Europe/Samara", offset: i$2.UTC_PLUS_4, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeSanMarino, name: "Europe/San_Marino", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeSarajevo, name: "Europe/Sarajevo", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeSimferopol, name: "Europe/Simferopol", offset: i$2.UTC_PLUS_3, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeSkopje, name: "Europe/Skopje", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeSofia, name: "Europe/Sofia", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeStockholm, name: "Europe/Stockholm", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeTallinn, name: "Europe/Tallinn", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeTirane, name: "Europe/Tirane", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeUzhgorod, name: "Europe/Uzhgorod", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeVaduz, name: "Europe/Vaduz", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeVatican, name: "Europe/Vatican", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeVienna, name: "Europe/Vienna", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeVilnius, name: "Europe/Vilnius", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeVolgograd, name: "Europe/Volgograd", offset: i$2.UTC_PLUS_4, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeWarsaw, name: "Europe/Warsaw", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeZagreb, name: "Europe/Zagreb", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.EuropeZaporozhye, name: "Europe/Zaporozhye", offset: i$2.UTC_PLUS_2, timezone: n$3.EasternEuropeanTime });
-({ id: t$1.EuropeZurich, name: "Europe/Zurich", offset: i$2.UTC_PLUS_1, timezone: n$3.CentralEuropeanTime });
-({ id: t$1.IndianAntananarivo, name: "Indian/Antananarivo", offset: i$2.UTC_PLUS_3, timezone: n$3.EastAfricaTime });
-({ id: t$1.IndianChagos, name: "Indian/Chagos", offset: i$2.UTC_PLUS_6, timezone: n$3.IndianOceanTime });
-({ id: t$1.IndianChristmas, name: "Indian/Christmas", offset: i$2.UTC_PLUS_7, timezone: n$3.ChristmasIslandTime });
-({ id: t$1.IndianCocos, name: "Indian/Cocos", offset: i$2.UTC_PLUS_6, timezone: n$3.CocosIslandsTime });
-({ id: t$1.IndianComoro, name: "Indian/Comoro", offset: i$2.UTC_PLUS_3, timezone: n$3.EastAfricaTime });
-({ id: t$1.IndianKerguelen, name: "Indian/Kerguelen", offset: i$2.UTC_PLUS_5, timezone: n$3.FrenchSouthernAndAntarcticTime });
-({ id: t$1.IndianMahe, name: "Indian/Mahe", offset: i$2.UTC_PLUS_4, timezone: n$3.SeychellesTime });
-({ id: t$1.IndianMaldives, name: "Indian/Maldives", offset: i$2.UTC_PLUS_5, timezone: n$3.MaldivesTime });
-({ id: t$1.IndianMauritius, name: "Indian/Mauritius", offset: i$2.UTC_PLUS_4, timezone: n$3.MauritiusTime });
-({ id: t$1.IndianMayotte, name: "Indian/Mayotte", offset: i$2.UTC_PLUS_3, timezone: n$3.EastAfricaTime });
-({ id: t$1.IndianReunion, name: "Indian/Reunion", offset: i$2.UTC_PLUS_4, timezone: n$3.ReunionTime });
-({ id: t$1.PacificApia, name: "Pacific/Apia", offset: i$2.UTC_PLUS_13, timezone: n$3.SamoaStandardTime });
-({ id: t$1.PacificAuckland, name: "Pacific/Auckland", offset: i$2.UTC_PLUS_13, timezone: n$3.NewZealandStandardTime });
-({ id: t$1.PacificChatham, name: "Pacific/Chatham", offset: i$2.UTC_PLUS_13, timezone: n$3.ChathamStandardTime });
-({ id: t$1.PacificEaster, name: "Pacific/Easter", offset: i$2.UTC_PLUS_6, timezone: n$3.EasterIslandStandardTime });
-({ id: t$1.PacificEfate, name: "Pacific/Efate", offset: i$2.UTC_PLUS_11, timezone: n$3.VanuatuTime });
-({ id: t$1.PacificEnderbury, name: "Pacific/Enderbury", offset: i$2.UTC_PLUS_13, timezone: n$3.TongaTime });
-({ id: t$1.PacificFakaofo, name: "Pacific/Fakaofo", offset: i$2.UTC_PLUS_13, timezone: n$3.TongaTime });
-({ id: t$1.PacificFiji, name: "Pacific/Fiji", offset: i$2.UTC_PLUS_12, timezone: n$3.FijiTime });
-({ id: t$1.PacificFunafuti, name: "Pacific/Funafuti", offset: i$2.UTC_PLUS_12, timezone: n$3.TuvaluTime });
-({ id: t$1.PacificGalapagos, name: "Pacific/Galapagos", offset: i$2.UTC_PLUS_6, timezone: n$3.GalapagosTime });
-({ id: t$1.PacificGambier, name: "Pacific/Gambier", offset: i$2.UTC_PLUS_9, timezone: n$3.GambierIslandTime });
-({ id: t$1.PacificGuadalcanal, name: "Pacific/Guadalcanal", offset: i$2.UTC_PLUS_11, timezone: n$3.SolomonIslandsTime });
-({ id: t$1.PacificGuam, name: "Pacific/Guam", offset: i$2.UTC_PLUS_10, timezone: n$3.ChamorroStandardTime });
-({ id: t$1.PacificHonolulu, name: "Pacific/Honolulu", offset: i$2.UTC_PLUS_10, timezone: n$3.HawaiiAleutianStandardTime });
-({ id: t$1.PacificJohnston, name: "Pacific/Johnston", offset: i$2.UTC_PLUS_10, timezone: n$3.HawaiiAleutianStandardTime });
-({ id: t$1.PacificKiritimati, name: "Pacific/Kiritimati", offset: i$2.UTC_PLUS_14, timezone: n$3.LineIslandsTime });
-({ id: t$1.PacificKosrae, name: "Pacific/Kosrae", offset: i$2.UTC_PLUS_11, timezone: n$3.KosraeTime });
-({ id: t$1.PacificKwajalein, name: "Pacific/Kwajalein", offset: i$2.UTC_PLUS_12, timezone: n$3.MarshallIslandsTime });
-({ id: t$1.PacificMajuro, name: "Pacific/Majuro", offset: i$2.UTC_PLUS_12, timezone: n$3.MarshallIslandsTime });
-({ id: t$1.PacificMarquesas, name: "Pacific/Marquesas", offset: i$2.UTC_PLUS_9, timezone: n$3.MarquesasIslandsTime });
-({ id: t$1.PacificMidway, name: "Pacific/Midway", offset: i$2.UTC_PLUS_11, timezone: n$3.SamoaStandardTime });
-({ id: t$1.PacificNauru, name: "Pacific/Nauru", offset: i$2.UTC_PLUS_12, timezone: n$3.NauruTime });
-({ id: t$1.PacificNiue, name: "Pacific/Niue", offset: i$2.UTC_PLUS_11, timezone: n$3.NiueTime });
-({ id: t$1.PacificNorfolk, name: "Pacific/Norfolk", offset: i$2.UTC_PLUS_11, timezone: n$3.NorfolkIslandTime });
-({ id: t$1.PacificNoumea, name: "Pacific/Noumea", offset: i$2.UTC_PLUS_11, timezone: n$3.NewCaledoniaTime });
-({ id: t$1.PacificPagoPago, name: "Pacific/Pago_Pago", offset: i$2.UTC_PLUS_11, timezone: n$3.SamoaStandardTime });
-({ id: t$1.PacificPalau, name: "Pacific/Palau", offset: i$2.UTC_PLUS_9, timezone: n$3.PalauTime });
-({ id: t$1.PacificPitcairn, name: "Pacific/Pitcairn", offset: i$2.UTC_PLUS_8, timezone: n$3.PitcairnTime });
-({ id: t$1.PacificPonape, name: "Pacific/Ponape", offset: i$2.UTC_PLUS_11, timezone: n$3.PohnpeiStandardTime });
-({ id: t$1.PacificPortMoresby, name: "Pacific/Port_Moresby", offset: i$2.UTC_PLUS_10, timezone: n$3.PapuaNewGuineaTime });
-({ id: t$1.PacificRarotonga, name: "Pacific/Rarotonga", offset: i$2.UTC_PLUS_10, timezone: n$3.CookIslandTime });
-({ id: t$1.PacificSaipan, name: "Pacific/Saipan", offset: i$2.UTC_PLUS_10, timezone: n$3.ChamorroStandardTime });
-({ id: t$1.PacificTahiti, name: "Pacific/Tahiti", offset: i$2.UTC_PLUS_10, timezone: n$3.TahitiTime });
-({ id: t$1.PacificTarawa, name: "Pacific/Tarawa", offset: i$2.UTC_PLUS_12, timezone: n$3.GilbertIslandTime });
-({ id: t$1.PacificTongatapu, name: "Pacific/Tongatapu", offset: i$2.UTC_PLUS_13, timezone: n$3.TongaTime });
-({ id: t$1.PacificChuuk, name: "Pacific/Chuuk", offset: i$2.UTC_PLUS_10, timezone: n$3.ChuukTime });
-({ id: t$1.PacificPohnpei, name: "Pacific/Pohnpei", offset: i$2.UTC_PLUS_11, timezone: n$3.PohnpeiStandardTime });
-({ id: t$1.PacificYap, name: "Pacific/Yap", offset: i$2.UTC_PLUS_10, timezone: n$3.ChuukTime });
+({ id: t$1.AfricaAbidjan, name: "Africa/Abidjan", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaAccra, name: "Africa/Accra", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaAddisAbaba, name: "Africa/Addis_Ababa", offset: i$2.UTC_PLUS_3, timezone: n$2.EastAfricaTime });
+({ id: t$1.AfricaAlgiers, name: "Africa/Algiers", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.AfricaAsmara, name: "Africa/Asmara", offset: i$2.UTC_PLUS_3, timezone: n$2.EastAfricaTime });
+({ id: t$1.AfricaBamako, name: "Africa/Bamako", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaBangui, name: "Africa/Bangui", offset: i$2.UTC_PLUS_1, timezone: n$2.WestAfricaTime });
+({ id: t$1.AfricaBanjul, name: "Africa/Banjul", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaBissau, name: "Africa/Bissau", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaBlantyre, name: "Africa/Blantyre", offset: i$2.UTC_PLUS_2, timezone: n$2.CentralAfricaTime });
+({ id: t$1.AfricaBrazzaville, name: "Africa/Brazzaville", offset: i$2.UTC_PLUS_1, timezone: n$2.WestAfricaTime });
+({ id: t$1.AfricaBujumbura, name: "Africa/Bujumbura", offset: i$2.UTC_PLUS_2, timezone: n$2.CentralAfricaTime });
+({ id: t$1.AfricaCairo, name: "Africa/Cairo", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.AfricaCasablanca, name: "Africa/Casablanca", offset: i$2.UTC_PLUS_1, timezone: n$2.WesternEuropeanTime });
+({ id: t$1.AfricaCeuta, name: "Africa/Ceuta", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.AfricaConakry, name: "Africa/Conakry", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaDakar, name: "Africa/Dakar", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaDarEsSalaam, name: "Africa/Dar_es_Salaam", offset: i$2.UTC_PLUS_3, timezone: n$2.EastAfricaTime });
+({ id: t$1.AfricaDjibouti, name: "Africa/Djibouti", offset: i$2.UTC_PLUS_3, timezone: n$2.EastAfricaTime });
+({ id: t$1.AfricaDouala, name: "Africa/Douala", offset: i$2.UTC_PLUS_1, timezone: n$2.WestAfricaTime });
+({ id: t$1.AfricaElAaiun, name: "Africa/El_Aaiun", offset: i$2.UTC_PLUS_1, timezone: n$2.WestAfricaTime });
+({ id: t$1.AfricaFreetown, name: "Africa/Freetown", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaGaborone, name: "Africa/Gaborone", offset: i$2.UTC_PLUS_2, timezone: n$2.CentralAfricaTime });
+({ id: t$1.AfricaHarare, name: "Africa/Harare", offset: i$2.UTC_PLUS_2, timezone: n$2.CentralAfricaTime });
+({ id: t$1.AfricaJohannesburg, name: "Africa/Johannesburg", offset: i$2.UTC_PLUS_2, timezone: n$2.SouthAfricanStandardTime });
+({ id: t$1.AfricaJuba, name: "Africa/Juba", offset: i$2.UTC_PLUS_3, timezone: n$2.EastAfricaTime });
+({ id: t$1.AfricaKampala, name: "Africa/Kampala", offset: i$2.UTC_PLUS_3, timezone: n$2.EastAfricaTime });
+({ id: t$1.AfricaKhartoum, name: "Africa/Khartoum", offset: i$2.UTC_PLUS_2, timezone: n$2.EastAfricaTime });
+({ id: t$1.AfricaKigali, name: "Africa/Kigali", offset: i$2.UTC_PLUS_2, timezone: n$2.CentralAfricaTime });
+({ id: t$1.AfricaKinshasa, name: "Africa/Kinshasa", offset: i$2.UTC_PLUS_1, timezone: n$2.WestAfricaTime });
+({ id: t$1.AfricaLagos, name: "Africa/Lagos", offset: i$2.UTC_PLUS_1, timezone: n$2.WestAfricaTime });
+({ id: t$1.AfricaLibreville, name: "Africa/Libreville", offset: i$2.UTC_PLUS_1, timezone: n$2.WestAfricaTime });
+({ id: t$1.AfricaLome, name: "Africa/Lome", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaLuanda, name: "Africa/Luanda", offset: i$2.UTC_PLUS_1, timezone: n$2.WestAfricaTime });
+({ id: t$1.AfricaLubumbashi, name: "Africa/Lubumbashi", offset: i$2.UTC_PLUS_2, timezone: n$2.CentralAfricaTime });
+({ id: t$1.AfricaLusaka, name: "Africa/Lusaka", offset: i$2.UTC_PLUS_2, timezone: n$2.CentralAfricaTime });
+({ id: t$1.AfricaMalabo, name: "Africa/Malabo", offset: i$2.UTC_PLUS_1, timezone: n$2.WestAfricaTime });
+({ id: t$1.AfricaMaputo, name: "Africa/Maputo", offset: i$2.UTC_PLUS_2, timezone: n$2.CentralAfricaTime });
+({ id: t$1.AfricaMaseru, name: "Africa/Maseru", offset: i$2.UTC_PLUS_2, timezone: n$2.SouthAfricanStandardTime });
+({ id: t$1.AfricaMbabane, name: "Africa/Mbabane", offset: i$2.UTC_PLUS_2, timezone: n$2.SouthAfricanStandardTime });
+({ id: t$1.AfricaMogadishu, name: "Africa/Mogadishu", offset: i$2.UTC_PLUS_3, timezone: n$2.EastAfricaTime });
+({ id: t$1.AfricaMonrovia, name: "Africa/Monrovia", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaNairobi, name: "Africa/Nairobi", offset: i$2.UTC_PLUS_3, timezone: n$2.EastAfricaTime });
+({ id: t$1.AfricaNdjamena, name: "Africa/Ndjamena", offset: i$2.UTC_PLUS_1, timezone: n$2.WestAfricaTime });
+({ id: t$1.AfricaNiamey, name: "Africa/Niamey", offset: i$2.UTC_PLUS_1, timezone: n$2.WestAfricaTime });
+({ id: t$1.AfricaNouakchott, name: "Africa/Nouakchott", offset: i$2.UTC_0, timezone: n$2.GreenwichMeanTime });
+({ id: t$1.AfricaOuagadougou, name: "Africa/Ouagadougou", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaPortoNovo, name: "Africa/Porto-Novo", offset: i$2.UTC_PLUS_1, timezone: n$2.WestAfricaTime });
+({ id: t$1.AfricaSaoTome, name: "Africa/SaoTome", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaTripoli, name: "Africa/Tripoli", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaTunis, name: "Africa/Tunis", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AfricaWindhoek, name: "Africa/Windhoek", offset: i$2.UTC_PLUS_2, timezone: n$2.WestAfricaTime });
+({ id: t$1.AmericaAdak, name: "America/Adak", offset: i$2.UTC_PLUS_10, timezone: n$2.HawaiiAleutianStandardTime });
+({ id: t$1.AmericaAnchorage, name: "America/Anchorage", offset: i$2.UTC_PLUS_9, timezone: n$2.AlaskaStandardTime });
+({ id: t$1.AmericaAnguilla, name: "America/Anguilla", offset: i$2.UTC_0, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaAntigua, name: "America/Antigua", offset: i$2.UTC_0, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaAraguaina, name: "America/Araguaina", offset: i$2.UTC_MINUS_3, timezone: n$2.BrasiliaTime });
+({ id: t$1.AmericaArgentinaBuenosAires, name: "America/Argentina/Buenos_Aires", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaArgentinaCatamarca, name: "America/Argentina/Catamarca", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaArgentinaCordoba, name: "America/Argentina/Cordoba", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaArgentinaJujuy, name: "America/Argentina/Jujuy", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaArgentinaLaRioja, name: "America/Argentina/La_Rioja", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaArgentinaMendoza, name: "America/Argentina/Mendoza", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaArgentinaRioGallegos, name: "America/Argentina/Rio_Gallegos", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaArgentinaSalta, name: "America/Argentina/Salta", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaArgentinaSanJuan, name: "America/Argentina/San_Juan", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaArgentinaSanLuis, name: "America/Argentina/San_Luis", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaArgentinaTucuman, name: "America/Argentina/Tucuman", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaArgentinaUshuaia, name: "America/Argentina/Ushuaia", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaAruba, name: "America/Aruba", offset: i$2.UTC_0, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaAsuncion, name: "America/Asuncion", offset: i$2.UTC_MINUS_4, timezone: n$2.ParaguayTime });
+({ id: t$1.AmericaAtikokan, name: "America/Atikokan", offset: i$2.UTC_0, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaAtka, name: "America/Atka", offset: i$2.UTC_MINUS_10, timezone: n$2.HawaiiAleutianStandardTime });
+({ id: t$1.AmericaBahia, name: "America/Bahia", offset: i$2.UTC_MINUS_3, timezone: n$2.BrasiliaTime });
+({ id: t$1.AmericaBahiaBanderas, name: "America/Bahia_Banderas", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaBarbados, name: "America/Barbados", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaBelem, name: "America/Belem", offset: i$2.UTC_MINUS_3, timezone: n$2.BrasiliaTime });
+({ id: t$1.AmericaBelize, name: "America/Belize", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaBlancSablon, name: "America/Blanc-Sablon", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaBoaVista, name: "America/Boa_Vista", offset: i$2.UTC_MINUS_4, timezone: n$2.AmazonTime });
+({ id: t$1.AmericaBogota, name: "America/Bogota", offset: i$2.UTC_MINUS_5, timezone: n$2.ColombiaTime });
+({ id: t$1.AmericaBoise, name: "America/Boise", offset: i$2.UTC_MINUS_7, timezone: n$2.MountainStandardTime });
+({ id: t$1.AmericaCambridgeBay, name: "America/Cambridge_Bay", offset: i$2.UTC_MINUS_7, timezone: n$2.MountainStandardTime });
+({ id: t$1.AmericaCampoGrande, name: "America/Campo_Grande", offset: i$2.UTC_MINUS_4, timezone: n$2.AmazonTime });
+({ id: t$1.AmericaCancun, name: "America/Cancun", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaCaracas, name: "America/Caracas", offset: i$2.UTC_MINUS_4, timezone: n$2.VenezuelaStandardTime });
+({ id: t$1.AmericaCayenne, name: "America/Cayenne", offset: i$2.UTC_MINUS_3, timezone: n$2.FrenchGuianaTime });
+({ id: t$1.AmericaCayman, name: "America/Cayman", offset: i$2.UTC_0, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaChicago, name: "America/Chicago", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaChihuahua, name: "America/Chihuahua", offset: i$2.UTC_MINUS_7, timezone: n$2.MountainStandardTime });
+({ id: t$1.AmericaCoralHarbour, name: "America/Coral_Harbour", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaCordoba, name: "America/Cordoba", offset: i$2.UTC_MINUS_3, timezone: n$2.ArgentinaTime });
+({ id: t$1.AmericaCostaRica, name: "America/Costa_Rica", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaCreston, name: "America/Creston", offset: i$2.UTC_MINUS_7, timezone: n$2.MountainStandardTime });
+({ id: t$1.AmericaCuiaba, name: "America/Cuiaba", offset: i$2.UTC_MINUS_4, timezone: n$2.AmazonTime });
+({ id: t$1.AmericaCuracao, name: "America/Curacao", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaDanmarkshavn, name: "America/Danmarkshavn", offset: i$2.UTC_0, timezone: n$2.GreenwichMeanTime });
+({ id: t$1.AmericaDawson, name: "America/Dawson", offset: i$2.UTC_MINUS_8, timezone: n$2.PacificStandardTime });
+({ id: t$1.AmericaDawsonCreek, name: "America/Dawson_Creek", offset: i$2.UTC_MINUS_8, timezone: n$2.PacificStandardTime });
+({ id: t$1.AmericaDenver, name: "America/Denver", offset: i$2.UTC_MINUS_7, timezone: n$2.MountainStandardTime });
+({ id: t$1.AmericaDetroit, name: "America/Detroit", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaDominica, name: "America/Dominica", offset: i$2.UTC_0, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaEdmonton, name: "America/Edmonton", offset: i$2.UTC_MINUS_7, timezone: n$2.MountainStandardTime });
+({ id: t$1.AmericaEirunepe, name: "America/Eirunepe", offset: i$2.UTC_MINUS_5, timezone: n$2.AcreTime });
+({ id: t$1.AmericaElSalvador, name: "America/El_Salvador", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaFortaleza, name: "America/Fortaleza", offset: i$2.UTC_MINUS_3, timezone: n$2.BrasiliaTime });
+({ id: t$1.AmericaGlaceBay, name: "America/Glace_Bay", offset: i$2.UTC_0, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaGodthab, name: "America/Godthab", offset: i$2.UTC_MINUS_3, timezone: n$2.WestGreenlandTime });
+({ id: t$1.AmericaGooseBay, name: "America/Goose_Bay", offset: i$2.UTC_0, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaGrandTurk, name: "America/Grand_Turk", offset: i$2.UTC_0, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaGrenada, name: "America/Grenada", offset: i$2.UTC_0, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaGuadeloupe, name: "America/Guadeloupe", offset: i$2.UTC_0, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaGuatemala, name: "America/Guatemala", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaGuayaquil, name: "America/Guayaquil", offset: i$2.UTC_MINUS_5, timezone: n$2.EcuadorTime });
+({ id: t$1.AmericaGuyana, name: "America/Guyana", offset: i$2.UTC_0, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaHalifax, name: "America/Halifax", offset: i$2.UTC_0, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaHavana, name: "America/Havana", offset: i$2.UTC_MINUS_5, timezone: n$2.CubaStandardTime });
+({ id: t$1.AmericaHermosillo, name: "America/Hermosillo", offset: i$2.UTC_MINUS_7, timezone: n$2.MountainStandardTime });
+({ id: t$1.AmericaIndianaIndianapolis, name: "America/Indiana/Indianapolis", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaIndianaKnox, name: "America/Indiana/Knox", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaIndianaMarengo, name: "America/Indiana/Marengo", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaIndianaPetersburg, name: "America/Indiana/Petersburg", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaIndianaTellCity, name: "America/Indiana/Tell_City", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaIndianaVevay, name: "America/Indiana/Vevay", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaIndianaVincennes, name: "America/Indiana/Vincennes", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaIndianaWinamac, name: "America/Indiana/Winamac", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaInuvik, name: "America/Inuvik", offset: i$2.UTC_MINUS_7, timezone: n$2.MountainStandardTime });
+({ id: t$1.AmericaIqaluit, name: "America/Iqaluit", offset: i$2.UTC_0, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaJamaica, name: "America/Jamaica", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaJuneau, name: "America/Juneau", offset: i$2.UTC_MINUS_9, timezone: n$2.AlaskaStandardTime });
+({ id: t$1.AmericaKentuckyLouisville, name: "America/Kentucky/Louisville", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaKentuckyMonticello, name: "America/Kentucky/Monticello", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaKralendijk, name: "America/Kralendijk", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaLaPaz, name: "America/La_Paz", offset: i$2.UTC_MINUS_4, timezone: n$2.BoliviaTime });
+({ id: t$1.AmericaLima, name: "America/Lima", offset: i$2.UTC_MINUS_5, timezone: n$2.PeruTime });
+({ id: t$1.AmericaLosAngeles, name: "America/Los_Angeles", offset: i$2.UTC_MINUS_8, timezone: n$2.PacificStandardTime });
+({ id: t$1.AmericaLouisville, name: "America/Louisville", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaLowerPrinces, name: "America/Lower_Princes", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaMaceio, name: "America/Maceio", offset: i$2.UTC_MINUS_3, timezone: n$2.BrasiliaTime });
+({ id: t$1.AmericaManagua, name: "America/Managua", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaManaus, name: "America/Manaus", offset: i$2.UTC_MINUS_4, timezone: n$2.AmazonTime });
+({ id: t$1.AmericaMarigot, name: "America/Marigot", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaMartinique, name: "America/Martinique", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaMatamoros, name: "America/Matamoros", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaMazatlan, name: "America/Mazatlan", offset: i$2.UTC_MINUS_7, timezone: n$2.MountainStandardTime });
+({ id: t$1.AmericaMenominee, name: "America/Menominee", offset: i$2.UTC_MINUS_5, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaMerida, name: "America/Merida", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaMetlakatla, name: "America/Metlakatla", offset: i$2.UTC_MINUS_9, timezone: n$2.AlaskaStandardTime });
+({ id: t$1.AmericaMexicoCity, name: "America/Mexico_City", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaMiquelon, name: "America/Miquelon", offset: i$2.UTC_MINUS_3, timezone: n$2.SaintPierreAndMiquelonStandardTime });
+({ id: t$1.AmericaMoncton, name: "America/Moncton", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaMonterrey, name: "America/Monterrey", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaMontevideo, name: "America/Montevideo", offset: i$2.UTC_MINUS_3, timezone: n$2.UruguayStandardTime });
+({ id: t$1.AmericaMontreal, name: "America/Montreal", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaMontserrat, name: "America/Montserrat", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaNassau, name: "America/Nassau", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaNewYork, name: "America/New_York", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaNipigon, name: "America/Nipigon", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaNome, name: "America/Nome", offset: i$2.UTC_MINUS_9, timezone: n$2.AlaskaStandardTime });
+({ id: t$1.AmericaNoronha, name: "America/Noronha", offset: i$2.UTC_MINUS_2, timezone: n$2.FernandoDeNoronhaTime });
+({ id: t$1.AmericaNorthDakotaBeulah, name: "America/North_Dakota/Beulah", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaNorthDakotaCenter, name: "America/North_Dakota/Center", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaNorthDakotaNewSalem, name: "America/North_Dakota/New_Salem", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaOjinaga, name: "America/Ojinaga", offset: i$2.UTC_MINUS_7, timezone: n$2.MountainStandardTime });
+({ id: t$1.AmericaPanama, name: "America/Panama", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaPangnirtung, name: "America/Pangnirtung", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaParamaribo, name: "America/Paramaribo", offset: i$2.UTC_MINUS_3, timezone: n$2.SurinameTime });
+({ id: t$1.AmericaPhoenix, name: "America/Phoenix", offset: i$2.UTC_MINUS_7, timezone: n$2.MountainStandardTime });
+({ id: t$1.AmericaPortAuPrince, name: "America/Port-au-Prince", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaPortOfSpain, name: "America/Port_of_Spain", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaPortoVelho, name: "America/Porto_Velho", offset: i$2.UTC_MINUS_4, timezone: n$2.AmazonTime });
+({ id: t$1.AmericaPuertoRico, name: "America/Puerto_Rico", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaRainyRiver, name: "America/Rainy_River", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaRankinInlet, name: "America/Rankin_Inlet", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaRecife, name: "America/Recife", offset: i$2.UTC_MINUS_3, timezone: n$2.BrasiliaTime });
+({ id: t$1.AmericaRegina, name: "America/Regina", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaResolute, name: "America/Resolute", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaRioBranco, name: "America/Rio_Branco", offset: i$2.UTC_MINUS_5, timezone: n$2.AcreTime });
+({ id: t$1.AmericaSantaIsabel, name: "America/Santa_Isabel", offset: i$2.UTC_MINUS_8, timezone: n$2.PacificStandardTime });
+({ id: t$1.AmericaSantarem, name: "America/Santarem", offset: i$2.UTC_MINUS_3, timezone: n$2.BrasiliaTime });
+({ id: t$1.AmericaSantiago, name: "America/Santiago", offset: i$2.UTC_MINUS_4, timezone: n$2.ChileStandardTime });
+({ id: t$1.AmericaSantoDomingo, name: "America/Santo_Domingo", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaSaoPaulo, name: "America/Sao_Paulo", offset: i$2.UTC_MINUS_3, timezone: n$2.BrasiliaTime });
+({ id: t$1.AmericaScoresbysund, name: "America/Scoresbysund", offset: i$2.UTC_MINUS_1, timezone: n$2.EasternGreenlandTime });
+({ id: t$1.AmericaShiprock, name: "America/Shiprock", offset: i$2.UTC_MINUS_7, timezone: n$2.MountainStandardTime });
+({ id: t$1.AmericaSitka, name: "America/Sitka", offset: i$2.UTC_MINUS_9, timezone: n$2.AlaskaStandardTime });
+({ id: t$1.AmericaStBarthelemy, name: "America/St_Barthelemy", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaStJohns, name: "America/St_Johns", offset: i$2.UTC_MINUS_3, timezone: n$2.NewfoundlandStandardTime });
+({ id: t$1.AmericaStKitts, name: "America/St_Kitts", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaStLucia, name: "America/St_Lucia", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaStThomas, name: "America/St_Thomas", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaStVincent, name: "America/St_Vincent", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaSwiftCurrent, name: "America/Swift_Current", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaTegucigalpa, name: "America/Tegucigalpa", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaThule, name: "America/Thule", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaThunderBay, name: "America/Thunder_Bay", offset: i$2.UTC_MINUS_4, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaTijuana, name: "America/Tijuana", offset: i$2.UTC_MINUS_8, timezone: n$2.PacificStandardTime });
+({ id: t$1.AmericaToronto, name: "America/Toronto", offset: i$2.UTC_MINUS_5, timezone: n$2.EasternStandardTime });
+({ id: t$1.AmericaTortola, name: "America/Tortola", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AmericaVancouver, name: "America/Vancouver", offset: i$2.UTC_MINUS_8, timezone: n$2.PacificStandardTime });
+({ id: t$1.AmericaWhitehorse, name: "America/Whitehorse", offset: i$2.UTC_MINUS_8, timezone: n$2.PacificStandardTime });
+({ id: t$1.AmericaWinnipeg, name: "America/Winnipeg", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AmericaYakutat, name: "America/Yakutat", offset: i$2.UTC_MINUS_9, timezone: n$2.AlaskaStandardTime });
+({ id: t$1.AmericaYellowknife, name: "America/Yellowknife", offset: i$2.UTC_MINUS_6, timezone: n$2.MountainStandardTime });
+({ id: t$1.AntarcticaCasey, name: "Antarctica/Casey", offset: i$2.UTC_MINUS_8, timezone: n$2.WesternStandardTime });
+({ id: t$1.AntarcticaDavis, name: "Antarctica/Davis", offset: i$2.UTC_MINUS_7, timezone: n$2.NewfoundlandStandardTime });
+({ id: t$1.AntarcticaDumontDUrville, name: "Antarctica/DumontDUrville", offset: i$2.UTC_MINUS_10, timezone: n$2.CentralStandardTime });
+({ id: t$1.AntarcticaMacquarie, name: "Antarctica/Macquarie", offset: i$2.UTC_MINUS_11, timezone: n$2.CentralStandardTime });
+({ id: t$1.AntarcticaMawson, name: "Antarctica/Mawson", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.AntarcticaMcMurdo, name: "Antarctica/McMurdo", offset: i$2.UTC_MINUS_12, timezone: n$2.NewZealandStandardTime });
+({ id: t$1.AntarcticaPalmer, name: "Antarctica/Palmer", offset: i$2.UTC_MINUS_4, timezone: n$2.ChathamStandardTime });
+({ id: t$1.AntarcticaRothera, name: "Antarctica/Rothera", offset: i$2.UTC_MINUS_3, timezone: n$2.RotheraResearchStationTime });
+({ id: t$1.AntarcticaSyowa, name: "Antarctica/Syowa", offset: i$2.UTC_MINUS_3, timezone: n$2.ShowaStationTime });
+({ id: t$1.AntarcticaTroll, name: "Antarctica/Troll", offset: i$2.UTC_MINUS_2, timezone: n$2.CentralStandardTime });
+({ id: t$1.AntarcticaVostok, name: "Antarctica/Vostok", offset: i$2.UTC_MINUS_6, timezone: n$2.CentralStandardTime });
+({ id: t$1.ArcticLongyearbyen, name: "Arctic/Longyearbyen", offset: i$2.UTC_MINUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.AsiaAden, name: "Asia/Aden", offset: i$2.UTC_PLUS_3, timezone: n$2.ArabiaStandardTime });
+({ id: t$1.AsiaAlmaty, name: "Asia/Almaty", offset: i$2.UTC_PLUS_6, timezone: n$2.AlmaAtaTime });
+({ id: t$1.AsiaAmman, name: "Asia/Amman", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.AsiaAnadyr, name: "Asia/Anadyr", offset: i$2.UTC_PLUS_12, timezone: n$2.NewCaledoniaTime });
+({ id: t$1.AsiaAqtau, name: "Asia/Aqtau", offset: i$2.UTC_PLUS_5, timezone: n$2.AqtobeTime });
+({ id: t$1.AsiaAqtobe, name: "Asia/Aqtobe", offset: i$2.UTC_PLUS_5, timezone: n$2.AqtobeTime });
+({ id: t$1.AsiaAshgabat, name: "Asia/Ashgabat", offset: i$2.UTC_PLUS_5, timezone: n$2.TurkmenistanTime });
+({ id: t$1.AsiaBaghdad, name: "Asia/Baghdad", offset: i$2.UTC_PLUS_3, timezone: n$2.ArabiaStandardTime });
+({ id: t$1.AsiaBahrain, name: "Asia/Bahrain", offset: i$2.UTC_PLUS_3, timezone: n$2.ArabiaStandardTime });
+({ id: t$1.AsiaBaku, name: "Asia/Baku", offset: i$2.UTC_PLUS_4, timezone: n$2.AzerbaijanTime });
+({ id: t$1.AsiaBangkok, name: "Asia/Bangkok", offset: i$2.UTC_PLUS_7, timezone: n$2.IndochinaTime });
+({ id: t$1.AsiaBarnaul, name: "Asia/Barnaul", offset: i$2.UTC_PLUS_7, timezone: n$2.KrasnoyarskTime });
+({ id: t$1.AsiaBeirut, name: "Asia/Beirut", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.AsiaBishkek, name: "Asia/Bishkek", offset: i$2.UTC_PLUS_6, timezone: n$2.KyrgyzstanTime });
+({ id: t$1.AsiaBrunei, name: "Asia/Brunei", offset: i$2.UTC_PLUS_8, timezone: n$2.BruneiTime });
+({ id: t$1.AsiaChita, name: "Asia/Chita", offset: i$2.UTC_PLUS_9, timezone: n$2.YakutskTime });
+({ id: t$1.AsiaChoibalsan, name: "Asia/Choibalsan", offset: i$2.UTC_PLUS_8, timezone: n$2.ChoibalsanStandardTime });
+({ id: t$1.AsiaColombo, name: "Asia/Colombo", offset: i$2.UTC_PLUS_5, timezone: n$2.IndianStandardTime });
+({ id: t$1.AsiaDamascus, name: "Asia/Damascus", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.AsiaDhaka, name: "Asia/Dhaka", offset: i$2.UTC_PLUS_6, timezone: n$2.BangladeshStandardTime });
+({ id: t$1.AsiaDili, name: "Asia/Dili", offset: i$2.UTC_PLUS_9, timezone: n$2.JapanStandardTime });
+({ id: t$1.AsiaDubai, name: "Asia/Dubai", offset: i$2.UTC_PLUS_4, timezone: n$2.GulfStandardTime });
+({ id: t$1.AsiaDushanbe, name: "Asia/Dushanbe", offset: i$2.UTC_PLUS_5, timezone: n$2.TajikistanTime });
+({ id: t$1.AsiaFamagusta, name: "Asia/Famagusta", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.AsiaGaza, name: "Asia/Gaza", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.AsiaHebron, name: "Asia/Hebron", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.AsiaHoChiMinh, name: "Asia/Ho_Chi_Minh", offset: i$2.UTC_PLUS_7, timezone: n$2.IndochinaTime });
+({ id: t$1.AsiaHongKong, name: "Asia/Hong_Kong", offset: i$2.UTC_PLUS_8, timezone: n$2.HongKongTime });
+({ id: t$1.AsiaHovd, name: "Asia/Hovd", offset: i$2.UTC_PLUS_7, timezone: n$2.HovdTime });
+({ id: t$1.AsiaIrkutsk, name: "Asia/Irkutsk", offset: i$2.UTC_PLUS_8, timezone: n$2.IrkutskTime });
+({ id: t$1.AsiaJakarta, name: "Asia/Jakarta", offset: i$2.UTC_PLUS_7, timezone: n$2.WesternIndonesianTime });
+({ id: t$1.AsiaJayapura, name: "Asia/Jayapura", offset: i$2.UTC_PLUS_9, timezone: n$2.JapanStandardTime });
+({ id: t$1.AsiaJerusalem, name: "Asia/Jerusalem", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.AsiaKabul, name: "Asia/Kabul", offset: i$2.UTC_PLUS_4, timezone: n$2.AfghanistanTime });
+({ id: t$1.AsiaKamchatka, name: "Asia/Kamchatka", offset: i$2.UTC_PLUS_12, timezone: n$2.KamchatkaTime });
+({ id: t$1.AsiaKarachi, name: "Asia/Karachi", offset: i$2.UTC_PLUS_5, timezone: n$2.PakistanStandardTime });
+({ id: t$1.AsiaKathmandu, name: "Asia/Kathmandu", offset: i$2.UTC_PLUS_5, timezone: n$2.NepalTime });
+({ id: t$1.AsiaKhandyga, name: "Asia/Khandyga", offset: i$2.UTC_PLUS_9, timezone: n$2.YakutskTime });
+({ id: t$1.AsiaKolkata, name: "Asia/Kolkata", offset: i$2.UTC_PLUS_5, timezone: n$2.IndianStandardTime });
+({ id: t$1.AsiaKrasnoyarsk, name: "Asia/Krasnoyarsk", offset: i$2.UTC_PLUS_7, timezone: n$2.KrasnoyarskTime });
+({ id: t$1.AsiaKualaLumpur, name: "Asia/Kuala_Lumpur", offset: i$2.UTC_PLUS_8, timezone: n$2.MalaysiaStandardTime });
+({ id: t$1.AsiaKuching, name: "Asia/Kuching", offset: i$2.UTC_PLUS_8, timezone: n$2.MalaysiaStandardTime });
+({ id: t$1.AsiaKuwait, name: "Asia/Kuwait", offset: i$2.UTC_PLUS_3, timezone: n$2.ArabiaStandardTime });
+({ id: t$1.AsiaMacau, name: "Asia/Macau", offset: i$2.UTC_PLUS_8, timezone: n$2.ChinaStandardTime });
+({ id: t$1.AsiaMagadan, name: "Asia/Magadan", offset: i$2.UTC_PLUS_11, timezone: n$2.MagadanTime });
+({ id: t$1.AsiaMakassar, name: "Asia/Makassar", offset: i$2.UTC_PLUS_8, timezone: n$2.MalaysiaTime });
+({ id: t$1.AsiaManila, name: "Asia/Manila", offset: i$2.UTC_PLUS_8, timezone: n$2.PhilippineTime });
+({ id: t$1.AsiaMuscat, name: "Asia/Muscat", offset: i$2.UTC_PLUS_4, timezone: n$2.GulfStandardTime });
+({ id: t$1.AsiaNovokuznetsk, name: "Asia/Novokuznetsk", offset: i$2.UTC_PLUS_6, timezone: n$2.NovosibirskTime });
+({ id: t$1.AsiaNovosibirsk, name: "Asia/Novosibirsk", offset: i$2.UTC_PLUS_6, timezone: n$2.NovosibirskTime });
+({ id: t$1.AsiaOmsk, name: "Asia/Omsk", offset: i$2.UTC_PLUS_6, timezone: n$2.OmskTime });
+({ id: t$1.AsiaOral, name: "Asia/Oral", offset: i$2.UTC_PLUS_5, timezone: n$2.OralTime });
+({ id: t$1.AsiaPhnomPenh, name: "Asia/Phnom_Penh", offset: i$2.UTC_PLUS_7, timezone: n$2.IndochinaTime });
+({ id: t$1.AsiaPontianak, name: "Asia/Pontianak", offset: i$2.UTC_PLUS_7, timezone: n$2.WesternIndonesianTime });
+({ id: t$1.AsiaPyongyang, name: "Asia/Pyongyang", offset: i$2.UTC_PLUS_9, timezone: n$2.KoreaStandardTime });
+({ id: t$1.AsiaQatar, name: "Asia/Qatar", offset: i$2.UTC_PLUS_3, timezone: n$2.ArabiaStandardTime });
+({ id: t$1.AsiaQyzylorda, name: "Asia/Qyzylorda", offset: i$2.UTC_PLUS_5, timezone: n$2.WestKazakhstanTime });
+({ id: t$1.AsiaRangoon, name: "Asia/Rangoon", offset: i$2.UTC_PLUS_6, timezone: n$2.MyanmarStandardTime });
+({ id: t$1.AsiaRiyadh, name: "Asia/Riyadh", offset: i$2.UTC_PLUS_3, timezone: n$2.ArabiaStandardTime });
+({ id: t$1.AsiaSakhalin, name: "Asia/Sakhalin", offset: i$2.UTC_PLUS_11, timezone: n$2.SakhalinIslandTime });
+({ id: t$1.AsiaSamarkand, name: "Asia/Samarkand", offset: i$2.UTC_PLUS_5, timezone: n$2.UzbekistanTime });
+({ id: t$1.AsiaSeoul, name: "Asia/Seoul", offset: i$2.UTC_PLUS_9, timezone: n$2.KoreaStandardTime });
+({ id: t$1.AsiaShanghai, name: "Asia/Shanghai", offset: i$2.UTC_PLUS_8, timezone: n$2.ChinaStandardTime });
+({ id: t$1.AsiaSingapore, name: "Asia/Singapore", offset: i$2.UTC_PLUS_8, timezone: n$2.SingaporeStandardTime });
+({ id: t$1.AsiaSrednekolymsk, name: "Asia/Srednekolymsk", offset: i$2.UTC_PLUS_11, timezone: n$2.SrednekolymskTime });
+({ id: t$1.AsiaTaipei, name: "Asia/Taipei", offset: i$2.UTC_PLUS_8, timezone: n$2.ChinaStandardTime });
+({ id: t$1.AsiaTashkent, name: "Asia/Tashkent", offset: i$2.UTC_PLUS_5, timezone: n$2.UzbekistanTime });
+({ id: t$1.AsiaTbilisi, name: "Asia/Tbilisi", offset: i$2.UTC_PLUS_4, timezone: n$2.GeorgiaStandardTime });
+({ id: t$1.AsiaTehran, name: "Asia/Tehran", offset: i$2.UTC_PLUS_3, timezone: n$2.IranStandardTime });
+({ id: t$1.AsiaThimphu, name: "Asia/Thimphu", offset: i$2.UTC_PLUS_6, timezone: n$2.BhutanTime });
+({ id: t$1.AsiaTokyo, name: "Asia/Tokyo", offset: i$2.UTC_PLUS_9, timezone: n$2.JapanStandardTime });
+({ id: t$1.AsiaTomsk, name: "Asia/Tomsk", offset: i$2.UTC_PLUS_6, timezone: n$2.KrasnoyarskTime });
+({ id: t$1.AsiaUlaanbaatar, name: "Asia/Ulaanbaatar", offset: i$2.UTC_PLUS_8, timezone: n$2.UlaanbaatarStandardTime });
+({ id: t$1.AsiaUrumqi, name: "Asia/Urumqi", offset: i$2.UTC_PLUS_8, timezone: n$2.ChinaStandardTime });
+({ id: t$1.AsiaUstNera, name: "Asia/Ust-Nera", offset: i$2.UTC_PLUS_10, timezone: n$2.VladivostokTime });
+({ id: t$1.AsiaVientiane, name: "Asia/Vientiane", offset: i$2.UTC_PLUS_7, timezone: n$2.IndochinaTime });
+({ id: t$1.AsiaVladivostok, name: "Asia/Vladivostok", offset: i$2.UTC_PLUS_10, timezone: n$2.VladivostokTime });
+({ id: t$1.AsiaYakutsk, name: "Asia/Yakutsk", offset: i$2.UTC_PLUS_9, timezone: n$2.YakutskTime });
+({ id: t$1.AsiaYekaterinburg, name: "Asia/Yekaterinburg", offset: i$2.UTC_PLUS_5, timezone: n$2.YekaterinburgTime });
+({ id: t$1.AsiaYerevan, name: "Asia/Yerevan", offset: i$2.UTC_PLUS_4, timezone: n$2.ArmeniaTime });
+({ id: t$1.AtlanticAzores, name: "Atlantic/Azores", offset: i$2.UTC_MINUS_1, timezone: n$2.AzoresStandardTime });
+({ id: t$1.AtlanticBermuda, name: "Atlantic/Bermuda", offset: i$2.UTC_MINUS_4, timezone: n$2.AtlanticStandardTime });
+({ id: t$1.AtlanticCanary, name: "Atlantic/Canary", offset: i$2.UTC_MINUS_1, timezone: n$2.WesternEuropeanTime });
+({ id: t$1.AtlanticCapeVerde, name: "Atlantic/Cape_Verde", offset: i$2.UTC_0, timezone: n$2.CapeVerdeTime });
+({ id: t$1.AtlanticFaroe, name: "Atlantic/Faroe", offset: i$2.UTC_0, timezone: n$2.GreenwichMeanTime });
+({ id: t$1.AtlanticMadeira, name: "Atlantic/Madeira", offset: i$2.UTC_0, timezone: n$2.WesternEuropeanTime });
+({ id: t$1.AtlanticReykjavik, name: "Atlantic/Reykjavik", offset: i$2.UTC_0, timezone: n$2.GreenwichMeanTime });
+({ id: t$1.AtlanticSouthGeorgia, name: "Atlantic/South_Georgia", offset: i$2.UTC_0, timezone: n$2.CoordinatedUniversalTime });
+({ id: t$1.AtlanticStHelena, name: "Atlantic/St_Helena", offset: i$2.UTC_0, timezone: n$2.GreenwichMeanTime });
+({ id: t$1.AtlanticStanley, name: "Atlantic/Stanley", offset: i$2.UTC_0, timezone: n$2.FalklandIslandsTime });
+({ id: t$1.AustraliaAdelaide, name: "Australia/Adelaide", offset: i$2.UTC_PLUS_9_30, timezone: n$2.AustralianCentralStandardTime });
+({ id: t$1.AustraliaBrisbane, name: "Australia/Brisbane", offset: i$2.UTC_PLUS_10, timezone: n$2.AustralianEasternStandardTime });
+({ id: t$1.AustraliaBrokenHill, name: "Australia/Broken_Hill", offset: i$2.UTC_PLUS_9_30, timezone: n$2.AustralianCentralStandardTime });
+({ id: t$1.AustraliaCanberra, name: "Australia/Canberra", offset: i$2.UTC_PLUS_10, timezone: n$2.AustralianEasternStandardTime });
+({ id: t$1.AustraliaCurrie, name: "Australia/Currie", offset: i$2.UTC_PLUS_10, timezone: n$2.AustralianEasternStandardTime });
+({ id: t$1.AustraliaDarwin, name: "Australia/Darwin", offset: i$2.UTC_PLUS_9_30, timezone: n$2.AustralianCentralStandardTime });
+({ id: t$1.AustraliaEucla, name: "Australia/Eucla", offset: i$2.UTC_PLUS_8_45, timezone: n$2.AustralianCentralWesternStandardTime });
+({ id: t$1.AustraliaHobart, name: "Australia/Hobart", offset: i$2.UTC_PLUS_10, timezone: n$2.AustralianEasternStandardTime });
+({ id: t$1.AustraliaLindeman, name: "Australia/Lindeman", offset: i$2.UTC_PLUS_10, timezone: n$2.AustralianEasternStandardTime });
+({ id: t$1.AustraliaLordHowe, name: "Australia/Lord_Howe", offset: i$2.UTC_PLUS_10_30, timezone: n$2.LordHoweStandardTime });
+({ id: t$1.AustraliaMelbourne, name: "Australia/Melbourne", offset: i$2.UTC_PLUS_10, timezone: n$2.AustralianEasternStandardTime });
+({ id: t$1.AustraliaPerth, name: "Australia/Perth", offset: i$2.UTC_PLUS_8, timezone: n$2.AustralianWesternStandardTime });
+({ id: t$1.AustraliaSydney, name: "Australia/Sydney", offset: i$2.UTC_PLUS_10, timezone: n$2.AustralianEasternStandardTime });
+({ id: t$1.EuropeAmsterdam, name: "Europe/Amsterdam", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeAndorra, name: "Europe/Andorra", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeAthens, name: "Europe/Athens", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeBelgrade, name: "Europe/Belgrade", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeBerlin, name: "Europe/Berlin", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeBratislava, name: "Europe/Bratislava", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeBrussels, name: "Europe/Brussels", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeBucharest, name: "Europe/Bucharest", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeBudapest, name: "Europe/Budapest", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeBusingen, name: "Europe/Busingen", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeChisinau, name: "Europe/Chisinau", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeCopenhagen, name: "Europe/Copenhagen", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeDublin, name: "Europe/Dublin", offset: i$2.UTC_0, timezone: n$2.GreenwichMeanTime });
+({ id: t$1.EuropeGibraltar, name: "Europe/Gibraltar", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeGuernsey, name: "Europe/Guernsey", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeHelsinki, name: "Europe/Helsinki", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeIsleOfMan, name: "Europe/Isle_of_Man", offset: i$2.UTC_0, timezone: n$2.GreenwichMeanTime });
+({ id: t$1.EuropeIstanbul, name: "Europe/Istanbul", offset: i$2.UTC_PLUS_3, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeJersey, name: "Europe/Jersey", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeKaliningrad, name: "Europe/Kaliningrad", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeKiev, name: "Europe/Kiev", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeLisbon, name: "Europe/Lisbon", offset: i$2.UTC_0, timezone: n$2.GreenwichMeanTime });
+({ id: t$1.EuropeLjubljana, name: "Europe/Ljubljana", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeLondon, name: "Europe/London", offset: i$2.UTC_0, timezone: n$2.GreenwichMeanTime });
+({ id: t$1.EuropeLuxembourg, name: "Europe/Luxembourg", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeMadrid, name: "Europe/Madrid", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeMalta, name: "Europe/Malta", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeMariehamn, name: "Europe/Mariehamn", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeMinsk, name: "Europe/Minsk", offset: i$2.UTC_PLUS_3, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeMonaco, name: "Europe/Monaco", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeMoscow, name: "Europe/Moscow", offset: i$2.UTC_PLUS_3, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeOslo, name: "Europe/Oslo", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeParis, name: "Europe/Paris", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropePodgorica, name: "Europe/Podgorica", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropePrague, name: "Europe/Prague", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeRiga, name: "Europe/Riga", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeRome, name: "Europe/Rome", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeSamara, name: "Europe/Samara", offset: i$2.UTC_PLUS_4, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeSanMarino, name: "Europe/San_Marino", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeSarajevo, name: "Europe/Sarajevo", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeSimferopol, name: "Europe/Simferopol", offset: i$2.UTC_PLUS_3, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeSkopje, name: "Europe/Skopje", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeSofia, name: "Europe/Sofia", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeStockholm, name: "Europe/Stockholm", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeTallinn, name: "Europe/Tallinn", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeTirane, name: "Europe/Tirane", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeUzhgorod, name: "Europe/Uzhgorod", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeVaduz, name: "Europe/Vaduz", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeVatican, name: "Europe/Vatican", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeVienna, name: "Europe/Vienna", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeVilnius, name: "Europe/Vilnius", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeVolgograd, name: "Europe/Volgograd", offset: i$2.UTC_PLUS_4, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeWarsaw, name: "Europe/Warsaw", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeZagreb, name: "Europe/Zagreb", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.EuropeZaporozhye, name: "Europe/Zaporozhye", offset: i$2.UTC_PLUS_2, timezone: n$2.EasternEuropeanTime });
+({ id: t$1.EuropeZurich, name: "Europe/Zurich", offset: i$2.UTC_PLUS_1, timezone: n$2.CentralEuropeanTime });
+({ id: t$1.IndianAntananarivo, name: "Indian/Antananarivo", offset: i$2.UTC_PLUS_3, timezone: n$2.EastAfricaTime });
+({ id: t$1.IndianChagos, name: "Indian/Chagos", offset: i$2.UTC_PLUS_6, timezone: n$2.IndianOceanTime });
+({ id: t$1.IndianChristmas, name: "Indian/Christmas", offset: i$2.UTC_PLUS_7, timezone: n$2.ChristmasIslandTime });
+({ id: t$1.IndianCocos, name: "Indian/Cocos", offset: i$2.UTC_PLUS_6, timezone: n$2.CocosIslandsTime });
+({ id: t$1.IndianComoro, name: "Indian/Comoro", offset: i$2.UTC_PLUS_3, timezone: n$2.EastAfricaTime });
+({ id: t$1.IndianKerguelen, name: "Indian/Kerguelen", offset: i$2.UTC_PLUS_5, timezone: n$2.FrenchSouthernAndAntarcticTime });
+({ id: t$1.IndianMahe, name: "Indian/Mahe", offset: i$2.UTC_PLUS_4, timezone: n$2.SeychellesTime });
+({ id: t$1.IndianMaldives, name: "Indian/Maldives", offset: i$2.UTC_PLUS_5, timezone: n$2.MaldivesTime });
+({ id: t$1.IndianMauritius, name: "Indian/Mauritius", offset: i$2.UTC_PLUS_4, timezone: n$2.MauritiusTime });
+({ id: t$1.IndianMayotte, name: "Indian/Mayotte", offset: i$2.UTC_PLUS_3, timezone: n$2.EastAfricaTime });
+({ id: t$1.IndianReunion, name: "Indian/Reunion", offset: i$2.UTC_PLUS_4, timezone: n$2.ReunionTime });
+({ id: t$1.PacificApia, name: "Pacific/Apia", offset: i$2.UTC_PLUS_13, timezone: n$2.SamoaStandardTime });
+({ id: t$1.PacificAuckland, name: "Pacific/Auckland", offset: i$2.UTC_PLUS_13, timezone: n$2.NewZealandStandardTime });
+({ id: t$1.PacificChatham, name: "Pacific/Chatham", offset: i$2.UTC_PLUS_13, timezone: n$2.ChathamStandardTime });
+({ id: t$1.PacificEaster, name: "Pacific/Easter", offset: i$2.UTC_PLUS_6, timezone: n$2.EasterIslandStandardTime });
+({ id: t$1.PacificEfate, name: "Pacific/Efate", offset: i$2.UTC_PLUS_11, timezone: n$2.VanuatuTime });
+({ id: t$1.PacificEnderbury, name: "Pacific/Enderbury", offset: i$2.UTC_PLUS_13, timezone: n$2.TongaTime });
+({ id: t$1.PacificFakaofo, name: "Pacific/Fakaofo", offset: i$2.UTC_PLUS_13, timezone: n$2.TongaTime });
+({ id: t$1.PacificFiji, name: "Pacific/Fiji", offset: i$2.UTC_PLUS_12, timezone: n$2.FijiTime });
+({ id: t$1.PacificFunafuti, name: "Pacific/Funafuti", offset: i$2.UTC_PLUS_12, timezone: n$2.TuvaluTime });
+({ id: t$1.PacificGalapagos, name: "Pacific/Galapagos", offset: i$2.UTC_PLUS_6, timezone: n$2.GalapagosTime });
+({ id: t$1.PacificGambier, name: "Pacific/Gambier", offset: i$2.UTC_PLUS_9, timezone: n$2.GambierIslandTime });
+({ id: t$1.PacificGuadalcanal, name: "Pacific/Guadalcanal", offset: i$2.UTC_PLUS_11, timezone: n$2.SolomonIslandsTime });
+({ id: t$1.PacificGuam, name: "Pacific/Guam", offset: i$2.UTC_PLUS_10, timezone: n$2.ChamorroStandardTime });
+({ id: t$1.PacificHonolulu, name: "Pacific/Honolulu", offset: i$2.UTC_PLUS_10, timezone: n$2.HawaiiAleutianStandardTime });
+({ id: t$1.PacificJohnston, name: "Pacific/Johnston", offset: i$2.UTC_PLUS_10, timezone: n$2.HawaiiAleutianStandardTime });
+({ id: t$1.PacificKiritimati, name: "Pacific/Kiritimati", offset: i$2.UTC_PLUS_14, timezone: n$2.LineIslandsTime });
+({ id: t$1.PacificKosrae, name: "Pacific/Kosrae", offset: i$2.UTC_PLUS_11, timezone: n$2.KosraeTime });
+({ id: t$1.PacificKwajalein, name: "Pacific/Kwajalein", offset: i$2.UTC_PLUS_12, timezone: n$2.MarshallIslandsTime });
+({ id: t$1.PacificMajuro, name: "Pacific/Majuro", offset: i$2.UTC_PLUS_12, timezone: n$2.MarshallIslandsTime });
+({ id: t$1.PacificMarquesas, name: "Pacific/Marquesas", offset: i$2.UTC_PLUS_9, timezone: n$2.MarquesasIslandsTime });
+({ id: t$1.PacificMidway, name: "Pacific/Midway", offset: i$2.UTC_PLUS_11, timezone: n$2.SamoaStandardTime });
+({ id: t$1.PacificNauru, name: "Pacific/Nauru", offset: i$2.UTC_PLUS_12, timezone: n$2.NauruTime });
+({ id: t$1.PacificNiue, name: "Pacific/Niue", offset: i$2.UTC_PLUS_11, timezone: n$2.NiueTime });
+({ id: t$1.PacificNorfolk, name: "Pacific/Norfolk", offset: i$2.UTC_PLUS_11, timezone: n$2.NorfolkIslandTime });
+({ id: t$1.PacificNoumea, name: "Pacific/Noumea", offset: i$2.UTC_PLUS_11, timezone: n$2.NewCaledoniaTime });
+({ id: t$1.PacificPagoPago, name: "Pacific/Pago_Pago", offset: i$2.UTC_PLUS_11, timezone: n$2.SamoaStandardTime });
+({ id: t$1.PacificPalau, name: "Pacific/Palau", offset: i$2.UTC_PLUS_9, timezone: n$2.PalauTime });
+({ id: t$1.PacificPitcairn, name: "Pacific/Pitcairn", offset: i$2.UTC_PLUS_8, timezone: n$2.PitcairnTime });
+({ id: t$1.PacificPonape, name: "Pacific/Ponape", offset: i$2.UTC_PLUS_11, timezone: n$2.PohnpeiStandardTime });
+({ id: t$1.PacificPortMoresby, name: "Pacific/Port_Moresby", offset: i$2.UTC_PLUS_10, timezone: n$2.PapuaNewGuineaTime });
+({ id: t$1.PacificRarotonga, name: "Pacific/Rarotonga", offset: i$2.UTC_PLUS_10, timezone: n$2.CookIslandTime });
+({ id: t$1.PacificSaipan, name: "Pacific/Saipan", offset: i$2.UTC_PLUS_10, timezone: n$2.ChamorroStandardTime });
+({ id: t$1.PacificTahiti, name: "Pacific/Tahiti", offset: i$2.UTC_PLUS_10, timezone: n$2.TahitiTime });
+({ id: t$1.PacificTarawa, name: "Pacific/Tarawa", offset: i$2.UTC_PLUS_12, timezone: n$2.GilbertIslandTime });
+({ id: t$1.PacificTongatapu, name: "Pacific/Tongatapu", offset: i$2.UTC_PLUS_13, timezone: n$2.TongaTime });
+({ id: t$1.PacificChuuk, name: "Pacific/Chuuk", offset: i$2.UTC_PLUS_10, timezone: n$2.ChuukTime });
+({ id: t$1.PacificPohnpei, name: "Pacific/Pohnpei", offset: i$2.UTC_PLUS_11, timezone: n$2.PohnpeiStandardTime });
+({ id: t$1.PacificYap, name: "Pacific/Yap", offset: i$2.UTC_PLUS_10, timezone: n$2.ChuukTime });
 var Vi = (a2 = 21) => {
   let u2 = "", A2 = crypto.getRandomValues(new Uint8Array(a2));
   for (; a2--; ) {
@@ -18614,7 +20473,7 @@ function Yi(a2, u2 = {}) {
   let { maxDepth: A2 = Number.POSITIVE_INFINITY } = u2;
   return typeof a2 == "object" && a2 !== null ? Ji({ from: a2, seen: [], forceEnumerable: true, maxDepth: A2, depth: 0 }) : typeof a2 == "function" ? `[Function: ${a2.name || "anonymous"}]` : a2;
 }
-var g$1 = ((m2) => (m2[m2.Warning = 999] = "Warning", m2[m2.Exception = 1e3] = "Exception", m2[m2.UnmanagedException = 1001] = "UnmanagedException", m2[m2.CaughtException = 1002] = "CaughtException", m2[m2.UncaughtException = 1003] = "UncaughtException", m2[m2.UnhandledPromiseRejectionException = 1004] = "UnhandledPromiseRejectionException", m2[m2.AuthenticationException = 2e3] = "AuthenticationException", m2[m2.AuthenticationExpiredAccessTokenException = 2001] = "AuthenticationExpiredAccessTokenException", m2[m2.AuthenticationInvalidAccessTokenException = 2002] = "AuthenticationInvalidAccessTokenException", m2[m2.AuthenticationMissingAccessTokenException = 2003] = "AuthenticationMissingAccessTokenException", m2[m2.AuthenticationExpiredRefreshTokenException = 2004] = "AuthenticationExpiredRefreshTokenException", m2[m2.AuthenticationInvalidRefreshTokenException = 2005] = "AuthenticationInvalidRefreshTokenException", m2[m2.AuthenticationMissingRefreshTokenException = 2006] = "AuthenticationMissingRefreshTokenException", m2[m2.AuthenticationMissingDeviceKeyException = 2007] = "AuthenticationMissingDeviceKeyException", m2[m2.AuthenticationUnAuthorizedAccessException = 2008] = "AuthenticationUnAuthorizedAccessException", m2[m2.AuthenticationCodeMismatchException = 2009] = "AuthenticationCodeMismatchException", m2[m2.AuthenticationExpiredCodeException = 2010] = "AuthenticationExpiredCodeException", m2[m2.AuthenticationLoginException = 2011] = "AuthenticationLoginException", m2[m2.AuthenticationLoginInvalidCredentialsException = 2012] = "AuthenticationLoginInvalidCredentialsException", m2[m2.AuthenticationLoginTooManyFailedAttemptsException = 2013] = "AuthenticationLoginTooManyFailedAttemptsException", m2[m2.AuthenticationLimitExceededException = 2014] = "AuthenticationLimitExceededException", m2[m2.AuthenticationUnauthorizedAccessException = 2015] = "AuthenticationUnauthorizedAccessException", m2[m2.AuthenticationTooManyRequestsException = 2016] = "AuthenticationTooManyRequestsException", m2[m2.AuthenticationUserNotFoundException = 2017] = "AuthenticationUserNotFoundException", m2[m2.AuthenticationSignupException = 2018] = "AuthenticationSignupException", m2[m2.AuthenticationUsernameAvailabilityCheckException = 2019] = "AuthenticationUsernameAvailabilityCheckException", m2[m2.AuthenticationUsernameExistsException = 2020] = "AuthenticationUsernameExistsException", m2[m2.AuthenticationAliasExistException = 2021] = "AuthenticationAliasExistException", m2[m2.AuthenticationCodeDeliveryFailureException = 2022] = "AuthenticationCodeDeliveryFailureException", m2[m2.AuthenticationMFAMethodNotFoundException = 2023] = "AuthenticationMFAMethodNotFoundException", m2[m2.AuthenticationNotAuthorizedException = 2024] = "AuthenticationNotAuthorizedException", m2[m2.AuthenticationPasswordResetRequiredException = 2025] = "AuthenticationPasswordResetRequiredException", m2[m2.AuthenticationUserNotConfirmedException = 2026] = "AuthenticationUserNotConfirmedException", m2[m2.DatabaseException = 3e3] = "DatabaseException", m2[m2.SequelizeNotInitializedException = 3001] = "SequelizeNotInitializedException", m2[m2.ProcessException = 4e3] = "ProcessException", m2[m2.ProcessWarningException = 4001] = "ProcessWarningException", m2[m2.KillProcessException = 4002] = "KillProcessException", m2[m2.FatalException = 4003] = "FatalException", m2[m2.ProcessSigTermException = 4004] = "ProcessSigTermException", m2[m2.ProcessSigIntException = 4005] = "ProcessSigIntException", m2[m2.MissingEnvironmentVariable = 4006] = "MissingEnvironmentVariable", m2[m2.NetworkException = 5e3] = "NetworkException", m2[m2.HttpException = 5001] = "HttpException", m2[m2.HttpRequestException = 5002] = "HttpRequestException", m2[m2.HttpRequestResourceNotFoundException = 5003] = "HttpRequestResourceNotFoundException", m2[m2.HttpResponseException = 5004] = "HttpResponseException", m2[m2.ServiceProviderException = 6e3] = "ServiceProviderException", m2[m2.AWSException = 6001] = "AWSException", m2[m2.AWSMissingAccessKeyException = 6002] = "AWSMissingAccessKeyException", m2[m2.AWSMissingSecretKeyException = 6003] = "AWSMissingSecretKeyException", m2[m2.CognitoException = 6004] = "CognitoException", m2[m2.CognitoInternalErrorException = 6005] = "CognitoInternalErrorException", m2[m2.CognitoInvalidEmailRoleAccessPolicyException = 6006] = "CognitoInvalidEmailRoleAccessPolicyException", m2[m2.CognitoInvalidLambdaResponseException = 6007] = "CognitoInvalidLambdaResponseException", m2[m2.CognitoUserLambdaValidationException = 6008] = "CognitoUserLambdaValidationException", m2[m2.CognitoInvalidParameterException = 6009] = "CognitoInvalidParameterException", m2[m2.CognitoInvalidSmsRoleAccessPolicyException = 6010] = "CognitoInvalidSmsRoleAccessPolicyException", m2[m2.CognitoInvalidSmsRoleTrustRelationshipException = 6011] = "CognitoInvalidSmsRoleTrustRelationshipException", m2[m2.CognitoInvalidUserPoolConfigurationException = 6012] = "CognitoInvalidUserPoolConfigurationException", m2[m2.CognitoResourceNotFoundException = 6013] = "CognitoResourceNotFoundException", m2[m2.CognitoMissingUserPoolClientIdException = 6014] = "CognitoMissingUserPoolClientIdException", m2[m2.CognitoMissingUserPoolIdException = 6015] = "CognitoMissingUserPoolIdException", m2[m2.CognitoUnexpectedLambdaException = 6016] = "CognitoUnexpectedLambdaException", m2[m2.StripeException = 6017] = "StripeException", m2[m2.StripeMissingSecretKeyException = 6018] = "StripeMissingSecretKeyException", m2[m2.StripeSubscriptionCreationFailedException = 6019] = "StripeSubscriptionCreationFailedException", m2[m2.StripePaymentMethodRequiredException = 6020] = "StripePaymentMethodRequiredException", m2[m2.UserException = 7e3] = "UserException", m2[m2.NullUserException = 7001] = "NullUserException", m2[m2.UserStateConflictException = 7002] = "UserStateConflictException", m2[m2.NullAccountException = 7003] = "NullAccountException", m2[m2.ValidationException = 8e3] = "ValidationException", m2[m2.InvalidTypeException = 8001] = "InvalidTypeException", m2[m2.MissingArgumentException = 8002] = "MissingArgumentException", m2[m2.MissingPropertyException = 8003] = "MissingPropertyException", m2[m2.InvalidArgumentException = 8004] = "InvalidArgumentException", m2[m2.InvalidPropertyException = 8005] = "InvalidPropertyException", m2[m2.MissingRequestBodyPropertyException = 8006] = "MissingRequestBodyPropertyException", m2[m2.MissingRequestUrlParameterException = 8007] = "MissingRequestUrlParameterException", m2[m2.MissingCookieException = 8008] = "MissingCookieException", m2))(g$1 || {});
+var g = ((m2) => (m2[m2.Warning = 999] = "Warning", m2[m2.Exception = 1e3] = "Exception", m2[m2.UnmanagedException = 1001] = "UnmanagedException", m2[m2.CaughtException = 1002] = "CaughtException", m2[m2.UncaughtException = 1003] = "UncaughtException", m2[m2.UnhandledPromiseRejectionException = 1004] = "UnhandledPromiseRejectionException", m2[m2.AuthenticationException = 2e3] = "AuthenticationException", m2[m2.AuthenticationExpiredAccessTokenException = 2001] = "AuthenticationExpiredAccessTokenException", m2[m2.AuthenticationInvalidAccessTokenException = 2002] = "AuthenticationInvalidAccessTokenException", m2[m2.AuthenticationMissingAccessTokenException = 2003] = "AuthenticationMissingAccessTokenException", m2[m2.AuthenticationExpiredRefreshTokenException = 2004] = "AuthenticationExpiredRefreshTokenException", m2[m2.AuthenticationInvalidRefreshTokenException = 2005] = "AuthenticationInvalidRefreshTokenException", m2[m2.AuthenticationMissingRefreshTokenException = 2006] = "AuthenticationMissingRefreshTokenException", m2[m2.AuthenticationMissingDeviceKeyException = 2007] = "AuthenticationMissingDeviceKeyException", m2[m2.AuthenticationUnAuthorizedAccessException = 2008] = "AuthenticationUnAuthorizedAccessException", m2[m2.AuthenticationCodeMismatchException = 2009] = "AuthenticationCodeMismatchException", m2[m2.AuthenticationExpiredCodeException = 2010] = "AuthenticationExpiredCodeException", m2[m2.AuthenticationLoginException = 2011] = "AuthenticationLoginException", m2[m2.AuthenticationLoginInvalidCredentialsException = 2012] = "AuthenticationLoginInvalidCredentialsException", m2[m2.AuthenticationLoginTooManyFailedAttemptsException = 2013] = "AuthenticationLoginTooManyFailedAttemptsException", m2[m2.AuthenticationLimitExceededException = 2014] = "AuthenticationLimitExceededException", m2[m2.AuthenticationUnauthorizedAccessException = 2015] = "AuthenticationUnauthorizedAccessException", m2[m2.AuthenticationTooManyRequestsException = 2016] = "AuthenticationTooManyRequestsException", m2[m2.AuthenticationUserNotFoundException = 2017] = "AuthenticationUserNotFoundException", m2[m2.AuthenticationSignupException = 2018] = "AuthenticationSignupException", m2[m2.AuthenticationUsernameAvailabilityCheckException = 2019] = "AuthenticationUsernameAvailabilityCheckException", m2[m2.AuthenticationUsernameExistsException = 2020] = "AuthenticationUsernameExistsException", m2[m2.AuthenticationAliasExistException = 2021] = "AuthenticationAliasExistException", m2[m2.AuthenticationCodeDeliveryFailureException = 2022] = "AuthenticationCodeDeliveryFailureException", m2[m2.AuthenticationMFAMethodNotFoundException = 2023] = "AuthenticationMFAMethodNotFoundException", m2[m2.AuthenticationNotAuthorizedException = 2024] = "AuthenticationNotAuthorizedException", m2[m2.AuthenticationPasswordResetRequiredException = 2025] = "AuthenticationPasswordResetRequiredException", m2[m2.AuthenticationUserNotConfirmedException = 2026] = "AuthenticationUserNotConfirmedException", m2[m2.DatabaseException = 3e3] = "DatabaseException", m2[m2.SequelizeNotInitializedException = 3001] = "SequelizeNotInitializedException", m2[m2.ProcessException = 4e3] = "ProcessException", m2[m2.ProcessWarningException = 4001] = "ProcessWarningException", m2[m2.KillProcessException = 4002] = "KillProcessException", m2[m2.FatalException = 4003] = "FatalException", m2[m2.ProcessSigTermException = 4004] = "ProcessSigTermException", m2[m2.ProcessSigIntException = 4005] = "ProcessSigIntException", m2[m2.MissingEnvironmentVariable = 4006] = "MissingEnvironmentVariable", m2[m2.NetworkException = 5e3] = "NetworkException", m2[m2.HttpException = 5001] = "HttpException", m2[m2.HttpRequestException = 5002] = "HttpRequestException", m2[m2.HttpRequestResourceNotFoundException = 5003] = "HttpRequestResourceNotFoundException", m2[m2.HttpResponseException = 5004] = "HttpResponseException", m2[m2.ServiceProviderException = 6e3] = "ServiceProviderException", m2[m2.AWSException = 6001] = "AWSException", m2[m2.AWSMissingAccessKeyException = 6002] = "AWSMissingAccessKeyException", m2[m2.AWSMissingSecretKeyException = 6003] = "AWSMissingSecretKeyException", m2[m2.CognitoException = 6004] = "CognitoException", m2[m2.CognitoInternalErrorException = 6005] = "CognitoInternalErrorException", m2[m2.CognitoInvalidEmailRoleAccessPolicyException = 6006] = "CognitoInvalidEmailRoleAccessPolicyException", m2[m2.CognitoInvalidLambdaResponseException = 6007] = "CognitoInvalidLambdaResponseException", m2[m2.CognitoUserLambdaValidationException = 6008] = "CognitoUserLambdaValidationException", m2[m2.CognitoInvalidParameterException = 6009] = "CognitoInvalidParameterException", m2[m2.CognitoInvalidSmsRoleAccessPolicyException = 6010] = "CognitoInvalidSmsRoleAccessPolicyException", m2[m2.CognitoInvalidSmsRoleTrustRelationshipException = 6011] = "CognitoInvalidSmsRoleTrustRelationshipException", m2[m2.CognitoInvalidUserPoolConfigurationException = 6012] = "CognitoInvalidUserPoolConfigurationException", m2[m2.CognitoResourceNotFoundException = 6013] = "CognitoResourceNotFoundException", m2[m2.CognitoMissingUserPoolClientIdException = 6014] = "CognitoMissingUserPoolClientIdException", m2[m2.CognitoMissingUserPoolIdException = 6015] = "CognitoMissingUserPoolIdException", m2[m2.CognitoUnexpectedLambdaException = 6016] = "CognitoUnexpectedLambdaException", m2[m2.StripeException = 6017] = "StripeException", m2[m2.StripeMissingSecretKeyException = 6018] = "StripeMissingSecretKeyException", m2[m2.StripeSubscriptionCreationFailedException = 6019] = "StripeSubscriptionCreationFailedException", m2[m2.StripePaymentMethodRequiredException = 6020] = "StripePaymentMethodRequiredException", m2[m2.UserException = 7e3] = "UserException", m2[m2.NullUserException = 7001] = "NullUserException", m2[m2.UserStateConflictException = 7002] = "UserStateConflictException", m2[m2.NullAccountException = 7003] = "NullAccountException", m2[m2.ValidationException = 8e3] = "ValidationException", m2[m2.InvalidTypeException = 8001] = "InvalidTypeException", m2[m2.MissingArgumentException = 8002] = "MissingArgumentException", m2[m2.MissingPropertyException = 8003] = "MissingPropertyException", m2[m2.InvalidArgumentException = 8004] = "InvalidArgumentException", m2[m2.InvalidPropertyException = 8005] = "InvalidPropertyException", m2[m2.MissingRequestBodyPropertyException = 8006] = "MissingRequestBodyPropertyException", m2[m2.MissingRequestUrlParameterException = 8007] = "MissingRequestUrlParameterException", m2[m2.MissingCookieException = 8008] = "MissingCookieException", m2))(g || {});
 var d = class extends Error {
   constructor(u2, A2) {
     super(u2);
@@ -18660,7 +20519,7 @@ var z$1 = class extends d {
     s$2(this, "remediation", { response: { code: 500 }, retry: { limit: 3 } });
   }
 };
-var p$3 = class extends d {
+var p$2 = class extends d {
   constructor() {
     super(...arguments);
     s$2(this, "code", 2e3);
@@ -18670,7 +20529,7 @@ var p$3 = class extends d {
     s$2(this, "remediation", { response: { code: 401 }, retry: { limit: 3, strategy: "circuit_breaker" } });
   }
 };
-var aa$1 = class extends p$3 {
+var aa$1 = class extends p$2 {
   constructor() {
     super(...arguments);
     s$2(this, "code", 2011);
@@ -18680,7 +20539,7 @@ var aa$1 = class extends p$3 {
     s$2(this, "remediation", { response: { code: 500 }, retry: true });
   }
 };
-var G$1 = class extends p$3 {
+var G$1 = class extends p$2 {
   constructor() {
     super(...arguments);
     s$2(this, "code", 2019);
@@ -18726,8 +20585,8 @@ var r$1 = class {
   }
   constructor(o2) {
   }
-}, p$2 = r$1;
-var e$1 = p$2;
+}, p$1 = r$1;
+var e$1 = p$1;
 const logger$2 = new e$1();
 const exceptionLogger = (store) => (next) => (action) => {
   try {
@@ -18738,25 +20597,6 @@ const exceptionLogger = (store) => (next) => (action) => {
     throw err;
   }
 };
-var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
-function getAugmentedNamespace(n2) {
-  if (n2.__esModule)
-    return n2;
-  var a2 = Object.defineProperty({}, "__esModule", { value: true });
-  Object.keys(n2).forEach(function(k2) {
-    var d2 = Object.getOwnPropertyDescriptor(n2, k2);
-    Object.defineProperty(a2, k2, d2.get ? d2 : {
-      enumerable: true,
-      get: function() {
-        return n2[k2];
-      }
-    });
-  });
-  return a2;
-}
-function commonjsRequire(path) {
-  throw new Error('Could not dynamically require "' + path + '". Please configure the dynamicRequireTargets or/and ignoreDynamicRequires option of @rollup/plugin-commonjs appropriately for this require call to work.');
-}
 var reduxLogger = { exports: {} };
 (function(module, exports) {
   !function(e2, t2) {
@@ -18799,8 +20639,8 @@ var reduxLogger = { exports: {} };
             if (c3.prefilter && c3.prefilter(g3, d3))
               return;
             if (c3.normalize) {
-              var h2 = c3.normalize(g3, d3, e3, t3);
-              h2 && (e3 = h2[0], t3 = h2[1]);
+              var h3 = c3.normalize(g3, d3, e3, t3);
+              h3 && (e3 = h3[0], t3 = h3[1]);
             }
           }
         }
@@ -18949,7 +20789,7 @@ var reduxLogger = { exports: {} };
         }
       }
     }
-    function h(e3, t3, r3) {
+    function h2(e3, t3, r3) {
       if (e3 && t3) {
         var n3 = function(n4) {
           r3 && !r3(e3, t3, n4) || d2(e3, t3, n4);
@@ -19012,7 +20852,7 @@ var reduxLogger = { exports: {} };
     function x2(e3, t3) {
       var r3 = t3.logger, n3 = t3.actionTransformer, o3 = t3.titleFormatter, i2 = o3 === void 0 ? w2(t3) : o3, a3 = t3.collapsed, f3 = t3.colors, u3 = t3.level, l3 = t3.diff, c3 = typeof t3.titleFormatter == "undefined";
       e3.forEach(function(o4, s3) {
-        var d3 = o4.started, p3 = o4.startedTime, g3 = o4.action, h2 = o4.prevState, y3 = o4.error, v3 = o4.took, w3 = o4.nextState, x3 = e3[s3 + 1];
+        var d3 = o4.started, p3 = o4.startedTime, g3 = o4.action, h3 = o4.prevState, y3 = o4.error, v3 = o4.took, w3 = o4.nextState, x3 = e3[s3 + 1];
         x3 && (w3 = x3.prevState, v3 = x3.started - d3);
         var S3 = n3(g3), k3 = typeof a3 == "function" ? a3(function() {
           return w3;
@@ -19024,13 +20864,13 @@ var reduxLogger = { exports: {} };
         } catch (e4) {
           r3.log(O3);
         }
-        var N3 = m2(u3, S3, [h2], "prevState"), P3 = m2(u3, S3, [S3], "action"), C3 = m2(u3, S3, [y3, h2], "error"), F3 = m2(u3, S3, [w3], "nextState");
+        var N3 = m2(u3, S3, [h3], "prevState"), P3 = m2(u3, S3, [S3], "action"), C3 = m2(u3, S3, [y3, h3], "error"), F3 = m2(u3, S3, [w3], "nextState");
         if (N3)
           if (f3.prevState) {
-            var L3 = "color: " + f3.prevState(h2) + "; font-weight: bold";
-            r3[N3]("%c prev state", L3, h2);
+            var L3 = "color: " + f3.prevState(h3) + "; font-weight: bold";
+            r3[N3]("%c prev state", L3, h3);
           } else
-            r3[N3]("prev state", h2);
+            r3[N3]("prev state", h3);
         if (P3)
           if (f3.action) {
             var T3 = "color: " + f3.action(S3) + "; font-weight: bold";
@@ -19039,7 +20879,7 @@ var reduxLogger = { exports: {} };
             r3[P3]("action    ", S3);
         if (y3 && C3)
           if (f3.error) {
-            var M2 = "color: " + f3.error(y3, h2) + "; font-weight: bold;";
+            var M2 = "color: " + f3.error(y3, h3) + "; font-weight: bold;";
             r3[C3]("%c error     ", M2, y3);
           } else
             r3[C3]("error     ", y3);
@@ -19049,7 +20889,7 @@ var reduxLogger = { exports: {} };
             r3[F3]("%c next state", _2, w3);
           } else
             r3[F3]("next state", w3);
-        l3 && b2(h2, w3, r3, k3);
+        l3 && b2(h3, w3, r3, k3);
         try {
           r3.groupEnd();
         } catch (e4) {
@@ -19122,7 +20962,7 @@ var reduxLogger = { exports: {} };
     }, C2 = [];
     k2 = (typeof commonjsGlobal == "undefined" ? "undefined" : N2(commonjsGlobal)) === "object" && commonjsGlobal ? commonjsGlobal : typeof window != "undefined" ? window : {}, j2 = k2.DeepDiff, j2 && C2.push(function() {
       typeof j2 != "undefined" && k2.DeepDiff === c2 && (k2.DeepDiff = j2, j2 = void 0);
-    }), t2(n2, r2), t2(o2, r2), t2(i, r2), t2(a2, r2), Object.defineProperties(c2, { diff: { value: c2, enumerable: true }, observableDiff: { value: l2, enumerable: true }, applyDiff: { value: h, enumerable: true }, applyChange: { value: d2, enumerable: true }, revertChange: { value: g2, enumerable: true }, isConflict: { value: function() {
+    }), t2(n2, r2), t2(o2, r2), t2(i, r2), t2(a2, r2), Object.defineProperties(c2, { diff: { value: c2, enumerable: true }, observableDiff: { value: l2, enumerable: true }, applyDiff: { value: h2, enumerable: true }, applyChange: { value: d2, enumerable: true }, revertChange: { value: g2, enumerable: true }, isConflict: { value: function() {
       return typeof j2 != "undefined";
     }, enumerable: true }, noConflict: { value: function() {
       return C2 && (C2.forEach(function(e3) {
@@ -19371,152 +21211,152 @@ class ZoneIsAbstractError extends LuxonError {
     super("Zone is an abstract class");
   }
 }
-const n$2 = "numeric", s$1 = "short", l = "long";
+const n$1 = "numeric", s$1 = "short", l = "long";
 const DATE_SHORT = {
-  year: n$2,
-  month: n$2,
-  day: n$2
+  year: n$1,
+  month: n$1,
+  day: n$1
 };
 const DATE_MED = {
-  year: n$2,
+  year: n$1,
   month: s$1,
-  day: n$2
+  day: n$1
 };
 const DATE_MED_WITH_WEEKDAY = {
-  year: n$2,
+  year: n$1,
   month: s$1,
-  day: n$2,
+  day: n$1,
   weekday: s$1
 };
 const DATE_FULL = {
-  year: n$2,
+  year: n$1,
   month: l,
-  day: n$2
+  day: n$1
 };
 const DATE_HUGE = {
-  year: n$2,
+  year: n$1,
   month: l,
-  day: n$2,
+  day: n$1,
   weekday: l
 };
 const TIME_SIMPLE = {
-  hour: n$2,
-  minute: n$2
+  hour: n$1,
+  minute: n$1
 };
 const TIME_WITH_SECONDS = {
-  hour: n$2,
-  minute: n$2,
-  second: n$2
+  hour: n$1,
+  minute: n$1,
+  second: n$1
 };
 const TIME_WITH_SHORT_OFFSET = {
-  hour: n$2,
-  minute: n$2,
-  second: n$2,
+  hour: n$1,
+  minute: n$1,
+  second: n$1,
   timeZoneName: s$1
 };
 const TIME_WITH_LONG_OFFSET = {
-  hour: n$2,
-  minute: n$2,
-  second: n$2,
+  hour: n$1,
+  minute: n$1,
+  second: n$1,
   timeZoneName: l
 };
 const TIME_24_SIMPLE = {
-  hour: n$2,
-  minute: n$2,
+  hour: n$1,
+  minute: n$1,
   hourCycle: "h23"
 };
 const TIME_24_WITH_SECONDS = {
-  hour: n$2,
-  minute: n$2,
-  second: n$2,
+  hour: n$1,
+  minute: n$1,
+  second: n$1,
   hourCycle: "h23"
 };
 const TIME_24_WITH_SHORT_OFFSET = {
-  hour: n$2,
-  minute: n$2,
-  second: n$2,
+  hour: n$1,
+  minute: n$1,
+  second: n$1,
   hourCycle: "h23",
   timeZoneName: s$1
 };
 const TIME_24_WITH_LONG_OFFSET = {
-  hour: n$2,
-  minute: n$2,
-  second: n$2,
+  hour: n$1,
+  minute: n$1,
+  second: n$1,
   hourCycle: "h23",
   timeZoneName: l
 };
 const DATETIME_SHORT = {
-  year: n$2,
-  month: n$2,
-  day: n$2,
-  hour: n$2,
-  minute: n$2
+  year: n$1,
+  month: n$1,
+  day: n$1,
+  hour: n$1,
+  minute: n$1
 };
 const DATETIME_SHORT_WITH_SECONDS = {
-  year: n$2,
-  month: n$2,
-  day: n$2,
-  hour: n$2,
-  minute: n$2,
-  second: n$2
+  year: n$1,
+  month: n$1,
+  day: n$1,
+  hour: n$1,
+  minute: n$1,
+  second: n$1
 };
 const DATETIME_MED = {
-  year: n$2,
+  year: n$1,
   month: s$1,
-  day: n$2,
-  hour: n$2,
-  minute: n$2
+  day: n$1,
+  hour: n$1,
+  minute: n$1
 };
 const DATETIME_MED_WITH_SECONDS = {
-  year: n$2,
+  year: n$1,
   month: s$1,
-  day: n$2,
-  hour: n$2,
-  minute: n$2,
-  second: n$2
+  day: n$1,
+  hour: n$1,
+  minute: n$1,
+  second: n$1
 };
 const DATETIME_MED_WITH_WEEKDAY = {
-  year: n$2,
+  year: n$1,
   month: s$1,
-  day: n$2,
+  day: n$1,
   weekday: s$1,
-  hour: n$2,
-  minute: n$2
+  hour: n$1,
+  minute: n$1
 };
 const DATETIME_FULL = {
-  year: n$2,
+  year: n$1,
   month: l,
-  day: n$2,
-  hour: n$2,
-  minute: n$2,
+  day: n$1,
+  hour: n$1,
+  minute: n$1,
   timeZoneName: s$1
 };
 const DATETIME_FULL_WITH_SECONDS = {
-  year: n$2,
+  year: n$1,
   month: l,
-  day: n$2,
-  hour: n$2,
-  minute: n$2,
-  second: n$2,
+  day: n$1,
+  hour: n$1,
+  minute: n$1,
+  second: n$1,
   timeZoneName: s$1
 };
 const DATETIME_HUGE = {
-  year: n$2,
+  year: n$1,
   month: l,
-  day: n$2,
+  day: n$1,
   weekday: l,
-  hour: n$2,
-  minute: n$2,
+  hour: n$1,
+  minute: n$1,
   timeZoneName: l
 };
 const DATETIME_HUGE_WITH_SECONDS = {
-  year: n$2,
+  year: n$1,
   month: l,
-  day: n$2,
+  day: n$1,
   weekday: l,
-  hour: n$2,
-  minute: n$2,
-  second: n$2,
+  hour: n$1,
+  minute: n$1,
+  second: n$1,
   timeZoneName: l
 };
 function isUndefined(o2) {
@@ -19565,7 +21405,7 @@ function pick(obj, keys) {
     return a2;
   }, {});
 }
-function hasOwnProperty$1(obj, prop) {
+function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 function integerBetween(thing, bottom, top) {
@@ -19675,7 +21515,7 @@ function asNumber(value) {
 function normalizeObject(obj, normalizer) {
   const normalized = {};
   for (const u2 in obj) {
-    if (hasOwnProperty$1(obj, u2)) {
+    if (hasOwnProperty(obj, u2)) {
       const v2 = obj[u2];
       if (v2 === void 0 || v2 === null)
         continue;
@@ -21207,7 +23047,7 @@ class Duration {
       return this;
     const dur = Duration.fromDurationLike(duration), result = {};
     for (const k2 of orderedUnits$1) {
-      if (hasOwnProperty$1(dur.values, k2) || hasOwnProperty$1(this.values, k2)) {
+      if (hasOwnProperty(dur.values, k2) || hasOwnProperty(this.values, k2)) {
         result[k2] = dur.get(k2) + this.get(k2);
       }
     }
@@ -21823,7 +23663,7 @@ function oneOf(strings, startIndex) {
   }
 }
 function offset(regex, groups) {
-  return { regex, deser: ([, h, m2]) => signedOffset(h, m2), groups };
+  return { regex, deser: ([, h2, m2]) => signedOffset(h2, m2), groups };
 }
 function simple(regex) {
   return { regex, deser: ([s2]) => s2 };
@@ -22008,10 +23848,10 @@ function match(input, regex, handlers) {
     const all = {};
     let matchIndex = 1;
     for (const i in handlers) {
-      if (hasOwnProperty$1(handlers, i)) {
-        const h = handlers[i], groups = h.groups ? h.groups + 1 : 1;
-        if (!h.literal && h.token) {
-          all[h.token.val[0]] = h.deser(matches.slice(matchIndex, matchIndex + groups));
+      if (hasOwnProperty(handlers, i)) {
+        const h2 = handlers[i], groups = h2.groups ? h2.groups + 1 : 1;
+        if (!h2.literal && h2.token) {
+          all[h2.token.val[0]] = h2.deser(matches.slice(matchIndex, matchIndex + groups));
         }
         matchIndex += groups;
       }
@@ -22123,7 +23963,7 @@ function explainFromTokens(locale, input, format) {
     return { input, tokens, invalidReason: disqualifyingUnit.invalidReason };
   } else {
     const [regexString, handlers] = buildRegex(units), regex = RegExp(regexString, "i"), [rawMatches, matches] = match(input, regex, handlers), [result, zone, specificOffset] = matches ? dateTimeFromMatches(matches) : [null, null, void 0];
-    if (hasOwnProperty$1(matches, "a") && hasOwnProperty$1(matches, "H")) {
+    if (hasOwnProperty(matches, "a") && hasOwnProperty(matches, "H")) {
       throw new ConflictingSpecificationError("Can't include meridiem when specifying 24-hour format");
     }
     return { input, tokens, regex, rawMatches, matches, result, zone, specificOffset };
@@ -23170,7 +25010,7 @@ var ci = (a2, l2, c2, A2) => {
       !li.call(a2, o2) && (c2 || o2 !== "default") && P(a2, o2, { get: () => l2[o2], enumerable: !(A2 = ui(l2, o2)) || A2.enumerable });
   return a2;
 }, L = (a2, l2) => ci(oi(P(a2 != null ? si(ti(a2)) : {}, "default", !l2 && a2 && a2.__esModule ? { get: () => a2.default, enumerable: true } : { value: a2, enumerable: true })), a2);
-var h$1 = (a2, l2, c2) => (mi(a2, typeof l2 != "symbol" ? l2 + "" : l2, c2), c2);
+var h = (a2, l2, c2) => (mi(a2, typeof l2 != "symbol" ? l2 + "" : l2, c2), c2);
 var Ge = U((qe2) => {
   var Ii2 = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
   qe2.validate = function(a2) {
@@ -23322,10 +25162,10 @@ var We = U((I_, ze2) => {
   };
   ze2.exports = Ve2;
 });
-var q$1;
+var q;
 (function(a2) {
   a2.Comment = "comment", a2.Create = "create", a2.Delete = "delete", a2.Edit = "edit", a2.Invoice = "invoice", a2.Message = "message", a2.PageView = "pageView", a2.Paid = "paid", a2.Payment = "payment", a2.Purchase = "purchase", a2.Referral = "referral", a2.Renewal = "renewal", a2.Signup = "signup", a2.Subscription = "subscription", a2.Upgrade = "upgrade";
-})(q$1 || (q$1 = {}));
+})(q || (q = {}));
 var G;
 (function(a2) {
   a2.Business = "business", a2.Engineering = "engineering", a2.Exception = "exception", a2.LogMessage = "log-message", a2.Marketing = "marketing", a2.PageLeave = "page-leave", a2.PageView = "page-view", a2.Product = "product", a2.QualityManagement = "quality-management", a2.UserAccess = "user-access", a2.UserLogin = "user-login", a2.UserLogout = "user-logout", a2.UserSignup = "user-signup", a2.UserPreferencesChanged = "user-preferences-changed", a2.WebsiteVisit = "website-visit";
@@ -23750,11 +25590,11 @@ var r;
 (function(a2) {
   a2.Afghanistan = "AF", a2.Albania = "AL", a2.Algeria = "DZ", a2.AmericanSamoa = "AS", a2.Andorra = "AD", a2.Angola = "AO", a2.Anguilla = "AI", a2.Antarctica = "AQ", a2.AntiguaAndBarbuda = "AG", a2.Argentina = "AR", a2.Armenia = "AM", a2.Aruba = "AW", a2.Australia = "AU", a2.Austria = "AT", a2.Azerbaijan = "AZ", a2.Bahamas = "BS", a2.Bahrain = "BH", a2.Bangladesh = "BD", a2.Barbados = "BB", a2.Belarus = "BY", a2.Belgium = "BE", a2.Belize = "BZ", a2.Benin = "BJ", a2.Bermuda = "BM", a2.Bhutan = "BT", a2.Bolivia = "BO", a2.BosniaAndHerzegovina = "BA", a2.Botswana = "BW", a2.BouvetIsland = "BV", a2.Brazil = "BR", a2.BritishIndianOceanTerritory = "IO", a2.Brunei = "BN", a2.Bulgaria = "BG", a2.BurkinaFaso = "BF", a2.Burundi = "BI", a2.Cambodia = "KH", a2.Cameroon = "CM", a2.Canada = "CA", a2.CapeVerde = "CV", a2.CaymanIslands = "KY", a2.CentralAfricanRepublic = "CF", a2.Chad = "TD", a2.Chile = "CL", a2.China = "CN", a2.ChristmasIsland = "CX", a2.CocosKeelingIslands = "CC", a2.Colombia = "CO", a2.Comoros = "KM", a2.Congo = "CG", a2.CongoTheDemocraticRepublicOfThe = "CD", a2.CookIslands = "CK", a2.CostaRica = "CR", a2.CoteDIvoire = "CI", a2.Croatia = "HR", a2.Cuba = "CU", a2.Cyprus = "CY", a2.CzechRepublic = "CZ", a2.Denmark = "DK", a2.Djibouti = "DJ", a2.Dominica = "DM", a2.DominicanRepublic = "DO", a2.Ecuador = "EC", a2.Egypt = "EG", a2.ElSalvador = "SV", a2.EquatorialGuinea = "GQ", a2.Eritrea = "ER", a2.Estonia = "EE", a2.Ethiopia = "ET", a2.FalklandIslands = "FK", a2.FaroeIslands = "FO", a2.Fiji = "FJ", a2.Finland = "FI", a2.France = "FR", a2.FrenchGuiana = "GF", a2.FrenchPolynesia = "PF", a2.FrenchSouthernTerritories = "TF", a2.Gabon = "GA", a2.Gambia = "GM", a2.Georgia = "GE", a2.Germany = "DE", a2.Ghana = "GH", a2.Gibraltar = "GI", a2.Greece = "GR", a2.Greenland = "GL", a2.Grenada = "GD", a2.Guadeloupe = "GP", a2.Guam = "GU", a2.Guatemala = "GT", a2.Guernsey = "GG", a2.Guinea = "GN", a2.GuineaBissau = "GW", a2.Guyana = "GY", a2.Haiti = "HT", a2.HeardIslandMcdonaldIslands = "HM", a2.HolySeeVaticanCityState = "VA", a2.Honduras = "HN", a2.HongKong = "HK", a2.Hungary = "HU", a2.Iceland = "IS", a2.India = "IN", a2.Indonesia = "ID", a2.Iran = "IR", a2.Iraq = "IQ", a2.Ireland = "IE", a2.IsleOfMan = "IM", a2.Israel = "IL", a2.Italy = "IT", a2.Jamaica = "JM", a2.Japan = "JP", a2.Jersey = "JE", a2.Jordan = "JO", a2.Kazakhstan = "KZ", a2.Kenya = "KE", a2.Kiribati = "KI", a2.Kuwait = "KW", a2.Kyrgyzstan = "KG", a2.Laos = "LA", a2.Latvia = "LV", a2.Lebanon = "LB", a2.Lesotho = "LS", a2.Liberia = "LR", a2.Libya = "LY", a2.Liechtenstein = "LI", a2.Lithuania = "LT", a2.Luxembourg = "LU", a2.Macau = "MO", a2.Madagascar = "MG", a2.Malawi = "MW", a2.Malaysia = "MY", a2.Maldives = "MV", a2.Mali = "ML", a2.Malta = "MT", a2.MarshallIslands = "MH", a2.Martinique = "MQ", a2.Mauritania = "MR", a2.Mauritius = "MU", a2.Mayotte = "YT", a2.Mexico = "MX", a2.MicronesiaFederatedStatesOf = "FM", a2.Moldova = "MD", a2.Monaco = "MC", a2.Mongolia = "MN", a2.Montenegro = "ME", a2.Montserrat = "MS", a2.Morocco = "MA", a2.Mozambique = "MZ", a2.Myanmar = "MM", a2.Namibia = "NA", a2.Nauru = "NR", a2.Nepal = "NP", a2.Netherlands = "NL", a2.NetherlandsAntilles = "AN", a2.NewCaledonia = "NC", a2.NewZealand = "NZ", a2.NorthKorea = "KP", a2.Nicaragua = "NI", a2.Niger = "NE", a2.Nigeria = "NG", a2.Niue = "NU", a2.NorfolkIsland = "NF", a2.NorthMacedonia = "MK", a2.NorthernMarianaIslands = "MP", a2.Norway = "NO", a2.Oman = "OM", a2.Pakistan = "PK", a2.Palau = "PW", a2.PalestinianTerritoryOccupied = "PS", a2.Panama = "PA", a2.PapuaNewGuinea = "PG", a2.Paraguay = "PY", a2.Peru = "PE", a2.Philippines = "PH", a2.Pitcairn = "PN", a2.Poland = "PL", a2.Portugal = "PT", a2.PuertoRico = "PR", a2.Qatar = "QA", a2.Reunion = "RE", a2.Romania = "RO", a2.RussianFederation = "RU", a2.Rwanda = "RW", a2.SaintBarthelemy = "BL", a2.SaintHelena = "SH", a2.SaintKittsAndNevis = "KN", a2.SaintLucia = "LC", a2.SaintMartin = "MF", a2.SaintPierreAndMiquelon = "PM", a2.SaintVincentAndTheGrenadines = "VC", a2.Samoa = "WS", a2.SanMarino = "SM", a2.SaoTomeAndPrincipe = "ST", a2.SaudiArabia = "SA", a2.Senegal = "SN", a2.Serbia = "RS", a2.SerbiaAndMontenegro = "CS", a2.Seychelles = "SC", a2.SierraLeone = "SL", a2.Singapore = "SG", a2.Slovakia = "SK", a2.Slovenia = "SI", a2.SolomonIslands = "SB", a2.Somalia = "SO", a2.SouthAfrica = "ZA", a2.SouthGeorgiaAndTheSouthSandwichIslands = "GS", a2.SouthKorea = "KR", a2.Spain = "ES", a2.SriLanka = "LK", a2.Sudan = "SD", a2.Suriname = "SR", a2.SvalbardAndJanMayen = "SJ", a2.Swaziland = "SZ", a2.Sweden = "SE", a2.Switzerland = "CH", a2.Syria = "SY", a2.Taiwan = "TW", a2.Tajikistan = "TJ", a2.Tanzania = "TZ", a2.Thailand = "TH", a2.TimorLeste = "TL", a2.Togo = "TG", a2.Tokelau = "TK", a2.Tonga = "TO", a2.TrinidadAndTobago = "TT", a2.Tunisia = "TN", a2.Turkey = "TR", a2.Turkmenistan = "TM", a2.TurksAndCaicosIslands = "TC", a2.Tuvalu = "TV", a2.Uganda = "UG", a2.Ukraine = "UA", a2.UnitedArabEmirates = "AE", a2.UnitedKingdom = "GB", a2.UnitedStates = "US", a2.UnitedStatesMinorOutlyingIslands = "UM", a2.Uruguay = "UY", a2.Uzbekistan = "UZ", a2.Vanuatu = "VU", a2.Venezuela = "VE", a2.Vietnam = "VN", a2.VirginIslandsBritish = "VG", a2.VirginIslandsUS = "VI", a2.WallisAndFutuna = "WF", a2.WesternSahara = "EH", a2.Yemen = "YE", a2.Zambia = "ZM", a2.Zimbabwe = "ZW";
 })(r || (r = {}));
-var m$1;
+var m;
 (function(a2) {
   a2.AfghanistanAfghani = "AFN", a2.AlbaniaLek = "ALL", a2.ArmeniaDram = "AMD", a2.AlgeriaDinar = "DZD", a2.AmericanSamoaTala = "WST", a2.AngolaKwanza = "AOA", a2.ArgentinaPeso = "ARS", a2.AustraliaDollar = "AUD", a2.ArubaFlorin = "AWG", a2.AzerbaijanNewManat = "AZN", a2.BosniaAndHerzegovinaConvertibleMark = "BAM", a2.BahrainDinar = "BHD", a2.BarbadosDollar = "BBD", a2.BangladeshTaka = "BDT", a2.BelgiumFranc = "BGN", a2.BermudaDollar = "BMD", a2.BruneiDollar = "BND", a2.BoliviaBoliviano = "BOB", a2.BrazilReal = "BRL", a2.BahamasDollar = "BSD", a2.BhutanNgultrum = "BTN", a2.BotswanaPula = "BWP", a2.BelarusRuble = "BYN", a2.BelizeDollar = "BZD", a2.BulgariaLev = "BGN", a2.BurundiFranc = "BIF", a2.BritishPound = "GBP", a2.CanadaDollar = "CAD", a2.CambodiaRiel = "KHR", a2.ComorosFranc = "KMF", a2.CaymanIslandsDollar = "KYD", a2.ChilePeso = "CLP", a2.ChinaYuan = "CNY", a2.ColombiaPeso = "COP", a2.CostaRicaColon = "CRC", a2.CroatiaKuna = "HRK", a2.CubaConvertiblePeso = "CUC", a2.CubaPeso = "CUP", a2.CapeVerdeEscudo = "CVE", a2.CyprusPound = "CYP", a2.CzechRepublicKoruna = "CZK", a2.DjiboutiFranc = "DJF", a2.DenmarkKrone = "DKK", a2.DominicaDollar = "XCD", a2.DominicanRepublicPeso = "DOP", a2.EastCaribbeanDollar = "XCD", a2.EgyptPound = "EGP", a2.ElSalvadorColon = "SVC", a2.EquatorialGuineaEkwele = "GQE", a2.EritreaNakfa = "ERN", a2.EstoniaKroon = "EEK", a2.EthiopiaBirr = "ETB", a2.Euro = "EUR", a2.FijiDollar = "FJD", a2.FalklandIslandsPound = "FKP", a2.GambiaDalasi = "GMD", a2.GabonFranc = "GMD", a2.GeorgiaLari = "GEL", a2.GhanaCedi = "GHS", a2.GibraltarPound = "GIP", a2.GuatemalaQuetzal = "GTQ", a2.GuernseyPound = "GGP", a2.GuineaBissauPeso = "GWP", a2.GuyanaDollar = "GYD", a2.HongKongDollar = "HKD", a2.HondurasLempira = "HNL", a2.HaitiGourde = "HTG", a2.HungaryForint = "HUF", a2.IndonesiaRupiah = "IDR", a2.IsleOfManPound = "IMP", a2.IsraelNewShekel = "ILS", a2.IndiaRupee = "INR", a2.IraqDinar = "IQD", a2.IranRial = "IRR", a2.IcelandKrona = "ISK", a2.JamaicaDollar = "JMD", a2.JapanYen = "JPY", a2.JerseyPound = "JEP", a2.JordanDinar = "JOD", a2.KazakhstanTenge = "KZT", a2.KenyaShilling = "KES", a2.KyrgyzstanSom = "KGS", a2.NorthKoreaWon = "KPW", a2.SouthKoreaWon = "KRW", a2.KuwaitDinar = "KWD", a2.LaosKip = "LAK", a2.LebanonPound = "LBP", a2.LiberiaDollar = "LRD", a2.LesothoLoti = "LSL", a2.LibyanDinar = "LYD", a2.LithuaniaLitas = "LTL", a2.LatviaLats = "LVL", a2.LibyaDinar = "LYD", a2.MacauPataca = "MOP", a2.MaldivesRufiyaa = "MVR", a2.MalawiKwacha = "MWK", a2.MaltaLira = "MTL", a2.MauritiusRupee = "MUR", a2.MongoliaTughrik = "MNT", a2.MoroccoDirham = "MAD", a2.MoldovaLeu = "MDL", a2.MozambiqueMetical = "MZN", a2.MadagascarAriary = "MGA", a2.MacedoniaDenar = "MKD", a2.MexicoPeso = "MXN", a2.MalaysiaRinggit = "MYR", a2.MyanmarKyat = "MMK", a2.MicronesiaFederatedStatesDollar = "USD", a2.NicaraguaCordoba = "NIO", a2.NamibiaDollar = "NAD", a2.NetherlandsAntillesGuilder = "ANG", a2.NewCaledoniaFranc = "XPF", a2.NigeriaNaira = "NGN", a2.NicaraguaCordobaOro = "NIO", a2.NigerCFAFranc = "XOF", a2.NorwayKrone = "NOK", a2.NepalRupee = "NPR", a2.NewZealandDollar = "NZD", a2.OmanRial = "OMR", a2.PanamaBalboa = "PAB", a2.PeruNuevoSol = "PEN", a2.PapuaNewGuineaKina = "PGK", a2.PhilippinesPeso = "PHP", a2.PakistanRupee = "PKR", a2.PeruNuevo = "PEN", a2.PolandZloty = "PLN", a2.ParaguayGuarani = "PYG", a2.QatarRial = "QAR", a2.RomaniaNewLeu = "RON", a2.SerbiaDinar = "RSD", a2.SriLankaRupee = "LKR", a2.RussiaRuble = "RUB", a2.RwandaFranc = "RWF", a2.SaudiArabiaRiyal = "SAR", a2.SlovakiaKoruna = "SKK", a2.SloveniaTolar = "SIT", a2.SolomonIslandsDollar = "SBD", a2.SeychellesRupee = "SCR", a2.SudanPound = "SDG", a2.SwedenKrona = "SEK", a2.SingaporeDollar = "SGD", a2.SaintHelenaPound = "SHP", a2.SierraLeoneLeone = "SLL", a2.SomaliaShilling = "SOS", a2.SurinameDollar = "SRD", a2.SintMaartenPound = "SXD", a2.SyriaPound = "SYP", a2.SwazilandLilangeni = "SZL", a2.SwitzerlandFranc = "CHF", a2.ThailandBaht = "THB", a2.TajikistanSomoni = "TJS", a2.TurkmenistanManat = "TMT", a2.TunisiaDinar = "TND", a2.TongaPaanga = "TOP", a2.TurkeyLira = "TRY", a2.TrinidadAndTobagoDollar = "TTD", a2.TaiwanNewDollar = "TWD", a2.TanzaniaShilling = "TZS", a2.UnitedArabEmiratesDirham = "AED", a2.UkraineHryvnia = "UAH", a2.UgandaShilling = "UGX", a2.UnitedKingdomPound = "GBP", a2.UnitedStatesDollar = "USD", a2.UruguayPeso = "UYU", a2.UzbekistanSom = "UZS", a2.VenezuelaBolivar = "VEF", a2.VietnamDong = "VND", a2.VanuatuVatu = "VUV", a2.SamoaTala = "WST", a2.YemenRial = "YER", a2.SouthAfricaRand = "ZAR", a2.ZambiaKwacha = "ZMW", a2.ZimbabweDollar = "ZWL";
-})(m$1 || (m$1 = {}));
-({ AfghanistanAfghani: { code: m$1.AfghanistanAfghani, countries: [r.Afghanistan], decimal_digits: 2, decimal_separator: ".", name: "Afghan Afghani", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u060B", symbol_native: "\u060B", symbol_placement: "before", thousands_separator: "," }, AlbaniaLek: { code: m$1.AlbaniaLek, countries: [r.Albania], decimal_digits: 2, decimal_separator: ",", name: "Albanian Lek", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Lek", symbol_native: "Lek", symbol_placement: "before", thousands_separator: "." }, AlgeriaDinar: { code: m$1.AlgeriaDinar, countries: [r.Algeria], decimal_digits: 2, decimal_separator: ".", name: "Algerian Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u062F.\u062C", symbol_native: "\u062F.\u062C", symbol_placement: "before", thousands_separator: "," }, ArgentinaPeso: { code: m$1.ArgentinaPeso, countries: [r.Argentina], decimal_digits: 2, decimal_separator: ".", name: "Argentine Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, ArmeniaDram: { code: m$1.ArmeniaDram, countries: [r.Armenia], decimal_digits: 2, decimal_separator: ",", name: "Armenian Dram", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u0564\u0580.", symbol_native: "\u0564\u0580.", symbol_placement: "before", thousands_separator: "." }, ArubaFlorin: { code: m$1.ArubaFlorin, countries: [r.Aruba], decimal_digits: 2, decimal_separator: ".", name: "Aruban Florin", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u0192", symbol_native: "\u0192", symbol_placement: "before", thousands_separator: "," }, AustraliaDollar: { code: m$1.AustraliaDollar, countries: [r.Australia], decimal_digits: 2, decimal_separator: ".", name: "Australian Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, AzerbaijanManat: { code: m$1.AzerbaijanNewManat, countries: [r.Azerbaijan], decimal_digits: 2, decimal_separator: ".", name: "Azerbaijani Manat", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u043C\u0430\u043D", symbol_native: "\u043C\u0430\u043D", symbol_placement: "before", thousands_separator: "," }, BahrainDinar: { code: m$1.BahrainDinar, countries: [r.Bahrain], decimal_digits: 3, decimal_separator: ".", name: "Bahraini Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: ".\u062F.\u0628", symbol_native: ".\u062F.\u0628", symbol_placement: "before", thousands_separator: "," }, BangladeshTaka: { code: m$1.BangladeshTaka, countries: [r.Bangladesh], decimal_digits: 2, decimal_separator: ".", name: "Bangladeshi Taka", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u09F3", symbol_native: "\u09F3", symbol_placement: "before", thousands_separator: "," }, BarbadosDollar: { code: m$1.BarbadosDollar, countries: [r.Barbados], decimal_digits: 2, decimal_separator: ".", name: "Barbadian Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, BelarusRuble: { code: m$1.BelarusRuble, countries: [r.Belarus], decimal_digits: 2, decimal_separator: ".", name: "Belarusian Ruble", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Br", symbol_native: "Br", symbol_placement: "before", thousands_separator: "." }, BelizeDollar: { code: m$1.BelizeDollar, countries: [r.Belize], decimal_digits: 2, decimal_separator: ".", name: "Belize Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "BZ$", symbol_native: "BZ$", symbol_placement: "before", thousands_separator: "," }, BermudaDollar: { code: m$1.BermudaDollar, countries: [r.Bermuda], decimal_digits: 2, decimal_separator: ".", name: "Bermudian Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, BoliviaBoliviano: { code: m$1.BoliviaBoliviano, countries: [r.Bolivia], decimal_digits: 2, decimal_separator: ".", name: "Bolivian Boliviano", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$b", symbol_native: "$b", symbol_placement: "before", thousands_separator: "," }, BosniaAndHerzegovinaConvertibleMarka: { code: m$1.BosniaAndHerzegovinaConvertibleMark, countries: [r.BosniaAndHerzegovina], decimal_digits: 2, decimal_separator: ",", name: "Bosnia and Herzegovina Convertible Marka", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "KM", symbol_native: "KM", symbol_placement: "before", thousands_separator: "." }, BotswanaPula: { code: m$1.BotswanaPula, countries: [r.Botswana], decimal_digits: 2, decimal_separator: ".", name: "Botswana Pula", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "P", symbol_native: "P", symbol_placement: "before", thousands_separator: "," }, BrazilReal: { code: m$1.BrazilReal, countries: [r.Brazil], decimal_digits: 2, decimal_separator: ",", name: "Brazilian Real", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "R$", symbol_native: "R$", symbol_placement: "before", thousands_separator: "." }, BruneiDollar: { code: m$1.BruneiDollar, countries: [r.Brunei], decimal_digits: 2, decimal_separator: ".", name: "Brunei Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, BulgariaLev: { code: m$1.BulgariaLev, countries: [r.Bulgaria], decimal_digits: 2, decimal_separator: ".", name: "Bulgarian Lev", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u043B\u0432", symbol_native: "\u043B\u0432", symbol_placement: "before", thousands_separator: "." }, BurundiFranc: { code: m$1.BurundiFranc, countries: [r.Burundi], decimal_digits: 0, decimal_separator: ".", name: "Burundian Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "FBu", symbol_native: "FBu", symbol_placement: "before", thousands_separator: "," }, CambodiaRiel: { code: m$1.CambodiaRiel, countries: [r.Cambodia], decimal_digits: 2, decimal_separator: ",", name: "Cambodian Riel", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u17DB", symbol_native: "\u17DB", symbol_placement: "before", thousands_separator: "." }, CanadaDollar: { code: m$1.CanadaDollar, countries: [r.Canada], decimal_digits: 2, decimal_separator: ".", name: "Canadian Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, CapeVerdeEscudo: { code: m$1.CapeVerdeEscudo, countries: [r.CapeVerde], decimal_digits: 2, decimal_separator: ".", name: "Cape Verde Escudo", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Esc", symbol_native: "Esc", symbol_placement: "before", thousands_separator: "," }, CaymanIslandsDollar: { code: m$1.CaymanIslandsDollar, countries: [r.CaymanIslands], decimal_digits: 2, decimal_separator: ".", name: "Cayman Islands Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, ChilePeso: { code: m$1.ChilePeso, countries: [r.Chile], decimal_digits: 0, decimal_separator: ".", name: "Chilean Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, ChinaYuanRenminbi: { code: m$1.ChinaYuan, countries: [r.China], decimal_digits: 2, decimal_separator: ".", name: "Chinese Yuan", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA5", symbol_native: "\xA5", symbol_placement: "before", thousands_separator: "," }, ColombiaPeso: { code: m$1.ColombiaPeso, countries: [r.Colombia], decimal_digits: 2, decimal_separator: ".", name: "Colombian Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, ComorosFranc: { code: m$1.ComorosFranc, countries: [r.Comoros], decimal_digits: 0, decimal_separator: ".", name: "Comoros Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "CF", symbol_native: "CF", symbol_placement: "before", thousands_separator: "," }, CostaRicaColon: { code: m$1.CostaRicaColon, countries: [r.CostaRica], decimal_digits: 2, decimal_separator: ".", name: "Costa Rican Colon", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A1", symbol_native: "\u20A1", symbol_placement: "before", thousands_separator: "," }, CroatiaKuna: { code: m$1.CroatiaKuna, countries: [r.Croatia], decimal_digits: 2, decimal_separator: ",", name: "Croatian Kuna", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "kn", symbol_native: "kn", symbol_placement: "before", thousands_separator: "." }, CubaConvertiblePeso: { code: m$1.CubaConvertiblePeso, countries: [r.Cuba], decimal_digits: 2, decimal_separator: ",", name: "Cuba Convertible Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, CubaPeso: { code: m$1.CubaPeso, countries: [r.Cuba], decimal_digits: 2, decimal_separator: ",", name: "Cuba Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, CyprusPound: { code: m$1.CyprusPound, countries: [r.Cyprus], decimal_digits: 2, decimal_separator: ",", name: "Cyprus Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, CzechRepublicKoruna: { code: m$1.CzechRepublicKoruna, countries: [r.CzechRepublic], decimal_digits: 2, decimal_separator: ",", name: "Czech Republic Koruna", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "K\u010D", symbol_native: "K\u010D", symbol_placement: "before", thousands_separator: "." }, DenmarkKrone: { code: m$1.DenmarkKrone, countries: [r.Denmark], decimal_digits: 2, decimal_separator: ",", name: "Denmark Krone", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "kr", symbol_native: "kr", symbol_placement: "before", thousands_separator: "." }, DjiboutiFranc: { code: m$1.DjiboutiFranc, countries: [r.Djibouti], decimal_digits: 0, decimal_separator: ".", name: "Djibouti Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Fdj", symbol_native: "Fdj", symbol_placement: "before", thousands_separator: "," }, DominicanRepublicPeso: { code: m$1.DominicanRepublicPeso, countries: [r.DominicanRepublic], decimal_digits: 2, decimal_separator: ",", name: "Dominican Republic Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "RD$", symbol_native: "RD$", symbol_placement: "before", thousands_separator: "." }, EastCaribbeanDollar: { code: m$1.EastCaribbeanDollar, countries: [r.AntiguaAndBarbuda, r.Dominica, r.Grenada, r.SaintKittsAndNevis, r.SaintLucia, r.SaintVincentAndTheGrenadines], decimal_digits: 2, decimal_separator: ".", name: "East Caribbean Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, EgyptPound: { code: m$1.EgyptPound, countries: [r.Egypt], decimal_digits: 2, decimal_separator: ".", name: "Egypt Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "," }, ElSalvadorColon: { code: m$1.ElSalvadorColon, countries: [r.ElSalvador], decimal_digits: 2, decimal_separator: ",", name: "El Salvador Colon", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A1", symbol_native: "\u20A1", symbol_placement: "before", thousands_separator: "." }, EquatorialGuineaEkwele: { code: m$1.EquatorialGuineaEkwele, countries: [r.EquatorialGuinea], decimal_digits: 0, decimal_separator: ".", name: "Equatorial Guinea Ekwele", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "GQE", symbol_native: "GQE", symbol_placement: "before", thousands_separator: "," }, EritreaNakfa: { code: m$1.EritreaNakfa, countries: [r.Eritrea], decimal_digits: 2, decimal_separator: ",", name: "Eritrea Nakfa", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Nfk", symbol_native: "Nfk", symbol_placement: "before", thousands_separator: "." }, EstoniaKroon: { code: m$1.EstoniaKroon, countries: [r.Estonia], decimal_digits: 2, decimal_separator: ",", name: "Estonia Kroon", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "kr", symbol_native: "kr", symbol_placement: "before", thousands_separator: "." }, EthiopiaBirr: { code: m$1.EthiopiaBirr, countries: [r.Ethiopia], decimal_digits: 2, decimal_separator: ",", name: "Ethiopia Birr", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Br", symbol_native: "Br", symbol_placement: "before", thousands_separator: "." }, Euro: { code: m$1.Euro, countries: [r.Andorra, r.Austria, r.Belgium, r.Cyprus, r.Estonia, r.Finland, r.France, r.Germany, r.Greece, r.Ireland, r.Italy, r.Latvia, r.Lithuania, r.Luxembourg, r.Malta, r.Monaco, r.Netherlands, r.Portugal, r.Spain, r.Sweden, r.UnitedKingdom], decimal_digits: 2, decimal_separator: ",", name: "Euro", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20AC", symbol_native: "\u20AC", symbol_placement: "before", thousands_separator: "." }, FalklandIslandsPound: { code: m$1.FalklandIslandsPound, countries: [r.FalklandIslands], decimal_digits: 2, decimal_separator: ",", name: "Equatorial Guinea Ekwele", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, FijiDollar: { code: m$1.FijiDollar, countries: [r.Fiji], decimal_digits: 2, decimal_separator: ",", name: "Fiji Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, GambiaDalasi: { code: m$1.GambiaDalasi, countries: [r.Gambia], decimal_digits: 2, decimal_separator: ",", name: "Gambia Dalasi", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "D", symbol_native: "D", symbol_placement: "before", thousands_separator: "." }, GeorgiaLari: { code: m$1.GeorgiaLari, countries: [r.Georgia], decimal_digits: 2, decimal_separator: ",", name: "Georgia Lari", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20BE", symbol_native: "\u20BE", symbol_placement: "before", thousands_separator: "." }, GhanaCedi: { code: m$1.GhanaCedi, countries: [r.Ghana], decimal_digits: 2, decimal_separator: ",", name: "Ghana Cedi", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20B5", symbol_native: "\u20B5", symbol_placement: "before", thousands_separator: "." }, GibraltarPound: { code: m$1.GibraltarPound, countries: [r.Gibraltar], decimal_digits: 2, decimal_separator: ",", name: "Gibraltar Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, GuatemalaQuetzal: { code: m$1.GuatemalaQuetzal, countries: [r.Guatemala], decimal_digits: 2, decimal_separator: ",", name: "Guatemala Quetzal", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Q", symbol_native: "Q", symbol_placement: "before", thousands_separator: "." }, GuernseyPound: { code: m$1.GuernseyPound, countries: [r.Guernsey], decimal_digits: 2, decimal_separator: ",", name: "Guernsey Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, GuineaBissauPeso: { code: m$1.GuineaBissauPeso, countries: [r.GuineaBissau], decimal_digits: 2, decimal_separator: ",", name: "Guinea-Bissau Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20B5", symbol_native: "\u20B5", symbol_placement: "before", thousands_separator: "." }, GuyanaDollar: { code: m$1.GuyanaDollar, countries: [r.Guyana], decimal_digits: 2, decimal_separator: ",", name: "Guyana Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, HaitiGourde: { code: m$1.HaitiGourde, countries: [r.Haiti], decimal_digits: 2, decimal_separator: ",", name: "Haiti Gourde", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "G", symbol_native: "G", symbol_placement: "before", thousands_separator: "." }, HondurasLempira: { code: m$1.HondurasLempira, countries: [r.Honduras], decimal_digits: 2, decimal_separator: ",", name: "Honduras Lempira", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "L", symbol_native: "L", symbol_placement: "before", thousands_separator: "." }, HongKongDollar: { code: m$1.HongKongDollar, countries: [r.HongKong], decimal_digits: 2, decimal_separator: ",", name: "Hong Kong Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, HungaryForint: { code: m$1.HungaryForint, countries: [r.Hungary], decimal_digits: 2, decimal_separator: ",", name: "Hungary Forint", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Ft", symbol_native: "Ft", symbol_placement: "before", thousands_separator: "." }, IcelandKrona: { code: m$1.IcelandKrona, countries: [r.Iceland], decimal_digits: 0, decimal_separator: ",", name: "Iceland Krona", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "kr", symbol_native: "kr", symbol_placement: "before", thousands_separator: "." }, IndianRupee: { code: m$1.IndiaRupee, countries: [r.India, r.Bhutan], decimal_digits: 2, decimal_separator: ",", name: "Indian Rupee", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20B9", symbol_native: "\u20B9", symbol_placement: "before", thousands_separator: "." }, IndonesiaRupiah: { code: m$1.IndonesiaRupiah, countries: [r.Indonesia], decimal_digits: 0, decimal_separator: ",", name: "Indonesia Rupiah", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Rp", symbol_native: "Rp", symbol_placement: "before", thousands_separator: "." }, IranRial: { code: m$1.IranRial, countries: [r.Iran], decimal_digits: 0, decimal_separator: ",", name: "Iran Rial", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\uFDFC", symbol_native: "\uFDFC", symbol_placement: "before", thousands_separator: "." }, IsleOfManPound: { code: m$1.IsleOfManPound, countries: [r.IsleOfMan], decimal_digits: 2, decimal_separator: ",", name: "Isle of Man Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\uFDFC", symbol_native: "\uFDFC", symbol_placement: "before", thousands_separator: "." }, IsraeliShekel: { code: m$1.IsraelNewShekel, countries: [r.Israel], decimal_digits: 2, decimal_separator: ",", name: "Israeli Shekel", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20AA", symbol_native: "\u20AA", symbol_placement: "before", thousands_separator: "." }, JamaicaDollar: { code: m$1.JamaicaDollar, countries: [r.Jamaica], decimal_digits: 2, decimal_separator: ",", name: "Jamaica Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "J$", symbol_native: "J$", symbol_placement: "before", thousands_separator: "." }, JapanYen: { code: m$1.JapanYen, countries: [r.Japan], decimal_digits: 0, decimal_separator: ",", name: "Japan Yen", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA5", symbol_native: "\uFFE5", symbol_placement: "before", thousands_separator: "." }, JerseyPound: { code: m$1.JerseyPound, countries: [r.Jersey], decimal_digits: 2, decimal_separator: ",", name: "Jersey Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, JordanDinar: { code: m$1.JordanDinar, countries: [r.Jordan], decimal_digits: 3, decimal_separator: ",", name: "Jordan Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "JD", symbol_native: "JD", symbol_placement: "before", thousands_separator: "." }, KazakhstanTenge: { code: m$1.KazakhstanTenge, countries: [r.Kazakhstan], decimal_digits: 2, decimal_separator: ",", name: "Kazakhstan Tenge", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20B8", symbol_native: "\u20B8", symbol_placement: "before", thousands_separator: "." }, KenyaShilling: { code: m$1.KenyaShilling, countries: [r.Kenya], decimal_digits: 2, decimal_separator: ",", name: "Kenya Shilling", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "KSh", symbol_native: "KSh", symbol_placement: "before", thousands_separator: "." }, KuwaitDinar: { code: m$1.KuwaitDinar, countries: [r.Kuwait], decimal_digits: 3, decimal_separator: ",", name: "Kuwait Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "KD", symbol_native: "KD", symbol_placement: "before", thousands_separator: "." }, KyrgyzstanSom: { code: m$1.KyrgyzstanSom, countries: [r.Kyrgyzstan], decimal_digits: 2, decimal_separator: ",", name: "Kyrgyzstan Som", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "KGS", symbol_native: "KGS", symbol_placement: "before", thousands_separator: "." }, LaosKip: { code: m$1.LaosKip, countries: [r.Laos], decimal_digits: 0, decimal_separator: ",", name: "Laos Kip", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20AD", symbol_native: "\u20AD", symbol_placement: "before", thousands_separator: "." }, LatviaLats: { code: m$1.LatviaLats, countries: [r.Latvia], decimal_digits: 2, decimal_separator: ",", name: "Latvia Lat", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Ls", symbol_native: "Ls", symbol_placement: "before", thousands_separator: "." }, LebanonPound: { code: m$1.LebanonPound, countries: [r.Lebanon], decimal_digits: 0, decimal_separator: ",", name: "Lebanon Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, LesothoLoti: { code: m$1.LesothoLoti, countries: [r.Lesotho], decimal_digits: 2, decimal_separator: ",", name: "Lesotho Loti", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "M", symbol_native: "M", symbol_placement: "before", thousands_separator: "." }, LiberiaDollar: { code: m$1.LiberiaDollar, countries: [r.Liberia], decimal_digits: 2, decimal_separator: ",", name: "Liberia Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, LibyanDinar: { code: m$1.LibyanDinar, countries: [r.Libya], decimal_digits: 3, decimal_separator: ",", name: "Libyan Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "LD", symbol_native: "LD", symbol_placement: "before", thousands_separator: "." }, LithuaniaLitas: { code: m$1.LithuaniaLitas, countries: [r.Lithuania], decimal_digits: 2, decimal_separator: ",", name: "Lithuania Litas", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Lt", symbol_native: "Lt", symbol_placement: "before", thousands_separator: "." }, MacauPataca: { code: m$1.MacauPataca, countries: [r.Macau], decimal_digits: 2, decimal_separator: ",", name: "Macau Pataca", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "MOP$", symbol_native: "MOP$", symbol_placement: "before", thousands_separator: "." }, MacedoniaDenar: { code: m$1.MacedoniaDenar, countries: [r.NorthMacedonia], decimal_digits: 2, decimal_separator: ",", name: "Macedonia Denar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u0434\u0435\u043D", symbol_native: "\u0434\u0435\u043D", symbol_placement: "before", thousands_separator: "." }, MadagascarAriary: { code: m$1.MadagascarAriary, countries: [r.Madagascar], decimal_digits: 0, decimal_separator: ",", name: "Madagascar Ariary", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Ar", symbol_native: "Ar", symbol_placement: "before", thousands_separator: "." }, MalawiKwacha: { code: m$1.MalawiKwacha, countries: [r.Malawi], decimal_digits: 2, decimal_separator: ",", name: "Malawi Kwacha", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "MK", symbol_native: "MK", symbol_placement: "before", thousands_separator: "." }, MalaysiaRinggit: { code: m$1.MalaysiaRinggit, countries: [r.Malaysia], decimal_digits: 2, decimal_separator: ",", name: "Malaysia Ringgit", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "RM", symbol_native: "RM", symbol_placement: "before", thousands_separator: "." }, MaldivesRufiyaa: { code: m$1.MaldivesRufiyaa, countries: [r.Maldives], decimal_digits: 2, decimal_separator: ",", name: "Maldives Rufiyaa", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Rf", symbol_native: "Rf", symbol_placement: "before", thousands_separator: "." }, MaltaLira: { code: m$1.MaltaLira, countries: [r.Malta], decimal_digits: 2, decimal_separator: ",", name: "Malta Lira", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Lm", symbol_native: "Lm", symbol_placement: "before", thousands_separator: "." }, MauritiusRupee: { code: m$1.MauritiusRupee, countries: [r.Mauritius], decimal_digits: 2, decimal_separator: ",", name: "Mauritius Rupee", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A8", symbol_native: "\u20A8", symbol_placement: "before", thousands_separator: "." }, MexicoPeso: { code: m$1.MexicoPeso, countries: [r.Mexico], decimal_digits: 2, decimal_separator: ",", name: "Mexico Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, MoldovaLeu: { code: m$1.MoldovaLeu, countries: [r.Moldova], decimal_digits: 2, decimal_separator: ",", name: "Moldova Leu", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "L", symbol_native: "L", symbol_placement: "before", thousands_separator: "." }, MongoliaTughrik: { code: m$1.MongoliaTughrik, countries: [r.Mongolia], decimal_digits: 2, decimal_separator: ",", name: "Mongolia Tughrik", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20AE", symbol_native: "\u20AE", symbol_placement: "before", thousands_separator: "." }, MoroccoDirham: { code: m$1.MoroccoDirham, countries: [r.Morocco], decimal_digits: 2, decimal_separator: ",", name: "Morocco Dirham", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "DH", symbol_native: "DH", symbol_placement: "before", thousands_separator: "." }, MozambiqueMetical: { code: m$1.MozambiqueMetical, countries: [r.Mozambique], decimal_digits: 2, decimal_separator: ",", name: "Mozambique Metical", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "MT", symbol_native: "MT", symbol_placement: "before", thousands_separator: "." }, MyanmarKyat: { code: m$1.MyanmarKyat, countries: [r.Myanmar], decimal_digits: 0, decimal_separator: ",", name: "Myanmar Kyat", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "K", symbol_native: "K", symbol_placement: "before", thousands_separator: "." }, NamibiaDollar: { code: m$1.NamibiaDollar, countries: [r.Namibia], decimal_digits: 2, decimal_separator: ",", name: "Namibia Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, NepalRupee: { code: m$1.NepalRupee, countries: [r.Nepal], decimal_digits: 2, decimal_separator: ",", name: "Nepal Rupee", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A8", symbol_native: "\u20A8", symbol_placement: "before", thousands_separator: "." }, NetherlandsAntillesGuilder: { code: m$1.NetherlandsAntillesGuilder, countries: [r.NetherlandsAntilles], decimal_digits: 2, decimal_separator: ",", name: "Netherlands Antilles Guilder", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u0192", symbol_native: "\u0192", symbol_placement: "before", thousands_separator: "." }, NewCaledoniaFranc: { code: m$1.NewCaledoniaFranc, countries: [r.NewCaledonia], decimal_digits: 0, decimal_separator: ",", name: "New Caledonia Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A3", symbol_native: "\u20A3", symbol_placement: "before", thousands_separator: "." }, NewZealandDollar: { code: m$1.NewZealandDollar, countries: [r.NewZealand], decimal_digits: 2, decimal_separator: ",", name: "New Zealand Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, NicaraguaCordoba: { code: m$1.NicaraguaCordoba, countries: [r.Nicaragua], decimal_digits: 2, decimal_separator: ",", name: "Nicaragua Cordoba", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "C$", symbol_native: "C$", symbol_placement: "before", thousands_separator: "." }, NigerCFAFranc: { code: m$1.NigerCFAFranc, countries: [r.Niger], decimal_digits: 0, decimal_separator: ",", name: "Niger CFA Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "CFA", symbol_native: "CFA", symbol_placement: "before", thousands_separator: "." }, NigeriaNaira: { code: m$1.NigeriaNaira, countries: [r.Nigeria], decimal_digits: 2, decimal_separator: ",", name: "Nigeria Naira", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A6", symbol_native: "\u20A6", symbol_placement: "before", thousands_separator: "." }, NorthKoreaWon: { code: m$1.NorthKoreaWon, countries: [r.NorthKorea], decimal_digits: 0, decimal_separator: ",", name: "North Korea Won", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A9", symbol_native: "\u20A9", symbol_placement: "before", thousands_separator: "." }, NorwayKrone: { code: m$1.NorwayKrone, countries: [r.Norway], decimal_digits: 2, decimal_separator: ",", name: "Norway Krone", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "kr", symbol_native: "kr", symbol_placement: "before", thousands_separator: "." }, OmanRial: { code: m$1.OmanRial, countries: [r.Oman], decimal_digits: 3, decimal_separator: ",", name: "Oman Rial", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\uFDFC", symbol_native: "\uFDFC", symbol_placement: "before", thousands_separator: "." }, PakistanRupee: { code: m$1.PakistanRupee, countries: [r.Pakistan], decimal_digits: 2, decimal_separator: ",", name: "Pakistan Rupee", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A8", symbol_native: "\u20A8", symbol_placement: "before", thousands_separator: "." }, PanamaBalboa: { code: m$1.PanamaBalboa, countries: [r.Panama], decimal_digits: 2, decimal_separator: ",", name: "Panama Balboa", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "B/.", symbol_native: "B/.", symbol_placement: "before", thousands_separator: "." }, ParaguayGuarani: { code: m$1.ParaguayGuarani, countries: [r.Paraguay], decimal_digits: 0, decimal_separator: ",", name: "Paraguay Guarani", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Gs", symbol_native: "Gs", symbol_placement: "before", thousands_separator: "." }, PeruvianNuevo: { code: m$1.PeruNuevo, countries: [r.Peru], decimal_digits: 2, decimal_separator: ",", name: "Peruvian Nuevo", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "S/.", symbol_native: "S/.", symbol_placement: "before", thousands_separator: "." }, PhilippinesPeso: { code: m$1.PhilippinesPeso, countries: [r.Philippines], decimal_digits: 2, decimal_separator: ",", name: "Philippines Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20B1", symbol_native: "\u20B1", symbol_placement: "before", thousands_separator: "." }, PolandZloty: { code: m$1.PolandZloty, countries: [r.Poland], decimal_digits: 2, decimal_separator: ",", name: "Poland Zloty", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "z\u0142", symbol_native: "z\u0142", symbol_placement: "before", thousands_separator: "." }, QatarRial: { code: m$1.QatarRial, countries: [r.Qatar], decimal_digits: 2, decimal_separator: ",", name: "Qatar Rial", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\uFDFC", symbol_native: "\uFDFC", symbol_placement: "before", thousands_separator: "." }, RomaniaNewLeu: { code: m$1.RomaniaNewLeu, countries: [r.Romania], decimal_digits: 2, decimal_separator: ",", name: "Romania New Leu", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "lei", symbol_native: "lei", symbol_placement: "before", thousands_separator: "." }, RussiaRuble: { code: m$1.RussiaRuble, countries: [r.RussianFederation], decimal_digits: 2, decimal_separator: ",", name: "Russia Ruble", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20BD", symbol_native: "\u20BD", symbol_placement: "before", thousands_separator: "." }, RwandaFranc: { code: m$1.RwandaFranc, countries: [r.Rwanda], decimal_digits: 0, decimal_separator: ",", name: "Rwanda Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "RF", symbol_native: "RF", symbol_placement: "before", thousands_separator: "." }, SaudiArabiaRiyal: { code: m$1.SaudiArabiaRiyal, countries: [r.SaudiArabia], decimal_digits: 2, decimal_separator: ",", name: "Saudi Arabia Riyal", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\uFDFC", symbol_native: "\uFDFC", symbol_placement: "before", thousands_separator: "." }, SerbiaDinar: { code: m$1.SerbiaDinar, countries: [r.Serbia], decimal_digits: 0, decimal_separator: ",", name: "Serbia Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u0414\u0438\u043D.", symbol_native: "\u0414\u0438\u043D.", symbol_placement: "before", thousands_separator: "." }, SeychellesRupee: { code: m$1.SeychellesRupee, countries: [r.Seychelles], decimal_digits: 2, decimal_separator: ",", name: "Seychelles Rupee", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A8", symbol_native: "\u20A8", symbol_placement: "before", thousands_separator: "." }, SingaporeDollar: { code: m$1.SingaporeDollar, countries: [r.Singapore], decimal_digits: 2, decimal_separator: ",", name: "Singapore Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, SlovakiaKoruna: { code: m$1.SlovakiaKoruna, countries: [r.Slovakia], decimal_digits: 2, decimal_separator: ",", name: "Slovakia Koruna", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Sk", symbol_native: "Sk", symbol_placement: "before", thousands_separator: "." }, SloveniaTolar: { code: m$1.SloveniaTolar, countries: [r.Slovenia], decimal_digits: 2, decimal_separator: ",", name: "Slovenia Tolar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "SIT", symbol_native: "SIT", symbol_placement: "before", thousands_separator: "." }, SolomonIslandsDollar: { code: m$1.SolomonIslandsDollar, countries: [r.SolomonIslands], decimal_digits: 2, decimal_separator: ",", name: "Solomon Islands Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, SomaliaShilling: { code: m$1.SomaliaShilling, countries: [r.Somalia], decimal_digits: 0, decimal_separator: ",", name: "Somalia Shilling", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "S", symbol_native: "S", symbol_placement: "before", thousands_separator: "." }, SouthAfricaRand: { code: m$1.SouthAfricaRand, countries: [r.SouthAfrica], decimal_digits: 2, decimal_separator: ",", name: "South Africa Rand", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "R", symbol_native: "R", symbol_placement: "before", thousands_separator: "." }, SouthKoreaWon: { code: m$1.SouthKoreaWon, countries: [r.SouthKorea], decimal_digits: 0, decimal_separator: ",", name: "South Korea Won", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A9", symbol_native: "\u20A9", symbol_placement: "before", thousands_separator: "." }, SriLankaRupee: { code: m$1.SriLankaRupee, countries: [r.SriLanka], decimal_digits: 2, decimal_separator: ",", name: "Sri Lanka Rupee", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A8", symbol_native: "\u20A8", symbol_placement: "before", thousands_separator: "." }, SudanPound: { code: m$1.SudanPound, countries: [r.Sudan], decimal_digits: 2, decimal_separator: ",", name: "Sudan Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, SurinameDollar: { code: m$1.SurinameDollar, countries: [r.Suriname], decimal_digits: 2, decimal_separator: ",", name: "Suriname Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, SwazilandLilangeni: { code: m$1.SwazilandLilangeni, countries: [r.Swaziland], decimal_digits: 2, decimal_separator: ",", name: "Swaziland Lilangeni", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "E", symbol_native: "E", symbol_placement: "before", thousands_separator: "." }, SwedenKrona: { code: m$1.SwedenKrona, countries: [r.Sweden], decimal_digits: 2, decimal_separator: ",", name: "Sweden Krona", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "kr", symbol_native: "kr", symbol_placement: "before", thousands_separator: "." }, SwitzerlandFranc: { code: m$1.SwitzerlandFranc, countries: [r.Switzerland], decimal_digits: 2, decimal_separator: ",", name: "Switzerland Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "CHF", symbol_native: "CHF", symbol_placement: "before", thousands_separator: "." }, SyriaPound: { code: m$1.SyriaPound, countries: [r.Syria], decimal_digits: 2, decimal_separator: ",", name: "Syria Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, TaiwanNewDollar: { code: m$1.TaiwanNewDollar, countries: [r.Taiwan], decimal_digits: 2, decimal_separator: ",", name: "Taiwan New Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "NT$", symbol_native: "NT$", symbol_placement: "before", thousands_separator: "." }, TajikistanSomoni: { code: m$1.TajikistanSomoni, countries: [r.Tajikistan], decimal_digits: 2, decimal_separator: ",", name: "Tajikistan Somoni", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "TJS", symbol_native: "TJS", symbol_placement: "before", thousands_separator: "." }, TanzaniaShilling: { code: m$1.TanzaniaShilling, countries: [r.Tanzania], decimal_digits: 2, decimal_separator: ",", name: "Tanzania Shilling", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "TSh", symbol_native: "TSh", symbol_placement: "before", thousands_separator: "." }, ThailandBaht: { code: m$1.ThailandBaht, countries: [r.Thailand], decimal_digits: 2, decimal_separator: ",", name: "Thailand Baht", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u0E3F", symbol_native: "\u0E3F", symbol_placement: "before", thousands_separator: "." }, TunisiaDinar: { code: m$1.TunisiaDinar, countries: [r.Tunisia], decimal_digits: 3, decimal_separator: ",", name: "Tunisia Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u062F.\u062A", symbol_native: "\u062F.\u062A", symbol_placement: "before", thousands_separator: "." }, TurkeyLira: { code: m$1.TurkeyLira, countries: [r.Turkey], decimal_digits: 2, decimal_separator: ",", name: "Turkey Lira", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20BA", symbol_native: "\u20BA", symbol_placement: "before", thousands_separator: "." }, TurkmenistanManat: { code: m$1.TurkmenistanManat, countries: [r.Turkmenistan], decimal_digits: 2, decimal_separator: ",", name: "Turkmenistan Manat", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "m", symbol_native: "m", symbol_placement: "before", thousands_separator: "." }, UgandaShilling: { code: m$1.UgandaShilling, countries: [r.Uganda], decimal_digits: 0, decimal_separator: ",", name: "Uganda Shilling", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "USh", symbol_native: "USh", symbol_placement: "before", thousands_separator: "." }, UkraineHryvnia: { code: m$1.UkraineHryvnia, countries: [r.Ukraine], decimal_digits: 2, decimal_separator: ",", name: "Ukraine Hryvnia", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20B4", symbol_native: "\u20B4", symbol_placement: "before", thousands_separator: "." }, UnitedArabEmiratesDirham: { code: m$1.UnitedArabEmiratesDirham, countries: [r.UnitedArabEmirates], decimal_digits: 2, decimal_separator: ",", name: "United Arab Emirates Dirham", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u062F.\u0625", symbol_native: "\u062F.\u0625", symbol_placement: "before", thousands_separator: "." }, UnitedKingdomPound: { code: m$1.UnitedKingdomPound, countries: [r.UnitedKingdom], decimal_digits: 2, decimal_separator: ",", name: "United Kingdom Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, UnitedStatesDollar: { code: m$1.UnitedStatesDollar, countries: [r.UnitedStates], decimal_digits: 2, decimal_separator: ",", name: "United States Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, UruguayPeso: { code: m$1.UruguayPeso, countries: [r.Uruguay], decimal_digits: 2, decimal_separator: ",", name: "Uruguay Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$U", symbol_native: "$U", symbol_placement: "before", thousands_separator: "." }, UzbekistanSom: { code: m$1.UzbekistanSom, countries: [r.Uzbekistan], decimal_digits: 2, decimal_separator: ",", name: "Uzbekistan Som", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "UZS", symbol_native: "UZS", symbol_placement: "before", thousands_separator: "." }, VanuatuVatu: { code: m$1.VanuatuVatu, countries: [r.Vanuatu], decimal_digits: 0, decimal_separator: ",", name: "Vanuatu Vatu", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "VT", symbol_native: "VT", symbol_placement: "before", thousands_separator: "." }, VenezuelaBolivar: { code: m$1.VenezuelaBolivar, countries: [r.Venezuela], decimal_digits: 2, decimal_separator: ",", name: "Venezuela Bolivar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Bs. F", symbol_native: "Bs. F", symbol_placement: "before", thousands_separator: "." }, VietnamDong: { code: m$1.VietnamDong, countries: [r.Vietnam], decimal_digits: 0, decimal_separator: ",", name: "Vietnam Dong", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20AB", symbol_native: "\u20AB", symbol_placement: "before", thousands_separator: "." }, YemenRial: { code: m$1.YemenRial, countries: [r.Yemen], decimal_digits: 2, decimal_separator: ",", name: "Yemen Rial", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\uFDFC", symbol_native: "\uFDFC", symbol_placement: "before", thousands_separator: "." }, ZambiaKwacha: { code: m$1.ZambiaKwacha, countries: [r.Zambia], decimal_digits: 2, decimal_separator: ",", name: "Zambia Kwacha", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "ZK", symbol_native: "ZK", symbol_placement: "before", thousands_separator: "." }, ZimbabweDollar: { code: m$1.ZimbabweDollar, countries: [r.Zimbabwe], decimal_digits: 2, decimal_separator: ",", name: "Zimbabwe Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20AB", symbol_native: "\u20AB", symbol_placement: "before", thousands_separator: "." } });
+})(m || (m = {}));
+({ AfghanistanAfghani: { code: m.AfghanistanAfghani, countries: [r.Afghanistan], decimal_digits: 2, decimal_separator: ".", name: "Afghan Afghani", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u060B", symbol_native: "\u060B", symbol_placement: "before", thousands_separator: "," }, AlbaniaLek: { code: m.AlbaniaLek, countries: [r.Albania], decimal_digits: 2, decimal_separator: ",", name: "Albanian Lek", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Lek", symbol_native: "Lek", symbol_placement: "before", thousands_separator: "." }, AlgeriaDinar: { code: m.AlgeriaDinar, countries: [r.Algeria], decimal_digits: 2, decimal_separator: ".", name: "Algerian Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u062F.\u062C", symbol_native: "\u062F.\u062C", symbol_placement: "before", thousands_separator: "," }, ArgentinaPeso: { code: m.ArgentinaPeso, countries: [r.Argentina], decimal_digits: 2, decimal_separator: ".", name: "Argentine Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, ArmeniaDram: { code: m.ArmeniaDram, countries: [r.Armenia], decimal_digits: 2, decimal_separator: ",", name: "Armenian Dram", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u0564\u0580.", symbol_native: "\u0564\u0580.", symbol_placement: "before", thousands_separator: "." }, ArubaFlorin: { code: m.ArubaFlorin, countries: [r.Aruba], decimal_digits: 2, decimal_separator: ".", name: "Aruban Florin", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u0192", symbol_native: "\u0192", symbol_placement: "before", thousands_separator: "," }, AustraliaDollar: { code: m.AustraliaDollar, countries: [r.Australia], decimal_digits: 2, decimal_separator: ".", name: "Australian Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, AzerbaijanManat: { code: m.AzerbaijanNewManat, countries: [r.Azerbaijan], decimal_digits: 2, decimal_separator: ".", name: "Azerbaijani Manat", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u043C\u0430\u043D", symbol_native: "\u043C\u0430\u043D", symbol_placement: "before", thousands_separator: "," }, BahrainDinar: { code: m.BahrainDinar, countries: [r.Bahrain], decimal_digits: 3, decimal_separator: ".", name: "Bahraini Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: ".\u062F.\u0628", symbol_native: ".\u062F.\u0628", symbol_placement: "before", thousands_separator: "," }, BangladeshTaka: { code: m.BangladeshTaka, countries: [r.Bangladesh], decimal_digits: 2, decimal_separator: ".", name: "Bangladeshi Taka", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u09F3", symbol_native: "\u09F3", symbol_placement: "before", thousands_separator: "," }, BarbadosDollar: { code: m.BarbadosDollar, countries: [r.Barbados], decimal_digits: 2, decimal_separator: ".", name: "Barbadian Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, BelarusRuble: { code: m.BelarusRuble, countries: [r.Belarus], decimal_digits: 2, decimal_separator: ".", name: "Belarusian Ruble", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Br", symbol_native: "Br", symbol_placement: "before", thousands_separator: "." }, BelizeDollar: { code: m.BelizeDollar, countries: [r.Belize], decimal_digits: 2, decimal_separator: ".", name: "Belize Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "BZ$", symbol_native: "BZ$", symbol_placement: "before", thousands_separator: "," }, BermudaDollar: { code: m.BermudaDollar, countries: [r.Bermuda], decimal_digits: 2, decimal_separator: ".", name: "Bermudian Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, BoliviaBoliviano: { code: m.BoliviaBoliviano, countries: [r.Bolivia], decimal_digits: 2, decimal_separator: ".", name: "Bolivian Boliviano", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$b", symbol_native: "$b", symbol_placement: "before", thousands_separator: "," }, BosniaAndHerzegovinaConvertibleMarka: { code: m.BosniaAndHerzegovinaConvertibleMark, countries: [r.BosniaAndHerzegovina], decimal_digits: 2, decimal_separator: ",", name: "Bosnia and Herzegovina Convertible Marka", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "KM", symbol_native: "KM", symbol_placement: "before", thousands_separator: "." }, BotswanaPula: { code: m.BotswanaPula, countries: [r.Botswana], decimal_digits: 2, decimal_separator: ".", name: "Botswana Pula", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "P", symbol_native: "P", symbol_placement: "before", thousands_separator: "," }, BrazilReal: { code: m.BrazilReal, countries: [r.Brazil], decimal_digits: 2, decimal_separator: ",", name: "Brazilian Real", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "R$", symbol_native: "R$", symbol_placement: "before", thousands_separator: "." }, BruneiDollar: { code: m.BruneiDollar, countries: [r.Brunei], decimal_digits: 2, decimal_separator: ".", name: "Brunei Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, BulgariaLev: { code: m.BulgariaLev, countries: [r.Bulgaria], decimal_digits: 2, decimal_separator: ".", name: "Bulgarian Lev", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u043B\u0432", symbol_native: "\u043B\u0432", symbol_placement: "before", thousands_separator: "." }, BurundiFranc: { code: m.BurundiFranc, countries: [r.Burundi], decimal_digits: 0, decimal_separator: ".", name: "Burundian Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "FBu", symbol_native: "FBu", symbol_placement: "before", thousands_separator: "," }, CambodiaRiel: { code: m.CambodiaRiel, countries: [r.Cambodia], decimal_digits: 2, decimal_separator: ",", name: "Cambodian Riel", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u17DB", symbol_native: "\u17DB", symbol_placement: "before", thousands_separator: "." }, CanadaDollar: { code: m.CanadaDollar, countries: [r.Canada], decimal_digits: 2, decimal_separator: ".", name: "Canadian Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, CapeVerdeEscudo: { code: m.CapeVerdeEscudo, countries: [r.CapeVerde], decimal_digits: 2, decimal_separator: ".", name: "Cape Verde Escudo", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Esc", symbol_native: "Esc", symbol_placement: "before", thousands_separator: "," }, CaymanIslandsDollar: { code: m.CaymanIslandsDollar, countries: [r.CaymanIslands], decimal_digits: 2, decimal_separator: ".", name: "Cayman Islands Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, ChilePeso: { code: m.ChilePeso, countries: [r.Chile], decimal_digits: 0, decimal_separator: ".", name: "Chilean Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, ChinaYuanRenminbi: { code: m.ChinaYuan, countries: [r.China], decimal_digits: 2, decimal_separator: ".", name: "Chinese Yuan", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA5", symbol_native: "\xA5", symbol_placement: "before", thousands_separator: "," }, ColombiaPeso: { code: m.ColombiaPeso, countries: [r.Colombia], decimal_digits: 2, decimal_separator: ".", name: "Colombian Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, ComorosFranc: { code: m.ComorosFranc, countries: [r.Comoros], decimal_digits: 0, decimal_separator: ".", name: "Comoros Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "CF", symbol_native: "CF", symbol_placement: "before", thousands_separator: "," }, CostaRicaColon: { code: m.CostaRicaColon, countries: [r.CostaRica], decimal_digits: 2, decimal_separator: ".", name: "Costa Rican Colon", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A1", symbol_native: "\u20A1", symbol_placement: "before", thousands_separator: "," }, CroatiaKuna: { code: m.CroatiaKuna, countries: [r.Croatia], decimal_digits: 2, decimal_separator: ",", name: "Croatian Kuna", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "kn", symbol_native: "kn", symbol_placement: "before", thousands_separator: "." }, CubaConvertiblePeso: { code: m.CubaConvertiblePeso, countries: [r.Cuba], decimal_digits: 2, decimal_separator: ",", name: "Cuba Convertible Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, CubaPeso: { code: m.CubaPeso, countries: [r.Cuba], decimal_digits: 2, decimal_separator: ",", name: "Cuba Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, CyprusPound: { code: m.CyprusPound, countries: [r.Cyprus], decimal_digits: 2, decimal_separator: ",", name: "Cyprus Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, CzechRepublicKoruna: { code: m.CzechRepublicKoruna, countries: [r.CzechRepublic], decimal_digits: 2, decimal_separator: ",", name: "Czech Republic Koruna", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "K\u010D", symbol_native: "K\u010D", symbol_placement: "before", thousands_separator: "." }, DenmarkKrone: { code: m.DenmarkKrone, countries: [r.Denmark], decimal_digits: 2, decimal_separator: ",", name: "Denmark Krone", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "kr", symbol_native: "kr", symbol_placement: "before", thousands_separator: "." }, DjiboutiFranc: { code: m.DjiboutiFranc, countries: [r.Djibouti], decimal_digits: 0, decimal_separator: ".", name: "Djibouti Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Fdj", symbol_native: "Fdj", symbol_placement: "before", thousands_separator: "," }, DominicanRepublicPeso: { code: m.DominicanRepublicPeso, countries: [r.DominicanRepublic], decimal_digits: 2, decimal_separator: ",", name: "Dominican Republic Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "RD$", symbol_native: "RD$", symbol_placement: "before", thousands_separator: "." }, EastCaribbeanDollar: { code: m.EastCaribbeanDollar, countries: [r.AntiguaAndBarbuda, r.Dominica, r.Grenada, r.SaintKittsAndNevis, r.SaintLucia, r.SaintVincentAndTheGrenadines], decimal_digits: 2, decimal_separator: ".", name: "East Caribbean Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "," }, EgyptPound: { code: m.EgyptPound, countries: [r.Egypt], decimal_digits: 2, decimal_separator: ".", name: "Egypt Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "," }, ElSalvadorColon: { code: m.ElSalvadorColon, countries: [r.ElSalvador], decimal_digits: 2, decimal_separator: ",", name: "El Salvador Colon", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A1", symbol_native: "\u20A1", symbol_placement: "before", thousands_separator: "." }, EquatorialGuineaEkwele: { code: m.EquatorialGuineaEkwele, countries: [r.EquatorialGuinea], decimal_digits: 0, decimal_separator: ".", name: "Equatorial Guinea Ekwele", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "GQE", symbol_native: "GQE", symbol_placement: "before", thousands_separator: "," }, EritreaNakfa: { code: m.EritreaNakfa, countries: [r.Eritrea], decimal_digits: 2, decimal_separator: ",", name: "Eritrea Nakfa", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Nfk", symbol_native: "Nfk", symbol_placement: "before", thousands_separator: "." }, EstoniaKroon: { code: m.EstoniaKroon, countries: [r.Estonia], decimal_digits: 2, decimal_separator: ",", name: "Estonia Kroon", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "kr", symbol_native: "kr", symbol_placement: "before", thousands_separator: "." }, EthiopiaBirr: { code: m.EthiopiaBirr, countries: [r.Ethiopia], decimal_digits: 2, decimal_separator: ",", name: "Ethiopia Birr", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Br", symbol_native: "Br", symbol_placement: "before", thousands_separator: "." }, Euro: { code: m.Euro, countries: [r.Andorra, r.Austria, r.Belgium, r.Cyprus, r.Estonia, r.Finland, r.France, r.Germany, r.Greece, r.Ireland, r.Italy, r.Latvia, r.Lithuania, r.Luxembourg, r.Malta, r.Monaco, r.Netherlands, r.Portugal, r.Spain, r.Sweden, r.UnitedKingdom], decimal_digits: 2, decimal_separator: ",", name: "Euro", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20AC", symbol_native: "\u20AC", symbol_placement: "before", thousands_separator: "." }, FalklandIslandsPound: { code: m.FalklandIslandsPound, countries: [r.FalklandIslands], decimal_digits: 2, decimal_separator: ",", name: "Equatorial Guinea Ekwele", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, FijiDollar: { code: m.FijiDollar, countries: [r.Fiji], decimal_digits: 2, decimal_separator: ",", name: "Fiji Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, GambiaDalasi: { code: m.GambiaDalasi, countries: [r.Gambia], decimal_digits: 2, decimal_separator: ",", name: "Gambia Dalasi", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "D", symbol_native: "D", symbol_placement: "before", thousands_separator: "." }, GeorgiaLari: { code: m.GeorgiaLari, countries: [r.Georgia], decimal_digits: 2, decimal_separator: ",", name: "Georgia Lari", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20BE", symbol_native: "\u20BE", symbol_placement: "before", thousands_separator: "." }, GhanaCedi: { code: m.GhanaCedi, countries: [r.Ghana], decimal_digits: 2, decimal_separator: ",", name: "Ghana Cedi", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20B5", symbol_native: "\u20B5", symbol_placement: "before", thousands_separator: "." }, GibraltarPound: { code: m.GibraltarPound, countries: [r.Gibraltar], decimal_digits: 2, decimal_separator: ",", name: "Gibraltar Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, GuatemalaQuetzal: { code: m.GuatemalaQuetzal, countries: [r.Guatemala], decimal_digits: 2, decimal_separator: ",", name: "Guatemala Quetzal", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Q", symbol_native: "Q", symbol_placement: "before", thousands_separator: "." }, GuernseyPound: { code: m.GuernseyPound, countries: [r.Guernsey], decimal_digits: 2, decimal_separator: ",", name: "Guernsey Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, GuineaBissauPeso: { code: m.GuineaBissauPeso, countries: [r.GuineaBissau], decimal_digits: 2, decimal_separator: ",", name: "Guinea-Bissau Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20B5", symbol_native: "\u20B5", symbol_placement: "before", thousands_separator: "." }, GuyanaDollar: { code: m.GuyanaDollar, countries: [r.Guyana], decimal_digits: 2, decimal_separator: ",", name: "Guyana Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, HaitiGourde: { code: m.HaitiGourde, countries: [r.Haiti], decimal_digits: 2, decimal_separator: ",", name: "Haiti Gourde", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "G", symbol_native: "G", symbol_placement: "before", thousands_separator: "." }, HondurasLempira: { code: m.HondurasLempira, countries: [r.Honduras], decimal_digits: 2, decimal_separator: ",", name: "Honduras Lempira", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "L", symbol_native: "L", symbol_placement: "before", thousands_separator: "." }, HongKongDollar: { code: m.HongKongDollar, countries: [r.HongKong], decimal_digits: 2, decimal_separator: ",", name: "Hong Kong Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, HungaryForint: { code: m.HungaryForint, countries: [r.Hungary], decimal_digits: 2, decimal_separator: ",", name: "Hungary Forint", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Ft", symbol_native: "Ft", symbol_placement: "before", thousands_separator: "." }, IcelandKrona: { code: m.IcelandKrona, countries: [r.Iceland], decimal_digits: 0, decimal_separator: ",", name: "Iceland Krona", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "kr", symbol_native: "kr", symbol_placement: "before", thousands_separator: "." }, IndianRupee: { code: m.IndiaRupee, countries: [r.India, r.Bhutan], decimal_digits: 2, decimal_separator: ",", name: "Indian Rupee", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20B9", symbol_native: "\u20B9", symbol_placement: "before", thousands_separator: "." }, IndonesiaRupiah: { code: m.IndonesiaRupiah, countries: [r.Indonesia], decimal_digits: 0, decimal_separator: ",", name: "Indonesia Rupiah", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Rp", symbol_native: "Rp", symbol_placement: "before", thousands_separator: "." }, IranRial: { code: m.IranRial, countries: [r.Iran], decimal_digits: 0, decimal_separator: ",", name: "Iran Rial", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\uFDFC", symbol_native: "\uFDFC", symbol_placement: "before", thousands_separator: "." }, IsleOfManPound: { code: m.IsleOfManPound, countries: [r.IsleOfMan], decimal_digits: 2, decimal_separator: ",", name: "Isle of Man Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\uFDFC", symbol_native: "\uFDFC", symbol_placement: "before", thousands_separator: "." }, IsraeliShekel: { code: m.IsraelNewShekel, countries: [r.Israel], decimal_digits: 2, decimal_separator: ",", name: "Israeli Shekel", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20AA", symbol_native: "\u20AA", symbol_placement: "before", thousands_separator: "." }, JamaicaDollar: { code: m.JamaicaDollar, countries: [r.Jamaica], decimal_digits: 2, decimal_separator: ",", name: "Jamaica Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "J$", symbol_native: "J$", symbol_placement: "before", thousands_separator: "." }, JapanYen: { code: m.JapanYen, countries: [r.Japan], decimal_digits: 0, decimal_separator: ",", name: "Japan Yen", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA5", symbol_native: "\uFFE5", symbol_placement: "before", thousands_separator: "." }, JerseyPound: { code: m.JerseyPound, countries: [r.Jersey], decimal_digits: 2, decimal_separator: ",", name: "Jersey Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, JordanDinar: { code: m.JordanDinar, countries: [r.Jordan], decimal_digits: 3, decimal_separator: ",", name: "Jordan Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "JD", symbol_native: "JD", symbol_placement: "before", thousands_separator: "." }, KazakhstanTenge: { code: m.KazakhstanTenge, countries: [r.Kazakhstan], decimal_digits: 2, decimal_separator: ",", name: "Kazakhstan Tenge", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20B8", symbol_native: "\u20B8", symbol_placement: "before", thousands_separator: "." }, KenyaShilling: { code: m.KenyaShilling, countries: [r.Kenya], decimal_digits: 2, decimal_separator: ",", name: "Kenya Shilling", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "KSh", symbol_native: "KSh", symbol_placement: "before", thousands_separator: "." }, KuwaitDinar: { code: m.KuwaitDinar, countries: [r.Kuwait], decimal_digits: 3, decimal_separator: ",", name: "Kuwait Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "KD", symbol_native: "KD", symbol_placement: "before", thousands_separator: "." }, KyrgyzstanSom: { code: m.KyrgyzstanSom, countries: [r.Kyrgyzstan], decimal_digits: 2, decimal_separator: ",", name: "Kyrgyzstan Som", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "KGS", symbol_native: "KGS", symbol_placement: "before", thousands_separator: "." }, LaosKip: { code: m.LaosKip, countries: [r.Laos], decimal_digits: 0, decimal_separator: ",", name: "Laos Kip", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20AD", symbol_native: "\u20AD", symbol_placement: "before", thousands_separator: "." }, LatviaLats: { code: m.LatviaLats, countries: [r.Latvia], decimal_digits: 2, decimal_separator: ",", name: "Latvia Lat", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Ls", symbol_native: "Ls", symbol_placement: "before", thousands_separator: "." }, LebanonPound: { code: m.LebanonPound, countries: [r.Lebanon], decimal_digits: 0, decimal_separator: ",", name: "Lebanon Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, LesothoLoti: { code: m.LesothoLoti, countries: [r.Lesotho], decimal_digits: 2, decimal_separator: ",", name: "Lesotho Loti", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "M", symbol_native: "M", symbol_placement: "before", thousands_separator: "." }, LiberiaDollar: { code: m.LiberiaDollar, countries: [r.Liberia], decimal_digits: 2, decimal_separator: ",", name: "Liberia Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, LibyanDinar: { code: m.LibyanDinar, countries: [r.Libya], decimal_digits: 3, decimal_separator: ",", name: "Libyan Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "LD", symbol_native: "LD", symbol_placement: "before", thousands_separator: "." }, LithuaniaLitas: { code: m.LithuaniaLitas, countries: [r.Lithuania], decimal_digits: 2, decimal_separator: ",", name: "Lithuania Litas", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Lt", symbol_native: "Lt", symbol_placement: "before", thousands_separator: "." }, MacauPataca: { code: m.MacauPataca, countries: [r.Macau], decimal_digits: 2, decimal_separator: ",", name: "Macau Pataca", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "MOP$", symbol_native: "MOP$", symbol_placement: "before", thousands_separator: "." }, MacedoniaDenar: { code: m.MacedoniaDenar, countries: [r.NorthMacedonia], decimal_digits: 2, decimal_separator: ",", name: "Macedonia Denar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u0434\u0435\u043D", symbol_native: "\u0434\u0435\u043D", symbol_placement: "before", thousands_separator: "." }, MadagascarAriary: { code: m.MadagascarAriary, countries: [r.Madagascar], decimal_digits: 0, decimal_separator: ",", name: "Madagascar Ariary", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Ar", symbol_native: "Ar", symbol_placement: "before", thousands_separator: "." }, MalawiKwacha: { code: m.MalawiKwacha, countries: [r.Malawi], decimal_digits: 2, decimal_separator: ",", name: "Malawi Kwacha", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "MK", symbol_native: "MK", symbol_placement: "before", thousands_separator: "." }, MalaysiaRinggit: { code: m.MalaysiaRinggit, countries: [r.Malaysia], decimal_digits: 2, decimal_separator: ",", name: "Malaysia Ringgit", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "RM", symbol_native: "RM", symbol_placement: "before", thousands_separator: "." }, MaldivesRufiyaa: { code: m.MaldivesRufiyaa, countries: [r.Maldives], decimal_digits: 2, decimal_separator: ",", name: "Maldives Rufiyaa", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Rf", symbol_native: "Rf", symbol_placement: "before", thousands_separator: "." }, MaltaLira: { code: m.MaltaLira, countries: [r.Malta], decimal_digits: 2, decimal_separator: ",", name: "Malta Lira", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Lm", symbol_native: "Lm", symbol_placement: "before", thousands_separator: "." }, MauritiusRupee: { code: m.MauritiusRupee, countries: [r.Mauritius], decimal_digits: 2, decimal_separator: ",", name: "Mauritius Rupee", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A8", symbol_native: "\u20A8", symbol_placement: "before", thousands_separator: "." }, MexicoPeso: { code: m.MexicoPeso, countries: [r.Mexico], decimal_digits: 2, decimal_separator: ",", name: "Mexico Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, MoldovaLeu: { code: m.MoldovaLeu, countries: [r.Moldova], decimal_digits: 2, decimal_separator: ",", name: "Moldova Leu", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "L", symbol_native: "L", symbol_placement: "before", thousands_separator: "." }, MongoliaTughrik: { code: m.MongoliaTughrik, countries: [r.Mongolia], decimal_digits: 2, decimal_separator: ",", name: "Mongolia Tughrik", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20AE", symbol_native: "\u20AE", symbol_placement: "before", thousands_separator: "." }, MoroccoDirham: { code: m.MoroccoDirham, countries: [r.Morocco], decimal_digits: 2, decimal_separator: ",", name: "Morocco Dirham", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "DH", symbol_native: "DH", symbol_placement: "before", thousands_separator: "." }, MozambiqueMetical: { code: m.MozambiqueMetical, countries: [r.Mozambique], decimal_digits: 2, decimal_separator: ",", name: "Mozambique Metical", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "MT", symbol_native: "MT", symbol_placement: "before", thousands_separator: "." }, MyanmarKyat: { code: m.MyanmarKyat, countries: [r.Myanmar], decimal_digits: 0, decimal_separator: ",", name: "Myanmar Kyat", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "K", symbol_native: "K", symbol_placement: "before", thousands_separator: "." }, NamibiaDollar: { code: m.NamibiaDollar, countries: [r.Namibia], decimal_digits: 2, decimal_separator: ",", name: "Namibia Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, NepalRupee: { code: m.NepalRupee, countries: [r.Nepal], decimal_digits: 2, decimal_separator: ",", name: "Nepal Rupee", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A8", symbol_native: "\u20A8", symbol_placement: "before", thousands_separator: "." }, NetherlandsAntillesGuilder: { code: m.NetherlandsAntillesGuilder, countries: [r.NetherlandsAntilles], decimal_digits: 2, decimal_separator: ",", name: "Netherlands Antilles Guilder", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u0192", symbol_native: "\u0192", symbol_placement: "before", thousands_separator: "." }, NewCaledoniaFranc: { code: m.NewCaledoniaFranc, countries: [r.NewCaledonia], decimal_digits: 0, decimal_separator: ",", name: "New Caledonia Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A3", symbol_native: "\u20A3", symbol_placement: "before", thousands_separator: "." }, NewZealandDollar: { code: m.NewZealandDollar, countries: [r.NewZealand], decimal_digits: 2, decimal_separator: ",", name: "New Zealand Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, NicaraguaCordoba: { code: m.NicaraguaCordoba, countries: [r.Nicaragua], decimal_digits: 2, decimal_separator: ",", name: "Nicaragua Cordoba", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "C$", symbol_native: "C$", symbol_placement: "before", thousands_separator: "." }, NigerCFAFranc: { code: m.NigerCFAFranc, countries: [r.Niger], decimal_digits: 0, decimal_separator: ",", name: "Niger CFA Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "CFA", symbol_native: "CFA", symbol_placement: "before", thousands_separator: "." }, NigeriaNaira: { code: m.NigeriaNaira, countries: [r.Nigeria], decimal_digits: 2, decimal_separator: ",", name: "Nigeria Naira", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A6", symbol_native: "\u20A6", symbol_placement: "before", thousands_separator: "." }, NorthKoreaWon: { code: m.NorthKoreaWon, countries: [r.NorthKorea], decimal_digits: 0, decimal_separator: ",", name: "North Korea Won", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A9", symbol_native: "\u20A9", symbol_placement: "before", thousands_separator: "." }, NorwayKrone: { code: m.NorwayKrone, countries: [r.Norway], decimal_digits: 2, decimal_separator: ",", name: "Norway Krone", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "kr", symbol_native: "kr", symbol_placement: "before", thousands_separator: "." }, OmanRial: { code: m.OmanRial, countries: [r.Oman], decimal_digits: 3, decimal_separator: ",", name: "Oman Rial", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\uFDFC", symbol_native: "\uFDFC", symbol_placement: "before", thousands_separator: "." }, PakistanRupee: { code: m.PakistanRupee, countries: [r.Pakistan], decimal_digits: 2, decimal_separator: ",", name: "Pakistan Rupee", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A8", symbol_native: "\u20A8", symbol_placement: "before", thousands_separator: "." }, PanamaBalboa: { code: m.PanamaBalboa, countries: [r.Panama], decimal_digits: 2, decimal_separator: ",", name: "Panama Balboa", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "B/.", symbol_native: "B/.", symbol_placement: "before", thousands_separator: "." }, ParaguayGuarani: { code: m.ParaguayGuarani, countries: [r.Paraguay], decimal_digits: 0, decimal_separator: ",", name: "Paraguay Guarani", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Gs", symbol_native: "Gs", symbol_placement: "before", thousands_separator: "." }, PeruvianNuevo: { code: m.PeruNuevo, countries: [r.Peru], decimal_digits: 2, decimal_separator: ",", name: "Peruvian Nuevo", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "S/.", symbol_native: "S/.", symbol_placement: "before", thousands_separator: "." }, PhilippinesPeso: { code: m.PhilippinesPeso, countries: [r.Philippines], decimal_digits: 2, decimal_separator: ",", name: "Philippines Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20B1", symbol_native: "\u20B1", symbol_placement: "before", thousands_separator: "." }, PolandZloty: { code: m.PolandZloty, countries: [r.Poland], decimal_digits: 2, decimal_separator: ",", name: "Poland Zloty", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "z\u0142", symbol_native: "z\u0142", symbol_placement: "before", thousands_separator: "." }, QatarRial: { code: m.QatarRial, countries: [r.Qatar], decimal_digits: 2, decimal_separator: ",", name: "Qatar Rial", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\uFDFC", symbol_native: "\uFDFC", symbol_placement: "before", thousands_separator: "." }, RomaniaNewLeu: { code: m.RomaniaNewLeu, countries: [r.Romania], decimal_digits: 2, decimal_separator: ",", name: "Romania New Leu", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "lei", symbol_native: "lei", symbol_placement: "before", thousands_separator: "." }, RussiaRuble: { code: m.RussiaRuble, countries: [r.RussianFederation], decimal_digits: 2, decimal_separator: ",", name: "Russia Ruble", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20BD", symbol_native: "\u20BD", symbol_placement: "before", thousands_separator: "." }, RwandaFranc: { code: m.RwandaFranc, countries: [r.Rwanda], decimal_digits: 0, decimal_separator: ",", name: "Rwanda Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "RF", symbol_native: "RF", symbol_placement: "before", thousands_separator: "." }, SaudiArabiaRiyal: { code: m.SaudiArabiaRiyal, countries: [r.SaudiArabia], decimal_digits: 2, decimal_separator: ",", name: "Saudi Arabia Riyal", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\uFDFC", symbol_native: "\uFDFC", symbol_placement: "before", thousands_separator: "." }, SerbiaDinar: { code: m.SerbiaDinar, countries: [r.Serbia], decimal_digits: 0, decimal_separator: ",", name: "Serbia Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u0414\u0438\u043D.", symbol_native: "\u0414\u0438\u043D.", symbol_placement: "before", thousands_separator: "." }, SeychellesRupee: { code: m.SeychellesRupee, countries: [r.Seychelles], decimal_digits: 2, decimal_separator: ",", name: "Seychelles Rupee", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A8", symbol_native: "\u20A8", symbol_placement: "before", thousands_separator: "." }, SingaporeDollar: { code: m.SingaporeDollar, countries: [r.Singapore], decimal_digits: 2, decimal_separator: ",", name: "Singapore Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, SlovakiaKoruna: { code: m.SlovakiaKoruna, countries: [r.Slovakia], decimal_digits: 2, decimal_separator: ",", name: "Slovakia Koruna", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Sk", symbol_native: "Sk", symbol_placement: "before", thousands_separator: "." }, SloveniaTolar: { code: m.SloveniaTolar, countries: [r.Slovenia], decimal_digits: 2, decimal_separator: ",", name: "Slovenia Tolar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "SIT", symbol_native: "SIT", symbol_placement: "before", thousands_separator: "." }, SolomonIslandsDollar: { code: m.SolomonIslandsDollar, countries: [r.SolomonIslands], decimal_digits: 2, decimal_separator: ",", name: "Solomon Islands Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, SomaliaShilling: { code: m.SomaliaShilling, countries: [r.Somalia], decimal_digits: 0, decimal_separator: ",", name: "Somalia Shilling", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "S", symbol_native: "S", symbol_placement: "before", thousands_separator: "." }, SouthAfricaRand: { code: m.SouthAfricaRand, countries: [r.SouthAfrica], decimal_digits: 2, decimal_separator: ",", name: "South Africa Rand", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "R", symbol_native: "R", symbol_placement: "before", thousands_separator: "." }, SouthKoreaWon: { code: m.SouthKoreaWon, countries: [r.SouthKorea], decimal_digits: 0, decimal_separator: ",", name: "South Korea Won", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A9", symbol_native: "\u20A9", symbol_placement: "before", thousands_separator: "." }, SriLankaRupee: { code: m.SriLankaRupee, countries: [r.SriLanka], decimal_digits: 2, decimal_separator: ",", name: "Sri Lanka Rupee", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20A8", symbol_native: "\u20A8", symbol_placement: "before", thousands_separator: "." }, SudanPound: { code: m.SudanPound, countries: [r.Sudan], decimal_digits: 2, decimal_separator: ",", name: "Sudan Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, SurinameDollar: { code: m.SurinameDollar, countries: [r.Suriname], decimal_digits: 2, decimal_separator: ",", name: "Suriname Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, SwazilandLilangeni: { code: m.SwazilandLilangeni, countries: [r.Swaziland], decimal_digits: 2, decimal_separator: ",", name: "Swaziland Lilangeni", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "E", symbol_native: "E", symbol_placement: "before", thousands_separator: "." }, SwedenKrona: { code: m.SwedenKrona, countries: [r.Sweden], decimal_digits: 2, decimal_separator: ",", name: "Sweden Krona", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "kr", symbol_native: "kr", symbol_placement: "before", thousands_separator: "." }, SwitzerlandFranc: { code: m.SwitzerlandFranc, countries: [r.Switzerland], decimal_digits: 2, decimal_separator: ",", name: "Switzerland Franc", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "CHF", symbol_native: "CHF", symbol_placement: "before", thousands_separator: "." }, SyriaPound: { code: m.SyriaPound, countries: [r.Syria], decimal_digits: 2, decimal_separator: ",", name: "Syria Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, TaiwanNewDollar: { code: m.TaiwanNewDollar, countries: [r.Taiwan], decimal_digits: 2, decimal_separator: ",", name: "Taiwan New Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "NT$", symbol_native: "NT$", symbol_placement: "before", thousands_separator: "." }, TajikistanSomoni: { code: m.TajikistanSomoni, countries: [r.Tajikistan], decimal_digits: 2, decimal_separator: ",", name: "Tajikistan Somoni", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "TJS", symbol_native: "TJS", symbol_placement: "before", thousands_separator: "." }, TanzaniaShilling: { code: m.TanzaniaShilling, countries: [r.Tanzania], decimal_digits: 2, decimal_separator: ",", name: "Tanzania Shilling", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "TSh", symbol_native: "TSh", symbol_placement: "before", thousands_separator: "." }, ThailandBaht: { code: m.ThailandBaht, countries: [r.Thailand], decimal_digits: 2, decimal_separator: ",", name: "Thailand Baht", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u0E3F", symbol_native: "\u0E3F", symbol_placement: "before", thousands_separator: "." }, TunisiaDinar: { code: m.TunisiaDinar, countries: [r.Tunisia], decimal_digits: 3, decimal_separator: ",", name: "Tunisia Dinar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u062F.\u062A", symbol_native: "\u062F.\u062A", symbol_placement: "before", thousands_separator: "." }, TurkeyLira: { code: m.TurkeyLira, countries: [r.Turkey], decimal_digits: 2, decimal_separator: ",", name: "Turkey Lira", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20BA", symbol_native: "\u20BA", symbol_placement: "before", thousands_separator: "." }, TurkmenistanManat: { code: m.TurkmenistanManat, countries: [r.Turkmenistan], decimal_digits: 2, decimal_separator: ",", name: "Turkmenistan Manat", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "m", symbol_native: "m", symbol_placement: "before", thousands_separator: "." }, UgandaShilling: { code: m.UgandaShilling, countries: [r.Uganda], decimal_digits: 0, decimal_separator: ",", name: "Uganda Shilling", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "USh", symbol_native: "USh", symbol_placement: "before", thousands_separator: "." }, UkraineHryvnia: { code: m.UkraineHryvnia, countries: [r.Ukraine], decimal_digits: 2, decimal_separator: ",", name: "Ukraine Hryvnia", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20B4", symbol_native: "\u20B4", symbol_placement: "before", thousands_separator: "." }, UnitedArabEmiratesDirham: { code: m.UnitedArabEmiratesDirham, countries: [r.UnitedArabEmirates], decimal_digits: 2, decimal_separator: ",", name: "United Arab Emirates Dirham", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u062F.\u0625", symbol_native: "\u062F.\u0625", symbol_placement: "before", thousands_separator: "." }, UnitedKingdomPound: { code: m.UnitedKingdomPound, countries: [r.UnitedKingdom], decimal_digits: 2, decimal_separator: ",", name: "United Kingdom Pound", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\xA3", symbol_native: "\xA3", symbol_placement: "before", thousands_separator: "." }, UnitedStatesDollar: { code: m.UnitedStatesDollar, countries: [r.UnitedStates], decimal_digits: 2, decimal_separator: ",", name: "United States Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$", symbol_native: "$", symbol_placement: "before", thousands_separator: "." }, UruguayPeso: { code: m.UruguayPeso, countries: [r.Uruguay], decimal_digits: 2, decimal_separator: ",", name: "Uruguay Peso", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "$U", symbol_native: "$U", symbol_placement: "before", thousands_separator: "." }, UzbekistanSom: { code: m.UzbekistanSom, countries: [r.Uzbekistan], decimal_digits: 2, decimal_separator: ",", name: "Uzbekistan Som", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "UZS", symbol_native: "UZS", symbol_placement: "before", thousands_separator: "." }, VanuatuVatu: { code: m.VanuatuVatu, countries: [r.Vanuatu], decimal_digits: 0, decimal_separator: ",", name: "Vanuatu Vatu", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "VT", symbol_native: "VT", symbol_placement: "before", thousands_separator: "." }, VenezuelaBolivar: { code: m.VenezuelaBolivar, countries: [r.Venezuela], decimal_digits: 2, decimal_separator: ",", name: "Venezuela Bolivar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "Bs. F", symbol_native: "Bs. F", symbol_placement: "before", thousands_separator: "." }, VietnamDong: { code: m.VietnamDong, countries: [r.Vietnam], decimal_digits: 0, decimal_separator: ",", name: "Vietnam Dong", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20AB", symbol_native: "\u20AB", symbol_placement: "before", thousands_separator: "." }, YemenRial: { code: m.YemenRial, countries: [r.Yemen], decimal_digits: 2, decimal_separator: ",", name: "Yemen Rial", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\uFDFC", symbol_native: "\uFDFC", symbol_placement: "before", thousands_separator: "." }, ZambiaKwacha: { code: m.ZambiaKwacha, countries: [r.Zambia], decimal_digits: 2, decimal_separator: ",", name: "Zambia Kwacha", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "ZK", symbol_native: "ZK", symbol_placement: "before", thousands_separator: "." }, ZimbabweDollar: { code: m.ZimbabweDollar, countries: [r.Zimbabwe], decimal_digits: 2, decimal_separator: ",", name: "Zimbabwe Dollar", negative_sign: "-", positive_sign: "", rounding: 0, symbol: "\u20AB", symbol_native: "\u20AB", symbol_placement: "before", thousands_separator: "." } });
 var Me;
 (function(a2) {
   a2.Bitcoin = "BTC", a2.Ethereum = "ETH", a2.Litecoin = "LTC", a2.Ripple = "XRP", a2.Dash = "DASH", a2.Zcash = "ZEC", a2.Dogecoin = "DOGE", a2.Monero = "XMR", a2.BitcoinCash = "BCH", a2.EOS = "EOS", a2.Binance = "BNB", a2.Stellar = "XLM", a2.Cardano = "ADA", a2.IOTA = "IOTA", a2.Tezos = "XTZ", a2.NEO = "NEO", a2.TRON = "TRX", a2.EOSClassic = "EOSC", a2.Ontology = "ONT", a2.VeChain = "VEN", a2.QTUM = "QTUM", a2.Lisk = "LSK", a2.Waves = "WAVES", a2.OmiseGO = "OMG", a2.Zilliqa = "ZIL", a2.BitcoinGold = "BTG", a2.Decred = "DCR", a2.Stratis = "STRAT", a2.Populous = "PPT", a2.Augur = "REP", a2.Golem = "GNT", a2.Siacoin = "SC", a2.BasicAttentionToken = "BAT", a2.ZCoin = "XZC", a2.StratisHedged = "SNT", a2.VeChainHedged = "VEN", a2.PowerLedger = "POWR", a2.WavesHedged = "WAVE", a2.ZilliqaHedged = "ZRX", a2.BitcoinDiamond = "BCD", a2.DigiByte = "DGB", a2.DigiByteHedged = "DGB", a2.Bytecoin = "BCN", a2.BytecoinHedged = "BCN";
@@ -23771,230 +25611,230 @@ var u;
 (function(a2) {
   a2.AfricaAbidjan = "Africa/Abidjan", a2.AfricaAccra = "Africa/Accra", a2.AfricaAddisAbaba = "Africa/Addis_Ababa", a2.AfricaAlgiers = "Africa/Algiers", a2.AfricaAsmara = "Africa/Asmara", a2.AfricaBamako = "Africa/Bamako", a2.AfricaBangui = "Africa/Bangui", a2.AfricaBanjul = "Africa/Banjul", a2.AfricaBissau = "Africa/Bissau", a2.AfricaBlantyre = "Africa/Blantyre", a2.AfricaBrazzaville = "Africa/Brazzaville", a2.AfricaBujumbura = "Africa/Bujumbura", a2.AfricaCairo = "Africa/Cairo", a2.AfricaCasablanca = "Africa/Casablanca", a2.AfricaCeuta = "Africa/Ceuta", a2.AfricaConakry = "Africa/Conakry", a2.AfricaDakar = "Africa/Dakar", a2.AfricaDarEsSalaam = "Africa/Dar_es_Salaam", a2.AfricaDjibouti = "Africa/Djibouti", a2.AfricaDouala = "Africa/Douala", a2.AfricaElAaiun = "Africa/El_Aaiun", a2.AfricaFreetown = "Africa/Freetown", a2.AfricaGaborone = "Africa/Gaborone", a2.AfricaHarare = "Africa/Harare", a2.AfricaJohannesburg = "Africa/Johannesburg", a2.AfricaJuba = "Africa/Juba", a2.AfricaKampala = "Africa/Kampala", a2.AfricaKhartoum = "Africa/Khartoum", a2.AfricaKigali = "Africa/Kigali", a2.AfricaKinshasa = "Africa/Kinshasa", a2.AfricaLagos = "Africa/Lagos", a2.AfricaLibreville = "Africa/Libreville", a2.AfricaLome = "Africa/Lome", a2.AfricaLuanda = "Africa/Luanda", a2.AfricaLubumbashi = "Africa/Lubumbashi", a2.AfricaLusaka = "Africa/Lusaka", a2.AfricaMalabo = "Africa/Malabo", a2.AfricaMaputo = "Africa/Maputo", a2.AfricaMaseru = "Africa/Maseru", a2.AfricaMbabane = "Africa/Mbabane", a2.AfricaMogadishu = "Africa/Mogadishu", a2.AfricaMonrovia = "Africa/Monrovia", a2.AfricaNairobi = "Africa/Nairobi", a2.AfricaNdjamena = "Africa/Ndjamena", a2.AfricaNiamey = "Africa/Niamey", a2.AfricaNouakchott = "Africa/Nouakchott", a2.AfricaOuagadougou = "Africa/Ouagadougou", a2.AfricaPortoNovo = "Africa/Porto-Novo", a2.AfricaSaoTome = "Africa/Sao_Tome", a2.AfricaTripoli = "Africa/Tripoli", a2.AfricaTunis = "Africa/Tunis", a2.AfricaWindhoek = "Africa/Windhoek", a2.AmericaAdak = "America/Adak", a2.AmericaAnchorage = "America/Anchorage", a2.AmericaAnguilla = "America/Anguilla", a2.AmericaAntigua = "America/Antigua", a2.AmericaAraguaina = "America/Araguaina", a2.AmericaArgentinaBuenosAires = "America/Argentina/Buenos_Aires", a2.AmericaArgentinaCatamarca = "America/Argentina/Catamarca", a2.AmericaArgentinaCordoba = "America/Argentina/Cordoba", a2.AmericaArgentinaJujuy = "America/Argentina/Jujuy", a2.AmericaArgentinaLaRioja = "America/Argentina/La_Rioja", a2.AmericaArgentinaMendoza = "America/Argentina/Mendoza", a2.AmericaArgentinaRioGallegos = "America/Argentina/Rio_Gallegos", a2.AmericaArgentinaSalta = "America/Argentina/Salta", a2.AmericaArgentinaSanJuan = "America/Argentina/San_Juan", a2.AmericaArgentinaSanLuis = "America/Argentina/San_Luis", a2.AmericaArgentinaTucuman = "America/Argentina/Tucuman", a2.AmericaArgentinaUshuaia = "America/Argentina/Ushuaia", a2.AmericaAruba = "America/Aruba", a2.AmericaAsuncion = "America/Asuncion", a2.AmericaAtikokan = "America/Atikokan", a2.AmericaAtka = "America/Atka", a2.AmericaBahia = "America/Bahia", a2.AmericaBahiaBanderas = "America/Bahia_Banderas", a2.AmericaBarbados = "America/Barbados", a2.AmericaBelem = "America/Belem", a2.AmericaBelize = "America/Belize", a2.AmericaBlancSablon = "America/Blanc-Sablon", a2.AmericaBoaVista = "America/Boa_Vista", a2.AmericaBogota = "America/Bogota", a2.AmericaBoise = "America/Boise", a2.AmericaCambridgeBay = "America/Cambridge_Bay", a2.AmericaCampoGrande = "America/Campo_Grande", a2.AmericaCancun = "America/Cancun", a2.AmericaCaracas = "America/Caracas", a2.AmericaCayenne = "America/Cayenne", a2.AmericaCayman = "America/Cayman", a2.AmericaChicago = "America/Chicago", a2.AmericaChihuahua = "America/Chihuahua", a2.AmericaCoralHarbour = "America/Coral_Harbour", a2.AmericaCordoba = "America/Cordoba", a2.AmericaCostaRica = "America/Costa_Rica", a2.AmericaCreston = "America/Creston", a2.AmericaCuiaba = "America/Cuiaba", a2.AmericaCuracao = "America/Curacao", a2.AmericaDanmarkshavn = "America/Danmarkshavn", a2.AmericaDawson = "America/Dawson", a2.AmericaDawsonCreek = "America/Dawson_Creek", a2.AmericaDenver = "America/Denver", a2.AmericaDetroit = "America/Detroit", a2.AmericaDominica = "America/Dominica", a2.AmericaEdmonton = "America/Edmonton", a2.AmericaEirunepe = "America/Eirunepe", a2.AmericaElSalvador = "America/El_Salvador", a2.AmericaFortaleza = "America/Fortaleza", a2.AmericaGlaceBay = "America/Glace_Bay", a2.AmericaGodthab = "America/Godthab", a2.AmericaGooseBay = "America/Goose_Bay", a2.AmericaGrandTurk = "America/Grand_Turk", a2.AmericaGrenada = "America/Grenada", a2.AmericaGuadeloupe = "America/Guadeloupe", a2.AmericaGuatemala = "America/Guatemala", a2.AmericaGuayaquil = "America/Guayaquil", a2.AmericaGuyana = "America/Guyana", a2.AmericaHalifax = "America/Halifax", a2.AmericaHavana = "America/Havana", a2.AmericaHermosillo = "America/Hermosillo", a2.AmericaIndianaIndianapolis = "America/Indiana/Indianapolis", a2.AmericaIndianaKnox = "America/Indiana/Knox", a2.AmericaIndianaMarengo = "America/Indiana/Marengo", a2.AmericaIndianaPetersburg = "America/Indiana/Petersburg", a2.AmericaIndianaTellCity = "America/Indiana/Tell_City", a2.AmericaIndianaVevay = "America/Indiana/Vevay", a2.AmericaIndianaVincennes = "America/Indiana/Vincennes", a2.AmericaIndianaWinamac = "America/Indiana/Winamac", a2.AmericaInuvik = "America/Inuvik", a2.AmericaIqaluit = "America/Iqaluit", a2.AmericaJamaica = "America/Jamaica", a2.AmericaJuneau = "America/Juneau", a2.AmericaKentuckyLouisville = "America/Kentucky/Louisville", a2.AmericaKentuckyMonticello = "America/Kentucky/Monticello", a2.AmericaKralendijk = "America/Kralendijk", a2.AmericaLaPaz = "America/La_Paz", a2.AmericaLima = "America/Lima", a2.AmericaLosAngeles = "America/Los_Angeles", a2.AmericaLouisville = "America/Louisville", a2.AmericaLowerPrinces = "America/Lower_Princes", a2.AmericaMaceio = "America/Maceio", a2.AmericaManagua = "America/Managua", a2.AmericaManaus = "America/Manaus", a2.AmericaMarigot = "America/Marigot", a2.AmericaMartinique = "America/Martinique", a2.AmericaMatamoros = "America/Matamoros", a2.AmericaMazatlan = "America/Mazatlan", a2.AmericaMenominee = "America/Menominee", a2.AmericaMerida = "America/Merida", a2.AmericaMetlakatla = "America/Metlakatla", a2.AmericaMexicoCity = "America/Mexico_City", a2.AmericaMiquelon = "America/Miquelon", a2.AmericaMoncton = "America/Moncton", a2.AmericaMonterrey = "America/Monterrey", a2.AmericaMontevideo = "America/Montevideo", a2.AmericaMontserrat = "America/Montserrat", a2.AmericaMontreal = "America/Montreal", a2.AmericaNassau = "America/Nassau", a2.AmericaNewYork = "America/New_York", a2.AmericaNipigon = "America/Nipigon", a2.AmericaNome = "America/Nome", a2.AmericaNoronha = "America/Noronha", a2.AmericaNorthDakotaBeulah = "America/North_Dakota/Beulah", a2.AmericaNorthDakotaCenter = "America/North_Dakota/Center", a2.AmericaNorthDakotaNewSalem = "America/North_Dakota/New_Salem", a2.AmericaOjinaga = "America/Ojinaga", a2.AmericaPanama = "America/Panama", a2.AmericaPangnirtung = "America/Pangnirtung", a2.AmericaParamaribo = "America/Paramaribo", a2.AmericaPhoenix = "America/Phoenix", a2.AmericaPortAuPrince = "America/Port-au-Prince", a2.AmericaPortOfSpain = "America/Port_of_Spain", a2.AmericaPortoVelho = "America/Porto_Velho", a2.AmericaPuertoRico = "America/Puerto_Rico", a2.AmericaRainyRiver = "America/Rainy_River", a2.AmericaRankinInlet = "America/Rankin_Inlet", a2.AmericaRecife = "America/Recife", a2.AmericaRegina = "America/Regina", a2.AmericaResolute = "America/Resolute", a2.AmericaRioBranco = "America/Rio_Branco", a2.AmericaSantaIsabel = "America/Santa_Isabel", a2.AmericaSantarem = "America/Santarem", a2.AmericaSantiago = "America/Santiago", a2.AmericaSantoDomingo = "America/Santo_Domingo", a2.AmericaSaoPaulo = "America/Sao_Paulo", a2.AmericaScoresbysund = "America/Scoresbysund", a2.AmericaShiprock = "America/Shiprock", a2.AmericaSitka = "America/Sitka", a2.AmericaStBarthelemy = "America/St_Barthelemy", a2.AmericaStJohns = "America/St_Johns", a2.AmericaStKitts = "America/St_Kitts", a2.AmericaStLucia = "America/St_Lucia", a2.AmericaStThomas = "America/St_Thomas", a2.AmericaStVincent = "America/St_Vincent", a2.AmericaSwiftCurrent = "America/Swift_Current", a2.AmericaTegucigalpa = "America/Tegucigalpa", a2.AmericaThule = "America/Thule", a2.AmericaThunderBay = "America/Thunder_Bay", a2.AmericaTijuana = "America/Tijuana", a2.AmericaToronto = "America/Toronto", a2.AmericaTortola = "America/Tortola", a2.AmericaVancouver = "America/Vancouver", a2.AmericaWhitehorse = "America/Whitehorse", a2.AmericaWinnipeg = "America/Winnipeg", a2.AmericaYakutat = "America/Yakutat", a2.AmericaYellowknife = "America/Yellowknife", a2.AntarcticaCasey = "Antarctica/Casey", a2.AntarcticaDavis = "Antarctica/Davis", a2.AntarcticaDumontDUrville = "Antarctica/DumontDUrville", a2.AntarcticaMacquarie = "Antarctica/Macquarie", a2.AntarcticaMawson = "Antarctica/Mawson", a2.AntarcticaMcMurdo = "Antarctica/McMurdo", a2.AntarcticaPalmer = "Antarctica/Palmer", a2.AntarcticaRothera = "Antarctica/Rothera", a2.AntarcticaSyowa = "Antarctica/Syowa", a2.AntarcticaTroll = "Antarctica/Troll", a2.AntarcticaVostok = "Antarctica/Vostok", a2.ArcticLongyearbyen = "Arctic/Longyearbyen", a2.AsiaAden = "Asia/Aden", a2.AsiaAlmaty = "Asia/Almaty", a2.AsiaAmman = "Asia/Amman", a2.AsiaAnadyr = "Asia/Anadyr", a2.AsiaAqtau = "Asia/Aqtau", a2.AsiaAqtobe = "Asia/Aqtobe", a2.AsiaAshgabat = "Asia/Ashgabat", a2.AsiaBaghdad = "Asia/Baghdad", a2.AsiaBahrain = "Asia/Bahrain", a2.AsiaBaku = "Asia/Baku", a2.AsiaBangkok = "Asia/Bangkok", a2.AsiaBarnaul = "Asia/Barnaul", a2.AsiaBeirut = "Asia/Beirut", a2.AsiaBishkek = "Asia/Bishkek", a2.AsiaBrunei = "Asia/Brunei", a2.AsiaChita = "Asia/Chita", a2.AsiaChoibalsan = "Asia/Choibalsan", a2.AsiaColombo = "Asia/Colombo", a2.AsiaDamascus = "Asia/Damascus", a2.AsiaDhaka = "Asia/Dhaka", a2.AsiaDili = "Asia/Dili", a2.AsiaDubai = "Asia/Dubai", a2.AsiaDushanbe = "Asia/Dushanbe", a2.AsiaFamagusta = "Asia/Famagusta", a2.AsiaGaza = "Asia/Gaza", a2.AsiaHebron = "Asia/Hebron", a2.AsiaHoChiMinh = "Asia/Ho_Chi_Minh", a2.AsiaHongKong = "Asia/Hong_Kong", a2.AsiaHovd = "Asia/Hovd", a2.AsiaIrkutsk = "Asia/Irkutsk", a2.AsiaJakarta = "Asia/Jakarta", a2.AsiaJayapura = "Asia/Jayapura", a2.AsiaJerusalem = "Asia/Jerusalem", a2.AsiaKabul = "Asia/Kabul", a2.AsiaKamchatka = "Asia/Kamchatka", a2.AsiaKarachi = "Asia/Karachi", a2.AsiaKathmandu = "Asia/Kathmandu", a2.AsiaKhandyga = "Asia/Khandyga", a2.AsiaKolkata = "Asia/Kolkata", a2.AsiaKrasnoyarsk = "Asia/Krasnoyarsk", a2.AsiaKualaLumpur = "Asia/Kuala_Lumpur", a2.AsiaKuching = "Asia/Kuching", a2.AsiaKuwait = "Asia/Kuwait", a2.AsiaMacau = "Asia/Macau", a2.AsiaMagadan = "Asia/Magadan", a2.AsiaMakassar = "Asia/Makassar", a2.AsiaManila = "Asia/Manila", a2.AsiaMuscat = "Asia/Muscat", a2.AsiaNicosia = "Asia/Nicosia", a2.AsiaNovokuznetsk = "Asia/Novokuznetsk", a2.AsiaNovosibirsk = "Asia/Novosibirsk", a2.AsiaOmsk = "Asia/Omsk", a2.AsiaOral = "Asia/Oral", a2.AsiaPhnomPenh = "Asia/Phnom_Penh", a2.AsiaPontianak = "Asia/Pontianak", a2.AsiaPyongyang = "Asia/Pyongyang", a2.AsiaQatar = "Asia/Qatar", a2.AsiaQyzylorda = "Asia/Qyzylorda", a2.AsiaRangoon = "Asia/Rangoon", a2.AsiaRiyadh = "Asia/Riyadh", a2.AsiaSakhalin = "Asia/Sakhalin", a2.AsiaSamarkand = "Asia/Samarkand", a2.AsiaSeoul = "Asia/Seoul", a2.AsiaShanghai = "Asia/Shanghai", a2.AsiaSingapore = "Asia/Singapore", a2.AsiaSrednekolymsk = "Asia/Srednekolymsk", a2.AsiaTaipei = "Asia/Taipei", a2.AsiaTashkent = "Asia/Tashkent", a2.AsiaTbilisi = "Asia/Tbilisi", a2.AsiaTehran = "Asia/Tehran", a2.AsiaThimphu = "Asia/Thimphu", a2.AsiaTokyo = "Asia/Tokyo", a2.AsiaTomsk = "Asia/Tomsk", a2.AsiaUlaanbaatar = "Asia/Ulaanbaatar", a2.AsiaUrumqi = "Asia/Urumqi", a2.AsiaUstNera = "Asia/Ust-Nera", a2.AsiaVientiane = "Asia/Vientiane", a2.AsiaVladivostok = "Asia/Vladivostok", a2.AsiaYakutsk = "Asia/Yakutsk", a2.AsiaYekaterinburg = "Asia/Yekaterinburg", a2.AsiaYerevan = "Asia/Yerevan", a2.AtlanticAzores = "Atlantic/Azores", a2.AtlanticBermuda = "Atlantic/Bermuda", a2.AtlanticCanary = "Atlantic/Canary", a2.AtlanticCapeVerde = "Atlantic/Cape_Verde", a2.AtlanticFaroe = "Atlantic/Faroe", a2.AtlanticMadeira = "Atlantic/Madeira", a2.AtlanticReykjavik = "Atlantic/Reykjavik", a2.AtlanticSouthGeorgia = "Atlantic/South_Georgia", a2.AtlanticStHelena = "Atlantic/St_Helena", a2.AtlanticStanley = "Atlantic/Stanley", a2.AustraliaAdelaide = "Australia/Adelaide", a2.AustraliaBrisbane = "Australia/Brisbane", a2.AustraliaBrokenHill = "Australia/Broken_Hill", a2.AustraliaCanberra = "Australia/Canberra", a2.AustraliaCurrie = "Australia/Currie", a2.AustraliaDarwin = "Australia/Darwin", a2.AustraliaEucla = "Australia/Eucla", a2.AustraliaHobart = "Australia/Hobart", a2.AustraliaLindeman = "Australia/Lindeman", a2.AustraliaLordHowe = "Australia/Lord_Howe", a2.AustraliaMelbourne = "Australia/Melbourne", a2.AustraliaPerth = "Australia/Perth", a2.AustraliaSydney = "Australia/Sydney", a2.EuropeAmsterdam = "Europe/Amsterdam", a2.EuropeAndorra = "Europe/Andorra", a2.EuropeAthens = "Europe/Athens", a2.EuropeBelgrade = "Europe/Belgrade", a2.EuropeBerlin = "Europe/Berlin", a2.EuropeBratislava = "Europe/Bratislava", a2.EuropeBrussels = "Europe/Brussels", a2.EuropeBucharest = "Europe/Bucharest", a2.EuropeBudapest = "Europe/Budapest", a2.EuropeBusingen = "Europe/Busingen", a2.EuropeChisinau = "Europe/Chisinau", a2.EuropeCopenhagen = "Europe/Copenhagen", a2.EuropeDublin = "Europe/Dublin", a2.EuropeGibraltar = "Europe/Gibraltar", a2.EuropeGuernsey = "Europe/Guernsey", a2.EuropeHelsinki = "Europe/Helsinki", a2.EuropeIsleOfMan = "Europe/Isle_of_Man", a2.EuropeIstanbul = "Europe/Istanbul", a2.EuropeJersey = "Europe/Jersey", a2.EuropeKaliningrad = "Europe/Kaliningrad", a2.EuropeKiev = "Europe/Kiev", a2.EuropeKirov = "Europe/Kirov", a2.EuropeLisbon = "Europe/Lisbon", a2.EuropeLjubljana = "Europe/Ljubljana", a2.EuropeLondon = "Europe/London", a2.EuropeLuxembourg = "Europe/Luxembourg", a2.EuropeMadrid = "Europe/Madrid", a2.EuropeMalta = "Europe/Malta", a2.EuropeMariehamn = "Europe/Mariehamn", a2.EuropeMinsk = "Europe/Minsk", a2.EuropeMonaco = "Europe/Monaco", a2.EuropeMoscow = "Europe/Moscow", a2.EuropeOslo = "Europe/Oslo", a2.EuropeParis = "Europe/Paris", a2.EuropePodgorica = "Europe/Podgorica", a2.EuropePrague = "Europe/Prague", a2.EuropeRiga = "Europe/Riga", a2.EuropeRome = "Europe/Rome", a2.EuropeSamara = "Europe/Samara", a2.EuropeSanMarino = "Europe/San_Marino", a2.EuropeSarajevo = "Europe/Sarajevo", a2.EuropeSimferopol = "Europe/Simferopol", a2.EuropeSkopje = "Europe/Skopje", a2.EuropeSofia = "Europe/Sofia", a2.EuropeStockholm = "Europe/Stockholm", a2.EuropeTallinn = "Europe/Tallinn", a2.EuropeTirane = "Europe/Tirane", a2.EuropeUzhgorod = "Europe/Uzhgorod", a2.EuropeVaduz = "Europe/Vaduz", a2.EuropeVatican = "Europe/Vatican", a2.EuropeVienna = "Europe/Vienna", a2.EuropeVilnius = "Europe/Vilnius", a2.EuropeVolgograd = "Europe/Volgograd", a2.EuropeWarsaw = "Europe/Warsaw", a2.EuropeZagreb = "Europe/Zagreb", a2.EuropeZaporozhye = "Europe/Zaporozhye", a2.EuropeZurich = "Europe/Zurich", a2.GMT = "GMT", a2.IndianAntananarivo = "Indian/Antananarivo", a2.IndianChagos = "Indian/Chagos", a2.IndianChristmas = "Indian/Christmas", a2.IndianCocos = "Indian/Cocos", a2.IndianComoro = "Indian/Comoro", a2.IndianKerguelen = "Indian/Kerguelen", a2.IndianMahe = "Indian/Mahe", a2.IndianMaldives = "Indian/Maldives", a2.IndianMauritius = "Indian/Mauritius", a2.IndianMayotte = "Indian/Mayotte", a2.IndianReunion = "Indian/Reunion", a2.PacificApia = "Pacific/Apia", a2.PacificAuckland = "Pacific/Auckland", a2.PacificBougainville = "Pacific/Bougainville", a2.PacificChatham = "Pacific/Chatham", a2.PacificChuuk = "Pacific/Chuuk", a2.PacificEaster = "Pacific/Easter", a2.PacificEfate = "Pacific/Efate", a2.PacificEnderbury = "Pacific/Enderbury", a2.PacificFakaofo = "Pacific/Fakaofo", a2.PacificFiji = "Pacific/Fiji", a2.PacificFunafuti = "Pacific/Funafuti", a2.PacificGalapagos = "Pacific/Galapagos", a2.PacificGambier = "Pacific/Gambier", a2.PacificGuadalcanal = "Pacific/Guadalcanal", a2.PacificGuam = "Pacific/Guam", a2.PacificHonolulu = "Pacific/Honolulu", a2.PacificJohnston = "Pacific/Johnston", a2.PacificKiritimati = "Pacific/Kiritimati", a2.PacificKosrae = "Pacific/Kosrae", a2.PacificKwajalein = "Pacific/Kwajalein", a2.PacificMajuro = "Pacific/Majuro", a2.PacificMarquesas = "Pacific/Marquesas", a2.PacificMidway = "Pacific/Midway", a2.PacificNauru = "Pacific/Nauru", a2.PacificNiue = "Pacific/Niue", a2.PacificNorfolk = "Pacific/Norfolk", a2.PacificNoumea = "Pacific/Noumea", a2.PacificPagoPago = "Pacific/Pago_Pago", a2.PacificPalau = "Pacific/Palau", a2.PacificPitcairn = "Pacific/Pitcairn", a2.PacificPohnpei = "Pacific/Pohnpei", a2.PacificPonape = "Pacific/Ponape", a2.PacificPortMoresby = "Pacific/Port_Moresby", a2.PacificRarotonga = "Pacific/Rarotonga", a2.PacificSaipan = "Pacific/Saipan", a2.PacificSamoa = "Pacific/Samoa", a2.PacificTahiti = "Pacific/Tahiti", a2.PacificTarawa = "Pacific/Tarawa", a2.PacificTongatapu = "Pacific/Tongatapu", a2.PacificTruk = "Pacific/Truk", a2.PacificWake = "Pacific/Wake", a2.PacificWallis = "Pacific/Wallis", a2.PacificYap = "Pacific/Yap";
 })(u || (u = {}));
-var n$1;
+var n;
 (function(a2) {
   a2.UTC_MINUS_12 = "UTC-12", a2.UTC_MINUS_11_30 = "UTC-11:30", a2.UTC_MINUS_11 = "UTC-11", a2.UTC_MINUS_10_30 = "UTC-10:30", a2.UTC_MINUS_10 = "UTC-10", a2.UTC_MINUS_9_30 = "UTC-9:30", a2.UTC_MINUS_9 = "UTC-09", a2.UTC_MINUS_8_45 = "UTC-8:45", a2.UTC_MINUS_8 = "UTC-08", a2.UTC_MINUS_7 = "UTC-07", a2.UTC_MINUS_6_30 = "UTC-6:30", a2.UTC_MINUS_6 = "UTC-06", a2.UTC_MINUS_5_45 = "UTC-5:45", a2.UTC_MINUS_5_30 = "UTC-5:30", a2.UTC_MINUS_5 = "UTC-05", a2.UTC_MINUS_4_30 = "UTC-4:30", a2.UTC_MINUS_4 = "UTC-04", a2.UTC_MINUS_3_30 = "UTC-3:30", a2.UTC_MINUS_3 = "UTC-03", a2.UTC_MINUS_2_30 = "UTC-2:30", a2.UTC_MINUS_2 = "UTC-02", a2.UTC_MINUS_1 = "UTC-01", a2.UTC_0 = "UTC+00", a2.UTC_PLUS_1 = "UTC+01", a2.UTC_PLUS_2 = "UTC+02", a2.UTC_PLUS_3 = "UTC+03", a2.UTC_PLUS_3_30 = "UTC+3:30", a2.UTC_PLUS_4 = "UTC+04", a2.UTC_PLUS_4_30 = "UTC+4:30", a2.UTC_PLUS_5 = "UTC+05", a2.UTC_PLUS_5_30 = "UTC+5:30", a2.UTC_PLUS_5_45 = "UTC+5:45", a2.UTC_PLUS_6 = "UTC+06", a2.UTC_PLUS_6_30 = "UTC+6:30", a2.UTC_PLUS_7 = "UTC+07", a2.UTC_PLUS_8 = "UTC+08", a2.UTC_PLUS_8_45 = "UTC+8:45", a2.UTC_PLUS_9 = "UTC+09", a2.UTC_PLUS_9_30 = "UTC+9:30", a2.UTC_PLUS_10 = "UTC+10", a2.UTC_PLUS_10_30 = "UTC+10:30", a2.UTC_PLUS_11 = "UTC+11", a2.UTC_PLUS_11_30 = "UTC+11:30", a2.UTC_PLUS_12 = "UTC+12", a2.UTC_PLUS_12_45 = "UTC+12:45", a2.UTC_PLUS_13 = "UTC+13", a2.UTC_PLUS_13_45 = "UTC+13:45", a2.UTC_PLUS_14 = "UTC+14";
-})(n$1 || (n$1 = {}));
+})(n || (n = {}));
 var s;
 (function(a2) {
   a2.AcreTime = "ACT", a2.AfghanistanTime = "AFT", a2.AIXCentralEuropeanTime = "DFT", a2.AlaskaDaylightTime = "AKDT", a2.AlaskaStandardTime = "AKST", a2.AlmaAtaTime = "ALMT", a2.AmazonSummerTime = "AMST", a2.AmazonTime = "AMT", a2.AnadyrTime = "ANAT", a2.AqtobeTime = "AQTT", a2.ArabiaStandardTime = "AST", a2.ArgentinaTime = "ART", a2.ArmeniaTime = "AMT", a2.ASEANCommonTime = "ASEAN", a2.AtlanticDaylightTime = "ADT", a2.AtlanticStandardTime = "AST", a2.AustralianCentralDaylightSavingTime = "ACDT", a2.AustralianCentralStandardTime = "ACST", a2.AustralianCentralWesternStandardTime = "ACWST", a2.AustralianEasternDaylightSavingTime = "AEDT", a2.AustralianEasternStandardTime = "AEST", a2.AustralianEasternTime = "AET", a2.AustralianWesternStandardTime = "AWST", a2.AzerbaijanTime = "AZT", a2.AzoresStandardTime = "AZOT", a2.AzoresSummerTime = "AZOST", a2.BakerIslandTime = "BIT", a2.BangladeshStandardTime = "BST", a2.BhutanTime = "BTT", a2.BoliviaTime = "BOT", a2.BougainvilleStandardTime = "BST", a2.BrasiliaSummerTime = "BRST", a2.BrasiliaTime = "BRT", a2.BritishIndianOceanTime = "BIOT", a2.BritishSummerTime = "BST", a2.BruneiTime = "BNT", a2.CapeVerdeTime = "CVT", a2.CentralAfricaTime = "CAT", a2.CentralDaylightTime = "CDT", a2.CentralEuropeanSummerTime = "CEST", a2.CentralEuropeanTime = "CET", a2.CentralIndonesiaTime = "WITA", a2.CentralStandardTime = "CST", a2.CentralTime = "CT", a2.CentralWesternStandardTime = "CWST", a2.ChamorroStandardTime = "CHST", a2.ChathamDaylightTime = "CHADT", a2.ChathamStandardTime = "CHAST", a2.ChileStandardTime = "CLT", a2.ChileSummerTime = "CLST", a2.ChinaStandardTime = "CST", a2.ChoibalsanStandardTime = "CHOT", a2.ChoibalsanSummerTime = "CHOST", a2.ChristmasIslandTime = "CXT", a2.ChuukTime = "CHUT", a2.ClipptertonIslandStandardTime = "CIST", a2.CocosIslandsTime = "CCT", a2.ColombiaSummerTime = "COST", a2.ColombiaTime = "COT", a2.CookIslandTime = "CKT", a2.CoordinatedUniversalTime = "UTC", a2.CubaDaylightTime = "CDT", a2.CubaStandardTime = "CST", a2.DavisTime = "DAVT", a2.DumontDUrvilleTime = "DDUT", a2.EastAfricaTime = "EAT", a2.EasterIslandStandardTime = "EAST", a2.EasterIslandSummerTime = "EASST", a2.EasternCaribbeanTime = "ECT", a2.EasternDaylightTime = "EDT", a2.EasternEuropeanSummerTime = "EEST", a2.EasternEuropeanTime = "EET", a2.EasternGreenlandSummerTime = "EGST", a2.EasternGreenlandTime = "EGT", a2.EasternIndonesianTime = "WIT", a2.EasternStandardTime = "EST", a2.EasternTime = "ET", a2.EcuadorTime = "ECT", a2.FalklandIslandsSummerTime = "FKST", a2.FalklandIslandsTime = "FKT", a2.FernandoDeNoronhaTime = "FNT", a2.FijiTime = "FJT", a2.FrenchGuianaTime = "GFT", a2.FrenchSouthernAndAntarcticTime = "TFT", a2.FurtherEasternEuropeanTime = "FET", a2.GalapagosTime = "GALT", a2.GambierIslandTime = "GIT", a2.GambierIslandsTime = "GAMT", a2.GeorgiaStandardTime = "GET", a2.GilbertIslandTime = "GILT", a2.GreenwichMeanTime = "GMT", a2.GulfStandardTime = "GST", a2.GuyanaTime = "GYT", a2.HawaiiAleutianDaylightTime = "HDT", a2.HawaiiAleutianStandardTime = "HST", a2.HeardAndMcDonaldIslandsTime = "HMT", a2.HeureAvanceeDEuropeCentraleTime = "HAEC", a2.HongKongTime = "HKT", a2.HovdSummerTime = "HOVST", a2.HovdTime = "HOVT", a2.IndianOceanTime = "IOT", a2.IndianStandardTime = "IST", a2.IndochinaTime = "ICT", a2.InternationalDayLineWestTime = "IDLW", a2.IranDaylightTime = "IRDT", a2.IranStandardTime = "IRST", a2.IrishStandardTime = "IST", a2.IrkutskSummerTime = "IRKST", a2.IrkutskTime = "IRKT", a2.IsraelDaylightTime = "IDT", a2.IsraelStandardTime = "IST", a2.JapanStandardTime = "JST", a2.KaliningradTime = "KALT", a2.KamchatkaTime = "KAMT", a2.KoreaStandardTime = "KST", a2.KosraeTime = "KOST", a2.KrasnoyarskSummerTime = "KRAST", a2.KrasnoyarskTime = "KRAT", a2.KyrgyzstanTime = "KGT", a2.LineIslandsTime = "LINT", a2.KazakhstanStandardTime = "KAST", a2.LordHoweStandardTime = "LHST", a2.LordHoweSummerTime = "LHST", a2.MacquarieIslandStationTime = "MIST", a2.MagadanTime = "MAGT", a2.MalaysiaStandardTime = "MST", a2.MalaysiaTime = "MYT", a2.MaldivesTime = "MVT", a2.MarquesasIslandsTime = "MART", a2.MarshallIslandsTime = "MHT", a2.MauritiusTime = "MUT", a2.MawsonStationTime = "MAWT", a2.MiddleEuropeanSummerTime = "MEDT", a2.MiddleEuropeanTime = "MET", a2.MoscowTime = "MSK", a2.MountainDaylightTime = "MDT", a2.MountainStandardTime = "MST", a2.MyanmarStandardTime = "MMT", a2.NepalTime = "NCT", a2.NauruTime = "NRT", a2.NewCaledoniaTime = "NCT", a2.NewZealandDaylightTime = "NZDT", a2.NewZealandStandardTime = "NZST", a2.NewfoundlandDaylightTime = "NDT", a2.NewfoundlandStandardTime = "NST", a2.NewfoundlandTime = "NT", a2.NiueTime = "NUT", a2.NorfolkIslandTime = "NFT", a2.NovosibirskTime = "NOVT", a2.OmskTime = "OMST", a2.OralTime = "ORAT", a2.PacificDaylightTime = "PDT", a2.PacificStandardTime = "PST", a2.PakistanStandardTime = "PKT", a2.PalauTime = "PWT", a2.PapuaNewGuineaTime = "PGT", a2.ParaguaySummerTime = "PYST", a2.ParaguayTime = "PYT", a2.PeruTime = "PET", a2.PhilippineStandardTime = "PHST", a2.PhilippineTime = "PHT", a2.PhoenixIslandTime = "PHOT", a2.PitcairnTime = "PST", a2.PohnpeiStandardTime = "PONT", a2.ReunionTime = "RET", a2.RotheraResearchStationTime = "ROTT", a2.SaintPierreAndMiquelonDaylightTime = "PMDT", a2.SaintPierreAndMiquelonStandardTime = "PMST", a2.SakhalinIslandTime = "SAKT", a2.SamaraTime = "SAMT", a2.SamoaDaylightTime = "SDT", a2.SamoaStandardTime = "SST", a2.SeychellesTime = "SCT", a2.ShowaStationTime = "SYOT", a2.SingaporeStandardTime = "SST", a2.SingaporeTime = "SGT", a2.SolomonIslandsTime = "SBT", a2.SouthAfricanStandardTime = "SAST", a2.SouthGeorgiaAndTheSouthSandwichIslandsTime = "GST", a2.SrednekolymskTime = "SRET", a2.SriLankaStandardTime = "SLST", a2.SurinameTime = "SRT", a2.TahitiTime = "TAHT", a2.TajikistanTime = "TJT", a2.ThailandStandardTime = "THA", a2.TimorLesteTime = "TLT", a2.TokelauTime = "TKT", a2.TongaTime = "TOT", a2.TurkeyTime = "TRT", a2.TurkmenistanTime = "TMT", a2.TuvaluTime = "TVT", a2.UlaanbaatarStandardTime = "ULAT", a2.UlaanbaatarSummerTime = "ULAST", a2.UruguayStandardTime = "UYT", a2.UruguaySummerTime = "UYST", a2.UzbekistanTime = "UZT", a2.VanuatuTime = "VUT", a2.VenezuelaStandardTime = "VET", a2.VladivostokTime = "VLAT", a2.VolgogradTime = "VOLT", a2.VostokStationTime = "VOST", a2.WakeIslandTime = "WAKT", a2.WestAfricaSummerTime = "WAST", a2.WestAfricaTime = "WAT", a2.WestGreenlandSummerTime = "WGST", a2.WestGreenlandTime = "WGT", a2.WestKazakhstanTime = "WKT", a2.WesternEuropeanSummerTime = "WEDT", a2.WesternEuropeanTime = "WET", a2.WesternIndonesianTime = "WIT", a2.WesternStandardTime = "WST", a2.YakutskTime = "YAKT", a2.YekaterinburgTime = "YEKT";
 })(s || (s = {}));
-({ dst: { is: false, uses: true }, id: s.AcreTime, name: "Acre Time", offset: n$1.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: s.AfghanistanTime, name: "Afghanistan Time", offset: n$1.UTC_PLUS_4_30 });
-({ dst: { is: false, uses: true }, id: s.AIXCentralEuropeanTime, name: "AIX Central European Time", offset: n$1.UTC_PLUS_1 });
-({ dst: { is: true, uses: true }, id: s.AlaskaDaylightTime, name: "Alaska Daylight Time", offset: n$1.UTC_MINUS_8 });
-({ dst: { is: false, uses: true }, id: s.AlaskaStandardTime, name: "Alaska Standard Time", offset: n$1.UTC_MINUS_9 });
-({ dst: { is: false, uses: true }, id: s.AlmaAtaTime, name: "Alma-Ata Time", offset: n$1.UTC_PLUS_6 });
-({ dst: { is: false, uses: true }, id: s.AmazonSummerTime, name: "Amazon Summer Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.AmazonTime, name: "Amazon Time", offset: n$1.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: s.AnadyrTime, name: "Anadyr Time", offset: n$1.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: s.AqtobeTime, name: "Aqtobe Time", offset: n$1.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: s.ArabiaStandardTime, name: "Arabia Standard Time", offset: n$1.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: s.ArgentinaTime, name: "Argentina Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.ArmeniaTime, name: "Armenia Time", offset: n$1.UTC_PLUS_4 });
-({ dst: { is: true, uses: true }, id: s.AtlanticDaylightTime, name: "Atlantic Daylight Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.AtlanticStandardTime, name: "Atlantic Standard Time", offset: n$1.UTC_MINUS_4 });
-({ dst: { is: true, uses: true }, id: s.AustralianCentralDaylightSavingTime, name: "Australian Central Daylight Saving Time", offset: n$1.UTC_PLUS_10_30 });
-({ dst: { is: false, uses: true }, id: s.AustralianCentralStandardTime, name: "Australian Central Standard Time", offset: n$1.UTC_PLUS_9_30 });
-({ dst: { is: false, uses: true }, id: s.AustralianCentralWesternStandardTime, name: "Australian Central Western Standard Time", offset: n$1.UTC_PLUS_8_45 });
-({ dst: { is: true, uses: true }, id: s.AustralianEasternDaylightSavingTime, name: "Australian Eastern Daylight Saving Time", offset: n$1.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: s.AustralianEasternStandardTime, name: "Australian Eastern Standard Time", offset: n$1.UTC_PLUS_10 });
-({ dst: { is: false, uses: true }, id: s.AustralianEasternTime, name: "Australian Eastern Time", offset: n$1.UTC_PLUS_10 });
-({ dst: { is: false, uses: true }, id: s.AustralianWesternStandardTime, name: "Australian Western Standard Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.AzerbaijanTime, name: "Azerbaijan Time", offset: n$1.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: s.AzoresStandardTime, name: "Azores Standard Time", offset: n$1.UTC_MINUS_1 });
-({ dst: { is: true, uses: true }, id: s.AzoresSummerTime, name: "Azores Summer Time", offset: n$1.UTC_0 });
-({ dst: { is: false, uses: true }, id: s.BakerIslandTime, name: "Baker Island Time", offset: n$1.UTC_MINUS_12 });
-({ dst: { is: false, uses: true }, id: s.BangladeshStandardTime, name: "Bangladesh Standard Time", offset: n$1.UTC_PLUS_6 });
-({ dst: { is: false, uses: true }, id: s.BhutanTime, name: "Bhutan Time", offset: n$1.UTC_PLUS_6 });
-({ dst: { is: false, uses: true }, id: s.BoliviaTime, name: "Bolivia Time", offset: n$1.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: s.BougainvilleStandardTime, name: "Bougainville Standard Time", offset: n$1.UTC_PLUS_11 });
-({ dst: { is: true, uses: true }, id: s.BrasiliaSummerTime, name: "Brasilia Summer Time", offset: n$1.UTC_MINUS_2 });
-({ dst: { is: false, uses: true }, id: s.BrasiliaTime, name: "Brasilia Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.BritishIndianOceanTime, name: "British Indian Ocean Time", offset: n$1.UTC_PLUS_6 });
-({ dst: { is: true, uses: true }, id: s.BritishSummerTime, name: "British Summer Time", offset: n$1.UTC_PLUS_1 });
-({ dst: { is: false, uses: true }, id: s.BruneiTime, name: "Brunei Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.CapeVerdeTime, name: "Cape Verde Time", offset: n$1.UTC_MINUS_1 });
-({ dst: { is: false, uses: true }, id: s.CentralAfricaTime, name: "Central Africa Time", offset: n$1.UTC_PLUS_2 });
-({ dst: { is: true, uses: true }, id: s.CentralDaylightTime, name: "Central Daylight Time", offset: n$1.UTC_MINUS_5 });
-({ dst: { is: true, uses: true }, id: s.CentralEuropeanSummerTime, name: "Central European Summer Time", offset: n$1.UTC_PLUS_2 });
-({ dst: { is: false, uses: true }, id: s.CentralEuropeanTime, name: "Central European Time", offset: n$1.UTC_PLUS_1 });
-({ dst: { is: false, uses: true }, id: s.CentralIndonesiaTime, name: "Central Indonesia Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.CentralStandardTime, name: "Central Standard Time", offset: n$1.UTC_MINUS_6 });
-({ dst: { is: false, uses: true }, id: s.CentralTime, name: "Central Time", offset: n$1.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: s.CentralWesternStandardTime, name: "Central Western Standard Time", offset: n$1.UTC_PLUS_8_45 });
-({ dst: { is: false, uses: true }, id: s.ChamorroStandardTime, name: "Chamorro Standard Time", offset: n$1.UTC_PLUS_10 });
-({ dst: { is: true, uses: true }, id: s.ChathamDaylightTime, name: "Chatham Daylight Time", offset: n$1.UTC_PLUS_13_45 });
-({ dst: { is: false, uses: true }, id: s.ChathamStandardTime, name: "Chatham Standard Time", offset: n$1.UTC_PLUS_12_45 });
-({ dst: { is: false, uses: true }, id: s.ChileStandardTime, name: "Chile Standard Time", offset: n$1.UTC_MINUS_4 });
-({ dst: { is: true, uses: true }, id: s.ChileSummerTime, name: "Chile Summer Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.ChinaStandardTime, name: "China Standard Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.ChoibalsanStandardTime, name: "Choibalsan Standard Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: true, uses: true }, id: s.ChoibalsanSummerTime, name: "Choibalsan Summer Time", offset: n$1.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: s.ChristmasIslandTime, name: "Christmas Island Time", offset: n$1.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: s.ChuukTime, name: "Chuuk Time", offset: n$1.UTC_PLUS_10 });
-({ dst: { is: false, uses: true }, id: s.ClipptertonIslandStandardTime, name: "Clippterton Island Standard Time", offset: n$1.UTC_MINUS_8 });
-({ dst: { is: false, uses: true }, id: s.CocosIslandsTime, name: "Cocos Standard Time", offset: n$1.UTC_PLUS_6_30 });
-({ dst: { is: true, uses: true }, id: s.ColombiaSummerTime, name: "Colombia Summer Time", offset: n$1.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: s.ColombiaTime, name: "Colombia Time", offset: n$1.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: s.CookIslandTime, name: "Cook Island Time", offset: n$1.UTC_MINUS_10 });
-({ dst: { is: false, uses: true }, id: s.CoordinatedUniversalTime, name: "Coordinated Universal Time", offset: n$1.UTC_0 });
-({ dst: { is: true, uses: true }, id: s.CubaDaylightTime, name: "Cuba Daylight Time", offset: n$1.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: s.CubaStandardTime, name: "Cuba Standard Time", offset: n$1.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: s.DavisTime, name: "Davis Time", offset: n$1.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: s.DumontDUrvilleTime, name: "Dumont D'Urville Time", offset: n$1.UTC_PLUS_10 });
-({ dst: { is: false, uses: true }, id: s.EastAfricaTime, name: "East Africa Time", offset: n$1.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: s.EasterIslandStandardTime, name: "Easter Island Standard Time", offset: n$1.UTC_MINUS_6 });
-({ dst: { is: true, uses: true }, id: s.EasterIslandSummerTime, name: "Easter Island Summer Time", offset: n$1.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: s.EasternCaribbeanTime, name: "Eastern Caribbean Time", offset: n$1.UTC_MINUS_4 });
-({ dst: { is: true, uses: true }, id: s.EasternDaylightTime, name: "Eastern Daylight Time", offset: n$1.UTC_MINUS_4 });
-({ dst: { is: true, uses: true }, id: s.EasternEuropeanSummerTime, name: "Eastern European Summer Time", offset: n$1.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: s.EasternEuropeanTime, name: "Eastern European Time", offset: n$1.UTC_PLUS_2 });
-({ dst: { is: true, uses: true }, id: s.EasternGreenlandSummerTime, name: "Eastern Greenland Summer Time", offset: n$1.UTC_0 });
-({ dst: { is: false, uses: true }, id: s.EasternGreenlandTime, name: "Eastern Greenland Time", offset: n$1.UTC_MINUS_1 });
-({ dst: { is: false, uses: true }, id: s.EasternIndonesianTime, name: "Eastern Indonesian Time", offset: n$1.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: s.EasternStandardTime, name: "Eastern Standard Time", offset: n$1.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: s.EasternTime, name: "Eastern Time", offset: n$1.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: s.EcuadorTime, name: "Ecuador Time", offset: n$1.UTC_MINUS_5 });
-({ dst: { is: true, uses: true }, id: s.FalklandIslandsSummerTime, name: "Falkland Islands Summer Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.FalklandIslandsTime, name: "Falkland Islands Time", offset: n$1.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: s.FernandoDeNoronhaTime, name: "Fernando de Noronha Time", offset: n$1.UTC_MINUS_2 });
-({ dst: { is: false, uses: true }, id: s.FijiTime, name: "Fiji Time", offset: n$1.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: s.FrenchGuianaTime, name: "French Guiana Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.FrenchSouthernAndAntarcticTime, name: "French Southern and Antarctic Time", offset: n$1.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: s.FurtherEasternEuropeanTime, name: "Further Eastern European Time", offset: n$1.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: s.GalapagosTime, name: "Galapagos Time", offset: n$1.UTC_MINUS_6 });
-({ dst: { is: false, uses: true }, id: s.GambierIslandTime, name: "Gambier Island Time", offset: n$1.UTC_MINUS_9 });
-({ dst: { is: false, uses: true }, id: s.GambierIslandsTime, name: "Gambier Islands Time", offset: n$1.UTC_MINUS_9 });
-({ dst: { is: false, uses: true }, id: s.GeorgiaStandardTime, name: "Georgia Standard Time", offset: n$1.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: s.GilbertIslandTime, name: "Gilbert Island Time", offset: n$1.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: s.GreenwichMeanTime, name: "Greenwich Mean Time", offset: n$1.UTC_0 });
-({ dst: { is: false, uses: true }, id: s.GulfStandardTime, name: "Gulf Standard Time", offset: n$1.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: s.GuyanaTime, name: "Guyana Time", offset: n$1.UTC_MINUS_4 });
-({ dst: { is: true, uses: true }, id: s.HawaiiAleutianDaylightTime, name: "Hawaii-Aleutian Daylight Time", offset: n$1.UTC_MINUS_9 });
-({ dst: { is: false, uses: true }, id: s.HawaiiAleutianStandardTime, name: "Hawaii-Aleutian Standard Time", offset: n$1.UTC_MINUS_10 });
-({ dst: { is: false, uses: true }, id: s.HeardAndMcDonaldIslandsTime, name: "Heard and McDonald Islands Time", offset: n$1.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: s.HongKongTime, name: "Hong Kong Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: true, uses: true }, id: s.HovdSummerTime, name: "Hovd Summer Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.HovdTime, name: "Hovd Time", offset: n$1.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: s.IndianOceanTime, name: "Indian Ocean Time", offset: n$1.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: s.IndianStandardTime, name: "Indian Standard Time", offset: n$1.UTC_PLUS_5_30 });
-({ dst: { is: false, uses: true }, id: s.IndochinaTime, name: "Indochina Time", offset: n$1.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: s.InternationalDayLineWestTime, name: "International Day Line West Time", offset: n$1.UTC_MINUS_12 });
-({ dst: { is: true, uses: true }, id: s.IranDaylightTime, name: "Iran Daylight Time", offset: n$1.UTC_PLUS_4_30 });
-({ dst: { is: false, uses: true }, id: s.IranStandardTime, name: "Iran Standard Time", offset: n$1.UTC_PLUS_3_30 });
-({ dst: { is: false, uses: true }, id: s.IrishStandardTime, name: "Irish Standard Time", offset: n$1.UTC_PLUS_1 });
-({ dst: { is: false, uses: true }, id: s.IrkutskTime, name: "Irkutsk Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: true, uses: true }, id: s.IsraelDaylightTime, name: "Israel Daylight Time", offset: n$1.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: s.IsraelStandardTime, name: "Israel Standard Time", offset: n$1.UTC_PLUS_2 });
-({ dst: { is: false, uses: true }, id: s.JapanStandardTime, name: "Japan Standard Time", offset: n$1.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: s.KaliningradTime, name: "Kaliningrad Time", offset: n$1.UTC_PLUS_2 });
-({ dst: { is: false, uses: true }, id: s.KamchatkaTime, name: "Kamchatka Time", offset: n$1.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: s.KoreaStandardTime, name: "Korea Standard Time", offset: n$1.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: s.KosraeTime, name: "Kosrae Time", offset: n$1.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: s.KrasnoyarskTime, name: "Krasnoyarsk Time", offset: n$1.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: s.KyrgyzstanTime, name: "Kyrgyzstan Time", offset: n$1.UTC_PLUS_6 });
-({ dst: { is: false, uses: true }, id: s.LineIslandsTime, name: "Line Islands Time", offset: n$1.UTC_PLUS_14 });
-({ dst: { is: false, uses: true }, id: s.LordHoweStandardTime, name: "Lord Howe Standard Time", offset: n$1.UTC_PLUS_10_30 });
-({ dst: { is: false, uses: true }, id: s.LordHoweSummerTime, name: "Lord Howe Summer Time", offset: n$1.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: s.MacquarieIslandStationTime, name: "Macquarie Island Station Time", offset: n$1.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: s.MagadanTime, name: "Magadan Time", offset: n$1.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: s.MalaysiaStandardTime, name: "Malaysia Standard Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.MalaysiaTime, name: "Malaysia Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.MaldivesTime, name: "Maldives Time", offset: n$1.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: s.MarquesasIslandsTime, name: "Marquesas Islands Time", offset: n$1.UTC_PLUS_9_30 });
-({ dst: { is: false, uses: true }, id: s.MarshallIslandsTime, name: "Marshall Islands Time", offset: n$1.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: s.MauritiusTime, name: "Mauritius Time", offset: n$1.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: s.MawsonStationTime, name: "Mawson Station Time", offset: n$1.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: s.MiddleEuropeanSummerTime, name: "Middle European Summer Time", offset: n$1.UTC_PLUS_2 });
-({ dst: { is: false, uses: true }, id: s.MiddleEuropeanTime, name: "Middle European Time", offset: n$1.UTC_PLUS_1 });
-({ dst: { is: false, uses: true }, id: s.MoscowTime, name: "Moscow Time", offset: n$1.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: s.MountainDaylightTime, name: "Mountain Daylight Time", offset: n$1.UTC_MINUS_6 });
-({ dst: { is: false, uses: true }, id: s.MountainStandardTime, name: "Mountain Standard Time", offset: n$1.UTC_MINUS_7 });
-({ dst: { is: false, uses: true }, id: s.MyanmarStandardTime, name: "Myanmar Standard Time", offset: n$1.UTC_PLUS_6_30 });
-({ dst: { is: false, uses: true }, id: s.NepalTime, name: "Nepal Time", offset: n$1.UTC_PLUS_5_45 });
-({ dst: { is: false, uses: true }, id: s.NauruTime, name: "Nauru Time", offset: n$1.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: s.NewCaledoniaTime, name: "New Caledonia Time", offset: n$1.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: s.NewZealandDaylightTime, name: "New Zealand Daylight Time", offset: n$1.UTC_PLUS_13 });
-({ dst: { is: false, uses: true }, id: s.NewZealandStandardTime, name: "New Zealand Standard Time", offset: n$1.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: s.NewfoundlandDaylightTime, name: "Newfoundland Daylight Time", offset: n$1.UTC_MINUS_2_30 });
-({ dst: { is: false, uses: true }, id: s.NewfoundlandTime, name: "Newfoundland Time", offset: n$1.UTC_MINUS_3_30 });
-({ dst: { is: false, uses: true }, id: s.NiueTime, name: "Niue Time", offset: n$1.UTC_MINUS_11 });
-({ dst: { is: false, uses: true }, id: s.NorfolkIslandTime, name: "Norfolk Island Time", offset: n$1.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: s.NovosibirskTime, name: "Novosibirsk Time", offset: n$1.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: s.OmskTime, name: "Omsk Time", offset: n$1.UTC_PLUS_6 });
-({ dst: { is: false, uses: true }, id: s.OralTime, name: "Oral Time", offset: n$1.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: s.PacificDaylightTime, name: "Pacific Daylight Time", offset: n$1.UTC_MINUS_7 });
-({ dst: { is: false, uses: true }, id: s.PacificStandardTime, name: "Pacific Standard Time", offset: n$1.UTC_MINUS_8 });
-({ dst: { is: false, uses: true }, id: s.PakistanStandardTime, name: "Pakistan Standard Time", offset: n$1.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: s.PalauTime, name: "Palau Time", offset: n$1.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: s.PapuaNewGuineaTime, name: "Papua New Guinea Time", offset: n$1.UTC_PLUS_10 });
-({ dst: { is: false, uses: true }, id: s.ParaguaySummerTime, name: "Paraguay Summer Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.ParaguayTime, name: "Paraguay Time", offset: n$1.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: s.PeruTime, name: "Peru Time", offset: n$1.UTC_MINUS_5 });
-({ dst: { is: false, uses: true }, id: s.PhilippineStandardTime, name: "Philippine Standard Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.PhilippineTime, name: "Philippine Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.PhoenixIslandTime, name: "Phoenix Island Time", offset: n$1.UTC_PLUS_13 });
-({ dst: { is: false, uses: true }, id: s.PitcairnTime, name: "Pitcairn Time", offset: n$1.UTC_MINUS_8 });
-({ dst: { is: false, uses: true }, id: s.PohnpeiStandardTime, name: "Pohnpei Standard Time", offset: n$1.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: s.ReunionTime, name: "Reunion Time", offset: n$1.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: s.RotheraResearchStationTime, name: "Rothera Research Station Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.SaintPierreAndMiquelonDaylightTime, name: "Saint Pierre and Miquelon Daylight Time", offset: n$1.UTC_MINUS_2 });
-({ dst: { is: false, uses: true }, id: s.SaintPierreAndMiquelonStandardTime, name: "Saint Pierre and Miquelon Standard Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.SakhalinIslandTime, name: "Sakhalin Island Time", offset: n$1.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: s.SamaraTime, name: "Samara Time", offset: n$1.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: s.SamoaDaylightTime, name: "Samoa Daylight Time", offset: n$1.UTC_MINUS_10 });
-({ dst: { is: false, uses: true }, id: s.SamoaStandardTime, name: "Samoa Standard Time", offset: n$1.UTC_MINUS_11 });
-({ dst: { is: false, uses: true }, id: s.SeychellesTime, name: "Seychelles Time", offset: n$1.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: s.ShowaStationTime, name: "Showa Station Time", offset: n$1.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: s.SingaporeStandardTime, name: "Singapore Standard Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.SingaporeTime, name: "Singapore Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.SolomonIslandsTime, name: "Solomon Islands Time", offset: n$1.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: s.SouthAfricanStandardTime, name: "South African Standard Time", offset: n$1.UTC_PLUS_2 });
-({ dst: { is: false, uses: true }, id: s.SouthGeorgiaAndTheSouthSandwichIslandsTime, name: "South Georgia and the South Sandwich Islands Time", offset: n$1.UTC_MINUS_2 });
-({ dst: { is: false, uses: true }, id: s.SrednekolymskTime, name: "Srednekolymsk Time", offset: n$1.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: s.SriLankaStandardTime, name: "Sri Lanka Standard Time", offset: n$1.UTC_PLUS_5_30 });
-({ dst: { is: false, uses: true }, id: s.SurinameTime, name: "Suriname Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.TahitiTime, name: "Tahiti Time", offset: n$1.UTC_MINUS_10 });
-({ dst: { is: false, uses: true }, id: s.TajikistanTime, name: "Tajikistan Time", offset: n$1.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: s.ThailandStandardTime, name: "Thailand Standard Time", offset: n$1.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: s.TimorLesteTime, name: "Timor-Leste Time", offset: n$1.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: s.TokelauTime, name: "Tokelau Time", offset: n$1.UTC_PLUS_13 });
-({ dst: { is: false, uses: true }, id: s.TongaTime, name: "Tonga Time", offset: n$1.UTC_PLUS_13 });
-({ dst: { is: false, uses: true }, id: s.TurkeyTime, name: "Turkey Time", offset: n$1.UTC_PLUS_3 });
-({ dst: { is: false, uses: true }, id: s.TurkmenistanTime, name: "Turkmenistan Time", offset: n$1.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: s.TuvaluTime, name: "Tuvalu Time", offset: n$1.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: s.UlaanbaatarStandardTime, name: "Ulaanbaatar Standard Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.UlaanbaatarSummerTime, name: "Ulaanbaatar Summer Time", offset: n$1.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: s.UruguayStandardTime, name: "Uruguay Standard Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.UruguaySummerTime, name: "Uruguay Summer Time", offset: n$1.UTC_MINUS_2 });
-({ dst: { is: false, uses: true }, id: s.UzbekistanTime, name: "Uzbekistan Time", offset: n$1.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: s.VanuatuTime, name: "Vanuatu Time", offset: n$1.UTC_PLUS_11 });
-({ dst: { is: false, uses: true }, id: s.VenezuelaStandardTime, name: "Venezuela Standard Time", offset: n$1.UTC_MINUS_4 });
-({ dst: { is: false, uses: true }, id: s.VladivostokTime, name: "Vladivostok Time", offset: n$1.UTC_PLUS_10 });
-({ dst: { is: false, uses: true }, id: s.VolgogradTime, name: "Volgograd Time", offset: n$1.UTC_PLUS_4 });
-({ dst: { is: false, uses: true }, id: s.VostokStationTime, name: "Vostok Station Time", offset: n$1.UTC_PLUS_6 });
-({ dst: { is: false, uses: true }, id: s.WakeIslandTime, name: "Wake Island Time", offset: n$1.UTC_PLUS_12 });
-({ dst: { is: false, uses: true }, id: s.WestAfricaSummerTime, name: "West Africa Summer Time", offset: n$1.UTC_PLUS_2 });
-({ dst: { is: false, uses: true }, id: s.WestAfricaTime, name: "West Africa Time", offset: n$1.UTC_PLUS_1 });
-({ dst: { is: false, uses: true }, id: s.WestGreenlandSummerTime, name: "West Greenland Summer Time", offset: n$1.UTC_MINUS_2 });
-({ dst: { is: false, uses: true }, id: s.WestGreenlandTime, name: "West Greenland Time", offset: n$1.UTC_MINUS_3 });
-({ dst: { is: false, uses: true }, id: s.WestKazakhstanTime, name: "West Kazakhstan Time", offset: n$1.UTC_PLUS_5 });
-({ dst: { is: false, uses: true }, id: s.WesternEuropeanSummerTime, name: "Western European Summer Time", offset: n$1.UTC_PLUS_1 });
-({ dst: { is: false, uses: true }, id: s.WesternEuropeanTime, name: "Western European Time", offset: n$1.UTC_0 });
-({ dst: { is: false, uses: true }, id: s.WesternIndonesianTime, name: "Western Indonesian Time", offset: n$1.UTC_PLUS_7 });
-({ dst: { is: false, uses: true }, id: s.WesternStandardTime, name: "Western Standard Time", offset: n$1.UTC_PLUS_8 });
-({ dst: { is: false, uses: true }, id: s.YakutskTime, name: "Yakutsk Time", offset: n$1.UTC_PLUS_9 });
-({ dst: { is: false, uses: true }, id: s.YekaterinburgTime, name: "Yekaterinburg Time", offset: n$1.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: s.AcreTime, name: "Acre Time", offset: n.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: s.AfghanistanTime, name: "Afghanistan Time", offset: n.UTC_PLUS_4_30 });
+({ dst: { is: false, uses: true }, id: s.AIXCentralEuropeanTime, name: "AIX Central European Time", offset: n.UTC_PLUS_1 });
+({ dst: { is: true, uses: true }, id: s.AlaskaDaylightTime, name: "Alaska Daylight Time", offset: n.UTC_MINUS_8 });
+({ dst: { is: false, uses: true }, id: s.AlaskaStandardTime, name: "Alaska Standard Time", offset: n.UTC_MINUS_9 });
+({ dst: { is: false, uses: true }, id: s.AlmaAtaTime, name: "Alma-Ata Time", offset: n.UTC_PLUS_6 });
+({ dst: { is: false, uses: true }, id: s.AmazonSummerTime, name: "Amazon Summer Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.AmazonTime, name: "Amazon Time", offset: n.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: s.AnadyrTime, name: "Anadyr Time", offset: n.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: s.AqtobeTime, name: "Aqtobe Time", offset: n.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: s.ArabiaStandardTime, name: "Arabia Standard Time", offset: n.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: s.ArgentinaTime, name: "Argentina Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.ArmeniaTime, name: "Armenia Time", offset: n.UTC_PLUS_4 });
+({ dst: { is: true, uses: true }, id: s.AtlanticDaylightTime, name: "Atlantic Daylight Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.AtlanticStandardTime, name: "Atlantic Standard Time", offset: n.UTC_MINUS_4 });
+({ dst: { is: true, uses: true }, id: s.AustralianCentralDaylightSavingTime, name: "Australian Central Daylight Saving Time", offset: n.UTC_PLUS_10_30 });
+({ dst: { is: false, uses: true }, id: s.AustralianCentralStandardTime, name: "Australian Central Standard Time", offset: n.UTC_PLUS_9_30 });
+({ dst: { is: false, uses: true }, id: s.AustralianCentralWesternStandardTime, name: "Australian Central Western Standard Time", offset: n.UTC_PLUS_8_45 });
+({ dst: { is: true, uses: true }, id: s.AustralianEasternDaylightSavingTime, name: "Australian Eastern Daylight Saving Time", offset: n.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: s.AustralianEasternStandardTime, name: "Australian Eastern Standard Time", offset: n.UTC_PLUS_10 });
+({ dst: { is: false, uses: true }, id: s.AustralianEasternTime, name: "Australian Eastern Time", offset: n.UTC_PLUS_10 });
+({ dst: { is: false, uses: true }, id: s.AustralianWesternStandardTime, name: "Australian Western Standard Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.AzerbaijanTime, name: "Azerbaijan Time", offset: n.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: s.AzoresStandardTime, name: "Azores Standard Time", offset: n.UTC_MINUS_1 });
+({ dst: { is: true, uses: true }, id: s.AzoresSummerTime, name: "Azores Summer Time", offset: n.UTC_0 });
+({ dst: { is: false, uses: true }, id: s.BakerIslandTime, name: "Baker Island Time", offset: n.UTC_MINUS_12 });
+({ dst: { is: false, uses: true }, id: s.BangladeshStandardTime, name: "Bangladesh Standard Time", offset: n.UTC_PLUS_6 });
+({ dst: { is: false, uses: true }, id: s.BhutanTime, name: "Bhutan Time", offset: n.UTC_PLUS_6 });
+({ dst: { is: false, uses: true }, id: s.BoliviaTime, name: "Bolivia Time", offset: n.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: s.BougainvilleStandardTime, name: "Bougainville Standard Time", offset: n.UTC_PLUS_11 });
+({ dst: { is: true, uses: true }, id: s.BrasiliaSummerTime, name: "Brasilia Summer Time", offset: n.UTC_MINUS_2 });
+({ dst: { is: false, uses: true }, id: s.BrasiliaTime, name: "Brasilia Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.BritishIndianOceanTime, name: "British Indian Ocean Time", offset: n.UTC_PLUS_6 });
+({ dst: { is: true, uses: true }, id: s.BritishSummerTime, name: "British Summer Time", offset: n.UTC_PLUS_1 });
+({ dst: { is: false, uses: true }, id: s.BruneiTime, name: "Brunei Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.CapeVerdeTime, name: "Cape Verde Time", offset: n.UTC_MINUS_1 });
+({ dst: { is: false, uses: true }, id: s.CentralAfricaTime, name: "Central Africa Time", offset: n.UTC_PLUS_2 });
+({ dst: { is: true, uses: true }, id: s.CentralDaylightTime, name: "Central Daylight Time", offset: n.UTC_MINUS_5 });
+({ dst: { is: true, uses: true }, id: s.CentralEuropeanSummerTime, name: "Central European Summer Time", offset: n.UTC_PLUS_2 });
+({ dst: { is: false, uses: true }, id: s.CentralEuropeanTime, name: "Central European Time", offset: n.UTC_PLUS_1 });
+({ dst: { is: false, uses: true }, id: s.CentralIndonesiaTime, name: "Central Indonesia Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.CentralStandardTime, name: "Central Standard Time", offset: n.UTC_MINUS_6 });
+({ dst: { is: false, uses: true }, id: s.CentralTime, name: "Central Time", offset: n.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: s.CentralWesternStandardTime, name: "Central Western Standard Time", offset: n.UTC_PLUS_8_45 });
+({ dst: { is: false, uses: true }, id: s.ChamorroStandardTime, name: "Chamorro Standard Time", offset: n.UTC_PLUS_10 });
+({ dst: { is: true, uses: true }, id: s.ChathamDaylightTime, name: "Chatham Daylight Time", offset: n.UTC_PLUS_13_45 });
+({ dst: { is: false, uses: true }, id: s.ChathamStandardTime, name: "Chatham Standard Time", offset: n.UTC_PLUS_12_45 });
+({ dst: { is: false, uses: true }, id: s.ChileStandardTime, name: "Chile Standard Time", offset: n.UTC_MINUS_4 });
+({ dst: { is: true, uses: true }, id: s.ChileSummerTime, name: "Chile Summer Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.ChinaStandardTime, name: "China Standard Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.ChoibalsanStandardTime, name: "Choibalsan Standard Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: true, uses: true }, id: s.ChoibalsanSummerTime, name: "Choibalsan Summer Time", offset: n.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: s.ChristmasIslandTime, name: "Christmas Island Time", offset: n.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: s.ChuukTime, name: "Chuuk Time", offset: n.UTC_PLUS_10 });
+({ dst: { is: false, uses: true }, id: s.ClipptertonIslandStandardTime, name: "Clippterton Island Standard Time", offset: n.UTC_MINUS_8 });
+({ dst: { is: false, uses: true }, id: s.CocosIslandsTime, name: "Cocos Standard Time", offset: n.UTC_PLUS_6_30 });
+({ dst: { is: true, uses: true }, id: s.ColombiaSummerTime, name: "Colombia Summer Time", offset: n.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: s.ColombiaTime, name: "Colombia Time", offset: n.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: s.CookIslandTime, name: "Cook Island Time", offset: n.UTC_MINUS_10 });
+({ dst: { is: false, uses: true }, id: s.CoordinatedUniversalTime, name: "Coordinated Universal Time", offset: n.UTC_0 });
+({ dst: { is: true, uses: true }, id: s.CubaDaylightTime, name: "Cuba Daylight Time", offset: n.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: s.CubaStandardTime, name: "Cuba Standard Time", offset: n.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: s.DavisTime, name: "Davis Time", offset: n.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: s.DumontDUrvilleTime, name: "Dumont D'Urville Time", offset: n.UTC_PLUS_10 });
+({ dst: { is: false, uses: true }, id: s.EastAfricaTime, name: "East Africa Time", offset: n.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: s.EasterIslandStandardTime, name: "Easter Island Standard Time", offset: n.UTC_MINUS_6 });
+({ dst: { is: true, uses: true }, id: s.EasterIslandSummerTime, name: "Easter Island Summer Time", offset: n.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: s.EasternCaribbeanTime, name: "Eastern Caribbean Time", offset: n.UTC_MINUS_4 });
+({ dst: { is: true, uses: true }, id: s.EasternDaylightTime, name: "Eastern Daylight Time", offset: n.UTC_MINUS_4 });
+({ dst: { is: true, uses: true }, id: s.EasternEuropeanSummerTime, name: "Eastern European Summer Time", offset: n.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: s.EasternEuropeanTime, name: "Eastern European Time", offset: n.UTC_PLUS_2 });
+({ dst: { is: true, uses: true }, id: s.EasternGreenlandSummerTime, name: "Eastern Greenland Summer Time", offset: n.UTC_0 });
+({ dst: { is: false, uses: true }, id: s.EasternGreenlandTime, name: "Eastern Greenland Time", offset: n.UTC_MINUS_1 });
+({ dst: { is: false, uses: true }, id: s.EasternIndonesianTime, name: "Eastern Indonesian Time", offset: n.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: s.EasternStandardTime, name: "Eastern Standard Time", offset: n.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: s.EasternTime, name: "Eastern Time", offset: n.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: s.EcuadorTime, name: "Ecuador Time", offset: n.UTC_MINUS_5 });
+({ dst: { is: true, uses: true }, id: s.FalklandIslandsSummerTime, name: "Falkland Islands Summer Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.FalklandIslandsTime, name: "Falkland Islands Time", offset: n.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: s.FernandoDeNoronhaTime, name: "Fernando de Noronha Time", offset: n.UTC_MINUS_2 });
+({ dst: { is: false, uses: true }, id: s.FijiTime, name: "Fiji Time", offset: n.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: s.FrenchGuianaTime, name: "French Guiana Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.FrenchSouthernAndAntarcticTime, name: "French Southern and Antarctic Time", offset: n.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: s.FurtherEasternEuropeanTime, name: "Further Eastern European Time", offset: n.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: s.GalapagosTime, name: "Galapagos Time", offset: n.UTC_MINUS_6 });
+({ dst: { is: false, uses: true }, id: s.GambierIslandTime, name: "Gambier Island Time", offset: n.UTC_MINUS_9 });
+({ dst: { is: false, uses: true }, id: s.GambierIslandsTime, name: "Gambier Islands Time", offset: n.UTC_MINUS_9 });
+({ dst: { is: false, uses: true }, id: s.GeorgiaStandardTime, name: "Georgia Standard Time", offset: n.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: s.GilbertIslandTime, name: "Gilbert Island Time", offset: n.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: s.GreenwichMeanTime, name: "Greenwich Mean Time", offset: n.UTC_0 });
+({ dst: { is: false, uses: true }, id: s.GulfStandardTime, name: "Gulf Standard Time", offset: n.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: s.GuyanaTime, name: "Guyana Time", offset: n.UTC_MINUS_4 });
+({ dst: { is: true, uses: true }, id: s.HawaiiAleutianDaylightTime, name: "Hawaii-Aleutian Daylight Time", offset: n.UTC_MINUS_9 });
+({ dst: { is: false, uses: true }, id: s.HawaiiAleutianStandardTime, name: "Hawaii-Aleutian Standard Time", offset: n.UTC_MINUS_10 });
+({ dst: { is: false, uses: true }, id: s.HeardAndMcDonaldIslandsTime, name: "Heard and McDonald Islands Time", offset: n.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: s.HongKongTime, name: "Hong Kong Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: true, uses: true }, id: s.HovdSummerTime, name: "Hovd Summer Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.HovdTime, name: "Hovd Time", offset: n.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: s.IndianOceanTime, name: "Indian Ocean Time", offset: n.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: s.IndianStandardTime, name: "Indian Standard Time", offset: n.UTC_PLUS_5_30 });
+({ dst: { is: false, uses: true }, id: s.IndochinaTime, name: "Indochina Time", offset: n.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: s.InternationalDayLineWestTime, name: "International Day Line West Time", offset: n.UTC_MINUS_12 });
+({ dst: { is: true, uses: true }, id: s.IranDaylightTime, name: "Iran Daylight Time", offset: n.UTC_PLUS_4_30 });
+({ dst: { is: false, uses: true }, id: s.IranStandardTime, name: "Iran Standard Time", offset: n.UTC_PLUS_3_30 });
+({ dst: { is: false, uses: true }, id: s.IrishStandardTime, name: "Irish Standard Time", offset: n.UTC_PLUS_1 });
+({ dst: { is: false, uses: true }, id: s.IrkutskTime, name: "Irkutsk Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: true, uses: true }, id: s.IsraelDaylightTime, name: "Israel Daylight Time", offset: n.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: s.IsraelStandardTime, name: "Israel Standard Time", offset: n.UTC_PLUS_2 });
+({ dst: { is: false, uses: true }, id: s.JapanStandardTime, name: "Japan Standard Time", offset: n.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: s.KaliningradTime, name: "Kaliningrad Time", offset: n.UTC_PLUS_2 });
+({ dst: { is: false, uses: true }, id: s.KamchatkaTime, name: "Kamchatka Time", offset: n.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: s.KoreaStandardTime, name: "Korea Standard Time", offset: n.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: s.KosraeTime, name: "Kosrae Time", offset: n.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: s.KrasnoyarskTime, name: "Krasnoyarsk Time", offset: n.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: s.KyrgyzstanTime, name: "Kyrgyzstan Time", offset: n.UTC_PLUS_6 });
+({ dst: { is: false, uses: true }, id: s.LineIslandsTime, name: "Line Islands Time", offset: n.UTC_PLUS_14 });
+({ dst: { is: false, uses: true }, id: s.LordHoweStandardTime, name: "Lord Howe Standard Time", offset: n.UTC_PLUS_10_30 });
+({ dst: { is: false, uses: true }, id: s.LordHoweSummerTime, name: "Lord Howe Summer Time", offset: n.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: s.MacquarieIslandStationTime, name: "Macquarie Island Station Time", offset: n.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: s.MagadanTime, name: "Magadan Time", offset: n.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: s.MalaysiaStandardTime, name: "Malaysia Standard Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.MalaysiaTime, name: "Malaysia Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.MaldivesTime, name: "Maldives Time", offset: n.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: s.MarquesasIslandsTime, name: "Marquesas Islands Time", offset: n.UTC_PLUS_9_30 });
+({ dst: { is: false, uses: true }, id: s.MarshallIslandsTime, name: "Marshall Islands Time", offset: n.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: s.MauritiusTime, name: "Mauritius Time", offset: n.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: s.MawsonStationTime, name: "Mawson Station Time", offset: n.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: s.MiddleEuropeanSummerTime, name: "Middle European Summer Time", offset: n.UTC_PLUS_2 });
+({ dst: { is: false, uses: true }, id: s.MiddleEuropeanTime, name: "Middle European Time", offset: n.UTC_PLUS_1 });
+({ dst: { is: false, uses: true }, id: s.MoscowTime, name: "Moscow Time", offset: n.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: s.MountainDaylightTime, name: "Mountain Daylight Time", offset: n.UTC_MINUS_6 });
+({ dst: { is: false, uses: true }, id: s.MountainStandardTime, name: "Mountain Standard Time", offset: n.UTC_MINUS_7 });
+({ dst: { is: false, uses: true }, id: s.MyanmarStandardTime, name: "Myanmar Standard Time", offset: n.UTC_PLUS_6_30 });
+({ dst: { is: false, uses: true }, id: s.NepalTime, name: "Nepal Time", offset: n.UTC_PLUS_5_45 });
+({ dst: { is: false, uses: true }, id: s.NauruTime, name: "Nauru Time", offset: n.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: s.NewCaledoniaTime, name: "New Caledonia Time", offset: n.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: s.NewZealandDaylightTime, name: "New Zealand Daylight Time", offset: n.UTC_PLUS_13 });
+({ dst: { is: false, uses: true }, id: s.NewZealandStandardTime, name: "New Zealand Standard Time", offset: n.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: s.NewfoundlandDaylightTime, name: "Newfoundland Daylight Time", offset: n.UTC_MINUS_2_30 });
+({ dst: { is: false, uses: true }, id: s.NewfoundlandTime, name: "Newfoundland Time", offset: n.UTC_MINUS_3_30 });
+({ dst: { is: false, uses: true }, id: s.NiueTime, name: "Niue Time", offset: n.UTC_MINUS_11 });
+({ dst: { is: false, uses: true }, id: s.NorfolkIslandTime, name: "Norfolk Island Time", offset: n.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: s.NovosibirskTime, name: "Novosibirsk Time", offset: n.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: s.OmskTime, name: "Omsk Time", offset: n.UTC_PLUS_6 });
+({ dst: { is: false, uses: true }, id: s.OralTime, name: "Oral Time", offset: n.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: s.PacificDaylightTime, name: "Pacific Daylight Time", offset: n.UTC_MINUS_7 });
+({ dst: { is: false, uses: true }, id: s.PacificStandardTime, name: "Pacific Standard Time", offset: n.UTC_MINUS_8 });
+({ dst: { is: false, uses: true }, id: s.PakistanStandardTime, name: "Pakistan Standard Time", offset: n.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: s.PalauTime, name: "Palau Time", offset: n.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: s.PapuaNewGuineaTime, name: "Papua New Guinea Time", offset: n.UTC_PLUS_10 });
+({ dst: { is: false, uses: true }, id: s.ParaguaySummerTime, name: "Paraguay Summer Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.ParaguayTime, name: "Paraguay Time", offset: n.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: s.PeruTime, name: "Peru Time", offset: n.UTC_MINUS_5 });
+({ dst: { is: false, uses: true }, id: s.PhilippineStandardTime, name: "Philippine Standard Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.PhilippineTime, name: "Philippine Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.PhoenixIslandTime, name: "Phoenix Island Time", offset: n.UTC_PLUS_13 });
+({ dst: { is: false, uses: true }, id: s.PitcairnTime, name: "Pitcairn Time", offset: n.UTC_MINUS_8 });
+({ dst: { is: false, uses: true }, id: s.PohnpeiStandardTime, name: "Pohnpei Standard Time", offset: n.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: s.ReunionTime, name: "Reunion Time", offset: n.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: s.RotheraResearchStationTime, name: "Rothera Research Station Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.SaintPierreAndMiquelonDaylightTime, name: "Saint Pierre and Miquelon Daylight Time", offset: n.UTC_MINUS_2 });
+({ dst: { is: false, uses: true }, id: s.SaintPierreAndMiquelonStandardTime, name: "Saint Pierre and Miquelon Standard Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.SakhalinIslandTime, name: "Sakhalin Island Time", offset: n.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: s.SamaraTime, name: "Samara Time", offset: n.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: s.SamoaDaylightTime, name: "Samoa Daylight Time", offset: n.UTC_MINUS_10 });
+({ dst: { is: false, uses: true }, id: s.SamoaStandardTime, name: "Samoa Standard Time", offset: n.UTC_MINUS_11 });
+({ dst: { is: false, uses: true }, id: s.SeychellesTime, name: "Seychelles Time", offset: n.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: s.ShowaStationTime, name: "Showa Station Time", offset: n.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: s.SingaporeStandardTime, name: "Singapore Standard Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.SingaporeTime, name: "Singapore Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.SolomonIslandsTime, name: "Solomon Islands Time", offset: n.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: s.SouthAfricanStandardTime, name: "South African Standard Time", offset: n.UTC_PLUS_2 });
+({ dst: { is: false, uses: true }, id: s.SouthGeorgiaAndTheSouthSandwichIslandsTime, name: "South Georgia and the South Sandwich Islands Time", offset: n.UTC_MINUS_2 });
+({ dst: { is: false, uses: true }, id: s.SrednekolymskTime, name: "Srednekolymsk Time", offset: n.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: s.SriLankaStandardTime, name: "Sri Lanka Standard Time", offset: n.UTC_PLUS_5_30 });
+({ dst: { is: false, uses: true }, id: s.SurinameTime, name: "Suriname Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.TahitiTime, name: "Tahiti Time", offset: n.UTC_MINUS_10 });
+({ dst: { is: false, uses: true }, id: s.TajikistanTime, name: "Tajikistan Time", offset: n.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: s.ThailandStandardTime, name: "Thailand Standard Time", offset: n.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: s.TimorLesteTime, name: "Timor-Leste Time", offset: n.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: s.TokelauTime, name: "Tokelau Time", offset: n.UTC_PLUS_13 });
+({ dst: { is: false, uses: true }, id: s.TongaTime, name: "Tonga Time", offset: n.UTC_PLUS_13 });
+({ dst: { is: false, uses: true }, id: s.TurkeyTime, name: "Turkey Time", offset: n.UTC_PLUS_3 });
+({ dst: { is: false, uses: true }, id: s.TurkmenistanTime, name: "Turkmenistan Time", offset: n.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: s.TuvaluTime, name: "Tuvalu Time", offset: n.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: s.UlaanbaatarStandardTime, name: "Ulaanbaatar Standard Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.UlaanbaatarSummerTime, name: "Ulaanbaatar Summer Time", offset: n.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: s.UruguayStandardTime, name: "Uruguay Standard Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.UruguaySummerTime, name: "Uruguay Summer Time", offset: n.UTC_MINUS_2 });
+({ dst: { is: false, uses: true }, id: s.UzbekistanTime, name: "Uzbekistan Time", offset: n.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: s.VanuatuTime, name: "Vanuatu Time", offset: n.UTC_PLUS_11 });
+({ dst: { is: false, uses: true }, id: s.VenezuelaStandardTime, name: "Venezuela Standard Time", offset: n.UTC_MINUS_4 });
+({ dst: { is: false, uses: true }, id: s.VladivostokTime, name: "Vladivostok Time", offset: n.UTC_PLUS_10 });
+({ dst: { is: false, uses: true }, id: s.VolgogradTime, name: "Volgograd Time", offset: n.UTC_PLUS_4 });
+({ dst: { is: false, uses: true }, id: s.VostokStationTime, name: "Vostok Station Time", offset: n.UTC_PLUS_6 });
+({ dst: { is: false, uses: true }, id: s.WakeIslandTime, name: "Wake Island Time", offset: n.UTC_PLUS_12 });
+({ dst: { is: false, uses: true }, id: s.WestAfricaSummerTime, name: "West Africa Summer Time", offset: n.UTC_PLUS_2 });
+({ dst: { is: false, uses: true }, id: s.WestAfricaTime, name: "West Africa Time", offset: n.UTC_PLUS_1 });
+({ dst: { is: false, uses: true }, id: s.WestGreenlandSummerTime, name: "West Greenland Summer Time", offset: n.UTC_MINUS_2 });
+({ dst: { is: false, uses: true }, id: s.WestGreenlandTime, name: "West Greenland Time", offset: n.UTC_MINUS_3 });
+({ dst: { is: false, uses: true }, id: s.WestKazakhstanTime, name: "West Kazakhstan Time", offset: n.UTC_PLUS_5 });
+({ dst: { is: false, uses: true }, id: s.WesternEuropeanSummerTime, name: "Western European Summer Time", offset: n.UTC_PLUS_1 });
+({ dst: { is: false, uses: true }, id: s.WesternEuropeanTime, name: "Western European Time", offset: n.UTC_0 });
+({ dst: { is: false, uses: true }, id: s.WesternIndonesianTime, name: "Western Indonesian Time", offset: n.UTC_PLUS_7 });
+({ dst: { is: false, uses: true }, id: s.WesternStandardTime, name: "Western Standard Time", offset: n.UTC_PLUS_8 });
+({ dst: { is: false, uses: true }, id: s.YakutskTime, name: "Yakutsk Time", offset: n.UTC_PLUS_9 });
+({ dst: { is: false, uses: true }, id: s.YekaterinburgTime, name: "Yekaterinburg Time", offset: n.UTC_PLUS_5 });
 var T;
 (function(a2) {
   a2.Africa = "Africa", a2.Americas = "Americas", a2.Asia = "Asia", a2.Europe = "Europe", a2.Oceania = "Oceania", a2.Polar = "Polar";
 })(T || (T = {}));
-var p$1;
+var p;
 (function(a2) {
   a2.CentralAmerica = "Central America", a2.EasternAsia = "Eastern Asia", a2.EasternEurope = "Eastern Europe", a2.EasternAfrica = "Eastern Africa", a2.MiddleAfrica = "Middle Africa", a2.MiddleEast = "Middle East", a2.NorthernAfrica = "Northern Africa", a2.NorthernAmerica = "Northern America", a2.NorthernEurope = "Northern Europe", a2.Polynesia = "Polynesia", a2.SouthAmerica = "South America", a2.SouthernAfrica = "Southern Africa", a2.SouthernAsia = "Southern Asia", a2.SouthernEurope = "Southern Europe", a2.WesternAfrica = "Western Africa", a2.WesternAsia = "Western Asia", a2.WesternEurope = "Western Europe", a2.WesternAustralia = "Western Australia";
-})(p$1 || (p$1 = {}));
-({ Afghanistan: { i18n: { calling_codes: [93], currencies: [m$1.AfghanistanAfghani], languages: [e.Pashto, e.Dari, e.Turkmen, e.Uzbek], tz: { offsets: [n$1.UTC_PLUS_4_30], regions: [u.AsiaKabul], timezones: [s.AfghanistanTime] } }, id: r.Afghanistan, info: { flag: { emoji: "\u{1F1E6}\u{1F1EB}", emoji_unicode: "U+1F1E6 U+1F1EB", svg: "https://www.countryflags.io/af/flat/64.svg" }, tld: [".af"] }, iso: { alpha2: r.Afghanistan, alpha3: "AFG", numeric: "004" }, name: { alt_spellings: ["AF", "Af\u0121\u0101nist\u0101n"], demonym: "Afghan", native: { endonym: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646" }, official: "Islamic Republic of Afghanistan", short: "Afghanistan", translations: { [e.Afrikaans]: "Afghanistan", [e.Albanian]: "Shqip\xEBri", [e.Amharic]: "\u12A0\u134D\u130B\u1295", [e.Arabic]: "\u0623\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e.Armenian]: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576", [e.Azerbaijani]: "Az\u0259rbaycan", [e.Bashkir]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Basque]: "Afganist\xE1n", [e.Belarusian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Bengali]: "\u0986\u09AB\u0997\u09BE\u09A8\u09BF\u09B8\u09CD\u09A4\u09BE\u09A8", [e.Berber]: "\u0623\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e.Bhutani]: "\u0F60\u0F56\u0FB2\u0F74\u0F42\u0F0B\u0F61\u0F74\u0F63\u0F0B\u0F66\u0FA4\u0FB2\u0F7C\u0F51\u0F0B\u0F40\u0FB1\u0F72\u0F0B\u0F51\u0F7C\u0F53\u0F0B\u0F63\u0F7A\u0F0B\u0F66\u0F90\u0F51\u0F0B\u0F46\u0F0D", [e.Bosnian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Breton]: "Afganistan", [e.Bulgarian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Burmese]: "\u1021\u102C\u1019\u1001\u103B\u1004\u103A\u1010\u1031\u102C\u103A", [e.Catalan]: "Afganistan", [e.Chinese]: "\u963F\u5BCC\u6C57", [e.Croatian]: "Afganistan", [e.Czech]: "Afganistan", [e.Danish]: "Afghanistan", [e.Dutch]: "Afghanistan", [e.English]: "Afghanistan", [e.Esperanto]: "Afganistan", [e.Estonian]: "Afganistan", [e.Finnish]: "Afghanistan", [e.French]: "Afghanistan", [e.Frisian]: "Afghanistan", [e.Galician]: "Afganist\xE1n", [e.Georgian]: "\u10D0\u10D5\u10E6\u10D0\u10DC\u10D4\u10D7\u10D8", [e.German]: "Afghanistan", [e.Greenlandic]: "Afghanistan", [e.Greek]: "\u0391\u03C6\u03B3\u03B1\u03BD\u03B9\u03C3\u03C4\u03AC\u03BD", [e.Gujarati]: "\u0A85\u0AAB\u0A97\u0ABE\u0AA8\u0ABF\u0AB8\u0ACD\u0AA4\u0ABE\u0AA8", [e.Haitian]: "Afghanistan", [e.Hausa]: "Afghanistan", [e.Hebrew]: "\u05D0\u05E4\u05D2\u05E0\u05D9\u05E1\u05D8\u05DF", [e.Hindi]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e.Hungarian]: "Afganistan", [e.Icelandic]: "Afghanistan", [e.Igbo]: "Afghanistan", [e.Indonesian]: "Afghanistan", [e.Irish]: "Afghanistan", [e.Italian]: "Afghanistan", [e.Japanese]: "\u30A2\u30D5\u30AC\u30CB\u30B9\u30BF\u30F3", [e.Javanese]: "Afghanistan", [e.Kannada]: "\u0C85\u0CAB\u0C97\u0CBE\u0CA8\u0CBF\u0CB8\u0CCD\u0CA4\u0CBE\u0CA8", [e.Kazakh]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Khmer]: "\u17A2\u17B6\u17A0\u17D2\u179C\u17D2\u179A\u17B7\u1780", [e.Korean]: "\uC544\uD504\uAC00\uB2C8\uC2A4\uD0C4", [e.Kurdish]: "Afghanistan", [e.Kyrgyz]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Lao]: "\u0EAD\u0EB2\u0E9F\u0EB2\u0EA5\u0EBD\u0E99", [e.Latin]: "Afghanistan", [e.Latvian]: "Afghanistan", [e.Lithuanian]: "Afganistanas", [e.Luxembourgish]: "Afghanistan", [e.Macedonian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Malagasy]: "Afghanistan", [e.Malay]: "Afghanistan", [e.Malayalam]: "\u0D05\u0D2B\u0D17\u0D3E\u0D28\u0D3F\u0D38\u0D4D\u0D24\u0D3E\u0D28", [e.Maltese]: "Afghanistan", [e.Maori]: "Afghanistan", [e.Marathi]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e.Mongolian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Nepali]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e.Norwegian]: "Afghanistan", [e.Pashto]: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e.Persian]: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e.Polish]: "Afganistan", [e.Portuguese]: "Afghanistan", [e.Punjabi]: "Afghanistan", [e.Romanian]: "Afghanistan", [e.Polish]: "Afganistan", [e.Russian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Samoan]: "Afghanistan", [e.Sanskrit]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e.Scots]: "Afghanistan", [e.Serbian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Sesotho]: "Afghanistan", [e.Shona]: "Afghanistan", [e.Sindhi]: "Afghanistan", [e.Sinhala]: "\u0D86\u0D9C\u0DCA\u200D\u0DBB\u0DDC\u0D9A\u0DCA\u0D9A\u0DD2\u0DBA\u0DCF\u0DC0", [e.Slovak]: "Afganistan", [e.Slovenian]: "Afganistan", [e.Somali]: "Afghanistan", [e.Spanish]: "Afganist\xE1n", [e.Sudanese]: "Afghanistan", [e.Swahili]: "Afghanistan", [e.Swedish]: "Afghanistan", [e.Tagalog]: "Afghanistan", [e.Tajik]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Tatar]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Tamil]: "\u0B86\u0BAA\u0BCD\u0BAA\u0B95\u0BBE\u0BA9\u0BBF\u0BB8\u0BCD\u0BA4\u0BBE\u0BA9\u0BCD", [e.Telugu]: "\u0C06\u0C2B\u0C4D\u0C18\u0C28\u0C3F\u0C38\u0C4D\u0C24\u0C3E\u0C28\u0C4D", [e.Thai]: "\u0E2D\u0E31\u0E1F\u0E01\u0E32\u0E19\u0E34\u0E2A\u0E16\u0E32\u0E19", [e.Tibetan]: "\u0F68\u0F55\u0F0B\u0F42\u0F7A\u0F0B\u0F53\u0F72\u0F66\u0F72\u0F0B\u0F4F\u0F7A\u0F53\u0F66\u0F72\u0F0D", [e.Turkish]: "Afganistan", [e.Ukrainian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Urdu]: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e.Uzbek]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Vietnamese]: "Afghanistan", [e.Welsh]: "Afghanistan", [e.Xhosa]: "Afghanistan", [e.Yiddish]: "Afghanistan", [e.Yoruba]: "Afghanistan", [e.Zulu]: "Afghanistan" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Kabul", total: 341e5 } }, geography: { area: 652230, region: T.Asia, sub_region: p$1.SouthernAsia }, government: { capital: "Kabul", type: "Islamic Emirate" } } }, Albania: { i18n: { calling_codes: [355], currencies: [m$1.AlbaniaLek], languages: [e.Albanian, e.Greek, e.Turkish], tz: { offsets: [n$1.UTC_PLUS_1], regions: [u.EuropeBrussels], timezones: [s.CentralEuropeanTime] } }, id: r.Albania, info: { flag: { emoji: "\u{1F1E6}\u{1F1F1}", emoji_unicode: "U+1F1E6 U+1F1F1", svg: "https://www.countryflags.io/al/flat/64.svg" }, tld: [".al"] }, iso: { alpha2: r.Albania, alpha3: "ALB", numeric: "008" }, name: { alt_spellings: ["AL", "Shqip\xEBri", "Shqip\xEBria", "Shqipnia"], demonym: "Albanian", native: { endonym: "Shqip\xEBri" }, official: "Republic of Albania", short: "Albania", translations: { [e.Afrikaans]: "Albania", [e.Albanian]: "Albania", [e.Amharic]: "\u12A0\u120D\u1263\u1295\u12EB", [e.Arabic]: "\u0623\u0644\u0628\u0627\u0646\u064A\u0627", [e.Armenian]: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576", [e.Azerbaijani]: "Az\u0259rbaycan", [e.Bashkir]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Basque]: "Albania", [e.Belarusian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Bengali]: "\u0986\u09B2\u09AC\u09BE\u09A8\u09BF\u09AF\u09BC\u09BE", [e.Berber]: "\u0623\u0644\u0628\u0627\u0646\u064A\u0627", [e.Bhutani]: "\u0F60\u0F56\u0FB2\u0F74\u0F42\u0F0B\u0F61\u0F74\u0F63\u0F0B", [e.Bosnian]: "Albanija", [e.Breton]: "Albania", [e.Bulgarian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Burmese]: "\u1021\u102C\u1019\u1001\u103B\u1004\u103A\u1010\u1031\u102C\u103A", [e.Catalan]: "Alb\xE0nia", [e.Chinese]: "\u963F\u5C14\u5DF4\u5C3C\u4E9A", [e.Croatian]: "Albanija", [e.Czech]: "Alb\xE1nie", [e.Danish]: "Albanien", [e.Dutch]: "Albani\xEB", [e.English]: "Albania", [e.Esperanto]: "Albanio", [e.Estonian]: "Albaania", [e.Finnish]: "Albania", [e.French]: "Albanie", [e.Frisian]: "Albani\xEB", [e.Galician]: "Alb\xE2nia", [e.Georgian]: "\u10D0\u10DA\u10D1\u10D0\u10DC\u10D8\u10D0", [e.German]: "Albanien", [e.Greenlandic]: "Albania", [e.Greek]: "\u0391\u03BB\u03B2\u03B1\u03BD\u03AF\u03B1", [e.Gujarati]: "\u0A85\u0AB2\u0AAC\u0AA8\u0ABF\u0AAF\u0ABE", [e.Haitian]: "Albanais", [e.Hausa]: "Albania", [e.Hebrew]: "\u05D0\u05DC\u05D1\u05E0\u05D9\u05D4", [e.Hindi]: "\u0905\u0932\u094D\u092C\u093E\u0928\u093F\u092F\u093E", [e.Hungarian]: "Alb\xE1nia", [e.Icelandic]: "Alb\xFAnir", [e.Igbo]: "Albania", [e.Indonesian]: "Albania", [e.Irish]: "Alb\xE1in", [e.Italian]: "Albania", [e.Japanese]: "\u30A2\u30EB\u30D0\u30CB\u30A2", [e.Javanese]: "Albania", [e.Kannada]: "\u0C85\u0CB2\u0CCD\u0CAC\u0CBE\u0CA8\u0CBF\u0CAF\u0CBE", [e.Kazakh]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Khmer]: "\u17A2\u17B6\u17A0\u17D2\u179C\u17D2\u179A\u17C1\u179F\u17CA\u17B8", [e.Korean]: "\uC54C\uBC14\uB2C8\uC544", [e.Kurdish]: "\u0622\u0644\u0628\u0627\u0646\u06CC\u0627", [e.Kyrgyz]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Lao]: "\u0EAD\u0EB2\u0EA5\u0EB2\u0E99\u0EB5", [e.Latin]: "Albania", [e.Latvian]: "Alb\u0101nija", [e.Lithuanian]: "Albanija", [e.Luxembourgish]: "Albani\xEB", [e.Macedonian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u0458\u0430", [e.Malagasy]: "Albania", [e.Malay]: "Albania", [e.Malayalam]: "\u0D05\u0D32\u0D4D\u0D2C\u0D3E\u0D28\u0D3F\u0D2F\u0D3E", [e.Maltese]: "Albania", [e.Maori]: "Albania", [e.Marathi]: "\u0905\u0932\u094D\u092C\u093E\u0928\u093F\u092F\u093E", [e.Mongolian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Nepali]: "\u0905\u0932\u094D\u092C\u093E\u0928\u093F\u092F\u093E", [e.Norwegian]: "Albania", [e.Pashto]: "\u0627\u0627\u0644\u0628\u0627\u0646\u06CC", [e.Persian]: "\u0622\u0644\u0628\u0627\u0646\u06CC", [e.Polish]: "Albania", [e.Portuguese]: "Alb\xE2nia", [e.Punjabi]: "\u0A05\u0A32\u0A2C\u0A28\u0A40\u0A06", [e.Romanian]: "Alb\u0103n", [e.Russian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Samoan]: "Albania", [e.Sanskrit]: "Albani", [e.Scots]: "Alb\xE0inia", [e.Serbian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u0458\u0430", [e.Sesotho]: "Albania", [e.Shona]: "Albania", [e.Sindhi]: "Albania", [e.Sinhala]: "\u0D87\u0DBD\u0DCA\u0DB6\u0DCF\u0DB1\u0DD2\u0DBA", [e.Slovak]: "Alb\xE1nsko", [e.Slovenian]: "Albanija", [e.Somali]: "Albania", [e.Spanish]: "Albania", [e.Sudanese]: "Albania", [e.Swahili]: "Albania", [e.Swedish]: "Albanien", [e.Tagalog]: "Albania", [e.Tajik]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Tamil]: "\u0B85\u0BB2\u0BCD\u0BAA\u0BBE\u0BA9\u0BBF\u0BAF\u0BBE", [e.Tatar]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Telugu]: "\u0C05\u0C32\u0C4D\u0C2C\u0C3E\u0C28\u0C3F\u0C2F\u0C3E", [e.Thai]: "\u0E2D\u0E31\u0E25\u0E41\u0E1A\u0E19\u0E34\u0E19\u0E35", [e.Tibetan]: "\u0F68\u0F63\u0F0B\u0F56\u0F72\u0F0B\u0F53\u0F72\u0F0B\u0F61\u0F72", [e.Turkish]: "Albaniye", [e.Ukrainian]: "\u0410\u043B\u0431\u0430\u043D\u0456\u044F", [e.Urdu]: "\u0622\u0644\u0628\u0627\u0646\u06CC", [e.Uzbek]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Vietnamese]: "Albanie", [e.Welsh]: "Albania", [e.Xhosa]: "Albania", [e.Yiddish]: "\u05D0\u05DC\u05D1\u05E0\u05D9\u05E9", [e.Yoruba]: "Albania", [e.Zulu]: "Albania" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Tirana", total: 2853e3 } }, geography: { area: 28748, region: T.Europe, sub_region: p$1.SouthernEurope }, government: { capital: "Tirana", type: "Republic" } } }, Algeria: { i18n: { calling_codes: [213], currencies: [m$1.AlgeriaDinar], languages: [e.Arabic, e.French, e.Berber, e.Tamazight], tz: { offsets: [n$1.UTC_PLUS_1, n$1.UTC_PLUS_2], regions: [u.AfricaAlgiers], timezones: [s.CentralEuropeanTime] } }, id: r.Algeria, info: { flag: { emoji: "\u{1F1E9}\u{1F1FF}", emoji_unicode: "U+1F1E9 U+1F1FF", svg: "https://www.countryflags.io/dz/flat/64.svg" }, tld: [".dz", ".\u062C\u0632\u0627\u0626\u0631"] }, iso: { alpha2: r.Algeria, alpha3: "DZA", numeric: "012" }, name: { alt_spellings: ["DZ", "Dzayer", "Alg\xE9rie"], demonym: "Algerian", native: { endonym: "\u0627\u0644\u062C\u0632\u0627\u0626\u0631" }, official: "People's Democratic Republic of Algeria", short: "Algeria", translations: { [e.Afrikaans]: "Algerije", [e.Albanian]: "Algeria", [e.Amharic]: "\u12A0\u120D\u1300\u122D\u1235", [e.Arabic]: "\u0627\u0644\u062C\u0632\u0627\u0626\u0631", [e.Armenian]: "\u0531\u056C\u0563\u0578\u0580\u056B\u0561", [e.Azerbaijani]: "Az\u0259rbaycan", [e.Bashkir]: "\u0410\u043B\u0436\u0438\u0440", [e.Basque]: "Algeria", [e.Belarusian]: "\u0410\u043B\u0436\u0438\u0440", [e.Bengali]: "\u0986\u09B2\u099C\u09C7\u09B0", [e.Berber]: "\u062C\u0632\u0627\u0626\u0631", [e.Bhutani]: "\u0F62\u0FAB\u0F7C\u0F44\u0F0B\u0F41", [e.Bosnian]: "Al\u017Eir", [e.Breton]: "Algeria", [e.Bulgarian]: "\u0410\u043B\u0436\u0438\u0440", [e.Burmese]: "\u1021\u102C\u101B\u1015\u103A", [e.Catalan]: "Alg\xE8ria", [e.Chinese]: "\u963F\u5C14\u53CA\u5229\u4E9A", [e.Croatian]: "Al\u017Eir", [e.Czech]: "Al\u017E\xEDrsko", [e.Danish]: "Algeriet", [e.Dutch]: "Algerije", [e.English]: "Algeria", [e.Esperanto]: "Al\u011Derio", [e.Estonian]: "Al\u017Eira", [e.Finnish]: "Algeria", [e.French]: "Alg\xE9rie", [e.Frisian]: "Algeri\xEB", [e.Galician]: "Alxeria", [e.Georgian]: "\u10D0\u10DA\u10D2\u10D8\u10E3\u10E0\u10D8", [e.German]: "Algerien", [e.Greenlandic]: "Algeria", [e.Greek]: "\u0391\u03BB\u03B3\u03B5\u03C1\u03AF\u03B1", [e.Gujarati]: "\u0A86\u0AB2\u0AC7\u0A97\u0AB0\u0ABF\u0AAF\u0ABE", [e.Haitian]: "Alg\xE9rie", [e.Hausa]: "Algeria", [e.Hebrew]: "\u05D0\u05DC\u05D2\u05F3\u05D9\u05E8\u05D9\u05D4", [e.Hindi]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e.Hungarian]: "Alg\xE1r", [e.Icelandic]: "Alg\xFAra", [e.Igbo]: "Algeria", [e.Indonesian]: "Aljir", [e.Irish]: "Alg\xE9rie", [e.Italian]: "Algeria", [e.Japanese]: "\u30A2\u30EB\u30B8\u30A7\u30EA\u30A2", [e.Javanese]: "Aljir", [e.Kannada]: "\u0C86\u0CB2\u0CCD\u0C97\u0CC7\u0CB0\u0CBF\u0CAF\u0CA8\u0CCD", [e.Kazakh]: "\u0410\u043B\u0436\u0438\u0440", [e.Khmer]: "\u17A2\u17B6\u179B\u17CB\u1794\u17B6\u1793\u17B8", [e.Korean]: "\uC54C\uC81C\uB9AC", [e.Kurdish]: "\u062C\u0632\u0627\u06CC\u0631 \u0627\u0644\u062C\u0632\u0627\u06CC\u0631", [e.Kyrgyz]: "\u0410\u043B\u0436\u0438\u0440", [e.Lao]: "\u0EAD\u0EB2\u0EA5\u0EB2\u0E88\u0EB5\u0E99", [e.Latin]: "Algeria", [e.Latvian]: "Al\u017E\u012Brija", [e.Lithuanian]: "Al\u017Eyras", [e.Luxembourgish]: "Algeria", [e.Macedonian]: "\u0410\u043B\u0436\u0438\u0440", [e.Malagasy]: "Alg\xE9rie", [e.Malay]: "Aljir", [e.Malayalam]: "\u0D06\u0D32\u0D02\u0D17\u0D47\u0D30\u0D3F\u0D2F\u0D7B", [e.Maltese]: "Alg\xE9rie", [e.Maori]: "Algeria", [e.Marathi]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e.Mongolian]: "\u0410\u043B\u0436\u0438\u0440", [e.Nepali]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e.Norwegian]: "Algeria", [e.Pashto]: "\u0627\u0644\u062C\u0632\u0627\u0626\u0631", [e.Persian]: "\u062C\u0632\u0627\u06CC\u0631 \u0627\u0644\u0639\u0631\u0628", [e.Polish]: "Algieria", [e.Portuguese]: "Alg\xE9ria", [e.Punjabi]: "\u0A06\u0A32\u0A47\u0A17\u0A40\u0A06", [e.Romanian]: "Algeria", [e.Russian]: "\u0410\u043B\u0436\u0438\u0440", [e.Samoan]: "Algeria", [e.Sanskrit]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e.Scots]: "Algeria", [e.Serbian]: "\u0410\u043B\u0436\u0438\u0440", [e.Sesotho]: "Algeria", [e.Shona]: "Algeria", [e.Sindhi]: "Algeria", [e.Sinhala]: "\u0D86\u0DBD\u0DCA\u0DB6\u0DCF\u0DB1\u0DD2\u0DBA", [e.Slovak]: "Al\u017E\xEDrsko", [e.Slovenian]: "Al\u017Eir", [e.Somali]: "Algeria", [e.Spanish]: "Algeria", [e.Sudanese]: "Aljir", [e.Swahili]: "Aljir", [e.Swedish]: "Algeriet", [e.Tagalog]: "Algeria", [e.Tajik]: "\u0410\u043B\u0436\u0438\u0440", [e.Tamil]: "\u0B86\u0BB2\u0BCD\u0B95\u0BC7\u0BB0\u0BBF\u0BAF\u0BBE", [e.Tatar]: "\u0410\u043B\u0436\u0438\u0440", [e.Telugu]: "\u0C06\u0C32\u0C4D\u0C17\u0C47\u0C30\u0C3F\u0C2F\u0C3E", [e.Thai]: "\u0E2D\u0E32\u0E23\u0E32\u0E01\u0E2D\u0E19", [e.Tibetan]: "\u0F68\u0F63\u0F9F\u0F72\u0F0B\u0F62\u0F72\u0F0B\u0F61\u0F72", [e.Turkish]: "Cezayir", [e.Ukrainian]: "\u0410\u043B\u0436\u0438\u0440", [e.Urdu]: "\u0622\u0644\u062C\u06CC\u0631", [e.Uzbek]: "\u0410\u043B\u0436\u0438\u0440", [e.Vietnamese]: "\u1EA2\u0301\u1EA1\u1EA3\u1EAD\u1EB5", [e.Welsh]: "Algeria", [e.Xhosa]: "Algeria", [e.Yiddish]: "\u05D0\u05DC\u05D2\u05F3\u05D9\u05E8\u05D9\u05D4", [e.Yoruba]: "Algeria", [e.Zulu]: "Algeria" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Oran", total: 371e5 } }, geography: { area: 2381740, region: T.Africa, sub_region: p$1.NorthernAfrica }, government: { capital: "Algiers", type: "Republic" } } }, AmericanSamoa: { i18n: { calling_codes: [1684], currencies: [m$1.AmericanSamoaTala], languages: [e.English, e.Samoan], tz: { offsets: [n$1.UTC_MINUS_11], regions: [u.PacificSamoa], timezones: [s.SamoaStandardTime] } }, id: r.AmericanSamoa, info: { flag: { emoji: "\u{1F1E6}\u{1F1F8}", emoji_unicode: "U+1F1E6 U+1F1F8", svg: "https://www.countryflags.io/as/flat/64.svg" }, tld: [".as"] }, iso: { alpha2: r.AmericanSamoa, alpha3: "ASM", numeric: "016" }, name: { alt_spellings: ["AS", "Amerika S\u0101moa", "Amelika S\u0101moa", "S\u0101moa Amelika"], demonym: "American Samoan", native: { endonym: "American Samoa" }, official: "American Samoa", short: "American Samoa", translations: { [e.Afrikaans]: "Amerikaans Samoa", [e.Albanian]: "Samoa Amerikane", [e.Amharic]: "\u1233\u121E\u12A0\u122D", [e.Arabic]: "\u0633\u0627\u0645\u0648\u0627 \u0627\u0644\u0623\u0645\u0631\u064A\u0643\u064A\u0629", [e.Armenian]: "\u054D\u0561\u0570\u0561\u0574\u0561\u056C\u056B\u0561", [e.Azerbaijani]: "Samoa Amerikana", [e.Bashkir]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0421\u0430\u043C\u043E\u0430", [e.Basque]: "Samoa Amerikana", [e.Belarusian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430\u044F \u0421\u0430\u043C\u043E\u0430", [e.Bengali]: "\u0986\u09AE\u09C7\u09B0\u09BF\u0995\u09BE\u09A8 \u09B8\u09BE\u09AE\u09CB\u09AF\u09BC\u09BE", [e.Berber]: "\u062C\u0632\u0631 \u0633\u0627\u0645\u0648\u0627 \u0627\u0644\u0623\u0645\u0631\u064A\u0643\u064A\u0629", [e.Bhutani]: "\u0F68\u0F62\u0F92\u0FB1\u0F0B\u0F58\u0F72\u0F0B\u0F51\u0F58\u0F44\u0F66\u0F0B\u0F66\u0FA4\u0FB2\u0F7C\u0F51\u0F0B\u0F40\u0FB1\u0F72\u0F0B\u0F66\u0F90\u0F56\u0F66\u0F0B\u0F62\u0F92\u0FB1\u0F74\u0F51\u0F0B\u0F46\u0F7A\u0F53\u0F0B\u0F54\u0F7C\u0F0D", [e.Bosnian]: "Ameri\u010Dka Samoa", [e.Breton]: "Samoa Amerikan", [e.Bulgarian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e.Burmese]: "\u1021\u1019\u1039\u1038\u1019\u101B\u102D\u102F\u1018\u102C\u101E\u102C", [e.Catalan]: "Samoa Americana", [e.Chinese]: "\u7F8E\u5C5E\u8428\u6469\u4E9A", [e.Croatian]: "Ameri\u010Dka Samoa", [e.Czech]: "Americk\xE1 Samoa", [e.Danish]: "Amerikansk Samoa", [e.Dutch]: "Amerikaans Samoa", [e.English]: "American Samoa", [e.Esperanto]: "Samoa Amerika", [e.Estonian]: "Ameerika Samoa", [e.Finnish]: "Amerikka Samoa", [e.French]: "American Samoa", [e.Frisian]: "Amerikaans Samoa", [e.Galician]: "Samoa Americana", [e.Georgian]: "\u10D0\u10DB\u10D4\u10E0\u10D8\u10D9\u10D8\u10E1 \u10E1\u10D0\u10DB\u10DD\u10D0", [e.German]: "Amerikanisch-Samoa", [e.Greenlandic]: "Amerikaans Samoa", [e.Greek]: "\u0391\u03BC\u03B5\u03C1\u03B9\u03BA\u03B1\u03BD\u03B9\u03BA\u03AE \u03A3\u03B1\u03BC\u03CC\u03B1", [e.Gujarati]: "\u0A86\u0AAE\u0AC7\u0AB0\u0ABF\u0A95\u0AA8 \u0AB8\u0ABE\u0AAE\u0ACB\u0AAF\u0ABE", [e.Haitian]: "Amerikaans Samoa", [e.Hausa]: "Amerikaans Samoa", [e.Hebrew]: "\u05D0\u05DE\u05E8\u05D9\u05E7\u05E0\u05D9\u05D4 \u05E1\u05DE\u05D5\u05D0\u05D4", [e.Hindi]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e.Hungarian]: "Amerikai Szamoa", [e.Icelandic]: "Amerikai Szamoa", [e.Igbo]: "Ikina Amerika", [e.Indonesian]: "Samoa Amerika", [e.Irish]: "Samoa Amerikana", [e.Italian]: "Samoa Americane", [e.Japanese]: "\u30A2\u30E1\u30EA\u30AB\u9818\u30B5\u30E2\u30A2", [e.Javanese]: "Samoa Amerika", [e.Kannada]: "\u0C85\u0CAE\u0CC7\u0CB0\u0CBF\u0C95\u0CA8\u0CCD \u0CB8\u0CAE\u0CCB\u0C86", [e.Kazakh]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0421\u0430\u043C\u043E\u0430", [e.Khmer]: "\u17A2\u17B6\u1798\u17C9\u17B6\u179A\u17B8\u179F\u17D2\u178F\u1784\u17CB", [e.Korean]: "\uC544\uBA54\uB9AC\uCE74 \uC0AC\uBAA8\uC544", [e.Kurdish]: "Amerikaans Samoa", [e.Kyrgyz]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0421\u0430\u043C\u043E\u0430", [e.Lao]: "\u0EAD\u0EB2\u0EA1\u0EB2\u0E99\u0EB2\u0E94\u0EB2\u0EA1\u0EB2\u0E99\u0EB2\u0E94", [e.Latin]: "Samoa Amerikana", [e.Latvian]: "Amerikas Samoa", [e.Lithuanian]: "Amerikos Samoa", [e.Luxembourgish]: "Amerikaans Samoa", [e.Macedonian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e.Malagasy]: "Samoa Amerika", [e.Malay]: "Amerika Samo", [e.Malayalam]: "\u0D05\u0D2E\u0D47\u0D30\u0D3F\u0D15\u0D4D\u0D15\u0D28\u0D4D\u0D31\u0D4D \u0D38\u0D2E\u0D4B\u0D06", [e.Maltese]: "Samoa Amerika", [e.Maori]: "Samoa Amerika", [e.Marathi]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e.Mongolian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0421\u0430\u043C\u043E\u0430", [e.Nepali]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e.Norwegian]: "Amerikansk Samoa", [e.Pashto]: "\u0627\u0645\u0631\u06CC\u06A9\u0627\u06CC \u0633\u0645\u0648\u0627", [e.Persian]: "\u0622\u0645\u0631\u06CC\u06A9\u0627\u06CC \u0633\u0645\u0648\u0627", [e.Polish]: "Samoa Ameryka\u0144skie", [e.Portuguese]: "Samoa Americana", [e.Punjabi]: "\u0A05\u0A2E\u0A30\u0A40\u0A15\u0A40 \u0A38\u0A3E\u0A2E\u0A4B\u0A06", [e.Romanian]: "Samoa americane", [e.Russian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430\u044F \u0421\u0430\u043C\u043E\u0430", [e.Samoan]: "Samoa Amerika", [e.Sanskrit]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e.Scots]: "Amerikaans Samoa", [e.Serbian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e.Sesotho]: "Amerikaans Samoa", [e.Shona]: "Amerikaans Samoa", [e.Sindhi]: "Amerikaans Samoa", [e.Sinhala]: "\u0D86\u0DBB\u0DCA\u0DA2\u0DD2\u0DB1\u0DCF\u0DB1\u0DD4 \u0DC3\u0DD0\u0DB8\u0DD0\u0DBD\u0DCA\u0DC0", [e.Slovak]: "Amerikaans Samoa", [e.Slovenian]: "Amerikaans Samoa", [e.Somali]: "Amerikaans Samoa", [e.Spanish]: "Samoa Americana", [e.Sudanese]: "Amerikaans Samoa", [e.Swahili]: "Amerikaans Samoa", [e.Swedish]: "Amerikansk Samoa", [e.Tagalog]: "Amerikaans Samoa", [e.Tajik]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0441\u0430\u043C\u043E\u0430", [e.Tamil]: "\u0B85\u0BAE\u0BC6\u0BB0\u0BBF\u0B95\u0BCD \u0B9A\u0BAE\u0BCB\u0BB5\u0BBE", [e.Tatar]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0441\u0430\u043C\u043E\u0430", [e.Telugu]: "\u0C05\u0C2E\u0C46\u0C30\u0C3F\u0C15\u0C4D \u0C38\u0C2E\u0C4B\u0C35\u0C3E", [e.Thai]: "\u0E2A\u0E2B\u0E23\u0E32\u0E0A\u0E2D\u0E32\u0E13\u0E32\u0E08\u0E31\u0E01\u0E23\u0E41\u0E2D\u0E1F\u0E23\u0E34\u0E01\u0E32", [e.Tibetan]: "\u0F68\u0F7A\u0F0B\u0F62\u0F72\u0F0B\u0F40\u0F0B\u0F68\u0F7A\u0F0B\u0F58\u0F72\u0F0B\u0F51\u0F74\u0F0B\u0F61\u0F72\u0F0B\u0F62\u0F72\u0F0B\u0F40", [e.Turkish]: "Amerikan Samoas\u0131", [e.Ukrainian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u044C\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e.Urdu]: "\u0627\u0645\u0631\u06CC\u06A9\u06CC \u0633\u0645\u0648\u0627", [e.Uzbek]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0441\u0430\u043C\u043E\u0430", [e.Vietnamese]: "Amerikaans Samoa", [e.Welsh]: "Amerikaans Samoa", [e.Xhosa]: "Amerikaans Samoa", [e.Yiddish]: "Amerikaans Samoa", [e.Yoruba]: "Amerikaans Samoa", [e.Zulu]: "Amerikaans Samoa" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Pago Pago", total: 558e3 } }, geography: { area: 199, region: T.Oceania, sub_region: p$1.Polynesia }, government: { capital: "Pago Pago", type: "Nonmetropolitan Territory of the US" } } }, Andorra: { i18n: { calling_codes: [376], currencies: [m$1.Euro], languages: [e.Catalan, e.Spanish], tz: { offsets: [n$1.UTC_PLUS_1, n$1.UTC_PLUS_2], regions: [u.EuropeAndorra], timezones: [s.CentralEuropeanTime] } }, id: r.Andorra, info: { flag: { emoji: "\u{1F1E6}\u{1F1F4}", emoji_unicode: "U+1F1E6 U+1F1F4", svg: "https://www.countryflags.io/ad/flat/64.svg" }, tld: [".ad"] }, iso: { alpha2: r.Andorra, alpha3: "AND", numeric: "020" }, name: { alt_spellings: ["AD", "Principality of Andorra", "Principat d'Andorra"], demonym: "Andorran", native: { endonym: "Andorra" }, official: "Principality of Andorra", short: "Andorra", translations: { [e.Afrikaans]: "Andorra", [e.Albanian]: "Andorra", [e.Amharic]: "\u12A0\u1295\u12F6\u122B", [e.Arabic]: "\u0623\u0646\u062F\u0648\u0631\u0627", [e.Armenian]: "\u0540\u0561\u0576\u0564\u0561\u0580\u0561\u057E\u0561\u0575\u0584", [e.Azerbaijani]: "Andorra", [e.Bashkir]: "\u0410\u043D\u0434\u043E\u0440\u0430", [e.Basque]: "Andorra", [e.Belarusian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Bengali]: "\u0985\u09A8\u09CD\u09A1\u09CB\u09B0\u09BE", [e.Berber]: "\u0623\u0646\u062F\u0648\u0631\u0627", [e.Bhutani]: "\u0F68\u0F53\u0F0B\u0F4C\u0F7C\u0F0B", [e.Bosnian]: "Andora", [e.Breton]: "Andorra", [e.Bulgarian]: "\u0410\u043D\u0434\u043E\u0440\u0430", [e.Burmese]: "\u1021\u1014\u1039\u1010\u102C\u101B\u102D\u102F\u1038", [e.Catalan]: "Andorra", [e.Chinese]: "\u5B89\u9053\u5C14", [e.Croatian]: "Andora", [e.Czech]: "Andorra", [e.Danish]: "Andorra", [e.Dutch]: "Andorra", [e.English]: "Andorra", [e.Esperanto]: "Andora", [e.Estonian]: "Andorra", [e.Finnish]: "Andorra", [e.French]: "Andorra", [e.Frisian]: "Andorra", [e.Galician]: "Andorra", [e.Georgian]: "\u12A0\u1295\u12F6\u122B", [e.German]: "Andorra", [e.Greek]: "\u0391\u03BD\u03B4\u03CC\u03C1\u03B1", [e.Hebrew]: "\u05D0\u05E0\u05D3\u05D5\u05E8\u05D4", [e.Hindi]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e.Hungarian]: "Andorra", [e.Icelandic]: "Andorra", [e.Igbo]: "Andorra", [e.Indonesian]: "Andorra", [e.Irish]: "Andorra", [e.Italian]: "Andorra", [e.Japanese]: "\u30A2\u30F3\u30C9\u30E9", [e.Javanese]: "Andorra", [e.Kannada]: "\u0C85\u0C82\u0CA1\u0CCB\u0CB0\u0CBF\u0CAF\u0CA8\u0CCD", [e.Kazakh]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Khmer]: "\u17A2\u1784\u17CB\u178A\u17B6\u179A\u17B6", [e.Korean]: "\uC548\uB3C4\uB77C", [e.Kurdish]: "Andorra", [e.Kyrgyz]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Lao]: "\u0EAD\u0EB1\u0E99\u0EC2\u0E94\u0EA3\u0EB2", [e.Latin]: "Andorra", [e.Latvian]: "Andora", [e.Lithuanian]: "Andora", [e.Luxembourgish]: "Andorra", [e.Macedonian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Malagasy]: "Andorra", [e.Malay]: "Andorra", [e.Malayalam]: "\u0D05\u0D02\u0D21\u0D4B\u0D30\u0D3F\u0D2F\u0D28\u0D4D", [e.Maltese]: "Andorra", [e.Maori]: "Andorra", [e.Marathi]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e.Mongolian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Nepali]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e.Norwegian]: "Andorra", [e.Pashto]: "\u0622\u0646\u062F\u0648\u0631\u0627", [e.Persian]: "\u0622\u0646\u062F\u0648\u0631\u0627", [e.Polish]: "Andora", [e.Portuguese]: "Andorra", [e.Punjabi]: "\u0A05\u0A70\u0A21\u0A4B\u0A30\u0A3E", [e.Romanian]: "Andorra", [e.Russian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Samoan]: "Andorra", [e.Sanskrit]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e.Scots]: "Andorra", [e.Serbian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Sesotho]: "Andorra", [e.Shona]: "Andorra", [e.Sindhi]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e.Sinhala]: "\u0D86\u0DB1\u0DCA\u0DAF\u0DDA", [e.Slovak]: "Andorra", [e.Slovenian]: "Andora", [e.Somali]: "Andorra", [e.Spanish]: "Andorra", [e.Sudanese]: "Andorra", [e.Swahili]: "Andorra", [e.Swedish]: "Andorra", [e.Tagalog]: "Andorra", [e.Tajik]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Tamil]: "\u0B85\u0BA9\u0BCB\u0BB0\u0BCD\u0B9F\u0BBE", [e.Tatar]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Telugu]: "\u0C05\u0C02\u0C21\u0C4B\u0C30\u0C4D\u0C30\u0C3E", [e.Thai]: "\u0E2D\u0E31\u0E19\u0E14\u0E2D\u0E23\u0E4C\u0E23\u0E32", [e.Tibetan]: "\u0F68\u0F53\u0F0B\u0F4C\u0F7C\u0F0B", [e.Turkish]: "Andora", [e.Ukrainian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Urdu]: "\u0622\u0646\u062F\u0648\u0631\u0627", [e.Uzbek]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Vietnamese]: "Andorra", [e.Welsh]: "Andorra", [e.Xhosa]: "Andorra", [e.Yiddish]: "\u05D0\u05E0\u05D3\u05D5\u05E8\u05D4", [e.Yoruba]: "Andorra", [e.Zulu]: "Andorra" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Andorra la Vella", total: 78e3 } }, geography: { area: 468, region: T.Europe, sub_region: p$1.SouthernEurope }, government: { capital: "Andorra la Vella", type: "Constitutional Monarchy" } } }, Angola: { i18n: { calling_codes: [244], currencies: [m$1.AngolaKwanza], languages: [e.Portuguese, e.Spanish, e.French, e.Italian, e.German, e.English], tz: { offsets: [n$1.UTC_0, n$1.UTC_PLUS_1, n$1.UTC_PLUS_2], regions: [u.AfricaLuanda], timezones: [s.WestAfricaTime] } }, id: r.Angola, info: { flag: { emoji: "\u{1F1E6}\u{1F1EC}", emoji_unicode: "U+1F1E6 U+1F1EC", svg: "https://www.countryflags.io/ao/flat/64.svg" }, tld: [".ao"] }, iso: { alpha2: r.Angola, alpha3: "AGO", numeric: "024" }, name: { alt_spellings: ["AO", "Rep\xFAblica de Angola", "\u0281\u025Bpublika de an"], demonym: "Angolan", native: { endonym: "Angola" }, official: "Republic of Angola", short: "Angola", translations: { [e.Afrikaans]: "Angola", [e.Albanian]: "Ang\xF2la", [e.Amharic]: "\u12A0\u1295\u130E\u120A\u12EB", [e.Arabic]: "\u0623\u0646\u063A\u0648\u0644\u0627", [e.Armenian]: "\u0540\u0561\u0576\u0563\u0561\u056C\u0561\u056F\u0561", [e.Azerbaijani]: "Ang\u0259l", [e.Bashkir]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Basque]: "Angola", [e.Belarusian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Bengali]: "\u0985\u0999\u09CD\u0997\u09B2\u09BE", [e.Berber]: "Angola", [e.Bhutani]: "\u0F60\u0F56\u0FB2\u0F74\u0F42", [e.Bosnian]: "Angola", [e.Breton]: "Angola", [e.Bulgarian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Burmese]: "\u1021\u1004\u103A\u1039\u1002\u101C\u102D\u1010\u103A", [e.Catalan]: "Angola", [e.Chinese]: "\u5B89\u54E5\u62C9", [e.Croatian]: "Angola", [e.Czech]: "Angola", [e.Danish]: "Angola", [e.Dutch]: "Angola", [e.English]: "Angola", [e.Esperanto]: "Angolo", [e.Estonian]: "Angola", [e.Finnish]: "Angola", [e.French]: "Angola", [e.Frisian]: "Angola", [e.Galician]: "Angola", [e.Georgian]: "\u10D0\u10DC\u10D2\u10DD\u10DA\u10D0", [e.German]: "Angola", [e.Greenlandic]: "Angola", [e.Greek]: "\u0391\u03B3\u03BA\u03CC\u03BB\u03B1", [e.Gujarati]: "\u0A85\u0A82\u0A97\u0ACB\u0AB2\u0ABE", [e.Haitian]: "Angola", [e.Hausa]: "Angola", [e.Hebrew]: "\u05D0\u05E0\u05D2\u05D5\u05DC\u05D4", [e.Hindi]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e.Hungarian]: "Angola", [e.Icelandic]: "Angola", [e.Igbo]: "Angola", [e.Indonesian]: "Angola", [e.Irish]: "Angola", [e.Italian]: "Angola", [e.Japanese]: "\u30A2\u30F3\u30B4\u30E9", [e.Javanese]: "Anggol", [e.Kannada]: "\u0C85\u0C82\u0C97\u0CCB\u0CB2\u0CBE", [e.Kazakh]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Khmer]: "\u17A2\u1784\u17CB\u1780\u17B6\u179B\u17A2\u1784\u17CB\u1782\u17D2\u179B\u17C1\u179F", [e.Korean]: "\uC559\uACE8\uB77C", [e.Kurdish]: "Angola", [e.Kyrgyz]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Lao]: "\u0EAD\u0EB0\u0E99\u0EB2\u0E94\u0EB2", [e.Latin]: "Angola", [e.Latvian]: "Angola", [e.Lithuanian]: "Angola", [e.Luxembourgish]: "Angola", [e.Macedonian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Malagasy]: "Angola", [e.Malay]: "Angola", [e.Malayalam]: "\u0D05\u0D02\u0D17\u0D4B\u0D33\u0D3E", [e.Maltese]: "Angola", [e.Maori]: "Angola", [e.Marathi]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e.Mongolian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Nepali]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e.Norwegian]: "Angola", [e.Pashto]: "\u0627\u0646\u06AB\u0648\u0644\u0627", [e.Persian]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e.Polish]: "Angola", [e.Portuguese]: "Angola", [e.Punjabi]: "\u0A05\u0A19\u0A4D\u0A17\u0A4B\u0A32\u0A3E", [e.Romanian]: "Angole", [e.Russian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Samoan]: "Angola", [e.Sanskrit]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e.Scots]: "Angola", [e.Serbian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Sesotho]: "Angola", [e.Shona]: "Angola", [e.Sindhi]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e.Sinhala]: "\u0D86\u0D9C\u0DBD\u0DD2\u0DBA\u0DCF\u0DC0", [e.Slovak]: "Angola", [e.Slovenian]: "Angola", [e.Somali]: "Angola", [e.Spanish]: "Angola", [e.Sudanese]: "Angola", [e.Swahili]: "Angola", [e.Swedish]: "Angola", [e.Tagalog]: "Angola", [e.Tajik]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Tamil]: "\u0B85\u0B99\u0BCD\u0B95\u0BCB\u0BB2\u0BBE", [e.Tatar]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Telugu]: "\u0C05\u0C02\u0C17\u0C4B\u0C32\u0C3E", [e.Thai]: "\u0E2D\u0E07\u0E04\u0E4C\u0E01\u0E32\u0E23\u0E2D\u0E32\u0E19\u0E32\u0E21\u0E34\u0E2A\u0E16\u0E32\u0E19", [e.Tibetan]: "\u0F68\u0F44\u0F0B\u0F63\u0F7C\u0F0B", [e.Turkish]: "Angola", [e.Ukrainian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Urdu]: "\u0627\u0646\u06AF\u0648\u0644\u0627", [e.Uzbek]: "Angola", [e.Vietnamese]: "Angola", [e.Xhosa]: "Angola", [e.Welsh]: "Angola", [e.Yiddish]: "\u05D0\u05E0\u05D2\u05D5\u05DC\u05D4", [e.Yoruba]: "Angola", [e.Zulu]: "Angola" } } }, Anguilla: { i18n: { calling_codes: [1264], currencies: [m$1.DominicaDollar, m$1.EastCaribbeanDollar, m$1.Euro, m$1.UnitedStatesDollar, m$1.BritishPound], languages: [e.English, e.Spanish], tz: { offsets: [n$1.UTC_MINUS_4], regions: [u.AmericaAnguilla], timezones: [s.AtlanticStandardTime] } }, id: r.Anguilla, info: { flag: { emoji: "\u{1F1E6}\u{1F1EC}", emoji_unicode: "U+1F1E6 U+1F1EC", svg: "https://www.countryflags.io/ai/flat/64.svg" }, tld: [".ai"] }, iso: { alpha2: r.Anguilla, alpha3: "AIA", numeric: "660" }, name: { alt_spellings: ["AI"], demonym: "Anguillian", native: { endonym: "Anguilla" }, official: "Anguilla", short: "Anguilla", translations: { [e.Afrikaans]: "Anguilla", [e.Albanian]: "Anguilla", [e.Amharic]: "\u12A0\u1295\u1309\u120B", [e.Arabic]: "\u0623\u0646\u063A\u0648\u064A\u0644\u0627", [e.Armenian]: "\u0531\u0576\u0563\u056B\u056C\u0561", [e.Azerbaijani]: "Az\u0259rbaycan", [e.Bashkir]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Basque]: "Angila", [e.Belarusian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Bengali]: "\u0985\u0999\u09CD\u0997\u09C0\u09B2\u09BE", [e.Berber]: "\u0623\u0646\u063A\u0648\u064A\u0644\u0627", [e.Bhutani]: "\u0F68\u0F44\u0F0B\u0F63\u0F7C\u0F0B", [e.Bosnian]: "Angila", [e.Breton]: "Angila", [e.Bulgarian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Burmese]: "\u1021\u1004\u103A\u1039\u1002\u101C\u102D\u1010\u103A", [e.Catalan]: "Angilla", [e.Chinese]: "\u5B89\u572D\u62C9", [e.Croatian]: "Angila", [e.Czech]: "Anguilla", [e.Danish]: "Anguilla", [e.Dutch]: "Anguilla", [e.English]: "Anguilla", [e.Esperanto]: "Angila", [e.Estonian]: "Anguilla", [e.Finnish]: "Anguilla", [e.French]: "Anguilla", [e.Frisian]: "Angila", [e.Galician]: "Anguilla", [e.Georgian]: "\u10D0\u10DC\u10D2\u10D8\u10DA\u10D0", [e.German]: "Anguilla", [e.Greenlandic]: "Anguilla", [e.Greek]: "\u0391\u03BD\u03B3\u03BA\u03C5\u03BB\u03AC", [e.Gujarati]: "\u0A85\u0A82\u0A97\u0ACD\u0AAF\u0ABE\u0AB2\u0ABE", [e.Haitian]: "Anguilla", [e.Hausa]: "Anguilla", [e.Hebrew]: "\u05D0\u05E0\u05D2\u05D5\u05D9\u05D0\u05DC\u05D4", [e.Hindi]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e.Hungarian]: "Anguilla", [e.Icelandic]: "Anguilla", [e.Igbo]: "Anguilla", [e.Indonesian]: "Anguilla", [e.Irish]: "Anguilla", [e.Italian]: "Anguilla", [e.Japanese]: "\u30A2\u30F3\u30AE\u30E9", [e.Javanese]: "Anguilla", [e.Kannada]: "\u0C85\u0C82\u0C97\u0CCD\u0CB5\u0CC7\u0CB2\u0CBE", [e.Kazakh]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Khmer]: "\u17A2\u1784\u17CB\u1780\u17B6\u179A\u17A0\u17D2\u1782\u17B8\u1798", [e.Korean]: "\uC575\uADC8\uB77C", [e.Kurdish]: "Anguilla", [e.Kyrgyz]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Lao]: "\u0EAD\u0EB0\u0E99\u0EB0\u0E88\u0EB3", [e.Latin]: "Anguilla", [e.Latvian]: "Anguilla", [e.Lithuanian]: "Anguilla", [e.Luxembourgish]: "Angilla", [e.Macedonian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Malagasy]: "Angila", [e.Malay]: "Anguilla", [e.Malayalam]: "\u0D05\u0D02\u0D17\u0D4D\u0D35\u0D47\u0D32\u0D3E", [e.Maltese]: "Anguilla", [e.Maori]: "Anguilla", [e.Marathi]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e.Mongolian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Nepali]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e.Norwegian]: "Anguilla", [e.Pashto]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e.Persian]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e.Polish]: "Anguilla", [e.Portuguese]: "Anguilla", [e.Punjabi]: "\u0A05\u0A02\u0A17\u0A40\u0A32\u0A3E", [e.Romanian]: "Anguilla", [e.Russian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Samoan]: "Anguilla", [e.Sanskrit]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e.Scots]: "Anguilla", [e.Serbian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Sesotho]: "Anguilla", [e.Shona]: "Anguilla", [e.Sindhi]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e.Sinhala]: "\u0D86\u0D82\u0D9C\u0DD2\u0DBD\u0DCF\u0DC0", [e.Slovak]: "Anguilla", [e.Slovenian]: "Anguilla", [e.Somali]: "Anguilla", [e.Spanish]: "Anguilla", [e.Sudanese]: "Anguilla", [e.Swahili]: "Anguilla", [e.Swedish]: "Anguilla", [e.Tagalog]: "Anguilla", [e.Tajik]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Tamil]: "\u0B85\u0B99\u0BCD\u0B95\u0BC8\u0BB2\u0BBE", [e.Tatar]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Telugu]: "\u0C05\u0C02\u0C17\u0C4D\u0C35\u0C47\u0C32\u0C3E", [e.Thai]: "\u0E2D\u0E31\u0E07\u0E01\u0E32\u0E25\u0E32", [e.Tibetan]: "\u0F68\u0F44\u0F0B\u0F63\u0F72\u0F0B", [e.Turkish]: "Anguilla", [e.Ukrainian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Urdu]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e.Uzbek]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Vietnamese]: "Anguilla", [e.Welsh]: "Anguilla", [e.Xhosa]: "Anguilla", [e.Yiddish]: "Anguilla", [e.Yoruba]: "Anguilla", [e.Zulu]: "Anguilla" } } }, Antarctica: { i18n: { calling_codes: [672], currencies: [m$1.UnitedStatesDollar, m$1.Euro], languages: [e.English, e.Spanish, e.French, e.Portuguese, e.Italian, e.Dutch, e.German, e.Swedish, e.Norwegian, e.Danish, e.Finnish], tz: { offsets: [n$1.UTC_PLUS_1, n$1.UTC_PLUS_2], regions: [u.AntarcticaCasey, u.AntarcticaDavis, u.AntarcticaMcMurdo, u.AntarcticaPalmer, u.AntarcticaRothera], timezones: [s.AtlanticStandardTime, s.CentralTime, s.EasternTime, s.AtlanticStandardTime, s.AzoresStandardTime, s.NewfoundlandStandardTime] } }, id: r.Antarctica, info: { flag: { emoji: "\u{1F1E6}\u{1F1F6}", emoji_unicode: "U+1F1E6 U+1F1F6", svg: "https://www.countryflags.io/aq/flat/64.svg" }, tld: [".aq"] }, iso: { alpha2: r.Antarctica, alpha3: "ATA", numeric: "010" }, name: { alt_spellings: ["AQ"], demonym: "Antarctican", native: { endonym: "Antarctica" }, official: "Antarctica", short: "Antarctica", translations: { [e.Afrikaans]: "Antarctica", [e.Albanian]: "Antarktika", [e.Amharic]: "\u12A0\u1295\u1272\u120D\u12AB\u1293", [e.Arabic]: "\u0623\u0646\u062A\u0627\u0631\u0643\u062A\u064A\u0643\u0627", [e.Armenian]: "\u0540\u0561\u0576\u0561\u0580\u0561\u057F\u056F\u0578", [e.Azerbaijani]: "Az\u0259rbaycan", [e.Bashkir]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Basque]: "Antarktika", [e.Belarusian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Bengali]: "\u0985\u09A8\u09CD\u09A4\u09B0\u09BE\u09B6\u09CD\u09AC\u09C0", [e.Berber]: "\u0623\u0646\u062A\u0627\u0631\u0643\u062A\u064A\u0643\u0627", [e.Bhutani]: "\u0F68\u0F44\u0F0B\u0F63\u0F72\u0F0B", [e.Bosnian]: "Antarktika", [e.Breton]: "Antarktika", [e.Bulgarian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Burmese]: "\u1021\u1014\u1039\u1010\u102C\u101B\u102E\u1038\u101A\u102C\u1038", [e.Catalan]: "Ant\xE0rtida", [e.Chinese]: "\u5357\u6781\u6D32", [e.Croatian]: "Antarktika", [e.Czech]: "Antarktida", [e.Danish]: "Antarktis", [e.Dutch]: "Antarctica", [e.English]: "Antarctica", [e.Esperanto]: "Antarktika", [e.Estonian]: "Antarktika", [e.Finnish]: "Antarktis", [e.French]: "Antarctica", [e.Frisian]: "Antarktis", [e.Galician]: "Ant\xE1rtida", [e.Georgian]: "\u10D0\u10DC\u10E2\u10D0\u10E0\u10E5\u10E2\u10D8\u10D9\u10D0", [e.German]: "Antarktis", [e.Greenlandic]: "Antarktis", [e.Greek]: "\u0391\u03BD\u03C4\u03B1\u03C1\u03BA\u03C4\u03B9\u03BA\u03AE", [e.Gujarati]: "\u0A85\u0AA8\u0ACD\u0AA4\u0AB0\u0ABE\u0AB6\u0ACD\u0AB5\u0AC0", [e.Haitian]: "Antarctica", [e.Hausa]: "Antarktika", [e.Hebrew]: "\u05D0\u05E0\u05D8\u05E8\u05E7\u05D8\u05D9\u05E7\u05D4", [e.Hindi]: "\u0905\u0928\u094D\u0924\u0930\u0915\u094D\u0937\u0947\u0924\u094D\u0930", [e.Hungarian]: "Antarktika", [e.Icelandic]: "Antarktis", [e.Igbo]: "Antarktika", [e.Indonesian]: "Antarktika", [e.Irish]: "Antarktika", [e.Italian]: "Antartide", [e.Japanese]: "\u5357\u6975", [e.Javanese]: "Antarktika", [e.Kannada]: "\u0C85\u0CA8\u0CCD\u0CA4\u0CB0\u0CBE\u0CB6\u0CCD\u0CB5\u0CBF", [e.Kazakh]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Khmer]: "\u17A2\u1784\u17CB\u179F\u17D2\u1780\u179A\u17A2\u17B6\u1798\u17C9\u17BB\u1799", [e.Korean]: "\uC564\uD2F0\uCE74\uD1A0\uB2C9", [e.Kurdish]: "Antarktika", [e.Kyrgyz]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Lao]: "\u0EAD\u0EB0\u0E99\u0EAD\u0EA5\u0EB2\u0E81\u0EB4\u0EAA\u0EB0", [e.Latin]: "Antarctica", [e.Latvian]: "Antarktika", [e.Lithuanian]: "Antarktis", [e.Luxembourgish]: "Antarktis", [e.Macedonian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Malagasy]: "Antarctica", [e.Malay]: "Antarktika", [e.Malayalam]: "\u0D05\u0D28\u0D4D\u0D24\u0D30\u0D3E\u0D36\u0D4D\u0D35\u0D3F", [e.Maltese]: "Antarktika", [e.Maori]: "Antarktika", [e.Marathi]: "\u0905\u0928\u094D\u0924\u0930\u093E\u0936\u094D\u0935\u093F\u0915\u093E", [e.Mongolian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Nepali]: "\u0905\u0928\u094D\u0924\u0930\u093E\u0936\u094D\u0935\u093F\u0915\u093E", [e.Norwegian]: "Antarktis", [e.Pashto]: "\u0627\u0646\u062A\u0627\u0631\u0643\u062A\u064A\u0643\u0627", [e.Persian]: "\u0622\u0646\u062A\u0627\u0631\u06A9\u062A\u06CC\u06A9\u0627", [e.Polish]: "Antarktyka", [e.Portuguese]: "Ant\xE1rtida", [e.Punjabi]: "\u0A05\u0A28\u0A4D\u0A24\u0A30\u0A3E\u0A36\u0A3F\u0A15\u0A3E", [e.Romanian]: "Antarctica", [e.Russian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Samoan]: "Antarktika", [e.Sanskrit]: "\u0905\u0928\u094D\u0924\u0930\u093E\u0936\u094D\u0935\u093F\u0915\u093E", [e.Scots]: "Antarktika", [e.Serbian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Sesotho]: "Antarktika", [e.Shona]: "Antarktika", [e.Sindhi]: "Antarktika", [e.Sinhala]: "\u0D86\u0DB1\u0DCA\u0DA7\u0DCA\u0DA7\u0DD2\u0D9A\u0DCF\u0DC0", [e.Slovak]: "Antarktika", [e.Slovenian]: "Antarktika", [e.Somali]: "Antarktika", [e.Spanish]: "Ant\xE1rtida", [e.Sudanese]: "Antarktika", [e.Swahili]: "Antarktika", [e.Swedish]: "Antarktis", [e.Tagalog]: "Antarktika", [e.Tajik]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Tamil]: "\u0B85\u0BA9\u0BCD\u0BA4\u0BBE\u0BB0\u0BCD\u0B95\u0BCD\u0B95\u0BBF\u0B95\u0BCD", [e.Tatar]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Telugu]: "\u0C05\u0C28\u0C4D\u0C24\u0C30\u0C3E\u0C36\u0C4D\u0C35\u0C3F\u0C15\u0C3E", [e.Thai]: "\u0E20\u0E39\u0E21\u0E34\u0E20\u0E32\u0E04\u0E2D\u0E32\u0E19\u0E31\u0E19\u0E15\u0E34\u0E01\u0E32", [e.Tibetan]: "\u0F68\u0F7A\u0F53\u0F0B\u0F4A\u0F72\u0F4A\u0F7A\u0F53\u0F0B\u0F40\u0F72\u0F66\u0F72\u0F0B\u0F68\u0F7A\u0F53\u0F0B\u0F4A\u0F72\u0F4A\u0F7A\u0F53\u0F0B\u0F40\u0F72\u0F66\u0F72", [e.Turkish]: "Antarktika", [e.Ukrainian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Urdu]: "\u0627\u0646\u062A\u0627\u0631\u06A9\u062A\u06CC\u06A9\u0627", [e.Uzbek]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Vietnamese]: "\u0110\u1EA5t Antarktik", [e.Welsh]: "Antarktika", [e.Xhosa]: "Antarktika", [e.Yiddish]: "Antarktika", [e.Yoruba]: "Antarktika", [e.Zulu]: "Antarktika" } } }, Armenia: { i18n: { calling_codes: [374], currencies: [m$1.ArmeniaDram], languages: [e.Armenian], tz: { offsets: [n$1.UTC_PLUS_4], regions: [u.AsiaJakarta], timezones: [s.ArmeniaTime] } }, id: r.Armenia, info: { flag: { emoji: "\u{1F1E6}\u{1F1F2}", emoji_unicode: "U+1F1E6 U+1F1F2", svg: "https://www.countryflags.io/am/flat/64.svg" }, tld: [".am"] }, iso: { alpha2: r.Armenia, alpha3: "ARM", numeric: "051" }, name: { alt_spellings: ["AM", "Hayastan", "Republic of Armenia", "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576"], demonym: "Armenian", native: { endonym: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576" }, official: "Republic of Armenia", short: "Armenia", translations: { [e.Afrikaans]: "Armeni\xEB", [e.Albanian]: "Armenia", [e.Amharic]: "\u12A0\u121B\u122D\u129B", [e.Arabic]: "\u0623\u0631\u0645\u064A\u0646\u064A\u0627", [e.Armenian]: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576", [e.Azerbaijani]: "Az\u0259rbaycan", [e.Bashkir]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Basque]: "Arm\xE9nia", [e.Belarusian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Bengali]: "\u0986\u09B0\u09CD\u09AE\u09C7\u09A8\u09BF", [e.Berber]: "\u0623\u0631\u0645\u064A\u0646\u064A\u0627", [e.Bhutani]: "\u0F62\u0F92\u0FB1\u0F0B\u0F53\u0F42", [e.Bosnian]: "Armenija", [e.Breton]: "Armeni\xEB", [e.Bulgarian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Burmese]: "\u1021\u102C\u1019\u1010\u102D\u1010\u1039", [e.Catalan]: "Arm\xE8nia", [e.Chinese]: "\u4E9A\u7F8E\u5C3C\u4E9A", [e.Croatian]: "Armenija", [e.Czech]: "Arm\xE9nie", [e.Danish]: "Armenien", [e.Dutch]: "Armeni\xEB", [e.English]: "Armenia", [e.Esperanto]: "Armenia", [e.Estonian]: "Armeenia", [e.Finnish]: "Armenia", [e.French]: "Armenia", [e.Frisian]: "Armeenia", [e.Galician]: "Arm\xE9nia", [e.Georgian]: "\u10D0\u10E0\u10DB\u10DD\u10DC\u10D8", [e.German]: "Armenien", [e.Greenlandic]: "Armenia", [e.Greek]: "\u0391\u03C1\u03BC\u03B5\u03BD\u03AF\u03B1", [e.Gujarati]: "\u0A85\u0AB0\u0ACD\u0AAE\u0AC7\u0AA8\u0ABF", [e.Haitian]: "Armenia", [e.Hausa]: "Armenia", [e.Hebrew]: "\u05D0\u05E8\u05DE\u05E0\u05D9\u05D4", [e.Hindi]: "\u0905\u05E8\u05DE\u05E0\u093F\u092F\u093E", [e.Hungarian]: "\xD6rm\xE9nyorsz\xE1g", [e.Icelandic]: "Armenia", [e.Igbo]: "Armenia", [e.Indonesian]: "Armenia", [e.Irish]: "Armenia", [e.Italian]: "Armenia", [e.Japanese]: "\u30A2\u30EB\u30E1\u30CB\u30A2", [e.Javanese]: "Armenia", [e.Kannada]: "\u0C85\u0CB0\u0CCD\u0CAE\u0CC7\u0CA8\u0CBF", [e.Kazakh]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Khmer]: "\u17A2\u17B6\u1798\u17C9\u17C1\u179A\u17B8", [e.Korean]: "\uC544\uB974\uBA54\uB2C8\uC544", [e.Kurdish]: "Armenia", [e.Kyrgyz]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Lao]: "\u0EAD\u0EB2\u0EAB\u0EBC\u0E99\u0EB2", [e.Latin]: "Armenia", [e.Latvian]: "Armeenia", [e.Lithuanian]: "Arm\u0117nija", [e.Luxembourgish]: "Armenien", [e.Macedonian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u0458\u0430", [e.Malagasy]: "Armenia", [e.Malay]: "Armenia", [e.Malayalam]: "\u0D05\u0D30\u0D4D\u200D\u0D2E\u0D47\u0D28\u0D3F", [e.Maltese]: "Armenia", [e.Maori]: "Armenia", [e.Marathi]: "\u0905\u0930\u094D\u092E\u0947\u0928\u093F", [e.Mongolian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Nepali]: "\u0905\u0930\u094D\u092E\u0947\u0928\u093F", [e.Norwegian]: "Armenia", [e.Pashto]: "\u0622\u0631\u0645\u06CC\u0646\u06CC\u0627", [e.Persian]: "\u0627\u0631\u0645\u0646\u0633\u062A\u0627\u0646", [e.Polish]: "Armenia", [e.Portuguese]: "Armenia", [e.Punjabi]: "\u0A05\u0A30\u0A2E\u0A40\u0A28\u0A40", [e.Romanian]: "Armenia", [e.Russian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Samoan]: "Armenia", [e.Sanskrit]: "Armenia", [e.Scots]: "Armenia", [e.Serbian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u0458\u0430", [e.Sesotho]: "Armenia", [e.Shona]: "Armenia", [e.Sindhi]: "Armenia", [e.Sinhala]: "\u0D86\u0DBB\u0DCA\u0DB8\u0DD3\u0DB1\u0DD2", [e.Slovak]: "Armenia", [e.Slovenian]: "Armenija", [e.Somali]: "Armenia", [e.Spanish]: "Armenia", [e.Sudanese]: "Armenia", [e.Swahili]: "Armenia", [e.Swedish]: "Armenien", [e.Tagalog]: "Armenia", [e.Tajik]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Tamil]: "\u0B85\u0BB0\u0BCD\u0BAE\u0BC7\u0BA9\u0BBF\u0BAF\u0BA9\u0BCD", [e.Tatar]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Telugu]: "\u0C05\u0C30\u0C4D\u0C2E\u0C47\u0C28\u0C3F", [e.Thai]: "\u0E2D\u0E32\u0E23\u0E4C\u0E40\u0E21\u0E19\u0E34\u0E2A\u0E16\u0E32\u0E19", [e.Tibetan]: "\u0F68\u0F62\u0F0B\u0F58\u0F7A\u0F0B\u0F53\u0F72\u0F0B\u0F61\u0F74\u0F0D", [e.Turkish]: "Ermenistan", [e.Ukrainian]: "\u0410\u0440\u043C\u0435\u043D\u0456\u044F", [e.Urdu]: "\u0627\u0631\u0645\u0646\u0633\u062A\u0627\u0646", [e.Uzbek]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Vietnamese]: "Armenia", [e.Welsh]: "Armenia", [e.Xhosa]: "Armenia", [e.Yiddish]: "\u05D0\u05E8\u05DE\u05E0\u05D9\u05D4", [e.Yoruba]: "Armenia", [e.Zulu]: "Armenia" } } }, SomeCountry: { i18n: { calling_codes: [], currencies: [], languages: [], tz: { offsets: [], regions: [], timezones: [] } }, id: r.AmericanSamoa, info: { flag: { emoji: "", emoji_unicode: "", svg: "" }, tld: [] }, iso: { alpha2: r.AmericanSamoa, alpha3: "", numeric: "" }, name: { alt_spellings: [], demonym: "", native: { endonym: "" }, official: "", short: "", translations: { [e.Afrikaans]: "", [e.Albanian]: "", [e.Amharic]: "", [e.Arabic]: "", [e.Armenian]: "", [e.Azerbaijani]: "", [e.Bashkir]: "", [e.Basque]: "", [e.Belarusian]: "", [e.Bengali]: "", [e.Berber]: "", [e.Bhutani]: "", [e.Bosnian]: "", [e.Breton]: "", [e.Bulgarian]: "", [e.Burmese]: "", [e.Catalan]: "", [e.Chinese]: "", [e.Croatian]: "", [e.Czech]: "", [e.Danish]: "", [e.Dutch]: "", [e.English]: "", [e.Esperanto]: "", [e.Estonian]: "", [e.Finnish]: "", [e.French]: "", [e.Frisian]: "", [e.Galician]: "", [e.Georgian]: "", [e.German]: "", [e.Greenlandic]: "", [e.Greek]: "", [e.Gujarati]: "", [e.Haitian]: "", [e.Hausa]: "", [e.Hebrew]: "", [e.Hindi]: "", [e.Hungarian]: "", [e.Icelandic]: "", [e.Igbo]: "", [e.Indonesian]: "", [e.Irish]: "", [e.Italian]: "", [e.Japanese]: "", [e.Javanese]: "", [e.Kannada]: "", [e.Kazakh]: "", [e.Khmer]: "", [e.Korean]: "", [e.Kurdish]: "", [e.Kyrgyz]: "", [e.Lao]: "", [e.Latin]: "", [e.Latvian]: "", [e.Lithuanian]: "", [e.Luxembourgish]: "", [e.Macedonian]: "", [e.Malagasy]: "", [e.Malay]: "", [e.Malayalam]: "", [e.Maltese]: "", [e.Maori]: "", [e.Marathi]: "", [e.Mongolian]: "", [e.Nepali]: "", [e.Norwegian]: "", [e.Pashto]: "", [e.Persian]: "", [e.Polish]: "", [e.Portuguese]: "", [e.Punjabi]: "", [e.Romanian]: "", [e.Russian]: "", [e.Samoan]: "", [e.Sanskrit]: "", [e.Scots]: "", [e.Serbian]: "", [e.Sesotho]: "", [e.Shona]: "", [e.Sindhi]: "", [e.Sinhala]: "", [e.Slovak]: "", [e.Slovenian]: "", [e.Somali]: "", [e.Spanish]: "", [e.Sudanese]: "", [e.Swahili]: "", [e.Swedish]: "", [e.Tagalog]: "", [e.Tajik]: "", [e.Tamil]: "", [e.Tatar]: "", [e.Telugu]: "", [e.Thai]: "", [e.Tibetan]: "", [e.Turkish]: "", [e.Ukrainian]: "", [e.Urdu]: "", [e.Uzbek]: "", [e.Vietnamese]: "", [e.Welsh]: "", [e.Xhosa]: "", [e.Yiddish]: "", [e.Yoruba]: "", [e.Zulu]: "" } } } });
+})(p || (p = {}));
+({ Afghanistan: { i18n: { calling_codes: [93], currencies: [m.AfghanistanAfghani], languages: [e.Pashto, e.Dari, e.Turkmen, e.Uzbek], tz: { offsets: [n.UTC_PLUS_4_30], regions: [u.AsiaKabul], timezones: [s.AfghanistanTime] } }, id: r.Afghanistan, info: { flag: { emoji: "\u{1F1E6}\u{1F1EB}", emoji_unicode: "U+1F1E6 U+1F1EB", svg: "https://www.countryflags.io/af/flat/64.svg" }, tld: [".af"] }, iso: { alpha2: r.Afghanistan, alpha3: "AFG", numeric: "004" }, name: { alt_spellings: ["AF", "Af\u0121\u0101nist\u0101n"], demonym: "Afghan", native: { endonym: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646" }, official: "Islamic Republic of Afghanistan", short: "Afghanistan", translations: { [e.Afrikaans]: "Afghanistan", [e.Albanian]: "Shqip\xEBri", [e.Amharic]: "\u12A0\u134D\u130B\u1295", [e.Arabic]: "\u0623\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e.Armenian]: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576", [e.Azerbaijani]: "Az\u0259rbaycan", [e.Bashkir]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Basque]: "Afganist\xE1n", [e.Belarusian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Bengali]: "\u0986\u09AB\u0997\u09BE\u09A8\u09BF\u09B8\u09CD\u09A4\u09BE\u09A8", [e.Berber]: "\u0623\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e.Bhutani]: "\u0F60\u0F56\u0FB2\u0F74\u0F42\u0F0B\u0F61\u0F74\u0F63\u0F0B\u0F66\u0FA4\u0FB2\u0F7C\u0F51\u0F0B\u0F40\u0FB1\u0F72\u0F0B\u0F51\u0F7C\u0F53\u0F0B\u0F63\u0F7A\u0F0B\u0F66\u0F90\u0F51\u0F0B\u0F46\u0F0D", [e.Bosnian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Breton]: "Afganistan", [e.Bulgarian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Burmese]: "\u1021\u102C\u1019\u1001\u103B\u1004\u103A\u1010\u1031\u102C\u103A", [e.Catalan]: "Afganistan", [e.Chinese]: "\u963F\u5BCC\u6C57", [e.Croatian]: "Afganistan", [e.Czech]: "Afganistan", [e.Danish]: "Afghanistan", [e.Dutch]: "Afghanistan", [e.English]: "Afghanistan", [e.Esperanto]: "Afganistan", [e.Estonian]: "Afganistan", [e.Finnish]: "Afghanistan", [e.French]: "Afghanistan", [e.Frisian]: "Afghanistan", [e.Galician]: "Afganist\xE1n", [e.Georgian]: "\u10D0\u10D5\u10E6\u10D0\u10DC\u10D4\u10D7\u10D8", [e.German]: "Afghanistan", [e.Greenlandic]: "Afghanistan", [e.Greek]: "\u0391\u03C6\u03B3\u03B1\u03BD\u03B9\u03C3\u03C4\u03AC\u03BD", [e.Gujarati]: "\u0A85\u0AAB\u0A97\u0ABE\u0AA8\u0ABF\u0AB8\u0ACD\u0AA4\u0ABE\u0AA8", [e.Haitian]: "Afghanistan", [e.Hausa]: "Afghanistan", [e.Hebrew]: "\u05D0\u05E4\u05D2\u05E0\u05D9\u05E1\u05D8\u05DF", [e.Hindi]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e.Hungarian]: "Afganistan", [e.Icelandic]: "Afghanistan", [e.Igbo]: "Afghanistan", [e.Indonesian]: "Afghanistan", [e.Irish]: "Afghanistan", [e.Italian]: "Afghanistan", [e.Japanese]: "\u30A2\u30D5\u30AC\u30CB\u30B9\u30BF\u30F3", [e.Javanese]: "Afghanistan", [e.Kannada]: "\u0C85\u0CAB\u0C97\u0CBE\u0CA8\u0CBF\u0CB8\u0CCD\u0CA4\u0CBE\u0CA8", [e.Kazakh]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Khmer]: "\u17A2\u17B6\u17A0\u17D2\u179C\u17D2\u179A\u17B7\u1780", [e.Korean]: "\uC544\uD504\uAC00\uB2C8\uC2A4\uD0C4", [e.Kurdish]: "Afghanistan", [e.Kyrgyz]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Lao]: "\u0EAD\u0EB2\u0E9F\u0EB2\u0EA5\u0EBD\u0E99", [e.Latin]: "Afghanistan", [e.Latvian]: "Afghanistan", [e.Lithuanian]: "Afganistanas", [e.Luxembourgish]: "Afghanistan", [e.Macedonian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Malagasy]: "Afghanistan", [e.Malay]: "Afghanistan", [e.Malayalam]: "\u0D05\u0D2B\u0D17\u0D3E\u0D28\u0D3F\u0D38\u0D4D\u0D24\u0D3E\u0D28", [e.Maltese]: "Afghanistan", [e.Maori]: "Afghanistan", [e.Marathi]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e.Mongolian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Nepali]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e.Norwegian]: "Afghanistan", [e.Pashto]: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e.Persian]: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e.Polish]: "Afganistan", [e.Portuguese]: "Afghanistan", [e.Punjabi]: "Afghanistan", [e.Romanian]: "Afghanistan", [e.Polish]: "Afganistan", [e.Russian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Samoan]: "Afghanistan", [e.Sanskrit]: "\u0905\u092B\u0917\u093E\u0928\u093F\u0938\u094D\u0924\u093E\u0928", [e.Scots]: "Afghanistan", [e.Serbian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Sesotho]: "Afghanistan", [e.Shona]: "Afghanistan", [e.Sindhi]: "Afghanistan", [e.Sinhala]: "\u0D86\u0D9C\u0DCA\u200D\u0DBB\u0DDC\u0D9A\u0DCA\u0D9A\u0DD2\u0DBA\u0DCF\u0DC0", [e.Slovak]: "Afganistan", [e.Slovenian]: "Afganistan", [e.Somali]: "Afghanistan", [e.Spanish]: "Afganist\xE1n", [e.Sudanese]: "Afghanistan", [e.Swahili]: "Afghanistan", [e.Swedish]: "Afghanistan", [e.Tagalog]: "Afghanistan", [e.Tajik]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Tatar]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Tamil]: "\u0B86\u0BAA\u0BCD\u0BAA\u0B95\u0BBE\u0BA9\u0BBF\u0BB8\u0BCD\u0BA4\u0BBE\u0BA9\u0BCD", [e.Telugu]: "\u0C06\u0C2B\u0C4D\u0C18\u0C28\u0C3F\u0C38\u0C4D\u0C24\u0C3E\u0C28\u0C4D", [e.Thai]: "\u0E2D\u0E31\u0E1F\u0E01\u0E32\u0E19\u0E34\u0E2A\u0E16\u0E32\u0E19", [e.Tibetan]: "\u0F68\u0F55\u0F0B\u0F42\u0F7A\u0F0B\u0F53\u0F72\u0F66\u0F72\u0F0B\u0F4F\u0F7A\u0F53\u0F66\u0F72\u0F0D", [e.Turkish]: "Afganistan", [e.Ukrainian]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Urdu]: "\u0627\u0641\u063A\u0627\u0646\u0633\u062A\u0627\u0646", [e.Uzbek]: "\u0410\u0444\u0433\u0430\u043D\u0438\u0441\u0442\u0430\u043D", [e.Vietnamese]: "Afghanistan", [e.Welsh]: "Afghanistan", [e.Xhosa]: "Afghanistan", [e.Yiddish]: "Afghanistan", [e.Yoruba]: "Afghanistan", [e.Zulu]: "Afghanistan" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Kabul", total: 341e5 } }, geography: { area: 652230, region: T.Asia, sub_region: p.SouthernAsia }, government: { capital: "Kabul", type: "Islamic Emirate" } } }, Albania: { i18n: { calling_codes: [355], currencies: [m.AlbaniaLek], languages: [e.Albanian, e.Greek, e.Turkish], tz: { offsets: [n.UTC_PLUS_1], regions: [u.EuropeBrussels], timezones: [s.CentralEuropeanTime] } }, id: r.Albania, info: { flag: { emoji: "\u{1F1E6}\u{1F1F1}", emoji_unicode: "U+1F1E6 U+1F1F1", svg: "https://www.countryflags.io/al/flat/64.svg" }, tld: [".al"] }, iso: { alpha2: r.Albania, alpha3: "ALB", numeric: "008" }, name: { alt_spellings: ["AL", "Shqip\xEBri", "Shqip\xEBria", "Shqipnia"], demonym: "Albanian", native: { endonym: "Shqip\xEBri" }, official: "Republic of Albania", short: "Albania", translations: { [e.Afrikaans]: "Albania", [e.Albanian]: "Albania", [e.Amharic]: "\u12A0\u120D\u1263\u1295\u12EB", [e.Arabic]: "\u0623\u0644\u0628\u0627\u0646\u064A\u0627", [e.Armenian]: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576", [e.Azerbaijani]: "Az\u0259rbaycan", [e.Bashkir]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Basque]: "Albania", [e.Belarusian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Bengali]: "\u0986\u09B2\u09AC\u09BE\u09A8\u09BF\u09AF\u09BC\u09BE", [e.Berber]: "\u0623\u0644\u0628\u0627\u0646\u064A\u0627", [e.Bhutani]: "\u0F60\u0F56\u0FB2\u0F74\u0F42\u0F0B\u0F61\u0F74\u0F63\u0F0B", [e.Bosnian]: "Albanija", [e.Breton]: "Albania", [e.Bulgarian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Burmese]: "\u1021\u102C\u1019\u1001\u103B\u1004\u103A\u1010\u1031\u102C\u103A", [e.Catalan]: "Alb\xE0nia", [e.Chinese]: "\u963F\u5C14\u5DF4\u5C3C\u4E9A", [e.Croatian]: "Albanija", [e.Czech]: "Alb\xE1nie", [e.Danish]: "Albanien", [e.Dutch]: "Albani\xEB", [e.English]: "Albania", [e.Esperanto]: "Albanio", [e.Estonian]: "Albaania", [e.Finnish]: "Albania", [e.French]: "Albanie", [e.Frisian]: "Albani\xEB", [e.Galician]: "Alb\xE2nia", [e.Georgian]: "\u10D0\u10DA\u10D1\u10D0\u10DC\u10D8\u10D0", [e.German]: "Albanien", [e.Greenlandic]: "Albania", [e.Greek]: "\u0391\u03BB\u03B2\u03B1\u03BD\u03AF\u03B1", [e.Gujarati]: "\u0A85\u0AB2\u0AAC\u0AA8\u0ABF\u0AAF\u0ABE", [e.Haitian]: "Albanais", [e.Hausa]: "Albania", [e.Hebrew]: "\u05D0\u05DC\u05D1\u05E0\u05D9\u05D4", [e.Hindi]: "\u0905\u0932\u094D\u092C\u093E\u0928\u093F\u092F\u093E", [e.Hungarian]: "Alb\xE1nia", [e.Icelandic]: "Alb\xFAnir", [e.Igbo]: "Albania", [e.Indonesian]: "Albania", [e.Irish]: "Alb\xE1in", [e.Italian]: "Albania", [e.Japanese]: "\u30A2\u30EB\u30D0\u30CB\u30A2", [e.Javanese]: "Albania", [e.Kannada]: "\u0C85\u0CB2\u0CCD\u0CAC\u0CBE\u0CA8\u0CBF\u0CAF\u0CBE", [e.Kazakh]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Khmer]: "\u17A2\u17B6\u17A0\u17D2\u179C\u17D2\u179A\u17C1\u179F\u17CA\u17B8", [e.Korean]: "\uC54C\uBC14\uB2C8\uC544", [e.Kurdish]: "\u0622\u0644\u0628\u0627\u0646\u06CC\u0627", [e.Kyrgyz]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Lao]: "\u0EAD\u0EB2\u0EA5\u0EB2\u0E99\u0EB5", [e.Latin]: "Albania", [e.Latvian]: "Alb\u0101nija", [e.Lithuanian]: "Albanija", [e.Luxembourgish]: "Albani\xEB", [e.Macedonian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u0458\u0430", [e.Malagasy]: "Albania", [e.Malay]: "Albania", [e.Malayalam]: "\u0D05\u0D32\u0D4D\u0D2C\u0D3E\u0D28\u0D3F\u0D2F\u0D3E", [e.Maltese]: "Albania", [e.Maori]: "Albania", [e.Marathi]: "\u0905\u0932\u094D\u092C\u093E\u0928\u093F\u092F\u093E", [e.Mongolian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Nepali]: "\u0905\u0932\u094D\u092C\u093E\u0928\u093F\u092F\u093E", [e.Norwegian]: "Albania", [e.Pashto]: "\u0627\u0627\u0644\u0628\u0627\u0646\u06CC", [e.Persian]: "\u0622\u0644\u0628\u0627\u0646\u06CC", [e.Polish]: "Albania", [e.Portuguese]: "Alb\xE2nia", [e.Punjabi]: "\u0A05\u0A32\u0A2C\u0A28\u0A40\u0A06", [e.Romanian]: "Alb\u0103n", [e.Russian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Samoan]: "Albania", [e.Sanskrit]: "Albani", [e.Scots]: "Alb\xE0inia", [e.Serbian]: "\u0410\u043B\u0431\u0430\u043D\u0438\u0458\u0430", [e.Sesotho]: "Albania", [e.Shona]: "Albania", [e.Sindhi]: "Albania", [e.Sinhala]: "\u0D87\u0DBD\u0DCA\u0DB6\u0DCF\u0DB1\u0DD2\u0DBA", [e.Slovak]: "Alb\xE1nsko", [e.Slovenian]: "Albanija", [e.Somali]: "Albania", [e.Spanish]: "Albania", [e.Sudanese]: "Albania", [e.Swahili]: "Albania", [e.Swedish]: "Albanien", [e.Tagalog]: "Albania", [e.Tajik]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Tamil]: "\u0B85\u0BB2\u0BCD\u0BAA\u0BBE\u0BA9\u0BBF\u0BAF\u0BBE", [e.Tatar]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Telugu]: "\u0C05\u0C32\u0C4D\u0C2C\u0C3E\u0C28\u0C3F\u0C2F\u0C3E", [e.Thai]: "\u0E2D\u0E31\u0E25\u0E41\u0E1A\u0E19\u0E34\u0E19\u0E35", [e.Tibetan]: "\u0F68\u0F63\u0F0B\u0F56\u0F72\u0F0B\u0F53\u0F72\u0F0B\u0F61\u0F72", [e.Turkish]: "Albaniye", [e.Ukrainian]: "\u0410\u043B\u0431\u0430\u043D\u0456\u044F", [e.Urdu]: "\u0622\u0644\u0628\u0627\u0646\u06CC", [e.Uzbek]: "\u0410\u043B\u0431\u0430\u043D\u0438\u044F", [e.Vietnamese]: "Albanie", [e.Welsh]: "Albania", [e.Xhosa]: "Albania", [e.Yiddish]: "\u05D0\u05DC\u05D1\u05E0\u05D9\u05E9", [e.Yoruba]: "Albania", [e.Zulu]: "Albania" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Tirana", total: 2853e3 } }, geography: { area: 28748, region: T.Europe, sub_region: p.SouthernEurope }, government: { capital: "Tirana", type: "Republic" } } }, Algeria: { i18n: { calling_codes: [213], currencies: [m.AlgeriaDinar], languages: [e.Arabic, e.French, e.Berber, e.Tamazight], tz: { offsets: [n.UTC_PLUS_1, n.UTC_PLUS_2], regions: [u.AfricaAlgiers], timezones: [s.CentralEuropeanTime] } }, id: r.Algeria, info: { flag: { emoji: "\u{1F1E9}\u{1F1FF}", emoji_unicode: "U+1F1E9 U+1F1FF", svg: "https://www.countryflags.io/dz/flat/64.svg" }, tld: [".dz", ".\u062C\u0632\u0627\u0626\u0631"] }, iso: { alpha2: r.Algeria, alpha3: "DZA", numeric: "012" }, name: { alt_spellings: ["DZ", "Dzayer", "Alg\xE9rie"], demonym: "Algerian", native: { endonym: "\u0627\u0644\u062C\u0632\u0627\u0626\u0631" }, official: "People's Democratic Republic of Algeria", short: "Algeria", translations: { [e.Afrikaans]: "Algerije", [e.Albanian]: "Algeria", [e.Amharic]: "\u12A0\u120D\u1300\u122D\u1235", [e.Arabic]: "\u0627\u0644\u062C\u0632\u0627\u0626\u0631", [e.Armenian]: "\u0531\u056C\u0563\u0578\u0580\u056B\u0561", [e.Azerbaijani]: "Az\u0259rbaycan", [e.Bashkir]: "\u0410\u043B\u0436\u0438\u0440", [e.Basque]: "Algeria", [e.Belarusian]: "\u0410\u043B\u0436\u0438\u0440", [e.Bengali]: "\u0986\u09B2\u099C\u09C7\u09B0", [e.Berber]: "\u062C\u0632\u0627\u0626\u0631", [e.Bhutani]: "\u0F62\u0FAB\u0F7C\u0F44\u0F0B\u0F41", [e.Bosnian]: "Al\u017Eir", [e.Breton]: "Algeria", [e.Bulgarian]: "\u0410\u043B\u0436\u0438\u0440", [e.Burmese]: "\u1021\u102C\u101B\u1015\u103A", [e.Catalan]: "Alg\xE8ria", [e.Chinese]: "\u963F\u5C14\u53CA\u5229\u4E9A", [e.Croatian]: "Al\u017Eir", [e.Czech]: "Al\u017E\xEDrsko", [e.Danish]: "Algeriet", [e.Dutch]: "Algerije", [e.English]: "Algeria", [e.Esperanto]: "Al\u011Derio", [e.Estonian]: "Al\u017Eira", [e.Finnish]: "Algeria", [e.French]: "Alg\xE9rie", [e.Frisian]: "Algeri\xEB", [e.Galician]: "Alxeria", [e.Georgian]: "\u10D0\u10DA\u10D2\u10D8\u10E3\u10E0\u10D8", [e.German]: "Algerien", [e.Greenlandic]: "Algeria", [e.Greek]: "\u0391\u03BB\u03B3\u03B5\u03C1\u03AF\u03B1", [e.Gujarati]: "\u0A86\u0AB2\u0AC7\u0A97\u0AB0\u0ABF\u0AAF\u0ABE", [e.Haitian]: "Alg\xE9rie", [e.Hausa]: "Algeria", [e.Hebrew]: "\u05D0\u05DC\u05D2\u05F3\u05D9\u05E8\u05D9\u05D4", [e.Hindi]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e.Hungarian]: "Alg\xE1r", [e.Icelandic]: "Alg\xFAra", [e.Igbo]: "Algeria", [e.Indonesian]: "Aljir", [e.Irish]: "Alg\xE9rie", [e.Italian]: "Algeria", [e.Japanese]: "\u30A2\u30EB\u30B8\u30A7\u30EA\u30A2", [e.Javanese]: "Aljir", [e.Kannada]: "\u0C86\u0CB2\u0CCD\u0C97\u0CC7\u0CB0\u0CBF\u0CAF\u0CA8\u0CCD", [e.Kazakh]: "\u0410\u043B\u0436\u0438\u0440", [e.Khmer]: "\u17A2\u17B6\u179B\u17CB\u1794\u17B6\u1793\u17B8", [e.Korean]: "\uC54C\uC81C\uB9AC", [e.Kurdish]: "\u062C\u0632\u0627\u06CC\u0631 \u0627\u0644\u062C\u0632\u0627\u06CC\u0631", [e.Kyrgyz]: "\u0410\u043B\u0436\u0438\u0440", [e.Lao]: "\u0EAD\u0EB2\u0EA5\u0EB2\u0E88\u0EB5\u0E99", [e.Latin]: "Algeria", [e.Latvian]: "Al\u017E\u012Brija", [e.Lithuanian]: "Al\u017Eyras", [e.Luxembourgish]: "Algeria", [e.Macedonian]: "\u0410\u043B\u0436\u0438\u0440", [e.Malagasy]: "Alg\xE9rie", [e.Malay]: "Aljir", [e.Malayalam]: "\u0D06\u0D32\u0D02\u0D17\u0D47\u0D30\u0D3F\u0D2F\u0D7B", [e.Maltese]: "Alg\xE9rie", [e.Maori]: "Algeria", [e.Marathi]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e.Mongolian]: "\u0410\u043B\u0436\u0438\u0440", [e.Nepali]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e.Norwegian]: "Algeria", [e.Pashto]: "\u0627\u0644\u062C\u0632\u0627\u0626\u0631", [e.Persian]: "\u062C\u0632\u0627\u06CC\u0631 \u0627\u0644\u0639\u0631\u0628", [e.Polish]: "Algieria", [e.Portuguese]: "Alg\xE9ria", [e.Punjabi]: "\u0A06\u0A32\u0A47\u0A17\u0A40\u0A06", [e.Romanian]: "Algeria", [e.Russian]: "\u0410\u043B\u0436\u0438\u0440", [e.Samoan]: "Algeria", [e.Sanskrit]: "\u0906\u0932\u094D\u0917\u0947\u0930\u093F\u092F\u093E", [e.Scots]: "Algeria", [e.Serbian]: "\u0410\u043B\u0436\u0438\u0440", [e.Sesotho]: "Algeria", [e.Shona]: "Algeria", [e.Sindhi]: "Algeria", [e.Sinhala]: "\u0D86\u0DBD\u0DCA\u0DB6\u0DCF\u0DB1\u0DD2\u0DBA", [e.Slovak]: "Al\u017E\xEDrsko", [e.Slovenian]: "Al\u017Eir", [e.Somali]: "Algeria", [e.Spanish]: "Algeria", [e.Sudanese]: "Aljir", [e.Swahili]: "Aljir", [e.Swedish]: "Algeriet", [e.Tagalog]: "Algeria", [e.Tajik]: "\u0410\u043B\u0436\u0438\u0440", [e.Tamil]: "\u0B86\u0BB2\u0BCD\u0B95\u0BC7\u0BB0\u0BBF\u0BAF\u0BBE", [e.Tatar]: "\u0410\u043B\u0436\u0438\u0440", [e.Telugu]: "\u0C06\u0C32\u0C4D\u0C17\u0C47\u0C30\u0C3F\u0C2F\u0C3E", [e.Thai]: "\u0E2D\u0E32\u0E23\u0E32\u0E01\u0E2D\u0E19", [e.Tibetan]: "\u0F68\u0F63\u0F9F\u0F72\u0F0B\u0F62\u0F72\u0F0B\u0F61\u0F72", [e.Turkish]: "Cezayir", [e.Ukrainian]: "\u0410\u043B\u0436\u0438\u0440", [e.Urdu]: "\u0622\u0644\u062C\u06CC\u0631", [e.Uzbek]: "\u0410\u043B\u0436\u0438\u0440", [e.Vietnamese]: "\u1EA2\u0301\u1EA1\u1EA3\u1EAD\u1EB5", [e.Welsh]: "Algeria", [e.Xhosa]: "Algeria", [e.Yiddish]: "\u05D0\u05DC\u05D2\u05F3\u05D9\u05E8\u05D9\u05D4", [e.Yoruba]: "Algeria", [e.Zulu]: "Algeria" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Oran", total: 371e5 } }, geography: { area: 2381740, region: T.Africa, sub_region: p.NorthernAfrica }, government: { capital: "Algiers", type: "Republic" } } }, AmericanSamoa: { i18n: { calling_codes: [1684], currencies: [m.AmericanSamoaTala], languages: [e.English, e.Samoan], tz: { offsets: [n.UTC_MINUS_11], regions: [u.PacificSamoa], timezones: [s.SamoaStandardTime] } }, id: r.AmericanSamoa, info: { flag: { emoji: "\u{1F1E6}\u{1F1F8}", emoji_unicode: "U+1F1E6 U+1F1F8", svg: "https://www.countryflags.io/as/flat/64.svg" }, tld: [".as"] }, iso: { alpha2: r.AmericanSamoa, alpha3: "ASM", numeric: "016" }, name: { alt_spellings: ["AS", "Amerika S\u0101moa", "Amelika S\u0101moa", "S\u0101moa Amelika"], demonym: "American Samoan", native: { endonym: "American Samoa" }, official: "American Samoa", short: "American Samoa", translations: { [e.Afrikaans]: "Amerikaans Samoa", [e.Albanian]: "Samoa Amerikane", [e.Amharic]: "\u1233\u121E\u12A0\u122D", [e.Arabic]: "\u0633\u0627\u0645\u0648\u0627 \u0627\u0644\u0623\u0645\u0631\u064A\u0643\u064A\u0629", [e.Armenian]: "\u054D\u0561\u0570\u0561\u0574\u0561\u056C\u056B\u0561", [e.Azerbaijani]: "Samoa Amerikana", [e.Bashkir]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0421\u0430\u043C\u043E\u0430", [e.Basque]: "Samoa Amerikana", [e.Belarusian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430\u044F \u0421\u0430\u043C\u043E\u0430", [e.Bengali]: "\u0986\u09AE\u09C7\u09B0\u09BF\u0995\u09BE\u09A8 \u09B8\u09BE\u09AE\u09CB\u09AF\u09BC\u09BE", [e.Berber]: "\u062C\u0632\u0631 \u0633\u0627\u0645\u0648\u0627 \u0627\u0644\u0623\u0645\u0631\u064A\u0643\u064A\u0629", [e.Bhutani]: "\u0F68\u0F62\u0F92\u0FB1\u0F0B\u0F58\u0F72\u0F0B\u0F51\u0F58\u0F44\u0F66\u0F0B\u0F66\u0FA4\u0FB2\u0F7C\u0F51\u0F0B\u0F40\u0FB1\u0F72\u0F0B\u0F66\u0F90\u0F56\u0F66\u0F0B\u0F62\u0F92\u0FB1\u0F74\u0F51\u0F0B\u0F46\u0F7A\u0F53\u0F0B\u0F54\u0F7C\u0F0D", [e.Bosnian]: "Ameri\u010Dka Samoa", [e.Breton]: "Samoa Amerikan", [e.Bulgarian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e.Burmese]: "\u1021\u1019\u1039\u1038\u1019\u101B\u102D\u102F\u1018\u102C\u101E\u102C", [e.Catalan]: "Samoa Americana", [e.Chinese]: "\u7F8E\u5C5E\u8428\u6469\u4E9A", [e.Croatian]: "Ameri\u010Dka Samoa", [e.Czech]: "Americk\xE1 Samoa", [e.Danish]: "Amerikansk Samoa", [e.Dutch]: "Amerikaans Samoa", [e.English]: "American Samoa", [e.Esperanto]: "Samoa Amerika", [e.Estonian]: "Ameerika Samoa", [e.Finnish]: "Amerikka Samoa", [e.French]: "American Samoa", [e.Frisian]: "Amerikaans Samoa", [e.Galician]: "Samoa Americana", [e.Georgian]: "\u10D0\u10DB\u10D4\u10E0\u10D8\u10D9\u10D8\u10E1 \u10E1\u10D0\u10DB\u10DD\u10D0", [e.German]: "Amerikanisch-Samoa", [e.Greenlandic]: "Amerikaans Samoa", [e.Greek]: "\u0391\u03BC\u03B5\u03C1\u03B9\u03BA\u03B1\u03BD\u03B9\u03BA\u03AE \u03A3\u03B1\u03BC\u03CC\u03B1", [e.Gujarati]: "\u0A86\u0AAE\u0AC7\u0AB0\u0ABF\u0A95\u0AA8 \u0AB8\u0ABE\u0AAE\u0ACB\u0AAF\u0ABE", [e.Haitian]: "Amerikaans Samoa", [e.Hausa]: "Amerikaans Samoa", [e.Hebrew]: "\u05D0\u05DE\u05E8\u05D9\u05E7\u05E0\u05D9\u05D4 \u05E1\u05DE\u05D5\u05D0\u05D4", [e.Hindi]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e.Hungarian]: "Amerikai Szamoa", [e.Icelandic]: "Amerikai Szamoa", [e.Igbo]: "Ikina Amerika", [e.Indonesian]: "Samoa Amerika", [e.Irish]: "Samoa Amerikana", [e.Italian]: "Samoa Americane", [e.Japanese]: "\u30A2\u30E1\u30EA\u30AB\u9818\u30B5\u30E2\u30A2", [e.Javanese]: "Samoa Amerika", [e.Kannada]: "\u0C85\u0CAE\u0CC7\u0CB0\u0CBF\u0C95\u0CA8\u0CCD \u0CB8\u0CAE\u0CCB\u0C86", [e.Kazakh]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0421\u0430\u043C\u043E\u0430", [e.Khmer]: "\u17A2\u17B6\u1798\u17C9\u17B6\u179A\u17B8\u179F\u17D2\u178F\u1784\u17CB", [e.Korean]: "\uC544\uBA54\uB9AC\uCE74 \uC0AC\uBAA8\uC544", [e.Kurdish]: "Amerikaans Samoa", [e.Kyrgyz]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0421\u0430\u043C\u043E\u0430", [e.Lao]: "\u0EAD\u0EB2\u0EA1\u0EB2\u0E99\u0EB2\u0E94\u0EB2\u0EA1\u0EB2\u0E99\u0EB2\u0E94", [e.Latin]: "Samoa Amerikana", [e.Latvian]: "Amerikas Samoa", [e.Lithuanian]: "Amerikos Samoa", [e.Luxembourgish]: "Amerikaans Samoa", [e.Macedonian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e.Malagasy]: "Samoa Amerika", [e.Malay]: "Amerika Samo", [e.Malayalam]: "\u0D05\u0D2E\u0D47\u0D30\u0D3F\u0D15\u0D4D\u0D15\u0D28\u0D4D\u0D31\u0D4D \u0D38\u0D2E\u0D4B\u0D06", [e.Maltese]: "Samoa Amerika", [e.Maori]: "Samoa Amerika", [e.Marathi]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e.Mongolian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438\u0439 \u0421\u0430\u043C\u043E\u0430", [e.Nepali]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e.Norwegian]: "Amerikansk Samoa", [e.Pashto]: "\u0627\u0645\u0631\u06CC\u06A9\u0627\u06CC \u0633\u0645\u0648\u0627", [e.Persian]: "\u0622\u0645\u0631\u06CC\u06A9\u0627\u06CC \u0633\u0645\u0648\u0627", [e.Polish]: "Samoa Ameryka\u0144skie", [e.Portuguese]: "Samoa Americana", [e.Punjabi]: "\u0A05\u0A2E\u0A30\u0A40\u0A15\u0A40 \u0A38\u0A3E\u0A2E\u0A4B\u0A06", [e.Romanian]: "Samoa americane", [e.Russian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430\u044F \u0421\u0430\u043C\u043E\u0430", [e.Samoan]: "Samoa Amerika", [e.Sanskrit]: "\u0905\u092E\u0947\u0930\u093F\u0915\u093E \u0938\u092E\u094B\u0906", [e.Scots]: "Amerikaans Samoa", [e.Serbian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e.Sesotho]: "Amerikaans Samoa", [e.Shona]: "Amerikaans Samoa", [e.Sindhi]: "Amerikaans Samoa", [e.Sinhala]: "\u0D86\u0DBB\u0DCA\u0DA2\u0DD2\u0DB1\u0DCF\u0DB1\u0DD4 \u0DC3\u0DD0\u0DB8\u0DD0\u0DBD\u0DCA\u0DC0", [e.Slovak]: "Amerikaans Samoa", [e.Slovenian]: "Amerikaans Samoa", [e.Somali]: "Amerikaans Samoa", [e.Spanish]: "Samoa Americana", [e.Sudanese]: "Amerikaans Samoa", [e.Swahili]: "Amerikaans Samoa", [e.Swedish]: "Amerikansk Samoa", [e.Tagalog]: "Amerikaans Samoa", [e.Tajik]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0441\u0430\u043C\u043E\u0430", [e.Tamil]: "\u0B85\u0BAE\u0BC6\u0BB0\u0BBF\u0B95\u0BCD \u0B9A\u0BAE\u0BCB\u0BB5\u0BBE", [e.Tatar]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0441\u0430\u043C\u043E\u0430", [e.Telugu]: "\u0C05\u0C2E\u0C46\u0C30\u0C3F\u0C15\u0C4D \u0C38\u0C2E\u0C4B\u0C35\u0C3E", [e.Thai]: "\u0E2A\u0E2B\u0E23\u0E32\u0E0A\u0E2D\u0E32\u0E13\u0E32\u0E08\u0E31\u0E01\u0E23\u0E41\u0E2D\u0E1F\u0E23\u0E34\u0E01\u0E32", [e.Tibetan]: "\u0F68\u0F7A\u0F0B\u0F62\u0F72\u0F0B\u0F40\u0F0B\u0F68\u0F7A\u0F0B\u0F58\u0F72\u0F0B\u0F51\u0F74\u0F0B\u0F61\u0F72\u0F0B\u0F62\u0F72\u0F0B\u0F40", [e.Turkish]: "Amerikan Samoas\u0131", [e.Ukrainian]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u044C\u043A\u0430 \u0421\u0430\u043C\u043E\u0430", [e.Urdu]: "\u0627\u0645\u0631\u06CC\u06A9\u06CC \u0633\u0645\u0648\u0627", [e.Uzbek]: "\u0410\u043C\u0435\u0440\u0438\u043A\u0430\u043D\u0441\u043A\u0438 \u0441\u0430\u043C\u043E\u0430", [e.Vietnamese]: "Amerikaans Samoa", [e.Welsh]: "Amerikaans Samoa", [e.Xhosa]: "Amerikaans Samoa", [e.Yiddish]: "Amerikaans Samoa", [e.Yoruba]: "Amerikaans Samoa", [e.Zulu]: "Amerikaans Samoa" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Pago Pago", total: 558e3 } }, geography: { area: 199, region: T.Oceania, sub_region: p.Polynesia }, government: { capital: "Pago Pago", type: "Nonmetropolitan Territory of the US" } } }, Andorra: { i18n: { calling_codes: [376], currencies: [m.Euro], languages: [e.Catalan, e.Spanish], tz: { offsets: [n.UTC_PLUS_1, n.UTC_PLUS_2], regions: [u.EuropeAndorra], timezones: [s.CentralEuropeanTime] } }, id: r.Andorra, info: { flag: { emoji: "\u{1F1E6}\u{1F1F4}", emoji_unicode: "U+1F1E6 U+1F1F4", svg: "https://www.countryflags.io/ad/flat/64.svg" }, tld: [".ad"] }, iso: { alpha2: r.Andorra, alpha3: "AND", numeric: "020" }, name: { alt_spellings: ["AD", "Principality of Andorra", "Principat d'Andorra"], demonym: "Andorran", native: { endonym: "Andorra" }, official: "Principality of Andorra", short: "Andorra", translations: { [e.Afrikaans]: "Andorra", [e.Albanian]: "Andorra", [e.Amharic]: "\u12A0\u1295\u12F6\u122B", [e.Arabic]: "\u0623\u0646\u062F\u0648\u0631\u0627", [e.Armenian]: "\u0540\u0561\u0576\u0564\u0561\u0580\u0561\u057E\u0561\u0575\u0584", [e.Azerbaijani]: "Andorra", [e.Bashkir]: "\u0410\u043D\u0434\u043E\u0440\u0430", [e.Basque]: "Andorra", [e.Belarusian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Bengali]: "\u0985\u09A8\u09CD\u09A1\u09CB\u09B0\u09BE", [e.Berber]: "\u0623\u0646\u062F\u0648\u0631\u0627", [e.Bhutani]: "\u0F68\u0F53\u0F0B\u0F4C\u0F7C\u0F0B", [e.Bosnian]: "Andora", [e.Breton]: "Andorra", [e.Bulgarian]: "\u0410\u043D\u0434\u043E\u0440\u0430", [e.Burmese]: "\u1021\u1014\u1039\u1010\u102C\u101B\u102D\u102F\u1038", [e.Catalan]: "Andorra", [e.Chinese]: "\u5B89\u9053\u5C14", [e.Croatian]: "Andora", [e.Czech]: "Andorra", [e.Danish]: "Andorra", [e.Dutch]: "Andorra", [e.English]: "Andorra", [e.Esperanto]: "Andora", [e.Estonian]: "Andorra", [e.Finnish]: "Andorra", [e.French]: "Andorra", [e.Frisian]: "Andorra", [e.Galician]: "Andorra", [e.Georgian]: "\u12A0\u1295\u12F6\u122B", [e.German]: "Andorra", [e.Greek]: "\u0391\u03BD\u03B4\u03CC\u03C1\u03B1", [e.Hebrew]: "\u05D0\u05E0\u05D3\u05D5\u05E8\u05D4", [e.Hindi]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e.Hungarian]: "Andorra", [e.Icelandic]: "Andorra", [e.Igbo]: "Andorra", [e.Indonesian]: "Andorra", [e.Irish]: "Andorra", [e.Italian]: "Andorra", [e.Japanese]: "\u30A2\u30F3\u30C9\u30E9", [e.Javanese]: "Andorra", [e.Kannada]: "\u0C85\u0C82\u0CA1\u0CCB\u0CB0\u0CBF\u0CAF\u0CA8\u0CCD", [e.Kazakh]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Khmer]: "\u17A2\u1784\u17CB\u178A\u17B6\u179A\u17B6", [e.Korean]: "\uC548\uB3C4\uB77C", [e.Kurdish]: "Andorra", [e.Kyrgyz]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Lao]: "\u0EAD\u0EB1\u0E99\u0EC2\u0E94\u0EA3\u0EB2", [e.Latin]: "Andorra", [e.Latvian]: "Andora", [e.Lithuanian]: "Andora", [e.Luxembourgish]: "Andorra", [e.Macedonian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Malagasy]: "Andorra", [e.Malay]: "Andorra", [e.Malayalam]: "\u0D05\u0D02\u0D21\u0D4B\u0D30\u0D3F\u0D2F\u0D28\u0D4D", [e.Maltese]: "Andorra", [e.Maori]: "Andorra", [e.Marathi]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e.Mongolian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Nepali]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e.Norwegian]: "Andorra", [e.Pashto]: "\u0622\u0646\u062F\u0648\u0631\u0627", [e.Persian]: "\u0622\u0646\u062F\u0648\u0631\u0627", [e.Polish]: "Andora", [e.Portuguese]: "Andorra", [e.Punjabi]: "\u0A05\u0A70\u0A21\u0A4B\u0A30\u0A3E", [e.Romanian]: "Andorra", [e.Russian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Samoan]: "Andorra", [e.Sanskrit]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e.Scots]: "Andorra", [e.Serbian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Sesotho]: "Andorra", [e.Shona]: "Andorra", [e.Sindhi]: "\u0905\u0902\u0921\u094B\u0930\u093E", [e.Sinhala]: "\u0D86\u0DB1\u0DCA\u0DAF\u0DDA", [e.Slovak]: "Andorra", [e.Slovenian]: "Andora", [e.Somali]: "Andorra", [e.Spanish]: "Andorra", [e.Sudanese]: "Andorra", [e.Swahili]: "Andorra", [e.Swedish]: "Andorra", [e.Tagalog]: "Andorra", [e.Tajik]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Tamil]: "\u0B85\u0BA9\u0BCB\u0BB0\u0BCD\u0B9F\u0BBE", [e.Tatar]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Telugu]: "\u0C05\u0C02\u0C21\u0C4B\u0C30\u0C4D\u0C30\u0C3E", [e.Thai]: "\u0E2D\u0E31\u0E19\u0E14\u0E2D\u0E23\u0E4C\u0E23\u0E32", [e.Tibetan]: "\u0F68\u0F53\u0F0B\u0F4C\u0F7C\u0F0B", [e.Turkish]: "Andora", [e.Ukrainian]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Urdu]: "\u0622\u0646\u062F\u0648\u0631\u0627", [e.Uzbek]: "\u0410\u043D\u0434\u043E\u0440\u0440\u0430", [e.Vietnamese]: "Andorra", [e.Welsh]: "Andorra", [e.Xhosa]: "Andorra", [e.Yiddish]: "\u05D0\u05E0\u05D3\u05D5\u05E8\u05D4", [e.Yoruba]: "Andorra", [e.Zulu]: "Andorra" } }, statistics: { demographics: { age: { distribution: [{ age: "0 to 14 years", percentage: 15.3 }, { age: "15 to 64 years", percentage: 66.7 }, { age: "65 years and over", percentage: 14.6 }], median_age: 35.5 }, population: { largest_city: "Andorra la Vella", total: 78e3 } }, geography: { area: 468, region: T.Europe, sub_region: p.SouthernEurope }, government: { capital: "Andorra la Vella", type: "Constitutional Monarchy" } } }, Angola: { i18n: { calling_codes: [244], currencies: [m.AngolaKwanza], languages: [e.Portuguese, e.Spanish, e.French, e.Italian, e.German, e.English], tz: { offsets: [n.UTC_0, n.UTC_PLUS_1, n.UTC_PLUS_2], regions: [u.AfricaLuanda], timezones: [s.WestAfricaTime] } }, id: r.Angola, info: { flag: { emoji: "\u{1F1E6}\u{1F1EC}", emoji_unicode: "U+1F1E6 U+1F1EC", svg: "https://www.countryflags.io/ao/flat/64.svg" }, tld: [".ao"] }, iso: { alpha2: r.Angola, alpha3: "AGO", numeric: "024" }, name: { alt_spellings: ["AO", "Rep\xFAblica de Angola", "\u0281\u025Bpublika de an"], demonym: "Angolan", native: { endonym: "Angola" }, official: "Republic of Angola", short: "Angola", translations: { [e.Afrikaans]: "Angola", [e.Albanian]: "Ang\xF2la", [e.Amharic]: "\u12A0\u1295\u130E\u120A\u12EB", [e.Arabic]: "\u0623\u0646\u063A\u0648\u0644\u0627", [e.Armenian]: "\u0540\u0561\u0576\u0563\u0561\u056C\u0561\u056F\u0561", [e.Azerbaijani]: "Ang\u0259l", [e.Bashkir]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Basque]: "Angola", [e.Belarusian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Bengali]: "\u0985\u0999\u09CD\u0997\u09B2\u09BE", [e.Berber]: "Angola", [e.Bhutani]: "\u0F60\u0F56\u0FB2\u0F74\u0F42", [e.Bosnian]: "Angola", [e.Breton]: "Angola", [e.Bulgarian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Burmese]: "\u1021\u1004\u103A\u1039\u1002\u101C\u102D\u1010\u103A", [e.Catalan]: "Angola", [e.Chinese]: "\u5B89\u54E5\u62C9", [e.Croatian]: "Angola", [e.Czech]: "Angola", [e.Danish]: "Angola", [e.Dutch]: "Angola", [e.English]: "Angola", [e.Esperanto]: "Angolo", [e.Estonian]: "Angola", [e.Finnish]: "Angola", [e.French]: "Angola", [e.Frisian]: "Angola", [e.Galician]: "Angola", [e.Georgian]: "\u10D0\u10DC\u10D2\u10DD\u10DA\u10D0", [e.German]: "Angola", [e.Greenlandic]: "Angola", [e.Greek]: "\u0391\u03B3\u03BA\u03CC\u03BB\u03B1", [e.Gujarati]: "\u0A85\u0A82\u0A97\u0ACB\u0AB2\u0ABE", [e.Haitian]: "Angola", [e.Hausa]: "Angola", [e.Hebrew]: "\u05D0\u05E0\u05D2\u05D5\u05DC\u05D4", [e.Hindi]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e.Hungarian]: "Angola", [e.Icelandic]: "Angola", [e.Igbo]: "Angola", [e.Indonesian]: "Angola", [e.Irish]: "Angola", [e.Italian]: "Angola", [e.Japanese]: "\u30A2\u30F3\u30B4\u30E9", [e.Javanese]: "Anggol", [e.Kannada]: "\u0C85\u0C82\u0C97\u0CCB\u0CB2\u0CBE", [e.Kazakh]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Khmer]: "\u17A2\u1784\u17CB\u1780\u17B6\u179B\u17A2\u1784\u17CB\u1782\u17D2\u179B\u17C1\u179F", [e.Korean]: "\uC559\uACE8\uB77C", [e.Kurdish]: "Angola", [e.Kyrgyz]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Lao]: "\u0EAD\u0EB0\u0E99\u0EB2\u0E94\u0EB2", [e.Latin]: "Angola", [e.Latvian]: "Angola", [e.Lithuanian]: "Angola", [e.Luxembourgish]: "Angola", [e.Macedonian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Malagasy]: "Angola", [e.Malay]: "Angola", [e.Malayalam]: "\u0D05\u0D02\u0D17\u0D4B\u0D33\u0D3E", [e.Maltese]: "Angola", [e.Maori]: "Angola", [e.Marathi]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e.Mongolian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Nepali]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e.Norwegian]: "Angola", [e.Pashto]: "\u0627\u0646\u06AB\u0648\u0644\u0627", [e.Persian]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e.Polish]: "Angola", [e.Portuguese]: "Angola", [e.Punjabi]: "\u0A05\u0A19\u0A4D\u0A17\u0A4B\u0A32\u0A3E", [e.Romanian]: "Angole", [e.Russian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Samoan]: "Angola", [e.Sanskrit]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e.Scots]: "Angola", [e.Serbian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Sesotho]: "Angola", [e.Shona]: "Angola", [e.Sindhi]: "\u0905\u0919\u094D\u0917\u094B\u0932\u093E", [e.Sinhala]: "\u0D86\u0D9C\u0DBD\u0DD2\u0DBA\u0DCF\u0DC0", [e.Slovak]: "Angola", [e.Slovenian]: "Angola", [e.Somali]: "Angola", [e.Spanish]: "Angola", [e.Sudanese]: "Angola", [e.Swahili]: "Angola", [e.Swedish]: "Angola", [e.Tagalog]: "Angola", [e.Tajik]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Tamil]: "\u0B85\u0B99\u0BCD\u0B95\u0BCB\u0BB2\u0BBE", [e.Tatar]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Telugu]: "\u0C05\u0C02\u0C17\u0C4B\u0C32\u0C3E", [e.Thai]: "\u0E2D\u0E07\u0E04\u0E4C\u0E01\u0E32\u0E23\u0E2D\u0E32\u0E19\u0E32\u0E21\u0E34\u0E2A\u0E16\u0E32\u0E19", [e.Tibetan]: "\u0F68\u0F44\u0F0B\u0F63\u0F7C\u0F0B", [e.Turkish]: "Angola", [e.Ukrainian]: "\u0410\u043D\u0433\u043E\u043B\u0430", [e.Urdu]: "\u0627\u0646\u06AF\u0648\u0644\u0627", [e.Uzbek]: "Angola", [e.Vietnamese]: "Angola", [e.Xhosa]: "Angola", [e.Welsh]: "Angola", [e.Yiddish]: "\u05D0\u05E0\u05D2\u05D5\u05DC\u05D4", [e.Yoruba]: "Angola", [e.Zulu]: "Angola" } } }, Anguilla: { i18n: { calling_codes: [1264], currencies: [m.DominicaDollar, m.EastCaribbeanDollar, m.Euro, m.UnitedStatesDollar, m.BritishPound], languages: [e.English, e.Spanish], tz: { offsets: [n.UTC_MINUS_4], regions: [u.AmericaAnguilla], timezones: [s.AtlanticStandardTime] } }, id: r.Anguilla, info: { flag: { emoji: "\u{1F1E6}\u{1F1EC}", emoji_unicode: "U+1F1E6 U+1F1EC", svg: "https://www.countryflags.io/ai/flat/64.svg" }, tld: [".ai"] }, iso: { alpha2: r.Anguilla, alpha3: "AIA", numeric: "660" }, name: { alt_spellings: ["AI"], demonym: "Anguillian", native: { endonym: "Anguilla" }, official: "Anguilla", short: "Anguilla", translations: { [e.Afrikaans]: "Anguilla", [e.Albanian]: "Anguilla", [e.Amharic]: "\u12A0\u1295\u1309\u120B", [e.Arabic]: "\u0623\u0646\u063A\u0648\u064A\u0644\u0627", [e.Armenian]: "\u0531\u0576\u0563\u056B\u056C\u0561", [e.Azerbaijani]: "Az\u0259rbaycan", [e.Bashkir]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Basque]: "Angila", [e.Belarusian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Bengali]: "\u0985\u0999\u09CD\u0997\u09C0\u09B2\u09BE", [e.Berber]: "\u0623\u0646\u063A\u0648\u064A\u0644\u0627", [e.Bhutani]: "\u0F68\u0F44\u0F0B\u0F63\u0F7C\u0F0B", [e.Bosnian]: "Angila", [e.Breton]: "Angila", [e.Bulgarian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Burmese]: "\u1021\u1004\u103A\u1039\u1002\u101C\u102D\u1010\u103A", [e.Catalan]: "Angilla", [e.Chinese]: "\u5B89\u572D\u62C9", [e.Croatian]: "Angila", [e.Czech]: "Anguilla", [e.Danish]: "Anguilla", [e.Dutch]: "Anguilla", [e.English]: "Anguilla", [e.Esperanto]: "Angila", [e.Estonian]: "Anguilla", [e.Finnish]: "Anguilla", [e.French]: "Anguilla", [e.Frisian]: "Angila", [e.Galician]: "Anguilla", [e.Georgian]: "\u10D0\u10DC\u10D2\u10D8\u10DA\u10D0", [e.German]: "Anguilla", [e.Greenlandic]: "Anguilla", [e.Greek]: "\u0391\u03BD\u03B3\u03BA\u03C5\u03BB\u03AC", [e.Gujarati]: "\u0A85\u0A82\u0A97\u0ACD\u0AAF\u0ABE\u0AB2\u0ABE", [e.Haitian]: "Anguilla", [e.Hausa]: "Anguilla", [e.Hebrew]: "\u05D0\u05E0\u05D2\u05D5\u05D9\u05D0\u05DC\u05D4", [e.Hindi]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e.Hungarian]: "Anguilla", [e.Icelandic]: "Anguilla", [e.Igbo]: "Anguilla", [e.Indonesian]: "Anguilla", [e.Irish]: "Anguilla", [e.Italian]: "Anguilla", [e.Japanese]: "\u30A2\u30F3\u30AE\u30E9", [e.Javanese]: "Anguilla", [e.Kannada]: "\u0C85\u0C82\u0C97\u0CCD\u0CB5\u0CC7\u0CB2\u0CBE", [e.Kazakh]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Khmer]: "\u17A2\u1784\u17CB\u1780\u17B6\u179A\u17A0\u17D2\u1782\u17B8\u1798", [e.Korean]: "\uC575\uADC8\uB77C", [e.Kurdish]: "Anguilla", [e.Kyrgyz]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Lao]: "\u0EAD\u0EB0\u0E99\u0EB0\u0E88\u0EB3", [e.Latin]: "Anguilla", [e.Latvian]: "Anguilla", [e.Lithuanian]: "Anguilla", [e.Luxembourgish]: "Angilla", [e.Macedonian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Malagasy]: "Angila", [e.Malay]: "Anguilla", [e.Malayalam]: "\u0D05\u0D02\u0D17\u0D4D\u0D35\u0D47\u0D32\u0D3E", [e.Maltese]: "Anguilla", [e.Maori]: "Anguilla", [e.Marathi]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e.Mongolian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Nepali]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e.Norwegian]: "Anguilla", [e.Pashto]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e.Persian]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e.Polish]: "Anguilla", [e.Portuguese]: "Anguilla", [e.Punjabi]: "\u0A05\u0A02\u0A17\u0A40\u0A32\u0A3E", [e.Romanian]: "Anguilla", [e.Russian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Samoan]: "Anguilla", [e.Sanskrit]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e.Scots]: "Anguilla", [e.Serbian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Sesotho]: "Anguilla", [e.Shona]: "Anguilla", [e.Sindhi]: "\u0905\u0902\u0917\u094D\u0935\u0947\u0932\u093E", [e.Sinhala]: "\u0D86\u0D82\u0D9C\u0DD2\u0DBD\u0DCF\u0DC0", [e.Slovak]: "Anguilla", [e.Slovenian]: "Anguilla", [e.Somali]: "Anguilla", [e.Spanish]: "Anguilla", [e.Sudanese]: "Anguilla", [e.Swahili]: "Anguilla", [e.Swedish]: "Anguilla", [e.Tagalog]: "Anguilla", [e.Tajik]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Tamil]: "\u0B85\u0B99\u0BCD\u0B95\u0BC8\u0BB2\u0BBE", [e.Tatar]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Telugu]: "\u0C05\u0C02\u0C17\u0C4D\u0C35\u0C47\u0C32\u0C3E", [e.Thai]: "\u0E2D\u0E31\u0E07\u0E01\u0E32\u0E25\u0E32", [e.Tibetan]: "\u0F68\u0F44\u0F0B\u0F63\u0F72\u0F0B", [e.Turkish]: "Anguilla", [e.Ukrainian]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Urdu]: "\u0622\u0646\u06AF\u0648\u0644\u0627", [e.Uzbek]: "\u0410\u043D\u0433\u0438\u043B\u0438", [e.Vietnamese]: "Anguilla", [e.Welsh]: "Anguilla", [e.Xhosa]: "Anguilla", [e.Yiddish]: "Anguilla", [e.Yoruba]: "Anguilla", [e.Zulu]: "Anguilla" } } }, Antarctica: { i18n: { calling_codes: [672], currencies: [m.UnitedStatesDollar, m.Euro], languages: [e.English, e.Spanish, e.French, e.Portuguese, e.Italian, e.Dutch, e.German, e.Swedish, e.Norwegian, e.Danish, e.Finnish], tz: { offsets: [n.UTC_PLUS_1, n.UTC_PLUS_2], regions: [u.AntarcticaCasey, u.AntarcticaDavis, u.AntarcticaMcMurdo, u.AntarcticaPalmer, u.AntarcticaRothera], timezones: [s.AtlanticStandardTime, s.CentralTime, s.EasternTime, s.AtlanticStandardTime, s.AzoresStandardTime, s.NewfoundlandStandardTime] } }, id: r.Antarctica, info: { flag: { emoji: "\u{1F1E6}\u{1F1F6}", emoji_unicode: "U+1F1E6 U+1F1F6", svg: "https://www.countryflags.io/aq/flat/64.svg" }, tld: [".aq"] }, iso: { alpha2: r.Antarctica, alpha3: "ATA", numeric: "010" }, name: { alt_spellings: ["AQ"], demonym: "Antarctican", native: { endonym: "Antarctica" }, official: "Antarctica", short: "Antarctica", translations: { [e.Afrikaans]: "Antarctica", [e.Albanian]: "Antarktika", [e.Amharic]: "\u12A0\u1295\u1272\u120D\u12AB\u1293", [e.Arabic]: "\u0623\u0646\u062A\u0627\u0631\u0643\u062A\u064A\u0643\u0627", [e.Armenian]: "\u0540\u0561\u0576\u0561\u0580\u0561\u057F\u056F\u0578", [e.Azerbaijani]: "Az\u0259rbaycan", [e.Bashkir]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Basque]: "Antarktika", [e.Belarusian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Bengali]: "\u0985\u09A8\u09CD\u09A4\u09B0\u09BE\u09B6\u09CD\u09AC\u09C0", [e.Berber]: "\u0623\u0646\u062A\u0627\u0631\u0643\u062A\u064A\u0643\u0627", [e.Bhutani]: "\u0F68\u0F44\u0F0B\u0F63\u0F72\u0F0B", [e.Bosnian]: "Antarktika", [e.Breton]: "Antarktika", [e.Bulgarian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Burmese]: "\u1021\u1014\u1039\u1010\u102C\u101B\u102E\u1038\u101A\u102C\u1038", [e.Catalan]: "Ant\xE0rtida", [e.Chinese]: "\u5357\u6781\u6D32", [e.Croatian]: "Antarktika", [e.Czech]: "Antarktida", [e.Danish]: "Antarktis", [e.Dutch]: "Antarctica", [e.English]: "Antarctica", [e.Esperanto]: "Antarktika", [e.Estonian]: "Antarktika", [e.Finnish]: "Antarktis", [e.French]: "Antarctica", [e.Frisian]: "Antarktis", [e.Galician]: "Ant\xE1rtida", [e.Georgian]: "\u10D0\u10DC\u10E2\u10D0\u10E0\u10E5\u10E2\u10D8\u10D9\u10D0", [e.German]: "Antarktis", [e.Greenlandic]: "Antarktis", [e.Greek]: "\u0391\u03BD\u03C4\u03B1\u03C1\u03BA\u03C4\u03B9\u03BA\u03AE", [e.Gujarati]: "\u0A85\u0AA8\u0ACD\u0AA4\u0AB0\u0ABE\u0AB6\u0ACD\u0AB5\u0AC0", [e.Haitian]: "Antarctica", [e.Hausa]: "Antarktika", [e.Hebrew]: "\u05D0\u05E0\u05D8\u05E8\u05E7\u05D8\u05D9\u05E7\u05D4", [e.Hindi]: "\u0905\u0928\u094D\u0924\u0930\u0915\u094D\u0937\u0947\u0924\u094D\u0930", [e.Hungarian]: "Antarktika", [e.Icelandic]: "Antarktis", [e.Igbo]: "Antarktika", [e.Indonesian]: "Antarktika", [e.Irish]: "Antarktika", [e.Italian]: "Antartide", [e.Japanese]: "\u5357\u6975", [e.Javanese]: "Antarktika", [e.Kannada]: "\u0C85\u0CA8\u0CCD\u0CA4\u0CB0\u0CBE\u0CB6\u0CCD\u0CB5\u0CBF", [e.Kazakh]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Khmer]: "\u17A2\u1784\u17CB\u179F\u17D2\u1780\u179A\u17A2\u17B6\u1798\u17C9\u17BB\u1799", [e.Korean]: "\uC564\uD2F0\uCE74\uD1A0\uB2C9", [e.Kurdish]: "Antarktika", [e.Kyrgyz]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Lao]: "\u0EAD\u0EB0\u0E99\u0EAD\u0EA5\u0EB2\u0E81\u0EB4\u0EAA\u0EB0", [e.Latin]: "Antarctica", [e.Latvian]: "Antarktika", [e.Lithuanian]: "Antarktis", [e.Luxembourgish]: "Antarktis", [e.Macedonian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Malagasy]: "Antarctica", [e.Malay]: "Antarktika", [e.Malayalam]: "\u0D05\u0D28\u0D4D\u0D24\u0D30\u0D3E\u0D36\u0D4D\u0D35\u0D3F", [e.Maltese]: "Antarktika", [e.Maori]: "Antarktika", [e.Marathi]: "\u0905\u0928\u094D\u0924\u0930\u093E\u0936\u094D\u0935\u093F\u0915\u093E", [e.Mongolian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Nepali]: "\u0905\u0928\u094D\u0924\u0930\u093E\u0936\u094D\u0935\u093F\u0915\u093E", [e.Norwegian]: "Antarktis", [e.Pashto]: "\u0627\u0646\u062A\u0627\u0631\u0643\u062A\u064A\u0643\u0627", [e.Persian]: "\u0622\u0646\u062A\u0627\u0631\u06A9\u062A\u06CC\u06A9\u0627", [e.Polish]: "Antarktyka", [e.Portuguese]: "Ant\xE1rtida", [e.Punjabi]: "\u0A05\u0A28\u0A4D\u0A24\u0A30\u0A3E\u0A36\u0A3F\u0A15\u0A3E", [e.Romanian]: "Antarctica", [e.Russian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Samoan]: "Antarktika", [e.Sanskrit]: "\u0905\u0928\u094D\u0924\u0930\u093E\u0936\u094D\u0935\u093F\u0915\u093E", [e.Scots]: "Antarktika", [e.Serbian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Sesotho]: "Antarktika", [e.Shona]: "Antarktika", [e.Sindhi]: "Antarktika", [e.Sinhala]: "\u0D86\u0DB1\u0DCA\u0DA7\u0DCA\u0DA7\u0DD2\u0D9A\u0DCF\u0DC0", [e.Slovak]: "Antarktika", [e.Slovenian]: "Antarktika", [e.Somali]: "Antarktika", [e.Spanish]: "Ant\xE1rtida", [e.Sudanese]: "Antarktika", [e.Swahili]: "Antarktika", [e.Swedish]: "Antarktis", [e.Tagalog]: "Antarktika", [e.Tajik]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Tamil]: "\u0B85\u0BA9\u0BCD\u0BA4\u0BBE\u0BB0\u0BCD\u0B95\u0BCD\u0B95\u0BBF\u0B95\u0BCD", [e.Tatar]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Telugu]: "\u0C05\u0C28\u0C4D\u0C24\u0C30\u0C3E\u0C36\u0C4D\u0C35\u0C3F\u0C15\u0C3E", [e.Thai]: "\u0E20\u0E39\u0E21\u0E34\u0E20\u0E32\u0E04\u0E2D\u0E32\u0E19\u0E31\u0E19\u0E15\u0E34\u0E01\u0E32", [e.Tibetan]: "\u0F68\u0F7A\u0F53\u0F0B\u0F4A\u0F72\u0F4A\u0F7A\u0F53\u0F0B\u0F40\u0F72\u0F66\u0F72\u0F0B\u0F68\u0F7A\u0F53\u0F0B\u0F4A\u0F72\u0F4A\u0F7A\u0F53\u0F0B\u0F40\u0F72\u0F66\u0F72", [e.Turkish]: "Antarktika", [e.Ukrainian]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Urdu]: "\u0627\u0646\u062A\u0627\u0631\u06A9\u062A\u06CC\u06A9\u0627", [e.Uzbek]: "\u0410\u043D\u0442\u0430\u0440\u043A\u0442\u0438\u043A\u0430", [e.Vietnamese]: "\u0110\u1EA5t Antarktik", [e.Welsh]: "Antarktika", [e.Xhosa]: "Antarktika", [e.Yiddish]: "Antarktika", [e.Yoruba]: "Antarktika", [e.Zulu]: "Antarktika" } } }, Armenia: { i18n: { calling_codes: [374], currencies: [m.ArmeniaDram], languages: [e.Armenian], tz: { offsets: [n.UTC_PLUS_4], regions: [u.AsiaJakarta], timezones: [s.ArmeniaTime] } }, id: r.Armenia, info: { flag: { emoji: "\u{1F1E6}\u{1F1F2}", emoji_unicode: "U+1F1E6 U+1F1F2", svg: "https://www.countryflags.io/am/flat/64.svg" }, tld: [".am"] }, iso: { alpha2: r.Armenia, alpha3: "ARM", numeric: "051" }, name: { alt_spellings: ["AM", "Hayastan", "Republic of Armenia", "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576"], demonym: "Armenian", native: { endonym: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576" }, official: "Republic of Armenia", short: "Armenia", translations: { [e.Afrikaans]: "Armeni\xEB", [e.Albanian]: "Armenia", [e.Amharic]: "\u12A0\u121B\u122D\u129B", [e.Arabic]: "\u0623\u0631\u0645\u064A\u0646\u064A\u0627", [e.Armenian]: "\u0540\u0561\u0575\u0561\u057D\u057F\u0561\u0576", [e.Azerbaijani]: "Az\u0259rbaycan", [e.Bashkir]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Basque]: "Arm\xE9nia", [e.Belarusian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Bengali]: "\u0986\u09B0\u09CD\u09AE\u09C7\u09A8\u09BF", [e.Berber]: "\u0623\u0631\u0645\u064A\u0646\u064A\u0627", [e.Bhutani]: "\u0F62\u0F92\u0FB1\u0F0B\u0F53\u0F42", [e.Bosnian]: "Armenija", [e.Breton]: "Armeni\xEB", [e.Bulgarian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Burmese]: "\u1021\u102C\u1019\u1010\u102D\u1010\u1039", [e.Catalan]: "Arm\xE8nia", [e.Chinese]: "\u4E9A\u7F8E\u5C3C\u4E9A", [e.Croatian]: "Armenija", [e.Czech]: "Arm\xE9nie", [e.Danish]: "Armenien", [e.Dutch]: "Armeni\xEB", [e.English]: "Armenia", [e.Esperanto]: "Armenia", [e.Estonian]: "Armeenia", [e.Finnish]: "Armenia", [e.French]: "Armenia", [e.Frisian]: "Armeenia", [e.Galician]: "Arm\xE9nia", [e.Georgian]: "\u10D0\u10E0\u10DB\u10DD\u10DC\u10D8", [e.German]: "Armenien", [e.Greenlandic]: "Armenia", [e.Greek]: "\u0391\u03C1\u03BC\u03B5\u03BD\u03AF\u03B1", [e.Gujarati]: "\u0A85\u0AB0\u0ACD\u0AAE\u0AC7\u0AA8\u0ABF", [e.Haitian]: "Armenia", [e.Hausa]: "Armenia", [e.Hebrew]: "\u05D0\u05E8\u05DE\u05E0\u05D9\u05D4", [e.Hindi]: "\u0905\u05E8\u05DE\u05E0\u093F\u092F\u093E", [e.Hungarian]: "\xD6rm\xE9nyorsz\xE1g", [e.Icelandic]: "Armenia", [e.Igbo]: "Armenia", [e.Indonesian]: "Armenia", [e.Irish]: "Armenia", [e.Italian]: "Armenia", [e.Japanese]: "\u30A2\u30EB\u30E1\u30CB\u30A2", [e.Javanese]: "Armenia", [e.Kannada]: "\u0C85\u0CB0\u0CCD\u0CAE\u0CC7\u0CA8\u0CBF", [e.Kazakh]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Khmer]: "\u17A2\u17B6\u1798\u17C9\u17C1\u179A\u17B8", [e.Korean]: "\uC544\uB974\uBA54\uB2C8\uC544", [e.Kurdish]: "Armenia", [e.Kyrgyz]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Lao]: "\u0EAD\u0EB2\u0EAB\u0EBC\u0E99\u0EB2", [e.Latin]: "Armenia", [e.Latvian]: "Armeenia", [e.Lithuanian]: "Arm\u0117nija", [e.Luxembourgish]: "Armenien", [e.Macedonian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u0458\u0430", [e.Malagasy]: "Armenia", [e.Malay]: "Armenia", [e.Malayalam]: "\u0D05\u0D30\u0D4D\u200D\u0D2E\u0D47\u0D28\u0D3F", [e.Maltese]: "Armenia", [e.Maori]: "Armenia", [e.Marathi]: "\u0905\u0930\u094D\u092E\u0947\u0928\u093F", [e.Mongolian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Nepali]: "\u0905\u0930\u094D\u092E\u0947\u0928\u093F", [e.Norwegian]: "Armenia", [e.Pashto]: "\u0622\u0631\u0645\u06CC\u0646\u06CC\u0627", [e.Persian]: "\u0627\u0631\u0645\u0646\u0633\u062A\u0627\u0646", [e.Polish]: "Armenia", [e.Portuguese]: "Armenia", [e.Punjabi]: "\u0A05\u0A30\u0A2E\u0A40\u0A28\u0A40", [e.Romanian]: "Armenia", [e.Russian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Samoan]: "Armenia", [e.Sanskrit]: "Armenia", [e.Scots]: "Armenia", [e.Serbian]: "\u0410\u0440\u043C\u0435\u043D\u0438\u0458\u0430", [e.Sesotho]: "Armenia", [e.Shona]: "Armenia", [e.Sindhi]: "Armenia", [e.Sinhala]: "\u0D86\u0DBB\u0DCA\u0DB8\u0DD3\u0DB1\u0DD2", [e.Slovak]: "Armenia", [e.Slovenian]: "Armenija", [e.Somali]: "Armenia", [e.Spanish]: "Armenia", [e.Sudanese]: "Armenia", [e.Swahili]: "Armenia", [e.Swedish]: "Armenien", [e.Tagalog]: "Armenia", [e.Tajik]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Tamil]: "\u0B85\u0BB0\u0BCD\u0BAE\u0BC7\u0BA9\u0BBF\u0BAF\u0BA9\u0BCD", [e.Tatar]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Telugu]: "\u0C05\u0C30\u0C4D\u0C2E\u0C47\u0C28\u0C3F", [e.Thai]: "\u0E2D\u0E32\u0E23\u0E4C\u0E40\u0E21\u0E19\u0E34\u0E2A\u0E16\u0E32\u0E19", [e.Tibetan]: "\u0F68\u0F62\u0F0B\u0F58\u0F7A\u0F0B\u0F53\u0F72\u0F0B\u0F61\u0F74\u0F0D", [e.Turkish]: "Ermenistan", [e.Ukrainian]: "\u0410\u0440\u043C\u0435\u043D\u0456\u044F", [e.Urdu]: "\u0627\u0631\u0645\u0646\u0633\u062A\u0627\u0646", [e.Uzbek]: "\u0410\u0440\u043C\u0435\u043D\u0438\u044F", [e.Vietnamese]: "Armenia", [e.Welsh]: "Armenia", [e.Xhosa]: "Armenia", [e.Yiddish]: "\u05D0\u05E8\u05DE\u05E0\u05D9\u05D4", [e.Yoruba]: "Armenia", [e.Zulu]: "Armenia" } } }, SomeCountry: { i18n: { calling_codes: [], currencies: [], languages: [], tz: { offsets: [], regions: [], timezones: [] } }, id: r.AmericanSamoa, info: { flag: { emoji: "", emoji_unicode: "", svg: "" }, tld: [] }, iso: { alpha2: r.AmericanSamoa, alpha3: "", numeric: "" }, name: { alt_spellings: [], demonym: "", native: { endonym: "" }, official: "", short: "", translations: { [e.Afrikaans]: "", [e.Albanian]: "", [e.Amharic]: "", [e.Arabic]: "", [e.Armenian]: "", [e.Azerbaijani]: "", [e.Bashkir]: "", [e.Basque]: "", [e.Belarusian]: "", [e.Bengali]: "", [e.Berber]: "", [e.Bhutani]: "", [e.Bosnian]: "", [e.Breton]: "", [e.Bulgarian]: "", [e.Burmese]: "", [e.Catalan]: "", [e.Chinese]: "", [e.Croatian]: "", [e.Czech]: "", [e.Danish]: "", [e.Dutch]: "", [e.English]: "", [e.Esperanto]: "", [e.Estonian]: "", [e.Finnish]: "", [e.French]: "", [e.Frisian]: "", [e.Galician]: "", [e.Georgian]: "", [e.German]: "", [e.Greenlandic]: "", [e.Greek]: "", [e.Gujarati]: "", [e.Haitian]: "", [e.Hausa]: "", [e.Hebrew]: "", [e.Hindi]: "", [e.Hungarian]: "", [e.Icelandic]: "", [e.Igbo]: "", [e.Indonesian]: "", [e.Irish]: "", [e.Italian]: "", [e.Japanese]: "", [e.Javanese]: "", [e.Kannada]: "", [e.Kazakh]: "", [e.Khmer]: "", [e.Korean]: "", [e.Kurdish]: "", [e.Kyrgyz]: "", [e.Lao]: "", [e.Latin]: "", [e.Latvian]: "", [e.Lithuanian]: "", [e.Luxembourgish]: "", [e.Macedonian]: "", [e.Malagasy]: "", [e.Malay]: "", [e.Malayalam]: "", [e.Maltese]: "", [e.Maori]: "", [e.Marathi]: "", [e.Mongolian]: "", [e.Nepali]: "", [e.Norwegian]: "", [e.Pashto]: "", [e.Persian]: "", [e.Polish]: "", [e.Portuguese]: "", [e.Punjabi]: "", [e.Romanian]: "", [e.Russian]: "", [e.Samoan]: "", [e.Sanskrit]: "", [e.Scots]: "", [e.Serbian]: "", [e.Sesotho]: "", [e.Shona]: "", [e.Sindhi]: "", [e.Sinhala]: "", [e.Slovak]: "", [e.Slovenian]: "", [e.Somali]: "", [e.Spanish]: "", [e.Sudanese]: "", [e.Swahili]: "", [e.Swedish]: "", [e.Tagalog]: "", [e.Tajik]: "", [e.Tamil]: "", [e.Tatar]: "", [e.Telugu]: "", [e.Thai]: "", [e.Tibetan]: "", [e.Turkish]: "", [e.Ukrainian]: "", [e.Urdu]: "", [e.Uzbek]: "", [e.Vietnamese]: "", [e.Welsh]: "", [e.Xhosa]: "", [e.Yiddish]: "", [e.Yoruba]: "", [e.Zulu]: "" } } } });
 ({ id: e.Afrikaans, language: { code: t.Afrikaans, name: "Afrikaans", native: "Afrikaans" }, name: "Afrikaans", native_name: "Afrikaans", rtl: false });
 ({ country: { code: r.SouthAfrica, name: "South Africa", native: "South Africa" }, id: e.AfrikaansSouthAfrica, language: { code: t.Afrikaans, name: "Afrikaans", native: "Afrikaans" }, name: "Afrikaans (South Africa)", native_name: "Afrikaans (Suid-Afrika)", rtl: false });
 ({ id: e.Albanian, language: { code: t.Albanian, name: "Albanian", native: "Shqip" }, name: "Albanian", native_name: "Shqip", rtl: false });
@@ -24292,430 +26132,430 @@ var p$1;
 ({ country: { code: r.Nigeria, name: "Nigeria", native: "Nigeria" }, id: e.YorubaNigeria, language: { code: t.Yoruba, name: "Yoruba", native: "Yor\xF9b\xE1" }, name: "Yoruba (Nigeria)", native_name: "Yor\xF9b\xE1 (Nigeria)", rtl: false });
 ({ id: e.Zulu, language: { code: t.Zulu, name: "Zulu", native: "isiZulu" }, name: "Zulu", native_name: "isiZulu", rtl: false });
 ({ country: { code: r.SouthAfrica, name: "South Africa", native: "South Africa" }, id: e.ZuluSouthAfrica, language: { code: t.Zulu, name: "Zulu", native: "isiZulu" }, name: "Zulu (South Africa)", native_name: "isiZulu (South Africa)", rtl: false });
-({ id: u.AfricaAbidjan, name: "Africa/Abidjan", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaAccra, name: "Africa/Accra", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaAddisAbaba, name: "Africa/Addis_Ababa", offset: n$1.UTC_PLUS_3, timezone: s.EastAfricaTime });
-({ id: u.AfricaAlgiers, name: "Africa/Algiers", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.AfricaAsmara, name: "Africa/Asmara", offset: n$1.UTC_PLUS_3, timezone: s.EastAfricaTime });
-({ id: u.AfricaBamako, name: "Africa/Bamako", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaBangui, name: "Africa/Bangui", offset: n$1.UTC_PLUS_1, timezone: s.WestAfricaTime });
-({ id: u.AfricaBanjul, name: "Africa/Banjul", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaBissau, name: "Africa/Bissau", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaBlantyre, name: "Africa/Blantyre", offset: n$1.UTC_PLUS_2, timezone: s.CentralAfricaTime });
-({ id: u.AfricaBrazzaville, name: "Africa/Brazzaville", offset: n$1.UTC_PLUS_1, timezone: s.WestAfricaTime });
-({ id: u.AfricaBujumbura, name: "Africa/Bujumbura", offset: n$1.UTC_PLUS_2, timezone: s.CentralAfricaTime });
-({ id: u.AfricaCairo, name: "Africa/Cairo", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.AfricaCasablanca, name: "Africa/Casablanca", offset: n$1.UTC_PLUS_1, timezone: s.WesternEuropeanTime });
-({ id: u.AfricaCeuta, name: "Africa/Ceuta", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.AfricaConakry, name: "Africa/Conakry", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaDakar, name: "Africa/Dakar", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaDarEsSalaam, name: "Africa/Dar_es_Salaam", offset: n$1.UTC_PLUS_3, timezone: s.EastAfricaTime });
-({ id: u.AfricaDjibouti, name: "Africa/Djibouti", offset: n$1.UTC_PLUS_3, timezone: s.EastAfricaTime });
-({ id: u.AfricaDouala, name: "Africa/Douala", offset: n$1.UTC_PLUS_1, timezone: s.WestAfricaTime });
-({ id: u.AfricaElAaiun, name: "Africa/El_Aaiun", offset: n$1.UTC_PLUS_1, timezone: s.WestAfricaTime });
-({ id: u.AfricaFreetown, name: "Africa/Freetown", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaGaborone, name: "Africa/Gaborone", offset: n$1.UTC_PLUS_2, timezone: s.CentralAfricaTime });
-({ id: u.AfricaHarare, name: "Africa/Harare", offset: n$1.UTC_PLUS_2, timezone: s.CentralAfricaTime });
-({ id: u.AfricaJohannesburg, name: "Africa/Johannesburg", offset: n$1.UTC_PLUS_2, timezone: s.SouthAfricanStandardTime });
-({ id: u.AfricaJuba, name: "Africa/Juba", offset: n$1.UTC_PLUS_3, timezone: s.EastAfricaTime });
-({ id: u.AfricaKampala, name: "Africa/Kampala", offset: n$1.UTC_PLUS_3, timezone: s.EastAfricaTime });
-({ id: u.AfricaKhartoum, name: "Africa/Khartoum", offset: n$1.UTC_PLUS_2, timezone: s.EastAfricaTime });
-({ id: u.AfricaKigali, name: "Africa/Kigali", offset: n$1.UTC_PLUS_2, timezone: s.CentralAfricaTime });
-({ id: u.AfricaKinshasa, name: "Africa/Kinshasa", offset: n$1.UTC_PLUS_1, timezone: s.WestAfricaTime });
-({ id: u.AfricaLagos, name: "Africa/Lagos", offset: n$1.UTC_PLUS_1, timezone: s.WestAfricaTime });
-({ id: u.AfricaLibreville, name: "Africa/Libreville", offset: n$1.UTC_PLUS_1, timezone: s.WestAfricaTime });
-({ id: u.AfricaLome, name: "Africa/Lome", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaLuanda, name: "Africa/Luanda", offset: n$1.UTC_PLUS_1, timezone: s.WestAfricaTime });
-({ id: u.AfricaLubumbashi, name: "Africa/Lubumbashi", offset: n$1.UTC_PLUS_2, timezone: s.CentralAfricaTime });
-({ id: u.AfricaLusaka, name: "Africa/Lusaka", offset: n$1.UTC_PLUS_2, timezone: s.CentralAfricaTime });
-({ id: u.AfricaMalabo, name: "Africa/Malabo", offset: n$1.UTC_PLUS_1, timezone: s.WestAfricaTime });
-({ id: u.AfricaMaputo, name: "Africa/Maputo", offset: n$1.UTC_PLUS_2, timezone: s.CentralAfricaTime });
-({ id: u.AfricaMaseru, name: "Africa/Maseru", offset: n$1.UTC_PLUS_2, timezone: s.SouthAfricanStandardTime });
-({ id: u.AfricaMbabane, name: "Africa/Mbabane", offset: n$1.UTC_PLUS_2, timezone: s.SouthAfricanStandardTime });
-({ id: u.AfricaMogadishu, name: "Africa/Mogadishu", offset: n$1.UTC_PLUS_3, timezone: s.EastAfricaTime });
-({ id: u.AfricaMonrovia, name: "Africa/Monrovia", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaNairobi, name: "Africa/Nairobi", offset: n$1.UTC_PLUS_3, timezone: s.EastAfricaTime });
-({ id: u.AfricaNdjamena, name: "Africa/Ndjamena", offset: n$1.UTC_PLUS_1, timezone: s.WestAfricaTime });
-({ id: u.AfricaNiamey, name: "Africa/Niamey", offset: n$1.UTC_PLUS_1, timezone: s.WestAfricaTime });
-({ id: u.AfricaNouakchott, name: "Africa/Nouakchott", offset: n$1.UTC_0, timezone: s.GreenwichMeanTime });
-({ id: u.AfricaOuagadougou, name: "Africa/Ouagadougou", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaPortoNovo, name: "Africa/Porto-Novo", offset: n$1.UTC_PLUS_1, timezone: s.WestAfricaTime });
-({ id: u.AfricaSaoTome, name: "Africa/SaoTome", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaTripoli, name: "Africa/Tripoli", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaTunis, name: "Africa/Tunis", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AfricaWindhoek, name: "Africa/Windhoek", offset: n$1.UTC_PLUS_2, timezone: s.WestAfricaTime });
-({ id: u.AmericaAdak, name: "America/Adak", offset: n$1.UTC_PLUS_10, timezone: s.HawaiiAleutianStandardTime });
-({ id: u.AmericaAnchorage, name: "America/Anchorage", offset: n$1.UTC_PLUS_9, timezone: s.AlaskaStandardTime });
-({ id: u.AmericaAnguilla, name: "America/Anguilla", offset: n$1.UTC_0, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaAntigua, name: "America/Antigua", offset: n$1.UTC_0, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaAraguaina, name: "America/Araguaina", offset: n$1.UTC_MINUS_3, timezone: s.BrasiliaTime });
-({ id: u.AmericaArgentinaBuenosAires, name: "America/Argentina/Buenos_Aires", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaArgentinaCatamarca, name: "America/Argentina/Catamarca", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaArgentinaCordoba, name: "America/Argentina/Cordoba", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaArgentinaJujuy, name: "America/Argentina/Jujuy", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaArgentinaLaRioja, name: "America/Argentina/La_Rioja", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaArgentinaMendoza, name: "America/Argentina/Mendoza", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaArgentinaRioGallegos, name: "America/Argentina/Rio_Gallegos", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaArgentinaSalta, name: "America/Argentina/Salta", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaArgentinaSanJuan, name: "America/Argentina/San_Juan", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaArgentinaSanLuis, name: "America/Argentina/San_Luis", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaArgentinaTucuman, name: "America/Argentina/Tucuman", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaArgentinaUshuaia, name: "America/Argentina/Ushuaia", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaAruba, name: "America/Aruba", offset: n$1.UTC_0, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaAsuncion, name: "America/Asuncion", offset: n$1.UTC_MINUS_4, timezone: s.ParaguayTime });
-({ id: u.AmericaAtikokan, name: "America/Atikokan", offset: n$1.UTC_0, timezone: s.EasternStandardTime });
-({ id: u.AmericaAtka, name: "America/Atka", offset: n$1.UTC_MINUS_10, timezone: s.HawaiiAleutianStandardTime });
-({ id: u.AmericaBahia, name: "America/Bahia", offset: n$1.UTC_MINUS_3, timezone: s.BrasiliaTime });
-({ id: u.AmericaBahiaBanderas, name: "America/Bahia_Banderas", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaBarbados, name: "America/Barbados", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaBelem, name: "America/Belem", offset: n$1.UTC_MINUS_3, timezone: s.BrasiliaTime });
-({ id: u.AmericaBelize, name: "America/Belize", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaBlancSablon, name: "America/Blanc-Sablon", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaBoaVista, name: "America/Boa_Vista", offset: n$1.UTC_MINUS_4, timezone: s.AmazonTime });
-({ id: u.AmericaBogota, name: "America/Bogota", offset: n$1.UTC_MINUS_5, timezone: s.ColombiaTime });
-({ id: u.AmericaBoise, name: "America/Boise", offset: n$1.UTC_MINUS_7, timezone: s.MountainStandardTime });
-({ id: u.AmericaCambridgeBay, name: "America/Cambridge_Bay", offset: n$1.UTC_MINUS_7, timezone: s.MountainStandardTime });
-({ id: u.AmericaCampoGrande, name: "America/Campo_Grande", offset: n$1.UTC_MINUS_4, timezone: s.AmazonTime });
-({ id: u.AmericaCancun, name: "America/Cancun", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaCaracas, name: "America/Caracas", offset: n$1.UTC_MINUS_4, timezone: s.VenezuelaStandardTime });
-({ id: u.AmericaCayenne, name: "America/Cayenne", offset: n$1.UTC_MINUS_3, timezone: s.FrenchGuianaTime });
-({ id: u.AmericaCayman, name: "America/Cayman", offset: n$1.UTC_0, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaChicago, name: "America/Chicago", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaChihuahua, name: "America/Chihuahua", offset: n$1.UTC_MINUS_7, timezone: s.MountainStandardTime });
-({ id: u.AmericaCoralHarbour, name: "America/Coral_Harbour", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaCordoba, name: "America/Cordoba", offset: n$1.UTC_MINUS_3, timezone: s.ArgentinaTime });
-({ id: u.AmericaCostaRica, name: "America/Costa_Rica", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaCreston, name: "America/Creston", offset: n$1.UTC_MINUS_7, timezone: s.MountainStandardTime });
-({ id: u.AmericaCuiaba, name: "America/Cuiaba", offset: n$1.UTC_MINUS_4, timezone: s.AmazonTime });
-({ id: u.AmericaCuracao, name: "America/Curacao", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaDanmarkshavn, name: "America/Danmarkshavn", offset: n$1.UTC_0, timezone: s.GreenwichMeanTime });
-({ id: u.AmericaDawson, name: "America/Dawson", offset: n$1.UTC_MINUS_8, timezone: s.PacificStandardTime });
-({ id: u.AmericaDawsonCreek, name: "America/Dawson_Creek", offset: n$1.UTC_MINUS_8, timezone: s.PacificStandardTime });
-({ id: u.AmericaDenver, name: "America/Denver", offset: n$1.UTC_MINUS_7, timezone: s.MountainStandardTime });
-({ id: u.AmericaDetroit, name: "America/Detroit", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaDominica, name: "America/Dominica", offset: n$1.UTC_0, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaEdmonton, name: "America/Edmonton", offset: n$1.UTC_MINUS_7, timezone: s.MountainStandardTime });
-({ id: u.AmericaEirunepe, name: "America/Eirunepe", offset: n$1.UTC_MINUS_5, timezone: s.AcreTime });
-({ id: u.AmericaElSalvador, name: "America/El_Salvador", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaFortaleza, name: "America/Fortaleza", offset: n$1.UTC_MINUS_3, timezone: s.BrasiliaTime });
-({ id: u.AmericaGlaceBay, name: "America/Glace_Bay", offset: n$1.UTC_0, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaGodthab, name: "America/Godthab", offset: n$1.UTC_MINUS_3, timezone: s.WestGreenlandTime });
-({ id: u.AmericaGooseBay, name: "America/Goose_Bay", offset: n$1.UTC_0, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaGrandTurk, name: "America/Grand_Turk", offset: n$1.UTC_0, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaGrenada, name: "America/Grenada", offset: n$1.UTC_0, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaGuadeloupe, name: "America/Guadeloupe", offset: n$1.UTC_0, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaGuatemala, name: "America/Guatemala", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaGuayaquil, name: "America/Guayaquil", offset: n$1.UTC_MINUS_5, timezone: s.EcuadorTime });
-({ id: u.AmericaGuyana, name: "America/Guyana", offset: n$1.UTC_0, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaHalifax, name: "America/Halifax", offset: n$1.UTC_0, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaHavana, name: "America/Havana", offset: n$1.UTC_MINUS_5, timezone: s.CubaStandardTime });
-({ id: u.AmericaHermosillo, name: "America/Hermosillo", offset: n$1.UTC_MINUS_7, timezone: s.MountainStandardTime });
-({ id: u.AmericaIndianaIndianapolis, name: "America/Indiana/Indianapolis", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaIndianaKnox, name: "America/Indiana/Knox", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaIndianaMarengo, name: "America/Indiana/Marengo", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaIndianaPetersburg, name: "America/Indiana/Petersburg", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaIndianaTellCity, name: "America/Indiana/Tell_City", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaIndianaVevay, name: "America/Indiana/Vevay", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaIndianaVincennes, name: "America/Indiana/Vincennes", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaIndianaWinamac, name: "America/Indiana/Winamac", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaInuvik, name: "America/Inuvik", offset: n$1.UTC_MINUS_7, timezone: s.MountainStandardTime });
-({ id: u.AmericaIqaluit, name: "America/Iqaluit", offset: n$1.UTC_0, timezone: s.EasternStandardTime });
-({ id: u.AmericaJamaica, name: "America/Jamaica", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaJuneau, name: "America/Juneau", offset: n$1.UTC_MINUS_9, timezone: s.AlaskaStandardTime });
-({ id: u.AmericaKentuckyLouisville, name: "America/Kentucky/Louisville", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaKentuckyMonticello, name: "America/Kentucky/Monticello", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaKralendijk, name: "America/Kralendijk", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaLaPaz, name: "America/La_Paz", offset: n$1.UTC_MINUS_4, timezone: s.BoliviaTime });
-({ id: u.AmericaLima, name: "America/Lima", offset: n$1.UTC_MINUS_5, timezone: s.PeruTime });
-({ id: u.AmericaLosAngeles, name: "America/Los_Angeles", offset: n$1.UTC_MINUS_8, timezone: s.PacificStandardTime });
-({ id: u.AmericaLouisville, name: "America/Louisville", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaLowerPrinces, name: "America/Lower_Princes", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaMaceio, name: "America/Maceio", offset: n$1.UTC_MINUS_3, timezone: s.BrasiliaTime });
-({ id: u.AmericaManagua, name: "America/Managua", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaManaus, name: "America/Manaus", offset: n$1.UTC_MINUS_4, timezone: s.AmazonTime });
-({ id: u.AmericaMarigot, name: "America/Marigot", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaMartinique, name: "America/Martinique", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaMatamoros, name: "America/Matamoros", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaMazatlan, name: "America/Mazatlan", offset: n$1.UTC_MINUS_7, timezone: s.MountainStandardTime });
-({ id: u.AmericaMenominee, name: "America/Menominee", offset: n$1.UTC_MINUS_5, timezone: s.CentralStandardTime });
-({ id: u.AmericaMerida, name: "America/Merida", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaMetlakatla, name: "America/Metlakatla", offset: n$1.UTC_MINUS_9, timezone: s.AlaskaStandardTime });
-({ id: u.AmericaMexicoCity, name: "America/Mexico_City", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaMiquelon, name: "America/Miquelon", offset: n$1.UTC_MINUS_3, timezone: s.SaintPierreAndMiquelonStandardTime });
-({ id: u.AmericaMoncton, name: "America/Moncton", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaMonterrey, name: "America/Monterrey", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaMontevideo, name: "America/Montevideo", offset: n$1.UTC_MINUS_3, timezone: s.UruguayStandardTime });
-({ id: u.AmericaMontreal, name: "America/Montreal", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaMontserrat, name: "America/Montserrat", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaNassau, name: "America/Nassau", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaNewYork, name: "America/New_York", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaNipigon, name: "America/Nipigon", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaNome, name: "America/Nome", offset: n$1.UTC_MINUS_9, timezone: s.AlaskaStandardTime });
-({ id: u.AmericaNoronha, name: "America/Noronha", offset: n$1.UTC_MINUS_2, timezone: s.FernandoDeNoronhaTime });
-({ id: u.AmericaNorthDakotaBeulah, name: "America/North_Dakota/Beulah", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaNorthDakotaCenter, name: "America/North_Dakota/Center", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaNorthDakotaNewSalem, name: "America/North_Dakota/New_Salem", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaOjinaga, name: "America/Ojinaga", offset: n$1.UTC_MINUS_7, timezone: s.MountainStandardTime });
-({ id: u.AmericaPanama, name: "America/Panama", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaPangnirtung, name: "America/Pangnirtung", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaParamaribo, name: "America/Paramaribo", offset: n$1.UTC_MINUS_3, timezone: s.SurinameTime });
-({ id: u.AmericaPhoenix, name: "America/Phoenix", offset: n$1.UTC_MINUS_7, timezone: s.MountainStandardTime });
-({ id: u.AmericaPortAuPrince, name: "America/Port-au-Prince", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaPortOfSpain, name: "America/Port_of_Spain", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaPortoVelho, name: "America/Porto_Velho", offset: n$1.UTC_MINUS_4, timezone: s.AmazonTime });
-({ id: u.AmericaPuertoRico, name: "America/Puerto_Rico", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaRainyRiver, name: "America/Rainy_River", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaRankinInlet, name: "America/Rankin_Inlet", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaRecife, name: "America/Recife", offset: n$1.UTC_MINUS_3, timezone: s.BrasiliaTime });
-({ id: u.AmericaRegina, name: "America/Regina", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaResolute, name: "America/Resolute", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaRioBranco, name: "America/Rio_Branco", offset: n$1.UTC_MINUS_5, timezone: s.AcreTime });
-({ id: u.AmericaSantaIsabel, name: "America/Santa_Isabel", offset: n$1.UTC_MINUS_8, timezone: s.PacificStandardTime });
-({ id: u.AmericaSantarem, name: "America/Santarem", offset: n$1.UTC_MINUS_3, timezone: s.BrasiliaTime });
-({ id: u.AmericaSantiago, name: "America/Santiago", offset: n$1.UTC_MINUS_4, timezone: s.ChileStandardTime });
-({ id: u.AmericaSantoDomingo, name: "America/Santo_Domingo", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaSaoPaulo, name: "America/Sao_Paulo", offset: n$1.UTC_MINUS_3, timezone: s.BrasiliaTime });
-({ id: u.AmericaScoresbysund, name: "America/Scoresbysund", offset: n$1.UTC_MINUS_1, timezone: s.EasternGreenlandTime });
-({ id: u.AmericaShiprock, name: "America/Shiprock", offset: n$1.UTC_MINUS_7, timezone: s.MountainStandardTime });
-({ id: u.AmericaSitka, name: "America/Sitka", offset: n$1.UTC_MINUS_9, timezone: s.AlaskaStandardTime });
-({ id: u.AmericaStBarthelemy, name: "America/St_Barthelemy", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaStJohns, name: "America/St_Johns", offset: n$1.UTC_MINUS_3, timezone: s.NewfoundlandStandardTime });
-({ id: u.AmericaStKitts, name: "America/St_Kitts", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaStLucia, name: "America/St_Lucia", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaStThomas, name: "America/St_Thomas", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaStVincent, name: "America/St_Vincent", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaSwiftCurrent, name: "America/Swift_Current", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaTegucigalpa, name: "America/Tegucigalpa", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaThule, name: "America/Thule", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaThunderBay, name: "America/Thunder_Bay", offset: n$1.UTC_MINUS_4, timezone: s.EasternStandardTime });
-({ id: u.AmericaTijuana, name: "America/Tijuana", offset: n$1.UTC_MINUS_8, timezone: s.PacificStandardTime });
-({ id: u.AmericaToronto, name: "America/Toronto", offset: n$1.UTC_MINUS_5, timezone: s.EasternStandardTime });
-({ id: u.AmericaTortola, name: "America/Tortola", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AmericaVancouver, name: "America/Vancouver", offset: n$1.UTC_MINUS_8, timezone: s.PacificStandardTime });
-({ id: u.AmericaWhitehorse, name: "America/Whitehorse", offset: n$1.UTC_MINUS_8, timezone: s.PacificStandardTime });
-({ id: u.AmericaWinnipeg, name: "America/Winnipeg", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AmericaYakutat, name: "America/Yakutat", offset: n$1.UTC_MINUS_9, timezone: s.AlaskaStandardTime });
-({ id: u.AmericaYellowknife, name: "America/Yellowknife", offset: n$1.UTC_MINUS_6, timezone: s.MountainStandardTime });
-({ id: u.AntarcticaCasey, name: "Antarctica/Casey", offset: n$1.UTC_MINUS_8, timezone: s.WesternStandardTime });
-({ id: u.AntarcticaDavis, name: "Antarctica/Davis", offset: n$1.UTC_MINUS_7, timezone: s.NewfoundlandStandardTime });
-({ id: u.AntarcticaDumontDUrville, name: "Antarctica/DumontDUrville", offset: n$1.UTC_MINUS_10, timezone: s.CentralStandardTime });
-({ id: u.AntarcticaMacquarie, name: "Antarctica/Macquarie", offset: n$1.UTC_MINUS_11, timezone: s.CentralStandardTime });
-({ id: u.AntarcticaMawson, name: "Antarctica/Mawson", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.AntarcticaMcMurdo, name: "Antarctica/McMurdo", offset: n$1.UTC_MINUS_12, timezone: s.NewZealandStandardTime });
-({ id: u.AntarcticaPalmer, name: "Antarctica/Palmer", offset: n$1.UTC_MINUS_4, timezone: s.ChathamStandardTime });
-({ id: u.AntarcticaRothera, name: "Antarctica/Rothera", offset: n$1.UTC_MINUS_3, timezone: s.RotheraResearchStationTime });
-({ id: u.AntarcticaSyowa, name: "Antarctica/Syowa", offset: n$1.UTC_MINUS_3, timezone: s.ShowaStationTime });
-({ id: u.AntarcticaTroll, name: "Antarctica/Troll", offset: n$1.UTC_MINUS_2, timezone: s.CentralStandardTime });
-({ id: u.AntarcticaVostok, name: "Antarctica/Vostok", offset: n$1.UTC_MINUS_6, timezone: s.CentralStandardTime });
-({ id: u.ArcticLongyearbyen, name: "Arctic/Longyearbyen", offset: n$1.UTC_MINUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.AsiaAden, name: "Asia/Aden", offset: n$1.UTC_PLUS_3, timezone: s.ArabiaStandardTime });
-({ id: u.AsiaAlmaty, name: "Asia/Almaty", offset: n$1.UTC_PLUS_6, timezone: s.AlmaAtaTime });
-({ id: u.AsiaAmman, name: "Asia/Amman", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.AsiaAnadyr, name: "Asia/Anadyr", offset: n$1.UTC_PLUS_12, timezone: s.NewCaledoniaTime });
-({ id: u.AsiaAqtau, name: "Asia/Aqtau", offset: n$1.UTC_PLUS_5, timezone: s.AqtobeTime });
-({ id: u.AsiaAqtobe, name: "Asia/Aqtobe", offset: n$1.UTC_PLUS_5, timezone: s.AqtobeTime });
-({ id: u.AsiaAshgabat, name: "Asia/Ashgabat", offset: n$1.UTC_PLUS_5, timezone: s.TurkmenistanTime });
-({ id: u.AsiaBaghdad, name: "Asia/Baghdad", offset: n$1.UTC_PLUS_3, timezone: s.ArabiaStandardTime });
-({ id: u.AsiaBahrain, name: "Asia/Bahrain", offset: n$1.UTC_PLUS_3, timezone: s.ArabiaStandardTime });
-({ id: u.AsiaBaku, name: "Asia/Baku", offset: n$1.UTC_PLUS_4, timezone: s.AzerbaijanTime });
-({ id: u.AsiaBangkok, name: "Asia/Bangkok", offset: n$1.UTC_PLUS_7, timezone: s.IndochinaTime });
-({ id: u.AsiaBarnaul, name: "Asia/Barnaul", offset: n$1.UTC_PLUS_7, timezone: s.KrasnoyarskTime });
-({ id: u.AsiaBeirut, name: "Asia/Beirut", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.AsiaBishkek, name: "Asia/Bishkek", offset: n$1.UTC_PLUS_6, timezone: s.KyrgyzstanTime });
-({ id: u.AsiaBrunei, name: "Asia/Brunei", offset: n$1.UTC_PLUS_8, timezone: s.BruneiTime });
-({ id: u.AsiaChita, name: "Asia/Chita", offset: n$1.UTC_PLUS_9, timezone: s.YakutskTime });
-({ id: u.AsiaChoibalsan, name: "Asia/Choibalsan", offset: n$1.UTC_PLUS_8, timezone: s.ChoibalsanStandardTime });
-({ id: u.AsiaColombo, name: "Asia/Colombo", offset: n$1.UTC_PLUS_5, timezone: s.IndianStandardTime });
-({ id: u.AsiaDamascus, name: "Asia/Damascus", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.AsiaDhaka, name: "Asia/Dhaka", offset: n$1.UTC_PLUS_6, timezone: s.BangladeshStandardTime });
-({ id: u.AsiaDili, name: "Asia/Dili", offset: n$1.UTC_PLUS_9, timezone: s.JapanStandardTime });
-({ id: u.AsiaDubai, name: "Asia/Dubai", offset: n$1.UTC_PLUS_4, timezone: s.GulfStandardTime });
-({ id: u.AsiaDushanbe, name: "Asia/Dushanbe", offset: n$1.UTC_PLUS_5, timezone: s.TajikistanTime });
-({ id: u.AsiaFamagusta, name: "Asia/Famagusta", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.AsiaGaza, name: "Asia/Gaza", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.AsiaHebron, name: "Asia/Hebron", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.AsiaHoChiMinh, name: "Asia/Ho_Chi_Minh", offset: n$1.UTC_PLUS_7, timezone: s.IndochinaTime });
-({ id: u.AsiaHongKong, name: "Asia/Hong_Kong", offset: n$1.UTC_PLUS_8, timezone: s.HongKongTime });
-({ id: u.AsiaHovd, name: "Asia/Hovd", offset: n$1.UTC_PLUS_7, timezone: s.HovdTime });
-({ id: u.AsiaIrkutsk, name: "Asia/Irkutsk", offset: n$1.UTC_PLUS_8, timezone: s.IrkutskTime });
-({ id: u.AsiaJakarta, name: "Asia/Jakarta", offset: n$1.UTC_PLUS_7, timezone: s.WesternIndonesianTime });
-({ id: u.AsiaJayapura, name: "Asia/Jayapura", offset: n$1.UTC_PLUS_9, timezone: s.JapanStandardTime });
-({ id: u.AsiaJerusalem, name: "Asia/Jerusalem", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.AsiaKabul, name: "Asia/Kabul", offset: n$1.UTC_PLUS_4, timezone: s.AfghanistanTime });
-({ id: u.AsiaKamchatka, name: "Asia/Kamchatka", offset: n$1.UTC_PLUS_12, timezone: s.KamchatkaTime });
-({ id: u.AsiaKarachi, name: "Asia/Karachi", offset: n$1.UTC_PLUS_5, timezone: s.PakistanStandardTime });
-({ id: u.AsiaKathmandu, name: "Asia/Kathmandu", offset: n$1.UTC_PLUS_5, timezone: s.NepalTime });
-({ id: u.AsiaKhandyga, name: "Asia/Khandyga", offset: n$1.UTC_PLUS_9, timezone: s.YakutskTime });
-({ id: u.AsiaKolkata, name: "Asia/Kolkata", offset: n$1.UTC_PLUS_5, timezone: s.IndianStandardTime });
-({ id: u.AsiaKrasnoyarsk, name: "Asia/Krasnoyarsk", offset: n$1.UTC_PLUS_7, timezone: s.KrasnoyarskTime });
-({ id: u.AsiaKualaLumpur, name: "Asia/Kuala_Lumpur", offset: n$1.UTC_PLUS_8, timezone: s.MalaysiaStandardTime });
-({ id: u.AsiaKuching, name: "Asia/Kuching", offset: n$1.UTC_PLUS_8, timezone: s.MalaysiaStandardTime });
-({ id: u.AsiaKuwait, name: "Asia/Kuwait", offset: n$1.UTC_PLUS_3, timezone: s.ArabiaStandardTime });
-({ id: u.AsiaMacau, name: "Asia/Macau", offset: n$1.UTC_PLUS_8, timezone: s.ChinaStandardTime });
-({ id: u.AsiaMagadan, name: "Asia/Magadan", offset: n$1.UTC_PLUS_11, timezone: s.MagadanTime });
-({ id: u.AsiaMakassar, name: "Asia/Makassar", offset: n$1.UTC_PLUS_8, timezone: s.MalaysiaTime });
-({ id: u.AsiaManila, name: "Asia/Manila", offset: n$1.UTC_PLUS_8, timezone: s.PhilippineTime });
-({ id: u.AsiaMuscat, name: "Asia/Muscat", offset: n$1.UTC_PLUS_4, timezone: s.GulfStandardTime });
-({ id: u.AsiaNovokuznetsk, name: "Asia/Novokuznetsk", offset: n$1.UTC_PLUS_6, timezone: s.NovosibirskTime });
-({ id: u.AsiaNovosibirsk, name: "Asia/Novosibirsk", offset: n$1.UTC_PLUS_6, timezone: s.NovosibirskTime });
-({ id: u.AsiaOmsk, name: "Asia/Omsk", offset: n$1.UTC_PLUS_6, timezone: s.OmskTime });
-({ id: u.AsiaOral, name: "Asia/Oral", offset: n$1.UTC_PLUS_5, timezone: s.OralTime });
-({ id: u.AsiaPhnomPenh, name: "Asia/Phnom_Penh", offset: n$1.UTC_PLUS_7, timezone: s.IndochinaTime });
-({ id: u.AsiaPontianak, name: "Asia/Pontianak", offset: n$1.UTC_PLUS_7, timezone: s.WesternIndonesianTime });
-({ id: u.AsiaPyongyang, name: "Asia/Pyongyang", offset: n$1.UTC_PLUS_9, timezone: s.KoreaStandardTime });
-({ id: u.AsiaQatar, name: "Asia/Qatar", offset: n$1.UTC_PLUS_3, timezone: s.ArabiaStandardTime });
-({ id: u.AsiaQyzylorda, name: "Asia/Qyzylorda", offset: n$1.UTC_PLUS_5, timezone: s.WestKazakhstanTime });
-({ id: u.AsiaRangoon, name: "Asia/Rangoon", offset: n$1.UTC_PLUS_6, timezone: s.MyanmarStandardTime });
-({ id: u.AsiaRiyadh, name: "Asia/Riyadh", offset: n$1.UTC_PLUS_3, timezone: s.ArabiaStandardTime });
-({ id: u.AsiaSakhalin, name: "Asia/Sakhalin", offset: n$1.UTC_PLUS_11, timezone: s.SakhalinIslandTime });
-({ id: u.AsiaSamarkand, name: "Asia/Samarkand", offset: n$1.UTC_PLUS_5, timezone: s.UzbekistanTime });
-({ id: u.AsiaSeoul, name: "Asia/Seoul", offset: n$1.UTC_PLUS_9, timezone: s.KoreaStandardTime });
-({ id: u.AsiaShanghai, name: "Asia/Shanghai", offset: n$1.UTC_PLUS_8, timezone: s.ChinaStandardTime });
-({ id: u.AsiaSingapore, name: "Asia/Singapore", offset: n$1.UTC_PLUS_8, timezone: s.SingaporeStandardTime });
-({ id: u.AsiaSrednekolymsk, name: "Asia/Srednekolymsk", offset: n$1.UTC_PLUS_11, timezone: s.SrednekolymskTime });
-({ id: u.AsiaTaipei, name: "Asia/Taipei", offset: n$1.UTC_PLUS_8, timezone: s.ChinaStandardTime });
-({ id: u.AsiaTashkent, name: "Asia/Tashkent", offset: n$1.UTC_PLUS_5, timezone: s.UzbekistanTime });
-({ id: u.AsiaTbilisi, name: "Asia/Tbilisi", offset: n$1.UTC_PLUS_4, timezone: s.GeorgiaStandardTime });
-({ id: u.AsiaTehran, name: "Asia/Tehran", offset: n$1.UTC_PLUS_3, timezone: s.IranStandardTime });
-({ id: u.AsiaThimphu, name: "Asia/Thimphu", offset: n$1.UTC_PLUS_6, timezone: s.BhutanTime });
-({ id: u.AsiaTokyo, name: "Asia/Tokyo", offset: n$1.UTC_PLUS_9, timezone: s.JapanStandardTime });
-({ id: u.AsiaTomsk, name: "Asia/Tomsk", offset: n$1.UTC_PLUS_6, timezone: s.KrasnoyarskTime });
-({ id: u.AsiaUlaanbaatar, name: "Asia/Ulaanbaatar", offset: n$1.UTC_PLUS_8, timezone: s.UlaanbaatarStandardTime });
-({ id: u.AsiaUrumqi, name: "Asia/Urumqi", offset: n$1.UTC_PLUS_8, timezone: s.ChinaStandardTime });
-({ id: u.AsiaUstNera, name: "Asia/Ust-Nera", offset: n$1.UTC_PLUS_10, timezone: s.VladivostokTime });
-({ id: u.AsiaVientiane, name: "Asia/Vientiane", offset: n$1.UTC_PLUS_7, timezone: s.IndochinaTime });
-({ id: u.AsiaVladivostok, name: "Asia/Vladivostok", offset: n$1.UTC_PLUS_10, timezone: s.VladivostokTime });
-({ id: u.AsiaYakutsk, name: "Asia/Yakutsk", offset: n$1.UTC_PLUS_9, timezone: s.YakutskTime });
-({ id: u.AsiaYekaterinburg, name: "Asia/Yekaterinburg", offset: n$1.UTC_PLUS_5, timezone: s.YekaterinburgTime });
-({ id: u.AsiaYerevan, name: "Asia/Yerevan", offset: n$1.UTC_PLUS_4, timezone: s.ArmeniaTime });
-({ id: u.AtlanticAzores, name: "Atlantic/Azores", offset: n$1.UTC_MINUS_1, timezone: s.AzoresStandardTime });
-({ id: u.AtlanticBermuda, name: "Atlantic/Bermuda", offset: n$1.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
-({ id: u.AtlanticCanary, name: "Atlantic/Canary", offset: n$1.UTC_MINUS_1, timezone: s.WesternEuropeanTime });
-({ id: u.AtlanticCapeVerde, name: "Atlantic/Cape_Verde", offset: n$1.UTC_0, timezone: s.CapeVerdeTime });
-({ id: u.AtlanticFaroe, name: "Atlantic/Faroe", offset: n$1.UTC_0, timezone: s.GreenwichMeanTime });
-({ id: u.AtlanticMadeira, name: "Atlantic/Madeira", offset: n$1.UTC_0, timezone: s.WesternEuropeanTime });
-({ id: u.AtlanticReykjavik, name: "Atlantic/Reykjavik", offset: n$1.UTC_0, timezone: s.GreenwichMeanTime });
-({ id: u.AtlanticSouthGeorgia, name: "Atlantic/South_Georgia", offset: n$1.UTC_0, timezone: s.CoordinatedUniversalTime });
-({ id: u.AtlanticStHelena, name: "Atlantic/St_Helena", offset: n$1.UTC_0, timezone: s.GreenwichMeanTime });
-({ id: u.AtlanticStanley, name: "Atlantic/Stanley", offset: n$1.UTC_0, timezone: s.FalklandIslandsTime });
-({ id: u.AustraliaAdelaide, name: "Australia/Adelaide", offset: n$1.UTC_PLUS_9_30, timezone: s.AustralianCentralStandardTime });
-({ id: u.AustraliaBrisbane, name: "Australia/Brisbane", offset: n$1.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
-({ id: u.AustraliaBrokenHill, name: "Australia/Broken_Hill", offset: n$1.UTC_PLUS_9_30, timezone: s.AustralianCentralStandardTime });
-({ id: u.AustraliaCanberra, name: "Australia/Canberra", offset: n$1.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
-({ id: u.AustraliaCurrie, name: "Australia/Currie", offset: n$1.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
-({ id: u.AustraliaDarwin, name: "Australia/Darwin", offset: n$1.UTC_PLUS_9_30, timezone: s.AustralianCentralStandardTime });
-({ id: u.AustraliaEucla, name: "Australia/Eucla", offset: n$1.UTC_PLUS_8_45, timezone: s.AustralianCentralWesternStandardTime });
-({ id: u.AustraliaHobart, name: "Australia/Hobart", offset: n$1.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
-({ id: u.AustraliaLindeman, name: "Australia/Lindeman", offset: n$1.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
-({ id: u.AustraliaLordHowe, name: "Australia/Lord_Howe", offset: n$1.UTC_PLUS_10_30, timezone: s.LordHoweStandardTime });
-({ id: u.AustraliaMelbourne, name: "Australia/Melbourne", offset: n$1.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
-({ id: u.AustraliaPerth, name: "Australia/Perth", offset: n$1.UTC_PLUS_8, timezone: s.AustralianWesternStandardTime });
-({ id: u.AustraliaSydney, name: "Australia/Sydney", offset: n$1.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
-({ id: u.EuropeAmsterdam, name: "Europe/Amsterdam", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeAndorra, name: "Europe/Andorra", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeAthens, name: "Europe/Athens", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeBelgrade, name: "Europe/Belgrade", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeBerlin, name: "Europe/Berlin", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeBratislava, name: "Europe/Bratislava", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeBrussels, name: "Europe/Brussels", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeBucharest, name: "Europe/Bucharest", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeBudapest, name: "Europe/Budapest", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeBusingen, name: "Europe/Busingen", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeChisinau, name: "Europe/Chisinau", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeCopenhagen, name: "Europe/Copenhagen", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeDublin, name: "Europe/Dublin", offset: n$1.UTC_0, timezone: s.GreenwichMeanTime });
-({ id: u.EuropeGibraltar, name: "Europe/Gibraltar", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeGuernsey, name: "Europe/Guernsey", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeHelsinki, name: "Europe/Helsinki", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeIsleOfMan, name: "Europe/Isle_of_Man", offset: n$1.UTC_0, timezone: s.GreenwichMeanTime });
-({ id: u.EuropeIstanbul, name: "Europe/Istanbul", offset: n$1.UTC_PLUS_3, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeJersey, name: "Europe/Jersey", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeKaliningrad, name: "Europe/Kaliningrad", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeKiev, name: "Europe/Kiev", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeLisbon, name: "Europe/Lisbon", offset: n$1.UTC_0, timezone: s.GreenwichMeanTime });
-({ id: u.EuropeLjubljana, name: "Europe/Ljubljana", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeLondon, name: "Europe/London", offset: n$1.UTC_0, timezone: s.GreenwichMeanTime });
-({ id: u.EuropeLuxembourg, name: "Europe/Luxembourg", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeMadrid, name: "Europe/Madrid", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeMalta, name: "Europe/Malta", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeMariehamn, name: "Europe/Mariehamn", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeMinsk, name: "Europe/Minsk", offset: n$1.UTC_PLUS_3, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeMonaco, name: "Europe/Monaco", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeMoscow, name: "Europe/Moscow", offset: n$1.UTC_PLUS_3, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeOslo, name: "Europe/Oslo", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeParis, name: "Europe/Paris", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropePodgorica, name: "Europe/Podgorica", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropePrague, name: "Europe/Prague", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeRiga, name: "Europe/Riga", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeRome, name: "Europe/Rome", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeSamara, name: "Europe/Samara", offset: n$1.UTC_PLUS_4, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeSanMarino, name: "Europe/San_Marino", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeSarajevo, name: "Europe/Sarajevo", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeSimferopol, name: "Europe/Simferopol", offset: n$1.UTC_PLUS_3, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeSkopje, name: "Europe/Skopje", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeSofia, name: "Europe/Sofia", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeStockholm, name: "Europe/Stockholm", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeTallinn, name: "Europe/Tallinn", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeTirane, name: "Europe/Tirane", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeUzhgorod, name: "Europe/Uzhgorod", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeVaduz, name: "Europe/Vaduz", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeVatican, name: "Europe/Vatican", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeVienna, name: "Europe/Vienna", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeVilnius, name: "Europe/Vilnius", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeVolgograd, name: "Europe/Volgograd", offset: n$1.UTC_PLUS_4, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeWarsaw, name: "Europe/Warsaw", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeZagreb, name: "Europe/Zagreb", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.EuropeZaporozhye, name: "Europe/Zaporozhye", offset: n$1.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
-({ id: u.EuropeZurich, name: "Europe/Zurich", offset: n$1.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
-({ id: u.IndianAntananarivo, name: "Indian/Antananarivo", offset: n$1.UTC_PLUS_3, timezone: s.EastAfricaTime });
-({ id: u.IndianChagos, name: "Indian/Chagos", offset: n$1.UTC_PLUS_6, timezone: s.IndianOceanTime });
-({ id: u.IndianChristmas, name: "Indian/Christmas", offset: n$1.UTC_PLUS_7, timezone: s.ChristmasIslandTime });
-({ id: u.IndianCocos, name: "Indian/Cocos", offset: n$1.UTC_PLUS_6, timezone: s.CocosIslandsTime });
-({ id: u.IndianComoro, name: "Indian/Comoro", offset: n$1.UTC_PLUS_3, timezone: s.EastAfricaTime });
-({ id: u.IndianKerguelen, name: "Indian/Kerguelen", offset: n$1.UTC_PLUS_5, timezone: s.FrenchSouthernAndAntarcticTime });
-({ id: u.IndianMahe, name: "Indian/Mahe", offset: n$1.UTC_PLUS_4, timezone: s.SeychellesTime });
-({ id: u.IndianMaldives, name: "Indian/Maldives", offset: n$1.UTC_PLUS_5, timezone: s.MaldivesTime });
-({ id: u.IndianMauritius, name: "Indian/Mauritius", offset: n$1.UTC_PLUS_4, timezone: s.MauritiusTime });
-({ id: u.IndianMayotte, name: "Indian/Mayotte", offset: n$1.UTC_PLUS_3, timezone: s.EastAfricaTime });
-({ id: u.IndianReunion, name: "Indian/Reunion", offset: n$1.UTC_PLUS_4, timezone: s.ReunionTime });
-({ id: u.PacificApia, name: "Pacific/Apia", offset: n$1.UTC_PLUS_13, timezone: s.SamoaStandardTime });
-({ id: u.PacificAuckland, name: "Pacific/Auckland", offset: n$1.UTC_PLUS_13, timezone: s.NewZealandStandardTime });
-({ id: u.PacificChatham, name: "Pacific/Chatham", offset: n$1.UTC_PLUS_13, timezone: s.ChathamStandardTime });
-({ id: u.PacificEaster, name: "Pacific/Easter", offset: n$1.UTC_PLUS_6, timezone: s.EasterIslandStandardTime });
-({ id: u.PacificEfate, name: "Pacific/Efate", offset: n$1.UTC_PLUS_11, timezone: s.VanuatuTime });
-({ id: u.PacificEnderbury, name: "Pacific/Enderbury", offset: n$1.UTC_PLUS_13, timezone: s.TongaTime });
-({ id: u.PacificFakaofo, name: "Pacific/Fakaofo", offset: n$1.UTC_PLUS_13, timezone: s.TongaTime });
-({ id: u.PacificFiji, name: "Pacific/Fiji", offset: n$1.UTC_PLUS_12, timezone: s.FijiTime });
-({ id: u.PacificFunafuti, name: "Pacific/Funafuti", offset: n$1.UTC_PLUS_12, timezone: s.TuvaluTime });
-({ id: u.PacificGalapagos, name: "Pacific/Galapagos", offset: n$1.UTC_PLUS_6, timezone: s.GalapagosTime });
-({ id: u.PacificGambier, name: "Pacific/Gambier", offset: n$1.UTC_PLUS_9, timezone: s.GambierIslandTime });
-({ id: u.PacificGuadalcanal, name: "Pacific/Guadalcanal", offset: n$1.UTC_PLUS_11, timezone: s.SolomonIslandsTime });
-({ id: u.PacificGuam, name: "Pacific/Guam", offset: n$1.UTC_PLUS_10, timezone: s.ChamorroStandardTime });
-({ id: u.PacificHonolulu, name: "Pacific/Honolulu", offset: n$1.UTC_PLUS_10, timezone: s.HawaiiAleutianStandardTime });
-({ id: u.PacificJohnston, name: "Pacific/Johnston", offset: n$1.UTC_PLUS_10, timezone: s.HawaiiAleutianStandardTime });
-({ id: u.PacificKiritimati, name: "Pacific/Kiritimati", offset: n$1.UTC_PLUS_14, timezone: s.LineIslandsTime });
-({ id: u.PacificKosrae, name: "Pacific/Kosrae", offset: n$1.UTC_PLUS_11, timezone: s.KosraeTime });
-({ id: u.PacificKwajalein, name: "Pacific/Kwajalein", offset: n$1.UTC_PLUS_12, timezone: s.MarshallIslandsTime });
-({ id: u.PacificMajuro, name: "Pacific/Majuro", offset: n$1.UTC_PLUS_12, timezone: s.MarshallIslandsTime });
-({ id: u.PacificMarquesas, name: "Pacific/Marquesas", offset: n$1.UTC_PLUS_9, timezone: s.MarquesasIslandsTime });
-({ id: u.PacificMidway, name: "Pacific/Midway", offset: n$1.UTC_PLUS_11, timezone: s.SamoaStandardTime });
-({ id: u.PacificNauru, name: "Pacific/Nauru", offset: n$1.UTC_PLUS_12, timezone: s.NauruTime });
-({ id: u.PacificNiue, name: "Pacific/Niue", offset: n$1.UTC_PLUS_11, timezone: s.NiueTime });
-({ id: u.PacificNorfolk, name: "Pacific/Norfolk", offset: n$1.UTC_PLUS_11, timezone: s.NorfolkIslandTime });
-({ id: u.PacificNoumea, name: "Pacific/Noumea", offset: n$1.UTC_PLUS_11, timezone: s.NewCaledoniaTime });
-({ id: u.PacificPagoPago, name: "Pacific/Pago_Pago", offset: n$1.UTC_PLUS_11, timezone: s.SamoaStandardTime });
-({ id: u.PacificPalau, name: "Pacific/Palau", offset: n$1.UTC_PLUS_9, timezone: s.PalauTime });
-({ id: u.PacificPitcairn, name: "Pacific/Pitcairn", offset: n$1.UTC_PLUS_8, timezone: s.PitcairnTime });
-({ id: u.PacificPonape, name: "Pacific/Ponape", offset: n$1.UTC_PLUS_11, timezone: s.PohnpeiStandardTime });
-({ id: u.PacificPortMoresby, name: "Pacific/Port_Moresby", offset: n$1.UTC_PLUS_10, timezone: s.PapuaNewGuineaTime });
-({ id: u.PacificRarotonga, name: "Pacific/Rarotonga", offset: n$1.UTC_PLUS_10, timezone: s.CookIslandTime });
-({ id: u.PacificSaipan, name: "Pacific/Saipan", offset: n$1.UTC_PLUS_10, timezone: s.ChamorroStandardTime });
-({ id: u.PacificTahiti, name: "Pacific/Tahiti", offset: n$1.UTC_PLUS_10, timezone: s.TahitiTime });
-({ id: u.PacificTarawa, name: "Pacific/Tarawa", offset: n$1.UTC_PLUS_12, timezone: s.GilbertIslandTime });
-({ id: u.PacificTongatapu, name: "Pacific/Tongatapu", offset: n$1.UTC_PLUS_13, timezone: s.TongaTime });
-({ id: u.PacificChuuk, name: "Pacific/Chuuk", offset: n$1.UTC_PLUS_10, timezone: s.ChuukTime });
-({ id: u.PacificPohnpei, name: "Pacific/Pohnpei", offset: n$1.UTC_PLUS_11, timezone: s.PohnpeiStandardTime });
-({ id: u.PacificYap, name: "Pacific/Yap", offset: n$1.UTC_PLUS_10, timezone: s.ChuukTime });
+({ id: u.AfricaAbidjan, name: "Africa/Abidjan", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaAccra, name: "Africa/Accra", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaAddisAbaba, name: "Africa/Addis_Ababa", offset: n.UTC_PLUS_3, timezone: s.EastAfricaTime });
+({ id: u.AfricaAlgiers, name: "Africa/Algiers", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.AfricaAsmara, name: "Africa/Asmara", offset: n.UTC_PLUS_3, timezone: s.EastAfricaTime });
+({ id: u.AfricaBamako, name: "Africa/Bamako", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaBangui, name: "Africa/Bangui", offset: n.UTC_PLUS_1, timezone: s.WestAfricaTime });
+({ id: u.AfricaBanjul, name: "Africa/Banjul", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaBissau, name: "Africa/Bissau", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaBlantyre, name: "Africa/Blantyre", offset: n.UTC_PLUS_2, timezone: s.CentralAfricaTime });
+({ id: u.AfricaBrazzaville, name: "Africa/Brazzaville", offset: n.UTC_PLUS_1, timezone: s.WestAfricaTime });
+({ id: u.AfricaBujumbura, name: "Africa/Bujumbura", offset: n.UTC_PLUS_2, timezone: s.CentralAfricaTime });
+({ id: u.AfricaCairo, name: "Africa/Cairo", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.AfricaCasablanca, name: "Africa/Casablanca", offset: n.UTC_PLUS_1, timezone: s.WesternEuropeanTime });
+({ id: u.AfricaCeuta, name: "Africa/Ceuta", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.AfricaConakry, name: "Africa/Conakry", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaDakar, name: "Africa/Dakar", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaDarEsSalaam, name: "Africa/Dar_es_Salaam", offset: n.UTC_PLUS_3, timezone: s.EastAfricaTime });
+({ id: u.AfricaDjibouti, name: "Africa/Djibouti", offset: n.UTC_PLUS_3, timezone: s.EastAfricaTime });
+({ id: u.AfricaDouala, name: "Africa/Douala", offset: n.UTC_PLUS_1, timezone: s.WestAfricaTime });
+({ id: u.AfricaElAaiun, name: "Africa/El_Aaiun", offset: n.UTC_PLUS_1, timezone: s.WestAfricaTime });
+({ id: u.AfricaFreetown, name: "Africa/Freetown", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaGaborone, name: "Africa/Gaborone", offset: n.UTC_PLUS_2, timezone: s.CentralAfricaTime });
+({ id: u.AfricaHarare, name: "Africa/Harare", offset: n.UTC_PLUS_2, timezone: s.CentralAfricaTime });
+({ id: u.AfricaJohannesburg, name: "Africa/Johannesburg", offset: n.UTC_PLUS_2, timezone: s.SouthAfricanStandardTime });
+({ id: u.AfricaJuba, name: "Africa/Juba", offset: n.UTC_PLUS_3, timezone: s.EastAfricaTime });
+({ id: u.AfricaKampala, name: "Africa/Kampala", offset: n.UTC_PLUS_3, timezone: s.EastAfricaTime });
+({ id: u.AfricaKhartoum, name: "Africa/Khartoum", offset: n.UTC_PLUS_2, timezone: s.EastAfricaTime });
+({ id: u.AfricaKigali, name: "Africa/Kigali", offset: n.UTC_PLUS_2, timezone: s.CentralAfricaTime });
+({ id: u.AfricaKinshasa, name: "Africa/Kinshasa", offset: n.UTC_PLUS_1, timezone: s.WestAfricaTime });
+({ id: u.AfricaLagos, name: "Africa/Lagos", offset: n.UTC_PLUS_1, timezone: s.WestAfricaTime });
+({ id: u.AfricaLibreville, name: "Africa/Libreville", offset: n.UTC_PLUS_1, timezone: s.WestAfricaTime });
+({ id: u.AfricaLome, name: "Africa/Lome", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaLuanda, name: "Africa/Luanda", offset: n.UTC_PLUS_1, timezone: s.WestAfricaTime });
+({ id: u.AfricaLubumbashi, name: "Africa/Lubumbashi", offset: n.UTC_PLUS_2, timezone: s.CentralAfricaTime });
+({ id: u.AfricaLusaka, name: "Africa/Lusaka", offset: n.UTC_PLUS_2, timezone: s.CentralAfricaTime });
+({ id: u.AfricaMalabo, name: "Africa/Malabo", offset: n.UTC_PLUS_1, timezone: s.WestAfricaTime });
+({ id: u.AfricaMaputo, name: "Africa/Maputo", offset: n.UTC_PLUS_2, timezone: s.CentralAfricaTime });
+({ id: u.AfricaMaseru, name: "Africa/Maseru", offset: n.UTC_PLUS_2, timezone: s.SouthAfricanStandardTime });
+({ id: u.AfricaMbabane, name: "Africa/Mbabane", offset: n.UTC_PLUS_2, timezone: s.SouthAfricanStandardTime });
+({ id: u.AfricaMogadishu, name: "Africa/Mogadishu", offset: n.UTC_PLUS_3, timezone: s.EastAfricaTime });
+({ id: u.AfricaMonrovia, name: "Africa/Monrovia", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaNairobi, name: "Africa/Nairobi", offset: n.UTC_PLUS_3, timezone: s.EastAfricaTime });
+({ id: u.AfricaNdjamena, name: "Africa/Ndjamena", offset: n.UTC_PLUS_1, timezone: s.WestAfricaTime });
+({ id: u.AfricaNiamey, name: "Africa/Niamey", offset: n.UTC_PLUS_1, timezone: s.WestAfricaTime });
+({ id: u.AfricaNouakchott, name: "Africa/Nouakchott", offset: n.UTC_0, timezone: s.GreenwichMeanTime });
+({ id: u.AfricaOuagadougou, name: "Africa/Ouagadougou", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaPortoNovo, name: "Africa/Porto-Novo", offset: n.UTC_PLUS_1, timezone: s.WestAfricaTime });
+({ id: u.AfricaSaoTome, name: "Africa/SaoTome", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaTripoli, name: "Africa/Tripoli", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaTunis, name: "Africa/Tunis", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AfricaWindhoek, name: "Africa/Windhoek", offset: n.UTC_PLUS_2, timezone: s.WestAfricaTime });
+({ id: u.AmericaAdak, name: "America/Adak", offset: n.UTC_PLUS_10, timezone: s.HawaiiAleutianStandardTime });
+({ id: u.AmericaAnchorage, name: "America/Anchorage", offset: n.UTC_PLUS_9, timezone: s.AlaskaStandardTime });
+({ id: u.AmericaAnguilla, name: "America/Anguilla", offset: n.UTC_0, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaAntigua, name: "America/Antigua", offset: n.UTC_0, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaAraguaina, name: "America/Araguaina", offset: n.UTC_MINUS_3, timezone: s.BrasiliaTime });
+({ id: u.AmericaArgentinaBuenosAires, name: "America/Argentina/Buenos_Aires", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaArgentinaCatamarca, name: "America/Argentina/Catamarca", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaArgentinaCordoba, name: "America/Argentina/Cordoba", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaArgentinaJujuy, name: "America/Argentina/Jujuy", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaArgentinaLaRioja, name: "America/Argentina/La_Rioja", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaArgentinaMendoza, name: "America/Argentina/Mendoza", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaArgentinaRioGallegos, name: "America/Argentina/Rio_Gallegos", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaArgentinaSalta, name: "America/Argentina/Salta", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaArgentinaSanJuan, name: "America/Argentina/San_Juan", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaArgentinaSanLuis, name: "America/Argentina/San_Luis", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaArgentinaTucuman, name: "America/Argentina/Tucuman", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaArgentinaUshuaia, name: "America/Argentina/Ushuaia", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaAruba, name: "America/Aruba", offset: n.UTC_0, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaAsuncion, name: "America/Asuncion", offset: n.UTC_MINUS_4, timezone: s.ParaguayTime });
+({ id: u.AmericaAtikokan, name: "America/Atikokan", offset: n.UTC_0, timezone: s.EasternStandardTime });
+({ id: u.AmericaAtka, name: "America/Atka", offset: n.UTC_MINUS_10, timezone: s.HawaiiAleutianStandardTime });
+({ id: u.AmericaBahia, name: "America/Bahia", offset: n.UTC_MINUS_3, timezone: s.BrasiliaTime });
+({ id: u.AmericaBahiaBanderas, name: "America/Bahia_Banderas", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaBarbados, name: "America/Barbados", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaBelem, name: "America/Belem", offset: n.UTC_MINUS_3, timezone: s.BrasiliaTime });
+({ id: u.AmericaBelize, name: "America/Belize", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaBlancSablon, name: "America/Blanc-Sablon", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaBoaVista, name: "America/Boa_Vista", offset: n.UTC_MINUS_4, timezone: s.AmazonTime });
+({ id: u.AmericaBogota, name: "America/Bogota", offset: n.UTC_MINUS_5, timezone: s.ColombiaTime });
+({ id: u.AmericaBoise, name: "America/Boise", offset: n.UTC_MINUS_7, timezone: s.MountainStandardTime });
+({ id: u.AmericaCambridgeBay, name: "America/Cambridge_Bay", offset: n.UTC_MINUS_7, timezone: s.MountainStandardTime });
+({ id: u.AmericaCampoGrande, name: "America/Campo_Grande", offset: n.UTC_MINUS_4, timezone: s.AmazonTime });
+({ id: u.AmericaCancun, name: "America/Cancun", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaCaracas, name: "America/Caracas", offset: n.UTC_MINUS_4, timezone: s.VenezuelaStandardTime });
+({ id: u.AmericaCayenne, name: "America/Cayenne", offset: n.UTC_MINUS_3, timezone: s.FrenchGuianaTime });
+({ id: u.AmericaCayman, name: "America/Cayman", offset: n.UTC_0, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaChicago, name: "America/Chicago", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaChihuahua, name: "America/Chihuahua", offset: n.UTC_MINUS_7, timezone: s.MountainStandardTime });
+({ id: u.AmericaCoralHarbour, name: "America/Coral_Harbour", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaCordoba, name: "America/Cordoba", offset: n.UTC_MINUS_3, timezone: s.ArgentinaTime });
+({ id: u.AmericaCostaRica, name: "America/Costa_Rica", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaCreston, name: "America/Creston", offset: n.UTC_MINUS_7, timezone: s.MountainStandardTime });
+({ id: u.AmericaCuiaba, name: "America/Cuiaba", offset: n.UTC_MINUS_4, timezone: s.AmazonTime });
+({ id: u.AmericaCuracao, name: "America/Curacao", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaDanmarkshavn, name: "America/Danmarkshavn", offset: n.UTC_0, timezone: s.GreenwichMeanTime });
+({ id: u.AmericaDawson, name: "America/Dawson", offset: n.UTC_MINUS_8, timezone: s.PacificStandardTime });
+({ id: u.AmericaDawsonCreek, name: "America/Dawson_Creek", offset: n.UTC_MINUS_8, timezone: s.PacificStandardTime });
+({ id: u.AmericaDenver, name: "America/Denver", offset: n.UTC_MINUS_7, timezone: s.MountainStandardTime });
+({ id: u.AmericaDetroit, name: "America/Detroit", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaDominica, name: "America/Dominica", offset: n.UTC_0, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaEdmonton, name: "America/Edmonton", offset: n.UTC_MINUS_7, timezone: s.MountainStandardTime });
+({ id: u.AmericaEirunepe, name: "America/Eirunepe", offset: n.UTC_MINUS_5, timezone: s.AcreTime });
+({ id: u.AmericaElSalvador, name: "America/El_Salvador", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaFortaleza, name: "America/Fortaleza", offset: n.UTC_MINUS_3, timezone: s.BrasiliaTime });
+({ id: u.AmericaGlaceBay, name: "America/Glace_Bay", offset: n.UTC_0, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaGodthab, name: "America/Godthab", offset: n.UTC_MINUS_3, timezone: s.WestGreenlandTime });
+({ id: u.AmericaGooseBay, name: "America/Goose_Bay", offset: n.UTC_0, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaGrandTurk, name: "America/Grand_Turk", offset: n.UTC_0, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaGrenada, name: "America/Grenada", offset: n.UTC_0, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaGuadeloupe, name: "America/Guadeloupe", offset: n.UTC_0, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaGuatemala, name: "America/Guatemala", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaGuayaquil, name: "America/Guayaquil", offset: n.UTC_MINUS_5, timezone: s.EcuadorTime });
+({ id: u.AmericaGuyana, name: "America/Guyana", offset: n.UTC_0, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaHalifax, name: "America/Halifax", offset: n.UTC_0, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaHavana, name: "America/Havana", offset: n.UTC_MINUS_5, timezone: s.CubaStandardTime });
+({ id: u.AmericaHermosillo, name: "America/Hermosillo", offset: n.UTC_MINUS_7, timezone: s.MountainStandardTime });
+({ id: u.AmericaIndianaIndianapolis, name: "America/Indiana/Indianapolis", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaIndianaKnox, name: "America/Indiana/Knox", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaIndianaMarengo, name: "America/Indiana/Marengo", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaIndianaPetersburg, name: "America/Indiana/Petersburg", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaIndianaTellCity, name: "America/Indiana/Tell_City", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaIndianaVevay, name: "America/Indiana/Vevay", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaIndianaVincennes, name: "America/Indiana/Vincennes", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaIndianaWinamac, name: "America/Indiana/Winamac", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaInuvik, name: "America/Inuvik", offset: n.UTC_MINUS_7, timezone: s.MountainStandardTime });
+({ id: u.AmericaIqaluit, name: "America/Iqaluit", offset: n.UTC_0, timezone: s.EasternStandardTime });
+({ id: u.AmericaJamaica, name: "America/Jamaica", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaJuneau, name: "America/Juneau", offset: n.UTC_MINUS_9, timezone: s.AlaskaStandardTime });
+({ id: u.AmericaKentuckyLouisville, name: "America/Kentucky/Louisville", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaKentuckyMonticello, name: "America/Kentucky/Monticello", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaKralendijk, name: "America/Kralendijk", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaLaPaz, name: "America/La_Paz", offset: n.UTC_MINUS_4, timezone: s.BoliviaTime });
+({ id: u.AmericaLima, name: "America/Lima", offset: n.UTC_MINUS_5, timezone: s.PeruTime });
+({ id: u.AmericaLosAngeles, name: "America/Los_Angeles", offset: n.UTC_MINUS_8, timezone: s.PacificStandardTime });
+({ id: u.AmericaLouisville, name: "America/Louisville", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaLowerPrinces, name: "America/Lower_Princes", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaMaceio, name: "America/Maceio", offset: n.UTC_MINUS_3, timezone: s.BrasiliaTime });
+({ id: u.AmericaManagua, name: "America/Managua", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaManaus, name: "America/Manaus", offset: n.UTC_MINUS_4, timezone: s.AmazonTime });
+({ id: u.AmericaMarigot, name: "America/Marigot", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaMartinique, name: "America/Martinique", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaMatamoros, name: "America/Matamoros", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaMazatlan, name: "America/Mazatlan", offset: n.UTC_MINUS_7, timezone: s.MountainStandardTime });
+({ id: u.AmericaMenominee, name: "America/Menominee", offset: n.UTC_MINUS_5, timezone: s.CentralStandardTime });
+({ id: u.AmericaMerida, name: "America/Merida", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaMetlakatla, name: "America/Metlakatla", offset: n.UTC_MINUS_9, timezone: s.AlaskaStandardTime });
+({ id: u.AmericaMexicoCity, name: "America/Mexico_City", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaMiquelon, name: "America/Miquelon", offset: n.UTC_MINUS_3, timezone: s.SaintPierreAndMiquelonStandardTime });
+({ id: u.AmericaMoncton, name: "America/Moncton", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaMonterrey, name: "America/Monterrey", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaMontevideo, name: "America/Montevideo", offset: n.UTC_MINUS_3, timezone: s.UruguayStandardTime });
+({ id: u.AmericaMontreal, name: "America/Montreal", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaMontserrat, name: "America/Montserrat", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaNassau, name: "America/Nassau", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaNewYork, name: "America/New_York", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaNipigon, name: "America/Nipigon", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaNome, name: "America/Nome", offset: n.UTC_MINUS_9, timezone: s.AlaskaStandardTime });
+({ id: u.AmericaNoronha, name: "America/Noronha", offset: n.UTC_MINUS_2, timezone: s.FernandoDeNoronhaTime });
+({ id: u.AmericaNorthDakotaBeulah, name: "America/North_Dakota/Beulah", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaNorthDakotaCenter, name: "America/North_Dakota/Center", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaNorthDakotaNewSalem, name: "America/North_Dakota/New_Salem", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaOjinaga, name: "America/Ojinaga", offset: n.UTC_MINUS_7, timezone: s.MountainStandardTime });
+({ id: u.AmericaPanama, name: "America/Panama", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaPangnirtung, name: "America/Pangnirtung", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaParamaribo, name: "America/Paramaribo", offset: n.UTC_MINUS_3, timezone: s.SurinameTime });
+({ id: u.AmericaPhoenix, name: "America/Phoenix", offset: n.UTC_MINUS_7, timezone: s.MountainStandardTime });
+({ id: u.AmericaPortAuPrince, name: "America/Port-au-Prince", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaPortOfSpain, name: "America/Port_of_Spain", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaPortoVelho, name: "America/Porto_Velho", offset: n.UTC_MINUS_4, timezone: s.AmazonTime });
+({ id: u.AmericaPuertoRico, name: "America/Puerto_Rico", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaRainyRiver, name: "America/Rainy_River", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaRankinInlet, name: "America/Rankin_Inlet", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaRecife, name: "America/Recife", offset: n.UTC_MINUS_3, timezone: s.BrasiliaTime });
+({ id: u.AmericaRegina, name: "America/Regina", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaResolute, name: "America/Resolute", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaRioBranco, name: "America/Rio_Branco", offset: n.UTC_MINUS_5, timezone: s.AcreTime });
+({ id: u.AmericaSantaIsabel, name: "America/Santa_Isabel", offset: n.UTC_MINUS_8, timezone: s.PacificStandardTime });
+({ id: u.AmericaSantarem, name: "America/Santarem", offset: n.UTC_MINUS_3, timezone: s.BrasiliaTime });
+({ id: u.AmericaSantiago, name: "America/Santiago", offset: n.UTC_MINUS_4, timezone: s.ChileStandardTime });
+({ id: u.AmericaSantoDomingo, name: "America/Santo_Domingo", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaSaoPaulo, name: "America/Sao_Paulo", offset: n.UTC_MINUS_3, timezone: s.BrasiliaTime });
+({ id: u.AmericaScoresbysund, name: "America/Scoresbysund", offset: n.UTC_MINUS_1, timezone: s.EasternGreenlandTime });
+({ id: u.AmericaShiprock, name: "America/Shiprock", offset: n.UTC_MINUS_7, timezone: s.MountainStandardTime });
+({ id: u.AmericaSitka, name: "America/Sitka", offset: n.UTC_MINUS_9, timezone: s.AlaskaStandardTime });
+({ id: u.AmericaStBarthelemy, name: "America/St_Barthelemy", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaStJohns, name: "America/St_Johns", offset: n.UTC_MINUS_3, timezone: s.NewfoundlandStandardTime });
+({ id: u.AmericaStKitts, name: "America/St_Kitts", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaStLucia, name: "America/St_Lucia", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaStThomas, name: "America/St_Thomas", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaStVincent, name: "America/St_Vincent", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaSwiftCurrent, name: "America/Swift_Current", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaTegucigalpa, name: "America/Tegucigalpa", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaThule, name: "America/Thule", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaThunderBay, name: "America/Thunder_Bay", offset: n.UTC_MINUS_4, timezone: s.EasternStandardTime });
+({ id: u.AmericaTijuana, name: "America/Tijuana", offset: n.UTC_MINUS_8, timezone: s.PacificStandardTime });
+({ id: u.AmericaToronto, name: "America/Toronto", offset: n.UTC_MINUS_5, timezone: s.EasternStandardTime });
+({ id: u.AmericaTortola, name: "America/Tortola", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AmericaVancouver, name: "America/Vancouver", offset: n.UTC_MINUS_8, timezone: s.PacificStandardTime });
+({ id: u.AmericaWhitehorse, name: "America/Whitehorse", offset: n.UTC_MINUS_8, timezone: s.PacificStandardTime });
+({ id: u.AmericaWinnipeg, name: "America/Winnipeg", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AmericaYakutat, name: "America/Yakutat", offset: n.UTC_MINUS_9, timezone: s.AlaskaStandardTime });
+({ id: u.AmericaYellowknife, name: "America/Yellowknife", offset: n.UTC_MINUS_6, timezone: s.MountainStandardTime });
+({ id: u.AntarcticaCasey, name: "Antarctica/Casey", offset: n.UTC_MINUS_8, timezone: s.WesternStandardTime });
+({ id: u.AntarcticaDavis, name: "Antarctica/Davis", offset: n.UTC_MINUS_7, timezone: s.NewfoundlandStandardTime });
+({ id: u.AntarcticaDumontDUrville, name: "Antarctica/DumontDUrville", offset: n.UTC_MINUS_10, timezone: s.CentralStandardTime });
+({ id: u.AntarcticaMacquarie, name: "Antarctica/Macquarie", offset: n.UTC_MINUS_11, timezone: s.CentralStandardTime });
+({ id: u.AntarcticaMawson, name: "Antarctica/Mawson", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.AntarcticaMcMurdo, name: "Antarctica/McMurdo", offset: n.UTC_MINUS_12, timezone: s.NewZealandStandardTime });
+({ id: u.AntarcticaPalmer, name: "Antarctica/Palmer", offset: n.UTC_MINUS_4, timezone: s.ChathamStandardTime });
+({ id: u.AntarcticaRothera, name: "Antarctica/Rothera", offset: n.UTC_MINUS_3, timezone: s.RotheraResearchStationTime });
+({ id: u.AntarcticaSyowa, name: "Antarctica/Syowa", offset: n.UTC_MINUS_3, timezone: s.ShowaStationTime });
+({ id: u.AntarcticaTroll, name: "Antarctica/Troll", offset: n.UTC_MINUS_2, timezone: s.CentralStandardTime });
+({ id: u.AntarcticaVostok, name: "Antarctica/Vostok", offset: n.UTC_MINUS_6, timezone: s.CentralStandardTime });
+({ id: u.ArcticLongyearbyen, name: "Arctic/Longyearbyen", offset: n.UTC_MINUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.AsiaAden, name: "Asia/Aden", offset: n.UTC_PLUS_3, timezone: s.ArabiaStandardTime });
+({ id: u.AsiaAlmaty, name: "Asia/Almaty", offset: n.UTC_PLUS_6, timezone: s.AlmaAtaTime });
+({ id: u.AsiaAmman, name: "Asia/Amman", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.AsiaAnadyr, name: "Asia/Anadyr", offset: n.UTC_PLUS_12, timezone: s.NewCaledoniaTime });
+({ id: u.AsiaAqtau, name: "Asia/Aqtau", offset: n.UTC_PLUS_5, timezone: s.AqtobeTime });
+({ id: u.AsiaAqtobe, name: "Asia/Aqtobe", offset: n.UTC_PLUS_5, timezone: s.AqtobeTime });
+({ id: u.AsiaAshgabat, name: "Asia/Ashgabat", offset: n.UTC_PLUS_5, timezone: s.TurkmenistanTime });
+({ id: u.AsiaBaghdad, name: "Asia/Baghdad", offset: n.UTC_PLUS_3, timezone: s.ArabiaStandardTime });
+({ id: u.AsiaBahrain, name: "Asia/Bahrain", offset: n.UTC_PLUS_3, timezone: s.ArabiaStandardTime });
+({ id: u.AsiaBaku, name: "Asia/Baku", offset: n.UTC_PLUS_4, timezone: s.AzerbaijanTime });
+({ id: u.AsiaBangkok, name: "Asia/Bangkok", offset: n.UTC_PLUS_7, timezone: s.IndochinaTime });
+({ id: u.AsiaBarnaul, name: "Asia/Barnaul", offset: n.UTC_PLUS_7, timezone: s.KrasnoyarskTime });
+({ id: u.AsiaBeirut, name: "Asia/Beirut", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.AsiaBishkek, name: "Asia/Bishkek", offset: n.UTC_PLUS_6, timezone: s.KyrgyzstanTime });
+({ id: u.AsiaBrunei, name: "Asia/Brunei", offset: n.UTC_PLUS_8, timezone: s.BruneiTime });
+({ id: u.AsiaChita, name: "Asia/Chita", offset: n.UTC_PLUS_9, timezone: s.YakutskTime });
+({ id: u.AsiaChoibalsan, name: "Asia/Choibalsan", offset: n.UTC_PLUS_8, timezone: s.ChoibalsanStandardTime });
+({ id: u.AsiaColombo, name: "Asia/Colombo", offset: n.UTC_PLUS_5, timezone: s.IndianStandardTime });
+({ id: u.AsiaDamascus, name: "Asia/Damascus", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.AsiaDhaka, name: "Asia/Dhaka", offset: n.UTC_PLUS_6, timezone: s.BangladeshStandardTime });
+({ id: u.AsiaDili, name: "Asia/Dili", offset: n.UTC_PLUS_9, timezone: s.JapanStandardTime });
+({ id: u.AsiaDubai, name: "Asia/Dubai", offset: n.UTC_PLUS_4, timezone: s.GulfStandardTime });
+({ id: u.AsiaDushanbe, name: "Asia/Dushanbe", offset: n.UTC_PLUS_5, timezone: s.TajikistanTime });
+({ id: u.AsiaFamagusta, name: "Asia/Famagusta", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.AsiaGaza, name: "Asia/Gaza", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.AsiaHebron, name: "Asia/Hebron", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.AsiaHoChiMinh, name: "Asia/Ho_Chi_Minh", offset: n.UTC_PLUS_7, timezone: s.IndochinaTime });
+({ id: u.AsiaHongKong, name: "Asia/Hong_Kong", offset: n.UTC_PLUS_8, timezone: s.HongKongTime });
+({ id: u.AsiaHovd, name: "Asia/Hovd", offset: n.UTC_PLUS_7, timezone: s.HovdTime });
+({ id: u.AsiaIrkutsk, name: "Asia/Irkutsk", offset: n.UTC_PLUS_8, timezone: s.IrkutskTime });
+({ id: u.AsiaJakarta, name: "Asia/Jakarta", offset: n.UTC_PLUS_7, timezone: s.WesternIndonesianTime });
+({ id: u.AsiaJayapura, name: "Asia/Jayapura", offset: n.UTC_PLUS_9, timezone: s.JapanStandardTime });
+({ id: u.AsiaJerusalem, name: "Asia/Jerusalem", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.AsiaKabul, name: "Asia/Kabul", offset: n.UTC_PLUS_4, timezone: s.AfghanistanTime });
+({ id: u.AsiaKamchatka, name: "Asia/Kamchatka", offset: n.UTC_PLUS_12, timezone: s.KamchatkaTime });
+({ id: u.AsiaKarachi, name: "Asia/Karachi", offset: n.UTC_PLUS_5, timezone: s.PakistanStandardTime });
+({ id: u.AsiaKathmandu, name: "Asia/Kathmandu", offset: n.UTC_PLUS_5, timezone: s.NepalTime });
+({ id: u.AsiaKhandyga, name: "Asia/Khandyga", offset: n.UTC_PLUS_9, timezone: s.YakutskTime });
+({ id: u.AsiaKolkata, name: "Asia/Kolkata", offset: n.UTC_PLUS_5, timezone: s.IndianStandardTime });
+({ id: u.AsiaKrasnoyarsk, name: "Asia/Krasnoyarsk", offset: n.UTC_PLUS_7, timezone: s.KrasnoyarskTime });
+({ id: u.AsiaKualaLumpur, name: "Asia/Kuala_Lumpur", offset: n.UTC_PLUS_8, timezone: s.MalaysiaStandardTime });
+({ id: u.AsiaKuching, name: "Asia/Kuching", offset: n.UTC_PLUS_8, timezone: s.MalaysiaStandardTime });
+({ id: u.AsiaKuwait, name: "Asia/Kuwait", offset: n.UTC_PLUS_3, timezone: s.ArabiaStandardTime });
+({ id: u.AsiaMacau, name: "Asia/Macau", offset: n.UTC_PLUS_8, timezone: s.ChinaStandardTime });
+({ id: u.AsiaMagadan, name: "Asia/Magadan", offset: n.UTC_PLUS_11, timezone: s.MagadanTime });
+({ id: u.AsiaMakassar, name: "Asia/Makassar", offset: n.UTC_PLUS_8, timezone: s.MalaysiaTime });
+({ id: u.AsiaManila, name: "Asia/Manila", offset: n.UTC_PLUS_8, timezone: s.PhilippineTime });
+({ id: u.AsiaMuscat, name: "Asia/Muscat", offset: n.UTC_PLUS_4, timezone: s.GulfStandardTime });
+({ id: u.AsiaNovokuznetsk, name: "Asia/Novokuznetsk", offset: n.UTC_PLUS_6, timezone: s.NovosibirskTime });
+({ id: u.AsiaNovosibirsk, name: "Asia/Novosibirsk", offset: n.UTC_PLUS_6, timezone: s.NovosibirskTime });
+({ id: u.AsiaOmsk, name: "Asia/Omsk", offset: n.UTC_PLUS_6, timezone: s.OmskTime });
+({ id: u.AsiaOral, name: "Asia/Oral", offset: n.UTC_PLUS_5, timezone: s.OralTime });
+({ id: u.AsiaPhnomPenh, name: "Asia/Phnom_Penh", offset: n.UTC_PLUS_7, timezone: s.IndochinaTime });
+({ id: u.AsiaPontianak, name: "Asia/Pontianak", offset: n.UTC_PLUS_7, timezone: s.WesternIndonesianTime });
+({ id: u.AsiaPyongyang, name: "Asia/Pyongyang", offset: n.UTC_PLUS_9, timezone: s.KoreaStandardTime });
+({ id: u.AsiaQatar, name: "Asia/Qatar", offset: n.UTC_PLUS_3, timezone: s.ArabiaStandardTime });
+({ id: u.AsiaQyzylorda, name: "Asia/Qyzylorda", offset: n.UTC_PLUS_5, timezone: s.WestKazakhstanTime });
+({ id: u.AsiaRangoon, name: "Asia/Rangoon", offset: n.UTC_PLUS_6, timezone: s.MyanmarStandardTime });
+({ id: u.AsiaRiyadh, name: "Asia/Riyadh", offset: n.UTC_PLUS_3, timezone: s.ArabiaStandardTime });
+({ id: u.AsiaSakhalin, name: "Asia/Sakhalin", offset: n.UTC_PLUS_11, timezone: s.SakhalinIslandTime });
+({ id: u.AsiaSamarkand, name: "Asia/Samarkand", offset: n.UTC_PLUS_5, timezone: s.UzbekistanTime });
+({ id: u.AsiaSeoul, name: "Asia/Seoul", offset: n.UTC_PLUS_9, timezone: s.KoreaStandardTime });
+({ id: u.AsiaShanghai, name: "Asia/Shanghai", offset: n.UTC_PLUS_8, timezone: s.ChinaStandardTime });
+({ id: u.AsiaSingapore, name: "Asia/Singapore", offset: n.UTC_PLUS_8, timezone: s.SingaporeStandardTime });
+({ id: u.AsiaSrednekolymsk, name: "Asia/Srednekolymsk", offset: n.UTC_PLUS_11, timezone: s.SrednekolymskTime });
+({ id: u.AsiaTaipei, name: "Asia/Taipei", offset: n.UTC_PLUS_8, timezone: s.ChinaStandardTime });
+({ id: u.AsiaTashkent, name: "Asia/Tashkent", offset: n.UTC_PLUS_5, timezone: s.UzbekistanTime });
+({ id: u.AsiaTbilisi, name: "Asia/Tbilisi", offset: n.UTC_PLUS_4, timezone: s.GeorgiaStandardTime });
+({ id: u.AsiaTehran, name: "Asia/Tehran", offset: n.UTC_PLUS_3, timezone: s.IranStandardTime });
+({ id: u.AsiaThimphu, name: "Asia/Thimphu", offset: n.UTC_PLUS_6, timezone: s.BhutanTime });
+({ id: u.AsiaTokyo, name: "Asia/Tokyo", offset: n.UTC_PLUS_9, timezone: s.JapanStandardTime });
+({ id: u.AsiaTomsk, name: "Asia/Tomsk", offset: n.UTC_PLUS_6, timezone: s.KrasnoyarskTime });
+({ id: u.AsiaUlaanbaatar, name: "Asia/Ulaanbaatar", offset: n.UTC_PLUS_8, timezone: s.UlaanbaatarStandardTime });
+({ id: u.AsiaUrumqi, name: "Asia/Urumqi", offset: n.UTC_PLUS_8, timezone: s.ChinaStandardTime });
+({ id: u.AsiaUstNera, name: "Asia/Ust-Nera", offset: n.UTC_PLUS_10, timezone: s.VladivostokTime });
+({ id: u.AsiaVientiane, name: "Asia/Vientiane", offset: n.UTC_PLUS_7, timezone: s.IndochinaTime });
+({ id: u.AsiaVladivostok, name: "Asia/Vladivostok", offset: n.UTC_PLUS_10, timezone: s.VladivostokTime });
+({ id: u.AsiaYakutsk, name: "Asia/Yakutsk", offset: n.UTC_PLUS_9, timezone: s.YakutskTime });
+({ id: u.AsiaYekaterinburg, name: "Asia/Yekaterinburg", offset: n.UTC_PLUS_5, timezone: s.YekaterinburgTime });
+({ id: u.AsiaYerevan, name: "Asia/Yerevan", offset: n.UTC_PLUS_4, timezone: s.ArmeniaTime });
+({ id: u.AtlanticAzores, name: "Atlantic/Azores", offset: n.UTC_MINUS_1, timezone: s.AzoresStandardTime });
+({ id: u.AtlanticBermuda, name: "Atlantic/Bermuda", offset: n.UTC_MINUS_4, timezone: s.AtlanticStandardTime });
+({ id: u.AtlanticCanary, name: "Atlantic/Canary", offset: n.UTC_MINUS_1, timezone: s.WesternEuropeanTime });
+({ id: u.AtlanticCapeVerde, name: "Atlantic/Cape_Verde", offset: n.UTC_0, timezone: s.CapeVerdeTime });
+({ id: u.AtlanticFaroe, name: "Atlantic/Faroe", offset: n.UTC_0, timezone: s.GreenwichMeanTime });
+({ id: u.AtlanticMadeira, name: "Atlantic/Madeira", offset: n.UTC_0, timezone: s.WesternEuropeanTime });
+({ id: u.AtlanticReykjavik, name: "Atlantic/Reykjavik", offset: n.UTC_0, timezone: s.GreenwichMeanTime });
+({ id: u.AtlanticSouthGeorgia, name: "Atlantic/South_Georgia", offset: n.UTC_0, timezone: s.CoordinatedUniversalTime });
+({ id: u.AtlanticStHelena, name: "Atlantic/St_Helena", offset: n.UTC_0, timezone: s.GreenwichMeanTime });
+({ id: u.AtlanticStanley, name: "Atlantic/Stanley", offset: n.UTC_0, timezone: s.FalklandIslandsTime });
+({ id: u.AustraliaAdelaide, name: "Australia/Adelaide", offset: n.UTC_PLUS_9_30, timezone: s.AustralianCentralStandardTime });
+({ id: u.AustraliaBrisbane, name: "Australia/Brisbane", offset: n.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
+({ id: u.AustraliaBrokenHill, name: "Australia/Broken_Hill", offset: n.UTC_PLUS_9_30, timezone: s.AustralianCentralStandardTime });
+({ id: u.AustraliaCanberra, name: "Australia/Canberra", offset: n.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
+({ id: u.AustraliaCurrie, name: "Australia/Currie", offset: n.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
+({ id: u.AustraliaDarwin, name: "Australia/Darwin", offset: n.UTC_PLUS_9_30, timezone: s.AustralianCentralStandardTime });
+({ id: u.AustraliaEucla, name: "Australia/Eucla", offset: n.UTC_PLUS_8_45, timezone: s.AustralianCentralWesternStandardTime });
+({ id: u.AustraliaHobart, name: "Australia/Hobart", offset: n.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
+({ id: u.AustraliaLindeman, name: "Australia/Lindeman", offset: n.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
+({ id: u.AustraliaLordHowe, name: "Australia/Lord_Howe", offset: n.UTC_PLUS_10_30, timezone: s.LordHoweStandardTime });
+({ id: u.AustraliaMelbourne, name: "Australia/Melbourne", offset: n.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
+({ id: u.AustraliaPerth, name: "Australia/Perth", offset: n.UTC_PLUS_8, timezone: s.AustralianWesternStandardTime });
+({ id: u.AustraliaSydney, name: "Australia/Sydney", offset: n.UTC_PLUS_10, timezone: s.AustralianEasternStandardTime });
+({ id: u.EuropeAmsterdam, name: "Europe/Amsterdam", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeAndorra, name: "Europe/Andorra", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeAthens, name: "Europe/Athens", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeBelgrade, name: "Europe/Belgrade", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeBerlin, name: "Europe/Berlin", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeBratislava, name: "Europe/Bratislava", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeBrussels, name: "Europe/Brussels", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeBucharest, name: "Europe/Bucharest", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeBudapest, name: "Europe/Budapest", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeBusingen, name: "Europe/Busingen", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeChisinau, name: "Europe/Chisinau", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeCopenhagen, name: "Europe/Copenhagen", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeDublin, name: "Europe/Dublin", offset: n.UTC_0, timezone: s.GreenwichMeanTime });
+({ id: u.EuropeGibraltar, name: "Europe/Gibraltar", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeGuernsey, name: "Europe/Guernsey", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeHelsinki, name: "Europe/Helsinki", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeIsleOfMan, name: "Europe/Isle_of_Man", offset: n.UTC_0, timezone: s.GreenwichMeanTime });
+({ id: u.EuropeIstanbul, name: "Europe/Istanbul", offset: n.UTC_PLUS_3, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeJersey, name: "Europe/Jersey", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeKaliningrad, name: "Europe/Kaliningrad", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeKiev, name: "Europe/Kiev", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeLisbon, name: "Europe/Lisbon", offset: n.UTC_0, timezone: s.GreenwichMeanTime });
+({ id: u.EuropeLjubljana, name: "Europe/Ljubljana", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeLondon, name: "Europe/London", offset: n.UTC_0, timezone: s.GreenwichMeanTime });
+({ id: u.EuropeLuxembourg, name: "Europe/Luxembourg", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeMadrid, name: "Europe/Madrid", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeMalta, name: "Europe/Malta", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeMariehamn, name: "Europe/Mariehamn", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeMinsk, name: "Europe/Minsk", offset: n.UTC_PLUS_3, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeMonaco, name: "Europe/Monaco", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeMoscow, name: "Europe/Moscow", offset: n.UTC_PLUS_3, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeOslo, name: "Europe/Oslo", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeParis, name: "Europe/Paris", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropePodgorica, name: "Europe/Podgorica", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropePrague, name: "Europe/Prague", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeRiga, name: "Europe/Riga", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeRome, name: "Europe/Rome", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeSamara, name: "Europe/Samara", offset: n.UTC_PLUS_4, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeSanMarino, name: "Europe/San_Marino", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeSarajevo, name: "Europe/Sarajevo", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeSimferopol, name: "Europe/Simferopol", offset: n.UTC_PLUS_3, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeSkopje, name: "Europe/Skopje", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeSofia, name: "Europe/Sofia", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeStockholm, name: "Europe/Stockholm", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeTallinn, name: "Europe/Tallinn", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeTirane, name: "Europe/Tirane", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeUzhgorod, name: "Europe/Uzhgorod", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeVaduz, name: "Europe/Vaduz", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeVatican, name: "Europe/Vatican", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeVienna, name: "Europe/Vienna", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeVilnius, name: "Europe/Vilnius", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeVolgograd, name: "Europe/Volgograd", offset: n.UTC_PLUS_4, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeWarsaw, name: "Europe/Warsaw", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeZagreb, name: "Europe/Zagreb", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.EuropeZaporozhye, name: "Europe/Zaporozhye", offset: n.UTC_PLUS_2, timezone: s.EasternEuropeanTime });
+({ id: u.EuropeZurich, name: "Europe/Zurich", offset: n.UTC_PLUS_1, timezone: s.CentralEuropeanTime });
+({ id: u.IndianAntananarivo, name: "Indian/Antananarivo", offset: n.UTC_PLUS_3, timezone: s.EastAfricaTime });
+({ id: u.IndianChagos, name: "Indian/Chagos", offset: n.UTC_PLUS_6, timezone: s.IndianOceanTime });
+({ id: u.IndianChristmas, name: "Indian/Christmas", offset: n.UTC_PLUS_7, timezone: s.ChristmasIslandTime });
+({ id: u.IndianCocos, name: "Indian/Cocos", offset: n.UTC_PLUS_6, timezone: s.CocosIslandsTime });
+({ id: u.IndianComoro, name: "Indian/Comoro", offset: n.UTC_PLUS_3, timezone: s.EastAfricaTime });
+({ id: u.IndianKerguelen, name: "Indian/Kerguelen", offset: n.UTC_PLUS_5, timezone: s.FrenchSouthernAndAntarcticTime });
+({ id: u.IndianMahe, name: "Indian/Mahe", offset: n.UTC_PLUS_4, timezone: s.SeychellesTime });
+({ id: u.IndianMaldives, name: "Indian/Maldives", offset: n.UTC_PLUS_5, timezone: s.MaldivesTime });
+({ id: u.IndianMauritius, name: "Indian/Mauritius", offset: n.UTC_PLUS_4, timezone: s.MauritiusTime });
+({ id: u.IndianMayotte, name: "Indian/Mayotte", offset: n.UTC_PLUS_3, timezone: s.EastAfricaTime });
+({ id: u.IndianReunion, name: "Indian/Reunion", offset: n.UTC_PLUS_4, timezone: s.ReunionTime });
+({ id: u.PacificApia, name: "Pacific/Apia", offset: n.UTC_PLUS_13, timezone: s.SamoaStandardTime });
+({ id: u.PacificAuckland, name: "Pacific/Auckland", offset: n.UTC_PLUS_13, timezone: s.NewZealandStandardTime });
+({ id: u.PacificChatham, name: "Pacific/Chatham", offset: n.UTC_PLUS_13, timezone: s.ChathamStandardTime });
+({ id: u.PacificEaster, name: "Pacific/Easter", offset: n.UTC_PLUS_6, timezone: s.EasterIslandStandardTime });
+({ id: u.PacificEfate, name: "Pacific/Efate", offset: n.UTC_PLUS_11, timezone: s.VanuatuTime });
+({ id: u.PacificEnderbury, name: "Pacific/Enderbury", offset: n.UTC_PLUS_13, timezone: s.TongaTime });
+({ id: u.PacificFakaofo, name: "Pacific/Fakaofo", offset: n.UTC_PLUS_13, timezone: s.TongaTime });
+({ id: u.PacificFiji, name: "Pacific/Fiji", offset: n.UTC_PLUS_12, timezone: s.FijiTime });
+({ id: u.PacificFunafuti, name: "Pacific/Funafuti", offset: n.UTC_PLUS_12, timezone: s.TuvaluTime });
+({ id: u.PacificGalapagos, name: "Pacific/Galapagos", offset: n.UTC_PLUS_6, timezone: s.GalapagosTime });
+({ id: u.PacificGambier, name: "Pacific/Gambier", offset: n.UTC_PLUS_9, timezone: s.GambierIslandTime });
+({ id: u.PacificGuadalcanal, name: "Pacific/Guadalcanal", offset: n.UTC_PLUS_11, timezone: s.SolomonIslandsTime });
+({ id: u.PacificGuam, name: "Pacific/Guam", offset: n.UTC_PLUS_10, timezone: s.ChamorroStandardTime });
+({ id: u.PacificHonolulu, name: "Pacific/Honolulu", offset: n.UTC_PLUS_10, timezone: s.HawaiiAleutianStandardTime });
+({ id: u.PacificJohnston, name: "Pacific/Johnston", offset: n.UTC_PLUS_10, timezone: s.HawaiiAleutianStandardTime });
+({ id: u.PacificKiritimati, name: "Pacific/Kiritimati", offset: n.UTC_PLUS_14, timezone: s.LineIslandsTime });
+({ id: u.PacificKosrae, name: "Pacific/Kosrae", offset: n.UTC_PLUS_11, timezone: s.KosraeTime });
+({ id: u.PacificKwajalein, name: "Pacific/Kwajalein", offset: n.UTC_PLUS_12, timezone: s.MarshallIslandsTime });
+({ id: u.PacificMajuro, name: "Pacific/Majuro", offset: n.UTC_PLUS_12, timezone: s.MarshallIslandsTime });
+({ id: u.PacificMarquesas, name: "Pacific/Marquesas", offset: n.UTC_PLUS_9, timezone: s.MarquesasIslandsTime });
+({ id: u.PacificMidway, name: "Pacific/Midway", offset: n.UTC_PLUS_11, timezone: s.SamoaStandardTime });
+({ id: u.PacificNauru, name: "Pacific/Nauru", offset: n.UTC_PLUS_12, timezone: s.NauruTime });
+({ id: u.PacificNiue, name: "Pacific/Niue", offset: n.UTC_PLUS_11, timezone: s.NiueTime });
+({ id: u.PacificNorfolk, name: "Pacific/Norfolk", offset: n.UTC_PLUS_11, timezone: s.NorfolkIslandTime });
+({ id: u.PacificNoumea, name: "Pacific/Noumea", offset: n.UTC_PLUS_11, timezone: s.NewCaledoniaTime });
+({ id: u.PacificPagoPago, name: "Pacific/Pago_Pago", offset: n.UTC_PLUS_11, timezone: s.SamoaStandardTime });
+({ id: u.PacificPalau, name: "Pacific/Palau", offset: n.UTC_PLUS_9, timezone: s.PalauTime });
+({ id: u.PacificPitcairn, name: "Pacific/Pitcairn", offset: n.UTC_PLUS_8, timezone: s.PitcairnTime });
+({ id: u.PacificPonape, name: "Pacific/Ponape", offset: n.UTC_PLUS_11, timezone: s.PohnpeiStandardTime });
+({ id: u.PacificPortMoresby, name: "Pacific/Port_Moresby", offset: n.UTC_PLUS_10, timezone: s.PapuaNewGuineaTime });
+({ id: u.PacificRarotonga, name: "Pacific/Rarotonga", offset: n.UTC_PLUS_10, timezone: s.CookIslandTime });
+({ id: u.PacificSaipan, name: "Pacific/Saipan", offset: n.UTC_PLUS_10, timezone: s.ChamorroStandardTime });
+({ id: u.PacificTahiti, name: "Pacific/Tahiti", offset: n.UTC_PLUS_10, timezone: s.TahitiTime });
+({ id: u.PacificTarawa, name: "Pacific/Tarawa", offset: n.UTC_PLUS_12, timezone: s.GilbertIslandTime });
+({ id: u.PacificTongatapu, name: "Pacific/Tongatapu", offset: n.UTC_PLUS_13, timezone: s.TongaTime });
+({ id: u.PacificChuuk, name: "Pacific/Chuuk", offset: n.UTC_PLUS_10, timezone: s.ChuukTime });
+({ id: u.PacificPohnpei, name: "Pacific/Pohnpei", offset: n.UTC_PLUS_11, timezone: s.PohnpeiStandardTime });
+({ id: u.PacificYap, name: "Pacific/Yap", offset: n.UTC_PLUS_10, timezone: s.ChuukTime });
 var ye = (a2 = 21) => {
   let l2 = "", c2 = crypto.getRandomValues(new Uint8Array(a2));
   for (; a2--; ) {
@@ -24766,27 +26606,27 @@ var b;
 var D = class extends Error {
   constructor(l2, c2) {
     super(l2);
-    h$1(this, "cause");
-    h$1(this, "code", b.Exception);
-    h$1(this, "context");
-    h$1(this, "created");
-    h$1(this, "data");
-    h$1(this, "description");
-    h$1(this, "model");
-    h$1(this, "form");
-    h$1(this, "friendlyMessage", "An unknown error has occurred. :(");
-    h$1(this, "id");
-    h$1(this, "logLevel", v.Exception);
-    h$1(this, "origin");
-    h$1(this, "pii");
-    h$1(this, "request");
-    h$1(this, "response");
-    h$1(this, "scope");
-    h$1(this, "remediation");
-    h$1(this, "tags");
-    h$1(this, "task");
-    h$1(this, "user");
-    h$1(this, "__proto__");
+    h(this, "cause");
+    h(this, "code", b.Exception);
+    h(this, "context");
+    h(this, "created");
+    h(this, "data");
+    h(this, "description");
+    h(this, "model");
+    h(this, "form");
+    h(this, "friendlyMessage", "An unknown error has occurred. :(");
+    h(this, "id");
+    h(this, "logLevel", v.Exception);
+    h(this, "origin");
+    h(this, "pii");
+    h(this, "request");
+    h(this, "response");
+    h(this, "scope");
+    h(this, "remediation");
+    h(this, "tags");
+    h(this, "task");
+    h(this, "user");
+    h(this, "__proto__");
     var o2, I2, d2, g2;
     let A2 = new.target.prototype;
     if (this.__proto__ = A2, Error.captureStackTrace && Error.captureStackTrace((o2 = c2 == null ? void 0 : c2.cause) != null ? o2 : this, D), this.id = ye(), this.name = this.constructor.name, this.created = new Date().toString(), this.description = (I2 = c2 == null ? void 0 : c2.description) != null ? I2 : this.description, this.remediation = (d2 = c2 == null ? void 0 : c2.remediation) != null ? d2 : this.remediation, this.scope = (g2 = c2 == null ? void 0 : c2.scope) != null ? g2 : this.scope, c2) {
@@ -24801,10 +26641,10 @@ var D = class extends Error {
 var k = class extends D {
   constructor() {
     super(...arguments);
-    h$1(this, "code", b.InvalidPropertyException);
-    h$1(this, "description", "An object property is invalid.");
-    h$1(this, "logLevel", v.Exception);
-    h$1(this, "remediation", { response: { code: 400 }, retry: false });
+    h(this, "code", b.InvalidPropertyException);
+    h(this, "description", "An object property is invalid.");
+    h(this, "logLevel", v.Exception);
+    h(this, "remediation", { response: { code: 400 }, retry: false });
   }
 };
 var Re = L(Ge(), 1), N = L(We(), 1);
@@ -27218,7 +29058,7 @@ var sha256 = { exports: {} };
           var e2 = H3[4];
           var f2 = H3[5];
           var g2 = H3[6];
-          var h = H3[7];
+          var h2 = H3[7];
           for (var i = 0; i < 64; i++) {
             if (i < 16) {
               W2[i] = M2[offset2 + i] | 0;
@@ -27233,9 +29073,9 @@ var sha256 = { exports: {} };
             var maj = a2 & b2 ^ a2 & c2 ^ b2 & c2;
             var sigma0 = (a2 << 30 | a2 >>> 2) ^ (a2 << 19 | a2 >>> 13) ^ (a2 << 10 | a2 >>> 22);
             var sigma1 = (e2 << 26 | e2 >>> 6) ^ (e2 << 21 | e2 >>> 11) ^ (e2 << 7 | e2 >>> 25);
-            var t1 = h + sigma1 + ch + K2[i] + W2[i];
+            var t1 = h2 + sigma1 + ch + K2[i] + W2[i];
             var t2 = sigma0 + maj;
-            h = g2;
+            h2 = g2;
             g2 = f2;
             f2 = e2;
             e2 = d2 + t1 | 0;
@@ -27251,7 +29091,7 @@ var sha256 = { exports: {} };
           H3[4] = H3[4] + e2 | 0;
           H3[5] = H3[5] + f2 | 0;
           H3[6] = H3[6] + g2 | 0;
-          H3[7] = H3[7] + h | 0;
+          H3[7] = H3[7] + h2 | 0;
         },
         _doFinalize: function() {
           var data = this._data;
@@ -27434,10 +29274,10 @@ function am2(i, x2, w2, j2, c2, n2) {
   var xl = x2 & 32767, xh = x2 >> 15;
   while (--n2 >= 0) {
     var l2 = this[i] & 32767;
-    var h = this[i++] >> 15;
-    var m2 = xh * l2 + h * xl;
+    var h2 = this[i++] >> 15;
+    var m2 = xh * l2 + h2 * xl;
     l2 = xl * l2 + ((m2 & 32767) << 15) + w2[j2] + (c2 & 1073741823);
-    c2 = (l2 >>> 30) + (m2 >>> 15) + xh * h + (c2 >>> 30);
+    c2 = (l2 >>> 30) + (m2 >>> 15) + xh * h2 + (c2 >>> 30);
     w2[j2++] = l2 & 1073741823;
   }
   return c2;
@@ -27446,10 +29286,10 @@ function am3(i, x2, w2, j2, c2, n2) {
   var xl = x2 & 16383, xh = x2 >> 14;
   while (--n2 >= 0) {
     var l2 = this[i] & 16383;
-    var h = this[i++] >> 14;
-    var m2 = xh * l2 + h * xl;
+    var h2 = this[i++] >> 14;
+    var m2 = xh * l2 + h2 * xl;
     l2 = xl * l2 + ((m2 & 16383) << 14) + w2[j2] + c2;
-    c2 = (l2 >> 28) + (m2 >> 14) + xh * h;
+    c2 = (l2 >> 28) + (m2 >> 14) + xh * h2;
     w2[j2++] = l2 & 268435455;
   }
   return c2;
@@ -30367,7 +32207,7 @@ var js_cookie = { exports: {} };
         }
         return document.cookie = key + "=" + value + stringifiedAttributes;
       }
-      function get(key, json) {
+      function get2(key, json) {
         if (typeof document === "undefined") {
           return;
         }
@@ -30400,10 +32240,10 @@ var js_cookie = { exports: {} };
       }
       api.set = set;
       api.get = function(key) {
-        return get(key, false);
+        return get2(key, false);
       };
       api.getJSON = function(key) {
-        return get(key, true);
+        return get2(key, true);
       };
       api.remove = function(key, attributes) {
         set(key, "", extend(attributes, {
@@ -30418,7 +32258,7 @@ var js_cookie = { exports: {} };
     });
   });
 })(js_cookie);
-const logger = new p$2();
+const logger = new p$1();
 const initialState$7 = {
   inProgress: false
 };
@@ -30685,7 +32525,7 @@ const signUp = ({
       }
     });
   } catch (error) {
-    if (error.name === p$3.name) {
+    if (error.name === p$2.name) {
       dispatch(setSignupFailure(error.toJSON()));
       return;
     }
@@ -30987,110 +32827,6 @@ const createRootReducer = ({
     user
   }));
 };
-var jsxRuntime = { exports: {} };
-var reactJsxRuntime_production_min = {};
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-function toObject(val) {
-  if (val === null || val === void 0) {
-    throw new TypeError("Object.assign cannot be called with null or undefined");
-  }
-  return Object(val);
-}
-function shouldUseNative() {
-  try {
-    if (!Object.assign) {
-      return false;
-    }
-    var test1 = new String("abc");
-    test1[5] = "de";
-    if (Object.getOwnPropertyNames(test1)[0] === "5") {
-      return false;
-    }
-    var test2 = {};
-    for (var i = 0; i < 10; i++) {
-      test2["_" + String.fromCharCode(i)] = i;
-    }
-    var order2 = Object.getOwnPropertyNames(test2).map(function(n2) {
-      return test2[n2];
-    });
-    if (order2.join("") !== "0123456789") {
-      return false;
-    }
-    var test3 = {};
-    "abcdefghijklmnopqrst".split("").forEach(function(letter) {
-      test3[letter] = letter;
-    });
-    if (Object.keys(Object.assign({}, test3)).join("") !== "abcdefghijklmnopqrst") {
-      return false;
-    }
-    return true;
-  } catch (err) {
-    return false;
-  }
-}
-shouldUseNative() ? Object.assign : function(target, source) {
-  var from;
-  var to = toObject(target);
-  var symbols;
-  for (var s2 = 1; s2 < arguments.length; s2++) {
-    from = Object(arguments[s2]);
-    for (var key in from) {
-      if (hasOwnProperty.call(from, key)) {
-        to[key] = from[key];
-      }
-    }
-    if (getOwnPropertySymbols) {
-      symbols = getOwnPropertySymbols(from);
-      for (var i = 0; i < symbols.length; i++) {
-        if (propIsEnumerable.call(from, symbols[i])) {
-          to[symbols[i]] = from[symbols[i]];
-        }
-      }
-    }
-  }
-  return to;
-};
-/** @license React v17.0.2
- * react-jsx-runtime.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-var f = require$$0$1, g = 60103;
-reactJsxRuntime_production_min.Fragment = 60107;
-if (typeof Symbol === "function" && Symbol.for) {
-  var h = Symbol.for;
-  g = h("react.element");
-  reactJsxRuntime_production_min.Fragment = h("react.fragment");
-}
-var m = f.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner, n = Object.prototype.hasOwnProperty, p = { key: true, ref: true, __self: true, __source: true };
-function q(c2, a2, k2) {
-  var b2, d2 = {}, e2 = null, l2 = null;
-  k2 !== void 0 && (e2 = "" + k2);
-  a2.key !== void 0 && (e2 = "" + a2.key);
-  a2.ref !== void 0 && (l2 = a2.ref);
-  for (b2 in a2)
-    n.call(a2, b2) && !p.hasOwnProperty(b2) && (d2[b2] = a2[b2]);
-  if (c2 && c2.defaultProps)
-    for (b2 in a2 = c2.defaultProps, a2)
-      d2[b2] === void 0 && (d2[b2] = a2[b2]);
-  return { $$typeof: g, type: c2, key: e2, ref: l2, props: d2, _owner: m.current };
-}
-reactJsxRuntime_production_min.jsx = q;
-reactJsxRuntime_production_min.jsxs = q;
-{
-  jsxRuntime.exports = reactJsxRuntime_production_min;
-}
-const jsx = jsxRuntime.exports.jsx;
 const useAppDispatch = () => useDispatch();
 const useAppSelector = useSelector;
 const paymentMethodsAdapter = createEntityAdapter({
@@ -31150,7 +32886,7 @@ const getSubscriptions = () => async (dispatch) => {
   dispatch(subscriptionsSlice.actions.setInProgress(true));
 };
 const environment = s$3();
-const history = createBrowserHistory();
+const history = createBrowserHistory$1();
 const createStore = ({
   models,
   reducers,
@@ -31231,5 +32967,5 @@ const renderReduxWebApp = async ({
     })
   }), document.querySelector("#root"));
 };
-export { addThemes, addToastNotification, checkUsernameAvailability, closeModal, createStore, deletePaymentMethod, getPaymentMethods, getSubscriptions, getVerificationDetails, hideModelPanel, history, login$1 as login, logout, refreshSession, renderReduxWebApp, resendVerificationCode, setTheme, showModal, showModelPanel, signUp, createStore as store, useAppDispatch as useDispatch, useAppSelector as useSelector, verifyCode };
+export { Link, NavLink, Navigate, Outlet, Route, Router, Routes, addThemes, addToastNotification, checkUsernameAvailability, closeModal, createStore, deletePaymentMethod, getPaymentMethods, getSubscriptions, getVerificationDetails, hideModelPanel, history, login$1 as login, logout, matchPath, matchRoutes, refreshSession, renderReduxWebApp, resendVerificationCode, setTheme, showModal, showModelPanel, signUp, createStore as store, useAppDispatch as useDispatch, useLocation, useMatch, useNavigate, useParams, useResolvedPath, useSearchParams, useAppSelector as useSelector, verifyCode };
 //# sourceMappingURL=index.js.map

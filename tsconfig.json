@@ -1,6 +1,7 @@
 {
   "extends": "@srclaunch/dx/tsconfig.ui.json",
   "compilerOptions": {
+    "declaration": true,
     "declarationDir": "dist",
     "emitDeclarationOnly": true,
     "outDir": "dist",

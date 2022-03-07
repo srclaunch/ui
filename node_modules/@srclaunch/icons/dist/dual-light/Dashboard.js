@@ -1,6 +1,0 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { memo } from 'react';
-export const Dashboard = memo((props) => {
-    return (_jsxs("svg", { width: "1em", height: "1em", viewBox: "0 0 24 24", fill: "none", ...props, children: [_jsx("path", { d: "M12 3C6.477 3 2 7.477 2 13c0 2.344.807 4.5 2.158 6.205.18.227.457.351.747.351h14.19c.29 0 .568-.124.747-.35A9.957 9.957 0 0022 13c0-5.523-4.477-10-10-10z", fill: "url(#prefix__paint0_linear)" }), _jsx("path", { d: "M17.207 9.207a1 1 0 00-1.414-1.414l-3.275 3.275a2 2 0 101.414 1.414l3.275-3.275z", fill: "url(#prefix__paint1_linear)" }), _jsxs("defs", { children: [_jsxs("linearGradient", { id: "prefix__paint0_linear", x1: 12, y1: 3, x2: 12, y2: 19.556, gradientUnits: "userSpaceOnUse", children: [_jsx("stop", { stopColor: "#fff" }), _jsx("stop", { offset: 1, stopColor: "#D1DAEE" })] }), _jsxs("linearGradient", { id: "prefix__paint1_linear", x1: 13.75, y1: 7.5, x2: 13.75, y2: 15, gradientUnits: "userSpaceOnUse", children: [_jsx("stop", { stopColor: "#6073D8" }), _jsx("stop", { offset: 1, stopColor: "#5C5ACA" })] })] })] }));
-});
-//# sourceMappingURL=Dashboard.js.map

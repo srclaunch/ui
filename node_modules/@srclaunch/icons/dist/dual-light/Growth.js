@@ -1,6 +1,0 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { memo } from 'react';
-export const Growth = memo((props) => {
-    return (_jsxs("svg", { width: "1em", height: "1em", viewBox: "0 0 24 24", fill: "none", ...props, children: [_jsx("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M3 2a1 1 0 011 1v16a1 1 0 001 1h16a1 1 0 110 2H5a3 3 0 01-3-3V3a1 1 0 011-1z", fill: "url(#prefix__paint0_linear)" }), _jsx("path", { d: "M17 6.5a1 1 0 100 2h1.586L14.5 12.586 11.914 10a2 2 0 00-2.828 0l-2.793 2.793a1 1 0 101.414 1.414l2.793-2.793L13.086 14a2 2 0 002.828 0L20 9.914V11.5a1 1 0 102 0v-4a1 1 0 00-1-1h-4z", fill: "url(#prefix__paint1_linear)" }), _jsxs("defs", { children: [_jsxs("linearGradient", { id: "prefix__paint0_linear", x1: 12, y1: 2, x2: 12, y2: 22, gradientUnits: "userSpaceOnUse", children: [_jsx("stop", { stopColor: "#6073D8" }), _jsx("stop", { offset: 1, stopColor: "#5C5ACA" })] }), _jsxs("linearGradient", { id: "prefix__paint1_linear", x1: 14, y1: 6.5, x2: 14, y2: 14.586, gradientUnits: "userSpaceOnUse", children: [_jsx("stop", { stopColor: "#fff" }), _jsx("stop", { offset: 1, stopColor: "#D1DAEE" })] })] })] }));
-});
-//# sourceMappingURL=Growth.js.map

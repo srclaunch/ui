@@ -2049,14 +2049,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/icons@npm:^0.1.7":
-  version: 0.1.7
-  resolution: "@srclaunch/icons@npm:0.1.7"
+"@srclaunch/icons@npm:^0.1.10":
+  version: 0.1.10
+  resolution: "@srclaunch/icons@npm:0.1.10"
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
-    styled-components: ^5.3.3
-  checksum: 51e5c8e1bbd96b51c47e3241aeb1772952ba72731377d67ca0bdc6b6f91129c3069db624e1b3a36230b35c22bb975187741323a0aed7402339fce69f3a52c89b
+  checksum: a59677b5098d3332f022c0f4fef437acac3561cf6f47f4b07a5532c29944dd6fb462387b8a4ba3f2da8704c31b2956d2f8af45d6b4a15433fb80621d5177dafb
   languageName: node
   linkType: hard
 
@@ -2074,35 +2073,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/react-hooks@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "@srclaunch/react-hooks@npm:0.1.2"
+"@srclaunch/react-hooks@npm:^0.1.3":
+  version: 0.1.3
+  resolution: "@srclaunch/react-hooks@npm:0.1.3"
   peerDependencies:
     react: ^17.0.2
+    react-dom: ^17.0.2
     react-router-dom: ^6.2.1
-  checksum: 81a7902e70f9d7fdc482ffd363c3b44eace2d36579bb4b1f79c186c53cb6828029b6f887c26a4297702e86bf41b859f91248871a8dc5e52179cf36e98c084b34
+  checksum: f10d0c8c0cf5643a5cd24dc624e501fccd674cf04d02737710205f38644f5b38974600e074b54465c4bf8c0624885ae7b19cc8c02fcabe33f2d636fe28310fd3
   languageName: node
   linkType: hard
 
-"@srclaunch/themes@npm:^0.1.10":
-  version: 0.1.10
-  resolution: "@srclaunch/themes@npm:0.1.10"
+"@srclaunch/themes@npm:^0.1.12":
+  version: 0.1.12
+  resolution: "@srclaunch/themes@npm:0.1.12"
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
     styled-components: ^5.3.3
-  checksum: 17e68756f734ab1393cf23d6b1aff1ee2f4e2fd21fbd5b821f84e4c276640e07c406363c3c4bd5656dbdd16351fa865bcad043dd755da7f654021de0dc42379a
-  languageName: node
-  linkType: hard
-
-"@srclaunch/themes@npm:^0.1.6":
-  version: 0.1.6
-  resolution: "@srclaunch/themes@npm:0.1.6"
-  peerDependencies:
-    react: ^17.0.2
-    react-dom: ^17.0.2
-    styled-components: ^5.3.3
-  checksum: adbc756a5278aa5f9144fc8e4732646825a3a2bfbf4a59a905c63a8acbbf767b277c6d88b21b10d43fe8613182c93aff4f5de786326436cfa82112caf8e9e4f2
+  checksum: da95b57000bbfad78e0c4e92ab098309c5401f6e80afe1abf9db6f9f38e8b9754d6993c314f0ec95babfe349fb783db27233cc78f0c25b74b42691cf226181f3
   languageName: node
   linkType: hard
 
@@ -2130,14 +2119,14 @@ __metadata:
     "@srclaunch/dx": ^0.1.2
     "@srclaunch/exceptions": ^0.1.6
     "@srclaunch/i18n": ^0.1.2
-    "@srclaunch/icons": ^0.1.7
+    "@srclaunch/icons": ^0.1.10
     "@srclaunch/logger": ^0.1.2
-    "@srclaunch/react-hooks": ^0.1.2
-    "@srclaunch/themes": ^0.1.10
+    "@srclaunch/react-hooks": ^0.1.3
+    "@srclaunch/themes": ^0.1.12
     "@srclaunch/transform": ^0.1.2
     "@srclaunch/types": ^0.1.2
     "@srclaunch/validation": ^0.1.2
-    "@srclaunch/web-application-state": ^0.1.28
+    "@srclaunch/web-application-state": ^0.1.30
     "@stripe/react-stripe-js": ^1.7.0
     "@stripe/stripe-js": ^1.22.0
     "@testing-library/jest-dom": ^5.16.2
@@ -2237,16 +2226,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/web-application-state@npm:^0.1.28":
-  version: 0.1.28
-  resolution: "@srclaunch/web-application-state@npm:0.1.28"
+"@srclaunch/web-application-state@npm:^0.1.30":
+  version: 0.1.30
+  resolution: "@srclaunch/web-application-state@npm:0.1.30"
   dependencies:
     "@reduxjs/toolkit": ^1.7.2
     "@srclaunch/exceptions": ^0.1.6
     "@srclaunch/http-client": ^0.1.2
     "@srclaunch/i18n": ^0.1.2
     "@srclaunch/logger": ^0.1.2
-    "@srclaunch/themes": ^0.1.6
+    "@srclaunch/themes": ^0.1.12
     "@srclaunch/validation": ^0.1.2
     "@srclaunch/web-environment": ^0.1.2
     amazon-cognito-identity-js: ^5.2.7
@@ -2261,7 +2250,7 @@ __metadata:
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: 25e819c4f3770fb8695e0fc5cd9b935aa2c0a26cb70ca77f7adf68e5c3126d229620b4c8f8c1d58c9c67330855825ef91851ab8eec760f880a0d84a5bbcb1e2e
+  checksum: 332255c1ef931df14863d022552a1114d8cc5063a0e5bca44770489253967b31a43923d37cf019cc521001d6b051ad286e70702749876ad223a019c040977b91
   languageName: node
   linkType: hard
 

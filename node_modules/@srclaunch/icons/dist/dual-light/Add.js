@@ -1,6 +1,0 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { memo } from 'react';
-export const Add = memo((props) => {
-    return (_jsxs("svg", { width: "1em", height: "1em", viewBox: "0 0 24 24", fill: "none", ...props, children: [_jsx("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M12 4a1 1 0 011 1v14a1 1 0 11-2 0V5a1 1 0 011-1z", fill: "url(#prefix__paint0_linear)" }), _jsx("path", { fillRule: "evenodd", clipRule: "evenodd", d: "M4 12a1 1 0 011-1h14a1 1 0 110 2H5a1 1 0 01-1-1z", fill: "url(#prefix__paint1_linear)" }), _jsxs("defs", { children: [_jsxs("linearGradient", { id: "prefix__paint0_linear", x1: 13, y1: 12, x2: 11, y2: 12, gradientUnits: "userSpaceOnUse", children: [_jsx("stop", { stopColor: "#6073D8" }), _jsx("stop", { offset: 1, stopColor: "#5C5ACA" })] }), _jsxs("linearGradient", { id: "prefix__paint1_linear", x1: 12, y1: 11, x2: 12, y2: 13, gradientUnits: "userSpaceOnUse", children: [_jsx("stop", { stopColor: "#fff" }), _jsx("stop", { offset: 1, stopColor: "#D1DAEE" })] })] })] }));
-});
-//# sourceMappingURL=Add.js.map
