@@ -37,6 +37,7 @@ export const Label = memo(
   ({
     alignItems = Align.Center,
     alignContent = Align.Stretch,
+    alignText = Align.Left,
     as = 'label',
     children,
     className = '',
@@ -73,6 +74,7 @@ export const Label = memo(
             icon.svg) && <Icon marginRight={Amount.Least} {...icon} />}
 
         <TextContainer
+          alignText={alignText}
           as="span"
           className={`${className} text`}
           inline={inline}

@@ -51,10 +51,10 @@ export const LoginForm = memo(
     const dispatch = useDispatch();
 
     const loginState = useSelector(
-      (state: RootState) => state.user.authentication?.login,
+      (s: RootState) => s.user.authentication?.login,
     );
 
-    const state = useSelector((state: RootState) => state);
+    const state = useSelector((s: RootState) => s);
 
     console.log('state2', state);
 

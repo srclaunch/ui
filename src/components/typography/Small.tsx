@@ -10,6 +10,7 @@ export const Small = memo(
     as = 'small',
     className = '',
     children,
+    grow = false,
     lineHeight = Size.Small,
     textColor = TextColors.Light,
     textSize = TextSize.Small,
@@ -19,6 +20,7 @@ export const Small = memo(
       <Label
         as={as}
         className={`${className} small`}
+        grow={grow}
         textColor={textColor}
         lineHeight={lineHeight}
         {...props}
