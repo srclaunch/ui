@@ -20734,7 +20734,7 @@ const Icon = memo((_g) => {
 const TextContainer = styled.span.withConfig({
   displayName: "TextContainer",
   componentId: "sc-1hiw5ca-0"
-})(["", ";"], TextStyles);
+})(["", ";display:contents;"], TextStyles);
 const Label = memo((_i2) => {
   var _j = _i2, {
     alignItems = Align.Center,

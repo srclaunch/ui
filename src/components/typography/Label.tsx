@@ -31,6 +31,7 @@ export type LabelProps<E = HTMLElement> = {
 
 const TextContainer = styled.span<TextProps>`
   ${TextStyles};
+  display: contents;
 `;
 
 export const Label = memo(
