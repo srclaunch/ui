@@ -20600,7 +20600,42 @@ const Container$h = memo((_a2) => {
   }));
 });
 function getDisplayPropertyValue(as) {
-  return as;
+  switch (as) {
+    case "a":
+      return "inline";
+    case "button":
+      return "inline-block";
+    case "div":
+      return "flex";
+    case "h1":
+      return "block";
+    case "h2":
+      return "block";
+    case "h3":
+      return "block";
+    case "h4":
+      return "block";
+    case "h5":
+      return "block";
+    case "h6":
+      return "block";
+    case "label":
+      return "flex";
+    case "input":
+      return "inline";
+    case "p":
+      return "block";
+    case "select":
+      return "inline";
+    case "small":
+      return "contents";
+    case "span":
+      return "contents";
+    case "textarea":
+      return "inline";
+    default:
+      return "inline";
+  }
 }
 const getLineHeight = (lineHeight) => {
   if (typeof lineHeight === "number") {
@@ -20793,7 +20828,7 @@ const Label = memo((_i2) => {
       marginRight: Amount.Least
     }, icon)), /* @__PURE__ */ jsx$1(TextContainer, __spreadProps(__spreadValues({
       alignText,
-      as: "span",
+      as,
       className: `${className} text`,
       inline,
       selectable,

@@ -78,7 +78,7 @@ export const Label = memo(
 
         <TextContainer
           alignText={alignText}
-          as="span"
+          as={as}
           className={`${className} text`}
           inline={inline}
           selectable={selectable}
