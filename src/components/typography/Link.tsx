@@ -68,6 +68,7 @@ export const Link = memo(
           height={size}
         >
           <Label
+            as="span"
             lineHeight={size}
             textColor={textColor}
             textWeight={textWeight}

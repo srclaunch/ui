@@ -30343,6 +30343,7 @@ const Link = memo((_ua) => {
       grow: false,
       height: size,
       children: /* @__PURE__ */ jsx$1(Label, __spreadProps(__spreadValues({
+        as: "span",
         lineHeight: size,
         textColor,
         textWeight,
