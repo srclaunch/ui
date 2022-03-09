@@ -58,7 +58,6 @@ export const Label = memo(
     whiteSpace = WhiteSpace.NoWrap,
     ...props
   }: LabelProps): ReactElement => {
-    console.log('as', as);
     return (
       <Container
         alignItems={alignItems}

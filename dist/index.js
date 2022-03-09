@@ -20815,7 +20815,6 @@ const Label = memo((_i2) => {
     "underline",
     "whiteSpace"
   ]);
-  console.log("as", as);
   return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
     alignItems,
     alignContent,
@@ -30365,6 +30364,7 @@ const Small = memo((_wa) => {
     className = "",
     children,
     grow = false,
+    orientation = Orientation.Horizontal,
     lineHeight = Size.Small,
     textColor = TextColors.Light,
     textSize = TextSize.Small
@@ -30373,6 +30373,7 @@ const Small = memo((_wa) => {
     "className",
     "children",
     "grow",
+    "orientation",
     "lineHeight",
     "textColor",
     "textSize"
@@ -30382,7 +30383,8 @@ const Small = memo((_wa) => {
     className: `${className} small`,
     grow,
     textColor,
-    lineHeight
+    lineHeight,
+    orientation
   }, props), {
     children
   }));
