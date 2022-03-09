@@ -20601,6 +20601,12 @@ const Container$h = memo((_a2) => {
 });
 function getDisplayPropertyValue(as) {
   switch (as) {
+    case "a":
+      return "inline";
+    case "button":
+      return "inline-block";
+    case "div":
+      return "flex";
     case "h1":
       return "block";
     case "h2":
@@ -20613,22 +20619,18 @@ function getDisplayPropertyValue(as) {
       return "block";
     case "h6":
       return "block";
-    case "p":
-      return "block";
-    case "span":
-      return "inline";
-    case "div":
-      return "block";
-    case "a":
-      return "inline";
-    case "button":
-      return "inline";
+    case "label":
+      return "flex";
     case "input":
       return "inline";
-    case "label":
-      return "inline";
+    case "p":
+      return "block";
     case "select":
       return "inline";
+    case "small":
+      return "contents";
+    case "span":
+      return "contents";
     case "textarea":
       return "inline";
     default:

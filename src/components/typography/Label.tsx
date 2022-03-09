@@ -1,7 +1,7 @@
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 
-import { getDisplayPropertyValue } from '../../lib/css/typography';
+import { getDisplayPropertyValue } from '../../lib/css/display';
 import { TextStyles } from '../../styles/typography';
 import {
   Align,
