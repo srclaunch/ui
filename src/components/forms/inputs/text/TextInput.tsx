@@ -88,7 +88,7 @@ export const TextInput = memo(
       if (validation && valueChanged) {
         const probs = validate(value, validation);
 
-        setProblems(probs && probs.length ? probs : undefined);
+        setProblems(probs && probs.length > 0 ? probs : undefined);
 
         if (onChange)
           onChange({

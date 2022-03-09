@@ -25730,7 +25730,7 @@ const TextInput = memo((_L) => {
   useEffect(() => {
     if (validation && valueChanged) {
       const probs = Si$1(value2, validation);
-      setProblems(probs && probs.length ? probs : void 0);
+      setProblems(probs && probs.length > 0 ? probs : void 0);
       if (onChange)
         onChange({
           problems: probs,
