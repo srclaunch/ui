@@ -20819,7 +20819,7 @@ const Label = memo((_i2) => {
   return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
     alignItems,
     alignContent,
-    as,
+    as: "label",
     className: `${className} label`,
     grow,
     orientation

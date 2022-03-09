@@ -63,7 +63,7 @@ export const Label = memo(
       <Container
         alignItems={alignItems}
         alignContent={alignContent}
-        as={as}
+        as="label"
         className={`${className} label`}
         grow={grow}
         orientation={orientation}
