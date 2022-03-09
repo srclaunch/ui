@@ -97,11 +97,11 @@ export const TextInput = memo(
             value,
           });
       } else {
-        setProblems([]);
+        setProblems(undefined);
 
         if (onChange)
           onChange({
-            problems: [],
+            problems: undefined,
             validated: true,
             value,
           });

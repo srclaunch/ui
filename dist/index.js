@@ -25738,10 +25738,10 @@ const TextInput = memo((_L) => {
           value: value2
         });
     } else {
-      setProblems([]);
+      setProblems(void 0);
       if (onChange)
         onChange({
-          problems: [],
+          problems: void 0,
           validated: true,
           value: value2
         });
