@@ -20815,6 +20815,7 @@ const Label = memo((_i2) => {
     "underline",
     "whiteSpace"
   ]);
+  console.log("as", as);
   return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
     alignItems,
     alignContent,
