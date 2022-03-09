@@ -80,7 +80,7 @@ export const TextInput = memo(
   }: TextInputProps): ReactElement => {
     const [value, setValue] = useState(defaultValue ?? '');
     const [focused, setFocused] = useState(false);
-    const [problems, setProblems] = useState<ValidationProblem[]>([]);
+    const [problems, setProblems] = useState<ValidationProblem[]>();
     const [valueChanged, setValueChanged] = useState(false);
     const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -88,7 +88,7 @@ export const TextInput = memo(
       if (validation && valueChanged) {
         const probs = validate(value, validation);
 
-        setProblems(probs);
+        setProblems(probs && probs.length ? probs : undefined);
 
         if (onChange)
           onChange({
@@ -114,7 +114,7 @@ export const TextInput = memo(
 
     return (
       <>
-        {(label || problems.length > 0) && (
+        {(label || problems) && (
           <InputLabel error={problems}>{label}</InputLabel>
         )}
 

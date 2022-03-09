@@ -25724,13 +25724,13 @@ const TextInput = memo((_L) => {
   var _a2;
   const [value2, setValue] = useState(defaultValue != null ? defaultValue : "");
   const [focused, setFocused] = useState(false);
-  const [problems, setProblems] = useState([]);
+  const [problems, setProblems] = useState();
   const [valueChanged, setValueChanged] = useState(false);
   const inputRef = useRef(null);
   useEffect(() => {
     if (validation && valueChanged) {
       const probs = Si$1(value2, validation);
-      setProblems(probs);
+      setProblems(probs && probs.length ? probs : void 0);
       if (onChange)
         onChange({
           problems: probs,
@@ -25752,7 +25752,7 @@ const TextInput = memo((_L) => {
     setValue((_a3 = defaultValue != null ? defaultValue : value2) != null ? _a3 : "");
   }, [defaultValue]);
   return /* @__PURE__ */ jsxs$1(Fragment, {
-    children: [(label || problems.length > 0) && /* @__PURE__ */ jsx$1(InputLabel, {
+    children: [(label || problems) && /* @__PURE__ */ jsx$1(InputLabel, {
       error: problems,
       children: label
     }), /* @__PURE__ */ jsxs$1(InputContainer, __spreadProps(__spreadValues({
