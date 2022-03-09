@@ -1,2 +1,2 @@
-export declare function getDisplayPropertyValue(as?: string): "inline" | "inline-block" | "flex" | "block" | "contents";
+export declare function getDisplayPropertyValue(as?: string): string | undefined;
 //# sourceMappingURL=display.d.ts.map
