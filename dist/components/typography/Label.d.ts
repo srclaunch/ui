@@ -9,5 +9,5 @@ export declare type LabelProps<E = HTMLElement> = {
     readonly hover?: LabelProps;
     readonly active?: LabelProps;
 } & ContainerProps<E> & TextProps & SizeProps;
-export declare const Label: import("react").MemoExoticComponent<({ alignItems, alignContent, as, children, className, grow, icon, inline, lineHeight, orientation, selectable, size, textColor, textOverflow, textSize, textWeight, underline, whiteSpace, ...props }: LabelProps) => ReactElement>;
+export declare const Label: import("react").MemoExoticComponent<({ alignItems, alignContent, alignText, as, children, className, grow, icon, inline, lineHeight, orientation, selectable, size, textColor, textOverflow, textSize, textWeight, underline, whiteSpace, ...props }: LabelProps) => ReactElement>;
 //# sourceMappingURL=Label.d.ts.map

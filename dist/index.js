@@ -20739,6 +20739,7 @@ const Label = memo((_i2) => {
   var _j = _i2, {
     alignItems = Align.Center,
     alignContent = Align.Stretch,
+    alignText = Align.Left,
     as = "label",
     children,
     className = "",
@@ -20758,6 +20759,7 @@ const Label = memo((_i2) => {
   } = _j, props = __objRest(_j, [
     "alignItems",
     "alignContent",
+    "alignText",
     "as",
     "children",
     "className",
@@ -20786,6 +20788,7 @@ const Label = memo((_i2) => {
     children: [icon && (icon.component || icon.name || icon.path || icon.url || icon.svg) && /* @__PURE__ */ jsx$1(Icon, __spreadValues({
       marginRight: Amount.Least
     }, icon)), /* @__PURE__ */ jsx$1(TextContainer, __spreadProps(__spreadValues({
+      alignText,
       as: "span",
       className: `${className} text`,
       inline,
@@ -23432,6 +23435,7 @@ const InputContainer = memo((_m) => {
     "size",
     "success"
   ]);
+  console.log("error in inputcontainer", error);
   return /* @__PURE__ */ jsx$1(Container$g, __spreadProps(__spreadValues({
     backgroundColor,
     borderRadius,
@@ -25527,6 +25531,7 @@ const InputLabel = memo((_J) => {
     "textSize"
   ]);
   var _a2;
+  console.log("error in inputlabel", error);
   return /* @__PURE__ */ jsxs$1(Container$h, {
     grow: false,
     orientation: Orientation.Horizontal,
@@ -25819,6 +25824,7 @@ const EmailAddressInput = memo((_N) => {
   const validationProps = __spreadProps(__spreadValues({}, validation), {
     [Condition.IsEmailAddress]: Boolean(emailAddress)
   });
+  console.log("error in email address input", error);
   return /* @__PURE__ */ jsx$1(TextInput, __spreadValues({
     autoComplete: autoComplete != null ? autoComplete : AutoComplete.EmailAddress,
     error,
@@ -30325,6 +30331,7 @@ const Small = memo((_wa) => {
     as = "small",
     className = "",
     children,
+    grow = false,
     lineHeight = Size.Small,
     textColor = TextColors.Light,
     textSize = TextSize.Small
@@ -30332,6 +30339,7 @@ const Small = memo((_wa) => {
     "as",
     "className",
     "children",
+    "grow",
     "lineHeight",
     "textColor",
     "textSize"
@@ -30339,6 +30347,7 @@ const Small = memo((_wa) => {
   return /* @__PURE__ */ jsx$1(Label, __spreadProps(__spreadValues({
     as,
     className: `${className} small`,
+    grow,
     textColor,
     lineHeight
   }, props), {
@@ -30450,11 +30459,11 @@ const LoginForm = memo((_ya) => {
   ]);
   var _a2;
   const dispatch = useDispatch();
-  const loginState = useSelector((state2) => {
+  const loginState = useSelector((s2) => {
     var _a3;
-    return (_a3 = state2.user.authentication) == null ? void 0 : _a3.login;
+    return (_a3 = s2.user.authentication) == null ? void 0 : _a3.login;
   });
-  const state = useSelector((state2) => state2);
+  const state = useSelector((s2) => s2);
   console.log("state2", state);
   const {
     error,
