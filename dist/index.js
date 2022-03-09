@@ -30364,7 +30364,7 @@ const Small = memo((_wa) => {
     className = "",
     children,
     grow = false,
-    orientation = Orientation.Horizontal,
+    orientation = Orientation.Vertical,
     lineHeight = Size.Small,
     textColor = TextColors.Light,
     textSize = TextSize.Small
