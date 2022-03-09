@@ -1,9 +1,9 @@
-import { PropsWithChildren, ReactElement } from 'react';
 import { Theme } from '@srclaunch/types';
+import { PropsWithChildren, ReactElement } from 'react';
 declare type ThemeProviderProps = PropsWithChildren<{
-    className?: string;
-    theme?: Theme['id'];
-    themes?: Theme[];
+    readonly className?: string;
+    readonly theme?: Theme['id'];
+    readonly themes?: readonly Theme[];
 }>;
 export declare const ThemeProvider: import("react").MemoExoticComponent<({ className, children, theme, themes, }: ThemeProviderProps) => ReactElement>;
 export {};

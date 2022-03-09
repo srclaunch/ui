@@ -141,6 +141,10 @@ const ThemeProvider = memo(({
   }, [theme]);
   return /* @__PURE__ */ jsxs("div", {
     className: `${currentTheme.id} ${className} theme-provider`,
+    style: {
+      display: "flex",
+      flexGrow: 1
+    },
     children: [/* @__PURE__ */ jsx(GlobalStyle, {
       theme: currentTheme
     }), children]

@@ -2084,14 +2084,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/themes@npm:^0.1.12":
-  version: 0.1.12
-  resolution: "@srclaunch/themes@npm:0.1.12"
+"@srclaunch/themes@npm:^0.1.13":
+  version: 0.1.13
+  resolution: "@srclaunch/themes@npm:0.1.13"
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
     styled-components: ^5.3.3
-  checksum: da95b57000bbfad78e0c4e92ab098309c5401f6e80afe1abf9db6f9f38e8b9754d6993c314f0ec95babfe349fb783db27233cc78f0c25b74b42691cf226181f3
+  checksum: 9a48fbd3511bd42526982d4bed5140d628909867cd32a5978c570445e2062eb2abfb2cc6ecff0fbd0a1c6e1144123de5b9920cb59ad9e87439d7e0aa7535e095
   languageName: node
   linkType: hard
 
@@ -2122,11 +2122,11 @@ __metadata:
     "@srclaunch/icons": ^0.1.10
     "@srclaunch/logger": ^0.1.2
     "@srclaunch/react-hooks": ^0.1.3
-    "@srclaunch/themes": ^0.1.12
+    "@srclaunch/themes": ^0.1.13
     "@srclaunch/transform": ^0.1.2
     "@srclaunch/types": ^0.1.2
     "@srclaunch/validation": ^0.1.2
-    "@srclaunch/web-application-state": ^0.1.31
+    "@srclaunch/web-application-state": ^0.1.32
     "@stripe/react-stripe-js": ^1.7.0
     "@stripe/stripe-js": ^1.22.0
     "@testing-library/jest-dom": ^5.16.2
@@ -2226,16 +2226,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/web-application-state@npm:^0.1.31":
-  version: 0.1.31
-  resolution: "@srclaunch/web-application-state@npm:0.1.31"
+"@srclaunch/web-application-state@npm:^0.1.32":
+  version: 0.1.32
+  resolution: "@srclaunch/web-application-state@npm:0.1.32"
   dependencies:
     "@reduxjs/toolkit": ^1.7.2
     "@srclaunch/exceptions": ^0.1.6
     "@srclaunch/http-client": ^0.1.2
     "@srclaunch/i18n": ^0.1.2
     "@srclaunch/logger": ^0.1.2
-    "@srclaunch/themes": ^0.1.12
+    "@srclaunch/themes": ^0.1.13
     "@srclaunch/validation": ^0.1.2
     "@srclaunch/web-environment": ^0.1.2
     amazon-cognito-identity-js: ^5.2.7
@@ -2250,7 +2250,7 @@ __metadata:
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: 6435b9547d6c7ea2847e95fbe27b0246584bdbb4688d89f1959061ff86437b10625b916e1b1cb719a74836d20fdd63b82457faf6a862f768d8b4f08639a28d37
+  checksum: 422bc7aa2b4ff2785d79952748446251177d85add7c22606e9619be2e69a21c6bbff86801ef1c971b8dccf1a19482f9edceb2a26a3e13743c9fa2152d2a33903
   languageName: node
   linkType: hard
 
