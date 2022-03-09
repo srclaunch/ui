@@ -30189,13 +30189,11 @@ const Form = memo((_sa) => {
     "padding",
     "submitButton"
   ]);
-  var _a2, _b;
   const [fieldValues, setFieldValues] = useState({});
   const [validationProblems, setValidationProblems] = useState();
   const [isValidated, setValidated] = useState(false);
   const [requiresValidation, setRequiresValidation] = useState(false);
   const submitButtonProps = __spreadValues({
-    fullWidth: false,
     label: "Submit",
     size: Size.Large,
     type: ButtonType.Primary
@@ -30236,10 +30234,9 @@ const Form = memo((_sa) => {
       fields,
       onChange: (ff) => setFieldValues(ff)
     }), submitButton && /* @__PURE__ */ jsx$1(FormActions, {
-      children: /* @__PURE__ */ jsx$1(Button$1, {
+      children: /* @__PURE__ */ jsx$1(Button$1, __spreadProps(__spreadValues({
         disabled: requiresValidation && !isValidated || inProgress,
         form: name2,
-        fullWidth: submitButtonProps.fullWidth,
         onClick: (e2) => {
           e2.preventDefault();
           if (onSubmit)
@@ -30259,11 +30256,10 @@ const Form = memo((_sa) => {
               problems: validationProblems,
               validated: isValidated
             });
-        },
-        size: (_a2 = submitButtonProps.size) != null ? _a2 : Size.Large,
-        type: (_b = submitButtonProps.type) != null ? _b : ButtonType.Primary,
+        }
+      }, submitButtonProps), {
         children: submitButton.label
-      })
+      }))
     })]
   }));
 });
@@ -30553,7 +30549,8 @@ const LoginForm = memo((_ya) => {
           }));
       },
       submitButton: {
-        fullWidth: true,
+        borderRadius: Amount.Least,
+        grow: true,
         label: "Login"
       }
     }), /* @__PURE__ */ jsx$1(Container$h, {

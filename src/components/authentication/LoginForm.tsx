@@ -165,7 +165,8 @@ export const LoginForm = memo(
               );
           }}
           submitButton={{
-            fullWidth: true,
+            borderRadius: Amount.Least,
+            grow: true,
             label: 'Login',
           }}
         />

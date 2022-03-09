@@ -4,7 +4,7 @@ import { memo, ReactElement, useEffect, useState } from 'react';
 import { Amount, FormField, Orientation, Size } from '../../types';
 // import { getFormFieldsFromModel } from '../../lib/forms/fields';
 import { Container } from '../layout/Container';
-import { Button, ButtonType } from './buttons/Button';
+import { Button, ButtonProps, ButtonType } from './buttons/Button';
 import { FormActions } from './FormActions';
 import { FormFields } from './FormFields';
 
@@ -45,12 +45,11 @@ type FormProps = {
     readonly problems?: readonly ValidationProblem[];
   }) => unknown;
   readonly padding?: Amount;
-  readonly submitButton?: {
-    readonly fullWidth?: boolean;
-    readonly label: string;
-    readonly size?: Size;
-    readonly type?: ButtonType;
-  } | null;
+  readonly submitButton?:
+    | ({
+        readonly label: string;
+      } & ButtonProps)
+    | null;
 };
 
 export const Form = memo(
@@ -76,7 +75,6 @@ export const Form = memo(
     const [requiresValidation, setRequiresValidation] = useState(false);
 
     const submitButtonProps = {
-      fullWidth: false,
       label: 'Submit',
       size: Size.Large,
       type: ButtonType.Primary,
@@ -135,7 +133,6 @@ export const Form = memo(
             <Button
               disabled={(requiresValidation && !isValidated) || inProgress}
               form={name}
-              fullWidth={submitButtonProps.fullWidth}
               onClick={e => {
                 e.preventDefault();
 
@@ -159,8 +156,7 @@ export const Form = memo(
                     validated: isValidated,
                   });
               }}
-              size={submitButtonProps.size ?? Size.Large}
-              type={submitButtonProps.type ?? ButtonType.Primary}
+              {...submitButtonProps}
             >
               {submitButton.label}
             </Button>
