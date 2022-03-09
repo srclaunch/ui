@@ -20599,6 +20599,42 @@ const Container$h = memo((_a2) => {
     children
   }));
 });
+function getDisplayPropertyValue(as) {
+  switch (as) {
+    case "h1":
+      return "block";
+    case "h2":
+      return "block";
+    case "h3":
+      return "block";
+    case "h4":
+      return "block";
+    case "h5":
+      return "block";
+    case "h6":
+      return "block";
+    case "p":
+      return "block";
+    case "span":
+      return "inline";
+    case "div":
+      return "block";
+    case "a":
+      return "inline";
+    case "button":
+      return "inline";
+    case "input":
+      return "inline";
+    case "label":
+      return "inline";
+    case "select":
+      return "inline";
+    case "textarea":
+      return "inline";
+    default:
+      return "inline";
+  }
+}
 const getLineHeight = (lineHeight) => {
   if (typeof lineHeight === "number") {
     return `${lineHeight}px`;
@@ -20734,7 +20770,7 @@ const Icon = memo((_g) => {
 const TextContainer = styled.span.withConfig({
   displayName: "TextContainer",
   componentId: "sc-1hiw5ca-0"
-})(["", ";display:contents;"], TextStyles);
+})(["", ";display:", ";"], TextStyles, (props) => getDisplayPropertyValue(props.as));
 const Label = memo((_i2) => {
   var _j = _i2, {
     alignItems = Align.Center,
@@ -23435,7 +23471,6 @@ const InputContainer = memo((_m) => {
     "size",
     "success"
   ]);
-  console.log("error in inputcontainer", error);
   return /* @__PURE__ */ jsx$1(Container$g, __spreadProps(__spreadValues({
     backgroundColor,
     borderRadius,
@@ -25531,7 +25566,6 @@ const InputLabel = memo((_J) => {
     "textSize"
   ]);
   var _a2;
-  console.log("error in inputlabel", error);
   return /* @__PURE__ */ jsxs$1(Container$h, {
     grow: false,
     orientation: Orientation.Horizontal,
@@ -25824,7 +25858,6 @@ const EmailAddressInput = memo((_N) => {
   const validationProps = __spreadProps(__spreadValues({}, validation), {
     [Condition.IsEmailAddress]: Boolean(emailAddress)
   });
-  console.log("error in email address input", error);
   return /* @__PURE__ */ jsx$1(TextInput, __spreadValues({
     autoComplete: autoComplete != null ? autoComplete : AutoComplete.EmailAddress,
     error,

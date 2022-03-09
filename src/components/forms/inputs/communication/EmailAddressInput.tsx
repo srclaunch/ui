@@ -26,8 +26,6 @@ export const EmailAddressInput = memo(
       [Condition.IsEmailAddress]: Boolean(emailAddress),
     };
 
-    console.log('error in email address input', error);
-
     return (
       <TextInput
         autoComplete={autoComplete ?? AutoComplete.EmailAddress}

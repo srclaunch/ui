@@ -1,6 +1,7 @@
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 
+import { getDisplayPropertyValue } from '../../lib/css/typography';
 import { TextStyles } from '../../styles/typography';
 import {
   Align,
@@ -29,9 +30,9 @@ export type LabelProps<E = HTMLElement> = {
   TextProps &
   SizeProps;
 
-const TextContainer = styled.span<TextProps>`
+const TextContainer = styled.span<LabelProps>`
   ${TextStyles};
-  display: contents;
+  display: ${props => getDisplayPropertyValue(props.as as string)};
 `;
 
 export const Label = memo(

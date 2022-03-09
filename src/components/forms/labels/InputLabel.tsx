@@ -29,7 +29,6 @@ export const InputLabel = memo(
     textSize = TextSize.Small,
     ...props
   }: InputLabelProps): ReactElement => {
-    console.log('error in inputlabel', error);
     return (
       <Container grow={false} orientation={Orientation.Horizontal}>
         <Label
