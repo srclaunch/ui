@@ -38,6 +38,7 @@ export const InputContainer = memo(
     success,
     ...props
   }: InputContainerProps): ReactElement => {
+    console.log('error in inputcontainer', error);
     return (
       <Container
         backgroundColor={backgroundColor}
