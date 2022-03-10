@@ -160,7 +160,8 @@ export const SignupForm = memo(
               );
           }}
           submitButton={{
-            fullWidth: true,
+            borderRadius: Amount.Least,
+            grow: true,
             label: 'Sign up',
           }}
         />

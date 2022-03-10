@@ -30730,7 +30730,8 @@ const SignupForm = memo(({
           }));
       },
       submitButton: {
-        fullWidth: true,
+        borderRadius: Amount.Least,
+        grow: true,
         label: "Sign up"
       }
     }), /* @__PURE__ */ jsx$1(Container$h, {
