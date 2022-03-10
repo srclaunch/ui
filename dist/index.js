@@ -20628,7 +20628,7 @@ function getDisplayPropertyValue(as) {
     case "select":
       return "inline";
     case "small":
-      return "contents";
+      return "inline-block";
     case "span":
       return "contents";
     case "textarea":
