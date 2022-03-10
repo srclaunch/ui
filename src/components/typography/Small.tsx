@@ -1,6 +1,12 @@
 import { memo, ReactElement } from 'react';
 
-import { Orientation, Size, TextColors, TextSize } from '../../types';
+import {
+  Orientation,
+  Size,
+  TextColors,
+  TextSize,
+  WhiteSpace,
+} from '../../types';
 import { Label, LabelProps } from './Label';
 
 type SmallProps = LabelProps;
@@ -25,6 +31,7 @@ export const Small = memo(
         textColor={textColor}
         lineHeight={lineHeight}
         orientation={orientation}
+        whiteSpace={WhiteSpace.NoWrap}
         {...props}
       >
         {children}
