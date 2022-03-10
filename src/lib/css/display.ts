@@ -19,7 +19,7 @@ export function getDisplayPropertyValue(as?: string) {
     case 'h6':
       return 'block';
     case 'label':
-      return 'inline-flex';
+      return 'contents';
     case 'input':
       return 'inline';
     case 'p':
