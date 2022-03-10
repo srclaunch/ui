@@ -20660,7 +20660,7 @@ const getTextAlignmentFromAlign = (align) => {
 const TextStyles = css(["color:", ";cursor:inherit;display:", ";font-size:", ";font-weight:", ";line-height:", ";text-align:", ";text-decoration:", ";text-decoration-color:", ";transition:color 0.15s ease-in;", ";", ";", ";", ";"], (props) => {
   var _a2;
   return props.textColor === TextColors.Inherit ? TextColors.Inherit : `rgb(${(_a2 = props.textColor) != null ? _a2 : TextColors.Default})`;
-}, (props) => props.inline ? "inline" : "flex", (props) => props.textSize, (props) => props.textWeight, (props) => getLineHeight(props.lineHeight), (props) => getTextAlignmentFromAlign(props.alignText), (props) => props.underline ? "underline" : "none", (props) => {
+}, (props) => props.inline ? "inline" : "inline-flex", (props) => props.textSize, (props) => props.textWeight, (props) => getLineHeight(props.lineHeight), (props) => getTextAlignmentFromAlign(props.alignText), (props) => props.underline ? "underline" : "none", (props) => {
   var _a2;
   return props.underlineColor ? props.underlineColor : props.textColor === TextColors.Inherit ? TextColors.Inherit : `rgb(${(_a2 = props.textColor) != null ? _a2 : TextColors.Default})`;
 }, (props) => props.overflow && css(["overflow:", ";"], props.overflow), (props) => props.textOverflow && css(["text-overflow:", ";"], props.textOverflow), (props) => !props.selectable && css(["user-select:none;"]), (props) => props.whiteSpace && css(["white-space:", ";"], props.whiteSpace));
@@ -23492,7 +23492,7 @@ const Container$g = styled.div.withConfig({
   displayName: "Container",
   componentId: "sc-1vswffv-0"
 })(["", ";input{border:none;}"], InputContainerStyles);
-const TextInputStyles = css(["", ";", ";outline:none;padding:0 ", ";&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}"], FocusedStyles, TextStyles, Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
+const TextInputStyles = css(["", ";", ";outline:none;padding:0 ", ";white-space:nowrap;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}"], FocusedStyles, TextStyles, Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
 const VerificationCodeInput = memo((_o) => {
   var _p = _o, {
     as,

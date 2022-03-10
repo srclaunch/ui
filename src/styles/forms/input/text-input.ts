@@ -10,9 +10,9 @@ import { TextStyles } from '../../typography';
 export const TextInputStyles = css<FocusProps>`
   ${FocusedStyles};
   ${TextStyles};
-
   outline: none;
   padding: 0 ${Amount.Less};
+  white-space: nowrap;
 
   &::placeholder {
     color: rgb(${TextColors.InputPlaceholder});

@@ -30,7 +30,7 @@ export const TextStyles = css<TextProps>`
       ? TextColors.Inherit
       : `rgb(${props.textColor ?? TextColors.Default})`};
   cursor: inherit;
-  display: ${props => (props.inline ? 'inline' : 'flex')};
+  display: ${props => (props.inline ? 'inline' : 'inline-flex')};
   font-size: ${props => props.textSize};
   font-weight: ${props => props.textWeight};
   line-height: ${props => getLineHeight(props.lineHeight)};
