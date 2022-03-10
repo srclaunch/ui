@@ -43,7 +43,7 @@ export const Label = memo(
     as = 'label',
     children,
     className = '',
-    grow = false,
+    grow = true,
     icon,
     inline = true,
     lineHeight = Size.Default,

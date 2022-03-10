@@ -20781,7 +20781,7 @@ const Label = memo((_i2) => {
     as = "label",
     children,
     className = "",
-    grow = false,
+    grow = true,
     icon,
     inline = true,
     lineHeight = Size.Default,
