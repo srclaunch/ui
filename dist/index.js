@@ -20620,7 +20620,7 @@ function getDisplayPropertyValue(as) {
     case "h6":
       return "block";
     case "label":
-      return "flex";
+      return "inline-flex";
     case "input":
       return "inline";
     case "p":
