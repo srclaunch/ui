@@ -17,7 +17,7 @@ export const Small = memo(
     className = '',
     children,
     grow = false,
-    orientation = Orientation.Vertical,
+    orientation = Orientation.Horizontal,
     lineHeight = Size.Small,
     textColor = TextColors.Light,
     textSize = TextSize.Small,
