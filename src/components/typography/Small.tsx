@@ -31,7 +31,7 @@ export const Small = memo(
         textColor={textColor}
         lineHeight={lineHeight}
         orientation={orientation}
-        whiteSpace={WhiteSpace.NoWrap}
+        whiteSpace={WhiteSpace.Normal}
         {...props}
       >
         {children}

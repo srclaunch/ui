@@ -30385,7 +30385,7 @@ const Small = memo((_wa) => {
     textColor,
     lineHeight,
     orientation,
-    whiteSpace: WhiteSpace.NoWrap
+    whiteSpace: WhiteSpace.Normal
   }, props), {
     children
   }));
