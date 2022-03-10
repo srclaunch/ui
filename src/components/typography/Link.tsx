@@ -41,51 +41,49 @@ export const Link = memo(
     const [hovered, setHovered] = useState(false);
 
     return (
-      <RouterLink
-        to={to}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        style={{
-          alignItems: Align.Center,
-          color: textColor as string,
-          display: 'inline-flex',
-          flexDirection: 'column',
-          justifyContent: Align.Center,
-          outline: 'none',
-          textDecoration:
-            (underline || (hovered && hover?.underline)) && !focused
-              ? 'underline'
-              : 'none',
-        }}
+      <Container
+        as="span"
+        lineHeight={size}
+        textColor={textColor}
+        textWeight={textWeight}
+        underline={(underline || (hovered && hover?.underline)) && !focused}
+        underlineColor={textColor}
+        alignContent={Align.Center}
+        alignItems={Align.Center}
+        focused={focused}
+        grow={false}
+        height={size}
+        {...props}
       >
-        <Container
-          alignContent={Align.Center}
-          alignItems={Align.Center}
-          focused={focused}
-          grow={false}
-          height={size}
+        <RouterLink
+          to={to}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          style={{
+            alignItems: Align.Center,
+            color: textColor as string,
+            display: 'inline-flex',
+            flexDirection: 'column',
+            justifyContent: Align.Center,
+            outline: 'none',
+            textDecoration:
+              (underline || (hovered && hover?.underline)) && !focused
+                ? 'underline'
+                : 'none',
+          }}
         >
-          <Label
-            as="span"
-            lineHeight={size}
-            textColor={textColor}
-            textWeight={textWeight}
-            underline={(underline || (hovered && hover?.underline)) && !focused}
-            underlineColor={textColor}
-            {...props}
-          >
-            {children}
-          </Label>
-        </Container>
-      </RouterLink>
+          {children}
+        </RouterLink>
+      </Container>
     );
   },
 );
 
+/* ${LayoutStyles}; */
+
 const Container = styled.span<Omit<LinkProps, 'to'>>`
-  ${LayoutStyles};
   ${FocusedStyles};
 
   cursor: pointer;

@@ -30320,44 +30320,42 @@ const Link = memo((_ua) => {
   ]);
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
-  return /* @__PURE__ */ jsx$1(Link$1, {
-    to,
-    onFocus: () => setFocused(true),
-    onBlur: () => setFocused(false),
-    onMouseEnter: () => setHovered(true),
-    onMouseLeave: () => setHovered(false),
-    style: {
-      alignItems: Align.Center,
-      color: textColor,
-      display: "inline-flex",
-      flexDirection: "column",
-      justifyContent: Align.Center,
-      outline: "none",
-      textDecoration: (underline || hovered && (hover == null ? void 0 : hover.underline)) && !focused ? "underline" : "none"
-    },
-    children: /* @__PURE__ */ jsx$1(Container$e, {
-      alignContent: Align.Center,
-      alignItems: Align.Center,
-      focused,
-      grow: false,
-      height: size,
-      children: /* @__PURE__ */ jsx$1(Label, __spreadProps(__spreadValues({
-        as: "span",
-        lineHeight: size,
-        textColor,
-        textWeight,
-        underline: (underline || hovered && (hover == null ? void 0 : hover.underline)) && !focused,
-        underlineColor: textColor
-      }, props), {
-        children
-      }))
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    as: "span",
+    lineHeight: size,
+    textColor,
+    textWeight,
+    underline: (underline || hovered && (hover == null ? void 0 : hover.underline)) && !focused,
+    underlineColor: textColor,
+    alignContent: Align.Center,
+    alignItems: Align.Center,
+    focused,
+    grow: false,
+    height: size
+  }, props), {
+    children: /* @__PURE__ */ jsx$1(Link$1, {
+      to,
+      onFocus: () => setFocused(true),
+      onBlur: () => setFocused(false),
+      onMouseEnter: () => setHovered(true),
+      onMouseLeave: () => setHovered(false),
+      style: {
+        alignItems: Align.Center,
+        color: textColor,
+        display: "inline-flex",
+        flexDirection: "column",
+        justifyContent: Align.Center,
+        outline: "none",
+        textDecoration: (underline || hovered && (hover == null ? void 0 : hover.underline)) && !focused ? "underline" : "none"
+      },
+      children
     })
-  });
+  }));
 });
 const Container$e = styled.span.withConfig({
   displayName: "Container",
   componentId: "sc-doc9uk-0"
-})(["", ";", ";cursor:pointer;position:relative;&:before{border-radius:", ";left:-9px;right:-9px;}"], LayoutStyles, FocusedStyles, Amount.All);
+})(["", ";cursor:pointer;position:relative;&:before{border-radius:", ";left:-9px;right:-9px;}"], FocusedStyles, Amount.All);
 const Small = memo((_wa) => {
   var _xa = _wa, {
     as = "small",
