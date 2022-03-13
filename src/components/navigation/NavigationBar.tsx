@@ -4,8 +4,6 @@ import { memo, ReactElement } from 'react';
 import { Container, ContainerProps } from '../../components/layout/Container';
 import { UserMenu } from '../../components/user/UserMenu';
 import {
-  AlignHorizontal,
-  Alignment,
   AlignVertical,
   Amount,
   BackgroundColors,
@@ -13,6 +11,7 @@ import {
   BorderStyle,
   Orientation,
 } from '../../types';
+import { Spacer } from '../layout/Spacer';
 
 export type NavigationBarProps = {
   readonly logo?: ReactElement;
@@ -32,6 +31,7 @@ export const NavigationBar = memo(
       <Container
         alignment={{
           orientation: Orientation.Horizontal,
+          vertical: AlignVertical.Center,
           ...alignment,
         }}
         background={{ color: BackgroundColors.NavigationBar, ...background }}
@@ -60,13 +60,9 @@ export const NavigationBar = memo(
           {logo}
         </Container>
 
-        <Container />
-        <Container
-          alignment={{
-            vertical: AlignVertical.Center,
-          }}
-          size={{ width: 200 }}
-        >
+        <Spacer />
+
+        <Container size={{ width: 200 }}>
           <UserMenu onLogoutSuccess={() => navigate('/login')} />
         </Container>
       </Container>

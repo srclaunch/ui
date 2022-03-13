@@ -50701,7 +50701,8 @@ const NavigationBar = memo(({
   const navigate = useNavigate();
   return /* @__PURE__ */ jsxs$1(Container$d, {
     alignment: __spreadValues({
-      orientation: Orientation.Horizontal
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
     }, alignment),
     background: __spreadValues({
       color: BackgroundColors.NavigationBar
@@ -50725,10 +50726,7 @@ const NavigationBar = memo(({
         vertical: AlignVertical.Center
       },
       children: logo
-    }), /* @__PURE__ */ jsx$1(Container$d, {}), /* @__PURE__ */ jsx$1(Container$d, {
-      alignment: {
-        vertical: AlignVertical.Center
-      },
+    }), /* @__PURE__ */ jsx$1(Spacer, {}), /* @__PURE__ */ jsx$1(Container$d, {
       size: {
         width: 200
       },
