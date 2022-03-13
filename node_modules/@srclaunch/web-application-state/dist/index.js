@@ -31286,6 +31286,9 @@ const login$1 = ({
       return;
     }
     const config2 = getState().app.config;
+    AWS.config.update({
+      region: config2.aws.region
+    });
     const authenticationData = {
       Password: password,
       Username: username
@@ -31310,6 +31313,43 @@ const login$1 = ({
       },
       onSuccess: (result) => {
         const accessToken = result.getAccessToken().getJwtToken();
+        const credentials = new AWS.CognitoIdentityCredentials({
+          IdentityPoolId: config2.aws.cognito.identityPoolId,
+          Logins: {
+            [`cognito-idp.${config2.aws.region}.amazonaws.com/${config2.aws.cognito.userPoolId}`]: result.getIdToken().getJwtToken()
+          }
+        });
+        AWS.config.credentials = credentials;
+        AWS.config.credentials.refresh((err) => {
+          if (err) {
+            const exception = new d("Error encountered while refreshing credentials", {
+              cause: err
+            });
+            dispatch(setLoginFailure(exception.toJSON()));
+          } else {
+            cognitoUser.getUserAttributes((err2, attributes) => {
+              if (err2) {
+                const exception = new d("Error encountered while getting user attributes", {
+                  cause: err2
+                });
+                logger.exception(exception.toJSON());
+                dispatch(setLoginFailure(exception.toJSON()));
+              } else if (attributes) {
+                let attrs = {};
+                for (const attr of Object.entries(attributes)) {
+                  attrs = __spreadValues({
+                    [attr[1].Name]: attr[1].Value
+                  }, attrs);
+                }
+                dispatch(setUserAttributes(attrs));
+                dispatch(setLoggedIn({
+                  accessToken
+                }));
+                dispatch(setLoginSuccess());
+              }
+            });
+          }
+        });
       }
     });
   } catch (error) {
@@ -31323,6 +31363,9 @@ const refreshSession = () => async (dispatch, getState) => {
   try {
     dispatch(setLoginInProgress(true));
     const config2 = getState().app.config;
+    AWS.config.update({
+      region: config2.aws.region
+    });
     const poolData = {
       ClientId: config2.aws.cognito.userPoolClientId,
       UserPoolId: config2.aws.cognito.userPoolId
@@ -31352,6 +31395,9 @@ const refreshSession = () => async (dispatch, getState) => {
           dispatch(setLoginInProgress(false));
         } else {
           const accessToken = session.getIdToken().getJwtToken();
+          AWS.config.update({
+            region: config2.aws.region
+          });
           const credentials = new AWS.CognitoIdentityCredentials({
             IdentityPoolId: config2.aws.cognito.identityPoolId,
             Logins: {
