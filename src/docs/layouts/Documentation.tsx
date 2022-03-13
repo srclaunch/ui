@@ -1,6 +1,7 @@
 import { DualLightIcons } from '@srclaunch/icons';
 import { useNavigate } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
+import { Spacer } from '../../components/layout/Spacer';
 
 import {
   Alignment,
@@ -86,7 +87,7 @@ export const Documentation = memo(
             <Title>AppLab Component Docs</Title>
           </Container>
 
-          <Container />
+          <Spacer />
 
           <ThemeSelector showLabel={false} size={{ width: 200 }} />
         </Container>
@@ -97,6 +98,9 @@ export const Documentation = memo(
             size={{ width: 260 }}
           >
             <NavigationMenu
+              alignment={{
+                overflow: Overflow.ScrollVertical,
+              }}
               // itemProps={{
               //   active: {
               //     backgroundColor: BackgroundColor.Primary,
@@ -214,11 +218,12 @@ export const Documentation = memo(
                   to: '/workspaces',
                 },
               ]}
-              overflow={Overflow.ScrollVertical}
             />
           </Container>
 
-          <Container alignment={{ fill: Fill.Both }} overflow={Overflow.Scroll}>
+          <Container
+            alignment={{ fill: Fill.Both, overflow: Overflow.ScrollBoth }}
+          >
             {children}
           </Container>
         </Container>

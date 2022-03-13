@@ -25,9 +25,20 @@ export declare enum Orientation {
     Horizontal = "horizontal",
     Vertical = "vertical"
 }
+export declare enum Overflow {
+    ClipVertical = "clip-vertical",
+    ClipHorizontal = "clip-horizontal",
+    ClipBoth = "clip-both",
+    Hidden = "hidden",
+    ScrollVertical = "scroll-vertical",
+    ScrollHorizontal = "scroll-horizontal",
+    ScrollBoth = "scroll-both",
+    Visible = "visible"
+}
 export declare type Alignment = {
     fill?: Fill;
     orientation?: Orientation;
+    overflow?: Overflow;
     horizontal?: AlignHorizontal;
     vertical?: AlignVertical;
 };

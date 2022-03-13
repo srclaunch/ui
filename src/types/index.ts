@@ -42,10 +42,10 @@ export {
   AlignHorizontal,
   AlignVertical,
   Orientation,
+  Overflow,
 } from './appearance/alignment';
 export { Amount } from './appearance/proportion';
 export { Fill } from './appearance/fill';
-export { Overflow } from './appearance/overflow';
 export type { Margin } from './appearance/margin';
 export type { Padding } from './appearance/padding';
 export type { Position } from './appearance/position';

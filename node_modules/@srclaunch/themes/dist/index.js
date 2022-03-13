@@ -143,7 +143,8 @@ const ThemeProvider = memo(({
     className: `${currentTheme.id} ${className} theme-provider`,
     style: {
       display: "flex",
-      flexGrow: 1
+      flexGrow: 1,
+      overflow: "hidden"
     },
     children: [/* @__PURE__ */ jsx(GlobalStyle, {
       theme: currentTheme

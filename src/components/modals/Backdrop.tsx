@@ -1,29 +1,39 @@
 import { memo, ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 
-import { ContainerProps, MouseEventProps } from '../../types';
+import { BackgroundColors, PositionBehavior } from '../../types';
+import { Container, ContainerProps } from '../layout/Container';
 
-type BackdropProps = ContainerProps<
-  {
-    onClick?: () => unknown;
-    visible: boolean;
-  } & MouseEventProps<HTMLDivElement>
->;
+type BackdropProps = {
+  onClick?: () => unknown;
+  visible: boolean;
+} & ContainerProps;
 
 export const Backdrop = memo(
   ({
     as = 'div',
+    background = {},
     children,
     className = '',
     onClick,
+    position = {},
     visible,
     ...props
   }: BackdropProps): ReactElement => {
     return (
       <Container
         as={as}
+        background={{ color: BackgroundColors.Darker, ...background }}
         className={`${className} backdrop`}
         onClick={onClick}
+        position={{
+          behavior: PositionBehavior.Absolute,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+          ...position,
+        }}
         visible={visible}
         {...props}
       >
@@ -32,23 +42,3 @@ export const Backdrop = memo(
     );
   },
 );
-
-const Container = styled.div<BackdropProps>`
-  background: var(--bg-color-backdrop-hidden);
-  bottom: 0;
-  display: block;
-  left: 0;
-  position: absolute;
-  pointer-events: none;
-  right: 0;
-  top: 0;
-  transition: background 0.3s ease-in-out;
-  z-index: 6000;
-
-  ${props =>
-    props.visible &&
-    css`
-      background: var(--bg-color-backdrop-visible);
-      pointer-events: all;
-    `}
-`;

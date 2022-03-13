@@ -30,7 +30,6 @@ import { DepthStyles } from '../../styles/container/depth';
 import { FocusStyles } from '../../styles/container/focus';
 import { MarginStyles } from '../../styles/container/margin';
 import { OpacityStyles } from '../../styles/container/opacity';
-import { OverflowStyles } from '../../styles/container/overflow';
 import { PaddingStyles } from '../../styles/container/padding';
 import { PositionStyles } from '../../styles/container/position';
 import { ShadowStyles } from '../../styles/container/shadow';
@@ -78,7 +77,6 @@ const Wrapper = styled.div<ContainerProps>`
   ${DepthStyles};
   ${MarginStyles};
   ${OpacityStyles};
-  ${OverflowStyles};
   ${PaddingStyles};
   ${PositionStyles};
   ${ShadowStyles};
@@ -110,6 +108,7 @@ export const Container = memo(
         alignment={{
           horizontal: AlignHorizontal.Stretch,
           orientation: Orientation.Vertical,
+          overflow: Overflow.Hidden,
           vertical: AlignVertical.Stretch,
           ...alignment,
         }}

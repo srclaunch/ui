@@ -88,6 +88,13 @@ export default defineConfig(({ command, mode }) => {
   } else if (command === 'serve') {
     return {
       sourcemap: true,
+      rollupOptions: {
+        // Externalize deps that shouldn't be bundled
+        external: ['@srclaunch/web-application-state'],
+      },
+      define: {
+        global: {},
+      },
       plugins: [
         react({
           babel: {

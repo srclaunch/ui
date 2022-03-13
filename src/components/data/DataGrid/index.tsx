@@ -231,7 +231,7 @@ export const DataGrid = memo(
           borderRadius={!header ? borderRadius : undefined}
           className="data-grid-grid"
           onScroll={(e: SyntheticEvent) => e.preventDefault()}
-          overflow={Overflow.Scroll}
+          overflow={Overflow.ScrollBoth}
           // width="min-content"
         >
           {display === DataGridDisplayType.Table ? (

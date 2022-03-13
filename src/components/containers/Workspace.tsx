@@ -54,7 +54,7 @@ export const Workspace = memo(
         alignment={{ vertical: AlignVertical.Top, ...alignment }}
         background={{ color: BackgroundColors.Workspace, ...background }}
         className={`${className} workspace`}
-        overflow={Overflow.Scroll}
+        overflow={Overflow.ScrollVertical}
         padding={{ all: Amount.Most, ...padding }}
         {...props}
         {...props2}

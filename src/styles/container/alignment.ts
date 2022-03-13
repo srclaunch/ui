@@ -5,6 +5,7 @@ import {
   AlignHorizontal,
   AlignVertical,
   Orientation,
+  Overflow,
   Fill,
   Size,
 } from '../../types';
@@ -128,6 +129,51 @@ export function getVerticalAlignStyle(
   }
 }
 
+export function getOverflowStyle(overflow?: Overflow): SimpleInterpolation {
+  console.log('wtf');
+  console.log('overflow', overflow);
+  switch (overflow) {
+    case Overflow.ClipBoth:
+      return css`
+        overflow: clip;
+      `;
+    case Overflow.ClipHorizontal:
+      return css`
+        overflow-x: clip;
+      `;
+    case Overflow.ClipVertical:
+      return css`
+        overflow-y: clip;
+      `;
+
+    case Overflow.ScrollBoth:
+      return css`
+        overflow: scroll;
+      `;
+    case Overflow.ScrollHorizontal:
+      return css`
+        overflow: hidden;
+        overflow-x: scroll;
+      `;
+    case Overflow.ScrollVertical:
+      return css`
+        /* position: absolute !important; */
+        /* height: min-content; */
+        overflow: hidden;
+        overflow-y: scroll;
+      `;
+    case Overflow.Visible:
+      return css`
+        overflow: visible;
+      `;
+    case Overflow.Hidden:
+    default:
+      console.log('hidden');
+      return css`
+        overflow: hidden;
+      `;
+  }
+}
 export const AlignmentStyles = css<{
   readonly alignment?: Alignment;
 }>`
@@ -157,5 +203,11 @@ export const AlignmentStyles = css<{
     props.alignment?.fill &&
     css`
       ${getFillStyles(props.alignment)};
+    `};
+
+  ${props =>
+    props.alignment?.overflow &&
+    css`
+      ${getOverflowStyle(props.alignment.overflow)};
     `};
 `;
