@@ -17,30 +17,28 @@ type ConversationListProps = ContainerProps;
 
 export const ConversationList = memo(
   ({
-    backgroundColor = BackgroundColors.Default,
-    borderRadius = Amount.Least,
+    background = {},
+    borderRadius = {},
     className = '',
     overflow = Overflow.ScrollVertical,
-    width = 350,
+    size = {},
     ...props
   }: ConversationListProps): ReactElement => {
     const items = new Array(5).fill(0);
     return (
       <Container
-        backgroundColor={backgroundColor}
-        borderRadius={borderRadius}
+        background={{ color: BackgroundColors.Default, ...background }}
+        borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} conversation-list`}
-        grow={true}
-        orientation={Orientation.Vertical}
         overflow={overflow}
-        width={width}
+        size={{ width: 350, ...size }}
         {...props}
       >
         {items.map((_, index) => {
           return (
             <NavigationLink to={`conversation/${index}`}>
               <MessagePreview
-                backgroundColor={BackgroundColors.Default}
+                background={{ color: BackgroundColors.Default }}
                 body="Lorem ipsum"
                 border={
                   index !== items.length - 1
@@ -53,7 +51,6 @@ export const ConversationList = memo(
                       }
                     : undefined
                 }
-                borderRadius={Amount.None}
                 date={new Date().toISOString()}
                 sender={{
                   id: '0',

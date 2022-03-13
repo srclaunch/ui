@@ -1,43 +1,36 @@
 import { getIcon, Icon as IconType } from '@srclaunch/icons';
 import { memo, ReactElement } from 'react';
-import styled from 'styled-components';
 
-import { AppearanceStyles } from '../../styles/appearance';
-import { DimensionStyles } from '../../styles/appearance/dimension';
-import { LayoutStyles } from '../../styles/layout';
 import {
-  Align,
-  Color,
+  ForegroundColor,
   ForegroundColors,
-  HeightProps,
-  Size,
-  SizeProps,
-  WidthProps,
+  Sizes,
+  TextColor,
 } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 import { Image } from './Image';
-import { Svg } from './Svg';
 
-export type IconProps = {
-  readonly color?: Color;
+export type IconProps = ContainerProps<HTMLSpanElement> & {
+  readonly color?: ForegroundColor | TextColor;
   readonly component?: ReactElement;
   readonly name?: IconType;
   readonly path?: string;
   readonly svg?: ReactElement;
   readonly url?: string;
-} & ContainerProps<HTMLSpanElement> &
-  HeightProps &
-  SizeProps &
-  WidthProps;
+};
 
 export const Icon = memo(
   ({
+    as = 'span',
     color = ForegroundColors.Default,
     className = '',
     component,
     name,
     path,
-    size = Size.Default,
+    size = {
+      height: Sizes.Default,
+      width: Sizes.Default,
+    },
     svg,
     url,
     ...props
@@ -47,15 +40,14 @@ export const Icon = memo(
 
       if (Ico)
         return (
-          <Svg
+          <Container
+            as={as}
             className={`${className} icon`}
-            color={color}
-            height={size}
-            width={size}
+            size={size}
             {...props}
           >
             <Ico />
-          </Svg>
+          </Container>
         );
     }
 

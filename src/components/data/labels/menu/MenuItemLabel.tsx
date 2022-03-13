@@ -1,8 +1,9 @@
 import { memo, ReactElement } from 'react';
 
-import { Label } from '../../../typography/Label';
+import { Label, LabelProps } from '../../../typography/Label';
 
-import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
+import { Sizes, TextColors, TextSize } from '../../../../types';
+
 import { ModelProps } from '@srclaunch/types';
 
 type MenuItemLabelProps = {
@@ -15,7 +16,7 @@ export const MenuItemLabel = memo(
   ({
     fieldName,
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     model,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,

@@ -1,8 +1,9 @@
 import { ReactElement } from 'react';
-import { ContainerProps, HeightProps, WidthProps } from '../../types';
+import { CommonComponentProps } from '../../types';
+import { ContainerProps } from '../layout/Container';
 declare type SlidePanelProps = {
     readonly visible?: boolean;
-} & ContainerProps<HTMLDivElement> & HeightProps & WidthProps;
-export declare const SlidePanel: import("react").MemoExoticComponent<({ alignItems, backgroundColor, boxShadow, borderRadius, children, className, depth, padding, visible, width, ...props }: SlidePanelProps) => ReactElement>;
+} & CommonComponentProps<HTMLDivElement> & ContainerProps;
+export declare const SlidePanel: import("react").MemoExoticComponent<({ as, background, borderRadius, children, className, depth, padding, position, shadow, size, visible, ...props }: SlidePanelProps) => ReactElement>;
 export {};
 //# sourceMappingURL=SlidePanel.d.ts.map

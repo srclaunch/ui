@@ -1,6 +1,5 @@
-import { Amount } from '../proportion';
 import { Color } from './color';
-import { Size } from './size';
+import { Sizes } from './size';
 export declare enum ElementBorderColors {
     InputControl = "var(--border-color-input-control-rgb)"
 }
@@ -40,30 +39,51 @@ export declare enum BorderColors {
     White = "var(--color-white-rgb)",
     WhiteContrast = "var(--color-white-contrast-rgb)"
 }
-export declare type BorderColor = BorderColors | string;
+export declare type BorderColor = BorderColors | Color;
 export declare enum BorderStyle {
+    Dashed = "dashed",
     Dotted = "dotted",
-    Solid = "solid"
+    Double = "double",
+    Groove = "groove",
+    Inset = "inset",
+    None = "none",
+    Outset = "outset",
+    Ridge = "ridge",
+    Solid = "solid",
+    Wavy = "wavy"
 }
-export declare type BorderStyleProps = {
-    readonly color: Color;
-    readonly style?: BorderStyle;
-    readonly width?: Amount | Size | number;
+export declare type Border = {
+    readonly all?: {
+        readonly color: BorderColor;
+        readonly style?: BorderStyle;
+        readonly width?: Sizes | string | number;
+    };
+    readonly bottom?: {
+        readonly color: BorderColor;
+        readonly style?: BorderStyle;
+        readonly width?: Sizes | string | number;
+    };
+    readonly left?: {
+        readonly color: BorderColor;
+        readonly style?: BorderStyle;
+        readonly width?: Sizes | string | number;
+    };
+    readonly right?: {
+        readonly color: BorderColor;
+        readonly style?: BorderStyle;
+        readonly width?: Sizes | string | number;
+    };
+    readonly top?: {
+        readonly color: BorderColor;
+        readonly style?: BorderStyle;
+        readonly width?: Sizes | string | number;
+    };
 };
-export declare type BorderDirectionProps = {
-    readonly bottom?: BorderStyleProps;
-    readonly left?: BorderStyleProps;
-    readonly right?: BorderStyleProps;
-    readonly top?: BorderStyleProps;
-};
-export declare type BorderRadiusCornerProps = {
-    readonly bottomLeft?: Amount | Size | number;
-    readonly bottomRight?: Amount | Size | number;
-    readonly topLeft?: Amount | Size | number;
-    readonly topRight?: Amount | Size | number;
-};
-export declare type BorderProps = {
-    readonly border?: BorderStyleProps | BorderDirectionProps;
-    readonly borderRadius?: (Amount | Size | number) | BorderRadiusCornerProps;
+export declare type BorderRadius = {
+    readonly all?: string | number;
+    readonly bottomLeft?: string | number;
+    readonly bottomRight?: string | number;
+    readonly topLeft?: string | number;
+    readonly topRight?: string | number;
 };
 //# sourceMappingURL=border.d.ts.map

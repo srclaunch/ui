@@ -1,6 +1,6 @@
 import { HttpClient } from '@srclaunch/http-client';
 import { ReactElement } from 'react';
-import { ContainerProps } from '../../../types';
+import { ContainerProps } from '../../layout/Container';
 declare type EntityPanelProps = {
     readonly actions?: Record<string, (...args: readonly any[]) => any>;
     readonly httpClient?: typeof HttpClient;

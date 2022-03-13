@@ -1,14 +1,8 @@
 import { memo, ReactElement } from 'react';
 import { BasicIcons } from '@srclaunch/icons';
-import { Label } from '../../../typography/Label';
+import { Label, LabelProps } from '../../../typography/Label';
 import { Icon } from '../../../media/Icon';
-import {
-  Colors,
-  LabelProps,
-  Size,
-  TextColors,
-  TextSize,
-} from '../../../../types';
+import { Colors, Sizes, TextColors, TextSize } from '../../../../types';
 
 type BooleanLabelProps = {
   value: boolean;
@@ -17,7 +11,7 @@ type BooleanLabelProps = {
 export const BooleanLabel = memo(
   ({
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value,
@@ -34,7 +28,7 @@ export const BooleanLabel = memo(
         <Icon
           color={value ? Colors.Primary : Colors.Error}
           name={value ? BasicIcons.Checkmark2 : BasicIcons.Close}
-          size={Size.Smaller}
+          // size={Size.Smaller}
         />
         {value}
       </Label>

@@ -2,10 +2,13 @@ import { memo, ReactElement } from 'react';
 
 import { Label } from '../..';
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
+  AlignVertical,
   Amount,
   BackgroundColors,
-  Size,
+  Fill,
+  Sizes,
   TextColors,
   TextSize,
   TextWeight,
@@ -18,37 +21,48 @@ export type NavigationMenuProps = ContainerProps<HTMLDivElement> & MenuProps;
 
 export const NavigationMenu = memo(
   ({
-    alignContent = Align.Left,
-    alignItems = Align.Center,
-    backgroundColor = BackgroundColors.NavigationMenu,
+    alignment = {},
+    background = {},
     className = '',
-    padding = Amount.Less,
+    padding = {},
     menu = [],
     menuItemProps = {
       active: {
-        backgroundColor: BackgroundColors.Primary,
-        boxShadow: {
-          blurRadius: 5,
+        background: {
           color: BackgroundColors.Primary,
-          offsetX: 0,
-          offsetY: 1,
-          opacity: 35,
-          spreadRadius: 3,
         },
+        // shadow: {
+        //   radius: 5,
+        //   color: BackgroundColors.Primary,
+        //   offsetX: 0,
+        //   offsetY: 1,
+        //   opacity: 35,
+        //   spreadRadius: 3,
+        // },
         textColor: TextColors.PrimaryContrast,
       },
-      borderRadius: Amount.Least,
+      alignment: {
+        fill: Fill.Horizontal,
+      },
+      borderRadius: {
+        all: Amount.Least,
+      },
       focus: {
         textColor: TextColors.PrimaryContrast,
       },
       hover: {
-        backgroundColor: BackgroundColors.Light,
+        background: {
+          color: BackgroundColors.Light,
+        },
         textColor: TextColors.Light,
       },
-      lineHeight: Size.Default,
-      padding: Amount.Least,
-      paddingLeft: Amount.Less,
-      paddingRight: Amount.Less,
+      lineHeight: Sizes.Default,
+      padding: {
+        bottom: Amount.Least,
+        left: Amount.Default,
+        right: Amount.Default,
+        top: Amount.Least,
+      },
       textColor: TextColors.Default,
       textSize: TextSize.Default,
     },
@@ -56,45 +70,40 @@ export const NavigationMenu = memo(
   }: NavigationMenuProps): ReactElement => {
     return (
       <Container
-        alignItems={Align.Stretch}
-        alignContent={Align.Top}
+        alignment={{
+          horizontal: AlignHorizontal.Stretch,
+          vertical: AlignVertical.Top,
+          ...alignment,
+        }}
         as="nav"
-        backgroundColor={backgroundColor}
+        background={{ color: BackgroundColors.NavigationMenu, ...background }}
         className={`${className} navigation-menu`}
-        padding={Amount.Less}
+        padding={{ all: Amount.Less, ...padding }}
         {...props}
       >
         {menu.map((item, key) => {
           return (
             <NavigationLink
               active={menuItemProps?.active ?? item.active}
-              backgroundColor={
-                menuItemProps?.backgroundColor ?? BackgroundColors.Transparent
-              }
+              // background={
+              //   {menuItemProps?.background ?? { color: BackgroundColors.Transparent }
+              // }
               borderRadius={
                 menuItemProps.borderRadius ??
-                item.borderRadius ??
-                Amount.Default
+                item.borderRadius ?? { all: Amount.Default }
               }
               className="navigation-menu-item"
               focus={menuItemProps?.focus ?? item.focus}
-              grow
               hover={menuItemProps?.hover ?? item.hover}
               icon={item.icon}
               key={key}
               label={item.label}
-              margin={menuItemProps.margin ?? Amount.None}
-              marginBottom={menuItemProps.marginBottom ?? Amount.Least}
-              marginLeft={menuItemProps.marginLeft ?? Amount.None}
-              marginRight={menuItemProps.marginRight ?? Amount.None}
-              marginTop={menuItemProps.marginTop ?? Amount.None}
-              padding={menuItemProps.padding ?? Amount.None}
-              paddingBottom={
-                menuItemProps.paddingBottom ?? menuItemProps.padding
+              margin={
+                menuItemProps.margin ?? {
+                  bottom: Amount.Least,
+                }
               }
-              paddingLeft={menuItemProps.paddingLeft ?? menuItemProps.padding}
-              paddingRight={menuItemProps.paddingRight ?? menuItemProps.padding}
-              paddingTop={menuItemProps.paddingTop ?? menuItemProps.padding}
+              padding={menuItemProps.padding ?? { all: Amount.None }}
               textColor={menuItemProps.textColor ?? TextColors.Default}
               to={item.to ?? '#'}
               {...menuItemProps}

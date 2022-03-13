@@ -9,14 +9,15 @@ import {
   Heading,
   Icon,
   NavigationLink,
-  Size,
+  Sizes,
   TextColors,
+  TextDecorationLine,
   TextSize,
   TextWeight,
   Title,
   UnorderedList,
   Workspace,
-} from '../../../..';
+} from '../../../../index';
 import { Documentation } from '../../../layouts/Documentation';
 
 export const BillingPayments = memo((): ReactElement => {
@@ -26,11 +27,15 @@ export const BillingPayments = memo((): ReactElement => {
         title: (
           <>
             <NavigationLink
-              to="/forms"
+              to="/billing"
               hover={{
-                underline: true,
+                textDecoration: {
+                  line: TextDecorationLine.Underline,
+                },
               }}
-              underline={false}
+              textDecoration={{
+                line: TextDecorationLine.None,
+              }}
             >
               <Title
                 textColor={TextColors.Primary}
@@ -43,9 +48,8 @@ export const BillingPayments = memo((): ReactElement => {
 
             <Icon
               name={DualLightIcons.ChevronDoubleForward}
-              marginLeft={Amount.Less}
-              marginRight={Amount.Less}
-              size={Size.Smaller}
+              margin={{ left: Amount.Less, right: Amount.Less }}
+              // size={Size.Smaller}
             />
 
             <Title textSize={TextSize.Larger} textWeight={TextWeight.Most}>
@@ -55,35 +59,33 @@ export const BillingPayments = memo((): ReactElement => {
         ),
       }}
       layout={Documentation}
-      padding={Amount.Most}
+      padding={{ all: Amount.Most }}
       title="Billing"
     >
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.Least}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.Least }}
         depth={Depth.High}
-        grow={false}
-        padding={Amount.Most}
+        padding={{ all: Amount.Most }}
       >
-        <Heading lineHeight={Size.Small}>Components</Heading>
+        <Heading lineHeight={Sizes.Small}>Components</Heading>
 
         <UnorderedList
           items={[
             <NavigationLink
-              to="/billing/payments"
+              to="/billing/payments/add-payment-method-form"
               label="AddPaymentMethodForm"
             />,
             <NavigationLink
-              to="/billing/subscription"
+              to="/billing/payments/payment-method-modal"
               label="PaymentMethodModal"
             />,
             <NavigationLink
-              to="/billing/subscription"
+              to="/billing/payments/progressive-payment-status"
               label="ProgressivePaymentStatus"
             />,
           ]}
-          paddingLeft={Amount.Default}
-          paddingRight={Amount.Default}
+          padding={{ left: Amount.Default, right: Amount.Default }}
         />
       </Container>
     </Workspace>

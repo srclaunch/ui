@@ -1,13 +1,14 @@
-import { NotificationType } from '@srclaunch/types';
 import { memo, ReactElement } from 'react';
-
+import { NotificationType } from '@srclaunch/types';
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
+  AlignVertical,
   Amount,
   BackgroundColors,
   Depth,
   Orientation,
-  Size,
+  Sizes,
   TextColors,
   TextWeight,
 } from '../../types';
@@ -23,18 +24,19 @@ export type NotificationLabelProps = {
 
 export const NotificationLabel = memo(
   ({
-    backgroundColor = BackgroundColors.Dark,
+    alignment = {},
+    background = {},
+    borderRadius = {},
     children,
     className = '',
-    grow = false,
     label = '',
-    orientation,
+    padding = {},
     showOrb = true,
     type,
     ...props
   }: NotificationLabelProps): ReactElement => {
     const getBackgroundColor = () => {
-      if (!type) return backgroundColor;
+      if (!type) return background.color;
 
       switch (type) {
         case NotificationType.Error:
@@ -66,28 +68,42 @@ export const NotificationLabel = memo(
     const bgColor = getBackgroundColor();
     const textColor = getTextColor();
 
+    console.log({
+      horizontal: AlignHorizontal.Center,
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center,
+      ...alignment,
+    });
     return (
       <Container
-        alignItems={Align.Center}
-        alignContent={Align.Center}
-        backgroundColor={bgColor}
-        backgroundOpacity={type ? 10 : 100}
-        borderRadius={Amount.All}
+        alignment={{
+          horizontal: AlignHorizontal.Center,
+          orientation: Orientation.Horizontal,
+          vertical: AlignVertical.Center,
+          ...alignment,
+        }}
+        background={{
+          color: BackgroundColors.Darker,
+          opacity: type ? 10 : 100,
+          ...background,
+        }}
+        borderRadius={{ all: Amount.All, ...borderRadius }}
         className={`${className} notification-label`}
         // depth={!type ? Depth.Low : undefined}
-        orientation={Orientation.Horizontal}
-        padding={Amount.More}
-        paddingBottom={Amount.Less}
-        paddingTop={Amount.Less}
-        grow={grow}
+        padding={{ all: Amount.Less, ...padding }}
         {...props}
       >
-        {showOrb && <Orb color={bgColor} marginRight={Amount.Less} />}
+        {showOrb && (
+          <Orb
+            background={{ color: bgColor }}
+            margin={{ right: Amount.Less }}
+          />
+        )}
 
         {label && (
           <Label
             textColor={textColor}
-            lineHeight={Size.Small}
+            lineHeight={Sizes.Small}
             textWeight={TextWeight.Default}
           >
             {label}

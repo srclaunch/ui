@@ -20,7 +20,6 @@ import {
 } from '@srclaunch/types';
 
 import { ImageInputProps } from '../../components/forms/inputs/media/ImageInput';
-import { MenuItemProps } from '..';
 import { InputValueChangeHandler } from '../events/input';
 import { ErrorProps } from '../state/error-props';
 import { ValidationProps } from '../state/validation-props';

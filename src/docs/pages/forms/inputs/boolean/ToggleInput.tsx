@@ -1,11 +1,15 @@
 import { memo, ReactElement } from 'react';
 
-import { Workspace } from '../../../../../components/containers/Workspace';
-import { ToggleInput } from '../../../../../components/forms/inputs/boolean/ToggleInput';
-import { InputLabel } from '../../../../../components/forms/labels/InputLabel';
-import { InputRow } from '../../../../../components/forms/layout/InputRow';
-import { Container } from '../../../../../components/layout/Container';
-import { Amount, BackgroundColors } from '../../../../../types';
+import {
+  Amount,
+  BackgroundColors,
+  Container,
+  InputLabel,
+  InputRow,
+  ToggleInput,
+  Workspace,
+} from '../../../../../index';
+
 import { Documentation } from '../../../../layouts/Documentation';
 
 export const ToggleInputPage = memo((): ReactElement => {
@@ -18,9 +22,9 @@ export const ToggleInputPage = memo((): ReactElement => {
       title="ToggleInput"
     >
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.More}
-        padding={Amount.More}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.More }}
+        padding={{ all: Amount.Most }}
       >
         <InputRow>
           <InputLabel>Example</InputLabel>

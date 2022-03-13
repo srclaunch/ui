@@ -3,7 +3,7 @@ import { memo, ReactElement } from 'react';
 import ReactCountryFlag from 'react-country-flag';
 import { CountryCode, LanguageCode, ValidationProblem } from '@srclaunch/types';
 
-import { Size } from '../../../../types';
+import { Sizes } from '../../../../types';
 import { DropdownInput, DropdownInputProps } from '../menu/DropdownInput';
 
 export type LanguageInputProps = DropdownInputProps<LanguageCode>;
@@ -23,7 +23,7 @@ export const LanguageInput = memo(
             <ReactCountryFlag
               svg
               countryCode={CountryCode.UnitedStates}
-              style={{ height: Size.Smaller, width: 'auto' }}
+              style={{ height: Sizes.Smaller, width: 'auto' }}
             />
           ),
         },

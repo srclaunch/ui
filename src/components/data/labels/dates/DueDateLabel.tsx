@@ -2,9 +2,9 @@ import { memo, ReactElement } from 'react';
 
 // import { getDueDateLabel } from '../../../../lib/dates/labels';
 
-import { Label } from '../../../typography/Label';
+import { Label, LabelProps } from '../../../typography/Label';
 
-import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
+import { Sizes, TextColors, TextSize } from '../../../../types';
 
 type DueDateLabelProps = {
   value: string;
@@ -13,7 +13,7 @@ type DueDateLabelProps = {
 export const DueDateLabel = memo(
   ({
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value,

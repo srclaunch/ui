@@ -6,16 +6,16 @@ import {
   Depth,
   NavigationLink,
   Workspace,
-} from '../../..';
+} from '../../../index';
 import { Documentation } from '../../layouts/Documentation';
 
 export const Modals = memo((): ReactElement => {
   return (
     <Workspace
-      backgroundColor={BackgroundColors.Default}
+      background={{ color: BackgroundColors.Default }}
       depth={Depth.Low}
       layout={Documentation}
-      padding={Amount.Most}
+      padding={{ all: Amount.Most }}
       title="Modals"
     >
       <ul>

@@ -104,7 +104,7 @@ export const PasswordInput = memo(
         />
 
         {showConfirmPassword && (
-          <InputRow marginTop={Amount.More} marginBottom={Amount.None}>
+          <InputRow margin={{ top: Amount.More }}>
             <InputLabel>{confirmPasswordLabel}</InputLabel>
 
             <TextInput

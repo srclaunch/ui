@@ -1,5 +1,4 @@
-import { Align } from '../layout/alignment';
-import { Color, Colors, ContrastColors } from './color';
+import { Colors, ContrastColors } from './color';
 
 export enum ElementBackgroundColors {
   Card = 'var(--bg-color-card-rgb)',
@@ -32,8 +31,6 @@ export enum BackgroundColorShade {
   Darkest = 'var(--bg-color-darkest-rgb)',
   Transparent = 'transparent',
 }
-
-export type BackgroundColor = BackgroundColors | string;
 
 export enum BackgroundColors {
   Card = ElementBackgroundColors.Card,
@@ -89,13 +86,22 @@ export enum BackgroundSize {
   FillVertical = 'fill-vertical',
 }
 
-export type BackgroundProps = {
-  readonly backgroundColor?: Color;
-  readonly backgroundImage?: {
-    readonly path?: string;
-    readonly position?: Align | string;
-    readonly size?: BackgroundSize | string;
-    readonly url?: string;
+export type BackgroundColor = BackgroundColors;
+
+export enum BackgroundRepeat {
+  NoRepeat = 'no-repeat',
+  Repeat = 'repeat',
+  RepeatX = 'repeat-x',
+  RepeatY = 'repeat-y',
+}
+
+export type Background = {
+  color?: BackgroundColor | string;
+  image?: {
+    path?: string;
+    repeat?: BackgroundRepeat;
+    size?: BackgroundSize;
+    url?: string;
   };
-  readonly backgroundOpacity?: number;
+  opacity?: number;
 };

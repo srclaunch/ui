@@ -1,7 +1,6 @@
 import { memo, ReactElement } from 'react';
 import { CurrencyAmount, CurrencyCode } from '@srclaunch/types';
-import { Label } from '../../../../typography/Label';
-import { LabelProps } from '../../../../../types';
+import { Label, LabelProps } from '../../../../typography/Label';
 
 type CurrencyAmountLabelProps = {
   amount: CurrencyAmount;

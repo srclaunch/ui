@@ -15,23 +15,22 @@ import { MessagePreview } from './MessagePreview';
 type ConversationProps = ContainerProps;
 export const Conversation = memo(
   ({
-    borderRadius = Amount.Less,
+    background = {},
+    borderRadius = {},
     className = '',
   }: ConversationProps): ReactElement => {
     const items = new Array(5).fill(0);
     return (
       <Container
-        borderRadius={borderRadius}
+        borderRadius={{ all: Amount.Less, ...borderRadius }}
         className={`${className} conversation-list`}
-        grow={false}
-        orientation={Orientation.Vertical}
         overflow={Overflow.Hidden}
-        width={350}
+        size={{ width: 350 }}
       >
         {items.map((_, index) => {
           return (
             <MessagePreview
-              backgroundColor={BackgroundColors.Lightest}
+              background={{ color: BackgroundColors.Lightest, ...background }}
               body="Lorem ipsum "
               border={{
                 bottom: {
@@ -41,7 +40,6 @@ export const Conversation = memo(
                   width: 1,
                 },
               }}
-              borderRadius={Amount.None}
               date={new Date().toISOString()}
               sender={{
                 id: '0',

@@ -5,13 +5,13 @@ import { Documentation } from '../layouts/Documentation';
 export const Introduction = memo((): ReactElement => {
   return (
     <Workspace
-      backgroundColor={BackgroundColors.Default}
+      background={{ color: BackgroundColors.Default }}
       depth={Depth.Low}
       header={{
         title: 'Introduction',
       }}
       layout={Documentation}
-      padding={Amount.Most}
+      padding={{ all: Amount.Most }}
       title="Introduction"
     ></Workspace>
   );

@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
-import { LabelProps, LinkProps } from '../../types';
+import { LinkProps } from '../../types';
+import { LabelProps } from '../typography/Label';
 export declare type PageLinkProps = {
     readonly label?: string;
     readonly showArrow?: boolean;

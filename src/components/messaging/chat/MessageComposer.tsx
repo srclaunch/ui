@@ -1,12 +1,13 @@
 import { ReactElement, memo } from 'react';
-import { Container } from '../../layout/Container';
+import { Container, ContainerProps } from '../../layout/Container';
 import {
-  Align,
+  AlignHorizontal,
+  AlignVertical,
+  Alignment,
   Amount,
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  ContainerProps,
 } from '../../../types';
 import { Button, ButtonType } from '../../forms/buttons/Button';
 import { Label } from '../../..';
@@ -16,9 +17,11 @@ type MessageComposerProps = ContainerProps;
 export const MessageComposer = memo(
   ({ ...props }: MessageComposerProps): ReactElement => {
     return (
-      <Container backgroundColor={BackgroundColors.Default} {...props}>
+      <Container background={{ color: BackgroundColors.Default }} {...props}>
         <Container
-          alignContent={Align.Center}
+          alignment={{
+            horizontal: AlignHorizontal.Center,
+          }}
           border={{
             bottom: {
               color: BorderColors.Dark,
@@ -26,13 +29,14 @@ export const MessageComposer = memo(
               width: 1,
             },
           }}
-          grow={false}
-          padding={Amount.More}
+          padding={{ all: Amount.More }}
         >
           <Label>Title</Label>
         </Container>
         <Container
-          alignContent={Align.Center}
+          alignment={{
+            horizontal: AlignHorizontal.Center,
+          }}
           border={{
             bottom: {
               color: BorderColors.Dark,
@@ -40,13 +44,14 @@ export const MessageComposer = memo(
               width: 1,
             },
           }}
-          grow={false}
-          padding={Amount.More}
+          padding={{ all: Amount.More }}
         >
           <Label>Recipients</Label>
         </Container>
         <Container
-          alignContent={Align.Center}
+          alignment={{
+            horizontal: AlignHorizontal.Center,
+          }}
           border={{
             bottom: {
               color: BorderColors.Dark,
@@ -54,29 +59,29 @@ export const MessageComposer = memo(
               width: 1,
             },
           }}
-          grow={false}
-          padding={Amount.More}
+          padding={{ all: Amount.More }}
         >
           <Label>Subject</Label>
         </Container>
 
         <Container
-          alignItems={Align.Top}
-          alignContent={Align.Top}
-          padding={Amount.More}
+          alignment={{
+            horizontal: AlignHorizontal.Left,
+            vertical: AlignVertical.Bottom,
+          }}
+          padding={{ all: Amount.More }}
         >
-          <Label grow={false}>Message</Label>
+          <Label>Message</Label>
         </Container>
 
         <Container
-          alignItems={Align.Left}
-          alignContent={Align.Top}
-          grow={false}
-          padding={Amount.More}
+          alignment={{
+            horizontal: AlignHorizontal.Left,
+            vertical: AlignVertical.Bottom,
+          }}
+          padding={{ all: Amount.More }}
         >
-          <Button grow={false} type={ButtonType.Primary}>
-            Send
-          </Button>
+          <Button type={ButtonType.Primary}>Send</Button>
         </Container>
       </Container>
     );

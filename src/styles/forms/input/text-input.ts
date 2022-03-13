@@ -1,14 +1,11 @@
 import { css } from 'styled-components';
 
 // import { TextProps } from '../../../components/typography/Text';
-import { Amount } from '../../../types/proportion';
+import { Amount, TextColors } from '../../../types';
 import { FocusProps } from '../../../types/state/focus-props';
-import { TextColors } from '../../../types/typography/text';
-import { FocusedStyles } from '../../focused';
 import { TextStyles } from '../../typography';
 
 export const TextInputStyles = css<FocusProps>`
-  ${FocusedStyles};
   ${TextStyles};
   outline: none;
   padding: 0 ${Amount.Less};

@@ -6,16 +6,14 @@ import {
 import { forwardRef, memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { FocusedStyles } from '../../../../styles/focused';
+import { FocusStyles } from '../../../../styles/container/focus';
 import { TextStyles } from '../../../../styles/typography';
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
   Amount,
-  AppearanceProps,
   BackgroundColors,
-  BackgroundProps,
   BorderColors,
-  BorderProps,
   BorderStyle,
   ClipboardEventProps,
   Cursor,
@@ -27,10 +25,10 @@ import {
   MouseEventProps,
   Orientation,
   Size,
-  SizeProps,
+  Sizes,
   TextColor,
   TextColors,
-  TextProps,
+  TextSize,
   TextWeight,
 } from '../../../../types';
 import { ErrorLabel } from '../../../errors/ErrorLabel';
@@ -38,7 +36,8 @@ import { Container } from '../../../layout/Container';
 import { Icon } from '../../../media/Icon';
 import { ProgressSpinner } from '../../../progress/ProgressSpinner';
 import { InputLabel } from '../../labels/InputLabel';
-import { InputContainer } from '../shared/InputContainer';
+import { InputContainer, InputContainerProps } from '../shared/InputContainer';
+import { Text, TextProps } from '../../../typography/Text';
 
 export type NumberInputProps<T = HTMLInputElement, V = number> = {
   readonly icon?: typeof Icon;
@@ -46,21 +45,15 @@ export type NumberInputProps<T = HTMLInputElement, V = number> = {
   readonly prefix?: string;
   readonly spellCheck?: boolean;
   readonly suffix?: string;
-} & AppearanceProps &
-  SizeProps &
-  TextProps &
-  InputProps<T, V>;
+} & InputContainerProps &
+  InputProps<T, V> &
+  TextProps;
 
 export const NumberInput = memo(
   ({
     as,
-    backgroundColor = BackgroundColors.InputControl,
-    boxShadow = DepthShadow.Low,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1,
-    },
+    background = {},
+    border = {},
     className = '',
     cursor = Cursor.Text,
     defaultValue,
@@ -74,7 +67,8 @@ export const NumberInput = memo(
     onKeyPress,
     placeholder = '',
     prefix = '',
-    size = Size.Default,
+    shadow = DepthShadow.Low,
+    textSize = TextSize.Default,
     suffix = '',
     textColor = TextColors.InputControl,
     textWeight = TextWeight.Default,
@@ -107,20 +101,29 @@ export const NumberInput = memo(
 
     return (
       <>
-        <Container orientation={Orientation.Horizontal}>
+        <Container alignment={{ orientation: Orientation.Horizontal }}>
           {label && <InputLabel>{label}</InputLabel>}
 
           {problems.length > 0 ? (
-            <ErrorLabel alignContent={Align.Right}>
+            <ErrorLabel alignment={{ horizontal: AlignHorizontal.Right }}>
               {problems[0]?.message.short}
             </ErrorLabel>
           ) : null}
         </Container>
 
         <InputContainer
-          backgroundColor={backgroundColor}
-          border={border}
-          boxShadow={boxShadow}
+          alignment={{
+            orientation: Orientation.Horizontal,
+          }}
+          background={{ color: BackgroundColors.InputControl, ...background }}
+          border={{
+            all: {
+              color: BorderColors.InputControl,
+              style: BorderStyle.Solid,
+              width: 1,
+            },
+            ...border,
+          }}
           cursor={cursor}
           className={`${className} number-input`}
           error={problems}
@@ -128,8 +131,7 @@ export const NumberInput = memo(
           onClick={() => {
             inputRef.current?.focus();
           }}
-          orientation={Orientation.Horizontal}
-          size={size}
+          shadow={shadow}
           {...props}
         >
           {icon && <>{icon}</>}
@@ -145,7 +147,6 @@ export const NumberInput = memo(
               setValue(e.target.value);
             }}
             onFocus={() => setFocused(true)}
-            lineHeight={size}
             placeholder={placeholder}
             onKeyPress={e => e.key}
             ref={inputRef}
@@ -155,9 +156,12 @@ export const NumberInput = memo(
           />
 
           {inProgress && (
-            <Container grow={false}>
-              <ProgressSpinner size={Size.Small} />
-            </Container>
+            <ProgressSpinner
+              size={{
+                height: Sizes.Small,
+                width: Sizes.Small,
+              }}
+            />
           )}
         </InputContainer>
       </>
@@ -176,7 +180,7 @@ export const NumberInput = memo(
 // `;
 
 const Input = styled.input<NumberInputProps>`
-  ${FocusedStyles};
+  ${FocusStyles};
   ${TextStyles};
 
   background: transparent;

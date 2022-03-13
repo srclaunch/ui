@@ -1,14 +1,16 @@
 import { memo, ReactElement } from 'react';
 import { Container } from '../../layout/Container';
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
+  AlignVertical,
   Amount,
   BackgroundColors,
   Color,
   Formatter,
   Orientation,
   Size,
-  SizeProps,
+  Sizes,
 } from '../../../types';
 import { ProgressMeter } from '../../charts/ProgressMeter';
 import { LinearGauge } from '../../charts/LinearGauge';
@@ -20,40 +22,37 @@ type ProgressivePaymentStatusProps = {
   currency?: CurrencyCode;
   color?: Color;
   totalDue: number;
-} & SizeProps;
+};
 
 export const ProgressivePaymentStatus = memo(
   ({
     amountPaid = 0,
     currency = CurrencyCode.UnitedStatesDollar,
     totalDue = 0,
-    size = Size.Default,
-  }: ProgressivePaymentStatusProps): ReactElement => {
+  }: // size = Size.Default,
+  ProgressivePaymentStatusProps): ReactElement => {
     const backgroundColor =
       amountPaid >= totalDue
         ? BackgroundColors.Success
         : BackgroundColors.Warning;
     return (
-      <Container
-        orientation={Orientation.Vertical}
-        paddingBottom={Amount.Default}
-        grow={false}
-      >
+      <Container padding={{ bottom: Amount.Default }}>
         <ProgressMeter
-          alignContent={Align.Center}
-          alignItems={Align.Center}
+          alignment={{
+            horizontal: AlignHorizontal.Center,
+            vertical: AlignVertical.Center,
+          }}
           amount={amountPaid}
-          color={backgroundColor}
-          borderRadius={Amount.Default}
-          height={size}
+          // color={backgroundColor}
+          borderRadius={{ all: Amount.Default }}
           label={formatCurrency({ amount: amountPaid, currency })}
-          marginBottom={Amount.Less}
+          margin={{ bottom: Amount.Less }}
           total={totalDue}
         />
 
         <LinearGauge
           amount={amountPaid}
-          color={BackgroundColors.Warning}
+          // color={ BackgroundColors.Warning }
           formatter={{
             formatter: Formatter.Currency,
             options: {

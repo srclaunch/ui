@@ -9,5 +9,5 @@ export declare type ImageInputProps = {
     readonly icon?: IconProps;
     readonly maxImages?: number;
 } & ContainerProps<HTMLDivElement> & InputProps<HTMLInputElement, readonly (File | ImageType)[]>;
-export declare const ImageInput: import("react").MemoExoticComponent<({ backgroundColor, border, borderRadius, button, defaultValue, icon, label, maxImages, name, onChange, padding, }: ImageInputProps) => ReactElement>;
+export declare const ImageInput: import("react").MemoExoticComponent<({ background, border, borderRadius, button, defaultValue, icon, label, maxImages, name, onChange, padding, }: ImageInputProps) => ReactElement>;
 //# sourceMappingURL=ImageInput.d.ts.map

@@ -2,9 +2,9 @@
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 
-import { ContainerProps } from '../../types';
+import { Container, ContainerProps } from '../layout/Container';
 
-type PieChartProps = ContainerProps<HTMLDivElement>;
+type PieChartProps = ContainerProps;
 
 export const PieChart = memo(({ ...props }: PieChartProps): ReactElement => {
   // const data = [
@@ -70,7 +70,3 @@ export const PieChart = memo(({ ...props }: PieChartProps): ReactElement => {
     </Container>
   );
 });
-
-const Container = styled.div`
-  height: 200px;
-`;

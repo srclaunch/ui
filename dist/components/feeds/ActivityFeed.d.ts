@@ -1,13 +1,13 @@
 import { Activity } from '@srclaunch/types';
 import { ReactElement } from 'react';
 import { DateTimeFormatOptions } from 'luxon';
-import { AppearanceProps, CommonComponentProps, LayoutProps } from '../../types';
+import { ContainerProps } from '../layout/Container';
 export declare type ActivityFeedProps = {
     activities: Activity[];
     dateFormat?: DateTimeFormatOptions;
-} & CommonComponentProps<HTMLDivElement> & LayoutProps & AppearanceProps;
+} & ContainerProps;
 export declare type ActivityFeedItemProps = {
     dateFormat?: DateTimeFormatOptions;
-} & Activity & CommonComponentProps<HTMLDivElement> & LayoutProps & AppearanceProps;
+} & Activity & ContainerProps;
 export declare const ActivityFeed: import("react").MemoExoticComponent<({ activities, className, dateFormat, ...props }: ActivityFeedProps) => ReactElement>;
 //# sourceMappingURL=ActivityFeed.d.ts.map

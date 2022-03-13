@@ -1,11 +1,4 @@
-import {
-  Amount,
-  BorderColors,
-  BorderDirectionProps,
-  BorderStyleProps,
-  BoxShadow,
-  BoxShadowDetails,
-} from '../../types';
+import { Amount, BorderColors, Shadow } from '../../types';
 
 export function getCSSMeasurementValue(
   val?: number | Amount | string,
@@ -25,48 +18,26 @@ export function getCSSMeasurementValue(
   return val;
 }
 
-const isBorderStyleProps = (
-  border: BorderDirectionProps | BorderStyleProps,
-): border is BorderStyleProps => {
-  return border.hasOwnProperty('color');
-};
+// export function getCSSBoxShadowValue(val?: Shadow): string | null {
+//   if (!val) return null;
 
-export function getCSSBorderValue(
-  val?: BorderDirectionProps | BorderStyleProps,
-): string | null {
-  if (!val) return null;
+//   // offset-x | offset-y | blur-radius | spread-radius | color
+//   const getString = (shadow: Shadow) => {
+//     const offsetX = shadow.x ? `${shadow.x}px` : 0;
+//     const offsetY = shadow.y ? `${shadow.y}px` : 0;
+//     const blurRadius = shadow.radius ? `${shadow.blurRadius}px` : '';
+//     const spreadradius = shadow.spreadRadius ? `${shadow.spreadRadius}px` : '';
+//     const color = ` rgba(${shadow.color}, ${shadow.opacity ?? 100}%)`;
 
-  if (isBorderStyleProps(val)) {
-    return `${getCSSMeasurementValue(val.width ?? 1)} ${val.style ?? ''} ${
-      val.color === BorderColors.Transparent
-        ? 'transparent'
-        : `rgb(${val.color ?? BorderColors.Default})`
-    }`;
-  }
+//     return `${offsetX} ${offsetY} ${blurRadius} ${spreadradius} ${color}`;
+//   };
 
-  return null;
-}
+//   if (Array.isArray(val)) {
+//     return val.map(s => getString(s)).join(',');
+//   }
 
-export function getCSSBoxShadowValue(val?: BoxShadow): string | null {
-  if (!val) return null;
+//   if (typeof val === 'string') return val;
 
-  // offset-x | offset-y | blur-radius | spread-radius | color
-  const getString = (shadow: BoxShadowDetails) => {
-    const offsetX = shadow.offsetX ? `${shadow.offsetX}px` : 0;
-    const offsetY = shadow.offsetY ? `${shadow.offsetY}px` : 0;
-    const blurRadius = shadow.blurRadius ? `${shadow.blurRadius}px` : '';
-    const spreadradius = shadow.spreadRadius ? `${shadow.spreadRadius}px` : '';
-    const color = ` rgba(${shadow.color}, ${shadow.opacity ?? 100}%)`;
-
-    return `${offsetX} ${offsetY} ${blurRadius} ${spreadradius} ${color}`;
-  };
-
-  if (Array.isArray(val)) {
-    return val.map(s => getString(s)).join(',');
-  }
-
-  if (typeof val === 'string') return val;
-
-  // @ts-ignore
-  return getString(val);
-}
+//   // @ts-ignore
+//   return getString(val);
+// }

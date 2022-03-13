@@ -2,12 +2,39 @@ import { PageRole, PageRoute } from '@srclaunch/types';
 
 import { Animation } from './pages/animation';
 import { Authentication } from './pages/authentication';
+import { CodeVerificationFormPage } from './pages/authentication/CodeVerificationForm';
+import { ForgotPasswordFormPage } from './pages/authentication/ForgotPasswordForm';
+import { LoginFormPage } from './pages/authentication/LoginForm';
+import { SignupFormPage } from './pages/authentication/SignupForm';
 import { Billing } from './pages/billing';
 import { BillingPayments } from './pages/billing/payments';
-import { DataGridPage } from './pages/data/DataGrid';
-import { DataGridCellPage } from './pages/data/DataGridCell';
-import { DataLabelPage } from './pages/data/DataLabel';
-import { Data } from './pages/data/index';
+import { AddPaymentMethodFormPage } from './pages/billing/payments/AddPaymentMethodForm';
+import { PaymentMethodModalPage } from './pages/billing/payments/PaymentMethodModal';
+import { ProgressivePaymentStatusPage } from './pages/billing/payments/ProgressivePaymentStatus';
+import { BillingSubscriptionsPage } from './pages/billing/subscriptions';
+import { SubscriptionModalPage } from './pages/billing/subscriptions/SubscriptionModal';
+import { CardsPage } from './pages/cards/index';
+import { CardPage } from './pages/cards/Card';
+import { TitleCardPage } from './pages/cards/TitleCard';
+import { ChartsPage } from './pages/charts/index';
+import { LinearGaugePage } from './pages/charts/LinearGauge';
+import { PieChartPage } from './pages/charts/PieChart';
+import { ProgressMeterPage } from './pages/charts/ProgressMeter';
+import { RadialChartPage } from './pages/charts/RadialChart';
+import { RadialGaugePage } from './pages/charts/RadialGauge';
+import { ContainersPage } from './pages/containers/index';
+import { PagePage } from './pages/containers/Page';
+import { WebApplicationPage } from './pages/containers/WebApplication';
+import { WorkspacePage } from './pages/containers/Workspace';
+import { DataPage } from './pages/data/index';
+import { DataGridsPage } from './pages/data/datagrids/index';
+import { DataGridPage } from './pages/data/datagrids/DataGrid';
+import { DataGridCellPage } from './pages/data/datagrids/DataGridCell';
+import { EntitiesPage } from './pages/data/entities/index';
+import { EntityEditorPage } from './pages/data/entities/EntityEditor';
+import { EntityPanelPage } from './pages/data/entities/EntityPanel';
+import { EntityPreviewPage } from './pages/data/entities/EntityPreview';
+import { LabelsPage } from './pages/data/labels/index';
 import { Forms } from './pages/forms';
 import { ButtonsPage } from './pages/forms/buttons';
 import { ButtonPage } from './pages/forms/buttons/Button';
@@ -21,17 +48,21 @@ import { LongTextInputPage } from './pages/forms/inputs/text/LongTextInput';
 import { TextInputPage } from './pages/forms/inputs/text/TextInput';
 import { Introduction } from './pages/Introduction';
 import { MoreMenuPage } from './pages/menus/MoreMenu';
-import { ChatMessagingPage } from './pages/messaging/chat';
-import { ConversationListPage } from './pages/messaging/chat/ConversationList';
-import { ConversationNavigationPage } from './pages/messaging/chat/ConversationNavigation';
-import { MessagePage } from './pages/messaging/chat/Message';
-import { MessageComposerPage } from './pages/messaging/chat/MessageComposer';
-import { MessageListPage } from './pages/messaging/chat/MessageList';
-import { MessagePreviewPage } from './pages/messaging/chat/MessagePreview';
+import { Messaging } from './pages/messaging/index';
+import { ChatPage } from './pages/messaging/chat/index';
+import { ConversationsPage } from './pages/messaging/chat/conversations';
+import { ConversationListPage } from './pages/messaging/chat/conversations/ConversationList';
+import { ConversationNavigationPage } from './pages/messaging/chat/conversations/ConversationNavigation';
+import { MessagesPage } from './pages/messaging/chat/messages';
+import { MessagePage } from './pages/messaging/chat/messages/Message';
+import { MessageComposerPage } from './pages/messaging/chat/messages/MessageComposer';
+import { MessageListPage } from './pages/messaging/chat/messages/MessageList';
+import { MessagePreviewPage } from './pages/messaging/chat/messages/MessagePreview';
 import { Modals } from './pages/modals/index';
 import { SlidePanelPage } from './pages/modals/SlidePanel';
 import { PageNotFound } from './pages/PageNotFound';
 import { ThemeSelectorPage } from './pages/themes/ThemeSelector';
+// import { LinearGauge, RadialGauge } from '../../dist';
 
 const routes: readonly PageRoute[] = [
   {
@@ -52,6 +83,22 @@ const routes: readonly PageRoute[] = [
     path: '/authentication',
   },
   {
+    component: CodeVerificationFormPage,
+    path: '/authentication/code-verification-form',
+  },
+  {
+    component: ForgotPasswordFormPage,
+    path: '/authentication/forgot-password-form',
+  },
+  {
+    component: LoginFormPage,
+    path: '/authentication/login-form',
+  },
+  {
+    component: SignupFormPage,
+    path: '/authentication/signup-form',
+  },
+  {
     component: Billing,
     path: '/billing',
   },
@@ -60,28 +107,112 @@ const routes: readonly PageRoute[] = [
     path: '/billing/payments',
   },
   {
-    component: Data,
+    component: AddPaymentMethodFormPage,
+    path: '/billing/payments/add-payment-method-form',
+  },
+  {
+    component: PaymentMethodModalPage,
+    path: '/billing/payments/payment-method-modal',
+  },
+  {
+    component: ProgressivePaymentStatusPage,
+    path: '/billing/payments/progressive-payment-status',
+  },
+  {
+    component: BillingSubscriptionsPage,
+    path: '/billing/subscriptions',
+  },
+  {
+    component: SubscriptionModalPage,
+    path: '/billing/subscriptions/subscription-modal',
+  },
+  {
+    component: CardsPage,
+    path: '/cards',
+  },
+  {
+    component: CardPage,
+    path: '/cards/card',
+  },
+  {
+    component: TitleCardPage,
+    path: '/cards/title-card',
+  },
+  {
+    component: ChartsPage,
+    path: '/charts',
+  },
+  {
+    component: LinearGaugePage,
+    path: '/charts/linear-gauge',
+  },
+  {
+    component: PieChartPage,
+    path: '/charts/pie-chart',
+  },
+  {
+    component: ProgressMeterPage,
+    path: '/charts/progress-meter',
+  },
+  {
+    component: RadialChartPage,
+    path: '/charts/radial-chart',
+  },
+  {
+    component: RadialGaugePage,
+    path: '/charts/radial-gauge',
+  },
+  {
+    component: ContainersPage,
+    path: '/containers',
+  },
+  {
+    component: PagePage,
+    path: '/containers/page',
+  },
+  {
+    component: WebApplicationPage,
+    path: '/containers/web-application',
+  },
+  {
+    component: WorkspacePage,
+    path: '/containers/workspace',
+  },
+  {
+    component: DataPage,
     path: '/data',
   },
   {
+    component: DataGridsPage,
+    path: '/data/datagrids',
+  },
+  {
     component: DataGridPage,
-    path: '/data/data-grid',
+    path: '/data/datagrids/data-grid',
   },
   {
     component: DataGridCellPage,
-    path: '/data/data-grid-cell',
+    path: '/data/datagrids/data-grid-cell',
   },
   {
-    component: DataLabelPage,
-    path: '/data/data-label',
+    component: EntitiesPage,
+    path: '/data/entities',
   },
   {
-    component: DataLabelPage,
-    path: '/data/data-labels/string-label',
+    component: EntityEditorPage,
+    path: '/data/entities/entity-editor',
   },
   {
-    component: DataLabelPage,
-    path: '/data/data-label',
+    component: EntityPanelPage,
+    path: '/data/entities/entity-panel',
+  },
+  {
+    component: EntityPreviewPage,
+    path: '/data/entities/entity-preview',
+  },
+  {
+    component: LabelsPage,
+    path: '/data/labels',
   },
   {
     component: Modals,
@@ -136,32 +267,44 @@ const routes: readonly PageRoute[] = [
     path: '/forms/inputs/toggle-input',
   },
   {
-    component: ChatMessagingPage,
+    component: Messaging,
+    path: '/messaging/',
+  },
+  {
+    component: ChatPage,
     path: '/messaging/chat',
   },
   {
+    component: ConversationsPage,
+    path: '/messaging/chat/conversations',
+  },
+  {
     component: ConversationListPage,
-    path: '/messaging/chat/conversation-list',
+    path: '/messaging/chat/conversations/conversation-list',
   },
   {
     component: ConversationNavigationPage,
-    path: '/messaging/chat/conversation-navigation',
+    path: '/messaging/chat/conversations/conversation-navigation',
+  },
+  {
+    component: MessagesPage,
+    path: '/messaging/chat/messages',
   },
   {
     component: MessagePage,
-    path: '/messaging/chat/message',
+    path: '/messaging/chat/messages/message',
   },
   {
     component: MessageComposerPage,
-    path: '/messaging/chat/message-composer',
+    path: '/messaging/chat/messages/message-composer',
   },
   {
     component: MessageListPage,
-    path: '/messaging/chat/message-list',
+    path: '/messaging/chat/messages/message-list',
   },
   {
     component: MessagePreviewPage,
-    path: '/messaging/chat/message-preview',
+    path: '/messaging/chat/messages/message-preview',
   },
   {
     component: SlidePanelPage,

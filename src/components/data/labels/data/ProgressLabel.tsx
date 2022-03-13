@@ -1,15 +1,9 @@
 import { memo, ReactElement } from 'react';
 
-import { Label } from '../../../typography/Label';
+import { Label, LabelProps } from '../../../typography/Label';
 import { ProgressMeter } from '../../../charts/ProgressMeter';
 
-import {
-  Color,
-  LabelProps,
-  Size,
-  TextColors,
-  TextSize,
-} from '../../../../types';
+import { Color, Sizes, TextColors, TextSize } from '../../../../types';
 
 type ProgressLabelProps = {
   color?: Color;
@@ -20,7 +14,7 @@ export const ProgressLabel = memo(
   ({
     color,
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value,
@@ -37,7 +31,7 @@ export const ProgressLabel = memo(
         textSize={textSize}
         {...props}
       >
-        <ProgressMeter amount={spent} backgroundColor={color} total={total} />
+        <ProgressMeter amount={spent} background={{ color }} total={total} />
       </Label>
     );
   },

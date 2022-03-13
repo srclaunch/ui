@@ -8,12 +8,13 @@ import { Container } from '../../../layout/Container';
 import { InputContainer } from '../shared/InputContainer';
 
 import {
-  Align,
+  AlignHorizontal,
+  AlignVertical,
   Amount,
   BackgroundColors,
   Orientation,
-  Size,
   TextColors,
+  TextSize,
 } from '../../../../types';
 
 export enum VerificationCodeType {
@@ -41,7 +42,7 @@ export const VerificationCodeInput = memo(
     onChange,
     onKeyPress,
     placeholder = '',
-    size = Size.Larger,
+    textSize = TextSize.Larger,
     textColor = TextColors.Dark,
     codeType = VerificationCodeType.Numeric,
     ...props
@@ -89,23 +90,28 @@ export const VerificationCodeInput = memo(
 
     return (
       <Container
-        orientation={Orientation.Horizontal}
-        alignContent={Align.Center}
+        alignment={{
+          horizontal: AlignHorizontal.Center,
+          orientation: Orientation.Horizontal,
+          vertical: AlignVertical.Center,
+        }}
       >
         {Array.from(Array(length)).map((_, key) => {
           return (
             <InputContainer
-              backgroundColor={BackgroundColors.InputControl}
+              background={{
+                color: BackgroundColors.InputControl,
+              }}
               focused={focusedKey === key}
               className={`${className} verification-code-input`}
               key={key}
-              marginLeft={Amount.Least}
-              marginRight={Amount.Least}
-              orientation={Orientation.Horizontal}
+              margin={{
+                left: Amount.Less,
+                right: Amount.Less,
+              }}
             >
               <Input
                 id={`${name}-verification-code-input-${key}`}
-                lineHeight={size}
                 max={codeType === VerificationCodeType.Numeric ? 9 : 'unset'}
                 min={codeType === VerificationCodeType.Numeric ? 0 : 'unset'}
                 name={name}

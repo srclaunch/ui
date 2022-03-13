@@ -3,9 +3,9 @@ import { Link } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 
-import { LabelProps, LinkProps, Size, TextColors } from '../../types';
+import { LinkProps, Size, TextColors } from '../../types';
 import { Icon } from '../media/Icon';
-import { Label } from '../typography/Label';
+import { Label, LabelProps } from '../typography/Label';
 
 export type PageLinkProps = {
   readonly label?: string;
@@ -28,14 +28,17 @@ export const PageLink = memo(
         <Link to={to}>
           <IconWrapper>{icon}</IconWrapper>
 
-          <Label textColor={textColor ?? TextColors.Primary} size={Size.Small}>
+          <Label
+            textColor={textColor ?? TextColors.Primary}
+            // size={Size.Small}
+          >
             {label}
           </Label>
 
           {showArrow && (
             <Icon
               name={BasicIcons.ChevronRight}
-              size={Size.Small}
+              // size={Size.Small}
               color={textColor}
             />
           )}

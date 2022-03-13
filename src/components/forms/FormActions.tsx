@@ -1,17 +1,20 @@
 import { memo, ReactElement } from 'react';
 
-import { Container } from '../layout/Container';
-import { Align, Amount, ContainerProps, Orientation } from '../../types';
+import { Container, ContainerProps } from '../layout/Container';
+import { AlignHorizontal, Alignment, Amount, Orientation } from '../../types';
 
 export const FormActions = memo(
   ({ children, ...props }: ContainerProps): ReactElement => {
     return (
       <Container
-        alignContent={Align.SpaceBetween}
+        alignment={{
+          horizontal: AlignHorizontal.SpaceBetween,
+          orientation: Orientation.Horizontal,
+        }}
         className="form-actions"
-        marginTop={Amount.More}
-        orientation={Orientation.Horizontal}
-        grow={false}
+        margin={{
+          top: Amount.More,
+        }}
         {...props}
       >
         {children}

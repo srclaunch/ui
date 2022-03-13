@@ -1,41 +1,32 @@
 import { memo, ReactElement } from 'react';
 
-import {
-  Orientation,
-  Size,
-  TextColors,
-  TextSize,
-  WhiteSpace,
-} from '../../types';
-import { Label, LabelProps } from './Label';
+import { Sizes, TextColors, TextSize } from '../../types';
+import { Text, TextProps } from './Text';
 
-type SmallProps = LabelProps;
+type SmallProps = TextProps;
 
 export const Small = memo(
   ({
     as = 'small',
     className = '',
     children,
-    grow = false,
-    orientation = Orientation.Horizontal,
-    lineHeight = Size.Small,
+    lineHeight = Sizes.Small,
     textColor = TextColors.Light,
     textSize = TextSize.Small,
     ...props
   }: SmallProps): ReactElement => {
     return (
-      <Label
+      <Text
         as={as}
         className={`${className} small`}
-        grow={grow}
-        textColor={textColor}
         lineHeight={lineHeight}
-        orientation={orientation}
-        whiteSpace={WhiteSpace.Normal}
+        lineWrap={true}
+        textColor={textColor}
+        textSize={textSize}
         {...props}
       >
         {children}
-      </Label>
+      </Text>
     );
   },
 );

@@ -18,7 +18,7 @@ export function getLabelByFieldType({
 }: PrimitiveLabelProps): ReactElement {
   switch (type) {
     case Primitives.Boolean:
-      return <BooleanLabel grow={false} value={value} {...props} />;
+      return <BooleanLabel value={value} {...props} />;
     case Primitives.CurrencyAmount:
       return (
         <CurrencyAmountLabel
@@ -43,9 +43,9 @@ export function getLabelByFieldType({
     case Primitives.Number:
       return <NumberLabel value={value} {...props} />;
     case Primitives.String:
-      return <StringLabel grow={false} value={value} {...props} />;
+      return <StringLabel value={value} {...props} />;
 
     default:
-      return <StringLabel grow={false} value={value} {...props} />;
+      return <StringLabel value={value} {...props} />;
   }
 }

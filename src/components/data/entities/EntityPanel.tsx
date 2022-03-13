@@ -9,14 +9,8 @@ import pluralize from 'pluralize';
 import { memo, ReactElement, useEffect, useState } from 'react';
 
 import { useEntityEditor } from '../../../hooks/use-entity-editor';
-import {
-  Amount,
-  Colors,
-  ContainerProps,
-  Size,
-  TextColors,
-} from '../../../types';
-import { Container } from '../../layout/Container';
+import { Amount, Colors, Size, TextColors } from '../../../types';
+import { Container, ContainerProps } from '../../layout/Container';
 import { ModalHeader } from '../../modals/ModalHeader';
 import { SlidePanel } from '../../modals/SlidePanel';
 import { LoadingOverlay } from '../../progress/LoadingOverlay';
@@ -129,7 +123,7 @@ export const EntityPanel = memo(
 
     return (
       <SlidePanel visible={visible}>
-        <Container borderRadius={Amount.Default} {...props}>
+        <Container borderRadius={{ all: Amount.Default }} {...props}>
           <LoadingOverlay visible={inProgress} />
 
           <ModalHeader
@@ -142,7 +136,7 @@ export const EntityPanel = memo(
                         icon: {
                           color: Colors.Error,
                           name: BasicIcons.TrashCan,
-                          size: Size.Smaller,
+                          // size: Sizes.Smaller,
                         },
                         label: 'Delete',
                         onClick: () => {
@@ -164,8 +158,8 @@ export const EntityPanel = memo(
           />
 
           <Container
-            padding={Amount.Default}
-            scrollable
+            padding={{ all: Amount.Default }}
+            // scrollable
             style={{
               top: '60px !important',
             }}

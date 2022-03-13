@@ -1,9 +1,9 @@
 import { memo, ReactElement } from 'react';
 import { DateTime, DateTimeFormatOptions } from 'luxon';
 import { Date } from '@srclaunch/types';
-import { Label } from '../../../typography/Label';
+import { Label, LabelProps } from '../../../typography/Label';
 
-import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
+import { Sizes, TextColors, TextSize } from '../../../../types';
 
 type DateLabelProps = {
   defaultValue?: Date;
@@ -14,7 +14,6 @@ type DateLabelProps = {
 export const DateLabel = memo(
   ({
     className = '',
-    grow = false,
     format = DateTime.DATE_MED,
     icon,
     textColor = TextColors.Lighter,
@@ -25,7 +24,6 @@ export const DateLabel = memo(
     return (
       <Label
         className={`${className} date-label`}
-        grow={false}
         icon={icon}
         textColor={textColor}
         textSize={textSize}

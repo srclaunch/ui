@@ -1,7 +1,7 @@
 import { ComponentType, memo, ReactElement } from 'react';
 
-import { Align, Amount, ContainerProps, Orientation } from '../../types';
-import { Container } from '../layout/Container';
+import { AlignHorizontal, Alignment, Amount, Orientation } from '../../types';
+import { Container, ContainerProps } from '../layout/Container';
 import { MoreMenu, MoreMenuProps } from '../menus/MoreMenu';
 import { Title } from '../typography/Title';
 import { CloseButton } from './CloseButton';
@@ -14,32 +14,37 @@ export type ModalHeaderProps = {
 
 export const ModalHeader = memo(
   ({
-    alignItems = Align.Center,
+    alignment = {},
     className = '',
     onCloseClick,
-    marginBottom = Amount.Most,
+    margin = {},
     moreMenu,
-    orientation = Orientation.Horizontal,
-    padding = Amount.Default,
+    padding = {},
     title,
   }: ModalHeaderProps): ReactElement => {
     return (
       <Container
-        alignItems={alignItems}
+        alignment={{
+          horizontal: AlignHorizontal.Center,
+          orientation: Orientation.Horizontal,
+          ...alignment,
+        }}
         className={`${className} modal-header`}
-        grow={false}
-        flat
-        marginBottom={marginBottom}
-        orientation={orientation}
-        padding={padding}
+        margin={{ bottom: Amount.Most, ...margin }}
+        padding={{ all: Amount.Default, ...padding }}
       >
         <Title>{title}</Title>
 
         <Container />
 
-        {moreMenu && <MoreMenu alignContent={Align.Right} {...moreMenu} />}
+        {moreMenu && (
+          <MoreMenu
+            alignment={{ horizontal: AlignHorizontal.Right }}
+            {...moreMenu}
+          />
+        )}
 
-        <CloseButton marginLeft={Amount.Less} onClick={onCloseClick} />
+        <CloseButton margin={{ left: Amount.Less }} onClick={onCloseClick} />
       </Container>
     );
   },

@@ -1,13 +1,13 @@
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 
-import { Color, SizeProps } from '../../types';
+import { Color, Sizes } from '../../types';
 
 type RadialGaugeProps = {
   color: Color;
   size: number;
   value: number;
-} & SizeProps;
+};
 
 export const RadialGauge = memo(
   ({ color, size, value }: RadialGaugeProps): ReactElement => {

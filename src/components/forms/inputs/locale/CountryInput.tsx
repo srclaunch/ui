@@ -3,7 +3,7 @@ import Countries from 'i18n-iso-countries';
 import { memo, ReactElement } from 'react';
 import ReactCountryFlag from 'react-country-flag';
 
-import { Amount, Size } from '../../../../types';
+import { Amount, Sizes } from '../../../../types';
 import { DropdownInput, DropdownInputProps } from '../menu/DropdownInput';
 
 export type CountryInputProps = DropdownInputProps<CountryCode>;
@@ -18,7 +18,7 @@ export const CountryInput = memo(
             <ReactCountryFlag
               svg
               countryCode={alpha2}
-              style={{ height: Size.Smaller, width: 'auto' }}
+              style={{ height: Sizes.Smaller, width: 'auto' }}
             />
           ),
         },

@@ -1,11 +1,16 @@
 import { memo, ReactElement } from 'react';
 
-import { Workspace } from '../../../../../components/containers/Workspace';
-import { LongTextInput } from '../../../../../components/forms/inputs/text/LongTextInput';
-import { InputLabel } from '../../../../../components/forms/labels/InputLabel';
-import { InputRow } from '../../../../../components/forms/layout/InputRow';
-import { Container } from '../../../../../components/layout/Container';
-import { Amount, BackgroundColors, Depth } from '../../../../../types';
+import {
+  Amount,
+  BackgroundColors,
+  Container,
+  Depth,
+  InputLabel,
+  InputRow,
+  LongTextInput,
+  Workspace,
+} from '../../../../../index';
+
 import { Documentation } from '../../../../layouts/Documentation';
 
 export const LongTextInputPage = memo((): ReactElement => {
@@ -18,10 +23,9 @@ export const LongTextInputPage = memo((): ReactElement => {
       title="LongTextInput"
     >
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.More}
-        grow={false}
-        padding={Amount.Most}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.More }}
+        padding={{ all: Amount.Most }}
       >
         <InputRow>
           <InputLabel>Example</InputLabel>

@@ -1,1 +1,1 @@
-{"version":3,"file":"size.d.ts","sourceRoot":"","sources":["../../../src/lib/proportions/size.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,IAAI,EAAE,MAAM,aAAa,CAAC;AAEnC,wBAAgB,cAAc,CAAC,IAAI,EAAE,IAAI,GAAG,IAAI,CAiB/C;AAED,wBAAgB,aAAa,CAAC,IAAI,EAAE,IAAI,GAAG,IAAI,CAiB9C"}
+{"version":3,"file":"size.d.ts","sourceRoot":"","sources":["../../../src/lib/proportions/size.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,KAAK,EAAE,MAAM,aAAa,CAAC;AAEpC,wBAAgB,cAAc,CAAC,IAAI,EAAE,KAAK,GAAG,KAAK,CAiBjD;AAED,wBAAgB,aAAa,CAAC,IAAI,EAAE,KAAK,GAAG,KAAK,CAiBhD"}

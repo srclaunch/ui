@@ -1,13 +1,12 @@
 import { ReactElement } from 'react';
-import { ContainerProps, IconProps } from '../../types';
-declare type TitleCardsProps = ContainerProps;
-export declare const TitleCards: import("react").MemoExoticComponent<({ children, className, grow, minHeight, orientation, ...props }: TitleCardsProps) => ReactElement>;
+import { ContainerProps } from '../layout/Container';
+import { IconProps } from '../media/Icon';
 declare type TitleCardProps = {
     icon?: IconProps;
     label?: string;
     loading?: boolean;
     value?: number;
-} & ContainerProps<HTMLDivElement>;
-export declare const TitleCard: import("react").MemoExoticComponent<({ backgroundColor, borderRadius, boxShadow, className, grow, flat, label, loading, marginRight, orientation, padding, value, icon, width, ...props }: TitleCardProps) => ReactElement>;
+} & ContainerProps;
+export declare const TitleCard: import("react").MemoExoticComponent<({ alignment, background, borderRadius, className, label, loading, padding, value, icon, shadow, size, ...props }: TitleCardProps) => ReactElement>;
 export {};
 //# sourceMappingURL=TitleCard.d.ts.map

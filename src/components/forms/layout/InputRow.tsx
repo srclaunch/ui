@@ -8,17 +8,13 @@ export const InputRow = memo(
   ({
     children,
     className = '',
-    grow = false,
-    marginBottom = Amount.More,
-    orientation = Orientation.Vertical,
+    margin = {},
     ...props
   }: ContainerProps): ReactElement => {
     return (
       <Container
         className={`${className} input-row`}
-        grow={grow}
-        marginBottom={marginBottom}
-        orientation={orientation}
+        margin={{ bottom: Amount.More, ...margin }}
         {...props}
       >
         {children}

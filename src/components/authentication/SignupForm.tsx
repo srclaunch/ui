@@ -1,18 +1,19 @@
+import { memo, ReactElement, useEffect } from 'react';
 import { Condition, Primitives } from '@srclaunch/types';
 import {
   signUp,
+  RootState,
   useDispatch,
   useSelector,
 } from '@srclaunch/web-application-state';
-import { memo, ReactElement, useEffect } from 'react';
-
 import {
-  Align,
+  AlignHorizontal,
   Amount,
   AutoComplete,
   BackgroundColors,
   DepthShadow,
-  Orientation,
+  TextAlign,
+  TextDecorationLine,
 } from '../../types';
 import { ErrorNotification } from '../errors/ErrorNotification';
 import { Form } from '../forms/Form';
@@ -31,17 +32,19 @@ type SignupFormProps = {
     readonly userId: string;
   }) => unknown;
   readonly title?: string;
-} & ContainerProps<HTMLDivElement>;
+} & ContainerProps;
 
 export const SignupForm = memo(
   ({
-    backgroundColor = BackgroundColors.Darker,
-    borderRadius = Amount.More,
+    background = {},
+    borderRadius = {},
     onSignupSuccess,
     title = 'Sign up',
   }: SignupFormProps): ReactElement => {
     const dispatch = useDispatch();
-    const signUpState = useSelector(state => state.user.authentication?.signup);
+    const signUpState = useSelector(
+      (state: RootState) => state.user.authentication?.signup,
+    );
     const { error, inProgress, success } = signUpState;
 
     useEffect(() => {
@@ -53,13 +56,13 @@ export const SignupForm = memo(
     return (
       <Container
         className="signup-form"
-        backgroundColor={backgroundColor}
-        borderRadius={borderRadius}
-        boxShadow={DepthShadow.Highest}
-        grow={false}
-        padding={Amount.Most}
-        paddingBottom={Amount.Default}
-        width={420}
+        background={{ color: BackgroundColors.Darker, ...background }}
+        borderRadius={{ all: Amount.More, ...borderRadius }}
+        padding={{ all: Amount.Most }}
+        shadow={DepthShadow.Highest}
+        size={{
+          width: 420,
+        }}
       >
         <LoadingOverlay borderRadius={borderRadius} visible={inProgress} />
 
@@ -68,22 +71,25 @@ export const SignupForm = memo(
         <img alt="Sign in" src="/illustrations/net_worth.svg" />
       </Illustration> */}
 
-        <Title alignText={Align.Center}>{title}</Title>
+        <Title textAlign={TextAlign.Center}>{title}</Title>
 
         <NotificationLabel
-          alignItems={Align.Center}
-          alignSelf={Align.Center}
-          backgroundColor={BackgroundColors.Darkest}
-          marginTop={Amount.Default}
-          marginBottom={Amount.All}
-          orientation={Orientation.Vertical}
-          grow={false}
+          alignment={{
+            horizontal: AlignHorizontal.Center,
+          }}
+          background={{
+            color: BackgroundColors.Darkest,
+          }}
           showOrb={false}
         >
-          <Paragraph alignText={Align.Center}>
+          <Paragraph textAlign={TextAlign.Center}>
             Already have an account?
             <br />
-            <Link to="/login" hover={{ underline: true }} underline={false}>
+            <Link
+              hover={{ textDecoration: { line: TextDecorationLine.Underline } }}
+              textDecoration={{ line: TextDecorationLine.Underline }}
+              to="/login"
+            >
               Sign in
             </Link>
           </Paragraph>
@@ -161,25 +167,23 @@ export const SignupForm = memo(
           }}
           submitButton={{
             borderRadius: Amount.Least,
-            grow: true,
+
             label: 'Sign up',
           }}
         />
 
-        <Container
-          paddingLeft={Amount.Default}
-          paddingRight={Amount.Default}
-          paddingTop={Amount.Default}
-        >
-          <Small alignText={Align.Center}>
+        <Container padding={{ all: Amount.Default }}>
+          <Small textAlign={TextAlign.Center}>
             By clicking the "Sign up" button you agree to the{' '}
-            {/* <Link to="https://budgetbloom.com/terms-of-use">Terms of use</Link> and{' '} */}
+            {/* 
+              <Link to="https://budgetbloom.com/terms-of-use">Terms of use</Link> and{' '} 
+              */}
             <Link
               // name="Privacy Policy Link [ Sign Up Form ]"
 
-              hover={{ underline: true }}
+              hover={{ textDecoration: { line: TextDecorationLine.Underline } }}
+              textDecoration={{ line: TextDecorationLine.Underline }}
               to="/privacy"
-              underline={false}
             >
               Privacy Policy
             </Link>

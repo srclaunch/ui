@@ -1,14 +1,14 @@
-import { useTitle } from '@srclaunch/react-hooks';
 import { cloneElement, ElementType, memo, ReactElement } from 'react';
-
+import { useTitle } from '@srclaunch/react-hooks';
 import {
-  Align,
+  AlignVertical,
   Amount,
   BackgroundColors,
-  ContainerProps,
+  Fill,
   Orientation,
+  Overflow,
 } from '../../types';
-import { Container } from '../layout/Container';
+import { Container, ContainerProps } from '../layout/Container';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 import { SubTitle } from '../typography/SubTitle';
 import { Title } from '../typography/Title';
@@ -27,16 +27,15 @@ type WorkspaceProps = {
 
 export const Workspace = memo(
   ({
-    alignContent = Align.Top,
-    backgroundColor = BackgroundColors.Workspace,
+    alignment = {},
+    background = {},
     className = '',
     children,
     header,
     layout: Layout,
     loading = false,
     loginRequired = false,
-    orientation = Orientation.Vertical,
-    padding = Amount.Most,
+    padding = {},
     title,
     ...props
   }: WorkspaceProps): ReactElement => {
@@ -44,7 +43,7 @@ export const Workspace = memo(
 
     const headerTitle = header?.title ? (
       typeof header.title === 'string' ? (
-        <Title marginTop={Amount.None}>{header.title}</Title>
+        <Title>{header.title}</Title>
       ) : (
         header.title
       )
@@ -52,38 +51,42 @@ export const Workspace = memo(
 
     const WorkspaceComp = (props2: any) => (
       <Container
-        alignContent={alignContent}
-        backgroundColor={backgroundColor}
+        alignment={{ vertical: AlignVertical.Top, ...alignment }}
+        background={{ color: BackgroundColors.Workspace, ...background }}
         className={`${className} workspace`}
-        grow
-        orientation={orientation}
-        padding={padding}
-        scrollable
+        overflow={Overflow.Scroll}
+        padding={{ all: Amount.Most, ...padding }}
         {...props}
         {...props2}
       >
         {(header?.title || header?.actions) && (
           <Container
-            alignItems={Align.Center}
-            grow={false}
-            marginBottom={Amount.All}
-            orientation={Orientation.Horizontal}
+            alignment={{
+              fill: Fill.Both,
+              orientation: Orientation.Horizontal,
+              vertical: AlignVertical.Center,
+            }}
+            margin={{
+              bottom: Amount.All,
+            }}
           >
             <Container>
               <Container
-                alignItems={Align.Center}
+                alignment={{
+                  orientation: Orientation.Horizontal,
+                  vertical: AlignVertical.Center,
+                }}
                 className="workspace-title"
-                orientation={Orientation.Horizontal}
               >
                 {headerTitle}
               </Container>
               <Container
                 className="workspace-sub-title"
-                orientation={Orientation.Horizontal}
+                alignment={{
+                  orientation: Orientation.Horizontal,
+                }}
               >
-                {header?.subTitle && (
-                  <SubTitle marginTop={Amount.None}>{header.subTitle}</SubTitle>
-                )}
+                {header?.subTitle && <SubTitle>{header.subTitle}</SubTitle>}
               </Container>
             </Container>
 

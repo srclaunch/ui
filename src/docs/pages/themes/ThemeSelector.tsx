@@ -1,7 +1,6 @@
 import { memo, ReactElement } from 'react';
-import { Workspace } from '../../../index';
+import { ThemeSelector, Workspace } from '../../../index';
 import { Documentation } from '../../layouts/Documentation';
-import { ThemeSelector } from '../../../components/themes/ThemeSelector';
 
 export const ThemeSelectorPage = memo((): ReactElement => {
   return (
@@ -10,7 +9,7 @@ export const ThemeSelectorPage = memo((): ReactElement => {
       layout={Documentation}
       title="ThemeSelector"
     >
-      <ThemeSelector width={200} />
+      <ThemeSelector size={{ width: 200 }} />
     </Workspace>
   );
 });

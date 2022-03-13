@@ -1,5 +1,3 @@
-import { Align } from '../layout/alignment';
-import { Color } from './color';
 export declare enum ElementBackgroundColors {
     Card = "var(--bg-color-card-rgb)",
     CloseButton = "var(--bg-color-close-button-rgb)",
@@ -30,7 +28,6 @@ export declare enum BackgroundColorShade {
     Darkest = "var(--bg-color-darkest-rgb)",
     Transparent = "transparent"
 }
-export declare type BackgroundColor = BackgroundColors | string;
 export declare enum BackgroundColors {
     Card = "var(--bg-color-card-rgb)",
     CloseButton = "var(--bg-color-close-button-rgb)",
@@ -83,14 +80,21 @@ export declare enum BackgroundSize {
     FillHorizontal = "fill-horizontal",
     FillVertical = "fill-vertical"
 }
-export declare type BackgroundProps = {
-    readonly backgroundColor?: Color;
-    readonly backgroundImage?: {
-        readonly path?: string;
-        readonly position?: Align | string;
-        readonly size?: BackgroundSize | string;
-        readonly url?: string;
+export declare type BackgroundColor = BackgroundColors;
+export declare enum BackgroundRepeat {
+    NoRepeat = "no-repeat",
+    Repeat = "repeat",
+    RepeatX = "repeat-x",
+    RepeatY = "repeat-y"
+}
+export declare type Background = {
+    color?: BackgroundColor | string;
+    image?: {
+        path?: string;
+        repeat?: BackgroundRepeat;
+        size?: BackgroundSize;
+        url?: string;
     };
-    readonly backgroundOpacity?: number;
+    opacity?: number;
 };
 //# sourceMappingURL=background.d.ts.map

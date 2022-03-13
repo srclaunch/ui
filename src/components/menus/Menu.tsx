@@ -13,66 +13,66 @@ import {
 import { Container, ContainerProps } from '../layout/Container';
 import { MenuItem, MenuItemProps } from './MenuItem';
 
-export type MenuProps = {
+export type MenuProps = ContainerProps & {
   readonly onItemClick?: (item: MenuItemProps) => void;
   readonly menu?: readonly MenuItemProps[];
   readonly menuItemProps?: MenuItemProps;
-} & ContainerProps;
+};
 
 export const Menu = memo(
   ({
     as = 'nav',
-    backgroundColor = BackgroundColors.Lightest,
-    borderRadius = Amount.Less,
-    boxShadow = DepthShadow.Surface,
+    background = {},
+    borderRadius = {},
     className = '',
     menu,
     menuItemProps = {
       active: {
-        backgroundColor: BackgroundColors.Primary,
-        boxShadow: {
-          blurRadius: 7,
+        background: {
           color: BackgroundColors.Primary,
-          offsetX: 0,
-          offsetY: 2,
-          opacity: 35,
-          spreadRadius: 4,
         },
+        // shadow: {
+        //   blur: 7,
+        //   color: BackgroundColors.Primary,
+        //   opacity: 35,
+        //   x: 0,
+        //   y: 2,
+        //   spread: 4,
+        // },
         textColor: TextColors.PrimaryContrast,
       },
-      borderRadius: Amount.Least,
+      borderRadius: {},
       focus: {
         textColor: TextColors.PrimaryContrast,
       },
       hover: {
-        backgroundColor: BackgroundColors.Primary,
+        background: {
+          color: BackgroundColors.Primary,
+        },
         textColor: TextColors.PrimaryContrast,
       },
-      padding: Amount.None,
-      paddingLeft: Amount.Less,
-      paddingRight: Amount.Less,
+      padding: {
+        left: Amount.Less,
+        right: Amount.Less,
+      },
       textSize: TextSize.Small,
     },
-    maxHeight = 120,
     onClick,
     onItemClick,
-    orientation = Orientation.Vertical,
-    minWidth = 80,
-    padding = Amount.Least,
+    padding = {},
+    shadow = DepthShadow.Surface,
+
     ...props
   }: MenuProps): ReactElement => {
     return (
       <Container
         as={as}
-        backgroundColor={backgroundColor}
-        boxShadow={boxShadow}
-        borderRadius={borderRadius}
+        background={{ color: BackgroundColors.Lightest, ...background }}
+        borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} menu`}
-        maxHeight={maxHeight}
-        minWidth={minWidth}
-        orientation={orientation}
         overflow={Overflow.ScrollVertical}
-        padding={padding}
+        padding={{ all: Amount.Least, ...padding }}
+        shadow={shadow}
         {...props}
       >
         {menu &&

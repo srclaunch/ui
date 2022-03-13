@@ -7,10 +7,9 @@ import {
   Depth,
   Heading,
   NavigationLink,
-  Size,
   UnorderedList,
   Workspace,
-} from '../../..';
+} from '../../../index';
 import { Documentation } from '../../layouts/Documentation';
 
 export const Billing = memo((): ReactElement => {
@@ -20,28 +19,26 @@ export const Billing = memo((): ReactElement => {
         title: 'Billing',
       }}
       layout={Documentation}
-      padding={Amount.Most}
+      padding={{ all: Amount.Most }}
       title="Billing"
     >
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.Least}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.Least }}
         depth={Depth.High}
-        grow={false}
-        padding={Amount.Most}
+        padding={{ all: Amount.Most }}
       >
-        <Heading lineHeight={Size.Small}>Components</Heading>
+        <Heading>Components</Heading>
 
         <UnorderedList
           items={[
             <NavigationLink to="/billing/payments" label="Payments" />,
             <NavigationLink
-              to="/billing/subscription"
-              label="SubscriptionModal"
+              to="/billing/subscriptions"
+              label="Subscriptions"
             />,
           ]}
-          paddingLeft={Amount.Default}
-          paddingRight={Amount.Default}
+          padding={{ left: Amount.Default, right: Amount.Default }}
         />
       </Container>
     </Workspace>

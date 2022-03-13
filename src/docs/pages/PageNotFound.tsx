@@ -1,6 +1,12 @@
 import { memo, ReactElement } from 'react';
 
-import { Align, BackgroundColors, Page, Paragraph, Title } from '../../index';
+import {
+  AlignHorizontal,
+  AlignVertical,
+  Page,
+  Paragraph,
+  Title,
+} from '../../index';
 // import { PageRole } from '@srclaunch/types';
 // import NotAuthenticated from '../layouts/NotAuthenticated';
 // import styled from 'styled-components';
@@ -9,8 +15,10 @@ import { Documentation } from '../layouts/Documentation';
 export const PageNotFound = memo((): ReactElement => {
   return (
     <Page
-      alignContent={Align.Center}
-      alignItems={Align.Center}
+      alignment={{
+        horizontal: AlignHorizontal.Center,
+        vertical: AlignVertical.Center,
+      }}
       layout={Documentation}
       title="AppLab - Page not found"
     >

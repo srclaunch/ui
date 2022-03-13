@@ -7,16 +7,12 @@ import {
 } from 'react';
 import styled from 'styled-components';
 import { Model, Primitives } from '@srclaunch/types';
-
 import { downloadDataAsFile } from '@srclaunch/actions';
 import { formatObjectToCSVData } from '@srclaunch/transform';
-
 import {
-  Align,
   Amount,
   BackgroundColors,
   BorderColors,
-  BorderProps,
   BorderStyle,
   Cursor,
   DataGridDisplayType,
@@ -25,8 +21,11 @@ import {
   Orientation,
   Overflow,
   Size,
+  Sizes,
   TextColors,
-  WidthProps,
+  AlignVertical,
+  AlignHorizontal,
+  TextSize,
 } from '../../../types';
 import { fetchFromObject } from '../../../lib/data/object';
 import { Container, ContainerProps } from '../../layout/Container';
@@ -38,16 +37,16 @@ import { MenuButton } from '../../forms/buttons/MenuButton';
 import { Button, ButtonType } from '../../forms/buttons/Button';
 
 export type DataGridColumn = {
-  align?: Align;
+  align?: AlignHorizontal;
   label: string;
   fallbackField?: string;
   field: string;
   fields?: string[];
+  size?: Size;
   type: Primitives;
-} & WidthProps;
+};
 
 export type DataGridProps = {
-  borderRadius?: BorderProps['borderRadius'];
   className?: string;
   columns: DataGridColumn[];
   columnCount?: number;
@@ -61,12 +60,14 @@ export type DataGridProps = {
     search?: {
       placeholder?: string;
       onChange?: (event: SyntheticEvent<HTMLInputElement>) => void;
+      size?: Size;
       value?: string;
-    } & WidthProps;
+    };
     export?: {
       label?: string;
       onClick?: (e: SyntheticEvent) => void;
-    } & WidthProps;
+      size?: Size;
+    };
   };
   hideOnProp?: string;
   loading?: boolean;
@@ -93,9 +94,9 @@ export type DataGridProps = {
 
 export const DataGrid = memo(
   ({
-    backgroundColor = BackgroundColors.DataGrid,
-    borderRadius = Amount.Least,
-    boxShadow = DepthShadow.Highest,
+    background = {},
+    borderRadius = {},
+
     className = '',
     columns,
     columnCount = 3,
@@ -108,7 +109,7 @@ export const DataGrid = memo(
     loading,
     model,
     onItemClick,
-    padding = Amount.Less,
+    shadow = DepthShadow.Highest,
     template,
     ...props
   }: DataGridProps): ReactElement => {
@@ -133,13 +134,14 @@ export const DataGrid = memo(
     if (!columns) {
       return (
         <Container
-          alignContent={Align.Top}
-          backgroundColor={backgroundColor}
-          borderRadius={borderRadius}
-          boxShadow={boxShadow}
+          alignment={{
+            vertical: AlignVertical.Top,
+          }}
+          background={{ color: BackgroundColors.DataGrid, ...background }}
+          borderRadius={{ all: Amount.Least, ...borderRadius }}
           className={`${className} data-grid`}
-          grow={true}
           overflow={Overflow.Hidden}
+          shadow={shadow}
           {...props}
         >
           <Label>No columns defined</Label>
@@ -149,31 +151,35 @@ export const DataGrid = memo(
 
     return (
       <Container
-        alignContent={Align.Top}
-        backgroundColor={backgroundColor}
+        alignment={{
+          vertical: AlignVertical.Top,
+        }}
+        background={background}
         borderRadius={borderRadius}
-        boxShadow={boxShadow}
         className={`${className} data-grid`}
-        grow={false}
         overflow={Overflow.Hidden}
+        shadow={shadow}
         {...props}
       >
         <LoadingOverlay borderRadius={borderRadius} visible={loading} />
 
         {header && Object.keys(header).length > 0 && (
           <Container
-            backgroundColor={BackgroundColors.DataGridHeader}
+            alignment={{
+              orientation: Orientation.Horizontal,
+            }}
+            background={{
+              color: BackgroundColors.DataGridHeader,
+            }}
             borderRadius={{
               topLeft: Amount.Less,
               topRight: Amount.Less,
             }}
             className="data-grid-header"
-            orientation={Orientation.Horizontal}
-            padding={Amount.Less}
-            grow={false}
+            padding={{ all: Amount.Less }}
           >
             {header.search && (
-              <Container width={header.search.width}>
+              <Container size={header.search.size}>
                 {/* @ts-ignore */}
                 <SearchInput
                   name="search-input"
@@ -181,15 +187,15 @@ export const DataGrid = memo(
                     setSearchTerm(value ?? '');
                   }}
                   placeholder={header.search.placeholder}
-                  width={header.search.width}
+                  size={{ width: header.search.size?.width }}
                 />
               </Container>
             )}
 
-            <Container alignSelf={Align.Stretch} />
+            <Container />
 
             {header.export && (
-              <Container width={header.export.width}>
+              <Container size={header.export.size}>
                 <MenuButton
                   menu={[
                     {
@@ -212,7 +218,7 @@ export const DataGrid = memo(
             {header.create && (
               <Button
                 onClick={header.create.onClick}
-                size={Size.Small}
+                // size={Sizes.Small}
                 type={ButtonType.Secondary}
               >
                 {header.create.label}
@@ -231,21 +237,28 @@ export const DataGrid = memo(
           {display === DataGridDisplayType.Table ? (
             <>
               <Container
-                alignItems={Align.Left}
-                backgroundColor={BackgroundColors.DataGridColumnHeaders}
+                alignment={{
+                  horizontal: AlignHorizontal.Left,
+                  orientation: Orientation.Horizontal,
+                }}
+                background={{ color: BackgroundColors.DataGridColumnHeaders }}
                 className="data-grid-headers"
-                orientation={Orientation.Horizontal}
-                paddingBottom={Amount.Least}
-                paddingTop={Amount.Least}
-                grow={false}
-                // width="min-content"
+                padding={{
+                  bottom: Amount.Least,
+                  top: Amount.Least,
+                }}
               >
                 {columns.map((column, key) => {
                   return (
                     <Container
-                      alignContent={column.align}
-                      alignItems={Align.Center}
-                      backgroundColor={BackgroundColors.DataGridColumnHeaders}
+                      alignment={{
+                        horizontal: column.align,
+                        orientation: Orientation.Horizontal,
+                        vertical: AlignVertical.Center,
+                      }}
+                      background={{
+                        color: BackgroundColors.DataGridColumnHeaders,
+                      }}
                       border={
                         key !== columns.length - 1
                           ? {
@@ -266,24 +279,25 @@ export const DataGrid = memo(
                           : undefined
                       }
                       className="data-grid-header-cell"
-                      shrink={false}
                       key={key}
-                      orientation={Orientation.Horizontal}
-                      // padding={padding}
-                      paddingLeft={Amount.Default}
-                      paddingRight={Amount.Default}
-                      maxWidth={column.maxWidth ?? MAX_COLUMN_WIDTH}
-                      minWidth={
-                        column.minWidth ? column.minWidth : MIN_COLUMN_WIDTH
-                      }
-                      width={column.width}
+                      padding={{
+                        left: Amount.Default,
+                        right: Amount.Default,
+                      }}
+                      size={{
+                        maxWidth: column.size?.maxWidth ?? MAX_COLUMN_WIDTH,
+                        minWidth: column.size?.minWidth ?? MIN_COLUMN_WIDTH,
+                        width: column.size?.width,
+                      }}
                     >
                       <Label
-                        alignContent={column.align}
-                        alignItems={Align.Center}
-                        height={Size.Large}
+                        alignment={{
+                          horizontal: column.align,
+                          vertical: AlignVertical.Center,
+                        }}
+                        lineHeight={Sizes.Large}
                         textColor={TextColors.DataGridColumnHeaders}
-                        size={Size.Smaller}
+                        textSize={TextSize.Smaller}
                       >
                         {column.label}
                       </Label>
@@ -293,50 +307,52 @@ export const DataGrid = memo(
               </Container>
 
               <Container
-                backgroundColor={BackgroundColors.DataGridRow}
+                background={{
+                  color: BackgroundColors.DataGridRow,
+                }}
                 borderRadius={{
                   bottomLeft: Amount.Default,
                   bottomRight: Amount.Default,
                 }}
                 className="data-grid-rows"
-                grow={true}
-                lineWrap={true}
-                orientation={Orientation.Vertical}
               >
                 {data &&
                   data.map((row, key) => {
                     return (
                       <Container
-                        backgroundColor={BackgroundColors.DataGridCell}
-                        borderRadius={Amount.None}
+                        alignment={{
+                          orientation: Orientation.Horizontal,
+                        }}
+                        background={{
+                          color: BackgroundColors.DataGridCell,
+                        }}
                         className="data-grid-row"
                         cursor={Cursor.Pointer}
-                        // flat={true}
-                        // fullWidth={true}
-                        grow={true}
                         hover={{
-                          backgroundColor: BackgroundColors.Primary,
+                          background: {
+                            color: BackgroundColors.Primary,
+                          },
                         }}
-                        orientation={Orientation.Horizontal}
                         key={key}
                         onClick={() => {
                           if (onItemClick) onItemClick(row);
                         }}
                         onMouseEnter={() => setHoveredRow(key)}
                         onMouseLeave={() => setHoveredRow(undefined)}
-                        padding={Amount.Least}
-                        paddingLeft={Amount.Least}
-                        paddingRight={Amount.Least}
-                        // type={ButtonType.Transparent}
+                        padding={{ all: Amount.Least }}
                       >
                         {columns.map((column, columnKey) => {
                           return (
                             <DataGridCell
-                              alignContent={column.align}
-                              alignItems={Align.Center}
+                              alignment={{
+                                horizontal: column.align,
+                                orientation: Orientation.Horizontal,
+                                vertical: AlignVertical.Center,
+                              }}
                               // backgroundColor={BackgroundColors.DataGridCell}
                               fieldName={column.field}
-                              height={Size.Large}
+                              lineHeight={Sizes.Large}
+                              lineWrap={true}
                               model={model}
                               textColor={
                                 hoveredRow === key
@@ -345,13 +361,13 @@ export const DataGrid = memo(
                               }
                               type={column.type}
                               value={fetchFromObject(row, column.field)}
-                              maxWidth={column.maxWidth ?? MAX_COLUMN_WIDTH}
-                              minWidth={
-                                column.minWidth
-                                  ? column.minWidth
-                                  : MIN_COLUMN_WIDTH
-                              }
-                              width={column.width}
+                              size={{
+                                maxWidth:
+                                  column.size?.maxWidth ?? MAX_COLUMN_WIDTH,
+                                minWidth:
+                                  column.size?.minWidth ?? MIN_COLUMN_WIDTH,
+                                width: column.size?.width,
+                              }}
                             />
                           );
                         })}
@@ -372,7 +388,9 @@ export const DataGrid = memo(
                   if (template && template.card) {
                     return createElement(template.card, {
                       key,
-                      marginBottom: Amount.Default,
+                      margin: {
+                        bottom: Amount.Default,
+                      },
                       onClick: () => {
                         if (onItemClick) onItemClick(row);
                       },

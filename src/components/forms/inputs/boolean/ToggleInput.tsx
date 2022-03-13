@@ -3,31 +3,30 @@ import { ValidationProblem } from '@srclaunch/types';
 import { memo, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import { AppearanceStyles } from '../../../../styles/appearance';
-import { FocusedStyles } from '../../../../styles/focused';
-import { LayoutStyles } from '../../../../styles/layout';
+import { FocusStyles } from '../../../../styles/container/focus';
+
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
+  AlignVertical,
   Amount,
-  AppearanceProps,
   BackgroundColors,
   BorderColors,
   BorderStyle,
   Colors,
-  ContainerProps,
   Depth,
   DepthShadow,
   FocusProps,
+  ForegroundColors,
   InputProps,
-  InputValueChangeHandler,
   Orientation,
   Size,
-  SizeProps,
+  Sizes,
   TextColors,
 } from '../../../../types';
 import { ErrorLabel } from '../../../errors/ErrorLabel';
 import { Button, ButtonType } from '../../../forms/buttons/Button';
-import { Container } from '../../../layout/Container';
+import { Container, ContainerProps } from '../../../layout/Container';
 import { Icon } from '../../../media/Icon';
 import { Label } from '../../../typography/Label';
 import { InputLabel } from '../../labels/InputLabel';
@@ -35,25 +34,20 @@ import { InputLabel } from '../../labels/InputLabel';
 export type ToggleInputProps<E = HTMLInputElement> = {
   readonly trueLabel?: string;
   readonly falseLabel?: string;
-} & AppearanceProps &
-  InputProps<E, boolean>;
+} & InputProps<E, boolean>;
 
 export const ToggleInput = memo(
   ({
-    backgroundColor = BackgroundColors.InputControl,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1,
-    },
     className = '',
     defaultValue = false,
     falseLabel,
     label,
     onChange,
     trueLabel,
-    size = Size.Default,
-    width = 55,
+    size = {
+      height: Sizes.Default,
+      width: Sizes.Default,
+    },
   }: ToggleInputProps): React.ReactElement => {
     const [focused, setFocused] = useState(false);
     const [problems, setProblems] = useState<ValidationProblem[]>([]);
@@ -69,22 +63,23 @@ export const ToggleInput = memo(
 
     return (
       <>
-        <Container orientation={Orientation.Horizontal} grow={false}>
+        <Container alignment={{ orientation: Orientation.Horizontal }}>
           {label && <InputLabel>{label}</InputLabel>}
 
           {problems.length > 0 ? (
-            <ErrorLabel alignContent={Align.Right}>
+            <ErrorLabel alignment={{ horizontal: AlignHorizontal.Right }}>
               {problems[0]?.message.short}
             </ErrorLabel>
           ) : null}
         </Container>
 
         <Container
-          alignContent={Align.Left}
-          alignItems={Align.Center}
-          orientation={Orientation.Horizontal}
+          alignment={{
+            horizontal: AlignHorizontal.Left,
+            orientation: Orientation.Horizontal,
+            vertical: AlignVertical.Center,
+          }}
           className={`${className} toggle-input`}
-          grow={false}
         >
           {falseLabel && (
             <Button
@@ -101,37 +96,43 @@ export const ToggleInput = memo(
             </Button>
           )}
 
-          <Toggle
-            alignItems={Align.Center}
+          <Container
+            alignment={{
+              orientation: Orientation.Horizontal,
+              vertical: AlignVertical.Center,
+            }}
             as="button"
-            backgroundColor={backgroundColor}
-            border={border}
-            borderRadius={Amount.All}
+            borderRadius={{ all: Amount.All }}
             form="null"
             onClick={() => setToggleValue(!toggleValue)}
             onFocus={() => setFocused(true)}
             onBlur={() => setFocused(false)}
-            orientation={Orientation.Horizontal}
-            padding={Amount.Least}
-            toggleValue={toggleValue}
-            size={size}
+            padding={{ all: Amount.Least }}
+            shadow={DepthShadow.Low}
           >
-            <ToggleSwitch
-              alignItems={Align.Center}
-              alignContent={Align.Center}
-              backgroundColor={toggleValue ? Colors.Primary : Colors.Error}
+            <Container
+              alignment={{
+                horizontal: AlignHorizontal.Center,
+                vertical: AlignVertical.Center,
+              }}
+              background={{
+                color: toggleValue ? Colors.Primary : Colors.Error,
+              }}
               depth={Depth.High}
               focused={focused}
-              toggleValue={toggleValue}
+              shadow={DepthShadow.High}
               size={size}
             >
               <Icon
-                color={BackgroundColors.Dark}
+                color={ForegroundColors.Lightest}
                 name={toggleValue ? BasicIcons.Checkmark2 : BasicIcons.Close}
-                size={Size.Smallest}
+                size={{
+                  height: Sizes.Smallest,
+                  width: Sizes.Smallest,
+                }}
               />
-            </ToggleSwitch>
-          </Toggle>
+            </Container>
+          </Container>
 
           {trueLabel && (
             <Button
@@ -161,75 +162,58 @@ export const ToggleInput = memo(
 //   margin-bottom: 5px;
 // `;
 
-const Toggle = styled.button<
-  {
-    readonly toggleValue: boolean;
-  } & ContainerProps<HTMLButtonElement>
->`
-  ${LayoutStyles};
-  ${AppearanceStyles};
+// const ToggleSwitch = styled.span<
+//   {
+//     readonly toggleValue: boolean;
+//   } & ContainerProps<HTMLSpanElement> &
+//     FocusProps
+// >`
+//   ${FocusStyles};
 
-  box-shadow: ${DepthShadow.Low};
-  border: none;
-  cursor: pointer;
-  width: calc(${props => props.size} * 2 - 2px);
-`;
+//   border-radius: ${Amount.All};
+//   height: ${props => `calc(${props.size} - 8px)`};
+//   transform: translateX(0);
+//   transition: background 0.1s ease-in-out, transform 0.1s ease-in-out;
+//   width: ${props => `calc(${props.size} - 8px)`};
 
-const ToggleSwitch = styled.span<
-  {
-    readonly toggleValue: boolean;
-  } & ContainerProps<HTMLSpanElement> &
-    FocusProps
->`
-  ${LayoutStyles};
-  ${AppearanceStyles};
-  ${FocusedStyles};
+//   i.icon {
+//     opacity: 0;
+//     transition: opacity 0.1s ease-in-out;
+//   }
+//   /*
+//   @keyframes toggle-animation {
+//     0% {
+//       height: 100%;
+//     }
 
-  box-shadow: ${DepthShadow.High};
-  border-radius: ${Amount.All};
-  height: ${props => `calc(${props.size} - 8px)`};
-  transform: translateX(0);
-  transition: background 0.1s ease-in-out, transform 0.1s ease-in-out;
-  width: ${props => `calc(${props.size} - 8px)`};
+//     50% {
+//       height: 50%;
+//       width: 50%;
+//     }
 
-  i.icon {
-    opacity: 0;
-    transition: opacity 0.1s ease-in-out;
-  }
-  /* 
-  @keyframes toggle-animation {
-    0% {
-      height: 100%;
-    }
+//     100% {
+//       height: 100%;
+//     }
+//   } */
 
-    50% {
-      height: 50%;
-      width: 50%;
-    }
+//   &:before {
+//     border-radius: 100%;
+//   }
 
-    100% {
-      height: 100%;
-    }
-  } */
+//   ${props =>
+//     props.toggleValue === true &&
+//     css`
+//       transform: translateX(calc(${props.size} - ${Amount.Least}));
+//       /* animation: toggle-animation 0.2s ease-in-out; */
 
-  &:before {
-    border-radius: 100%;
-  }
+//       i.icon {
+//         opacity: 1;
+//       }
+//     `}
 
-  ${props =>
-    props.toggleValue === true &&
-    css`
-      transform: translateX(calc(${props.size} - ${Amount.Least}));
-      /* animation: toggle-animation 0.2s ease-in-out; */
-
-      i.icon {
-        opacity: 1;
-      }
-    `}
-
-  ${props =>
-    props.toggleValue === false &&
-    css`
-      /* */
-    `}
-`;
+//   ${props =>
+//     props.toggleValue === false &&
+//     css`
+//       /* */
+//     `}
+// `;

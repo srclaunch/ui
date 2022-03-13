@@ -1,6 +1,7 @@
 import { Model, ValidationProblem } from '@srclaunch/types';
 import { ReactElement } from 'react';
 import { Amount, FormField } from '../../types';
+import { ContainerProps } from '../layout/Container';
 import { ButtonProps } from './buttons/Button';
 declare type FormProps = {
     readonly cancelButton?: {
@@ -37,7 +38,7 @@ declare type FormProps = {
     readonly submitButton?: ({
         readonly label: string;
     } & ButtonProps) | null;
-};
-export declare const Form: import("react").MemoExoticComponent<({ className, entity, fields, inProgress, onChange, onSubmit, model, name, padding, submitButton, ...props }: FormProps) => ReactElement>;
+} & ContainerProps;
+export declare const Form: import("react").MemoExoticComponent<({ borderRadius, className, entity, fields, inProgress, onChange, onSubmit, model, name, padding, submitButton, ...props }: FormProps) => ReactElement>;
 export {};
 //# sourceMappingURL=Form.d.ts.map

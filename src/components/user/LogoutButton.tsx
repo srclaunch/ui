@@ -7,7 +7,7 @@ import {
 } from '@srclaunch/web-application-state';
 import { memo, ReactElement, useEffect } from 'react';
 
-import { Size, TextColors } from '../../types';
+import { Size, TextColors, TextSize } from '../../types';
 import { Button, ButtonProps } from '../forms/buttons/Button';
 import { Icon } from '../media/Icon';
 import { Label } from '../typography/Label';
@@ -41,7 +41,7 @@ export const LogoutButton = memo(
       <Button onClick={() => dispatch(logout())} {...props}>
         {icon && <Icon {...icon} />}
 
-        <Label textColor={textColor} size={Size.Small}>
+        <Label textColor={textColor} textSize={TextSize.Small}>
           {label ?? 'Logout'}
         </Label>
 
@@ -49,7 +49,7 @@ export const LogoutButton = memo(
           <Icon
             color={textColor}
             name={BasicIcons.ChevronRight}
-            size={Size.Small}
+            // size={Size.Small}
           />
         )}
       </Button>

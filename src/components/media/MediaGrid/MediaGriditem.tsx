@@ -2,7 +2,8 @@ import { Image as ImageType, Video as VideoType } from '@srclaunch/types';
 import { memo, MouseEventHandler, ReactElement } from 'react';
 
 import {
-  Align,
+  Alignment,
+  AlignVertical,
   Amount,
   BackgroundColors,
   BackgroundSize,
@@ -31,7 +32,8 @@ export type MediaGridItem = {
 
 export const MediaGridItem = memo(
   ({
-    borderRadius = Amount.Default,
+    background = {},
+    borderRadius = {},
     description,
     images,
     minHeight,
@@ -44,9 +46,11 @@ export const MediaGridItem = memo(
   }: MediaGridItem) => {
     const content = images ? (
       <Container
-        alignItems={Align.Bottom}
-        orientation={Orientation.Horizontal}
-        padding={Amount.Default}
+        alignment={{
+          orientation: Orientation.Horizontal,
+          vertical: AlignVertical.Bottom,
+        }}
+        padding={{ all: Amount.Default }}
       >
         <Label
           textColor={TextColors.White}
@@ -73,19 +77,21 @@ export const MediaGridItem = memo(
 
     return (
       <Card
-        alignItems={Align.Stretch}
-        alignContent={Align.Stretch}
-        backgroundColor={BackgroundColors.Dark}
-        backgroundImage={{
-          position: Align.Center,
-          size: BackgroundSize.Cover,
-          url: images?.[0]?.url ?? images?.[0]?.path,
+        background={{
+          color: BackgroundColors.Dark,
+
+          image: {
+            url: images?.[0]?.url ?? images?.[0]?.path,
+            // size: BackgroundSize.Cover,
+          },
+          ...background,
         }}
-        borderRadius={borderRadius}
-        grow={false}
+        borderRadius={{ all: Amount.Default, ...borderRadius }}
         linkTo={url}
-        minHeight={minHeight ?? 220}
         onClick={onClick}
+        size={{
+          minHeight: minHeight ?? 220,
+        }}
         {...props}
       >
         {content}

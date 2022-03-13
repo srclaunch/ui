@@ -1,9 +1,6 @@
+import { memo, ReactElement, useEffect, useState } from 'react';
 import { BasicIcons } from '@srclaunch/icons';
-import {
-  UserVerificationStatus,
-  ValidationProblem,
-  VerificationCode,
-} from '@srclaunch/types';
+import { UserVerificationStatus, ValidationProblem } from '@srclaunch/types';
 import {
   getVerificationDetails,
   resendVerificationCode,
@@ -14,19 +11,18 @@ import {
   useSelector,
   verifyCode,
 } from '@srclaunch/web-application-state';
-import { memo, ReactElement, useEffect, useState } from 'react';
-
 import {
-  Align,
+  AlignHorizontal,
   Amount,
   AutoComplete,
   BackgroundColors,
   DepthShadow,
-  Size,
+  Sizes,
+  TextAlign,
   TextColors,
+  TextSize,
   TextWeight,
 } from '../../types';
-// import ErrorContainer from '../errors/ErrorContainer';
 import { Button, ButtonType } from '../forms/buttons/Button';
 import { VerificationCodeInput } from '../forms/inputs/authentication/VerificationCodeInput';
 import { InputRow } from '../forms/layout/InputRow';
@@ -40,12 +36,12 @@ import { Title } from '../typography/Title';
 type CodeVerificationFormProps = {
   readonly onVerificationSuccess?: () => unknown;
   readonly userId: string;
-} & ContainerProps<HTMLDivElement>;
+} & ContainerProps;
 
 export const CodeVerificationForm = memo(
   ({
-    backgroundColor = BackgroundColors.Darker,
-    borderRadius = Amount.More,
+    background = {},
+    borderRadius = {},
     onVerificationSuccess,
     userId,
   }: CodeVerificationFormProps): ReactElement => {
@@ -73,14 +69,13 @@ export const CodeVerificationForm = memo(
     return (
       <Container
         className="code-verification-form"
-        backgroundColor={backgroundColor}
-        borderRadius={borderRadius}
-        boxShadow={DepthShadow.Highest}
-        fadeIn
-        grow={false}
-        padding={Amount.Most}
-        paddingBottom={Amount.Default}
-        width={420}
+        background={{ color: BackgroundColors.Darker, ...background }}
+        borderRadius={{ all: Amount.More, ...borderRadius }}
+        padding={{ all: Amount.Most }}
+        shadow={DepthShadow.Highest}
+        size={{
+          width: 420,
+        }}
       >
         {/* <Illustration>
         <img alt="Login" src="/illustrations/total_debt.svg" />
@@ -99,11 +94,11 @@ export const CodeVerificationForm = memo(
 
         {verificationState.verify.success ||
         verificationState.status.state === UserVerificationStatus.Confirmed ? (
-          <Container padding={Amount.Default} paddingBottom={Amount.Most}>
-            <Title alignText={Align.Center}>You're verified!</Title>
+          <Container padding={{ all: Amount.Default }}>
+            <Title textAlign={TextAlign.Center}>You're verified!</Title>
 
-            <Container margin={Amount.More}>
-              <Paragraph alignText={Align.Center}>
+            <Container margin={{ all: Amount.More }}>
+              <Paragraph textAlign={TextAlign.Center}>
                 Thank you for verifying your email address.
               </Paragraph>
             </Container>
@@ -111,7 +106,6 @@ export const CodeVerificationForm = memo(
             <Button
               fullWidth
               onClick={() => navigate('/login')}
-              size={Size.Large}
               type={ButtonType.Primary}
             >
               Login
@@ -119,19 +113,22 @@ export const CodeVerificationForm = memo(
           </Container>
         ) : (
           <>
-            <Title alignText={Align.Center}>Verification</Title>
+            <Title textAlign={TextAlign.Center}>Verification</Title>
 
-            <Container margin={Amount.More}>
-              <Paragraph alignText={Align.Center}>
+            <Container margin={{ all: Amount.More }}>
+              <Paragraph textAlign={TextAlign.Center}>
                 Enter the confirmation code sent to{' '}
                 <b>{verificationState.delivery?.destination}</b>.
               </Paragraph>
             </Container>
 
             <Container
-              padding={Amount.Default}
-              paddingLeft={Amount.More}
-              paddingRight={Amount.More}
+              padding={{
+                bottom: Amount.Default,
+                left: Amount.More,
+                right: Amount.More,
+                top: Amount.Default,
+              }}
             >
               <InputRow>
                 <VerificationCodeInput
@@ -144,11 +141,15 @@ export const CodeVerificationForm = memo(
                     if (validated && problemos && problemos.length === 0)
                       setCode(value);
                   }}
-                  size={Size.Large}
+                  // size={Sizes.Large}
                 />
               </InputRow>
 
-              <LineBreak size={Size.Small} />
+              <LineBreak
+                size={{
+                  height: Sizes.Small,
+                }}
+              />
 
               <Button
                 disabled={
@@ -163,7 +164,6 @@ export const CodeVerificationForm = memo(
                     dispatch(verifyCode({ code, userId }));
                   }
                 }}
-                size={Size.Large}
                 type={ButtonType.Primary}
               >
                 Verify
@@ -171,10 +171,10 @@ export const CodeVerificationForm = memo(
             </Container>
 
             <Container
-              alignItems={Align.Center}
-              paddingLeft={Amount.Default}
-              paddingRight={Amount.Default}
-              paddingTop={Amount.Default}
+              alignment={{
+                horizontal: AlignHorizontal.Center,
+              }}
+              padding={{ all: Amount.Default }}
             >
               {!verificationState.resend.success ? (
                 <Button
@@ -183,7 +183,6 @@ export const CodeVerificationForm = memo(
                       dispatch(resendVerificationCode({ userId }));
                     }
                   }}
-                  size={Size.Smaller}
                   type={ButtonType.Link}
                 >
                   Resend verification code
@@ -192,10 +191,13 @@ export const CodeVerificationForm = memo(
                 <Label
                   icon={{
                     name: BasicIcons.Checkmark2,
-                    size: Size.Smaller,
+                    size: {
+                      height: Sizes.Smaller,
+                      width: Sizes.Smaller,
+                    },
                   }}
-                  lineHeight={Size.Smaller}
-                  size={Size.Default}
+                  lineHeight={Sizes.Smaller}
+                  textSize={TextSize.Default}
                   textColor={TextColors.Success}
                   textWeight={TextWeight.More}
                 >

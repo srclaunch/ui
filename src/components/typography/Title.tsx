@@ -1,16 +1,18 @@
 import { memo, ReactElement } from 'react';
-import { Size, TextColors, TextSize, TextWeight } from '../../types';
-
+import { Amount, Sizes, TextColors, TextSize, TextWeight } from '../../types';
 import { Label, LabelProps } from './Label';
 
-export type TitleProps = LabelProps<HTMLHeadingElement>;
+import { Text, TextProps } from './Text';
+
+export type TitleProps = LabelProps;
 
 export const Title = memo(
   ({
     as = 'h1',
     children,
     className = '',
-    lineHeight = Size.Small,
+    lineHeight = Sizes.Small,
+    margin = {},
     textSize = TextSize.Larger,
     textColor = TextColors.Title,
     textWeight = TextWeight.Most,
@@ -20,9 +22,9 @@ export const Title = memo(
       <Label
         as={as}
         className={`${className} title`}
-        inline={false}
         textColor={textColor}
         lineHeight={lineHeight}
+        margin={{ bottom: Amount.Less, ...margin }}
         textSize={textSize}
         textWeight={textWeight}
         {...props}

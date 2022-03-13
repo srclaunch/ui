@@ -8,7 +8,7 @@ module.exports = {
   },
   extends: [
     ...base.extends,
-    'plugin:@microsoft/sdl/react', // Microsoft SDL React rules
+    // 'plugin:@microsoft/sdl/react', // Microsoft SDL React rules
     'plugin:jsx-a11y/recommended',
     // 'plugin:better-styled-components/recommended',
     'plugin:react/recommended',
@@ -21,8 +21,8 @@ module.exports = {
     ...base.plugins,
     'better-styled-components',
     'jsx-a11y',
-    'react',
-    'react-hooks',
+    // 'react',
+    // 'react-hooks',
   ],
   rules: {
     ...base.rules,

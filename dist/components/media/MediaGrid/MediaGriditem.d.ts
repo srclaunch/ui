@@ -13,5 +13,5 @@ export declare type MediaGridItem = {
     readonly url?: string;
     readonly video?: VideoType;
 } & ContainerProps<HTMLDivElement>;
-export declare const MediaGridItem: import("react").MemoExoticComponent<({ borderRadius, description, images, minHeight, moreMenu, onClick, title, url, video, ...props }: MediaGridItem) => JSX.Element>;
+export declare const MediaGridItem: import("react").MemoExoticComponent<({ background, borderRadius, description, images, minHeight, moreMenu, onClick, title, url, video, ...props }: MediaGridItem) => JSX.Element>;
 //# sourceMappingURL=MediaGriditem.d.ts.map

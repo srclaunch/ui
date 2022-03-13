@@ -1,7 +1,3 @@
-import { TextColor } from '../typography/text';
-import { BackgroundColor } from './background';
-import { BorderColor } from './border';
-import { ForegroundColor } from './foreground';
 export declare enum Colors {
     Black = "var(--color-black-rgb)",
     Default = "var(--color-default-rgb)",
@@ -26,5 +22,5 @@ export declare enum ContrastColors {
     Warning = "var(--color-warning-contrast-rgb)",
     White = "var(--color-white-contrast-rgb)"
 }
-export declare type Color = BackgroundColor | BorderColor | Colors | ContrastColors | ForegroundColor | TextColor | string;
+export declare type Color = Colors | ContrastColors | string;
 //# sourceMappingURL=color.d.ts.map

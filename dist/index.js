@@ -20070,150 +20070,7 @@ var SubRegion;
   offset: TimezoneOffset.UTC_PLUS_10,
   timezone: Timezones.ChuukTime
 });
-function getSmallerAmount(amount) {
-  switch (amount) {
-    case Amount.All:
-      return Amount.Most;
-    case Amount.Most:
-      return Amount.More;
-    case Amount.More:
-      return Amount.Default;
-    case Amount.Default:
-      return Amount.Less;
-    case Amount.Less:
-      return Amount.Least;
-    case Amount.Least:
-      return Amount.None;
-    case Amount.None:
-      return Amount.None;
-  }
-}
-function getLargerAmount(amount) {
-  switch (amount) {
-    case Amount.None:
-      return Amount.Least;
-    case Amount.Least:
-      return Amount.Less;
-    case Amount.Less:
-      return Amount.Default;
-    case Amount.Default:
-      return Amount.More;
-    case Amount.More:
-      return Amount.Most;
-    case Amount.Most:
-      return Amount.All;
-    case Amount.All:
-      return Amount.All;
-  }
-}
-function convertAmountToSize(amount) {
-  switch (amount) {
-    case Amount.None:
-      return Size.Smallest;
-    case Amount.Least:
-      return Size.Smaller;
-    case Amount.Less:
-      return Size.Small;
-    case Amount.Default:
-      return Size.Default;
-    case Amount.More:
-      return Size.Large;
-    case Amount.Most:
-      return Size.Larger;
-    case Amount.All:
-      return Size.Largest;
-  }
-}
-function convertSizeToAmount(size) {
-  if (!size)
-    return Amount.Default;
-  switch (size) {
-    case Size.Smallest:
-      return Amount.None;
-    case Size.Smaller:
-      return Amount.Least;
-    case Size.Small:
-      return Amount.Less;
-    case Size.Default:
-      return Amount.Default;
-    case Size.Large:
-      return Amount.More;
-    case Size.Larger:
-      return Amount.Most;
-    case Size.Largest:
-      return Amount.All;
-  }
-}
-function convertSizeToTextSize(size) {
-  if (!size)
-    return TextSize.Default;
-  switch (size) {
-    case Size.Smallest:
-      return TextSize.Smallest;
-    case Size.Smaller:
-      return TextSize.Smaller;
-    case Size.Small:
-      return TextSize.Small;
-    case Size.Default:
-      return TextSize.Default;
-    case Size.Large:
-      return TextSize.Large;
-    case Size.Larger:
-      return TextSize.Larger;
-    case Size.Largest:
-      return TextSize.Largest;
-  }
-}
-function getSmallerSize(size) {
-  switch (size) {
-    case Size.Smallest:
-      return Size.Smallest;
-    case Size.Smaller:
-      return Size.Smallest;
-    case Size.Small:
-      return Size.Smaller;
-    case Size.Default:
-      return Size.Small;
-    case Size.Large:
-      return Size.Default;
-    case Size.Larger:
-      return Size.Large;
-    case Size.Largest:
-      return Size.Larger;
-  }
-}
-function getLargerSize(size) {
-  switch (size) {
-    case Size.Smallest:
-      return Size.Smaller;
-    case Size.Smaller:
-      return Size.Small;
-    case Size.Small:
-      return Size.Default;
-    case Size.Default:
-      return Size.Large;
-    case Size.Large:
-      return Size.Larger;
-    case Size.Larger:
-      return Size.Largest;
-    case Size.Largest:
-      return Size.Largest;
-  }
-}
-const AnimationStyles = css(["", ";"], (props) => {
-  var _a2, _b, _c;
-  return ((_a2 = props.transform) == null ? void 0 : _a2.rotate) && css(["transform:rotate(", ");"], (_c = `${(_b = props.transform) == null ? void 0 : _b.rotate}deg`) != null ? _c : "none");
-});
-const getBackgroundColor = (color, opacity) => {
-  if (!color)
-    return null;
-  if (color === BackgroundColors.Transparent)
-    return "transparent";
-  if (opacity) {
-    return `rgba(${color}, ${opacity}%)`;
-  }
-  return `rgb(${color})`;
-};
+const ContainerAnimationStyles = css(["", ";"], (props) => props.animation && css([""]));
 const getBackgroundSize = (size) => {
   switch (size) {
     case BackgroundSize.Auto:
@@ -20234,31 +20091,57 @@ const getBackgroundSize = (size) => {
       return size;
   }
 };
-const BackgroundStyles = css(["", ";", ";", ";", ";", ";", ";", ";", ";"], (props) => {
-  var _a2, _b;
-  return props.backgroundColor && css(["background:", ";"], (_b = getBackgroundColor(props.backgroundColor, (_a2 = props.backgroundOpacity) != null ? _a2 : 100)) != null ? _b : "transparent");
-}, (props) => {
-  var _a2, _b, _c, _d;
-  return props.hover && ((_a2 = props.hover) == null ? void 0 : _a2.backgroundColor) && css(["&:hover{background:", ";}"], (_d = getBackgroundColor(props.hover.backgroundColor, (_c = (_b = props.hover) == null ? void 0 : _b.backgroundOpacity) != null ? _c : 100)) != null ? _d : "transparent");
-}, (props) => {
-  var _a2;
-  return props.backgroundImage && css(["background-position:", ";background-image:url(", ");background-size:", ";"], (_a2 = props.backgroundImage.position) != null ? _a2 : "center", props.backgroundImage.url, getBackgroundSize(props.backgroundImage.size));
-}, (props) => {
-  var _a2, _b, _c;
-  return props.hover && ((_a2 = props.hover) == null ? void 0 : _a2.backgroundOpacity) && css(["&:hover{background:", ";}"], getBackgroundColor((_c = (_b = props.hover.backgroundColor) != null ? _b : props.backgroundColor) != null ? _c : "transparent", props.hover.backgroundOpacity));
-}, (props) => {
-  var _a2, _b, _c;
-  return props.focus && ((_a2 = props.focus) == null ? void 0 : _a2.backgroundColor) && css(["&:focus{background:", ";}"], (_c = getBackgroundColor(props.focus.backgroundColor, (_b = props.focus.backgroundOpacity) != null ? _b : 100)) != null ? _c : "transparent");
-}, (props) => {
-  var _a2, _b, _c, _d;
-  return props.focus && ((_a2 = props.focus) == null ? void 0 : _a2.backgroundOpacity) && css(["&:focus{background:", ";}"], (_d = getBackgroundColor((_b = props.focus.backgroundColor) != null ? _b : props.backgroundColor, (_c = props.focus) == null ? void 0 : _c.backgroundOpacity)) != null ? _d : "transparent");
-}, (props) => {
-  var _a2, _b, _c;
-  return props.active && ((_a2 = props.active) == null ? void 0 : _a2.backgroundColor) && css(["&:active,&.active{background:", ";}"], (_c = getBackgroundColor(props.active.backgroundColor, (_b = props.active.backgroundOpacity) != null ? _b : 100)) != null ? _c : "transparent");
-}, (props) => {
-  var _a2, _b, _c;
-  return props.active && ((_a2 = props.active) == null ? void 0 : _a2.backgroundOpacity) && css(["&:active,&.active{background:", ";}"], (_c = getBackgroundColor((_b = props.active.backgroundColor) != null ? _b : props.backgroundColor, props.active.backgroundOpacity)) != null ? _c : "transparent");
-});
+function getBackgroundStyle(background) {
+  const {
+    color,
+    image,
+    opacity
+  } = background || {};
+  if (color) {
+    if (color === BackgroundColors.Transparent)
+      return "transparent";
+    if (opacity) {
+      return css(["background-color:rgba(", ",", "%);"], color, opacity);
+    }
+    return css(["background-color:rgb(", ");"], color);
+  }
+  if (image) {
+    if (image.path || image.url) {
+      return css(["background-image:url(", ");"], image.url);
+    }
+    if (image.repeat) {
+      return css(["background-repeat:", ";"], image.repeat);
+    }
+    if (image.size) {
+      return css(["background-size:", ";"], getBackgroundSize(image.size));
+    }
+  }
+}
+const BackgroundStyles = css(["", ";"], (props) => props.background && css(["", ";"], getBackgroundStyle(props.background)));
+function getBorderValue(border) {
+  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j;
+  if (!border) {
+    return;
+  }
+  let borderValue = "";
+  if (border.all) {
+    borderValue += `border: ${(_a2 = border.all.width) != null ? _a2 : 1}px ${(_b = border.all.style) != null ? _b : "solid"} ${border.all.color ? `rgb(${border.all.color})` : BorderColors.Default}`;
+  }
+  if (border.bottom) {
+    borderValue += `border-bottom: ${(_c = border.bottom.width) != null ? _c : 1}px ${(_d = border.bottom.style) != null ? _d : "solid"} ${border.bottom.color ? `rgb(${border.bottom.color})` : BorderColors.Default}`;
+  }
+  if (border.left) {
+    borderValue += `border-left: ${(_e2 = border.left.width) != null ? _e2 : 1}px ${(_f = border.left.style) != null ? _f : "solid"} ${border.left.color ? `rgb(${border.left.color})` : BorderColors.Default}`;
+  }
+  if (border.right) {
+    borderValue += `border-right: ${(_g = border.right.width) != null ? _g : 1}px ${(_h = border.right.style) != null ? _h : "solid"} ${border.right.color ? `rgb(${border.right.color})` : BorderColors.Default}`;
+  }
+  if (border.top) {
+    borderValue += `border-top: ${(_i2 = border.top.width) != null ? _i2 : 1}px ${(_j = border.top.style) != null ? _j : "solid"} ${border.top.color ? `rgb(${border.top.color})` : BorderColors.Default}`;
+  }
+  return css(["", ""], borderValue);
+}
+const BorderStyles = css(["", ";"], (props) => props.border && css(["", ";"], getBorderValue(props.border)));
 function getCSSMeasurementValue(val) {
   if (typeof val === "string" && val.includes("var(")) {
     return val;
@@ -20271,195 +20154,185 @@ function getCSSMeasurementValue(val) {
   }
   return val;
 }
-const isBorderStyleProps$1 = (border) => {
-  return border.hasOwnProperty("color");
-};
-function getCSSBorderValue(val) {
-  var _a2, _b, _c;
-  if (!val)
-    return null;
-  if (isBorderStyleProps$1(val)) {
-    return `${getCSSMeasurementValue((_a2 = val.width) != null ? _a2 : 1)} ${(_b = val.style) != null ? _b : ""} ${val.color === BorderColors.Transparent ? "transparent" : `rgb(${(_c = val.color) != null ? _c : BorderColors.Default})`}`;
-  }
-  return null;
-}
-function getCSSBoxShadowValue(val) {
-  if (!val)
-    return null;
-  const getString = (shadow) => {
-    var _a2;
-    const offsetX = shadow.offsetX ? `${shadow.offsetX}px` : 0;
-    const offsetY = shadow.offsetY ? `${shadow.offsetY}px` : 0;
-    const blurRadius = shadow.blurRadius ? `${shadow.blurRadius}px` : "";
-    const spreadradius = shadow.spreadRadius ? `${shadow.spreadRadius}px` : "";
-    const color = ` rgba(${shadow.color}, ${(_a2 = shadow.opacity) != null ? _a2 : 100}%)`;
-    return `${offsetX} ${offsetY} ${blurRadius} ${spreadradius} ${color}`;
-  };
-  if (Array.isArray(val)) {
-    return val.map((s2) => getString(s2)).join(",");
-  }
-  if (typeof val === "string")
-    return val;
-  return getString(val);
-}
-const isBorderStyleProps = (border) => {
-  return border.hasOwnProperty("color");
-};
-const BorderStyles = css(["", ";"], (props) => {
-  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _A, _B, _C, _D, _E, _F, _G, _H, _I, _J;
-  return props.flat ? css(["border:1px solid transparent;"]) : css(["", ";", ";", ";", ";"], props.border && isBorderStyleProps(props.border) ? css(["border:", ";"], (_a2 = getCSSBorderValue(props.border)) != null ? _a2 : "none") : css(["border-bottom:", ";border-left:", ";border-right:", ";border-top:", ";"], (_c = getCSSBorderValue((_b = props.border) == null ? void 0 : _b.bottom)) != null ? _c : "initial", (_e2 = getCSSBorderValue((_d = props.border) == null ? void 0 : _d.left)) != null ? _e2 : "initial", (_g = getCSSBorderValue((_f = props.border) == null ? void 0 : _f.right)) != null ? _g : "initial", (_i2 = getCSSBorderValue((_h = props.border) == null ? void 0 : _h.top)) != null ? _i2 : "initial"), props.hover && props.hover.border && css(["&:hover{", ";}"], props.hover.border && isBorderStyleProps(props.hover.border) ? css(["border:", ";"], (_j = getCSSBorderValue(props.hover.border)) != null ? _j : "none") : css(["border-bottom:", ";border-left:", ";border-right:", ";border-top:", ";"], (_l = getCSSBorderValue((_k = props.hover.border) == null ? void 0 : _k.bottom)) != null ? _l : "initial", (_n = getCSSBorderValue((_m = props.hover.border) == null ? void 0 : _m.left)) != null ? _n : "initial", (_p = getCSSBorderValue((_o = props.hover.border) == null ? void 0 : _o.right)) != null ? _p : "initial", (_r = getCSSBorderValue((_q = props.hover.border) == null ? void 0 : _q.top)) != null ? _r : "initial")), props.active && props.active.border && css(["&:active,&.active{", ";}"], props.active.border && isBorderStyleProps(props.active.border) ? css(["border:", ";"], (_s = getCSSBorderValue(props.active.border)) != null ? _s : "none") : css(["border-bottom:", ";border-left:", ";border-right:", ";border-top:", ";"], (_u = getCSSBorderValue((_t = props.active.border) == null ? void 0 : _t.bottom)) != null ? _u : "initial", (_w = getCSSBorderValue((_v = props.active.border) == null ? void 0 : _v.left)) != null ? _w : "initial", (_y = getCSSBorderValue((_x = props.active.border) == null ? void 0 : _x.right)) != null ? _y : "initial", (_A = getCSSBorderValue((_z = props.active.border) == null ? void 0 : _z.top)) != null ? _A : "initial")), props.focus && props.focus.border && css(["&:focus{", ";}"], props.focus.border && isBorderStyleProps(props.focus.border) ? css(["border:", ";"], (_B = getCSSBorderValue(props.focus.border)) != null ? _B : "none") : css(["border-bottom:", ";border-left:", ";border-right:", ";border-top:", ";"], (_D = getCSSBorderValue((_C = props.focus.border) == null ? void 0 : _C.bottom)) != null ? _D : "initial", (_F = getCSSBorderValue((_E = props.focus.border) == null ? void 0 : _E.left)) != null ? _F : "initial", (_H = getCSSBorderValue((_G = props.focus.border) == null ? void 0 : _G.right)) != null ? _H : "initial", (_J = getCSSBorderValue((_I = props.focus.border) == null ? void 0 : _I.top)) != null ? _J : "initial")));
-});
-function getBorderRadius(borderRadius) {
-  var _a2, _b, _c, _d;
-  if (!borderRadius)
-    return null;
+function getBorderRadiusValue(borderRadius) {
+  var _a2, _b, _c, _d, _e2;
   if (typeof borderRadius === "number") {
-    return getCSSMeasurementValue(borderRadius);
+    return `${borderRadius}px`;
+  }
+  if (typeof borderRadius === "string") {
+    return borderRadius;
   }
   if (typeof borderRadius === "object") {
-    const topLeft = typeof borderRadius.topLeft === "number" ? getCSSMeasurementValue(borderRadius.topLeft) : (_a2 = borderRadius.topLeft) != null ? _a2 : "initial";
-    const topRight = typeof borderRadius.topRight === "number" ? getCSSMeasurementValue(borderRadius.topRight) : (_b = borderRadius.topRight) != null ? _b : "initial";
-    const bottomRight = typeof borderRadius.bottomRight === "number" ? getCSSMeasurementValue(borderRadius.bottomRight) : (_c = borderRadius.bottomRight) != null ? _c : "initial";
-    const bottomLeft = typeof borderRadius.bottomLeft === "number" ? getCSSMeasurementValue(borderRadius.bottomLeft) : (_d = borderRadius.bottomLeft) != null ? _d : "initial";
+    if (borderRadius.all) {
+      const all = typeof borderRadius.all === "number" ? getCSSMeasurementValue(borderRadius.all) : (_a2 = borderRadius.all) != null ? _a2 : "initial";
+      return all;
+    }
+    const topLeft = typeof borderRadius.topLeft === "number" ? getCSSMeasurementValue(borderRadius.topLeft) : (_b = borderRadius.topLeft) != null ? _b : "initial";
+    const topRight = typeof borderRadius.topRight === "number" ? getCSSMeasurementValue(borderRadius.topRight) : (_c = borderRadius.topRight) != null ? _c : "initial";
+    const bottomRight = typeof borderRadius.bottomRight === "number" ? getCSSMeasurementValue(borderRadius.bottomRight) : (_d = borderRadius.bottomRight) != null ? _d : "initial";
+    const bottomLeft = typeof borderRadius.bottomLeft === "number" ? getCSSMeasurementValue(borderRadius.bottomLeft) : (_e2 = borderRadius.bottomLeft) != null ? _e2 : "initial";
     return `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`;
   }
-  return borderRadius;
 }
-const BorderRadiusStyles = css(["", " ", " ", " ", ""], (props) => props.borderRadius && css(["border-radius:", ";"], getBorderRadius(props.borderRadius)), (props) => {
-  var _a2;
-  return props.active && css(["&:active,&.active{border-radius:", ";}"], getBorderRadius((_a2 = props.active) == null ? void 0 : _a2.borderRadius));
-}, (props) => {
-  var _a2;
-  return props.focus && css(["&:focus{border-radius:", ";}"], getBorderRadius((_a2 = props.focus) == null ? void 0 : _a2.borderRadius));
-}, (props) => {
-  var _a2;
-  return props.hover && css(["&:hover{border-radius:", ";}"], getBorderRadius((_a2 = props.hover) == null ? void 0 : _a2.borderRadius));
-});
-function getCSSBoxShadowFromDepth(depth) {
-  switch (depth) {
-    case Depth.Lowest:
-      return DepthShadow.Lowest;
-    case Depth.Lower:
-      return DepthShadow.Lower;
-    case Depth.Low:
-      return DepthShadow.Surface;
-    case Depth.High:
-      return DepthShadow.High;
-    case Depth.Higher:
-      return DepthShadow.Higher;
-    case Depth.Highest:
-      return DepthShadow.Highest;
-    default:
-      return DepthShadow.Surface;
-  }
-}
-const BoxShadowStyles = css(["box-shadow:", ";", ";"], (props) => props.boxShadow ? getCSSBoxShadowValue(props.boxShadow) : props.depth ? getCSSBoxShadowFromDepth(props.depth) : "0 0 0 0 transparent", (props) => {
-  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2;
-  return props.flat ? css(["box-shadow:none;"]) : css(["", ";", ";", ";"], props.active && ((_a2 = props.active) == null ? void 0 : _a2.boxShadow) && css(["&:active,&.active{box-shadow:", ";}"], (_c = getCSSBoxShadowValue((_b = props.active) == null ? void 0 : _b.boxShadow)) != null ? _c : "0 0 0 0 transparent"), props.focus && ((_d = props.focus) == null ? void 0 : _d.boxShadow) && css(["&:focus{box-shadow:", ";}"], (_f = getCSSBoxShadowValue((_e2 = props.focus) == null ? void 0 : _e2.boxShadow)) != null ? _f : "0 0 0 0 transparent"), props.hover && ((_g = props.hover) == null ? void 0 : _g.boxShadow) && css(["&:hover{box-shadow:", ";}"], (_i2 = getCSSBoxShadowValue((_h = props.hover) == null ? void 0 : _h.boxShadow)) != null ? _i2 : "0 0 0 0 transparent"));
-});
+const BorderRadiusStyles = css(["", ";"], (props) => props.borderRadius && css(["border-radius:", ";"], getBorderRadiusValue(props.borderRadius)));
 const CursorStyles = css(["cursor:", ";"], (props) => {
   var _a2;
   return (_a2 = props.cursor) != null ? _a2 : "inherit";
 });
-const TranslucencyStyles = css(["opacity:", ";"], (props) => props.opacity ? props.opacity / 100 : 1);
-const AppearanceStyles = css(["", ";", ";", ";", ";", ";", ";", ";transition:opacity 0.13s ease-in-out,background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,transform 0.13s ease-in-out;"], AnimationStyles, BackgroundStyles, BorderStyles, BorderRadiusStyles, BoxShadowStyles, CursorStyles, TranslucencyStyles);
-const getDimension = (dimension) => {
-  if (typeof dimension === "number") {
-    return `${dimension}px`;
-  }
-  return dimension;
-};
-const DimensionStyles = css(["", ";", ";", ";", ";", ";", ";", ";"], (props) => props.height && css(["max-height:", ";min-height:", ";height:", ";"], getDimension(props.height), getDimension(props.height), getDimension(props.height)), (props) => props.width && css(["max-width:", ";min-width:", ";width:", ";"], getDimension(props.width), getDimension(props.width), getDimension(props.width)), (props) => props.maxHeight && css(["max-height:", ";"], getDimension(props.maxHeight)), (props) => props.maxWidth && css(["max-width:", ";"], getDimension(props.maxWidth)), (props) => props.minHeight && css(["min-height:", ";"], getDimension(props.minHeight)), (props) => props.minWidth && css(["min-width:", ";"], getDimension(props.minWidth)), (props) => props.size && css(["max-height:", ";min-height:", ";height:", ";max-width:", ";min-width:", ";width:", ";"], props.size, props.size, props.size, props.size, props.size, props.size));
-const VisibilityStyles = css(["animation:", ";animation-iteration-count:", ";animation-fill-mode:", ";", ";@keyframes fadeInAnimation{0%{opacity:0;}100%{opacity:1;}}"], (props) => props.fadeIn ? "fadeInAnimation ease 0.13s" : "none", (props) => props.fadeIn ? 1 : "none", (props) => props.fadeIn ? "forwards" : "none", (props) => props.visible !== void 0 && css(["opacity:", ";pointer-events:", ";visibility:", ";"], props.visible ? 1 : 0, props.visible ? "all" : "none", props.visible ? "visible" : "hidden"));
-const FocusedStyles = css(["outline:none;&:before{bottom:-4px;border-radius:calc(", " + 3px);content:'';display:block;border-color:rgb(", ");border-style:solid;border-width:2px;opacity:", ";left:-4px;position:absolute;pointer-events:none;right:-4px;top:-4px;transition:opacity 0.2s ease-in-out;z-index:0;}&:focus{&:before{opacity:1;}}"], (props) => props.borderRadius, () => BorderColors.Primary, (props) => props.focused ? 1 : 0);
-const AlignmentStyles = css(["align-items:", ";display:flex;flex:unset;flex-grow:", ";flex-direction:", ";flex-shrink:", ";flex-wrap:", ";justify-content:", ";place-self:", ";"], (props) => {
-  var _a2;
-  return (_a2 = props.alignItems) != null ? _a2 : "center";
-}, (props) => props.grow ? 1 : 0, (props) => props.orientation && props.orientation === Orientation.Horizontal ? "row" : "column", (props) => props.shrink ? 1 : 0, (props) => props.lineWrap ? "wrap" : "nowrap", (props) => {
-  var _a2;
-  return (_a2 = props.alignContent) != null ? _a2 : "initial";
-}, (props) => {
-  var _a2;
-  return (_a2 = props.alignSelf) != null ? _a2 : "initial";
-});
-function getOverflowStyle(value2) {
-  switch (value2) {
-    case Overflow.Clip:
-      return css(["overflow:clip;"]);
-    case Overflow.ClipBoth:
-      return css(["overflow:clip-both;"]);
-    case Overflow.ClipHorizontal:
-      return css(["overflow-x:clip;"]);
-    case Overflow.ClipVertical:
-      return css(["overflow-y:clip;"]);
-    case Overflow.Hidden:
-      return css(["overflow:hidden;"]);
-    case Overflow.Scroll:
-    case Overflow.ScrollBoth:
-      return css(["overflow:scroll;"]);
-    case Overflow.ScrollHorizontal:
-      return css(["overflow:hidden;overflow-x:scroll;"]);
-    case Overflow.ScrollVertical:
-      return css(["overflow:hidden;overflow-y:scroll;"]);
-    case Overflow.Visible:
-      return css(["overflow:visible;"]);
-    default:
-      return value2;
-  }
-}
-const BehaviorStyles = css(["", ";", ";", ";", ";", ";", ";"], (props) => props.fillBehavior === FillBehavior.FillVertical && Orientation.Vertical && css(["flex:1 1 auto;"]), (props) => props.fillBehavior === FillBehavior.FillHorizontal && Orientation.Horizontal && css(["flex:1 1 auto;"]), (props) => props.fillBehavior === FillBehavior.FillBoth && css(["flex:1 1 auto;"]), (props) => props.fillScreen && css(["display:flex;bottom:0 !important;left:0 !important;position:fixed !important;right:0 !important;top:0 !important;"]), (props) => getOverflowStyle(props.overflow), (props) => props.scrollable && css(["bottom:0 !important;overflow:hidden !important;overflow-y:scroll !important;left:0 !important;position:absolute !important;right:0 !important;top:0 !important;"]));
-function getDepthZIndex(value2) {
-  switch (value2) {
-    case Depth.Lowest:
-      return -3;
-    case Depth.Lower:
-      return -2;
-    case Depth.Low:
-      return -1;
-    case Depth.Surface:
-      return 0;
-    case Depth.High:
-      return 1;
-    case Depth.Higher:
-      return 2;
-    case Depth.Highest:
-      return 3;
-    default:
-      return 0;
-  }
-}
-const DepthStyles = css(["z-index:", ";"], (props) => getDepthZIndex(props.depth) === 0 ? "auto" : getDepthZIndex(props.depth));
+const DepthStyles = css([""]);
+const FocusStyles = css(["&:before{transition:opacity 0.2s ease-in-out;}", ";"], (props) => props.focused && css(["outline:none;&:before{bottom:-4px;content:'';display:block;border-color:rgb(", ");border-radius:", ";border-style:solid;border-width:2px;opacity:", ";left:-4px;position:absolute;pointer-events:none;right:-4px;top:-4px;transition:opacity 0.2s ease-in-out;}&:focus{&:before{opacity:1;}}"], BorderColors.Primary, getBorderRadiusValue(props.borderRadius), props.focused ? 1 : 0));
 const MarginStyles = css(["", ";", ";", ";", ";", ";"], (props) => {
   var _a2;
-  return props.margin && css(["margin:", ";"], (_a2 = getCSSMeasurementValue(props.margin)) != null ? _a2 : 0);
-}, (props) => props.marginBottom && css(["margin-bottom:", ";"], getCSSMeasurementValue(props.marginBottom)), (props) => props.marginLeft && css(["margin-left:", ";"], getCSSMeasurementValue(props.marginLeft)), (props) => props.marginRight && css(["margin-right:", ";"], getCSSMeasurementValue(props.marginRight)), (props) => props.marginTop && css(["margin-top:", ";"], getCSSMeasurementValue(props.marginTop)));
+  return ((_a2 = props.margin) == null ? void 0 : _a2.all) && css(["margin:", ";"], getCSSMeasurementValue(props.margin.all));
+}, (props) => {
+  var _a2;
+  return ((_a2 = props.margin) == null ? void 0 : _a2.bottom) && css(["margin-bottom:", ";"], getCSSMeasurementValue(props.margin.bottom));
+}, (props) => {
+  var _a2;
+  return ((_a2 = props.margin) == null ? void 0 : _a2.left) && css(["margin-left:", ";"], getCSSMeasurementValue(props.margin.left));
+}, (props) => {
+  var _a2;
+  return ((_a2 = props.margin) == null ? void 0 : _a2.right) && css(["margin-right:", ";"], getCSSMeasurementValue(props.margin.right));
+}, (props) => {
+  var _a2;
+  return ((_a2 = props.margin) == null ? void 0 : _a2.top) && css(["margin-top:", ";"], getCSSMeasurementValue(props.margin.top));
+});
+const OpacityStyles = css(["opacity:", ";"], (props) => props.opacity ? props.opacity / 100 : 1);
+const OverflowStyles = css(["", ";"], (props) => props.overflow && css(["overflow:", ";"], props.overflow));
 const PaddingStyles = css(["", ";", ";", ";", ";", ";"], (props) => {
   var _a2;
-  return props.padding && css(["padding:", ";"], (_a2 = getCSSMeasurementValue(props.padding)) != null ? _a2 : 0);
-}, (props) => props.paddingBottom && css(["padding-bottom:", ";"], getCSSMeasurementValue(props.paddingBottom)), (props) => props.paddingLeft && css(["padding-left:", ";"], getCSSMeasurementValue(props.paddingLeft)), (props) => props.paddingRight && css(["padding-right:", ";"], getCSSMeasurementValue(props.paddingRight)), (props) => props.paddingTop && css(["padding-top:", ";"], getCSSMeasurementValue(props.paddingTop)));
-function getPositionProperty(value2) {
-  if (typeof value2 === "number") {
-    return getCSSMeasurementValue(value2);
-  }
-  return value2;
-}
-const PositionStyles = css(["bottom:", ";left:", ";position:", ";right:", ";top:", ";"], (props) => {
-  var _a2;
-  return (_a2 = getPositionProperty(props.bottom)) != null ? _a2 : "auto";
+  return ((_a2 = props.padding) == null ? void 0 : _a2.all) && css(["padding:", ";"], getCSSMeasurementValue(props.padding.all));
 }, (props) => {
   var _a2;
-  return (_a2 = getPositionProperty(props.left)) != null ? _a2 : "auto";
+  return ((_a2 = props.padding) == null ? void 0 : _a2.bottom) && css(["padding:", ";"], getCSSMeasurementValue(props.padding.bottom));
 }, (props) => {
   var _a2;
-  return (_a2 = props.position) != null ? _a2 : "relative";
+  return ((_a2 = props.padding) == null ? void 0 : _a2.left) && css(["padding:", ";"], getCSSMeasurementValue(props.padding.left));
 }, (props) => {
   var _a2;
-  return (_a2 = getPositionProperty(props.right)) != null ? _a2 : "auto";
+  return ((_a2 = props.padding) == null ? void 0 : _a2.right) && css(["padding:", ";"], getCSSMeasurementValue(props.padding.right));
 }, (props) => {
   var _a2;
-  return (_a2 = getPositionProperty(props.top)) != null ? _a2 : "auto";
+  return ((_a2 = props.padding) == null ? void 0 : _a2.top) && css(["padding:", ";"], getCSSMeasurementValue(props.padding.top));
 });
-const LayoutStyles = css(["", ";", ";", ";", ";", ";", ""], AlignmentStyles, BehaviorStyles, DepthStyles, MarginStyles, PaddingStyles, PositionStyles);
+const PositionStyles = css(["position:relative;", ";", ";", ";", ";", ";"], (props) => {
+  var _a2;
+  return ((_a2 = props.position) == null ? void 0 : _a2.behavior) && css(["position:", ";"], props.position.behavior);
+}, (props) => {
+  var _a2, _b;
+  return (((_a2 = props.position) == null ? void 0 : _a2.bottom) || ((_b = props.position) == null ? void 0 : _b.bottom) === 0) && css(["bottom:", "px;"], props.position.bottom);
+}, (props) => {
+  var _a2, _b;
+  return (((_a2 = props.position) == null ? void 0 : _a2.left) || ((_b = props.position) == null ? void 0 : _b.left) === 0) && css(["left:", "px;"], props.position.left);
+}, (props) => {
+  var _a2, _b;
+  return (((_a2 = props.position) == null ? void 0 : _a2.right) || ((_b = props.position) == null ? void 0 : _b.right) === 0) && css(["right:", "px;"], props.position.right);
+}, (props) => {
+  var _a2, _b;
+  return (((_a2 = props.position) == null ? void 0 : _a2.top) || ((_b = props.position) == null ? void 0 : _b.top) === 0) && css(["top:", "px;"], props.position.top);
+});
+const ShadowStyles = css(["", ";"], (props) => props.shadow && css([""]));
+const SizeStyles = css(["", ";", ";", ";", ";", ";", ";"], (props) => {
+  var _a2;
+  return ((_a2 = props.size) == null ? void 0 : _a2.height) && css(["height:", "px;"], props.size.height);
+}, (props) => {
+  var _a2;
+  return ((_a2 = props.size) == null ? void 0 : _a2.maxHeight) && css(["max-height:", "px;"], props.size.maxHeight);
+}, (props) => {
+  var _a2;
+  return ((_a2 = props.size) == null ? void 0 : _a2.minHeight) && css(["min-height:", "px;"], props.size.minHeight);
+}, (props) => {
+  var _a2;
+  return ((_a2 = props.size) == null ? void 0 : _a2.maxWidth) && css(["max-width:", "px;"], props.size.maxWidth);
+}, (props) => {
+  var _a2;
+  return ((_a2 = props.size) == null ? void 0 : _a2.minWidth) && css(["min-width:", "px;"], props.size.minWidth);
+}, (props) => {
+  var _a2;
+  return ((_a2 = props.size) == null ? void 0 : _a2.width) && css(["width:", "px;"], props.size.width);
+});
+const VisibilityStyles = css(["", ";"], (props) => props.visible !== void 0 && css(["opacity:", ";pointer-events:", ";visibility:", ";"], props.visible ? 1 : 0, props.visible ? "all" : "none", props.visible ? "visible" : "hidden"));
+function getFillStyles(alignment, size) {
+  if ((alignment == null ? void 0 : alignment.fill) === Fill.Both) {
+    return css(["flex-grow:1;"]);
+  }
+  if ((alignment == null ? void 0 : alignment.fill) === Fill.Horizontal) {
+    return css(["flex-grow:1;"]);
+  }
+  if ((alignment == null ? void 0 : alignment.fill) === Fill.Vertical) {
+    return css(["flex-grow:1;"]);
+  }
+  return css(["flex-grow:0;"]);
+}
+function getHorizontalAlignStyle(alignment, size) {
+  const {
+    horizontal,
+    orientation
+  } = alignment != null ? alignment : {};
+  if (orientation === Orientation.Horizontal) {
+    switch (horizontal) {
+      case AlignHorizontal.Center:
+        return css(["justify-content:center;"]);
+      case AlignHorizontal.Right:
+        return css(["justify-content:flex-end;"]);
+      case AlignHorizontal.Left:
+        return css(["justify-content:flex-start;"]);
+      default:
+        return css(["justify-content:stretch;"]);
+    }
+  }
+  switch (horizontal) {
+    case AlignHorizontal.Center:
+      return css(["align-items:center;"]);
+    case AlignHorizontal.Right:
+      return css(["align-items:flex-end;"]);
+    case AlignHorizontal.Left:
+      return css(["align-items:flex-start;"]);
+    default:
+      return css(["align-items:stretch;"]);
+  }
+}
+function getVerticalAlignStyle(alignment) {
+  const {
+    orientation,
+    vertical
+  } = alignment != null ? alignment : {};
+  if (orientation === Orientation.Horizontal) {
+    switch (vertical) {
+      case AlignVertical.Bottom:
+        return css(["align-items:flex-end;"]);
+      case AlignVertical.Center:
+        return css(["align-items:center;"]);
+      case AlignVertical.Top:
+        return css(["align-items:flex-start;"]);
+      default:
+        return css(["align-items:stretch;"]);
+    }
+  }
+  switch (vertical) {
+    case AlignVertical.Bottom:
+      return css(["justify-content:flex-end;"]);
+    case AlignVertical.Center:
+      return css(["justify-content:center;"]);
+    case AlignVertical.Top:
+      return css(["justify-content:flex-start;"]);
+    default:
+      return css(["justify-content:stretch;"]);
+  }
+}
+const AlignmentStyles = css(["display:flex;", ";", ";", ";", ";"], (props) => {
+  var _a2;
+  return ((_a2 = props.alignment) == null ? void 0 : _a2.orientation) && css(["flex-direction:", ";"], props.alignment.orientation === Orientation.Horizontal ? "row" : "column");
+}, (props) => {
+  var _a2;
+  return ((_a2 = props.alignment) == null ? void 0 : _a2.horizontal) && css(["", ";"], getHorizontalAlignStyle(props.alignment));
+}, (props) => {
+  var _a2;
+  return ((_a2 = props.alignment) == null ? void 0 : _a2.vertical) && css(["", ";"], getVerticalAlignStyle(props.alignment));
+}, (props) => {
+  var _a2;
+  return ((_a2 = props.alignment) == null ? void 0 : _a2.fill) && css(["", ";"], getFillStyles(props.alignment));
+});
 var jsxRuntime$1 = { exports: {} };
 var reactJsxRuntime_production_min$1 = {};
 /*
@@ -20566,169 +20439,81 @@ reactJsxRuntime_production_min$1.jsxs = q$3;
 const jsx$1 = jsxRuntime$1.exports.jsx;
 const jsxs$1 = jsxRuntime$1.exports.jsxs;
 const Fragment = jsxRuntime$1.exports.Fragment;
-const Wrapper$6 = styled.div.withConfig({
+const Wrapper$1 = styled.div.withConfig({
   displayName: "Wrapper",
   componentId: "sc-19tf6wk-0"
-})(["", ";", ";", ";", ";", ";"], LayoutStyles, AppearanceStyles, FocusedStyles, DimensionStyles, VisibilityStyles);
-const Container$h = memo((_a2) => {
+})(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:opacity 0.13s ease-in-out,background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,transform 0.13s ease-in-out;"], AlignmentStyles, ContainerAnimationStyles, BackgroundStyles, BorderStyles, BorderRadiusStyles, CursorStyles, DepthStyles, MarginStyles, OpacityStyles, OverflowStyles, PaddingStyles, PositionStyles, ShadowStyles, FocusStyles, SizeStyles, VisibilityStyles);
+const Container$e = memo((_a2) => {
   var _b = _a2, {
-    alignItems = Align.Stretch,
+    alignment,
     as = "div",
     children,
-    className = "",
-    fadeIn = false,
-    grow = true,
-    orientation = Orientation.Vertical
+    className = ""
   } = _b, props = __objRest(_b, [
-    "alignItems",
+    "alignment",
     "as",
     "children",
-    "className",
-    "fadeIn",
-    "grow",
-    "orientation"
+    "className"
   ]);
-  return /* @__PURE__ */ jsx$1(Wrapper$6, __spreadProps(__spreadValues({
-    alignItems,
+  return /* @__PURE__ */ jsx$1(Wrapper$1, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      horizontal: AlignHorizontal.Stretch,
+      orientation: Orientation.Vertical,
+      vertical: AlignVertical.Stretch
+    }, alignment),
     as,
-    className: `${className} container`,
-    fadeIn,
-    grow,
-    orientation
+    className: `${className} container`
   }, props), {
     children
   }));
 });
-function getDisplayPropertyValue(as) {
-  switch (as) {
-    case "a":
-      return "inline";
-    case "button":
-      return "inline-block";
-    case "div":
-      return "flex";
-    case "h1":
-      return "block";
-    case "h2":
-      return "block";
-    case "h3":
-      return "block";
-    case "h4":
-      return "block";
-    case "h5":
-      return "block";
-    case "h6":
-      return "block";
-    case "label":
-      return "contents";
-    case "input":
-      return "inline";
-    case "p":
-      return "block";
-    case "select":
-      return "inline";
-    case "small":
-      return "inline-block";
-    case "span":
-      return "contents";
-    case "textarea":
-      return "inline";
-    default:
-      return "inline";
-  }
-}
-const getLineHeight = (lineHeight) => {
-  if (typeof lineHeight === "number") {
-    return `${lineHeight}px`;
-  }
-  return lineHeight;
-};
-const getTextAlignmentFromAlign = (align) => {
-  switch (align) {
-    case Align.Center:
-      return "center";
-    case Align.Justify:
-      return "justify";
-    case Align.Left:
-      return "left";
-    case Align.Right:
-      return "right";
-    default:
-      return align != null ? align : "left";
-  }
-};
-const TextStyles = css(["color:", ";cursor:inherit;display:", ";font-size:", ";font-weight:", ";line-height:", ";text-align:", ";text-decoration:", ";text-decoration-color:", ";transition:color 0.15s ease-in;", ";", ";", ";", ";"], (props) => {
-  var _a2;
-  return props.textColor === TextColors.Inherit ? TextColors.Inherit : `rgb(${(_a2 = props.textColor) != null ? _a2 : TextColors.Default})`;
-}, (props) => props.inline ? "inline" : "inline-flex", (props) => props.textSize, (props) => props.textWeight, (props) => getLineHeight(props.lineHeight), (props) => getTextAlignmentFromAlign(props.alignText), (props) => props.underline ? "underline" : "none", (props) => {
-  var _a2;
-  return props.underlineColor ? props.underlineColor : props.textColor === TextColors.Inherit ? TextColors.Inherit : `rgb(${(_a2 = props.textColor) != null ? _a2 : TextColors.Default})`;
-}, (props) => props.overflow && css(["overflow:", ";"], props.overflow), (props) => props.textOverflow && css(["text-overflow:", ";"], props.textOverflow), (props) => !props.selectable && css(["user-select:none;"]), (props) => props.whiteSpace && css(["white-space:", ";"], props.whiteSpace));
+const AnimationStyles = css(["", ";"], (props) => props.animation && css([""]));
 const Img = styled.img.withConfig({
   displayName: "Img",
   componentId: "sc-152mfqb-0"
-})(["", ";", ";", ";", ";"], AnimationStyles, DimensionStyles, BorderRadiusStyles, MarginStyles);
+})(["", ";", ";", ";", ";", ";"], AnimationStyles, BorderStyles, BorderRadiusStyles, MarginStyles, SizeStyles);
 const Image = memo((_c) => {
   var _d = _c, {
     alt,
     className = "",
     description,
-    height = "auto",
     path,
     url,
-    width = "auto"
+    size = {
+      height: "100%",
+      width: "100%"
+    }
   } = _d, props = __objRest(_d, [
     "alt",
     "className",
     "description",
-    "height",
     "path",
     "url",
-    "width"
+    "size"
   ]);
   return /* @__PURE__ */ jsx$1(Img, __spreadValues({
     alt: alt != null ? alt : description,
     className: `${className} image`,
-    height,
-    src: path != null ? path : url,
-    width
+    size,
+    src: path != null ? path : url
   }, props));
 });
-const SvgMedia = styled.svg.withConfig({
-  displayName: "SvgMedia",
-  componentId: "sc-1xm40ad-0"
-})(["", ";", ";align-items:center;display:flex;justify-content:center;svg{fill:rgb(", ");}"], DimensionStyles, MarginStyles, (props) => props.color);
-const Svg = memo((_e2) => {
+const Icon = memo((_e2) => {
   var _f = _e2, {
     as = "span",
-    children,
-    className = "",
-    size = Size.Small
-  } = _f, props = __objRest(_f, [
-    "as",
-    "children",
-    "className",
-    "size"
-  ]);
-  return /* @__PURE__ */ jsx$1(SvgMedia, __spreadProps(__spreadValues({
-    as,
-    className: `${className} svg`,
-    size
-  }, props), {
-    children
-  }));
-});
-const Icon = memo((_g) => {
-  var _h = _g, {
     color = ForegroundColors.Default,
     className = "",
     component,
     name: name2,
     path,
-    size = Size.Default,
+    size = {
+      height: Sizes.Default,
+      width: Sizes.Default
+    },
     svg,
     url
-  } = _h, props = __objRest(_h, [
+  } = _f, props = __objRest(_f, [
+    "as",
     "color",
     "className",
     "component",
@@ -20741,11 +20526,10 @@ const Icon = memo((_g) => {
   if (name2) {
     const Ico = getIcon(name2);
     if (Ico)
-      return /* @__PURE__ */ jsx$1(Svg, __spreadProps(__spreadValues({
+      return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+        as,
         className: `${className} icon`,
-        color,
-        height: size,
-        width: size
+        size
       }, props), {
         children: /* @__PURE__ */ jsx$1(Ico, {})
       }));
@@ -20769,76 +20553,117 @@ const Icon = memo((_g) => {
   }
   return /* @__PURE__ */ jsx$1(Fragment, {});
 });
-const TextContainer = styled.span.withConfig({
-  displayName: "TextContainer",
-  componentId: "sc-1hiw5ca-0"
-})(["", ";display:", ";"], TextStyles, (props) => getDisplayPropertyValue(props.as));
-const Label = memo((_i2) => {
-  var _j = _i2, {
-    alignItems = Align.Center,
-    alignContent = Align.Stretch,
-    alignText = Align.Left,
-    as = "label",
+const TextStyles = css(["color:rgb(", ");display:inline-block;font-size:", ";transition:color 0.15s ease-in;", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";"], (props) => {
+  var _a2;
+  return (_a2 = props.textColor) != null ? _a2 : TextColors.Default;
+}, (props) => {
+  var _a2;
+  return (_a2 = props.textSize) != null ? _a2 : TextSize.Default;
+}, (props) => props.cursor && css(["cursor:", ";"], props.cursor), (props) => props.textAlign && css(["text-align:", ";"], props.textAlign), (props) => {
+  var _a2, _b;
+  return ((_a2 = props.textDecoration) == null ? void 0 : _a2.color) && css(["text-decoration-color:", ";"], (_b = props.textDecoration) == null ? void 0 : _b.color);
+}, (props) => {
+  var _a2, _b;
+  return ((_a2 = props.textDecoration) == null ? void 0 : _a2.line) && css(["text-decoration-line:", ";"], (_b = props.textDecoration) == null ? void 0 : _b.line);
+}, (props) => {
+  var _a2, _b;
+  return ((_a2 = props.textDecoration) == null ? void 0 : _a2.style) && css(["text-decoration-style:", ";"], (_b = props.textDecoration) == null ? void 0 : _b.style);
+}, (props) => {
+  var _a2, _b;
+  return ((_a2 = props.textDecoration) == null ? void 0 : _a2.thickness) && css(["text-decoration-thickness:", ";"], (_b = props.textDecoration) == null ? void 0 : _b.thickness);
+}, (props) => props.lineHeight && css(["line-height:", ";"], props.lineHeight), (props) => props.textOverflow && css(["text-overflow:", ";"], props.textOverflow), (props) => !props.selectable && css(["user-select:none;"]), (props) => props.textWeight && css(["font-weight:", ";"], props.textWeight));
+const Container$d = styled.span.withConfig({
+  displayName: "Container",
+  componentId: "sc-196umx6-0"
+})(["", ";"], TextStyles);
+const Text = memo((_g) => {
+  var _h = _g, {
+    as = "span",
     children,
     className = "",
-    grow = true,
-    icon,
-    inline = true,
-    lineHeight = Size.Default,
-    orientation = Orientation.Horizontal,
+    lineHeight = Sizes.Default,
+    lineWrap = true,
     selectable = true,
-    size = Size.Default,
+    textAlign = TextAlign.Left,
     textColor = TextColors.Default,
-    textOverflow = TextOverflow.Ellipsis,
     textSize = TextSize.Default,
-    textWeight = TextWeight.Default,
-    underline = false,
-    whiteSpace = WhiteSpace.NoWrap
-  } = _j, props = __objRest(_j, [
-    "alignItems",
-    "alignContent",
-    "alignText",
+    textOverflow = TextOverflow.Ellipsis,
+    textWeight = TextWeight.Default
+  } = _h, props = __objRest(_h, [
     "as",
     "children",
     "className",
-    "grow",
-    "icon",
-    "inline",
     "lineHeight",
-    "orientation",
+    "lineWrap",
     "selectable",
-    "size",
+    "textAlign",
+    "textColor",
+    "textSize",
+    "textOverflow",
+    "textWeight"
+  ]);
+  return /* @__PURE__ */ jsx$1(Container$d, __spreadProps(__spreadValues({
+    textAlign,
+    textColor,
+    as,
+    className: `${className} text`,
+    selectable,
+    lineHeight,
+    textOverflow,
+    textSize,
+    textWeight
+  }, props), {
+    children
+  }));
+});
+const Label = memo((_i2) => {
+  var _j = _i2, {
+    alignment = {},
+    as = "label",
+    children,
+    className = "",
+    icon,
+    lineHeight = Sizes.Default,
+    lineWrap = false,
+    selectable = true,
+    textColor = TextColors.Default,
+    textOverflow = TextOverflow.Ellipsis,
+    textSize = TextSize.Default,
+    textWeight = TextWeight.Default
+  } = _j, props = __objRest(_j, [
+    "alignment",
+    "as",
+    "children",
+    "className",
+    "icon",
+    "lineHeight",
+    "lineWrap",
+    "selectable",
     "textColor",
     "textOverflow",
     "textSize",
-    "textWeight",
-    "underline",
-    "whiteSpace"
+    "textWeight"
   ]);
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    alignItems,
-    alignContent,
-    as: "label",
-    className: `${className} label`,
-    grow,
-    orientation
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      fill: Fill.Both,
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    }, alignment),
+    as,
+    className: `${className} label`
   }, props), {
     children: [icon && (icon.component || icon.name || icon.path || icon.url || icon.svg) && /* @__PURE__ */ jsx$1(Icon, __spreadValues({
-      marginRight: Amount.Least
-    }, icon)), /* @__PURE__ */ jsx$1(TextContainer, __spreadProps(__spreadValues({
-      alignText,
-      as,
-      className: `${className} text`,
-      inline,
+      margin: {
+        right: Amount.Least
+      }
+    }, icon)), /* @__PURE__ */ jsx$1(Text, __spreadProps(__spreadValues({
       selectable,
       lineHeight,
-      overflow: Overflow.Hidden,
       textColor,
       textOverflow,
       textSize,
-      textWeight,
-      underline,
-      whiteSpace
+      textWeight
     }, props), {
       children
     }))]
@@ -20861,54 +20686,59 @@ var ButtonType = /* @__PURE__ */ ((ButtonType2) => {
 const Button$1 = memo((_k) => {
   var _l = _k, {
     active,
-    alignItems = Align.Center,
-    alignContent = Align.Center,
-    backgroundColor,
-    borderRadius = Amount.All,
+    alignment = {
+      horizontal: AlignHorizontal.Center,
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    },
+    background,
+    borderRadius = {},
     children,
     className = "",
     cursor = Cursor.Pointer,
     disabled = false,
     form,
-    grow = false,
     hover,
     icon,
     label,
+    lineHeight = Sizes.Default,
     onClick,
     onMouseEnter,
     onMouseLeave,
-    orientation = Orientation.Horizontal,
-    size = Size.Default,
+    padding = {
+      left: Amount.Less,
+      right: Amount.Less
+    },
+    textAlign = TextAlign.Center,
     textColor,
     textSize,
     textWeight,
     type
   } = _l, props = __objRest(_l, [
     "active",
-    "alignItems",
-    "alignContent",
-    "backgroundColor",
+    "alignment",
+    "background",
     "borderRadius",
     "children",
     "className",
     "cursor",
     "disabled",
     "form",
-    "grow",
     "hover",
     "icon",
     "label",
+    "lineHeight",
     "onClick",
     "onMouseEnter",
     "onMouseLeave",
-    "orientation",
-    "size",
+    "padding",
+    "textAlign",
     "textColor",
     "textSize",
     "textWeight",
     "type"
   ]);
-  var _a2, _b, _c, _d;
+  var _a2, _b, _c, _d, _e2;
   const [hovered, setHovered] = useState(false);
   const getColors = () => {
     if (!type)
@@ -20975,32 +20805,30 @@ const Button$1 = memo((_k) => {
     }
   };
   const colors = getColors();
-  const updatedBackgroundColor = hovered ? (hover == null ? void 0 : hover.backgroundColor) ? hover == null ? void 0 : hover.backgroundColor : (_a2 = colors == null ? void 0 : colors.backgroundColor) != null ? _a2 : backgroundColor : (_b = colors == null ? void 0 : colors.backgroundColor) != null ? _b : backgroundColor;
-  const updatedTextColor = hovered ? (hover == null ? void 0 : hover.textColor) ? hover == null ? void 0 : hover.textColor : (_c = colors == null ? void 0 : colors.textColor) != null ? _c : textColor : (_d = colors == null ? void 0 : colors.textColor) != null ? _d : textColor;
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
+  const updatedBackgroundColor = hovered ? ((_a2 = hover == null ? void 0 : hover.background) == null ? void 0 : _a2.color) ? hover == null ? void 0 : hover.background.color : (_b = colors == null ? void 0 : colors.backgroundColor) != null ? _b : background == null ? void 0 : background.color : (_c = colors == null ? void 0 : colors.backgroundColor) != null ? _c : background == null ? void 0 : background.color;
+  const updatedTextColor = hovered ? (hover == null ? void 0 : hover.textColor) ? hover == null ? void 0 : hover.textColor : (_d = colors == null ? void 0 : colors.textColor) != null ? _d : textColor : (_e2 = colors == null ? void 0 : colors.textColor) != null ? _e2 : textColor;
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
     active: __spreadValues({
-      backgroundOpacity: 80
+      background: {
+        opacity: 80
+      }
     }, active),
-    alignItems,
-    alignContent,
+    alignment,
     as: "button",
-    backgroundColor: updatedBackgroundColor,
-    borderRadius: grow && !borderRadius ? Amount.Least : borderRadius,
-    boxShadow: {
-      blurRadius: 8,
-      color: colors == null ? void 0 : colors.backgroundColor,
-      offsetX: 0,
-      offsetY: 2,
-      opacity: 35,
-      spreadRadius: 4
+    background: {
+      color: updatedBackgroundColor
     },
+    borderRadius: __spreadValues({
+      all: Amount.All
+    }, borderRadius),
     className: `${className} button`,
     cursor,
     disabled,
     form,
-    grow,
     hover: __spreadValues({
-      backgroundOpacity: 90
+      background: {
+        opacity: 90
+      }
     }, hover),
     onClick,
     onMouseEnter: (e2) => {
@@ -21013,20 +20841,19 @@ const Button$1 = memo((_k) => {
       if (onMouseLeave)
         onMouseLeave(e2);
     },
-    orientation,
     overflow: Overflow.Visible,
-    paddingLeft: getLargerAmount(convertSizeToAmount(size)),
-    paddingRight: getLargerAmount(convertSizeToAmount(size))
+    padding
   }, props), {
     children: typeof children === "string" ? /* @__PURE__ */ jsx$1(Label, {
-      alignContent: grow ? Align.Center : alignContent,
-      grow: true,
       icon,
-      lineHeight: size === Size.Smaller || size === Size.Smallest ? Size.Small : size,
+      lineHeight,
+      textAlign,
       textColor: updatedTextColor,
-      textSize: convertSizeToTextSize(getSmallerSize(size)),
+      textDecoration: type === "link" && hovered ? {
+        line: TextDecorationLine.Underline
+      } : void 0,
+      textSize,
       textWeight,
-      underline: type === "link" && hovered,
       children
     }) : /* @__PURE__ */ jsx$1(Fragment, {
       children
@@ -21163,8 +20990,16 @@ var BorderColors = ((BorderColors2) => {
   return BorderColors2;
 })(BorderColors || {});
 var BorderStyle = /* @__PURE__ */ ((BorderStyle2) => {
+  BorderStyle2["Dashed"] = "dashed";
   BorderStyle2["Dotted"] = "dotted";
+  BorderStyle2["Double"] = "double";
+  BorderStyle2["Groove"] = "groove";
+  BorderStyle2["Inset"] = "inset";
+  BorderStyle2["None"] = "none";
+  BorderStyle2["Outset"] = "outset";
+  BorderStyle2["Ridge"] = "ridge";
   BorderStyle2["Solid"] = "solid";
+  BorderStyle2["Wavy"] = "wavy";
   return BorderStyle2;
 })(BorderStyle || {});
 var Cursor = /* @__PURE__ */ ((Cursor2) => {
@@ -21248,16 +21083,82 @@ var ForegroundColors = ((ForegroundColors2) => {
   ForegroundColors2[ForegroundColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
   return ForegroundColors2;
 })(ForegroundColors || {});
-var Size = /* @__PURE__ */ ((Size2) => {
-  Size2["Smallest"] = "var(--size-smallest)";
-  Size2["Smaller"] = "var(--size-smaller)";
-  Size2["Small"] = "var(--size-small)";
-  Size2["Default"] = "var(--size-default)";
-  Size2["Large"] = "var(--size-large)";
-  Size2["Larger"] = "var(--size-larger)";
-  Size2["Largest"] = "var(--size-largest)";
-  return Size2;
-})(Size || {});
+var AlignHorizontal = /* @__PURE__ */ ((AlignHorizontal2) => {
+  AlignHorizontal2["Baseline"] = "baseline";
+  AlignHorizontal2["Center"] = "center";
+  AlignHorizontal2["Default"] = "default";
+  AlignHorizontal2["Left"] = "start";
+  AlignHorizontal2["Right"] = "end";
+  AlignHorizontal2["SpaceAround"] = "space-around";
+  AlignHorizontal2["SpaceBetween"] = "space-between";
+  AlignHorizontal2["SpaceEvenly"] = "space-evenly";
+  AlignHorizontal2["Stretch"] = "stretch";
+  return AlignHorizontal2;
+})(AlignHorizontal || {});
+var AlignVertical = /* @__PURE__ */ ((AlignVertical2) => {
+  AlignVertical2["Baseline"] = "baseline";
+  AlignVertical2["Bottom"] = "end";
+  AlignVertical2["Center"] = "center";
+  AlignVertical2["Default"] = "default";
+  AlignVertical2["SpaceAround"] = "space-around";
+  AlignVertical2["SpaceBetween"] = "space-between";
+  AlignVertical2["SpaceEvenly"] = "space-evenly";
+  AlignVertical2["Stretch"] = "stretch";
+  AlignVertical2["Top"] = "start";
+  return AlignVertical2;
+})(AlignVertical || {});
+var Orientation = /* @__PURE__ */ ((Orientation2) => {
+  Orientation2["Horizontal"] = "horizontal";
+  Orientation2["Vertical"] = "vertical";
+  return Orientation2;
+})(Orientation || {});
+var Amount = /* @__PURE__ */ ((Amount2) => {
+  Amount2["None"] = "var(--amount-none)";
+  Amount2["Least"] = "var(--amount-least)";
+  Amount2["Less"] = "var(--amount-less)";
+  Amount2["Default"] = "var(--amount-default)";
+  Amount2["More"] = "var(--amount-more)";
+  Amount2["Most"] = "var(--amount-most)";
+  Amount2["All"] = "var(--amount-all)";
+  return Amount2;
+})(Amount || {});
+var Fill = /* @__PURE__ */ ((Fill2) => {
+  Fill2["Horizontal"] = "horizontal";
+  Fill2["Vertical"] = "vertical";
+  Fill2["Both"] = "both";
+  return Fill2;
+})(Fill || {});
+var Overflow = /* @__PURE__ */ ((Overflow2) => {
+  Overflow2["Hidden"] = "hidden";
+  Overflow2["Scroll"] = "scroll";
+  Overflow2["ScrollVertical"] = "scroll_x";
+  Overflow2["ScrollHorizontal"] = "scroll_y";
+  Overflow2["ScrollBoth"] = "scroll_both";
+  Overflow2["Clip"] = "clip";
+  Overflow2["ClipVertical"] = "clip_x";
+  Overflow2["ClipHorizontal"] = "clip_y";
+  Overflow2["ClipBoth"] = "clip_both";
+  Overflow2["Visible"] = "visible";
+  return Overflow2;
+})(Overflow || {});
+var PositionBehavior = /* @__PURE__ */ ((PositionBehavior2) => {
+  PositionBehavior2["Absolute"] = "absolute";
+  PositionBehavior2["Fixed"] = "fixed";
+  PositionBehavior2["Relative"] = "relative";
+  PositionBehavior2["Static"] = "static";
+  PositionBehavior2["Sticky"] = "sticky";
+  return PositionBehavior2;
+})(PositionBehavior || {});
+var Sizes = /* @__PURE__ */ ((Sizes2) => {
+  Sizes2["Smallest"] = "var(--size-smallest)";
+  Sizes2["Smaller"] = "var(--size-smaller)";
+  Sizes2["Small"] = "var(--size-small)";
+  Sizes2["Default"] = "var(--size-default)";
+  Sizes2["Large"] = "var(--size-large)";
+  Sizes2["Larger"] = "var(--size-larger)";
+  Sizes2["Largest"] = "var(--size-largest)";
+  return Sizes2;
+})(Sizes || {});
 var DataGridDisplayType = /* @__PURE__ */ ((DataGridDisplayType2) => {
   DataGridDisplayType2["Card"] = "card";
   DataGridDisplayType2["Table"] = "table";
@@ -21296,63 +21197,14 @@ var AutoComplete = /* @__PURE__ */ ((AutoComplete2) => {
   AutoComplete2["Username"] = "username";
   return AutoComplete2;
 })(AutoComplete || {});
-var Align = /* @__PURE__ */ ((Align2) => {
-  Align2["Baseline"] = "baseline";
-  Align2["Bottom"] = "flex-end";
-  Align2["Center"] = "center";
-  Align2["Left"] = "flex-start";
-  Align2["Right"] = "flex-end";
-  Align2["SpaceAround"] = "space-around";
-  Align2["SpaceBetween"] = "space-between";
-  Align2["SpaceEvenly"] = "space-evenly";
-  Align2["Stretch"] = "stretch";
-  Align2["Top"] = "flex-start";
-  Align2["Justify"] = "justify";
-  return Align2;
-})(Align || {});
-var Orientation = /* @__PURE__ */ ((Orientation2) => {
-  Orientation2["Diagonal"] = "diagonal";
-  Orientation2["Horizontal"] = "horizontal";
-  Orientation2["Vertical"] = "vertical";
-  return Orientation2;
-})(Orientation || {});
-var FillBehavior = /* @__PURE__ */ ((FillBehavior2) => {
-  FillBehavior2["FillHorizontal"] = "fill_horizontal";
-  FillBehavior2["FillVertical"] = "fill_vertical";
-  FillBehavior2["FillBoth"] = "fill_both";
-  return FillBehavior2;
-})(FillBehavior || {});
-var Overflow = /* @__PURE__ */ ((Overflow2) => {
-  Overflow2["Hidden"] = "hidden";
-  Overflow2["Scroll"] = "scroll";
-  Overflow2["ScrollVertical"] = "scroll_x";
-  Overflow2["ScrollHorizontal"] = "scroll_y";
-  Overflow2["ScrollBoth"] = "scroll_both";
-  Overflow2["Clip"] = "clip";
-  Overflow2["ClipVertical"] = "clip_x";
-  Overflow2["ClipHorizontal"] = "clip_y";
-  Overflow2["ClipBoth"] = "clip_both";
-  Overflow2["Visible"] = "visible";
-  return Overflow2;
-})(Overflow || {});
-var Position = /* @__PURE__ */ ((Position2) => {
-  Position2["Absolute"] = "absolute";
-  Position2["Fixed"] = "fixed";
-  Position2["Relative"] = "relative";
-  Position2["Static"] = "static";
-  Position2["Sticky"] = "sticky";
-  return Position2;
-})(Position || {});
-var Amount = /* @__PURE__ */ ((Amount2) => {
-  Amount2["None"] = "var(--amount-none)";
-  Amount2["Least"] = "var(--amount-least)";
-  Amount2["Less"] = "var(--amount-less)";
-  Amount2["Default"] = "var(--amount-default)";
-  Amount2["More"] = "var(--amount-more)";
-  Amount2["Most"] = "var(--amount-most)";
-  Amount2["All"] = "var(--amount-all)";
-  return Amount2;
-})(Amount || {});
+var TextAlign = /* @__PURE__ */ ((TextAlign2) => {
+  TextAlign2["Center"] = "center";
+  TextAlign2["Default"] = "initial";
+  TextAlign2["Justify"] = "justify";
+  TextAlign2["Left"] = "left";
+  TextAlign2["Right"] = "right";
+  return TextAlign2;
+})(TextAlign || {});
 var TextColors = ((TextColors2) => {
   TextColors2["DataGridColumnHeaders"] = "var(--text-color-data-grid-column-headers-rgb)";
   TextColors2["DataGridCell"] = "var(--text-color-data-grid-cell-rgb)";
@@ -21396,6 +21248,22 @@ var TextColors = ((TextColors2) => {
   TextColors2[TextColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
   return TextColors2;
 })(TextColors || {});
+var TextDecorationLine = /* @__PURE__ */ ((TextDecorationLine2) => {
+  TextDecorationLine2["LineThrough"] = "line-through";
+  TextDecorationLine2["None"] = "none";
+  TextDecorationLine2["Overline"] = "overline";
+  TextDecorationLine2["Underline"] = "underline";
+  return TextDecorationLine2;
+})(TextDecorationLine || {});
+var TextDecorationStyle = /* @__PURE__ */ ((TextDecorationStyle2) => {
+  TextDecorationStyle2["Solid"] = "solid";
+  TextDecorationStyle2["Double"] = "double";
+  TextDecorationStyle2["Dotted"] = "dotted";
+  TextDecorationStyle2["Dashed"] = "dashed";
+  TextDecorationStyle2["None"] = "none";
+  TextDecorationStyle2["Wavy"] = "wavy";
+  return TextDecorationStyle2;
+})(TextDecorationStyle || {});
 var TextOverflow = /* @__PURE__ */ ((TextOverflow2) => {
   TextOverflow2["Clip"] = "clip";
   TextOverflow2["Ellipsis"] = "ellipsis";
@@ -21419,14 +21287,6 @@ var TextSize = /* @__PURE__ */ ((TextSize2) => {
   TextSize2["Largest"] = "var(--text-size-largest)";
   return TextSize2;
 })(TextSize || {});
-var WhiteSpace = /* @__PURE__ */ ((WhiteSpace2) => {
-  WhiteSpace2["Normal"] = "normal";
-  WhiteSpace2["NoWrap"] = "nowrap";
-  WhiteSpace2["Pre"] = "pre";
-  WhiteSpace2["PreWrap"] = "pre-wrap";
-  WhiteSpace2["PreLine"] = "pre-line";
-  return WhiteSpace2;
-})(WhiteSpace || {});
 var si$1 = Object.create;
 var P$1 = Object.defineProperty;
 var ui$1 = Object.getOwnPropertyDescriptor;
@@ -23448,23 +23308,20 @@ function Ti$1(a, l2) {
       return { long: "Not a valid year string.", short: "Invalid year" };
   }
 }
-const InputContainerStyles = css(["", ";", ";", ";", ";", ";", ";", ";"], LayoutStyles, FocusedStyles, AppearanceStyles, (props) => props.flat && css(["background-color:transparent;border:1px solid transparent;box-shadow:none;"]), (props) => props.focused && css(["box-shadow:none;"]), (props) => props.focused && props.border && css(["border:1px solid transparent;"]), (props) => props.focused && props.error && Array.isArray(props.error) && props.error.length > 0 && css(["&:before{border-color:rgb(", ");}"], BorderColors.Error));
 const InputContainer = memo((_m) => {
   var _n = _m, {
-    backgroundColor = BackgroundColors.Lightest,
-    borderRadius = Amount.Least,
-    border = {
-      color: BorderColors.Default,
-      style: BorderStyle.Solid,
-      width: 1
-    },
+    alignment = {},
+    background = {},
+    borderRadius = {},
+    border = {},
     children,
     className = "",
     error,
     size,
     success
   } = _n, props = __objRest(_n, [
-    "backgroundColor",
+    "alignment",
+    "background",
     "borderRadius",
     "border",
     "children",
@@ -23473,26 +23330,30 @@ const InputContainer = memo((_m) => {
     "size",
     "success"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$g, __spreadProps(__spreadValues({
-    backgroundColor,
-    borderRadius,
-    border: __spreadProps(__spreadValues({}, border), {
-      color: error && Array.isArray(error) && error.length > 0 ? BorderColors.Error : border.hasOwnProperty("color") ? border == null ? void 0 : border.color : BorderColors.InputControl
-    }),
-    className: `${className} input-container`,
-    error,
-    grow: true,
-    orientation: Orientation.Horizontal,
-    success
+  var _a2, _b;
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      orientation: Orientation.Horizontal
+    }, alignment),
+    background: __spreadValues({
+      color: BackgroundColors.InputControl
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.Least
+    }, borderRadius),
+    border: {
+      all: {
+        color: error && Array.isArray(error) && error.length > 0 ? BorderColors.Error : (_b = (_a2 = border == null ? void 0 : border.all) == null ? void 0 : _a2.color) != null ? _b : BorderColors.InputControl,
+        style: BorderStyle.Solid,
+        width: 1
+      }
+    },
+    className: `${className} input-container`
   }, props), {
     children
   }));
 });
-const Container$g = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-1vswffv-0"
-})(["", ";input{border:none;}"], InputContainerStyles);
-const TextInputStyles = css(["", ";", ";outline:none;padding:0 ", ";white-space:nowrap;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}"], FocusedStyles, TextStyles, Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
+const TextInputStyles = css(["", ";outline:none;padding:0 ", ";white-space:nowrap;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}"], TextStyles, Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
 const VerificationCodeInput = memo((_o) => {
   var _p = _o, {
     as,
@@ -23504,7 +23365,7 @@ const VerificationCodeInput = memo((_o) => {
     onChange,
     onKeyPress,
     placeholder = "",
-    size = Size.Larger,
+    textSize = TextSize.Larger,
     textColor = TextColors.Dark,
     codeType = "numeric"
   } = _p, props = __objRest(_p, [
@@ -23517,7 +23378,7 @@ const VerificationCodeInput = memo((_o) => {
     "onChange",
     "onKeyPress",
     "placeholder",
-    "size",
+    "textSize",
     "textColor",
     "codeType"
   ]);
@@ -23552,21 +23413,26 @@ const VerificationCodeInput = memo((_o) => {
         value: code
       });
   }, [code]);
-  return /* @__PURE__ */ jsx$1(Container$h, {
-    orientation: Orientation.Horizontal,
-    alignContent: Align.Center,
+  return /* @__PURE__ */ jsx$1(Container$e, {
+    alignment: {
+      horizontal: AlignHorizontal.Center,
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    },
     children: Array.from(Array(length)).map((_, key) => {
       var _a2;
       return /* @__PURE__ */ jsx$1(InputContainer, {
-        backgroundColor: BackgroundColors.InputControl,
+        background: {
+          color: BackgroundColors.InputControl
+        },
         focused: focusedKey === key,
         className: `${className} verification-code-input`,
-        marginLeft: Amount.Least,
-        marginRight: Amount.Least,
-        orientation: Orientation.Horizontal,
+        margin: {
+          left: Amount.Less,
+          right: Amount.Less
+        },
         children: /* @__PURE__ */ jsx$1(Input$4, {
           id: `${name2}-verification-code-input-${key}`,
-          lineHeight: size,
           max: codeType === "numeric" ? 9 : "unset",
           min: codeType === "numeric" ? 0 : "unset",
           name: name2,
@@ -23636,55 +23502,65 @@ const InputRow = memo((_q) => {
   var _r = _q, {
     children,
     className = "",
-    grow = false,
-    marginBottom = Amount.More,
-    orientation = Orientation.Vertical
+    margin = {}
   } = _r, props = __objRest(_r, [
     "children",
     "className",
-    "grow",
-    "marginBottom",
-    "orientation"
+    "margin"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
     className: `${className} input-row`,
-    grow,
-    marginBottom,
-    orientation
+    margin: __spreadValues({
+      bottom: Amount.More
+    }, margin)
   }, props), {
     children
   }));
 });
 const ProgressSpinner = memo(({
-  size = Size.Default
+  size = {
+    height: Sizes.Default,
+    width: Sizes.Default
+  }
 }) => {
-  return /* @__PURE__ */ jsx$1(Container$f, {
+  return /* @__PURE__ */ jsx$1(Container$c, {
     size
   });
 });
-const Container$f = memo(styled.div.withConfig({
+const Container$c = memo(styled.div.withConfig({
   displayName: "Container",
   componentId: "sc-1w3nox1-0"
 })(["animation:loop 0.8s infinite linear;border-top:calc(", " / 5) solid rgba(200,200,200,0.2);border-right:calc(", " / 5) solid rgba(200,200,200,0.2);border-bottom:calc(", " / 5) solid rgba(200,200,200,0.2);border-left:calc(", " / 5) solid rgba(0,0,0,0.2);border-radius:50%;display:inline-block;font-size:10px;height:", ";position:relative;text-indent:-9999em;transform:translateZ(0);width:", ";&:after{border-radius:50%;width:calc(", " / 3);height:calc(", " / 3);}@keyframes loop{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}"], (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size));
 const LoadingOverlay = memo((_s) => {
   var _t = _s, {
-    backgroundColor = BackgroundColors.Dark,
-    borderRadius = Amount.None,
+    background = {},
+    borderRadius = {},
     className = "",
+    position = {},
     spinnerSize,
     visible
   } = _t, props = __objRest(_t, [
-    "backgroundColor",
+    "background",
     "borderRadius",
     "className",
+    "position",
     "spinnerSize",
     "visible"
   ]);
-  return /* @__PURE__ */ jsx$1(Wrapper$5, __spreadProps(__spreadValues({
-    backgroundColor,
-    backgroundOpacity: 85,
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    background: __spreadValues({
+      color: BackgroundColors.Dark,
+      opacity: 85
+    }, background),
     borderRadius,
     className: `${className} loading-overlay`,
+    position: __spreadValues({
+      behavior: PositionBehavior.Fixed,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      top: 0
+    }, position),
     visible
   }, props), {
     children: /* @__PURE__ */ jsx$1(ProgressSpinner, {
@@ -23692,21 +23568,19 @@ const LoadingOverlay = memo((_s) => {
     })
   }));
 });
-const Wrapper$5 = memo(styled.div.withConfig({
-  displayName: "Wrapper",
-  componentId: "sc-gr02k1-0"
-})(["", ";", ";align-items:center;backdrop-filter:blur(1px);border-radius:", ";bottom:0;display:flex;justify-content:center;min-height:", ";min-width:", ";opacity:0;pointer-events:none;position:absolute;left:0;right:0;text-align:center;top:0;transition:background 0.2s cubic-bezier(0.2,0.3,0.25,0.9),opacity 0.2s cubic-bezier(0.25,0.1,0.25,0.1);z-index:4;", ""], LayoutStyles, AppearanceStyles, (props) => props.borderRadius, Size.Largest, Size.Largest, (props) => props.visible && css(["opacity:1;pointer-events:all;"])));
 const LineBreak = memo((_u) => {
   var _v = _u, {
     className = "",
-    size = Size.Default
+    size = {
+      height: Sizes.Default
+    }
   } = _v, props = __objRest(_v, [
     "className",
     "size"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadValues({
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadValues({
     className: `${className} link-break`,
-    height: size
+    size
   }, props));
 });
 const Paragraph = memo((_w) => {
@@ -23714,7 +23588,7 @@ const Paragraph = memo((_w) => {
     as = "p",
     children,
     className = "",
-    lineHeight = Size.Smaller,
+    lineHeight = Sizes.Smaller,
     textColor = TextColors.Paragraph,
     textSize = TextSize.Default
   } = _x, props = __objRest(_x, [
@@ -23740,7 +23614,8 @@ const Title = memo((_y) => {
     as = "h1",
     children,
     className = "",
-    lineHeight = Size.Small,
+    lineHeight = Sizes.Small,
+    margin = {},
     textSize = TextSize.Larger,
     textColor = TextColors.Title,
     textWeight = TextWeight.Most
@@ -23749,6 +23624,7 @@ const Title = memo((_y) => {
     "children",
     "className",
     "lineHeight",
+    "margin",
     "textSize",
     "textColor",
     "textWeight"
@@ -23756,9 +23632,11 @@ const Title = memo((_y) => {
   return /* @__PURE__ */ jsx$1(Label, __spreadProps(__spreadValues({
     as,
     className: `${className} title`,
-    inline: false,
     textColor,
     lineHeight,
+    margin: __spreadValues({
+      bottom: Amount.Less
+    }, margin),
     textSize,
     textWeight
   }, props), {
@@ -23766,8 +23644,8 @@ const Title = memo((_y) => {
   }));
 });
 const CodeVerificationForm = memo(({
-  backgroundColor = BackgroundColors.Darker,
-  borderRadius = Amount.More,
+  background = {},
+  borderRadius = {},
   onVerificationSuccess,
   userId
 }) => {
@@ -23792,54 +23670,66 @@ const CodeVerificationForm = memo(({
       onVerificationSuccess();
     }
   }, [verificationState.verify.success]);
-  return /* @__PURE__ */ jsxs$1(Container$h, {
+  return /* @__PURE__ */ jsxs$1(Container$e, {
     className: "code-verification-form",
-    backgroundColor,
-    borderRadius,
-    boxShadow: DepthShadow.Highest,
-    fadeIn: true,
-    grow: false,
-    padding: Amount.Most,
-    paddingBottom: Amount.Default,
-    width: 420,
+    background: __spreadValues({
+      color: BackgroundColors.Darker
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.More
+    }, borderRadius),
+    padding: {
+      all: Amount.Most
+    },
+    shadow: DepthShadow.Highest,
+    size: {
+      width: 420
+    },
     children: [/* @__PURE__ */ jsx$1(LoadingOverlay, {
       borderRadius,
       visible: verificationState.status.inProgress || verificationState.resend.inProgress || verificationState.verify.inProgress
-    }), verificationState.verify.success || verificationState.status.state === UserVerificationStatus.Confirmed ? /* @__PURE__ */ jsxs$1(Container$h, {
-      padding: Amount.Default,
-      paddingBottom: Amount.Most,
+    }), verificationState.verify.success || verificationState.status.state === UserVerificationStatus.Confirmed ? /* @__PURE__ */ jsxs$1(Container$e, {
+      padding: {
+        all: Amount.Default
+      },
       children: [/* @__PURE__ */ jsx$1(Title, {
-        alignText: Align.Center,
+        textAlign: TextAlign.Center,
         children: "You're verified!"
-      }), /* @__PURE__ */ jsx$1(Container$h, {
-        margin: Amount.More,
+      }), /* @__PURE__ */ jsx$1(Container$e, {
+        margin: {
+          all: Amount.More
+        },
         children: /* @__PURE__ */ jsx$1(Paragraph, {
-          alignText: Align.Center,
+          textAlign: TextAlign.Center,
           children: "Thank you for verifying your email address."
         })
       }), /* @__PURE__ */ jsx$1(Button$1, {
         fullWidth: true,
         onClick: () => navigate("/login"),
-        size: Size.Large,
         type: ButtonType.Primary,
         children: "Login"
       })]
     }) : /* @__PURE__ */ jsxs$1(Fragment, {
       children: [/* @__PURE__ */ jsx$1(Title, {
-        alignText: Align.Center,
+        textAlign: TextAlign.Center,
         children: "Verification"
-      }), /* @__PURE__ */ jsx$1(Container$h, {
-        margin: Amount.More,
+      }), /* @__PURE__ */ jsx$1(Container$e, {
+        margin: {
+          all: Amount.More
+        },
         children: /* @__PURE__ */ jsxs$1(Paragraph, {
-          alignText: Align.Center,
+          textAlign: TextAlign.Center,
           children: ["Enter the confirmation code sent to", " ", /* @__PURE__ */ jsx$1("b", {
             children: (_a2 = verificationState.delivery) == null ? void 0 : _a2.destination
           }), "."]
         })
-      }), /* @__PURE__ */ jsxs$1(Container$h, {
-        padding: Amount.Default,
-        paddingLeft: Amount.More,
-        paddingRight: Amount.More,
+      }), /* @__PURE__ */ jsxs$1(Container$e, {
+        padding: {
+          bottom: Amount.Default,
+          left: Amount.More,
+          right: Amount.More,
+          top: Amount.Default
+        },
         children: [/* @__PURE__ */ jsx$1(InputRow, {
           children: /* @__PURE__ */ jsx$1(VerificationCodeInput, {
             autoComplete: AutoComplete.OneTimeCode,
@@ -23853,11 +23743,12 @@ const CodeVerificationForm = memo(({
               setProblems(problemos);
               if (validated && problemos && problemos.length === 0)
                 setCode(value2);
-            },
-            size: Size.Large
+            }
           })
         }), /* @__PURE__ */ jsx$1(LineBreak, {
-          size: Size.Small
+          size: {
+            height: Sizes.Small
+          }
         }), /* @__PURE__ */ jsx$1(Button$1, {
           disabled: problems && problems.length > 0 || !code || verificationState.verify.inProgress || verificationState.resend.inProgress,
           fullWidth: true,
@@ -23869,15 +23760,16 @@ const CodeVerificationForm = memo(({
               }));
             }
           },
-          size: Size.Large,
           type: ButtonType.Primary,
           children: "Verify"
         })]
-      }), /* @__PURE__ */ jsx$1(Container$h, {
-        alignItems: Align.Center,
-        paddingLeft: Amount.Default,
-        paddingRight: Amount.Default,
-        paddingTop: Amount.Default,
+      }), /* @__PURE__ */ jsx$1(Container$e, {
+        alignment: {
+          horizontal: AlignHorizontal.Center
+        },
+        padding: {
+          all: Amount.Default
+        },
         children: !verificationState.resend.success ? /* @__PURE__ */ jsx$1(Button$1, {
           onClick: () => {
             if (userId) {
@@ -23886,16 +23778,18 @@ const CodeVerificationForm = memo(({
               }));
             }
           },
-          size: Size.Smaller,
           type: ButtonType.Link,
           children: "Resend verification code"
         }) : /* @__PURE__ */ jsx$1(Label, {
           icon: {
             name: BasicIcons.Checkmark2,
-            size: Size.Smaller
+            size: {
+              height: Sizes.Smaller,
+              width: Sizes.Smaller
+            }
           },
-          lineHeight: Size.Smaller,
-          size: Size.Default,
+          lineHeight: Sizes.Smaller,
+          textSize: TextSize.Default,
           textColor: TextColors.Success,
           textWeight: TextWeight.More,
           children: "A new code has been sent"
@@ -23908,43 +23802,51 @@ const Orb = memo((_A) => {
   var _B = _A, {
     color = BackgroundColors.Default,
     className = "",
-    size = Size.Smallest
+    size = {
+      height: Sizes.Smallest,
+      width: Sizes.Smallest
+    }
   } = _B, props = __objRest(_B, [
     "color",
     "className",
     "size"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadValues({
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadValues({
     className: `${className} orb`,
-    backgroundColor: color,
-    borderRadius: Amount.All,
-    height: size,
-    width: size
+    background: {
+      color
+    },
+    borderRadius: {
+      all: Amount.All
+    },
+    size
   }, props));
 });
 const NotificationLabel = memo((_C) => {
   var _D = _C, {
-    backgroundColor = BackgroundColors.Dark,
+    alignment = {},
+    background = {},
+    borderRadius = {},
     children,
     className = "",
-    grow = false,
     label = "",
-    orientation,
+    padding = {},
     showOrb = true,
     type
   } = _D, props = __objRest(_D, [
-    "backgroundColor",
+    "alignment",
+    "background",
+    "borderRadius",
     "children",
     "className",
-    "grow",
     "label",
-    "orientation",
+    "padding",
     "showOrb",
     "type"
   ]);
-  const getBackgroundColor2 = () => {
+  const getBackgroundColor = () => {
     if (!type)
-      return backgroundColor;
+      return background.color;
     switch (type) {
       case NotificationType.Error:
         return BackgroundColors.Error;
@@ -23970,27 +23872,41 @@ const NotificationLabel = memo((_C) => {
         return TextColors.Warning;
     }
   };
-  const bgColor = getBackgroundColor2();
+  const bgColor = getBackgroundColor();
   const textColor = getTextColor();
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    alignItems: Align.Center,
-    alignContent: Align.Center,
-    backgroundColor: bgColor,
-    backgroundOpacity: type ? 10 : 100,
-    borderRadius: Amount.All,
-    className: `${className} notification-label`,
+  console.log(__spreadValues({
+    horizontal: AlignHorizontal.Center,
     orientation: Orientation.Horizontal,
-    padding: Amount.More,
-    paddingBottom: Amount.Less,
-    paddingTop: Amount.Less,
-    grow
+    vertical: AlignVertical.Center
+  }, alignment));
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      horizontal: AlignHorizontal.Center,
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    }, alignment),
+    background: __spreadValues({
+      color: BackgroundColors.Darker,
+      opacity: type ? 10 : 100
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.All
+    }, borderRadius),
+    className: `${className} notification-label`,
+    padding: __spreadValues({
+      all: Amount.Less
+    }, padding)
   }, props), {
     children: [showOrb && /* @__PURE__ */ jsx$1(Orb, {
-      color: bgColor,
-      marginRight: Amount.Less
+      background: {
+        color: bgColor
+      },
+      margin: {
+        right: Amount.Less
+      }
     }), label && /* @__PURE__ */ jsx$1(Label, {
       textColor,
-      lineHeight: Size.Small,
+      lineHeight: Sizes.Small,
       textWeight: TextWeight.Default,
       children: label
     }), children]
@@ -24005,7 +23921,9 @@ const ErrorNotification = memo((_E) => {
     "showOrb"
   ]);
   return /* @__PURE__ */ jsx$1(NotificationLabel, __spreadValues({
-    alignItems: Align.Center,
+    alignment: {
+      horizontal: AlignHorizontal.Center
+    },
     label,
     showOrb,
     type: NotificationType.Error
@@ -24017,12 +23935,15 @@ const FormActions = memo((_G) => {
   } = _H, props = __objRest(_H, [
     "children"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-    alignContent: Align.SpaceBetween,
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    alignment: {
+      horizontal: AlignHorizontal.SpaceBetween,
+      orientation: Orientation.Horizontal
+    },
     className: "form-actions",
-    marginTop: Amount.More,
-    orientation: Orientation.Horizontal,
-    grow: false
+    margin: {
+      top: Amount.More
+    }
   }, props), {
     children
   }));
@@ -24033,36 +23954,45 @@ const JSONEditor = memo((_I) => {
     children: "JSONEditor"
   });
 });
-const ErrorLabel = memo(({
-  alignContent = Align.Center,
-  alignText = Align.Center,
-  children,
-  className = "",
-  grow = true,
-  icon = {
-    color: Colors.Error,
-    name: BasicIcons.Alert,
-    size: Size.Smaller
-  },
-  lineHeight = Size.Smaller,
-  marginBottom = Amount.Least,
-  size = Size.Default,
-  textColor = TextColors.Error,
-  textSize = TextSize.Small
-}) => {
-  return /* @__PURE__ */ jsx$1(Label, {
-    alignContent,
-    alignText,
+const ErrorLabel = memo((_J) => {
+  var _K = _J, {
+    alignment = {
+      horizontal: AlignHorizontal.Center,
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    },
+    children,
+    className = "",
+    icon = {
+      color: Colors.Error,
+      name: BasicIcons.Alert,
+      size: {
+        height: Sizes.Smaller,
+        width: Sizes.Smaller
+      }
+    },
+    lineHeight = Sizes.Smaller,
+    textColor = TextColors.Error,
+    textSize = TextSize.Small
+  } = _K, props = __objRest(_K, [
+    "alignment",
+    "children",
+    "className",
+    "icon",
+    "lineHeight",
+    "textColor",
+    "textSize"
+  ]);
+  return /* @__PURE__ */ jsx$1(Label, __spreadProps(__spreadValues({
+    alignment,
     className: `${className} error-label`,
-    grow,
     icon,
     lineHeight,
-    marginBottom,
-    size,
     textColor,
-    textSize,
+    textSize
+  }, props), {
     children
-  });
+  }));
 });
 var cn = Object.defineProperty;
 var un = (a, u2, A2) => u2 in a ? cn(a, u2, { enumerable: true, configurable: true, writable: true, value: A2 }) : a[u2] = A2;
@@ -25545,65 +25475,59 @@ var d$b = class extends Error {
   }
 };
 var T$1 = ((f2) => (f2.Simple = "simple", f2.ExponentialBackoff = "exponential", f2.CircuitBreaker = "circuit_breaker", f2))(T$1 || {});
-const InputLabel = memo((_J) => {
-  var _K = _J, {
-    alignContent = Align.Left,
+const InputLabel = memo((_L) => {
+  var _M = _L, {
+    alignment = {},
     children,
     className = "",
     error,
-    lineHeight = Size.Smaller,
-    marginBottom = Amount.Least,
-    size = Size.Small,
+    lineHeight = Sizes.Smaller,
+    margin = {},
     textColor = TextColors.InputLabel,
     textSize = TextSize.Small
-  } = _K, props = __objRest(_K, [
-    "alignContent",
+  } = _M, props = __objRest(_M, [
+    "alignment",
     "children",
     "className",
     "error",
     "lineHeight",
-    "marginBottom",
-    "size",
+    "margin",
     "textColor",
     "textSize"
   ]);
   var _a2;
-  return /* @__PURE__ */ jsxs$1(Container$h, {
-    grow: false,
-    orientation: Orientation.Horizontal,
+  return /* @__PURE__ */ jsxs$1(Container$e, {
     children: [/* @__PURE__ */ jsx$1(Label, __spreadProps(__spreadValues({
-      alignContent,
+      alignment: __spreadValues({
+        horizontal: AlignHorizontal.Left,
+        orientation: Orientation.Horizontal
+      }, alignment),
       className: `${className} input-label`,
-      grow: false,
       lineHeight,
       textSize,
       textColor,
-      marginBottom,
-      size
+      margin: __spreadValues({
+        bottom: Amount.Least
+      }, margin)
     }, props), {
       children
     })), error && /* @__PURE__ */ jsx$1(ErrorLabel, {
-      alignContent: Align.Right,
-      size,
+      textSize,
       children: error instanceof d$b ? error.message : error.length > 0 ? (_a2 = error[0]) == null ? void 0 : _a2.message.long : null
     })]
   });
 });
 const ToggleInput = memo(({
-  backgroundColor = BackgroundColors.InputControl,
-  border = {
-    color: BorderColors.InputControl,
-    style: BorderStyle.Solid,
-    width: 1
-  },
   className = "",
   defaultValue = false,
   falseLabel,
   label,
   onChange,
   trueLabel,
-  size = Size.Default,
-  width = 55
+  size = {
+    height: Sizes.Default,
+    width: Sizes.Default
+  }
 }) => {
   var _a2;
   const [focused, setFocused] = useState(false);
@@ -25621,21 +25545,25 @@ const ToggleInput = memo(({
     setToggleValue((_a3 = defaultValue != null ? defaultValue : toggleValue) != null ? _a3 : "");
   }, [defaultValue]);
   return /* @__PURE__ */ jsxs$1(Fragment, {
-    children: [/* @__PURE__ */ jsxs$1(Container$h, {
-      orientation: Orientation.Horizontal,
-      grow: false,
+    children: [/* @__PURE__ */ jsxs$1(Container$e, {
+      alignment: {
+        orientation: Orientation.Horizontal
+      },
       children: [label && /* @__PURE__ */ jsx$1(InputLabel, {
         children: label
       }), problems.length > 0 ? /* @__PURE__ */ jsx$1(ErrorLabel, {
-        alignContent: Align.Right,
+        alignment: {
+          horizontal: AlignHorizontal.Right
+        },
         children: (_a2 = problems[0]) == null ? void 0 : _a2.message.short
       }) : null]
-    }), /* @__PURE__ */ jsxs$1(Container$h, {
-      alignContent: Align.Left,
-      alignItems: Align.Center,
-      orientation: Orientation.Horizontal,
+    }), /* @__PURE__ */ jsxs$1(Container$e, {
+      alignment: {
+        horizontal: AlignHorizontal.Left,
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.Center
+      },
       className: `${className} toggle-input`,
-      grow: false,
       children: [falseLabel && /* @__PURE__ */ jsx$1(Button$1, {
         form: "null",
         onClick: () => setToggleValue(false),
@@ -25645,32 +25573,42 @@ const ToggleInput = memo(({
           textColor: !toggleValue ? TextColors.Light : TextColors.Lighter,
           children: falseLabel
         })
-      }), /* @__PURE__ */ jsx$1(Toggle, {
-        alignItems: Align.Center,
+      }), /* @__PURE__ */ jsx$1(Container$e, {
+        alignment: {
+          orientation: Orientation.Horizontal,
+          vertical: AlignVertical.Center
+        },
         as: "button",
-        backgroundColor,
-        border,
-        borderRadius: Amount.All,
+        borderRadius: {
+          all: Amount.All
+        },
         form: "null",
         onClick: () => setToggleValue(!toggleValue),
         onFocus: () => setFocused(true),
         onBlur: () => setFocused(false),
-        orientation: Orientation.Horizontal,
-        padding: Amount.Least,
-        toggleValue,
-        size,
-        children: /* @__PURE__ */ jsx$1(ToggleSwitch, {
-          alignItems: Align.Center,
-          alignContent: Align.Center,
-          backgroundColor: toggleValue ? Colors.Primary : Colors.Error,
+        padding: {
+          all: Amount.Least
+        },
+        shadow: DepthShadow.Low,
+        children: /* @__PURE__ */ jsx$1(Container$e, {
+          alignment: {
+            horizontal: AlignHorizontal.Center,
+            vertical: AlignVertical.Center
+          },
+          background: {
+            color: toggleValue ? Colors.Primary : Colors.Error
+          },
           depth: Depth.High,
           focused,
-          toggleValue,
+          shadow: DepthShadow.High,
           size,
           children: /* @__PURE__ */ jsx$1(Icon, {
-            color: BackgroundColors.Dark,
+            color: ForegroundColors.Lightest,
             name: toggleValue ? BasicIcons.Checkmark2 : BasicIcons.Close,
-            size: Size.Smallest
+            size: {
+              height: Sizes.Smallest,
+              width: Sizes.Smallest
+            }
           })
         })
       }), trueLabel && /* @__PURE__ */ jsx$1(Button$1, {
@@ -25686,14 +25624,6 @@ const ToggleInput = memo(({
     })]
   });
 });
-const Toggle = styled.button.withConfig({
-  displayName: "Toggle",
-  componentId: "sc-5z4r9s-0"
-})(["", ";", ";box-shadow:", ";border:none;cursor:pointer;width:calc(", " * 2 - 2px);"], LayoutStyles, AppearanceStyles, DepthShadow.Low, (props) => props.size);
-const ToggleSwitch = styled.span.withConfig({
-  displayName: "ToggleSwitch",
-  componentId: "sc-5z4r9s-1"
-})(["", ";", ";", ";box-shadow:", ";border-radius:", ";height:", ";transform:translateX(0);transition:background 0.1s ease-in-out,transform 0.1s ease-in-out;width:", ";i.icon{opacity:0;transition:opacity 0.1s ease-in-out;}&:before{border-radius:100%;}", " ", ""], LayoutStyles, AppearanceStyles, FocusedStyles, DepthShadow.High, Amount.All, (props) => `calc(${props.size} - 8px)`, (props) => `calc(${props.size} - 8px)`, (props) => props.toggleValue === true && css(["transform:translateX(calc(", " - ", "));i.icon{opacity:1;}"], props.size, Amount.Least), (props) => props.toggleValue === false && css([""]));
 var TextInputType = /* @__PURE__ */ ((TextInputType2) => {
   TextInputType2["EmailAddress"] = "email";
   TextInputType2["Text"] = "text";
@@ -25701,56 +25631,50 @@ var TextInputType = /* @__PURE__ */ ((TextInputType2) => {
   TextInputType2["Search"] = "search";
   return TextInputType2;
 })(TextInputType || {});
-const TextInput = memo((_L) => {
-  var _M = _L, {
+const TextInput = memo((_N) => {
+  var _O = _N, {
     autoComplete,
-    backgroundColor = BackgroundColors.InputControl,
-    boxShadow = DepthShadow.Low,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1
-    },
+    background = {},
+    border = {},
     className = "",
     cursor = Cursor.Text,
     defaultValue,
     error,
-    flat = false,
     hidden = false,
     icon,
     inProgress = false,
     inputType = "text",
     label,
+    lineHeight = Sizes.Default,
     name: name2,
     onChange,
     prefix: prefix2 = "",
     placeholder = "",
-    size = Size.Default,
+    shadow = DepthShadow.Low,
     spellCheck = true,
     suffix: suffix2 = "",
     textColor = TextColors.InputControl,
     textWeight = TextWeight.Default,
     validation = {}
-  } = _M, props = __objRest(_M, [
+  } = _O, props = __objRest(_O, [
     "autoComplete",
-    "backgroundColor",
-    "boxShadow",
+    "background",
     "border",
     "className",
     "cursor",
     "defaultValue",
     "error",
-    "flat",
     "hidden",
     "icon",
     "inProgress",
     "inputType",
     "label",
+    "lineHeight",
     "name",
     "onChange",
     "prefix",
     "placeholder",
-    "size",
+    "shadow",
     "spellCheck",
     "suffix",
     "textColor",
@@ -25792,28 +25716,36 @@ const TextInput = memo((_L) => {
       error: problems,
       children: label
     }), /* @__PURE__ */ jsxs$1(InputContainer, __spreadProps(__spreadValues({
-      backgroundColor,
-      border,
-      boxShadow,
+      background: __spreadValues({
+        color: BackgroundColors.InputControl
+      }, background),
+      border: __spreadValues({
+        all: {
+          color: BorderColors.InputControl,
+          style: BorderStyle.Solid,
+          width: 1
+        }
+      }, border),
       className: `${className} text-input`,
       cursor,
       error: problems,
       focused,
-      flat,
       onClick: () => {
         var _a3;
         (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
       },
-      orientation: Orientation.Horizontal,
-      size
+      shadow
     }, props), {
       children: [icon && /* @__PURE__ */ jsx$1(Icon, __spreadProps(__spreadValues({}, icon), {
         color: value2 === "" ? TextColors.InputPlaceholder : (_a2 = icon.color) != null ? _a2 : textColor,
-        marginLeft: Amount.Less
+        margin: {
+          left: Amount.Less
+        }
       })), /* @__PURE__ */ jsx$1(Input$3, {
         autoComplete,
         defaultValue,
         hidden,
+        lineHeight,
         name: name2,
         onBlur: () => setFocused(false),
         onChange: (e2) => {
@@ -25821,7 +25753,6 @@ const TextInput = memo((_L) => {
           setValue(prefix2 + e2.target.value + suffix2);
         },
         onFocus: () => setFocused(true),
-        lineHeight: size,
         placeholder,
         textColor,
         textWeight,
@@ -25829,11 +25760,11 @@ const TextInput = memo((_L) => {
         value: value2,
         ref: inputRef,
         spellCheck
-      }), inProgress && /* @__PURE__ */ jsx$1(Container$h, {
-        grow: false,
-        children: /* @__PURE__ */ jsx$1(ProgressSpinner, {
-          size: Size.Small
-        })
+      }), inProgress && /* @__PURE__ */ jsx$1(ProgressSpinner, {
+        size: {
+          height: Sizes.Small,
+          width: Sizes.Small
+        }
       })]
     }))]
   });
@@ -25842,13 +25773,13 @@ const Input$3 = styled.input.withConfig({
   displayName: "Input",
   componentId: "sc-j32swv-0"
 })(["", ";background:transparent;border:none;width:100%;&::-ms-clear{display:none;width:0;height:0;}&::-ms-reveal{display:none;width:0;height:0;}&::-webkit-search-decoration,&::-webkit-search-cancel-button,&::-webkit-search-results-button,&::-webkit-search-results-decoration{display:none;}"], TextInputStyles);
-const EmailAddressInput = memo((_N) => {
-  var _O = _N, {
+const EmailAddressInput = memo((_P) => {
+  var _Q = _P, {
     autoComplete,
     defaultValue,
     onChange,
     validation = {}
-  } = _O, props = __objRest(_O, [
+  } = _Q, props = __objRest(_Q, [
     "autoComplete",
     "defaultValue",
     "onChange",
@@ -25883,8 +25814,8 @@ const EmailAddressInput = memo((_N) => {
     validation: validationProps
   }, props));
 });
-const PhoneNumberInput = memo((_P) => {
-  var props = __objRest(_P, []);
+const PhoneNumberInput = memo((_R) => {
+  var props = __objRest(_R, []);
   return /* @__PURE__ */ jsx$1(TextInput, __spreadValues({
     validation: {
       [Condition.IsPhoneNumber]: true
@@ -25901,39 +25832,30 @@ const getBorderColor = ({
     return BorderColors.Primary;
   return BorderColors.InputControl;
 };
-const Wrapper$4 = styled.div.withConfig({
+styled.div.withConfig({
   displayName: "Wrapper",
   componentId: "sc-1k5smuz-0"
-})(["background:transparent;border:none;width:100%;", ";.react-date-picker,.react-date-picker__wrapper{width:100%;.react-calendar{color:rgb(", ");overflow:hidden;width:100%;}}.react-date-picker__wrapper{background:transparent;box-shadow:0 0 0 transparent;border:none;cursor:", ";width:100%;}.react-date-picker__inputGroup{line-height:26px;padding:0 ", ";}.react-date-picker__inputGroup__input,.react-date-picker__inputGroup__leadingZero{color:rgb(", ");font-size:14px;font-weight:500;}.react-date-picker__inputGroup__leadingZero{margin-right:4px;}input.react-date-picker__inputGroup__input,.react-date-picker__inputGroup__leadingZero{background:transparent;border:1px solid transparent;border-radius:4px;color:rgb(", ");height:initial;line-height:24px;padding:2px 6px 3px 6px;text-align:center;vertical-align:middle;&:hover{border:1px solid rgb(", ");}&:focus{box-shadow:0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06) !important;border:1px solid rgb(", ");}}.react-date-picker__inputGroup__divider{color:rgb(", ");}.react-date-picker__calendar{background-color:rgb(", ");border:2px solid rgb( ", " );border-top:none;border-radius:0 0 ", " ", ";height:auto !important;left:-4px !important;padding:", ";right:-1px !important;top:calc(", " - 3px) !important;transition:border 0.2s ease-in-out,opacity 0.2s ease-in-out,transform 0.2s ease-in-out;z-index:100500;width:calc(100% + (", " + 8px));}.react-date-picker__calendar.react-date-picker__calendar--closed{opacity:0;pointer-events:none;transform:translateY(-10px);}.react-calendar__navigation{display:flex;.react-calendar__navigation__arrow{background-color:rgb(", ");border:none;border-radius:", ";color:rgb(", ");cursor:", ";height:", ";margin:0 ", ";text-align:center;width:", ";&:hover{background-color:rgb(", ");}}.react-calendar__navigation__label{background-color:transparent;border:none;border-radius:", ";color:rgb(", ");cursor:", ";font-weight:", ";padding:", " 0;&:hover{background-color:rgb(", ");}}}.react-calendar__tile{background:transparent;border:none;border-radius:", ";color:rgb(", ");padding:", " 0;&:hover{background-color:rgb(", ");color:rgb(", ");cursor:", ";}}.react-calendar__tile--active,.react-calendar__tile--hasActive{background:rgb(", ") !important;color:rgb(", ");}.react-calendar__month-view__weekdays__weekday{border:none;font-size:", ";padding:", " 0;text-align:center;text-decoration:none;}.react-calendar__month-view__days__day--neighboringMonth{color:rgb(", ");}"], BoxShadowStyles, TextColors.Lighter, Cursor.Pointer, Amount.Least, TextColors.InputControl, TextColors.InputControl, BorderColors.InputControl, BorderColors.Primary, ForegroundColors.Default, BackgroundColors.InputControl, (props) => getBorderColor({
+})(["background:transparent;border:none;width:100%;", ";.react-date-picker,.react-date-picker__wrapper{width:100%;.react-calendar{color:rgb(", ");overflow:hidden;width:100%;}}.react-date-picker__wrapper{background:transparent;box-shadow:0 0 0 transparent;border:none;cursor:", ";width:100%;}.react-date-picker__inputGroup{line-height:26px;padding:0 ", ";}.react-date-picker__inputGroup__input,.react-date-picker__inputGroup__leadingZero{color:rgb(", ");font-size:14px;font-weight:500;}.react-date-picker__inputGroup__leadingZero{margin-right:4px;}input.react-date-picker__inputGroup__input,.react-date-picker__inputGroup__leadingZero{background:transparent;border:1px solid transparent;border-radius:4px;color:rgb(", ");height:initial;line-height:24px;padding:2px 6px 3px 6px;text-align:center;vertical-align:middle;&:hover{border:1px solid rgb(", ");}&:focus{box-shadow:0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06) !important;border:1px solid rgb(", ");}}.react-date-picker__inputGroup__divider{color:rgb(", ");}.react-date-picker__calendar{background-color:rgb(", ");border:2px solid rgb( ", " );border-top:none;border-radius:0 0 ", " ", ";height:auto !important;left:-4px !important;padding:", ";right:-1px !important;top:calc(", " - 3px) !important;transition:border 0.2s ease-in-out,opacity 0.2s ease-in-out,transform 0.2s ease-in-out;z-index:100500;width:calc(100% + (", " + 8px));}.react-date-picker__calendar.react-date-picker__calendar--closed{opacity:0;pointer-events:none;transform:translateY(-10px);}.react-calendar__navigation{display:flex;.react-calendar__navigation__arrow{background-color:rgb(", ");border:none;border-radius:", ";color:rgb(", ");cursor:", ";height:", ";margin:0 ", ";text-align:center;width:", ";&:hover{background-color:rgb(", ");}}.react-calendar__navigation__label{background-color:transparent;border:none;border-radius:", ";color:rgb(", ");cursor:", ";font-weight:", ";padding:", " 0;&:hover{background-color:rgb(", ");}}}.react-calendar__tile{background:transparent;border:none;border-radius:", ";color:rgb(", ");padding:", " 0;&:hover{background-color:rgb(", ");color:rgb(", ");cursor:", ";}}.react-calendar__tile--active,.react-calendar__tile--hasActive{background:rgb(", ") !important;color:rgb(", ");}.react-calendar__month-view__weekdays__weekday{border:none;font-size:", ";padding:", " 0;text-align:center;text-decoration:none;}.react-calendar__month-view__days__day--neighboringMonth{color:rgb(", ");}"], ShadowStyles, TextColors.Lighter, Cursor.Pointer, Amount.Least, TextColors.InputControl, TextColors.InputControl, BorderColors.InputControl, BorderColors.Primary, ForegroundColors.Default, BackgroundColors.InputControl, (props) => getBorderColor({
   error: props.error,
   focused: props.focused
-}), Amount.Least, Amount.Least, Amount.Least, (props) => props.size, (props) => props.size, BackgroundColors.Dark, Size.Default, TextColors.Lighter, Cursor.Pointer, Size.Default, Amount.Least, Size.Default, BackgroundColors.Darker, Amount.All, TextColors.Default, Cursor.Pointer, TextWeight.More, Amount.Least, BackgroundColors.Darker, Amount.Least, TextColors.Default, Amount.Less, BackgroundColors.Darker, TextColors.Light, Cursor.Pointer, BackgroundColors.Primary, TextColors.InputControl, TextSize.Small, Amount.Least, TextColors.Darker);
-const DownArrow = styled.div.withConfig({
-  displayName: "DownArrow",
-  componentId: "sc-1k5smuz-1"
-})(["cursor:", " !important;", ";", ";", ";"], Cursor.Pointer, LayoutStyles, AppearanceStyles, DimensionStyles);
-const DateInput = memo((_Q) => {
-  var _R = _Q, {
-    backgroundColor = BackgroundColors.InputControl,
-    boxShadow = DepthShadow.Low,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1
-    },
+}), Amount.Least, Amount.Least, Amount.Least, (props) => props.size, (props) => props.size, BackgroundColors.Dark, Sizes.Default, TextColors.Lighter, Cursor.Pointer, Sizes.Default, Amount.Least, Sizes.Default, BackgroundColors.Darker, Amount.All, TextColors.Default, Cursor.Pointer, TextWeight.More, Amount.Least, BackgroundColors.Darker, Amount.Least, TextColors.Default, Amount.Less, BackgroundColors.Darker, TextColors.Light, Cursor.Pointer, BackgroundColors.Primary, TextColors.InputControl, TextSize.Small, Amount.Least, TextColors.Darker);
+const DateInput = memo((_S) => {
+  var _T = _S, {
+    background = {},
+    border = {},
     className = "",
     error,
     resetIcon,
     defaultValue,
     label,
     onChange,
-    size = Size.Default,
+    shadow = DepthShadow.Low,
+    textSize = TextSize.Default,
     validation = {
       [Condition.IsDate]: true
     }
-  } = _R, props = __objRest(_R, [
-    "backgroundColor",
-    "boxShadow",
+  } = _T, props = __objRest(_T, [
+    "background",
     "border",
     "className",
     "error",
@@ -25941,7 +25863,8 @@ const DateInput = memo((_Q) => {
     "defaultValue",
     "label",
     "onChange",
-    "size",
+    "shadow",
+    "textSize",
     "validation"
   ]);
   const [value2, setValue] = useState(defaultValue);
@@ -25972,24 +25895,28 @@ const DateInput = memo((_Q) => {
     children: [(label || problems.length > 0) && /* @__PURE__ */ jsx$1(InputLabel, {
       error: problems,
       children: label
-    }), /* @__PURE__ */ jsxs$1(InputContainer, __spreadProps(__spreadValues({
-      backgroundColor,
-      border,
-      boxShadow: !focused ? boxShadow : DepthShadow.Higher,
+    }), /* @__PURE__ */ jsx$1(InputContainer, __spreadProps(__spreadValues({
+      background: __spreadValues({
+        color: BackgroundColors.InputControl
+      }, background),
+      border: __spreadValues({
+        all: {
+          color: BorderColors.InputControl,
+          style: BorderStyle.Solid,
+          width: 1
+        }
+      }, border),
       className: `${className} date-input`,
       error: problems,
       focused,
       onMouseLeave: () => setFocused(false),
-      orientation: Orientation.Horizontal,
-      size
+      shadow: !focused ? shadow : DepthShadow.Higher
     }, props), {
-      children: [/* @__PURE__ */ jsx$1(Wrapper$4, {
-        error: problems,
-        focused,
-        size
-      }), /* @__PURE__ */ jsx$1(DownArrow, {
-        alignItems: Align.Center,
-        alignContent: Align.Center,
+      children: /* @__PURE__ */ jsx$1(Container$e, {
+        alignment: {
+          horizontal: AlignHorizontal.Center,
+          vertical: AlignVertical.Center
+        },
         border: {
           left: {
             color: BorderColors.InputControl,
@@ -25998,20 +25925,20 @@ const DateInput = memo((_Q) => {
           }
         },
         className: "down-arrow",
-        grow: false,
-        menuVisible: focused,
-        height: Size.Small,
-        width: size,
+        size: {
+          height: Sizes.Default,
+          width: Sizes.Default
+        },
         children: /* @__PURE__ */ jsx$1(Icon, {
           color: focused ? ForegroundColors.Lightest : ForegroundColors.Lighter,
           name: BasicIcons.CaretDownArrow,
           className: focused ? "up" : "down",
-          size: Size.Smallest,
-          transform: {
-            rotate: focused ? 0 : 0
+          size: {
+            height: Sizes.Smallest,
+            width: Sizes.Smallest
           }
         })
-      })]
+      })
     }))]
   });
 });
@@ -26025,10 +25952,10 @@ const DateTimeInput = memo(({
   }
 }) => {
   return /* @__PURE__ */ jsx$1(InputContainer, {
-    children: /* @__PURE__ */ jsx$1(Wrapper$3, {})
+    children: /* @__PURE__ */ jsx$1(Wrapper, {})
   });
 });
-const Wrapper$3 = styled.div.withConfig({
+const Wrapper = styled.div.withConfig({
   displayName: "Wrapper",
   componentId: "sc-v3l8eb-0"
 })(["cursor:pointer;.react-date-picker,.react-date-picker__wrapper{border-radius:6px;width:100%;.react-calendar{border-radius:15px;box-shadow:0 5px 25px rgba(0,0,0,0.1);overflow:hidden;width:100%;}}.react-date-picker__wrapper{background:white;box-shadow:0 0 0 transparent;border:none;padding:6px;}.react-date-picker__inputGroup{line-height:26px;}.react-date-picker__inputGroup__input,.react-date-picker__inputGroup__leadingZero{color:#5b5b5b;font-size:14px;font-weight:500;}.react-date-picker__inputGroup__leadingZero{margin-right:4px;}input.react-date-picker__inputGroup__input,.react-date-picker__inputGroup__leadingZero{border:1px solid transparent;border-radius:4px;color:#5b5b5b;height:initial;line-height:24px;padding:2px 6px 3px 6px;text-align:center;vertical-align:middle;&:hover{border:1px solid #bbb;}&:focus{box-shadow:0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06) !important;border:1px solid rgba(65,145,6,1);}}select.react-date-picker__inputGroup__input{height:27px;}.react-date-picker__inputGroup__divider{color:#aaa;}.react-date-picker__calendar{top:45px !important;z-index:100500;}.react-calendar__tile{border-radius:50px;&:hover{background:#f2f2f2;}}.react-calendar__tile--active,.react-calendar__tile--hasActive{background:rgba(65,145,63,1) !important;color:white;}"]);
@@ -26539,19 +26466,14 @@ var CurrencyInput$1 = forwardRef(function(_a2, ref) {
 });
 CurrencyInput$1.displayName = "CurrencyInput";
 const CurrencyAmountInput = memo(({
-  backgroundColor = BackgroundColors.InputControl,
-  boxShadow = DepthShadow.Low,
-  border = {
-    color: BorderColors.InputControl,
-    style: BorderStyle.Solid,
-    width: 1
-  },
+  background = {},
+  border = {},
   className = "",
   defaultValue,
   label,
   name: name2,
   onChange,
-  size = Size.Default,
+  shadow = DepthShadow.Low,
   textColor = TextColors.InputControl,
   textWeight = TextWeight.Default,
   validation = {
@@ -26588,9 +26510,16 @@ const CurrencyAmountInput = memo(({
       error: problems,
       children: label
     }), /* @__PURE__ */ jsxs$1(InputContainer, {
-      backgroundColor,
-      border,
-      boxShadow,
+      background: __spreadValues({
+        color: BackgroundColors.InputControl
+      }, background),
+      border: __spreadValues({
+        all: {
+          color: BorderColors.InputControl,
+          style: BorderStyle.Solid,
+          width: 1
+        }
+      }, border),
       className: `${className} currency-amount-input`,
       onClick: () => {
         if (inputRef.current)
@@ -26598,9 +26527,12 @@ const CurrencyAmountInput = memo(({
       },
       error: problems,
       focused,
+      shadow,
       children: [/* @__PURE__ */ jsx$1(Label, {
-        marginLeft: Amount.Less,
-        marginRight: Amount.Least,
+        margin: {
+          left: Amount.Less,
+          right: Amount.Least
+        },
         textColor: !value2 ? TextColors.InputPlaceholder : textColor,
         children: "$"
       }), /* @__PURE__ */ jsx$1(CurrencyInput$1, {
@@ -26617,9 +26549,7 @@ const CurrencyAmountInput = memo(({
           backgroundColor: "transparent",
           border: "none",
           color: !value2 ? `rgb(${TextColors.InputPlaceholder})` : `rgb(${TextColors.InputControl})`,
-          flexGrow: 1,
-          fontWeight: textWeight,
-          lineHeight: size
+          fontWeight: textWeight
         }
       })]
     })]
@@ -26688,75 +26618,53 @@ var ReactCountryFlag = function ReactCountryFlag2(_ref) {
     }, style)
   }), emoji);
 };
-const NavigationLink = memo((_S) => {
-  var _T = _S, {
+const NavigationLink = memo((_U) => {
+  var _V = _U, {
     active,
     activeClassName = "active",
-    alignContent,
-    alignItems = Align.Left,
+    alignment = {},
     as = "span",
-    backgroundColor,
-    borderRadius = Amount.Less,
+    background,
+    borderRadius = {},
     children,
     className = "",
     focus,
-    grow = true,
     hover,
     inline = false,
     label,
-    lineHeight = Size.Smaller,
+    lineHeight = Sizes.Smaller,
     margin,
-    marginBottom,
-    marginLeft,
-    marginRight,
-    marginTop,
     menu,
     onClick,
     onMouseEnter,
     onMouseLeave,
-    orientation = Orientation.Horizontal,
-    padding,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    paddingTop,
+    padding = {},
     rel,
     target,
     textColor = TextColors.Primary,
     textSize,
     textWeight,
     to
-  } = _T, props = __objRest(_T, [
+  } = _V, props = __objRest(_V, [
     "active",
     "activeClassName",
-    "alignContent",
-    "alignItems",
+    "alignment",
     "as",
-    "backgroundColor",
+    "background",
     "borderRadius",
     "children",
     "className",
     "focus",
-    "grow",
     "hover",
     "inline",
     "label",
     "lineHeight",
     "margin",
-    "marginBottom",
-    "marginLeft",
-    "marginRight",
-    "marginTop",
     "menu",
     "onClick",
     "onMouseEnter",
     "onMouseLeave",
-    "orientation",
     "padding",
-    "paddingBottom",
-    "paddingLeft",
-    "paddingRight",
-    "paddingTop",
     "rel",
     "target",
     "textColor",
@@ -26766,7 +26674,7 @@ const NavigationLink = memo((_S) => {
   ]);
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const [updatedBackgroundColor, setUpdatedBackgroundColor] = useState(backgroundColor);
+  const [updatedBackgroundColor, setUpdatedBackgroundColor] = useState(background == null ? void 0 : background.color);
   const [updatedTextColor, setUpdatedTextColor] = useState(textColor);
   const resolved = useResolvedPath(to);
   const exactMatch = useMatch({
@@ -26790,14 +26698,15 @@ const NavigationLink = memo((_S) => {
     }
   };
   const setBackgroundColor = () => {
-    if (focused && (focus == null ? void 0 : focus.backgroundColor)) {
-      setUpdatedBackgroundColor(focus.backgroundColor);
-    } else if (exactMatch && (active == null ? void 0 : active.backgroundColor)) {
-      setUpdatedBackgroundColor(active.backgroundColor);
-    } else if (hovered && (hover == null ? void 0 : hover.backgroundColor)) {
-      setUpdatedBackgroundColor(hover.backgroundColor);
+    var _a2, _b, _c, _d, _e2, _f;
+    if (focused && ((_a2 = focus == null ? void 0 : focus.background) == null ? void 0 : _a2.color)) {
+      setUpdatedBackgroundColor((_b = focus.background) == null ? void 0 : _b.color);
+    } else if (exactMatch && ((_c = active == null ? void 0 : active.background) == null ? void 0 : _c.color)) {
+      setUpdatedBackgroundColor((_d = active.background) == null ? void 0 : _d.color);
+    } else if (hovered && ((_e2 = hover == null ? void 0 : hover.background) == null ? void 0 : _e2.color)) {
+      setUpdatedBackgroundColor((_f = hover.background) == null ? void 0 : _f.color);
     } else {
-      setUpdatedBackgroundColor(backgroundColor);
+      setUpdatedBackgroundColor(background == null ? void 0 : background.color);
     }
   };
   useEffect(() => {
@@ -26813,34 +26722,27 @@ const NavigationLink = memo((_S) => {
     to: to + location.search,
     style: {
       display: inline ? "inline-flex" : "flex",
-      lineHeight: inline ? Size.Smaller : lineHeight,
       textDecoration: "none"
     },
-    children: /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-      alignContent,
-      alignItems: menu ? Align.Stretch : alignItems,
+    children: /* @__PURE__ */ jsx$1(Container$e, {
+      alignment: __spreadValues({
+        horizontal: menu ? AlignHorizontal.Stretch : AlignHorizontal.Left,
+        orientation: menu ? Orientation.Vertical : Orientation.Horizontal,
+        vertical: AlignVertical.Center
+      }, alignment),
       active,
       as,
-      backgroundColor: updatedBackgroundColor,
-      borderRadius,
-      boxShadow: {
-        blurRadius: 8,
-        color: backgroundColor,
-        offsetX: 0,
-        offsetY: 3,
-        opacity: 35,
-        spreadRadius: 3
+      background: {
+        color: updatedBackgroundColor
       },
+      borderRadius: __spreadValues({
+        all: Amount.Less
+      }, borderRadius),
       className: `${className} ${exactMatch ? activeClassName : ""} link`,
       focus,
       focused,
-      grow,
       hover,
       margin,
-      marginBottom,
-      marginLeft,
-      marginRight,
-      marginTop,
       onClick,
       onMouseEnter: (e2) => {
         setHovered(true);
@@ -26852,48 +26754,42 @@ const NavigationLink = memo((_S) => {
         if (onMouseLeave)
           onMouseLeave(e2);
       },
-      orientation: menu ? Orientation.Vertical : orientation,
-      padding,
-      paddingBottom: menu ? paddingLeft : paddingBottom,
-      paddingLeft,
-      paddingRight,
-      paddingTop
-    }, props), {
-      children: label ? /* @__PURE__ */ jsx$1(Label, __spreadProps(__spreadValues({
+      padding: __spreadValues({
+        bottom: menu ? padding == null ? void 0 : padding.left : padding == null ? void 0 : padding.bottom
+      }, padding),
+      children: label ? /* @__PURE__ */ jsx$1(Label, {
         lineHeight,
         textColor: updatedTextColor,
         textSize,
-        textWeight
-      }, props), {
+        textWeight,
         children: label
-      })) : children
-    }))
+      }) : children
+    })
   });
 });
-const MenuItem = memo((_U) => {
-  var _V = _U, {
+const MenuItem = memo((_W) => {
+  var _X = _W, {
     active,
     as = "div",
-    backgroundColor = BackgroundColors.Lightest,
-    borderRadius = Amount.Less,
-    boxShadow = DepthShadow.Surface,
+    background = {},
+    borderRadius = {},
     className = "",
     component,
     focus,
     hover,
     icon,
     label,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     onClick,
+    shadow = DepthShadow.Surface,
     title,
     to,
     value: value2
-  } = _V, props = __objRest(_V, [
+  } = _X, props = __objRest(_X, [
     "active",
     "as",
-    "backgroundColor",
+    "background",
     "borderRadius",
-    "boxShadow",
     "className",
     "component",
     "focus",
@@ -26902,6 +26798,7 @@ const MenuItem = memo((_U) => {
     "label",
     "lineHeight",
     "onClick",
+    "shadow",
     "title",
     "to",
     "value"
@@ -26913,11 +26810,15 @@ const MenuItem = memo((_U) => {
     children: title
   }) : null;
   if (to) {
-    return /* @__PURE__ */ jsxs$1(Container$h, {
+    return /* @__PURE__ */ jsxs$1(Container$e, {
       children: [itemTitle, /* @__PURE__ */ jsx$1(NavigationLink, {
         active,
-        borderRadius: Amount.Least,
-        backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent,
+        borderRadius: __spreadValues({
+          all: Amount.Least
+        }, borderRadius),
+        background: __spreadValues({
+          color: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent
+        }, background),
         focus,
         hover,
         icon,
@@ -26928,19 +26829,27 @@ const MenuItem = memo((_U) => {
           if (onClick)
             onClick(e2);
         },
-        paddingLeft: Amount.Less,
-        paddingRight: Amount.Less,
+        padding: {
+          left: Amount.Less,
+          right: Amount.Less
+        },
         textColor: (_a2 = props.textColor) != null ? _a2 : TextColors.Default,
         to,
         children: component != null ? component : label
       })]
     });
   }
-  return /* @__PURE__ */ jsxs$1(Container$h, {
+  return /* @__PURE__ */ jsxs$1(Container$e, {
     children: [itemTitle, /* @__PURE__ */ jsx$1(Button$1, {
-      alignContent: Align.Left,
-      borderRadius: Amount.Least,
-      backgroundColor: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent,
+      alignment: {
+        vertical: AlignVertical.Center
+      },
+      borderRadius: __spreadValues({
+        all: Amount.Least
+      }, borderRadius),
+      background: __spreadValues({
+        color: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent
+      }, background),
       form: "null",
       icon,
       lineHeight,
@@ -26952,79 +26861,75 @@ const MenuItem = memo((_U) => {
       },
       onMouseEnter: () => setHovered(true),
       onMouseLeave: () => setHovered(false),
-      paddingLeft: Amount.Less,
-      paddingRight: Amount.Less,
+      padding: {
+        left: Amount.Less,
+        right: Amount.Less
+      },
       type: hovered ? ButtonType.Primary : ButtonType.Transparent,
       children: component != null ? component : label
     })]
   });
 });
-const Menu = memo((_W) => {
-  var _X = _W, {
+const Menu = memo((_Y) => {
+  var _Z = _Y, {
     as = "nav",
-    backgroundColor = BackgroundColors.Lightest,
-    borderRadius = Amount.Less,
-    boxShadow = DepthShadow.Surface,
+    background = {},
+    borderRadius = {},
     className = "",
     menu,
     menuItemProps = {
       active: {
-        backgroundColor: BackgroundColors.Primary,
-        boxShadow: {
-          blurRadius: 7,
-          color: BackgroundColors.Primary,
-          offsetX: 0,
-          offsetY: 2,
-          opacity: 35,
-          spreadRadius: 4
+        background: {
+          color: BackgroundColors.Primary
         },
         textColor: TextColors.PrimaryContrast
       },
-      borderRadius: Amount.Least,
+      borderRadius: {},
       focus: {
         textColor: TextColors.PrimaryContrast
       },
       hover: {
-        backgroundColor: BackgroundColors.Primary,
+        background: {
+          color: BackgroundColors.Primary
+        },
         textColor: TextColors.PrimaryContrast
       },
-      padding: Amount.None,
-      paddingLeft: Amount.Less,
-      paddingRight: Amount.Less,
+      padding: {
+        left: Amount.Less,
+        right: Amount.Less
+      },
       textSize: TextSize.Small
     },
-    maxHeight = 120,
     onClick,
     onItemClick,
-    orientation = Orientation.Vertical,
-    minWidth = 80,
-    padding = Amount.Least
-  } = _X, props = __objRest(_X, [
+    padding = {},
+    shadow = DepthShadow.Surface
+  } = _Z, props = __objRest(_Z, [
     "as",
-    "backgroundColor",
+    "background",
     "borderRadius",
-    "boxShadow",
     "className",
     "menu",
     "menuItemProps",
-    "maxHeight",
     "onClick",
     "onItemClick",
-    "orientation",
-    "minWidth",
-    "padding"
+    "padding",
+    "shadow"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
     as,
-    backgroundColor,
-    boxShadow,
-    borderRadius,
+    background: __spreadValues({
+      color: BackgroundColors.Lightest
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.Least
+    }, borderRadius),
     className: `${className} menu`,
-    maxHeight,
-    minWidth,
-    orientation,
     overflow: Overflow.ScrollVertical,
-    padding
+    padding: __spreadValues({
+      all: Amount.Least
+    }, padding),
+    shadow
   }, props), {
     children: menu && menu.map((item, key) => {
       return /* @__PURE__ */ jsx$1(MenuItem, __spreadValues(__spreadValues({
@@ -27037,22 +26942,40 @@ const Menu = memo((_W) => {
     })
   }));
 });
-const Wrapper$2 = styled.button.withConfig({
+function getDepthZIndex(value2) {
+  switch (value2) {
+    case Depth.Lowest:
+      return -3;
+    case Depth.Lower:
+      return -2;
+    case Depth.Low:
+      return -1;
+    case Depth.Surface:
+      return 0;
+    case Depth.High:
+      return 1;
+    case Depth.Higher:
+      return 2;
+    case Depth.Highest:
+      return 3;
+    default:
+      return 0;
+  }
+}
+const InputContainerStyles = css(["", ";", ";", ";"], (props) => props.focused && css(["box-shadow:none;"]), (props) => props.focused && props.border && css(["border:1px solid transparent;"]), (props) => props.focused && props.error && Array.isArray(props.error) && props.error.length > 0 && css(["&:before{border-color:rgb(", ");}"], BorderColors.Error));
+styled.button.withConfig({
   displayName: "Wrapper",
   componentId: "sc-f4sg9u-0"
 })(["", ";z-index:", ";", ";"], InputContainerStyles, (props) => {
   var _a2;
   return props.menuVisible ? getDepthZIndex((_a2 = props.depth) != null ? _a2 : Depth.Surface) + 3 : "auto";
 }, (props) => props.focused && props.menuVisible && css(["border-bottom-color:transparent;border-bottom-left-radius:0;border-bottom-right-radius:0;&:before{border-radius:calc(", " + 3px) calc(", " + 3px) 0 0;border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom:none;}"], Amount.Least, Amount.Least));
-const DropdownControl = memo((_Y) => {
-  var _Z = _Y, {
-    backgroundColor = BackgroundColors.DropdownMenu,
-    border = {
-      color: BorderColors.Default,
-      style: BorderStyle.Solid,
-      width: 1
-    },
-    borderRadius = Amount.Least,
+const DropdownControl = memo((__) => {
+  var _$ = __, {
+    alignment = {},
+    background = {},
+    border = {},
+    borderRadius = {},
     className = "",
     component,
     error,
@@ -27064,11 +26987,11 @@ const DropdownControl = memo((_Y) => {
     onBlur,
     onClick,
     placeholder = "Select an option",
-    ref,
-    size = Size.Default,
+    textSize = TextSize.Default,
     textColor = TextColors.DropdownMenu
-  } = _Z, props = __objRest(_Z, [
-    "backgroundColor",
+  } = _$, props = __objRest(_$, [
+    "alignment",
+    "background",
     "border",
     "borderRadius",
     "className",
@@ -27082,53 +27005,56 @@ const DropdownControl = memo((_Y) => {
     "onBlur",
     "onClick",
     "placeholder",
-    "ref",
-    "size",
+    "textSize",
     "textColor"
   ]);
   var _a2;
-  return /* @__PURE__ */ jsxs$1(Wrapper$2, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(InputContainer, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      horizontal: AlignHorizontal.Center,
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    }, alignment),
     as: "button",
-    alignContent: Align.Stretch,
-    alignItems: Align.Center,
-    backgroundColor,
-    borderRadius,
-    border: __spreadProps(__spreadValues({}, border), {
-      color: error && Array.isArray(error) && error.length > 0 ? BorderColors.Error : border.hasOwnProperty("color") ? border == null ? void 0 : border.color : BorderColors.InputControl
-    }),
+    background: __spreadValues({
+      color: BackgroundColors.DropdownMenu
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.Least
+    }, borderRadius),
+    border: __spreadValues({
+      all: {
+        color: error && Array.isArray(error) && error.length > 0 ? BorderColors.Error : border.hasOwnProperty("color") ? border == null ? void 0 : border.color : BorderColors.InputControl,
+        style: BorderStyle.Solid,
+        width: 1
+      }
+    }, border),
     depth: menuVisible ? Depth.Higher : Depth.Surface,
-    orientation: Orientation.Horizontal,
     className: `${className} dropdown-control`,
     cursor: Cursor.Pointer,
     error,
     form: "null",
     focused,
-    grow: false,
-    menuVisible,
     onBlur,
     onFocus,
     onClick,
-    ref
+    padding: {
+      left: Amount.Less,
+      right: Amount.Less
+    }
   }, props), {
-    children: [component ? component : /* @__PURE__ */ jsx$1(Label, {
-      alignItems: Align.Center,
-      alignContent: Align.Stretch,
-      grow: true,
-      icon,
-      overflow: Overflow.Hidden,
-      marginLeft: Amount.None,
-      marginRight: Amount.None,
-      paddingLeft: Amount.Less,
-      paddingRight: Amount.Least,
-      size,
+    children: [component ? component : /* @__PURE__ */ jsx$1(Text, {
+      lineHeight: Sizes.Small,
+      textSize,
       textColor: !label && placeholder ? TextColors.InputPlaceholder : textColor,
       textOverflow: TextOverflow.Ellipsis,
-      whiteSpace: WhiteSpace.NoWrap,
-      width: "auto",
       children: (_a2 = label != null ? label : placeholder) != null ? _a2 : ""
-    }), /* @__PURE__ */ jsx$1(Container$h, {
-      alignItems: Align.Center,
-      alignContent: Align.Center,
+    }), /* @__PURE__ */ jsx$1(Container$e, {
+      alignment: {
+        horizontal: AlignHorizontal.Center,
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.Center
+      },
       border: {
         left: {
           color: BorderColors.InputControl,
@@ -27137,98 +27063,83 @@ const DropdownControl = memo((_Y) => {
         }
       },
       className: "down-arrow",
-      grow: false,
-      height: Size.Small,
-      width: size,
       children: /* @__PURE__ */ jsx$1(Icon, {
         color: menuVisible ? ForegroundColors.Lightest : ForegroundColors.Lighter,
         name: BasicIcons.CaretDownArrow,
         className: menuVisible ? "up" : "down",
-        size: Size.Smallest,
-        transform: {
-          rotate: menuVisible ? -180 : 0
+        size: {
+          height: Sizes.Smallest,
+          width: Sizes.Smallest
         }
       })
     })]
   }));
 });
-const DropdownPanel = memo((__) => {
-  var _$ = __, {
-    alignItems = Align.Stretch,
-    backgroundColor = BackgroundColors.Lightest,
-    border = {
-      color: BackgroundColors.Transparent,
-      style: BorderStyle.Solid,
-      width: 1
-    },
-    borderRadius = Amount.Less,
+const DropdownPanel = memo((_aa) => {
+  var _ba = _aa, {
+    background = {},
+    border = {},
+    borderRadius = {},
     children,
     className = "",
     depth = Depth.Higher,
     focused,
-    orientation = Orientation.Vertical,
     visible = false
-  } = _$, props = __objRest(_$, [
-    "alignItems",
-    "backgroundColor",
+  } = _ba, props = __objRest(_ba, [
+    "background",
     "border",
     "borderRadius",
     "children",
     "className",
     "depth",
     "focused",
-    "orientation",
     "visible"
   ]);
-  return /* @__PURE__ */ jsx$1(Wrapper$1, __spreadProps(__spreadValues({
-    alignItems,
-    backgroundColor,
-    border,
-    borderRadius,
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    background: __spreadValues({
+      color: BackgroundColors.Lightest
+    }, background),
+    border: __spreadValues({
+      all: {
+        color: BorderColors.Transparent,
+        style: BorderStyle.Solid,
+        width: 1
+      }
+    }, border),
+    borderRadius: __spreadValues({
+      all: Amount.Less
+    }, borderRadius),
     className: `${className} dropdown-panel`,
     depth,
     focused,
-    orientation,
     visible
   }, props), {
     children
   }));
 });
-const Wrapper$1 = styled.div.withConfig({
-  displayName: "Wrapper",
-  componentId: "sc-lb5hvp-0"
-})(["", ";", ";", ";", ";border-radius:", ";left:0;opacity:", ";position:absolute;right:0;top:calc(100% - 3px);&:before{border-radius:0 0 calc(", " + 3px) calc(", " + 3px);border-top-color:transparent;}"], LayoutStyles, AppearanceStyles, FocusedStyles, VisibilityStyles, (props) => `0 0 ${props.borderRadius} ${props.borderRadius}`, (props) => props.visible ? 1 : 0, Amount.Least, Amount.Least);
-const DropdownInput = memo((_aa) => {
-  var _ba = _aa, {
-    backgroundColor = BackgroundColors.DropdownMenu,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1
-    },
-    borderRadius = Amount.Least,
+const DropdownInput = memo((_ca) => {
+  var _da = _ca, {
+    background = {},
+    border = {},
+    borderRadius = {},
     className = "",
     defaultValue,
     label,
     menu,
-    maxWidth = 300,
-    minWidth = 240,
     name: name2,
     onChange,
-    padding = 5,
+    padding = {},
     placeholder,
-    size = Size.Default,
+    size = {},
     validation
-  } = _ba, props = __objRest(_ba, [
-    "backgroundColor",
+  } = _da, props = __objRest(_da, [
+    "background",
     "border",
     "borderRadius",
     "className",
     "defaultValue",
     "label",
     "menu",
-    "maxWidth",
-    "minWidth",
     "name",
     "onChange",
     "padding",
@@ -27269,21 +27180,30 @@ const DropdownInput = memo((_aa) => {
     children: [(label || problems.length > 0) && /* @__PURE__ */ jsx$1(InputLabel, {
       error: problems,
       children: label
-    }), /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-      boxShadow: menuVisible ? DepthShadow.Higher : DepthShadow.Surface,
-      borderRadius,
+    }), /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+      borderRadius: __spreadValues({
+        all: Amount.Least
+      }, borderRadius),
       className: `${className} dropdown-input`,
       depth: menuVisible ? Depth.Higher : Depth.Surface,
-      grow: false,
-      minWidth,
-      orientation: Orientation.Vertical,
       onMouseLeave: () => setMenuVisible(false),
-      height: size
+      size: __spreadValues({
+        maxWidth: 300,
+        minWidth: 240
+      }, size),
+      shadow: menuVisible ? DepthShadow.Higher : DepthShadow.Surface
     }, props), {
       children: [/* @__PURE__ */ jsx$1(DropdownControl, {
-        backgroundColor,
-        border,
-        boxShadow: DepthShadow.Low,
+        background: __spreadValues({
+          color: BackgroundColors.DropdownMenu
+        }, background),
+        border: __spreadValues({
+          all: {
+            color: BorderColors.InputControl,
+            style: BorderStyle.Solid,
+            width: 1
+          }
+        }, border),
         component: item == null ? void 0 : item.component,
         depth: Depth.High,
         error: problems,
@@ -27298,30 +27218,46 @@ const DropdownInput = memo((_aa) => {
         onFocus: () => setFocused(true),
         onClick: () => setMenuVisible(!menuVisible),
         placeholder,
-        size
+        shadow: DepthShadow.Low,
+        size: __spreadValues({
+          maxWidth: 300,
+          minWidth: 240
+        }, size)
       }), /* @__PURE__ */ jsx$1(DropdownPanel, {
-        backgroundColor,
-        borderRadius,
+        background: __spreadValues({
+          color: BackgroundColors.DropdownMenu
+        }, background),
+        borderRadius: __spreadValues({
+          all: Amount.Least
+        }, borderRadius),
         focused,
-        padding,
+        padding: __spreadValues({
+          all: Amount.Less
+        }, padding),
         visible: menuVisible,
         children: /* @__PURE__ */ jsx$1(Menu, {
-          backgroundColor: BackgroundColors.Light,
-          borderRadius,
+          background: {
+            color: BackgroundColors.Light
+          },
+          borderRadius: __spreadValues({
+            all: Amount.Least
+          }, borderRadius),
           menu,
           onItemClick: (i2) => {
             setValueChanged(true);
             setItem(i2);
             setMenuVisible(false);
           },
-          padding
+          padding: __spreadValues({
+            all: Amount.Less
+          }, padding)
         })
       })]
     }))]
   });
 });
-const CountryInput = memo((_ca) => {
-  var _da = _ca, {
+const CountryInput = memo((_ea) => {
+  var _fa = _ea, {
     defaultValue = CountryCode.UnitedStates,
     menu = Object.entries(i18nIsoCountries.getAlpha2Codes()).map(([alpha2, alpha3]) => ({
       icon: {
@@ -27329,7 +27265,7 @@ const CountryInput = memo((_ca) => {
           svg: true,
           countryCode: alpha2,
           style: {
-            height: Size.Smaller,
+            height: Sizes.Smaller,
             width: "auto"
           }
         })
@@ -27342,7 +27278,7 @@ const CountryInput = memo((_ca) => {
     name: name2 = "country",
     onChange,
     placeholder = "Select a country"
-  } = _da, props = __objRest(_da, [
+  } = _fa, props = __objRest(_fa, [
     "defaultValue",
     "menu",
     "name",
@@ -27365,13 +27301,13 @@ const CountryInput = memo((_ca) => {
     placeholder
   }, props));
 });
-const CurrencyInput = memo((_ea) => {
-  var _fa = _ea, {
+const CurrencyInput = memo((_ga) => {
+  var _ha = _ga, {
     defaultValue = CurrencyCode.UnitedStatesDollar,
     name: name2 = "language",
     onChange,
     placeholder = "Select a currency"
-  } = _fa, props = __objRest(_fa, [
+  } = _ha, props = __objRest(_ha, [
     "defaultValue",
     "name",
     "onChange",
@@ -27383,7 +27319,7 @@ const CurrencyInput = memo((_ea) => {
         svg: true,
         countryCode: CountryCode.UnitedStates,
         style: {
-          height: Size.Smaller,
+          height: Sizes.Smaller,
           width: "auto"
         }
       })
@@ -27407,13 +27343,13 @@ const CurrencyInput = memo((_ea) => {
     placeholder
   }, props));
 });
-const LanguageInput = memo((_ga) => {
-  var _ha = _ga, {
+const LanguageInput = memo((_ia) => {
+  var _ja = _ia, {
     defaultValue = LanguageCode.English,
     name: name2,
     onChange,
     placeholder = "Select a language"
-  } = _ha, props = __objRest(_ha, [
+  } = _ja, props = __objRest(_ja, [
     "defaultValue",
     "name",
     "onChange",
@@ -27425,7 +27361,7 @@ const LanguageInput = memo((_ga) => {
         svg: true,
         countryCode: CountryCode.UnitedStates,
         style: {
-          height: Size.Smaller,
+          height: Sizes.Smaller,
           width: "auto"
         }
       })
@@ -28729,15 +28665,20 @@ function reducer(state, action) {
 }
 function noop$2() {
 }
-const CloseButton = memo((_ia) => {
-  var _ja = _ia, {
-    backgroundColor = BackgroundColors.CloseButton,
+const CloseButton = memo((_ka) => {
+  var _la = _ka, {
+    background = {
+      color: BackgroundColors.CloseButton
+    },
     iconColor = ForegroundColors.CloseButton,
     className = "",
     onClick,
-    size = Size.Default
-  } = _ja, props = __objRest(_ja, [
-    "backgroundColor",
+    size = {
+      height: Sizes.Default,
+      width: Sizes.Default
+    }
+  } = _la, props = __objRest(_la, [
+    "background",
     "iconColor",
     "className",
     "onClick",
@@ -28746,55 +28687,65 @@ const CloseButton = memo((_ia) => {
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const iconHoverColor = hovered ? ForegroundColors.PrimaryContrast : iconColor;
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-    alignContent: Align.Center,
-    alignItems: Align.Center,
+  return /* @__PURE__ */ jsx$1(Container$e, {
+    alignment: {
+      horizontal: AlignHorizontal.Center,
+      vertical: AlignVertical.Center
+    },
     as: "button",
-    backgroundColor: hovered ? BackgroundColors.Primary : backgroundColor,
-    borderRadius: Amount.All,
+    background: hovered ? {
+      color: BackgroundColors.Primary
+    } : background,
+    borderRadius: {
+      all: Amount.All
+    },
     className: `${className} close-button`,
     depth: Depth.Higher,
     focused,
     form: "null",
-    grow: false,
-    height: size,
     onClick,
     onFocus: () => setFocused(true),
     onBlur: () => setFocused(false),
     onMouseEnter: () => setHovered(true),
     onMouseLeave: () => setHovered(false),
-    width: size
-  }, props), {
+    size: __spreadValues({
+      height: size.height,
+      width: size.width
+    }, size),
     children: /* @__PURE__ */ jsx$1(Icon, {
       color: iconHoverColor,
       name: BasicIcons.Close,
-      size: Size.Smallest
+      size: {
+        height: Sizes.Smallest,
+        width: Sizes.Smallest
+      }
     })
-  }));
+  });
 });
 const ImageInput = memo(({
-  backgroundColor = BackgroundColors.InputControl,
-  border = {
-    color: BorderColors.Default,
-    style: BorderStyle.Solid,
-    width: 1
+  background = {
+    color: BackgroundColors.InputControl
   },
-  borderRadius = Amount.Least,
+  border = {},
+  borderRadius = {},
   button = {
     label: "Choose File"
   },
   defaultValue = [],
   icon = {
     name: BasicIcons.Upload,
-    size: Size.Default
+    size: {
+      height: Sizes.Default,
+      width: Sizes.Default
+    }
   },
   label,
   maxImages = 1,
   name: name2 = "images",
   onChange,
-  padding = Amount.Default
+  padding = {}
 }) => {
-  var _c, _d, _e2, _f;
+  var _c, _d;
   const [images, setImages] = useState(defaultValue);
   const [errorMessage, setErrorMessage] = useState();
   const [previewImages, setPreviewImages] = useState([]);
@@ -28889,86 +28840,110 @@ const ImageInput = memo(({
     children: [(label || problems.length > 0) && /* @__PURE__ */ jsxs$1(InputLabel, {
       error: problems,
       children: [label, maxImages > 1 && ` (${previewImages.length} of ${maxImages})`]
-    }), /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-      alignItems: Align.Center,
-      alignContent: Align.Center,
-      backgroundColor: isDragActive ? BackgroundColors.Darker : backgroundColor,
-      border: __spreadProps(__spreadValues({}, border), {
-        color: problems && Array.isArray(problems) && problems.length > 0 ? BorderColors.Error : border == null ? void 0 : border.color
-      }),
-      borderRadius,
-      boxShadow: DepthShadow.Low,
-      grow: false,
-      padding
+    }), /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+      alignment: {
+        horizontal: AlignHorizontal.Center,
+        vertical: AlignVertical.Center
+      },
+      background: isDragActive ? {
+        color: BackgroundColors.Darker
+      } : background,
+      border: __spreadValues({
+        all: {
+          color: problems && Array.isArray(problems) && problems.length > 0 ? BorderColors.Error : border == null ? void 0 : border.color,
+          style: BorderStyle.Solid,
+          width: 1
+        }
+      }, border),
+      borderRadius: __spreadValues({
+        all: Amount.Least
+      }, borderRadius),
+      padding: __spreadValues({
+        all: Amount.Default
+      }, padding),
+      shadow: DepthShadow.Low
     }, rootProps), {
-      children: /* @__PURE__ */ jsx$1(Container$h, {
-        grow: false,
-        children: /* @__PURE__ */ jsxs$1(Container$h, {
-          alignItems: Align.Center,
-          alignContent: Align.Center,
-          grow: false,
-          padding: Amount.Default,
-          paddingTop: Amount.Least,
+      children: /* @__PURE__ */ jsx$1(Container$e, {
+        children: /* @__PURE__ */ jsxs$1(Container$e, {
+          alignment: {
+            horizontal: AlignHorizontal.Center,
+            vertical: AlignVertical.Center
+          },
+          padding: {
+            bottom: Amount.Default,
+            left: Amount.Default,
+            right: Amount.Default,
+            top: Amount.Least
+          },
           children: [/* @__PURE__ */ jsx$1("input", __spreadValues({
             name: name2
           }, inputProps)), errorMessage && /* @__PURE__ */ jsx$1(ErrorLabel, {
             children: errorMessage
-          }), previewImages && previewImages.length > 0 ? /* @__PURE__ */ jsx$1(Container$h, {
-            alignItems: Align.Stretch,
-            grow: false,
-            marginBottom: Amount.Less,
-            children: /* @__PURE__ */ jsx$1(Container$h, {
-              alignItems: Align.Stretch,
-              alignContent: Align.Center,
-              backgroundColor: BackgroundColors.Lightest,
-              borderRadius: Amount.Least,
-              lineWrap: true,
+          }), previewImages && previewImages.length > 0 ? /* @__PURE__ */ jsx$1(Container$e, {
+            margin: {
+              bottom: Amount.Less
+            },
+            children: /* @__PURE__ */ jsx$1(Container$e, {
+              alignment: {
+                horizontal: AlignHorizontal.Center,
+                orientation: Orientation.Horizontal,
+                vertical: AlignVertical.Stretch
+              },
+              background: {
+                color: BackgroundColors.Lightest
+              },
+              borderRadius: {
+                all: Amount.Least
+              },
               opacity: isDragActive ? 50 : 100,
-              orientation: Orientation.Horizontal,
-              paddingBottom: Amount.Least,
-              paddingLeft: Amount.Least,
-              paddingRight: Amount.Least,
-              paddingTop: Amount.Least,
-              children: previewImages.map((image, index) => /* @__PURE__ */ jsxs$1(Container$h, {
-                grow: false,
-                marginBottom: Amount.Least,
-                marginLeft: Amount.Least,
-                marginRight: Amount.Least,
-                marginTop: Amount.Least,
+              padding: {
+                all: Amount.Least
+              },
+              children: previewImages.map((image, index) => /* @__PURE__ */ jsxs$1(Container$e, {
+                margin: {
+                  all: Amount.Least
+                },
                 children: [/* @__PURE__ */ jsx$1(CloseButton, {
                   onClick: () => {
                     setImages((files) => files == null ? void 0 : files.filter((e2, i2) => i2 !== index));
                   },
-                  position: Position.Absolute,
-                  right: -7,
-                  size: Size.Small,
-                  top: -7
+                  position: {
+                    behavior: PositionBehavior.Absolute,
+                    right: -7,
+                    top: -7
+                  }
                 }), /* @__PURE__ */ jsx$1(Image, {
                   alt: "preview",
-                  borderRadius: Amount.Least,
-                  fadeIn: true,
-                  height: 70,
-                  width: 70,
+                  borderRadius: {
+                    all: Amount.Least
+                  },
+                  size: {
+                    height: 70,
+                    width: 70
+                  },
                   url: image.url
                 }, index)]
               }, index))
             })
           }) : /* @__PURE__ */ jsx$1(Icon, {
-            marginBottom: Amount.Less,
-            name: (_c = icon == null ? void 0 : icon.name) != null ? _c : BasicIcons.FileUpload,
-            size: (_d = icon == null ? void 0 : icon.size) != null ? _d : Size.Default
-          }), /* @__PURE__ */ jsxs$1(Container$h, {
-            alignItems: Align.Center,
-            orientation: Orientation.Vertical,
+            margin: {
+              bottom: Amount.Less
+            },
+            name: (_c = icon == null ? void 0 : icon.name) != null ? _c : BasicIcons.FileUpload
+          }), /* @__PURE__ */ jsxs$1(Container$e, {
+            alignment: {
+              vertical: AlignVertical.Center
+            },
             children: [/* @__PURE__ */ jsx$1(Label, {
-              marginBottom: Amount.Least,
-              size: Size.Small,
+              margin: {
+                bottom: Amount.Least
+              },
+              textSize: TextSize.Small,
               children: dragLabel
             }), button && /* @__PURE__ */ jsx$1(Button$1, __spreadProps(__spreadValues({
               form: "null",
               onClick: open,
-              size: (_e2 = button.size) != null ? _e2 : Size.Small,
-              type: (_f = button.type) != null ? _f : ButtonType.Primary
+              type: (_d = button.type) != null ? _d : ButtonType.Primary
             }, button), {
               children: buttonLabel
             }))]
@@ -28978,16 +28953,11 @@ const ImageInput = memo(({
     }))]
   });
 });
-const NumberInput = memo((_ka) => {
-  var _la = _ka, {
+const NumberInput = memo((_ma) => {
+  var _na = _ma, {
     as,
-    backgroundColor = BackgroundColors.InputControl,
-    boxShadow = DepthShadow.Low,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1
-    },
+    background = {},
+    border = {},
     className = "",
     cursor = Cursor.Text,
     defaultValue,
@@ -29001,15 +28971,15 @@ const NumberInput = memo((_ka) => {
     onKeyPress,
     placeholder = "",
     prefix: prefix2 = "",
-    size = Size.Default,
+    shadow = DepthShadow.Low,
+    textSize = TextSize.Default,
     suffix: suffix2 = "",
     textColor = TextColors.InputControl,
     textWeight = TextWeight.Default,
     validation = {}
-  } = _la, props = __objRest(_la, [
+  } = _na, props = __objRest(_na, [
     "as",
-    "backgroundColor",
-    "boxShadow",
+    "background",
     "border",
     "className",
     "cursor",
@@ -29024,7 +28994,8 @@ const NumberInput = memo((_ka) => {
     "onKeyPress",
     "placeholder",
     "prefix",
-    "size",
+    "shadow",
+    "textSize",
     "suffix",
     "textColor",
     "textWeight",
@@ -29050,18 +29021,32 @@ const NumberInput = memo((_ka) => {
     }
   }, [value2]);
   return /* @__PURE__ */ jsxs$1(Fragment, {
-    children: [/* @__PURE__ */ jsxs$1(Container$h, {
-      orientation: Orientation.Horizontal,
+    children: [/* @__PURE__ */ jsxs$1(Container$e, {
+      alignment: {
+        orientation: Orientation.Horizontal
+      },
       children: [label && /* @__PURE__ */ jsx$1(InputLabel, {
         children: label
       }), problems.length > 0 ? /* @__PURE__ */ jsx$1(ErrorLabel, {
-        alignContent: Align.Right,
+        alignment: {
+          horizontal: AlignHorizontal.Right
+        },
         children: (_a2 = problems[0]) == null ? void 0 : _a2.message.short
       }) : null]
     }), /* @__PURE__ */ jsxs$1(InputContainer, __spreadProps(__spreadValues({
-      backgroundColor,
-      border,
-      boxShadow,
+      alignment: {
+        orientation: Orientation.Horizontal
+      },
+      background: __spreadValues({
+        color: BackgroundColors.InputControl
+      }, background),
+      border: __spreadValues({
+        all: {
+          color: BorderColors.InputControl,
+          style: BorderStyle.Solid,
+          width: 1
+        }
+      }, border),
       cursor,
       className: `${className} number-input`,
       error: problems,
@@ -29070,8 +29055,7 @@ const NumberInput = memo((_ka) => {
         var _a3;
         (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
       },
-      orientation: Orientation.Horizontal,
-      size
+      shadow
     }, props), {
       children: [icon && /* @__PURE__ */ jsx$1(Fragment, {
         children: icon
@@ -29085,18 +29069,17 @@ const NumberInput = memo((_ka) => {
           setValue(e2.target.value);
         },
         onFocus: () => setFocused(true),
-        lineHeight: size,
         placeholder,
         onKeyPress: (e2) => e2.key,
         ref: inputRef,
         textColor,
         type: "number",
         value: value2
-      }), inProgress && /* @__PURE__ */ jsx$1(Container$h, {
-        grow: false,
-        children: /* @__PURE__ */ jsx$1(ProgressSpinner, {
-          size: Size.Small
-        })
+      }), inProgress && /* @__PURE__ */ jsx$1(ProgressSpinner, {
+        size: {
+          height: Sizes.Small,
+          width: Sizes.Small
+        }
       })]
     }))]
   });
@@ -29104,17 +29087,12 @@ const NumberInput = memo((_ka) => {
 const Input$2 = styled.input.withConfig({
   displayName: "Input",
   componentId: "sc-wxjtmr-0"
-})(["", ";", ";background:transparent;border:none;outline:none;padding:0 ", ";width:100%;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}&::-ms-clear{display:none;width:0;height:0;}&::-ms-reveal{display:none;width:0;height:0;}&::-webkit-search-decoration,&::-webkit-search-cancel-button,&::-webkit-search-results-button,&::-webkit-search-results-decoration{display:none;}"], FocusedStyles, TextStyles, Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
-const SSNInput = memo((_ma) => {
-  var _na = _ma, {
+})(["", ";", ";background:transparent;border:none;outline:none;padding:0 ", ";width:100%;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}&::-ms-clear{display:none;width:0;height:0;}&::-ms-reveal{display:none;width:0;height:0;}&::-webkit-search-decoration,&::-webkit-search-cancel-button,&::-webkit-search-results-button,&::-webkit-search-results-decoration{display:none;}"], FocusStyles, TextStyles, Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
+const SSNInput = memo((_oa) => {
+  var _pa = _oa, {
     as,
-    backgroundColor = BackgroundColors.InputControl,
-    boxShadow = DepthShadow.Low,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1
-    },
+    background = {},
+    border = {},
     className = "",
     cursor = Cursor.Text,
     defaultValue,
@@ -29127,16 +29105,16 @@ const SSNInput = memo((_ma) => {
     onChange,
     onKeyPress,
     placeholder = "",
-    size = Size.Default,
+    shadow = DepthShadow.Low,
+    textSize = TextSize.Default,
     textColor = TextColors.InputControl,
     textWeight = TextWeight.Default,
     validation = {
       [Condition.IsSSN]: true
     }
-  } = _na, props = __objRest(_na, [
+  } = _pa, props = __objRest(_pa, [
     "as",
-    "backgroundColor",
-    "boxShadow",
+    "background",
     "border",
     "className",
     "cursor",
@@ -29150,7 +29128,8 @@ const SSNInput = memo((_ma) => {
     "onChange",
     "onKeyPress",
     "placeholder",
-    "size",
+    "shadow",
+    "textSize",
     "textColor",
     "textWeight",
     "validation"
@@ -29177,18 +29156,29 @@ const SSNInput = memo((_ma) => {
     }
   }, [value2]);
   return /* @__PURE__ */ jsxs$1(Fragment, {
-    children: [/* @__PURE__ */ jsxs$1(Container$h, {
-      orientation: Orientation.Horizontal,
+    children: [/* @__PURE__ */ jsxs$1(Container$e, {
+      alignment: {
+        orientation: Orientation.Horizontal
+      },
       children: [label && /* @__PURE__ */ jsx$1(InputLabel, {
         children: label
       }), problems.length > 0 ? /* @__PURE__ */ jsx$1(ErrorLabel, {
-        alignContent: Align.Right,
+        alignment: {
+          horizontal: AlignHorizontal.Right
+        },
         children: (_a2 = problems[0]) == null ? void 0 : _a2.message.short
       }) : null]
     }), /* @__PURE__ */ jsxs$1(InputContainer, __spreadProps(__spreadValues({
-      backgroundColor,
-      border,
-      boxShadow,
+      background: __spreadValues({
+        color: BackgroundColors.InputControl
+      }, background),
+      border: __spreadValues({
+        all: {
+          color: BorderColors.InputControl,
+          style: BorderStyle.Solid,
+          width: 1
+        }
+      }, border),
       cursor,
       className: `${className} ssn-input`,
       error: problems,
@@ -29198,15 +29188,15 @@ const SSNInput = memo((_ma) => {
           firstInputRef.current.focus();
         }
       },
-      orientation: Orientation.Horizontal,
-      paddingLeft: Amount.Least,
-      paddingRight: Amount.Least,
-      size
+      padding: {
+        left: Amount.Least,
+        right: Amount.Least
+      },
+      shadow
     }, props), {
       children: [icon && /* @__PURE__ */ jsx$1(Fragment, {
         children: icon
       }), /* @__PURE__ */ jsx$1(Input$1, {
-        alignText: Align.Center,
         hidden,
         max: 999,
         min: 100,
@@ -29221,7 +29211,6 @@ const SSNInput = memo((_ma) => {
           }
         },
         onFocus: () => setFocused(true),
-        lineHeight: size,
         placeholder: "123",
         onKeyPress: (e2) => {
           if (e2.target.value.length === 3) {
@@ -29229,13 +29218,13 @@ const SSNInput = memo((_ma) => {
           }
         },
         ref: firstInputRef,
+        textAlign: TextAlign.Center,
         textColor,
         type: "number"
       }), /* @__PURE__ */ jsx$1(Label, {
         textSize: TextSize.Larger,
         children: "-"
       }), /* @__PURE__ */ jsx$1(Input$1, {
-        alignText: Align.Center,
         hidden,
         max: 99,
         min: 1,
@@ -29250,7 +29239,6 @@ const SSNInput = memo((_ma) => {
           }
         },
         onFocus: () => setFocused(true),
-        lineHeight: size,
         placeholder: "45",
         onKeyPress: (e2) => {
           if (e2.target.value.length === 2) {
@@ -29264,13 +29252,13 @@ const SSNInput = memo((_ma) => {
           }
         },
         ref: secondInputRef,
+        textAlign: TextAlign.Center,
         textColor,
         type: "number"
       }), /* @__PURE__ */ jsx$1(Label, {
         textSize: TextSize.Larger,
         children: "-"
       }), /* @__PURE__ */ jsx$1(Input$1, {
-        alignText: Align.Center,
         hidden,
         max: 9999,
         min: 1e3,
@@ -29281,7 +29269,6 @@ const SSNInput = memo((_ma) => {
           setValue([value2[0], value2[1], e2.target.value]);
         },
         onFocus: () => setFocused(true),
-        lineHeight: size,
         placeholder: "6789",
         onKeyPress: (e2) => {
           if (e2.target.value.length === 4) {
@@ -29295,13 +29282,14 @@ const SSNInput = memo((_ma) => {
           }
         },
         ref: thirdInputRef,
+        textAlign: TextAlign.Center,
         textColor,
         type: "number"
-      }), inProgress && /* @__PURE__ */ jsx$1(Container$h, {
-        grow: false,
-        children: /* @__PURE__ */ jsx$1(ProgressSpinner, {
-          size: Size.Small
-        })
+      }), inProgress && /* @__PURE__ */ jsx$1(ProgressSpinner, {
+        size: {
+          height: Sizes.Small,
+          width: Sizes.Small
+        }
       })]
     }))]
   });
@@ -29309,19 +29297,13 @@ const SSNInput = memo((_ma) => {
 const Input$1 = styled.input.withConfig({
   displayName: "Input",
   componentId: "sc-1kwp1c5-0"
-})(["", ";", ";background:transparent;border:none;outline:none;padding:0 ", ";-moz-appearance:textfield;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}&::-webkit-outer-spin-button,&::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}"], FocusedStyles, TextStyles, Amount.Least, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
+})(["", ";", ";background:transparent;border:none;outline:none;padding:0 ", ";-moz-appearance:textfield;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}&::-webkit-outer-spin-button,&::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}"], FocusStyles, TextStyles, Amount.Least, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
 const LongTextInput = memo(({
-  backgroundColor = BackgroundColors.InputControl,
-  border = {
-    color: BorderColors.InputControl,
-    style: BorderStyle.Solid,
-    width: 1
-  },
-  boxShadow = DepthShadow.Low,
+  background = {},
+  border = {},
   className = "",
   defaultValue,
   error,
-  flat = false,
   hidden = false,
   inProgress = false,
   label,
@@ -29329,7 +29311,7 @@ const LongTextInput = memo(({
   name: name2,
   onChange,
   placeholder = "",
-  size = Size.Default,
+  shadow = DepthShadow.Low,
   spellCheck = true,
   textColor = TextColors.InputControl,
   validation = {}
@@ -29365,32 +29347,43 @@ const LongTextInput = memo(({
     setValue((_a3 = defaultValue != null ? defaultValue : value2) != null ? _a3 : "");
   }, [defaultValue]);
   return /* @__PURE__ */ jsxs$1(Fragment, {
-    children: [/* @__PURE__ */ jsxs$1(Container$h, {
-      orientation: Orientation.Horizontal,
+    children: [/* @__PURE__ */ jsxs$1(Container$e, {
+      alignment: {
+        orientation: Orientation.Horizontal
+      },
       children: [label && /* @__PURE__ */ jsx$1(InputLabel, {
         children: label
       }), problems.length > 0 ? /* @__PURE__ */ jsx$1(ErrorLabel, {
-        alignContent: Align.Right,
+        alignment: {
+          horizontal: AlignHorizontal.Right
+        },
         children: (_a2 = problems[0]) == null ? void 0 : _a2.message.short
       }) : null]
     }), /* @__PURE__ */ jsxs$1(InputContainer, {
-      backgroundColor,
-      border,
-      boxShadow,
+      background: __spreadValues({
+        color: BackgroundColors.InputControl
+      }, background),
+      border: __spreadValues({
+        all: {
+          color: BorderColors.InputControl,
+          style: BorderStyle.Solid,
+          width: 1
+        }
+      }, border),
       className: `${className} text-input`,
       error: problems,
       focused,
-      flat,
-      height: size,
       onClick: () => {
         var _a3;
         (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
       },
-      orientation: Orientation.Horizontal,
-      padding: Amount.Least,
-      paddingLeft: Amount.Less,
-      paddingRight: Amount.Least,
-      size,
+      padding: {
+        bottom: Amount.Least,
+        left: Amount.Less,
+        right: Amount.Less,
+        top: Amount.Least
+      },
+      shadow,
       children: [/* @__PURE__ */ jsx$1(Input, {
         hidden,
         name: name2,
@@ -29406,12 +29399,7 @@ const LongTextInput = memo(({
         textColor,
         value: value2,
         spellCheck
-      }), inProgress && /* @__PURE__ */ jsx$1(Container$h, {
-        grow: false,
-        children: /* @__PURE__ */ jsx$1(ProgressSpinner, {
-          size: Size.Small
-        })
-      })]
+      }), inProgress && /* @__PURE__ */ jsx$1(ProgressSpinner, {})]
     })]
   });
 });
@@ -29932,8 +29920,8 @@ var main = function(e2, a) {
   }, a.defaultProps = { className: void 0, style: void 0, scoreWordClassName: void 0, scoreWordStyle: void 0, password: "", userInputs: [], barColors: ["#ddd", "#ef4836", "#f6b44d", "#2b90ef", "#25c281"], scoreWords: ["weak", "weak", "okay", "good", "strong"], minLength: 4, shortScoreWord: "too short", onChangeScore: void 0 }, a;
 }(React__default.Component);
 var _default = dist.default = PasswordStrengthBar;
-const PasswordInput = memo((_oa) => {
-  var _pa = _oa, {
+const PasswordInput = memo((_qa) => {
+  var _ra = _qa, {
     autoComplete = AutoComplete.CurrentPassword,
     confirmPasswordLabel = "Confirm password",
     label = "Password",
@@ -29951,7 +29939,7 @@ const PasswordInput = memo((_oa) => {
       [Condition.IsLengthGreaterThanOrEqual]: 8,
       [Condition.IsLengthLessThanOrEqual]: 99
     }
-  } = _pa, props = __objRest(_pa, [
+  } = _ra, props = __objRest(_ra, [
     "autoComplete",
     "confirmPasswordLabel",
     "label",
@@ -30009,8 +29997,9 @@ const PasswordInput = memo((_oa) => {
       inputType: TextInputType.Password,
       validation
     }, props)), showConfirmPassword && /* @__PURE__ */ jsxs$1(InputRow, {
-      marginTop: Amount.More,
-      marginBottom: Amount.None,
+      margin: {
+        top: Amount.More
+      },
       children: [/* @__PURE__ */ jsx$1(InputLabel, {
         children: confirmPasswordLabel
       }), /* @__PURE__ */ jsx$1(TextInput, {
@@ -30137,12 +30126,12 @@ function getInputElementByFieldType(field) {
       });
   }
 }
-const FormFields = memo((_qa) => {
-  var _ra = _qa, {
+const FormFields = memo((_sa) => {
+  var _ta = _sa, {
     entity,
     fields,
     onChange
-  } = _ra, props = __objRest(_ra, [
+  } = _ta, props = __objRest(_ta, [
     "entity",
     "fields",
     "onChange"
@@ -30169,10 +30158,11 @@ const FormFields = memo((_qa) => {
       })];
     })));
   }, [entity]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
     className: "form-fields",
-    borderRadius: Amount.More,
-    orientation: Orientation.Vertical
+    borderRadius: {
+      all: Amount.More
+    }
   }, props), {
     children: (_a2 = Object.entries(fieldValues)) == null ? void 0 : _a2.map(([fieldName, field]) => {
       if (field.name === "created_date" || field.name === "updated_date")
@@ -30200,8 +30190,9 @@ const FormFields = memo((_qa) => {
     })
   }));
 });
-const Form = memo((_sa) => {
-  var _ta = _sa, {
+const Form = memo((_ua) => {
+  var _va = _ua, {
+    borderRadius = {},
     className = "",
     entity,
     fields,
@@ -30212,7 +30203,8 @@ const Form = memo((_sa) => {
     name: name2,
     padding = Amount.None,
     submitButton
-  } = _ta, props = __objRest(_ta, [
+  } = _va, props = __objRest(_va, [
+    "borderRadius",
     "className",
     "entity",
     "fields",
@@ -30230,7 +30222,6 @@ const Form = memo((_sa) => {
   const [requiresValidation, setRequiresValidation] = useState(false);
   const submitButtonProps = __spreadValues({
     label: "Submit",
-    size: Size.Large,
     type: ButtonType.Primary
   }, submitButton);
   useEffect(() => {
@@ -30255,12 +30246,13 @@ const Form = memo((_sa) => {
         validated
       });
   }, [fieldValues]);
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
     as: "form",
-    borderRadius: Amount.More,
+    borderRadius: __spreadValues({
+      all: Amount.More
+    }, borderRadius),
     className: `${className} form`,
     id: name2,
-    orientation: Orientation.Vertical,
     name: name2,
     padding
   }, props), {
@@ -30298,40 +30290,32 @@ const Form = memo((_sa) => {
     })]
   }));
 });
-const Link = memo((_ua) => {
-  var _va = _ua, {
+const Link = memo((_wa) => {
+  var _xa = _wa, {
     children,
     hover,
-    size = Size.Small,
     textColor = TextColors.Link,
+    textDecoration = {
+      line: [TextDecorationLine.Underline],
+      style: TextDecorationStyle.Solid
+    },
+    textSize = TextSize.Small,
     textWeight = TextWeight.Default,
-    to,
-    underline = true,
-    underlineColor = TextColors.Link
-  } = _va, props = __objRest(_va, [
+    to
+  } = _xa, props = __objRest(_xa, [
     "children",
     "hover",
-    "size",
     "textColor",
+    "textDecoration",
+    "textSize",
     "textWeight",
-    "to",
-    "underline",
-    "underlineColor"
+    "to"
   ]);
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
-  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$1(Container$b, __spreadProps(__spreadValues({
     as: "span",
-    lineHeight: size,
-    textColor,
-    textWeight,
-    underline: (underline || hovered && (hover == null ? void 0 : hover.underline)) && !focused,
-    underlineColor: textColor,
-    alignContent: Align.Center,
-    alignItems: Align.Center,
-    focused,
-    grow: false,
-    height: size
+    focused
   }, props), {
     children: /* @__PURE__ */ jsx$1(Link$1, {
       to,
@@ -30340,56 +30324,52 @@ const Link = memo((_ua) => {
       onMouseEnter: () => setHovered(true),
       onMouseLeave: () => setHovered(false),
       style: {
-        alignItems: Align.Center,
-        color: textColor,
-        display: "inline-flex",
-        flexDirection: "column",
-        justifyContent: Align.Center,
-        outline: "none",
-        textDecoration: (underline || hovered && (hover == null ? void 0 : hover.underline)) && !focused ? "underline" : "none"
+        outline: "none"
       },
-      children
+      children: /* @__PURE__ */ jsx$1(Text, __spreadProps(__spreadValues({
+        textDecoration,
+        textColor,
+        textWeight
+      }, props), {
+        children
+      }))
     })
   }));
 });
-const Container$e = styled.span.withConfig({
+const Container$b = styled.span.withConfig({
   displayName: "Container",
   componentId: "sc-doc9uk-0"
-})(["", ";cursor:pointer;position:relative;&:before{border-radius:", ";left:-9px;right:-9px;}"], FocusedStyles, Amount.All);
-const Small = memo((_wa) => {
-  var _xa = _wa, {
+})(["", ";cursor:pointer;position:relative;&:before{border-radius:", ";left:-9px;right:-9px;}"], FocusStyles, Amount.All);
+const Small = memo((_ya) => {
+  var _za = _ya, {
     as = "small",
     className = "",
     children,
-    grow = false,
-    orientation = Orientation.Horizontal,
-    lineHeight = Size.Small,
+    lineHeight = Sizes.Small,
     textColor = TextColors.Light,
     textSize = TextSize.Small
-  } = _xa, props = __objRest(_xa, [
+  } = _za, props = __objRest(_za, [
     "as",
     "className",
     "children",
-    "grow",
-    "orientation",
     "lineHeight",
     "textColor",
     "textSize"
   ]);
-  return /* @__PURE__ */ jsx$1(Label, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$1(Text, __spreadProps(__spreadValues({
     as,
     className: `${className} small`,
-    grow,
-    textColor,
     lineHeight,
-    orientation,
-    whiteSpace: WhiteSpace.Normal
+    lineWrap: true,
+    textColor,
+    textSize
   }, props), {
     children
   }));
 });
 const ForgotPasswordForm = memo(({
-  backgroundColor = BackgroundColors.Darker,
+  background = {},
+  borderRadius = {},
   title = "Forgot your password?",
   showSignupLink,
   signUpLinkLabel,
@@ -30406,25 +30386,29 @@ const ForgotPasswordForm = memo(({
   });
   const startPasswordReset = async (email) => {
   };
-  return /* @__PURE__ */ jsxs$1(Container$h, {
+  return /* @__PURE__ */ jsxs$1(Container$e, {
     className: "forgot-password-form",
-    backgroundColor,
-    borderRadius: Amount.More,
-    boxShadow: DepthShadow.Highest,
-    grow: false,
-    padding: Amount.Most,
-    paddingBottom: Amount.Default,
-    width: 420,
+    background: __spreadValues({
+      color: BackgroundColors.Darker
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.More
+    }, borderRadius),
+    padding: {
+      all: Amount.Most
+    },
+    shadow: DepthShadow.Highest,
+    size: {
+      width: 420
+    },
     children: [/* @__PURE__ */ jsx$1(LoadingOverlay, {
       visible: inProgress
     }), /* @__PURE__ */ jsx$1(Title, {
-      alignText: Align.Center,
+      textAlign: TextAlign.Center,
       children: title
-    }), /* @__PURE__ */ jsx$1(Container$h, {
-      marginBottom: Amount.More,
-      marginTop: Amount.More,
+    }), /* @__PURE__ */ jsx$1(Container$e, {
       children: /* @__PURE__ */ jsx$1(Paragraph, {
-        alignText: Align.Center,
+        textAlign: TextAlign.Center,
         children: "Enter the email address associated with your account and we'll send instructions on how to reset your password."
       })
     }), authError && /* @__PURE__ */ jsx$1(ErrorNotification, {
@@ -30453,38 +30437,44 @@ const ForgotPasswordForm = memo(({
         fullWidth: true,
         label: "Send instructions"
       }
-    }), /* @__PURE__ */ jsx$1(Container$h, {
-      paddingLeft: Amount.Default,
-      paddingRight: Amount.Default,
-      paddingTop: Amount.Default,
+    }), /* @__PURE__ */ jsx$1(Container$e, {
+      padding: {
+        all: Amount.Default
+      },
       children: /* @__PURE__ */ jsx$1(Small, {
-        alignText: Align.Center,
+        textAlign: TextAlign.Center,
         children: /* @__PURE__ */ jsx$1(Link, {
           hover: {
-            underline: true
+            textDecoration: {
+              line: TextDecorationLine.Underline
+            }
+          },
+          textDecoration: {
+            line: TextDecorationLine.Underline
           },
           to: "/login",
-          underline: false,
           children: "Login"
         })
       })
     })]
   });
 });
-const LoginForm = memo((_ya) => {
-  var _za = _ya, {
-    backgroundColor = BackgroundColors.Darker,
-    borderRadius = Amount.More,
+const LoginForm = memo((_Aa) => {
+  var _Ba = _Aa, {
+    background = {},
+    borderRadius = {},
     onLoginSuccess,
+    size = {},
     title = "Login",
     showSignupLink,
     signUpLinkLabel,
     signInButtonLabel,
     forgotPasswordLinkLabel
-  } = _za, props = __objRest(_za, [
-    "backgroundColor",
+  } = _Ba, props = __objRest(_Ba, [
+    "background",
     "borderRadius",
     "onLoginSuccess",
+    "size",
     "title",
     "showSignupLink",
     "signUpLinkLabel",
@@ -30509,39 +30499,58 @@ const LoginForm = memo((_ya) => {
       onLoginSuccess();
     }
   }, [success]);
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
     className: "login-form",
-    backgroundColor,
-    borderRadius,
-    boxShadow: DepthShadow.Highest,
-    grow: false,
-    padding: Amount.Most,
-    paddingBottom: Amount.Default,
-    width: 420
+    background: __spreadValues({
+      color: BackgroundColors.Darker
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.More
+    }, borderRadius),
+    padding: {
+      all: Amount.Most
+    },
+    shadow: DepthShadow.Highest,
+    size: __spreadValues({
+      width: 420
+    }, size)
   }, props), {
     children: [/* @__PURE__ */ jsx$1(LoadingOverlay, {
       borderRadius,
       visible: inProgress
     }), /* @__PURE__ */ jsx$1(Title, {
-      alignContent: Align.Center,
+      alignment: {
+        horizontal: AlignHorizontal.Center
+      },
       children: title
     }), /* @__PURE__ */ jsx$1(NotificationLabel, {
-      alignItems: Align.Center,
-      alignSelf: Align.Center,
-      backgroundColor: BackgroundColors.Darkest,
-      marginTop: Amount.Default,
-      marginBottom: Amount.All,
-      orientation: Orientation.Vertical,
-      grow: false,
+      alignment: {
+        horizontal: AlignHorizontal.Center,
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.Center
+      },
+      background: {
+        color: BackgroundColors.Darkest
+      },
+      margin: {
+        bottom: Amount.Default
+      },
       showOrb: false,
       children: /* @__PURE__ */ jsxs$1(Paragraph, {
-        alignText: Align.Center,
+        alignment: {
+          horizontal: AlignHorizontal.Center
+        },
+        textAlign: TextAlign.Center,
         children: ["Don't have an account yet?", /* @__PURE__ */ jsx$1("br", {}), /* @__PURE__ */ jsx$1(Link, {
           to: "/signup",
           hover: {
-            underline: true
+            textDecoration: {
+              line: TextDecorationLine.Underline
+            }
           },
-          underline: false,
+          textDecoration: {
+            line: TextDecorationLine.Underline
+          },
           children: "Sign up for free!"
         })]
       })
@@ -30587,22 +30596,29 @@ const LoginForm = memo((_ya) => {
           }));
       },
       submitButton: {
+        alignment: {
+          fill: Fill.Both,
+          horizontal: AlignHorizontal.Center
+        },
         borderRadius: Amount.Least,
-        grow: true,
         label: "Login"
       }
-    }), /* @__PURE__ */ jsx$1(Container$h, {
-      paddingLeft: Amount.Default,
-      paddingRight: Amount.Default,
-      paddingTop: Amount.Default,
+    }), /* @__PURE__ */ jsx$1(Container$e, {
+      padding: {
+        all: Amount.Default
+      },
       children: /* @__PURE__ */ jsx$1(Small, {
-        alignText: Align.Center,
+        textAlign: TextAlign.Center,
         children: /* @__PURE__ */ jsx$1(Link, {
           hover: {
-            underline: true
+            textDecoration: {
+              line: TextDecorationLine.Underline
+            }
+          },
+          textDecoration: {
+            line: TextDecorationLine.Underline
           },
           to: "/forgot-password",
-          underline: false,
           children: "Forgot your password?"
         })
       })
@@ -30610,8 +30626,8 @@ const LoginForm = memo((_ya) => {
   }));
 });
 const SignupForm = memo(({
-  backgroundColor = BackgroundColors.Darker,
-  borderRadius = Amount.More,
+  background = {},
+  borderRadius = {},
   onSignupSuccess,
   title = "Sign up"
 }) => {
@@ -30633,38 +30649,47 @@ const SignupForm = memo(({
       });
     }
   }, [success]);
-  return /* @__PURE__ */ jsxs$1(Container$h, {
+  return /* @__PURE__ */ jsxs$1(Container$e, {
     className: "signup-form",
-    backgroundColor,
-    borderRadius,
-    boxShadow: DepthShadow.Highest,
-    grow: false,
-    padding: Amount.Most,
-    paddingBottom: Amount.Default,
-    width: 420,
+    background: __spreadValues({
+      color: BackgroundColors.Darker
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.More
+    }, borderRadius),
+    padding: {
+      all: Amount.Most
+    },
+    shadow: DepthShadow.Highest,
+    size: {
+      width: 420
+    },
     children: [/* @__PURE__ */ jsx$1(LoadingOverlay, {
       borderRadius,
       visible: inProgress
     }), /* @__PURE__ */ jsx$1(Title, {
-      alignText: Align.Center,
+      textAlign: TextAlign.Center,
       children: title
     }), /* @__PURE__ */ jsx$1(NotificationLabel, {
-      alignItems: Align.Center,
-      alignSelf: Align.Center,
-      backgroundColor: BackgroundColors.Darkest,
-      marginTop: Amount.Default,
-      marginBottom: Amount.All,
-      orientation: Orientation.Vertical,
-      grow: false,
+      alignment: {
+        horizontal: AlignHorizontal.Center
+      },
+      background: {
+        color: BackgroundColors.Darkest
+      },
       showOrb: false,
       children: /* @__PURE__ */ jsxs$1(Paragraph, {
-        alignText: Align.Center,
+        textAlign: TextAlign.Center,
         children: ["Already have an account?", /* @__PURE__ */ jsx$1("br", {}), /* @__PURE__ */ jsx$1(Link, {
-          to: "/login",
           hover: {
-            underline: true
+            textDecoration: {
+              line: TextDecorationLine.Underline
+            }
           },
-          underline: false,
+          textDecoration: {
+            line: TextDecorationLine.Underline
+          },
+          to: "/login",
           children: "Sign in"
         })]
       })
@@ -30729,21 +30754,24 @@ const SignupForm = memo(({
       },
       submitButton: {
         borderRadius: Amount.Least,
-        grow: true,
         label: "Sign up"
       }
-    }), /* @__PURE__ */ jsx$1(Container$h, {
-      paddingLeft: Amount.Default,
-      paddingRight: Amount.Default,
-      paddingTop: Amount.Default,
+    }), /* @__PURE__ */ jsx$1(Container$e, {
+      padding: {
+        all: Amount.Default
+      },
       children: /* @__PURE__ */ jsxs$1(Small, {
-        alignText: Align.Center,
+        textAlign: TextAlign.Center,
         children: ['By clicking the "Sign up" button you agree to the', " ", /* @__PURE__ */ jsx$1(Link, {
           hover: {
-            underline: true
+            textDecoration: {
+              line: TextDecorationLine.Underline
+            }
+          },
+          textDecoration: {
+            line: TextDecorationLine.Underline
           },
           to: "/privacy",
-          underline: false,
           children: "Privacy Policy"
         }), "."]
       })
@@ -31115,7 +31143,7 @@ const PaymentMethodModal = memo(({
       setInProgress(false);
     }
   };
-  return /* @__PURE__ */ jsx$1(Container$d, {
+  return /* @__PURE__ */ jsx$1(Container$a, {
     visible,
     children: /* @__PURE__ */ jsxs$1(Content$3, {
       visible,
@@ -31195,7 +31223,6 @@ const PaymentMethodModal = memo(({
                     setPaymentMethod(paymentMethod2);
                     setReviewOrder(true);
                   },
-                  size: Size.Small,
                   children: "Use this card"
                 })
               }), /* @__PURE__ */ jsxs$1(Brand, {
@@ -31223,7 +31250,7 @@ const PaymentMethodModal = memo(({
     })
   });
 });
-const Container$d = styled.div.withConfig({
+const Container$a = styled.div.withConfig({
   displayName: "Container",
   componentId: "sc-1cgis25-0"
 })(["background:rgba(0,0,0,0.5);bottom:0;left:0;opacity:0;pointer-events:none;position:fixed;right:0;top:0;transition:opacity 0.2s ease-out;z-index:500000;", ";"], (props) => props.visible && css(["opacity:1;pointer-events:auto;"]));
@@ -31279,73 +31306,54 @@ const Progress = styled.div.withConfig({
   displayName: "Progress",
   componentId: "sc-1cgis25-13"
 })(["float:right;padding:0;"]);
-const ProgressMeter = memo((_Aa) => {
-  var _Ba = _Aa, {
+const ProgressMeter = memo((_Ca) => {
+  var _Da = _Ca, {
     amount,
-    borderRadius = Amount.Less,
+    background = {},
+    borderRadius = {},
     children,
-    color = BackgroundColors.Primary,
-    height = Size.Default,
     label,
-    margin,
-    marginBottom,
-    marginLeft,
-    marginRight,
-    marginTop,
-    padding = Amount.None,
+    size = {
+      height: Sizes.Default
+    },
     total
-  } = _Ba, props = __objRest(_Ba, [
+  } = _Da, props = __objRest(_Da, [
     "amount",
+    "background",
     "borderRadius",
     "children",
-    "color",
-    "height",
     "label",
-    "margin",
-    "marginBottom",
-    "marginLeft",
-    "marginRight",
-    "marginTop",
-    "padding",
+    "size",
     "total"
   ]);
   const progressPercent = amount === 0 ? 0 : Number.parseInt(((amount != null ? amount : 0) / (total != null ? total : 0) * 100).toFixed(0));
-  return /* @__PURE__ */ jsx$1(Container$h, {
-    backgroundColor: BackgroundColors.Lighter,
-    borderRadius,
-    grow: false,
-    margin,
-    marginBottom,
-    marginLeft,
-    marginRight,
-    marginTop,
-    padding,
-    style: {
-      borderRadius: `calc(${borderRadius} + 3px)`
-    },
-    children: /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-      backgroundColor: color,
-      borderRadius,
-      boxShadow: {
-        blurRadius: 8,
-        color,
-        offsetX: 0,
-        offsetY: 2,
-        opacity: 35,
-        spreadRadius: 4
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    background: __spreadValues({
+      color: BackgroundColors.Primary
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.Less
+    }, borderRadius)
+  }, props), {
+    children: /* @__PURE__ */ jsxs$1(Container$e, {
+      background: __spreadValues({
+        color: BackgroundColors.Primary
+      }, background),
+      borderRadius: __spreadValues({
+        all: Amount.Less
+      }, borderRadius),
+      size: {
+        width: `${progressPercent}%`
       },
-      height,
-      width: `${progressPercent}%`
-    }, props), {
       children: [children, label && /* @__PURE__ */ jsx$1(Label, {
-        alignText: Align.Center,
+        textAlign: TextAlign.Center,
         textSize: TextSize.Larger,
         textColor: TextColors.Darkest,
         textWeight: TextWeight.More,
         children: label
       })]
-    }))
-  });
+    })
+  }));
 });
 function formatCurrency({ amount, currency }) {
   switch (currency) {
@@ -31372,7 +31380,6 @@ function formatValue(value2, {
 }
 const LinearGauge = memo(({
   amount,
-  color,
   formatter,
   showTicks = true,
   showTickLabels = true,
@@ -31382,27 +31389,23 @@ const LinearGauge = memo(({
 }) => {
   const progressPercent = amount === 0 ? 0 : Number.parseInt((amount / total * 100).toFixed(0));
   const tickPercent = total / tickCount;
-  return /* @__PURE__ */ jsxs$1(Container$h, {
-    children: [showTicks && /* @__PURE__ */ jsxs$1(Container$h, {
-      orientation: Orientation.Horizontal,
-      children: [showValue && /* @__PURE__ */ jsx$1(Container$h, {
-        border: {
-          left: {
-            color,
-            style: BorderStyle.Solid,
-            width: 3
-          }
+  return /* @__PURE__ */ jsxs$1(Container$e, {
+    children: [showTicks && /* @__PURE__ */ jsxs$1(Container$e, {
+      alignment: {
+        orientation: Orientation.Horizontal
+      },
+      children: [showValue && /* @__PURE__ */ jsx$1(Container$e, {
+        size: {
+          height: Sizes.Small
         },
-        height: 9,
         style: {
           left: `calc(${progressPercent}% - 3px)`,
           position: "absolute",
           top: "-3px"
         },
         children: /* @__PURE__ */ jsx$1(Label, {
-          alignText: Align.Center,
           lineHeight: Amount.None,
-          textColor: color,
+          textAlign: TextAlign.Center,
           textSize: TextSize.Small,
           textWeight: TextWeight.More,
           style: {
@@ -31417,18 +31420,12 @@ const LinearGauge = memo(({
       }), new Array(tickCount).fill(0).map((_, index) => {
         const tickValue = tickPercent * index;
         const tickValueFormatted = formatter ? formatValue(tickValue, formatter) : tickValue;
-        return /* @__PURE__ */ jsx$1(Container$h, {
-          border: {
-            left: {
-              color: amount >= tickValue ? color : BackgroundColors.Lightest,
-              style: BorderStyle.Solid,
-              width: 1
-            }
+        return /* @__PURE__ */ jsx$1(Container$e, {
+          size: {
+            height: 6
           },
-          height: 6,
           children: showTickLabels && /* @__PURE__ */ jsx$1(Label, {
-            alignText: Align.Left,
-            textColor: amount >= tickValue ? color : TextColors.Dark,
+            textAlign: TextAlign.Left,
             textSize: TextSize.Smallest,
             textWeight: TextWeight.More,
             style: {
@@ -31438,36 +31435,34 @@ const LinearGauge = memo(({
             children: tickValueFormatted
           })
         }, index);
-      }), /* @__PURE__ */ jsx$1(Container$h, {
-        border: {
-          right: {
-            color: amount >= total ? color : BackgroundColors.Lightest,
-            style: BorderStyle.Solid,
-            width: 1
-          }
+      }), /* @__PURE__ */ jsx$1(Container$e, {
+        size: {
+          height: 6
         },
-        height: 6,
         style: {
           position: "absolute",
           right: 0
         },
         children: showTickLabels && /* @__PURE__ */ jsx$1(Label, {
-          alignText: Align.Right,
+          textAlign: TextAlign.Right,
           textColor: TextColors.Dark,
           textSize: TextSize.Small,
           textWeight: TextWeight.More,
           children: formatter ? formatValue(total, formatter) : total
         })
       })]
-    }), /* @__PURE__ */ jsx$1(Container$h, {
-      backgroundColor: BackgroundColors.Lightest,
-      grow: false,
-      height: 1,
-      children: /* @__PURE__ */ jsx$1(Container$h, {
-        backgroundColor: color,
-        height: 1,
-        grow: false,
-        width: `${progressPercent}%`
+    }), /* @__PURE__ */ jsx$1(Container$e, {
+      background: {
+        color: BackgroundColors.Lightest
+      },
+      size: {
+        height: 1
+      },
+      children: /* @__PURE__ */ jsx$1(Container$e, {
+        size: {
+          height: 1,
+          width: `${progressPercent}%`
+        }
       })
     })]
   });
@@ -31475,30 +31470,32 @@ const LinearGauge = memo(({
 const ProgressivePaymentStatus = memo(({
   amountPaid = 0,
   currency = CurrencyCode.UnitedStatesDollar,
-  totalDue = 0,
-  size = Size.Default
+  totalDue = 0
 }) => {
-  const backgroundColor = amountPaid >= totalDue ? BackgroundColors.Success : BackgroundColors.Warning;
-  return /* @__PURE__ */ jsxs$1(Container$h, {
-    orientation: Orientation.Vertical,
-    paddingBottom: Amount.Default,
-    grow: false,
+  amountPaid >= totalDue ? BackgroundColors.Success : BackgroundColors.Warning;
+  return /* @__PURE__ */ jsxs$1(Container$e, {
+    padding: {
+      bottom: Amount.Default
+    },
     children: [/* @__PURE__ */ jsx$1(ProgressMeter, {
-      alignContent: Align.Center,
-      alignItems: Align.Center,
+      alignment: {
+        horizontal: AlignHorizontal.Center,
+        vertical: AlignVertical.Center
+      },
       amount: amountPaid,
-      color: backgroundColor,
-      borderRadius: Amount.Default,
-      height: size,
+      borderRadius: {
+        all: Amount.Default
+      },
       label: formatCurrency({
         amount: amountPaid,
         currency
       }),
-      marginBottom: Amount.Less,
+      margin: {
+        bottom: Amount.Less
+      },
       total: totalDue
     }), /* @__PURE__ */ jsx$1(LinearGauge, {
       amount: amountPaid,
-      color: BackgroundColors.Warning,
       formatter: {
         formatter: Formatter$1.Currency,
         options: {
@@ -31511,7 +31508,7 @@ const ProgressivePaymentStatus = memo(({
 });
 const SubscriptionModal = memo(() => {
   const visible = useSelector((state) => state.app.subscriptionBillingModalVisible);
-  return /* @__PURE__ */ jsx$1(Container$c, {
+  return /* @__PURE__ */ jsx$1(Container$9, {
     visible,
     children: /* @__PURE__ */ jsxs$1(Content$2, {
       visible,
@@ -31561,7 +31558,7 @@ const SubscriptionModal = memo(() => {
     })
   });
 });
-const Container$c = styled.div.withConfig({
+const Container$9 = styled.div.withConfig({
   displayName: "Container",
   componentId: "sc-1gc8te9-0"
 })(["background:rgba(0,0,0,0.7);bottom:0;left:0;opacity:0;pointer-events:none;position:fixed;right:0;top:0;transition:opacity 0.2s ease-out;z-index:500000;", ";"], (props) => props.visible && css(["opacity:1;pointer-events:auto;"]));
@@ -31643,37 +31640,38 @@ class ErrorBoundary extends Component {
     });
   }
 }
-const Card = memo((_Ca) => {
-  var _Da = _Ca, {
-    backgroundColor = BackgroundColors.Card,
-    borderRadius = Amount.Less,
-    boxShadow = DepthShadow.Higher,
+const Card = memo((_Ea) => {
+  var _Fa = _Ea, {
+    background = {},
+    borderRadius = {},
     children,
     draggable = false,
     id: id2,
     linkTo,
     onClick,
-    title,
-    width
-  } = _Da, props = __objRest(_Da, [
-    "backgroundColor",
+    shadow = DepthShadow.Higher,
+    title
+  } = _Fa, props = __objRest(_Fa, [
+    "background",
     "borderRadius",
-    "boxShadow",
     "children",
     "draggable",
     "id",
     "linkTo",
     "onClick",
-    "title",
-    "width"
+    "shadow",
+    "title"
   ]);
-  const content = /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    borderRadius,
-    boxShadow,
+  const content = /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+    background: __spreadValues({
+      color: BackgroundColors.Card
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.Less
+    }, borderRadius),
     className: `card${id2 ? `-${id2}` : ""}`,
-    grow: true,
     onClick,
-    width: linkTo ? "100%" : width != null ? width : "auto"
+    shadow
   }, props), {
     children: [title && /* @__PURE__ */ jsx$1("h4", {
       children: title
@@ -31682,7 +31680,7 @@ const Card = memo((_Ca) => {
     })]
   }));
   if (draggable) {
-    return /* @__PURE__ */ jsx$1(DragWrapper, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
       className: "draggable-card"
     }, props), {
       children: content
@@ -31690,109 +31688,73 @@ const Card = memo((_Ca) => {
   }
   if (linkTo) {
     return /* @__PURE__ */ jsx$1(NavigationLink, {
-      borderRadius,
-      grow: true,
-      orientation: Orientation.Vertical,
+      className: "link-card",
       to: linkTo,
-      width,
       children: content
     });
   }
   return content;
 });
-const DragWrapper = styled.div.withConfig({
-  displayName: "DragWrapper",
-  componentId: "sc-vglho4-0"
-})(["", ";", ";", ";transition:box-shadow 0.3s ease-in-out;"], LayoutStyles, AppearanceStyles, DimensionStyles);
-const TitleCards = memo((_Ea) => {
-  var _Fa = _Ea, {
-    children,
-    className = "title-cards",
-    grow = false,
-    minHeight = 82,
-    orientation = Orientation.Horizontal
-  } = _Fa, props = __objRest(_Fa, [
-    "children",
-    "className",
-    "grow",
-    "minHeight",
-    "orientation"
-  ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-    className: `${className} title-cards`,
-    grow,
-    minHeight,
-    overflow: Overflow.ScrollHorizontal,
-    paddingBottom: Amount.Default
-  }, props), {
-    children: /* @__PURE__ */ jsx$1(Container$h, {
-      orientation,
-      overflow: Overflow.ScrollHorizontal,
-      position: Position.Absolute,
-      children
-    })
-  }));
-});
 const TitleCard = memo((_Ga) => {
   var _Ha = _Ga, {
-    backgroundColor = BackgroundColors.Card,
-    borderRadius = Amount.Least,
-    boxShadow = DepthShadow.High,
+    alignment = {},
+    background = {},
+    borderRadius = {},
     className = "",
-    grow = true,
-    flat = false,
     label,
     loading = false,
-    marginRight = Amount.Default,
-    orientation = Orientation.Horizontal,
-    padding = Amount.Default,
+    padding = {},
     value: value2,
     icon,
-    width = 260
+    shadow = DepthShadow.High,
+    size = {
+      width: 260
+    }
   } = _Ha, props = __objRest(_Ha, [
-    "backgroundColor",
+    "alignment",
+    "background",
     "borderRadius",
-    "boxShadow",
     "className",
-    "grow",
-    "flat",
     "label",
     "loading",
-    "marginRight",
-    "orientation",
     "padding",
     "value",
     "icon",
-    "width"
+    "shadow",
+    "size"
   ]);
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    backgroundColor,
-    borderRadius,
-    boxShadow,
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      orientation: Orientation.Horizontal
+    }, alignment),
+    background: __spreadValues({
+      color: BackgroundColors.Card
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.Least
+    }, borderRadius),
     className: `${className} title-card`,
-    flat,
-    grow,
-    marginRight,
-    orientation,
-    padding,
-    width
+    padding: __spreadValues({
+      all: Amount.Default
+    }, padding),
+    shadow,
+    size
   }, props), {
     children: [/* @__PURE__ */ jsx$1(LoadingOverlay, {
       visible: loading,
-      spinnerSize: Size.Small
-    }), icon && /* @__PURE__ */ jsx$1(Container$h, {
-      alignItems: Align.Center,
-      alignContent: Align.Center,
-      borderRadius: Amount.All,
-      grow: false,
-      marginRight: Amount.Default,
-      paddingLeft: Amount.Less,
-      paddingRight: Amount.Less,
-      children: /* @__PURE__ */ jsx$1(Icon, __spreadValues({}, icon))
-    }), !loading && /* @__PURE__ */ jsxs$1(Container$h, {
-      alignContent: Align.Center,
-      alignItems: Align.Left,
-      orientation: Orientation.Vertical,
+      spinnerSize: {
+        height: Sizes.Small,
+        width: Sizes.Small
+      }
+    }), icon && /* @__PURE__ */ jsx$1(Icon, __spreadValues({
+      margin: {
+        right: Amount.Default
+      }
+    }, icon)), !loading && /* @__PURE__ */ jsxs$1(Container$e, {
+      alignment: {
+        orientation: Orientation.Vertical,
+        vertical: AlignVertical.Center
+      },
       children: [/* @__PURE__ */ jsx$1(Small, {
         children: label
       }), /* @__PURE__ */ jsx$1(Title, {
@@ -31803,24 +31765,16 @@ const TitleCard = memo((_Ga) => {
 });
 const PieChart = memo((_Ia) => {
   var props = __objRest(_Ia, []);
-  return /* @__PURE__ */ jsx$1(Container$b, __spreadValues({}, props));
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadValues({}, props));
 });
-const Container$b = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-1vyo5kj-0"
-})(["height:200px;"]);
 const RadialChart = memo((_Ja) => {
   var _Ka = _Ja, {
     data
   } = _Ka, props = __objRest(_Ka, [
     "data"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$a, __spreadValues({}, props));
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadValues({}, props));
 });
-const Container$a = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-yt8yoj-0"
-})([""]);
 const RadialGauge = memo(({
   color,
   size,
@@ -31831,7 +31785,7 @@ const RadialGauge = memo(({
     return normalized >= 0 ? normalized : 0;
   };
   const gaugePercent = getGaugePercent();
-  return /* @__PURE__ */ jsx$1(Container$9, {
+  return /* @__PURE__ */ jsx$1(Container$8, {
     color,
     size,
     value: gaugePercent,
@@ -31850,7 +31804,7 @@ const RadialGauge = memo(({
     })
   });
 });
-const Container$9 = styled.div.withConfig({
+const Container$8 = styled.div.withConfig({
   displayName: "Container",
   componentId: "sc-1yzhota-0"
 })(["margin:0 auto;position:relative;width:", "px;svg{display:inline-block;height:", "px;position:relative;top:-4px;width:", "px;}path{stroke-linecap:round;stroke-width:12;}path.grey{stroke:#eee;}path.value{stroke:rgba(162,192,80,1);stroke:rgba(", ");stroke-dasharray:198;stroke-dashoffset:", ";transition:all 0.3s ease-out;}"], (props) => props.size + 9, (props) => props.size, (props) => props.size, (props) => props.color, (props) => props.value);
@@ -31861,30 +31815,31 @@ function useTitle(title) {
 }
 const Page = memo((_La) => {
   var _Ma = _La, {
-    alignContent = Align.Top,
-    backgroundColor = BackgroundColors.Page,
+    alignment = {},
+    background = {},
     children,
     className = "",
-    grow = true,
     layout: Layout,
     loading = false,
     title
   } = _Ma, props = __objRest(_Ma, [
-    "alignContent",
-    "backgroundColor",
+    "alignment",
+    "background",
     "children",
     "className",
-    "grow",
     "layout",
     "loading",
     "title"
   ]);
   useTitle(title);
-  const PageComp = () => /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    alignContent,
-    backgroundColor,
-    className: `${className} page`,
-    grow
+  const PageComp = () => /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      vertical: AlignVertical.Top
+    }, alignment),
+    background: __spreadValues({
+      color: BackgroundColors.Page
+    }, background),
+    className: `${className} page`
   }, props), {
     children: [/* @__PURE__ */ jsx$1(LoadingOverlay, {
       visible: loading
@@ -32978,28 +32933,18 @@ function useEntityEditor() {
 }
 const HoverPanel = memo((_Na) => {
   var _Oa = _Na, {
-    alignItems = Align.Stretch,
-    alignContent = Align.Stretch,
-    backgroundColor = BackgroundColors.Lightest,
-    border = {
-      color: BackgroundColors.Transparent,
-      style: BorderStyle.Solid,
-      width: 1
-    },
-    borderRadius = Amount.Less,
+    background = {},
+    border = {},
+    borderRadius = {},
     children,
     className = "",
     depth = Depth.Higher,
     detached = true,
     focused,
-    grow = false,
-    orientation = Orientation.Vertical,
     visible = true,
     setMenuVisible
   } = _Oa, props = __objRest(_Oa, [
-    "alignItems",
-    "alignContent",
-    "backgroundColor",
+    "background",
     "border",
     "borderRadius",
     "children",
@@ -33007,76 +32952,79 @@ const HoverPanel = memo((_Na) => {
     "depth",
     "detached",
     "focused",
-    "grow",
-    "orientation",
     "visible",
     "setMenuVisible"
   ]);
-  return /* @__PURE__ */ jsx$1(Wrapper, __spreadProps(__spreadValues({
-    alignItems,
-    alignContent,
-    backgroundColor,
-    border,
-    borderRadius,
-    boxShadow: visible ? DepthShadow.Higher : DepthShadow.Surface,
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    background: __spreadValues({
+      color: BackgroundColors.Lightest
+    }, background),
+    border: __spreadValues({
+      all: {
+        color: BorderColors.Transparent,
+        style: BorderStyle.Solid,
+        width: 1
+      }
+    }, border),
+    borderRadius: __spreadValues({
+      all: Amount.Less
+    }, borderRadius),
     className: `${className} hover-panel`,
     depth,
-    grow,
-    detached,
     focused,
-    marginTop: 0,
-    orientation,
+    shadow: visible ? DepthShadow.Higher : DepthShadow.Surface,
     visible
   }, props), {
     children
   }));
 });
-const Wrapper = styled.div.withConfig({
-  displayName: "Wrapper",
-  componentId: "sc-1nu60i0-0"
-})(["", ";", ";", ";", ";border-radius:", ";left:", ";position:absolute;right:", ";top:", ";&:before{border-top:0;border-top-left-radius:", ";border-top-right-radius:", ";}"], LayoutStyles, AppearanceStyles, FocusedStyles, VisibilityStyles, (props) => props.detached ? props.borderRadius : `0 0 ${props.borderRadius} ${props.borderRadius}`, (props) => props.detached ? props.alignContent === Align.Left ? "-10px" : "auto" : 0, (props) => props.detached ? props.alignContent === Align.Right ? "-10px" : "auto" : 0, (props) => props.detached ? "80%" : "calc(100% - 3px)", (props) => props.detached ? props.borderRadius : `0 0 ${props.borderRadius} ${props.borderRadius}`, (props) => props.detached ? props.borderRadius : `0 0 ${props.borderRadius} ${props.borderRadius}`);
 const MoreMenu = memo((_Pa) => {
   var _Qa = _Pa, {
-    alignContent = Align.Left,
-    backgroundColor = BackgroundColors.MoreMenu,
+    alignment = {},
+    background = {},
     className = "",
     dotColor = ForegroundColors.MoreMenu,
-    orientation = Orientation.Horizontal,
-    size = Size.Default,
-    menu,
-    width = 150
+    size = {
+      height: Sizes.Default,
+      width: Sizes.Default
+    },
+    menu
   } = _Qa, props = __objRest(_Qa, [
-    "alignContent",
-    "backgroundColor",
+    "alignment",
+    "background",
     "className",
     "dotColor",
-    "orientation",
     "size",
-    "menu",
-    "width"
+    "menu"
   ]);
   const [menuVisible, setMenuVisible] = useState(false);
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
-  const dotFillColor = menuVisible || hovered ? ForegroundColors.PrimaryContrast : dotColor;
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
+  menuVisible || hovered ? ForegroundColors.PrimaryContrast : dotColor;
+  return /* @__PURE__ */ jsxs$1(Container$e, {
     className: `${className} more-menu`,
-    grow: false,
-    onMouseLeave: () => setMenuVisible(false)
-  }, props), {
-    children: [/* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-      alignContent: Align.Center,
-      alignItems: Align.Center,
+    onMouseLeave: () => setMenuVisible(false),
+    children: [/* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+      alignment: __spreadValues({
+        horizontal: AlignHorizontal.Center,
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.Center
+      }, alignment),
       as: "button",
       cursor: Cursor.Pointer,
-      backgroundColor: menuVisible ? BackgroundColors.Primary : backgroundColor,
-      backgroundOpacity: menuVisible ? 70 : 100,
-      borderRadius: size,
+      background: __spreadValues({
+        color: menuVisible ? BackgroundColors.Primary : BackgroundColors.MoreMenu,
+        opacity: menuVisible ? 70 : 100
+      }, background),
+      borderRadius: {
+        all: Amount.All
+      },
       focused,
       depth: Depth.Surface,
-      grow: false,
       hover: {
-        backgroundColor: BackgroundColors.Primary
+        background: {
+          color: BackgroundColors.Primary
+        }
       },
       onClick: (e2) => {
         e2.stopPropagation();
@@ -33089,108 +33037,157 @@ const MoreMenu = memo((_Pa) => {
       },
       onMouseEnter: () => setHovered(true),
       onMouseLeave: () => setHovered(false),
-      orientation,
-      height: size,
-      width: size
+      size
     }, props), {
       children: [/* @__PURE__ */ jsx$1(Dot, {
-        borderRadius: Amount.All,
-        backgroundColor: dotFillColor
+        borderRadius: {
+          all: Amount.All
+        },
+        background: {
+          color: BackgroundColors.Lighter
+        },
+        margin: {
+          left: 1,
+          right: 1
+        },
+        size: {
+          height: 4,
+          width: 4
+        }
       }), /* @__PURE__ */ jsx$1(Dot, {
-        borderRadius: Amount.All,
-        backgroundColor: dotFillColor
+        borderRadius: {
+          all: Amount.All
+        },
+        background: {
+          color: BackgroundColors.Lighter
+        },
+        margin: {
+          left: 1,
+          right: 1
+        },
+        size: {
+          height: 4,
+          width: 4
+        }
       }), /* @__PURE__ */ jsx$1(Dot, {
-        borderRadius: Amount.All,
-        backgroundColor: dotFillColor
+        borderRadius: {
+          all: Amount.All
+        },
+        background: {
+          color: BackgroundColors.Lighter
+        },
+        margin: {
+          left: 1,
+          right: 1
+        },
+        size: {
+          height: 4,
+          width: 4
+        }
       })]
     })), /* @__PURE__ */ jsx$1(HoverPanel, {
-      alignContent,
-      orientation: Orientation.Vertical,
       visible: menuVisible,
       setMenuVisible,
-      width,
       children: /* @__PURE__ */ jsx$1(Menu, {
         menu,
         onClick: () => setMenuVisible(false)
       })
     })]
-  }));
+  });
 });
 const Dot = styled.span.withConfig({
   displayName: "Dot",
   componentId: "sc-ycayhd-0"
-})(["", ";background-color:rgb(", ");display:inline-block;height:4px;margin:0 1px;width:4px;"], AppearanceStyles, (props) => props.fillColor);
+})(["", ";", ";", ";", ";display:inline-block;"], BackgroundStyles, BorderRadiusStyles, MarginStyles, SizeStyles);
 const ModalHeader = memo(({
-  alignItems = Align.Center,
+  alignment = {},
   className = "",
   onCloseClick,
-  marginBottom = Amount.Most,
+  margin = {},
   moreMenu,
-  orientation = Orientation.Horizontal,
-  padding = Amount.Default,
+  padding = {},
   title
 }) => {
-  return /* @__PURE__ */ jsxs$1(Container$h, {
-    alignItems,
+  return /* @__PURE__ */ jsxs$1(Container$e, {
+    alignment: __spreadValues({
+      horizontal: AlignHorizontal.Center,
+      orientation: Orientation.Horizontal
+    }, alignment),
     className: `${className} modal-header`,
-    grow: false,
-    flat: true,
-    marginBottom,
-    orientation,
-    padding,
+    margin: __spreadValues({
+      bottom: Amount.Most
+    }, margin),
+    padding: __spreadValues({
+      all: Amount.Default
+    }, padding),
     children: [/* @__PURE__ */ jsx$1(Title, {
       children: title
-    }), /* @__PURE__ */ jsx$1(Container$h, {}), moreMenu && /* @__PURE__ */ jsx$1(MoreMenu, __spreadValues({
-      alignContent: Align.Right
+    }), /* @__PURE__ */ jsx$1(Container$e, {}), moreMenu && /* @__PURE__ */ jsx$1(MoreMenu, __spreadValues({
+      alignment: {
+        horizontal: AlignHorizontal.Right
+      }
     }, moreMenu)), /* @__PURE__ */ jsx$1(CloseButton, {
-      marginLeft: Amount.Less,
+      margin: {
+        left: Amount.Less
+      },
       onClick: onCloseClick
     })]
   });
 });
 const SlidePanel = memo((_Ra) => {
   var _Sa = _Ra, {
-    alignItems = Align.Stretch,
-    backgroundColor = BackgroundColors.SlidePanel,
-    boxShadow = DepthShadow.Highest,
-    borderRadius = Amount.Most,
+    as = "div",
+    background = {},
+    borderRadius = {},
     children,
     className = "",
     depth = Depth.Highest,
-    padding = Amount.Less,
-    visible = false,
-    width = 380
+    padding = {},
+    position = {},
+    shadow = DepthShadow.Highest,
+    size = {},
+    visible = false
   } = _Sa, props = __objRest(_Sa, [
-    "alignItems",
-    "backgroundColor",
-    "boxShadow",
+    "as",
+    "background",
     "borderRadius",
     "children",
     "className",
     "depth",
     "padding",
-    "visible",
-    "width"
+    "position",
+    "shadow",
+    "size",
+    "visible"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$8, __spreadProps(__spreadValues({
-    alignItems,
-    backgroundColor,
-    boxShadow,
-    as: Container$8,
-    borderRadius,
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    background: __spreadValues({
+      color: BackgroundColors.SlidePanel
+    }, background),
+    as,
+    borderRadius: __spreadValues({
+      all: Amount.Most
+    }, borderRadius),
     className: `${className} slide-panel`,
     depth,
-    padding,
+    padding: __spreadValues({
+      all: Amount.Less
+    }, padding),
+    position: __spreadValues({
+      behavior: PositionBehavior.Fixed,
+      bottom: 0,
+      right: 0,
+      top: 0
+    }, position),
     visible,
-    width
+    shadow,
+    size: __spreadValues({
+      width: 380
+    }, size)
   }, props), {
     children
   }));
 });
-const Container$8 = styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-dorncl-0"
-})(["", ";", ";", ";bottom:", ";opacity:", ";position:fixed;right:", ";top:", ";transform:", ";transition:all 0.3s ease-in-out;transform:", ";z-index:6;"], LayoutStyles, AppearanceStyles, DimensionStyles, Amount.Default, (props) => props.visible ? "1" : "0", Amount.Default, Amount.Default, (props) => props.visible ? "translate(0, 0)" : "translate(0, 1900px)", (props) => props.visible ? "translate(0, 0)" : "translate(1600px, 0)");
 function getFormFieldsFromModel({
   entity,
   model
@@ -33237,15 +33234,17 @@ const EntityEditor = memo(({
     }
   }, [id2, entity]);
   if (id2 && !entity && !inProgress) {
-    return /* @__PURE__ */ jsx$1(Container$h, {
+    return /* @__PURE__ */ jsx$1(Container$e, {
       className: `${className} entity-editor`,
-      padding: Amount.More,
+      padding: {
+        all: Amount.More
+      },
       children: /* @__PURE__ */ jsx$1(ErrorLabel, {
         children: "Entity not found"
       })
     });
   }
-  return /* @__PURE__ */ jsx$1(Container$h, {
+  return /* @__PURE__ */ jsx$1(Container$e, {
     className: `${className} entity-editor`,
     children: /* @__PURE__ */ jsx$1(Form, {
       fields: getFormFieldsFromModel({
@@ -33290,7 +33289,7 @@ const EntityPreview = memo(({
   id: id2,
   model
 }) => {
-  return /* @__PURE__ */ jsx$1(Container$h, {
+  return /* @__PURE__ */ jsx$1(Container$e, {
     "data-testid": "account-pane",
     children: /* @__PURE__ */ jsx$1(LoadingOverlay, {
       visible: false
@@ -33359,8 +33358,10 @@ const EntityPanel = memo((_Ta) => {
   };
   return /* @__PURE__ */ jsx$1(SlidePanel, {
     visible,
-    children: /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-      borderRadius: Amount.Default
+    children: /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+      borderRadius: {
+        all: Amount.Default
+      }
     }, props), {
       children: [/* @__PURE__ */ jsx$1(LoadingOverlay, {
         visible: inProgress
@@ -33370,8 +33371,7 @@ const EntityPanel = memo((_Ta) => {
           menu: [{
             icon: {
               color: Colors.Error,
-              name: BasicIcons.TrashCan,
-              size: Size.Smaller
+              name: BasicIcons.TrashCan
             },
             label: "Delete",
             onClick: () => {
@@ -33385,9 +33385,10 @@ const EntityPanel = memo((_Ta) => {
           }]
         } : void 0,
         title: getHeaderTitle()
-      }), /* @__PURE__ */ jsx$1(Container$h, {
-        padding: Amount.Default,
-        scrollable: true,
+      }), /* @__PURE__ */ jsx$1(Container$e, {
+        padding: {
+          all: Amount.Default
+        },
         style: {
           top: "60px !important"
         },
@@ -33427,14 +33428,16 @@ const WebApplication = memo((_Xa) => {
   var _Ya = _Xa, {
     authentication = false,
     actions,
-    backgroundColor = BackgroundColors.Dark,
+    background = {
+      color: BackgroundColors.Dark
+    },
     children,
     className = "",
     httpClient
   } = _Ya, props = __objRest(_Ya, [
     "authentication",
     "actions",
-    "backgroundColor",
+    "background",
     "children",
     "className",
     "httpClient"
@@ -33485,8 +33488,11 @@ const WebApplication = memo((_Xa) => {
   } = useSelector((state) => state.ui.themes);
   const loginCondition = authentication ? loggedIn && (loginRequired || !loginRequired) || !loggedIn && !loginRequired : true;
   const showOutlet = !inProgress && loginCondition;
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-    backgroundColor,
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    alignment: {
+      fill: Fill.Both
+    },
+    background,
     className: `${className} web-application`
   }, props), {
     children: /* @__PURE__ */ jsxs$1(ThemeProvider, {
@@ -33508,9 +33514,11 @@ const SubTitle = memo((_Za) => {
     as = "h2",
     children,
     className = "",
-    lineHeight = Size.Small,
-    marginBottom = Amount.More,
-    marginTop = Amount.Default,
+    lineHeight = Sizes.Small,
+    margin = {
+      bottom: Amount.More,
+      top: Amount.Default
+    },
     textSize = TextSize.Large,
     textColor = TextColors.SubTitle,
     textWeight = TextWeight.More
@@ -33519,8 +33527,7 @@ const SubTitle = memo((_Za) => {
     "children",
     "className",
     "lineHeight",
-    "marginBottom",
-    "marginTop",
+    "margin",
     "textSize",
     "textColor",
     "textWeight"
@@ -33528,10 +33535,9 @@ const SubTitle = memo((_Za) => {
   return /* @__PURE__ */ jsx$1(Label, __spreadProps(__spreadValues({
     as,
     className: `${className} title`,
-    inline: false,
     lineHeight,
-    marginBottom,
-    marginTop,
+    lineWrap: false,
+    margin,
     textWeight,
     textColor,
     textSize
@@ -33541,64 +33547,72 @@ const SubTitle = memo((_Za) => {
 });
 const Workspace = memo((_$a) => {
   var _ab = _$a, {
-    alignContent = Align.Top,
-    backgroundColor = BackgroundColors.Workspace,
+    alignment = {},
+    background = {},
     className = "",
     children,
     header,
     layout: Layout,
     loading = false,
     loginRequired = false,
-    orientation = Orientation.Vertical,
-    padding = Amount.Most,
+    padding = {},
     title
   } = _ab, props = __objRest(_ab, [
-    "alignContent",
-    "backgroundColor",
+    "alignment",
+    "background",
     "className",
     "children",
     "header",
     "layout",
     "loading",
     "loginRequired",
-    "orientation",
     "padding",
     "title"
   ]);
   useTitle(title);
   const headerTitle = (header == null ? void 0 : header.title) ? typeof header.title === "string" ? /* @__PURE__ */ jsx$1(Title, {
-    marginTop: Amount.None,
     children: header.title
   }) : header.title : null;
-  const WorkspaceComp = (props2) => /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues(__spreadValues({
-    alignContent,
-    backgroundColor,
+  const WorkspaceComp = (props2) => /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues(__spreadValues({
+    alignment: __spreadValues({
+      vertical: AlignVertical.Top
+    }, alignment),
+    background: __spreadValues({
+      color: BackgroundColors.Workspace
+    }, background),
     className: `${className} workspace`,
-    grow: true,
-    orientation,
-    padding,
-    scrollable: true
+    overflow: Overflow.Scroll,
+    padding: __spreadValues({
+      all: Amount.Most
+    }, padding)
   }, props), props2), {
-    children: [((header == null ? void 0 : header.title) || (header == null ? void 0 : header.actions)) && /* @__PURE__ */ jsxs$1(Container$h, {
-      alignItems: Align.Center,
-      grow: false,
-      marginBottom: Amount.All,
-      orientation: Orientation.Horizontal,
-      children: [/* @__PURE__ */ jsxs$1(Container$h, {
-        children: [/* @__PURE__ */ jsx$1(Container$h, {
-          alignItems: Align.Center,
+    children: [((header == null ? void 0 : header.title) || (header == null ? void 0 : header.actions)) && /* @__PURE__ */ jsxs$1(Container$e, {
+      alignment: {
+        fill: Fill.Both,
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.Center
+      },
+      margin: {
+        bottom: Amount.All
+      },
+      children: [/* @__PURE__ */ jsxs$1(Container$e, {
+        children: [/* @__PURE__ */ jsx$1(Container$e, {
+          alignment: {
+            orientation: Orientation.Horizontal,
+            vertical: AlignVertical.Center
+          },
           className: "workspace-title",
-          orientation: Orientation.Horizontal,
           children: headerTitle
-        }), /* @__PURE__ */ jsx$1(Container$h, {
+        }), /* @__PURE__ */ jsx$1(Container$e, {
           className: "workspace-sub-title",
-          orientation: Orientation.Horizontal,
+          alignment: {
+            orientation: Orientation.Horizontal
+          },
           children: (header == null ? void 0 : header.subTitle) && /* @__PURE__ */ jsx$1(SubTitle, {
-            marginTop: Amount.None,
             children: header.subTitle
           })
         })]
-      }), (header == null ? void 0 : header.actions) && /* @__PURE__ */ jsx$1(Container$h, {
+      }), (header == null ? void 0 : header.actions) && /* @__PURE__ */ jsx$1(Container$e, {
         className: "workspace-actions",
         children: header.actions
       })]
@@ -33662,7 +33676,7 @@ function fetchFromObject(obj, prop) {
 const StringLabel = memo((_bb) => {
   var _cb = _bb, {
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
@@ -33685,7 +33699,7 @@ const StringLabel = memo((_bb) => {
 const NumberLabel = memo((_db) => {
   var _eb = _db, {
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
@@ -37546,7 +37560,6 @@ function friendlyDateTime(dateTimeish) {
 const DateLabel = memo((_jb) => {
   var _kb = _jb, {
     className = "",
-    grow = false,
     format = DateTime.DATE_MED,
     icon,
     textColor = TextColors.Lighter,
@@ -37554,7 +37567,6 @@ const DateLabel = memo((_jb) => {
     value: value2
   } = _kb, props = __objRest(_kb, [
     "className",
-    "grow",
     "format",
     "icon",
     "textColor",
@@ -37563,7 +37575,6 @@ const DateLabel = memo((_jb) => {
   ]);
   return /* @__PURE__ */ jsx$1(Label, __spreadProps(__spreadValues({
     className: `${className} date-label`,
-    grow: false,
     icon,
     textColor,
     textSize
@@ -37575,7 +37586,7 @@ const MenuItemLabel = memo((_lb) => {
   var _mb = _lb, {
     fieldName,
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     model,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
@@ -37609,7 +37620,6 @@ function getLabelByFieldType({
   switch (type) {
     case Primitives.Boolean:
       return /* @__PURE__ */ jsx$1(BooleanLabel, __spreadValues({
-        grow: false,
         value: value2
       }, props));
     case Primitives.CurrencyAmount:
@@ -37637,52 +37647,54 @@ function getLabelByFieldType({
       }, props));
     case Primitives.String:
       return /* @__PURE__ */ jsx$1(StringLabel, __spreadValues({
-        grow: false,
         value: value2
       }, props));
     default:
       return /* @__PURE__ */ jsx$1(StringLabel, __spreadValues({
-        grow: false,
         value: value2
       }, props));
   }
 }
 const DataGridCell = memo((_nb) => {
   var _ob = _nb, {
+    as = "label",
     fieldName,
     model,
     type,
     value: value2
   } = _ob, props = __objRest(_ob, [
+    "as",
     "fieldName",
     "model",
     "type",
     "value"
   ]);
   const {
-    alignContent,
+    alignment,
     textColor,
     textOverflow,
     textSize,
     textWeight,
-    maxWidth,
-    minWidth,
-    width
+    size
   } = props;
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-    orientation: Orientation.Horizontal,
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    alignment: {
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    },
+    as,
     overflow: Overflow.Hidden,
-    maxWidth,
-    minWidth,
-    paddingLeft: Amount.Less,
-    paddingRight: Amount.Less,
-    width
+    padding: {
+      left: Amount.Less,
+      right: Amount.Less
+    },
+    size
   }, props), {
     children: getLabelByFieldType({
       fieldName,
       model,
       props: {
-        alignContent,
+        alignment,
         overflow: Overflow.Hidden,
         textColor,
         textOverflow,
@@ -37702,8 +37714,7 @@ const SearchInput = memo((_pb) => {
   ]);
   return /* @__PURE__ */ jsx$1(TextInput, __spreadValues({
     icon: {
-      name: BasicIcons.Search,
-      size: Size.Smaller
+      name: BasicIcons.Search
     },
     inputType: TextInputType.Search,
     onChange,
@@ -37712,57 +37723,55 @@ const SearchInput = memo((_pb) => {
 });
 const MenuButton = memo((_rb) => {
   var _sb = _rb, {
-    backgroundColor = BackgroundColors.MenuButton,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1
-    },
-    borderRadius = Amount.Least,
+    background = {},
+    border = {},
+    borderRadius = {},
     className = "",
     menu,
     label,
-    padding = 5,
-    size = Size.Default,
-    textColor = TextColors.MenuButton,
-    width
+    padding = {},
+    textColor = TextColors.MenuButton
   } = _sb, props = __objRest(_sb, [
-    "backgroundColor",
+    "background",
     "border",
     "borderRadius",
     "className",
     "menu",
     "label",
     "padding",
-    "size",
-    "textColor",
-    "width"
+    "textColor"
   ]);
   const [focused, setFocused] = useState(false);
   const [menuVisible, setMenuVisible] = useState(false);
   useEffect(() => {
     setFocused(menuVisible);
   }, [menuVisible]);
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    boxShadow: menuVisible ? DepthShadow.Higher : DepthShadow.Surface,
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
     borderRadius,
     className: `${className} menu-button`,
     depth: Depth.Higher,
-    grow: false,
-    orientation: Orientation.Vertical,
     onMouseLeave: () => {
       setMenuVisible(false);
     },
-    width
+    shadow: menuVisible ? DepthShadow.Higher : DepthShadow.Surface
   }, props), {
     children: [/* @__PURE__ */ jsx$1(DropdownControl, {
-      backgroundColor,
-      borderRadius,
-      border,
+      background: __spreadValues({
+        color: BackgroundColors.MenuButton
+      }, background),
+      borderRadius: __spreadValues({
+        all: Amount.Least
+      }, borderRadius),
+      border: __spreadValues({
+        all: {
+          color: BorderColors.InputControl,
+          style: BorderStyle.Solid,
+          width: 1
+        }
+      }, border),
       depth: Depth.High,
       label: label != null ? label : "",
       focused,
-      lineHeight: size,
       menuVisible,
       name: "menu-button-dropdown-control",
       onBlur: () => {
@@ -37773,16 +37782,23 @@ const MenuButton = memo((_rb) => {
       onClick: () => setMenuVisible(!menuVisible),
       textColor
     }), /* @__PURE__ */ jsx$1(HoverPanel, {
-      backgroundColor,
-      borderRadius,
+      background: __spreadValues({
+        color: BackgroundColors.MenuButton
+      }, background),
+      borderRadius: __spreadValues({
+        all: Amount.Least
+      }, borderRadius),
       detached: false,
       focused,
-      padding,
+      padding: __spreadValues({
+        all: 5
+      }, padding),
       visible: menuVisible,
       setMenuVisible,
-      width,
       children: /* @__PURE__ */ jsx$1(Menu, {
-        backgroundColor: BackgroundColors.Light,
+        background: {
+          color: BackgroundColors.Light
+        },
         borderRadius,
         menu,
         onClick: (e2) => {
@@ -37794,9 +37810,8 @@ const MenuButton = memo((_rb) => {
 });
 const DataGrid = memo((_tb) => {
   var _ub = _tb, {
-    backgroundColor = BackgroundColors.DataGrid,
-    borderRadius = Amount.Least,
-    boxShadow = DepthShadow.Highest,
+    background = {},
+    borderRadius = {},
     className = "",
     columns,
     columnCount = 3,
@@ -37809,12 +37824,11 @@ const DataGrid = memo((_tb) => {
     loading,
     model,
     onItemClick,
-    padding = Amount.Less,
+    shadow = DepthShadow.Highest,
     template
   } = _ub, props = __objRest(_ub, [
-    "backgroundColor",
+    "background",
     "borderRadius",
-    "boxShadow",
     "className",
     "columns",
     "columnCount",
@@ -37827,52 +37841,64 @@ const DataGrid = memo((_tb) => {
     "loading",
     "model",
     "onItemClick",
-    "padding",
+    "shadow",
     "template"
   ]);
+  var _a2;
   const [searchTerm, setSearchTerm] = useState("");
   const [hoveredRow, setHoveredRow] = useState();
   const MIN_COLUMN_WIDTH = 150;
   const MAX_COLUMN_WIDTH = 300;
   if (!columns) {
-    return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-      alignContent: Align.Top,
-      backgroundColor,
-      borderRadius,
-      boxShadow,
+    return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+      alignment: {
+        vertical: AlignVertical.Top
+      },
+      background: __spreadValues({
+        color: BackgroundColors.DataGrid
+      }, background),
+      borderRadius: __spreadValues({
+        all: Amount.Least
+      }, borderRadius),
       className: `${className} data-grid`,
-      grow: true,
-      overflow: Overflow.Hidden
+      overflow: Overflow.Hidden,
+      shadow
     }, props), {
       children: /* @__PURE__ */ jsx$1(Label, {
         children: "No columns defined"
       })
     }));
   }
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    alignContent: Align.Top,
-    backgroundColor,
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+    alignment: {
+      vertical: AlignVertical.Top
+    },
+    background,
     borderRadius,
-    boxShadow,
     className: `${className} data-grid`,
-    grow: false,
-    overflow: Overflow.Hidden
+    overflow: Overflow.Hidden,
+    shadow
   }, props), {
     children: [/* @__PURE__ */ jsx$1(LoadingOverlay, {
       borderRadius,
       visible: loading
-    }), header && Object.keys(header).length > 0 && /* @__PURE__ */ jsxs$1(Container$h, {
-      backgroundColor: BackgroundColors.DataGridHeader,
+    }), header && Object.keys(header).length > 0 && /* @__PURE__ */ jsxs$1(Container$e, {
+      alignment: {
+        orientation: Orientation.Horizontal
+      },
+      background: {
+        color: BackgroundColors.DataGridHeader
+      },
       borderRadius: {
         topLeft: Amount.Less,
         topRight: Amount.Less
       },
       className: "data-grid-header",
-      orientation: Orientation.Horizontal,
-      padding: Amount.Less,
-      grow: false,
-      children: [header.search && /* @__PURE__ */ jsx$1(Container$h, {
-        width: header.search.width,
+      padding: {
+        all: Amount.Less
+      },
+      children: [header.search && /* @__PURE__ */ jsx$1(Container$e, {
+        size: header.search.size,
         children: /* @__PURE__ */ jsx$1(SearchInput, {
           name: "search-input",
           onChange: ({
@@ -37881,12 +37907,12 @@ const DataGrid = memo((_tb) => {
             setSearchTerm(value2 != null ? value2 : "");
           },
           placeholder: header.search.placeholder,
-          width: header.search.width
+          size: {
+            width: (_a2 = header.search.size) == null ? void 0 : _a2.width
+          }
         })
-      }), /* @__PURE__ */ jsx$1(Container$h, {
-        alignSelf: Align.Stretch
-      }), header.export && /* @__PURE__ */ jsx$1(Container$h, {
-        width: header.export.width,
+      }), /* @__PURE__ */ jsx$1(Container$e, {}), header.export && /* @__PURE__ */ jsx$1(Container$e, {
+        size: header.export.size,
         children: /* @__PURE__ */ jsx$1(MenuButton, {
           menu: [{
             label: "Export to CSV",
@@ -37901,30 +37927,39 @@ const DataGrid = memo((_tb) => {
         })
       }), header.create && /* @__PURE__ */ jsx$1(Button$1, {
         onClick: header.create.onClick,
-        size: Size.Small,
         type: ButtonType.Secondary,
         children: header.create.label
       })]
-    }), /* @__PURE__ */ jsx$1(Container$h, {
+    }), /* @__PURE__ */ jsx$1(Container$e, {
       borderRadius: !header ? borderRadius : void 0,
       className: "data-grid-grid",
       onScroll: (e2) => e2.preventDefault(),
       overflow: Overflow.Scroll,
       children: display === DataGridDisplayType.Table ? /* @__PURE__ */ jsxs$1(Fragment, {
-        children: [/* @__PURE__ */ jsx$1(Container$h, {
-          alignItems: Align.Left,
-          backgroundColor: BackgroundColors.DataGridColumnHeaders,
+        children: [/* @__PURE__ */ jsx$1(Container$e, {
+          alignment: {
+            horizontal: AlignHorizontal.Left,
+            orientation: Orientation.Horizontal
+          },
+          background: {
+            color: BackgroundColors.DataGridColumnHeaders
+          },
           className: "data-grid-headers",
-          orientation: Orientation.Horizontal,
-          paddingBottom: Amount.Least,
-          paddingTop: Amount.Least,
-          grow: false,
+          padding: {
+            bottom: Amount.Least,
+            top: Amount.Least
+          },
           children: columns.map((column, key) => {
-            var _a2;
-            return /* @__PURE__ */ jsx$1(Container$h, {
-              alignContent: column.align,
-              alignItems: Align.Center,
-              backgroundColor: BackgroundColors.DataGridColumnHeaders,
+            var _a3, _b, _c, _d, _e2;
+            return /* @__PURE__ */ jsx$1(Container$e, {
+              alignment: {
+                horizontal: column.align,
+                orientation: Orientation.Horizontal,
+                vertical: AlignVertical.Center
+              },
+              background: {
+                color: BackgroundColors.DataGridColumnHeaders
+              },
               border: key !== columns.length - 1 ? {
                 right: {
                   color: BorderColors.Default,
@@ -37937,75 +37972,88 @@ const DataGrid = memo((_tb) => {
                 topRight: header ? 0 : Amount.Default
               } : void 0,
               className: "data-grid-header-cell",
-              shrink: false,
-              orientation: Orientation.Horizontal,
-              paddingLeft: Amount.Default,
-              paddingRight: Amount.Default,
-              maxWidth: (_a2 = column.maxWidth) != null ? _a2 : MAX_COLUMN_WIDTH,
-              minWidth: column.minWidth ? column.minWidth : MIN_COLUMN_WIDTH,
-              width: column.width,
+              padding: {
+                left: Amount.Default,
+                right: Amount.Default
+              },
+              size: {
+                maxWidth: (_b = (_a3 = column.size) == null ? void 0 : _a3.maxWidth) != null ? _b : MAX_COLUMN_WIDTH,
+                minWidth: (_d = (_c = column.size) == null ? void 0 : _c.minWidth) != null ? _d : MIN_COLUMN_WIDTH,
+                width: (_e2 = column.size) == null ? void 0 : _e2.width
+              },
               children: /* @__PURE__ */ jsx$1(Label, {
-                alignContent: column.align,
-                alignItems: Align.Center,
-                height: Size.Large,
+                alignment: {
+                  horizontal: column.align,
+                  vertical: AlignVertical.Center
+                },
+                lineHeight: Sizes.Large,
                 textColor: TextColors.DataGridColumnHeaders,
-                size: Size.Smaller,
+                textSize: TextSize.Smaller,
                 children: column.label
               })
             }, key);
           })
-        }), /* @__PURE__ */ jsx$1(Container$h, {
-          backgroundColor: BackgroundColors.DataGridRow,
+        }), /* @__PURE__ */ jsx$1(Container$e, {
+          background: {
+            color: BackgroundColors.DataGridRow
+          },
           borderRadius: {
             bottomLeft: Amount.Default,
             bottomRight: Amount.Default
           },
           className: "data-grid-rows",
-          grow: true,
-          lineWrap: true,
-          orientation: Orientation.Vertical,
           children: data && data.map((row, key) => {
-            return /* @__PURE__ */ jsx$1(Container$h, {
-              backgroundColor: BackgroundColors.DataGridCell,
-              borderRadius: Amount.None,
+            return /* @__PURE__ */ jsx$1(Container$e, {
+              alignment: {
+                orientation: Orientation.Horizontal
+              },
+              background: {
+                color: BackgroundColors.DataGridCell
+              },
               className: "data-grid-row",
               cursor: Cursor.Pointer,
-              grow: true,
               hover: {
-                backgroundColor: BackgroundColors.Primary
+                background: {
+                  color: BackgroundColors.Primary
+                }
               },
-              orientation: Orientation.Horizontal,
               onClick: () => {
                 if (onItemClick)
                   onItemClick(row);
               },
               onMouseEnter: () => setHoveredRow(key),
               onMouseLeave: () => setHoveredRow(void 0),
-              padding: Amount.Least,
-              paddingLeft: Amount.Least,
-              paddingRight: Amount.Least,
+              padding: {
+                all: Amount.Least
+              },
               children: columns.map((column, columnKey) => {
-                var _a2;
+                var _a3, _b, _c, _d, _e2;
                 return /* @__PURE__ */ jsx$1(DataGridCell, {
-                  alignContent: column.align,
-                  alignItems: Align.Center,
+                  alignment: {
+                    horizontal: column.align,
+                    orientation: Orientation.Horizontal,
+                    vertical: AlignVertical.Center
+                  },
                   fieldName: column.field,
-                  height: Size.Large,
+                  lineHeight: Sizes.Large,
+                  lineWrap: true,
                   model,
                   textColor: hoveredRow === key ? TextColors.PrimaryContrast : TextColors.DataGridCell,
                   type: column.type,
                   value: fetchFromObject(row, column.field),
-                  maxWidth: (_a2 = column.maxWidth) != null ? _a2 : MAX_COLUMN_WIDTH,
-                  minWidth: column.minWidth ? column.minWidth : MIN_COLUMN_WIDTH,
-                  width: column.width
+                  size: {
+                    maxWidth: (_b = (_a3 = column.size) == null ? void 0 : _a3.maxWidth) != null ? _b : MAX_COLUMN_WIDTH,
+                    minWidth: (_d = (_c = column.size) == null ? void 0 : _c.minWidth) != null ? _d : MIN_COLUMN_WIDTH,
+                    width: (_e2 = column.size) == null ? void 0 : _e2.width
+                  }
                 });
               })
             }, key);
           })
         })]
-      }) : /* @__PURE__ */ jsx$1(Container$h, {
+      }) : /* @__PURE__ */ jsx$1(Container$e, {
         children: !loading && loaded && data && data.length === 0 ? /* @__PURE__ */ jsx$1(NoResults, {
-          as: Container$h,
+          as: Container$e,
           children: /* @__PURE__ */ jsx$1(Label, {
             children: "No results"
           })
@@ -38013,7 +38061,9 @@ const DataGrid = memo((_tb) => {
           if (template && template.card) {
             return createElement(template.card, {
               key,
-              marginBottom: Amount.Default,
+              margin: {
+                bottom: Amount.Default
+              },
               onClick: () => {
                 if (onItemClick)
                   onItemClick(row);
@@ -38037,7 +38087,7 @@ const NoResults = styled.div.withConfig({
 const BooleanLabel = memo((_vb) => {
   var _wb = _vb, {
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
@@ -38056,15 +38106,14 @@ const BooleanLabel = memo((_vb) => {
   }, props), {
     children: [/* @__PURE__ */ jsx$1(Icon, {
       color: value2 ? Colors.Primary : Colors.Error,
-      name: value2 ? BasicIcons.Checkmark2 : BasicIcons.Close,
-      size: Size.Smaller
+      name: value2 ? BasicIcons.Checkmark2 : BasicIcons.Close
     }), value2]
   }));
 });
 const ColorLabel = memo((_xb) => {
   var _yb = _xb, {
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
@@ -38087,7 +38136,7 @@ const ColorLabel = memo((_xb) => {
 const EmailAddressLabel = memo((_zb) => {
   var _Ab = _zb, {
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
@@ -38110,7 +38159,7 @@ const EmailAddressLabel = memo((_zb) => {
 const PhoneNumberLabel = memo((_Bb) => {
   var _Cb = _Bb, {
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
@@ -38134,7 +38183,7 @@ const ProgressLabel = memo((_Db) => {
   var _Eb = _Db, {
     color,
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
@@ -38156,7 +38205,9 @@ const ProgressLabel = memo((_Db) => {
   }, props), {
     children: /* @__PURE__ */ jsx$1(ProgressMeter, {
       amount: spent,
-      backgroundColor: color,
+      background: {
+        color
+      },
       total
     })
   }));
@@ -38164,7 +38215,7 @@ const ProgressLabel = memo((_Db) => {
 const CountryLabel = memo((_Fb) => {
   var _Gb = _Fb, {
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
@@ -38187,7 +38238,7 @@ const CountryLabel = memo((_Fb) => {
 const LanguageLabel = memo((_Hb) => {
   var _Ib = _Hb, {
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
@@ -38211,31 +38262,29 @@ const PersonLabel = memo((_Jb) => {
   var _Kb = _Jb, {
     image,
     name: name2,
-    size = Size.Default,
     textSize = TextSize.Large
   } = _Kb, props = __objRest(_Kb, [
     "image",
     "name",
-    "size",
     "textSize"
   ]);
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    alignItems: Align.Center,
-    orientation: Orientation.Horizontal
-  }, props), {
+  return /* @__PURE__ */ jsxs$1(Container$e, {
+    alignment: {
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    },
     children: [/* @__PURE__ */ jsx$1(Image, {
-      borderRadius: Amount.All,
-      marginRight: getSmallerAmount(convertSizeToAmount(size)),
+      borderRadius: {
+        all: Amount.All
+      },
       path: image == null ? void 0 : image.path,
-      url: image == null ? void 0 : image.url,
-      size
+      url: image == null ? void 0 : image.url
     }), /* @__PURE__ */ jsx$1(Label, {
-      lineHeight: getSmallerAmount(convertSizeToAmount(size)),
       textWeight: TextWeight.More,
       textSize,
       children: name2
     })]
-  }));
+  });
 });
 const UserLabel = memo(({
   className = "",
@@ -38257,24 +38306,28 @@ const UserLabel = memo(({
   },
   name: name2,
   image,
-  size = Size.Default,
   textSize = TextSize.Default
 }) => {
   return /* @__PURE__ */ jsxs$1(NavigationLink, {
-    borderRadius: Amount.All,
+    alignment: {
+      orientation: Orientation.Horizontal
+    },
+    borderRadius: {
+      all: Amount.All
+    },
     className: `${className} user-label`,
     active: {
-      backgroundColor: BackgroundColors.Primary,
-      backgroundOpacity: 100
+      background: {
+        color: BackgroundColors.Primary,
+        opacity: 100
+      }
     },
     hover: {
-      backgroundColor: BackgroundColors.Primary,
-      backgroundOpacity: 90
+      background: {
+        color: BackgroundColors.Primary,
+        opacity: 90
+      }
     },
-    orientation: Orientation.Horizontal,
-    padding: getSmallerAmount(convertSizeToAmount(size)),
-    paddingTop: getSmallerAmount(convertSizeToAmount(size)),
-    paddingBottom: getSmallerAmount(convertSizeToAmount(size)),
     to: to != null ? to : `/people/${id2}`,
     style: {
       position: "relative",
@@ -38283,13 +38336,8 @@ const UserLabel = memo(({
     children: [/* @__PURE__ */ jsx$1(PersonLabel, {
       name: name2,
       image,
-      lineHeight: size,
-      size,
       textSize
-    }), messageIcon && /* @__PURE__ */ jsx$1(Icon, __spreadValues({
-      grow: false,
-      size
-    }, messageIcon)), menu && /* @__PURE__ */ jsx$1(MoreMenu, __spreadValues({}, menu))]
+    }), messageIcon && /* @__PURE__ */ jsx$1(Icon, __spreadValues({}, messageIcon)), menu && /* @__PURE__ */ jsx$1(MoreMenu, __spreadValues({}, menu))]
   });
 });
 const MarkdownEditor = memo((_Lb) => {
@@ -38339,47 +38387,60 @@ const ActivityFeedItem = memo(({
   what,
   where
 }) => {
-  return /* @__PURE__ */ jsxs$1(Container$h, {
+  return /* @__PURE__ */ jsxs$1(Container$e, {
+    alignment: {
+      orientation: Orientation.Horizontal
+    },
     className: "activity-item",
-    grow: false,
-    orientation: Orientation.Horizontal,
     children: [who && /* @__PURE__ */ jsx$1(UserLabel, {
-      grow: false,
       image: who.image,
       menu: null,
       name: who.name,
-      size: Size.Small,
       to: who.to
-    }), what && /* @__PURE__ */ jsxs$1(Container$h, {
-      grow: false,
-      marginLeft: -2,
-      orientation: Orientation.Horizontal,
+    }), what && /* @__PURE__ */ jsxs$1(Container$e, {
+      alignment: {
+        orientation: Orientation.Horizontal
+      },
+      margin: {
+        left: -2
+      },
       children: [/* @__PURE__ */ jsx$1(Label, {
+        margin: {
+          right: 3
+        },
         textSize: TextSize.Default,
         children: getActivityLabel(what.name)
       }), what.to ? /* @__PURE__ */ jsx$1(Link, {
         to: what.to,
         hover: {
-          underline: true
+          textDecoration: {
+            line: TextDecorationLine.Underline
+          }
         },
-        marginLeft: 3,
-        underline: false,
+        textDecoration: {
+          line: TextDecorationLine.None
+        },
         children: what.label
       }) : what.label]
     }), where && /* @__PURE__ */ jsx$1(Label, {
-      alignItems: Align.Center,
-      grow: false,
-      marginLeft: -2,
+      alignment: {
+        horizontal: AlignHorizontal.Center
+      },
+      margin: {
+        left: -2
+      },
       textSize: TextSize.Default,
       children: where
     }), /* @__PURE__ */ jsx$1(Label, {
-      grow: false,
-      marginLeft: 3,
+      margin: {
+        left: 3
+      },
       children: "on"
     }), when && /* @__PURE__ */ jsx$1(DateLabel, {
       format: dateFormat,
-      grow: false,
-      marginLeft: 3,
+      margin: {
+        left: 3
+      },
       textSize: TextSize.Default,
       value: when
     })]
@@ -38395,27 +38456,36 @@ const ActivityFeed = memo((_Mb) => {
     "className",
     "dateFormat"
   ]);
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
     className: `${className} activity-feed`
   }, props), {
     children: [activities.map((activity, key) => {
-      return /* @__PURE__ */ jsxs$1(Container$h, {
-        children: [key !== 0 && key !== activities.length && /* @__PURE__ */ jsx$1(Container$h, {
-          backgroundColor: BackgroundColors.Lighter,
-          borderRadius: Amount.Default,
-          height: 12,
-          marginLeft: convertSizeToAmount(Size.Default),
-          marginBottom: 5,
-          marginTop: 5,
+      return /* @__PURE__ */ jsxs$1(Container$e, {
+        children: [key !== 0 && key !== activities.length && /* @__PURE__ */ jsx$1(Container$e, {
+          background: {
+            color: BackgroundColors.Lighter
+          },
+          borderRadius: {
+            all: Amount.Default
+          },
+          margin: {
+            bottom: 5,
+            top: 5
+          },
+          size: {
+            height: 12,
+            width: 5
+          },
           style: {
             transform: "translateX(-2px)"
-          },
-          width: 5
+          }
         }), /* @__PURE__ */ jsx$1(ActivityFeedItem, __spreadValues({}, activity))]
       }, key);
-    }), /* @__PURE__ */ jsx$1(Container$h, {
-      alignContent: Align.Center,
-      alignItems: Align.Center,
+    }), /* @__PURE__ */ jsx$1(Container$e, {
+      alignment: {
+        horizontal: AlignHorizontal.Center,
+        vertical: AlignVertical.Center
+      },
       border: {
         top: {
           color: BorderColors.Light,
@@ -38423,12 +38493,17 @@ const ActivityFeed = memo((_Mb) => {
           width: 1
         }
       },
-      marginTop: Amount.Default,
-      padding: Amount.Default,
-      paddingBottom: Amount.None,
+      margin: {
+        top: Amount.Default
+      },
+      padding: {
+        bottom: Amount.None,
+        left: Amount.Default,
+        right: Amount.Default,
+        top: Amount.Default
+      },
       children: /* @__PURE__ */ jsx$1(Button$1, {
         type: ButtonType.Primary,
-        size: Size.Small,
         children: "Load more"
       })
     })]
@@ -38474,7 +38549,9 @@ const Checkbox = memo((_Ob) => {
     className = "",
     defaultValue = false,
     onChange,
-    size = Size.Small,
+    size = {
+      height: Sizes.Small
+    },
     validation = {}
   } = _Pb, props = __objRest(_Pb, [
     "className",
@@ -38496,18 +38573,22 @@ const Checkbox = memo((_Ob) => {
         value: value2
       });
   }, [value2]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-    alignContent: Align.Center,
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    alignment: {
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    },
     as: "button",
-    backgroundColor: BackgroundColors.Transparent,
+    background: {
+      color: BackgroundColors.Transparent
+    },
     className: `${className} checkbox`,
     cursor: Cursor.Pointer,
     error: problems,
     form: "null",
     onBlur: () => setFocused(false),
     onClick: () => setValue(!value2),
-    onFocus: () => setFocused(true),
-    orientation: Orientation.Horizontal
+    onFocus: () => setFocused(true)
   }, props), {
     children: /* @__PURE__ */ jsx$1(Box, {
       size,
@@ -38515,7 +38596,10 @@ const Checkbox = memo((_Ob) => {
       children: /* @__PURE__ */ jsx$1(Icon, {
         color: value2 ? Colors.Success : Colors.White,
         name: BasicIcons.Checkmark2,
-        size: Size.Smaller
+        size: {
+          height: Sizes.Smaller,
+          width: Sizes.Smaller
+        }
       })
     })
   }));
@@ -38523,7 +38607,7 @@ const Checkbox = memo((_Ob) => {
 const Box = styled.span.withConfig({
   displayName: "Box",
   componentId: "sc-1afvykv-0"
-})(["", ";align-items:center;background:white;border:1px solid rgba(230,230,230,1);border-radius:4px;color:#7b7b7b;cursor:pointer;display:flex;height:", ";justify-content:center;margin-right:5px;position:relative;text-align:center;transition:background 0.2s ease-in-out;width:", ";&:before{border-radius:", ";}", ""], FocusedStyles, (props) => props.size, (props) => props.size, Amount.Least, (props) => !props.fixed && css(["&:hover{background:rgba(220,220,220,0.1);}"]));
+})(["", ";align-items:center;background:white;border:1px solid rgba(230,230,230,1);border-radius:4px;color:#7b7b7b;cursor:pointer;display:flex;height:", ";justify-content:center;margin-right:5px;position:relative;text-align:center;transition:background 0.2s ease-in-out;width:", ";&:before{border-radius:", ";}", ""], FocusStyles, (props) => props.size, (props) => props.size, Amount.Least, (props) => !props.fixed && css(["&:hover{background:rgba(220,220,220,0.1);}"]));
 var colorNamer$1 = { exports: {} };
 var chroma$1 = { exports: {} };
 (function(module, exports) {
@@ -49762,125 +49846,98 @@ const StreetAddressInput = memo((_Qb) => {
   var props = __objRest(_Qb, []);
   return /* @__PURE__ */ jsx$1(TextInput, __spreadValues({}, props));
 });
-const AlignLeft = memo((_Rb) => {
+const ListItem = memo((_Rb) => {
   var _Sb = _Rb, {
-    children
-  } = _Sb, props = __objRest(_Sb, [
-    "children"
-  ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-    alignItems: Align.Left,
-    className: "align-left"
-  }, props), {
-    children
-  }));
-});
-const AlignRight = memo((_Tb) => {
-  var _Ub = _Tb, {
-    children
-  } = _Ub, props = __objRest(_Ub, [
-    "children"
-  ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-    alignItems: Align.Right,
-    className: "right"
-  }, props), {
-    children
-  }));
-});
-const ListItem = memo((_Vb) => {
-  var _Wb = _Vb, {
     as = "li",
     children
-  } = _Wb, props = __objRest(_Wb, [
+  } = _Sb, props = __objRest(_Sb, [
     "as",
     "children"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    alignment: {
+      orientation: Orientation.Horizontal
+    },
     as,
     style: {
       display: as === "li" ? "list-item" : "flex"
-    },
-    orientation: Orientation.Horizontal
+    }
   }, props), {
     children
   }));
 });
-const OrderedList = memo((_Xb) => {
-  var _Yb = _Xb, {
+const OrderedList = memo((_Tb) => {
+  var _Ub = _Tb, {
     as = "ul",
     children
-  } = _Yb, props = __objRest(_Yb, [
+  } = _Ub, props = __objRest(_Ub, [
     "as",
     "children"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
     as
   }, props), {
     children
   }));
 });
-const UnorderedList = memo((_Zb) => {
-  var __b = _Zb, {
+const UnorderedList = memo((_Vb) => {
+  var _Wb = _Vb, {
     as = "ul",
-    grow = false,
     items,
-    marginLeft = Amount.Default
-  } = __b, props = __objRest(__b, [
+    margin = {}
+  } = _Wb, props = __objRest(_Wb, [
     "as",
-    "grow",
     "items",
-    "marginLeft"
+    "margin"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-    as,
-    grow,
-    orientation: Orientation.Vertical
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    as
   }, props), {
-    children: items.map((item, index) => item.props.items ? /* @__PURE__ */ jsx$1(Container$h, {
-      grow,
-      marginLeft,
-      paddingBottom: Amount.Least,
-      paddingTop: Amount.Least,
+    children: items.map((item, index) => item.props.items ? /* @__PURE__ */ jsx$1(Container$e, {
+      margin: __spreadValues({
+        left: Amount.Default
+      }, margin),
+      padding: {
+        bottom: Amount.Least,
+        top: Amount.Least
+      },
       children: item
     }) : /* @__PURE__ */ jsx$1(ListItem, {
-      grow: false,
-      marginLeft,
-      paddingBottom: Amount.Least,
-      paddingTop: Amount.Least,
+      margin: __spreadValues({
+        left: Amount.Default
+      }, margin),
+      padding: {
+        bottom: Amount.Least,
+        top: Amount.Least
+      },
       children: item
     }, index))
   }));
 });
-const Video = memo((_$b) => {
-  var _ac = _$b, {
+const Video = memo((_Xb) => {
+  var _Yb = _Xb, {
     className = "",
-    height = "100%",
-    url,
-    width = "100%"
-  } = _ac, props = __objRest(_ac, [
+    url
+  } = _Yb, props = __objRest(_Yb, [
     "className",
-    "height",
-    "url",
-    "width"
+    "url"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
     className: `${className} video`
   }, props), {
     children: /* @__PURE__ */ jsx$1(VideoElement, __spreadValues({
-      height,
-      src: url,
-      width
+      src: url
     }, props))
   }));
 });
 const VideoElement = styled.video.withConfig({
   displayName: "VideoElement",
   componentId: "sc-1ai2qam-0"
-})(["", ";"], DimensionStyles);
-const MediaGridItem = memo((_bc) => {
-  var _cc = _bc, {
-    borderRadius = Amount.Default,
+})([""]);
+const MediaGridItem = memo((_Zb) => {
+  var __b = _Zb, {
+    background = {},
+    borderRadius = {},
     description,
     images,
     minHeight,
@@ -49889,7 +49946,8 @@ const MediaGridItem = memo((_bc) => {
     title,
     url,
     video
-  } = _cc, props = __objRest(_cc, [
+  } = __b, props = __objRest(__b, [
+    "background",
     "borderRadius",
     "description",
     "images",
@@ -49901,51 +49959,56 @@ const MediaGridItem = memo((_bc) => {
     "video"
   ]);
   var _a2, _b, _c;
-  const content = images ? /* @__PURE__ */ jsxs$1(Container$h, {
-    alignItems: Align.Bottom,
-    orientation: Orientation.Horizontal,
-    padding: Amount.Default,
+  const content = images ? /* @__PURE__ */ jsxs$1(Container$e, {
+    alignment: {
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Bottom
+    },
+    padding: {
+      all: Amount.Default
+    },
     children: [/* @__PURE__ */ jsx$1(Label, {
       textColor: TextColors.White,
       textSize: TextSize.Large,
       textWeight: TextWeight.Most,
       children: title
-    }), /* @__PURE__ */ jsx$1(Container$h, {}), moreMenu && /* @__PURE__ */ jsx$1(MoreMenu, __spreadValues({}, moreMenu))]
+    }), /* @__PURE__ */ jsx$1(Container$e, {}), moreMenu && /* @__PURE__ */ jsx$1(MoreMenu, __spreadValues({}, moreMenu))]
   }) : video ? /* @__PURE__ */ jsx$1(Video, {
     className: "media-grid-video",
     description: video.description,
     path: video.path,
     url: video.url
-  }) : /* @__PURE__ */ jsx$1(Container$h, {
+  }) : /* @__PURE__ */ jsx$1(Container$e, {
     children: "Image not found"
   });
   return /* @__PURE__ */ jsx$1(Card, __spreadProps(__spreadValues({
-    alignItems: Align.Stretch,
-    alignContent: Align.Stretch,
-    backgroundColor: BackgroundColors.Dark,
-    backgroundImage: {
-      position: Align.Center,
-      size: BackgroundSize.Cover,
-      url: (_c = (_a2 = images == null ? void 0 : images[0]) == null ? void 0 : _a2.url) != null ? _c : (_b = images == null ? void 0 : images[0]) == null ? void 0 : _b.path
-    },
-    borderRadius,
-    grow: false,
+    background: __spreadValues({
+      color: BackgroundColors.Dark,
+      image: {
+        url: (_c = (_a2 = images == null ? void 0 : images[0]) == null ? void 0 : _a2.url) != null ? _c : (_b = images == null ? void 0 : images[0]) == null ? void 0 : _b.path
+      }
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.Default
+    }, borderRadius),
     linkTo: url,
-    minHeight: minHeight != null ? minHeight : 220,
-    onClick
+    onClick,
+    size: {
+      minHeight: minHeight != null ? minHeight : 220
+    }
   }, props), {
     children: content
   }));
 });
-const MediaGrid = memo((_dc) => {
-  var _ec = _dc, {
-    borderRadius = Amount.Default,
+const MediaGrid = memo((_$b) => {
+  var _ac = _$b, {
+    borderRadius = {},
     children,
     columns = 3,
     className = "",
     items,
     loading
-  } = _ec, props = __objRest(_ec, [
+  } = _ac, props = __objRest(_ac, [
     "borderRadius",
     "children",
     "columns",
@@ -49956,88 +50019,133 @@ const MediaGrid = memo((_dc) => {
   const rows = Array.from({
     length: Math.ceil(items.length / columns)
   }).fill(0);
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    borderRadius,
-    className: `${className} media-grid`,
-    marginBottom: Amount.Default,
-    orientation: Orientation.Vertical
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+    borderRadius: __spreadValues({
+      all: Amount.Default
+    }, borderRadius),
+    className: `${className} media-grid`
   }, props), {
     children: [/* @__PURE__ */ jsx$1(LoadingOverlay, {
-      backgroundColor: BackgroundColors.Transparent,
+      background: {
+        color: BackgroundColors.Transparent
+      },
       borderRadius,
       visible: loading
     }), rows.map((x2, row) => {
-      return /* @__PURE__ */ jsx$1(Container$h, {
+      return /* @__PURE__ */ jsx$1(Container$e, {
+        alignment: {
+          orientation: Orientation.Horizontal
+        },
         className: "media-grid-row",
-        marginBottom: Amount.Default,
-        orientation: Orientation.Horizontal,
+        margin: {
+          bottom: Amount.Default
+        },
         children: items.slice(columns * row, columns * row + columns).map((i2, key) => /* @__PURE__ */ jsx$1(MediaGridItem, __spreadValues({
-          marginRight: Amount.Default,
-          width: `calc(100% / ${columns != null ? columns : 1} - ${Amount.Default})`
+          margin: {
+            right: Amount.Default
+          },
+          size: {
+            width: `calc(100% / ${columns != null ? columns : 1} - ${Amount.Default})`
+          }
         }, i2), key))
       }, row);
     })]
   }));
 });
-const MediaPreview = memo((_fc) => {
-  var _gc = _fc, {
-    borderRadius = Amount.Less,
+const MediaPreview = memo((_bc) => {
+  var _cc = _bc, {
+    alignment = {},
+    borderRadius = {},
     className = "",
-    height = 220,
-    media,
-    orientation = Orientation.Vertical
-  } = _gc, props = __objRest(_gc, [
+    media
+  } = _cc, props = __objRest(_cc, [
+    "alignment",
     "borderRadius",
     "className",
-    "height",
-    "media",
-    "orientation"
+    "media"
   ]);
   var _a2, _b;
   if (!media || media.length === 0)
-    return /* @__PURE__ */ jsx$1(Container$h, {
+    return /* @__PURE__ */ jsx$1(Container$e, {
       children: "No media"
     });
   console.log("media", media);
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    className: `${className} media-preview`,
-    height: orientation === Orientation.Horizontal ? height : "auto",
-    orientation
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+    className: `${className} media-preview`
   }, props), {
     children: [media && media.length > 0 && media[0] && /* @__PURE__ */ jsx$1(Image, {
       alt: media[0].description,
-      borderRadius,
-      maxWidth: orientation === Orientation.Horizontal ? 300 : "auto",
+      borderRadius: __spreadValues({
+        all: Amount.Less
+      }, borderRadius),
+      size: {
+        maxWidth: 300
+      },
       url: (_b = media[0].url) != null ? _b : (_a2 = media == null ? void 0 : media[0]) == null ? void 0 : _a2.path
-    }), media && media.slice(1).length > 0 && /* @__PURE__ */ jsx$1(Container$h, {
-      alignContent: Align.SpaceBetween,
-      orientation: orientation === Orientation.Horizontal ? Orientation.Vertical : Orientation.Horizontal,
-      lineWrap: true,
+    }), media && media.slice(1).length > 0 && /* @__PURE__ */ jsx$1(Container$e, {
+      alignment: __spreadValues({
+        horizontal: AlignHorizontal.SpaceBetween,
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.SpaceBetween
+      }, alignment),
       children: media.slice(1).map((item, k2) => {
         return /* @__PURE__ */ jsx$1(Image, {
           alt: item.description,
-          borderRadius: Amount.Least,
-          height: orientation === Orientation.Horizontal ? "47%" : "auto",
-          marginLeft: orientation === Orientation.Horizontal ? Amount.Less : Amount.None,
-          marginTop: orientation === Orientation.Vertical ? Amount.Less : Amount.None,
+          borderRadius: {
+            all: Amount.Least
+          },
+          margin: {
+            left: alignment.orientation === Orientation.Horizontal ? Amount.Less : Amount.None,
+            top: alignment.orientation === Orientation.Vertical ? Amount.Less : Amount.None
+          },
           url: item.url,
-          width: orientation === Orientation.Vertical ? "31%" : "auto"
+          size: {
+            height: alignment.orientation === Orientation.Horizontal ? "47%" : "auto",
+            width: alignment.orientation === Orientation.Vertical ? "31%" : "auto"
+          }
         }, k2);
       })
     })]
   }));
 });
-const MessagePreview = memo((_hc) => {
-  var _ic = _hc, {
-    backgroundColor = BackgroundColors.Light,
+styled.svg.withConfig({
+  displayName: "SvgMedia",
+  componentId: "sc-1xm40ad-0"
+})(["align-items:center;display:flex;justify-content:center;svg{fill:rgb(", ");}"], (props) => props.color);
+const Svg = memo((_dc) => {
+  var _ec = _dc, {
+    as = "span",
+    children,
+    className = "",
+    size = {
+      height: Sizes.Small,
+      width: Sizes.Small
+    }
+  } = _ec, props = __objRest(_ec, [
+    "as",
+    "children",
+    "className",
+    "size"
+  ]);
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    as,
+    className: `${className} svg`,
+    size
+  }, props), {
+    children
+  }));
+});
+const MessagePreview = memo((_fc) => {
+  var _gc = _fc, {
+    background = {},
     body,
-    borderRadius = Amount.Least,
+    borderRadius = {},
     className = "",
     date,
     subject,
     sender
-  } = _ic, props = __objRest(_ic, [
-    "backgroundColor",
+  } = _gc, props = __objRest(_gc, [
+    "background",
     "body",
     "borderRadius",
     "className",
@@ -50045,99 +50153,115 @@ const MessagePreview = memo((_hc) => {
     "subject",
     "sender"
   ]);
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    backgroundColor,
-    borderRadius,
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+    background: __spreadValues({
+      color: BackgroundColors.Light
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.Least
+    }, borderRadius),
     className: `${className} message-preview`,
-    grow: true,
-    orientation: Orientation.Vertical,
-    padding: Amount.Default,
-    paddingLeft: Amount.More,
-    paddingRight: Amount.More
+    padding: {
+      bottom: Amount.Default,
+      left: Amount.More,
+      right: Amount.More,
+      top: Amount.Default
+    }
   }, props), {
-    children: [/* @__PURE__ */ jsxs$1(Container$h, {
-      alignItems: Align.Top,
-      grow: true,
-      orientation: Orientation.Horizontal,
+    children: [/* @__PURE__ */ jsxs$1(Container$e, {
+      alignment: {
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.Top
+      },
       children: [/* @__PURE__ */ jsx$1(Image, {
-        borderRadius: Amount.All,
-        marginRight: Amount.More,
-        url: "http://localhost:3000/public/assets/images/placeholders/people/person1.png",
-        size: Size.Default
+        borderRadius: {
+          all: Amount.All
+        },
+        margin: {
+          right: Amount.More
+        },
+        url: "http://localhost:3000/public/assets/images/placeholders/people/person1.png"
       }), /* @__PURE__ */ jsx$1(Label, {
-        alignItems: Align.Left,
-        grow: true,
         lineHeight: Amount.Default,
-        marginBottom: Amount.None,
+        margin: {
+          bottom: Amount.None
+        },
         textColor: TextColors.Light,
         textSize: TextSize.Small,
         textWeight: TextWeight.Default,
         children: "Samanatha Baskin"
       }), /* @__PURE__ */ jsx$1(DateLabel, {
-        alignContent: Align.Right,
-        grow: false,
+        alignment: {
+          horizontal: AlignHorizontal.Right
+        },
         lineHeight: Amount.Default,
         value: date,
         textColor: TextColors.Lighter,
         textSize: TextSize.Smaller
       })]
-    }), /* @__PURE__ */ jsxs$1(Container$h, {
-      grow: false,
-      orientation: Orientation.Horizontal,
-      children: [/* @__PURE__ */ jsx$1(Container$h, {
-        borderRadius: Amount.All,
-        marginRight: Amount.More,
-        size: Size.Default
-      }), /* @__PURE__ */ jsxs$1(Container$h, {
-        alignContent: Align.Top,
-        alignItems: Align.Left,
-        orientation: Orientation.Vertical,
+    }), /* @__PURE__ */ jsxs$1(Container$e, {
+      alignment: {
+        orientation: Orientation.Horizontal
+      },
+      children: [/* @__PURE__ */ jsx$1(Container$e, {
+        borderRadius: {
+          all: Amount.All
+        },
+        margin: {
+          right: Amount.More
+        }
+      }), /* @__PURE__ */ jsxs$1(Container$e, {
+        alignment: {
+          horizontal: AlignHorizontal.Left,
+          vertical: AlignVertical.Top
+        },
         children: [/* @__PURE__ */ jsx$1(Title, {
-          alignItems: Align.Left,
-          grow: true,
           lineHeight: Amount.Less,
-          marginTop: Amount.None,
-          marginBottom: Amount.Less,
           textSize: TextSize.Large,
           textWeight: TextWeight.More,
           children: subject
         }), /* @__PURE__ */ jsx$1(Paragraph, {
-          marginBottom: Amount.None,
           children: body
         })]
       })]
     })]
   }));
 });
-const ConversationList = memo((_jc) => {
-  var _kc = _jc, {
-    backgroundColor = BackgroundColors.Default,
-    borderRadius = Amount.Least,
+const ConversationList = memo((_hc) => {
+  var _ic = _hc, {
+    background = {},
+    borderRadius = {},
     className = "",
     overflow = Overflow.ScrollVertical,
-    width = 350
-  } = _kc, props = __objRest(_kc, [
-    "backgroundColor",
+    size = {}
+  } = _ic, props = __objRest(_ic, [
+    "background",
     "borderRadius",
     "className",
     "overflow",
-    "width"
+    "size"
   ]);
   const items = new Array(5).fill(0);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-    backgroundColor,
-    borderRadius,
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    background: __spreadValues({
+      color: BackgroundColors.Default
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.Least
+    }, borderRadius),
     className: `${className} conversation-list`,
-    grow: true,
-    orientation: Orientation.Vertical,
     overflow,
-    width
+    size: __spreadValues({
+      width: 350
+    }, size)
   }, props), {
     children: items.map((_, index) => {
       return /* @__PURE__ */ jsx$1(NavigationLink, {
         to: `conversation/${index}`,
         children: /* @__PURE__ */ jsx$1(MessagePreview, {
-          backgroundColor: BackgroundColors.Default,
+          background: {
+            color: BackgroundColors.Default
+          },
           body: "Lorem ipsum",
           border: index !== items.length - 1 ? {
             bottom: {
@@ -50146,7 +50270,6 @@ const ConversationList = memo((_jc) => {
               width: 1
             }
           } : void 0,
-          borderRadius: Amount.None,
           date: new Date().toISOString(),
           sender: {
             id: "0",
@@ -50158,139 +50281,152 @@ const ConversationList = memo((_jc) => {
     })
   }));
 });
-const NavigationMenu = memo((_lc) => {
-  var _mc = _lc, {
-    alignContent = Align.Left,
-    alignItems = Align.Center,
-    backgroundColor = BackgroundColors.NavigationMenu,
+const NavigationMenu = memo((_jc) => {
+  var _kc = _jc, {
+    alignment = {},
+    background = {},
     className = "",
-    padding = Amount.Less,
+    padding = {},
     menu = [],
     menuItemProps = {
       active: {
-        backgroundColor: BackgroundColors.Primary,
-        boxShadow: {
-          blurRadius: 5,
-          color: BackgroundColors.Primary,
-          offsetX: 0,
-          offsetY: 1,
-          opacity: 35,
-          spreadRadius: 3
+        background: {
+          color: BackgroundColors.Primary
         },
         textColor: TextColors.PrimaryContrast
       },
-      borderRadius: Amount.Least,
+      alignment: {
+        fill: Fill.Horizontal
+      },
+      borderRadius: {
+        all: Amount.Least
+      },
       focus: {
         textColor: TextColors.PrimaryContrast
       },
       hover: {
-        backgroundColor: BackgroundColors.Light,
+        background: {
+          color: BackgroundColors.Light
+        },
         textColor: TextColors.Light
       },
-      lineHeight: Size.Default,
-      padding: Amount.Least,
-      paddingLeft: Amount.Less,
-      paddingRight: Amount.Less,
+      lineHeight: Sizes.Default,
+      padding: {
+        bottom: Amount.Least,
+        left: Amount.Default,
+        right: Amount.Default,
+        top: Amount.Least
+      },
       textColor: TextColors.Default,
       textSize: TextSize.Default
     }
-  } = _mc, props = __objRest(_mc, [
-    "alignContent",
-    "alignItems",
-    "backgroundColor",
+  } = _kc, props = __objRest(_kc, [
+    "alignment",
+    "background",
     "className",
     "padding",
     "menu",
     "menuItemProps"
   ]);
-  return /* @__PURE__ */ jsx$1(Container$h, __spreadProps(__spreadValues({
-    alignItems: Align.Stretch,
-    alignContent: Align.Top,
+  return /* @__PURE__ */ jsx$1(Container$e, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      horizontal: AlignHorizontal.Stretch,
+      vertical: AlignVertical.Top
+    }, alignment),
     as: "nav",
-    backgroundColor,
+    background: __spreadValues({
+      color: BackgroundColors.NavigationMenu
+    }, background),
     className: `${className} navigation-menu`,
-    padding: Amount.Less
+    padding: __spreadValues({
+      all: Amount.Less
+    }, padding)
   }, props), {
     children: menu.map((item, key) => {
-      var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o, _p, _q, _r;
+      var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2;
       return /* @__PURE__ */ jsx$1(NavigationLink, __spreadValues({
         active: (_a2 = menuItemProps == null ? void 0 : menuItemProps.active) != null ? _a2 : item.active,
-        backgroundColor: (_b = menuItemProps == null ? void 0 : menuItemProps.backgroundColor) != null ? _b : BackgroundColors.Transparent,
-        borderRadius: (_d = (_c = menuItemProps.borderRadius) != null ? _c : item.borderRadius) != null ? _d : Amount.Default,
+        borderRadius: (_c = (_b = menuItemProps.borderRadius) != null ? _b : item.borderRadius) != null ? _c : {
+          all: Amount.Default
+        },
         className: "navigation-menu-item",
-        focus: (_e2 = menuItemProps == null ? void 0 : menuItemProps.focus) != null ? _e2 : item.focus,
-        grow: true,
-        hover: (_f = menuItemProps == null ? void 0 : menuItemProps.hover) != null ? _f : item.hover,
+        focus: (_d = menuItemProps == null ? void 0 : menuItemProps.focus) != null ? _d : item.focus,
+        hover: (_e2 = menuItemProps == null ? void 0 : menuItemProps.hover) != null ? _e2 : item.hover,
         icon: item.icon,
         label: item.label,
-        margin: (_g = menuItemProps.margin) != null ? _g : Amount.None,
-        marginBottom: (_h = menuItemProps.marginBottom) != null ? _h : Amount.Least,
-        marginLeft: (_i2 = menuItemProps.marginLeft) != null ? _i2 : Amount.None,
-        marginRight: (_j = menuItemProps.marginRight) != null ? _j : Amount.None,
-        marginTop: (_k = menuItemProps.marginTop) != null ? _k : Amount.None,
-        padding: (_l = menuItemProps.padding) != null ? _l : Amount.None,
-        paddingBottom: (_m = menuItemProps.paddingBottom) != null ? _m : menuItemProps.padding,
-        paddingLeft: (_n = menuItemProps.paddingLeft) != null ? _n : menuItemProps.padding,
-        paddingRight: (_o = menuItemProps.paddingRight) != null ? _o : menuItemProps.padding,
-        paddingTop: (_p = menuItemProps.paddingTop) != null ? _p : menuItemProps.padding,
-        textColor: (_q = menuItemProps.textColor) != null ? _q : TextColors.Default,
-        to: (_r = item.to) != null ? _r : "#"
+        margin: (_f = menuItemProps.margin) != null ? _f : {
+          bottom: Amount.Least
+        },
+        padding: (_g = menuItemProps.padding) != null ? _g : {
+          all: Amount.None
+        },
+        textColor: (_h = menuItemProps.textColor) != null ? _h : TextColors.Default,
+        to: (_i2 = item.to) != null ? _i2 : "#"
       }, menuItemProps), key);
     })
   }));
 });
-const ConversationNavigation = memo((_nc) => {
-  var props = __objRest(_nc, []);
+const ConversationNavigation = memo((_lc) => {
+  var props = __objRest(_lc, []);
   const navigate = useNavigate();
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({}, props), {
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({}, props), {
     children: [/* @__PURE__ */ jsx$1(Button$1, {
-      alignContent: Align.Center,
-      borderRadius: Amount.Least,
-      fullWidth: true,
-      grow: false,
+      alignment: {
+        fill: Fill.Horizontal,
+        vertical: AlignVertical.Center
+      },
+      borderRadius: {
+        all: Amount.Least
+      },
       icon: {
         name: DualLightIcons.AddCircle,
-        size: Size.Small
+        size: {
+          height: Sizes.Small,
+          width: Sizes.Small
+        }
       },
-      marginBottom: Amount.Default,
+      margin: {
+        bottom: Amount.Default
+      },
       onClick: () => navigate("/messages/new"),
-      size: Size.Large,
       type: ButtonType.Primary,
       children: "New Message"
     }), /* @__PURE__ */ jsx$1(NavigationMenu, {
-      backgroundColor: BackgroundColors.Transparent,
+      background: {
+        color: BackgroundColors.Transparent
+      },
       menu: [{
         icon: {
           name: DualLightIcons.Inbox,
-          size: Size.Small
+          size: Sizes.Small
         },
         label: "Inbox",
         to: "/messages/inbox"
       }, {
         icon: {
           name: DualLightIcons.Star,
-          size: Size.Small
+          size: Sizes.Small
         },
         label: "Starred",
         to: "/messages/starred"
       }, {
         icon: {
           name: DualLightIcons.Send,
-          size: Size.Small
+          size: Sizes.Small
         },
         label: "Sent",
         to: "/messages/sent"
       }, {
         icon: {
           name: DualLightIcons.Note,
-          size: Size.Small
+          size: Sizes.Small
         },
         label: "Drafts",
         to: "/messages/drafts"
       }, {
         icon: {
           name: DualLightIcons.Trash,
-          size: Size.Small
+          size: Sizes.Small
         },
         label: "Trash",
         to: "/messages/trash"
@@ -50303,15 +50439,19 @@ const Message$1 = memo(({
   subject,
   sender
 }) => {
-  return /* @__PURE__ */ jsx$1(Container$h, {});
+  return /* @__PURE__ */ jsx$1(Container$e, {});
 });
-const MessageComposer = memo((_oc) => {
-  var props = __objRest(_oc, []);
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    backgroundColor: BackgroundColors.Default
+const MessageComposer = memo((_mc) => {
+  var props = __objRest(_mc, []);
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+    background: {
+      color: BackgroundColors.Default
+    }
   }, props), {
-    children: [/* @__PURE__ */ jsx$1(Container$h, {
-      alignContent: Align.Center,
+    children: [/* @__PURE__ */ jsx$1(Container$e, {
+      alignment: {
+        horizontal: AlignHorizontal.Center
+      },
       border: {
         bottom: {
           color: BorderColors.Dark,
@@ -50319,13 +50459,16 @@ const MessageComposer = memo((_oc) => {
           width: 1
         }
       },
-      grow: false,
-      padding: Amount.More,
+      padding: {
+        all: Amount.More
+      },
       children: /* @__PURE__ */ jsx$1(Label, {
         children: "Title"
       })
-    }), /* @__PURE__ */ jsx$1(Container$h, {
-      alignContent: Align.Center,
+    }), /* @__PURE__ */ jsx$1(Container$e, {
+      alignment: {
+        horizontal: AlignHorizontal.Center
+      },
       border: {
         bottom: {
           color: BorderColors.Dark,
@@ -50333,13 +50476,16 @@ const MessageComposer = memo((_oc) => {
           width: 1
         }
       },
-      grow: false,
-      padding: Amount.More,
+      padding: {
+        all: Amount.More
+      },
       children: /* @__PURE__ */ jsx$1(Label, {
         children: "Recipients"
       })
-    }), /* @__PURE__ */ jsx$1(Container$h, {
-      alignContent: Align.Center,
+    }), /* @__PURE__ */ jsx$1(Container$e, {
+      alignment: {
+        horizontal: AlignHorizontal.Center
+      },
       border: {
         bottom: {
           color: BorderColors.Dark,
@@ -50347,26 +50493,32 @@ const MessageComposer = memo((_oc) => {
           width: 1
         }
       },
-      grow: false,
-      padding: Amount.More,
+      padding: {
+        all: Amount.More
+      },
       children: /* @__PURE__ */ jsx$1(Label, {
         children: "Subject"
       })
-    }), /* @__PURE__ */ jsx$1(Container$h, {
-      alignItems: Align.Top,
-      alignContent: Align.Top,
-      padding: Amount.More,
+    }), /* @__PURE__ */ jsx$1(Container$e, {
+      alignment: {
+        horizontal: AlignHorizontal.Left,
+        vertical: AlignVertical.Bottom
+      },
+      padding: {
+        all: Amount.More
+      },
       children: /* @__PURE__ */ jsx$1(Label, {
-        grow: false,
         children: "Message"
       })
-    }), /* @__PURE__ */ jsx$1(Container$h, {
-      alignItems: Align.Left,
-      alignContent: Align.Top,
-      grow: false,
-      padding: Amount.More,
+    }), /* @__PURE__ */ jsx$1(Container$e, {
+      alignment: {
+        horizontal: AlignHorizontal.Left,
+        vertical: AlignVertical.Bottom
+      },
+      padding: {
+        all: Amount.More
+      },
       children: /* @__PURE__ */ jsx$1(Button$1, {
-        grow: false,
         type: ButtonType.Primary,
         children: "Send"
       })
@@ -50416,16 +50568,14 @@ const UserMenu = memo(({
   return /* @__PURE__ */ jsx$1(MenuButton, {
     menu: [{
       icon: {
-        name: BasicIcons.GearCog,
-        size: Size.Smaller
+        name: BasicIcons.GearCog
       },
       label: "Settings",
       to: "/settings"
     }, {
       icon: {
         color: Colors.Error,
-        name: BasicIcons.Exit,
-        size: Size.Smaller
+        name: BasicIcons.Exit
       },
       label: "Logout",
       onClick: () => {
@@ -50438,44 +50588,58 @@ const UserMenu = memo(({
   });
 });
 const NavigationBar = memo(({
-  backgroundColor = BackgroundColors.NavigationBar,
-  logo
+  alignment = {},
+  background = {},
+  border = {},
+  logo,
+  padding = {}
 }) => {
   const navigate = useNavigate();
-  return /* @__PURE__ */ jsxs$1(Container$h, {
-    backgroundColor,
-    border: {
+  return /* @__PURE__ */ jsxs$1(Container$e, {
+    alignment: __spreadValues({
+      orientation: Orientation.Horizontal
+    }, alignment),
+    background: __spreadValues({
+      color: BackgroundColors.NavigationBar
+    }, background),
+    border: __spreadValues({
       bottom: {
         color: BorderColors.Dark,
         style: BorderStyle.Solid,
         width: 1
       }
-    },
-    grow: false,
-    orientation: Orientation.Horizontal,
-    padding: Amount.Default,
-    paddingLeft: Amount.More,
-    paddingRight: Amount.Most,
-    children: [/* @__PURE__ */ jsx$1(Container$h, {
-      alignItems: Align.Center,
-      grow: false,
-      orientation: Orientation.Horizontal,
+    }, border),
+    padding: __spreadValues({
+      bottom: Amount.Default,
+      left: Amount.More,
+      right: Amount.Most,
+      top: Amount.Default
+    }, padding),
+    children: [/* @__PURE__ */ jsx$1(Container$e, {
+      alignment: {
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.Center
+      },
       children: logo
-    }), /* @__PURE__ */ jsx$1(Container$h, {}), /* @__PURE__ */ jsx$1(Container$h, {
-      alignContent: Align.Center,
-      width: 200,
+    }), /* @__PURE__ */ jsx$1(Container$e, {}), /* @__PURE__ */ jsx$1(Container$e, {
+      alignment: {
+        vertical: AlignVertical.Center
+      },
+      size: {
+        width: 200
+      },
       children: /* @__PURE__ */ jsx$1(UserMenu, {
         onLogoutSuccess: () => navigate("/login")
       })
     })]
   });
 });
-const ObjectLink = memo((_pc) => {
-  var _qc = _pc, {
+const ObjectLink = memo((_nc) => {
+  var _oc = _nc, {
     children,
     disabled,
     onClick
-  } = _qc, props = __objRest(_qc, [
+  } = _oc, props = __objRest(_oc, [
     "children",
     "disabled",
     "onClick"
@@ -50506,11 +50670,9 @@ const PageLink = memo(({
         children: icon
       }), /* @__PURE__ */ jsx$1(Label, {
         textColor: textColor != null ? textColor : TextColors.Primary,
-        size: Size.Small,
         children: label
       }), showArrow && /* @__PURE__ */ jsx$1(Icon, {
         name: BasicIcons.ChevronRight,
-        size: Size.Small,
         color: textColor
       })]
     })
@@ -50525,7 +50687,8 @@ const IconWrapper$1 = styled.div.withConfig({
   componentId: "sc-10hsjyi-1"
 })(["flex-basis:20px;"]);
 const Tabs = memo(({
-  borderRadius = Amount.More,
+  background = {},
+  borderRadius = {},
   className = "",
   children
 }) => {
@@ -50536,15 +50699,19 @@ const Tabs = memo(({
       initialIndex = key;
   });
   const [currentTabIndex, setTabIndex] = useState(initialIndex);
-  return /* @__PURE__ */ jsxs$1(Container$h, {
-    alignContent: Align.Stretch,
+  return /* @__PURE__ */ jsxs$1(Container$e, {
+    alignment: {
+      vertical: AlignVertical.Stretch
+    },
     className: `${className} tabs`,
-    orientation: Orientation.Vertical,
-    children: [/* @__PURE__ */ jsx$1(Container$h, {
-      alignContent: Align.Center,
-      marginBottom: Amount.Default,
-      orientation: Orientation.Horizontal,
-      grow: false,
+    children: [/* @__PURE__ */ jsx$1(Container$e, {
+      alignment: {
+        orientation: Orientation.Horizontal,
+        horizontal: AlignHorizontal.Center
+      },
+      margin: {
+        bottom: Amount.Default
+      },
       children: React.Children.map(children, (c2, key) => {
         if (c2.props.visible === false)
           return null;
@@ -50562,17 +50729,21 @@ const Tabs = memo(({
           })
         }, key);
       })
-    }), /* @__PURE__ */ jsx$1(Container$h, {
-      alignContent: Align.Top,
-      backgroundColor: BackgroundColors.Default,
-      borderRadius,
-      boxShadow: DepthShadow.Highest,
+    }), /* @__PURE__ */ jsx$1(Container$e, {
+      background: __spreadValues({
+        color: BackgroundColors.Default
+      }, background),
+      borderRadius: __spreadValues({
+        all: Amount.More
+      }, borderRadius),
       className: "tab-content",
-      grow: false,
-      orientation: Orientation.Vertical,
-      padding: Amount.Most,
-      paddingLeft: Amount.All,
-      paddingRight: Amount.All,
+      padding: {
+        bottom: Amount.Default,
+        left: Amount.Most,
+        right: Amount.Most,
+        top: Amount.Default
+      },
+      shadow: DepthShadow.Highest,
       children: Children.map(children, (c2, key) => {
         if (key !== currentTabIndex)
           return null;
@@ -50584,32 +50755,31 @@ const Tabs = memo(({
 const TabButton = styled.button.withConfig({
   displayName: "TabButton",
   componentId: "sc-1qraht0-0"
-})(["", ";background:transparent;border:none;border-bottom:3px solid rgba(", ",0.5);color:var(--text-color-light);cursor:pointer;display:inline-block;font-size:14px;font-weight:600;height:var(--amount-all);line-height:var(--amount-all);padding:0 var(--amount-default);position:relative;text-align:center;transition:background 0.2s ease-out,border 0.2s ease-out,color 0.2s ease-out;user-select:none;&:before{border-radius:", ";top:-2px;left:-2px;right:-2px;bottom:-2px;}*{cursor:pointer;}", ""], FocusedStyles, BorderColors.Light, Amount.Least, (props) => props.current && css(["border-bottom:3px solid var(--color-primary);font-weight:700;"]));
+})(["", ";background:transparent;border:none;border-bottom:3px solid rgba(", ",0.5);color:var(--text-color-light);cursor:pointer;display:inline-block;font-size:14px;font-weight:600;height:var(--amount-all);line-height:var(--amount-all);padding:0 var(--amount-default);position:relative;text-align:center;transition:background 0.2s ease-out,border 0.2s ease-out,color 0.2s ease-out;user-select:none;&:before{border-radius:", ";top:-2px;left:-2px;right:-2px;bottom:-2px;}*{cursor:pointer;}", ""], FocusStyles, BorderColors.Light, Amount.Least, (props) => props.current && css(["border-bottom:3px solid var(--color-primary);font-weight:700;"]));
 const Tab = memo(({
   className = "",
   children,
   label,
   onClick
 }) => {
-  return /* @__PURE__ */ jsx$1(Container$h, {
+  return /* @__PURE__ */ jsx$1(Container$e, {
     className: `${className} tab`,
     "data-label": label,
-    fadeIn: true,
     children
   });
 });
-const ConnectionStatus = memo((_rc) => {
-  var props = __objRest(_rc, []);
+const ConnectionStatus = memo((_pc) => {
+  var props = __objRest(_pc, []);
   return /* @__PURE__ */ jsx$1(NotificationLabel, __spreadValues({
     type: NotificationType.Success,
     label: "Connected"
   }, props));
 });
-const Badge = memo((_sc) => {
-  var _tc = _sc, {
+const Badge = memo((_qc) => {
+  var _rc = _qc, {
     children,
     label
-  } = _tc, props = __objRest(_tc, [
+  } = _rc, props = __objRest(_rc, [
     "children",
     "label"
   ]);
@@ -50664,34 +50834,25 @@ const Close = styled.div.withConfig({
   displayName: "Close",
   componentId: "sc-hj2572-4"
 })(["float:right;height:60px;line-height:49px;text-align:center;width:60px;"]);
-const Heading = memo((_uc) => {
-  var _vc = _uc, {
+const Heading = memo((_sc) => {
+  var _tc = _sc, {
     as = "h3",
-    alignText = Align.Left,
     children,
     className = "",
-    grow = false,
-    marginBottom = Amount.More,
     textWeight = TextWeight.More,
     textColor = TextColors.Dark,
     textSize = TextSize.Large
-  } = _vc, props = __objRest(_vc, [
+  } = _tc, props = __objRest(_tc, [
     "as",
-    "alignText",
     "children",
     "className",
-    "grow",
-    "marginBottom",
     "textWeight",
     "textColor",
     "textSize"
   ]);
-  return /* @__PURE__ */ jsx$1(Label, __spreadProps(__spreadValues({
-    alignText,
+  return /* @__PURE__ */ jsx$1(Text, __spreadProps(__spreadValues({
     as,
     className: `${className} heading`,
-    grow,
-    marginBottom,
     textColor,
     textWeight,
     textSize
@@ -50699,8 +50860,8 @@ const Heading = memo((_uc) => {
     children
   }));
 });
-const UniversalSearch = memo((_wc) => {
-  var props = __objRest(_wc, []);
+const UniversalSearch = memo((_uc) => {
+  var props = __objRest(_uc, []);
   const [resultsVisible, setResultsVisible] = useState(false);
   const [searchValue, setSearchValue] = useState();
   const [isFocused, setFocused] = useState(false);
@@ -50711,14 +50872,11 @@ const UniversalSearch = memo((_wc) => {
       setResultsVisible(false);
     }
   }, [isFocused, searchValue]);
-  return /* @__PURE__ */ jsxs$1(Container$h, __spreadProps(__spreadValues({
-    className: "universal-search",
-    grow: true,
-    orientation: Orientation.Vertical
+  return /* @__PURE__ */ jsxs$1(Container$e, __spreadProps(__spreadValues({
+    className: "universal-search"
   }, props), {
     children: [/* @__PURE__ */ jsx$1(SearchInput, {
       name: "universal-search",
-      flat: true,
       placeholder: "Search everything",
       onChange: ({
         value: value2
@@ -50731,14 +50889,14 @@ const UniversalSearch = memo((_wc) => {
       },
       spellCheck: false
     }), /* @__PURE__ */ jsxs$1(SearchResults, {
-      as: Container$h,
+      as: Container$e,
       resultsVisible,
       depth: Depth.Highest,
-      padding: Amount.More,
+      padding: {
+        all: Amount.More
+      },
       children: [/* @__PURE__ */ jsx$1(CloseButton, {
-        alignSelf: Align.Right,
-        onClick: () => setResultsVisible(false),
-        size: Size.Small
+        onClick: () => setResultsVisible(false)
       }), /* @__PURE__ */ jsx$1(Heading, {
         children: "Search Results"
       })]
@@ -50749,10 +50907,10 @@ const SearchResults = styled.div.withConfig({
   displayName: "SearchResults",
   componentId: "sc-1rpv9xw-0"
 })(["backdrop-filter:blur(3px);background:var(--bg-color-depth-highest-opaque);border-radius:var(--border-radius);cursor:default;display:none;overflow:hidden;overflow-y:scroll;left:20px;max-height:390px;min-height:300px;position:absolute;opacity:0;pointer-events:none;top:80%;transform:translateY(-300px);transition:opacity 0.18s ease-in-out,transform 0.18s ease-in-out;min-width:500px;max-width:500px;z-index:3;.result{margin-bottom:3px;}", ";"], (props) => props.resultsVisible && css(["display:flex;opacity:1;pointer-events:all;transform:translateY(0);"]));
-const ThemeSelector = memo((_xc) => {
-  var _yc = _xc, {
+const ThemeSelector = memo((_vc) => {
+  var _wc = _vc, {
     showLabel = true
-  } = _yc, props = __objRest(_yc, [
+  } = _wc, props = __objRest(_wc, [
     "showLabel"
   ]);
   const dispatch = useDispatch();
@@ -50760,9 +50918,10 @@ const ThemeSelector = memo((_xc) => {
     current,
     list
   } = useSelector((state) => state.ui.themes);
-  return /* @__PURE__ */ jsxs$1(Container$h, {
-    alignContent: Align.Center,
-    grow: false,
+  return /* @__PURE__ */ jsxs$1(Container$e, {
+    alignment: {
+      vertical: AlignVertical.Center
+    },
     children: [showLabel && /* @__PURE__ */ jsx$1(InputLabel, {
       children: "Theme"
     }), /* @__PURE__ */ jsx$1(DropdownInput, __spreadValues({
@@ -50784,14 +50943,14 @@ const ThemeSelector = memo((_xc) => {
     }, props))]
   });
 });
-const LogoutButton = memo((_zc) => {
-  var _Ac = _zc, {
+const LogoutButton = memo((_xc) => {
+  var _yc = _xc, {
     icon,
     onLogoutSuccess,
     label,
     showArrow = false,
     textColor = TextColors.Error
-  } = _Ac, props = __objRest(_Ac, [
+  } = _yc, props = __objRest(_yc, [
     "icon",
     "onLogoutSuccess",
     "label",
@@ -50809,12 +50968,11 @@ const LogoutButton = memo((_zc) => {
   }, props), {
     children: [icon && /* @__PURE__ */ jsx$1(Icon, __spreadValues({}, icon)), /* @__PURE__ */ jsx$1(Label, {
       textColor,
-      size: Size.Small,
+      textSize: TextSize.Small,
       children: label != null ? label : "Logout"
     }), showArrow && /* @__PURE__ */ jsx$1(Icon, {
       color: textColor,
-      name: BasicIcons.ChevronRight,
-      size: Size.Small
+      name: BasicIcons.ChevronRight
     })]
   }));
 });
@@ -50868,10 +51026,139 @@ function useAuthentication({
     loginRequired
   };
 }
-const ButtonStyles = css(["background-color:", ";border:1px solid ", ";padding:0 calc(", " / 3);"], BackgroundColors.Lightest, BorderColors.Light, (props) => props.size);
+function getSmallerAmount(amount) {
+  switch (amount) {
+    case Amount.All:
+      return Amount.Most;
+    case Amount.Most:
+      return Amount.More;
+    case Amount.More:
+      return Amount.Default;
+    case Amount.Default:
+      return Amount.Less;
+    case Amount.Less:
+      return Amount.Least;
+    case Amount.Least:
+      return Amount.None;
+    case Amount.None:
+      return Amount.None;
+  }
+}
+function getLargerAmount(amount) {
+  switch (amount) {
+    case Amount.None:
+      return Amount.Least;
+    case Amount.Least:
+      return Amount.Less;
+    case Amount.Less:
+      return Amount.Default;
+    case Amount.Default:
+      return Amount.More;
+    case Amount.More:
+      return Amount.Most;
+    case Amount.Most:
+      return Amount.All;
+    case Amount.All:
+      return Amount.All;
+  }
+}
+function convertAmountToSize(amount) {
+  switch (amount) {
+    case Amount.None:
+      return Sizes.Smallest;
+    case Amount.Least:
+      return Sizes.Smaller;
+    case Amount.Less:
+      return Sizes.Small;
+    case Amount.Default:
+      return Sizes.Default;
+    case Amount.More:
+      return Sizes.Large;
+    case Amount.Most:
+      return Sizes.Larger;
+    case Amount.All:
+      return Sizes.Largest;
+  }
+}
+function convertSizeToAmount(size) {
+  if (!size)
+    return Amount.Default;
+  switch (size) {
+    case Sizes.Smallest:
+      return Amount.None;
+    case Sizes.Smaller:
+      return Amount.Least;
+    case Sizes.Small:
+      return Amount.Less;
+    case Sizes.Default:
+      return Amount.Default;
+    case Sizes.Large:
+      return Amount.More;
+    case Sizes.Larger:
+      return Amount.Most;
+    case Sizes.Largest:
+      return Amount.All;
+  }
+}
+function convertSizeToTextSize(size) {
+  if (!size)
+    return TextSize.Default;
+  switch (size) {
+    case Sizes.Smallest:
+      return TextSize.Smallest;
+    case Sizes.Smaller:
+      return TextSize.Smaller;
+    case Sizes.Small:
+      return TextSize.Small;
+    case Sizes.Default:
+      return TextSize.Default;
+    case Sizes.Large:
+      return TextSize.Large;
+    case Sizes.Larger:
+      return TextSize.Larger;
+    case Sizes.Largest:
+      return TextSize.Largest;
+  }
+}
+function getSmallerSize(size) {
+  switch (size) {
+    case Sizes.Smallest:
+      return Sizes.Smallest;
+    case Sizes.Smaller:
+      return Sizes.Smallest;
+    case Sizes.Small:
+      return Sizes.Smaller;
+    case Sizes.Default:
+      return Sizes.Small;
+    case Sizes.Large:
+      return Sizes.Default;
+    case Sizes.Larger:
+      return Sizes.Large;
+    case Sizes.Largest:
+      return Sizes.Larger;
+  }
+}
+function getLargerSize(size) {
+  switch (size) {
+    case Sizes.Smallest:
+      return Sizes.Smaller;
+    case Sizes.Smaller:
+      return Sizes.Small;
+    case Sizes.Small:
+      return Sizes.Default;
+    case Sizes.Default:
+      return Sizes.Large;
+    case Sizes.Large:
+      return Sizes.Larger;
+    case Sizes.Larger:
+      return Sizes.Largest;
+    case Sizes.Largest:
+      return Sizes.Largest;
+  }
+}
 async function init() {
   i18nIsoCountries.registerLocale(englishLanguage);
 }
 init();
-export { ActivityFeed, AddPaymentMethodForm, Align, AlignLeft, AlignRight, Amount, AnimationStyles, AppearanceStyles, AutoComplete, Backdrop, BackgroundColorShade, BackgroundColors, BackgroundSize, BackgroundStyles, Badge, BooleanLabel, BorderColorShade, BorderColors, BorderRadiusStyles, BorderStyle, BorderStyles, BoxShadowStyles, Button$1 as Button, ButtonStyles, ButtonType, Card, Checkbox, CloseButton, CodeVerificationForm, ColorInput, ColorLabel, Colors, ConnectionStatus, Container$h as Container, ContrastColors, ConversationList, ConversationNavigation, CountryInput, CountryLabel, CurrencyAmountInput, CurrencyAmountLabel, CurrencyInput, Cursor, DataGrid, DataGridCell, DataGridDisplayType, DateInput, DateLabel, Depth, DepthShadow, DimensionStyles, DropdownInput, DropdownPanel, DynamicInput, EmailAddressInput, EmailAddressLabel, EntityEditor, EntityPanel, EntityPreview, ErrorLabel, ErrorNotification, FillBehavior, FocusedStyles, ForegroundColorShade, ForegroundColors, ForgotPasswordForm, Form, FormActions, FormFields, Formatter$1 as Formatter, Heading, HelperButton, HoverPanel, Icon, Image, InputContainerStyles, InputHelper, InputLabel, InputRow, Label, LanguageInput, LanguageLabel, LayoutStyles, LineBreak, LinearGauge, Link, ListItem, LoadingOverlay, LoginForm, LogoutButton, MarkdownEditor, MediaGrid, MediaPreview, Menu, MenuButton, Message$1 as Message, MessageComposer, MessagePreview, Modal, ModalHeader, MoreMenu, NavigationBar, NavigationLink, NavigationMenu, NotificationLabel, Notifications, NumberInput, NumberLabel, ObjectLink, Orb, OrderedList, Orientation, Overflow, Page, PageLink, Paragraph, PasswordInput, PaymentMethodModal, PersonLabel, PhoneNumberInput, PhoneNumberLabel, PieChart, Position, ProgressLabel, ProgressMeter, ProgressSpinner, ProgressivePaymentStatus, RadialChart, RadialGauge, SearchInput, SignupForm, Size, SlidePanel, Small, StreetAddressInput, SubTitle, SubscriptionModal, Svg, Tab, Tabs, TextColors, TextInput, TextInputStyles, TextOverflow, TextSize, TextStyles, TextWeight, ThemeSelector, Title, TitleCard, TitleCards, ToggleInput, UniversalSearch, UnorderedList, UserLabel, UserMenu, VerificationCodeInput, Video, WebApplication, WhiteSpace, Workspace, convertAmountToSize, convertSizeToAmount, convertSizeToTextSize, getCSSBorderValue, getCSSBoxShadowValue, getCSSMeasurementValue, getFormFieldsFromModel, getInputElementByFieldType, getLabelByFieldType, getLargerAmount, getLargerSize, getSmallerAmount, getSmallerSize, useAuthentication, useEntityEditor };
+export { ActivityFeed, AddPaymentMethodForm, AlignHorizontal, AlignVertical, Amount, AutoComplete, Backdrop, BackgroundColorShade, BackgroundColors, BackgroundSize, Badge, BooleanLabel, BorderColorShade, BorderColors, BorderStyle, Button$1 as Button, ButtonType, Card, Checkbox, CloseButton, CodeVerificationForm, ColorInput, ColorLabel, Colors, ConnectionStatus, Container$e as Container, ContrastColors, ConversationList, ConversationNavigation, CountryInput, CountryLabel, CurrencyAmountInput, CurrencyAmountLabel, CurrencyInput, Cursor, DataGrid, DataGridCell, DataGridDisplayType, DateInput, DateLabel, Depth, DepthShadow, DropdownInput, DropdownPanel, DynamicInput, EmailAddressInput, EmailAddressLabel, EntityEditor, EntityPanel, EntityPreview, ErrorLabel, ErrorNotification, Fill, ForegroundColorShade, ForegroundColors, ForgotPasswordForm, Form, FormActions, FormFields, Formatter$1 as Formatter, Heading, HelperButton, HoverPanel, Icon, Image, ImageInput, InputHelper, InputLabel, InputRow, Label, LanguageInput, LanguageLabel, LineBreak, LinearGauge, Link, ListItem, LoadingOverlay, LoginForm, LogoutButton, LongTextInput, MarkdownEditor, MediaGrid, MediaPreview, Menu, MenuButton, Message$1 as Message, MessageComposer, MessagePreview, Modal, ModalHeader, MoreMenu, NavigationBar, NavigationLink, NavigationMenu, NotificationLabel, Notifications, NumberInput, NumberLabel, ObjectLink, Orb, OrderedList, Orientation, Overflow, Page, PageLink, Paragraph, PasswordInput, PaymentMethodModal, PersonLabel, PhoneNumberInput, PhoneNumberLabel, PieChart, PositionBehavior, ProgressLabel, ProgressMeter, ProgressSpinner, ProgressivePaymentStatus, RadialChart, RadialGauge, SearchInput, SignupForm, Sizes, SlidePanel, Small, StreetAddressInput, SubTitle, SubscriptionModal, Svg, Tab, Tabs, TextAlign, TextColors, TextDecorationLine, TextDecorationStyle, TextInput, TextOverflow, TextSize, TextWeight, ThemeSelector, Title, TitleCard, ToggleInput, UniversalSearch, UnorderedList, UserLabel, UserMenu, VerificationCodeInput, Video, WebApplication, Workspace, convertAmountToSize, convertSizeToAmount, convertSizeToTextSize, getCSSMeasurementValue, getFormFieldsFromModel, getInputElementByFieldType, getLabelByFieldType, getLargerAmount, getLargerSize, getSmallerAmount, getSmallerSize, useAuthentication, useEntityEditor };
 //# sourceMappingURL=index.js.map

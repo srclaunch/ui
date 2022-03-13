@@ -9,11 +9,13 @@ export const ListItem = memo(
   ({ as = 'li', children, ...props }: ListItemProps): ReactElement => {
     return (
       <Container
+        alignment={{
+          orientation: Orientation.Horizontal,
+        }}
         as={as}
         style={{
           display: as === 'li' ? 'list-item' : 'flex',
         }}
-        orientation={Orientation.Horizontal}
         {...props}
       >
         {children}

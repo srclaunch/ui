@@ -7,10 +7,10 @@ import {
   Depth,
   Heading,
   NavigationLink,
-  Size,
+  Sizes,
   UnorderedList,
   Workspace,
-} from '../../..';
+} from '../../../index';
 import { Documentation } from '../../layouts/Documentation';
 
 export const Animation = memo((): ReactElement => {
@@ -20,17 +20,16 @@ export const Animation = memo((): ReactElement => {
         title: 'Animation',
       }}
       layout={Documentation}
-      padding={Amount.Most}
+      padding={{ all: Amount.Most }}
       title="Animation"
     >
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.Least}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.Least }}
         depth={Depth.High}
-        grow={false}
-        padding={Amount.Most}
+        padding={{ all: Amount.Most }}
       >
-        <Heading lineHeight={Size.Smaller}>Components</Heading>
+        <Heading lineHeight={Sizes.Smaller}>Components</Heading>
       </Container>
     </Workspace>
   );

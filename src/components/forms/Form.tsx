@@ -3,7 +3,7 @@ import { memo, ReactElement, useEffect, useState } from 'react';
 
 import { Amount, FormField, Orientation, Size } from '../../types';
 // import { getFormFieldsFromModel } from '../../lib/forms/fields';
-import { Container } from '../layout/Container';
+import { Container, ContainerProps } from '../layout/Container';
 import { Button, ButtonProps, ButtonType } from './buttons/Button';
 import { FormActions } from './FormActions';
 import { FormFields } from './FormFields';
@@ -50,10 +50,11 @@ type FormProps = {
         readonly label: string;
       } & ButtonProps)
     | null;
-};
+} & ContainerProps;
 
 export const Form = memo(
   ({
+    borderRadius = {},
     className = '',
     entity,
     fields,
@@ -76,7 +77,7 @@ export const Form = memo(
 
     const submitButtonProps = {
       label: 'Submit',
-      size: Size.Large,
+      // size: Size.Large,
       type: ButtonType.Primary,
       ...submitButton,
     };
@@ -112,10 +113,9 @@ export const Form = memo(
     return (
       <Container
         as="form"
-        borderRadius={Amount.More}
+        borderRadius={{ all: Amount.More, ...borderRadius }}
         className={`${className} form`}
         id={name}
-        orientation={Orientation.Vertical}
         name={name}
         padding={padding}
         {...props}

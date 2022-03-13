@@ -8,16 +8,19 @@ import {
 } from '../../../lib/proportions/conversions';
 import { getSmallerSize } from '../../../lib/proportions/size';
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
+  AlignVertical,
   Amount,
   BackgroundColors,
+  CommonComponentProps,
   Cursor,
   Orientation,
   Overflow,
-  Size,
-  SizeProps,
+  Sizes,
+  TextAlign,
   TextColors,
-  TextWeight,
+  TextDecorationLine,
 } from '../../../types/index';
 import { Container, ContainerProps } from '../../layout/Container';
 import { IconProps } from '../../media/Icon';
@@ -37,16 +40,15 @@ export enum ButtonType {
   White = 'white',
 }
 
-export type ButtonProps = {
+export type ButtonProps<E = HTMLButtonElement> = {
   readonly disabled?: boolean;
   readonly form?: string;
   readonly fullWidth?: boolean;
   readonly icon?: IconProps;
   readonly label?: string;
   readonly type?: ButtonType;
-} & ContainerProps<HTMLButtonElement> &
-  LabelProps &
-  SizeProps;
+} & ContainerProps &
+  LabelProps;
 
 // const Wrapper = styled.button<ButtonProps>`
 //   ${LayoutStyles};
@@ -90,24 +92,30 @@ export type ButtonProps = {
 export const Button = memo(
   ({
     active,
-    alignItems = Align.Center,
-    alignContent = Align.Center,
-    backgroundColor,
-    borderRadius = Amount.All,
+    alignment = {
+      horizontal: AlignHorizontal.Center,
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center,
+    },
+    background,
+    borderRadius = {},
     children,
     className = '',
     cursor = Cursor.Pointer,
     disabled = false,
     form,
-    grow = false,
     hover,
     icon,
     label,
+    lineHeight = Sizes.Default,
     onClick,
     onMouseEnter,
     onMouseLeave,
-    orientation = Orientation.Horizontal,
-    size = Size.Default,
+    padding = {
+      left: Amount.Less,
+      right: Amount.Less,
+    },
+    textAlign = TextAlign.Center,
     textColor,
     textSize,
     textWeight,
@@ -185,10 +193,10 @@ export const Button = memo(
     const colors = getColors();
 
     const updatedBackgroundColor = hovered
-      ? hover?.backgroundColor
-        ? hover?.backgroundColor
-        : colors?.backgroundColor ?? backgroundColor
-      : colors?.backgroundColor ?? backgroundColor;
+      ? hover?.background?.color
+        ? hover?.background.color
+        : colors?.backgroundColor ?? background?.color
+      : colors?.backgroundColor ?? background?.color;
 
     const updatedTextColor = hovered
       ? hover?.textColor
@@ -199,29 +207,23 @@ export const Button = memo(
     return (
       <Container
         active={{
-          backgroundOpacity: 80,
+          background: {
+            opacity: 80,
+          },
           ...active,
         }}
-        alignItems={alignItems}
-        alignContent={alignContent}
+        alignment={alignment}
         as="button"
-        backgroundColor={updatedBackgroundColor}
-        borderRadius={grow && !borderRadius ? Amount.Least : borderRadius}
-        boxShadow={{
-          blurRadius: 8,
-          color: colors?.backgroundColor,
-          offsetX: 0,
-          offsetY: 2,
-          opacity: 35,
-          spreadRadius: 4,
-        }}
+        background={{ color: updatedBackgroundColor }}
+        borderRadius={{ all: Amount.All, ...borderRadius }}
         className={`${className} button`}
         cursor={cursor}
         disabled={disabled}
         form={form}
-        grow={grow}
         hover={{
-          backgroundOpacity: 90,
+          background: {
+            opacity: 90,
+          },
           ...hover,
         }}
         onClick={onClick}
@@ -235,26 +237,33 @@ export const Button = memo(
 
           if (onMouseLeave) onMouseLeave(e);
         }}
-        orientation={orientation}
         overflow={Overflow.Visible}
-        paddingLeft={getLargerAmount(convertSizeToAmount(size))}
-        paddingRight={getLargerAmount(convertSizeToAmount(size))}
+        padding={padding}
+        // shadow={{
+        //   radius: 8,
+        //   color: colors?.backgroundColor,
+        //   x: 0,
+        //   y: 2,
+        //   opacity: 35,
+        //   spread: 4,
+        // }}
         {...props}
       >
         {typeof children === 'string' ? (
           <Label
-            alignContent={grow ? Align.Center : alignContent}
-            grow
             icon={icon}
-            lineHeight={
-              size === Size.Smaller || size === Size.Smallest
-                ? Size.Small
-                : size
-            }
+            lineHeight={lineHeight}
+            textAlign={textAlign}
             textColor={updatedTextColor}
-            textSize={convertSizeToTextSize(getSmallerSize(size))}
+            textDecoration={
+              type === ButtonType.Link && hovered
+                ? {
+                    line: TextDecorationLine.Underline,
+                  }
+                : undefined
+            }
+            textSize={textSize}
             textWeight={textWeight}
-            underline={type === ButtonType.Link && hovered}
           >
             {children}
           </Label>

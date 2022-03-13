@@ -1,29 +1,16 @@
-import {
-  CountryCode,
-  CurrencyCode,
-  LanguageCode,
-  Menu as MenuType,
-  Primitive,
-  Primitives,
-  ValidationProblem,
-} from '@srclaunch/types';
+import { ValidationProblem } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
 import { memo, ReactElement, useEffect, useState } from 'react';
 
 import {
-  Align,
   Amount,
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  CommonComponentProps,
   Depth,
   DepthShadow,
   InputProps,
   Orientation,
-  Size,
-  SizeProps,
-  TextColors,
 } from '../../../../types';
 import { ErrorLabel } from '../../../errors/ErrorLabel';
 import { Container, ContainerProps } from '../../../layout/Container';
@@ -34,29 +21,24 @@ import { InputLabel } from '../../labels/InputLabel';
 import { DropdownControl } from '../shared/DropdownControl';
 import { DropdownPanel } from '../shared/DropdownPanel';
 
-export type DropdownInputProps<V = any> = InputProps<HTMLSelectElement, V> &
+export type DropdownInputProps<V = any> = ContainerProps &
+  InputProps<HTMLSelectElement, V> &
   MenuProps;
 
 export const DropdownInput = memo(
   ({
-    backgroundColor = BackgroundColors.DropdownMenu,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1,
-    },
-    borderRadius = Amount.Least,
+    background = {},
+    border = {},
+    borderRadius = {},
     className = '',
     defaultValue,
     label,
     menu,
-    maxWidth = 300,
-    minWidth = 240,
     name,
     onChange,
-    padding = 5,
+    padding = {},
     placeholder,
-    size = Size.Default,
+    size = {},
     validation,
     ...props
   }: DropdownInputProps): ReactElement => {
@@ -115,21 +97,24 @@ export const DropdownInput = memo(
         )}
 
         <Container
-          boxShadow={menuVisible ? DepthShadow.Higher : DepthShadow.Surface}
-          borderRadius={borderRadius}
+          borderRadius={{ all: Amount.Least, ...borderRadius }}
           className={`${className} dropdown-input`}
           depth={menuVisible ? Depth.Higher : Depth.Surface}
-          grow={false}
-          minWidth={minWidth}
-          orientation={Orientation.Vertical}
           onMouseLeave={() => setMenuVisible(false)}
-          height={size}
+          size={{ maxWidth: 300, minWidth: 240, ...size }}
+          shadow={menuVisible ? DepthShadow.Higher : DepthShadow.Surface}
           {...props}
         >
           <DropdownControl
-            backgroundColor={backgroundColor}
-            border={border}
-            boxShadow={DepthShadow.Low}
+            background={{ color: BackgroundColors.DropdownMenu, ...background }}
+            border={{
+              all: {
+                color: BorderColors.InputControl,
+                style: BorderStyle.Solid,
+                width: 1,
+              },
+              ...border,
+            }}
             component={item?.component}
             depth={Depth.High}
             error={problems}
@@ -144,26 +129,29 @@ export const DropdownInput = memo(
             onFocus={() => setFocused(true)}
             onClick={() => setMenuVisible(!menuVisible)}
             placeholder={placeholder}
-            size={size}
+            shadow={DepthShadow.Low}
+            size={{ maxWidth: 300, minWidth: 240, ...size }}
           />
 
           <DropdownPanel
-            backgroundColor={backgroundColor}
-            borderRadius={borderRadius}
+            background={{ color: BackgroundColors.DropdownMenu, ...background }}
+            borderRadius={{ all: Amount.Least, ...borderRadius }}
             focused={focused}
-            padding={padding}
+            padding={{ all: Amount.Less, ...padding }}
             visible={menuVisible}
           >
             <Menu
-              backgroundColor={BackgroundColors.Light}
-              borderRadius={borderRadius}
+              background={{
+                color: BackgroundColors.Light,
+              }}
+              borderRadius={{ all: Amount.Least, ...borderRadius }}
               menu={menu}
               onItemClick={i => {
                 setValueChanged(true);
                 setItem(i);
                 setMenuVisible(false);
               }}
-              padding={padding}
+              padding={{ all: Amount.Less, ...padding }}
             />
           </DropdownPanel>
         </Container>

@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { ModelProps, Primitives } from '@srclaunch/types';
-import { LabelProps, Size, TextColor } from '../../../types';
+import { Size, TextColor } from '../../../types';
+import { LabelProps } from '../../typography/Label';
 declare type DataGridCellProps = {
     fieldName?: string;
     lineHeight?: Size;
@@ -9,6 +10,6 @@ declare type DataGridCellProps = {
     type: Primitives;
     value: any;
 } & LabelProps;
-export declare const DataGridCell: import("react").MemoExoticComponent<({ fieldName, model, type, value, ...props }: DataGridCellProps) => ReactElement>;
+export declare const DataGridCell: import("react").MemoExoticComponent<({ as, fieldName, model, type, value, ...props }: DataGridCellProps) => ReactElement>;
 export {};
 //# sourceMappingURL=DataGridCell.d.ts.map

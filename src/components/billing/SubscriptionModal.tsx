@@ -1,12 +1,12 @@
-import { useSelector } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
 import styled, { css } from 'styled-components';
+import { useSelector, RootState } from '@srclaunch/web-application-state';
 
 // import CloseButton from '../common/CloseButton';
 
 export const SubscriptionModal = memo((): ReactElement => {
   const visible = useSelector(
-    state => state.app.subscriptionBillingModalVisible,
+    (state: RootState) => state.app.subscriptionBillingModalVisible,
   );
 
   // const dispatch = useDispatch();

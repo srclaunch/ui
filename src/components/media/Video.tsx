@@ -2,33 +2,28 @@ import { Video as VideoType } from '@srclaunch/types';
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 
-import { DimensionStyles } from '../../styles/appearance/dimension';
-import { HeightProps, WidthProps } from '../../types';
-import { Container } from '../layout/Container';
+import { Container, ContainerProps } from '../layout/Container';
 
 export type VideoProps = {
   readonly className?: string;
   readonly description?: string;
-} & HeightProps &
-  VideoType &
-  WidthProps;
+} & VideoType &
+  ContainerProps;
 
 export const Video = memo(
   ({
     className = '',
-    height = '100%',
+    // height = '100%',
     url,
-    width = '100%',
+    // width = '100%',
     ...props
   }: VideoProps): ReactElement => {
     return (
       <Container className={`${className} video`} {...props}>
-        <VideoElement height={height} src={url} width={width} {...props} />
+        <VideoElement src={url} {...props} />
       </Container>
     );
   },
 );
 
-const VideoElement = styled.video`
-  ${DimensionStyles};
-`;
+const VideoElement = styled.video``;

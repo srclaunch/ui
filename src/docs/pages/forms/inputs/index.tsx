@@ -8,17 +8,15 @@ import {
   Depth,
   Heading,
   Icon,
-  IconProps,
-  ListItem,
   NavigationLink,
-  Size,
   TextColors,
+  TextDecorationLine,
   TextSize,
   TextWeight,
   Title,
   UnorderedList,
   Workspace,
-} from '../../../..';
+} from '../../../../index';
 import { Documentation } from '../../../layouts/Documentation';
 
 export const FormInputsPage = memo((): ReactElement => {
@@ -30,9 +28,13 @@ export const FormInputsPage = memo((): ReactElement => {
             <NavigationLink
               to="/forms"
               hover={{
-                underline: true,
+                textDecoration: {
+                  line: TextDecorationLine.Underline,
+                },
               }}
-              underline={false}
+              textDecoration={{
+                line: TextDecorationLine.None,
+              }}
             >
               <Title
                 textColor={TextColors.Primary}
@@ -45,9 +47,8 @@ export const FormInputsPage = memo((): ReactElement => {
 
             <Icon
               name={DualLightIcons.ChevronDoubleForward}
-              marginLeft={Amount.Less}
-              marginRight={Amount.Less}
-              size={Size.Smaller}
+              margin={{ left: Amount.Less, right: Amount.Less }}
+              // size={Size.Smaller}
             />
 
             <Title textSize={TextSize.Larger} textWeight={TextWeight.Most}>
@@ -57,17 +58,16 @@ export const FormInputsPage = memo((): ReactElement => {
         ),
       }}
       layout={Documentation}
-      padding={Amount.Most}
+      padding={{ all: Amount.Most }}
       title="Inputs"
     >
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.Least}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.Least }}
         depth={Depth.High}
-        grow={false}
-        padding={Amount.Most}
+        padding={{ all: Amount.Most }}
       >
-        <Heading lineHeight={Size.Smaller}>Components</Heading>
+        <Heading>Components</Heading>
 
         <UnorderedList
           items={[
@@ -75,10 +75,9 @@ export const FormInputsPage = memo((): ReactElement => {
             <NavigationLink to="/forms/inputs/locale" label="Locale" />,
             <NavigationLink to="/forms/inputs/media" label="Media" />,
             <NavigationLink to="/forms/inputs/menu" label="Menu" />,
-            <NavigationLink to="/forms/inputs/text" label="Text" />,
+            <NavigationLink to="/forms/inputs/text-input" label="Text" />,
           ]}
-          paddingLeft={Amount.Default}
-          paddingRight={Amount.Default}
+          padding={{ left: Amount.Default, right: Amount.Default }}
         />
       </Container>
     </Workspace>

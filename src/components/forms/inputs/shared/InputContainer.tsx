@@ -7,30 +7,25 @@ import {
   BackgroundColors,
   BorderColors,
   BorderStyle,
+  CommonComponentProps,
   ErrorProps,
-  FocusProps,
   Orientation,
-  SizeProps,
   SuccessProps,
   WarningProps,
 } from '../../../../types';
-import { ContainerProps } from '../../../layout/Container';
+import { Container, ContainerProps } from '../../../layout/Container';
 
-export type InputContainerProps = ContainerProps<HTMLDivElement> &
-  SizeProps &
+export type InputContainerProps = ContainerProps &
   ErrorProps &
   SuccessProps &
   WarningProps;
 
 export const InputContainer = memo(
   ({
-    backgroundColor = BackgroundColors.Lightest,
-    borderRadius = Amount.Least,
-    border = {
-      color: BorderColors.Default,
-      style: BorderStyle.Solid,
-      width: 1,
-    },
+    alignment = {},
+    background = {},
+    borderRadius = {},
+    border = {},
     children,
     className = '',
     error,
@@ -40,24 +35,25 @@ export const InputContainer = memo(
   }: InputContainerProps): ReactElement => {
     return (
       <Container
-        backgroundColor={backgroundColor}
-        borderRadius={borderRadius}
+        alignment={{ orientation: Orientation.Horizontal, ...alignment }}
+        background={{
+          color: BackgroundColors.InputControl,
+          ...background,
+        }}
+        borderRadius={{ all: Amount.Least, ...borderRadius }}
         border={{
-          ...border,
-          // @ts-ignore
-          color:
-            error && Array.isArray(error) && error.length > 0
-              ? BorderColors.Error
-              : border.hasOwnProperty('color')
-              ? // @ts-ignore
-                border?.color
-              : BorderColors.InputControl,
+          all: {
+            color:
+              error && Array.isArray(error) && error.length > 0
+                ? BorderColors.Error
+                : border?.all?.color ?? BorderColors.InputControl,
+            style: BorderStyle.Solid,
+            width: 1,
+          },
         }}
         className={`${className} input-container`}
-        error={error}
-        grow
-        orientation={Orientation.Horizontal}
-        success={success}
+        // error={error}
+        // success={success}
         {...props}
       >
         {children}
@@ -66,10 +62,10 @@ export const InputContainer = memo(
   },
 );
 
-const Container = styled.div<InputContainerProps>`
-  ${InputContainerStyles};
+// const Container = styled.div<InputContainerProps>`
+//   ${InputContainerStyles};
 
-  input {
-    border: none;
-  }
-`;
+//   input {
+//     border: none;
+//   }
+// `;

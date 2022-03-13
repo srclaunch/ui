@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
-import { Color, LabelProps } from '../../../../types';
+import { LabelProps } from '../../../typography/Label';
+import { Color } from '../../../../types';
 declare type ProgressLabelProps = {
     color?: Color;
     value: number[];

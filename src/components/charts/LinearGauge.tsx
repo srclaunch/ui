@@ -2,15 +2,15 @@ import { memo, ReactElement } from 'react';
 
 import { FormatterProps, formatValue } from '../../lib/data/format';
 import {
-  Align,
   Amount,
-  // Amount,
-  BackgroundColor,
   BackgroundColors,
+  BorderColors,
   BorderStyle,
   Color,
   Orientation,
   Size,
+  Sizes,
+  TextAlign,
   TextColors,
   TextSize,
   TextWeight,
@@ -20,7 +20,7 @@ import { Label } from '../typography/Label';
 
 type LinearGaugeProps = {
   readonly amount: number;
-  readonly color: Color;
+  // readonly color: Color;
   readonly formatter?: FormatterProps;
   readonly label?: string;
   readonly showTicks?: boolean;
@@ -34,7 +34,7 @@ type LinearGaugeProps = {
 export const LinearGauge = memo(
   ({
     amount,
-    color,
+    // color,
     formatter,
     showTicks = true,
     showTickLabels = true,
@@ -49,17 +49,19 @@ export const LinearGauge = memo(
     return (
       <Container>
         {showTicks && (
-          <Container orientation={Orientation.Horizontal}>
+          <Container alignment={{ orientation: Orientation.Horizontal }}>
             {showValue && (
               <Container
-                border={{
-                  left: {
-                    color,
-                    style: BorderStyle.Solid,
-                    width: 3,
-                  },
+                // border={{
+                //   left: {
+                //     color,
+                //     style: BorderStyle.Solid,
+                //     width: 3,
+                //   },
+                // }}
+                size={{
+                  height: Sizes.Small,
                 }}
-                height={9}
                 style={{
                   left: `calc(${progressPercent}% - 3px)`,
                   position: 'absolute',
@@ -67,9 +69,9 @@ export const LinearGauge = memo(
                 }}
               >
                 <Label
-                  alignText={Align.Center}
                   lineHeight={Amount.None}
-                  textColor={color}
+                  textAlign={TextAlign.Center}
+                  // textColor={color}
                   textSize={TextSize.Small}
                   textWeight={TextWeight.More}
                   style={{
@@ -94,20 +96,22 @@ export const LinearGauge = memo(
               return (
                 <Container
                   key={index}
-                  border={{
-                    left: {
-                      color:
-                        amount >= tickValue ? color : BackgroundColors.Lightest,
-                      style: BorderStyle.Solid,
-                      width: 1,
-                    },
+                  // border={{
+                  //   left: {
+                  //     color:
+                  //       amount >= tickValue ? color : BorderColors.Lightest,
+                  //     style: BorderStyle.Solid,
+                  //     width: 1,
+                  //   },
+                  // }}
+                  size={{
+                    height: 6,
                   }}
-                  height={6}
                 >
                   {showTickLabels && (
                     <Label
-                      alignText={Align.Left}
-                      textColor={amount >= tickValue ? color : TextColors.Dark}
+                      textAlign={TextAlign.Left}
+                      // textColor={amount >= tickValue ? color : TextColors.Dark}
                       textSize={TextSize.Smallest}
                       textWeight={TextWeight.More}
                       style={{
@@ -123,14 +127,16 @@ export const LinearGauge = memo(
             })}
 
             <Container
-              border={{
-                right: {
-                  color: amount >= total ? color : BackgroundColors.Lightest,
-                  style: BorderStyle.Solid,
-                  width: 1,
-                },
+              // border={{
+              //   right: {
+              //     // color: amount >= total ? color : BorderColors.Lightest,
+              //     style: BorderStyle.Solid,
+              //     width: 1,
+              //   },
+              // }}
+              size={{
+                height: 6,
               }}
-              height={6}
               style={{
                 position: 'absolute',
                 right: 0,
@@ -138,7 +144,7 @@ export const LinearGauge = memo(
             >
               {showTickLabels && (
                 <Label
-                  alignText={Align.Right}
+                  textAlign={TextAlign.Right}
                   textColor={TextColors.Dark}
                   textSize={TextSize.Small}
                   textWeight={TextWeight.More}
@@ -151,15 +157,18 @@ export const LinearGauge = memo(
         )}
 
         <Container
-          backgroundColor={BackgroundColors.Lightest}
-          grow={false}
-          height={1}
+          background={{
+            color: BackgroundColors.Lightest,
+          }}
+          size={{
+            height: 1,
+          }}
         >
           <Container
-            backgroundColor={color as BackgroundColor}
-            height={1}
-            grow={false}
-            width={`${progressPercent}%`}
+            // background={{
+            //   color,
+            // }}
+            size={{ height: 1, width: `${progressPercent}%` }}
           />
         </Container>
 

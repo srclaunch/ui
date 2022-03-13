@@ -1,14 +1,19 @@
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 
-import { Size } from '../../types';
+import { Size, Sizes } from '../../types';
 
 type ProgressSpinnerProps = {
   size?: Size;
 };
 
 export const ProgressSpinner = memo(
-  ({ size = Size.Default }: ProgressSpinnerProps): ReactElement => {
+  ({
+    size = {
+      height: Sizes.Default,
+      width: Sizes.Default,
+    },
+  }: ProgressSpinnerProps): ReactElement => {
     return <Container size={size} />;
   },
 );

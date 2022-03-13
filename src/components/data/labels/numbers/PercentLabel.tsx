@@ -1,8 +1,7 @@
 import { memo, ReactElement } from 'react';
 import { Primitives } from '@srclaunch/types';
 
-import { Label } from '../../../typography/Label';
-import { LabelProps } from '../../../../types';
+import { Label, LabelProps } from '../../../typography/Label';
 
 type PercentLabelProps = {
   value: number;

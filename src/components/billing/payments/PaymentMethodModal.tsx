@@ -216,7 +216,7 @@ export const PaymentMethodModal = memo(
                               setPaymentMethod(paymentMethod);
                               setReviewOrder(true);
                             }}
-                            size={Size.Small}
+                            // size={Size.Small}
                           >
                             Use this card
                           </Button>

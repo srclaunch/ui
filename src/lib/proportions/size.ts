@@ -1,39 +1,39 @@
-import { Size } from '../../types';
+import { Sizes } from '../../types';
 
-export function getSmallerSize(size: Size): Size {
+export function getSmallerSize(size: Sizes): Sizes {
   switch (size) {
-    case Size.Smallest:
-      return Size.Smallest;
-    case Size.Smaller:
-      return Size.Smallest;
-    case Size.Small:
-      return Size.Smaller;
-    case Size.Default:
-      return Size.Small;
-    case Size.Large:
-      return Size.Default;
-    case Size.Larger:
-      return Size.Large;
-    case Size.Largest:
-      return Size.Larger;
+    case Sizes.Smallest:
+      return Sizes.Smallest;
+    case Sizes.Smaller:
+      return Sizes.Smallest;
+    case Sizes.Small:
+      return Sizes.Smaller;
+    case Sizes.Default:
+      return Sizes.Small;
+    case Sizes.Large:
+      return Sizes.Default;
+    case Sizes.Larger:
+      return Sizes.Large;
+    case Sizes.Largest:
+      return Sizes.Larger;
   }
 }
 
-export function getLargerSize(size: Size): Size {
+export function getLargerSize(size: Sizes): Sizes {
   switch (size) {
-    case Size.Smallest:
-      return Size.Smaller;
-    case Size.Smaller:
-      return Size.Small;
-    case Size.Small:
-      return Size.Default;
-    case Size.Default:
-      return Size.Large;
-    case Size.Large:
-      return Size.Larger;
-    case Size.Larger:
-      return Size.Largest;
-    case Size.Largest:
-      return Size.Largest;
+    case Sizes.Smallest:
+      return Sizes.Smaller;
+    case Sizes.Smaller:
+      return Sizes.Small;
+    case Sizes.Small:
+      return Sizes.Default;
+    case Sizes.Default:
+      return Sizes.Large;
+    case Sizes.Large:
+      return Sizes.Larger;
+    case Sizes.Larger:
+      return Sizes.Largest;
+    case Sizes.Largest:
+      return Sizes.Largest;
   }
 }

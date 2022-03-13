@@ -1,23 +1,16 @@
 import { memo, ReactElement, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import {
-  Align,
-  Amount,
-  AppearanceProps,
-  Depth,
-  Orientation,
-  Size,
-} from '../../types';
+import { Alignment, Amount, Depth, Orientation, Size } from '../../types';
 import {
   SearchInput,
   SearchInputProps,
 } from '../forms/inputs/text/SearchInput';
-import { Container } from '../layout/Container';
+import { Container, ContainerProps } from '../layout/Container';
 import { CloseButton } from '../modals/CloseButton';
 import { Heading } from '../typography/Heading';
 
-type UniversalSearchProps = AppearanceProps & SearchInputProps;
+type UniversalSearchProps = ContainerProps & SearchInputProps;
 
 export const UniversalSearch = memo(
   ({ ...props }: UniversalSearchProps): ReactElement => {
@@ -36,14 +29,11 @@ export const UniversalSearch = memo(
     return (
       <Container
         className="universal-search"
-        grow
-        orientation={Orientation.Vertical}
         // onMouseLeave={() => setResultsVisible(false)}
         {...props}
       >
         <SearchInput
           name="universal-search"
-          flat
           placeholder="Search everything"
           onChange={({ value }) => setSearchValue(value)}
           onFocus={() => {
@@ -59,12 +49,11 @@ export const UniversalSearch = memo(
           as={Container}
           resultsVisible={resultsVisible}
           depth={Depth.Highest}
-          padding={Amount.More}
+          padding={{ all: Amount.More }}
         >
           <CloseButton
-            alignSelf={Align.Right}
             onClick={() => setResultsVisible(false)}
-            size={Size.Small}
+            // size={Size.Small}
           />
 
           <Heading>Search Results</Heading>

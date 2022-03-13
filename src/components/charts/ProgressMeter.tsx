@@ -1,18 +1,16 @@
 import { memo, ReactElement } from 'react';
-
 import {
-  Align,
   Amount,
-  BackgroundColor,
   BackgroundColors,
   Color,
-  ContainerProps,
   Size,
+  Sizes,
+  TextAlign,
   TextColors,
   TextSize,
   TextWeight,
 } from '../../types';
-import { Container } from '../layout/Container';
+import { Container, ContainerProps } from '../layout/Container';
 import { Label } from '../typography/Label';
 
 type ProgressMeterProps = {
@@ -21,22 +19,19 @@ type ProgressMeterProps = {
   readonly label?: string;
   readonly size?: Size;
   readonly total?: number;
-} & ContainerProps<HTMLDivElement>;
+} & ContainerProps;
 
 export const ProgressMeter = memo(
   ({
     amount,
-    borderRadius = Amount.Less,
+    background = {},
+    borderRadius = {},
     children,
-    color = BackgroundColors.Primary,
-    height = Size.Default,
     label,
-    margin,
-    marginBottom,
-    marginLeft,
-    marginRight,
-    marginTop,
-    padding = Amount.None,
+
+    size = {
+      height: Sizes.Default,
+    },
     total,
     ...props
   }: ProgressMeterProps): ReactElement => {
@@ -47,39 +42,29 @@ export const ProgressMeter = memo(
 
     return (
       <Container
-        backgroundColor={BackgroundColors.Lighter}
-        borderRadius={borderRadius}
-        grow={false}
-        margin={margin}
-        marginBottom={marginBottom}
-        marginLeft={marginLeft}
-        marginRight={marginRight}
-        marginTop={marginTop}
-        padding={padding}
-        style={{
-          borderRadius: `calc(${borderRadius} + 3px)`,
+        background={{
+          color: BackgroundColors.Primary,
+          ...background,
         }}
+        borderRadius={{ all: Amount.Less, ...borderRadius }}
+        {...props}
       >
         <Container
-          backgroundColor={color as BackgroundColor}
-          borderRadius={borderRadius}
-          boxShadow={{
-            blurRadius: 8,
-            color,
-            offsetX: 0,
-            offsetY: 2,
-            opacity: 35,
-            spreadRadius: 4,
+          background={{
+            color: BackgroundColors.Primary,
+            ...background,
           }}
-          height={height}
-          width={`${progressPercent}%`}
-          {...props}
+          borderRadius={{ all: Amount.Less, ...borderRadius }}
+          // shadow={shadow}
+          size={{
+            width: `${progressPercent}%`,
+          }}
         >
           {children}
 
           {label && (
             <Label
-              alignText={Align.Center}
+              textAlign={TextAlign.Center}
               textSize={TextSize.Larger}
               textColor={TextColors.Darkest}
               textWeight={TextWeight.More}

@@ -1,3 +1,1 @@
-import { AppearanceProps } from '../appearance';
-
-export type AnimatedAppearanceProps = AppearanceProps;
+export type AnimatedAppearanceProps = {};

@@ -14,16 +14,14 @@ import {
 } from 'react';
 import styled from 'styled-components';
 
-import { FocusedStyles } from '../../../../styles/focused';
+import { FocusStyles } from '../../../../styles/container/focus';
 import { TextStyles } from '../../../../styles/typography';
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
   Amount,
-  AppearanceProps,
   BackgroundColors,
-  BackgroundProps,
   BorderColors,
-  BorderProps,
   BorderStyle,
   ClipboardEventProps,
   Cursor,
@@ -36,10 +34,10 @@ import {
   MouseEventProps,
   Orientation,
   Size,
-  SizeProps,
+  Sizes,
+  TextAlign,
   TextColor,
   TextColors,
-  TextProps,
   TextSize,
   TextWeight,
 } from '../../../../types';
@@ -49,24 +47,21 @@ import { Icon } from '../../../media/Icon';
 import { ProgressSpinner } from '../../../progress/ProgressSpinner';
 import { Label } from '../../../typography/Label';
 import { InputLabel } from '../../labels/InputLabel';
-import { InputContainer } from '../shared/InputContainer';
+import { InputContainer, InputContainerProps } from '../shared/InputContainer';
+import { TextProps } from '../../../typography/Text';
 
 export type SSNInputProps = {
   readonly icon?: typeof Icon;
 } & InputProps<HTMLInputElement, SSN> &
-  AppearanceProps &
+  InputContainerProps &
   TextProps;
 
 export const SSNInput = memo(
   ({
     as,
-    backgroundColor = BackgroundColors.InputControl,
-    boxShadow = DepthShadow.Low,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1,
-    },
+    background = {},
+
+    border = {},
     className = '',
     cursor = Cursor.Text,
     defaultValue,
@@ -79,7 +74,8 @@ export const SSNInput = memo(
     onChange,
     onKeyPress,
     placeholder = '',
-    size = Size.Default,
+    shadow = DepthShadow.Low,
+    textSize = TextSize.Default,
     textColor = TextColors.InputControl,
     textWeight = TextWeight.Default,
     validation = { [Condition.IsSSN]: true },
@@ -121,20 +117,30 @@ export const SSNInput = memo(
 
     return (
       <>
-        <Container orientation={Orientation.Horizontal}>
+        <Container
+          alignment={{
+            orientation: Orientation.Horizontal,
+          }}
+        >
           {label && <InputLabel>{label}</InputLabel>}
 
           {problems.length > 0 ? (
-            <ErrorLabel alignContent={Align.Right}>
+            <ErrorLabel alignment={{ horizontal: AlignHorizontal.Right }}>
               {problems[0]?.message.short}
             </ErrorLabel>
           ) : null}
         </Container>
 
         <InputContainer
-          backgroundColor={backgroundColor}
-          border={border}
-          boxShadow={boxShadow}
+          background={{ color: BackgroundColors.InputControl, ...background }}
+          border={{
+            all: {
+              color: BorderColors.InputControl,
+              style: BorderStyle.Solid,
+              width: 1,
+            },
+            ...border,
+          }}
           cursor={cursor}
           className={`${className} ssn-input`}
           error={problems}
@@ -144,16 +150,16 @@ export const SSNInput = memo(
               firstInputRef.current.focus();
             }
           }}
-          orientation={Orientation.Horizontal}
-          paddingLeft={Amount.Least}
-          paddingRight={Amount.Least}
-          size={size}
+          padding={{
+            left: Amount.Least,
+            right: Amount.Least,
+          }}
+          shadow={shadow}
           {...props}
         >
           {icon && <>{icon}</>}
 
           <Input
-            alignText={Align.Center}
             // defaultValue={defaultValue}
             hidden={hidden}
             max={999}
@@ -170,7 +176,6 @@ export const SSNInput = memo(
               }
             }}
             onFocus={() => setFocused(true)}
-            lineHeight={size}
             placeholder="123"
             onKeyPress={(e: any) => {
               if (e.target.value.length === 3) {
@@ -179,6 +184,7 @@ export const SSNInput = memo(
             }}
             // @ts-ignore
             ref={firstInputRef}
+            textAlign={TextAlign.Center}
             textColor={textColor}
             type="number"
             // value={value[0]}
@@ -187,7 +193,6 @@ export const SSNInput = memo(
           <Label textSize={TextSize.Larger}>-</Label>
 
           <Input
-            alignText={Align.Center}
             // defaultValue={defaultValue}
             hidden={hidden}
             max={99}
@@ -204,7 +209,6 @@ export const SSNInput = memo(
               }
             }}
             onFocus={() => setFocused(true)}
-            lineHeight={size}
             placeholder="45"
             onKeyPress={(e: any) => {
               if (e.target.value.length === 2) {
@@ -218,6 +222,7 @@ export const SSNInput = memo(
             }}
             // @ts-ignore
             ref={secondInputRef}
+            textAlign={TextAlign.Center}
             textColor={textColor}
             type="number"
             // value={value[1]}
@@ -226,7 +231,6 @@ export const SSNInput = memo(
           <Label textSize={TextSize.Larger}>-</Label>
 
           <Input
-            alignText={Align.Center}
             // defaultValue={defaultValue}
             hidden={hidden}
             max={9999}
@@ -238,7 +242,6 @@ export const SSNInput = memo(
               setValue([value[0], value[1], e.target.value]);
             }}
             onFocus={() => setFocused(true)}
-            lineHeight={size}
             placeholder="6789"
             onKeyPress={(e: any) => {
               if (e.target.value.length === 4) {
@@ -252,15 +255,19 @@ export const SSNInput = memo(
             }}
             // @ts-ignore
             ref={thirdInputRef}
+            textAlign={TextAlign.Center}
             textColor={textColor}
             type="number"
             // value={value[2]}
           />
 
           {inProgress && (
-            <Container grow={false}>
-              <ProgressSpinner size={Size.Small} />
-            </Container>
+            <ProgressSpinner
+              size={{
+                height: Sizes.Small,
+                width: Sizes.Small,
+              }}
+            />
           )}
         </InputContainer>
       </>
@@ -279,7 +286,7 @@ export const SSNInput = memo(
 // `;
 
 const Input = styled.input<SSNInputProps>`
-  ${FocusedStyles};
+  ${FocusStyles};
   ${TextStyles};
 
   background: transparent;

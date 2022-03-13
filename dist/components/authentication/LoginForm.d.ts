@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { ContainerProps } from '../../types';
+import { ContainerProps } from '../layout/Container';
 declare type LoginFormProps = {
     readonly onLoginSuccess?: () => unknown;
     readonly title?: string;
@@ -7,7 +7,7 @@ declare type LoginFormProps = {
     readonly signUpLinkLabel?: ReactElement;
     readonly signInButtonLabel?: ReactElement;
     readonly forgotPasswordLinkLabel?: ReactElement;
-} & ContainerProps<HTMLDivElement>;
-export declare const LoginForm: import("react").MemoExoticComponent<({ backgroundColor, borderRadius, onLoginSuccess, title, showSignupLink, signUpLinkLabel, signInButtonLabel, forgotPasswordLinkLabel, ...props }: LoginFormProps) => ReactElement>;
+} & ContainerProps;
+export declare const LoginForm: import("react").MemoExoticComponent<({ background, borderRadius, onLoginSuccess, size, title, showSignupLink, signUpLinkLabel, signInButtonLabel, forgotPasswordLinkLabel, ...props }: LoginFormProps) => ReactElement>;
 export {};
 //# sourceMappingURL=LoginForm.d.ts.map

@@ -1,15 +1,16 @@
 import { useNavigate } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
 
-import { Container } from '../../components/layout/Container';
+import { Container, ContainerProps } from '../../components/layout/Container';
 import { UserMenu } from '../../components/user/UserMenu';
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
+  AlignVertical,
   Amount,
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  ContainerProps,
   Orientation,
 } from '../../types';
 
@@ -19,37 +20,53 @@ export type NavigationBarProps = {
 
 export const NavigationBar = memo(
   ({
-    backgroundColor = BackgroundColors.NavigationBar,
+    alignment = {},
+    background = {},
+    border = {},
     logo,
+    padding = {},
   }: NavigationBarProps) => {
     const navigate = useNavigate();
 
     return (
       <Container
-        backgroundColor={backgroundColor}
+        alignment={{
+          orientation: Orientation.Horizontal,
+          ...alignment,
+        }}
+        background={{ color: BackgroundColors.NavigationBar, ...background }}
         border={{
           bottom: {
             color: BorderColors.Dark,
             style: BorderStyle.Solid,
             width: 1,
           },
+          ...border,
         }}
-        grow={false}
-        orientation={Orientation.Horizontal}
-        padding={Amount.Default}
-        paddingLeft={Amount.More}
-        paddingRight={Amount.Most}
+        padding={{
+          bottom: Amount.Default,
+          left: Amount.More,
+          right: Amount.Most,
+          top: Amount.Default,
+          ...padding,
+        }}
       >
         <Container
-          alignItems={Align.Center}
-          grow={false}
-          orientation={Orientation.Horizontal}
+          alignment={{
+            orientation: Orientation.Horizontal,
+            vertical: AlignVertical.Center,
+          }}
         >
           {logo}
         </Container>
 
         <Container />
-        <Container alignContent={Align.Center} width={200}>
+        <Container
+          alignment={{
+            vertical: AlignVertical.Center,
+          }}
+          size={{ width: 200 }}
+        >
           <UserMenu onLogoutSuccess={() => navigate('/login')} />
         </Container>
       </Container>

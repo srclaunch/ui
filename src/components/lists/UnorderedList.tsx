@@ -11,35 +11,31 @@ export type UnorderedListProps = {
 export const UnorderedList = memo(
   ({
     as = 'ul',
-    grow = false,
     items,
-    marginLeft = Amount.Default,
+    margin = {},
     ...props
   }: UnorderedListProps): ReactElement => {
     return (
-      <Container
-        as={as}
-        grow={grow}
-        orientation={Orientation.Vertical}
-        {...props}
-      >
+      <Container as={as} {...props}>
         {items.map((item, index) =>
           item.props.items ? (
             <Container
-              grow={grow}
-              marginLeft={marginLeft}
-              paddingBottom={Amount.Least}
-              paddingTop={Amount.Least}
+              margin={{ left: Amount.Default, ...margin }}
+              padding={{
+                bottom: Amount.Least,
+                top: Amount.Least,
+              }}
             >
               {item}
             </Container>
           ) : (
             <ListItem
-              grow={false}
               key={index}
-              marginLeft={marginLeft}
-              paddingBottom={Amount.Least}
-              paddingTop={Amount.Least}
+              margin={{ left: Amount.Default, ...margin }}
+              padding={{
+                bottom: Amount.Least,
+                top: Amount.Least,
+              }}
             >
               {item}
             </ListItem>

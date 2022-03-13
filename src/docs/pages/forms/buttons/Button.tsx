@@ -2,7 +2,7 @@ import { DualLightIcons } from '@srclaunch/icons';
 import { memo, ReactElement } from 'react';
 
 import {
-  Align,
+  AlignVertical,
   Amount,
   BackgroundColors,
   Button,
@@ -13,13 +13,13 @@ import {
   Icon,
   NavigationLink,
   Paragraph,
-  Size,
   TextColors,
+  TextDecorationLine,
   TextSize,
   TextWeight,
   Title,
   Workspace,
-} from '../../../..';
+} from '../../../../index';
 import { Documentation } from '../../../layouts/Documentation';
 
 export const ButtonPage = memo((): ReactElement => {
@@ -31,9 +31,13 @@ export const ButtonPage = memo((): ReactElement => {
             <NavigationLink
               to="/forms"
               hover={{
-                underline: true,
+                textDecoration: {
+                  line: TextDecorationLine.Underline,
+                },
               }}
-              underline={false}
+              textDecoration={{
+                line: TextDecorationLine.None,
+              }}
             >
               <Title
                 textColor={TextColors.Primary}
@@ -46,17 +50,20 @@ export const ButtonPage = memo((): ReactElement => {
 
             <Icon
               name={DualLightIcons.ChevronDoubleForward}
-              marginLeft={Amount.Less}
-              marginRight={Amount.Less}
-              size={Size.Smaller}
+              margin={{ left: Amount.Less, right: Amount.Less }}
+              // size={Size.Smaller}
             />
 
             <NavigationLink
               to="/forms/buttons"
               hover={{
-                underline: true,
+                textDecoration: {
+                  line: TextDecorationLine.Underline,
+                },
               }}
-              underline={false}
+              textDecoration={{
+                line: TextDecorationLine.None,
+              }}
             >
               <Title
                 textColor={TextColors.Primary}
@@ -69,9 +76,8 @@ export const ButtonPage = memo((): ReactElement => {
 
             <Icon
               name={DualLightIcons.ChevronDoubleForward}
-              marginLeft={Amount.Less}
-              marginRight={Amount.Less}
-              size={Size.Smaller}
+              margin={{ left: Amount.Less, right: Amount.Less }}
+              // size={Size.Smaller}
             />
 
             <Title textSize={TextSize.Larger} textWeight={TextWeight.Most}>
@@ -81,18 +87,17 @@ export const ButtonPage = memo((): ReactElement => {
         ),
       }}
       layout={Documentation}
-      padding={Amount.Most}
+      padding={{ all: Amount.Most }}
       title="Button"
     >
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.Least}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.Least }}
         depth={Depth.High}
-        grow={false}
-        marginBottom={Amount.Default}
-        padding={Amount.Most}
+        margin={{ bottom: Amount.Default }}
+        padding={{ all: Amount.Most }}
       >
-        <Heading lineHeight={Size.Smaller}>Description</Heading>
+        <Heading>Description</Heading>
 
         <Paragraph>
           The <b>&lt;Button&gt;</b> component is used to create a button.
@@ -100,44 +105,44 @@ export const ButtonPage = memo((): ReactElement => {
       </Container>
 
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.Least}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.Least }}
         depth={Depth.High}
-        grow={false}
-        marginBottom={Amount.Default}
-        padding={Amount.Most}
+        margin={{ bottom: Amount.Default }}
+        padding={{ all: Amount.Most }}
       >
-        <Heading lineHeight={Size.Smaller}>Default</Heading>
+        <Heading>Default</Heading>
 
         <Container
-          alignItems={Align.Baseline}
-          backgroundColor={BackgroundColors.Lighter}
-          borderRadius={Amount.Least}
+          alignment={{
+            vertical: AlignVertical.Baseline,
+          }}
+          background={{ color: BackgroundColors.Lighter }}
+          borderRadius={{ all: Amount.Least }}
           depth={Depth.Lower}
-          grow={false}
-          padding={Amount.Most}
+          padding={{ all: Amount.Most }}
         >
-          <Button grow={false}>Hello, world!</Button>
+          <Button>Hello, world!</Button>
         </Container>
       </Container>
 
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.Least}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.Least }}
         depth={Depth.High}
-        grow={false}
-        marginBottom={Amount.Default}
-        padding={Amount.Most}
+        margin={{ bottom: Amount.Default }}
+        padding={{ all: Amount.Most }}
       >
-        <Heading lineHeight={Size.Smaller}>Primary</Heading>
+        <Heading>Primary</Heading>
 
         <Container
-          alignItems={Align.Baseline}
-          backgroundColor={BackgroundColors.Lighter}
-          borderRadius={Amount.Least}
+          alignment={{
+            vertical: AlignVertical.Baseline,
+          }}
+          background={{ color: BackgroundColors.Lighter }}
+          borderRadius={{ all: Amount.Least }}
           depth={Depth.Lower}
-          grow={false}
-          padding={Amount.Most}
+          padding={{ all: Amount.Most }}
         >
           <Button type={ButtonType.Primary}>Primary</Button>
         </Container>

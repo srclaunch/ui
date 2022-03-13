@@ -1,8 +1,8 @@
 import { useTitle } from '@srclaunch/react-hooks';
 import { cloneElement, ElementType, memo, ReactElement } from 'react';
 
-import { Align, BackgroundColors, ContainerProps } from '../../types';
-import { Container } from '../layout/Container';
+import { AlignVertical, BackgroundColors } from '../../types';
+import { Container, ContainerProps } from '../layout/Container';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 
 type PageProps = {
@@ -10,15 +10,14 @@ type PageProps = {
   readonly loading?: boolean;
   readonly loginRequired?: boolean;
   readonly title?: string | null;
-} & ContainerProps<HTMLDivElement>;
+} & ContainerProps;
 
 export const Page = memo(
   ({
-    alignContent = Align.Top,
-    backgroundColor = BackgroundColors.Page,
+    alignment = {},
+    background = {},
     children,
     className = '',
-    grow = true,
     layout: Layout,
     loading = false,
     title,
@@ -28,10 +27,9 @@ export const Page = memo(
 
     const PageComp = () => (
       <Container
-        alignContent={alignContent}
-        backgroundColor={backgroundColor}
+        alignment={{ vertical: AlignVertical.Top, ...alignment }}
+        background={{ color: BackgroundColors.Page, ...background }}
         className={`${className} page`}
-        grow={grow}
         {...props}
       >
         <LoadingOverlay visible={loading} />

@@ -1,44 +1,46 @@
 import { memo, ReactElement, useState } from 'react';
 import styled from 'styled-components';
+import { BackgroundStyles } from '../../styles/container/background';
+import { BorderRadiusStyles } from '../../styles/container/border-radius';
+import { MarginStyles } from '../../styles/container/margin';
+import { SizeStyles } from '../../styles/container/size';
 
-import { AppearanceStyles } from '../../styles/appearance';
-import { DimensionStyles } from '../../styles/appearance/dimension';
-import { LayoutStyles } from '../../styles/layout';
 import {
-  Align,
+  AlignHorizontal,
+  AlignVertical,
   Amount,
-  AppearanceProps,
+  Background,
   BackgroundColors,
+  BorderRadius,
   Color,
   Cursor,
   Depth,
+  ForegroundColor,
   ForegroundColors,
-  MenuProps,
+  Margin,
   Orientation,
   Size,
-  SizeProps,
-  WidthProps,
+  Sizes,
 } from '../../types';
-import { Container, ContainerProps } from '../layout/Container';
+import { Container } from '../layout/Container';
 import { HoverPanel } from '../modals/HoverPanel';
-import { Menu } from './Menu';
+import { Menu, MenuProps } from './Menu';
 
 export type MoreMenuProps = {
-  readonly dotColor?: Color;
-} & MenuProps &
-  SizeProps &
-  WidthProps;
+  readonly dotColor?: ForegroundColor;
+} & MenuProps;
 
 export const MoreMenu = memo(
   ({
-    alignContent = Align.Left,
-    backgroundColor = BackgroundColors.MoreMenu,
+    alignment = {},
+    background = {},
     className = '',
     dotColor = ForegroundColors.MoreMenu,
-    orientation = Orientation.Horizontal,
-    size = Size.Default,
+    size = {
+      height: Sizes.Default,
+      width: Sizes.Default,
+    },
     menu,
-    width = 150,
     ...props
   }: MoreMenuProps): ReactElement => {
     const [menuVisible, setMenuVisible] = useState(false);
@@ -52,25 +54,31 @@ export const MoreMenu = memo(
       // @ts-ignore
       <Container
         className={`${className} more-menu`}
-        grow={false}
         onMouseLeave={() => setMenuVisible(false)}
-        {...props}
       >
         <Container
-          alignContent={Align.Center}
-          alignItems={Align.Center}
+          alignment={{
+            horizontal: AlignHorizontal.Center,
+            orientation: Orientation.Horizontal,
+            vertical: AlignVertical.Center,
+            ...alignment,
+          }}
           as="button"
           cursor={Cursor.Pointer}
-          backgroundColor={
-            menuVisible ? BackgroundColors.Primary : backgroundColor
-          }
-          backgroundOpacity={menuVisible ? 70 : 100}
-          borderRadius={size}
+          background={{
+            color: menuVisible
+              ? BackgroundColors.Primary
+              : BackgroundColors.MoreMenu,
+            opacity: menuVisible ? 70 : 100,
+            ...background,
+          }}
+          borderRadius={{ all: Amount.All }}
           focused={focused}
           depth={Depth.Surface}
-          grow={false}
           hover={{
-            backgroundColor: BackgroundColors.Primary,
+            background: {
+              color: BackgroundColors.Primary,
+            },
           }}
           // @ts-ignore
           onClick={(e: any) => {
@@ -85,23 +93,48 @@ export const MoreMenu = memo(
           }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
-          orientation={orientation}
-          height={size}
-          width={size}
+          size={size}
           {...props}
         >
-          <Dot borderRadius={Amount.All} backgroundColor={dotFillColor} />
-          <Dot borderRadius={Amount.All} backgroundColor={dotFillColor} />
-          <Dot borderRadius={Amount.All} backgroundColor={dotFillColor} />
+          <Dot
+            borderRadius={{ all: Amount.All }}
+            background={{ color: BackgroundColors.Lighter }}
+            margin={{
+              left: 1,
+              right: 1,
+            }}
+            size={{
+              height: 4,
+              width: 4,
+            }}
+          />
+          <Dot
+            borderRadius={{ all: Amount.All }}
+            background={{ color: BackgroundColors.Lighter }}
+            margin={{
+              left: 1,
+              right: 1,
+            }}
+            size={{
+              height: 4,
+              width: 4,
+            }}
+          />
+          <Dot
+            borderRadius={{ all: Amount.All }}
+            background={{ color: BackgroundColors.Lighter }}
+            margin={{
+              left: 1,
+              right: 1,
+            }}
+            size={{
+              height: 4,
+              width: 4,
+            }}
+          />
         </Container>
 
-        <HoverPanel
-          alignContent={alignContent}
-          orientation={Orientation.Vertical}
-          visible={menuVisible}
-          setMenuVisible={setMenuVisible}
-          width={width}
-        >
+        <HoverPanel visible={menuVisible} setMenuVisible={setMenuVisible}>
           <Menu menu={menu} onClick={() => setMenuVisible(false)} />
         </HoverPanel>
       </Container>
@@ -109,16 +142,16 @@ export const MoreMenu = memo(
   },
 );
 
-const Dot = styled.span<
-  {
-    readonly fillColor?: Color;
-  } & AppearanceProps
->`
-  ${AppearanceStyles};
-
-  background-color: rgb(${props => props.fillColor});
+const Dot = styled.span<{
+  readonly background?: Background;
+  readonly borderRadius?: BorderRadius;
+  readonly color?: Color;
+  readonly margin?: Margin;
+  readonly size?: Size;
+}>`
+  ${BackgroundStyles};
+  ${BorderRadiusStyles};
+  ${MarginStyles};
+  ${SizeStyles};
   display: inline-block;
-  height: 4px;
-  margin: 0 1px;
-  width: 4px;
 `;

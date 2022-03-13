@@ -1,6 +1,8 @@
 import { ReactElement } from 'react';
-import { AppearanceProps, InputProps, TextProps } from '../../../../types';
+import { InputProps } from '../../../../types';
 import { IconProps } from '../../../media/Icon';
+import { InputContainerProps } from '../shared/InputContainer';
+import { TextProps } from '../../../typography/Text';
 export declare enum TextInputType {
     EmailAddress = "email",
     Text = "text",
@@ -13,6 +15,6 @@ export declare type TextInputProps<V = string> = {
     readonly prefix?: string;
     readonly spellCheck?: boolean;
     readonly suffix?: string;
-} & InputProps<HTMLInputElement, V> & AppearanceProps & TextProps;
-export declare const TextInput: import("react").MemoExoticComponent<({ autoComplete, backgroundColor, boxShadow, border, className, cursor, defaultValue, error, flat, hidden, icon, inProgress, inputType, label, name, onChange, prefix, placeholder, size, spellCheck, suffix, textColor, textWeight, validation, ...props }: TextInputProps) => ReactElement>;
+} & InputProps<HTMLInputElement, V> & InputContainerProps & TextProps;
+export declare const TextInput: import("react").MemoExoticComponent<({ autoComplete, background, border, className, cursor, defaultValue, error, hidden, icon, inProgress, inputType, label, lineHeight, name, onChange, prefix, placeholder, shadow, spellCheck, suffix, textColor, textWeight, validation, ...props }: TextInputProps) => ReactElement>;
 //# sourceMappingURL=TextInput.d.ts.map

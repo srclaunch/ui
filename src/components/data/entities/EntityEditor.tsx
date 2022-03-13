@@ -45,7 +45,7 @@ export const EntityEditor = memo(
       return (
         <Container
           className={`${className} entity-editor`}
-          padding={Amount.More}
+          padding={{ all: Amount.More }}
         >
           <ErrorLabel>Entity not found</ErrorLabel>
         </Container>

@@ -1,9 +1,14 @@
 import { memo, ReactElement } from 'react';
-import { Align, Amount, BackgroundColors, Depth } from '../../../types';
+
+import {
+  Amount,
+  BackgroundColors,
+  Container,
+  MoreMenu,
+  Workspace,
+} from '../../../index';
+import { AlignHorizontal } from '../../../types';
 import { Documentation } from '../../layouts/Documentation';
-import { Workspace } from '../../../components/containers/Workspace';
-import { MoreMenu } from '../../../components/menus/MoreMenu';
-import { Container } from '../../..';
 
 export const MoreMenuPage = memo((): ReactElement => {
   return (
@@ -15,10 +20,9 @@ export const MoreMenuPage = memo((): ReactElement => {
       title="MoreMenu"
     >
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.More}
-        grow={false}
-        padding={Amount.Most}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.More }}
+        padding={{ all: Amount.Most }}
       >
         <MoreMenu
           menu={[
@@ -33,13 +37,14 @@ export const MoreMenuPage = memo((): ReactElement => {
       </Container>
 
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.More}
-        grow={false}
-        padding={Amount.Most}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.More }}
+        padding={{ all: Amount.Most }}
       >
         <MoreMenu
-          alignContent={Align.Left}
+          alignment={{
+            horizontal: AlignHorizontal.Left,
+          }}
           menu={[
             {
               label: 'Hello',
@@ -52,14 +57,15 @@ export const MoreMenuPage = memo((): ReactElement => {
       </Container>
 
       <Container
-        alignItems={Align.Right}
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.More}
-        grow={false}
-        padding={Amount.Most}
+        alignment={{
+          horizontal: AlignHorizontal.Right,
+        }}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.More }}
+        padding={{ all: Amount.Most }}
       >
         <MoreMenu
-          alignContent={Align.Right}
+          alignment={{ horizontal: AlignHorizontal.Right }}
           menu={[
             {
               label: 'Hello',

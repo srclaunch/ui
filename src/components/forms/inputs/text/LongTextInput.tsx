@@ -5,9 +5,9 @@ import styled from 'styled-components';
 
 import { TextStyles } from '../../../../styles/typography';
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
   Amount,
-  AppearanceProps,
   BackgroundColors,
   BorderColors,
   BorderStyle,
@@ -19,47 +19,39 @@ import {
   Orientation,
   Size,
   TextColors,
-  TextProps,
 } from '../../../../types';
 import { ErrorLabel } from '../../../errors/ErrorLabel';
 import { Container } from '../../../layout/Container';
 import { Icon } from '../../../media/Icon';
 import { ProgressSpinner } from '../../../progress/ProgressSpinner';
 import { InputLabel } from '../../labels/InputLabel';
-import { InputContainer } from '../shared/InputContainer';
+import { InputContainer, InputContainerProps } from '../shared/InputContainer';
 import { TextInputProps } from './TextInput';
+import { TextProps } from '../../../typography/Text';
 
 export type LongTextInputProps<V = LongText> = {
   readonly spellCheck?: boolean;
 } & InputProps<HTMLTextAreaElement, V> &
-  AppearanceProps &
+  InputContainerProps &
   TextProps;
 
 export const LongTextInput = memo(
   ({
-    backgroundColor = BackgroundColors.InputControl,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1,
-    },
-    boxShadow = DepthShadow.Low,
+    background = {},
+    border = {},
     className = '',
     defaultValue,
     error,
-    flat = false,
     hidden = false,
-
     inProgress = false,
     label,
     lineHeight = Amount.More,
     name,
     onChange,
-
     placeholder = '',
-    size = Size.Default,
+    // size = Size.Default,
+    shadow = DepthShadow.Low,
     spellCheck = true,
-
     textColor = TextColors.InputControl,
     validation = {},
   }: LongTextInputProps): ReactElement => {
@@ -99,33 +91,41 @@ export const LongTextInput = memo(
 
     return (
       <>
-        <Container orientation={Orientation.Horizontal}>
+        <Container alignment={{ orientation: Orientation.Horizontal }}>
           {label && <InputLabel>{label}</InputLabel>}
 
           {problems.length > 0 ? (
-            <ErrorLabel alignContent={Align.Right}>
+            <ErrorLabel alignment={{ horizontal: AlignHorizontal.Right }}>
               {problems[0]?.message.short}
             </ErrorLabel>
           ) : null}
         </Container>
 
         <InputContainer
-          backgroundColor={backgroundColor}
-          border={border}
-          boxShadow={boxShadow}
+          background={{ color: BackgroundColors.InputControl, ...background }}
+          border={{
+            all: {
+              color: BorderColors.InputControl,
+              style: BorderStyle.Solid,
+              width: 1,
+            },
+            ...border,
+          }}
           className={`${className} text-input`}
           error={problems}
           focused={focused}
-          flat={flat}
-          height={size}
+          // height={size}
           onClick={() => {
             inputRef.current?.focus();
           }}
-          orientation={Orientation.Horizontal}
-          padding={Amount.Least}
-          paddingLeft={Amount.Less}
-          paddingRight={Amount.Least}
-          size={size}
+          padding={{
+            bottom: Amount.Least,
+            left: Amount.Less,
+            right: Amount.Less,
+            top: Amount.Least,
+          }}
+          shadow={shadow}
+          // size={size}
         >
           <Input
             hidden={hidden}
@@ -147,9 +147,9 @@ export const LongTextInput = memo(
           />
 
           {inProgress && (
-            <Container grow={false}>
-              <ProgressSpinner size={Size.Small} />
-            </Container>
+            <ProgressSpinner
+            // size={Size.Small}
+            />
           )}
         </InputContainer>
       </>

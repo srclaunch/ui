@@ -13,8 +13,7 @@ import {
 } from '../../../../types';
 import { MoreMenu } from '../../../menus/MoreMenu';
 import { MoreMenuProps } from '../../../menus/MoreMenu';
-import { Icon } from '../../../media/Icon';
-import { IconProps } from '../../../../types';
+import { Icon, IconProps } from '../../../media/Icon';
 import { convertSizeToAmount } from '../../../../lib/proportions/conversions';
 import { getSmallerAmount } from '../../../../lib/proportions/amount';
 
@@ -46,25 +45,31 @@ export const UserLabel = memo(
     },
     name,
     image,
-    size = Size.Default,
+    // size = Sizes.Default,
     textSize = TextSize.Default,
   }: UserLabelProps): ReactElement => {
     return (
       <NavigationLink
-        borderRadius={Amount.All}
+        alignment={{
+          orientation: Orientation.Horizontal,
+        }}
+        borderRadius={{ all: Amount.All }}
         className={`${className} user-label`}
         active={{
-          backgroundColor: BackgroundColors.Primary,
-          backgroundOpacity: 100,
+          background: {
+            color: BackgroundColors.Primary,
+            opacity: 100,
+          },
         }}
         hover={{
-          backgroundColor: BackgroundColors.Primary,
-          backgroundOpacity: 90,
+          background: {
+            color: BackgroundColors.Primary,
+            opacity: 90,
+          },
         }}
-        orientation={Orientation.Horizontal}
-        padding={getSmallerAmount(convertSizeToAmount(size))}
-        paddingTop={getSmallerAmount(convertSizeToAmount(size))}
-        paddingBottom={getSmallerAmount(convertSizeToAmount(size))}
+        // padding={getSmallerAmount(convertSizeToAmount(size))}
+        // paddingTop={getSmallerAmount(convertSizeToAmount(size))}
+        // paddingBottom={getSmallerAmount(convertSizeToAmount(size))}
         to={to ?? `/people/${id}`}
         style={{
           position: 'relative',
@@ -74,12 +79,17 @@ export const UserLabel = memo(
         <PersonLabel
           name={name}
           image={image}
-          lineHeight={size}
-          size={size}
+          // lineHeight={size}
+          // size={size}
           textSize={textSize}
         />
 
-        {messageIcon && <Icon grow={false} size={size} {...messageIcon} />}
+        {messageIcon && (
+          <Icon
+            //  size={size}
+            {...messageIcon}
+          />
+        )}
 
         {menu && <MoreMenu {...menu} />}
       </NavigationLink>

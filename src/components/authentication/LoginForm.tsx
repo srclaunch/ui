@@ -1,3 +1,4 @@
+import { memo, ReactElement, useEffect } from 'react';
 import { Condition, Primitives } from '@srclaunch/types';
 import {
   login,
@@ -5,21 +6,22 @@ import {
   useDispatch,
   useSelector,
 } from '@srclaunch/web-application-state';
-import { memo, ReactElement, useEffect } from 'react';
-
 import {
-  Align,
+  AlignHorizontal,
+  AlignVertical,
   Amount,
   AutoComplete,
   BackgroundColors,
-  ContainerProps,
   DepthShadow,
+  Fill,
   FormField,
   Orientation,
+  TextAlign,
+  TextDecorationLine,
 } from '../../types';
 import { ErrorNotification } from '../errors/ErrorNotification';
 import { Form } from '../forms/Form';
-import { Container } from '../layout/Container';
+import { Container, ContainerProps } from '../layout/Container';
 import { NotificationLabel } from '../notifications/NotificationLabel';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 import { Link } from '../typography/Link';
@@ -34,13 +36,14 @@ type LoginFormProps = {
   readonly signUpLinkLabel?: ReactElement;
   readonly signInButtonLabel?: ReactElement;
   readonly forgotPasswordLinkLabel?: ReactElement;
-} & ContainerProps<HTMLDivElement>;
+} & ContainerProps;
 
 export const LoginForm = memo(
   ({
-    backgroundColor = BackgroundColors.Darker,
-    borderRadius = Amount.More,
+    background = {},
+    borderRadius = {},
     onLoginSuccess,
+    size = {},
     title = 'Login',
     showSignupLink,
     signUpLinkLabel,
@@ -69,13 +72,14 @@ export const LoginForm = memo(
     return (
       <Container
         className="login-form"
-        backgroundColor={backgroundColor}
-        borderRadius={borderRadius}
-        boxShadow={DepthShadow.Highest}
-        grow={false}
-        padding={Amount.Most}
-        paddingBottom={Amount.Default}
-        width={420}
+        background={{ color: BackgroundColors.Darker, ...background }}
+        borderRadius={{ all: Amount.More, ...borderRadius }}
+        padding={{ all: Amount.Most }}
+        shadow={DepthShadow.Highest}
+        size={{
+          width: 420,
+          ...size,
+        }}
         {...props}
       >
         <LoadingOverlay borderRadius={borderRadius} visible={inProgress} />
@@ -84,22 +88,37 @@ export const LoginForm = memo(
         <img alt={'Login'} src="/illustrations/total_debt.svg" />
       </Illustration> */}
 
-        <Title alignContent={Align.Center}>{title}</Title>
+        <Title alignment={{ horizontal: AlignHorizontal.Center }}>
+          {title}
+        </Title>
 
         <NotificationLabel
-          alignItems={Align.Center}
-          alignSelf={Align.Center}
-          backgroundColor={BackgroundColors.Darkest}
-          marginTop={Amount.Default}
-          marginBottom={Amount.All}
-          orientation={Orientation.Vertical}
-          grow={false}
+          alignment={{
+            horizontal: AlignHorizontal.Center,
+            orientation: Orientation.Horizontal,
+            vertical: AlignVertical.Center,
+          }}
+          background={{
+            color: BackgroundColors.Darkest,
+          }}
+          margin={{
+            bottom: Amount.Default,
+          }}
           showOrb={false}
         >
-          <Paragraph alignText={Align.Center}>
+          <Paragraph
+            alignment={{
+              horizontal: AlignHorizontal.Center,
+            }}
+            textAlign={TextAlign.Center}
+          >
             Don't have an account yet?
             <br />
-            <Link to="/signup" hover={{ underline: true }} underline={false}>
+            <Link
+              to="/signup"
+              hover={{ textDecoration: { line: TextDecorationLine.Underline } }}
+              textDecoration={{ line: TextDecorationLine.Underline }}
+            >
               Sign up for free!
             </Link>
           </Paragraph>
@@ -165,22 +184,21 @@ export const LoginForm = memo(
               );
           }}
           submitButton={{
+            alignment: {
+              fill: Fill.Both,
+              horizontal: AlignHorizontal.Center,
+            },
             borderRadius: Amount.Least,
-            grow: true,
             label: 'Login',
           }}
         />
 
-        <Container
-          paddingLeft={Amount.Default}
-          paddingRight={Amount.Default}
-          paddingTop={Amount.Default}
-        >
-          <Small alignText={Align.Center}>
+        <Container padding={{ all: Amount.Default }}>
+          <Small textAlign={TextAlign.Center}>
             <Link
-              hover={{ underline: true }}
+              hover={{ textDecoration: { line: TextDecorationLine.Underline } }}
+              textDecoration={{ line: TextDecorationLine.Underline }}
               to="/forgot-password"
-              underline={false}
             >
               Forgot your password?
             </Link>

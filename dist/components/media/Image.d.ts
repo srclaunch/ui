@@ -1,6 +1,5 @@
 import { ReactElement } from 'react';
-import { BorderProps, CommonComponentProps, HeightProps, MarginProps, SizeProps, WidthProps } from '../../types';
-import { AnimationProps } from '../../types/appearance/animation';
+import { Border, BorderRadius, CommonComponentProps, Margin, Size } from '../../types';
 /**
  * Image component for displaying GIFs, JPGs or PNGs.
  *
@@ -14,6 +13,11 @@ export declare type ImageProps = {
     readonly description?: string;
     readonly url?: string;
     readonly path?: string;
-} & CommonComponentProps<HTMLImageElement> & AnimationProps & BorderProps & HeightProps & MarginProps & WidthProps & SizeProps;
-export declare const Image: import("react").MemoExoticComponent<({ alt, className, description, height, path, url, width, ...props }: ImageProps) => ReactElement>;
+} & CommonComponentProps<HTMLImageElement> & {
+    border?: Border;
+    borderRadius?: BorderRadius;
+    margin?: Margin;
+    size?: Size;
+};
+export declare const Image: import("react").MemoExoticComponent<({ alt, className, description, path, url, size, ...props }: ImageProps) => ReactElement>;
 //# sourceMappingURL=Image.d.ts.map

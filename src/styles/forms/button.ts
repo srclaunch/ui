@@ -1,21 +1,14 @@
 import { css } from 'styled-components';
 
-import {
-  BackgroundColors,
-  BackgroundProps,
-  BorderColors,
-  BorderProps,
-  Size,
-  TextColor,
-  TextProps,
-} from '../../types';
+import { BackgroundColors, BorderColors, Size, TextColor } from '../../types';
 
+import { ContainerProps } from '../../components/layout/Container';
+import { TextProps } from '../../components/typography/Text';
 export const ButtonStyles = css<
   {
     size?: Size;
     textColor?: TextColor;
-  } & BackgroundProps &
-    BorderProps &
+  } & ContainerProps &
     TextProps
 >`
   background-color: ${BackgroundColors.Lightest};

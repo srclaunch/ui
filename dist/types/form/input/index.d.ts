@@ -1,7 +1,6 @@
 import { ForwardedRef } from 'react';
 import { InputValueChangeHandler } from '../..';
-import { HeightProps, WidthProps } from '../../appearance/dimension';
-import { SizeProps } from '../../appearance/size';
+import { Size } from '../../appearance/size';
 import { CommonComponentProps } from '../../component';
 import { ClipboardEventProps } from '../../events/clipboard';
 import { ErrorProps } from '../../state/error-props';
@@ -47,7 +46,8 @@ export declare type InputProps<E = HTMLInputElement, V = string> = {
     readonly placeholder?: string;
     readonly ref?: ForwardedRef<E>;
     readonly required?: boolean;
+    readonly size?: Size;
     readonly submitOnEnter?: boolean;
     readonly value?: V;
-} & CommonComponentProps<E> & ClipboardEventProps<E> & ErrorProps & HeightProps & ProgressProps & SizeProps & SuccessProps & ValidationProps & WarningProps & WidthProps;
+} & CommonComponentProps<E> & ClipboardEventProps<E> & ErrorProps & ProgressProps & SuccessProps & ValidationProps & WarningProps;
 //# sourceMappingURL=index.d.ts.map

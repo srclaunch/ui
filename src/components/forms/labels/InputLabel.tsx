@@ -2,11 +2,13 @@ import { Exception } from '@srclaunch/exceptions';
 import { memo, ReactElement } from 'react';
 
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
   Amount,
   ErrorProps,
   Orientation,
   Size,
+  Sizes,
   TextColors,
   TextSize,
 } from '../../../types';
@@ -18,35 +20,36 @@ type InputLabelProps = ErrorProps & LabelProps;
 
 export const InputLabel = memo(
   ({
-    alignContent = Align.Left,
+    alignment = {},
     children,
     className = '',
     error,
-    lineHeight = Size.Smaller,
-    marginBottom = Amount.Least,
-    size = Size.Small,
+    lineHeight = Sizes.Smaller,
+    margin = {},
     textColor = TextColors.InputLabel,
     textSize = TextSize.Small,
     ...props
   }: InputLabelProps): ReactElement => {
     return (
-      <Container grow={false} orientation={Orientation.Horizontal}>
+      <Container>
         <Label
-          alignContent={alignContent}
+          alignment={{
+            horizontal: AlignHorizontal.Left,
+            orientation: Orientation.Horizontal,
+            ...alignment,
+          }}
           className={`${className} input-label`}
-          grow={false}
           lineHeight={lineHeight}
           textSize={textSize}
           textColor={textColor}
-          marginBottom={marginBottom}
-          size={size}
+          margin={{ bottom: Amount.Least, ...margin }}
           {...props}
         >
           {children}
         </Label>
 
         {error && (
-          <ErrorLabel alignContent={Align.Right} size={size}>
+          <ErrorLabel textSize={textSize}>
             {error instanceof Exception
               ? error.message
               : error.length > 0

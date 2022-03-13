@@ -3,14 +3,15 @@ import { useNavigate } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
 
 import {
-  Align,
+  Alignment,
+  AlignVertical,
   Amount,
   BackgroundColors,
   BorderColors,
   BorderStyle,
   Container,
   ContainerProps,
-  FillBehavior,
+  Fill,
   Icon,
   Label,
   NavigationMenu,
@@ -23,6 +24,7 @@ import {
   ThemeSelector,
   Title,
 } from '../../index';
+import { AlignHorizontal } from '../../types';
 
 {
   /* <Workspace>
@@ -57,12 +59,14 @@ export const Documentation = memo(
   ({ children }: DocumentationProps): ReactElement => {
     return (
       <Container
-        backgroundColor={BackgroundColors.Darker}
-        fillScreen
-        orientation={Orientation.Vertical}
+        alignment={{ fill: Fill.Both }}
+        background={{ color: BackgroundColors.Darker }}
       >
         <Container
-          backgroundColor={BackgroundColors.Lightest}
+          alignment={{
+            orientation: Orientation.Horizontal,
+          }}
+          background={{ color: BackgroundColors.Lightest }}
           border={{
             bottom: {
               color: BorderColors.Default,
@@ -70,26 +74,28 @@ export const Documentation = memo(
               width: 1,
             },
           }}
-          grow={false}
-          orientation={Orientation.Horizontal}
-          padding={Amount.Default}
+          padding={{ all: Amount.Default }}
         >
           <Container
-            alignContent={Align.Center}
-            alignItems={Align.Center}
-            grow={false}
-            orientation={Orientation.Horizontal}
+            alignment={{
+              horizontal: AlignHorizontal.Center,
+              orientation: Orientation.Horizontal,
+              vertical: AlignVertical.Center,
+            }}
           >
             <Title>AppLab Component Docs</Title>
           </Container>
 
           <Container />
 
-          <ThemeSelector width={200} showLabel={false} />
+          <ThemeSelector showLabel={false} size={{ width: 200 }} />
         </Container>
 
-        <Container orientation={Orientation.Horizontal}>
-          <Container backgroundColor={BackgroundColors.Lightest} width={260}>
+        <Container alignment={{ orientation: Orientation.Horizontal }}>
+          <Container
+            background={{ color: BackgroundColors.Lightest }}
+            size={{ width: 260 }}
+          >
             <NavigationMenu
               // itemProps={{
               //   active: {
@@ -126,6 +132,10 @@ export const Documentation = memo(
                 {
                   label: 'Charts',
                   to: '/charts',
+                },
+                {
+                  label: 'Containers',
+                  to: '/containers',
                 },
                 {
                   label: 'Data',
@@ -205,11 +215,10 @@ export const Documentation = memo(
                 },
               ]}
               overflow={Overflow.ScrollVertical}
-              scrollable
             />
           </Container>
 
-          <Container grow orientation={Orientation.Vertical}>
+          <Container alignment={{ fill: Fill.Both }} overflow={Overflow.Scroll}>
             {children}
           </Container>
         </Container>

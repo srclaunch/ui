@@ -9,5 +9,5 @@ export declare type MenuItemProps = {
     readonly to?: string;
     readonly value?: any;
 } & LabelProps<HTMLAnchorElement | HTMLButtonElement>;
-export declare const MenuItem: import("react").MemoExoticComponent<({ active, as, backgroundColor, borderRadius, boxShadow, className, component, focus, hover, icon, label, lineHeight, onClick, title, to, value, ...props }: MenuItemProps) => ReactElement>;
+export declare const MenuItem: import("react").MemoExoticComponent<({ active, as, background, borderRadius, className, component, focus, hover, icon, label, lineHeight, onClick, shadow, title, to, value, ...props }: MenuItemProps) => ReactElement>;
 //# sourceMappingURL=MenuItem.d.ts.map

@@ -2,14 +2,15 @@ import { memo, ReactElement } from 'react';
 import { ModelProps, Primitives } from '@srclaunch/types';
 import { getLabelByFieldType } from '../../../lib/data/labels';
 import {
+  AlignVertical,
   Amount,
-  LabelProps,
   Orientation,
   Overflow,
   Size,
   TextColor,
 } from '../../../types';
 import { Container } from '../../layout/Container';
+import { Label, LabelProps } from '../../typography/Label';
 
 // import BooleanLabel from './labels/BooleanLabel';
 // import CurrencyLabel from './labels/CurrencyLabel';
@@ -31,38 +32,35 @@ type DataGridCellProps = {
 
 export const DataGridCell = memo(
   ({
+    as = 'label',
     fieldName,
     model,
     type,
     value,
     ...props
   }: DataGridCellProps): ReactElement => {
-    const {
-      alignContent,
-      textColor,
-      textOverflow,
-      textSize,
-      textWeight,
-      maxWidth,
-      minWidth,
-      width,
-    } = props;
+    const { alignment, textColor, textOverflow, textSize, textWeight, size } =
+      props;
     return (
       <Container
-        orientation={Orientation.Horizontal}
+        alignment={{
+          orientation: Orientation.Horizontal,
+          vertical: AlignVertical.Center,
+        }}
+        as={as}
         overflow={Overflow.Hidden}
-        maxWidth={maxWidth}
-        minWidth={minWidth}
-        paddingLeft={Amount.Less}
-        paddingRight={Amount.Less}
-        width={width}
+        padding={{
+          left: Amount.Less,
+          right: Amount.Less,
+        }}
+        size={size}
         {...props}
       >
         {getLabelByFieldType({
           fieldName,
           model,
           props: {
-            alignContent,
+            alignment,
             overflow: Overflow.Hidden,
             textColor,
             textOverflow,

@@ -1,4 +1,4 @@
-export declare enum Size {
+export declare enum Sizes {
     Smallest = "var(--size-smallest)",
     Smaller = "var(--size-smaller)",
     Small = "var(--size-small)",
@@ -7,7 +7,12 @@ export declare enum Size {
     Larger = "var(--size-larger)",
     Largest = "var(--size-largest)"
 }
-export declare type SizeProps = {
-    readonly size?: Size;
+export declare type Size = {
+    readonly height?: Sizes | string | number;
+    readonly maxHeight?: Sizes | string | number;
+    readonly maxWidth?: Sizes | string | number;
+    readonly minHeight?: Sizes | string | number;
+    readonly minWidth?: Sizes | string | number;
+    readonly width?: Sizes | string | number;
 };
 //# sourceMappingURL=size.d.ts.map

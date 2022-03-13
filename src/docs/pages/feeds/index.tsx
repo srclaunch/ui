@@ -10,7 +10,7 @@ import {
   Size,
   UnorderedList,
   Workspace,
-} from '../../..';
+} from '../../../index';
 import { Documentation } from '../../layouts/Documentation';
 
 export const Forms = memo((): ReactElement => {
@@ -20,27 +20,15 @@ export const Forms = memo((): ReactElement => {
         title: 'Forms',
       }}
       layout={Documentation}
-      padding={Amount.Most}
+      padding={{ all: Amount.Most }}
       title="Forms"
     >
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.Least}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.Least }}
         depth={Depth.High}
-        grow={false}
-        padding={Amount.Most}
-      >
-        <Heading lineHeight={Size.Smaller}>Components</Heading>
-
-        <UnorderedList
-          items={[
-            <NavigationLink to="/forms/buttons" label="Buttons" />,
-            <NavigationLink to="/forms/inputs" label="Inputs" />,
-          ]}
-          paddingLeft={Amount.Default}
-          paddingRight={Amount.Default}
-        />
-      </Container>
+        padding={{ all: Amount.Most }}
+      ></Container>
     </Workspace>
   );
 });

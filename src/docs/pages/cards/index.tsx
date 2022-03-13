@@ -7,38 +7,36 @@ import {
   Depth,
   Heading,
   NavigationLink,
-  Size,
+  Sizes,
   UnorderedList,
   Workspace,
-} from '../../..';
+} from '../../../index';
 import { Documentation } from '../../layouts/Documentation';
 
-export const Forms = memo((): ReactElement => {
+export const CardsPage = memo((): ReactElement => {
   return (
     <Workspace
       header={{
-        title: 'Forms',
+        title: 'Cards',
       }}
       layout={Documentation}
-      padding={Amount.Most}
-      title="Forms"
+      padding={{ all: Amount.Most }}
+      title="Cards"
     >
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.Least}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.Least }}
         depth={Depth.High}
-        grow={false}
-        padding={Amount.Most}
+        padding={{ all: Amount.Most }}
       >
-        <Heading lineHeight={Size.Smaller}>Components</Heading>
+        <Heading lineHeight={Sizes.Smaller}>Components</Heading>
 
         <UnorderedList
           items={[
-            <NavigationLink to="/forms/buttons" label="Buttons" />,
-            <NavigationLink to="/forms/inputs" label="Inputs" />,
+            <NavigationLink to="/cards/card" label="Card" />,
+            <NavigationLink to="/cards/title-card" label="TitleCard" />,
           ]}
-          paddingLeft={Amount.Default}
-          paddingRight={Amount.Default}
+          padding={{ left: Amount.Default, right: Amount.Default }}
         />
       </Container>
     </Workspace>

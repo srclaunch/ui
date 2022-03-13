@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
-import { ContainerProps, SizeProps } from '../../types';
-declare type LineBreakProps = ContainerProps<HTMLDivElement> & SizeProps;
+import { ContainerProps } from '../layout/Container';
+declare type LineBreakProps = ContainerProps<HTMLDivElement>;
 export declare const LineBreak: import("react").MemoExoticComponent<({ className, size, ...props }: LineBreakProps) => ReactElement>;
 export {};
 //# sourceMappingURL=LineBreak.d.ts.map

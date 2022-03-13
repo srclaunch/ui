@@ -1,9 +1,9 @@
 import { memo, ReactElement } from 'react';
 // import moment from 'moment';
 
-import { Label } from '../../../typography/Label';
+import { Label, LabelProps } from '../../../typography/Label';
 
-import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
+import { Sizes, TextColors, TextSize } from '../../../../types';
 
 type DateTimeLabelProps = {
   value: string;
@@ -12,7 +12,7 @@ type DateTimeLabelProps = {
 export const DateTimeLabel = memo(
   ({
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value,

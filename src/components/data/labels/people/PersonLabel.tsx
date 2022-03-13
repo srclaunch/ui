@@ -4,51 +4,49 @@ import { memo, ReactElement } from 'react';
 import { getSmallerAmount } from '../../../../lib/proportions/amount';
 import { convertSizeToAmount } from '../../../../lib/proportions/conversions';
 import {
-  Align,
+  Alignment,
+  AlignVertical,
   Amount,
-  ContainerProps,
   Orientation,
   Size,
-  SizeProps,
-  TextProps,
+  Sizes,
   TextSize,
   TextWeight,
 } from '../../../../types';
 import { Container } from '../../../layout/Container';
 import { Image } from '../../../media/Image';
-import { Label } from '../../../typography/Label';
+import { Label, LabelProps } from '../../../typography/Label';
 
 export type PersonLabelProps = {
   readonly image?: ImageProps;
   readonly name?: string;
-} & ContainerProps<HTMLDivElement> &
-  SizeProps &
-  TextProps;
+} & LabelProps;
 
 export const PersonLabel = memo(
   ({
     image,
     name,
-    size = Size.Default,
+    // size = Size.Default,
     textSize = TextSize.Large,
     ...props
   }: PersonLabelProps): ReactElement => {
     return (
       <Container
-        alignItems={Align.Center}
-        orientation={Orientation.Horizontal}
-        {...props}
+        alignment={{
+          orientation: Orientation.Horizontal,
+          vertical: AlignVertical.Center,
+        }}
       >
         <Image
-          borderRadius={Amount.All}
-          marginRight={getSmallerAmount(convertSizeToAmount(size))}
+          borderRadius={{ all: Amount.All }}
+          // margin={{ right: getSmallerAmount(convertSizeToAmount(size))}}
           path={image?.path}
           url={image?.url}
-          size={size}
+          // size={size}
         />
 
         <Label
-          lineHeight={getSmallerAmount(convertSizeToAmount(size))}
+          // lineHeight={getSmallerAmount(convertSizeToAmount(size))}
           textWeight={TextWeight.More}
           textSize={textSize}
         >

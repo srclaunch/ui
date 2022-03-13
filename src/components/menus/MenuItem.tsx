@@ -1,21 +1,18 @@
 import { memo, MouseEvent, ReactElement, useState } from 'react';
 
 import {
-  Align,
+  AlignVertical,
   Amount,
   BackgroundColors,
   DepthShadow,
-  Size,
+  Sizes,
   TextColors,
   TextSize,
 } from '../../types';
 import { Button, ButtonProps, ButtonType } from '../forms/buttons/Button';
 import { Container, ContainerProps } from '../layout/Container';
 import { IconProps } from '../media/Icon';
-import {
-  NavigationLink,
-  NavigationLinkProps,
-} from '../navigation/NavigationLink';
+import { NavigationLink } from '../navigation/NavigationLink';
 import { Label, LabelProps } from '../typography/Label';
 
 export type MenuItemProps = {
@@ -31,17 +28,17 @@ export const MenuItem = memo(
   ({
     active,
     as = 'div',
-    backgroundColor = BackgroundColors.Lightest,
-    borderRadius = Amount.Less,
-    boxShadow = DepthShadow.Surface,
+    background = {},
+    borderRadius = {},
     className = '',
     component,
     focus,
     hover,
     icon,
     label,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     onClick,
+    shadow = DepthShadow.Surface,
     title,
     to,
     value,
@@ -60,10 +57,13 @@ export const MenuItem = memo(
 
           <NavigationLink
             active={active}
-            borderRadius={Amount.Least}
-            backgroundColor={
-              hovered ? BackgroundColors.Primary : BackgroundColors.Transparent
-            }
+            borderRadius={{ all: Amount.Least, ...borderRadius }}
+            background={{
+              color: hovered
+                ? BackgroundColors.Primary
+                : BackgroundColors.Transparent,
+              ...background,
+            }}
             focus={focus}
             hover={hover}
             icon={icon}
@@ -74,8 +74,10 @@ export const MenuItem = memo(
 
               if (onClick) onClick(e);
             }}
-            paddingLeft={Amount.Less}
-            paddingRight={Amount.Less}
+            padding={{
+              left: Amount.Less,
+              right: Amount.Less,
+            }}
             textColor={props.textColor ?? TextColors.Default}
             to={to}
           >
@@ -90,15 +92,20 @@ export const MenuItem = memo(
         {itemTitle}
 
         <Button
-          alignContent={Align.Left}
-          borderRadius={Amount.Least}
-          backgroundColor={
-            hovered ? BackgroundColors.Primary : BackgroundColors.Transparent
-          }
+          alignment={{
+            vertical: AlignVertical.Center,
+          }}
+          borderRadius={{ all: Amount.Least, ...borderRadius }}
+          background={{
+            color: hovered
+              ? BackgroundColors.Primary
+              : BackgroundColors.Transparent,
+            ...background,
+          }}
           form="null"
           icon={icon}
           lineHeight={lineHeight}
-          onClick={e => {
+          onClick={(e: any) => {
             e.preventDefault();
             e.stopPropagation();
 
@@ -107,8 +114,10 @@ export const MenuItem = memo(
           }}
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
-          paddingLeft={Amount.Less}
-          paddingRight={Amount.Less}
+          padding={{
+            left: Amount.Less,
+            right: Amount.Less,
+          }}
           type={hovered ? ButtonType.Primary : ButtonType.Transparent}
         >
           {component ?? label}

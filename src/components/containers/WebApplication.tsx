@@ -1,3 +1,4 @@
+import { memo, ReactElement, useEffect, useState } from 'react';
 import { HttpClient } from '@srclaunch/http-client';
 import { ThemeProvider } from '@srclaunch/themes';
 import {
@@ -8,13 +9,12 @@ import {
   RootState,
   useSelector,
 } from '@srclaunch/web-application-state';
-import { memo, ReactElement, useEffect, useState } from 'react';
 import { PageRole, PageRoute } from '@srclaunch/types';
 
-import { BackgroundColors, ContainerProps } from '../../types';
+import { BackgroundColors, Fill } from '../../types';
 import { EntityPanel } from '../data/entities/EntityPanel';
 import { ErrorBoundary } from '../errors/ErrorBoundary';
-import { Container } from '../layout/Container';
+import { Container, ContainerProps } from '../layout/Container';
 import { Backdrop } from '../modals/Backdrop';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 
@@ -28,7 +28,9 @@ export const WebApplication = memo(
   ({
     authentication = false,
     actions,
-    backgroundColor = BackgroundColors.Dark,
+    background = {
+      color: BackgroundColors.Dark,
+    },
     children,
     className = '',
     httpClient,
@@ -112,7 +114,8 @@ export const WebApplication = memo(
 
     return (
       <Container
-        backgroundColor={backgroundColor}
+        alignment={{ fill: Fill.Both }}
+        background={background}
         className={`${className} web-application`}
         {...props}
       >

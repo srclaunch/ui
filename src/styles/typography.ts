@@ -1,53 +1,54 @@
 import { css } from 'styled-components';
+import { TextProps } from '../components/typography/Text';
 
-import { Align, TextColors, TextProps } from '../types';
+import { TextColors, TextSize } from '../types';
 
-const getLineHeight = (lineHeight: TextProps['lineHeight']) => {
-  if (typeof lineHeight === 'number') {
-    return `${lineHeight}px`;
-  }
-
-  return lineHeight;
-};
-
-export const getTextAlignmentFromAlign = (align?: Align | string) => {
-  switch (align) {
-    case Align.Center:
-      return 'center';
-    case Align.Justify:
-      return 'justify';
-    case Align.Left:
-      return 'left';
-    case Align.Right:
-      return 'right';
-    default:
-      return align ?? 'left';
-  }
-};
 export const TextStyles = css<TextProps>`
-  color: ${props =>
-    props.textColor === TextColors.Inherit
-      ? TextColors.Inherit
-      : `rgb(${props.textColor ?? TextColors.Default})`};
-  cursor: inherit;
-  display: ${props => (props.inline ? 'inline' : 'inline-flex')};
-  font-size: ${props => props.textSize};
-  font-weight: ${props => props.textWeight};
-  line-height: ${props => getLineHeight(props.lineHeight)};
-  text-align: ${props => getTextAlignmentFromAlign(props.alignText)};
-  text-decoration: ${props => (props.underline ? 'underline' : 'none')};
-  text-decoration-color: ${props =>
-    props.underlineColor
-      ? props.underlineColor
-      : props.textColor === TextColors.Inherit
-      ? TextColors.Inherit
-      : `rgb(${props.textColor ?? TextColors.Default})`};
+  color: rgb(${props => props.textColor ?? TextColors.Default});
+  display: inline-block;
+  font-size: ${props => props.textSize ?? TextSize.Default};
   transition: color 0.15s ease-in;
 
   ${props =>
-    props.overflow &&
+    props.cursor &&
     css`
-      overflow: ${props.overflow};
+      cursor: ${props.cursor};
+    `};
+
+  ${props =>
+    props.textAlign &&
+    css`
+      text-align: ${props.textAlign};
+    `};
+
+  ${props =>
+    props.textDecoration?.color &&
+    css`
+      text-decoration-color: ${props.textDecoration?.color};
+    `};
+
+  ${props =>
+    props.textDecoration?.line &&
+    css`
+      text-decoration-line: ${props.textDecoration?.line};
+    `};
+
+  ${props =>
+    props.textDecoration?.style &&
+    css`
+      text-decoration-style: ${props.textDecoration?.style};
+    `};
+
+  ${props =>
+    props.textDecoration?.thickness &&
+    css`
+      text-decoration-thickness: ${props.textDecoration?.thickness};
+    `};
+
+  ${props =>
+    props.lineHeight &&
+    css`
+      line-height: ${props.lineHeight};
     `};
 
   ${props =>
@@ -63,8 +64,8 @@ export const TextStyles = css<TextProps>`
     `};
 
   ${props =>
-    props.whiteSpace &&
+    props.textWeight &&
     css`
-      white-space: ${props.whiteSpace};
+      font-weight: ${props.textWeight};
     `};
 `;

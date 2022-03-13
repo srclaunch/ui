@@ -2,18 +2,20 @@ import { Link as RouterLink } from '@srclaunch/web-application-state';
 import { memo, MouseEvent, ReactElement, useState } from 'react';
 import styled from 'styled-components';
 
-import { FocusedStyles } from '../../styles/focused';
-import { LayoutStyles } from '../../styles/layout';
+import { FocusStyles } from '../../styles/container/focus';
 import {
-  Align,
   Amount,
   FocusProps,
-  Size,
   TextColors,
+  TextSize,
   TextWeight,
 } from '../../types';
+import {
+  TextDecorationLine,
+  TextDecorationStyle,
+} from '../../types/typography/text';
 import { Icon } from '../media/Icon';
-import { Label, LabelProps } from './Label';
+import { Text, TextProps } from './Text';
 
 export type LinkProps = {
   readonly icon?: typeof Icon;
@@ -22,39 +24,28 @@ export type LinkProps = {
   readonly rel?: string;
   readonly target?: '_blank';
   readonly to: string;
-} & LabelProps &
+} & TextProps &
   FocusProps;
 
 export const Link = memo(
   ({
     children,
     hover,
-    size = Size.Small,
     textColor = TextColors.Link,
+    textDecoration = {
+      line: [TextDecorationLine.Underline],
+      style: TextDecorationStyle.Solid,
+    },
+    textSize = TextSize.Small,
     textWeight = TextWeight.Default,
     to,
-    underline = true,
-    underlineColor = TextColors.Link,
     ...props
   }: LinkProps): ReactElement => {
     const [focused, setFocused] = useState(false);
     const [hovered, setHovered] = useState(false);
 
     return (
-      <Container
-        as="span"
-        lineHeight={size}
-        textColor={textColor}
-        textWeight={textWeight}
-        underline={(underline || (hovered && hover?.underline)) && !focused}
-        underlineColor={textColor}
-        alignContent={Align.Center}
-        alignItems={Align.Center}
-        focused={focused}
-        grow={false}
-        height={size}
-        {...props}
-      >
+      <Container as="span" focused={focused} {...props}>
         <RouterLink
           to={to}
           onFocus={() => setFocused(true)}
@@ -62,19 +53,17 @@ export const Link = memo(
           onMouseEnter={() => setHovered(true)}
           onMouseLeave={() => setHovered(false)}
           style={{
-            alignItems: Align.Center,
-            color: textColor as string,
-            display: 'inline-flex',
-            flexDirection: 'column',
-            justifyContent: Align.Center,
             outline: 'none',
-            textDecoration:
-              (underline || (hovered && hover?.underline)) && !focused
-                ? 'underline'
-                : 'none',
           }}
         >
-          {children}
+          <Text
+            textDecoration={textDecoration}
+            textColor={textColor}
+            textWeight={textWeight}
+            {...props}
+          >
+            {children}
+          </Text>
         </RouterLink>
       </Container>
     );
@@ -84,7 +73,7 @@ export const Link = memo(
 /* ${LayoutStyles}; */
 
 const Container = styled.span<Omit<LinkProps, 'to'>>`
-  ${FocusedStyles};
+  ${FocusStyles};
 
   cursor: pointer;
   position: relative;

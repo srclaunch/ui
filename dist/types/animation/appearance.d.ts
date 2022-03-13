@@ -1,3 +1,2 @@
-import { AppearanceProps } from '../appearance';
-export declare type AnimatedAppearanceProps = AppearanceProps;
+export declare type AnimatedAppearanceProps = {};
 //# sourceMappingURL=appearance.d.ts.map

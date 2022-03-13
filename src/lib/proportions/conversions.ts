@@ -1,62 +1,62 @@
-import { Amount, Size, TextSize } from '../../types';
+import { Amount, Sizes, TextSize } from '../../types';
 
-export function convertAmountToSize(amount: Amount): Size {
+export function convertAmountToSize(amount: Amount): Sizes {
   switch (amount) {
     case Amount.None:
-      return Size.Smallest;
+      return Sizes.Smallest;
     case Amount.Least:
-      return Size.Smaller;
+      return Sizes.Smaller;
     case Amount.Less:
-      return Size.Small;
+      return Sizes.Small;
     case Amount.Default:
-      return Size.Default;
+      return Sizes.Default;
     case Amount.More:
-      return Size.Large;
+      return Sizes.Large;
     case Amount.Most:
-      return Size.Larger;
+      return Sizes.Larger;
     case Amount.All:
-      return Size.Largest;
+      return Sizes.Largest;
   }
 }
 
-export function convertSizeToAmount(size?: Size): Amount {
+export function convertSizeToAmount(size?: Sizes): Amount {
   if (!size) return Amount.Default;
 
   switch (size) {
-    case Size.Smallest:
+    case Sizes.Smallest:
       return Amount.None;
-    case Size.Smaller:
+    case Sizes.Smaller:
       return Amount.Least;
-    case Size.Small:
+    case Sizes.Small:
       return Amount.Less;
-    case Size.Default:
+    case Sizes.Default:
       return Amount.Default;
-    case Size.Large:
+    case Sizes.Large:
       return Amount.More;
-    case Size.Larger:
+    case Sizes.Larger:
       return Amount.Most;
-    case Size.Largest:
+    case Sizes.Largest:
       return Amount.All;
   }
 }
 
-export function convertSizeToTextSize(size?: Size): TextSize {
+export function convertSizeToTextSize(size?: Sizes): TextSize {
   if (!size) return TextSize.Default;
 
   switch (size) {
-    case Size.Smallest:
+    case Sizes.Smallest:
       return TextSize.Smallest;
-    case Size.Smaller:
+    case Sizes.Smaller:
       return TextSize.Smaller;
-    case Size.Small:
+    case Sizes.Small:
       return TextSize.Small;
-    case Size.Default:
+    case Sizes.Default:
       return TextSize.Default;
-    case Size.Large:
+    case Sizes.Large:
       return TextSize.Large;
-    case Size.Larger:
+    case Sizes.Larger:
       return TextSize.Larger;
-    case Size.Largest:
+    case Sizes.Largest:
       return TextSize.Largest;
   }
 }

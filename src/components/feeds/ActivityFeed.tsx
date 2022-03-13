@@ -3,22 +3,23 @@ import { memo, ReactElement } from 'react';
 import { DateTime, DateTimeFormatOptions } from 'luxon';
 import { getActivityLabel } from '../../lib/activity';
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
+  AlignVertical,
   Amount,
-  AppearanceProps,
   BackgroundColors,
   BorderColors,
   BorderStyle,
   CommonComponentProps,
-  LayoutProps,
   Orientation,
   Size,
+  TextDecorationLine,
   TextSize,
 } from '../../types';
 import { DateLabel } from '../data/labels/dates/DateLabel';
 import { UserLabel } from '../data/labels/people/UserLabel';
 import { Button, ButtonType } from '../forms/buttons/Button';
-import { Container } from '../layout/Container';
+import { Container, ContainerProps } from '../layout/Container';
 import { Label } from '../typography/Label';
 import { Link } from '../typography/Link';
 import { convertSizeToAmount } from '../../lib/proportions/conversions';
@@ -26,16 +27,12 @@ import { convertSizeToAmount } from '../../lib/proportions/conversions';
 export type ActivityFeedProps = {
   activities: Activity[];
   dateFormat?: DateTimeFormatOptions;
-} & CommonComponentProps<HTMLDivElement> &
-  LayoutProps &
-  AppearanceProps;
+} & ContainerProps;
 
 export type ActivityFeedItemProps = {
   dateFormat?: DateTimeFormatOptions;
 } & Activity &
-  CommonComponentProps<HTMLDivElement> &
-  LayoutProps &
-  AppearanceProps;
+  ContainerProps;
 
 const ActivityFeedItem = memo(
   ({
@@ -47,28 +44,29 @@ const ActivityFeedItem = memo(
   }: ActivityFeedItemProps): ReactElement => {
     return (
       <Container
+        alignment={{
+          orientation: Orientation.Horizontal,
+        }}
         className="activity-item"
-        grow={false}
-        orientation={Orientation.Horizontal}
       >
         {who && (
           <UserLabel
-            grow={false}
             image={who.image}
             menu={null}
             name={who.name}
-            size={Size.Small}
+            // size={Size.Small}
             to={who.to}
           />
         )}
 
         {what && (
           <Container
-            grow={false}
-            marginLeft={-2}
-            orientation={Orientation.Horizontal}
+            alignment={{
+              orientation: Orientation.Horizontal,
+            }}
+            margin={{ left: -2 }}
           >
-            <Label textSize={TextSize.Default}>
+            <Label margin={{ right: 3 }} textSize={TextSize.Default}>
               {getActivityLabel(what.name)}
             </Label>
 
@@ -76,10 +74,13 @@ const ActivityFeedItem = memo(
               <Link
                 to={what.to}
                 hover={{
-                  underline: true,
+                  textDecoration: {
+                    line: TextDecorationLine.Underline,
+                  },
                 }}
-                marginLeft={3}
-                underline={false}
+                textDecoration={{
+                  line: TextDecorationLine.None,
+                }}
               >
                 {what.label}
               </Link>
@@ -90,24 +91,22 @@ const ActivityFeedItem = memo(
         )}
         {where && (
           <Label
-            alignItems={Align.Center}
-            grow={false}
-            marginLeft={-2}
+            alignment={{
+              horizontal: AlignHorizontal.Center,
+            }}
+            margin={{ left: -2 }}
             textSize={TextSize.Default}
           >
             {where}
           </Label>
         )}
 
-        <Label grow={false} marginLeft={3}>
-          on
-        </Label>
+        <Label margin={{ left: 3 }}>on</Label>
 
         {when && (
           <DateLabel
             format={dateFormat}
-            grow={false}
-            marginLeft={3}
+            margin={{ left: 3 }}
             textSize={TextSize.Default}
             value={when}
           />
@@ -131,16 +130,23 @@ export const ActivityFeed = memo(
             <Container key={key}>
               {key !== 0 && key !== activities.length && (
                 <Container
-                  backgroundColor={BackgroundColors.Lighter}
-                  borderRadius={Amount.Default}
-                  height={12}
-                  marginLeft={convertSizeToAmount(Size.Default)}
-                  marginBottom={5}
-                  marginTop={5}
+                  background={{
+                    color: BackgroundColors.Lighter,
+                  }}
+                  borderRadius={{ all: Amount.Default }}
+                  margin={{
+                    bottom: 5,
+                    top: 5,
+                  }}
+                  // marginLeft={convertSizeToAmount(Size.Default)}
+
+                  size={{
+                    height: 12,
+                    width: 5,
+                  }}
                   style={{
                     transform: 'translateX(-2px)',
                   }}
-                  width={5}
                 />
               )}
 
@@ -150,8 +156,10 @@ export const ActivityFeed = memo(
         })}
 
         <Container
-          alignContent={Align.Center}
-          alignItems={Align.Center}
+          alignment={{
+            horizontal: AlignHorizontal.Center,
+            vertical: AlignVertical.Center,
+          }}
           border={{
             top: {
               color: BorderColors.Light,
@@ -159,11 +167,18 @@ export const ActivityFeed = memo(
               width: 1,
             },
           }}
-          marginTop={Amount.Default}
-          padding={Amount.Default}
-          paddingBottom={Amount.None}
+          margin={{ top: Amount.Default }}
+          padding={{
+            bottom: Amount.None,
+            left: Amount.Default,
+            right: Amount.Default,
+            top: Amount.Default,
+          }}
         >
-          <Button type={ButtonType.Primary} size={Size.Small}>
+          <Button
+            type={ButtonType.Primary}
+            // size={Size.Small}
+          >
             Load more
           </Button>
         </Container>

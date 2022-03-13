@@ -1,12 +1,14 @@
 import { Primitives } from '@srclaunch/types';
 import { memo, ReactElement } from 'react';
 
-import { Workspace } from '../../../../../components/containers/Workspace';
-import { DataGrid } from '../../../../../components/data/DataGrid/index';
-import { DropdownInput } from '../../../../../components/forms/inputs/menu/DropdownInput';
-import { Paragraph } from '../../../../../components/typography/Paragraph';
-import { SubTitle } from '../../../../../components/typography/SubTitle';
-import { Align, Amount } from '../../../../../types';
+import {
+  Amount,
+  DataGrid,
+  DropdownInput,
+  Paragraph,
+  Workspace,
+} from '../../../../../index';
+
 import { Documentation } from '../../../../layouts/Documentation';
 
 export const DropdownInputPage = memo((): ReactElement => {
@@ -16,7 +18,7 @@ export const DropdownInputPage = memo((): ReactElement => {
       layout={Documentation}
       title="DropdownInput"
     >
-      <Paragraph marginBottom={Amount.Most}>
+      <Paragraph margin={{ bottom: Amount.Most }}>
         The <b>DropdownInput</b> component is used to display a dropdown menu.
       </Paragraph>
 
@@ -36,7 +38,7 @@ export const DropdownInputPage = memo((): ReactElement => {
           },
         ]}
         placeholder="Choose an item"
-        width={200}
+        size={{ width: 200 }}
       />
 
       <br />
@@ -58,7 +60,7 @@ export const DropdownInputPage = memo((): ReactElement => {
           },
         ]}
         placeholder="Choose an item"
-        width={200}
+        size={{ width: 200 }}
       />
     </Workspace>
   );

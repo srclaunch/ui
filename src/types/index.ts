@@ -1,12 +1,5 @@
-export type { ButtonProps } from '../components/forms/buttons/Button';
 export { ButtonType } from '../components/forms/buttons/Button';
-export type { DropdownInputProps } from '../components/forms/inputs/menu/DropdownInput';
-export type { InputContainerProps } from '../components/forms/inputs/shared/InputContainer';
 export type { ContainerProps } from '../components/layout/Container';
-export type { IconProps } from '../components/media/Icon';
-export type { MenuProps } from '../components/menus/Menu';
-export type { MenuItemProps } from '../components/menus/MenuItem';
-export type { LabelProps } from '../components/typography/Label';
 export type {
   Animation,
   AnimationProps,
@@ -20,48 +13,45 @@ export type { SkewProps } from './animation/skew';
 export type { AnimatedTextProps } from './animation/text';
 export type { Transform, TransformProps } from './animation/transform';
 export type { TranslateProps } from './animation/translate';
-export type { BackgroundColor, BackgroundProps } from './appearance/background';
+export type { ContainerAnimation } from './appearance/animation';
+export type { Background, BackgroundColor } from './appearance/background';
 export {
   BackgroundColors,
   BackgroundColorShade,
   BackgroundSize,
 } from './appearance/background';
-export type {
-  BorderColor,
-  BorderDirectionProps,
-  BorderProps,
-  BorderRadiusCornerProps,
-  BorderStyleProps,
-} from './appearance/border';
+export type { Border, BorderColor, BorderRadius } from './appearance/border';
 export {
   BorderColors,
   BorderColorShade,
   BorderStyle,
 } from './appearance/border';
-export type {
-  BoxShadow,
-  BoxShadowDetails,
-  BoxShadowProps,
-} from './appearance/box-shadow';
+export type { Shadow } from './appearance/shadow';
 export type { Color } from './appearance/color';
 export { Colors, ContrastColors } from './appearance/color';
 export type { CursorProps } from './appearance/cursor';
 export { Cursor } from './appearance/cursor';
-export type { DepthProps } from './appearance/depth';
 export { Depth, DepthShadow } from './appearance/depth';
-export type {
-  DimensionValue,
-  HeightProps,
-  WidthProps,
-} from './appearance/dimension';
 export type { ForegroundColor } from './appearance/foreground';
 export {
   ForegroundColors,
   ForegroundColorShade,
 } from './appearance/foreground';
-export type { AppearanceProps } from './appearance/index';
-export type { SizeProps } from './appearance/size';
-export { Size } from './appearance/size';
+export type { Alignment } from './appearance/alignment';
+export {
+  AlignHorizontal,
+  AlignVertical,
+  Orientation,
+} from './appearance/alignment';
+export { Amount } from './appearance/proportion';
+export { Fill } from './appearance/fill';
+export { Overflow } from './appearance/overflow';
+export type { Margin } from './appearance/margin';
+export type { Padding } from './appearance/padding';
+export type { Position } from './appearance/position';
+export { PositionBehavior } from './appearance/position';
+export type { Size } from './appearance/size';
+export { Sizes } from './appearance/size';
 export type { TranslucencyProps } from './appearance/translucency';
 export type { VisibilityProps } from './appearance/visibility';
 export type { CommonComponentProps } from './component';
@@ -75,26 +65,18 @@ export type { MouseEventProps } from './events/mouse';
 export type { CommonFormFieldProps, FormField } from './form/field';
 export type { InputProps } from './form/input';
 export { AutoComplete } from './form/input';
-export type { LayoutProps } from './layout';
-export type { AlignmentProps } from './layout/alignment';
-export { Align, Orientation } from './layout/alignment';
-export type { BehaviorProps } from './layout/behavior';
-export { FillBehavior, Overflow } from './layout/behavior';
-export type { MarginProps } from './layout/margin';
-export type { PaddingProps } from './layout/padding';
-export type { PositionProps } from './layout/position';
-export { Position } from './layout/position';
 export type { LinkProps } from './navigation/link';
-export { Amount } from './proportion';
 export type { ErrorProps } from './state/error-props';
 export type { FocusProps } from './state/focus-props';
 export type { SuccessProps } from './state/success-props';
 export type { WarningProps } from './state/warning-props';
-export type { TextColor, TextProps } from './typography/text';
+export type { TextColor } from './typography/text';
 export {
+  TextAlign,
   TextColors,
+  TextDecorationLine,
+  TextDecorationStyle,
   TextOverflow,
   TextSize,
   TextWeight,
-  WhiteSpace,
 } from './typography/text';

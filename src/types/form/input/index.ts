@@ -1,8 +1,7 @@
 import { ForwardedRef, MutableRefObject, Ref } from 'react';
 
 import { FocusProps, InputValueChangeHandler } from '../..';
-import { HeightProps, WidthProps } from '../../appearance/dimension';
-import { SizeProps } from '../../appearance/size';
+import { Size } from '../../appearance/size';
 import { CommonComponentProps } from '../../component';
 import { ClipboardEventProps } from '../../events/clipboard';
 import { FocusEventProps } from '../../events/focus';
@@ -55,15 +54,13 @@ export type InputProps<E = HTMLInputElement, V = string> = {
   readonly placeholder?: string;
   readonly ref?: ForwardedRef<E>;
   readonly required?: boolean;
+  readonly size?: Size;
   readonly submitOnEnter?: boolean;
   readonly value?: V;
 } & CommonComponentProps<E> &
   ClipboardEventProps<E> &
   ErrorProps &
-  HeightProps &
   ProgressProps &
-  SizeProps &
   SuccessProps &
   ValidationProps &
-  WarningProps &
-  WidthProps;
+  WarningProps;

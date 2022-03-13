@@ -1,120 +1,69 @@
 import { memo, ReactElement } from 'react';
-
-import { Container } from '../layout/Container';
-import { Label } from '../typography/Label';
+import { Container, ContainerProps } from '../layout/Container';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
-
 import {
-  Align,
+  AlignVertical,
   Amount,
   BackgroundColors,
-  ContainerProps,
   DepthShadow,
-  IconProps,
   Orientation,
-  Overflow,
-  Position,
-  Size,
-  TextColors,
-  TextSize,
-  TextWeight,
+  Sizes,
 } from '../../types';
-import { Icon } from '../media/Icon';
+import { Icon, IconProps } from '../media/Icon';
 import { Title } from '../typography/Title';
 import { Small } from '../typography/Small';
-
-type TitleCardsProps = ContainerProps;
-
-export const TitleCards = memo(
-  ({
-    children,
-    className = 'title-cards',
-    grow = false,
-    minHeight = 82,
-    orientation = Orientation.Horizontal,
-    ...props
-  }: TitleCardsProps): ReactElement => {
-    return (
-      <Container
-        className={`${className} title-cards`}
-        grow={grow}
-        minHeight={minHeight}
-        overflow={Overflow.ScrollHorizontal}
-        paddingBottom={Amount.Default}
-        {...props}
-      >
-        <Container
-          orientation={orientation}
-          overflow={Overflow.ScrollHorizontal}
-          position={Position.Absolute}
-        >
-          {children}
-        </Container>
-      </Container>
-    );
-  },
-);
 
 type TitleCardProps = {
   icon?: IconProps;
   label?: string;
   loading?: boolean;
   value?: number;
-} & ContainerProps<HTMLDivElement>;
+} & ContainerProps;
 
 export const TitleCard = memo(
   ({
-    backgroundColor = BackgroundColors.Card,
-    borderRadius = Amount.Least,
-    boxShadow = DepthShadow.High,
+    alignment = {},
+    background = {},
+    borderRadius = {},
     className = '',
-    grow = true,
-    flat = false,
     label,
     loading = false,
-    marginRight = Amount.Default,
-    orientation = Orientation.Horizontal,
-    padding = Amount.Default,
+    padding = {},
     value,
     icon,
-    width = 260,
+    shadow = DepthShadow.High,
+    size = {
+      width: 260,
+    },
     ...props
   }: TitleCardProps): ReactElement => {
     return (
       <Container
-        backgroundColor={backgroundColor}
-        borderRadius={borderRadius}
-        boxShadow={boxShadow}
+        alignment={{ orientation: Orientation.Horizontal, ...alignment }}
+        background={{ color: BackgroundColors.Card, ...background }}
+        borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} title-card`}
-        flat={flat}
-        grow={grow}
-        marginRight={marginRight}
-        orientation={orientation}
-        padding={padding}
-        width={width}
+        padding={{ all: Amount.Default, ...padding }}
+        shadow={shadow}
+        size={size}
         {...props}
       >
-        <LoadingOverlay visible={loading} spinnerSize={Size.Small} />
+        <LoadingOverlay
+          visible={loading}
+          spinnerSize={{
+            height: Sizes.Small,
+            width: Sizes.Small,
+          }}
+        />
 
-        {icon && (
-          <Container
-            alignItems={Align.Center}
-            alignContent={Align.Center}
-            borderRadius={Amount.All}
-            grow={false}
-            marginRight={Amount.Default}
-            paddingLeft={Amount.Less}
-            paddingRight={Amount.Less}
-          >
-            <Icon {...icon} />
-          </Container>
-        )}
+        {icon && <Icon margin={{ right: Amount.Default }} {...icon} />}
 
         {!loading && (
           <Container
-            alignContent={Align.Center}
-            alignItems={Align.Left}
-            orientation={Orientation.Vertical}
+            alignment={{
+              orientation: Orientation.Vertical,
+              vertical: AlignVertical.Center,
+            }}
           >
             <Small>{label}</Small>
 

@@ -5,7 +5,7 @@ declare type SignupFormProps = {
         readonly userId: string;
     }) => unknown;
     readonly title?: string;
-} & ContainerProps<HTMLDivElement>;
-export declare const SignupForm: import("react").MemoExoticComponent<({ backgroundColor, borderRadius, onSignupSuccess, title, }: SignupFormProps) => ReactElement>;
+} & ContainerProps;
+export declare const SignupForm: import("react").MemoExoticComponent<({ background, borderRadius, onSignupSuccess, title, }: SignupFormProps) => ReactElement>;
 export {};
 //# sourceMappingURL=SignupForm.d.ts.map

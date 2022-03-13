@@ -17,8 +17,3 @@ export enum DepthShadow {
   Higher = 'var(--shadow-depth-higher)',
   Highest = 'var(--shadow-depth-highest)',
 }
-
-export type DepthProps = {
-  readonly depth?: Depth;
-  readonly flat?: boolean;
-};

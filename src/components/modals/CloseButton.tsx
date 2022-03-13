@@ -2,14 +2,16 @@ import { BasicIcons } from '@srclaunch/icons';
 import { memo, ReactElement, useState } from 'react';
 
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
+  AlignVertical,
   Amount,
   BackgroundColors,
   Depth,
   ForegroundColor,
   ForegroundColors,
   Position,
-  Size,
+  Sizes,
 } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 import { Icon } from '../media/Icon';
@@ -20,11 +22,14 @@ export type CloseButtonProps = {
 
 export const CloseButton = memo(
   ({
-    backgroundColor = BackgroundColors.CloseButton,
+    background = { color: BackgroundColors.CloseButton },
     iconColor = ForegroundColors.CloseButton,
     className = '',
     onClick,
-    size = Size.Default,
+    size = {
+      height: Sizes.Default,
+      width: Sizes.Default,
+    },
     ...props
   }: CloseButtonProps): ReactElement => {
     const [hovered, setHovered] = useState(false);
@@ -36,29 +41,32 @@ export const CloseButton = memo(
 
     return (
       <Container
-        alignContent={Align.Center}
-        alignItems={Align.Center}
+        alignment={{
+          horizontal: AlignHorizontal.Center,
+          vertical: AlignVertical.Center,
+        }}
         as="button"
-        backgroundColor={hovered ? BackgroundColors.Primary : backgroundColor}
-        borderRadius={Amount.All}
+        background={hovered ? { color: BackgroundColors.Primary } : background}
+        borderRadius={{ all: Amount.All }}
         className={`${className} close-button`}
         depth={Depth.Higher}
         focused={focused}
         form="null"
-        grow={false}
-        height={size}
         onClick={onClick}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        width={size}
-        {...props}
+        size={{
+          height: size.height,
+          width: size.width,
+          ...size,
+        }}
       >
         <Icon
           color={iconHoverColor}
           name={BasicIcons.Close}
-          size={Size.Smallest}
+          size={{ height: Sizes.Smallest, width: Sizes.Smallest }}
         />
       </Container>
     );

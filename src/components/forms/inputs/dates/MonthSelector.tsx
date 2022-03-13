@@ -3,7 +3,7 @@
 import { memo, ReactElement, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { BasicIcons } from '@srclaunch/icons';
-import { Size } from '../../../../types';
+import { Sizes } from '../../../../types';
 import { Button } from '../../buttons/Button';
 import { Icon } from '../../../media/Icon';
 
@@ -71,7 +71,7 @@ const Month = memo(
         <YearSelector>
           <Button
             className="back"
-            size={Size.Small}
+            // size={Sizes.Small}
             // onClick={() => setCurrentYear(currentYear - 1)}
           >
             Back
@@ -79,7 +79,7 @@ const Month = memo(
           {/* <CurrentYear>{currentYear}</CurrentYear> */}
           <Button
             className="forward"
-            size={Size.Small}
+            // size={Sizes.Small}
             // onClick={() => setCurrentYear(currentYear + 1)}
           >
             Next

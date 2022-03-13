@@ -1,7 +1,8 @@
 import { ReactElement } from 'react';
-import { Color, MenuProps, SizeProps, WidthProps } from '../../types';
+import { ForegroundColor } from '../../types';
+import { MenuProps } from './Menu';
 export declare type MoreMenuProps = {
-    readonly dotColor?: Color;
-} & MenuProps & SizeProps & WidthProps;
-export declare const MoreMenu: import("react").MemoExoticComponent<({ alignContent, backgroundColor, className, dotColor, orientation, size, menu, width, ...props }: MoreMenuProps) => ReactElement>;
+    readonly dotColor?: ForegroundColor;
+} & MenuProps;
+export declare const MoreMenu: import("react").MemoExoticComponent<({ alignment, background, className, dotColor, size, menu, ...props }: MoreMenuProps) => ReactElement>;
 //# sourceMappingURL=MoreMenu.d.ts.map

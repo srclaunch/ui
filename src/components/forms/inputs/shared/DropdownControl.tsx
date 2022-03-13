@@ -2,14 +2,12 @@ import { BasicIcons } from '@srclaunch/icons';
 import { ComponentRef, ForwardedRef, memo, ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 
-import { DimensionStyles } from '../../../..';
 import { rotate } from '../../../../lib/animation/transform';
 import { getDepthZIndex } from '../../../../lib/css/depth/z-index';
-import { AppearanceStyles } from '../../../../styles/appearance';
 import { InputContainerStyles } from '../../../../styles/forms/input/container';
-import { LayoutStyles } from '../../../../styles/layout';
 import {
-  Align,
+  AlignHorizontal,
+  AlignVertical,
   Amount,
   BackgroundColors,
   BorderColors,
@@ -17,22 +15,21 @@ import {
   Cursor,
   Depth,
   ForegroundColors,
-  IconProps,
-  InputContainerProps,
   InputProps,
   MouseEventProps,
   Orientation,
   Overflow,
   Size,
+  Sizes,
   TextColors,
   TextOverflow,
-  TextProps,
+  TextSize,
   TransformProps,
-  WhiteSpace,
 } from '../../../../types';
 import { Container } from '../../../layout/Container';
-import { Icon } from '../../../media/Icon';
-import { Label } from '../../../typography/Label';
+import { Icon, IconProps } from '../../../media/Icon';
+import { Text, TextProps } from '../../../typography/Text';
+import { InputContainer, InputContainerProps } from './InputContainer';
 
 type DropdownControlProps = {
   readonly component?: ReactElement;
@@ -72,13 +69,10 @@ const Wrapper = styled.button<DropdownControlProps>`
 
 export const DropdownControl = memo(
   ({
-    backgroundColor = BackgroundColors.DropdownMenu,
-    border = {
-      color: BorderColors.Default,
-      style: BorderStyle.Solid,
-      width: 1,
-    },
-    borderRadius = Amount.Least,
+    alignment = {},
+    background = {},
+    border = {},
+    borderRadius = {},
     className = '',
     component,
     error,
@@ -90,72 +84,71 @@ export const DropdownControl = memo(
     onBlur,
     onClick,
     placeholder = 'Select an option',
-    ref,
-    size = Size.Default,
+    textSize = TextSize.Default,
     textColor = TextColors.DropdownMenu,
     ...props
   }: DropdownControlProps): ReactElement => {
     return (
-      <Wrapper
+      <InputContainer
+        alignment={{
+          horizontal: AlignHorizontal.Center,
+          orientation: Orientation.Horizontal,
+          vertical: AlignVertical.Center,
+          ...alignment,
+        }}
         as="button"
-        alignContent={Align.Stretch}
-        alignItems={Align.Center}
-        backgroundColor={backgroundColor}
-        borderRadius={borderRadius}
+        background={{ color: BackgroundColors.DropdownMenu, ...background }}
+        borderRadius={{ all: Amount.Least, ...borderRadius }}
         border={{
+          all: {
+            color:
+              error && Array.isArray(error) && error.length > 0
+                ? BorderColors.Error
+                : border.hasOwnProperty('color')
+                ? // @ts-ignore
+                  border?.color
+                : BorderColors.InputControl,
+            style: BorderStyle.Solid,
+            width: 1,
+          },
           ...border,
-          // @ts-ignore
-          color:
-            error && Array.isArray(error) && error.length > 0
-              ? BorderColors.Error
-              : border.hasOwnProperty('color')
-              ? // @ts-ignore
-                border?.color
-              : BorderColors.InputControl,
         }}
         depth={menuVisible ? Depth.Higher : Depth.Surface}
-        orientation={Orientation.Horizontal}
         className={`${className} dropdown-control`}
         cursor={Cursor.Pointer}
         error={error}
         form="null"
         focused={focused}
-        grow={false}
-        menuVisible={menuVisible}
         onBlur={onBlur}
         onFocus={onFocus}
         onClick={onClick}
-        ref={ref}
+        padding={{
+          left: Amount.Less,
+          right: Amount.Less,
+        }}
         {...props}
       >
         {component ? (
           component
         ) : (
-          <Label
-            alignItems={Align.Center}
-            alignContent={Align.Stretch}
-            grow
-            icon={icon}
-            overflow={Overflow.Hidden}
-            marginLeft={Amount.None}
-            marginRight={Amount.None}
-            paddingLeft={Amount.Less}
-            paddingRight={Amount.Least}
-            size={size}
+          <Text
+            lineHeight={Sizes.Small}
+            textSize={textSize}
             textColor={
               !label && placeholder ? TextColors.InputPlaceholder : textColor
             }
             textOverflow={TextOverflow.Ellipsis}
-            whiteSpace={WhiteSpace.NoWrap}
-            width="auto"
           >
             {label ?? placeholder ?? ''}
-          </Label>
+          </Text>
         )}
 
         <Container
-          alignItems={Align.Center}
-          alignContent={Align.Center}
+          alignment={{
+            horizontal: AlignHorizontal.Center,
+            orientation: Orientation.Horizontal,
+            vertical: AlignVertical.Center,
+          }}
           border={{
             left: {
               color: BorderColors.InputControl,
@@ -164,9 +157,10 @@ export const DropdownControl = memo(
             },
           }}
           className="down-arrow"
-          grow={false}
-          height={Size.Small}
-          width={size}
+          // size={{
+          //   height: Sizes.Default,
+          //   width: Sizes.Default,
+          // }}
         >
           <Icon
             color={
@@ -174,13 +168,16 @@ export const DropdownControl = memo(
             }
             name={BasicIcons.CaretDownArrow}
             className={menuVisible ? 'up' : 'down'}
-            size={Size.Smallest}
-            transform={{
-              rotate: menuVisible ? -180 : 0,
+            size={{
+              height: Sizes.Smallest,
+              width: Sizes.Smallest,
             }}
+            // transform={{
+            //   rotate: menuVisible ? -180 : 0,
+            // }}
           />
         </Container>
-      </Wrapper>
+      </InputContainer>
     );
   },
 );

@@ -5,18 +5,17 @@ import {
   Amount,
   BackgroundColors,
   Container,
-  Depth,
   Icon,
   InputRow,
   MenuButton,
   NavigationLink,
-  Size,
   TextColors,
+  TextDecorationLine,
   TextSize,
   TextWeight,
   Title,
   Workspace,
-} from '../../../../';
+} from '../../../../index';
 import { Documentation } from '../../../layouts/Documentation';
 
 export const MenuButtonPage = memo((): ReactElement => {
@@ -28,9 +27,13 @@ export const MenuButtonPage = memo((): ReactElement => {
             <NavigationLink
               to="/forms"
               hover={{
-                underline: true,
+                textDecoration: {
+                  line: TextDecorationLine.Underline,
+                },
               }}
-              underline={false}
+              textDecoration={{
+                line: TextDecorationLine.None,
+              }}
             >
               <Title
                 textColor={TextColors.Primary}
@@ -43,17 +46,20 @@ export const MenuButtonPage = memo((): ReactElement => {
 
             <Icon
               name={DualLightIcons.ChevronDoubleForward}
-              marginLeft={Amount.Less}
-              marginRight={Amount.Less}
-              size={Size.Smaller}
+              margin={{ left: Amount.Less, right: Amount.Less }}
+              // size={Size.Smaller}
             />
 
             <NavigationLink
               to="/forms/buttons"
               hover={{
-                underline: true,
+                textDecoration: {
+                  line: TextDecorationLine.Underline,
+                },
               }}
-              underline={false}
+              textDecoration={{
+                line: TextDecorationLine.None,
+              }}
             >
               <Title
                 textColor={TextColors.Primary}
@@ -66,9 +72,8 @@ export const MenuButtonPage = memo((): ReactElement => {
 
             <Icon
               name={DualLightIcons.ChevronDoubleForward}
-              marginLeft={Amount.Less}
-              marginRight={Amount.Less}
-              size={Size.Smaller}
+              margin={{ left: Amount.Less, right: Amount.Less }}
+              // size={Size.Smaller}
             />
 
             <Title textSize={TextSize.Larger} textWeight={TextWeight.Most}>
@@ -78,18 +83,18 @@ export const MenuButtonPage = memo((): ReactElement => {
         ),
       }}
       layout={Documentation}
-      padding={Amount.Most}
+      padding={{ all: Amount.Most }}
       title="MenuButton"
     >
       <InputRow>
         <MenuButton
           label="Choose an action"
           menu={[{ label: 'Hello' }, { label: 'World' }]}
-          width={250}
+          size={{ width: 250 }}
         />
         <br />
         <br />
-        <Container backgroundColor={BackgroundColors.Default}>
+        <Container background={{ color: BackgroundColors.Default }}>
           This should be placed behing the menu
         </Container>
       </InputRow>

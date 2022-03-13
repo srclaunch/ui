@@ -1,12 +1,6 @@
 import { memo, ReactElement } from 'react';
 
-import {
-  Align,
-  Amount,
-  BackgroundColors,
-  FillBehavior,
-  Orientation,
-} from '../../../types';
+import { Amount, BackgroundColors, Orientation } from '../../../types';
 import { Container, ContainerProps } from '../../layout/Container';
 import { LoadingOverlay } from '../../progress/LoadingOverlay';
 import { MediaGridItem } from './MediaGriditem';
@@ -20,7 +14,7 @@ export type MediaGridProps = {
 
 export const MediaGrid = memo(
   ({
-    borderRadius = Amount.Default,
+    borderRadius = {},
     children,
     columns = 3,
     className = '',
@@ -34,14 +28,12 @@ export const MediaGrid = memo(
 
     return (
       <Container
-        borderRadius={borderRadius}
+        borderRadius={{ all: Amount.Default, ...borderRadius }}
         className={`${className} media-grid`}
-        marginBottom={Amount.Default}
-        orientation={Orientation.Vertical}
         {...props}
       >
         <LoadingOverlay
-          backgroundColor={BackgroundColors.Transparent}
+          background={{ color: BackgroundColors.Transparent }}
           borderRadius={borderRadius}
           visible={loading}
         />
@@ -49,18 +41,22 @@ export const MediaGrid = memo(
         {rows.map((x, row) => {
           return (
             <Container
+              alignment={{
+                orientation: Orientation.Horizontal,
+              }}
               className="media-grid-row"
               key={row}
-              marginBottom={Amount.Default}
-              orientation={Orientation.Horizontal}
+              margin={{ bottom: Amount.Default }}
             >
               {items
                 .slice(columns * row, columns * row + columns)
                 .map((i, key) => (
                   <MediaGridItem
-                    marginRight={Amount.Default}
+                    margin={{ right: Amount.Default }}
                     key={key}
-                    width={`calc(100% / ${columns ?? 1} - ${Amount.Default})`}
+                    size={{
+                      width: `calc(100% / ${columns ?? 1} - ${Amount.Default})`,
+                    }}
                     {...i}
                   />
                 ))}

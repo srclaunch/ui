@@ -1,71 +1,53 @@
 import { memo, ReactElement } from 'react';
-import styled from 'styled-components';
 
-import { getDisplayPropertyValue } from '../../lib/css/display';
-import { TextStyles } from '../../styles/typography';
 import {
-  Align,
+  AlignVertical,
   Amount,
+  CommonComponentProps,
+  Fill,
   Orientation,
-  Overflow,
-  Size,
-  SizeProps,
+  Sizes,
   TextColors,
   TextOverflow,
-  TextProps,
   TextSize,
   TextWeight,
-  WhiteSpace,
 } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 import { Icon, IconProps } from '../media/Icon';
+import { Text, TextProps } from './Text';
 
-export type LabelProps<E = HTMLElement> = {
+export type LabelProps<E = HTMLLabelElement> = {
   readonly icon?: IconProps;
-} & {
-  readonly focus?: LabelProps;
-  readonly hover?: LabelProps;
-  readonly active?: LabelProps;
-} & ContainerProps<E> &
-  TextProps &
-  SizeProps;
-
-const TextContainer = styled.span<LabelProps>`
-  ${TextStyles};
-  display: ${props => getDisplayPropertyValue(props.as as string)};
-`;
+} & CommonComponentProps<E> &
+  ContainerProps &
+  TextProps;
 
 export const Label = memo(
   ({
-    alignItems = Align.Center,
-    alignContent = Align.Stretch,
-    alignText = Align.Left,
+    alignment = {},
     as = 'label',
     children,
     className = '',
-    grow = true,
     icon,
-    inline = true,
-    lineHeight = Size.Default,
-    orientation = Orientation.Horizontal,
+    lineHeight = Sizes.Default,
+    lineWrap = false,
     selectable = true,
-    size = Size.Default,
     textColor = TextColors.Default,
     textOverflow = TextOverflow.Ellipsis,
     textSize = TextSize.Default,
     textWeight = TextWeight.Default,
-    underline = false,
-    whiteSpace = WhiteSpace.NoWrap,
     ...props
   }: LabelProps): ReactElement => {
     return (
       <Container
-        alignItems={alignItems}
-        alignContent={alignContent}
-        as="label"
+        alignment={{
+          fill: Fill.Both,
+          orientation: Orientation.Horizontal,
+          vertical: AlignVertical.Center,
+          ...alignment,
+        }}
+        as={as}
         className={`${className} label`}
-        grow={grow}
-        orientation={orientation}
         {...props}
       >
         {icon &&
@@ -73,26 +55,19 @@ export const Label = memo(
             icon.name ||
             icon.path ||
             icon.url ||
-            icon.svg) && <Icon marginRight={Amount.Least} {...icon} />}
+            icon.svg) && <Icon margin={{ right: Amount.Least }} {...icon} />}
 
-        <TextContainer
-          alignText={alignText}
-          as={as}
-          className={`${className} text`}
-          inline={inline}
+        <Text
           selectable={selectable}
           lineHeight={lineHeight}
-          overflow={Overflow.Hidden}
           textColor={textColor}
           textOverflow={textOverflow}
           textSize={textSize}
           textWeight={textWeight}
-          underline={underline}
-          whiteSpace={whiteSpace}
           {...props}
         >
           {children}
-        </TextContainer>
+        </Text>
       </Container>
     );
   },

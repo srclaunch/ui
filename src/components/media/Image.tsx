@@ -1,19 +1,21 @@
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
-
 import { AnimationStyles } from '../../styles/animation';
-import { BorderRadiusStyles } from '../../styles/appearance/border-radius';
-import { DimensionStyles } from '../../styles/appearance/dimension';
-import { MarginStyles } from '../../styles/layout/margin';
+import { BorderStyles } from '../../styles/container/border';
+import { BorderRadiusStyles } from '../../styles/container/border-radius';
+import { MarginStyles } from '../../styles/container/margin';
+import { SizeStyles } from '../../styles/container/size';
 import {
-  BorderProps,
+  Animation,
+  Border,
+  BorderRadius,
   CommonComponentProps,
-  HeightProps,
-  MarginProps,
-  SizeProps,
-  WidthProps,
+  Margin,
+  Size,
+  Sizes,
 } from '../../types';
-import { AnimationProps } from '../../types/appearance/animation';
+
+import { Container, ContainerProps } from '../layout/Container';
 
 /**
  * Image component for displaying GIFs, JPGs or PNGs.
@@ -28,19 +30,19 @@ export type ImageProps = {
   readonly description?: string;
   readonly url?: string;
   readonly path?: string;
-} & CommonComponentProps<HTMLImageElement> &
-  AnimationProps &
-  BorderProps &
-  HeightProps &
-  MarginProps &
-  WidthProps &
-  SizeProps;
+} & CommonComponentProps<HTMLImageElement> & {
+    border?: Border;
+    borderRadius?: BorderRadius;
+    margin?: Margin;
+    size?: Size;
+  };
 
 const Img = styled.img<ImageProps>`
   ${AnimationStyles};
-  ${DimensionStyles};
+  ${BorderStyles};
   ${BorderRadiusStyles};
   ${MarginStyles};
+  ${SizeStyles};
 `;
 
 export const Image = memo(
@@ -48,19 +50,20 @@ export const Image = memo(
     alt,
     className = '',
     description,
-    height = 'auto',
     path,
     url,
-    width = 'auto',
+    size = {
+      height: '100%',
+      width: '100%',
+    },
     ...props
   }: ImageProps): ReactElement => {
     return (
       <Img
         alt={alt ?? description}
         className={`${className} image`}
-        height={height}
+        size={size}
         src={path ?? url}
-        width={width}
         {...props}
       />
     );

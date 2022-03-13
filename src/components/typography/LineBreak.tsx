@@ -1,22 +1,20 @@
 import { memo, ReactElement } from 'react';
 
-import { ContainerProps, Size, SizeProps } from '../../types';
-import { Container } from '../layout/Container';
+import { Size, Sizes } from '../../types';
+import { Container, ContainerProps } from '../layout/Container';
 
-type LineBreakProps = ContainerProps<HTMLDivElement> & SizeProps;
+type LineBreakProps = ContainerProps<HTMLDivElement>;
 
 export const LineBreak = memo(
   ({
     className = '',
-    size = Size.Default,
+    size = {
+      height: Sizes.Default,
+    },
     ...props
   }: LineBreakProps): ReactElement => {
     return (
-      <Container
-        className={`${className} link-break`}
-        height={size}
-        {...props}
-      />
+      <Container className={`${className} link-break`} size={size} {...props} />
     );
   },
 );

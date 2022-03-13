@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { LabelProps } from '../../../../types';
+import { LabelProps } from '../../../typography/Label';
 import { ModelProps } from '@srclaunch/types';
 declare type MenuItemLabelProps = {
     fieldName?: string;

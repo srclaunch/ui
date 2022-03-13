@@ -1,8 +1,8 @@
 import { memo, ReactElement } from 'react';
 
-import { Label } from '../../../typography/Label';
+import { Label, LabelProps } from '../../../typography/Label';
 
-import { LabelProps, Size, TextColors, TextSize } from '../../../../types';
+import { Sizes, TextColors, TextSize } from '../../../../types';
 
 type MD5LabelProps = {
   value: string;
@@ -11,7 +11,7 @@ type MD5LabelProps = {
 export const MD5Label = memo(
   ({
     icon,
-    lineHeight = Size.Default,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value,

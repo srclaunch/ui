@@ -6,16 +6,11 @@ import { memo, ReactElement, useEffect, useState } from 'react';
 // import css from 'react-date-picker/dist/DatePicker.css';
 import styled, { css } from 'styled-components';
 
-import { AppearanceStyles } from '../../../../styles/appearance';
-import { BoxShadowStyles } from '../../../../styles/appearance/box-shadow';
-import { DimensionStyles } from '../../../../styles/appearance/dimension';
-import { FocusedStyles } from '../../../../styles/focused';
-import { InputContainerStyles } from '../../../../styles/forms/input/container';
-import { LayoutStyles } from '../../../../styles/layout';
 import {
-  Align,
+  AlignHorizontal,
+  Alignment,
+  AlignVertical,
   Amount,
-  AppearanceProps,
   BackgroundColors,
   BorderColors,
   BorderStyle,
@@ -25,20 +20,22 @@ import {
   InputProps,
   Orientation,
   Size,
+  Sizes,
   TextColors,
-  TextProps,
   TextSize,
   TextWeight,
   TransformProps,
 } from '../../../../types';
-import { ContainerProps } from '../../../layout/Container';
+import { Container, ContainerProps } from '../../../layout/Container';
 import { Icon, IconProps } from '../../../media/Icon';
 import { InputLabel } from '../../labels/InputLabel';
-import { InputContainer } from '../shared/InputContainer';
+import { InputContainer, InputContainerProps } from '../shared/InputContainer';
+import { Text, TextProps } from '../../../typography/Text';
+import { ShadowStyles } from '../../../../styles/container/shadow';
 
 export type DateInputProps = {
   readonly resetIcon?: IconProps;
-} & AppearanceProps &
+} & InputContainerProps &
   InputProps<HTMLInputElement, ISO8601String> &
   TextProps;
 
@@ -66,7 +63,7 @@ const Wrapper = styled.div<{
   background: transparent;
   border: none;
   width: 100%;
-  ${BoxShadowStyles};
+  ${ShadowStyles};
 
   .react-date-picker,
   .react-date-picker__wrapper {
@@ -163,13 +160,13 @@ const Wrapper = styled.div<{
     .react-calendar__navigation__arrow {
       background-color: rgb(${BackgroundColors.Dark});
       border: none;
-      border-radius: ${Size.Default};
+      border-radius: ${Sizes.Default};
       color: rgb(${TextColors.Lighter});
       cursor: ${Cursor.Pointer};
-      height: ${Size.Default};
+      height: ${Sizes.Default};
       margin: 0 ${Amount.Least};
       text-align: center;
-      width: ${Size.Default};
+      width: ${Sizes.Default};
 
       &:hover {
         background-color: rgb(${BackgroundColors.Darker});
@@ -224,35 +221,19 @@ const Wrapper = styled.div<{
   }
 `;
 
-const DownArrow = styled.div<
-  {
-    readonly menuVisible: boolean;
-  } & ContainerProps<HTMLDivElement> &
-    TransformProps
->`
-  cursor: ${Cursor.Pointer} !important;
-
-  ${LayoutStyles};
-  ${AppearanceStyles};
-  ${DimensionStyles};
-`;
-
 export const DateInput = memo(
   ({
-    backgroundColor = BackgroundColors.InputControl,
-    boxShadow = DepthShadow.Low,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1,
-    },
+    background = {},
+
+    border = {},
     className = '',
     error,
     resetIcon,
     defaultValue,
     label,
     onChange,
-    size = Size.Default,
+    shadow = DepthShadow.Low,
+    textSize = TextSize.Default,
     validation = { [Condition.IsDate]: true },
     ...props
   }: DateInputProps): ReactElement => {
@@ -292,20 +273,24 @@ export const DateInput = memo(
         )}
 
         <InputContainer
-          backgroundColor={backgroundColor}
-          border={border}
-          boxShadow={!focused ? boxShadow : DepthShadow.Higher}
+          background={{ color: BackgroundColors.InputControl, ...background }}
+          border={{
+            all: {
+              color: BorderColors.InputControl,
+              style: BorderStyle.Solid,
+              width: 1,
+            },
+            ...border,
+          }}
           className={`${className} date-input`}
           error={problems}
           focused={focused}
           onMouseLeave={() => setFocused(false)}
-          orientation={Orientation.Horizontal}
           // onClick={() => setFocused(!focused)}
-          size={size}
+          shadow={!focused ? shadow : DepthShadow.Higher}
           {...props}
         >
-          <Wrapper error={problems} focused={focused} size={size}>
-            {/* <DatePickerC
+          {/* <DatePickerC
               calendarType="ISO 8601"
               // calendarIcon={
               //   <CalendarIcon focused={focused}>
@@ -331,11 +316,12 @@ export const DateInput = memo(
               }}
               value={value ? new Date(value) : undefined}
             /> */}
-          </Wrapper>
 
-          <DownArrow
-            alignItems={Align.Center}
-            alignContent={Align.Center}
+          <Container
+            alignment={{
+              horizontal: AlignHorizontal.Center,
+              vertical: AlignVertical.Center,
+            }}
             border={{
               left: {
                 color: BorderColors.InputControl,
@@ -344,11 +330,11 @@ export const DateInput = memo(
               },
             }}
             className="down-arrow"
-            grow={false}
-            menuVisible={focused}
+            size={{
+              height: Sizes.Default,
+              width: Sizes.Default,
+            }}
             // onClick={() => setFocused(!focused)}
-            height={Size.Small}
-            width={size}
           >
             <Icon
               color={
@@ -356,12 +342,15 @@ export const DateInput = memo(
               }
               name={BasicIcons.CaretDownArrow}
               className={focused ? 'up' : 'down'}
-              size={Size.Smallest}
-              transform={{
-                rotate: focused ? 0 : 0,
+              size={{
+                height: Sizes.Smallest,
+                width: Sizes.Smallest,
               }}
+              // transform={{
+              //   rotate: focused ? 0 : 0,
+              // }}
             />
-          </DownArrow>
+          </Container>
         </InputContainer>
       </>
     );

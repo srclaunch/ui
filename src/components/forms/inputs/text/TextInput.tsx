@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { TextInputStyles } from '../../../../styles/forms/input/text-input';
 import {
   Amount,
-  AppearanceProps,
   BackgroundColors,
   BorderColors,
   BorderStyle,
@@ -19,15 +18,16 @@ import {
   MouseEventProps,
   Orientation,
   Size,
+  Sizes,
   TextColors,
-  TextProps,
   TextWeight,
 } from '../../../../types';
 import { Container } from '../../../layout/Container';
 import { Icon, IconProps } from '../../../media/Icon';
 import { ProgressSpinner } from '../../../progress/ProgressSpinner';
 import { InputLabel } from '../../labels/InputLabel';
-import { InputContainer } from '../shared/InputContainer';
+import { InputContainer, InputContainerProps } from '../shared/InputContainer';
+import { Text, TextProps } from '../../../typography/Text';
 
 export enum TextInputType {
   EmailAddress = 'email',
@@ -43,34 +43,29 @@ export type TextInputProps<V = string> = {
   readonly spellCheck?: boolean;
   readonly suffix?: string;
 } & InputProps<HTMLInputElement, V> &
-  AppearanceProps &
+  InputContainerProps &
   TextProps;
 
 export const TextInput = memo(
   ({
     autoComplete,
-    backgroundColor = BackgroundColors.InputControl,
-    boxShadow = DepthShadow.Low,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1,
-    },
+    background = {},
+    border = {},
     className = '',
     cursor = Cursor.Text,
     defaultValue,
     error,
-    flat = false,
     hidden = false,
     icon,
     inProgress = false,
     inputType = TextInputType.Text,
     label,
+    lineHeight = Sizes.Default,
     name,
     onChange,
     prefix = '',
     placeholder = '',
-    size = Size.Default,
+    shadow = DepthShadow.Low,
     spellCheck = true,
     suffix = '',
     textColor = TextColors.InputControl,
@@ -119,19 +114,23 @@ export const TextInput = memo(
         )}
 
         <InputContainer
-          backgroundColor={backgroundColor}
-          border={border}
-          boxShadow={boxShadow}
+          background={{ color: BackgroundColors.InputControl, ...background }}
+          border={{
+            all: {
+              color: BorderColors.InputControl,
+              style: BorderStyle.Solid,
+              width: 1,
+            },
+            ...border,
+          }}
           className={`${className} text-input`}
           cursor={cursor}
           error={problems}
           focused={focused}
-          flat={flat}
           onClick={() => {
             inputRef.current?.focus();
           }}
-          orientation={Orientation.Horizontal}
-          size={size}
+          shadow={shadow}
           {...props}
         >
           {icon && (
@@ -142,7 +141,9 @@ export const TextInput = memo(
                   ? TextColors.InputPlaceholder
                   : icon.color ?? textColor
               }
-              marginLeft={Amount.Less}
+              margin={{
+                left: Amount.Less,
+              }}
             />
           )}
 
@@ -150,6 +151,7 @@ export const TextInput = memo(
             autoComplete={autoComplete}
             defaultValue={defaultValue}
             hidden={hidden}
+            lineHeight={lineHeight}
             name={name}
             onBlur={() => setFocused(false)}
             onChange={(e: any) => {
@@ -157,7 +159,6 @@ export const TextInput = memo(
               setValue(prefix + e.target.value + suffix);
             }}
             onFocus={() => setFocused(true)}
-            lineHeight={size}
             placeholder={placeholder}
             textColor={textColor}
             textWeight={textWeight}
@@ -168,9 +169,12 @@ export const TextInput = memo(
           />
 
           {inProgress && (
-            <Container grow={false}>
-              <ProgressSpinner size={Size.Small} />
-            </Container>
+            <ProgressSpinner
+              size={{
+                height: Sizes.Small,
+                width: Sizes.Small,
+              }}
+            />
           )}
         </InputContainer>
       </>

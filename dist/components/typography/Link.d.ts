@@ -1,7 +1,7 @@
 import { MouseEvent, ReactElement } from 'react';
 import { FocusProps } from '../../types';
 import { Icon } from '../media/Icon';
-import { LabelProps } from './Label';
+import { TextProps } from './Text';
 export declare type LinkProps = {
     readonly icon?: typeof Icon;
     readonly onClick?: (e: MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
@@ -9,6 +9,6 @@ export declare type LinkProps = {
     readonly rel?: string;
     readonly target?: '_blank';
     readonly to: string;
-} & LabelProps & FocusProps;
-export declare const Link: import("react").MemoExoticComponent<({ children, hover, size, textColor, textWeight, to, underline, underlineColor, ...props }: LinkProps) => ReactElement>;
+} & TextProps & FocusProps;
+export declare const Link: import("react").MemoExoticComponent<({ children, hover, textColor, textDecoration, textSize, textWeight, to, ...props }: LinkProps) => ReactElement>;
 //# sourceMappingURL=Link.d.ts.map

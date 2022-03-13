@@ -1,52 +1,52 @@
 import { memo, ReactElement } from 'react';
-import styled from 'styled-components';
-
-import { AppearanceStyles } from '../../styles/appearance';
-import { DimensionStyles } from '../../styles/appearance/dimension';
-import { LayoutStyles } from '../../styles/layout';
 import {
-  Align,
   Amount,
   BackgroundColors,
-  ContainerProps,
+  CommonComponentProps,
   Depth,
   DepthShadow,
-  HeightProps,
-  WidthProps,
+  PositionBehavior,
 } from '../../types';
+import { Container, ContainerProps } from '../layout/Container';
 
 type SlidePanelProps = {
   readonly visible?: boolean;
-} & ContainerProps<HTMLDivElement> &
-  HeightProps &
-  WidthProps;
+} & CommonComponentProps<HTMLDivElement> &
+  ContainerProps;
 
 export const SlidePanel = memo(
   ({
-    alignItems = Align.Stretch,
-    backgroundColor = BackgroundColors.SlidePanel,
-    boxShadow = DepthShadow.Highest,
-    borderRadius = Amount.Most,
+    as = 'div',
+    background = {},
+    borderRadius = {},
     children,
     className = '',
     depth = Depth.Highest,
-    padding = Amount.Less,
+    padding = {},
+    position = {},
+    shadow = DepthShadow.Highest,
+    size = {},
     visible = false,
-    width = 380,
     ...props
   }: SlidePanelProps): ReactElement => {
     return (
       <Container
-        alignItems={alignItems}
-        backgroundColor={backgroundColor}
-        boxShadow={boxShadow}
-        as={Container}
-        borderRadius={borderRadius}
+        background={{ color: BackgroundColors.SlidePanel, ...background }}
+        as={as}
+        borderRadius={{ all: Amount.Most, ...borderRadius }}
         className={`${className} slide-panel`}
         depth={depth}
-        padding={padding}
+        padding={{ all: Amount.Less, ...padding }}
+        position={{
+          behavior: PositionBehavior.Fixed,
+          bottom: 0,
+          right: 0,
+          top: 0,
+          ...position,
+        }}
         visible={visible}
-        width={width}
+        shadow={shadow}
+        size={{ width: 380, ...size }}
         {...props}
       >
         {children}
@@ -54,21 +54,3 @@ export const SlidePanel = memo(
     );
   },
 );
-
-const Container = styled.div<SlidePanelProps>`
-  ${LayoutStyles};
-  ${AppearanceStyles};
-  ${DimensionStyles};
-
-  bottom: ${Amount.Default};
-  opacity: ${props => (props.visible ? '1' : '0')};
-  position: fixed;
-  right: ${Amount.Default};
-  top: ${Amount.Default};
-  transform: ${props =>
-    props.visible ? 'translate(0, 0)' : 'translate(0, 1900px)'};
-  transition: all 0.3s ease-in-out;
-  transform: ${props =>
-    props.visible ? 'translate(0, 0)' : 'translate(1600px, 0)'};
-  z-index: 6;
-`;

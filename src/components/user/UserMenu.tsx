@@ -42,7 +42,7 @@ export const UserMenu = memo(
           {
             icon: {
               name: BasicIcons.GearCog,
-              size: Size.Smaller,
+              // size: Size.Smaller,
             },
             label: 'Settings',
             to: '/settings',
@@ -51,7 +51,7 @@ export const UserMenu = memo(
             icon: {
               color: Colors.Error,
               name: BasicIcons.Exit,
-              size: Size.Smaller,
+              // size: Size.Smaller,
             },
             label: 'Logout',
             onClick: () => {

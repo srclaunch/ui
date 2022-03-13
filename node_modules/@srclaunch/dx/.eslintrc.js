@@ -4,8 +4,8 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'plugin:@microsoft/sdl/common', // Microsoft SDL rules
-    'plugin:@microsoft/sdl/typescript', // Microsoft SDL TS rules
+    // 'plugin:@microsoft/sdl/common', // Microsoft SDL rules
+    // 'plugin:@microsoft/sdl/typescript', // Microsoft SDL TS rules
     'plugin:@typescript-eslint/recommended',
     'plugin:import/recommended',
 
@@ -26,11 +26,11 @@ module.exports = {
     sourceType: 'module', // Allows for the use of imports
   },
   plugins: [
-    '@microsoft/sdl',
+    // '@microsoft/sdl',
     'functional',
     'unicorn',
     'prettier',
-    // 'only-warn',
+    'only-warn',
     'simple-import-sort',
     'sort-keys-fix',
     '@typescript-eslint',
@@ -109,20 +109,20 @@ module.exports = {
     'sort-imports': 'off',
     'sort-keys': 2,
     'sort-keys-fix/sort-keys-fix': 'error',
-    'unicorn/filename-case': [
-      'error',
-      {
-        case: 'kebabCase',
-        ignore: [
-          '.*\\.d\\.ts',
-          '.*\\.js',
-          '\\.stories\\.tsx',
-          '\\.test\\.tsx?',
-          'reportWebVitals\\.ts',
-          'setupTests\\.ts',
-        ],
-      },
-    ],
+    // 'unicorn/filename-case': [
+    //   'error',
+    //   {
+    //     case: 'kebabCase',
+    //     ignore: [
+    //       '.*\\.d\\.ts',
+    //       '.*\\.js',
+    //       '\\.stories\\.tsx',
+    //       '\\.test\\.tsx?',
+    //       'reportWebVitals\\.ts',
+    //       'setupTests\\.ts',
+    //     ],
+    //   },
+    // ],
     'unicorn/no-null': 'off',
     'unicorn/no-reduce': 'off',
     'unicorn/number-literal-case': 'off',

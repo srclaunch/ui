@@ -1,7 +1,6 @@
 import { memo, ReactElement } from 'react';
-import { Workspace } from '../../../index';
+import { SlidePanel, Workspace } from '../../../index';
 import { Documentation } from '../../layouts/Documentation';
-import { SlidePanel } from '../../../components/modals/SlidePanel';
 
 export const SlidePanelPage = memo((): ReactElement => {
   return (

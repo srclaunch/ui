@@ -13,7 +13,11 @@ export type TabProps = {
 export const Tab = memo(
   ({ className = '', children, label, onClick }: TabProps): ReactElement => {
     return (
-      <Container className={`${className} tab`} data-label={label} fadeIn>
+      <Container
+        className={`${className} tab`}
+        data-label={label}
+        // fadeIn
+      >
         {children}
       </Container>
     );

@@ -1,18 +1,19 @@
+import { memo, ReactElement, useEffect, useState } from 'react';
 import {
   NavLink,
   useLocation,
   useMatch,
   useResolvedPath,
 } from '@srclaunch/web-application-state';
-import { memo, ReactElement, useEffect, useState } from 'react';
 
 import {
-  Align,
+  AlignHorizontal,
+  AlignVertical,
   Amount,
-  CommonComponentProps,
   LinkProps,
   Orientation,
   Size,
+  Sizes,
   TextColors,
 } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
@@ -27,41 +28,31 @@ export type NavigationLinkProps = {
   readonly label?: string;
   readonly menu?: readonly MenuItemProps[];
   readonly size?: Size;
-} & LabelProps<HTMLAnchorElement> &
+} & ContainerProps<HTMLAnchorElement> &
+  LabelProps<HTMLAnchorElement> &
   LinkProps;
 
 export const NavigationLink = memo(
   ({
     active,
     activeClassName = 'active',
-    alignContent,
-    alignItems = Align.Left,
+    alignment = {},
     as = 'span',
-    backgroundColor,
-    borderRadius = Amount.Less,
+    background,
+    borderRadius = {},
     children,
     className = '',
     focus,
-    grow = true,
     hover,
     inline = false,
     label,
-    lineHeight = Size.Smaller,
+    lineHeight = Sizes.Smaller,
     margin,
-    marginBottom,
-    marginLeft,
-    marginRight,
-    marginTop,
     menu,
     onClick,
     onMouseEnter,
     onMouseLeave,
-    orientation = Orientation.Horizontal,
-    padding,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    paddingTop,
+    padding = {},
     rel,
     target,
     textColor = TextColors.Primary,
@@ -72,8 +63,9 @@ export const NavigationLink = memo(
   }: NavigationLinkProps): ReactElement => {
     const [focused, setFocused] = useState(false);
     const [hovered, setHovered] = useState(false);
-    const [updatedBackgroundColor, setUpdatedBackgroundColor] =
-      useState(backgroundColor);
+    const [updatedBackgroundColor, setUpdatedBackgroundColor] = useState(
+      background?.color,
+    );
     const [updatedTextColor, setUpdatedTextColor] = useState(textColor);
 
     const resolved = useResolvedPath(to);
@@ -94,14 +86,14 @@ export const NavigationLink = memo(
     };
 
     const setBackgroundColor = () => {
-      if (focused && focus?.backgroundColor) {
-        setUpdatedBackgroundColor(focus.backgroundColor);
-      } else if (exactMatch && active?.backgroundColor) {
-        setUpdatedBackgroundColor(active.backgroundColor);
-      } else if (hovered && hover?.backgroundColor) {
-        setUpdatedBackgroundColor(hover.backgroundColor);
+      if (focused && focus?.background?.color) {
+        setUpdatedBackgroundColor(focus.background?.color);
+      } else if (exactMatch && active?.background?.color) {
+        setUpdatedBackgroundColor(active.background?.color);
+      } else if (hovered && hover?.background?.color) {
+        setUpdatedBackgroundColor(hover.background?.color);
       } else {
-        setUpdatedBackgroundColor(backgroundColor);
+        setUpdatedBackgroundColor(background?.color);
       }
     };
 
@@ -120,35 +112,25 @@ export const NavigationLink = memo(
         to={to + location.search}
         style={{
           display: inline ? 'inline-flex' : 'flex',
-          lineHeight: inline ? Size.Smaller : lineHeight,
           textDecoration: 'none',
         }}
       >
         <Container
-          alignContent={alignContent}
-          alignItems={menu ? Align.Stretch : alignItems}
+          alignment={{
+            horizontal: menu ? AlignHorizontal.Stretch : AlignHorizontal.Left,
+            orientation: menu ? Orientation.Vertical : Orientation.Horizontal,
+            vertical: AlignVertical.Center,
+            ...alignment,
+          }}
           active={active}
           as={as}
-          backgroundColor={updatedBackgroundColor}
-          borderRadius={borderRadius}
-          boxShadow={{
-            blurRadius: 8,
-            color: backgroundColor,
-            offsetX: 0,
-            offsetY: 3,
-            opacity: 35,
-            spreadRadius: 3,
-          }}
+          background={{ color: updatedBackgroundColor }}
+          borderRadius={{ all: Amount.Less, ...borderRadius }}
           className={`${className} ${exactMatch ? activeClassName : ''} link`}
           focus={focus}
           focused={focused}
-          grow={grow}
           hover={hover}
           margin={margin}
-          marginBottom={marginBottom}
-          marginLeft={marginLeft}
-          marginRight={marginRight}
-          marginTop={marginTop}
           onClick={onClick}
           onMouseEnter={e => {
             setHovered(true);
@@ -162,13 +144,18 @@ export const NavigationLink = memo(
             // @ts-ignore
             if (onMouseLeave) onMouseLeave(e);
           }}
-          orientation={menu ? Orientation.Vertical : orientation}
-          padding={padding}
-          paddingBottom={menu ? paddingLeft : paddingBottom}
-          paddingLeft={paddingLeft}
-          paddingRight={paddingRight}
-          paddingTop={paddingTop}
-          {...props}
+          padding={{
+            bottom: menu ? padding?.left : padding?.bottom,
+            ...padding,
+          }}
+          // shadow={{
+          //   radius: 8,
+          //   color: background?.color,
+          //   x: 0,
+          //   y: 3,
+          //   opacity: 35,
+          //   spread: 3,
+          // }}
         >
           {label ? (
             <Label
@@ -176,7 +163,6 @@ export const NavigationLink = memo(
               textColor={updatedTextColor}
               textSize={textSize}
               textWeight={textWeight}
-              {...props}
             >
               {label}
             </Label>

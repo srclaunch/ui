@@ -73,8 +73,7 @@ export const FormFields = memo(
     return (
       <Container
         className="form-fields"
-        borderRadius={Amount.More}
-        orientation={Orientation.Vertical}
+        borderRadius={{ all: Amount.More }}
         {...props}
       >
         {Object.entries(fieldValues)?.map(([fieldName, field]) => {

@@ -1,5 +1,5 @@
 import { ElementType, ReactElement } from 'react';
-import { ContainerProps } from '../../types';
+import { ContainerProps } from '../layout/Container';
 declare type WorkspaceProps = {
     readonly header?: {
         readonly actions?: ReactElement;
@@ -11,6 +11,6 @@ declare type WorkspaceProps = {
     readonly loginRequired?: boolean;
     readonly title?: string | null;
 } & ContainerProps<HTMLDivElement>;
-export declare const Workspace: import("react").MemoExoticComponent<({ alignContent, backgroundColor, className, children, header, layout: Layout, loading, loginRequired, orientation, padding, title, ...props }: WorkspaceProps) => ReactElement>;
+export declare const Workspace: import("react").MemoExoticComponent<({ alignment, background, className, children, header, layout: Layout, loading, loginRequired, padding, title, ...props }: WorkspaceProps) => ReactElement>;
 export {};
 //# sourceMappingURL=Workspace.d.ts.map

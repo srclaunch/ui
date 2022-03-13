@@ -1,7 +1,7 @@
 import { NotificationType } from '@srclaunch/types';
 import { memo, ReactElement } from 'react';
 
-import { Align } from '../../types';
+import { AlignHorizontal, Alignment } from '../../types';
 import {
   NotificationLabel,
   NotificationLabelProps,
@@ -13,7 +13,9 @@ export const ErrorNotification = memo(
   ({ label, showOrb = true, ...props }: ErrorContainerProps): ReactElement => {
     return (
       <NotificationLabel
-        alignItems={Align.Center}
+        alignment={{
+          horizontal: AlignHorizontal.Center,
+        }}
         label={label}
         showOrb={showOrb}
         type={NotificationType.Error}

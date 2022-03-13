@@ -5,7 +5,6 @@ import CurrencyInputField from 'react-currency-input-field';
 
 import {
   Amount,
-  AppearanceProps,
   BackgroundColors,
   BorderColors,
   BorderStyle,
@@ -13,32 +12,30 @@ import {
   InputProps,
   Size,
   TextColors,
-  TextProps,
   TextWeight,
 } from '../../../../../types';
 import { Label } from '../../../../typography/Label';
 import { InputLabel } from '../../../labels/InputLabel';
-import { InputContainer } from '../../shared/InputContainer';
-
-type CurrencyAmountInputProps = AppearanceProps &
+import {
+  InputContainer,
+  InputContainerProps,
+} from '../../shared/InputContainer';
+import { TextProps } from '../../../../typography/Text';
+type CurrencyAmountInputProps = InputContainerProps &
   InputProps<HTMLInputElement, CurrencyAmount> &
   TextProps;
 
 export const CurrencyAmountInput = memo(
   ({
-    backgroundColor = BackgroundColors.InputControl,
-    boxShadow = DepthShadow.Low,
-    border = {
-      color: BorderColors.InputControl,
-      style: BorderStyle.Solid,
-      width: 1,
-    },
+    background = {},
+
+    border = {},
     className = '',
     defaultValue,
     label,
     name,
     onChange,
-    size = Size.Default,
+    shadow = DepthShadow.Low,
     textColor = TextColors.InputControl,
     textWeight = TextWeight.Default,
     validation = { [Condition.IsCurrency]: true },
@@ -80,19 +77,28 @@ export const CurrencyAmountInput = memo(
         )}
 
         <InputContainer
-          backgroundColor={backgroundColor}
-          border={border}
-          boxShadow={boxShadow}
+          background={{ color: BackgroundColors.InputControl, ...background }}
+          border={{
+            all: {
+              color: BorderColors.InputControl,
+              style: BorderStyle.Solid,
+              width: 1,
+            },
+            ...border,
+          }}
           className={`${className} currency-amount-input`}
           onClick={() => {
             if (inputRef.current) inputRef.current.focus();
           }}
           error={problems}
           focused={focused}
+          shadow={shadow}
         >
           <Label
-            marginLeft={Amount.Less}
-            marginRight={Amount.Least}
+            margin={{
+              left: Amount.Less,
+              right: Amount.Least,
+            }}
             textColor={!value ? TextColors.InputPlaceholder : textColor}
           >
             $
@@ -112,13 +118,11 @@ export const CurrencyAmountInput = memo(
             style={{
               backgroundColor: 'transparent',
               border: 'none',
-
               color: !value
                 ? `rgb(${TextColors.InputPlaceholder})`
                 : `rgb(${TextColors.InputControl})`,
-              flexGrow: 1,
+
               fontWeight: textWeight,
-              lineHeight: size,
             }}
           />
         </InputContainer>

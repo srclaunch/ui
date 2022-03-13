@@ -1,27 +1,30 @@
 import { memo, ReactElement } from 'react';
 
-import { Amount, BackgroundColors, Color, Size, SizeProps } from '../../types';
+import { Amount, BackgroundColors, Color, Size, Sizes } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 
 type OrbProps = {
-  readonly color?: Color;
-} & ContainerProps<HTMLLabelElement> &
-  SizeProps;
+  readonly color?: BackgroundColors;
+} & ContainerProps;
 
 export const Orb = memo(
   ({
     color = BackgroundColors.Default,
     className = '',
-    size = Size.Smallest,
+    size = {
+      height: Sizes.Smallest,
+      width: Sizes.Smallest,
+    },
     ...props
   }: OrbProps): ReactElement => {
     return (
       <Container
         className={`${className} orb`}
-        backgroundColor={color}
-        borderRadius={Amount.All}
-        height={size}
-        width={size}
+        background={{
+          color,
+        }}
+        borderRadius={{ all: Amount.All }}
+        size={size}
         {...props}
       />
     );

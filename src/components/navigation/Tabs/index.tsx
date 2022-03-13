@@ -1,29 +1,27 @@
 import { Children, memo, ReactElement, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import { AppearanceStyles } from '../../../styles/appearance';
-import { FocusedStyles } from '../../../styles/focused';
-import { LayoutStyles } from '../../../styles/layout';
+import { FocusStyles } from '../../../styles/container/focus';
+
 import {
-  Align,
+  AlignHorizontal,
+  AlignVertical,
   Amount,
-  AppearanceProps,
   BackgroundColors,
   BorderColors,
-  ContainerProps,
   DepthShadow,
-  LayoutProps,
   Orientation,
   TextColors,
 } from '../../../types';
-import { Container } from '../../layout/Container';
+import { Container, ContainerProps } from '../../layout/Container';
 import { Label } from '../../typography/Label';
 
 type TabsProps = ContainerProps;
 
 export const Tabs = memo(
   ({
-    borderRadius = Amount.More,
+    background = {},
+    borderRadius = {},
     className = '',
     children,
   }: TabsProps): ReactElement => {
@@ -39,15 +37,19 @@ export const Tabs = memo(
 
     return (
       <Container
-        alignContent={Align.Stretch}
+        alignment={{
+          vertical: AlignVertical.Stretch,
+        }}
         className={`${className} tabs`}
-        orientation={Orientation.Vertical}
       >
         <Container
-          alignContent={Align.Center}
-          marginBottom={Amount.Default}
-          orientation={Orientation.Horizontal}
-          grow={false}
+          alignment={{
+            orientation: Orientation.Horizontal,
+            horizontal: AlignHorizontal.Center,
+          }}
+          margin={{
+            bottom: Amount.Default,
+          }}
         >
           {/* @ts-ignore */}
           {React.Children.map(children, (c: React.ReactElement, key) => {
@@ -80,16 +82,19 @@ export const Tabs = memo(
         </Container>
 
         <Container
-          alignContent={Align.Top}
-          backgroundColor={BackgroundColors.Default}
-          borderRadius={borderRadius}
-          boxShadow={DepthShadow.Highest}
+          background={{
+            color: BackgroundColors.Default,
+            ...background,
+          }}
+          borderRadius={{ all: Amount.More, ...borderRadius }}
           className="tab-content"
-          grow={false}
-          orientation={Orientation.Vertical}
-          padding={Amount.Most}
-          paddingLeft={Amount.All}
-          paddingRight={Amount.All}
+          padding={{
+            bottom: Amount.Default,
+            left: Amount.Most,
+            right: Amount.Most,
+            top: Amount.Default,
+          }}
+          shadow={DepthShadow.Highest}
         >
           {Children.map(children, (c: React.ReactNode, key) => {
             if (key !== currentTabIndex) return null;
@@ -106,7 +111,7 @@ export const Tabs = memo(
 const TabButton = styled.button<{
   readonly current?: boolean;
 }>`
-  ${FocusedStyles};
+  ${FocusStyles};
 
   background: transparent;
   border: none;

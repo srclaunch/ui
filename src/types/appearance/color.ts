@@ -29,11 +29,4 @@ export enum ContrastColors {
   White = 'var(--color-white-contrast-rgb)',
 }
 
-export type Color =
-  | BackgroundColor
-  | BorderColor
-  | Colors
-  | ContrastColors
-  | ForegroundColor
-  | TextColor
-  | string;
+export type Color = Colors | ContrastColors | string;

@@ -1,14 +1,14 @@
 import { Condition, Primitives } from '@srclaunch/types';
-import { useSelector } from '@srclaunch/web-application-state';
+import { useSelector, RootState } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
-
 import {
-  Align,
   Amount,
   AutoComplete,
   BackgroundColors,
   DepthShadow,
+  TextAlign,
 } from '../../types';
+import { TextDecorationLine } from '../../types/typography/text';
 import { ErrorNotification } from '../errors/ErrorNotification';
 import { Form } from '../forms/Form';
 import { Container, ContainerProps } from '../layout/Container';
@@ -24,11 +24,12 @@ type ForgotPasswordFormProps = {
   readonly signUpLinkLabel?: ReactElement;
   readonly signInButtonLabel?: ReactElement;
   readonly forgotPasswordLinkLabel?: ReactElement;
-} & ContainerProps<HTMLDivElement>;
+} & ContainerProps;
 
 export const ForgotPasswordForm = memo(
   ({
-    backgroundColor = BackgroundColors.Darker,
+    background = {},
+    borderRadius = {},
     title = 'Forgot your password?',
     showSignupLink,
     signUpLinkLabel,
@@ -42,8 +43,12 @@ export const ForgotPasswordForm = memo(
     // const [error, setError] = useState<Exception | null | undefined>();
     // const [canSubmit, setCanSubmit] = useState(false);
 
-    const inProgress = useSelector(state => state.authentication?.in_progress);
-    const authError = useSelector(state => state.authentication?.error);
+    const inProgress = useSelector(
+      (state: RootState) => state.authentication?.in_progress,
+    );
+    const authError = useSelector(
+      (state: RootState) => state.authentication?.error,
+    );
     // const queryStrings = useSelector(state => state.router.location.search);
     // const confirmed = queryString.parse(queryStrings).c === '1';
     // const medium = queryString.parse(queryStrings).m;
@@ -61,23 +66,23 @@ export const ForgotPasswordForm = memo(
     return (
       <Container
         className="forgot-password-form"
-        backgroundColor={backgroundColor}
-        borderRadius={Amount.More}
-        boxShadow={DepthShadow.Highest}
-        grow={false}
-        padding={Amount.Most}
-        paddingBottom={Amount.Default}
-        width={420}
+        background={{ color: BackgroundColors.Darker, ...background }}
+        borderRadius={{ all: Amount.More, ...borderRadius }}
+        padding={{ all: Amount.Most }}
+        shadow={DepthShadow.Highest}
+        size={{
+          width: 420,
+        }}
       >
         <LoadingOverlay visible={inProgress} />
         {/* <Illustration>
         <img alt={'Login'} src="/illustrations/total_debt.svg" />
       </Illustration> */}
 
-        <Title alignText={Align.Center}>{title}</Title>
+        <Title textAlign={TextAlign.Center}>{title}</Title>
 
-        <Container marginBottom={Amount.More} marginTop={Amount.More}>
-          <Paragraph alignText={Align.Center}>
+        <Container>
+          <Paragraph textAlign={TextAlign.Center}>
             Enter the email address associated with your account and we'll send
             instructions on how to reset your password.
           </Paragraph>
@@ -118,13 +123,13 @@ export const ForgotPasswordForm = memo(
           }}
         />
 
-        <Container
-          paddingLeft={Amount.Default}
-          paddingRight={Amount.Default}
-          paddingTop={Amount.Default}
-        >
-          <Small alignText={Align.Center}>
-            <Link hover={{ underline: true }} to="/login" underline={false}>
+        <Container padding={{ all: Amount.Default }}>
+          <Small textAlign={TextAlign.Center}>
+            <Link
+              hover={{ textDecoration: { line: TextDecorationLine.Underline } }}
+              textDecoration={{ line: TextDecorationLine.Underline }}
+              to="/login"
+            >
               Login
             </Link>
           </Small>

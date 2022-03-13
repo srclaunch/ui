@@ -7,10 +7,10 @@ import {
   Depth,
   Heading,
   NavigationLink,
-  Size,
+  Sizes,
   UnorderedList,
   Workspace,
-} from '../../..';
+} from '../../../index';
 import { Documentation } from '../../layouts/Documentation';
 
 export const Authentication = memo((): ReactElement => {
@@ -20,17 +20,16 @@ export const Authentication = memo((): ReactElement => {
         title: 'Authentication',
       }}
       layout={Documentation}
-      padding={Amount.Most}
+      padding={{ all: Amount.Most }}
       title="Authentication"
     >
       <Container
-        backgroundColor={BackgroundColors.Lightest}
-        borderRadius={Amount.Least}
+        background={{ color: BackgroundColors.Lightest }}
+        borderRadius={{ all: Amount.Least }}
         depth={Depth.High}
-        grow={false}
-        padding={Amount.Most}
+        padding={{ all: Amount.Most }}
       >
-        <Heading lineHeight={Size.Smaller}>Components</Heading>
+        <Heading lineHeight={Sizes.Smaller}>Components</Heading>
 
         <UnorderedList
           items={[
@@ -51,8 +50,7 @@ export const Authentication = memo((): ReactElement => {
               label="SignupForm"
             />,
           ]}
-          paddingLeft={Amount.Default}
-          paddingRight={Amount.Default}
+          padding={{ left: Amount.Default, right: Amount.Default }}
         />
       </Container>
     </Workspace>
