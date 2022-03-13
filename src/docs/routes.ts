@@ -60,6 +60,8 @@ import { MessageListPage } from './pages/messaging/chat/messages/MessageList';
 import { MessagePreviewPage } from './pages/messaging/chat/messages/MessagePreview';
 import { Modals } from './pages/modals/index';
 import { SlidePanelPage } from './pages/modals/SlidePanel';
+import { Progress } from './pages/progress';
+import { LoadingOverlayPage } from './pages/progress/LoadingOverlayPage';
 import { PageNotFound } from './pages/PageNotFound';
 import { ThemeSelectorPage } from './pages/themes/ThemeSelector';
 // import { LinearGauge, RadialGauge } from '../../dist';
@@ -313,6 +315,14 @@ const routes: readonly PageRoute[] = [
   {
     component: Modals,
     path: '/modals',
+  },
+  {
+    component: Progress,
+    path: '/progress',
+  },
+  {
+    component: LoadingOverlayPage,
+    path: '/progress/loading-overlay',
   },
   {
     component: ThemeSelectorPage,

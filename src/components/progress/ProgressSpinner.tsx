@@ -1,5 +1,6 @@
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
+import { getCSSMeasurementValue } from '../../lib/css/properties';
 
 import { Size, Sizes } from '../../types';
 
@@ -27,16 +28,16 @@ const Container = memo(styled.div<{ size: Size }>`
   border-radius: 50%;
   display: inline-block;
   font-size: 10px;
-  height: ${props => props.size};
+  height: ${props => getCSSMeasurementValue(props.size.height)};
   position: relative;
   text-indent: -9999em;
   transform: translateZ(0);
-  width: ${props => props.size};
+  width: ${props => getCSSMeasurementValue(props.size.width)};
 
   &:after {
     border-radius: 50%;
-    width: calc(${props => props.size} / 3);
-    height: calc(${props => props.size} / 3);
+    width: ${props => getCSSMeasurementValue(props.size.width)};
+    height: calc(${props => getCSSMeasurementValue(props.size.height)} / 3);
   }
 
   @keyframes loop {

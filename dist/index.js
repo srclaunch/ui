@@ -23571,7 +23571,7 @@ const ProgressSpinner = memo(({
 const Container$c = memo(styled.div.withConfig({
   displayName: "Container",
   componentId: "sc-1w3nox1-0"
-})(["animation:loop 0.8s infinite linear;border-top:calc(", " / 5) solid rgba(200,200,200,0.2);border-right:calc(", " / 5) solid rgba(200,200,200,0.2);border-bottom:calc(", " / 5) solid rgba(200,200,200,0.2);border-left:calc(", " / 5) solid rgba(0,0,0,0.2);border-radius:50%;display:inline-block;font-size:10px;height:", ";position:relative;text-indent:-9999em;transform:translateZ(0);width:", ";&:after{border-radius:50%;width:calc(", " / 3);height:calc(", " / 3);}@keyframes loop{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}"], (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size));
+})(["animation:loop 0.8s infinite linear;border-top:calc(", " / 5) solid rgba(200,200,200,0.2);border-right:calc(", " / 5) solid rgba(200,200,200,0.2);border-bottom:calc(", " / 5) solid rgba(200,200,200,0.2);border-left:calc(", " / 5) solid rgba(0,0,0,0.2);border-radius:50%;display:inline-block;font-size:10px;height:", ";position:relative;text-indent:-9999em;transform:translateZ(0);width:", ";&:after{border-radius:50%;width:", ";height:calc(", " / 3);}@keyframes loop{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}"], (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => getCSSMeasurementValue(props.size.height), (props) => getCSSMeasurementValue(props.size.width), (props) => getCSSMeasurementValue(props.size.width), (props) => getCSSMeasurementValue(props.size.height)));
 const LoadingOverlay = memo((_s) => {
   var _t = _s, {
     background = {},
@@ -23596,7 +23596,7 @@ const LoadingOverlay = memo((_s) => {
     borderRadius,
     className: `${className} loading-overlay`,
     position: __spreadValues({
-      behavior: PositionBehavior.Fixed,
+      behavior: PositionBehavior.Absolute,
       bottom: 0,
       left: 0,
       right: 0,

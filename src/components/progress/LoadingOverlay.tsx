@@ -29,7 +29,7 @@ export const LoadingOverlay = memo(
         borderRadius={borderRadius}
         className={`${className} loading-overlay`}
         position={{
-          behavior: PositionBehavior.Fixed,
+          behavior: PositionBehavior.Absolute,
           bottom: 0,
           left: 0,
           right: 0,

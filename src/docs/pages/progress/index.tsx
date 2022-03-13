@@ -13,15 +13,15 @@ import {
 } from '../../../index';
 import { Documentation } from '../../layouts/Documentation';
 
-export const Forms = memo((): ReactElement => {
+export const Progress = memo((): ReactElement => {
   return (
     <Workspace
       header={{
-        title: 'Forms',
+        title: 'Progress',
       }}
       layout={Documentation}
       padding={{ all: Amount.Most }}
-      title="Forms"
+      title="Progress"
     >
       <Container
         background={{ color: BackgroundColors.Lightest }}
@@ -29,12 +29,14 @@ export const Forms = memo((): ReactElement => {
         depth={Depth.High}
         padding={{ all: Amount.Most }}
       >
-        <Heading>Components</Heading>
+        <Heading>Progress Components</Heading>
 
         <UnorderedList
           items={[
-            <NavigationLink to="/forms/buttons" label="Buttons" />,
-            <NavigationLink to="/forms/inputs" label="Inputs" />,
+            <NavigationLink
+              to="/progress/loading-overlay"
+              label="LoadingOverlay"
+            />,
           ]}
         />
       </Container>

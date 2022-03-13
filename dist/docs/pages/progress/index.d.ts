@@ -1,3 +1,3 @@
 import { ReactElement } from 'react';
-export declare const Forms: import("react").MemoExoticComponent<() => ReactElement>;
+export declare const Progress: import("react").MemoExoticComponent<() => ReactElement>;
 //# sourceMappingURL=index.d.ts.map
