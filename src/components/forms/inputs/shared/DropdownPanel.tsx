@@ -10,6 +10,7 @@ import {
   BorderColors,
   BorderStyle,
   Depth,
+  PositionBehavior,
 } from '../../../../types';
 import { Container, ContainerProps } from '../../../layout/Container';
 
@@ -45,6 +46,12 @@ export const DropdownPanel = memo(
         className={`${className} dropdown-panel`}
         depth={depth}
         focused={focused}
+        position={{
+          behavior: PositionBehavior.Absolute,
+          left: 0,
+          right: 0,
+          top: 'auto',
+        }}
         visible={visible}
         {...props}
       >

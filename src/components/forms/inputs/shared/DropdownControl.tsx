@@ -14,6 +14,7 @@ import {
   BorderStyle,
   Cursor,
   Depth,
+  Fill,
   ForegroundColors,
   InputProps,
   MouseEventProps,
@@ -27,6 +28,7 @@ import {
   TransformProps,
 } from '../../../../types';
 import { Container } from '../../../layout/Container';
+import { Spacer } from '../../../layout/Spacer';
 import { Icon, IconProps } from '../../../media/Icon';
 import { Text, TextProps } from '../../../typography/Text';
 import { InputContainer, InputContainerProps } from './InputContainer';
@@ -91,7 +93,7 @@ export const DropdownControl = memo(
     return (
       <InputContainer
         alignment={{
-          horizontal: AlignHorizontal.Center,
+          horizontal: AlignHorizontal.Left,
           orientation: Orientation.Horizontal,
           vertical: AlignVertical.Center,
           ...alignment,
@@ -143,6 +145,8 @@ export const DropdownControl = memo(
           </Text>
         )}
 
+        <Spacer />
+
         <Container
           alignment={{
             horizontal: AlignHorizontal.Center,
@@ -157,10 +161,10 @@ export const DropdownControl = memo(
             },
           }}
           className="down-arrow"
-          // size={{
-          //   height: Sizes.Default,
-          //   width: Sizes.Default,
-          // }}
+          size={{
+            height: Sizes.Default,
+            width: Sizes.Default,
+          }}
         >
           <Icon
             color={

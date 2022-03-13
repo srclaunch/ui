@@ -15,24 +15,24 @@ export const PaddingStyles = css<{
   ${props =>
     props.padding?.bottom &&
     css`
-      padding: ${getCSSMeasurementValue(props.padding.bottom)};
+      padding-bottom: ${getCSSMeasurementValue(props.padding.bottom)};
     `};
 
   ${props =>
     props.padding?.left &&
     css`
-      padding: ${getCSSMeasurementValue(props.padding.left)};
+      padding-left: ${getCSSMeasurementValue(props.padding.left)};
     `};
 
   ${props =>
     props.padding?.right &&
     css`
-      padding: ${getCSSMeasurementValue(props.padding.right)};
+      padding-right: ${getCSSMeasurementValue(props.padding.right)};
     `};
 
   ${props =>
     props.padding?.top &&
     css`
-      padding: ${getCSSMeasurementValue(props.padding.top)};
+      padding-top: ${getCSSMeasurementValue(props.padding.top)};
     `};
 `;

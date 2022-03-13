@@ -7,13 +7,13 @@ export declare type Shadow = {
     readonly x?: Amount | Size;
     readonly y?: Amount | Size;
     readonly opacity?: number;
-    readonly radius?: Amount | Size;
+    readonly spread?: Amount | Size;
 } | {
     readonly blur?: Amount | Size;
     readonly color?: Color;
     readonly x?: Amount | Size;
     readonly y?: Amount | Size;
     readonly opacity?: number;
-    readonly radius?: Amount | Size;
+    readonly spread?: Amount | Size;
 }[];
 //# sourceMappingURL=shadow.d.ts.map

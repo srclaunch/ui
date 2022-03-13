@@ -52,15 +52,9 @@ export const LoginForm = memo(
     ...props
   }: LoginFormProps): ReactElement => {
     const dispatch = useDispatch();
-
     const loginState = useSelector(
       (s: RootState) => s.user.authentication?.login,
     );
-
-    const state = useSelector((s: RootState) => s);
-
-    console.log('state2', state);
-
     const { error, inProgress, success } = loginState;
 
     useEffect(() => {
@@ -72,9 +66,9 @@ export const LoginForm = memo(
     return (
       <Container
         className="login-form"
-        background={{ color: BackgroundColors.Darker, ...background }}
+        background={{ color: BackgroundColors.Lighter, ...background }}
         borderRadius={{ all: Amount.More, ...borderRadius }}
-        padding={{ all: Amount.Most }}
+        padding={{ all: Amount.Most, bottom: Amount.None }}
         shadow={DepthShadow.Highest}
         size={{
           width: 420,
@@ -98,9 +92,9 @@ export const LoginForm = memo(
             orientation: Orientation.Horizontal,
             vertical: AlignVertical.Center,
           }}
-          background={{
-            color: BackgroundColors.Darkest,
-          }}
+          // background={{
+          //   color: BackgroundColors.Darkest,
+          // }}
           margin={{
             bottom: Amount.Default,
           }}
@@ -188,7 +182,7 @@ export const LoginForm = memo(
               fill: Fill.Both,
               horizontal: AlignHorizontal.Center,
             },
-            borderRadius: Amount.Least,
+            borderRadius: { all: Amount.Least },
             label: 'Login',
           }}
         />

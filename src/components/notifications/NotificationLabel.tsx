@@ -83,7 +83,7 @@ export const NotificationLabel = memo(
           ...alignment,
         }}
         background={{
-          color: BackgroundColors.Darker,
+          color: BackgroundColors.Light,
           opacity: type ? 10 : 100,
           ...background,
         }}

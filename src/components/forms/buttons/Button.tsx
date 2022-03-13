@@ -21,6 +21,7 @@ import {
   TextAlign,
   TextColors,
   TextDecorationLine,
+  TextSize,
 } from '../../../types/index';
 import { Container, ContainerProps } from '../../layout/Container';
 import { IconProps } from '../../media/Icon';
@@ -117,7 +118,7 @@ export const Button = memo(
     },
     textAlign = TextAlign.Center,
     textColor,
-    textSize,
+    textSize = TextSize.Default,
     textWeight,
     type,
     ...props

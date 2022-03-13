@@ -10,7 +10,7 @@ export type Shadow =
       readonly x?: Amount | Size;
       readonly y?: Amount | Size;
       readonly opacity?: number;
-      readonly radius?: Amount | Size;
+      readonly spread?: Amount | Size;
     }
   | {
       readonly blur?: Amount | Size;
@@ -18,5 +18,5 @@ export type Shadow =
       readonly x?: Amount | Size;
       readonly y?: Amount | Size;
       readonly opacity?: number;
-      readonly radius?: Amount | Size;
+      readonly spread?: Amount | Size;
     }[];
