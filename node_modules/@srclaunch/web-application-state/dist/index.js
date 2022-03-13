@@ -17449,7 +17449,7 @@ function createBrowserHistory(b2) {
     };
   } };
 }
-var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof {} !== "undefined" ? {} : typeof self !== "undefined" ? self : {};
 function getAugmentedNamespace(n2) {
   if (n2.__esModule)
     return n2;
@@ -20004,7 +20004,7 @@ var reduxLogger = { exports: {} };
       }
       return Array.from(e3);
     }, C2 = [];
-    k2 = (typeof commonjsGlobal == "undefined" ? "undefined" : N2(commonjsGlobal)) === "object" && commonjsGlobal ? commonjsGlobal : typeof window != "undefined" ? window : {}, j2 = k2.DeepDiff, j2 && C2.push(function() {
+    k2 = (typeof {} == "undefined" ? "undefined" : N2({})) === "object" && {} ? {} : typeof window != "undefined" ? window : {}, j2 = k2.DeepDiff, j2 && C2.push(function() {
       typeof j2 != "undefined" && k2.DeepDiff === c2 && (k2.DeepDiff = j2, j2 = void 0);
     }), t2(n2, r2), t2(o2, r2), t2(i, r2), t2(a2, r2), Object.defineProperties(c2, { diff: { value: c2, enumerable: true }, observableDiff: { value: l2, enumerable: true }, applyDiff: { value: h2, enumerable: true }, applyChange: { value: d2, enumerable: true }, revertChange: { value: g2, enumerable: true }, isConflict: { value: function() {
       return typeof j2 != "undefined";
@@ -26279,7 +26279,7 @@ var isarray = Array.isArray || function(arr) {
   exports.Buffer = Buffer2;
   exports.SlowBuffer = SlowBuffer;
   exports.INSPECT_MAX_BYTES = 50;
-  Buffer2.TYPED_ARRAY_SUPPORT = commonjsGlobal.TYPED_ARRAY_SUPPORT !== void 0 ? commonjsGlobal.TYPED_ARRAY_SUPPORT : typedArraySupport();
+  Buffer2.TYPED_ARRAY_SUPPORT = typedArraySupport();
   exports.kMaxLength = kMaxLength();
   function typedArraySupport() {
     try {
@@ -27732,8 +27732,8 @@ var core = { exports: {} };
       if (!crypto2 && typeof window !== "undefined" && window.msCrypto) {
         crypto2 = window.msCrypto;
       }
-      if (!crypto2 && typeof commonjsGlobal !== "undefined" && commonjsGlobal.crypto) {
-        crypto2 = commonjsGlobal.crypto;
+      if (!crypto2 && typeof {} !== "undefined" && {}.crypto) {
+        crypto2 = {}.crypto;
       }
       if (!crypto2 && typeof commonjsRequire === "function") {
         try {
@@ -28225,8 +28225,8 @@ if (typeof window !== "undefined" && window.crypto) {
 if (!crypto$1 && typeof window !== "undefined" && window.msCrypto) {
   crypto$1 = window.msCrypto;
 }
-if (!crypto$1 && typeof global !== "undefined" && global.crypto) {
-  crypto$1 = global.crypto;
+if (!crypto$1 && typeof {} !== "undefined" && {}.crypto) {
+  crypto$1 = {}.crypto;
 }
 if (!crypto$1 && typeof require === "function") {
   try {
