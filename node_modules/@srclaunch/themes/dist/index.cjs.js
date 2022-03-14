@@ -225,8 +225,8 @@ body,
   --color-primary-contrast: rgb(var(--color-primary-contrast-rgb));
   --color-default-rgb: var(--color-black-rgb);
   --color-default: rgb(var(--color-default-rgb));
-  --color-default-contrast-rgb: var(--color-default-rgb);
-  --color-default-contrast: var(--color-default-rgb);
+  --color-default-contrast-rgb: rgb(var(--color-white-rgb));
+  --color-default-contrast: var(--color-default-contrast-rgb);
   --color-secondary-rgb: var(--bg-color-lightest-rgb);
   --color-secondary: rgb(var(--color-secondary-rgb));
   --color-secondary-contrast-rgb: var(--color-white-rgb);

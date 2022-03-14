@@ -3,7 +3,7 @@
   "description": "CSS variable and styled-component based themes",
   "author": "Steven Bennett <steven@srclaunch.com>",
   "license": "MIT",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "engines": {
     "node": ">=16"
   },

@@ -33743,6 +33743,10 @@ const Workspace = memo((_$a) => {
           })
         })]
       }), (header == null ? void 0 : header.actions) && /* @__PURE__ */ jsx$1(Container$d, {
+        alignment: {
+          fill: Fill.Horizontal,
+          horizontal: AlignHorizontal.Right
+        },
         className: "workspace-actions",
         children: header.actions
       })]

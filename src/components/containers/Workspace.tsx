@@ -1,6 +1,7 @@
 import { cloneElement, ElementType, memo, ReactElement } from 'react';
 import { useTitle } from '@srclaunch/react-hooks';
 import {
+  AlignHorizontal,
   AlignVertical,
   Amount,
   BackgroundColors,
@@ -91,7 +92,13 @@ export const Workspace = memo(
             </Container>
 
             {header?.actions && (
-              <Container className="workspace-actions">
+              <Container
+                alignment={{
+                  fill: Fill.Horizontal,
+                  horizontal: AlignHorizontal.Right,
+                }}
+                className="workspace-actions"
+              >
                 {header.actions}
               </Container>
             )}

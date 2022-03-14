@@ -1,5 +1,6 @@
 import { DualLightIcons } from '@srclaunch/icons';
 import { memo, ReactElement } from 'react';
+import { Button } from '../../../components/forms/buttons/Button';
 
 import {
   Amount,
@@ -58,7 +59,7 @@ export const WorkspacePage = memo((): ReactElement => {
       title="Workspace"
     >
       <InputRow>
-        {/* <Workspace />   */}
+        <Workspace header={{ actions: <Button>asdf</Button> }} />
         Placeholder, properties needed
       </InputRow>
     </Workspace>
