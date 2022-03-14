@@ -24,7 +24,9 @@ export default defineConfig(({ command, mode }) => {
             // '@srclaunch/icons',
             // '@srclaunch/logger',
             // '@srclaunch/react-hooks',
-            // '@srclaunch/themes',
+            // '@srclaunch/themes','
+            // 'aws-sdk',
+            '@srclaunch/web-application-state',
             // '@srclaunch/transform',
             // '@srclaunch/types',
             // '@srclaunch/web-application-state',
@@ -90,10 +92,45 @@ export default defineConfig(({ command, mode }) => {
       sourcemap: true,
       rollupOptions: {
         // Externalize deps that shouldn't be bundled
-        external: ['@srclaunch/web-application-state'],
+        external: [
+          // '@srclaunch/actions',
+          // '@srclaunch/exceptions',
+          // '@srclaunch/i18n',
+          // '@srclaunch/icons',
+          // '@srclaunch/logger',
+          // '@srclaunch/react-hooks',
+          // '@srclaunch/themes','
+          // 'aws-sdk',
+          // '@srclaunch/transform',
+          // '@srclaunch/types',
+          // '@srclaunch/web-application-state',
+          // 'amazon-cognito-identity-js',
+          // 'color-namer',
+          // 'i18n-iso-countries',
+          // 'react',
+          // 'react-date-picker',
+          // 'react-dom',
+          // 'react-password-strength-bar',
+          // 'react-redux',
+          // 'react-router',
+          // 'react-router-dom',
+          // 'styled-components',
+        ],
+        output: {
+          // Global vars to use in UMD build for externalized deps
+          globals: {
+            //   react: 'React',
+            //   'react-dom': 'ReactDOM',
+            //   'styled-components': 'styled',
+          },
+        },
       },
       define: {
-        global: {},
+        // global: {},
+      },
+      optimizeDeps: {
+        exclude: [],
+        include: [],
       },
       plugins: [
         react({
