@@ -140,7 +140,6 @@ export const DataGrid = memo(
           background={{ color: BackgroundColors.DataGrid, ...background }}
           borderRadius={{ all: Amount.Least, ...borderRadius }}
           className={`${className} data-grid`}
-          overflow={Overflow.Hidden}
           shadow={shadow}
           {...props}
         >
@@ -157,7 +156,6 @@ export const DataGrid = memo(
         background={background}
         borderRadius={borderRadius}
         className={`${className} data-grid`}
-        overflow={Overflow.Hidden}
         shadow={shadow}
         {...props}
       >
@@ -228,10 +226,13 @@ export const DataGrid = memo(
         )}
 
         <Container
+          alignment={{
+            overflow: Overflow.ScrollBoth,
+          }}
           borderRadius={!header ? borderRadius : undefined}
           className="data-grid-grid"
           onScroll={(e: SyntheticEvent) => e.preventDefault()}
-          overflow={Overflow.ScrollBoth}
+
           // width="min-content"
         >
           {display === DataGridDisplayType.Table ? (

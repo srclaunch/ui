@@ -11,6 +11,7 @@ import {
   BorderStyle,
   Depth,
   PositionBehavior,
+  Sizes,
 } from '../../../../types';
 import { Container, ContainerProps } from '../../../layout/Container';
 
@@ -26,8 +27,10 @@ export const DropdownPanel = memo(
     borderRadius = {},
     children,
     className = '',
-    depth = Depth.Higher,
+    depth = Depth.Highest,
     focused,
+    position = {},
+    size = {},
     visible = false,
     ...props
   }: DropdownPanelProps): ReactElement => {
@@ -50,8 +53,10 @@ export const DropdownPanel = memo(
           behavior: PositionBehavior.Absolute,
           left: 0,
           right: 0,
-          top: 'auto',
+          top: size?.height ?? Sizes.Default,
+          ...position,
         }}
+        size={{ minHeight: 80, maxHeight: 300, ...size }}
         visible={visible}
         {...props}
       >

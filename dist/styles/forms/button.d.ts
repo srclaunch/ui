@@ -13,10 +13,9 @@ export declare const ButtonStyles: import("styled-components").FlattenInterpolat
     borderRadius?: import("../../types").BorderRadius | undefined;
     cursor?: import("../../types").Cursor | undefined;
     depth?: import("../../types").Depth | undefined;
-    disable?: boolean | undefined;
+    disabled?: boolean | undefined;
     margin?: import("../../types").Margin | undefined;
     opacity?: number | undefined;
-    overflow?: import("../../types").Overflow | undefined;
     padding?: import("../../types").Padding | undefined;
     position?: import("../../types").Position | undefined;
     shadow?: import("../../types").DepthShadow | import("../../types").Shadow | undefined;
@@ -26,7 +25,7 @@ export declare const ButtonStyles: import("styled-components").FlattenInterpolat
     children?: import("react").ReactNode;
 } & {
     readonly active?: ContainerProps<HTMLDivElement> | undefined;
-    readonly disabled?: ContainerProps<HTMLDivElement> | undefined;
+    readonly disable?: ContainerProps<HTMLDivElement> | undefined;
     readonly hover?: ContainerProps<HTMLDivElement> | undefined;
     readonly focus?: ContainerProps<HTMLDivElement> | undefined;
 } & {

@@ -64,6 +64,7 @@ import { Progress } from './pages/progress';
 import { LoadingOverlayPage } from './pages/progress/LoadingOverlayPage';
 import { PageNotFound } from './pages/PageNotFound';
 import { ThemeSelectorPage } from './pages/themes/ThemeSelector';
+import { MenuPage } from './pages/forms/inputs/menu';
 // import { LinearGauge, RadialGauge } from '../../dist';
 
 const routes: readonly PageRoute[] = [
@@ -261,8 +262,12 @@ const routes: readonly PageRoute[] = [
     path: '/forms/inputs/long-text-input',
   },
   {
+    component: MenuPage,
+    path: '/forms/inputs/menu',
+  },
+  {
     component: DropdownInputPage,
-    path: '/forms/inputs/dropdown-input',
+    path: '/forms/inputs/menu/dropdown-input',
   },
   {
     component: ToggleInputPage,

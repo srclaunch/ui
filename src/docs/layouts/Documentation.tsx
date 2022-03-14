@@ -66,6 +66,7 @@ export const Documentation = memo(
         <Container
           alignment={{
             orientation: Orientation.Horizontal,
+            overflow: Overflow.Visible,
           }}
           background={{ color: BackgroundColors.Lightest }}
           border={{

@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import { getCSSMeasurementValue } from '../../lib/css/properties';
 
 import { Position } from '../../types';
 
@@ -16,25 +17,25 @@ export const PositionStyles = css<{
   ${props =>
     (props.position?.bottom || props.position?.bottom === 0) &&
     css`
-      bottom: ${props.position.bottom}px;
+      bottom: ${getCSSMeasurementValue(props.position.bottom)};
     `};
 
   ${props =>
     (props.position?.left || props.position?.left === 0) &&
     css`
-      left: ${props.position.left}px;
+      left: ${getCSSMeasurementValue(props.position.left)};
     `};
 
   ${props =>
     (props.position?.right || props.position?.right === 0) &&
     css`
-      right: ${props.position.right}px;
+      right: ${getCSSMeasurementValue(props.position.right)};
     `};
 
   ${props =>
     (props.position?.top || props.position?.top === 0) &&
     css`
-      top: ${props.position.top}px;
+      top: ${getCSSMeasurementValue(props.position.top)};
     `};
 `;
 

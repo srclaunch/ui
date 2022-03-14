@@ -63,27 +63,27 @@ export type Border = {
   readonly all?: {
     readonly color: BorderColor;
     readonly style?: BorderStyle;
-    readonly width?: Sizes | string | number;
+    readonly width?: string | number;
   };
   readonly bottom?: {
     readonly color: BorderColor;
     readonly style?: BorderStyle;
-    readonly width?: Sizes | string | number;
+    readonly width?: string | number;
   };
   readonly left?: {
     readonly color: BorderColor;
     readonly style?: BorderStyle;
-    readonly width?: Sizes | string | number;
+    readonly width?: string | number;
   };
   readonly right?: {
     readonly color: BorderColor;
     readonly style?: BorderStyle;
-    readonly width?: Sizes | string | number;
+    readonly width?: string | number;
   };
   readonly top?: {
     readonly color: BorderColor;
     readonly style?: BorderStyle;
-    readonly width?: Sizes | string | number;
+    readonly width?: string | number;
   };
 };
 

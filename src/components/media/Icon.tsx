@@ -1,16 +1,22 @@
 import { getIcon, Icon as IconType } from '@srclaunch/icons';
 import { memo, ReactElement } from 'react';
-
+import styled, { css } from 'styled-components';
+import { AlignmentStyles } from '../../styles/container/alignment';
+import { SizeStyles } from '../../styles/container/size';
 import {
+  AlignHorizontal,
+  AlignVertical,
+  Fill,
   ForegroundColor,
   ForegroundColors,
   Sizes,
   TextColor,
+  TextColors,
 } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 import { Image } from './Image';
 
-export type IconProps = ContainerProps<HTMLSpanElement> & {
+export type IconProps = ContainerProps & {
   readonly color?: ForegroundColor | TextColor;
   readonly component?: ReactElement;
   readonly name?: IconType;
@@ -19,18 +25,31 @@ export type IconProps = ContainerProps<HTMLSpanElement> & {
   readonly url?: string;
 };
 
+const Wrapper = styled.i<IconProps>`
+  ${AlignmentStyles};
+
+  svg {
+    ${props =>
+      props.color &&
+      css`
+        fill: ${props.color === 'inherit'
+          ? 'currentColor'
+          : `rgb(${props.color})`};
+      `};
+    ${SizeStyles};
+  }
+`;
+
 export const Icon = memo(
   ({
-    as = 'span',
-    color = ForegroundColors.Default,
+    as = 'i',
+    alignment = {},
+    color = TextColors.Default,
     className = '',
     component,
     name,
     path,
-    size = {
-      height: Sizes.Default,
-      width: Sizes.Default,
-    },
+    size = {},
     svg,
     url,
     ...props
@@ -40,14 +59,20 @@ export const Icon = memo(
 
       if (Ico)
         return (
-          <Container
+          <Wrapper
+            alignment={{
+              horizontal: AlignHorizontal.Center,
+              vertical: AlignVertical.Center,
+              ...alignment,
+            }}
             as={as}
+            color={color}
             className={`${className} icon`}
-            size={size}
+            size={{ height: Sizes.Default, width: Sizes.Default, ...size }}
             {...props}
           >
             <Ico />
-          </Container>
+          </Wrapper>
         );
     }
 

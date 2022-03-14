@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { ContainerProps } from '../layout/Container';
 import { IconProps } from '../media/Icon';
 import { LabelProps } from '../typography/Label';
 export declare type MenuItemProps = {
@@ -8,6 +9,6 @@ export declare type MenuItemProps = {
     readonly title?: string;
     readonly to?: string;
     readonly value?: any;
-} & LabelProps<HTMLAnchorElement | HTMLButtonElement>;
+} & ContainerProps<HTMLButtonElement> & LabelProps;
 export declare const MenuItem: import("react").MemoExoticComponent<({ active, as, background, borderRadius, className, component, focus, hover, icon, label, lineHeight, onClick, shadow, title, to, value, ...props }: MenuItemProps) => ReactElement>;
 //# sourceMappingURL=MenuItem.d.ts.map

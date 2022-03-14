@@ -26,51 +26,22 @@ export const Menu = memo(
     borderRadius = {},
     className = '',
     menu,
-    menuItemProps = {
-      active: {
-        background: {
-          color: BackgroundColors.Primary,
-        },
-        // shadow: {
-        //   blur: 7,
-        //   color: BackgroundColors.Primary,
-        //   opacity: 35,
-        //   x: 0,
-        //   y: 2,
-        //   spread: 4,
-        // },
-        textColor: TextColors.PrimaryContrast,
-      },
-      borderRadius: {},
-      focus: {
-        textColor: TextColors.PrimaryContrast,
-      },
-      hover: {
-        background: {
-          color: BackgroundColors.Primary,
-        },
-        textColor: TextColors.PrimaryContrast,
-      },
-      padding: {
-        left: Amount.Less,
-        right: Amount.Less,
-      },
-      textSize: TextSize.Small,
-    },
+    menuItemProps = {},
     onClick,
     onItemClick,
     padding = {},
     shadow = DepthShadow.Surface,
-
     ...props
   }: MenuProps): ReactElement => {
     return (
       <Container
+        alignment={{
+          overflow: Overflow.ScrollVertical,
+        }}
         as={as}
         background={{ color: BackgroundColors.Lightest, ...background }}
         borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} menu`}
-        overflow={Overflow.ScrollVertical}
         padding={{ all: Amount.Least, ...padding }}
         shadow={shadow}
         {...props}
@@ -85,6 +56,35 @@ export const Menu = memo(
                     onItemClick(item);
                   }
                 }}
+                active={{
+                  background: {
+                    color: BackgroundColors.Primary,
+                  },
+                  // shadow: {
+                  //   blur: 7,
+                  //   color: BackgroundColors.Primary,
+                  //   opacity: 35,
+                  //   x: 0,
+                  //   y: 2,
+                  //   spread: 4,
+                  // },
+                  textColor: TextColors.PrimaryContrast,
+                }}
+                // borderRadius= {}
+                focus={{
+                  textColor: TextColors.PrimaryContrast,
+                }}
+                hover={{
+                  background: {
+                    color: BackgroundColors.Primary,
+                  },
+                  textColor: TextColors.PrimaryContrast,
+                }}
+                padding={{
+                  left: Amount.Less,
+                  right: Amount.Less,
+                }}
+                textSize={TextSize.Small}
                 {...menuItemProps}
                 {...item}
               />

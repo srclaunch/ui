@@ -13,6 +13,8 @@ import {
   AlignVertical,
   Amount,
   BackgroundColors,
+  BorderColors,
+  BorderStyle,
   CommonComponentProps,
   Cursor,
   Orientation,
@@ -93,12 +95,10 @@ export type ButtonProps<E = HTMLButtonElement> = {
 export const Button = memo(
   ({
     active,
-    alignment = {
-      horizontal: AlignHorizontal.Center,
-      orientation: Orientation.Horizontal,
-      vertical: AlignVertical.Center,
-    },
-    background,
+    alignment = {},
+    as = 'button',
+    background = {},
+    border = {},
     borderRadius = {},
     children,
     className = '',
@@ -112,15 +112,12 @@ export const Button = memo(
     onClick,
     onMouseEnter,
     onMouseLeave,
-    padding = {
-      left: Amount.Less,
-      right: Amount.Less,
-    },
+    padding = {},
     textAlign = TextAlign.Center,
     textColor,
     textSize = TextSize.Default,
     textWeight,
-    type,
+    type = ButtonType.Default,
     ...props
   }: ButtonProps): ReactElement => {
     const [hovered, setHovered] = useState(false);
@@ -213,9 +210,23 @@ export const Button = memo(
           },
           ...active,
         }}
-        alignment={alignment}
-        as="button"
-        background={{ color: updatedBackgroundColor }}
+        alignment={{
+          horizontal: AlignHorizontal.Center,
+          orientation: Orientation.Horizontal,
+          overflow: Overflow.Visible,
+          vertical: AlignVertical.Center,
+          ...alignment,
+        }}
+        as={as}
+        background={{ color: updatedBackgroundColor, ...background }}
+        border={{
+          all: {
+            color: BorderColors.Transparent,
+            style: BorderStyle.None,
+            width: 0,
+          },
+          ...border,
+        }}
         borderRadius={{ all: Amount.All, ...borderRadius }}
         className={`${className} button`}
         cursor={cursor}
@@ -238,8 +249,7 @@ export const Button = memo(
 
           if (onMouseLeave) onMouseLeave(e);
         }}
-        overflow={Overflow.Visible}
-        padding={padding}
+        padding={{ left: Amount.Less, right: Amount.Less, ...padding }}
         // shadow={{
         //   radius: 8,
         //   color: colors?.backgroundColor,

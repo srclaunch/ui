@@ -7,8 +7,8 @@ import {
   BorderStyle,
   Depth,
   DepthShadow,
-  Orientation,
-  Size,
+  Overflow,
+  Sizes,
   TextColors,
 } from '../../../types';
 import { Container, ContainerProps } from '../../layout/Container';
@@ -16,6 +16,7 @@ import { Menu, MenuProps } from '../../menus/Menu';
 import { MenuItemProps } from '../../menus/MenuItem';
 import { HoverPanel } from '../../modals/HoverPanel';
 import { DropdownControl } from '../inputs/shared/DropdownControl';
+import { DropdownPanel } from '../inputs/shared/DropdownPanel';
 import { TextProps } from '../../typography/Text';
 
 export type MenuButtonProps = {
@@ -33,9 +34,8 @@ export const MenuButton = memo(
     menu,
     label,
     padding = {},
-    // size = Size.Default,
+    size = {},
     textColor = TextColors.MenuButton,
-
     ...props
   }: MenuButtonProps): ReactElement => {
     const [focused, setFocused] = useState(false);
@@ -47,11 +47,20 @@ export const MenuButton = memo(
 
     return (
       <Container
-        borderRadius={borderRadius}
+        alignment={{
+          overflow: Overflow.Visible,
+        }}
+        borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} menu-button`}
         depth={Depth.Higher}
         onMouseLeave={() => {
           setMenuVisible(false);
+        }}
+        size={{
+          height: Sizes.Default,
+          maxWidth: 300,
+          minWidth: 240,
+          ...size,
         }}
         shadow={menuVisible ? DepthShadow.Higher : DepthShadow.Surface}
         {...props}
@@ -80,9 +89,14 @@ export const MenuButton = memo(
           // onBlur={() => setMenuVisible(false)}
           onClick={() => setMenuVisible(!menuVisible)}
           textColor={textColor}
+          shadow={DepthShadow.High}
+          size={{
+            height: Sizes.Default,
+            ...size,
+          }}
         />
 
-        <HoverPanel
+        {/* <HoverPanel
           background={{ color: BackgroundColors.MenuButton, ...background }}
           borderRadius={{ all: Amount.Least, ...borderRadius }}
           detached={false}
@@ -100,7 +114,49 @@ export const MenuButton = memo(
               setMenuVisible(false);
             }}
           />
-        </HoverPanel>
+        </HoverPanel> */}
+
+        <DropdownPanel
+          background={{ color: BackgroundColors.DropdownMenu, ...background }}
+          border={{
+            all: {
+              color: BorderColors.InputControl,
+              style: BorderStyle.Solid,
+              width: 1,
+            },
+            top: {
+              color: BorderColors.InputControl,
+              style: BorderStyle.Solid,
+              width: 0,
+            },
+            ...border,
+          }}
+          borderRadius={{
+            all: Amount.Least,
+            // topLeft: Amount.None,
+            // topRight: Amount.None,
+            ...borderRadius,
+          }}
+          focused={focused}
+          padding={padding}
+          position={{ top: `calc(${Sizes.Default} - 0px)` }}
+          size={{
+            height: Sizes.Default,
+            maxWidth: 300,
+            minWidth: 240,
+            ...size,
+          }}
+          visible={menuVisible}
+        >
+          <Menu
+            background={{
+              color: BackgroundColors.Lightest,
+            }}
+            borderRadius={{ all: Amount.Least, ...borderRadius }}
+            menu={menu}
+            padding={padding}
+          />
+        </DropdownPanel>
       </Container>
     );
   },

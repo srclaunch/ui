@@ -17,20 +17,20 @@ type ConversationListProps = ContainerProps;
 
 export const ConversationList = memo(
   ({
+    alignment = {},
     background = {},
     borderRadius = {},
     className = '',
-    overflow = Overflow.ScrollVertical,
     size = {},
     ...props
   }: ConversationListProps): ReactElement => {
     const items = new Array(5).fill(0);
     return (
       <Container
+        alignment={{ overflow: Overflow.ScrollVertical, ...alignment }}
         background={{ color: BackgroundColors.Default, ...background }}
         borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} conversation-list`}
-        overflow={overflow}
         size={{ width: 350, ...size }}
         {...props}
       >

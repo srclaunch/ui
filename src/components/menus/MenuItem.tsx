@@ -22,12 +22,13 @@ export type MenuItemProps = {
   readonly title?: string;
   readonly to?: string;
   readonly value?: any;
-} & LabelProps<HTMLAnchorElement | HTMLButtonElement>;
+} & ContainerProps<HTMLButtonElement> &
+  LabelProps;
 
 export const MenuItem = memo(
   ({
     active,
-    as = 'div',
+    as = 'button',
     background = {},
     borderRadius = {},
     className = '',
@@ -56,7 +57,6 @@ export const MenuItem = memo(
           {itemTitle}
 
           <NavigationLink
-            active={active}
             borderRadius={{ all: Amount.Least, ...borderRadius }}
             background={{
               color: hovered
@@ -80,6 +80,7 @@ export const MenuItem = memo(
             }}
             textColor={props.textColor ?? TextColors.Default}
             to={to}
+            {...props}
           >
             {component ?? label}
           </NavigationLink>
@@ -119,6 +120,7 @@ export const MenuItem = memo(
             right: Amount.Less,
           }}
           type={hovered ? ButtonType.Primary : ButtonType.Transparent}
+          {...props}
         >
           {component ?? label}
         </Button>

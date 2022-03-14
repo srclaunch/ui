@@ -45,10 +45,9 @@ export type ContainerProps<E = HTMLDivElement> = PropsWithChildren<{
   borderRadius?: BorderRadius;
   cursor?: Cursor;
   depth?: Depth;
-  disable?: boolean;
+  disabled?: boolean;
   margin?: Margin;
   opacity?: number;
-  overflow?: Overflow;
   padding?: Padding;
   position?: Position;
   shadow?: DepthShadow | Shadow;
@@ -56,7 +55,7 @@ export type ContainerProps<E = HTMLDivElement> = PropsWithChildren<{
   visible?: boolean;
 }> & {
   readonly active?: ContainerProps<E>;
-  readonly disabled?: ContainerProps<E>;
+  readonly disable?: ContainerProps<E>;
   readonly hover?: ContainerProps<E>;
   readonly focus?: ContainerProps<E>;
 } & CommonComponentProps<any>;

@@ -30,6 +30,7 @@ import {
 import { Container } from '../../../layout/Container';
 import { Spacer } from '../../../layout/Spacer';
 import { Icon, IconProps } from '../../../media/Icon';
+import { Label } from '../../../typography/Label';
 import { Text, TextProps } from '../../../typography/Text';
 import { InputContainer, InputContainerProps } from './InputContainer';
 
@@ -77,6 +78,7 @@ export const DropdownControl = memo(
     borderRadius = {},
     className = '',
     component,
+    depth = Depth.Low,
     error,
     focused,
     icon,
@@ -86,6 +88,7 @@ export const DropdownControl = memo(
     onBlur,
     onClick,
     placeholder = 'Select an option',
+    size = {},
     textSize = TextSize.Default,
     textColor = TextColors.DropdownMenu,
     ...props
@@ -115,7 +118,7 @@ export const DropdownControl = memo(
           },
           ...border,
         }}
-        depth={menuVisible ? Depth.Higher : Depth.Surface}
+        depth={depth}
         className={`${className} dropdown-control`}
         cursor={Cursor.Pointer}
         error={error}
@@ -124,17 +127,20 @@ export const DropdownControl = memo(
         onBlur={onBlur}
         onFocus={onFocus}
         onClick={onClick}
-        padding={{
-          left: Amount.Less,
-          right: Amount.Less,
-        }}
+        size={{ height: Sizes.Default, ...size }}
         {...props}
       >
         {component ? (
           component
         ) : (
-          <Text
-            lineHeight={Sizes.Small}
+          <Label
+            alignment={{
+              fill: Fill.Horizontal,
+            }}
+            lineHeight={size?.height ?? Sizes.Default}
+            padding={{
+              left: Amount.Less,
+            }}
             textSize={textSize}
             textColor={
               !label && placeholder ? TextColors.InputPlaceholder : textColor
@@ -142,34 +148,33 @@ export const DropdownControl = memo(
             textOverflow={TextOverflow.Ellipsis}
           >
             {label ?? placeholder ?? ''}
-          </Text>
+          </Label>
         )}
-
-        <Spacer />
 
         <Container
           alignment={{
             horizontal: AlignHorizontal.Center,
-            orientation: Orientation.Horizontal,
             vertical: AlignVertical.Center,
           }}
           border={{
             left: {
-              color: BorderColors.InputControl,
+              color: BorderColors.Lighter,
               style: BorderStyle.Solid,
               width: 1,
             },
           }}
           className="down-arrow"
+          padding={{
+            left: Amount.Least,
+            right: Amount.Least,
+          }}
           size={{
-            height: Sizes.Default,
-            width: Sizes.Default,
+            height: size?.height ?? Sizes.Default,
+            width: size?.height ?? Sizes.Default,
           }}
         >
           <Icon
-            color={
-              menuVisible ? ForegroundColors.Lightest : ForegroundColors.Lighter
-            }
+            color={menuVisible ? TextColors.Lightest : TextColors.Lighter}
             name={BasicIcons.CaretDownArrow}
             className={menuVisible ? 'up' : 'down'}
             size={{

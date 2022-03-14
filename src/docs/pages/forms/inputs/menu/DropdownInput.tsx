@@ -1,11 +1,18 @@
-import { Primitives } from '@srclaunch/types';
 import { memo, ReactElement } from 'react';
+import { DualLightIcons } from '@srclaunch/icons';
 
 import {
   Amount,
   DataGrid,
   DropdownInput,
+  Icon,
+  NavigationLink,
   Paragraph,
+  TextColors,
+  TextDecorationLine,
+  TextSize,
+  TextWeight,
+  Title,
   Workspace,
 } from '../../../../../index';
 
@@ -14,7 +21,93 @@ import { Documentation } from '../../../../layouts/Documentation';
 export const DropdownInputPage = memo((): ReactElement => {
   return (
     <Workspace
-      header={{ title: 'DropdownInput' }}
+      header={{
+        title: (
+          <>
+            <NavigationLink
+              to="/forms"
+              hover={{
+                textDecoration: {
+                  line: TextDecorationLine.Underline,
+                },
+              }}
+              textDecoration={{
+                line: TextDecorationLine.None,
+              }}
+            >
+              <Title
+                textColor={TextColors.Primary}
+                textSize={TextSize.Larger}
+                textWeight={TextWeight.Most}
+              >
+                Forms
+              </Title>
+            </NavigationLink>
+
+            <Icon
+              name={DualLightIcons.ChevronDoubleForward}
+              margin={{ left: Amount.Less, right: Amount.Less }}
+              // size={Size.Smaller}
+            />
+
+            <NavigationLink
+              to="/forms/inputs"
+              hover={{
+                textDecoration: {
+                  line: TextDecorationLine.Underline,
+                },
+              }}
+              textDecoration={{
+                line: TextDecorationLine.None,
+              }}
+            >
+              <Title
+                textColor={TextColors.Primary}
+                textSize={TextSize.Larger}
+                textWeight={TextWeight.Most}
+              >
+                Inputs
+              </Title>
+            </NavigationLink>
+
+            <Icon
+              name={DualLightIcons.ChevronDoubleForward}
+              margin={{ left: Amount.Less, right: Amount.Less }}
+              // size={Size.Smaller}
+            />
+
+            <NavigationLink
+              to="/forms/inputs"
+              hover={{
+                textDecoration: {
+                  line: TextDecorationLine.Underline,
+                },
+              }}
+              textDecoration={{
+                line: TextDecorationLine.None,
+              }}
+            >
+              <Title
+                textColor={TextColors.Primary}
+                textSize={TextSize.Larger}
+                textWeight={TextWeight.Most}
+              >
+                Menu
+              </Title>
+            </NavigationLink>
+
+            <Icon
+              name={DualLightIcons.ChevronDoubleForward}
+              margin={{ left: Amount.Less, right: Amount.Less }}
+              // size={Size.Smaller}
+            />
+
+            <Title textSize={TextSize.Larger} textWeight={TextWeight.Most}>
+              DropdownInput
+            </Title>
+          </>
+        ),
+      }}
       layout={Documentation}
       title="DropdownInput"
     >

@@ -7,7 +7,7 @@ import {
 } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
 
-import { AlignVertical } from '../../types';
+import { AlignVertical, Overflow } from '../../types';
 import {
   DropdownInput,
   DropdownInputProps,
@@ -29,7 +29,12 @@ export const ThemeSelector = memo(
     );
 
     return (
-      <Container alignment={{ vertical: AlignVertical.Center }}>
+      <Container
+        alignment={{
+          overflow: Overflow.Visible,
+          vertical: AlignVertical.Center,
+        }}
+      >
         {showLabel && <InputLabel>Theme</InputLabel>}
 
         <DropdownInput

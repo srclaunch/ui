@@ -24,7 +24,6 @@ export const Conversation = memo(
       <Container
         borderRadius={{ all: Amount.Less, ...borderRadius }}
         className={`${className} conversation-list`}
-        overflow={Overflow.Hidden}
         size={{ width: 350 }}
       >
         {items.map((_, index) => {

@@ -1,6 +1,7 @@
-import { css, SimpleInterpolation } from 'styled-components';
+import { css } from 'styled-components';
+import { getCSSMeasurementValue } from '../../lib/css/properties';
 
-import { Alignment, AlignHorizontal, AlignVertical, Size } from '../../types';
+import { Alignment, Size } from '../../types';
 
 // function getFlexGrowStyle(
 //   alignment?: Alignment,
@@ -26,37 +27,37 @@ export const SizeStyles = css<{
   ${props =>
     props.size?.height &&
     css`
-      height: ${props.size.height}px;
+      height: ${getCSSMeasurementValue(props.size.height)};
     `};
 
   ${props =>
     props.size?.maxHeight &&
     css`
-      max-height: ${props.size.maxHeight}px;
+      max-height: ${getCSSMeasurementValue(props.size.maxHeight)};
     `};
 
   ${props =>
     props.size?.minHeight &&
     css`
-      min-height: ${props.size.minHeight}px;
+      min-height: ${getCSSMeasurementValue(props.size.minHeight)};
     `};
 
   ${props =>
     props.size?.maxWidth &&
     css`
-      max-width: ${props.size.maxWidth}px;
+      max-width: ${getCSSMeasurementValue(props.size.maxWidth)};
     `};
 
   ${props =>
     props.size?.minWidth &&
     css`
-      min-width: ${props.size.minWidth}px;
+      min-width: ${getCSSMeasurementValue(props.size.minWidth)};
     `};
 
   ${props =>
     props.size?.width &&
     css`
-      width: ${props.size.width}px;
+      width: ${getCSSMeasurementValue(props.size.width)};
     `};
 `;
 

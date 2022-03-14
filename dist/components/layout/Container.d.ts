@@ -1,5 +1,5 @@
 import { PropsWithChildren, ReactElement } from 'react';
-import { Alignment, Background, Border, BorderRadius, CommonComponentProps, ContainerAnimation, Cursor, Depth, Margin, Padding, Size, Shadow, Position, Overflow, DepthShadow } from '../../types';
+import { Alignment, Background, Border, BorderRadius, CommonComponentProps, ContainerAnimation, Cursor, Depth, Margin, Padding, Size, Shadow, Position, DepthShadow } from '../../types';
 export declare type ContainerProps<E = HTMLDivElement> = PropsWithChildren<{
     alignment?: Alignment;
     animation?: ContainerAnimation;
@@ -8,10 +8,9 @@ export declare type ContainerProps<E = HTMLDivElement> = PropsWithChildren<{
     borderRadius?: BorderRadius;
     cursor?: Cursor;
     depth?: Depth;
-    disable?: boolean;
+    disabled?: boolean;
     margin?: Margin;
     opacity?: number;
-    overflow?: Overflow;
     padding?: Padding;
     position?: Position;
     shadow?: DepthShadow | Shadow;
@@ -19,7 +18,7 @@ export declare type ContainerProps<E = HTMLDivElement> = PropsWithChildren<{
     visible?: boolean;
 }> & {
     readonly active?: ContainerProps<E>;
-    readonly disabled?: ContainerProps<E>;
+    readonly disable?: ContainerProps<E>;
     readonly hover?: ContainerProps<E>;
     readonly focus?: ContainerProps<E>;
 } & CommonComponentProps<any>;

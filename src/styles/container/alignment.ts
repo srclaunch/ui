@@ -10,10 +10,7 @@ import {
   Size,
 } from '../../types';
 
-export function getFillStyles(
-  alignment?: Alignment,
-  size?: Size,
-): SimpleInterpolation {
+export function getFillStyles(alignment?: Alignment): SimpleInterpolation {
   if (alignment?.fill === Fill.Both) {
     return css`
       flex-grow: 1;
@@ -38,7 +35,6 @@ export function getFillStyles(
 
 export function getHorizontalAlignStyle(
   alignment?: Alignment,
-  size?: Size,
 ): SimpleInterpolation {
   const { horizontal, orientation } = alignment ?? {};
 
@@ -130,8 +126,6 @@ export function getVerticalAlignStyle(
 }
 
 export function getOverflowStyle(overflow?: Overflow): SimpleInterpolation {
-  console.log('wtf');
-  console.log('overflow', overflow);
   switch (overflow) {
     case Overflow.ClipBoth:
       return css`
@@ -168,7 +162,6 @@ export function getOverflowStyle(overflow?: Overflow): SimpleInterpolation {
       `;
     case Overflow.Hidden:
     default:
-      console.log('hidden');
       return css`
         overflow: hidden;
       `;

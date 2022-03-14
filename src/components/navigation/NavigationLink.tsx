@@ -156,6 +156,7 @@ export const NavigationLink = memo(
           //   opacity: 35,
           //   spread: 3,
           // }}
+          {...props}
         >
           {label ? (
             <Label
@@ -163,6 +164,7 @@ export const NavigationLink = memo(
               textColor={updatedTextColor}
               textSize={textSize}
               textWeight={textWeight}
+              {...props}
             >
               {label}
             </Label>

@@ -39,53 +39,48 @@ import { BorderRadius } from '../../types';
 export function getBorderRadiusValue(
   borderRadius?: BorderRadius,
 ): SimpleInterpolation {
-  if (typeof borderRadius === 'number') {
-    return `${borderRadius}px`;
-  }
+  return css`
+    ${borderRadius &&
+    borderRadius.all &&
+    css`
+      border-radius: ${getCSSMeasurementValue(borderRadius.all)};
+    `};
 
-  if (typeof borderRadius === 'string') {
-    return borderRadius;
-  }
+    ${borderRadius &&
+    borderRadius.bottomLeft &&
+    css`
+      border-bottom-left-radius: ${getCSSMeasurementValue(
+        borderRadius.bottomLeft,
+      )};
+    `};
 
-  // TODO: We should return border-radius: {props.all}
-  // But also continue and add the rest of the directional
-  // border-radius properties
-  if (typeof borderRadius === 'object') {
-    if (borderRadius.all) {
-      const all =
-        typeof borderRadius.all === 'number'
-          ? getCSSMeasurementValue(borderRadius.all)
-          : borderRadius.all ?? 'initial';
+    ${borderRadius &&
+    borderRadius.bottomRight &&
+    css`
+      border-bottom-right-radius: ${getCSSMeasurementValue(
+        borderRadius.bottomRight,
+      )};
+    `};
 
-      return all;
-    }
+    ${borderRadius &&
+    borderRadius.topLeft &&
+    css`
+      border-top-left-radius: ${getCSSMeasurementValue(borderRadius.topLeft)};
+    `};
 
-    const topLeft =
-      typeof borderRadius.topLeft === 'number'
-        ? getCSSMeasurementValue(borderRadius.topLeft)
-        : borderRadius.topLeft ?? 'initial';
-    const topRight =
-      typeof borderRadius.topRight === 'number'
-        ? getCSSMeasurementValue(borderRadius.topRight)
-        : borderRadius.topRight ?? 'initial';
-    const bottomRight =
-      typeof borderRadius.bottomRight === 'number'
-        ? getCSSMeasurementValue(borderRadius.bottomRight)
-        : borderRadius.bottomRight ?? 'initial';
-    const bottomLeft =
-      typeof borderRadius.bottomLeft === 'number'
-        ? getCSSMeasurementValue(borderRadius.bottomLeft)
-        : borderRadius.bottomLeft ?? 'initial';
-
-    return `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`;
-  }
+    ${borderRadius &&
+    borderRadius.topRight &&
+    css`
+      border-top-right-radius: ${getCSSMeasurementValue(borderRadius.topRight)};
+    `};
+  `;
 }
 
 export const BorderRadiusStyles = css<{ readonly borderRadius?: BorderRadius }>`
   ${props =>
     props.borderRadius &&
     css`
-      border-radius: ${getBorderRadiusValue(props.borderRadius)};
+      ${getBorderRadiusValue(props.borderRadius)};
     `};
 `;
 

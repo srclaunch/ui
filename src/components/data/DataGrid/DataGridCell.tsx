@@ -48,7 +48,6 @@ export const DataGridCell = memo(
           vertical: AlignVertical.Center,
         }}
         as={as}
-        overflow={Overflow.Hidden}
         padding={{
           left: Amount.Less,
           right: Amount.Less,
@@ -61,7 +60,7 @@ export const DataGridCell = memo(
           model,
           props: {
             alignment,
-            overflow: Overflow.Hidden,
+
             textColor,
             textOverflow,
             textSize,
