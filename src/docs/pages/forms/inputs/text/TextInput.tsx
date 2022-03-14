@@ -1,3 +1,4 @@
+import { Condition } from '@srclaunch/types';
 import { memo, ReactElement } from 'react';
 
 import {
@@ -20,6 +21,14 @@ export const TextInputPage = memo((): ReactElement => {
       <InputRow>
         <InputLabel>Example</InputLabel>
         <TextInput onChange={() => {}} />
+      </InputRow>
+
+      <InputRow>
+        <InputLabel>Required</InputLabel>
+        <TextInput
+          onChange={() => {}}
+          validation={{ [Condition.IsRequired]: true }}
+        />
       </InputRow>
     </Workspace>
   );
