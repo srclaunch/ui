@@ -31953,6 +31953,8 @@ const Page = memo((_La) => {
   useTitle(title);
   const PageComp = () => /* @__PURE__ */ jsxs$1(Container$d, __spreadProps(__spreadValues({
     alignment: __spreadValues({
+      fill: Fill.Both,
+      overflow: Overflow.ScrollVertical,
       vertical: AlignVertical.Top
     }, alignment),
     background: __spreadValues({
@@ -33705,13 +33707,14 @@ const Workspace = memo((_$a) => {
   }) : header.title : null;
   const WorkspaceComp = (props2) => /* @__PURE__ */ jsxs$1(Container$d, __spreadProps(__spreadValues(__spreadValues({
     alignment: __spreadValues({
+      fill: Fill.Both,
+      overflow: Overflow.ScrollVertical,
       vertical: AlignVertical.Top
     }, alignment),
     background: __spreadValues({
       color: BackgroundColors.Workspace
     }, background),
     className: `${className} workspace`,
-    overflow: Overflow.ScrollVertical,
     padding: __spreadValues({
       all: Amount.Most
     }, padding)

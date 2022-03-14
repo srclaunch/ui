@@ -1,7 +1,7 @@
 import { useTitle } from '@srclaunch/react-hooks';
 import { cloneElement, ElementType, memo, ReactElement } from 'react';
 
-import { AlignVertical, BackgroundColors } from '../../types';
+import { AlignVertical, BackgroundColors, Fill, Overflow } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 
@@ -27,7 +27,12 @@ export const Page = memo(
 
     const PageComp = () => (
       <Container
-        alignment={{ vertical: AlignVertical.Top, ...alignment }}
+        alignment={{
+          fill: Fill.Both,
+          overflow: Overflow.ScrollVertical,
+          vertical: AlignVertical.Top,
+          ...alignment,
+        }}
         background={{ color: BackgroundColors.Page, ...background }}
         className={`${className} page`}
         {...props}

@@ -52,10 +52,14 @@ export const Workspace = memo(
 
     const WorkspaceComp = (props2: any) => (
       <Container
-        alignment={{ vertical: AlignVertical.Top, ...alignment }}
+        alignment={{
+          fill: Fill.Both,
+          overflow: Overflow.ScrollVertical,
+          vertical: AlignVertical.Top,
+          ...alignment,
+        }}
         background={{ color: BackgroundColors.Workspace, ...background }}
         className={`${className} workspace`}
-        overflow={Overflow.ScrollVertical}
         padding={{ all: Amount.Most, ...padding }}
         {...props}
         {...props2}
