@@ -26,7 +26,7 @@ export default defineConfig(({ command, mode }) => {
             // '@srclaunch/react-hooks',
             // '@srclaunch/themes','
             // 'aws-sdk',
-            // '@srclaunch/web-application-state',
+            '@srclaunch/web-application-state',
             // '@srclaunch/transform',
             // '@srclaunch/types',
             // '@srclaunch/web-application-state',
@@ -53,7 +53,13 @@ export default defineConfig(({ command, mode }) => {
         },
       },
       optimizeDeps: {
-        exclude: ['react', 'react-dom', 'styled-components'],
+        exclude: [
+          'react',
+          'react-dom',
+          'styled-components',
+          '@vite/client',
+          '@vite/env',
+        ],
         include: [],
       },
       define: {
