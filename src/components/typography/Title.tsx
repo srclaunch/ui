@@ -12,7 +12,6 @@ export const Title = memo(
     children,
     className = '',
     lineHeight = Sizes.Small,
-    margin = {},
     textSize = TextSize.Larger,
     textColor = TextColors.Title,
     textWeight = TextWeight.Most,
@@ -24,7 +23,6 @@ export const Title = memo(
         className={`${className} title`}
         textColor={textColor}
         lineHeight={lineHeight}
-        margin={{ bottom: Amount.Less, ...margin }}
         textSize={textSize}
         textWeight={textWeight}
         {...props}

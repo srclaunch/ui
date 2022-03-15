@@ -23683,7 +23683,6 @@ const Title = memo((_y) => {
     children,
     className = "",
     lineHeight = Sizes.Small,
-    margin = {},
     textSize = TextSize.Larger,
     textColor = TextColors.Title,
     textWeight = TextWeight.Most
@@ -23692,7 +23691,6 @@ const Title = memo((_y) => {
     "children",
     "className",
     "lineHeight",
-    "margin",
     "textSize",
     "textColor",
     "textWeight"
@@ -23702,9 +23700,6 @@ const Title = memo((_y) => {
     className: `${className} title`,
     textColor,
     lineHeight,
-    margin: __spreadValues({
-      bottom: Amount.Less
-    }, margin),
     textSize,
     textWeight
   }, props), {
@@ -33645,10 +33640,6 @@ const SubTitle = memo((_Za) => {
     children,
     className = "",
     lineHeight = Sizes.Small,
-    margin = {
-      bottom: Amount.More,
-      top: Amount.Default
-    },
     textSize = TextSize.Large,
     textColor = TextColors.SubTitle,
     textWeight = TextWeight.More
@@ -33657,7 +33648,6 @@ const SubTitle = memo((_Za) => {
     "children",
     "className",
     "lineHeight",
-    "margin",
     "textSize",
     "textColor",
     "textWeight"
@@ -33667,7 +33657,6 @@ const SubTitle = memo((_Za) => {
     className: `${className} title`,
     lineHeight,
     lineWrap: false,
-    margin,
     textWeight,
     textColor,
     textSize
@@ -33700,9 +33689,6 @@ const Workspace = memo((_$a) => {
     "title"
   ]);
   useTitle(title);
-  const headerTitle = (header == null ? void 0 : header.title) ? typeof header.title === "string" ? /* @__PURE__ */ jsx$1(Title, {
-    children: header.title
-  }) : header.title : null;
   const WorkspaceComp = (props2) => /* @__PURE__ */ jsxs$1(Container$d, __spreadProps(__spreadValues(__spreadValues({
     alignment: __spreadValues({
       fill: Fill.Both,
@@ -33717,9 +33703,10 @@ const Workspace = memo((_$a) => {
       all: Amount.Most
     }, padding)
   }, props), props2), {
-    children: [((header == null ? void 0 : header.title) || (header == null ? void 0 : header.actions)) && /* @__PURE__ */ jsxs$1(Container$d, {
+    children: [/* @__PURE__ */ jsx$1(LoadingOverlay, {
+      visible: loading
+    }), ((header == null ? void 0 : header.title) || (header == null ? void 0 : header.actions)) && /* @__PURE__ */ jsxs$1(Container$d, {
       alignment: {
-        fill: Fill.Both,
         orientation: Orientation.Horizontal,
         vertical: AlignVertical.Center
       },
@@ -33733,11 +33720,14 @@ const Workspace = memo((_$a) => {
             vertical: AlignVertical.Center
           },
           className: "workspace-title",
-          children: headerTitle
+          children: (header == null ? void 0 : header.title) && (typeof header.title === "string" ? /* @__PURE__ */ jsx$1(Title, {
+            children: header.title
+          }) : header.title)
         }), /* @__PURE__ */ jsx$1(Container$d, {
           className: "workspace-sub-title",
           alignment: {
-            orientation: Orientation.Horizontal
+            orientation: Orientation.Horizontal,
+            vertical: AlignVertical.Center
           },
           children: (header == null ? void 0 : header.subTitle) && /* @__PURE__ */ jsx$1(SubTitle, {
             children: header.subTitle
@@ -33751,8 +33741,6 @@ const Workspace = memo((_$a) => {
         className: "workspace-actions",
         children: header.actions
       })]
-    }), /* @__PURE__ */ jsx$1(LoadingOverlay, {
-      visible: loading
     }), children]
   }));
   const Child = () => Layout ? cloneElement(/* @__PURE__ */ jsx$1(Layout, __spreadValues({

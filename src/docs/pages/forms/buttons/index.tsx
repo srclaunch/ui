@@ -9,6 +9,7 @@ import {
   Heading,
   Icon,
   NavigationLink,
+  Sizes,
   TextColors,
   TextDecorationLine,
   TextSize,
@@ -48,7 +49,7 @@ export const ButtonsPage = memo((): ReactElement => {
             <Icon
               name={DualLightIcons.ChevronDoubleForward}
               margin={{ left: Amount.Less, right: Amount.Less }}
-              // size={Size.Smaller}
+              size={{ height: Sizes.Small, width: Sizes.Small }}
             />
 
             <Title textSize={TextSize.Larger} textWeight={TextWeight.Most}>

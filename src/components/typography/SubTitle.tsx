@@ -11,10 +11,7 @@ export const SubTitle = memo(
     children,
     className = '',
     lineHeight = Sizes.Small,
-    margin = {
-      bottom: Amount.More,
-      top: Amount.Default,
-    },
+
     textSize = TextSize.Large,
     textColor = TextColors.SubTitle,
     textWeight = TextWeight.More,
@@ -26,7 +23,6 @@ export const SubTitle = memo(
         className={`${className} title`}
         lineHeight={lineHeight}
         lineWrap={false}
-        margin={margin}
         textWeight={textWeight}
         textColor={textColor}
         textSize={textSize}

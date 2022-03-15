@@ -42,14 +42,6 @@ export const Workspace = memo(
   }: WorkspaceProps): ReactElement => {
     useTitle(title);
 
-    const headerTitle = header?.title ? (
-      typeof header.title === 'string' ? (
-        <Title>{header.title}</Title>
-      ) : (
-        header.title
-      )
-    ) : null;
-
     const WorkspaceComp = (props2: any) => (
       <Container
         alignment={{
@@ -64,10 +56,11 @@ export const Workspace = memo(
         {...props}
         {...props2}
       >
+        <LoadingOverlay visible={loading} />
+
         {(header?.title || header?.actions) && (
           <Container
             alignment={{
-              fill: Fill.Both,
               orientation: Orientation.Horizontal,
               vertical: AlignVertical.Center,
             }}
@@ -83,12 +76,18 @@ export const Workspace = memo(
                 }}
                 className="workspace-title"
               >
-                {headerTitle}
+                {header?.title &&
+                  (typeof header.title === 'string' ? (
+                    <Title>{header.title}</Title>
+                  ) : (
+                    header.title
+                  ))}
               </Container>
               <Container
                 className="workspace-sub-title"
                 alignment={{
                   orientation: Orientation.Horizontal,
+                  vertical: AlignVertical.Center,
                 }}
               >
                 {header?.subTitle && <SubTitle>{header.subTitle}</SubTitle>}
@@ -108,8 +107,6 @@ export const Workspace = memo(
             )}
           </Container>
         )}
-
-        <LoadingOverlay visible={loading} />
 
         {children}
       </Container>
