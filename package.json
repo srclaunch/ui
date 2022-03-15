@@ -3,7 +3,7 @@
   "description": "AppLab UI React component library",
   "author": "Steven Bennett <steven@srclaunch.com>",
   "license": "MIT",
-  "version": "0.1.128",
+  "version": "0.1.129",
   "engines": {
     "node": ">=16"
   },
