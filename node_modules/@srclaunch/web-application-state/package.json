@@ -3,7 +3,7 @@
   "description": "Redux state and utilities used by AppLab web applications",
   "author": "Steven Bennett <steven@srclaunch.com>",
   "license": "MIT",
-  "version": "0.1.51",
+  "version": "0.1.52",
   "engines": {
     "node": ">=16"
   },

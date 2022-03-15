@@ -113,7 +113,7 @@ export const Form = memo(
     return (
       <Container
         as="form"
-        borderRadius={{ all: Amount.More, ...borderRadius }}
+        borderRadius={borderRadius}
         className={`${className} form`}
         id={name}
         name={name}

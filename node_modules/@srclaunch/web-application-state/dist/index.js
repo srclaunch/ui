@@ -31363,7 +31363,7 @@ const refreshSession = () => async (dispatch, getState) => {
   try {
     dispatch(setLoginInProgress(true));
     const config2 = getState().app.config;
-    const AWS = global.AWS || {};
+    const AWS = window.AWS || {};
     AWS.config.update({
       region: config2.aws.region
     });

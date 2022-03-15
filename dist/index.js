@@ -30369,9 +30369,7 @@ const Form = memo((_ua) => {
   }, [fieldValues]);
   return /* @__PURE__ */ jsxs$1(Container$d, __spreadProps(__spreadValues({
     as: "form",
-    borderRadius: __spreadValues({
-      all: Amount.More
-    }, borderRadius),
+    borderRadius,
     className: `${className} form`,
     id: name2,
     name: name2,
