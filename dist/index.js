@@ -30981,6 +30981,10 @@ const LoginForm = memo((_Da) => {
         validation
       }) => {
         var _a3, _b;
+        console.log({
+          fields,
+          validation
+        });
         if (validation && validation.validated || !validation) {
           dispatch(login({
             password: (_a3 = fields.password) == null ? void 0 : _a3.value,

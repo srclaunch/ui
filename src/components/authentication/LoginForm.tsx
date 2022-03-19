@@ -169,6 +169,7 @@ export const LoginForm = memo(
           inProgress={inProgress}
           name="login-form"
           onSubmit={({ fields, validation }) => {
+            console.log({ fields, validation });
             if ((validation && validation.validated) || !validation) {
               dispatch(
                 login({
