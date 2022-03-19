@@ -58,7 +58,7 @@ export const EntityEditor = memo(
           inProgress={inProgress}
           model={model}
           name="entity-editor"
-          onSubmit={async ({ fields, problems, validated }) => {
+          onSubmit={async ({ fields, validation }) => {
             let fieldData = {};
 
             for (const [key, props] of Object.entries(fields)) {

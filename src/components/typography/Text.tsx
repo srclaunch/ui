@@ -13,11 +13,12 @@ import {
   TextSize,
   TextWeight,
 } from '../../types';
-import { TextStyles } from '../../styles/typography';
+import { getTextStyles, TextStyles } from '../../styles/typography';
 import {
   TextDecorationLine,
   TextDecorationStyle,
 } from '../../types/typography/text';
+import { getStatesStyles } from '../../styles/container/states';
 
 export type TextProps = PropsWithChildren<
   CommonComponentProps & {
@@ -44,7 +45,8 @@ export type TextProps = PropsWithChildren<
 };
 
 const Wrapper = styled.span<TextProps>`
-  ${TextStyles};
+  ${props => getTextStyles(props)}
+  ${props => getStatesStyles(props)}
 `;
 
 export const Text = memo(

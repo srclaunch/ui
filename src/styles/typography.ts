@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css, SimpleInterpolation } from 'styled-components';
 import { TextProps } from '../components/typography/Text';
 import {
   getCSSColorValue,
@@ -7,72 +7,111 @@ import {
 
 import { TextColors, TextSize } from '../types';
 
-export const TextStyles = css<TextProps>`
-  color: ${props => getCSSColorValue(props.textColor ?? TextColors.Default)};
-  display: inline-block;
-  font-size: ${props =>
-    getCSSMeasurementValue(props.textSize ?? TextSize.Default)};
-  transition: color 0.15s ease-in;
+/*
+    readonly bold?: boolean;
+    readonly cursor?: Cursor;
+    readonly italic?: boolean;
+    readonly lineHeight?: string | number;
+    readonly lineWrap?: boolean;
+    readonly textOverflow?: TextOverflow | string;
+    readonly selectable?: boolean;
+    readonly textAlign?: TextAlign | string;
+    readonly textColor?: TextColor;
+    readonly textDecoration?: {
+      readonly color?: TextColor | string;
+      readonly line?: TextDecorationLine | TextDecorationLine[];
+      readonly style?: TextDecorationStyle;
+      readonly thickness?: Amount | number;
+    };
+    readonly textSize?: TextSize | string | number;
+    readonly textWeight?: TextWeight | string;
+    */
 
-  ${props =>
-    props.cursor &&
+export const getTextStyles = (props: TextProps): SimpleInterpolation => {
+  const {
+    bold,
+    cursor,
+    italic,
+    lineHeight,
+    lineWrap,
+    textOverflow,
+    selectable,
+    textAlign,
+    textColor,
+    textDecoration,
+    textSize,
+    textWeight,
+  } = props;
+
+  return css`
+    color: ${getCSSColorValue(textColor ?? TextColors.Default)};
+    font-size: ${getCSSMeasurementValue(textSize ?? TextSize.Default)};
+
+    ${bold &&
     css`
-      cursor: ${props.cursor};
+      font-weight: bold;
     `};
 
-  ${props =>
-    props.textAlign &&
+    ${cursor &&
     css`
-      text-align: ${props.textAlign};
+      cursor: ${cursor};
     `};
 
-  ${props =>
-    props.textDecoration?.color &&
+    ${italic &&
     css`
-      text-decoration-color: ${getCSSColorValue(props.textDecoration?.color)};
+      font-style: italic;
     `};
 
-  ${props =>
-    props.textDecoration?.line &&
+    ${lineHeight &&
     css`
-      text-decoration-line: ${props.textDecoration?.line};
+      line-height: ${getCSSMeasurementValue(lineHeight ?? TextSize.Default)};
     `};
 
-  ${props =>
-    props.textDecoration?.style &&
+    ${lineWrap &&
     css`
-      text-decoration-style: ${props.textDecoration?.style};
+      white-space: nowrap;
     `};
 
-  ${props =>
-    props.textDecoration?.thickness &&
+    ${selectable &&
     css`
+      user-select: text;
+    `};
+
+    ${textAlign &&
+    css`
+      text-align: ${textAlign};
+    `};
+
+    ${textDecoration &&
+    css`
+      text-decoration: ${textDecoration.line ? textDecoration.line : 'none'};
+      text-decoration-color: ${getCSSColorValue(textDecoration.color)};
+      text-decoration-style: ${textDecoration.style
+        ? textDecoration.style
+        : 'solid'};
       text-decoration-thickness: ${getCSSMeasurementValue(
-        props.textDecoration?.thickness,
+        textDecoration.thickness,
       )};
     `};
 
-  ${props =>
-    props.lineHeight &&
+    ${textOverflow &&
     css`
-      line-height: ${getCSSMeasurementValue(props.lineHeight)};
+      text-overflow: ${textOverflow};
     `};
 
-  ${props =>
-    props.textOverflow &&
+    ${textWeight &&
     css`
-      text-overflow: ${props.textOverflow};
+      font-weight: ${textWeight};
     `};
 
-  ${props =>
-    !props.selectable &&
-    css`
-      user-select: none;
-    `};
+    transition: color 0.13s ease-in-out, font-size 0.13s ease-in-out,
+      font-weight 0.13s ease-in-out, text-decoration 0.13s ease-in-out,
+      text-decoration-color 0.13s ease-in-out,
+      text-decoration-style 0.13s ease-in-out,
+      text-decoration-thickness 0.13s ease-in-out;
+  `;
+};
 
-  ${props =>
-    props.textWeight &&
-    css`
-      font-weight: ${props.textWeight};
-    `};
+export const TextStyles = css<TextProps>`
+  ${props => getTextStyles(props)};
 `;

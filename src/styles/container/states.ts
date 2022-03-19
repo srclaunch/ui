@@ -2,8 +2,12 @@ import { css, SimpleInterpolation } from 'styled-components';
 import { ContainerStyles, getContainerStyles } from './index';
 import { InteractionStates } from '../../types/states';
 import { ContainerProps } from '../../components/layout/Container';
+import { getTextStyles } from '../typography';
+import { TextProps } from '../../components/typography/Text';
 
-export function getStatesStyles(props: ContainerProps): SimpleInterpolation {
+export function getStatesStyles(
+  props: ContainerProps & TextProps,
+): SimpleInterpolation {
   const { states } = props;
 
   if (!states) {
@@ -24,35 +28,25 @@ export function getStatesStyles(props: ContainerProps): SimpleInterpolation {
     warning,
   } = states;
 
-  console.log('states', states);
-
   return css`
-    ${active &&
-    state?.active &&
-    css`
-      ${state?.active
-        ? getContainerStyles(active)
-        : css`
-            &:active {
-              ${getContainerStyles(active)};
-            }
-          `};
-    `};
-
     ${current &&
     state?.current &&
     css`
       ${getContainerStyles(current)};
+      ${getTextStyles(current)};
     `};
 
     ${disabled &&
-    state?.disabled &&
     css`
       ${state?.disabled
-        ? getContainerStyles(disabled)
+        ? css`
+            ${getContainerStyles(disabled)};
+            ${getTextStyles(disabled)};
+          `
         : css`
             &:disabled {
               ${getContainerStyles(disabled)};
+              ${getTextStyles(disabled)};
             }
           `};
     `};
@@ -61,27 +55,51 @@ export function getStatesStyles(props: ContainerProps): SimpleInterpolation {
     state?.error &&
     css`
       ${getContainerStyles(error)};
+      ${getTextStyles(error)};
     `};
 
     ${focused &&
-    state?.focused &&
     css`
       ${state?.focused
-        ? getContainerStyles(focused)
+        ? css`
+            ${getContainerStyles(focused)};
+            ${getTextStyles(focused)};
+          `
         : css`
             &:focus {
               ${getContainerStyles(focused)};
+              ${getTextStyles(focused)};
             }
           `};
     `};
 
     ${hovered &&
+    !state?.active &&
     css`
       ${state?.hovered
-        ? getContainerStyles(hovered)
+        ? css`
+            ${getContainerStyles(hovered)};
+            ${getTextStyles(hovered)};
+          `
         : css`
             &:hover {
-              ${getContainerStyles({ ...props, ...hovered })};
+              ${getContainerStyles(hovered)};
+              ${getTextStyles(hovered)};
+            }
+          `};
+    `};
+
+    ${active &&
+    css`
+      ${state?.active
+        ? css`
+            ${getContainerStyles(active)};
+            ${getTextStyles(active)};
+          `
+        : css`
+            &::active {
+              ${getContainerStyles(active)};
+              ${getTextStyles(active)};
             }
           `};
     `};
@@ -90,28 +108,32 @@ export function getStatesStyles(props: ContainerProps): SimpleInterpolation {
     state?.loading &&
     css`
       ${getContainerStyles(loading)};
+      ${getTextStyles(loading)};
     `};
 
     ${success &&
     state?.success &&
     css`
       ${getContainerStyles(success)};
+      ${getTextStyles(success)};
     `};
 
     ${visible &&
     state?.visible &&
     css`
       ${getContainerStyles(visible)};
+      ${getTextStyles(visible)};
     `};
 
     ${warning &&
     state?.warning &&
     css`
       ${getContainerStyles(warning)};
+      ${getTextStyles(warning)};
     `};
   `;
 }
 
-export const StateStyles = css<ContainerProps>`
+export const StateStyles = css<ContainerProps & TextProps>`
   ${props => getStatesStyles(props)};
 `;

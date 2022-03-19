@@ -25,13 +25,14 @@ export type LabelProps = ContainerProps &
 export const Label = memo(
   ({
     alignment = {},
-    as = 'label',
+    as = 'span',
     children,
     className = '',
     icon,
     lineHeight = Sizes.Default,
     lineWrap = false,
     selectable = true,
+    states = {},
     textColor = TextColors.Default,
     textOverflow = TextOverflow.Ellipsis,
     textSize = TextSize.Default,
@@ -47,6 +48,7 @@ export const Label = memo(
         }}
         as={as}
         className={`${className} label`}
+        states={states}
         {...props}
       >
         {icon &&
@@ -59,8 +61,9 @@ export const Label = memo(
           )}
 
         <Text
-          selectable={selectable}
           lineHeight={lineHeight}
+          selectable={selectable}
+          states={states}
           textColor={textColor}
           textOverflow={textOverflow}
           textSize={textSize}

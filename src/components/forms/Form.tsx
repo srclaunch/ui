@@ -22,27 +22,29 @@ type FormProps = {
   readonly name: string;
   readonly onChange?: ({
     fields,
-    validated,
-    problems,
+    validation,
   }: {
     readonly fields: {
       readonly [name: string]: FormField;
     };
-    readonly validated?: boolean;
-    readonly problems?: readonly ValidationProblem[];
+    readonly validation?: {
+      readonly validated?: boolean;
+      readonly problems?: readonly ValidationProblem[];
+    };
   }) => unknown;
   readonly onSubmit?: ({
     fields,
-    validated,
+    validation,
     values,
-    problems,
   }: {
     readonly fields: {
       readonly [name: string]: FormField;
     };
-    readonly validated?: boolean;
+    readonly validation?: {
+      readonly problems?: readonly ValidationProblem[];
+      readonly validated?: boolean;
+    };
     readonly values?: { readonly [name: string]: unknown };
-    readonly problems?: readonly ValidationProblem[];
   }) => unknown;
   readonly padding?: Amount;
   readonly submitButton?:
@@ -107,7 +109,8 @@ export const Form = memo(
 
       setValidated(validated);
 
-      if (onChange) onChange({ fields: fieldValues, problems, validated });
+      if (onChange)
+        onChange({ fields: fieldValues, validation: { problems, validated } });
     }, [fieldValues]);
 
     return (
@@ -137,8 +140,10 @@ export const Form = memo(
                     if (e.key === 'Enter' && onSubmit)
                       onSubmit({
                         fields: fieldValues,
-                        problems: validationProblems,
-                        validated: isValidated,
+                        validation: {
+                          problems: validationProblems,
+                          validated: isValidated,
+                        },
                       });
                   },
                 },
@@ -149,8 +154,10 @@ export const Form = memo(
                     if (onSubmit)
                       onSubmit({
                         fields: fieldValues,
-                        problems: validationProblems,
-                        validated: isValidated,
+                        validation: {
+                          problems: validationProblems,
+                          validated: isValidated,
+                        },
                         values: Object.entries(fieldValues).map(
                           ([fieldName, field]) => ({
                             [fieldName]: field.value,

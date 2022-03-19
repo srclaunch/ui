@@ -4,7 +4,11 @@ import { Cursor } from '../../types';
 
 export function getCursorStyles(cursor?: Cursor): SimpleInterpolation {
   return css`
-    cursor: ${cursor ?? 'inherit'};
+    ${cursor &&
+    css`
+      cursor: ${cursor};
+    `};
+    /* cursor: ${cursor ?? 'inherit'}; */
   `;
 }
 

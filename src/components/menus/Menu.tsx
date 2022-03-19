@@ -13,7 +13,6 @@ import { MenuItem, MenuItemProps } from './MenuItem';
 export type MenuProps = ContainerProps & {
   readonly onItemClick?: (item: MenuItemProps) => void;
   readonly menu?: readonly MenuItemProps[];
-  readonly menuItemProps?: MenuItemProps;
 };
 
 export const Menu = memo(
@@ -23,7 +22,6 @@ export const Menu = memo(
     borderRadius = {},
     className = '',
     menu,
-    menuItemProps = {},
     events = {},
     onItemClick,
     padding = {},
@@ -89,7 +87,6 @@ export const Menu = memo(
                   },
                 }}
                 textSize={TextSize.Small}
-                {...menuItemProps}
                 {...item}
               />
             );

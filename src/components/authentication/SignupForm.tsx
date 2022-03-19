@@ -166,8 +166,8 @@ export const SignupForm = memo(
           ]}
           inProgress={inProgress}
           name="signup-form"
-          onSubmit={({ fields, validated }) => {
-            if (validated)
+          onSubmit={({ fields, validation }) => {
+            if ((validation && validation.validated) || !validation)
               dispatch(
                 signUp({
                   firstName: fields.firstName?.value as string,

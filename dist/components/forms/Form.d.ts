@@ -17,22 +17,26 @@ declare type FormProps = {
     readonly inProgress?: boolean;
     readonly model?: Model;
     readonly name: string;
-    readonly onChange?: ({ fields, validated, problems, }: {
+    readonly onChange?: ({ fields, validation, }: {
         readonly fields: {
             readonly [name: string]: FormField;
         };
-        readonly validated?: boolean;
-        readonly problems?: readonly ValidationProblem[];
+        readonly validation?: {
+            readonly validated?: boolean;
+            readonly problems?: readonly ValidationProblem[];
+        };
     }) => unknown;
-    readonly onSubmit?: ({ fields, validated, values, problems, }: {
+    readonly onSubmit?: ({ fields, validation, values, }: {
         readonly fields: {
             readonly [name: string]: FormField;
         };
-        readonly validated?: boolean;
+        readonly validation?: {
+            readonly problems?: readonly ValidationProblem[];
+            readonly validated?: boolean;
+        };
         readonly values?: {
             readonly [name: string]: unknown;
         };
-        readonly problems?: readonly ValidationProblem[];
     }) => unknown;
     readonly padding?: Amount;
     readonly submitButton?: ({

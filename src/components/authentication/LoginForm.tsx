@@ -168,22 +168,15 @@ export const LoginForm = memo(
           ]}
           inProgress={inProgress}
           name="login-form"
-          onSubmit={({
-            fields,
-            validated,
-          }: {
-            fields: { [field: string]: FormField };
-            validated?: boolean;
-          }) => {
-            console.log('fields', fields);
-
-            if (validated)
+          onSubmit={({ fields, validation }) => {
+            if ((validation && validation.validated) || !validation) {
               dispatch(
                 login({
                   password: fields.password?.value as string,
                   username: fields.username?.value as string,
                 }),
               );
+            }
           }}
           submitButton={{
             alignment: {

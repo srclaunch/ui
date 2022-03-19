@@ -115,9 +115,10 @@ export const ForgotPasswordForm = memo(
             },
           ]}
           inProgress={inProgress}
-          onSubmit={({ fields, validated }) => {
-            // @ts-ignore
-            if (validated) startPasswordReset(fields.emailAddress.value);
+          onSubmit={({ fields, validation }) => {
+            if ((validation && validation.validated) || !validation) {
+              startPasswordReset(fields.emailAddress?.value as string);
+            }
           }}
           submitButton={{
             label: 'Send instructions',

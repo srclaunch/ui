@@ -20653,7 +20653,7 @@ function getBorderRadiusStyles(borderRadius) {
 }
 const BorderRadiusStyles = css$2(["", ";"], (props) => getBorderRadiusStyles(props.borderRadius));
 function getCursorStyles(cursor) {
-  return css$2(["cursor:", ";"], cursor != null ? cursor : "inherit");
+  return css$2(["", ";"], cursor && css$2(["cursor:", ";"], cursor));
 }
 css$2(["", ";"], (props) => getCursorStyles(props.cursor));
 function getZIndexValue(depth) {
@@ -20751,6 +20751,24 @@ const getContainerStyles = (props) => {
   return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:opacity 0.13s ease-in-out,background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,transform 0.13s ease-in-out;"], getAlignmentStyles(props.alignment), getAnimationStyles(props.animations), getBackgroundStyles(props.background), getBorderStyles(props.border), getBorderRadiusStyles(props.borderRadius), getCursorStyles(props.cursor), getDepthStyles(props.depth), getEventStyles(props.events), getMarginStyles(props.margin), getPaddingStyles(props.padding), getPositionStyles(props.position), getShadowStyles(props.shadow), getSizeStyles(props.size), getVisibilityStyles(props.visibility));
 };
 const ContainerStyles = css$2(["", ";"], (props) => getContainerStyles(props));
+const getTextStyles = (props) => {
+  const {
+    bold,
+    cursor,
+    italic,
+    lineHeight,
+    lineWrap,
+    textOverflow,
+    selectable,
+    textAlign,
+    textColor,
+    textDecoration,
+    textSize,
+    textWeight
+  } = props;
+  return css$2(["color:", ";font-size:", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:color 0.13s ease-in-out,font-size 0.13s ease-in-out,font-weight 0.13s ease-in-out,text-decoration 0.13s ease-in-out,text-decoration-color 0.13s ease-in-out,text-decoration-style 0.13s ease-in-out,text-decoration-thickness 0.13s ease-in-out;"], getCSSColorValue(textColor != null ? textColor : TextColors.Default), getCSSMeasurementValue(textSize != null ? textSize : TextSize.Default), bold && css$2(["font-weight:bold;"]), cursor && css$2(["cursor:", ";"], cursor), italic && css$2(["font-style:italic;"]), lineHeight && css$2(["line-height:", ";"], getCSSMeasurementValue(lineHeight != null ? lineHeight : TextSize.Default)), lineWrap && css$2(["white-space:nowrap;"]), selectable && css$2(["user-select:text;"]), textAlign && css$2(["text-align:", ";"], textAlign), textDecoration && css$2(["text-decoration:", ";text-decoration-color:", ";text-decoration-style:", ";text-decoration-thickness:", ";"], textDecoration.line ? textDecoration.line : "none", getCSSColorValue(textDecoration.color), textDecoration.style ? textDecoration.style : "solid", getCSSMeasurementValue(textDecoration.thickness)), textOverflow && css$2(["text-overflow:", ";"], textOverflow), textWeight && css$2(["font-weight:", ";"], textWeight));
+};
+const TextStyles = css$2(["", ";"], (props) => getTextStyles(props));
 function getStatesStyles(props) {
   const {
     states
@@ -20771,8 +20789,7 @@ function getStatesStyles(props) {
     visible,
     warning
   } = states;
-  console.log("states", states);
-  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";"], active && (state == null ? void 0 : state.active) && css$2(["", ";"], (state == null ? void 0 : state.active) ? getContainerStyles(active) : css$2(["&:active{", ";}"], getContainerStyles(active))), current && (state == null ? void 0 : state.current) && css$2(["", ";"], getContainerStyles(current)), disabled && (state == null ? void 0 : state.disabled) && css$2(["", ";"], (state == null ? void 0 : state.disabled) ? getContainerStyles(disabled) : css$2(["&:disabled{", ";}"], getContainerStyles(disabled))), error && (state == null ? void 0 : state.error) && css$2(["", ";"], getContainerStyles(error)), focused && (state == null ? void 0 : state.focused) && css$2(["", ";"], (state == null ? void 0 : state.focused) ? getContainerStyles(focused) : css$2(["&:focus{", ";}"], getContainerStyles(focused))), hovered && css$2(["", ";"], (state == null ? void 0 : state.hovered) ? getContainerStyles(hovered) : css$2(["&:hover{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, props), hovered)))), loading && (state == null ? void 0 : state.loading) && css$2(["", ";"], getContainerStyles(loading)), success && (state == null ? void 0 : state.success) && css$2(["", ";"], getContainerStyles(success)), visible && (state == null ? void 0 : state.visible) && css$2(["", ";"], getContainerStyles(visible)), warning && (state == null ? void 0 : state.warning) && css$2(["", ";"], getContainerStyles(warning)));
+  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";"], current && (state == null ? void 0 : state.current) && css$2(["", ";", ";"], getContainerStyles(current), getTextStyles(current)), disabled && css$2(["", ";"], (state == null ? void 0 : state.disabled) ? css$2(["", ";", ";"], getContainerStyles(disabled), getTextStyles(disabled)) : css$2(["&:disabled{", ";", ";}"], getContainerStyles(disabled), getTextStyles(disabled))), error && (state == null ? void 0 : state.error) && css$2(["", ";", ";"], getContainerStyles(error), getTextStyles(error)), focused && css$2(["", ";"], (state == null ? void 0 : state.focused) ? css$2(["", ";", ";"], getContainerStyles(focused), getTextStyles(focused)) : css$2(["&:focus{", ";", ";}"], getContainerStyles(focused), getTextStyles(focused))), hovered && !(state == null ? void 0 : state.active) && css$2(["", ";"], (state == null ? void 0 : state.hovered) ? css$2(["", ";", ";"], getContainerStyles(hovered), getTextStyles(hovered)) : css$2(["&:hover{", ";", ";}"], getContainerStyles(hovered), getTextStyles(hovered))), active && css$2(["", ";"], (state == null ? void 0 : state.active) ? css$2(["", ";", ";"], getContainerStyles(active), getTextStyles(active)) : css$2(["&::active{", ";", ";}"], getContainerStyles(active), getTextStyles(active))), loading && (state == null ? void 0 : state.loading) && css$2(["", ";", ";"], getContainerStyles(loading), getTextStyles(loading)), success && (state == null ? void 0 : state.success) && css$2(["", ";", ";"], getContainerStyles(success), getTextStyles(success)), visible && (state == null ? void 0 : state.visible) && css$2(["", ";", ";"], getContainerStyles(visible), getTextStyles(visible)), warning && (state == null ? void 0 : state.warning) && css$2(["", ";", ";"], getContainerStyles(warning), getTextStyles(warning)));
 }
 const StateStyles = css$2(["", ";"], (props) => getStatesStyles(props));
 function getEventHandlers(events) {
@@ -21028,29 +21045,10 @@ const Icon = memo((_e2) => {
   }
   return /* @__PURE__ */ jsx$2(Fragment, {});
 });
-const TextStyles = css$2(["color:", ";display:inline-block;font-size:", ";transition:color 0.15s ease-in;", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";"], (props) => {
-  var _a2;
-  return getCSSColorValue((_a2 = props.textColor) != null ? _a2 : TextColors.Default);
-}, (props) => {
-  var _a2;
-  return getCSSMeasurementValue((_a2 = props.textSize) != null ? _a2 : TextSize.Default);
-}, (props) => props.cursor && css$2(["cursor:", ";"], props.cursor), (props) => props.textAlign && css$2(["text-align:", ";"], props.textAlign), (props) => {
-  var _a2, _b;
-  return ((_a2 = props.textDecoration) == null ? void 0 : _a2.color) && css$2(["text-decoration-color:", ";"], getCSSColorValue((_b = props.textDecoration) == null ? void 0 : _b.color));
-}, (props) => {
-  var _a2, _b;
-  return ((_a2 = props.textDecoration) == null ? void 0 : _a2.line) && css$2(["text-decoration-line:", ";"], (_b = props.textDecoration) == null ? void 0 : _b.line);
-}, (props) => {
-  var _a2, _b;
-  return ((_a2 = props.textDecoration) == null ? void 0 : _a2.style) && css$2(["text-decoration-style:", ";"], (_b = props.textDecoration) == null ? void 0 : _b.style);
-}, (props) => {
-  var _a2, _b;
-  return ((_a2 = props.textDecoration) == null ? void 0 : _a2.thickness) && css$2(["text-decoration-thickness:", ";"], getCSSMeasurementValue((_b = props.textDecoration) == null ? void 0 : _b.thickness));
-}, (props) => props.lineHeight && css$2(["line-height:", ";"], getCSSMeasurementValue(props.lineHeight)), (props) => props.textOverflow && css$2(["text-overflow:", ";"], props.textOverflow), (props) => !props.selectable && css$2(["user-select:none;"]), (props) => props.textWeight && css$2(["font-weight:", ";"], props.textWeight));
 const Wrapper$1 = styled.span.withConfig({
   displayName: "Wrapper",
   componentId: "sc-196umx6-0"
-})(["", ";"], TextStyles);
+})(["", " ", ""], (props) => getTextStyles(props), (props) => getStatesStyles(props));
 const Text = memo((_g) => {
   var _h = _g, {
     as = "span",
@@ -21094,13 +21092,14 @@ const Text = memo((_g) => {
 const Label = memo((_i2) => {
   var _j = _i2, {
     alignment = {},
-    as = "label",
+    as = "span",
     children,
     className = "",
     icon: icon2,
     lineHeight = Sizes.Default,
     lineWrap = false,
     selectable = true,
+    states = {},
     textColor = TextColors.Default,
     textOverflow = TextOverflow.Ellipsis,
     textSize = TextSize.Default,
@@ -21114,6 +21113,7 @@ const Label = memo((_i2) => {
     "lineHeight",
     "lineWrap",
     "selectable",
+    "states",
     "textColor",
     "textOverflow",
     "textSize",
@@ -21125,15 +21125,17 @@ const Label = memo((_i2) => {
       vertical: AlignVertical.Top
     }, alignment),
     as,
-    className: `${className} label`
+    className: `${className} label`,
+    states
   }, props), {
     children: [icon2 && (icon2.component || icon2.name || icon2.path || icon2.url || icon2.svg) && /* @__PURE__ */ jsx$2(Icon, __spreadValues({
       margin: __spreadValues({
         right: Amount.Least
       }, icon2.margin)
     }, icon2)), /* @__PURE__ */ jsx$2(Text, {
-      selectable,
       lineHeight,
+      selectable,
+      states,
       textColor,
       textOverflow,
       textSize,
@@ -21198,6 +21200,7 @@ const Button$1 = memo((_k) => {
     "textWeight",
     "type"
   ]);
+  var _a2, _b;
   const getColors = () => {
     if (!type)
       return {
@@ -21290,17 +21293,20 @@ const Button$1 = memo((_k) => {
     states: __spreadValues({
       active: {
         background: {
+          color: (_a2 = background == null ? void 0 : background.color) != null ? _a2 : colors == null ? void 0 : colors.backgroundColor,
           opacity: 80
         }
       },
       hovered: {
         background: {
-          opacity: 20
+          color: (_b = background == null ? void 0 : background.color) != null ? _b : colors == null ? void 0 : colors.backgroundColor,
+          opacity: 90
         }
       }
     }, states)
   }, props), {
     children: typeof children === "string" ? /* @__PURE__ */ jsx$2(Label, {
+      cursor,
       icon: icon2,
       lineHeight,
       textAlign,
@@ -26912,10 +26918,11 @@ const NavigationLink = memo((_V) => {
     activeClassName = "active",
     alignment = {},
     as = "span",
-    background,
+    background = {},
     borderRadius = {},
     children,
     className = "",
+    cursor = Cursor.Pointer,
     events = {},
     inline = false,
     label,
@@ -26939,6 +26946,7 @@ const NavigationLink = memo((_V) => {
     "borderRadius",
     "children",
     "className",
+    "cursor",
     "events",
     "inline",
     "label",
@@ -26955,10 +26963,6 @@ const NavigationLink = memo((_V) => {
     "textWeight",
     "to"
   ]);
-  const [focused, setFocused] = useState(false);
-  useState(false);
-  const [updatedBackgroundColor, setUpdatedBackgroundColor] = useState(background == null ? void 0 : background.color);
-  const [updatedTextColor, setUpdatedTextColor] = useState(textColor);
   const resolved = useResolvedPath(to);
   const match2 = useMatch({
     end: matchExactPath,
@@ -26967,47 +26971,47 @@ const NavigationLink = memo((_V) => {
   const location = useLocation();
   return /* @__PURE__ */ jsx$2(NavLink, {
     className: `${className} navigation-link`,
-    onBlur: () => setFocused(false),
-    onFocus: () => setFocused(true),
     rel,
     target,
     to: to + location.search,
     style: {
+      color: "unset",
       display: inline ? "inline-flex" : "flex",
-      textDecoration: "none"
+      textDecoration: "unset"
     },
-    children: /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+    children: /* @__PURE__ */ jsx$2(Container$9, {
       alignment: __spreadValues({
         horizontal: menu ? AlignHorizontal.Stretch : AlignHorizontal.Left,
         orientation: menu ? Orientation.Vertical : Orientation.Horizontal,
         vertical: AlignVertical.Center
       }, alignment),
       as,
-      background: {
-        color: updatedBackgroundColor
-      },
       borderRadius,
       className: `${className} ${match2 ? activeClassName : ""} link`,
+      cursor,
       margin,
       padding: __spreadValues({
         bottom: menu ? padding == null ? void 0 : padding.left : padding == null ? void 0 : padding.bottom
       }, padding),
-      states: {
+      states: __spreadValues({
         state: {
-          current: match2 ? true : false,
-          focused
+          active: match2 ? true : false
         }
-      }
-    }, props), {
-      children: label ? /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+      }, states),
+      children: label ? /* @__PURE__ */ jsx$2(Label, {
+        cursor,
         lineHeight,
-        textColor: updatedTextColor,
+        states: __spreadValues({
+          state: {
+            active: match2 ? true : false
+          }
+        }, states),
+        textColor,
         textSize,
-        textWeight
-      }, props), {
+        textWeight,
         children: label
-      })) : children
-    }))
+      }) : children
+    })
   });
 });
 const MenuItem = memo((_X) => {
@@ -27131,7 +27135,6 @@ const Menu = memo((_Z) => {
     borderRadius = {},
     className = "",
     menu,
-    menuItemProps = {},
     events = {},
     onItemClick,
     padding = {},
@@ -27142,7 +27145,6 @@ const Menu = memo((_Z) => {
     "borderRadius",
     "className",
     "menu",
-    "menuItemProps",
     "events",
     "onItemClick",
     "padding",
@@ -27166,7 +27168,7 @@ const Menu = memo((_Z) => {
     shadow
   }, props), {
     children: menu && menu.map((item, key) => {
-      return /* @__PURE__ */ jsx$2(MenuItem, __spreadValues(__spreadValues({
+      return /* @__PURE__ */ jsx$2(MenuItem, __spreadValues({
         events: {
           mouse: {
             onClick: () => {
@@ -27198,7 +27200,7 @@ const Menu = memo((_Z) => {
           }
         },
         textSize: TextSize.Small
-      }, menuItemProps), item), key);
+      }, item), key);
     })
   }));
 });
@@ -30629,8 +30631,10 @@ const Form = memo((_xa) => {
     if (onChange)
       onChange({
         fields: fieldValues,
-        problems,
-        validated
+        validation: {
+          problems,
+          validated
+        }
       });
   }, [fieldValues]);
   return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
@@ -30653,8 +30657,10 @@ const Form = memo((_xa) => {
               if (e2.key === "Enter" && onSubmit)
                 onSubmit({
                   fields: fieldValues,
-                  problems: validationProblems,
-                  validated: isValidated
+                  validation: {
+                    problems: validationProblems,
+                    validated: isValidated
+                  }
                 });
             }
           },
@@ -30664,8 +30670,10 @@ const Form = memo((_xa) => {
               if (onSubmit)
                 onSubmit({
                   fields: fieldValues,
-                  problems: validationProblems,
-                  validated: isValidated,
+                  validation: {
+                    problems: validationProblems,
+                    validated: isValidated
+                  },
                   values: Object.entries(fieldValues).map(([fieldName, field]) => ({
                     [fieldName]: field.value
                   }))
@@ -30808,10 +30816,12 @@ const ForgotPasswordForm = memo(({
       inProgress,
       onSubmit: ({
         fields,
-        validated
+        validation
       }) => {
-        if (validated)
-          startPasswordReset(fields.emailAddress.value);
+        var _a2;
+        if (validation && validation.validated || !validation) {
+          startPasswordReset((_a2 = fields.emailAddress) == null ? void 0 : _a2.value);
+        }
       },
       submitButton: {
         label: "Send instructions"
@@ -30968,15 +30978,15 @@ const LoginForm = memo((_Da) => {
       name: "login-form",
       onSubmit: ({
         fields,
-        validated
+        validation
       }) => {
         var _a3, _b;
-        console.log("fields", fields);
-        if (validated)
+        if (validation && validation.validated || !validation) {
           dispatch(login({
             password: (_a3 = fields.password) == null ? void 0 : _a3.value,
             username: (_b = fields.username) == null ? void 0 : _b.value
           }));
+        }
       },
       submitButton: {
         alignment: {
@@ -31138,10 +31148,10 @@ const SignupForm = memo(({
       name: "signup-form",
       onSubmit: ({
         fields,
-        validated
+        validation
       }) => {
         var _a3, _b, _c, _d;
-        if (validated)
+        if (validation && validation.validated || !validation)
           dispatch(signUp({
             firstName: (_a3 = fields.firstName) == null ? void 0 : _a3.value,
             lastName: (_b = fields.lastName) == null ? void 0 : _b.value,
@@ -33805,8 +33815,7 @@ const EntityEditor = memo(({
       name: "entity-editor",
       onSubmit: async ({
         fields,
-        problems,
-        validated
+        validation
       }) => {
         let fieldData = {};
         for (const [key, props] of Object.entries(fields)) {
@@ -51151,52 +51160,20 @@ const NavigationMenu = memo((_sc) => {
     alignment = {},
     background = {},
     className = "",
+    margin = {},
     matchExactPath = false,
     menu = [],
-    menuItemProps = {
-      alignment: {
-        fill: Fill.Horizontal
-      },
-      borderRadius: {
-        all: Amount.Least
-      },
-      lineHeight: Sizes.Default,
-      padding: {
-        bottom: Amount.Least,
-        left: Amount.Default,
-        right: Amount.Default,
-        top: Amount.Least
-      },
-      states: {
-        active: {
-          background: {
-            color: BackgroundColors.Primary
-          },
-          textColor: TextColors.PrimaryContrast
-        },
-        current: {},
-        hovered: {
-          background: {
-            color: BackgroundColors.Light
-          },
-          textColor: TextColors.Light
-        },
-        focused: {
-          textColor: TextColors.PrimaryContrast
-        }
-      },
-      textColor: TextColors.Default,
-      textSize: TextSize.Default
-    },
-    padding = {}
+    padding = {},
+    states = {}
   } = _tc, props = __objRest(_tc, [
     "alignment",
     "background",
     "className",
+    "margin",
     "matchExactPath",
     "menu",
-    "menuItemProps",
-    "padding"
+    "padding",
+    "states"
   ]);
   return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
     alignment: __spreadValues({
@@ -51213,23 +51190,51 @@ const NavigationMenu = memo((_sc) => {
     }, padding)
   }, props), {
     children: menu.map((item, key) => {
-      var _a2, _b, _c, _d, _e2, _f;
-      return /* @__PURE__ */ jsx$2(NavigationLink, __spreadValues({
-        borderRadius: (_b = (_a2 = menuItemProps.borderRadius) != null ? _a2 : item.borderRadius) != null ? _b : {
-          all: Amount.Default
+      var _a2, _b, _c, _d;
+      return /* @__PURE__ */ jsx$2(NavigationLink, {
+        alignment: {
+          fill: Fill.Horizontal
+        },
+        background: __spreadValues({
+          color: (_b = (_a2 = item == null ? void 0 : item.background) == null ? void 0 : _a2.color) != null ? _b : BackgroundColors.Transparent
+        }, background),
+        borderRadius: (_c = item.borderRadius) != null ? _c : {
+          all: Amount.Least
         },
         className: "navigation-menu-item",
         icon: item.icon,
         label: item.label,
-        margin: (_c = menuItemProps.margin) != null ? _c : {
+        lineHeight: Sizes.Large,
+        margin: __spreadValues({
           bottom: Amount.Least
-        },
-        padding: (_d = menuItemProps.padding) != null ? _d : {
-          all: Amount.None
-        },
-        textColor: (_e2 = menuItemProps.textColor) != null ? _e2 : TextColors.Default,
-        to: (_f = item.to) != null ? _f : "#"
-      }, menuItemProps), key);
+        }, margin),
+        padding: __spreadValues({
+          bottom: Amount.Least,
+          left: Amount.Default,
+          right: Amount.Default,
+          top: Amount.Least
+        }, padding),
+        states: __spreadValues({
+          active: {
+            background: {
+              color: BackgroundColors.Primary
+            },
+            textColor: TextColors.PrimaryContrast
+          },
+          focused: {
+            textColor: TextColors.PrimaryContrast
+          },
+          hovered: {
+            background: {
+              color: BackgroundColors.Light
+            },
+            textColor: TextColors.Light,
+            textSize: TextSize.Default
+          }
+        }, states),
+        textColor: TextColors.Default,
+        to: (_d = item.to) != null ? _d : "#"
+      }, key);
     })
   }));
 });

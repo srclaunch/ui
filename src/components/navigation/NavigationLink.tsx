@@ -10,6 +10,7 @@ import {
   AlignHorizontal,
   AlignVertical,
   Amount,
+  Cursor,
   LinkProps,
   Orientation,
   Size,
@@ -37,10 +38,11 @@ export const NavigationLink = memo(
     activeClassName = 'active',
     alignment = {},
     as = 'span',
-    background,
+    background = {},
     borderRadius = {},
     children,
     className = '',
+    cursor = Cursor.Pointer,
     events = {},
     inline = false,
     label,
@@ -58,13 +60,6 @@ export const NavigationLink = memo(
     to,
     ...props
   }: NavigationLinkProps): ReactElement => {
-    const [focused, setFocused] = useState(false);
-    const [hovered, setHovered] = useState(false);
-    const [updatedBackgroundColor, setUpdatedBackgroundColor] = useState(
-      background?.color,
-    );
-    const [updatedTextColor, setUpdatedTextColor] = useState(textColor);
-
     const resolved = useResolvedPath(to);
     const match = useMatch({ end: matchExactPath, path: resolved.pathname });
     const location = useLocation();
@@ -72,14 +67,13 @@ export const NavigationLink = memo(
     return (
       <NavLink
         className={`${className} navigation-link`}
-        onBlur={() => setFocused(false)}
-        onFocus={() => setFocused(true)}
         rel={rel}
         target={target}
         to={to + location.search}
         style={{
+          color: 'unset',
           display: inline ? 'inline-flex' : 'flex',
-          textDecoration: 'none',
+          textDecoration: 'unset',
         }}
       >
         <Container
@@ -90,9 +84,9 @@ export const NavigationLink = memo(
             ...alignment,
           }}
           as={as}
-          background={{ color: updatedBackgroundColor }}
           borderRadius={borderRadius}
           className={`${className} ${match ? activeClassName : ''} link`}
+          cursor={cursor}
           margin={margin}
           padding={{
             bottom: menu ? padding?.left : padding?.bottom,
@@ -108,19 +102,24 @@ export const NavigationLink = memo(
           // }}
           states={{
             state: {
-              current: match ? true : false,
-              focused,
+              active: match ? true : false,
             },
+            ...states,
           }}
-          {...props}
         >
           {label ? (
             <Label
+              cursor={cursor}
               lineHeight={lineHeight}
-              textColor={updatedTextColor}
+              states={{
+                state: {
+                  active: match ? true : false,
+                },
+                ...states,
+              }}
+              textColor={textColor}
               textSize={textSize}
               textWeight={textWeight}
-              {...props}
             >
               {label}
             </Label>

@@ -26,53 +26,11 @@ export const NavigationMenu = memo(
     alignment = {},
     background = {},
     className = '',
+    margin = {},
     matchExactPath = false,
     menu = [],
-    menuItemProps = {
-      alignment: {
-        fill: Fill.Horizontal,
-      },
-      borderRadius: {
-        all: Amount.Least,
-      },
-
-      lineHeight: Sizes.Default,
-      padding: {
-        bottom: Amount.Least,
-        left: Amount.Default,
-        right: Amount.Default,
-        top: Amount.Least,
-      },
-      states: {
-        active: {
-          background: {
-            color: BackgroundColors.Primary,
-          },
-          // shadow: {
-          //   radius: 5,
-          //   color: BackgroundColors.Primary,
-          //   offsetX: 0,
-          //   offsetY: 1,
-          //   opacity: 35,
-          //   spreadRadius: 3,
-          // },
-          textColor: TextColors.PrimaryContrast,
-        },
-        current: {},
-        hovered: {
-          background: {
-            color: BackgroundColors.Light,
-          },
-          textColor: TextColors.Light,
-        },
-        focused: {
-          textColor: TextColors.PrimaryContrast,
-        },
-      },
-      textColor: TextColors.Default,
-      textSize: TextSize.Default,
-    },
     padding = {},
+    states = {},
     ...props
   }: NavigationMenuProps): ReactElement => {
     return (
@@ -91,26 +49,59 @@ export const NavigationMenu = memo(
         {menu.map((item, key) => {
           return (
             <NavigationLink
-              // background={
-              //   {menuItemProps?.background ?? { color: BackgroundColors.Transparent }
-              // }
-              borderRadius={
-                menuItemProps.borderRadius ??
-                item.borderRadius ?? { all: Amount.Default }
-              }
+              alignment={{
+                fill: Fill.Horizontal,
+              }}
+              background={{
+                color: item?.background?.color ?? BackgroundColors.Transparent,
+                ...background,
+              }}
+              borderRadius={item.borderRadius ?? { all: Amount.Least }}
               className="navigation-menu-item"
               icon={item.icon}
               key={key}
               label={item.label}
-              margin={
-                menuItemProps.margin ?? {
-                  bottom: Amount.Least,
-                }
-              }
-              padding={menuItemProps.padding ?? { all: Amount.None }}
-              textColor={menuItemProps.textColor ?? TextColors.Default}
+              lineHeight={Sizes.Large}
+              margin={{
+                bottom: Amount.Least,
+                ...margin,
+              }}
+              padding={{
+                bottom: Amount.Least,
+                left: Amount.Default,
+                right: Amount.Default,
+                top: Amount.Least,
+                ...padding,
+              }}
+              states={{
+                active: {
+                  background: {
+                    color: BackgroundColors.Primary,
+                  },
+                  textColor: TextColors.PrimaryContrast,
+                  // shadow: {
+                  //   radius: 5,
+                  //   color: BackgroundColors.Primary,
+                  //   offsetX: 0,
+                  //   offsetY: 1,
+                  //   opacity: 35,
+                  //   spreadRadius: 3,
+                  // },
+                },
+                focused: {
+                  textColor: TextColors.PrimaryContrast,
+                },
+                hovered: {
+                  background: {
+                    color: BackgroundColors.Light,
+                  },
+                  textColor: TextColors.Light,
+                  textSize: TextSize.Default,
+                },
+                ...states,
+              }}
+              textColor={TextColors.Default}
               to={item.to ?? '#'}
-              {...menuItemProps}
             />
           );
         })}

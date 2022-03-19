@@ -41,8 +41,6 @@ export type ButtonProps = ContainerProps &
     readonly form?: string;
     readonly label?: string;
     readonly type?: ButtonType;
-  } & {
-    readonly states?: InteractionStates<ButtonProps>;
   };
 
 // const Wrapper = styled.button<ButtonProps>`
@@ -210,12 +208,14 @@ export const Button = memo(
         states={{
           active: {
             background: {
+              color: background?.color ?? colors?.backgroundColor,
               opacity: 80,
             },
           },
           hovered: {
             background: {
-              opacity: 20,
+              color: background?.color ?? colors?.backgroundColor,
+              opacity: 90,
             },
           },
           ...states,
@@ -224,6 +224,7 @@ export const Button = memo(
       >
         {typeof children === 'string' ? (
           <Label
+            cursor={cursor}
             icon={icon}
             lineHeight={lineHeight}
             textAlign={textAlign}
