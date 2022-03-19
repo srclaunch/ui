@@ -1,6 +1,11 @@
 import { css, SimpleInterpolation } from 'styled-components';
 
-import { Background, BackgroundColors, BackgroundSize } from '../../types';
+import {
+  Background,
+  BackgroundColors,
+  BackgroundSize,
+  Color,
+} from '../../types';
 
 const getBackgroundSize = (size?: BackgroundSize | string) => {
   switch (size) {
@@ -23,54 +28,35 @@ const getBackgroundSize = (size?: BackgroundSize | string) => {
   }
 };
 
-export function getBackgroundStyle(
+export function getBackgroundColorValue(
+  color?: Color,
+  opacity?: number,
+): string {
+  if (color === BackgroundColors.Transparent) return 'transparent';
+
+  if (color && !opacity) return `rgb(${color})`;
+
+  if (color && opacity) return `rgba(${color}, ${opacity}%)`;
+
+  if (!color && opacity) return `rgba(initial, ${opacity}%)`;
+
+  return color as string;
+}
+
+export function getBackgroundStyles(
   background?: Background,
 ): SimpleInterpolation {
   const { color, image, opacity } = background || {};
 
-  if (color) {
-    if (color === BackgroundColors.Transparent) return 'transparent';
-
-    if (opacity) {
-      return css`
-        background-color: rgba(${color}, ${opacity}%);
-      `;
-    }
-
-    return css`
-      background-color: rgb(${color});
-    `;
-  }
-
-  if (image) {
-    if (image.path || image.url) {
-      return css`
-        background-image: url(${image.url});
-      `;
-    }
-
-    if (image.repeat) {
-      return css`
-        background-repeat: ${image.repeat};
-      `;
-    }
-
-    if (image.size) {
-      return css`
-        background-size: ${getBackgroundSize(image.size)};
-      `;
-    }
-  }
+  return css`
+    background-color: ${getBackgroundColorValue(color, opacity)};
+  `;
 }
 
 export const BackgroundStyles = css<{
   readonly background?: Background;
 }>`
-  ${props =>
-    props.background &&
-    css`
-      ${getBackgroundStyle(props.background)};
-    `};
+  ${props => getBackgroundStyles(props.background)};
 `;
 
 /* ${props =>

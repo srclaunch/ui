@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../types';
 
-type MACAddressLabelProps = {
+type MACAddressLabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const MACAddressLabel = memo(
   ({

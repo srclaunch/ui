@@ -2,7 +2,8 @@ import { Primitives, ValidationProblem } from '@srclaunch/types';
 import { memo, ReactElement, useEffect, useState } from 'react';
 
 import { getInputElementByFieldType } from '../../lib/forms/inputs';
-import { Amount, FormField, Orientation } from '../../types';
+import { Amount, FormField } from '../../types';
+import { Validation } from '../../types/validation';
 import { Container } from '../layout/Container';
 import { InputRow } from './layout/InputRow';
 
@@ -93,17 +94,15 @@ export const FormFields = memo(
               {getInputElementByFieldType({
                 ...field,
                 onChange: ({
-                  problems,
+                  validation,
                   value,
-                  validated,
                 }: {
-                  problems?: readonly ValidationProblem[];
+                  validation?: Validation;
                   value?: any;
-                  validated?: boolean;
                 }) =>
                   setFieldValues({
                     ...fieldValues,
-                    [field.name]: { ...field, problems, validated, value },
+                    [field.name]: { ...field, validation, value },
                   }),
               })}
             </InputRow>

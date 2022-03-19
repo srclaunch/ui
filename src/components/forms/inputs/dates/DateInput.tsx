@@ -24,7 +24,6 @@ import {
   TextColors,
   TextSize,
   TextWeight,
-  TransformProps,
 } from '../../../../types';
 import { Container, ContainerProps } from '../../../layout/Container';
 import { Icon, IconProps } from '../../../media/Icon';
@@ -33,11 +32,11 @@ import { InputContainer, InputContainerProps } from '../shared/InputContainer';
 import { Text, TextProps } from '../../../typography/Text';
 import { ShadowStyles } from '../../../../styles/container/shadow';
 
-export type DateInputProps = {
-  readonly resetIcon?: IconProps;
-} & InputContainerProps &
-  InputProps<HTMLInputElement, ISO8601String> &
-  TextProps;
+export type DateInputProps = InputContainerProps &
+  InputProps<ISO8601String> &
+  TextProps & {
+    readonly resetIcon?: IconProps;
+  };
 
 const getBorderColor = ({
   focused,
@@ -224,17 +223,16 @@ const Wrapper = styled.div<{
 export const DateInput = memo(
   ({
     background = {},
-
     border = {},
     className = '',
-    error,
-    resetIcon,
+    events = {},
     defaultValue,
     label,
-    onChange,
+    resetIcon,
+    states = {},
     shadow = DepthShadow.Low,
     textSize = TextSize.Default,
-    validation = { [Condition.IsDate]: true },
+    validation = { conditions: { [Condition.IsDate]: true } },
     ...props
   }: DateInputProps): ReactElement => {
     const [value, setValue] = useState<ISO8601String | undefined>(defaultValue);
@@ -243,33 +241,39 @@ export const DateInput = memo(
     const [valueChanged, setValueChanged] = useState(false);
 
     useEffect(() => {
-      if (validation && valueChanged) {
-        const probs = validate(value, validation);
+      if (valueChanged) {
+        if (validation?.conditions) {
+          const probs = validate(value, validation.conditions);
 
-        setProblems(probs);
+          setProblems(probs);
 
-        if (onChange)
-          onChange({
-            problems: probs,
-            validated: probs.length === 0,
-            value,
-          });
-      } else {
-        setProblems([]);
-
-        if (onChange && value)
-          onChange({
-            problems: [],
-            validated: true,
-            value,
-          });
+          if (events.input?.onValueChange)
+            events.input.onValueChange({
+              validation: {
+                problems: probs,
+                validated: probs.length === 0,
+              },
+              value,
+            });
+        } else {
+          if (events.input?.onValueChange && value)
+            events.input.onValueChange({
+              validation: {
+                problems: [],
+                validated: true,
+              },
+              value,
+            });
+        }
       }
     }, [value]);
 
     return (
       <>
         {(label || problems.length > 0) && (
-          <InputLabel error={problems}>{label}</InputLabel>
+          <InputLabel states={{ state: { error: problems } }}>
+            {label}
+          </InputLabel>
         )}
 
         <InputContainer
@@ -283,9 +287,12 @@ export const DateInput = memo(
             ...border,
           }}
           className={`${className} date-input`}
-          error={problems}
-          focused={focused}
-          onMouseLeave={() => setFocused(false)}
+          events={{
+            mouse: {
+              onMouseLeave: () => setFocused(false),
+            },
+          }}
+          states={{ state: { error: problems, focused } }}
           // onClick={() => setFocused(!focused)}
           shadow={!focused ? shadow : DepthShadow.Higher}
           {...props}

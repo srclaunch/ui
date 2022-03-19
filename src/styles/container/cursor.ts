@@ -1,7 +1,13 @@
-import { css } from 'styled-components';
+import { css, SimpleInterpolation } from 'styled-components';
 
 import { Cursor } from '../../types';
 
+export function getCursorStyles(cursor?: Cursor): SimpleInterpolation {
+  return css`
+    cursor: ${cursor ?? 'inherit'};
+  `;
+}
+
 export const CursorStyles = css<{ cursor?: Cursor }>`
-  cursor: ${props => props.cursor ?? 'inherit'};
+  ${props => getCursorStyles(props.cursor)};
 `;

@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css, SimpleInterpolation } from 'styled-components';
 import { getCSSMeasurementValue } from '../../lib/css/properties';
 
 import { Alignment, Size } from '../../types';
@@ -20,45 +20,47 @@ import { Alignment, Size } from '../../types';
 
 // }
 // }
+
+export function getSizeStyles(size?: Size): SimpleInterpolation {
+  const { maxHeight, minHeight, maxWidth, minWidth, width, height } =
+    size ?? {};
+
+  return css`
+    ${maxHeight &&
+    css`
+      max-height: ${getCSSMeasurementValue(maxHeight)};
+    `};
+
+    ${minHeight &&
+    css`
+      min-height: ${getCSSMeasurementValue(minHeight)};
+    `};
+
+    ${height &&
+    css`
+      height: ${getCSSMeasurementValue(height)};
+    `};
+
+    ${maxWidth &&
+    css`
+      max-width: ${getCSSMeasurementValue(maxWidth)};
+    `};
+
+    ${minWidth &&
+    css`
+      min-width: ${getCSSMeasurementValue(minWidth)};
+    `};
+
+    ${width &&
+    css`
+      width: ${getCSSMeasurementValue(width)};
+    `};
+  `;
+}
 export const SizeStyles = css<{
-  alignment?: Alignment;
   size?: Size;
 }>`
-  ${props =>
-    props.size?.height &&
-    css`
-      height: ${getCSSMeasurementValue(props.size.height)};
-    `};
-
-  ${props =>
-    props.size?.maxHeight &&
-    css`
-      max-height: ${getCSSMeasurementValue(props.size.maxHeight)};
-    `};
-
-  ${props =>
-    props.size?.minHeight &&
-    css`
-      min-height: ${getCSSMeasurementValue(props.size.minHeight)};
-    `};
-
-  ${props =>
-    props.size?.maxWidth &&
-    css`
-      max-width: ${getCSSMeasurementValue(props.size.maxWidth)};
-    `};
-
-  ${props =>
-    props.size?.minWidth &&
-    css`
-      min-width: ${getCSSMeasurementValue(props.size.minWidth)};
-    `};
-
-  ${props =>
-    props.size?.width &&
-    css`
-      width: ${getCSSMeasurementValue(props.size.width)};
-    `};
+  ${props => getSizeStyles(props.size)};
 `;
 
 // const getDimension = (dimension: DimensionValue) => {

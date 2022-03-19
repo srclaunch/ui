@@ -1,9 +1,7 @@
 import { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
-
-import { Condition, VerificationCode } from '@srclaunch/types';
+import { Condition } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
-
 import { Container } from '../../../layout/Container';
 import { InputContainer } from '../shared/InputContainer';
 
@@ -26,22 +24,21 @@ export enum VerificationCodeType {
 import { TextInputProps } from '../text/TextInput';
 import { TextInputStyles } from '../../../../styles/forms/input/text-input';
 
-type VerificationCodeInputProps = {
+type VerificationCodeInputProps = TextInputProps & {
   length?: number;
   codeType?: VerificationCodeType;
-} & TextInputProps<VerificationCode>;
+};
 
 export const VerificationCodeInput = memo(
   ({
     as,
     className = '',
     defaultValue,
-    hidden = false,
+    events = {},
     length = 4,
     name,
-    onChange,
-    onKeyPress,
     placeholder = '',
+    states = {},
     textSize = TextSize.Larger,
     textColor = TextColors.Dark,
     codeType = VerificationCodeType.Numeric,
@@ -80,10 +77,12 @@ export const VerificationCodeInput = memo(
 
       const probs = validate(code, validation);
 
-      if (onChange)
-        onChange({
-          problems: probs,
-          validated: !probs.length,
+      if (events.input?.onValueChange)
+        events.input?.onValueChange({
+          validation: {
+            problems: probs,
+            validated: !probs.length,
+          },
           value: code as VerificationCodeType,
         });
     }, [code]);
@@ -95,6 +94,8 @@ export const VerificationCodeInput = memo(
           orientation: Orientation.Horizontal,
           vertical: AlignVertical.Center,
         }}
+        className={`${className} verification-code-input`}
+        {...props}
       >
         {Array.from(Array(length)).map((_, key) => {
           return (
@@ -102,12 +103,16 @@ export const VerificationCodeInput = memo(
               background={{
                 color: BackgroundColors.InputControl,
               }}
-              focused={focusedKey === key}
               className={`${className} verification-code-input`}
               key={key}
               margin={{
                 left: Amount.Less,
                 right: Amount.Less,
+              }}
+              states={{
+                state: {
+                  focused: focusedKey === key,
+                },
               }}
             >
               <Input

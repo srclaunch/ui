@@ -1,7 +1,7 @@
 export type Padding = {
-  readonly all?: string | number;
-  readonly bottom?: string | number;
-  readonly left?: string | number;
-  readonly right?: string | number;
-  readonly top?: string | number;
+  readonly all?: number | string;
+  readonly bottom?: number | string;
+  readonly left?: number | string;
+  readonly right?: number | string;
+  readonly top?: number | string;
 };

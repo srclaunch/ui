@@ -1,21 +1,18 @@
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
-import { AnimationStyles } from '../../styles/animation';
-import { BorderStyles } from '../../styles/container/border';
-import { BorderRadiusStyles } from '../../styles/container/border-radius';
-import { MarginStyles } from '../../styles/container/margin';
-import { SizeStyles } from '../../styles/container/size';
+
+import { ContainerStyles } from '../../styles/container';
+
+import { StateStyles } from '../../styles/container/states';
 import {
-  Animation,
   Border,
   BorderRadius,
   CommonComponentProps,
+  Events,
+  InteractionStates,
   Margin,
   Size,
-  Sizes,
 } from '../../types';
-
-import { Container, ContainerProps } from '../layout/Container';
 
 /**
  * Image component for displaying GIFs, JPGs or PNGs.
@@ -24,25 +21,23 @@ import { Container, ContainerProps } from '../layout/Container';
  * @param url - A full URL path to an image
  * @param path - A relative path to an image located in the 'Assets" repo
  */
-export type ImageProps = {
+export type ImageProps<P = {}> = (CommonComponentProps & {
   readonly alt?: string;
-  readonly className?: string;
+  readonly border?: Border;
+  readonly borderRadius?: BorderRadius;
   readonly description?: string;
-  readonly url?: string;
+  readonly events?: Events;
+  readonly margin?: Margin;
   readonly path?: string;
-} & CommonComponentProps<HTMLImageElement> & {
-    border?: Border;
-    borderRadius?: BorderRadius;
-    margin?: Margin;
-    size?: Size;
-  };
+  readonly size?: Size;
+  readonly url?: string;
+} & P) & {
+  readonly states?: InteractionStates<ImageProps>;
+};
 
 const Img = styled.img<ImageProps>`
-  ${AnimationStyles};
-  ${BorderStyles};
-  ${BorderRadiusStyles};
-  ${MarginStyles};
-  ${SizeStyles};
+  ${ContainerStyles};
+  ${StateStyles};
 `;
 
 export const Image = memo(

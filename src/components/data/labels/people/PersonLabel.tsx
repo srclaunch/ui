@@ -17,10 +17,10 @@ import { Container } from '../../../layout/Container';
 import { Image } from '../../../media/Image';
 import { Label, LabelProps } from '../../../typography/Label';
 
-export type PersonLabelProps = {
+export type PersonLabelProps = LabelProps & {
   readonly image?: ImageProps;
   readonly name?: string;
-} & LabelProps;
+};
 
 export const PersonLabel = memo(
   ({

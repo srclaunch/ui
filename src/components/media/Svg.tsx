@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import { Color, Sizes } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 
-export type SvgProps = {
+export type SvgProps = ContainerProps & {
   readonly color?: Color;
   readonly path?: string;
   readonly url?: string;
-} & ContainerProps<HTMLOrSVGElement>;
+};
 
 const SvgMedia = styled.svg<SvgProps>`
   align-items: center;

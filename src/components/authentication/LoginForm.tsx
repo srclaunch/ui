@@ -110,7 +110,11 @@ export const LoginForm = memo(
             <br />
             <Link
               to="/signup"
-              hover={{ textDecoration: { line: TextDecorationLine.Underline } }}
+              states={{
+                hovered: {
+                  textDecoration: { line: TextDecorationLine.Underline },
+                },
+              }}
               textDecoration={{ line: TextDecorationLine.Underline }}
             >
               Sign up for free!
@@ -138,7 +142,9 @@ export const LoginForm = memo(
               name: 'username',
               type: Primitives.EmailAddress,
               validation: {
-                [Condition.IsRequired]: true,
+                conditions: {
+                  [Condition.IsRequired]: true,
+                },
               },
             },
             {
@@ -147,14 +153,16 @@ export const LoginForm = memo(
               name: 'password',
               type: Primitives.Password,
               validation: {
-                [Condition.IsRequired]: true,
-                [Condition.HasLetterCount]: 2,
-                [Condition.HasNumberCount]: 1,
-                [Condition.HasSymbolCount]: 1,
-                [Condition.HasUppercaseCount]: 1,
-                [Condition.HasLowercaseCount]: 1,
-                [Condition.IsLengthGreaterThanOrEqual]: 8,
-                [Condition.IsLengthLessThanOrEqual]: 99,
+                conditions: {
+                  [Condition.IsRequired]: true,
+                  [Condition.HasLetterCount]: 2,
+                  [Condition.HasNumberCount]: 1,
+                  [Condition.HasSymbolCount]: 1,
+                  [Condition.HasUppercaseCount]: 1,
+                  [Condition.HasLowercaseCount]: 1,
+                  [Condition.IsLengthGreaterThanOrEqual]: 8,
+                  [Condition.IsLengthLessThanOrEqual]: 99,
+                },
               },
             },
           ]}
@@ -190,7 +198,11 @@ export const LoginForm = memo(
         <Container padding={{ all: Amount.Default }}>
           <Small textAlign={TextAlign.Center}>
             <Link
-              hover={{ textDecoration: { line: TextDecorationLine.Underline } }}
+              states={{
+                hovered: {
+                  textDecoration: { line: TextDecorationLine.Underline },
+                },
+              }}
               textDecoration={{ line: TextDecorationLine.Underline }}
               to="/forgot-password"
             >

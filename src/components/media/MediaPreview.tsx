@@ -9,9 +9,9 @@ import {
 import { Container, ContainerProps } from '../layout/Container';
 import { Image } from './Image';
 
-export type MediaPreviewProps = {
+export type MediaPreviewProps = ContainerProps & {
   readonly media?: readonly (ImageType | Video)[];
-} & ContainerProps<HTMLDivElement>;
+};
 
 export const MediaPreview = memo(
   ({

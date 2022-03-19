@@ -1,4 +1,8 @@
 import { css, SimpleInterpolation } from 'styled-components';
+import {
+  getCSSColorValue,
+  getCSSMeasurementValue,
+} from '../../lib/css/properties';
 
 import { Border, BorderColors } from '../../types';
 
@@ -8,82 +12,63 @@ import { Border, BorderColors } from '../../types';
 //   return border.hasOwnProperty('color');
 // };
 
-export function getBorderValue(border?: Border): SimpleInterpolation {
-  if (!border) {
-    return;
-  }
-
-  let borderValue = '';
-
-  if (border.all) {
-    borderValue += `border: ${border.all.width ?? 1}px ${
-      border.all.style ?? 'solid'
-    } ${
-      border.all.color
-        ? border.all.color === BorderColors.Transparent
-          ? 'transparent'
-          : `rgb(${border.all.color})`
-        : BorderColors.Default
-    }`;
-  }
-
-  if (border.bottom) {
-    borderValue += `border-bottom: ${border.bottom.width ?? 1}px ${
-      border.bottom.style ?? 'solid'
-    } ${
-      border.bottom.color
-        ? border.bottom.color === BorderColors.Transparent
-          ? 'transparent'
-          : `rgb(${border.bottom.color})`
-        : BorderColors.Default
-    }`;
-  }
-
-  if (border.left) {
-    borderValue += `border-left: ${border.left.width ?? 1}px ${
-      border.left.style ?? 'solid'
-    } ${
-      border.left.color
-        ? border.left.color === BorderColors.Transparent
-          ? 'transparent'
-          : `rgb(${border.left.color})`
-        : BorderColors.Default
-    }`;
-  }
-
-  if (border.right) {
-    borderValue += `border-right: ${border.right.width ?? 1}px ${
-      border.right.style ?? 'solid'
-    } ${
-      border.right.color
-        ? border.right.color === BorderColors.Transparent
-          ? 'transparent'
-          : `rgb(${border.right.color})`
-        : BorderColors.Default
-    }`;
-  }
-
-  if (border.top) {
-    borderValue += `border-top: ${border.top.width ?? 1}px ${
-      border.top.style ?? 'solid'
-    } ${
-      border.top.color
-        ? border.top.color === BorderColors.Transparent
-          ? 'transparent'
-          : `rgb(${border.top.color})`
-        : BorderColors.Default
-    }`;
-  }
-
+export function getBorderStyles(border?: Border): SimpleInterpolation {
   return css`
-    ${borderValue}
+    ${border?.all &&
+    css`
+      border: ${getCSSMeasurementValue(border.all.width ?? 0)}
+        ${border.all.style ?? 'solid'}
+        ${border.all.color
+          ? getCSSColorValue(border.all.color)
+          : BorderColors.Default};
+    `};
+
+    ${border?.bottom &&
+    css`
+      border-bottom: ${getCSSMeasurementValue(
+          border.bottom.width !== undefined ? border.bottom.width : 1,
+        )}
+        ${border.bottom.style ?? 'solid'}
+        ${border.bottom.color
+          ? getCSSColorValue(border.bottom.color)
+          : BorderColors.Default};
+    `};
+
+    ${border?.left &&
+    css`
+      border-left: ${getCSSMeasurementValue(
+          border.left.width !== undefined ? border.left.width : 1,
+        )}
+        ${border.left.style ?? 'solid'}
+        ${border.left.color
+          ? getCSSColorValue(border.left.color)
+          : BorderColors.Default};
+    `};
+
+    ${border?.right &&
+    css`
+      border-right: ${getCSSMeasurementValue(
+          border.right.width !== undefined ? border.right.width : 1,
+        )}
+        ${border.right.style ?? 'solid'}
+        ${border.right.color
+          ? getCSSColorValue(border.right.color)
+          : BorderColors.Default};
+    `};
+
+    ${border?.top &&
+    css`
+      border-top: ${getCSSMeasurementValue(
+          border.top.width !== undefined ? border.top.width : 1,
+        )}
+        ${border.top.style ?? 'solid'}
+        ${border.top.color
+          ? getCSSColorValue(border.top.color)
+          : BorderColors.Default};
+    `};
   `;
 }
 
 export const BorderStyles = css<{ readonly border?: Border }>`
-  ${props =>
-    props.border &&
-    css`
-      ${getBorderValue(props.border)};
-    `};
+  ${props => getBorderStyles(props.border)};
 `;

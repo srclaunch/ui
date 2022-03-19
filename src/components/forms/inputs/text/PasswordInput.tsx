@@ -1,4 +1,4 @@
-import { Condition, Password } from '@srclaunch/types';
+import { Condition, ValidationProblem } from '@srclaunch/types';
 import {
   // getValidationProblemLabel,
   validate,
@@ -11,33 +11,35 @@ import { InputLabel } from '../../labels/InputLabel';
 import { InputRow } from '../../layout/InputRow';
 import { TextInput, TextInputProps, TextInputType } from './TextInput';
 
-export type PasswordInputProps = {
+export type PasswordInputProps = TextInputProps & {
   readonly autoComplete?:
     | AutoComplete.CurrentPassword
     | AutoComplete.NewPassword;
   readonly confirmPasswordLabel?: string;
   readonly showConfirmPassword?: boolean;
   readonly showPasswordStrength?: boolean;
-} & TextInputProps<Password>;
+};
 
 export const PasswordInput = memo(
   ({
     autoComplete = AutoComplete.CurrentPassword,
     confirmPasswordLabel = 'Confirm password',
+    events = {},
     label = 'Password',
     name,
-    onChange,
     showConfirmPassword = false,
     showPasswordStrength = false,
     validation = {
-      [Condition.IsRequired]: true,
-      [Condition.HasLetterCount]: 2,
-      [Condition.HasNumberCount]: 1,
-      [Condition.HasSymbolCount]: 1,
-      [Condition.HasUppercaseCount]: 1,
-      [Condition.HasLowercaseCount]: 1,
-      [Condition.IsLengthGreaterThanOrEqual]: 8,
-      [Condition.IsLengthLessThanOrEqual]: 99,
+      conditions: {
+        [Condition.IsRequired]: true,
+        [Condition.HasLetterCount]: 2,
+        [Condition.HasNumberCount]: 1,
+        [Condition.HasSymbolCount]: 1,
+        [Condition.HasUppercaseCount]: 1,
+        [Condition.HasLowercaseCount]: 1,
+        [Condition.IsLengthGreaterThanOrEqual]: 8,
+        [Condition.IsLengthLessThanOrEqual]: 99,
+      },
     },
     ...props
   }: PasswordInputProps): ReactElement => {
@@ -48,7 +50,11 @@ export const PasswordInput = memo(
 
     useEffect(() => {
       if (showConfirmPassword) {
-        const problems = validate(password, validation);
+        let problems: ValidationProblem[] | undefined = [];
+
+        if (validation && validation.conditions) {
+          problems = validate(password, validation?.conditions);
+        }
 
         if (password !== confirmPassword) {
           problems.push({
@@ -60,19 +66,27 @@ export const PasswordInput = memo(
           });
         }
 
-        if (onChange)
-          onChange({
-            problems,
-            validated: problems.length === 0,
+        if (events.input?.onValueChange)
+          events.input.onValueChange({
+            validation: {
+              problems,
+              validated: problems.length === 0,
+            },
             value: password,
           });
       } else {
-        const problems = validate(password, validation);
+        let problems: ValidationProblem[] | undefined = [];
 
-        if (onChange)
-          onChange({
-            problems,
-            validated: problems.length === 0,
+        if (validation && validation.conditions) {
+          problems = validate(password, validation?.conditions);
+        }
+
+        if (events.input?.onValueChange)
+          events.input.onValueChange({
+            validation: {
+              problems,
+              validated: problems.length === 0,
+            },
             value: password,
           });
       }
@@ -95,8 +109,12 @@ export const PasswordInput = memo(
           }
           label={label}
           name={name}
-          onChange={({ problems, validated, value }) => {
-            setPassword(value);
+          events={{
+            input: {
+              onValueChange: ({ validation, value }) => {
+                setPassword(value);
+              },
+            },
           }}
           inputType={TextInputType.Password}
           validation={validation}
@@ -114,14 +132,17 @@ export const PasswordInput = memo(
               //     ? 'Passwords do not match'
               //     : undefined
               // }
+              events={{
+                input: {
+                  onValueChange: ({ validation, value }) => {
+                    setConfirmPassword(value);
+                  },
+                },
+              }}
               inputType={TextInputType.Password}
               name="confirmPassword"
-              onChange={({ value }) => {
-                setConfirmPassword(value);
-                // setConfirmPasswordChanged(true);
-              }}
               validation={{
-                [Condition.IsEqual]: password,
+                conditions: { [Condition.IsEqual]: password },
               }}
             />
           </InputRow>

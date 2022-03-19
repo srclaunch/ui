@@ -1,12 +1,17 @@
 import { css } from 'styled-components';
 import { TextProps } from '../components/typography/Text';
+import {
+  getCSSColorValue,
+  getCSSMeasurementValue,
+} from '../lib/css/properties';
 
 import { TextColors, TextSize } from '../types';
 
 export const TextStyles = css<TextProps>`
-  color: rgb(${props => props.textColor ?? TextColors.Default});
+  color: ${props => getCSSColorValue(props.textColor ?? TextColors.Default)};
   display: inline-block;
-  font-size: ${props => props.textSize ?? TextSize.Default};
+  font-size: ${props =>
+    getCSSMeasurementValue(props.textSize ?? TextSize.Default)};
   transition: color 0.15s ease-in;
 
   ${props =>
@@ -24,7 +29,7 @@ export const TextStyles = css<TextProps>`
   ${props =>
     props.textDecoration?.color &&
     css`
-      text-decoration-color: ${props.textDecoration?.color};
+      text-decoration-color: ${getCSSColorValue(props.textDecoration?.color)};
     `};
 
   ${props =>
@@ -42,13 +47,15 @@ export const TextStyles = css<TextProps>`
   ${props =>
     props.textDecoration?.thickness &&
     css`
-      text-decoration-thickness: ${props.textDecoration?.thickness};
+      text-decoration-thickness: ${getCSSMeasurementValue(
+        props.textDecoration?.thickness,
+      )};
     `};
 
   ${props =>
     props.lineHeight &&
     css`
-      line-height: ${props.lineHeight};
+      line-height: ${getCSSMeasurementValue(props.lineHeight)};
     `};
 
   ${props =>

@@ -6,8 +6,6 @@ import {
 } from '@srclaunch/web-application-state';
 import { memo, ReactElement, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
-
-import { Size } from '../../../types';
 import { Button } from '../../forms/buttons/Button';
 import { CloseButton } from '../../modals/CloseButton';
 import { ProgressSpinner } from '../../progress/ProgressSpinner';
@@ -77,12 +75,16 @@ export const PaymentMethodModal = memo(
         <Content visible={visible}>
           <Close>
             <CloseButton
-              onClick={() => {
-                // dispatch(hideSubscriptionBillingModal());
-                // dispatch(hidePaymentMethodModal());
-                setReviewOrder(false);
-                setPaymentSuccess(false);
-                setPaymentMethod(null);
+              events={{
+                mouse: {
+                  onClick: () => {
+                    // dispatch(hideSubscriptionBillingModal());
+                    // dispatch(hidePaymentMethodModal());
+                    setReviewOrder(false);
+                    setPaymentSuccess(false);
+                    setPaymentMethod(null);
+                  },
+                },
               }}
             />
           </Close>
@@ -112,12 +114,16 @@ export const PaymentMethodModal = memo(
             )} */}
 
               <Button
-                onClick={() => {
-                  // dispatch(hideSubscriptionBillingModal());
-                  // dispatch(hidePaymentMethodModal());
-                  setReviewOrder(false);
-                  setPaymentSuccess(false);
-                  setPaymentMethod(null);
+                events={{
+                  mouse: {
+                    onClick: () => {
+                      // dispatch(hideSubscriptionBillingModal());
+                      // dispatch(hidePaymentMethodModal());
+                      setReviewOrder(false);
+                      setPaymentSuccess(false);
+                      setPaymentMethod(null);
+                    },
+                  },
                 }}
               >
                 Close
@@ -158,21 +164,33 @@ export const PaymentMethodModal = memo(
 
                 <Actions>
                   <Button
-                    disabled={inProgress}
+                    events={{
+                      mouse: {
+                        onClick: () => {
+                          // dispatch(hideSubscriptionBillingModal());
+                          setReviewOrder(false);
+                          setPaymentMethod(null);
+                        },
+                      },
+                    }}
                     id="cancel"
-                    onClick={() => {
-                      // dispatch(hideSubscriptionBillingModal());
-                      setReviewOrder(false);
-                      setPaymentMethod(null);
+                    states={{
+                      state: {
+                        disabled: inProgress,
+                      },
                     }}
                   >
                     Cancel
                   </Button>
 
                   <Button
+                    events={{
+                      mouse: {
+                        onClick: confirmPurchase,
+                      },
+                    }}
                     // disabled={inProgress || hasError}
                     id="confirm"
-                    onClick={confirmPurchase}
                   >
                     Confirm order
                   </Button>
@@ -212,10 +230,15 @@ export const PaymentMethodModal = memo(
                       <PaymentMethodItem key={paymentMethod.id}>
                         <UseCard>
                           <Button
-                            onClick={() => {
-                              setPaymentMethod(paymentMethod);
-                              setReviewOrder(true);
+                            events={{
+                              mouse: {
+                                onClick: () => {
+                                  setPaymentMethod(paymentMethod);
+                                  setReviewOrder(true);
+                                },
+                              },
                             }}
+
                             // size={Size.Small}
                           >
                             Use this card
@@ -243,10 +266,14 @@ export const PaymentMethodModal = memo(
 
                   {!showAddPaymentForm && (
                     <Button
-                      id="show-add-form"
-                      onClick={() => {
-                        setShowAddPaymentForm(true);
+                      events={{
+                        mouse: {
+                          onClick: () => {
+                            setShowAddPaymentForm(true);
+                          },
+                        },
                       }}
+                      id="show-add-form"
                     >
                       Add new card
                     </Button>

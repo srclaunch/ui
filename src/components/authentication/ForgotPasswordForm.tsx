@@ -107,8 +107,10 @@ export const ForgotPasswordForm = memo(
               name: 'emailAddress',
               type: Primitives.EmailAddress,
               validation: {
-                [Condition.IsRequired]: true,
-                [Condition.IsEmailAddress]: true,
+                conditions: {
+                  [Condition.IsRequired]: true,
+                  [Condition.IsEmailAddress]: true,
+                },
               },
             },
           ]}
@@ -118,7 +120,6 @@ export const ForgotPasswordForm = memo(
             if (validated) startPasswordReset(fields.emailAddress.value);
           }}
           submitButton={{
-            fullWidth: true,
             label: 'Send instructions',
           }}
         />
@@ -126,7 +127,11 @@ export const ForgotPasswordForm = memo(
         <Container padding={{ all: Amount.Default }}>
           <Small textAlign={TextAlign.Center}>
             <Link
-              hover={{ textDecoration: { line: TextDecorationLine.Underline } }}
+              states={{
+                hovered: {
+                  textDecoration: { line: TextDecorationLine.Underline },
+                },
+              }}
               textDecoration={{ line: TextDecorationLine.Underline }}
               to="/login"
             >

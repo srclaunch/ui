@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../types';
 
-type StreetAddressLabelProps = {
+type StreetAddressLabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const StreetAddressLabel = memo(
   ({

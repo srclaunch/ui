@@ -1,3 +1,6 @@
+import { BackgroundColors } from './background';
+import { BorderColors } from './border';
+import { ForegroundColors } from './foreground';
 export declare enum Colors {
     Black = "var(--color-black-rgb)",
     Default = "var(--color-default-rgb)",
@@ -22,5 +25,5 @@ export declare enum ContrastColors {
     Warning = "var(--color-warning-contrast-rgb)",
     White = "var(--color-white-contrast-rgb)"
 }
-export declare type Color = Colors | ContrastColors | string;
+export declare type Color = BackgroundColors | BorderColors | Colors | ContrastColors | ForegroundColors | string;
 //# sourceMappingURL=color.d.ts.map

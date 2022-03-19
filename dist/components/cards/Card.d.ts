@@ -7,6 +7,6 @@ declare type CardProps = ContainerProps & {
     readonly onClick?: MouseEventHandler<any>;
     readonly title?: string;
 };
-export declare const Card: import("react").MemoExoticComponent<({ background, borderRadius, children, draggable, id, linkTo, onClick, shadow, title, ...props }: CardProps) => ReactElement>;
+export declare const Card: import("react").MemoExoticComponent<({ background, borderRadius, children, draggable, id, linkTo, shadow, title, ...props }: CardProps) => ReactElement>;
 export {};
 //# sourceMappingURL=Card.d.ts.map

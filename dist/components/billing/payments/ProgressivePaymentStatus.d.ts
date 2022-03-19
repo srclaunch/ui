@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
-import { Color } from '../../../types';
 import { CurrencyCode } from '@srclaunch/types';
+import { Color } from '../../../types';
 declare type ProgressivePaymentStatusProps = {
     amountPaid: number;
     currency?: CurrencyCode;

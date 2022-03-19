@@ -5,12 +5,11 @@ import {
   AlignVertical,
   Amount,
   Orientation,
-  Overflow,
   Size,
   TextColor,
 } from '../../../types';
 import { Container } from '../../layout/Container';
-import { Label, LabelProps } from '../../typography/Label';
+import { LabelProps } from '../../typography/Label';
 
 // import BooleanLabel from './labels/BooleanLabel';
 // import CurrencyLabel from './labels/CurrencyLabel';
@@ -21,14 +20,14 @@ import { Label, LabelProps } from '../../typography/Label';
 // import {NumberLabel }from '../labels/NumberLabel';
 // import { DateTime } from 'luxon';
 
-type DataGridCellProps = {
+type DataGridCellProps = LabelProps & {
   fieldName?: string;
   lineHeight?: Size;
   model?: ModelProps;
   textColor?: TextColor;
   type: Primitives;
   value: any;
-} & LabelProps;
+};
 
 export const DataGridCell = memo(
   ({

@@ -1,8 +1,8 @@
 import { memo, ReactElement } from 'react';
 
-import { Container } from '../../layout/Container';
+import { Container, ContainerProps } from '../../layout/Container';
 
-import { Amount, ContainerProps, Orientation } from '../../../types';
+import { Amount } from '../../../types';
 
 export const InputRow = memo(
   ({

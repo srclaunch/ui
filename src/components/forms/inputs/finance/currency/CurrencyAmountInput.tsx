@@ -22,7 +22,7 @@ import {
 } from '../../shared/InputContainer';
 import { TextProps } from '../../../../typography/Text';
 type CurrencyAmountInputProps = InputContainerProps &
-  InputProps<HTMLInputElement, CurrencyAmount> &
+  InputProps<CurrencyAmount> &
   TextProps;
 
 export const CurrencyAmountInput = memo(
@@ -32,13 +32,15 @@ export const CurrencyAmountInput = memo(
     border = {},
     className = '',
     defaultValue,
+    events = {},
     label,
     name,
-    onChange,
+
     shadow = DepthShadow.Low,
+    states = {},
     textColor = TextColors.InputControl,
     textWeight = TextWeight.Default,
-    validation = { [Condition.IsCurrency]: true },
+    validation = { conditions: { [Condition.IsCurrency]: true } },
   }: CurrencyAmountInputProps): ReactElement => {
     const [value, setValue] = useState<number>(defaultValue ?? 0);
     const [focused, setFocused] = useState(false);
@@ -47,33 +49,32 @@ export const CurrencyAmountInput = memo(
     const [valueChanged, setValueChanged] = useState(false);
 
     useEffect(() => {
-      if (validation && valueChanged) {
-        const probs = validate(value, validation);
+      if (valueChanged) {
+        if (validation?.conditions) {
+          const probs = validate(value, validation.conditions);
 
-        setProblems(probs);
+          setProblems(probs);
 
-        if (onChange)
-          onChange({
-            problems: probs,
-            validated: probs.length === 0,
-            value,
-          });
-      } else {
-        setProblems([]);
-
-        if (onChange && value)
-          onChange({
-            problems: [],
-            validated: true,
-            value,
-          });
+          if (events.input?.onValueChange)
+            events.input.onValueChange({
+              validation: { problems: probs, validated: probs.length === 0 },
+              value,
+            });
+        } else {
+          if (events.input?.onValueChange)
+            events.input.onValueChange({
+              value,
+            });
+        }
       }
     }, [value]);
 
     return (
       <>
         {(label || problems.length > 0) && (
-          <InputLabel error={problems}>{label}</InputLabel>
+          <InputLabel states={{ state: { error: problems } }}>
+            {label}
+          </InputLabel>
         )}
 
         <InputContainer
@@ -87,12 +88,20 @@ export const CurrencyAmountInput = memo(
             ...border,
           }}
           className={`${className} currency-amount-input`}
-          onClick={() => {
-            if (inputRef.current) inputRef.current.focus();
+          events={{
+            mouse: {
+              onClick: () => {
+                if (inputRef.current) inputRef.current.focus();
+              },
+            },
           }}
-          error={problems}
-          focused={focused}
           shadow={shadow}
+          states={{
+            state: {
+              error: problems,
+              focused,
+            },
+          }}
         >
           <Label
             margin={{

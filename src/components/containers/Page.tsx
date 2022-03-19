@@ -1,16 +1,15 @@
 import { useTitle } from '@srclaunch/react-hooks';
 import { cloneElement, ElementType, memo, ReactElement } from 'react';
-
 import { AlignVertical, BackgroundColors, Fill, Overflow } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 
-type PageProps = {
+type PageProps = ContainerProps & {
   readonly layout?: ElementType;
   readonly loading?: boolean;
   readonly loginRequired?: boolean;
   readonly title?: string | null;
-} & ContainerProps;
+};
 
 export const Page = memo(
   ({

@@ -36,34 +36,27 @@ import { Label } from '../../../typography/Label';
 import { Button, ButtonProps, ButtonType } from '../../buttons/Button';
 import { InputLabel } from '../../labels/InputLabel';
 
-export type ImageInputProps = {
-  readonly button?: ButtonProps;
-  readonly icon?: IconProps;
-  readonly maxImages?: number;
-} & ContainerProps<HTMLDivElement> &
-  InputProps<HTMLInputElement, readonly (File | ImageType)[]>;
+export type ImageInputProps = ContainerProps &
+  InputProps<(File | ImageType)[]> & {
+    readonly button?: ButtonProps;
+    readonly icon?: IconProps;
+    readonly maxImages?: number;
+  };
 
 export const ImageInput = memo(
   ({
-    background = { color: BackgroundColors.InputControl },
+    background = {},
     border = {},
     borderRadius = {},
-    button = {
-      label: 'Choose File',
-    },
+    button = {},
     defaultValue = [],
-    icon = {
-      name: BasicIcons.Upload,
-      size: {
-        height: Sizes.Default,
-        width: Sizes.Default,
-      },
-    },
+    events = {},
+    icon = {},
     label,
     maxImages = 1,
     name = 'images',
-    onChange,
     padding = {},
+    ...props
   }: ImageInputProps): ReactElement => {
     const [images, setImages] = useState<(File | ImageType)[]>(
       defaultValue as (File | ImageType)[],
@@ -163,31 +156,18 @@ export const ImageInput = memo(
       };
     }, [images]);
 
-    // useEffect(() => {
-    //   if (onChange) onChange({ value: images });
-    // }, [images]);
-
     useEffect(() => {
-      if (onChange) onChange({ value: images });
+      if (events?.input?.onValueChange)
+        events.input?.onValueChange({ value: images });
     }, [previewImages]);
-
-    // useEffect(() => {
-    //   console.log('ImageInput: useEffect');
-    //   if (defaultValue && images !== defaultValue) {
-    //     setImages(defaultValue);
-    //   }
-    // }, [defaultValue]);
 
     const dragLabel = `Drag ${maxImages > 1 ? 'images' : 'an image'} here...`;
     const buttonLabel = `Browse files`;
-    // @ts-ignore
-    const { ref: inputRef, ...inputProps } = getInputProps();
-    const { ref: rootRef, ...rootProps } = getRootProps();
 
     return (
       <>
         {(label || problems.length > 0) && (
-          <InputLabel error={problems}>
+          <InputLabel states={{ state: { error: problems } }}>
             {label}
             {maxImages > 1 && ` (${previewImages.length} of ${maxImages})`}
           </InputLabel>
@@ -198,9 +178,12 @@ export const ImageInput = memo(
             horizontal: AlignHorizontal.Center,
             vertical: AlignVertical.Center,
           }}
-          background={
-            isDragActive ? { color: BackgroundColors.Darker } : background
-          }
+          background={{
+            color: isDragActive
+              ? BackgroundColors.Darker
+              : BackgroundColors.InputControl,
+            ...background,
+          }}
           border={{
             //TODO: Need to be able to add error/warning/success colors on only borders
             // that are specified if not all
@@ -208,116 +191,127 @@ export const ImageInput = memo(
               color:
                 problems && Array.isArray(problems) && problems.length > 0
                   ? BorderColors.Error
-                  : // @ts-ignore
-                    border?.color,
+                  : border.all?.color ?? BorderColors.Light,
               style: BorderStyle.Solid,
               width: 1,
             },
             ...border,
-            // @ts-ignore
           }}
           borderRadius={{ all: Amount.Least, ...borderRadius }}
           padding={{ all: Amount.Default, ...padding }}
           shadow={DepthShadow.Low}
-          {...rootProps}
+          {...props}
+          {...getRootProps()}
         >
-          <Container>
-            <Container
-              alignment={{
-                horizontal: AlignHorizontal.Center,
-                vertical: AlignVertical.Center,
-              }}
-              padding={{
-                bottom: Amount.Default,
-                left: Amount.Default,
-                right: Amount.Default,
-                top: Amount.Least,
-              }}
-            >
-              <input name={name} {...inputProps} />
+          <Container
+            alignment={{
+              horizontal: AlignHorizontal.Center,
+              vertical: AlignVertical.Center,
+            }}
+            events={{
+              mouse: {
+                disabled: isDragActive,
+              },
+            }}
+            padding={{
+              bottom: Amount.Default,
+              left: Amount.Default,
+              right: Amount.Default,
+              top: Amount.Least,
+            }}
+          >
+            <input name={name} {...getInputProps()} />
 
-              {errorMessage && <ErrorLabel>{errorMessage}</ErrorLabel>}
+            {errorMessage && <ErrorLabel>{errorMessage}</ErrorLabel>}
 
-              {previewImages && previewImages.length > 0 ? (
-                <Container margin={{ bottom: Amount.Less }}>
-                  <Container
-                    alignment={{
-                      horizontal: AlignHorizontal.Center,
-                      orientation: Orientation.Horizontal,
-                      vertical: AlignVertical.Stretch,
-                    }}
-                    background={{ color: BackgroundColors.Lightest }}
-                    borderRadius={{ all: Amount.Least }}
-                    opacity={isDragActive ? 50 : 100}
-                    padding={{ all: Amount.Least }}
-                  >
-                    {previewImages.map((image, index) => (
-                      <Container key={index} margin={{ all: Amount.Least }}>
-                        <CloseButton
-                          onClick={() => {
-                            setImages(files =>
-                              files?.filter((e, i) => i !== index),
-                            );
-                          }}
-                          position={{
-                            behavior: PositionBehavior.Absolute,
-                            right: -7,
-                            top: -7,
-                          }}
-                        />
-
-                        <Image
-                          alt="preview"
-                          borderRadius={{ all: Amount.Least }}
-                          // fadeIn
-                          key={index}
-                          size={{
-                            height: 70,
-                            width: 70,
-                          }}
-                          // @ts-ignore
-                          url={image.url}
-                        />
-                      </Container>
-                    ))}
-                  </Container>
-                </Container>
-              ) : (
-                <Icon
-                  margin={{ bottom: Amount.Less }}
-                  name={icon?.name ?? BasicIcons.FileUpload}
-                  // size={{
-                  //   height: icon?.size ?? Sizes.Default,
-                  //   width: icon?.size ?? Sizes.Default,
-                  // }}
-                />
-              )}
-
+            {previewImages && previewImages.length > 0 ? (
               <Container
                 alignment={{
-                  vertical: AlignVertical.Center,
+                  horizontal: AlignHorizontal.Center,
+                  orientation: Orientation.Horizontal,
+                  vertical: AlignVertical.Stretch,
+                }}
+                background={{ color: BackgroundColors.Lightest }}
+                borderRadius={{ all: Amount.Least }}
+                margin={{ bottom: Amount.Less }}
+                padding={{ all: Amount.Least }}
+                visibility={{
+                  opacity: isDragActive ? 50 : 100,
                 }}
               >
-                <Label
-                  margin={{ bottom: Amount.Least }}
-                  textSize={TextSize.Small}
-                >
-                  {dragLabel}
-                </Label>
+                {previewImages.map((image, index) => (
+                  <Container key={index} margin={{ all: Amount.Least }}>
+                    <CloseButton
+                      events={{
+                        mouse: {
+                          onClick: () =>
+                            setImages(files =>
+                              files?.filter((e, i) => i !== index),
+                            ),
+                        },
+                      }}
+                      position={{
+                        behavior: PositionBehavior.Absolute,
+                        right: -7,
+                        top: -7,
+                      }}
+                    />
 
-                {button && (
-                  <Button
-                    // events={!isDragActive}
-                    form="null"
-                    onClick={open}
-                    // size={button.size ?? Sizes.Small}
-                    type={button.type ?? ButtonType.Primary}
-                    {...button}
-                  >
-                    {buttonLabel}
-                  </Button>
-                )}
+                    <Image
+                      alt="preview"
+                      borderRadius={{ all: Amount.Least }}
+                      // fadeIn
+                      key={index}
+                      size={{
+                        height: 70,
+                        width: 70,
+                      }}
+                      // @ts-ignore
+                      url={image.url}
+                    />
+                  </Container>
+                ))}
               </Container>
+            ) : (
+              <Icon
+                margin={{ bottom: Amount.Less }}
+                name={icon?.name ?? BasicIcons.FileUpload}
+                size={{
+                  height: Sizes.Default,
+                  width: Sizes.Default,
+                }}
+                {...icon}
+              />
+            )}
+
+            <Container
+              alignment={{
+                vertical: AlignVertical.Center,
+              }}
+            >
+              <Label
+                margin={{ bottom: Amount.Least }}
+                textSize={TextSize.Small}
+              >
+                {dragLabel}
+              </Label>
+
+              {button && (
+                <Button
+                  events={{
+                    mouse: {
+                      onClick: open,
+                    },
+                  }}
+                  form="null"
+                  lineHeight={Sizes.Small}
+                  textSize={TextSize.Small}
+                  type={button.type ?? ButtonType.Primary}
+                  {...button}
+                >
+                  {buttonLabel}
+                </Button>
+              )}
             </Container>
           </Container>
         </Container>

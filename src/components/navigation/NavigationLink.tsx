@@ -21,20 +21,19 @@ import { IconProps } from '../media/Icon';
 import { MenuItemProps } from '../menus/MenuItem';
 import { Label, LabelProps } from '../typography/Label';
 
-export type NavigationLinkProps = {
-  readonly activeClassName?: string;
-  readonly icon?: IconProps;
-  readonly inline?: boolean;
-  readonly label?: string;
-  readonly menu?: readonly MenuItemProps[];
-  readonly size?: Size;
-} & ContainerProps<HTMLAnchorElement> &
-  LabelProps<HTMLAnchorElement> &
-  LinkProps;
+export type NavigationLinkProps = LabelProps &
+  LinkProps & {
+    readonly activeClassName?: string;
+    readonly icon?: IconProps;
+    readonly inline?: boolean;
+    readonly label?: string;
+    readonly matchExactPath?: boolean;
+    readonly menu?: readonly MenuItemProps[];
+    readonly size?: Size;
+  };
 
 export const NavigationLink = memo(
   ({
-    active,
     activeClassName = 'active',
     alignment = {},
     as = 'span',
@@ -42,18 +41,16 @@ export const NavigationLink = memo(
     borderRadius = {},
     children,
     className = '',
-    focus,
-    hover,
+    events = {},
     inline = false,
     label,
     lineHeight = Sizes.Smaller,
     margin,
+    matchExactPath = false,
     menu,
-    onClick,
-    onMouseEnter,
-    onMouseLeave,
     padding = {},
     rel,
+    states = {},
     target,
     textColor = TextColors.Primary,
     textSize,
@@ -69,38 +66,8 @@ export const NavigationLink = memo(
     const [updatedTextColor, setUpdatedTextColor] = useState(textColor);
 
     const resolved = useResolvedPath(to);
-    const exactMatch = useMatch({ end: true, path: resolved.pathname });
-    const pathMatch = useMatch({ end: false, path: resolved.pathname });
+    const match = useMatch({ end: matchExactPath, path: resolved.pathname });
     const location = useLocation();
-
-    const setTextColor = () => {
-      if (focused && focus?.textColor) {
-        setUpdatedTextColor(focus.textColor);
-      } else if (exactMatch && active?.textColor) {
-        setUpdatedTextColor(active.textColor);
-      } else if (hovered && hover?.textColor) {
-        setUpdatedTextColor(hover.textColor);
-      } else {
-        setUpdatedTextColor(textColor);
-      }
-    };
-
-    const setBackgroundColor = () => {
-      if (focused && focus?.background?.color) {
-        setUpdatedBackgroundColor(focus.background?.color);
-      } else if (exactMatch && active?.background?.color) {
-        setUpdatedBackgroundColor(active.background?.color);
-      } else if (hovered && hover?.background?.color) {
-        setUpdatedBackgroundColor(hover.background?.color);
-      } else {
-        setUpdatedBackgroundColor(background?.color);
-      }
-    };
-
-    useEffect(() => {
-      setTextColor();
-      setBackgroundColor();
-    }, [hovered, focused, exactMatch]);
 
     return (
       <NavLink
@@ -122,28 +89,11 @@ export const NavigationLink = memo(
             vertical: AlignVertical.Center,
             ...alignment,
           }}
-          active={active}
           as={as}
           background={{ color: updatedBackgroundColor }}
-          borderRadius={{ all: Amount.Less, ...borderRadius }}
-          className={`${className} ${exactMatch ? activeClassName : ''} link`}
-          focus={focus}
-          focused={focused}
-          hover={hover}
+          borderRadius={borderRadius}
+          className={`${className} ${match ? activeClassName : ''} link`}
           margin={margin}
-          onClick={onClick}
-          onMouseEnter={e => {
-            setHovered(true);
-
-            // @ts-ignore
-            if (onMouseEnter) onMouseEnter(e);
-          }}
-          onMouseLeave={e => {
-            setHovered(false);
-
-            // @ts-ignore
-            if (onMouseLeave) onMouseLeave(e);
-          }}
           padding={{
             bottom: menu ? padding?.left : padding?.bottom,
             ...padding,
@@ -156,6 +106,12 @@ export const NavigationLink = memo(
           //   opacity: 35,
           //   spread: 3,
           // }}
+          states={{
+            state: {
+              current: match ? true : false,
+              focused,
+            },
+          }}
           {...props}
         >
           {label ? (

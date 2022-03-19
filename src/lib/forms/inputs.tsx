@@ -1,7 +1,7 @@
 import { Primitives } from '@srclaunch/types';
 
 // import { StreetAddressInput } from '../../components/forms/inputs/locale/StreetAddressInput';
-import { JSONEditor } from '../../components/editors/JSONEditor';
+import { PropertyEditor } from '../../components/editors/PropertyEditor';
 import { VerificationCodeInput } from '../../components/forms/inputs/authentication/VerificationCodeInput';
 import { ToggleInput } from '../../components/forms/inputs/boolean/ToggleInput';
 import { EmailAddressInput } from '../../components/forms/inputs/communication/EmailAddressInput';
@@ -103,7 +103,7 @@ export function getInputElementByFieldType(field: FormField) {
       );
     case Primitives.JSON:
       return (
-        <JSONEditor
+        <PropertyEditor
           defaultValue={field.value}
           onChange={field.onChange}
           {...field}

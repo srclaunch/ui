@@ -13,13 +13,13 @@ import {
 import { Container, ContainerProps } from '../layout/Container';
 import { Label } from '../typography/Label';
 
-type ProgressMeterProps = {
+type ProgressMeterProps = ContainerProps & {
   readonly amount?: number;
   readonly color?: Color;
   readonly label?: string;
   readonly size?: Size;
   readonly total?: number;
-} & ContainerProps;
+};
 
 export const ProgressMeter = memo(
   ({

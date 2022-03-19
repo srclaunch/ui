@@ -7,9 +7,8 @@ import { useDispatch, useSelector } from '@srclaunch/web-application-state';
 import { camelCase, capitalCase } from 'change-case';
 import pluralize from 'pluralize';
 import { memo, ReactElement, useEffect, useState } from 'react';
-
 import { useEntityEditor } from '../../../hooks/use-entity-editor';
-import { Amount, Colors, Size, TextColors } from '../../../types';
+import { Amount, Colors, TextColors } from '../../../types';
 import { Container, ContainerProps } from '../../layout/Container';
 import { ModalHeader } from '../../modals/ModalHeader';
 import { SlidePanel } from '../../modals/SlidePanel';
@@ -17,10 +16,10 @@ import { LoadingOverlay } from '../../progress/LoadingOverlay';
 import { EntityEditor } from './EntityEditor';
 import { EntityPreview } from './EntityPreview';
 
-type EntityPanelProps = {
+type EntityPanelProps = ContainerProps & {
   readonly actions?: Record<string, (...args: readonly any[]) => any>;
   readonly httpClient?: typeof HttpClient;
-} & ContainerProps<HTMLDivElement>;
+};
 
 export const EntityPanel = memo(
   ({ actions, ...props }: EntityPanelProps): ReactElement => {
@@ -133,21 +132,25 @@ export const EntityPanel = memo(
                 ? {
                     menu: [
                       {
+                        events: {
+                          mouse: {
+                            onClick: () => {
+                              if (model && entity?.id) {
+                                const deleteFunction =
+                                  actions?.[`delete${model.name}`];
+
+                                if (deleteFunction)
+                                  dispatch(deleteFunction(entity.id));
+                              }
+                            },
+                          },
+                        },
                         icon: {
                           color: Colors.Error,
                           name: BasicIcons.TrashCan,
                           // size: Sizes.Smaller,
                         },
                         label: 'Delete',
-                        onClick: () => {
-                          if (model && entity?.id) {
-                            const deleteFunction =
-                              actions?.[`delete${model.name}`];
-
-                            if (deleteFunction)
-                              dispatch(deleteFunction(entity.id));
-                          }
-                        },
                         textColor: TextColors.Error,
                       },
                     ],

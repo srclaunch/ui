@@ -1,16 +1,15 @@
 import { memo, ReactElement } from 'react';
-
 import { Amount, BackgroundColors, Orientation } from '../../../types';
 import { Container, ContainerProps } from '../../layout/Container';
 import { LoadingOverlay } from '../../progress/LoadingOverlay';
 import { MediaGridItem } from './MediaGriditem';
 
-export type MediaGridProps = {
+export type MediaGridProps = ContainerProps & {
   readonly className?: string;
   readonly columns?: number;
   readonly items: readonly MediaGridItem[];
   readonly loading?: boolean;
-} & ContainerProps<HTMLDivElement>;
+};
 
 export const MediaGrid = memo(
   ({

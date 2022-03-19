@@ -1,1 +1,1 @@
-{"version":3,"file":"animation.d.ts","sourceRoot":"","sources":["../../../src/styles/container/animation.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,kBAAkB,EAAE,MAAM,mBAAmB,CAAC;AAEvD,eAAO,MAAM,wBAAwB;;QAIpC,CAAC"}
+{"version":3,"file":"animation.d.ts","sourceRoot":"","sources":["../../../src/styles/container/animation.ts"],"names":[],"mappings":"AAAA,OAAO,EAAO,mBAAmB,EAAE,MAAM,mBAAmB,CAAC;AAC7D,OAAO,EAAE,SAAS,EAAE,MAAM,mBAAmB,CAAC;AAE9C,wBAAgB,kBAAkB,CAChC,UAAU,CAAC,EAAE,SAAS,EAAE,GACvB,mBAAmB,CAUrB;AAID,eAAO,MAAM,eAAe;;QAI3B,CAAC"}

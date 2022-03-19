@@ -1,1 +1,0 @@
-{"version":3,"file":"error-props.d.ts","sourceRoot":"","sources":["../../../src/types/state/error-props.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,SAAS,EAAE,MAAM,uBAAuB,CAAC;AAClD,OAAO,EAAE,iBAAiB,EAAE,MAAM,kBAAkB,CAAC;AAErD,oBAAY,UAAU,GAAG;IACvB,QAAQ,CAAC,KAAK,CAAC,EAAE,SAAS,GAAG,SAAS,iBAAiB,EAAE,CAAC;CAC3D,CAAC"}

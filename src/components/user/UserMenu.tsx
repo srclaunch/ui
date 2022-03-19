@@ -48,16 +48,21 @@ export const UserMenu = memo(
             to: '/settings',
           },
           {
+            events: {
+              mouse: {
+                onClick: () => {
+                  setLoggingOut(true);
+                  dispatch(logout());
+                },
+              },
+            },
             icon: {
               color: Colors.Error,
               name: BasicIcons.Exit,
               // size: Size.Smaller,
             },
             label: 'Logout',
-            onClick: () => {
-              setLoggingOut(true);
-              dispatch(logout());
-            },
+
             textColor: TextColors.Error,
           },
         ]}

@@ -1,10 +1,7 @@
-import { LongText } from '@srclaunch/types';
 import { ReactElement } from 'react';
-import { InputProps } from '../../../../types';
-import { InputContainerProps } from '../shared/InputContainer';
-import { TextProps } from '../../../typography/Text';
-export declare type LongTextInputProps<V = LongText> = {
+import { TextInputProps } from './TextInput';
+export declare type LongTextInputProps = {
     readonly spellCheck?: boolean;
-} & InputProps<HTMLTextAreaElement, V> & InputContainerProps & TextProps;
-export declare const LongTextInput: import("react").MemoExoticComponent<({ background, border, className, defaultValue, error, hidden, inProgress, label, lineHeight, name, onChange, placeholder, shadow, spellCheck, textColor, validation, }: LongTextInputProps) => ReactElement>;
+} & TextInputProps;
+export declare const LongTextInput: import("react").MemoExoticComponent<({ background, border, className, defaultValue, events, label, lineHeight, name, placeholder, shadow, spellCheck, states, textColor, validation, }: LongTextInputProps) => ReactElement>;
 //# sourceMappingURL=LongTextInput.d.ts.map

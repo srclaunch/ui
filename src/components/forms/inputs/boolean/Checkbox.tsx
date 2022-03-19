@@ -1,37 +1,29 @@
 import { memo, useEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
 import { BasicIcons } from '@srclaunch/icons';
 
 import { Container } from '../../../layout/Container';
 import {
-  Alignment,
   AlignVertical,
-  Amount,
   BackgroundColors,
   Colors,
   Cursor,
   InputProps,
-  InputValueChangeHandler,
   Orientation,
-  Size,
   Sizes,
 } from '../../../../types';
-
 import { Icon } from '../../../media/Icon';
-import { FocusStyles } from '../../../../styles/container/focus';
 import { validate } from '@srclaunch/validation';
 import { ValidationProblem } from '@srclaunch/types';
+import { InputContainer, InputContainerProps } from '../shared/InputContainer';
 
-type CheckboxProps = InputProps<HTMLInputElement, boolean>;
+type CheckboxProps = InputContainerProps & InputProps<boolean>;
 
 export const Checkbox = memo(
   ({
     className = '',
-    defaultValue = false,
-    onChange,
-    size = {
-      height: Sizes.Small,
-    },
+    defaultValue,
+    events = {},
+    size = {},
     validation = {},
     ...props
   }: CheckboxProps): React.ReactElement => {
@@ -40,20 +32,24 @@ export const Checkbox = memo(
     const [value, setValue] = useState(defaultValue);
 
     useEffect(() => {
-      const probs = validate(value, validation);
+      if (validation?.conditions) {
+        const probs = validate(value, validation.conditions);
 
-      setProblems(probs);
+        setProblems(probs);
 
-      if (onChange)
-        onChange({
-          problems: probs,
-          validated: !probs.length,
-          value,
-        });
+        if (events.input?.onValueChange)
+          events.input?.onValueChange({
+            validation: {
+              problems: probs,
+              validated: !probs.length,
+            },
+            value,
+          });
+      }
     }, [value]);
 
     return (
-      <Container
+      <InputContainer
         alignment={{
           orientation: Orientation.Horizontal,
           vertical: AlignVertical.Center,
@@ -62,59 +58,66 @@ export const Checkbox = memo(
         background={{ color: BackgroundColors.Transparent }}
         className={`${className} checkbox`}
         cursor={Cursor.Pointer}
-        error={problems}
+        events={{
+          focus: {
+            onBlur: () => setFocused(false),
+            onFocus: () => setFocused(true),
+          },
+          mouse: {
+            onClick: () => setValue(!value),
+          },
+        }}
         form="null"
-        onBlur={() => setFocused(false)}
-        onClick={() => setValue(!value)}
-        onFocus={() => setFocused(true)}
+        states={{ state: { error: problems } }}
         {...props}
       >
-        <Box size={size} focused={focused}>
+        <Container size={size} states={{ state: { focused } }}>
           <Icon
             color={value ? Colors.Success : Colors.White}
             name={BasicIcons.Checkmark2}
             size={{
               height: Sizes.Smaller,
               width: Sizes.Smaller,
+              ...size,
             }}
           />
-        </Box>
-      </Container>
+        </Container>
+      </InputContainer>
     );
   },
 );
 
-const Box = styled.span<{
-  fixed?: boolean;
-  focused?: boolean;
-  size?: Size;
-}>`
-  ${FocusStyles};
+// const Box = styled.span<{
+//   fixed?: boolean;
+//   focused?: boolean;
+//   size?: Size;
+// }>`
+//   ${FocusStyles};
 
-  align-items: center;
-  background: white;
-  border: 1px solid rgba(230, 230, 230, 1);
-  border-radius: 4px;
-  color: #7b7b7b;
-  cursor: pointer;
-  display: flex;
-  height: ${props => props.size};
-  justify-content: center;
-  margin-right: 5px;
-  position: relative;
-  text-align: center;
-  transition: background 0.2s ease-in-out;
-  width: ${props => props.size};
+//   align-items: center;
+//   background: white;
+//   border: 1px solid rgba(230, 230, 230, 1);
+//   border-radius: 4px;
+//   color: #7b7b7b;
+//   cursor: pointer;
+//   display: flex;
+//   height: ${props => props.size};
+//   justify-content: center;
+//   margin-right: 5px;
+//   position: relative;
+//   text-align: center;
+//   transition: background 0.2s ease-in-out;
+//   width: ${props => props.size};
 
-  &:before {
-    border-radius: ${Amount.Least};
-  }
+//   &:before {
+//     border-radius: ${Amount.Least};
+//   }
 
-  ${props =>
-    !props.fixed &&
-    css`
-      &:hover {
-        background: rgba(220, 220, 220, 0.1);
-      }
-    `}
-`;
+//   ${props =>
+//     !props.fixed &&
+//     css`
+//       &:hover {
+//         background: rgba(220, 220, 220, 0.1);
+//       }
+//     `}
+// `;

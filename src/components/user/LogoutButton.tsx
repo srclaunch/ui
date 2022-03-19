@@ -38,7 +38,14 @@ export const LogoutButton = memo(
     }, [loggedIn]);
 
     return (
-      <Button onClick={() => dispatch(logout())} {...props}>
+      <Button
+        events={{
+          mouse: {
+            onClick: () => dispatch(logout()),
+          },
+        }}
+        {...props}
+      >
         {icon && <Icon {...icon} />}
 
         <Label textColor={textColor} textSize={TextSize.Small}>

@@ -2,11 +2,9 @@ import { memo, ReactElement } from 'react';
 import { NotificationType } from '@srclaunch/types';
 import {
   AlignHorizontal,
-  Alignment,
   AlignVertical,
   Amount,
   BackgroundColors,
-  Depth,
   Orientation,
   Sizes,
   TextColors,
@@ -16,11 +14,11 @@ import { Container, ContainerProps } from '../layout/Container';
 import { Label } from '../typography/Label';
 import { Orb } from './Orb';
 
-export type NotificationLabelProps = {
+export type NotificationLabelProps = ContainerProps & {
   readonly label?: string;
   readonly showOrb?: boolean;
   readonly type?: NotificationType;
-} & ContainerProps<HTMLDivElement>;
+};
 
 export const NotificationLabel = memo(
   ({

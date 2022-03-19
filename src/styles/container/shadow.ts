@@ -2,7 +2,7 @@ import { css, SimpleInterpolation } from 'styled-components';
 
 import { DepthShadow, Shadow } from '../../types';
 
-export function getBoxShadowValue(
+export function getShadowStyles(
   shadow?: DepthShadow | Shadow,
 ): SimpleInterpolation {
   if (!shadow) {
@@ -17,7 +17,7 @@ export function getBoxShadowValue(
 
   if (Array.isArray(shadow)) {
     return css`
-      box-shadow: ${shadow.map(getBoxShadowValue).join(', ')};
+      box-shadow: ${shadow.map(getShadowStyles).join(', ')};
     `;
   }
 
@@ -33,11 +33,7 @@ export function getBoxShadowValue(
 export const ShadowStyles = css<{
   shadow?: DepthShadow | Shadow;
 }>`
-  ${props =>
-    props.shadow &&
-    css`
-      ${getBoxShadowValue(props.shadow)}
-    `};
+  ${props => getShadowStyles(props.shadow)};
 `;
 
 /*

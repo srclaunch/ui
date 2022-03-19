@@ -8,38 +8,26 @@ import {
   Amount,
   BackgroundColors,
   Orientation,
-  Size,
   TextSize,
 } from '../../../../types';
 import { MoreMenu } from '../../../menus/MoreMenu';
 import { MoreMenuProps } from '../../../menus/MoreMenu';
 import { Icon, IconProps } from '../../../media/Icon';
-import { convertSizeToAmount } from '../../../../lib/proportions/conversions';
-import { getSmallerAmount } from '../../../../lib/proportions/amount';
 
-type UserLabelProps = {
+type UserLabelProps = PersonLabelProps & {
   menu?: MoreMenuProps | null;
   id?: User['id'];
   to?: string;
   messageIcon?: IconProps;
-} & PersonLabelProps;
+};
 
 export const UserLabel = memo(
   ({
+    events = {},
     className = '',
     to,
     id,
-    menu = {
-      menu: [
-        {
-          label: 'Send message',
-          onClick: () => {
-            console.log('sendEmail');
-          },
-        },
-        { label: 'View Profile', to: `/people/${id}` },
-      ],
-    },
+    menu = {},
     messageIcon = {
       name: BasicIcons.BillEnvelope,
     },
@@ -55,22 +43,24 @@ export const UserLabel = memo(
         }}
         borderRadius={{ all: Amount.All }}
         className={`${className} user-label`}
-        active={{
-          background: {
-            color: BackgroundColors.Primary,
-            opacity: 100,
-          },
-        }}
-        hover={{
-          background: {
-            color: BackgroundColors.Primary,
-            opacity: 90,
-          },
-        }}
         // padding={getSmallerAmount(convertSizeToAmount(size))}
         // paddingTop={getSmallerAmount(convertSizeToAmount(size))}
         // paddingBottom={getSmallerAmount(convertSizeToAmount(size))}
         to={to ?? `/people/${id}`}
+        states={{
+          active: {
+            background: {
+              color: BackgroundColors.Primary,
+              opacity: 100,
+            },
+          },
+          hovered: {
+            background: {
+              color: BackgroundColors.Primary,
+              opacity: 90,
+            },
+          },
+        }}
         style={{
           position: 'relative',
           zIndex: 5,
@@ -91,7 +81,23 @@ export const UserLabel = memo(
           />
         )}
 
-        {menu && <MoreMenu {...menu} />}
+        {menu && (
+          <MoreMenu
+            menu={[
+              {
+                label: 'Send message',
+                events: {
+                  mouse: {
+                    onClick: () => {
+                      console.log('sendEmail');
+                    },
+                  },
+                },
+              },
+              { label: 'View Profile', to: `/people/${id}` },
+            ]}
+          />
+        )}
       </NavigationLink>
     );
   },

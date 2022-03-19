@@ -1,7 +1,6 @@
 import { ValidationProblem } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
 import { memo, ReactElement, useEffect, useState } from 'react';
-
 import {
   Amount,
   BackgroundColors,
@@ -10,22 +9,19 @@ import {
   Depth,
   DepthShadow,
   InputProps,
-  Orientation,
-  Overflow,
   Sizes,
 } from '../../../../types';
-import { ErrorLabel } from '../../../errors/ErrorLabel';
 import { Container, ContainerProps } from '../../../layout/Container';
 import { Menu, MenuProps } from '../../../menus/Menu';
 import { MenuItemProps } from '../../../menus/MenuItem';
-import { LabelProps } from '../../../typography/Label';
+
 import { InputLabel } from '../../labels/InputLabel';
 import { DropdownControl } from '../shared/DropdownControl';
 import { DropdownPanel } from '../shared/DropdownPanel';
 
-export type DropdownInputProps<V = any> = ContainerProps &
-  InputProps<HTMLSelectElement, V> &
-  MenuProps;
+export type DropdownInputProps<V = unknown> = ContainerProps &
+  MenuProps &
+  InputProps<V>;
 
 export const DropdownInput = memo(
   ({
@@ -34,10 +30,10 @@ export const DropdownInput = memo(
     borderRadius = {},
     className = '',
     defaultValue,
+    events = {},
     label,
     menu,
     name,
-    onChange,
     padding = {},
     placeholder,
     size = {},
@@ -61,26 +57,26 @@ export const DropdownInput = memo(
     // }, [item]);
 
     useEffect(() => {
-      if (validation && valueChanged) {
-        const probs = validate(item, validation);
+      if (valueChanged) {
+        if (validation && validation?.conditions) {
+          const probs = validate(item, validation.conditions);
 
-        setProblems(probs);
+          setProblems(probs);
 
-        if (onChange)
-          onChange({
-            problems: probs,
-            validated: probs.length === 0,
-            value: item?.value,
-          });
-      } else {
-        setProblems([]);
-
-        if (onChange)
-          onChange({
-            problems: [],
-            validated: true,
-            value: item?.value,
-          });
+          if (events.input?.onValueChange)
+            events.input.onValueChange({
+              validation: {
+                problems: probs,
+                validated: probs.length === 0,
+              },
+              value: item?.value,
+            });
+        } else {
+          if (events.input?.onValueChange)
+            events.input.onValueChange({
+              value: item?.value,
+            });
+        }
       }
     }, [item]);
 
@@ -95,17 +91,20 @@ export const DropdownInput = memo(
     return (
       <>
         {(label || problems.length > 0) && (
-          <InputLabel error={problems}>{label}</InputLabel>
+          <InputLabel states={{ state: { error: problems } }}>
+            {label}
+          </InputLabel>
         )}
 
         <Container
-          alignment={{
-            overflow: Overflow.Visible,
-          }}
           borderRadius={{ all: Amount.Least, ...borderRadius }}
           className={`${className} dropdown-input`}
           depth={menuVisible ? Depth.Higher : Depth.Surface}
-          onMouseLeave={() => setMenuVisible(false)}
+          events={{
+            mouse: {
+              onMouseLeave: () => setMenuVisible(false),
+            },
+          }}
           size={{
             height: Sizes.Default,
             maxWidth: 300,
@@ -127,19 +126,24 @@ export const DropdownInput = memo(
             }}
             component={item?.component}
             depth={Depth.High}
-            error={problems}
-            focused={focused}
+            events={{
+              focus: {
+                onBlur: () => {
+                  setFocused(false);
+                },
+                onFocus: () => setFocused(true),
+              },
+              mouse: {
+                onClick: () => setMenuVisible(!menuVisible),
+              },
+            }}
             icon={item?.icon}
             label={item?.label}
             menuVisible={menuVisible}
             name={name}
-            onBlur={() => {
-              setFocused(false);
-            }}
-            onFocus={() => setFocused(true)}
-            onClick={() => setMenuVisible(!menuVisible)}
             placeholder={placeholder}
             shadow={DepthShadow.Low}
+            states={{ state: { error: problems, focused } }}
             size={{
               height: Sizes.Default,
               ...size,
@@ -167,7 +171,6 @@ export const DropdownInput = memo(
               // topRight: Amount.None,
               ...borderRadius,
             }}
-            focused={focused}
             padding={padding}
             position={{ top: `calc(${Sizes.Default} - 0px)` }}
             size={{
@@ -176,7 +179,7 @@ export const DropdownInput = memo(
               minWidth: 240,
               ...size,
             }}
-            visible={menuVisible}
+            states={{ state: { focused, visible: menuVisible } }}
           >
             <Menu
               background={{

@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Border, BorderRadius, CommonComponentProps, Margin, Size } from '../../types';
+import { Border, BorderRadius, CommonComponentProps, Events, InteractionStates, Margin, Size } from '../../types';
 /**
  * Image component for displaying GIFs, JPGs or PNGs.
  *
@@ -7,17 +7,18 @@ import { Border, BorderRadius, CommonComponentProps, Margin, Size } from '../../
  * @param url - A full URL path to an image
  * @param path - A relative path to an image located in the 'Assets" repo
  */
-export declare type ImageProps = {
+export declare type ImageProps<P = {}> = (CommonComponentProps & {
     readonly alt?: string;
-    readonly className?: string;
+    readonly border?: Border;
+    readonly borderRadius?: BorderRadius;
     readonly description?: string;
-    readonly url?: string;
+    readonly events?: Events;
+    readonly margin?: Margin;
     readonly path?: string;
-} & CommonComponentProps<HTMLImageElement> & {
-    border?: Border;
-    borderRadius?: BorderRadius;
-    margin?: Margin;
-    size?: Size;
+    readonly size?: Size;
+    readonly url?: string;
+} & P) & {
+    readonly states?: InteractionStates<ImageProps>;
 };
 export declare const Image: import("react").MemoExoticComponent<({ alt, className, description, path, url, size, ...props }: ImageProps) => ReactElement>;
 //# sourceMappingURL=Image.d.ts.map

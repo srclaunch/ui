@@ -14,7 +14,7 @@ import { LoadingOverlay } from '../progress/LoadingOverlay';
 import { SubTitle } from '../typography/SubTitle';
 import { Title } from '../typography/Title';
 
-type WorkspaceProps = {
+type WorkspaceProps = ContainerProps & {
   readonly header?: {
     readonly actions?: ReactElement;
     readonly title?: string | ReactElement;
@@ -24,7 +24,7 @@ type WorkspaceProps = {
   readonly loading?: boolean;
   readonly loginRequired?: boolean;
   readonly title?: string | null;
-} & ContainerProps<HTMLDivElement>;
+};
 
 export const Workspace = memo(
   ({
@@ -64,40 +64,48 @@ export const Workspace = memo(
               orientation: Orientation.Horizontal,
               vertical: AlignVertical.Center,
             }}
+            className="workspace-header"
             margin={{
               bottom: Amount.All,
             }}
           >
-            <Container>
-              <Container
-                alignment={{
-                  orientation: Orientation.Horizontal,
-                  vertical: AlignVertical.Center,
-                }}
-                className="workspace-title"
-              >
-                {header?.title &&
-                  (typeof header.title === 'string' ? (
+            <Container
+              alignment={{
+                fill: Fill.Horizontal,
+              }}
+            >
+              {header?.title && (
+                <Container
+                  alignment={{
+                    orientation: Orientation.Horizontal,
+                    vertical: AlignVertical.Center,
+                  }}
+                  className="workspace-title"
+                >
+                  {typeof header.title === 'string' ? (
                     <Title>{header.title}</Title>
                   ) : (
                     header.title
-                  ))}
-              </Container>
-              <Container
-                className="workspace-sub-title"
-                alignment={{
-                  orientation: Orientation.Horizontal,
-                  vertical: AlignVertical.Center,
-                }}
-              >
-                {header?.subTitle && <SubTitle>{header.subTitle}</SubTitle>}
-              </Container>
+                  )}
+                </Container>
+              )}
+
+              {header?.subTitle && (
+                <Container
+                  className="workspace-sub-title"
+                  alignment={{
+                    orientation: Orientation.Horizontal,
+                    vertical: AlignVertical.Center,
+                  }}
+                >
+                  {<SubTitle>{header.subTitle}</SubTitle>}
+                </Container>
+              )}
             </Container>
 
             {header?.actions && (
               <Container
                 alignment={{
-                  fill: Fill.Horizontal,
                   horizontal: AlignHorizontal.Right,
                 }}
                 className="workspace-actions"

@@ -29,11 +29,9 @@ import { InputContainer, InputContainerProps } from '../shared/InputContainer';
 import { TextInputProps } from './TextInput';
 import { TextProps } from '../../../typography/Text';
 
-export type LongTextInputProps<V = LongText> = {
+export type LongTextInputProps = {
   readonly spellCheck?: boolean;
-} & InputProps<HTMLTextAreaElement, V> &
-  InputContainerProps &
-  TextProps;
+} & TextInputProps;
 
 export const LongTextInput = memo(
   ({
@@ -41,17 +39,15 @@ export const LongTextInput = memo(
     border = {},
     className = '',
     defaultValue,
-    error,
-    hidden = false,
-    inProgress = false,
+    events = {},
     label,
     lineHeight = Amount.More,
     name,
-    onChange,
     placeholder = '',
     // size = Size.Default,
     shadow = DepthShadow.Low,
     spellCheck = true,
+    states = {},
     textColor = TextColors.InputControl,
     validation = {},
   }: LongTextInputProps): ReactElement => {
@@ -62,26 +58,26 @@ export const LongTextInput = memo(
     const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
     useEffect(() => {
-      if (validation && valueChanged) {
-        const probs = validate(value, validation);
+      if (valueChanged) {
+        if (validation && validation.conditions) {
+          const probs = validate(value, validation.conditions);
 
-        setProblems(probs);
+          setProblems(probs);
 
-        if (onChange)
-          onChange({
-            problems: probs,
-            validated: probs.length === 0,
-            value,
-          });
-      } else {
-        setProblems([]);
-
-        if (onChange)
-          onChange({
-            problems: [],
-            validated: true,
-            value,
-          });
+          if (events.input?.onValueChange)
+            events.input.onValueChange({
+              validation: {
+                problems: probs,
+                validated: probs.length === 0,
+              },
+              value,
+            });
+        } else {
+          if (events.input?.onValueChange)
+            events.input.onValueChange({
+              value,
+            });
+        }
       }
     }, [value]);
 
@@ -112,12 +108,15 @@ export const LongTextInput = memo(
             ...border,
           }}
           className={`${className} text-input`}
-          error={problems}
-          focused={focused}
-          // height={size}
-          onClick={() => {
-            inputRef.current?.focus();
+          events={{
+            mouse: {
+              onClick: () => {
+                inputRef.current?.focus();
+              },
+            },
           }}
+          // height={size}
+
           padding={{
             bottom: Amount.Least,
             left: Amount.Less,
@@ -125,10 +124,15 @@ export const LongTextInput = memo(
             top: Amount.Least,
           }}
           shadow={shadow}
+          states={{
+            state: {
+              error: problems,
+              focused,
+            },
+          }}
           // size={size}
         >
           <Input
-            hidden={hidden}
             name={name}
             onBlur={() => setFocused(false)}
             onChange={(e: any) => {
@@ -141,12 +145,17 @@ export const LongTextInput = memo(
             placeholder={placeholder}
             ref={inputRef}
             lineHeight={lineHeight}
+            states={{
+              state: {
+                visible: !states.state?.visible,
+              },
+            }}
             textColor={textColor}
             value={value}
             spellCheck={spellCheck}
           />
 
-          {inProgress && (
+          {states.state?.loading && (
             <ProgressSpinner
             // size={Size.Small}
             />

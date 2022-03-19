@@ -7,6 +7,7 @@ import { HexColorPicker } from 'react-colorful';
 import rgbHex from 'rgb-hex';
 
 import { Color, InputProps } from '../../../../types';
+import { InputContainer, InputContainerProps } from '../shared/InputContainer';
 
 export const defaultColors = [
   '244,67,54',
@@ -29,23 +30,27 @@ export const defaultColors = [
   '96,125,139',
 ];
 
-type ColorInputProps = InputProps<HTMLDivElement, Color>;
+type ColorInputProps = InputContainerProps & InputProps<string>;
 
 export const ColorInput = memo(
-  ({ defaultValue, onChange }: ColorInputProps): React.ReactElement => {
-    const [value, setValue] = useState<Color | undefined>(defaultValue);
+  ({
+    defaultValue,
+    events = {},
+    ...props
+  }: ColorInputProps): React.ReactElement => {
+    const [value, setValue] = useState(defaultValue);
     const [colorName, setColorName] = useState(null);
 
     useEffect(() => {
       setColorName(colorNamer(`rgb(${value})`).pantone[0].name);
 
       if (value !== defaultValue) {
-        if (onChange) onChange({ value });
+        if (events.input?.onValueChange) events.input?.onValueChange({ value });
       }
     }, [value]);
 
     return (
-      <Container
+      <InputContainer
         data-testid="color-picker"
         //  modal={modal}
       >
@@ -79,7 +84,7 @@ export const ColorInput = memo(
             />
           </ColorMixer>
         </ColorMenu>
-      </Container>
+      </InputContainer>
     );
   },
 );

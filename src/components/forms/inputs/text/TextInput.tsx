@@ -9,15 +9,9 @@ import {
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  ClipboardEventProps,
   Cursor,
   DepthShadow,
-  FocusEventProps,
   InputProps,
-  KeyboardEventProps,
-  MouseEventProps,
-  Orientation,
-  Size,
   Sizes,
   TextColors,
   TextWeight,
@@ -36,15 +30,15 @@ export enum TextInputType {
   Search = 'search',
 }
 
-export type TextInputProps<V = string> = {
-  readonly icon?: IconProps;
-  readonly inputType?: TextInputType;
-  readonly prefix?: string;
-  readonly spellCheck?: boolean;
-  readonly suffix?: string;
-} & InputProps<HTMLInputElement, V> &
-  InputContainerProps &
-  TextProps;
+export type TextInputProps = InputContainerProps &
+  InputProps<string> &
+  TextProps & {
+    readonly icon?: IconProps;
+    readonly inputType?: TextInputType;
+    readonly prefix?: string;
+    readonly spellCheck?: boolean;
+    readonly suffix?: string;
+  };
 
 export const TextInput = memo(
   ({
@@ -54,19 +48,17 @@ export const TextInput = memo(
     className = '',
     cursor = Cursor.Text,
     defaultValue,
-    error,
-    hidden = false,
+    events = {},
     icon,
-    inProgress = false,
     inputType = TextInputType.Text,
     label,
     lineHeight = Sizes.Default,
     name,
-    onChange,
     prefix = '',
     placeholder = '',
     shadow = DepthShadow.Low,
     spellCheck = true,
+    states = {},
     suffix = '',
     textColor = TextColors.InputControl,
     textWeight = TextWeight.Default,
@@ -80,26 +72,26 @@ export const TextInput = memo(
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
-      if (validation && valueChanged) {
-        const probs = validate(value, validation);
+      if (valueChanged) {
+        if (validation?.conditions) {
+          const probs = validate(value, validation?.conditions);
 
-        setProblems(probs && probs.length > 0 ? probs : undefined);
+          setProblems(probs && probs.length > 0 ? probs : undefined);
 
-        if (onChange)
-          onChange({
-            problems: probs,
-            validated: probs.length === 0,
-            value,
-          });
-      } else {
-        setProblems(undefined);
-
-        if (onChange)
-          onChange({
-            problems: undefined,
-            validated: true,
-            value,
-          });
+          if (events.input?.onValueChange)
+            events.input?.onValueChange({
+              validation: {
+                problems: probs,
+                validated: probs.length === 0,
+              },
+              value,
+            });
+        } else {
+          if (events.input?.onValueChange)
+            events.input?.onValueChange({
+              value,
+            });
+        }
       }
     }, [value]);
 
@@ -110,7 +102,15 @@ export const TextInput = memo(
     return (
       <>
         {(label || problems) && (
-          <InputLabel error={problems}>{label}</InputLabel>
+          <InputLabel
+            states={{
+              state: {
+                error: problems,
+              },
+            }}
+          >
+            {label}
+          </InputLabel>
         )}
 
         <InputContainer
@@ -125,10 +125,18 @@ export const TextInput = memo(
           }}
           className={`${className} text-input`}
           cursor={cursor}
-          error={problems}
-          focused={focused}
-          onClick={() => {
-            inputRef.current?.focus();
+          events={{
+            mouse: {
+              onClick: () => () => {
+                inputRef.current?.focus();
+              },
+            },
+          }}
+          states={{
+            state: {
+              error: problems,
+              focused,
+            },
           }}
           shadow={shadow}
           {...props}
@@ -150,7 +158,6 @@ export const TextInput = memo(
           <Input
             autoComplete={autoComplete}
             defaultValue={defaultValue}
-            hidden={hidden}
             lineHeight={lineHeight}
             name={name}
             onBlur={() => setFocused(false)}
@@ -166,9 +173,10 @@ export const TextInput = memo(
             value={value}
             ref={inputRef}
             spellCheck={spellCheck}
+            states={states}
           />
 
-          {inProgress && (
+          {states.state?.loading && (
             <ProgressSpinner
               size={{
                 height: Sizes.Small,

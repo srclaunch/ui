@@ -2,43 +2,37 @@ import { css, SimpleInterpolation } from 'styled-components';
 
 import { Depth } from '../../types';
 
-export function getZIndexValue(depth?: Depth): SimpleInterpolation {
+export function getZIndexValue(depth?: Depth): number {
   switch (depth) {
     case Depth.Lowest:
-      return css`
-        z-index: -3;
-      `;
+      return -3;
     case Depth.Lower:
-      return css`
-        z-index: -2;
-      `;
+      return -2;
     case Depth.Low:
-      return css`
-        z-index: -1;
-      `;
+      return -1;
     case Depth.Surface:
-      return css`
-        z-index: 0;
-      `;
+      return 0;
     case Depth.High:
-      return css`
-        z-index: 1;
-      `;
+      return 1;
     case Depth.Higher:
-      return css`
-        z-index: 2;
-      `;
+      return 2;
     case Depth.Highest:
-      return css`
-        z-index: 3;
-      `;
+      return 3;
     default:
-      return;
+      return 0;
   }
 }
 
+export function getDepthStyles(depth?: Depth): SimpleInterpolation {
+  return css`
+    ${depth &&
+    css`
+      z-index: ${getZIndexValue(depth)};
+    `};
+  `;
+}
 export const DepthStyles = css<{
   readonly depth?: Depth;
 }>`
-  ${props => getZIndexValue(props.depth)}
+  ${props => getDepthStyles(props.depth)};
 `;

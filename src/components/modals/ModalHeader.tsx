@@ -1,16 +1,16 @@
 import { ComponentType, memo, ReactElement } from 'react';
 
-import { AlignHorizontal, Alignment, Amount, Orientation } from '../../types';
+import { AlignHorizontal, Amount, Orientation } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 import { MoreMenu, MoreMenuProps } from '../menus/MoreMenu';
 import { Title } from '../typography/Title';
 import { CloseButton } from './CloseButton';
 
-export type ModalHeaderProps = {
+export type ModalHeaderProps = ContainerProps & {
   readonly onCloseClick?: () => unknown;
   readonly moreMenu?: MoreMenuProps;
   readonly title?: string | ComponentType;
-} & ContainerProps<HTMLDivElement>;
+};
 
 export const ModalHeader = memo(
   ({
@@ -44,7 +44,10 @@ export const ModalHeader = memo(
           />
         )}
 
-        <CloseButton margin={{ left: Amount.Less }} onClick={onCloseClick} />
+        <CloseButton
+          events={{ mouse: { onClick: onCloseClick } }}
+          margin={{ left: Amount.Less }}
+        />
       </Container>
     );
   },

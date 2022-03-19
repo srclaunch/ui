@@ -26,7 +26,6 @@ export const Card = memo(
     draggable = false,
     id,
     linkTo,
-    onClick,
     shadow = DepthShadow.Higher,
     title,
     ...props
@@ -39,7 +38,6 @@ export const Card = memo(
         }}
         borderRadius={{ all: Amount.Less, ...borderRadius }}
         className={`card${id ? `-${id}` : ''}`}
-        onClick={onClick}
         shadow={shadow}
         {...props}
       >

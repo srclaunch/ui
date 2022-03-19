@@ -73,9 +73,11 @@ const ActivityFeedItem = memo(
             {what.to ? (
               <Link
                 to={what.to}
-                hover={{
-                  textDecoration: {
-                    line: TextDecorationLine.Underline,
+                states={{
+                  hovered: {
+                    textDecoration: {
+                      line: TextDecorationLine.Underline,
+                    },
                   },
                 }}
                 textDecoration={{

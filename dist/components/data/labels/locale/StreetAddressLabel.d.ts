@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import { LabelProps } from '../../../typography/Label';
-declare type StreetAddressLabelProps = {
+declare type StreetAddressLabelProps = LabelProps & {
     value: string;
-} & LabelProps;
+};
 export declare const StreetAddressLabel: import("react").MemoExoticComponent<({ icon, lineHeight, textColor, textSize, value, ...props }: StreetAddressLabelProps) => ReactElement>;
 export {};
 //# sourceMappingURL=StreetAddressLabel.d.ts.map

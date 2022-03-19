@@ -4,8 +4,9 @@ import { memo, ReactElement } from 'react';
 import {
   AlignHorizontal,
   Alignment,
+  AlignVertical,
   Amount,
-  ErrorProps,
+  Fill,
   Orientation,
   Size,
   Sizes,
@@ -15,23 +16,27 @@ import {
 import { ErrorLabel } from '../../errors/ErrorLabel';
 import { Container, ContainerProps } from '../../layout/Container';
 import { Label, LabelProps } from '../../typography/Label';
+import { getErrorMessage } from '../../../lib/errors/messages';
 
-type InputLabelProps = ErrorProps & LabelProps;
+type InputLabelProps = LabelProps;
 
 export const InputLabel = memo(
   ({
     alignment = {},
     children,
     className = '',
-    error,
-    lineHeight = Sizes.Smaller,
-    margin = {},
+    states = {},
     textColor = TextColors.InputLabel,
     textSize = TextSize.Small,
     ...props
   }: InputLabelProps): ReactElement => {
     return (
-      <Container>
+      <Container
+        alignment={{
+          orientation: Orientation.Horizontal,
+          vertical: AlignVertical.Center,
+        }}
+      >
         <Label
           alignment={{
             horizontal: AlignHorizontal.Left,
@@ -39,24 +44,27 @@ export const InputLabel = memo(
             ...alignment,
           }}
           className={`${className} input-label`}
-          lineHeight={lineHeight}
           textSize={textSize}
           textColor={textColor}
-          margin={{ bottom: Amount.Least, ...margin }}
           {...props}
         >
           {children}
         </Label>
 
-        {error && (
-          <ErrorLabel textSize={textSize}>
-            {error instanceof Exception
-              ? error.message
-              : error.length > 0
-              ? error[0]?.message.long
-              : null}
-          </ErrorLabel>
-        )}
+        {states.state &&
+          (states.state?.error instanceof Exception ||
+            (Array.isArray(states.state?.error) &&
+              states.state?.error.length > 0)) && (
+            <ErrorLabel
+              alignment={{
+                fill: Fill.Horizontal,
+                horizontal: AlignHorizontal.Right,
+              }}
+              textSize={textSize}
+            >
+              {getErrorMessage(states.state.error)}
+            </ErrorLabel>
+          )}
       </Container>
     );
   },

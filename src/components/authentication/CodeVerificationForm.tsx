@@ -33,10 +33,10 @@ import { LineBreak } from '../typography/LineBreak';
 import { Paragraph } from '../typography/Paragraph';
 import { Title } from '../typography/Title';
 
-type CodeVerificationFormProps = {
+type CodeVerificationFormProps = ContainerProps & {
   readonly onVerificationSuccess?: () => unknown;
   readonly userId: string;
-} & ContainerProps;
+};
 
 export const CodeVerificationForm = memo(
   ({
@@ -104,8 +104,11 @@ export const CodeVerificationForm = memo(
             </Container>
 
             <Button
-              fullWidth
-              onClick={() => navigate('/login')}
+              events={{
+                mouse: {
+                  onClick: () => navigate('/'),
+                },
+              }}
               type={ButtonType.Primary}
             >
               Login
@@ -133,14 +136,23 @@ export const CodeVerificationForm = memo(
               <InputRow>
                 <VerificationCodeInput
                   autoComplete={AutoComplete.OneTimeCode}
+                  events={{
+                    input: {
+                      onValueChange: ({ validation, value }) => {
+                        setProblems(validation?.problems);
+
+                        if (
+                          (validation && validation.validated) ||
+                          !validation
+                        ) {
+                          setCode(value);
+                        }
+                      },
+                    },
+                  }}
                   length={6}
                   name="verification_code"
-                  onChange={({ value, validated, problems: problemos }) => {
-                    setProblems(problemos);
 
-                    if (validated && problemos && problemos.length === 0)
-                      setCode(value);
-                  }}
                   // size={Sizes.Large}
                 />
               </InputRow>
@@ -152,17 +164,23 @@ export const CodeVerificationForm = memo(
               />
 
               <Button
-                disabled={
-                  (problems && problems.length > 0) ||
-                  !code ||
-                  verificationState.verify.inProgress ||
-                  verificationState.resend.inProgress
-                }
-                fullWidth
-                onClick={() => {
-                  if (userId && code) {
-                    dispatch(verifyCode({ code, userId }));
-                  }
+                events={{
+                  mouse: {
+                    onClick: () => {
+                      if (userId && code) {
+                        dispatch(verifyCode({ code, userId }));
+                      }
+                    },
+                  },
+                }}
+                states={{
+                  state: {
+                    disabled:
+                      (problems && problems.length > 0) ||
+                      !code ||
+                      verificationState.verify.inProgress ||
+                      verificationState.resend.inProgress,
+                  },
                 }}
                 type={ButtonType.Primary}
               >
@@ -178,10 +196,14 @@ export const CodeVerificationForm = memo(
             >
               {!verificationState.resend.success ? (
                 <Button
-                  onClick={() => {
-                    if (userId) {
-                      dispatch(resendVerificationCode({ userId }));
-                    }
+                  events={{
+                    mouse: {
+                      onClick: () => {
+                        if (userId) {
+                          dispatch(resendVerificationCode({ userId }));
+                        }
+                      },
+                    },
                   }}
                   type={ButtonType.Link}
                 >

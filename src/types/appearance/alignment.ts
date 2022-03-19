@@ -41,9 +41,9 @@ export enum Overflow {
 }
 
 export type Alignment = {
-  fill?: Fill;
-  orientation?: Orientation;
-  overflow?: Overflow;
-  horizontal?: AlignHorizontal;
-  vertical?: AlignVertical;
+  readonly fill?: Fill;
+  readonly orientation?: Orientation;
+  readonly overflow?: Overflow;
+  readonly horizontal?: AlignHorizontal;
+  readonly vertical?: AlignVertical;
 };

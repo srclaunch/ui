@@ -13,9 +13,9 @@ import {
 } from '../../types';
 import { Spacer } from '../layout/Spacer';
 
-export type NavigationBarProps = {
+export type NavigationBarProps = ContainerProps & {
   readonly logo?: ReactElement;
-} & ContainerProps<HTMLDivElement>;
+};
 
 export const NavigationBar = memo(
   ({

@@ -7,7 +7,7 @@ import {
 } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
 
-import { AlignVertical, Overflow } from '../../types';
+import { AlignVertical, Fill, Overflow } from '../../types';
 import {
   DropdownInput,
   DropdownInputProps,
@@ -15,10 +15,10 @@ import {
 import { InputLabel } from '../forms/labels/InputLabel';
 import { Container, ContainerProps } from '../layout/Container';
 
-export type ThemeSelectorProps = {
-  readonly showLabel?: boolean;
-} & ContainerProps<HTMLDivElement> &
-  DropdownInputProps;
+export type ThemeSelectorProps = ContainerProps &
+  DropdownInputProps & {
+    readonly showLabel?: boolean;
+  };
 
 export const ThemeSelector = memo(
   ({ showLabel = true, ...props }: ThemeSelectorProps): ReactElement => {
@@ -29,16 +29,20 @@ export const ThemeSelector = memo(
     );
 
     return (
-      <Container
-        alignment={{
-          overflow: Overflow.Visible,
-          vertical: AlignVertical.Center,
-        }}
-      >
+      <>
         {showLabel && <InputLabel>Theme</InputLabel>}
 
         <DropdownInput
           defaultValue={current}
+          events={{
+            input: {
+              onValueChange: ({ value }) => {
+                const newTheme = list.find((t: Theme) => t.id === value);
+
+                dispatch(setTheme(newTheme.id));
+              },
+            },
+          }}
           name="theme"
           menu={list.map((i: Theme) => {
             return {
@@ -46,15 +50,10 @@ export const ThemeSelector = memo(
               value: i.id,
             };
           })}
-          onChange={({ value }) => {
-            const newTheme = list.find((t: Theme) => t.id === value);
-
-            dispatch(setTheme(newTheme.id));
-          }}
           placeholder="Choose a theme"
           {...props}
         />
-      </Container>
+      </>
     );
   },
 );

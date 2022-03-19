@@ -1,4 +1,4 @@
-import { Colors, ContrastColors } from './color';
+import { Color, Colors, ContrastColors } from './color';
 
 export enum ElementBackgroundColors {
   Card = 'var(--bg-color-card-rgb)',
@@ -96,12 +96,12 @@ export enum BackgroundRepeat {
 }
 
 export type Background = {
-  color?: BackgroundColor | string;
-  image?: {
-    path?: string;
-    repeat?: BackgroundRepeat;
-    size?: BackgroundSize;
-    url?: string;
+  readonly color?: Color;
+  readonly image?: {
+    readonly path?: string;
+    readonly repeat?: BackgroundRepeat;
+    readonly size?: BackgroundSize;
+    readonly url?: string;
   };
-  opacity?: number;
+  readonly opacity?: number;
 };

@@ -1,30 +1,24 @@
-import { css } from 'styled-components';
+import { css, SimpleInterpolation } from 'styled-components';
+import { Visibility } from '../../types/appearance/visibility';
+
+export function getVisibilityStyles(
+  visibility?: Visibility,
+): SimpleInterpolation {
+  return css`
+    ${visibility?.hidden === true &&
+    css`
+      visibility: hidden;
+    `};
+
+    ${visibility?.opacity &&
+    css`
+      opacity: ${visibility.opacity}%;
+    `};
+  `;
+}
 
 export const VisibilityStyles = css<{
-  visible?: boolean;
+  visibility?: Visibility;
 }>`
-  ${props =>
-    props.visible !== undefined &&
-    css`
-      opacity: ${props.visible ? 1 : 0};
-      pointer-events: ${props.visible ? 'all' : 'none'};
-      visibility: ${props.visible ? 'visible' : 'hidden'};
-    `};
+  ${props => getVisibilityStyles(props.visibility)};
 `;
-
-/*
- animation: ${props => (props.fadeIn ? 'fadeInAnimation ease 0.13s' : 'none')};
-  animation-iteration-count: ${props => (props.fadeIn ? 1 : 'none')};
-  animation-fill-mode: ${props => (props.fadeIn ? 'forwards' : 'none')};
-
-
-  @keyframes fadeInAnimation {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-    }
-  }
-  */

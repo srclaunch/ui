@@ -6,6 +6,7 @@ import {
   CommonComponentProps,
   Fill,
   Orientation,
+  Overflow,
   Sizes,
   TextColors,
   TextOverflow,
@@ -16,11 +17,10 @@ import { Container, ContainerProps } from '../layout/Container';
 import { Icon, IconProps } from '../media/Icon';
 import { Text, TextProps } from './Text';
 
-export type LabelProps<E = HTMLLabelElement> = {
-  readonly icon?: IconProps;
-} & CommonComponentProps<E> &
-  ContainerProps &
-  TextProps;
+export type LabelProps = ContainerProps &
+  TextProps & {
+    readonly icon?: IconProps;
+  };
 
 export const Label = memo(
   ({
@@ -41,9 +41,8 @@ export const Label = memo(
     return (
       <Container
         alignment={{
-          fill: Fill.Both,
           orientation: Orientation.Horizontal,
-          vertical: AlignVertical.Center,
+          vertical: AlignVertical.Top,
           ...alignment,
         }}
         as={as}
@@ -55,7 +54,9 @@ export const Label = memo(
             icon.name ||
             icon.path ||
             icon.url ||
-            icon.svg) && <Icon margin={{ right: Amount.Least }} {...icon} />}
+            icon.svg) && (
+            <Icon margin={{ right: Amount.Least, ...icon.margin }} {...icon} />
+          )}
 
         <Text
           selectable={selectable}
@@ -64,7 +65,6 @@ export const Label = memo(
           textOverflow={textOverflow}
           textSize={textSize}
           textWeight={textWeight}
-          {...props}
         >
           {children}
         </Text>

@@ -1,7 +1,11 @@
 import { ReactElement, SyntheticEvent } from 'react';
 import { Model, Primitives } from '@srclaunch/types';
-import { DataGridDisplayType, Size, AlignHorizontal } from '../../../types';
+import { Size, AlignHorizontal } from '../../../types';
 import { ContainerProps } from '../../layout/Container';
+export declare enum DataGridDisplayType {
+    Card = "card",
+    Table = "table"
+}
 export declare type DataGridColumn = {
     align?: AlignHorizontal;
     label: string;
@@ -11,7 +15,7 @@ export declare type DataGridColumn = {
     size?: Size;
     type: Primitives;
 };
-export declare type DataGridProps = {
+export declare type DataGridProps = ContainerProps & {
     className?: string;
     columns: DataGridColumn[];
     columnCount?: number;
@@ -40,16 +44,14 @@ export declare type DataGridProps = {
     model?: Model;
     onItemClick?: (row: Record<string, unknown>) => unknown;
     template?: {
-        card?: ({ onClick, row, }: {
-            onClick?: (row: Record<string, Primitives>) => unknown;
+        card?: ({ row, }: {
             row: Record<string, Primitives>;
-        } & ContainerProps<HTMLDivElement>) => ReactElement;
-        row?: ({ onClick, row, }: {
-            onClick?: (row: Record<string, Primitives>) => unknown;
+        } & ContainerProps) => ReactElement;
+        row?: ({ row, }: {
             row: Record<string, Primitives>;
-        } & ContainerProps<HTMLDivElement>) => ReactElement;
+        } & ContainerProps) => ReactElement;
     };
-} & ContainerProps<HTMLElement>;
+};
 export declare const DataGrid: import("react").MemoExoticComponent<({ background, borderRadius, className, columns, columnCount, data, depth, display, header, hideOnProp, loaded, loading, model, onItemClick, shadow, template, ...props }: DataGridProps) => ReactElement>;
 export default DataGrid;
 //# sourceMappingURL=index.d.ts.map

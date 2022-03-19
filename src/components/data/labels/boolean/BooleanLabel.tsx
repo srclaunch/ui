@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 import { Icon } from '../../../media/Icon';
 import { Colors, Sizes, TextColors, TextSize } from '../../../../types';
 
-type BooleanLabelProps = {
+type BooleanLabelProps = LabelProps & {
   value: boolean;
-} & LabelProps;
+};
 
 export const BooleanLabel = memo(
   ({

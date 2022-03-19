@@ -1,7 +1,7 @@
 import { memo, ReactElement, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 
-import { Alignment, Amount, Depth, Orientation, Size } from '../../types';
+import { Amount, Depth } from '../../types';
 import {
   SearchInput,
   SearchInputProps,
@@ -10,10 +10,10 @@ import { Container, ContainerProps } from '../layout/Container';
 import { CloseButton } from '../modals/CloseButton';
 import { Heading } from '../typography/Heading';
 
-type UniversalSearchProps = ContainerProps & SearchInputProps;
+type UniversalSearchProps = SearchInputProps;
 
 export const UniversalSearch = memo(
-  ({ ...props }: UniversalSearchProps): ReactElement => {
+  (props: UniversalSearchProps): ReactElement => {
     const [resultsVisible, setResultsVisible] = useState(false);
     const [searchValue, setSearchValue] = useState<string>();
     const [isFocused, setFocused] = useState(false);
@@ -33,15 +33,21 @@ export const UniversalSearch = memo(
         {...props}
       >
         <SearchInput
+          events={{
+            focus: {
+              onBlur: () => {
+                setFocused(false);
+              },
+              onFocus: () => {
+                setFocused(true);
+              },
+            },
+            input: {
+              onValueChange: ({ value }) => setSearchValue(value),
+            },
+          }}
           name="universal-search"
           placeholder="Search everything"
-          onChange={({ value }) => setSearchValue(value)}
-          onFocus={() => {
-            setFocused(true);
-          }}
-          onBlur={() => {
-            setFocused(false);
-          }}
           spellCheck={false}
         />
 
@@ -52,7 +58,12 @@ export const UniversalSearch = memo(
           padding={{ all: Amount.More }}
         >
           <CloseButton
-            onClick={() => setResultsVisible(false)}
+            events={{
+              mouse: {
+                onClick: () => setResultsVisible(false),
+              },
+            }}
+
             // size={Size.Small}
           />
 

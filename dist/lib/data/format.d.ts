@@ -1,5 +1,7 @@
 import { CurrencyCode } from '@srclaunch/types';
-import { Formatter } from '../../types';
+export declare enum Formatter {
+    Currency = "currency"
+}
 export declare type FormatterProps = {
     formatter: Formatter;
     options?: FormatterOptions;

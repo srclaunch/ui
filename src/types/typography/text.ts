@@ -1,6 +1,3 @@
-import { Amount } from '../appearance/proportion';
-import { Size } from '../appearance/size';
-import { Cursor } from '../appearance/cursor';
 import { Colors, ContrastColors } from '../appearance/color';
 import { ForegroundColors } from '../appearance/foreground';
 

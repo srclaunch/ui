@@ -2,7 +2,6 @@ import { BasicIcons } from '@srclaunch/icons';
 import { ComponentRef, ForwardedRef, memo, ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 
-import { rotate } from '../../../../lib/animation/transform';
 import { getDepthZIndex } from '../../../../lib/css/depth/z-index';
 import { InputContainerStyles } from '../../../../styles/forms/input/container';
 import {
@@ -15,17 +14,11 @@ import {
   Cursor,
   Depth,
   Fill,
-  ForegroundColors,
-  InputProps,
-  MouseEventProps,
   Orientation,
-  Overflow,
-  Size,
   Sizes,
   TextColors,
   TextOverflow,
   TextSize,
-  TransformProps,
 } from '../../../../types';
 import { Container } from '../../../layout/Container';
 import { Spacer } from '../../../layout/Spacer';
@@ -53,7 +46,7 @@ const Wrapper = styled.button<DropdownControlProps>`
       : 'auto'};
 
   ${props =>
-    props.focused &&
+    props.states?.state?.focused &&
     props.menuVisible &&
     css`
       border-bottom-color: transparent;
@@ -79,15 +72,13 @@ export const DropdownControl = memo(
     className = '',
     component,
     depth = Depth.Low,
-    error,
-    focused,
+
     icon,
     label,
     menuVisible,
-    onFocus,
-    onBlur,
-    onClick,
+
     placeholder = 'Select an option',
+    states = {},
     size = {},
     textSize = TextSize.Default,
     textColor = TextColors.DropdownMenu,
@@ -96,7 +87,7 @@ export const DropdownControl = memo(
     return (
       <InputContainer
         alignment={{
-          horizontal: AlignHorizontal.Left,
+          fill: Fill.Horizontal,
           orientation: Orientation.Horizontal,
           vertical: AlignVertical.Center,
           ...alignment,
@@ -107,7 +98,9 @@ export const DropdownControl = memo(
         border={{
           all: {
             color:
-              error && Array.isArray(error) && error.length > 0
+              states.state?.error &&
+              Array.isArray(states.state.error) &&
+              states?.state.error.length > 0
                 ? BorderColors.Error
                 : border.hasOwnProperty('color')
                 ? // @ts-ignore
@@ -121,13 +114,11 @@ export const DropdownControl = memo(
         depth={depth}
         className={`${className} dropdown-control`}
         cursor={Cursor.Pointer}
-        error={error}
         form="null"
-        focused={focused}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        onClick={onClick}
-        size={{ height: Sizes.Default, ...size }}
+        size={{ height: Sizes.Default }}
+        states={{
+          ...states,
+        }}
         {...props}
       >
         {component ? (

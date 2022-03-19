@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../types';
 
-type IMEILabelProps = {
+type IMEILabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const IMEILabel = memo(
   ({

@@ -23,20 +23,12 @@ import {
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  ClipboardEventProps,
   Cursor,
-  CursorProps,
   DepthShadow,
-  FocusEventProps,
   InputProps,
-  InputValueChangeHandler,
-  KeyboardEventProps,
-  MouseEventProps,
   Orientation,
-  Size,
   Sizes,
   TextAlign,
-  TextColor,
   TextColors,
   TextSize,
   TextWeight,
@@ -50,35 +42,31 @@ import { InputLabel } from '../../labels/InputLabel';
 import { InputContainer, InputContainerProps } from '../shared/InputContainer';
 import { TextProps } from '../../../typography/Text';
 
-export type SSNInputProps = {
-  readonly icon?: typeof Icon;
-} & InputProps<HTMLInputElement, SSN> &
+export type SSNInputProps = InputProps<SSN> &
   InputContainerProps &
-  TextProps;
+  TextProps & {
+    readonly icon?: typeof Icon;
+  };
 
 export const SSNInput = memo(
   ({
     as,
     background = {},
-
     border = {},
     className = '',
     cursor = Cursor.Text,
     defaultValue,
-    error,
-    hidden = false,
+    events = {},
     icon,
-    inProgress = false,
     label,
     name,
-    onChange,
-    onKeyPress,
     placeholder = '',
     shadow = DepthShadow.Low,
+    states = {},
     textSize = TextSize.Default,
     textColor = TextColors.InputControl,
     textWeight = TextWeight.Default,
-    validation = { [Condition.IsSSN]: true },
+    validation = { conditions: { [Condition.IsSSN]: true } },
     ...props
   }: SSNInputProps): ReactElement => {
     const [value, setValue] = useState<number[]>(
@@ -102,16 +90,25 @@ export const SSNInput = memo(
       setValueChanged(true);
 
       if (valueChanged) {
-        const probs = validate(value, validation);
+        if (validation && validation.conditions) {
+          const probs = validate(value, validation.conditions);
 
-        setProblems(probs);
+          setProblems(probs);
 
-        if (onChange && value)
-          onChange({
-            problems: probs,
-            validated: probs.length === 0,
-            value: Number.parseInt(value.join('')),
-          });
+          if (events.input?.onValueChange && value)
+            events.input.onValueChange({
+              validation: {
+                problems: probs,
+                validated: probs.length === 0,
+              },
+              value: Number.parseInt(value.join('')),
+            });
+        } else {
+          if (events.input?.onValueChange && value)
+            events.input.onValueChange({
+              value: Number.parseInt(value.join('')),
+            });
+        }
       }
     }, [value]);
 
@@ -143,25 +140,33 @@ export const SSNInput = memo(
           }}
           cursor={cursor}
           className={`${className} ssn-input`}
-          error={problems}
-          focused={focused}
-          onClick={() => {
-            if (!focused && firstInputRef.current) {
-              firstInputRef.current.focus();
-            }
+          events={{
+            mouse: {
+              onClick: () => {
+                if (!focused && firstInputRef.current) {
+                  firstInputRef.current.focus();
+                }
+              },
+            },
           }}
           padding={{
             left: Amount.Least,
             right: Amount.Least,
           }}
           shadow={shadow}
+          states={{
+            state: {
+              error: problems,
+              focused,
+            },
+          }}
           {...props}
         >
           {icon && <>{icon}</>}
 
           <Input
             // defaultValue={defaultValue}
-            hidden={hidden}
+            hidden={!states.state?.visible}
             max={999}
             min={100}
             name={name}
@@ -194,7 +199,7 @@ export const SSNInput = memo(
 
           <Input
             // defaultValue={defaultValue}
-            hidden={hidden}
+            hidden={!states.state?.visible}
             max={99}
             min={1}
             name={name}
@@ -232,7 +237,7 @@ export const SSNInput = memo(
 
           <Input
             // defaultValue={defaultValue}
-            hidden={hidden}
+            hidden={!states.state?.visible}
             max={9999}
             min={1000}
             name={name}
@@ -261,7 +266,7 @@ export const SSNInput = memo(
             // value={value[2]}
           />
 
-          {inProgress && (
+          {states.state?.loading && (
             <ProgressSpinner
               size={{
                 height: Sizes.Small,

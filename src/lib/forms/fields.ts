@@ -10,7 +10,7 @@ export function getFormFieldsFromModel({
 }): FormField[] {
   let fields: FormField[] = [];
 
-  for (const [fieldName, field] of  Object.entries(model.fields)) {
+  for (const [fieldName, field] of Object.entries(model.fields)) {
     if (fieldName !== 'created_date' && fieldName !== 'updated_date') {
       fields = [
         // @ts-ignore
@@ -20,9 +20,11 @@ export function getFormFieldsFromModel({
           ...field,
           name: fieldName,
           type: field.type,
-          validation:  Boolean(field.required) ? {
-            [Condition.IsRequired]: Boolean(field.required),
-          } : undefined,
+          validation: Boolean(field.required)
+            ? {
+                conditions: { [Condition.IsRequired]: Boolean(field.required) },
+              }
+            : undefined,
         },
       ];
     }

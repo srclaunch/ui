@@ -5,11 +5,10 @@ import {
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  ContainerProps,
   Orientation,
   Overflow,
 } from '../../../types';
-import { Container } from '../../layout/Container';
+import { Container, ContainerProps } from '../../layout/Container';
 import { MessagePreview } from './MessagePreview';
 import { NavigationLink } from '../../navigation/NavigationLink';
 

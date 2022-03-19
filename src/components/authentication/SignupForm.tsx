@@ -86,7 +86,11 @@ export const SignupForm = memo(
             Already have an account?
             <br />
             <Link
-              hover={{ textDecoration: { line: TextDecorationLine.Underline } }}
+              states={{
+                hovered: {
+                  textDecoration: { line: TextDecorationLine.Underline },
+                },
+              }}
               textDecoration={{ line: TextDecorationLine.Underline }}
               to="/login"
             >
@@ -109,7 +113,9 @@ export const SignupForm = memo(
               name: 'firstName',
               type: Primitives.String,
               validation: {
-                [Condition.IsRequired]: true,
+                conditions: {
+                  [Condition.IsRequired]: true,
+                },
               },
             },
             {
@@ -118,7 +124,9 @@ export const SignupForm = memo(
               name: 'lastName',
               type: Primitives.String,
               validation: {
-                [Condition.IsRequired]: true,
+                conditions: {
+                  [Condition.IsRequired]: true,
+                },
               },
             },
             {
@@ -127,9 +135,11 @@ export const SignupForm = memo(
               name: 'username',
               type: Primitives.EmailAddress,
               validation: {
-                [Condition.IsRequired]: true,
-                [Condition.IsEmailAddress]: true,
-                // [Condition.IsUsernameAvailable]: true,
+                conditions: {
+                  [Condition.IsRequired]: true,
+                  [Condition.IsEmailAddress]: true,
+                  // [Condition.IsUsernameAvailable]: true,
+                },
               },
             },
             {
@@ -141,14 +151,16 @@ export const SignupForm = memo(
               // showPasswordStrength: false,
               type: Primitives.Password,
               validation: {
-                [Condition.IsRequired]: true,
-                [Condition.HasLetterCount]: 2,
-                [Condition.HasNumberCount]: 1,
-                [Condition.HasSymbolCount]: 1,
-                [Condition.HasUppercaseCount]: 1,
-                [Condition.HasLowercaseCount]: 1,
-                [Condition.IsLengthGreaterThanOrEqual]: 8,
-                [Condition.IsLengthLessThanOrEqual]: 99,
+                conditions: {
+                  [Condition.IsRequired]: true,
+                  [Condition.HasLetterCount]: 2,
+                  [Condition.HasNumberCount]: 1,
+                  [Condition.HasSymbolCount]: 1,
+                  [Condition.HasUppercaseCount]: 1,
+                  [Condition.HasLowercaseCount]: 1,
+                  [Condition.IsLengthGreaterThanOrEqual]: 8,
+                  [Condition.IsLengthLessThanOrEqual]: 99,
+                },
               },
             },
           ]}
@@ -181,7 +193,11 @@ export const SignupForm = memo(
             <Link
               // name="Privacy Policy Link [ Sign Up Form ]"
 
-              hover={{ textDecoration: { line: TextDecorationLine.Underline } }}
+              states={{
+                hovered: {
+                  textDecoration: { line: TextDecorationLine.Underline },
+                },
+              }}
               textDecoration={{ line: TextDecorationLine.Underline }}
               to="/privacy"
             >

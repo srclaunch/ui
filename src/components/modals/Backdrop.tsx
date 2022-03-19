@@ -25,7 +25,6 @@ export const Backdrop = memo(
         as={as}
         background={{ color: BackgroundColors.Darker, ...background }}
         className={`${className} backdrop`}
-        onClick={onClick}
         position={{
           behavior: PositionBehavior.Absolute,
           bottom: 0,
@@ -34,7 +33,9 @@ export const Backdrop = memo(
           top: 0,
           ...position,
         }}
-        visible={visible}
+        visibility={{
+          hidden: !visible,
+        }}
         {...props}
       >
         {children}

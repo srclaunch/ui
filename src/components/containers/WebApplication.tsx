@@ -10,27 +10,24 @@ import {
   useSelector,
 } from '@srclaunch/web-application-state';
 import { PageRole, PageRoute } from '@srclaunch/types';
-
 import { BackgroundColors, Fill } from '../../types';
 import { EntityPanel } from '../data/entities/EntityPanel';
-import { ErrorBoundary } from '../errors/ErrorBoundary';
 import { Container, ContainerProps } from '../layout/Container';
 import { Backdrop } from '../modals/Backdrop';
 import { LoadingOverlay } from '../progress/LoadingOverlay';
 
-type WebApplicationProps = {
+type WebApplicationProps = ContainerProps & {
   readonly authentication?: boolean;
   readonly actions?: Record<string, (...args: readonly any[]) => any>;
   readonly httpClient?: typeof HttpClient;
-} & ContainerProps<HTMLDivElement>;
+};
 
 export const WebApplication = memo(
   ({
-    authentication = false,
     actions,
-    background = {
-      color: BackgroundColors.Dark,
-    },
+    alignment = {},
+    authentication = false,
+    background = {},
     children,
     className = '',
     httpClient,
@@ -114,8 +111,8 @@ export const WebApplication = memo(
 
     return (
       <Container
-        alignment={{ fill: Fill.Both }}
-        background={background}
+        alignment={{ fill: Fill.Both, ...alignment }}
+        background={{ color: BackgroundColors.Lightest, ...background }}
         className={`${className} web-application`}
         {...props}
       >

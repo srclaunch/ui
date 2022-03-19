@@ -1,9 +1,9 @@
-import { getBorderRadiusValue } from '../../../styles/container/border-radius';
+import { getBorderRadiusStyles } from '../../../styles/container/border-radius';
 import { Amount } from '../../../types';
 
 test('returns correct value when given an object of corners with numeric values', () => {
   expect(
-    getBorderRadiusValue({
+    getBorderRadiusStyles({
       bottomLeft: 1,
       bottomRight: 2,
       topLeft: 3,
@@ -13,5 +13,5 @@ test('returns correct value when given an object of corners with numeric values'
 });
 
 test('returns correct value when given an Amount', () => {
-  expect(getBorderRadiusValue({ all: Amount.Default })).toBe(Amount.Default);
+  expect(getBorderRadiusStyles({ all: Amount.Default })).toBe(Amount.Default);
 });

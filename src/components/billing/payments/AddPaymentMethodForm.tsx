@@ -7,7 +7,6 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { PaymentMethod, StripeError } from '@stripe/stripe-js';
 import { memo, ReactElement, useState } from 'react';
 import styled, { css } from 'styled-components';
-
 import { Button } from '../../forms/buttons/Button';
 import { ProgressSpinner } from '../../progress/ProgressSpinner';
 
@@ -135,7 +134,18 @@ export const AddPaymentMethodForm = memo(
 
         {paymentMethodsCount > 0 && (
           <GoBack>
-            <Button disabled={inProgress} onClick={cancel}>
+            <Button
+              events={{
+                mouse: {
+                  onClick: cancel,
+                },
+              }}
+              states={{
+                state: {
+                  disabled: inProgress,
+                },
+              }}
+            >
               Cancel
             </Button>
           </GoBack>

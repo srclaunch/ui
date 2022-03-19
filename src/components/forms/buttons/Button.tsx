@@ -1,12 +1,5 @@
-import { memo, MouseEvent, ReactElement, useState } from 'react';
-import styled, { css } from 'styled-components';
+import { memo, ReactElement, useState } from 'react';
 
-import { getLargerAmount } from '../../../lib/proportions/amount';
-import {
-  convertSizeToAmount,
-  convertSizeToTextSize,
-} from '../../../lib/proportions/conversions';
-import { getSmallerSize } from '../../../lib/proportions/size';
 import {
   AlignHorizontal,
   Alignment,
@@ -15,8 +8,8 @@ import {
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  CommonComponentProps,
   Cursor,
+  InteractionStates,
   Orientation,
   Overflow,
   Sizes,
@@ -43,15 +36,14 @@ export enum ButtonType {
   White = 'white',
 }
 
-export type ButtonProps<E = HTMLButtonElement> = {
-  readonly disabled?: boolean;
-  readonly form?: string;
-  readonly fullWidth?: boolean;
-  readonly icon?: IconProps;
-  readonly label?: string;
-  readonly type?: ButtonType;
-} & ContainerProps &
-  LabelProps;
+export type ButtonProps = ContainerProps &
+  LabelProps & {
+    readonly form?: string;
+    readonly label?: string;
+    readonly type?: ButtonType;
+  } & {
+    readonly states?: InteractionStates<ButtonProps>;
+  };
 
 // const Wrapper = styled.button<ButtonProps>`
 //   ${LayoutStyles};
@@ -94,7 +86,6 @@ export type ButtonProps<E = HTMLButtonElement> = {
 
 export const Button = memo(
   ({
-    active,
     alignment = {},
     as = 'button',
     background = {},
@@ -103,25 +94,19 @@ export const Button = memo(
     children,
     className = '',
     cursor = Cursor.Pointer,
-    disabled = false,
     form,
-    hover,
     icon,
     label,
     lineHeight = Sizes.Default,
-    onClick,
-    onMouseEnter,
-    onMouseLeave,
-    padding = {},
+    states = {},
     textAlign = TextAlign.Center,
     textColor,
+    textDecoration = {},
     textSize = TextSize.Default,
     textWeight,
     type = ButtonType.Default,
     ...props
   }: ButtonProps): ReactElement => {
-    const [hovered, setHovered] = useState(false);
-
     const getColors = () => {
       if (!type)
         return {
@@ -190,26 +175,8 @@ export const Button = memo(
 
     const colors = getColors();
 
-    const updatedBackgroundColor = hovered
-      ? hover?.background?.color
-        ? hover?.background.color
-        : colors?.backgroundColor ?? background?.color
-      : colors?.backgroundColor ?? background?.color;
-
-    const updatedTextColor = hovered
-      ? hover?.textColor
-        ? hover?.textColor
-        : colors?.textColor ?? textColor
-      : colors?.textColor ?? textColor;
-
     return (
       <Container
-        active={{
-          background: {
-            opacity: 80,
-          },
-          ...active,
-        }}
         alignment={{
           horizontal: AlignHorizontal.Center,
           orientation: Orientation.Horizontal,
@@ -218,7 +185,7 @@ export const Button = memo(
           ...alignment,
         }}
         as={as}
-        background={{ color: updatedBackgroundColor, ...background }}
+        background={{ color: colors?.backgroundColor, ...background }}
         border={{
           all: {
             color: BorderColors.Transparent,
@@ -230,26 +197,8 @@ export const Button = memo(
         borderRadius={{ all: Amount.All, ...borderRadius }}
         className={`${className} button`}
         cursor={cursor}
-        disabled={disabled}
         form={form}
-        hover={{
-          background: {
-            opacity: 90,
-          },
-          ...hover,
-        }}
-        onClick={onClick}
-        onMouseEnter={(e: MouseEvent<HTMLButtonElement>) => {
-          setHovered(true);
-
-          if (onMouseEnter) onMouseEnter(e);
-        }}
-        onMouseLeave={(e: MouseEvent<HTMLButtonElement>) => {
-          setHovered(false);
-
-          if (onMouseLeave) onMouseLeave(e);
-        }}
-        padding={{ left: Amount.Less, right: Amount.Less, ...padding }}
+        // padding={{ left: Amount.Less, right: Amount.Less, ...padding }}
         // shadow={{
         //   radius: 8,
         //   color: colors?.backgroundColor,
@@ -258,6 +207,19 @@ export const Button = memo(
         //   opacity: 35,
         //   spread: 4,
         // }}
+        states={{
+          active: {
+            background: {
+              opacity: 80,
+            },
+          },
+          hovered: {
+            background: {
+              opacity: 20,
+            },
+          },
+          ...states,
+        }}
         {...props}
       >
         {typeof children === 'string' ? (
@@ -265,14 +227,11 @@ export const Button = memo(
             icon={icon}
             lineHeight={lineHeight}
             textAlign={textAlign}
-            textColor={updatedTextColor}
-            textDecoration={
-              type === ButtonType.Link && hovered
-                ? {
-                    line: TextDecorationLine.Underline,
-                  }
-                : undefined
-            }
+            textColor={colors?.textColor}
+            textDecoration={{
+              line: TextDecorationLine.None,
+              ...textDecoration,
+            }}
             textSize={textSize}
             textWeight={textWeight}
           >

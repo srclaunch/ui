@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../types';
 
-type SSNLabelProps = {
+type SSNLabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const SSNLabel = memo(
   ({

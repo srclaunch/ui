@@ -3,7 +3,7 @@ import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 import { Container, ContainerProps } from '../layout/Container';
 
-type RadialChartProps = {
+type RadialChartProps = ContainerProps & {
   data: {
     title?: string | number;
     color: string;
@@ -11,7 +11,7 @@ type RadialChartProps = {
     key?: string | number;
     [key: string]: any;
   };
-} & ContainerProps;
+};
 
 export const RadialChart = memo(
   ({ data, ...props }: RadialChartProps): ReactElement => {

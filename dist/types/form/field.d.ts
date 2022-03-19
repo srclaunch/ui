@@ -1,15 +1,15 @@
 import { CountryCode, CurrencyAmount, CurrencyCode, Date, DateTime, EmailAddress, Image, JSONObject, LanguageCode, LongText, Password, PhoneNumber, Primitive, Primitives, SSN, UUID, VerificationCode } from '@srclaunch/types';
 import { ImageInputProps } from '../../components/forms/inputs/media/ImageInput';
-import { InputValueChangeHandler } from '../events/input';
-import { ErrorProps } from '../state/error-props';
-import { ValidationProps } from '../state/validation-props';
+import { InputValueChangeHandler } from '../events';
+import { Validation } from '../validation';
 import { AutoComplete } from './input';
 export declare type CommonFormFieldProps = {
     readonly hidden?: boolean;
     readonly label?: string;
     readonly name: string;
     readonly properties?: Record<string, any>;
-} & ErrorProps & ValidationProps;
+    readonly validation?: Validation;
+};
 export declare type FormFieldValueProps<T extends Primitive | readonly Primitive[], P = Record<string, unknown>> = {
     readonly defaultValue?: T;
     readonly onChange?: InputValueChangeHandler<T>;
@@ -31,7 +31,7 @@ export declare type FormField = CommonFormFieldProps & (FormFieldValueProps<bool
 }> | FormFieldValueProps<EmailAddress, {
     readonly autoComplete?: AutoComplete.Username | AutoComplete.EmailAddress;
     readonly type: Primitives.EmailAddress;
-}> | FormFieldValueProps<readonly (File | Image)[], {
+}> | FormFieldValueProps<(File | Image)[], {
     readonly properties: ImageInputProps;
     readonly type: Primitives.Image;
 }> | FormFieldValueProps<JSONObject, {

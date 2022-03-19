@@ -91,8 +91,8 @@ export const Form = memo(
           validationRequired = true;
         }
 
-        if (field[1].problems) {
-          problems = [...problems, ...field[1].problems];
+        if (field[1].validation?.problems) {
+          problems = [...problems, ...field[1].validation?.problems];
         }
       }
 
@@ -102,7 +102,7 @@ export const Form = memo(
       const validated =
         requiresValidation &&
         Object.values(fieldValues).filter(
-          field => field.validation && !field.validated,
+          field => field.validation && !field.validation?.validated,
         ).length === 0;
 
       setValidated(validated);
@@ -131,30 +131,40 @@ export const Form = memo(
         {submitButton && (
           <FormActions>
             <Button
-              disabled={(requiresValidation && !isValidated) || inProgress}
-              form={name}
-              onClick={e => {
-                e.preventDefault();
+              events={{
+                keyboard: {
+                  onKeyPress: e => {
+                    if (e.key === 'Enter' && onSubmit)
+                      onSubmit({
+                        fields: fieldValues,
+                        problems: validationProblems,
+                        validated: isValidated,
+                      });
+                  },
+                },
+                mouse: {
+                  onClick: e => {
+                    e.preventDefault();
 
-                if (onSubmit)
-                  onSubmit({
-                    fields: fieldValues,
-                    problems: validationProblems,
-                    validated: isValidated,
-                    values: Object.entries(fieldValues).map(
-                      ([fieldName, field]) => ({
-                        [fieldName]: field.value,
-                      }),
-                    ) as unknown as { readonly [name: string]: unknown },
-                  });
+                    if (onSubmit)
+                      onSubmit({
+                        fields: fieldValues,
+                        problems: validationProblems,
+                        validated: isValidated,
+                        values: Object.entries(fieldValues).map(
+                          ([fieldName, field]) => ({
+                            [fieldName]: field.value,
+                          }),
+                        ) as unknown as { readonly [name: string]: unknown },
+                      });
+                  },
+                },
               }}
-              onKeyPress={e => {
-                if (e.key === 'Enter' && onSubmit)
-                  onSubmit({
-                    fields: fieldValues,
-                    problems: validationProblems,
-                    validated: isValidated,
-                  });
+              form={name}
+              states={{
+                state: {
+                  disabled: (requiresValidation && !isValidated) || inProgress,
+                },
               }}
               {...submitButtonProps}
             >

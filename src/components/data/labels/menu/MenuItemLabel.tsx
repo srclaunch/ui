@@ -6,11 +6,11 @@ import { Sizes, TextColors, TextSize } from '../../../../types';
 
 import { ModelProps } from '@srclaunch/types';
 
-type MenuItemLabelProps = {
+type MenuItemLabelProps = LabelProps & {
   fieldName?: string;
   model?: ModelProps;
   value: string;
-} & LabelProps;
+};
 
 export const MenuItemLabel = memo(
   ({

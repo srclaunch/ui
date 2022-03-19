@@ -8,11 +8,11 @@ import {
   PositionBehavior,
 } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
+import { SlideLeft, SlideRight } from '../../lib/animation/library';
 
-type SlidePanelProps = {
+type SlidePanelProps = ContainerProps & {
   readonly visible?: boolean;
-} & CommonComponentProps<HTMLDivElement> &
-  ContainerProps;
+};
 
 export const SlidePanel = memo(
   ({
@@ -39,14 +39,19 @@ export const SlidePanel = memo(
         padding={{ all: Amount.Less, ...padding }}
         position={{
           behavior: PositionBehavior.Fixed,
-          bottom: 0,
-          right: 0,
-          top: 0,
+          bottom: Amount.Default,
+          right: Amount.Default,
+          top: Amount.Default,
           ...position,
         }}
-        visible={visible}
         shadow={shadow}
         size={{ width: 380, ...size }}
+        states={{
+          visible: {
+            animations: visible ? [SlideLeft] : [SlideRight],
+          },
+        }}
+        visibility={{ hidden: !visible, ...props.visibility }}
         {...props}
       >
         {children}

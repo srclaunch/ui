@@ -1,17 +1,20 @@
 import { memo, ReactElement } from 'react';
-import { Condition, PhoneNumber } from '@srclaunch/types';
+import { Condition } from '@srclaunch/types';
 
-import { AutoComplete, InputValueChangeHandler } from '../../../../types';
+import { AutoComplete } from '../../../../types';
 import { TextInput, TextInputProps } from '../text/TextInput';
 
-type PhoneNumberInputProps = {
+type PhoneNumberInputProps = TextInputProps & {
   autoComplete?: AutoComplete.PhoneNumber;
-} & TextInputProps<PhoneNumber>;
+};
 
 export const PhoneNumberInput = memo(
   ({ ...props }: PhoneNumberInputProps): ReactElement => {
     return (
-      <TextInput validation={{ [Condition.IsPhoneNumber]: true }} {...props} />
+      <TextInput
+        validation={{ conditions: { [Condition.IsPhoneNumber]: true } }}
+        {...props}
+      />
     );
   },
 );

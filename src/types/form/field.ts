@@ -20,9 +20,9 @@ import {
 } from '@srclaunch/types';
 
 import { ImageInputProps } from '../../components/forms/inputs/media/ImageInput';
-import { InputValueChangeHandler } from '../events/input';
-import { ErrorProps } from '../state/error-props';
-import { ValidationProps } from '../state/validation-props';
+import { InputValueChangeHandler } from '../events';
+
+import { Validation } from '../validation';
 import { AutoComplete } from './input';
 
 export type CommonFormFieldProps = {
@@ -30,8 +30,8 @@ export type CommonFormFieldProps = {
   readonly label?: string;
   readonly name: string;
   readonly properties?: Record<string, any>;
-} & ErrorProps &
-  ValidationProps;
+  readonly validation?: Validation;
+};
 
 export type FormFieldValueProps<
   T extends Primitive | readonly Primitive[],
@@ -76,7 +76,8 @@ export type FormField = CommonFormFieldProps &
         }
       >
     | FormFieldValueProps<
-        readonly (File | Image)[],
+        // @ts-ignore
+        (File | Image)[],
         {
           readonly properties: ImageInputProps;
           readonly type: Primitives.Image;

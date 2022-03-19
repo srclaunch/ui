@@ -1,8 +1,6 @@
 import { memo, ReactElement } from 'react';
-
 import ReactCountryFlag from 'react-country-flag';
 import { CountryCode, LanguageCode, ValidationProblem } from '@srclaunch/types';
-
 import { Sizes } from '../../../../types';
 import { DropdownInput, DropdownInputProps } from '../menu/DropdownInput';
 
@@ -12,7 +10,6 @@ export const LanguageInput = memo(
   ({
     defaultValue = LanguageCode.English,
     name,
-    onChange,
     placeholder = 'Select a language',
     ...props
   }: LanguageInputProps): ReactElement => {
@@ -37,7 +34,6 @@ export const LanguageInput = memo(
         defaultValue={defaultValue}
         menu={languages}
         name={name}
-        onChange={onChange}
         placeholder={placeholder}
         {...props}
       />

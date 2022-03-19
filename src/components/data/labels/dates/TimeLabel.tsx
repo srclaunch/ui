@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../types';
 
-type TimeLabelProps = {
+type TimeLabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const TimeLabel = memo(
   ({

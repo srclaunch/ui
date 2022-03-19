@@ -3,7 +3,7 @@ import { memo, ReactElement } from 'react';
 import { Size, Sizes } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 
-type LineBreakProps = ContainerProps<HTMLDivElement>;
+type LineBreakProps = ContainerProps;
 
 export const LineBreak = memo(
   ({

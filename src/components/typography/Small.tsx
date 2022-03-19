@@ -1,9 +1,9 @@
 import { memo, ReactElement } from 'react';
 
 import { Sizes, TextColors, TextSize } from '../../types';
-import { Text, TextProps } from './Text';
+import { Label, LabelProps } from './Label';
 
-type SmallProps = TextProps;
+type SmallProps = LabelProps;
 
 export const Small = memo(
   ({
@@ -16,7 +16,7 @@ export const Small = memo(
     ...props
   }: SmallProps): ReactElement => {
     return (
-      <Text
+      <Label
         as={as}
         className={`${className} small`}
         lineHeight={lineHeight}
@@ -26,7 +26,7 @@ export const Small = memo(
         {...props}
       >
         {children}
-      </Text>
+      </Label>
     );
   },
 );

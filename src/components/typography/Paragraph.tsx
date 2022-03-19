@@ -1,17 +1,16 @@
 import { memo, ReactElement } from 'react';
 
-import { CommonComponentProps, Sizes, TextColors, TextSize } from '../../types';
+import { Sizes, TextColors, TextSize } from '../../types';
 import { Label, LabelProps } from './Label';
 
-export type ParagraphProps = CommonComponentProps<HTMLParagraphElement> &
-  LabelProps;
+export type ParagraphProps = LabelProps;
 
 export const Paragraph = memo(
   ({
     as = 'p',
     children,
     className = '',
-    lineHeight = Sizes.Smaller,
+    lineHeight = Sizes.Default,
     textColor = TextColors.Paragraph,
     textSize = TextSize.Default,
     ...props
@@ -20,8 +19,8 @@ export const Paragraph = memo(
       <Label
         as={as}
         className={`${className} paragraph`}
-        textColor={textColor}
         lineHeight={lineHeight}
+        textColor={textColor}
         textSize={textSize}
         {...props}
       >

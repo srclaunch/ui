@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../types';
 
-type DateRangeLabelProps = {
+type DateRangeLabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const DateRangeLabel = memo(
   ({

@@ -20,7 +20,11 @@ export const RadialGauge = memo(
     const gaugePercent = getGaugePercent();
 
     return (
-      <Container color={color} size={size} value={gaugePercent}>
+      <Container
+        // color={color}
+        size={size}
+        value={gaugePercent}
+      >
         <svg viewBox="0 0 105 105">
           <path className="grey" d="M30,90 A40,40 0 1,1 80,90" fill="none" />
           <path

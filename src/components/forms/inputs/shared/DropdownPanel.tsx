@@ -28,10 +28,9 @@ export const DropdownPanel = memo(
     children,
     className = '',
     depth = Depth.Highest,
-    focused,
     position = {},
     size = {},
-    visible = false,
+    states = {},
     ...props
   }: DropdownPanelProps): ReactElement => {
     return (
@@ -48,7 +47,6 @@ export const DropdownPanel = memo(
         borderRadius={{ all: Amount.Less, ...borderRadius }}
         className={`${className} dropdown-panel`}
         depth={depth}
-        focused={focused}
         position={{
           behavior: PositionBehavior.Absolute,
           left: 0,
@@ -57,7 +55,12 @@ export const DropdownPanel = memo(
           ...position,
         }}
         size={{ minHeight: 80, maxHeight: 300, ...size }}
-        visible={visible}
+        states={{
+          state: {
+            focused: states.state?.focused,
+            visible: states.state?.visible,
+          },
+        }}
         {...props}
       >
         {children}

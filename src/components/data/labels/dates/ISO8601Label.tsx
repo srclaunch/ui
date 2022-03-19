@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../types';
 
-type ISO8601LabelProps = {
+type ISO8601LabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const ISO8601Label = memo(
   ({

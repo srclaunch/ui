@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../types';
 
-type MimeTypeLabelProps = {
+type MimeTypeLabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const MimeTypeLabel = memo(
   ({

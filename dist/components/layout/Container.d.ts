@@ -1,26 +1,24 @@
 import { PropsWithChildren, ReactElement } from 'react';
-import { Alignment, Background, Border, BorderRadius, CommonComponentProps, ContainerAnimation, Cursor, Depth, Margin, Padding, Size, Shadow, Position, DepthShadow } from '../../types';
-export declare type ContainerProps<E = HTMLDivElement> = PropsWithChildren<{
-    alignment?: Alignment;
-    animation?: ContainerAnimation;
-    background?: Background;
-    border?: Border;
-    borderRadius?: BorderRadius;
-    cursor?: Cursor;
-    depth?: Depth;
-    disabled?: boolean;
-    margin?: Margin;
-    opacity?: number;
-    padding?: Padding;
-    position?: Position;
-    shadow?: DepthShadow | Shadow;
-    size?: Size;
-    visible?: boolean;
+import { Alignment, Background, Border, BorderRadius, CommonComponentProps, DepthShadow, Animation, Cursor, Depth, Events, InteractionStates, Margin, Padding, Size, Shadow, Position, Visibility } from '../../types';
+import { Transform } from '../../types/appearance/animation';
+export declare type ContainerProps = PropsWithChildren<CommonComponentProps & {
+    readonly alignment?: Alignment;
+    readonly animations?: Animation[];
+    readonly background?: Background;
+    readonly border?: Border;
+    readonly borderRadius?: BorderRadius;
+    readonly cursor?: Cursor;
+    readonly depth?: Depth;
+    readonly events?: Events;
+    readonly margin?: Margin;
+    readonly padding?: Padding;
+    readonly position?: Position;
+    readonly shadow?: DepthShadow | Shadow;
+    readonly size?: Size;
+    readonly transform?: Transform;
+    readonly visibility?: Visibility;
 }> & {
-    readonly active?: ContainerProps<E>;
-    readonly disable?: ContainerProps<E>;
-    readonly hover?: ContainerProps<E>;
-    readonly focus?: ContainerProps<E>;
-} & CommonComponentProps<any>;
-export declare const Container: import("react").MemoExoticComponent<({ alignment, as, children, className, ...props }: ContainerProps) => ReactElement>;
+    readonly states?: Omit<InteractionStates<ContainerProps>, 'inputs'>;
+};
+export declare const Container: import("react").MemoExoticComponent<({ alignment, as, children, className, events, ...props }: ContainerProps) => ReactElement>;
 //# sourceMappingURL=Container.d.ts.map

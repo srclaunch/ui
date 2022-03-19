@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
+import { InteractionStates } from '../../../types/index';
 import { ContainerProps } from '../../layout/Container';
-import { IconProps } from '../../media/Icon';
 import { LabelProps } from '../../typography/Label';
 export declare enum ButtonType {
     Default = "black",
@@ -15,13 +15,12 @@ export declare enum ButtonType {
     Warning = "warning",
     White = "white"
 }
-export declare type ButtonProps<E = HTMLButtonElement> = {
-    readonly disabled?: boolean;
+export declare type ButtonProps = ContainerProps & LabelProps & {
     readonly form?: string;
-    readonly fullWidth?: boolean;
-    readonly icon?: IconProps;
     readonly label?: string;
     readonly type?: ButtonType;
-} & ContainerProps & LabelProps;
-export declare const Button: import("react").MemoExoticComponent<({ active, alignment, as, background, border, borderRadius, children, className, cursor, disabled, form, hover, icon, label, lineHeight, onClick, onMouseEnter, onMouseLeave, padding, textAlign, textColor, textSize, textWeight, type, ...props }: ButtonProps) => ReactElement>;
+} & {
+    readonly states?: InteractionStates<ButtonProps>;
+};
+export declare const Button: import("react").MemoExoticComponent<({ alignment, as, background, border, borderRadius, children, className, cursor, form, icon, label, lineHeight, states, textAlign, textColor, textDecoration, textSize, textWeight, type, ...props }: ButtonProps) => ReactElement>;
 //# sourceMappingURL=Button.d.ts.map

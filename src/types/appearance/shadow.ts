@@ -1,22 +1,17 @@
-import { Color } from './color';
-import { DepthShadow } from './depth';
-import { Amount } from './proportion';
-import { Size } from './size';
-
 export type Shadow =
   | {
-      readonly blur?: Amount | Size;
-      readonly color?: Color;
-      readonly x?: Amount | Size;
-      readonly y?: Amount | Size;
+      readonly blur?: string | number;
+      readonly color?: string;
+      readonly x?: number;
+      readonly y?: number;
       readonly opacity?: number;
-      readonly spread?: Amount | Size;
+      readonly spread?: string | number;
     }
   | {
-      readonly blur?: Amount | Size;
-      readonly color?: Color;
-      readonly x?: Amount | Size;
-      readonly y?: Amount | Size;
+      readonly blur?: string | number;
+      readonly color?: string;
+      readonly x?: number;
+      readonly y?: number;
       readonly opacity?: number;
-      readonly spread?: Amount | Size;
+      readonly spread?: string | number;
     }[];

@@ -5,10 +5,10 @@ import { ProgressMeter } from '../../../charts/ProgressMeter';
 
 import { Color, Sizes, TextColors, TextSize } from '../../../../types';
 
-type ProgressLabelProps = {
+type ProgressLabelProps = LabelProps & {
   color?: Color;
   value: number[];
-} & LabelProps;
+};
 
 export const ProgressLabel = memo(
   ({

@@ -1,5 +1,4 @@
 import { memo, ReactElement, useEffect, useState } from 'react';
-
 import {
   Amount,
   BackgroundColors,
@@ -13,17 +12,15 @@ import {
 } from '../../../types';
 import { Container, ContainerProps } from '../../layout/Container';
 import { Menu, MenuProps } from '../../menus/Menu';
-import { MenuItemProps } from '../../menus/MenuItem';
-import { HoverPanel } from '../../modals/HoverPanel';
 import { DropdownControl } from '../inputs/shared/DropdownControl';
 import { DropdownPanel } from '../inputs/shared/DropdownPanel';
 import { TextProps } from '../../typography/Text';
 
-export type MenuButtonProps = {
-  readonly label?: string;
-} & ContainerProps<HTMLDivElement> &
+export type MenuButtonProps = ContainerProps &
   MenuProps &
-  TextProps;
+  TextProps & {
+    readonly label?: string;
+  };
 
 export const MenuButton = memo(
   ({
@@ -53,8 +50,12 @@ export const MenuButton = memo(
         borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} menu-button`}
         depth={Depth.Higher}
-        onMouseLeave={() => {
-          setMenuVisible(false);
+        events={{
+          mouse: {
+            onMouseLeave: () => {
+              setMenuVisible(false);
+            },
+          },
         }}
         size={{
           height: Sizes.Default,
@@ -77,19 +78,30 @@ export const MenuButton = memo(
             ...border,
           }}
           depth={Depth.High}
+          events={{
+            focus: {
+              onBlur: () => {
+                if (!menuVisible) setFocused(false);
+              },
+              onFocus: () => setFocused(true),
+            },
+            mouse: {
+              onClick: () => setMenuVisible(!menuVisible),
+            },
+          }}
           label={label ?? ''}
-          focused={focused}
           // lineHeight={size}
           menuVisible={menuVisible}
           name="menu-button-dropdown-control"
-          onBlur={() => {
-            if (!menuVisible) setFocused(false);
-          }}
-          onFocus={() => setFocused(true)}
           // onBlur={() => setMenuVisible(false)}
-          onClick={() => setMenuVisible(!menuVisible)}
+
           textColor={textColor}
           shadow={DepthShadow.High}
+          states={{
+            state: {
+              focused,
+            },
+          }}
           size={{
             height: Sizes.Default,
             ...size,
@@ -137,7 +149,6 @@ export const MenuButton = memo(
             // topRight: Amount.None,
             ...borderRadius,
           }}
-          focused={focused}
           padding={padding}
           position={{ top: `calc(${Sizes.Default} - 0px)` }}
           size={{
@@ -145,6 +156,11 @@ export const MenuButton = memo(
             maxWidth: 300,
             minWidth: 240,
             ...size,
+          }}
+          states={{
+            state: {
+              focused,
+            },
           }}
           visible={menuVisible}
         >

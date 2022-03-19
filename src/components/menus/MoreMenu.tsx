@@ -54,7 +54,11 @@ export const MoreMenu = memo(
       // @ts-ignore
       <Container
         className={`${className} more-menu`}
-        onMouseLeave={() => setMenuVisible(false)}
+        events={{
+          mouse: {
+            onMouseLeave: () => setMenuVisible(false),
+          },
+        }}
       >
         <Container
           alignment={{
@@ -73,27 +77,33 @@ export const MoreMenu = memo(
             ...background,
           }}
           borderRadius={{ all: Amount.All }}
-          focused={focused}
           depth={Depth.Surface}
-          hover={{
-            background: {
-              color: BackgroundColors.Primary,
+          events={{
+            focus: {
+              onBlur: () => setFocused(false),
+              onFocus: () => setFocused(true),
+            },
+            mouse: {
+              onClick: (e: any) => {
+                e.stopPropagation();
+                e.preventDefault();
+                setMenuVisible(!menuVisible);
+              },
+              onMouseEnter: () => setHovered(true),
+              onMouseLeave: () => setHovered(false),
             },
           }}
-          // @ts-ignore
-          onClick={(e: any) => {
-            e.stopPropagation();
-            e.preventDefault();
-            setMenuVisible(!menuVisible);
-          }}
-          onFocus={() => setFocused(true)}
-          onBlur={() => {
-            setFocused(false);
-            // setMenuVisible(false);
-          }}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
           size={size}
+          states={{
+            hovered: {
+              background: {
+                color: BackgroundColors.Primary,
+              },
+            },
+            state: {
+              focused,
+            },
+          }}
           {...props}
         >
           <Dot
@@ -135,7 +145,14 @@ export const MoreMenu = memo(
         </Container>
 
         <HoverPanel visible={menuVisible} setMenuVisible={setMenuVisible}>
-          <Menu menu={menu} onClick={() => setMenuVisible(false)} />
+          <Menu
+            menu={menu}
+            events={{
+              mouse: {
+                onClick: () => setMenuVisible(false),
+              },
+            }}
+          />
         </HoverPanel>
       </Container>
     );

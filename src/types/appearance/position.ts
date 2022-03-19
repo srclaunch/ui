@@ -1,6 +1,3 @@
-import { Amount } from './proportion';
-import { Sizes } from './size';
-
 export enum PositionBehavior {
   Absolute = 'absolute',
   Fixed = 'fixed',
@@ -10,9 +7,9 @@ export enum PositionBehavior {
 }
 
 export type Position = {
-  readonly bottom?: Amount | string | number;
-  readonly left?: Amount | string | number;
   readonly behavior?: PositionBehavior;
-  readonly right?: Amount | string | number;
-  readonly top?: Amount | string | number;
+  readonly bottom?: number | string;
+  readonly left?: number | string;
+  readonly right?: number | string;
+  readonly top?: number | string;
 };

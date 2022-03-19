@@ -3,36 +3,36 @@ import { getCSSMeasurementValue } from '../../lib/css/properties';
 
 import { Padding } from '../../types';
 
+export function getPaddingStyles(padding?: Padding): SimpleInterpolation {
+  return css`
+    ${padding?.all &&
+    css`
+      padding: ${getCSSMeasurementValue(padding.all)};
+    `};
+
+    ${padding?.bottom &&
+    css`
+      padding-bottom: ${getCSSMeasurementValue(padding.bottom)};
+    `};
+
+    ${padding?.left &&
+    css`
+      padding-left: ${getCSSMeasurementValue(padding.left)};
+    `};
+
+    ${padding?.right &&
+    css`
+      padding-right: ${getCSSMeasurementValue(padding.right)};
+    `};
+
+    ${padding?.top &&
+    css`
+      padding-top: ${getCSSMeasurementValue(padding.top)};
+    `};
+  `;
+}
 export const PaddingStyles = css<{
   padding?: Padding;
 }>`
-  ${props =>
-    props.padding?.all &&
-    css`
-      padding: ${getCSSMeasurementValue(props.padding.all)};
-    `};
-
-  ${props =>
-    props.padding?.bottom &&
-    css`
-      padding-bottom: ${getCSSMeasurementValue(props.padding.bottom)};
-    `};
-
-  ${props =>
-    props.padding?.left &&
-    css`
-      padding-left: ${getCSSMeasurementValue(props.padding.left)};
-    `};
-
-  ${props =>
-    props.padding?.right &&
-    css`
-      padding-right: ${getCSSMeasurementValue(props.padding.right)};
-    `};
-
-  ${props =>
-    props.padding?.top &&
-    css`
-      padding-top: ${getCSSMeasurementValue(props.padding.top)};
-    `};
+  ${props => getPaddingStyles(props.padding)}
 `;

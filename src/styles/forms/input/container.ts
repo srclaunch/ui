@@ -1,31 +1,29 @@
 import { css } from 'styled-components';
 
-import { Border, BorderColors, ErrorProps } from '../../../types';
+import { Border, BorderColors, InteractionStates } from '../../../types';
 
-export const InputContainerStyles = css<
-  {
-    border?: Border;
-    focused?: boolean;
-  } & ErrorProps
->`
+export const InputContainerStyles = css<{
+  border?: Border;
+  states?: InteractionStates;
+}>`
   ${props =>
-    props.focused &&
+    props.states?.state?.focused &&
     css`
       box-shadow: none;
     `};
 
   ${props =>
-    props.focused &&
+    props.states?.state?.focused &&
     props.border &&
     css`
       border: 1px solid transparent;
     `};
 
   ${props =>
-    props.focused &&
-    props.error &&
-    Array.isArray(props.error) &&
-    props.error.length > 0 &&
+    props.states?.state?.focused &&
+    props.states?.state?.error &&
+    Array.isArray(props.states.state.error) &&
+    props.states?.state?.error.length > 0 &&
     css`
       &:before {
         border-color: rgb(${BorderColors.Error});

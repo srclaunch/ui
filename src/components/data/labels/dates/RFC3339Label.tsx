@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../types';
 
-type RFC3339LabelProps = {
+type RFC3339LabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const RFC3339Label = memo(
   ({

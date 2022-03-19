@@ -2,8 +2,7 @@ import { CountryCode, ValidationProblem } from '@srclaunch/types';
 import Countries from 'i18n-iso-countries';
 import { memo, ReactElement } from 'react';
 import ReactCountryFlag from 'react-country-flag';
-
-import { Amount, Sizes } from '../../../../types';
+import { Sizes } from '../../../../types';
 import { DropdownInput, DropdownInputProps } from '../menu/DropdownInput';
 
 export type CountryInputProps = DropdownInputProps<CountryCode>;
@@ -27,7 +26,6 @@ export const CountryInput = memo(
       }),
     ),
     name = 'country',
-    onChange,
     placeholder = 'Select a country',
     ...props
   }: CountryInputProps): ReactElement => {
@@ -36,22 +34,6 @@ export const CountryInput = memo(
         defaultValue={defaultValue}
         menu={menu}
         name={name}
-        onChange={({
-          problems,
-          value,
-          validated,
-        }: {
-          problems?: readonly ValidationProblem[];
-          value?: CountryCode;
-          validated?: boolean;
-        }) =>
-          onChange &&
-          (onChange({
-            problems,
-            validated,
-            value,
-          }) as CountryInputProps['onChange'])
-        }
         placeholder={placeholder}
         {...props}
       />

@@ -9,12 +9,12 @@ export declare enum TextInputType {
     Password = "password",
     Search = "search"
 }
-export declare type TextInputProps<V = string> = {
+export declare type TextInputProps = InputContainerProps & InputProps<string> & TextProps & {
     readonly icon?: IconProps;
     readonly inputType?: TextInputType;
     readonly prefix?: string;
     readonly spellCheck?: boolean;
     readonly suffix?: string;
-} & InputProps<HTMLInputElement, V> & InputContainerProps & TextProps;
-export declare const TextInput: import("react").MemoExoticComponent<({ autoComplete, background, border, className, cursor, defaultValue, error, hidden, icon, inProgress, inputType, label, lineHeight, name, onChange, prefix, placeholder, shadow, spellCheck, suffix, textColor, textWeight, validation, ...props }: TextInputProps) => ReactElement>;
+};
+export declare const TextInput: import("react").MemoExoticComponent<({ autoComplete, background, border, className, cursor, defaultValue, events, icon, inputType, label, lineHeight, name, prefix, placeholder, shadow, spellCheck, states, suffix, textColor, textWeight, validation, ...props }: TextInputProps) => ReactElement>;
 //# sourceMappingURL=TextInput.d.ts.map

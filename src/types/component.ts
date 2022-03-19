@@ -1,20 +1,16 @@
+import { ForwardedRef } from 'react';
+import { ReactElement } from 'react';
+import { Ref } from 'react';
 import { ComponentType, CSSProperties } from 'react';
 
-import {
-  FocusEventProps,
-  FocusProps,
-  KeyboardEventProps,
-  MouseEventProps,
-} from '../types';
-
-export type CommonComponentProps<E = HTMLElement> = {
+export type CommonComponentProps = {
   readonly as?: string | ComponentType<any>;
   readonly className?: string;
   readonly form?: string;
   readonly id?: string;
   readonly name?: string;
+
   readonly style?: CSSProperties;
-} & KeyboardEventProps<E> &
-  FocusEventProps<E> &
-  MouseEventProps<E> &
-  FocusProps;
+};
+// & E would add standard props for given element type
+// which required overriding those props when necessary

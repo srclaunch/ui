@@ -2,10 +2,10 @@ import { memo, ReactElement } from 'react';
 import { CurrencyAmount, CurrencyCode } from '@srclaunch/types';
 import { Label, LabelProps } from '../../../../typography/Label';
 
-type CurrencyAmountLabelProps = {
+type CurrencyAmountLabelProps = LabelProps & {
   amount: CurrencyAmount;
   currency: CurrencyCode;
-} & LabelProps;
+};
 
 export const CurrencyAmountLabel = memo(
   ({ amount, currency, ...props }: CurrencyAmountLabelProps): ReactElement => {

@@ -3,13 +3,13 @@ import { DateTime, DateTimeFormatOptions } from 'luxon';
 import { Date } from '@srclaunch/types';
 import { Label, LabelProps } from '../../../typography/Label';
 
-import { Sizes, TextColors, TextSize } from '../../../../types';
+import { TextColors, TextSize } from '../../../../types';
 
-type DateLabelProps = {
+type DateLabelProps = LabelProps & {
   defaultValue?: Date;
   format?: DateTimeFormatOptions;
   value: Date;
-} & LabelProps;
+};
 
 export const DateLabel = memo(
   ({

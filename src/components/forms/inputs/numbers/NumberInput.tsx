@@ -3,28 +3,20 @@ import {
   // getValidationProblemLabel,
   validate,
 } from '@srclaunch/validation';
-import { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { FocusStyles } from '../../../../styles/container/focus';
 import { TextStyles } from '../../../../styles/typography';
 import {
   AlignHorizontal,
-  Alignment,
   Amount,
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  ClipboardEventProps,
   Cursor,
   DepthShadow,
-  FocusEventProps,
   InputProps,
-  InputValueChangeHandler,
-  KeyboardEventProps,
-  MouseEventProps,
   Orientation,
-  Size,
   Sizes,
   TextColor,
   TextColors,
@@ -39,15 +31,15 @@ import { InputLabel } from '../../labels/InputLabel';
 import { InputContainer, InputContainerProps } from '../shared/InputContainer';
 import { Text, TextProps } from '../../../typography/Text';
 
-export type NumberInputProps<T = HTMLInputElement, V = number> = {
-  readonly icon?: typeof Icon;
-  readonly placeholderTextColor?: TextColor;
-  readonly prefix?: string;
-  readonly spellCheck?: boolean;
-  readonly suffix?: string;
-} & InputContainerProps &
-  InputProps<T, V> &
-  TextProps;
+export type NumberInputProps = InputContainerProps &
+  InputProps<number> &
+  TextProps & {
+    readonly icon?: typeof Icon;
+    readonly placeholderTextColor?: TextColor;
+    readonly prefix?: string;
+    readonly spellCheck?: boolean;
+    readonly suffix?: string;
+  };
 
 export const NumberInput = memo(
   ({
@@ -57,18 +49,15 @@ export const NumberInput = memo(
     className = '',
     cursor = Cursor.Text,
     defaultValue,
-    error,
-    hidden = false,
+    events = {},
     icon,
-    inProgress = false,
     label,
     name,
-    onChange,
-    onKeyPress,
     placeholder = '',
     prefix = '',
     shadow = DepthShadow.Low,
     textSize = TextSize.Default,
+    states = {},
     suffix = '',
     textColor = TextColors.InputControl,
     textWeight = TextWeight.Default,
@@ -85,17 +74,24 @@ export const NumberInput = memo(
     useEffect(() => {
       setValueChanged(true);
 
-      if (valueChanged) {
-        const probs = validate(value, validation);
+      if (events.input?.onValueChange && valueChanged) {
+        if (validation && validation.conditions) {
+          const probs = validate(value, validation.conditions);
 
-        setProblems(probs);
+          setProblems(probs);
 
-        if (onChange && value)
-          onChange({
-            problems: probs,
-            validated: probs.length === 0,
+          events.input.onValueChange({
+            validation: {
+              problems: probs,
+              validated: probs.length === 0,
+            },
             value,
           });
+        } else {
+          events.input.onValueChange({
+            value,
+          });
+        }
       }
     }, [value]);
 
@@ -126,36 +122,50 @@ export const NumberInput = memo(
           }}
           cursor={cursor}
           className={`${className} number-input`}
-          error={problems}
-          focused={focused}
-          onClick={() => {
-            inputRef.current?.focus();
+          events={{
+            mouse: {
+              onClick: () => inputRef.current?.focus(),
+            },
           }}
           shadow={shadow}
+          states={{
+            state: {
+              error: problems,
+              focused,
+            },
+          }}
           {...props}
         >
           {icon && <>{icon}</>}
 
           <Input
             defaultValue={defaultValue}
-            hidden={hidden}
-            name={name}
-            onBlur={() => setFocused(false)}
-            // @ts-ignore
-            onChange={(e: any) => {
-              setValueChanged(true);
-              setValue(e.target.value);
+            events={{
+              focus: {
+                onBlur: () => setFocused(false),
+                onFocus: () => setFocused(true),
+              },
+              input: {
+                onChange: (e: any) => {
+                  setValueChanged(true);
+                  setValue(e.target.value);
+                },
+              },
             }}
-            onFocus={() => setFocused(true)}
+            name={name}
             placeholder={placeholder}
-            onKeyPress={e => e.key}
             ref={inputRef}
+            states={{
+              state: {
+                visible: !states.state?.visible,
+              },
+            }}
             textColor={textColor}
             type="number"
             value={value}
           />
 
-          {inProgress && (
+          {states.state?.loading && (
             <ProgressSpinner
               size={{
                 height: Sizes.Small,
@@ -180,7 +190,6 @@ export const NumberInput = memo(
 // `;
 
 const Input = styled.input<NumberInputProps>`
-  ${FocusStyles};
   ${TextStyles};
 
   background: transparent;

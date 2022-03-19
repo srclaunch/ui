@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../types';
 
-type JSONLabelProps = {
+type JSONLabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const JSONLabel = memo(
   ({

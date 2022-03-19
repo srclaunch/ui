@@ -2,20 +2,18 @@ import { Model } from '@srclaunch/types';
 import { useDispatch, useSelector } from '@srclaunch/web-application-state';
 import pluralize from 'pluralize';
 import { memo, ReactElement, useEffect, useState } from 'react';
-
 import { useEntityEditor } from '../../../hooks/use-entity-editor';
 import { getFormFieldsFromModel } from '../../../lib/forms/fields';
 import { Amount } from '../../../types';
 import { ErrorLabel } from '../../errors/ErrorLabel';
 import { Form } from '../../forms/Form';
 import { Container, ContainerProps } from '../../layout/Container';
-import { LoadingOverlay } from '../../progress/LoadingOverlay';
 
-type EntityEditorProps = {
+type EntityEditorProps = ContainerProps & {
   readonly actions?: Record<string, (...args: readonly any[]) => any>;
   readonly id?: string;
   readonly model: Model;
-} & ContainerProps<HTMLDivElement>;
+};
 
 export const EntityEditor = memo(
   ({ actions, className = '', id, model }: EntityEditorProps): ReactElement => {

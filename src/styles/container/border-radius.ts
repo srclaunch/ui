@@ -36,7 +36,7 @@ import { BorderRadius } from '../../types';
 //   return borderRadius;
 // }
 
-export function getBorderRadiusValue(
+export function getBorderRadiusStyles(
   borderRadius?: BorderRadius,
 ): SimpleInterpolation {
   return css`
@@ -77,11 +77,7 @@ export function getBorderRadiusValue(
 }
 
 export const BorderRadiusStyles = css<{ readonly borderRadius?: BorderRadius }>`
-  ${props =>
-    props.borderRadius &&
-    css`
-      ${getBorderRadiusValue(props.borderRadius)};
-    `};
+  ${props => getBorderRadiusStyles(props.borderRadius)};
 `;
 
 // ${props =>

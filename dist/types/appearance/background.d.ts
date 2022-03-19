@@ -1,3 +1,4 @@
+import { Color } from './color';
 export declare enum ElementBackgroundColors {
     Card = "var(--bg-color-card-rgb)",
     CloseButton = "var(--bg-color-close-button-rgb)",
@@ -88,13 +89,13 @@ export declare enum BackgroundRepeat {
     RepeatY = "repeat-y"
 }
 export declare type Background = {
-    color?: BackgroundColor | string;
-    image?: {
-        path?: string;
-        repeat?: BackgroundRepeat;
-        size?: BackgroundSize;
-        url?: string;
+    readonly color?: Color;
+    readonly image?: {
+        readonly path?: string;
+        readonly repeat?: BackgroundRepeat;
+        readonly size?: BackgroundSize;
+        readonly url?: string;
     };
-    opacity?: number;
+    readonly opacity?: number;
 };
 //# sourceMappingURL=background.d.ts.map

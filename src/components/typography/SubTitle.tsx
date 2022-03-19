@@ -3,7 +3,7 @@ import { memo, ReactElement } from 'react';
 import { Amount, Sizes, TextColors, TextSize, TextWeight } from '../../types';
 import { Label, LabelProps } from './Label';
 
-type SubTitleProps = LabelProps<HTMLHeadingElement>;
+type SubTitleProps = LabelProps;
 
 export const SubTitle = memo(
   ({
@@ -11,7 +11,6 @@ export const SubTitle = memo(
     children,
     className = '',
     lineHeight = Sizes.Small,
-
     textSize = TextSize.Large,
     textColor = TextColors.SubTitle,
     textWeight = TextWeight.More,

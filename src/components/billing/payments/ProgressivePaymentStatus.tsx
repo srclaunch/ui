@@ -1,21 +1,17 @@
 import { memo, ReactElement } from 'react';
+import { formatCurrency } from '@srclaunch/i18n';
+import { CurrencyCode } from '@srclaunch/types';
 import { Container } from '../../layout/Container';
 import {
   AlignHorizontal,
-  Alignment,
   AlignVertical,
   Amount,
   BackgroundColors,
   Color,
-  Formatter,
-  Orientation,
-  Size,
-  Sizes,
 } from '../../../types';
 import { ProgressMeter } from '../../charts/ProgressMeter';
 import { LinearGauge } from '../../charts/LinearGauge';
-import { formatCurrency } from '@srclaunch/i18n';
-import { CurrencyCode } from '@srclaunch/types';
+import { Formatter } from '../../../lib/data/format';
 
 type ProgressivePaymentStatusProps = {
   amountPaid: number;

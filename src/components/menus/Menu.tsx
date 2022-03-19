@@ -1,11 +1,8 @@
 import { memo, ReactElement } from 'react';
-
 import {
   Amount,
   BackgroundColors,
-  CommonComponentProps,
   DepthShadow,
-  Orientation,
   Overflow,
   TextColors,
   TextSize,
@@ -27,7 +24,7 @@ export const Menu = memo(
     className = '',
     menu,
     menuItemProps = {},
-    onClick,
+    events = {},
     onItemClick,
     padding = {},
     shadow = DepthShadow.Surface,
@@ -50,39 +47,46 @@ export const Menu = memo(
           menu.map((item, key: number) => {
             return (
               <MenuItem
+                events={{
+                  mouse: {
+                    onClick: () => {
+                      if (onItemClick) {
+                        onItemClick(item);
+                      }
+                    },
+                  },
+                }}
                 key={key}
-                onClick={() => {
-                  if (onItemClick) {
-                    onItemClick(item);
-                  }
-                }}
-                active={{
-                  background: {
-                    color: BackgroundColors.Primary,
-                  },
-                  // shadow: {
-                  //   blur: 7,
-                  //   color: BackgroundColors.Primary,
-                  //   opacity: 35,
-                  //   x: 0,
-                  //   y: 2,
-                  //   spread: 4,
-                  // },
-                  textColor: TextColors.PrimaryContrast,
-                }}
                 // borderRadius= {}
-                focus={{
-                  textColor: TextColors.PrimaryContrast,
-                }}
-                hover={{
-                  background: {
-                    color: BackgroundColors.Primary,
-                  },
-                  textColor: TextColors.PrimaryContrast,
-                }}
+
                 padding={{
                   left: Amount.Less,
                   right: Amount.Less,
+                }}
+                states={{
+                  active: {
+                    background: {
+                      color: BackgroundColors.Primary,
+                    },
+                    // shadow: {
+                    //   blur: 7,
+                    //   color: BackgroundColors.Primary,
+                    //   opacity: 35,
+                    //   x: 0,
+                    //   y: 2,
+                    //   spread: 4,
+                    // },
+                    textColor: TextColors.PrimaryContrast,
+                  },
+                  focused: {
+                    textColor: TextColors.PrimaryContrast,
+                  },
+                  hovered: {
+                    background: {
+                      color: BackgroundColors.Primary,
+                    },
+                    textColor: TextColors.PrimaryContrast,
+                  },
                 }}
                 textSize={TextSize.Small}
                 {...menuItemProps}

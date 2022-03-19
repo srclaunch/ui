@@ -5,14 +5,15 @@ import {
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  ContainerProps,
-  Orientation,
-  Overflow,
 } from '../../../types';
-import { Container } from '../../../components/layout/Container';
+import {
+  Container,
+  ContainerProps,
+} from '../../../components/layout/Container';
 import { MessagePreview } from './MessagePreview';
 
 type ConversationProps = ContainerProps;
+
 export const Conversation = memo(
   ({
     background = {},

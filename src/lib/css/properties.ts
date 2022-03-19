@@ -18,6 +18,15 @@ export function getCSSMeasurementValue(
   return val;
 }
 
+export function getCSSColorValue(val?: string | number | undefined) {
+  if (!val) return val;
+
+  if (val === 'transparent') {
+    return 'transparent';
+  }
+
+  return `rgb(${val})`;
+}
 // export function getCSSBoxShadowValue(val?: Shadow): string | null {
 //   if (!val) return null;
 

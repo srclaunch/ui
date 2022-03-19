@@ -1,5 +1,7 @@
-import { memo, PropsWithChildren, ReactElement } from 'react';
+import { memo, useState, PropsWithChildren, ReactElement } from 'react';
 import styled from 'styled-components';
+import { ContainerStyles, getContainerStyles } from '../../styles/container';
+import { getStatesStyles, StateStyles } from '../../styles/container/states';
 import {
   Alignment,
   AlignHorizontal,
@@ -8,57 +10,44 @@ import {
   Border,
   BorderRadius,
   CommonComponentProps,
-  ContainerAnimation,
+  DepthShadow,
+  Animation,
   Cursor,
   Depth,
-  Fill,
+  Events,
+  InteractionStates,
   Margin,
   Orientation,
   Padding,
   Size,
   Shadow,
   Position,
-  Overflow,
-  DepthShadow,
+  Visibility,
 } from '../../types';
-import { ContainerAnimationStyles } from '../../styles/container/animation';
-import { BackgroundStyles } from '../../styles/container/background';
-import { BorderStyles } from '../../styles/container/border';
-import { BorderRadiusStyles } from '../../styles/container/border-radius';
-import { CursorStyles } from '../../styles/container/cursor';
-import { DepthStyles } from '../../styles/container/depth';
-import { FocusStyles } from '../../styles/container/focus';
-import { MarginStyles } from '../../styles/container/margin';
-import { OpacityStyles } from '../../styles/container/opacity';
-import { PaddingStyles } from '../../styles/container/padding';
-import { PositionStyles } from '../../styles/container/position';
-import { ShadowStyles } from '../../styles/container/shadow';
-import { SizeStyles } from '../../styles/container/size';
-import { VisibilityStyles } from '../../styles/container/visibility';
-import { AlignmentStyles } from '../../styles/container/alignment';
+import { getEventHandlers } from '../../lib/events';
+import { ReactEventHandler } from 'react';
+import { useEffect } from 'react';
+import { Transform } from '../../types/appearance/animation';
 
-export type ContainerProps<E = HTMLDivElement> = PropsWithChildren<{
-  alignment?: Alignment;
-  animation?: ContainerAnimation;
-  background?: Background;
-  border?: Border;
-  borderRadius?: BorderRadius;
-  cursor?: Cursor;
-  depth?: Depth;
-  disabled?: boolean;
-  margin?: Margin;
-  opacity?: number;
-  padding?: Padding;
-  position?: Position;
-  shadow?: DepthShadow | Shadow;
-  size?: Size;
-  visible?: boolean;
-}> & {
-  readonly active?: ContainerProps<E>;
-  readonly disable?: ContainerProps<E>;
-  readonly hover?: ContainerProps<E>;
-  readonly focus?: ContainerProps<E>;
-} & CommonComponentProps<any>;
+export type ContainerProps = PropsWithChildren<
+  CommonComponentProps & {
+    readonly alignment?: Alignment;
+    readonly animations?: Animation[];
+    readonly background?: Background;
+    readonly border?: Border;
+    readonly borderRadius?: BorderRadius;
+    readonly cursor?: Cursor;
+    readonly depth?: Depth;
+    readonly events?: Events;
+    readonly margin?: Margin;
+    readonly padding?: Padding;
+    readonly position?: Position;
+    readonly shadow?: DepthShadow | Shadow;
+    readonly size?: Size;
+    readonly transform?: Transform;
+    readonly visibility?: Visibility;
+  }
+> & { readonly states?: Omit<InteractionStates<ContainerProps>, 'inputs'> };
 
 // ${props =>
 //   props.transform?.rotate &&
@@ -67,54 +56,42 @@ export type ContainerProps<E = HTMLDivElement> = PropsWithChildren<{
 //   `};
 
 const Wrapper = styled.div<ContainerProps>`
-  ${AlignmentStyles};
-  ${ContainerAnimationStyles};
-  ${BackgroundStyles};
-  ${BorderStyles};
-  ${BorderRadiusStyles};
-  ${CursorStyles};
-  ${DepthStyles};
-  ${MarginStyles};
-  ${OpacityStyles};
-  ${PaddingStyles};
-  ${PositionStyles};
-  ${ShadowStyles};
-  ${FocusStyles};
-  ${SizeStyles};
-  ${VisibilityStyles};
-
-  transition: opacity 0.13s ease-in-out, background 0.13s ease-in-out,
-    background-color 0.13s ease-in-out, border-radius 0.13s ease-in-out,
-    border-bottom-left-radius 0.13s ease-in-out,
-    border-bottom-right-radius 0.13s ease-in-out,
-    border-top-left-radius 0.13s ease-in-out,
-    border-top-right-radius 0.13s ease-in-out, border 0.13s ease-in-out,
-    border-color 0.13s ease-in-out, box-shadow 0.13s ease-in-out,
-    color 0.13s ease-in, transform 0.13s ease-in-out;
+  ${props => getContainerStyles(props)};
+  ${props => getStatesStyles(props)};
 `;
-
+/* ${StateStyles}; */
 export const Container = memo(
   ({
     alignment,
     as = 'div',
     children,
     className = '',
-    /* fadeIn = false, */
+    events = {},
     ...props
   }: ContainerProps): ReactElement => {
+    const [eventHandlers, setEventHandlers] = useState<{
+      [key: string]: ReactEventHandler;
+    }>({});
+
+    useEffect(() => {
+      if (events && Object.keys(events).length > 0) {
+        setEventHandlers(getEventHandlers(events));
+      }
+    }, []);
+
     return (
       <Wrapper
         alignment={{
           horizontal: AlignHorizontal.Stretch,
           orientation: Orientation.Vertical,
-          overflow: Overflow.Hidden,
           vertical: AlignVertical.Stretch,
           ...alignment,
         }}
         as={as}
         className={`${className} container`}
-        /* fadeIn={fadeIn} */
+        events={events}
         {...props}
+        {...eventHandlers}
       >
         {children}
       </Wrapper>

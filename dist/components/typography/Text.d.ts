@@ -1,11 +1,11 @@
 import { PropsWithChildren, ReactElement } from 'react';
-import { Amount, CommonComponentProps, Cursor, Size, TextAlign, TextColor, TextOverflow, TextSize, TextWeight } from '../../types';
+import { Amount, CommonComponentProps, Cursor, InteractionStates, TextAlign, TextColor, TextOverflow, TextSize, TextWeight } from '../../types';
 import { TextDecorationLine, TextDecorationStyle } from '../../types/typography/text';
-export declare type TextProps<E = HTMLSpanElement> = PropsWithChildren<{
+export declare type TextProps = PropsWithChildren<CommonComponentProps & {
     readonly bold?: boolean;
     readonly cursor?: Cursor;
     readonly italic?: boolean;
-    readonly lineHeight?: Size | string | number;
+    readonly lineHeight?: string | number;
     readonly lineWrap?: boolean;
     readonly textOverflow?: TextOverflow | string;
     readonly selectable?: boolean;
@@ -19,10 +19,8 @@ export declare type TextProps<E = HTMLSpanElement> = PropsWithChildren<{
     };
     readonly textSize?: TextSize | string | number;
     readonly textWeight?: TextWeight | string;
-}> & CommonComponentProps<E> & {
-    readonly focus?: TextProps;
-    readonly hover?: TextProps;
-    readonly active?: TextProps;
+}> & {
+    readonly states?: InteractionStates<TextProps>;
 };
 export declare const Text: import("react").MemoExoticComponent<({ as, children, className, lineHeight, lineWrap, selectable, textAlign, textColor, textSize, textOverflow, textWeight, ...props }: TextProps) => ReactElement>;
 //# sourceMappingURL=Text.d.ts.map

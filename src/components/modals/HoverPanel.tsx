@@ -7,11 +7,10 @@ import {
   BorderStyle,
   Depth,
   DepthShadow,
-  FocusProps,
 } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 
-type HoverPanelProps = ContainerProps<HTMLDivElement> & {
+type HoverPanelProps = ContainerProps & {
   readonly detached?: boolean;
   readonly visible?: boolean;
   readonly setMenuVisible?: (visible: boolean) => unknown;
@@ -26,9 +25,9 @@ export const HoverPanel = memo(
     className = '',
     depth = Depth.Higher,
     detached = true,
-    focused,
-    visible = true,
     setMenuVisible,
+    states = {},
+    visible = true,
     ...props
   }: HoverPanelProps): ReactElement => {
     return (
@@ -45,9 +44,10 @@ export const HoverPanel = memo(
         borderRadius={{ all: Amount.Less, ...borderRadius }}
         className={`${className} hover-panel`}
         depth={depth}
-        focused={focused}
         shadow={visible ? DepthShadow.Higher : DepthShadow.Surface}
-        visible={visible}
+        states={{
+          state: { focused: states.state?.focused, visible },
+        }}
         {...props}
       >
         {children}

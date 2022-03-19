@@ -23,7 +23,7 @@ import {
 } from '../../../types';
 import { DateLabel } from '../../data/labels/dates/DateLabel';
 
-export type MessagePreviewProps = ContainerProps<HTMLDivElement> & ChatMessage;
+export type MessagePreviewProps = ContainerProps & ChatMessage;
 
 export const MessagePreview = memo(
   ({

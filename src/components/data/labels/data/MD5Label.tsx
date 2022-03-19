@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../types';
 
-type MD5LabelProps = {
+type MD5LabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const MD5Label = memo(
   ({

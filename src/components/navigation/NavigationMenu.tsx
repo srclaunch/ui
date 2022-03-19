@@ -17,45 +17,25 @@ import { Container, ContainerProps } from '../layout/Container';
 import { Menu, MenuProps } from '../menus/Menu';
 import { NavigationLink } from './NavigationLink';
 
-export type NavigationMenuProps = ContainerProps<HTMLDivElement> & MenuProps;
+export type NavigationMenuProps = MenuProps & {
+  matchExactPath?: boolean;
+};
 
 export const NavigationMenu = memo(
   ({
     alignment = {},
     background = {},
     className = '',
-    padding = {},
+    matchExactPath = false,
     menu = [],
     menuItemProps = {
-      active: {
-        background: {
-          color: BackgroundColors.Primary,
-        },
-        // shadow: {
-        //   radius: 5,
-        //   color: BackgroundColors.Primary,
-        //   offsetX: 0,
-        //   offsetY: 1,
-        //   opacity: 35,
-        //   spreadRadius: 3,
-        // },
-        textColor: TextColors.PrimaryContrast,
-      },
       alignment: {
         fill: Fill.Horizontal,
       },
       borderRadius: {
         all: Amount.Least,
       },
-      focus: {
-        textColor: TextColors.PrimaryContrast,
-      },
-      hover: {
-        background: {
-          color: BackgroundColors.Light,
-        },
-        textColor: TextColors.Light,
-      },
+
       lineHeight: Sizes.Default,
       padding: {
         bottom: Amount.Least,
@@ -63,9 +43,36 @@ export const NavigationMenu = memo(
         right: Amount.Default,
         top: Amount.Least,
       },
+      states: {
+        active: {
+          background: {
+            color: BackgroundColors.Primary,
+          },
+          // shadow: {
+          //   radius: 5,
+          //   color: BackgroundColors.Primary,
+          //   offsetX: 0,
+          //   offsetY: 1,
+          //   opacity: 35,
+          //   spreadRadius: 3,
+          // },
+          textColor: TextColors.PrimaryContrast,
+        },
+        current: {},
+        hovered: {
+          background: {
+            color: BackgroundColors.Light,
+          },
+          textColor: TextColors.Light,
+        },
+        focused: {
+          textColor: TextColors.PrimaryContrast,
+        },
+      },
       textColor: TextColors.Default,
       textSize: TextSize.Default,
     },
+    padding = {},
     ...props
   }: NavigationMenuProps): ReactElement => {
     return (
@@ -84,7 +91,6 @@ export const NavigationMenu = memo(
         {menu.map((item, key) => {
           return (
             <NavigationLink
-              active={menuItemProps?.active ?? item.active}
               // background={
               //   {menuItemProps?.background ?? { color: BackgroundColors.Transparent }
               // }
@@ -93,8 +99,6 @@ export const NavigationMenu = memo(
                 item.borderRadius ?? { all: Amount.Default }
               }
               className="navigation-menu-item"
-              focus={menuItemProps?.focus ?? item.focus}
-              hover={menuItemProps?.hover ?? item.hover}
               icon={item.icon}
               key={key}
               label={item.label}

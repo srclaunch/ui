@@ -1,12 +1,12 @@
 import { memo, ReactElement } from 'react';
 
-import { Amount, Orientation } from '../../types';
+import { Amount, Orientation, Overflow } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 import { ListItem } from './ListItem';
 
-export type UnorderedListProps = {
+export type UnorderedListProps = ContainerProps & {
   readonly items: readonly ReactElement[];
-} & ContainerProps<HTMLUListElement>;
+};
 
 export const UnorderedList = memo(
   ({

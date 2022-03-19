@@ -1,7 +1,11 @@
 import { getIcon, Icon as IconType } from '@srclaunch/icons';
 import { memo, ReactElement } from 'react';
 import styled, { css } from 'styled-components';
+import { getContainerStyles } from '../../styles/container';
 import { AlignmentStyles } from '../../styles/container/alignment';
+import { MarginStyles } from '../../styles/container/margin';
+import { PaddingStyles } from '../../styles/container/padding';
+import { PositionStyles } from '../../styles/container/position';
 import { SizeStyles } from '../../styles/container/size';
 import {
   AlignHorizontal,
@@ -9,6 +13,7 @@ import {
   Fill,
   ForegroundColor,
   ForegroundColors,
+  InteractionStates,
   Sizes,
   TextColor,
   TextColors,
@@ -23,10 +28,12 @@ export type IconProps = ContainerProps & {
   readonly path?: string;
   readonly svg?: ReactElement;
   readonly url?: string;
+} & {
+  readonly states?: InteractionStates<IconProps>;
 };
 
-const Wrapper = styled.i<IconProps>`
-  ${AlignmentStyles};
+const Wrapper = styled.span<IconProps>`
+  ${props => getContainerStyles(props)};
 
   svg {
     ${props =>
@@ -36,7 +43,6 @@ const Wrapper = styled.i<IconProps>`
           ? 'currentColor'
           : `rgb(${props.color})`};
       `};
-    ${SizeStyles};
   }
 `;
 
@@ -81,25 +87,11 @@ export const Icon = memo(
     }
 
     if (path) {
-      return (
-        <Image
-          alt="icon"
-          className={`${className} icon`}
-          path={path}
-          {...props}
-        />
-      );
+      return <Image alt="icon" className={`${className} icon`} path={path} />;
     }
 
     if (url) {
-      return (
-        <Image
-          alt="icon"
-          className={`${className} icon`}
-          url={url}
-          {...props}
-        />
-      );
+      return <Image alt="icon" className={`${className} icon`} url={url} />;
     }
 
     return <></>;

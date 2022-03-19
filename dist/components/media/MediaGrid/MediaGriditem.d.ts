@@ -3,7 +3,7 @@ import { ReactElement } from 'react';
 import { Amount } from '../../../types';
 import { ContainerProps } from '../../layout/Container';
 import { MoreMenuProps } from '../../menus/MoreMenu';
-export declare type MediaGridItem = {
+export declare type MediaGridItem = ContainerProps & {
     readonly description?: string | null;
     readonly element?: ReactElement;
     readonly images?: readonly ImageType[];
@@ -12,6 +12,6 @@ export declare type MediaGridItem = {
     readonly title?: string;
     readonly url?: string;
     readonly video?: VideoType;
-} & ContainerProps<HTMLDivElement>;
-export declare const MediaGridItem: import("react").MemoExoticComponent<({ background, borderRadius, description, images, minHeight, moreMenu, onClick, title, url, video, ...props }: MediaGridItem) => JSX.Element>;
+};
+export declare const MediaGridItem: import("react").MemoExoticComponent<({ background, borderRadius, description, images, minHeight, moreMenu, title, url, video, ...props }: MediaGridItem) => JSX.Element>;
 //# sourceMappingURL=MediaGriditem.d.ts.map

@@ -2,10 +2,9 @@ import { css } from 'styled-components';
 
 // import { TextProps } from '../../../components/typography/Text';
 import { Amount, TextColors } from '../../../types';
-import { FocusProps } from '../../../types/state/focus-props';
 import { TextStyles } from '../../typography';
 
-export const TextInputStyles = css<FocusProps>`
+export const TextInputStyles = css`
   ${TextStyles};
   outline: none;
   padding: 0 ${Amount.Less};

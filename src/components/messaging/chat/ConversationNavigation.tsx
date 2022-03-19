@@ -27,6 +27,11 @@ export const ConversationNavigation = memo(
             vertical: AlignVertical.Center,
           }}
           borderRadius={{ all: Amount.Least }}
+          events={{
+            mouse: {
+              onClick: () => navigate('/messages/new'),
+            },
+          }}
           icon={{
             name: DualLightIcons.AddCircle,
             size: {
@@ -37,7 +42,6 @@ export const ConversationNavigation = memo(
           margin={{
             bottom: Amount.Default,
           }}
-          onClick={() => navigate('/messages/new')}
           // size={Sizes.Large}
           type={ButtonType.Primary}
         >
@@ -50,7 +54,10 @@ export const ConversationNavigation = memo(
             {
               icon: {
                 name: DualLightIcons.Inbox,
-                size: Sizes.Small,
+                size: {
+                  height: Sizes.Small,
+                  width: Sizes.Small,
+                },
               },
               label: 'Inbox',
               to: '/messages/inbox',
@@ -58,7 +65,10 @@ export const ConversationNavigation = memo(
             {
               icon: {
                 name: DualLightIcons.Star,
-                size: Sizes.Small,
+                size: {
+                  height: Sizes.Small,
+                  width: Sizes.Small,
+                },
               },
               label: 'Starred',
               to: '/messages/starred',
@@ -66,7 +76,10 @@ export const ConversationNavigation = memo(
             {
               icon: {
                 name: DualLightIcons.Send,
-                size: Sizes.Small,
+                size: {
+                  height: Sizes.Small,
+                  width: Sizes.Small,
+                },
               },
               label: 'Sent',
               to: '/messages/sent',
@@ -74,7 +87,10 @@ export const ConversationNavigation = memo(
             {
               icon: {
                 name: DualLightIcons.Note,
-                size: Sizes.Small,
+                size: {
+                  height: Sizes.Small,
+                  width: Sizes.Small,
+                },
               },
               label: 'Drafts',
               to: '/messages/drafts',
@@ -82,7 +98,10 @@ export const ConversationNavigation = memo(
             {
               icon: {
                 name: DualLightIcons.Trash,
-                size: Sizes.Small,
+                size: {
+                  height: Sizes.Small,
+                  width: Sizes.Small,
+                },
               },
               label: 'Trash',
               to: '/messages/trash',

@@ -19,7 +19,7 @@ import { Video } from '../../media/Video';
 import { MoreMenu, MoreMenuProps } from '../../menus/MoreMenu';
 import { Label } from '../../typography/Label';
 
-export type MediaGridItem = {
+export type MediaGridItem = ContainerProps & {
   readonly description?: string | null;
   readonly element?: ReactElement;
   readonly images?: readonly ImageType[];
@@ -28,7 +28,7 @@ export type MediaGridItem = {
   readonly title?: string;
   readonly url?: string;
   readonly video?: VideoType;
-} & ContainerProps<HTMLDivElement>;
+};
 
 export const MediaGridItem = memo(
   ({
@@ -38,7 +38,6 @@ export const MediaGridItem = memo(
     images,
     minHeight,
     moreMenu,
-    onClick,
     title,
     url,
     video,
@@ -88,7 +87,6 @@ export const MediaGridItem = memo(
         }}
         borderRadius={{ all: Amount.Default, ...borderRadius }}
         linkTo={url}
-        onClick={onClick}
         size={{
           minHeight: minHeight ?? 220,
         }}

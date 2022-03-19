@@ -55,34 +55,34 @@ export declare type Border = {
     readonly all?: {
         readonly color: BorderColor;
         readonly style?: BorderStyle;
-        readonly width?: string | number;
+        readonly width?: number | string;
     };
     readonly bottom?: {
         readonly color: BorderColor;
         readonly style?: BorderStyle;
-        readonly width?: string | number;
+        readonly width?: number | string;
     };
     readonly left?: {
         readonly color: BorderColor;
         readonly style?: BorderStyle;
-        readonly width?: string | number;
+        readonly width?: number | string;
     };
     readonly right?: {
         readonly color: BorderColor;
         readonly style?: BorderStyle;
-        readonly width?: string | number;
+        readonly width?: number | string;
     };
     readonly top?: {
         readonly color: BorderColor;
         readonly style?: BorderStyle;
-        readonly width?: string | number;
+        readonly width?: number | string;
     };
 };
 export declare type BorderRadius = {
-    readonly all?: string | number;
-    readonly bottomLeft?: string | number;
-    readonly bottomRight?: string | number;
-    readonly topLeft?: string | number;
-    readonly topRight?: string | number;
+    readonly all?: number | string;
+    readonly bottomLeft?: number | string;
+    readonly bottomRight?: number | string;
+    readonly topLeft?: number | string;
+    readonly topRight?: number | string;
 };
 //# sourceMappingURL=border.d.ts.map

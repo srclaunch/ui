@@ -13,12 +13,12 @@ import { Icon, IconProps } from '../media/Icon';
 import { Title } from '../typography/Title';
 import { Small } from '../typography/Small';
 
-type TitleCardProps = {
+type TitleCardProps = ContainerProps & {
   icon?: IconProps;
   label?: string;
   loading?: boolean;
   value?: number;
-} & ContainerProps;
+};
 
 export const TitleCard = memo(
   ({

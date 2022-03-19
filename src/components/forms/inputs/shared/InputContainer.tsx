@@ -1,24 +1,15 @@
 import { memo, ReactElement } from 'react';
-import styled, { css } from 'styled-components';
 
-import { InputContainerStyles } from '../../../../styles/forms/input/container';
 import {
   Amount,
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  CommonComponentProps,
-  ErrorProps,
   Orientation,
-  SuccessProps,
-  WarningProps,
 } from '../../../../types';
 import { Container, ContainerProps } from '../../../layout/Container';
 
-export type InputContainerProps = ContainerProps &
-  ErrorProps &
-  SuccessProps &
-  WarningProps;
+export type InputContainerProps = ContainerProps;
 
 export const InputContainer = memo(
   ({
@@ -28,9 +19,7 @@ export const InputContainer = memo(
     border = {},
     children,
     className = '',
-    error,
-    size,
-    success,
+    states = {},
     ...props
   }: InputContainerProps): ReactElement => {
     return (
@@ -44,9 +33,13 @@ export const InputContainer = memo(
         border={{
           all: {
             color:
-              error && Array.isArray(error) && error.length > 0
+              states.state?.error &&
+              Array.isArray(states.state.error) &&
+              states.state.error.length > 0
                 ? BorderColors.Error
-                : border?.all?.color ?? BorderColors.InputControl,
+                : border?.all && typeof border?.all == 'object'
+                ? border.all.color
+                : BorderColors.InputControl,
             style: BorderStyle.Solid,
             width: 1,
           },

@@ -18,12 +18,16 @@ export const Notifications = memo((): ReactElement => {
         return (
           <NotificationContainer key={notification.id}>
             <IconWrapper color={notification.color}>
-              <Icon name={notification.icon} />
+              {/* <Icon name={notification.icon} /> */}
             </IconWrapper>
             <Close>
               <CloseButton
-                onClick={() => {
-                  // dispatch(removeNotification({ id: notification.id }));
+                events={{
+                  mouse: {
+                    onClick: () => {
+                      // dispatch(removeNotification({ id: notification.id }));
+                    },
+                  },
                 }}
               />
             </Close>

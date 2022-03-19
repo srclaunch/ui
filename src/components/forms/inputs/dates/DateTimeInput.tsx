@@ -9,22 +9,23 @@ import { Condition, DateTime } from '@srclaunch/types';
 
 // import { BasicIcons } from '@srclaunch/icons';
 import { Icon } from '../../../media/Icon';
-import { InputContainer } from '../shared/InputContainer';
+import { InputContainer, InputContainerProps } from '../shared/InputContainer';
 import { InputProps, InputValueChangeHandler } from '../../../../types';
 
 // import { validate } from '@srclaunch/validation';
 
-type DateTimeInputProps = {
-  resetIcon?: typeof Icon;
-} & InputProps<HTMLInputElement, DateTime>;
+type DateTimeInputProps = InputContainerProps &
+  InputProps<DateTime> & {
+    resetIcon?: typeof Icon;
+  };
 
 export const DateTimeInput = memo(
   ({
-    error,
-    resetIcon,
+    events = {},
     defaultValue = new Date().toISOString(),
-    onChange,
-    validation = { [Condition.IsDate]: true },
+    states = {},
+    resetIcon,
+    validation = { conditions: { [Condition.IsDate]: true } },
   }: DateTimeInputProps): ReactElement => {
     // const [value, setValue] = useState<DateTime>(defaultValue);
     // const [focused, setFocused] = useState(false);

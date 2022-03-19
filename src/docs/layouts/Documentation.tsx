@@ -1,7 +1,10 @@
 import { DualLightIcons } from '@srclaunch/icons';
 import { useNavigate } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
+
+import { Container, ContainerProps } from '../../components/layout/Container';
 import { Spacer } from '../../components/layout/Spacer';
+import { MenuItemProps } from '../../components/menus/MenuItem';
 
 import {
   Alignment,
@@ -10,8 +13,6 @@ import {
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  Container,
-  ContainerProps,
   Fill,
   Icon,
   Label,
@@ -26,7 +27,7 @@ import {
   Title,
 } from '../../index';
 import { AlignHorizontal } from '../../types';
-
+import componentLibrary from '../component-library';
 {
   /* <Workspace>
           <WorkspaceFooter>
@@ -54,19 +55,18 @@ import { AlignHorizontal } from '../../types';
         </Workspace> */
 }
 
-type DocumentationProps = ContainerProps;
-
 export const Documentation = memo(
-  ({ children }: DocumentationProps): ReactElement => {
+  ({ children }: ContainerProps): ReactElement => {
     return (
       <Container
         alignment={{ fill: Fill.Both }}
         background={{ color: BackgroundColors.Darker }}
+        className="documentation-layout"
       >
         <Container
           alignment={{
             orientation: Orientation.Horizontal,
-            overflow: Overflow.Visible,
+            vertical: AlignVertical.Center,
           }}
           background={{ color: BackgroundColors.Lightest }}
           border={{
@@ -76,17 +76,13 @@ export const Documentation = memo(
               width: 1,
             },
           }}
-          padding={{ all: Amount.Default }}
+          padding={{
+            all: Amount.Least,
+            left: Amount.Default,
+            right: Amount.Default,
+          }}
         >
-          <Container
-            alignment={{
-              horizontal: AlignHorizontal.Center,
-              orientation: Orientation.Horizontal,
-              vertical: AlignVertical.Center,
-            }}
-          >
-            <Title>AppLab Component Docs</Title>
-          </Container>
+          <Title>AppLab Component Docs</Title>
 
           <Spacer />
 
@@ -99,6 +95,17 @@ export const Documentation = memo(
             size={{ width: 260 }}
           >
             <NavigationMenu
+              menu={[
+                ...(componentLibrary.components?.map(component => {
+                  return {
+                    label: component.title,
+                    to: component.path,
+                  };
+                }) as MenuItemProps[]),
+              ]}
+              size={{ width: 260 }}
+            />
+            {/* <NavigationMenu
               alignment={{
                 overflow: Overflow.ScrollVertical,
               }}
@@ -219,7 +226,7 @@ export const Documentation = memo(
                   to: '/workspaces',
                 },
               ]}
-            />
+            /> */}
           </Container>
 
           <Container

@@ -15,7 +15,6 @@ import {
   BorderColors,
   BorderStyle,
   Cursor,
-  DataGridDisplayType,
   Depth,
   DepthShadow,
   Orientation,
@@ -36,6 +35,11 @@ import { SearchInput } from '../../forms/inputs/text/SearchInput';
 import { MenuButton } from '../../forms/buttons/MenuButton';
 import { Button, ButtonType } from '../../forms/buttons/Button';
 
+export enum DataGridDisplayType {
+  Card = 'card',
+  Table = 'table',
+}
+
 export type DataGridColumn = {
   align?: AlignHorizontal;
   label: string;
@@ -46,7 +50,7 @@ export type DataGridColumn = {
   type: Primitives;
 };
 
-export type DataGridProps = {
+export type DataGridProps = ContainerProps & {
   className?: string;
   columns: DataGridColumn[];
   columnCount?: number;
@@ -76,21 +80,21 @@ export type DataGridProps = {
   onItemClick?: (row: Record<string, unknown>) => unknown;
   template?: {
     card?: ({
-      onClick,
+      // onClick,
       row,
     }: {
-      onClick?: (row: Record<string, Primitives>) => unknown;
+      // onClick?: (row: Record<string, Primitives>) => unknown;
       row: Record<string, Primitives>;
-    } & ContainerProps<HTMLDivElement>) => ReactElement;
+    } & ContainerProps) => ReactElement;
     row?: ({
-      onClick,
+      // onClick,
       row,
     }: {
-      onClick?: (row: Record<string, Primitives>) => unknown;
+      // onClick?: (row: Record<string, Primitives>) => unknown;
       row: Record<string, Primitives>;
-    } & ContainerProps<HTMLDivElement>) => ReactElement;
+    } & ContainerProps) => ReactElement;
   };
-} & ContainerProps<HTMLElement>;
+};
 
 export const DataGrid = memo(
   ({
@@ -181,8 +185,12 @@ export const DataGrid = memo(
                 {/* @ts-ignore */}
                 <SearchInput
                   name="search-input"
-                  onChange={({ value }) => {
-                    setSearchTerm(value ?? '');
+                  events={{
+                    input: {
+                      onValueChange: ({ value }) => {
+                        setSearchTerm(value ?? '');
+                      },
+                    },
                   }}
                   placeholder={header.search.placeholder}
                   size={{ width: header.search.size?.width }}
@@ -197,15 +205,19 @@ export const DataGrid = memo(
                 <MenuButton
                   menu={[
                     {
+                      events: {
+                        mouse: {
+                          onClick: () =>
+                            downloadDataAsFile({
+                              data: formatObjectToCSVData({
+                                // data: [],
+                                objectType: 'EXPENSE',
+                              }),
+                              fileName: 'expenses',
+                            }),
+                        },
+                      },
                       label: 'Export to CSV',
-                      onClick: () =>
-                        downloadDataAsFile({
-                          data: formatObjectToCSVData({
-                            // data: [],
-                            objectType: 'EXPENSE',
-                          }),
-                          fileName: 'expenses',
-                        }),
                     },
                   ]}
                   label="Export"
@@ -215,7 +227,11 @@ export const DataGrid = memo(
 
             {header.create && (
               <Button
-                onClick={header.create.onClick}
+                events={{
+                  mouse: {
+                    onClick: header.create.onClick,
+                  },
+                }}
                 // size={Sizes.Small}
                 type={ButtonType.Secondary}
               >
@@ -231,9 +247,11 @@ export const DataGrid = memo(
           }}
           borderRadius={!header ? borderRadius : undefined}
           className="data-grid-grid"
-          onScroll={(e: SyntheticEvent) => e.preventDefault()}
-
-          // width="min-content"
+          events={{
+            ui: {
+              onScroll: (e: SyntheticEvent) => e.preventDefault(),
+            },
+          }}
         >
           {display === DataGridDisplayType.Table ? (
             <>
@@ -329,18 +347,22 @@ export const DataGrid = memo(
                         }}
                         className="data-grid-row"
                         cursor={Cursor.Pointer}
-                        hover={{
-                          background: {
-                            color: BackgroundColors.Primary,
+                        events={{
+                          mouse: {
+                            onClick: () => {
+                              if (onItemClick) onItemClick(row);
+                            },
                           },
                         }}
                         key={key}
-                        onClick={() => {
-                          if (onItemClick) onItemClick(row);
-                        }}
-                        onMouseEnter={() => setHoveredRow(key)}
-                        onMouseLeave={() => setHoveredRow(undefined)}
                         padding={{ all: Amount.Least }}
+                        states={{
+                          hovered: {
+                            background: {
+                              color: BackgroundColors.Primary,
+                            },
+                          },
+                        }}
                       >
                         {columns.map((column, columnKey) => {
                           return (
@@ -389,12 +411,17 @@ export const DataGrid = memo(
                   if (template && template.card) {
                     return createElement(template.card, {
                       key,
+                      events: {
+                        mouse: {
+                          onClick: () => {
+                            if (onItemClick) onItemClick(row);
+                          },
+                        },
+                      },
                       margin: {
                         bottom: Amount.Default,
                       },
-                      onClick: () => {
-                        if (onItemClick) onItemClick(row);
-                      },
+
                       row,
                     });
                   } else {

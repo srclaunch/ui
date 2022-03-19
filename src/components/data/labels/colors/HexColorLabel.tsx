@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../types';
 
-type HexColorLabelProps = {
+type HexColorLabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const HexColorLabel = memo(
   ({

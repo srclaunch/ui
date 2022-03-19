@@ -4,9 +4,9 @@ import { Label, LabelProps } from '../../../../typography/Label';
 
 import { Sizes, TextColors, TextSize } from '../../../../../types';
 
-type EINLabelProps = {
+type EINLabelProps = LabelProps & {
   value: string;
-} & LabelProps;
+};
 
 export const EINLabel = memo(
   ({

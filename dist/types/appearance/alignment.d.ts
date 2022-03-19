@@ -36,10 +36,10 @@ export declare enum Overflow {
     Visible = "visible"
 }
 export declare type Alignment = {
-    fill?: Fill;
-    orientation?: Orientation;
-    overflow?: Overflow;
-    horizontal?: AlignHorizontal;
-    vertical?: AlignVertical;
+    readonly fill?: Fill;
+    readonly orientation?: Orientation;
+    readonly overflow?: Overflow;
+    readonly horizontal?: AlignHorizontal;
+    readonly vertical?: AlignVertical;
 };
 //# sourceMappingURL=alignment.d.ts.map

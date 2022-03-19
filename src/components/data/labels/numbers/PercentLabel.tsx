@@ -3,9 +3,9 @@ import { Primitives } from '@srclaunch/types';
 
 import { Label, LabelProps } from '../../../typography/Label';
 
-type PercentLabelProps = {
+type PercentLabelProps = LabelProps & {
   value: number;
-} & LabelProps;
+};
 
 export const PercentLabel = memo(
   ({ value, ...props }: PercentLabelProps): ReactElement => {

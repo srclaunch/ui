@@ -1,3 +1,4 @@
-export type VisibilityProps = {
-  readonly visible?: boolean;
+export type Visibility = {
+  readonly hidden?: boolean;
+  readonly opacity?: number;
 };

@@ -1,10 +1,26 @@
-import { css } from 'styled-components';
-import { ContainerAnimation } from '../../types/index';
+import { css, SimpleInterpolation } from 'styled-components';
+import { Animation } from '../../types/index';
 
-export const ContainerAnimationStyles = css<{
-  readonly animation?: ContainerAnimation;
+export function getAnimationStyles(
+  animations?: Animation[],
+): SimpleInterpolation {
+  if (!animations || !animations.length) return;
+  return css`
+    animation: ${animations
+      .map(
+        animation =>
+          `${animation.name} ${animation.timing?.duration} ${animation.timing?.easing} ${animation.timing?.delay}`,
+      )
+      .join(', ')};
+  `;
+}
+
+// ${animation?.timing?.duration} ${animation?.timing?.easing}
+// ${animation?.timing?.delay} ${animation?.timing?.iterations};
+export const AnimationStyles = css<{
+  readonly animations?: Animation[];
 }>`
-  ${props => props.animation && css``};
+  ${props => getAnimationStyles(props.animations)};
 `;
 
 // ${props =>

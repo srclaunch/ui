@@ -1,7 +1,6 @@
-import { TextColor } from '../typography/text';
-import { BackgroundColor } from './background';
-import { BorderColor } from './border';
-import { ForegroundColor } from './foreground';
+import { BackgroundColors } from './background';
+import { BorderColors } from './border';
+import { ForegroundColors } from './foreground';
 
 export enum Colors {
   Black = 'var(--color-black-rgb)',
@@ -29,4 +28,10 @@ export enum ContrastColors {
   White = 'var(--color-white-contrast-rgb)',
 }
 
-export type Color = Colors | ContrastColors | string;
+export type Color =
+  | BackgroundColors
+  | BorderColors
+  | Colors
+  | ContrastColors
+  | ForegroundColors
+  | string;

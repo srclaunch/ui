@@ -13,62 +13,57 @@ import {
   Position,
   Sizes,
 } from '../../types';
-import { Container, ContainerProps } from '../layout/Container';
+import { Button, ButtonProps } from '../forms/buttons/Button';
 import { Icon } from '../media/Icon';
 
-export type CloseButtonProps = {
-  readonly iconColor?: ForegroundColor;
-} & ContainerProps<HTMLButtonElement>;
+export type CloseButtonProps = ButtonProps;
 
 export const CloseButton = memo(
   ({
-    background = { color: BackgroundColors.CloseButton },
-    iconColor = ForegroundColors.CloseButton,
+    background = {},
+    icon = {},
     className = '',
-    onClick,
-    size = {
-      height: Sizes.Default,
-      width: Sizes.Default,
-    },
+    size = {},
     ...props
   }: CloseButtonProps): ReactElement => {
-    const [hovered, setHovered] = useState(false);
-    const [focused, setFocused] = useState(false);
-
-    const iconHoverColor = hovered
-      ? ForegroundColors.PrimaryContrast
-      : iconColor;
-
     return (
-      <Container
+      <Button
         alignment={{
           horizontal: AlignHorizontal.Center,
           vertical: AlignVertical.Center,
         }}
-        as="button"
-        background={hovered ? { color: BackgroundColors.Primary } : background}
+        background={{ color: BackgroundColors.CloseButton, ...background }}
         borderRadius={{ all: Amount.All }}
         className={`${className} close-button`}
         depth={Depth.Higher}
-        focused={focused}
         form="null"
-        onClick={onClick}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
         size={{
-          height: size.height,
-          width: size.width,
+          height: Sizes.Default,
+          width: Sizes.Default,
           ...size,
         }}
+        states={{
+          hovered: {
+            background: { color: BackgroundColors.Primary },
+            icon: { color: ForegroundColors.PrimaryContrast },
+          },
+        }}
+        {...props}
       >
         <Icon
-          color={iconHoverColor}
+          color={ForegroundColors.CloseButton}
           name={BasicIcons.Close}
           size={{ height: Sizes.Smallest, width: Sizes.Smallest }}
+          states={
+            {
+              // hovered: {
+              //   color: ForegroundColors.PrimaryContrast,
+              // },
+            }
+          }
+          {...icon}
         />
-      </Container>
+      </Button>
     );
   },
 );

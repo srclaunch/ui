@@ -15,31 +15,28 @@ import { IconProps } from '../media/Icon';
 import { NavigationLink } from '../navigation/NavigationLink';
 import { Label, LabelProps } from '../typography/Label';
 
-export type MenuItemProps = {
+export type MenuItemProps = ButtonProps & {
   readonly component?: ReactElement;
   readonly icon?: IconProps;
   readonly label?: string;
   readonly title?: string;
   readonly to?: string;
   readonly value?: any;
-} & ContainerProps<HTMLButtonElement> &
-  LabelProps;
+};
 
 export const MenuItem = memo(
   ({
-    active,
     as = 'button',
     background = {},
     borderRadius = {},
     className = '',
     component,
-    focus,
-    hover,
+    events = {},
     icon,
     label,
     lineHeight = Sizes.Default,
-    onClick,
     shadow = DepthShadow.Surface,
+    states = {},
     title,
     to,
     value,
@@ -64,19 +61,24 @@ export const MenuItem = memo(
                 : BackgroundColors.Transparent,
               ...background,
             }}
-            focus={focus}
-            hover={hover}
+            events={{
+              mouse: {
+                onClick: e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+
+                  if (events.mouse?.onClick) events.mouse?.onClick(e);
+                },
+              },
+            }}
             icon={icon}
             lineHeight={lineHeight}
-            onClick={e => {
-              e.preventDefault();
-              e.stopPropagation();
-
-              if (onClick) onClick(e);
-            }}
             padding={{
               left: Amount.Less,
               right: Amount.Less,
+            }}
+            states={{
+              state: {},
             }}
             textColor={props.textColor ?? TextColors.Default}
             to={to}
@@ -106,20 +108,26 @@ export const MenuItem = memo(
           form="null"
           icon={icon}
           lineHeight={lineHeight}
-          onClick={(e: any) => {
-            e.preventDefault();
-            e.stopPropagation();
+          events={{
+            mouse: {
+              onClick: e => {
+                e.preventDefault();
+                e.stopPropagation();
 
-            // @ts-ignore
-            if (onClick) onClick(e);
+                if (events.mouse?.onClick) events.mouse?.onClick(e);
+              },
+            },
           }}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
           padding={{
             left: Amount.Less,
             right: Amount.Less,
           }}
-          type={hovered ? ButtonType.Primary : ButtonType.Transparent}
+          states={{
+            hovered: {
+              type: ButtonType.Primary,
+            },
+          }}
+          type={ButtonType.Transparent}
           {...props}
         >
           {component ?? label}

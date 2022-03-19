@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 import { getCSSMeasurementValue } from '../../lib/css/properties';
 import { BorderColors, BorderRadius } from '../../types';
-import { getBorderRadiusValue } from './border-radius';
+import { getBorderRadiusStyles } from './border-radius';
 /* border-radius: calc(${props => props.borderRadius} + 3px); */
 /* border-color: rgb(${() => BorderColors.Primary}); */
 
@@ -20,11 +20,12 @@ export const FocusStyles = css<{
       outline: none;
 
       &:before {
+        ${getBorderRadiusStyles(props.borderRadius)};
+
         bottom: -4px;
         content: '';
         display: block;
         border-color: rgb(${BorderColors.Primary});
-        border-radius: ${getBorderRadiusValue(props.borderRadius)};
         border-style: solid;
         border-width: 2px;
         opacity: ${props.focused ? 1 : 0};
