@@ -224,7 +224,7 @@ export const Button = memo(
       >
         {typeof children === 'string' ? (
           <Label
-            cursor={cursor}
+            // cursor={cursor}
             icon={icon}
             lineHeight={lineHeight}
             textAlign={textAlign}
@@ -235,6 +235,7 @@ export const Button = memo(
             }}
             textSize={textSize}
             textWeight={textWeight}
+            states={states}
           >
             {children}
           </Label>

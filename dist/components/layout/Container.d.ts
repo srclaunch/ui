@@ -19,5 +19,5 @@ export declare type ContainerProps = PropsWithChildren<CommonComponentProps & {
     readonly visibility?: Visibility;
     readonly states?: States<ContainerProps>;
 }>;
-export declare const Container: import("react").MemoExoticComponent<({ alignment, as, children, className, events, ...props }: ContainerProps) => ReactElement>;
+export declare const Container: import("react").MemoExoticComponent<({ alignment, as, children, className, events, states, ...props }: ContainerProps) => ReactElement>;
 //# sourceMappingURL=Container.d.ts.map

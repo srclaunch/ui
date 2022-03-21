@@ -75,6 +75,7 @@ export const Container = memo(
     children,
     className = '',
     events = {},
+    states = {},
     ...props
   }: ContainerProps): ReactElement => {
     const [eventHandlers, setEventHandlers] = useState<{
@@ -87,6 +88,10 @@ export const Container = memo(
       }
     }, []);
 
+    // if (as === 'button') {
+    //   console.log('props.states', states);
+    // }
+
     return (
       <Wrapper
         alignment={{
@@ -97,7 +102,8 @@ export const Container = memo(
         }}
         as={as}
         className={`${className} container`}
-        disabled={props?.states?.state?.disabled}
+        disabled={states?.state?.disabled}
+        states={states}
         {...props}
         {...eventHandlers}
       >

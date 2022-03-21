@@ -74,21 +74,12 @@ export const NavigationMenu = memo(
                 ...padding,
               }}
               states={{
-                // active: {
-                //   background: {
-                //     color: BackgroundColors.Primary,
-                //   },
-                //   // lineHeight: Sizes.Large,
-                //   textColor: TextColors.PrimaryContrast,
-                //   // shadow: {
-                //   //   radius: 5,
-                //   //   color: BackgroundColors.Primary,
-                //   //   offsetX: 0,
-                //   //   offsetY: 1,
-                //   //   opacity: 35,
-                //   //   spreadRadius: 3,
-                //   // },
-                // },
+                active: {
+                  background: {
+                    color: BackgroundColors.Dark,
+                  },
+                  textColor: TextColors.Darker,
+                },
                 current: {
                   background: {
                     color: BackgroundColors.Primary,

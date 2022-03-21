@@ -1,18 +1,16 @@
 import { css, SimpleInterpolation } from 'styled-components';
 import { getContainerStyles } from './index';
 import { ContainerProps } from '../../components/layout/Container';
-import { getTextStyles } from '../typography';
-import { TextProps } from '../../components/typography/Text';
 
 export function getDisabledStateStyles(): SimpleInterpolation {
   return css`
-    opacity: 0.1 !important;
-    background-color: yellow !important;
+    cursor: not-allowed !important;
+    opacity: 0.3 !important;
   `;
 }
 
 export function getContainerStatesStyles(
-  props: ContainerProps & TextProps,
+  props: ContainerProps,
 ): SimpleInterpolation {
   const { states, ...otherProps } = props;
 
@@ -35,28 +33,36 @@ export function getContainerStatesStyles(
   } = states;
 
   return css`
+    ${active &&
+    css`
+      ${state?.active
+        ? css`
+            ${getContainerStyles({ ...otherProps, ...active })};
+          `
+        : css`
+            &::active {
+              ${getContainerStyles({ ...otherProps, ...active })};
+            }
+          `};
+    `};
+
     ${current &&
     state?.current &&
     css`
       ${getContainerStyles({ ...otherProps, ...current })};
     `};
 
-    ${disabled &&
-    css`
-      ${state?.disabled
-        ? css`
-            ${getContainerStyles({ ...otherProps, ...disabled })};
-
+    ${disabled && state?.disabled
+      ? css`
+          ${getDisabledStateStyles()};
+          ${getContainerStyles({ ...otherProps, ...disabled })};
+        `
+      : css`
+          &:disabled {
             ${getDisabledStateStyles()};
-          `
-        : css`
-            &:disabled {
-              ${getContainerStyles({ ...otherProps, ...disabled })};
-
-              ${getDisabledStateStyles()};
-            }
-          `};
-    `};
+            ${getContainerStyles({ ...otherProps, ...disabled })};
+          }
+        `};
 
     ${error &&
     state?.error &&
@@ -91,19 +97,6 @@ export function getContainerStatesStyles(
           `};
     `};
 
-    ${active &&
-    css`
-      ${state?.active
-        ? css`
-            ${getContainerStyles({ ...otherProps, ...active })};
-          `
-        : css`
-            &::active {
-              ${getContainerStyles({ ...otherProps, ...active })};
-            }
-          `};
-    `};
-
     ${loading &&
     state?.loading &&
     css`
@@ -130,6 +123,6 @@ export function getContainerStatesStyles(
   `;
 }
 
-export const StateStyles = css<ContainerProps & TextProps>`
+export const StateStyles = css<ContainerProps>`
   ${props => getContainerStatesStyles(props)};
 `;
