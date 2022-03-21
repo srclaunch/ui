@@ -3,6 +3,7 @@ import { CodeVerificationForm } from '../components/authentication/CodeVerificat
 import { ForgotPasswordForm } from '../components/authentication/ForgotPasswordForm';
 import { LoginForm } from '../components/authentication/LoginForm';
 import { SignupForm } from '../components/authentication/SignupForm';
+import { DropdownInput } from '../components/forms/inputs/menu/DropdownInput';
 import { NumberInput } from '../components/forms/inputs/numbers/NumberInput';
 import { TextInput } from '../components/forms/inputs/text/TextInput';
 import {
@@ -305,7 +306,22 @@ const Example = () => (
               title: 'Menus',
               description: 'Menu and list user inputs',
               path: '/forms/inputs/menus',
-              components: [],
+              components: [
+                {
+                  component: DropdownInput,
+                  description: 'A dropdown menu input',
+                  title: 'DropdownInput',
+                  path: '/forms/inputs/menus/dropdown-input',
+                  examples: [
+                    {
+                      title: 'Default',
+                      properties: {
+                        label: 'Dropdown',
+                      },
+                    },
+                  ],
+                },
+              ],
             },
             {
               title: 'Numbers',

@@ -5,7 +5,23 @@ import { ContainerProps } from '../../components/layout/Container';
 export function getDisabledStateStyles(): SimpleInterpolation {
   return css`
     cursor: not-allowed !important;
-    opacity: 0.3 !important;
+    opacity: 0.3;
+  `;
+}
+
+export function getVisibleStateStyles(): SimpleInterpolation {
+  return css`
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+  `;
+}
+
+export function getHiddenStateStyles(): SimpleInterpolation {
+  return css`
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
   `;
 }
 
@@ -54,13 +70,13 @@ export function getContainerStatesStyles(
 
     ${disabled && state?.disabled
       ? css`
-          ${getDisabledStateStyles()};
           ${getContainerStyles({ ...otherProps, ...disabled })};
+          ${getDisabledStateStyles()};
         `
       : css`
           &:disabled {
-            ${getDisabledStateStyles()};
             ${getContainerStyles({ ...otherProps, ...disabled })};
+            ${getDisabledStateStyles()};
           }
         `};
 
@@ -113,6 +129,27 @@ export function getContainerStatesStyles(
     state?.visible &&
     css`
       ${getContainerStyles({ ...otherProps, ...visible })};
+      ${getVisibleStateStyles()};
+    `};
+
+    ${visible &&
+    state?.visible === false &&
+    css`
+      ${getContainerStyles({ ...otherProps, ...visible })};
+      ${getHiddenStateStyles()};
+    `};
+
+    ${visible &&
+    state?.visible === false &&
+    css`
+      ${getContainerStyles({ ...otherProps, ...visible })};
+      ${getHiddenStateStyles()};
+    `};
+
+    ${!visible &&
+    state?.visible === false &&
+    css`
+      ${getHiddenStateStyles()};
     `};
 
     ${warning &&

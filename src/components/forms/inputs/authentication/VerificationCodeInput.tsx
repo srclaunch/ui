@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { ChangeEvent, memo, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Condition } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
@@ -23,7 +23,7 @@ export enum VerificationCodeType {
   Numeric = 'numeric',
 }
 
-import { TextInputProps } from '../text/TextInput';
+import { TextInput, TextInputProps } from '../text/TextInput';
 import { NumberInput } from '../numbers/NumberInput';
 import { TextProps } from '../../../typography/Text';
 import { InputProps } from '../shared/Input';
@@ -52,8 +52,13 @@ export const VerificationCodeInput = memo(
     const [codeParts, setCodeParts] = useState<{
       [key: number]: string | undefined;
     }>({});
+    const [code, setCode] = useState<undefined | string>();
+    const codePartsRef = useRef(codeParts);
     const [focusedKey, setFocusedKey] = useState<number | undefined>(undefined);
-    const code = Object.values(codeParts).join('');
+
+    useEffect(() => {
+      setCode(Object.values(codeParts).join(''));
+    }, [codeParts]);
 
     useEffect(() => {
       const typeCondition = () => {
@@ -92,6 +97,9 @@ export const VerificationCodeInput = memo(
         });
     }, [code]);
 
+    console.log('coeParts', codeParts);
+    console.log('code', code);
+
     return (
       <Container
         alignment={{
@@ -104,19 +112,8 @@ export const VerificationCodeInput = memo(
       >
         {Array.from(Array(length)).map((_, key) => {
           return (
-            // <InputContainer
-            //   background={{
-            //     color: BackgroundColors.InputControl,
-            //   }}
-            //   className={`${className} verification-code-input`}
-            //   key={key}
-            //   states={{
-            //     state: {
-            //       focused: focusedKey === key,
-            //     },
-            //   }}
-            // >
-            <NumberInput
+            <TextInput
+              id={`${name}-verification-code-input-${key}`}
               events={{
                 clipboard: {
                   onPaste: e => {
@@ -137,34 +134,49 @@ export const VerificationCodeInput = memo(
                           i += 1;
                         }
 
+                        codePartsRef.current = obj;
                         setCodeParts(obj);
                       }
                     }
                   },
+                  ...events.clipboard,
                 },
                 input: {
-                  onChange: e => {
+                  onChange: (e: ChangeEvent<HTMLInputElement>) => {
+                    console.log('codePartsRef,', codePartsRef);
+                    console.log('e', e);
+
                     // @ts-ignore
                     if (e.nativeEvent.inputType !== 'insertFromPaste') {
-                      const currentCodePart = codeParts?.[key];
+                      const currentCodePart = codePartsRef.current?.[key];
 
+                      console.log('curentCodePart', currentCodePart);
                       if (
-                        // @ts-ignore
                         e.target.value.length === 1 ||
-                        // @ts-ignore
                         e.target.value.length === 0
                       ) {
-                        // @ts-ignore
-                        setCodeParts({ ...codeParts, [key]: e.target.value });
+                        codePartsRef.current = {
+                          ...codePartsRef.current,
+                          // @ts-ignore
+                          [key]: e.target.value,
+                        };
+
+                        setCodeParts({
+                          ...codePartsRef.current,
+                          [key]: e.target.value,
+                        });
                       } else {
-                        setCodeParts({ ...codeParts, [key]: undefined });
+                        codePartsRef.current = {
+                          ...codePartsRef.current,
+                          [key]: undefined,
+                        };
+                        setCodeParts({
+                          ...codePartsRef.current,
+                          [key]: undefined,
+                        });
                       }
 
-                      if (
-                        // @ts-ignore
-                        e.target.value.length === 1 &&
-                        !currentCodePart
-                      ) {
+                      if (e.target.value.length === 1 && !currentCodePart) {
                         const nextElem = document.getElementById(
                           `${name}-verification-code-input-${key + 1}`,
                         );
@@ -175,8 +187,14 @@ export const VerificationCodeInput = memo(
                       }
                     }
                   },
+                  onValueChange: ({ value }) => {
+                    console.log('VALUE', value);
+                  },
                 },
                 keyboard: {
+                  onKeyPress: e => {
+                    console.log('e', e);
+                  },
                   onKeyDown: e => {
                     if (
                       e.key === 'Delete' ||
@@ -192,6 +210,7 @@ export const VerificationCodeInput = memo(
                       }
                     }
                   },
+                  ...events.keyboard,
                 },
                 ...events,
               }}
@@ -210,10 +229,11 @@ export const VerificationCodeInput = memo(
               textAlign={TextAlign.Center}
               textSize={TextSize.Larger}
               value={
-                codeParts?.[key]
-                  ? Number.parseInt(codeParts[key] as string)
+                codePartsRef.current[key]
+                  ? codePartsRef.current[key]
                   : undefined
               }
+              // {...props}
             />
           );
         })}

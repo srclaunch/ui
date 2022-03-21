@@ -32,35 +32,8 @@ type DropdownControlProps = InputContainerProps<string> & {
   readonly icon?: IconProps;
   readonly label?: string;
   readonly placeholder?: string;
-  readonly menuVisible: boolean;
   readonly ref?: ComponentRef<any>;
 };
-
-const Wrapper = styled.button<DropdownControlProps>`
-  ${InputContainerStyles};
-
-  z-index: ${props =>
-    props.menuVisible
-      ? getDepthZIndex(props.depth ?? Depth.Surface) + 3
-      : 'auto'};
-
-  ${props =>
-    props.states?.state?.focused &&
-    props.menuVisible &&
-    css`
-      border-bottom-color: transparent;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-
-      &:before {
-        border-radius: calc(${Amount.Least} + 3px) calc(${Amount.Least} + 3px) 0
-          0;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        border-bottom: none;
-      }
-    `};
-`;
 
 export const DropdownControl = memo(
   ({
@@ -71,11 +44,8 @@ export const DropdownControl = memo(
     className = '',
     component,
     depth = Depth.Low,
-
     icon,
     label,
-    menuVisible,
-
     placeholder = 'Select an option',
     states = {},
     size = {},
@@ -115,9 +85,7 @@ export const DropdownControl = memo(
         cursor={Cursor.Pointer}
         form="null"
         size={{ height: Sizes.Default }}
-        states={{
-          ...states,
-        }}
+        states={states}
         {...props}
       >
         {component ? (
@@ -164,9 +132,11 @@ export const DropdownControl = memo(
           }}
         >
           <Icon
-            color={menuVisible ? TextColors.Lightest : TextColors.Lighter}
+            color={
+              states.state?.visible ? TextColors.Lightest : TextColors.Lighter
+            }
             name={BasicIcons.CaretDownArrow}
-            className={menuVisible ? 'up' : 'down'}
+            className={states.state?.visible ? 'up' : 'down'}
             size={{
               height: Sizes.Smallest,
               width: Sizes.Smallest,

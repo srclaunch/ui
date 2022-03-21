@@ -91,7 +91,7 @@ export const MenuButton = memo(
           }}
           label={label ?? ''}
           // lineHeight={size}
-          menuVisible={menuVisible}
+
           name="menu-button-dropdown-control"
           // onBlur={() => setMenuVisible(false)}
 
@@ -100,6 +100,7 @@ export const MenuButton = memo(
           states={{
             state: {
               focused,
+              visible: menuVisible,
             },
           }}
           size={{
@@ -160,9 +161,9 @@ export const MenuButton = memo(
           states={{
             state: {
               focused,
+              visible: menuVisible,
             },
           }}
-          visible={menuVisible}
         >
           <Menu
             background={{

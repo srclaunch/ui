@@ -1,5 +1,5 @@
 import { PointerEventHandler } from 'react';
-import { AnimationEventHandler, ChangeEventHandler, ClipboardEventHandler, CompositionEventHandler, DragEventHandler, ReactEventHandler, FocusEventHandler, FormEventHandler, KeyboardEventHandler, MouseEventHandler, TouchEventHandler, UIEventHandler, WheelEventHandler } from 'react';
+import { AnimationEventHandler, ClipboardEventHandler, CompositionEventHandler, DragEventHandler, ReactEventHandler, FocusEventHandler, FormEventHandler, KeyboardEventHandler, MouseEventHandler, TouchEventHandler, UIEventHandler, WheelEventHandler } from 'react';
 import { FormField } from './form/field';
 import { Validation } from './validation';
 export declare type FormSubmitHandler<V> = ({ fields, validation, }: {
@@ -49,7 +49,7 @@ export declare type Events<V = undefined> = {
         readonly onLoad?: ReactEventHandler;
     };
     input?: {
-        readonly onChange?: ChangeEventHandler;
+        readonly onChange?: ReactEventHandler;
         readonly onValueChange?: InputValueChangeHandler<V>;
     };
     keyboard?: {

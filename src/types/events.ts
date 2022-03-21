@@ -79,10 +79,9 @@ export type Events<V = undefined> = {
     readonly onLoad?: ReactEventHandler;
   };
   input?: {
-    readonly onChange?: ChangeEventHandler;
+    readonly onChange?: ReactEventHandler;
     readonly onValueChange?: InputValueChangeHandler<V>;
   };
-  // } & HasInputValueType<V>;
   keyboard?: {
     readonly onKeyDown?: KeyboardEventHandler;
     readonly onKeyPress?: KeyboardEventHandler;

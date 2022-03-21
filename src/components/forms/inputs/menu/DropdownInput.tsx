@@ -1,6 +1,6 @@
 import { ValidationProblem } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
-import { memo, ReactElement, useEffect, useState } from 'react';
+import { memo, ReactElement, useEffect, useRef, useState } from 'react';
 import {
   Amount,
   BackgroundColors,
@@ -43,6 +43,8 @@ export const DropdownInput = memo(
     // const [value, setValue] = useState(defaultValue);
     const [focused, setFocused] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
+    const menuVisibleRef = useRef(menuVisible);
+    menuVisibleRef.current = false;
     const [problems, setProblems] = useState<ValidationProblem[]>([]);
     const [item, setItem] = useState<MenuItemProps | undefined>(
       menu?.find((i: MenuItemProps) => i.value === defaultValue),
@@ -134,12 +136,14 @@ export const DropdownInput = memo(
                 onFocus: () => setFocused(true),
               },
               mouse: {
-                onClick: () => setMenuVisible(!menuVisible),
+                onClick: () => {
+                  menuVisibleRef.current = !menuVisibleRef.current;
+                  setMenuVisible(!menuVisible);
+                },
               },
             }}
             icon={item?.icon}
             label={item?.label}
-            menuVisible={menuVisible}
             name={name}
             placeholder={placeholder}
             shadow={DepthShadow.Low}
@@ -159,7 +163,7 @@ export const DropdownInput = memo(
                 width: 1,
               },
               top: {
-                color: BorderColors.InputControl,
+                color: BorderColors.Transparent,
                 style: BorderStyle.Solid,
                 width: 0,
               },
@@ -190,6 +194,7 @@ export const DropdownInput = memo(
               onItemClick={i => {
                 setValueChanged(true);
                 setItem(i);
+                menuVisibleRef.current = false;
                 setMenuVisible(false);
               }}
               padding={padding}

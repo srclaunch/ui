@@ -7,7 +7,9 @@ import {
   DepthShadow,
   Orientation,
   Sizes,
+  TextAlign,
   TextColors,
+  TextSize,
 } from '../../../../types';
 import { Container, ContainerProps } from '../../../layout/Container';
 import { Input, InputProps } from './Input';
@@ -38,10 +40,16 @@ export const InputContainer = memo(
     icon = {},
     label = undefined,
     lineHeight = Sizes.Default,
+    max,
+    maxLength,
+    min,
     name,
     shadow = DepthShadow.Low,
     states = {},
+    textAlign = TextAlign.Left,
     textColor = TextColors.InputControl,
+    textSize = TextSize.Default,
+    type,
     validation = {},
     ...props
   }: InputContainerProps<any>): ReactElement => {
@@ -78,10 +86,14 @@ export const InputContainer = memo(
         className={`${className} input-container`}
         events={{
           mouse: {
-            onClick: () => () => {
+            onClick: e => () => {
               inputRef.current?.focus();
+              if (events.mouse?.onClick) {
+                events.mouse.onClick(e);
+              }
             },
           },
+          ...events,
         }}
       >
         {(label || problems) && (
@@ -141,19 +153,34 @@ export const InputContainer = memo(
             />
           )}
 
-          <Input
-            events={{
-              ...events,
-              input: {
-                ...events.input,
-                onValueChange: ({ value: val }) => {
-                  setValueChanged(true);
-                  setValue(val);
+          {children ? (
+            children
+          ) : (
+            <Input
+              events={{
+                input: {
+                  onChange: events.input?.onChange,
+                  onValueChange: ({ value: val }) => {
+                    setValueChanged(true);
+                    setValue(val);
+
+                    if (events.input?.onValueChange) {
+                      events.input.onValueChange({
+                        value: val,
+                      });
+                    }
+                  },
                 },
-              },
-            }}
-            {...props}
-          />
+              }}
+              max={max}
+              maxLength={maxLength}
+              min={min}
+              textAlign={textAlign}
+              textColor={textColor}
+              textSize={textSize}
+              type={type}
+            />
+          )}
 
           {states.state?.loading && (
             <ProgressSpinner

@@ -1,5 +1,6 @@
 import { ValidationProblem } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
+import { ChangeEvent } from 'react';
 import { forwardRef } from 'react';
 import {
   memo,
@@ -23,7 +24,9 @@ import {
   InputType,
   Size,
   Sizes,
+  TextAlign,
   TextColors,
+  TextSize,
   TextWeight,
   Validation,
   Visibility,
@@ -96,12 +99,17 @@ export const Input = memo(
     defaultValue,
     events = {},
     lineHeight = Sizes.Default,
+    max,
+    maxLength,
+    min,
     name,
     prefix = '',
     placeholder = '',
     size = {},
     states = {},
     suffix = '',
+    textAlign = TextAlign.Left,
+    textSize = TextSize.Default,
     textColor = TextColors.InputControl,
     textWeight = TextWeight.Default,
     type,
@@ -112,16 +120,16 @@ export const Input = memo(
     const [value, setValue] = useState(defaultValue);
     const [focused, setFocused] = useState(false);
     // const [problems, setProblems] = useState<ValidationProblem[]>();
-    // const inputRef = useRef<HTMLInputElement | null>(null);
-    // const [eventHandlers, setEventHandlers] = useState<{
-    //   [key: string]: ReactEventHandler;
-    // }>({});
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [eventHandlers, setEventHandlers] = useState<{
+      [key: string]: ReactEventHandler;
+    }>({});
 
-    // useEffect(() => {
-    //   if (events && Object.keys(events).length > 0) {
-    //     setEventHandlers(getEventHandlers(events));
-    //   }
-    // }, []);
+    useEffect(() => {
+      if (events && Object.keys(events).length > 0) {
+        setEventHandlers(getEventHandlers(events));
+      }
+    }, []);
 
     useEffect(() => {
       if (defaultValue !== value) {
@@ -142,19 +150,21 @@ export const Input = memo(
         defaultValue={defaultValue}
         className={`${className} input`}
         cursor={cursor}
+        inputSize={size}
         lineHeight={lineHeight}
+        max={max}
+        maxLength={maxLength}
+        min={min}
         name={name}
         onBlur={() => setFocused(false)}
-        onChange={event => {
-          setValue(prefix + event.target?.value + suffix);
-        }}
         onFocus={() => setFocused(true)}
         placeholder={placeholder}
+        textAlign={textAlign}
         textColor={textColor}
+        textSize={textSize}
         textWeight={textWeight}
         // value={value}
         // ref={inputRef}
-        inputSize={size}
         states={{
           state: {
             error: states.state?.error,
@@ -163,7 +173,13 @@ export const Input = memo(
           ...states,
         }}
         type={type}
-        // {...eventHandlers}
+        {...eventHandlers}
+        onChange={(e: ChangeEvent<HTMLInputElement>) => {
+          setValue(prefix + e.target?.value + suffix);
+          if (events.input?.onChange) {
+            events.input.onChange(e);
+          }
+        }}
         // {...props}
       />
     );

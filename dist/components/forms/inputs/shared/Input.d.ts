@@ -25,5 +25,5 @@ export declare type InputProps<V> = CommonComponentProps & TextProps & Events<V>
     readonly value?: V;
     readonly visibility?: Visibility;
 };
-export declare const Input: import("react").MemoExoticComponent<({ autoComplete, background, border, className, cursor, defaultValue, events, lineHeight, name, prefix, placeholder, size, states, suffix, textColor, textWeight, type, ...props }: InputProps<((string | number | readonly string[]) & string) | undefined>) => ReactElement>;
+export declare const Input: import("react").MemoExoticComponent<({ autoComplete, background, border, className, cursor, defaultValue, events, lineHeight, max, maxLength, min, name, prefix, placeholder, size, states, suffix, textAlign, textSize, textColor, textWeight, type, ...props }: InputProps<((string | number | readonly string[]) & string) | undefined>) => ReactElement>;
 //# sourceMappingURL=Input.d.ts.map

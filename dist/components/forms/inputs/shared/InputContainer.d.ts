@@ -8,5 +8,5 @@ export declare type InputContainerProps<V> = ContainerProps & InputProps<V> & {
     readonly spellCheck?: boolean;
     readonly suffix?: string;
 };
-export declare const InputContainer: import("react").MemoExoticComponent<({ alignment, background, borderRadius, border, children, className, defaultValue, events, icon, label, lineHeight, name, shadow, states, textColor, validation, ...props }: InputContainerProps<any>) => ReactElement>;
+export declare const InputContainer: import("react").MemoExoticComponent<({ alignment, background, borderRadius, border, children, className, defaultValue, events, icon, label, lineHeight, max, maxLength, min, name, shadow, states, textAlign, textColor, textSize, type, validation, ...props }: InputContainerProps<any>) => ReactElement>;
 //# sourceMappingURL=InputContainer.d.ts.map

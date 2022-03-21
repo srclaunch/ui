@@ -6,9 +6,8 @@ declare type DropdownControlProps = InputContainerProps<string> & {
     readonly icon?: IconProps;
     readonly label?: string;
     readonly placeholder?: string;
-    readonly menuVisible: boolean;
     readonly ref?: ComponentRef<any>;
 };
-export declare const DropdownControl: import("react").MemoExoticComponent<({ alignment, background, border, borderRadius, className, component, depth, icon, label, menuVisible, placeholder, states, size, textSize, textColor, ...props }: DropdownControlProps) => ReactElement>;
+export declare const DropdownControl: import("react").MemoExoticComponent<({ alignment, background, border, borderRadius, className, component, depth, icon, label, placeholder, states, size, textSize, textColor, ...props }: DropdownControlProps) => ReactElement>;
 export {};
 //# sourceMappingURL=DropdownControl.d.ts.map

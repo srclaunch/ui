@@ -11,7 +11,7 @@ export type EmailAddressInputProps = TextInputProps & {
 
 export const EmailAddressInput = memo(
   ({
-    autoComplete,
+    autoComplete = AutoComplete.EmailAddress,
     className = '',
     defaultValue,
     spellCheck = false,
@@ -20,54 +20,7 @@ export const EmailAddressInput = memo(
   }: EmailAddressInputProps): ReactElement => {
     return (
       <TextInput
-        autoComplete={autoComplete ?? AutoComplete.EmailAddress}
-        // events={{
-        //   input: {
-        //     onValueChange: async ({ validation, value }) => {
-        //       if (validation?.problems) {
-        //         setError(validation.problems);
-        //       }
-
-        //       if (events.input?.onValueChange)
-        //         events.input?.onValueChange({ validation, value });
-
-        //       if (
-        //         validation?.conditions &&
-        //         Object.keys(validation.conditions).includes(
-        //           Condition.IsUsernameAvailable,
-        //         ) &&
-        //         validation?.validated &&
-        //         !validation?.problems?.length &&
-        //         value &&
-        //         value !== ''
-        //       ) {
-        //         // setInProgress(true);
-        //         // const emailAvailable =
-        //         //   await AuthenticationService.checkUsernameAvailability({
-        //         //     username: value,
-        //         //   });
-        //         // setInProgress(false);
-        //         // if (!emailAvailable) {
-        //         //   const problem: ValidationProblem = {
-        //         //     condition: Condition.IsUsernameAvailable,
-        //         //     message: {
-        //         //       long: 'Email address is already in use',
-        //         //       short: 'Email already in use',
-        //         //     },
-        //         //   };
-        //         //   setError([problem]);
-        //         //   if (onChange)
-        //         //     onChange({
-        //         //       problems: [problem],
-        //         //       validated: true,
-        //         //       value,
-        //         //     });
-        //         // }
-        //       }
-        //     },
-        //   },
-        //   ...events,
-        // }}
+        autoComplete={autoComplete}
         className={`email-address-input ${className}`}
         spellCheck={spellCheck}
         validation={{

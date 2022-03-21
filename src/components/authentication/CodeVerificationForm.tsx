@@ -44,7 +44,6 @@ export const CodeVerificationForm = memo(
     borderRadius = {},
     onVerificationSuccess,
     userId,
-    ...props
   }: CodeVerificationFormProps): ReactElement => {
     const navigate = useNavigate();
 
@@ -77,7 +76,6 @@ export const CodeVerificationForm = memo(
         size={{
           width: 450,
         }}
-        {...props}
       >
         {/* <Illustration>
         <img alt="Login" src="/illustrations/total_debt.svg" />
@@ -127,7 +125,7 @@ export const CodeVerificationForm = memo(
 
             <Paragraph
               alignment={{ horizontal: AlignHorizontal.Center }}
-              padding={{ all: Amount.More, bottom: Amount.Most }}
+              padding={{ all: Amount.More }}
             >
               Enter the confirmation code sent to{' '}
               <b>{verificationState.delivery?.destination}</b>.
@@ -141,7 +139,7 @@ export const CodeVerificationForm = memo(
             //   top: Amount.Default,
             // }}
             >
-              <InputRow margin={{ bottom: Amount.All }}>
+              <InputRow>
                 <VerificationCodeInput
                   autoComplete={AutoComplete.OneTimeCode}
                   events={{
@@ -160,7 +158,7 @@ export const CodeVerificationForm = memo(
                   }}
                   length={6}
                   name="verification_code"
-
+                  value={code}
                   // size={Sizes.Large}
                 />
               </InputRow>
@@ -182,6 +180,7 @@ export const CodeVerificationForm = memo(
                     disabled:
                       (problems && problems.length > 0) ||
                       !code ||
+                      code.length !== 6 ||
                       verificationState.verify.inProgress ||
                       verificationState.resend.inProgress,
                   },
