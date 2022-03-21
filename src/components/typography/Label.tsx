@@ -8,6 +8,7 @@ import {
   Orientation,
   Overflow,
   Sizes,
+  TextAlign,
   TextColors,
   TextOverflow,
   TextSize,
@@ -33,6 +34,7 @@ export const Label = memo(
     lineWrap = false,
     selectable = true,
     states = {},
+    textAlign = TextAlign.Default,
     textColor = TextColors.Default,
     textOverflow = TextOverflow.Ellipsis,
     textSize = TextSize.Default,
@@ -64,10 +66,12 @@ export const Label = memo(
           lineHeight={lineHeight}
           selectable={selectable}
           states={states}
+          textAlign={textAlign}
           textColor={textColor}
           textOverflow={textOverflow}
           textSize={textSize}
           textWeight={textWeight}
+          // {...props}
         >
           {children}
         </Text>

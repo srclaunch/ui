@@ -1,5 +1,5 @@
 import { SimpleInterpolation } from 'styled-components';
-import { TextProps } from '../components/typography/Text';
+import { TextProps } from '../../components/typography/Text';
 export declare const getTextStyles: (props: TextProps) => SimpleInterpolation;
 export declare const TextStyles: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<TextProps, any>>;
-//# sourceMappingURL=typography.d.ts.map
+//# sourceMappingURL=index.d.ts.map

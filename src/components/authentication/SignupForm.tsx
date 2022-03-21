@@ -8,10 +8,14 @@ import {
 } from '@srclaunch/web-application-state';
 import {
   AlignHorizontal,
+  AlignVertical,
   Amount,
   AutoComplete,
   BackgroundColors,
   DepthShadow,
+  Fill,
+  Orientation,
+  Sizes,
   TextAlign,
   TextDecorationLine,
 } from '../../types';
@@ -39,7 +43,9 @@ export const SignupForm = memo(
     background = {},
     borderRadius = {},
     onSignupSuccess,
+    size = {},
     title = 'Sign up',
+    ...props
   }: SignupFormProps): ReactElement => {
     const dispatch = useDispatch();
     const signUpState = useSelector(
@@ -56,13 +62,15 @@ export const SignupForm = memo(
     return (
       <Container
         className="signup-form"
-        background={{ color: BackgroundColors.Darker, ...background }}
+        background={{ color: BackgroundColors.Lighter, ...background }}
         borderRadius={{ all: Amount.More, ...borderRadius }}
-        padding={{ all: Amount.Most }}
+        padding={{ all: Amount.Most, bottom: Amount.None }}
         shadow={DepthShadow.Highest}
         size={{
           width: 420,
+          ...size,
         }}
+        {...props}
       >
         <LoadingOverlay borderRadius={borderRadius} visible={inProgress} />
 
@@ -71,21 +79,33 @@ export const SignupForm = memo(
         <img alt="Sign in" src="/illustrations/net_worth.svg" />
       </Illustration> */}
 
-        <Title textAlign={TextAlign.Center}>{title}</Title>
+        <Title
+          alignment={{
+            horizontal: AlignHorizontal.Center,
+          }}
+          textAlign={TextAlign.Center}
+        >
+          {title}
+        </Title>
 
         <NotificationLabel
           alignment={{
             horizontal: AlignHorizontal.Center,
+            orientation: Orientation.Horizontal,
+            vertical: AlignVertical.Center,
           }}
-          background={{
-            color: BackgroundColors.Darkest,
+          margin={{
+            all: Amount.Most,
+            bottom: Amount.All,
           }}
           showOrb={false}
+          textAlign={TextAlign.Center}
         >
-          <Paragraph textAlign={TextAlign.Center}>
+          <Paragraph lineHeight={Sizes.Small} textAlign={TextAlign.Center}>
             Already have an account?
             <br />
             <Link
+              lineHeight={Sizes.Small}
               states={{
                 hovered: {
                   textDecoration: { line: TextDecorationLine.Underline },
@@ -106,6 +126,21 @@ export const SignupForm = memo(
         )}
 
         <Form
+          events={{
+            form: {
+              onSubmitted: ({ fields, validation }) => {
+                if ((validation && validation.validated) || !validation)
+                  dispatch(
+                    signUp({
+                      firstName: fields.firstName?.value as string,
+                      lastName: fields.lastName?.value as string,
+                      password: fields.password?.value as string,
+                      username: fields.username?.value as string,
+                    }),
+                  );
+              },
+            },
+          }}
           fields={[
             {
               autoComplete: AutoComplete.GivenName,
@@ -166,25 +201,18 @@ export const SignupForm = memo(
           ]}
           inProgress={inProgress}
           name="signup-form"
-          onSubmit={({ fields, validation }) => {
-            if ((validation && validation.validated) || !validation)
-              dispatch(
-                signUp({
-                  firstName: fields.firstName?.value as string,
-                  lastName: fields.lastName?.value as string,
-                  password: fields.password?.value as string,
-                  username: fields.username?.value as string,
-                }),
-              );
-          }}
           submitButton={{
-            borderRadius: Amount.Least,
-
+            alignment: {
+              fill: Fill.Both,
+              horizontal: AlignHorizontal.Center,
+            },
+            borderRadius: { all: Amount.Least },
             label: 'Sign up',
+            lineHeight: Sizes.Large,
           }}
         />
 
-        <Container padding={{ all: Amount.Default }}>
+        <Container padding={{ all: Amount.Most }}>
           <Small textAlign={TextAlign.Center}>
             By clicking the "Sign up" button you agree to the{' '}
             {/* 

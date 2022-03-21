@@ -1,7 +1,7 @@
 import { Exception, Warning } from '@srclaunch/exceptions';
 import { ValidationProblem } from '@srclaunch/types';
 
-export type InteractionStates<P = {}> = {
+export type States<P = {}> = {
   readonly active?: P;
   readonly current?: P;
   readonly disabled?: P;

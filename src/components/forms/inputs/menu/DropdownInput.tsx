@@ -8,7 +8,6 @@ import {
   BorderStyle,
   Depth,
   DepthShadow,
-  InputProps,
   Sizes,
 } from '../../../../types';
 import { Container, ContainerProps } from '../../../layout/Container';
@@ -18,6 +17,7 @@ import { MenuItemProps } from '../../../menus/MenuItem';
 import { InputLabel } from '../../labels/InputLabel';
 import { DropdownControl } from '../shared/DropdownControl';
 import { DropdownPanel } from '../shared/DropdownPanel';
+import { InputProps } from '../shared/Input';
 
 export type DropdownInputProps<V = unknown> = ContainerProps &
   MenuProps &

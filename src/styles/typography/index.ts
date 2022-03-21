@@ -1,11 +1,11 @@
 import { css, SimpleInterpolation } from 'styled-components';
-import { TextProps } from '../components/typography/Text';
+import { TextProps } from '../../components/typography/Text';
 import {
   getCSSColorValue,
   getCSSMeasurementValue,
-} from '../lib/css/properties';
+} from '../../lib/css/properties';
 
-import { TextColors, TextSize } from '../types';
+import { Sizes, TextColors, TextSize } from '../../types';
 
 /*
     readonly bold?: boolean;
@@ -46,6 +46,7 @@ export const getTextStyles = (props: TextProps): SimpleInterpolation => {
   return css`
     color: ${getCSSColorValue(textColor ?? TextColors.Default)};
     font-size: ${getCSSMeasurementValue(textSize ?? TextSize.Default)};
+    line-height: ${getCSSMeasurementValue(lineHeight ?? Sizes.Default)};
 
     ${bold &&
     css`
@@ -60,11 +61,6 @@ export const getTextStyles = (props: TextProps): SimpleInterpolation => {
     ${italic &&
     css`
       font-style: italic;
-    `};
-
-    ${lineHeight &&
-    css`
-      line-height: ${getCSSMeasurementValue(lineHeight ?? TextSize.Default)};
     `};
 
     ${lineWrap &&

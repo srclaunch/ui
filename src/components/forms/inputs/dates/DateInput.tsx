@@ -4,11 +4,10 @@ import { validate } from '@srclaunch/validation';
 import { memo, ReactElement, useEffect, useState } from 'react';
 // import DatePickerC from 'react-date-picker';
 // import css from 'react-date-picker/dist/DatePicker.css';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import {
   AlignHorizontal,
-  Alignment,
   AlignVertical,
   Amount,
   BackgroundColors,
@@ -17,26 +16,19 @@ import {
   Cursor,
   DepthShadow,
   ForegroundColors,
-  InputProps,
-  Orientation,
   Size,
   Sizes,
   TextColors,
   TextSize,
   TextWeight,
 } from '../../../../types';
-import { Container, ContainerProps } from '../../../layout/Container';
-import { Icon, IconProps } from '../../../media/Icon';
+import { Container } from '../../../layout/Container';
+import { Icon } from '../../../media/Icon';
 import { InputLabel } from '../../labels/InputLabel';
 import { InputContainer, InputContainerProps } from '../shared/InputContainer';
-import { Text, TextProps } from '../../../typography/Text';
 import { ShadowStyles } from '../../../../styles/container/shadow';
 
-export type DateInputProps = InputContainerProps &
-  InputProps<ISO8601String> &
-  TextProps & {
-    readonly resetIcon?: IconProps;
-  };
+export type DateInputProps = InputContainerProps<ISO8601String>;
 
 const getBorderColor = ({
   focused,
@@ -228,7 +220,6 @@ export const DateInput = memo(
     events = {},
     defaultValue,
     label,
-    resetIcon,
     states = {},
     shadow = DepthShadow.Low,
     textSize = TextSize.Default,

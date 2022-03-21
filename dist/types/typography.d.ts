@@ -99,4 +99,4 @@ export declare enum TextSize {
     Larger = "var(--text-size-larger)",
     Largest = "var(--text-size-largest)"
 }
-//# sourceMappingURL=text.d.ts.map
+//# sourceMappingURL=typography.d.ts.map

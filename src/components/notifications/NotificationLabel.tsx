@@ -13,12 +13,14 @@ import {
 import { Container, ContainerProps } from '../layout/Container';
 import { Label } from '../typography/Label';
 import { Orb } from './Orb';
+import { TextProps } from '../typography/Text';
 
-export type NotificationLabelProps = ContainerProps & {
-  readonly label?: string;
-  readonly showOrb?: boolean;
-  readonly type?: NotificationType;
-};
+export type NotificationLabelProps = ContainerProps &
+  TextProps & {
+    readonly label?: string;
+    readonly showOrb?: boolean;
+    readonly type?: NotificationType;
+  };
 
 export const NotificationLabel = memo(
   ({
@@ -66,12 +68,6 @@ export const NotificationLabel = memo(
     const bgColor = getBackgroundColor();
     const textColor = getTextColor();
 
-    console.log({
-      horizontal: AlignHorizontal.Center,
-      orientation: Orientation.Horizontal,
-      vertical: AlignVertical.Center,
-      ...alignment,
-    });
     return (
       <Container
         alignment={{
@@ -103,6 +99,7 @@ export const NotificationLabel = memo(
             textColor={textColor}
             lineHeight={Sizes.Small}
             textWeight={TextWeight.Default}
+            {...props}
           >
             {label}
           </Label>

@@ -1,5 +1,6 @@
 import { Exception } from '@srclaunch/exceptions';
 import { PointerEventHandler } from 'react';
+import { FormEvent } from 'react';
 import {
   AnimationEventHandler,
   ChangeEventHandler,
@@ -11,11 +12,23 @@ import {
   FormEventHandler,
   KeyboardEventHandler,
   MouseEventHandler,
+  SyntheticEvent,
   TouchEventHandler,
   UIEventHandler,
   WheelEventHandler,
 } from 'react';
+import { FormField } from './form/field';
 import { Validation } from './validation';
+
+export type FormSubmitHandler<V> = ({
+  fields,
+  validation,
+}: {
+  readonly fields: {
+    readonly [name: string]: FormField;
+  };
+  readonly validation?: Validation;
+}) => void;
 
 export type InputValueChangeHandler<V> = ({
   validation,
@@ -50,16 +63,16 @@ export type Events<V = undefined> = {
     readonly onToggle?: ReactEventHandler;
   };
   focus?: {
-    readonly disabled?: boolean;
     readonly onBlur?: FocusEventHandler;
     readonly onFocus?: FocusEventHandler;
   };
-  forms?: {
-    readonly onChange?: FormEventHandler;
+  form?: {
+    readonly onChange?: FormSubmitHandler<V>;
     readonly onInput?: FormEventHandler;
     readonly onInvalid?: FormEventHandler;
     readonly onReset?: FormEventHandler;
     readonly onSubmit?: FormEventHandler;
+    readonly onSubmitted?: FormSubmitHandler<V>;
   };
   image?: {
     readonly onError?: ReactEventHandler;
@@ -67,7 +80,9 @@ export type Events<V = undefined> = {
   };
   input?: {
     readonly onChange?: ChangeEventHandler;
-  } & HasInputValueType<V>;
+    readonly onValueChange?: InputValueChangeHandler<V>;
+  };
+  // } & HasInputValueType<V>;
   keyboard?: {
     readonly onKeyDown?: KeyboardEventHandler;
     readonly onKeyPress?: KeyboardEventHandler;

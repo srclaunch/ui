@@ -1,7 +1,3 @@
-import { Size } from '../appearance/size';
-import { Visibility } from '../appearance/visibility';
-import { Events } from '../events';
-import { Validation } from '../validation';
 export declare enum AutoComplete {
     Birthday = "bday",
     BirthdayDay = "bday-day",
@@ -30,17 +26,11 @@ export declare enum AutoComplete {
     StreetAddress = "street-address",
     Username = "username"
 }
-export declare type InputProps<V> = {
-    readonly autoComplete?: AutoComplete;
-    readonly defaultValue?: V;
-    readonly events?: Events<V>;
-    readonly label?: string;
-    readonly name?: string;
-    readonly placeholder?: string;
-    readonly size?: Size;
-    readonly submitOnEnter?: boolean;
-    readonly validation?: Validation;
-    readonly value?: V;
-    readonly visibility?: Visibility;
-};
+export declare enum InputType {
+    Email = "email",
+    Text = "text",
+    Number = "number",
+    Password = "password",
+    Search = "search"
+}
 //# sourceMappingURL=input.d.ts.map

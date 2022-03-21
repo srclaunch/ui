@@ -1,5 +1,6 @@
 import { Exception } from '@srclaunch/exceptions';
 import { ValidationProblem } from '@srclaunch/types';
+
 export function getErrorMessage(
   error:
     | Exception
@@ -15,6 +16,8 @@ export function getErrorMessage(
   if (Array.isArray(error) && error.length > 0) {
     if (error[0] instanceof Exception) {
       return error[0].message;
+    } else if (typeof error[0] === 'object') {
+      return error[0].message.short;
     } else if (typeof error[0] === 'string') {
       return error[0];
     }

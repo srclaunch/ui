@@ -1,6 +1,6 @@
 import { memo, ReactElement } from 'react';
-import { InputProps } from '../../../../types';
 import { Container } from '../../../layout/Container';
+import { InputProps } from '../shared/Input';
 
 type EmojiInputProps = InputProps<string>;
 

@@ -9,7 +9,7 @@ import {
   BorderColors,
   BorderStyle,
   Cursor,
-  InteractionStates,
+  States,
   Orientation,
   Overflow,
   Sizes,

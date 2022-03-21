@@ -1,7 +1,8 @@
 import { ReactElement } from 'react';
 import { NotificationType } from '@srclaunch/types';
 import { ContainerProps } from '../layout/Container';
-export declare type NotificationLabelProps = ContainerProps & {
+import { TextProps } from '../typography/Text';
+export declare type NotificationLabelProps = ContainerProps & TextProps & {
     readonly label?: string;
     readonly showOrb?: boolean;
     readonly type?: NotificationType;

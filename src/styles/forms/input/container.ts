@@ -1,10 +1,10 @@
 import { css } from 'styled-components';
 
-import { Border, BorderColors, InteractionStates } from '../../../types';
+import { Border, BorderColors, States } from '../../../types';
 
 export const InputContainerStyles = css<{
   border?: Border;
-  states?: InteractionStates;
+  states?: States;
 }>`
   ${props =>
     props.states?.state?.focused &&

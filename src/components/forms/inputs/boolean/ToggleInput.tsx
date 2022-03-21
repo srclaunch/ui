@@ -10,7 +10,6 @@ import {
   Depth,
   DepthShadow,
   ForegroundColors,
-  InputProps,
   Orientation,
   Size,
   Sizes,
@@ -22,6 +21,7 @@ import { Container, ContainerProps } from '../../../layout/Container';
 import { Icon } from '../../../media/Icon';
 import { Label } from '../../../typography/Label';
 import { InputLabel } from '../../labels/InputLabel';
+import { InputProps } from '../shared/Input';
 
 export type ToggleInputProps = ContainerProps &
   InputProps<boolean> & {

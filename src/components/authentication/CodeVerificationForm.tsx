@@ -44,6 +44,7 @@ export const CodeVerificationForm = memo(
     borderRadius = {},
     onVerificationSuccess,
     userId,
+    ...props
   }: CodeVerificationFormProps): ReactElement => {
     const navigate = useNavigate();
 
@@ -69,13 +70,14 @@ export const CodeVerificationForm = memo(
     return (
       <Container
         className="code-verification-form"
-        background={{ color: BackgroundColors.Darker, ...background }}
+        background={{ color: BackgroundColors.Lighter, ...background }}
         borderRadius={{ all: Amount.More, ...borderRadius }}
-        padding={{ all: Amount.Most }}
+        padding={{ all: Amount.Most, bottom: Amount.None }}
         shadow={DepthShadow.Highest}
         size={{
-          width: 420,
+          width: 450,
         }}
+        {...props}
       >
         {/* <Illustration>
         <img alt="Login" src="/illustrations/total_debt.svg" />
@@ -95,13 +97,16 @@ export const CodeVerificationForm = memo(
         {verificationState.verify.success ||
         verificationState.status.state === UserVerificationStatus.Confirmed ? (
           <Container padding={{ all: Amount.Default }}>
-            <Title textAlign={TextAlign.Center}>You're verified!</Title>
+            <Title alignment={{ horizontal: AlignHorizontal.Center }}>
+              You're verified!
+            </Title>
 
-            <Container margin={{ all: Amount.More }}>
-              <Paragraph textAlign={TextAlign.Center}>
-                Thank you for verifying your email address.
-              </Paragraph>
-            </Container>
+            <Paragraph
+              alignment={{ horizontal: AlignHorizontal.Center }}
+              padding={{ all: Amount.More }}
+            >
+              Thank you for verifying your email address.
+            </Paragraph>
 
             <Button
               events={{
@@ -116,24 +121,27 @@ export const CodeVerificationForm = memo(
           </Container>
         ) : (
           <>
-            <Title textAlign={TextAlign.Center}>Verification</Title>
+            <Title alignment={{ horizontal: AlignHorizontal.Center }}>
+              Verification
+            </Title>
 
-            <Container margin={{ all: Amount.More }}>
-              <Paragraph textAlign={TextAlign.Center}>
-                Enter the confirmation code sent to{' '}
-                <b>{verificationState.delivery?.destination}</b>.
-              </Paragraph>
-            </Container>
+            <Paragraph
+              alignment={{ horizontal: AlignHorizontal.Center }}
+              padding={{ all: Amount.More, bottom: Amount.Most }}
+            >
+              Enter the confirmation code sent to{' '}
+              <b>{verificationState.delivery?.destination}</b>.
+            </Paragraph>
 
             <Container
-              padding={{
-                bottom: Amount.Default,
-                left: Amount.More,
-                right: Amount.More,
-                top: Amount.Default,
-              }}
+            // padding={{
+            //   bottom: Amount.None,
+            //   left: Amount.More,
+            //   right: Amount.More,
+            //   top: Amount.Default,
+            // }}
             >
-              <InputRow>
+              <InputRow margin={{ bottom: Amount.All }}>
                 <VerificationCodeInput
                   autoComplete={AutoComplete.OneTimeCode}
                   events={{
@@ -157,13 +165,8 @@ export const CodeVerificationForm = memo(
                 />
               </InputRow>
 
-              <LineBreak
-                size={{
-                  height: Sizes.Small,
-                }}
-              />
-
               <Button
+                borderRadius={{ all: Amount.Least }}
                 events={{
                   mouse: {
                     onClick: () => {
@@ -173,6 +176,7 @@ export const CodeVerificationForm = memo(
                     },
                   },
                 }}
+                lineHeight={Sizes.Large}
                 states={{
                   state: {
                     disabled:

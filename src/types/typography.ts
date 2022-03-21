@@ -1,5 +1,5 @@
-import { Colors, ContrastColors } from '../appearance/color';
-import { ForegroundColors } from '../appearance/foreground';
+import { Colors, ContrastColors } from './appearance/color';
+import { ForegroundColors } from './appearance/foreground';
 
 export enum ElementTextColors {
   DataGridCell = 'var(--text-color-data-grid-cell-rgb)',

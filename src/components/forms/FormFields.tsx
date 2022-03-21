@@ -93,17 +93,23 @@ export const FormFields = memo(
             >
               {getInputElementByFieldType({
                 ...field,
-                onChange: ({
-                  validation,
-                  value,
-                }: {
-                  validation?: Validation;
-                  value?: any;
-                }) =>
-                  setFieldValues({
-                    ...fieldValues,
-                    [field.name]: { ...field, validation, value },
-                  }),
+                events: {
+                  input: {
+                    onValueChange: ({
+                      validation,
+                      value,
+                    }: {
+                      validation?: Validation;
+                      value?: any;
+                    }) => {
+                      setFieldValues({
+                        ...fieldValues,
+                        [field.name]: { ...field, validation, value },
+                      });
+                    },
+                  },
+                  ...field.events,
+                },
               })}
             </InputRow>
           );

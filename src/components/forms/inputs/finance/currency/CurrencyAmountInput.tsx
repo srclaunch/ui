@@ -9,8 +9,6 @@ import {
   BorderColors,
   BorderStyle,
   DepthShadow,
-  InputProps,
-  Size,
   TextColors,
   TextWeight,
 } from '../../../../../types';
@@ -20,22 +18,17 @@ import {
   InputContainer,
   InputContainerProps,
 } from '../../shared/InputContainer';
-import { TextProps } from '../../../../typography/Text';
-type CurrencyAmountInputProps = InputContainerProps &
-  InputProps<CurrencyAmount> &
-  TextProps;
 
+type CurrencyAmountInputProps = InputContainerProps<CurrencyAmount>;
 export const CurrencyAmountInput = memo(
   ({
     background = {},
-
     border = {},
     className = '',
     defaultValue,
     events = {},
     label,
     name,
-
     shadow = DepthShadow.Low,
     states = {},
     textColor = TextColors.InputControl,
@@ -101,6 +94,7 @@ export const CurrencyAmountInput = memo(
               error: problems,
               focused,
             },
+            ...states,
           }}
         >
           <Label

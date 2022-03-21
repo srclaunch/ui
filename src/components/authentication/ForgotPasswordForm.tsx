@@ -2,13 +2,18 @@ import { Condition, Primitives } from '@srclaunch/types';
 import { useSelector, RootState } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
 import {
+  AlignHorizontal,
+  AlignVertical,
   Amount,
   AutoComplete,
   BackgroundColors,
   DepthShadow,
+  Fill,
+  Orientation,
+  Sizes,
   TextAlign,
 } from '../../types';
-import { TextDecorationLine } from '../../types/typography/text';
+import { TextDecorationLine } from '../../types/typography';
 import { ErrorNotification } from '../errors/ErrorNotification';
 import { Form } from '../forms/Form';
 import { Container, ContainerProps } from '../layout/Container';
@@ -30,11 +35,13 @@ export const ForgotPasswordForm = memo(
   ({
     background = {},
     borderRadius = {},
+    size = {},
     title = 'Forgot your password?',
     showSignupLink,
     signUpLinkLabel,
     signInButtonLabel,
     forgotPasswordLinkLabel,
+    ...props
   }: ForgotPasswordFormProps): ReactElement => {
     // const dispatch = useDispatch();
 
@@ -66,27 +73,34 @@ export const ForgotPasswordForm = memo(
     return (
       <Container
         className="forgot-password-form"
-        background={{ color: BackgroundColors.Darker, ...background }}
+        background={{ color: BackgroundColors.Lighter, ...background }}
         borderRadius={{ all: Amount.More, ...borderRadius }}
         padding={{ all: Amount.Most }}
         shadow={DepthShadow.Highest}
         size={{
           width: 420,
+          ...size,
         }}
+        {...props}
       >
         <LoadingOverlay visible={inProgress} />
         {/* <Illustration>
         <img alt={'Login'} src="/illustrations/total_debt.svg" />
       </Illustration> */}
 
-        <Title textAlign={TextAlign.Center}>{title}</Title>
+        <Title alignment={{ horizontal: AlignHorizontal.Center }}>
+          {title}
+        </Title>
 
-        <Container>
-          <Paragraph textAlign={TextAlign.Center}>
-            Enter the email address associated with your account and we'll send
-            instructions on how to reset your password.
-          </Paragraph>
-        </Container>
+        <Paragraph
+          alignment={{ horizontal: AlignHorizontal.Center }}
+          lineHeight={Sizes.Small}
+          padding={{ all: Amount.More, bottom: Amount.Most }}
+          textAlign={TextAlign.Center}
+        >
+          Enter the email address associated with your account and we'll send
+          instructions on how to reset your password.
+        </Paragraph>
 
         {/* {confirmed && medium && (
         <ConfirmationContainer>
@@ -99,7 +113,15 @@ export const ForgotPasswordForm = memo(
         )}
 
         <Form
-          name="forgot-password-form"
+          events={{
+            form: {
+              onSubmitted: ({ fields, validation }) => {
+                if ((validation && validation.validated) || !validation) {
+                  startPasswordReset(fields.emailAddress?.value as string);
+                }
+              },
+            },
+          }}
           fields={[
             {
               autoComplete: AutoComplete.Username,
@@ -114,18 +136,31 @@ export const ForgotPasswordForm = memo(
               },
             },
           ]}
-          inProgress={inProgress}
-          onSubmit={({ fields, validation }) => {
-            if ((validation && validation.validated) || !validation) {
-              startPasswordReset(fields.emailAddress?.value as string);
-            }
+          name="forgot-password-form"
+          states={{
+            state: {
+              loading: inProgress,
+            },
           }}
           submitButton={{
+            alignment: {
+              fill: Fill.Both,
+              horizontal: AlignHorizontal.Center,
+            },
+            borderRadius: { all: Amount.Least },
             label: 'Send instructions',
+            lineHeight: Sizes.Large,
           }}
         />
-
-        <Container padding={{ all: Amount.Default }}>
+        {/* 
+        <Container
+          alignment={{
+            horizontal: AlignHorizontal.Center,
+            orientation: Orientation.Horizontal,
+            vertical: AlignVertical.Center,
+          }}
+          padding={{ all: Amount.Default }}
+        >
           <Small textAlign={TextAlign.Center}>
             <Link
               states={{
@@ -133,13 +168,13 @@ export const ForgotPasswordForm = memo(
                   textDecoration: { line: TextDecorationLine.Underline },
                 },
               }}
-              textDecoration={{ line: TextDecorationLine.Underline }}
+              textDecoration={{ line: TextDecorationLine.None }}
               to="/login"
             >
               Login
             </Link>
           </Small>
-        </Container>
+        </Container> */}
       </Container>
     );
   },

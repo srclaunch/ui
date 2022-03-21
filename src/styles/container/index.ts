@@ -13,7 +13,6 @@ import { getPaddingStyles } from './padding';
 import { getPositionStyles } from './position';
 import { getShadowStyles } from './shadow';
 import { getSizeStyles } from './size';
-import { getStatesStyles } from './states';
 import { getVisibilityStyles } from './visibility';
 
 export const getContainerStyles = (

@@ -1,7 +1,13 @@
-import { memo, useState, PropsWithChildren, ReactElement } from 'react';
+import {
+  memo,
+  forwardRef,
+  useState,
+  PropsWithChildren,
+  ReactElement,
+} from 'react';
 import styled from 'styled-components';
-import { ContainerStyles, getContainerStyles } from '../../styles/container';
-import { getStatesStyles, StateStyles } from '../../styles/container/states';
+import { getContainerStyles } from '../../styles/container';
+import { getContainerStatesStyles } from '../../styles/container/states';
 import {
   Alignment,
   AlignHorizontal,
@@ -15,7 +21,7 @@ import {
   Cursor,
   Depth,
   Events,
-  InteractionStates,
+  States,
   Margin,
   Orientation,
   Padding,
@@ -46,8 +52,9 @@ export type ContainerProps = PropsWithChildren<
     readonly size?: Size;
     readonly transform?: Transform;
     readonly visibility?: Visibility;
+    readonly states?: States<ContainerProps>;
   }
-> & { readonly states?: Omit<InteractionStates<ContainerProps>, 'inputs'> };
+>;
 
 // ${props =>
 //   props.transform?.rotate &&
@@ -57,9 +64,10 @@ export type ContainerProps = PropsWithChildren<
 
 const Wrapper = styled.div<ContainerProps>`
   ${props => getContainerStyles(props)};
-  ${props => getStatesStyles(props)};
+  ${props => getContainerStatesStyles(props)};
 `;
 /* ${StateStyles}; */
+
 export const Container = memo(
   ({
     alignment,
@@ -89,7 +97,7 @@ export const Container = memo(
         }}
         as={as}
         className={`${className} container`}
-        events={events}
+        disabled={props?.states?.state?.disabled}
         {...props}
         {...eventHandlers}
       >

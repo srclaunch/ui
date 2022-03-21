@@ -19,11 +19,8 @@ import {
   BorderColors,
   BorderStyle,
   DepthShadow,
-  InputProps,
   Orientation,
-  Position,
   PositionBehavior,
-  Size,
   Sizes,
   TextSize,
 } from '../../../../types';
@@ -35,6 +32,7 @@ import { CloseButton } from '../../../modals/CloseButton';
 import { Label } from '../../../typography/Label';
 import { Button, ButtonProps, ButtonType } from '../../buttons/Button';
 import { InputLabel } from '../../labels/InputLabel';
+import { InputProps } from '../shared/Input';
 
 export type ImageInputProps = ContainerProps &
   InputProps<(File | ImageType)[]> & {

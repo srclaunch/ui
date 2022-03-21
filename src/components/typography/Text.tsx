@@ -4,7 +4,7 @@ import {
   Amount,
   CommonComponentProps,
   Cursor,
-  InteractionStates,
+  States,
   Sizes,
   TextAlign,
   TextColor,
@@ -13,12 +13,12 @@ import {
   TextSize,
   TextWeight,
 } from '../../types';
-import { getTextStyles, TextStyles } from '../../styles/typography';
+import { getTextStyles } from '../../styles/typography';
 import {
   TextDecorationLine,
   TextDecorationStyle,
-} from '../../types/typography/text';
-import { getStatesStyles } from '../../styles/container/states';
+} from '../../types/typography';
+import { getTextStatesStyles } from '../../styles/typography/states';
 
 export type TextProps = PropsWithChildren<
   CommonComponentProps & {
@@ -41,12 +41,12 @@ export type TextProps = PropsWithChildren<
     readonly textWeight?: TextWeight | string;
   }
 > & {
-  readonly states?: InteractionStates<TextProps>;
+  readonly states?: States<TextProps>;
 };
 
 const Wrapper = styled.span<TextProps>`
-  ${props => getTextStyles(props)}
-  ${props => getStatesStyles(props)}
+  ${props => getTextStyles(props)};
+  ${props => getTextStatesStyles(props)};
 `;
 
 export const Text = memo(

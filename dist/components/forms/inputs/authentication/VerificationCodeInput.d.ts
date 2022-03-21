@@ -1,11 +1,12 @@
 /// <reference types="react" />
+import { ContainerProps } from '../../../layout/Container';
 export declare enum VerificationCodeType {
     Alpha = "alpha",
     AlphaNumeric = "alphanumeric",
     Numeric = "numeric"
 }
-import { TextInputProps } from '../text/TextInput';
-declare type VerificationCodeInputProps = TextInputProps & {
+import { InputProps } from '../shared/Input';
+declare type VerificationCodeInputProps = ContainerProps & InputProps<string> & {
     length?: number;
     codeType?: VerificationCodeType;
 };

@@ -7,7 +7,6 @@ import {
   BackgroundColors,
   Colors,
   Cursor,
-  InputProps,
   Orientation,
   Sizes,
 } from '../../../../types';
@@ -16,7 +15,7 @@ import { validate } from '@srclaunch/validation';
 import { ValidationProblem } from '@srclaunch/types';
 import { InputContainer, InputContainerProps } from '../shared/InputContainer';
 
-type CheckboxProps = InputContainerProps & InputProps<boolean>;
+type CheckboxProps = InputContainerProps<boolean>;
 
 export const Checkbox = memo(
   ({

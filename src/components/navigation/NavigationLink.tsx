@@ -76,57 +76,50 @@ export const NavigationLink = memo(
           textDecoration: 'unset',
         }}
       >
-        <Container
-          alignment={{
-            horizontal: menu ? AlignHorizontal.Stretch : AlignHorizontal.Left,
-            orientation: menu ? Orientation.Vertical : Orientation.Horizontal,
-            vertical: AlignVertical.Center,
-            ...alignment,
-          }}
-          as={as}
-          borderRadius={borderRadius}
-          className={`${className} ${match ? activeClassName : ''} link`}
-          cursor={cursor}
-          margin={margin}
-          padding={{
-            bottom: menu ? padding?.left : padding?.bottom,
-            ...padding,
-          }}
-          // shadow={{
-          //   radius: 8,
-          //   color: background?.color,
-          //   x: 0,
-          //   y: 3,
-          //   opacity: 35,
-          //   spread: 3,
-          // }}
-          states={{
-            state: {
-              active: match ? true : false,
-            },
-            ...states,
-          }}
-        >
-          {label ? (
-            <Label
-              cursor={cursor}
-              lineHeight={lineHeight}
-              states={{
-                state: {
-                  active: match ? true : false,
-                },
-                ...states,
-              }}
-              textColor={textColor}
-              textSize={textSize}
-              textWeight={textWeight}
-            >
-              {label}
-            </Label>
-          ) : (
-            children
-          )}
-        </Container>
+        {label ? (
+          <Label
+            alignment={{
+              horizontal: menu ? AlignHorizontal.Stretch : AlignHorizontal.Left,
+              orientation: menu ? Orientation.Vertical : Orientation.Horizontal,
+              vertical: AlignVertical.Center,
+              ...alignment,
+            }}
+            as={as}
+            borderRadius={borderRadius}
+            className={`${className} ${match ? activeClassName : ''} link`}
+            cursor={cursor}
+            margin={margin}
+            padding={{
+              bottom: menu ? padding?.left : padding?.bottom,
+              ...padding,
+            }}
+            // shadow={{
+            //   radius: 8,
+            //   color: background?.color,
+            //   x: 0,
+            //   y: 3,
+            //   opacity: 35,
+            //   spread: 3,
+            // }}
+
+            lineHeight={lineHeight}
+            states={{
+              state: {
+                current: match ? true : false,
+                ...states.state,
+              },
+              ...states,
+            }}
+            textColor={textColor}
+            textSize={textSize}
+            textWeight={textWeight}
+            {...props}
+          >
+            {label}
+          </Label>
+        ) : (
+          children
+        )}
       </NavLink>
     );
   },

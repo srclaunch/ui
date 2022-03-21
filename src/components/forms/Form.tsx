@@ -1,7 +1,13 @@
 import { Model, ValidationProblem } from '@srclaunch/types';
-import { memo, ReactElement, useEffect, useState } from 'react';
-
-import { Amount, FormField, Orientation, Size } from '../../types';
+import {
+  memo,
+  FormEvent,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { Amount, FormField, States } from '../../types';
 // import { getFormFieldsFromModel } from '../../lib/forms/fields';
 import { Container, ContainerProps } from '../layout/Container';
 import { Button, ButtonProps, ButtonType } from './buttons/Button';
@@ -16,36 +22,11 @@ type FormProps = {
   readonly entity?:
     | ({ readonly [f: string]: unknown } & { readonly id?: string })
     | undefined;
+  readonly states?: States;
   readonly fields?: readonly FormField[];
   readonly inProgress?: boolean;
   readonly model?: Model;
   readonly name: string;
-  readonly onChange?: ({
-    fields,
-    validation,
-  }: {
-    readonly fields: {
-      readonly [name: string]: FormField;
-    };
-    readonly validation?: {
-      readonly validated?: boolean;
-      readonly problems?: readonly ValidationProblem[];
-    };
-  }) => unknown;
-  readonly onSubmit?: ({
-    fields,
-    validation,
-    values,
-  }: {
-    readonly fields: {
-      readonly [name: string]: FormField;
-    };
-    readonly validation?: {
-      readonly problems?: readonly ValidationProblem[];
-      readonly validated?: boolean;
-    };
-    readonly values?: { readonly [name: string]: unknown };
-  }) => unknown;
   readonly padding?: Amount;
   readonly submitButton?:
     | ({
@@ -59,10 +40,9 @@ export const Form = memo(
     borderRadius = {},
     className = '',
     entity,
+    events = {},
     fields,
     inProgress = false,
-    onChange,
-    onSubmit,
     model,
     name,
     padding = Amount.None,
@@ -76,6 +56,10 @@ export const Form = memo(
       useState<ValidationProblem[]>();
     const [isValidated, setValidated] = useState(false);
     const [requiresValidation, setRequiresValidation] = useState(false);
+    const fieldValuesRef = useRef(fieldValues);
+    const requiresValidationRef = useRef(requiresValidation);
+    const validationProblemsRef = useRef(validationProblems);
+    const isValidatedRef = useRef(isValidated);
 
     const submitButtonProps = {
       label: 'Submit',
@@ -84,7 +68,7 @@ export const Form = memo(
       ...submitButton,
     };
 
-    useEffect(() => {
+    const checkValidation = () => {
       let problems: ValidationProblem[] = [];
       let validationRequired = false;
 
@@ -98,26 +82,54 @@ export const Form = memo(
         }
       }
 
+      requiresValidationRef.current = validationRequired;
       setRequiresValidation(validationRequired);
+      validationProblemsRef.current = problems;
       setValidationProblems(problems);
 
       const validated =
-        requiresValidation &&
         Object.values(fieldValues).filter(
           field => field.validation && !field.validation?.validated,
         ).length === 0;
 
+      isValidatedRef.current = validated;
       setValidated(validated);
+    };
 
-      if (onChange)
-        onChange({ fields: fieldValues, validation: { problems, validated } });
+    useEffect(() => {
+      checkValidation();
     }, [fieldValues]);
+
+    const submitForm = (event: FormEvent<HTMLFormElement>) => {
+      if (requiresValidationRef.current) {
+        if (events.form?.onSubmitted)
+          events.form.onSubmitted({
+            fields: fieldValuesRef.current,
+            validation: {
+              problems: validationProblemsRef.current,
+              validated: isValidatedRef.current,
+            },
+          });
+      } else {
+        if (events.form?.onSubmitted)
+          events.form.onSubmitted({
+            fields: fieldValuesRef.current,
+          });
+      }
+
+      event.preventDefault();
+    };
 
     return (
       <Container
         as="form"
         borderRadius={borderRadius}
         className={`${className} form`}
+        events={{
+          form: {
+            onSubmit: submitForm,
+          },
+        }}
         id={name}
         name={name}
         padding={padding}
@@ -127,46 +139,16 @@ export const Form = memo(
           <FormFields
             entity={entity}
             fields={fields}
-            onChange={ff => setFieldValues(ff)}
+            onChange={ff => {
+              fieldValuesRef.current = ff;
+              setFieldValues(ff);
+            }}
           />
         )}
 
         {submitButton && (
           <FormActions>
             <Button
-              events={{
-                keyboard: {
-                  onKeyPress: e => {
-                    if (e.key === 'Enter' && onSubmit)
-                      onSubmit({
-                        fields: fieldValues,
-                        validation: {
-                          problems: validationProblems,
-                          validated: isValidated,
-                        },
-                      });
-                  },
-                },
-                mouse: {
-                  onClick: e => {
-                    e.preventDefault();
-
-                    if (onSubmit)
-                      onSubmit({
-                        fields: fieldValues,
-                        validation: {
-                          problems: validationProblems,
-                          validated: isValidated,
-                        },
-                        values: Object.entries(fieldValues).map(
-                          ([fieldName, field]) => ({
-                            [fieldName]: field.value,
-                          }),
-                        ) as unknown as { readonly [name: string]: unknown },
-                      });
-                  },
-                },
-              }}
               form={name}
               states={{
                 state: {

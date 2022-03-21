@@ -20,7 +20,7 @@ import {
 } from '@srclaunch/types';
 
 import { ImageInputProps } from '../../components/forms/inputs/media/ImageInput';
-import { InputValueChangeHandler } from '../events';
+import { Events, InputValueChangeHandler } from '../events';
 
 import { Validation } from '../validation';
 import { AutoComplete } from './input';
@@ -39,6 +39,7 @@ export type FormFieldValueProps<
 > = {
   readonly defaultValue?: T;
   readonly onChange?: InputValueChangeHandler<T>;
+  readonly events?: Events<T>;
   readonly system?: boolean;
   readonly value?: T;
 } & P;

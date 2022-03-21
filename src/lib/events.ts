@@ -10,7 +10,7 @@ export function getEventHandlers(events: Events): {
 
   for (const entry of entries) {
     for (const handler of [...Object.entries(entry[1])]) {
-      if (handler[0] !== 'disbled' && handler[0] !== 'onValueChange') {
+      if (handler[0] !== 'onValueChange' && handler[0] !== 'onSubmitted') {
         handlers = { ...handlers, [handler[0]]: handler[1] };
       }
     }

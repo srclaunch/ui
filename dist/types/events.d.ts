@@ -1,13 +1,17 @@
 import { PointerEventHandler } from 'react';
 import { AnimationEventHandler, ChangeEventHandler, ClipboardEventHandler, CompositionEventHandler, DragEventHandler, ReactEventHandler, FocusEventHandler, FormEventHandler, KeyboardEventHandler, MouseEventHandler, TouchEventHandler, UIEventHandler, WheelEventHandler } from 'react';
+import { FormField } from './form/field';
 import { Validation } from './validation';
+export declare type FormSubmitHandler<V> = ({ fields, validation, }: {
+    readonly fields: {
+        readonly [name: string]: FormField;
+    };
+    readonly validation?: Validation;
+}) => void;
 export declare type InputValueChangeHandler<V> = ({ validation, value, }: {
     readonly validation?: Validation;
     readonly value: V | any;
 }) => void;
-declare type HasInputValueType<V> = V extends undefined ? {} : {
-    readonly onValueChange?: InputValueChangeHandler<V>;
-};
 export declare type Events<V = undefined> = {
     animation?: {
         readonly onAnimationStart?: AnimationEventHandler;
@@ -29,16 +33,16 @@ export declare type Events<V = undefined> = {
         readonly onToggle?: ReactEventHandler;
     };
     focus?: {
-        readonly disabled?: boolean;
         readonly onBlur?: FocusEventHandler;
         readonly onFocus?: FocusEventHandler;
     };
-    forms?: {
-        readonly onChange?: FormEventHandler;
+    form?: {
+        readonly onChange?: FormSubmitHandler<V>;
         readonly onInput?: FormEventHandler;
         readonly onInvalid?: FormEventHandler;
         readonly onReset?: FormEventHandler;
         readonly onSubmit?: FormEventHandler;
+        readonly onSubmitted?: FormSubmitHandler<V>;
     };
     image?: {
         readonly onError?: ReactEventHandler;
@@ -46,7 +50,8 @@ export declare type Events<V = undefined> = {
     };
     input?: {
         readonly onChange?: ChangeEventHandler;
-    } & HasInputValueType<V>;
+        readonly onValueChange?: InputValueChangeHandler<V>;
+    };
     keyboard?: {
         readonly onKeyDown?: KeyboardEventHandler;
         readonly onKeyPress?: KeyboardEventHandler;
@@ -129,5 +134,4 @@ export declare type Events<V = undefined> = {
         readonly onWheel?: WheelEventHandler;
     };
 };
-export {};
 //# sourceMappingURL=events.d.ts.map

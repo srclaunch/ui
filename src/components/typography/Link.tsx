@@ -7,7 +7,7 @@ import { Amount, TextColors, TextSize, TextWeight } from '../../types';
 import {
   TextDecorationLine,
   TextDecorationStyle,
-} from '../../types/typography/text';
+} from '../../types/typography';
 import { Icon } from '../media/Icon';
 import { Text, TextProps } from './Text';
 

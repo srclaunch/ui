@@ -21,10 +21,9 @@ export declare const ButtonStyles: import("styled-components").FlattenInterpolat
     readonly size?: Size | undefined;
     readonly transform?: import("../../types/appearance/animation").Transform | undefined;
     readonly visibility?: import("../../types").Visibility | undefined;
+    readonly states?: import("../../types").States<ContainerProps> | undefined;
 } & {
     children?: import("react").ReactNode;
-} & {
-    readonly states?: Omit<import("../../types").InteractionStates<ContainerProps>, "inputs"> | undefined;
 } & {
     readonly bold?: boolean | undefined;
     readonly cursor?: import("../../types").Cursor | undefined;
@@ -44,6 +43,6 @@ export declare const ButtonStyles: import("styled-components").FlattenInterpolat
     readonly textSize?: string | number | undefined;
     readonly textWeight?: string | undefined;
 } & {
-    readonly states?: import("../../types").InteractionStates<TextProps> | undefined;
+    readonly states?: import("../../types").States<TextProps> | undefined;
 }, any>>;
 //# sourceMappingURL=button.d.ts.map

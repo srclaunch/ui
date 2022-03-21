@@ -1,9 +1,9 @@
 /// <reference types="react" />
 import { SimpleInterpolation } from 'styled-components';
-import { InteractionStates } from '../../types/states';
 import { ContainerProps } from '../../components/layout/Container';
 import { TextProps } from '../../components/typography/Text';
-export declare function getStatesStyles(props: ContainerProps & TextProps): SimpleInterpolation;
+export declare function getDisabledStateStyles(): SimpleInterpolation;
+export declare function getContainerStatesStyles(props: ContainerProps & TextProps): SimpleInterpolation;
 export declare const StateStyles: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<import("../..").CommonComponentProps & {
     readonly alignment?: import("../..").Alignment | undefined;
     readonly animations?: import("../..").Animation[] | undefined;
@@ -20,10 +20,9 @@ export declare const StateStyles: import("styled-components").FlattenInterpolati
     readonly size?: import("../..").Size | undefined;
     readonly transform?: import("../../types/appearance/animation").Transform | undefined;
     readonly visibility?: import("../..").Visibility | undefined;
+    readonly states?: import("../..").States<ContainerProps> | undefined;
 } & {
     children?: import("react").ReactNode;
-} & {
-    readonly states?: Omit<InteractionStates<ContainerProps>, "inputs"> | undefined;
 } & {
     readonly bold?: boolean | undefined;
     readonly cursor?: import("../..").Cursor | undefined;
@@ -43,6 +42,6 @@ export declare const StateStyles: import("styled-components").FlattenInterpolati
     readonly textSize?: string | number | undefined;
     readonly textWeight?: string | undefined;
 } & {
-    readonly states?: InteractionStates<TextProps> | undefined;
+    readonly states?: import("../..").States<TextProps> | undefined;
 }, any>>;
 //# sourceMappingURL=states.d.ts.map

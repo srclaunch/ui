@@ -57,11 +57,10 @@ export type { CommonComponentProps } from './component';
 export type { PrimitiveLabelProps } from './data/label';
 export type { InputValueChangeHandler, Events } from './events';
 export type { CommonFormFieldProps, FormField } from './form/field';
-export type { InputProps } from './form/input';
-export { AutoComplete } from './form/input';
+export { AutoComplete, InputType } from './form/input';
 export type { LinkProps } from './navigation';
-export type { InteractionStates } from './states';
-export type { TextColor } from './typography/text';
+export type { States } from './states';
+export type { TextColor } from './typography';
 export {
   TextAlign,
   TextColors,
@@ -70,4 +69,5 @@ export {
   TextOverflow,
   TextSize,
   TextWeight,
-} from './typography/text';
+} from './typography';
+export type { Validation } from './validation';

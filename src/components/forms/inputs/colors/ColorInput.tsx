@@ -6,7 +6,6 @@ import hexRgb from 'hex-rgb';
 import { HexColorPicker } from 'react-colorful';
 import rgbHex from 'rgb-hex';
 
-import { Color, InputProps } from '../../../../types';
 import { InputContainer, InputContainerProps } from '../shared/InputContainer';
 
 export const defaultColors = [
@@ -30,7 +29,7 @@ export const defaultColors = [
   '96,125,139',
 ];
 
-type ColorInputProps = InputContainerProps & InputProps<string>;
+type ColorInputProps = InputContainerProps<string>;
 
 export const ColorInput = memo(
   ({

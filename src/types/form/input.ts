@@ -34,17 +34,10 @@ export enum AutoComplete {
   Username = 'username',
 }
 
-export type InputProps<V> = {
-  readonly autoComplete?: AutoComplete;
-  readonly defaultValue?: V;
-  readonly events?: Events<V>;
-  readonly label?: string;
-  readonly name?: string;
-  readonly placeholder?: string;
-  // readonly ref?: ForwardedRef<E>;
-  readonly size?: Size;
-  readonly submitOnEnter?: boolean;
-  readonly validation?: Validation;
-  readonly value?: V;
-  readonly visibility?: Visibility;
-};
+export enum InputType {
+  Email = 'email',
+  Text = 'text',
+  Number = 'number',
+  Password = 'password',
+  Search = 'search',
+}

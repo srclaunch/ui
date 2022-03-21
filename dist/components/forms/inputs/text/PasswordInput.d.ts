@@ -1,4 +1,3 @@
-import { Condition } from '@srclaunch/types';
 import { ReactElement } from 'react';
 import { AutoComplete } from '../../../../types';
 import { TextInputProps } from './TextInput';

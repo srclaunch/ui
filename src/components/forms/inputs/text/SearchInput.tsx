@@ -1,6 +1,7 @@
 import { memo, ReactElement } from 'react';
 import { BasicIcons } from '@srclaunch/icons';
-import { TextInput, TextInputProps, TextInputType } from './TextInput';
+import { TextInput, TextInputProps } from './TextInput';
+import { InputType } from '../../../../types';
 
 export type SearchInputProps = TextInputProps;
 
@@ -11,7 +12,7 @@ export const SearchInput = memo((props: SearchInputProps): ReactElement => {
         name: BasicIcons.Search,
         // size: Size.Smaller,
       }}
-      inputType={TextInputType.Search}
+      type={InputType.Search}
       spellCheck={false}
       {...props}
     />

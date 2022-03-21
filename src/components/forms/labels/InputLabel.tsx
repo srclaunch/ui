@@ -3,20 +3,16 @@ import { memo, ReactElement } from 'react';
 
 import {
   AlignHorizontal,
-  Alignment,
   AlignVertical,
-  Amount,
   Fill,
   Orientation,
-  Size,
-  Sizes,
   TextColors,
   TextSize,
 } from '../../../types';
 import { ErrorLabel } from '../../errors/ErrorLabel';
 import { Container, ContainerProps } from '../../layout/Container';
 import { Label, LabelProps } from '../../typography/Label';
-import { getErrorMessage } from '../../../lib/errors/messages';
+import { getErrorMessage } from '../../../lib/errors';
 
 type InputLabelProps = LabelProps;
 

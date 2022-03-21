@@ -1,6 +1,6 @@
 import { CountryCode, CurrencyAmount, CurrencyCode, Date, DateTime, EmailAddress, Image, JSONObject, LanguageCode, LongText, Password, PhoneNumber, Primitive, Primitives, SSN, UUID, VerificationCode } from '@srclaunch/types';
 import { ImageInputProps } from '../../components/forms/inputs/media/ImageInput';
-import { InputValueChangeHandler } from '../events';
+import { Events, InputValueChangeHandler } from '../events';
 import { Validation } from '../validation';
 import { AutoComplete } from './input';
 export declare type CommonFormFieldProps = {
@@ -13,6 +13,7 @@ export declare type CommonFormFieldProps = {
 export declare type FormFieldValueProps<T extends Primitive | readonly Primitive[], P = Record<string, unknown>> = {
     readonly defaultValue?: T;
     readonly onChange?: InputValueChangeHandler<T>;
+    readonly events?: Events<T>;
     readonly system?: boolean;
     readonly value?: T;
 } & P;

@@ -1,5 +1,5 @@
 import { PropsWithChildren, ReactElement } from 'react';
-import { Alignment, Background, Border, BorderRadius, CommonComponentProps, DepthShadow, Animation, Cursor, Depth, Events, InteractionStates, Margin, Padding, Size, Shadow, Position, Visibility } from '../../types';
+import { Alignment, Background, Border, BorderRadius, CommonComponentProps, DepthShadow, Animation, Cursor, Depth, Events, States, Margin, Padding, Size, Shadow, Position, Visibility } from '../../types';
 import { Transform } from '../../types/appearance/animation';
 export declare type ContainerProps = PropsWithChildren<CommonComponentProps & {
     readonly alignment?: Alignment;
@@ -17,8 +17,7 @@ export declare type ContainerProps = PropsWithChildren<CommonComponentProps & {
     readonly size?: Size;
     readonly transform?: Transform;
     readonly visibility?: Visibility;
-}> & {
-    readonly states?: Omit<InteractionStates<ContainerProps>, 'inputs'>;
-};
+    readonly states?: States<ContainerProps>;
+}>;
 export declare const Container: import("react").MemoExoticComponent<({ alignment, as, children, className, events, ...props }: ContainerProps) => ReactElement>;
 //# sourceMappingURL=Container.d.ts.map

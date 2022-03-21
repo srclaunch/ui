@@ -1,4 +1,4 @@
-import { LongText, ValidationProblem } from '@srclaunch/types';
+import { ValidationProblem } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
 import { memo, ReactElement, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
@@ -6,32 +6,21 @@ import styled from 'styled-components';
 import { TextStyles } from '../../../../styles/typography';
 import {
   AlignHorizontal,
-  Alignment,
   Amount,
   BackgroundColors,
   BorderColors,
   BorderStyle,
-  Color,
-  Depth,
   DepthShadow,
-  InputProps,
-  InputValueChangeHandler,
   Orientation,
-  Size,
   TextColors,
 } from '../../../../types';
 import { ErrorLabel } from '../../../errors/ErrorLabel';
 import { Container } from '../../../layout/Container';
-import { Icon } from '../../../media/Icon';
 import { ProgressSpinner } from '../../../progress/ProgressSpinner';
 import { InputLabel } from '../../labels/InputLabel';
 import { InputContainer, InputContainerProps } from '../shared/InputContainer';
-import { TextInputProps } from './TextInput';
-import { TextProps } from '../../../typography/Text';
 
-export type LongTextInputProps = {
-  readonly spellCheck?: boolean;
-} & TextInputProps;
+export type LongTextInputProps = InputContainerProps<string>;
 
 export const LongTextInput = memo(
   ({

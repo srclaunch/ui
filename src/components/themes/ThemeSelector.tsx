@@ -36,7 +36,7 @@ export const ThemeSelector = memo(
           defaultValue={current}
           events={{
             input: {
-              onValueChange: ({ value }) => {
+              onValueChange: ({ value }: { value: string }) => {
                 const newTheme = list.find((t: Theme) => t.id === value);
 
                 dispatch(setTheme(newTheme.id));

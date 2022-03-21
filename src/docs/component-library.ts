@@ -1,4 +1,10 @@
 import { Exception } from '@srclaunch/exceptions';
+import { CodeVerificationForm } from '../components/authentication/CodeVerificationForm';
+import { ForgotPasswordForm } from '../components/authentication/ForgotPasswordForm';
+import { LoginForm } from '../components/authentication/LoginForm';
+import { SignupForm } from '../components/authentication/SignupForm';
+import { NumberInput } from '../components/forms/inputs/numbers/NumberInput';
+import { TextInput } from '../components/forms/inputs/text/TextInput';
 import {
   Amount,
   BreadcrumbNavigation,
@@ -7,6 +13,7 @@ import {
   ImageInput,
   InputLabel,
 } from '../index';
+import { Validation } from '../types';
 
 import { ComponentLibrary } from './types/component';
 
@@ -20,7 +27,138 @@ export default {
     },
     {
       title: 'Authentication',
+      description: 'Components used for authentication',
       path: '/authentication',
+      components: [
+        {
+          component: CodeVerificationForm,
+          description: 'A form for verifying a user’s code',
+          title: 'CodeVerificationForm',
+          path: '/authentication/code-verification-form',
+          examples: [
+            {
+              title: 'Default',
+              properties: {
+                onSubmit: ({
+                  fields,
+                }: {
+                  fields?: Record<string, unknown>;
+                }) => {
+                  console.log(fields);
+                },
+              },
+              code: `import { CodeVerificationForm } from '@srclaunch/ui';
+
+<CodeVerificationForm
+  onSubmit: ({
+    fields,
+  }: {
+    fields: Record<string, unknown>;
+  }) => {
+    console.log(fields);
+  }}
+/>
+              `,
+            },
+          ],
+        },
+        {
+          component: ForgotPasswordForm,
+          description: 'A form for resetting a user’s password',
+          title: 'ForgotPasswordForm',
+          path: '/authentication/forgot-password-form',
+          examples: [
+            {
+              title: 'Default',
+              properties: {
+                onSubmit: ({
+                  fields,
+                }: {
+                  fields?: Record<string, unknown>;
+                }) => {
+                  console.log(fields);
+                },
+              },
+              code: `import { ForgotPasswordForm } from '@srclaunch/ui';
+
+<ForgotPasswordForm
+  onSubmit: ({
+    fields,
+  }: {
+    fields: Record<string, unknown>;
+  }) => {
+    console.log(fields);
+  }}
+/>
+              `,
+            },
+          ],
+        },
+        {
+          component: LoginForm,
+          description: 'A form for logging in a user',
+          title: 'LoginForm',
+          path: '/authentication/login-form',
+          examples: [
+            {
+              title: 'Default',
+              properties: {
+                onSubmit: ({
+                  fields,
+                }: {
+                  fields?: Record<string, unknown>;
+                }) => {
+                  console.log(fields);
+                },
+              },
+              code: `import { LoginForm } from '@srclaunch/ui';
+
+<LoginForm
+  onSubmit: ({
+    fields,
+  }: {
+    fields: Record<string, unknown>;
+  }) => {
+    console.log(fields);
+  }}
+/>
+              `,
+            },
+          ],
+        },
+        {
+          component: SignupForm,
+          description: 'A form for signing up a user',
+          title: 'SignupForm',
+          path: '/authentication/signup-form',
+          examples: [
+            {
+              title: 'Default',
+              properties: {
+                onSubmit: ({
+                  fields,
+                }: {
+                  fields?: Record<string, unknown>;
+                }) => {
+                  console.log(fields);
+                },
+              },
+              code: `import { SignupForm } from '@srclaunch/ui';
+
+<SignupForm
+  onSubmit: ({
+    fields,
+  }: {
+    fields: Record<string, unknown>;
+  }) => {
+    console.log(fields);
+  }}
+/>
+              `,
+            },
+          ],
+        },
+      ],
     },
     {
       title: 'Billing',
@@ -168,6 +306,125 @@ const Example = () => (
               description: 'Menu and list user inputs',
               path: '/forms/inputs/menus',
               components: [],
+            },
+            {
+              title: 'Numbers',
+              description: 'Menu and list user inputs',
+              path: '/forms/inputs/numbers',
+              components: [
+                {
+                  component: NumberInput,
+                  description: 'An input for entering numbers',
+                  title: 'NumberInput',
+                  path: '/forms/inputs/numbers/number-input',
+                  examples: [
+                    {
+                      title: 'Default',
+                      properties: {
+                        events: {
+                          input: {
+                            onValueChange: ({
+                              validation,
+                              value,
+                            }: {
+                              validation?: Validation;
+                              value?: string;
+                            }) => {
+                              console.log(validation, value);
+                            },
+                          },
+                        },
+                      },
+                      code: `import { NumberInput } from '@srclaunch/ui';
+        
+<NumberInput
+  events={{
+    input: {
+      onValueChange: ({ validation, value }) => {
+        console.log(validation, value);
+      }),
+    }
+  }}
+/>`,
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              title: 'Text',
+              description: 'Text and string user inputs',
+              path: '/forms/inputs/text',
+              components: [
+                {
+                  component: TextInput,
+                  description: 'A form for signing up a user',
+                  title: 'TextInput',
+                  path: '/forms/inputs/text/text-input',
+                  examples: [
+                    {
+                      title: 'Default',
+                      properties: {
+                        events: {
+                          input: {
+                            onValueChange: ({
+                              validation,
+                              value,
+                            }: {
+                              validation?: Validation;
+                              value?: string;
+                            }) => {
+                              console.log(validation, value);
+                            },
+                          },
+                        },
+                      },
+                      code: `import { TextInput } from '@srclaunch/ui';
+        
+<TextInput
+  events={{
+    input: {
+      onValueChange: ({ validation, value }) => {
+        console.log(validation, value);
+      }),
+    }
+  }}
+/>`,
+                    },
+                    {
+                      title: 'With a label',
+                      properties: {
+                        events: {
+                          input: {
+                            onValueChange: ({
+                              validation,
+                              value,
+                            }: {
+                              validation?: Validation;
+                              value?: string;
+                            }) => {
+                              console.log(validation, value);
+                            },
+                          },
+                        },
+                        label: 'Enter your name',
+                      },
+                      code: `import { TextInput } from '@srclaunch/ui';
+        
+<TextInput
+  events={{
+    input: {
+      onValueChange: ({ validation, value }) => {
+        console.log(validation, value);
+      }),
+    }
+  }}
+  label="Enter your name"
+/>`,
+                    },
+                  ],
+                },
+              ],
             },
           ],
         },

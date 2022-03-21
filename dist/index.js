@@ -20410,6 +20410,14 @@ var AutoComplete = /* @__PURE__ */ ((AutoComplete2) => {
   AutoComplete2["Username"] = "username";
   return AutoComplete2;
 })(AutoComplete || {});
+var InputType = /* @__PURE__ */ ((InputType2) => {
+  InputType2["Email"] = "email";
+  InputType2["Text"] = "text";
+  InputType2["Number"] = "number";
+  InputType2["Password"] = "password";
+  InputType2["Search"] = "search";
+  return InputType2;
+})(InputType || {});
 var TextAlign = /* @__PURE__ */ ((TextAlign2) => {
   TextAlign2["Center"] = "center";
   TextAlign2["Default"] = "initial";
@@ -20751,28 +20759,15 @@ const getContainerStyles = (props) => {
   return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:opacity 0.13s ease-in-out,background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,transform 0.13s ease-in-out;"], getAlignmentStyles(props.alignment), getAnimationStyles(props.animations), getBackgroundStyles(props.background), getBorderStyles(props.border), getBorderRadiusStyles(props.borderRadius), getCursorStyles(props.cursor), getDepthStyles(props.depth), getEventStyles(props.events), getMarginStyles(props.margin), getPaddingStyles(props.padding), getPositionStyles(props.position), getShadowStyles(props.shadow), getSizeStyles(props.size), getVisibilityStyles(props.visibility));
 };
 const ContainerStyles = css$2(["", ";"], (props) => getContainerStyles(props));
-const getTextStyles = (props) => {
-  const {
-    bold,
-    cursor,
-    italic,
-    lineHeight,
-    lineWrap,
-    textOverflow,
-    selectable,
-    textAlign,
-    textColor,
-    textDecoration,
-    textSize,
-    textWeight
-  } = props;
-  return css$2(["color:", ";font-size:", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:color 0.13s ease-in-out,font-size 0.13s ease-in-out,font-weight 0.13s ease-in-out,text-decoration 0.13s ease-in-out,text-decoration-color 0.13s ease-in-out,text-decoration-style 0.13s ease-in-out,text-decoration-thickness 0.13s ease-in-out;"], getCSSColorValue(textColor != null ? textColor : TextColors.Default), getCSSMeasurementValue(textSize != null ? textSize : TextSize.Default), bold && css$2(["font-weight:bold;"]), cursor && css$2(["cursor:", ";"], cursor), italic && css$2(["font-style:italic;"]), lineHeight && css$2(["line-height:", ";"], getCSSMeasurementValue(lineHeight != null ? lineHeight : TextSize.Default)), lineWrap && css$2(["white-space:nowrap;"]), selectable && css$2(["user-select:text;"]), textAlign && css$2(["text-align:", ";"], textAlign), textDecoration && css$2(["text-decoration:", ";text-decoration-color:", ";text-decoration-style:", ";text-decoration-thickness:", ";"], textDecoration.line ? textDecoration.line : "none", getCSSColorValue(textDecoration.color), textDecoration.style ? textDecoration.style : "solid", getCSSMeasurementValue(textDecoration.thickness)), textOverflow && css$2(["text-overflow:", ";"], textOverflow), textWeight && css$2(["font-weight:", ";"], textWeight));
-};
-const TextStyles = css$2(["", ";"], (props) => getTextStyles(props));
-function getStatesStyles(props) {
-  const {
+function getDisabledStateStyles$1() {
+  return css$2(["opacity:0.1 !important;background-color:yellow !important;"]);
+}
+function getContainerStatesStyles(props) {
+  const _a2 = props, {
     states
-  } = props;
+  } = _a2, otherProps = __objRest(_a2, [
+    "states"
+  ]);
   if (!states) {
     return;
   }
@@ -20789,15 +20784,15 @@ function getStatesStyles(props) {
     visible,
     warning
   } = states;
-  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";"], current && (state == null ? void 0 : state.current) && css$2(["", ";", ";"], getContainerStyles(current), getTextStyles(current)), disabled && css$2(["", ";"], (state == null ? void 0 : state.disabled) ? css$2(["", ";", ";"], getContainerStyles(disabled), getTextStyles(disabled)) : css$2(["&:disabled{", ";", ";}"], getContainerStyles(disabled), getTextStyles(disabled))), error && (state == null ? void 0 : state.error) && css$2(["", ";", ";"], getContainerStyles(error), getTextStyles(error)), focused && css$2(["", ";"], (state == null ? void 0 : state.focused) ? css$2(["", ";", ";"], getContainerStyles(focused), getTextStyles(focused)) : css$2(["&:focus{", ";", ";}"], getContainerStyles(focused), getTextStyles(focused))), hovered && !(state == null ? void 0 : state.active) && css$2(["", ";"], (state == null ? void 0 : state.hovered) ? css$2(["", ";", ";"], getContainerStyles(hovered), getTextStyles(hovered)) : css$2(["&:hover{", ";", ";}"], getContainerStyles(hovered), getTextStyles(hovered))), active && css$2(["", ";"], (state == null ? void 0 : state.active) ? css$2(["", ";", ";"], getContainerStyles(active), getTextStyles(active)) : css$2(["&::active{", ";", ";}"], getContainerStyles(active), getTextStyles(active))), loading && (state == null ? void 0 : state.loading) && css$2(["", ";", ";"], getContainerStyles(loading), getTextStyles(loading)), success && (state == null ? void 0 : state.success) && css$2(["", ";", ";"], getContainerStyles(success), getTextStyles(success)), visible && (state == null ? void 0 : state.visible) && css$2(["", ";", ";"], getContainerStyles(visible), getTextStyles(visible)), warning && (state == null ? void 0 : state.warning) && css$2(["", ";", ";"], getContainerStyles(warning), getTextStyles(warning)));
+  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";"], current && (state == null ? void 0 : state.current) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), current))), disabled && css$2(["", ";"], (state == null ? void 0 : state.disabled) ? css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()) : css$2(["&:disabled{", ";", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1())), error && (state == null ? void 0 : state.error) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), error))), focused && css$2(["", ";"], (state == null ? void 0 : state.focused) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused))) : css$2(["&:focus{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)))), hovered && !(state == null ? void 0 : state.current) && css$2(["", ";"], (state == null ? void 0 : state.hovered) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered))) : css$2(["&:hover{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered)))), active && css$2(["", ";"], (state == null ? void 0 : state.active) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active))) : css$2(["&::active{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active)))), loading && (state == null ? void 0 : state.loading) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loading))), success && (state == null ? void 0 : state.success) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), success))), visible && (state == null ? void 0 : state.visible) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible))), warning && (state == null ? void 0 : state.warning) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), warning))));
 }
-const StateStyles = css$2(["", ";"], (props) => getStatesStyles(props));
+const StateStyles = css$2(["", ";"], (props) => getContainerStatesStyles(props));
 function getEventHandlers(events) {
   const entries = [...Object.entries(events)];
   let handlers = {};
   for (const entry of entries) {
     for (const handler of [...Object.entries(entry[1])]) {
-      if (handler[0] !== "disbled" && handler[0] !== "onValueChange") {
+      if (handler[0] !== "onValueChange" && handler[0] !== "onSubmitted") {
         handlers = __spreadProps(__spreadValues({}, handlers), {
           [handler[0]]: handler[1]
         });
@@ -20915,7 +20910,7 @@ const Fragment = jsxRuntime$1.exports.Fragment;
 const Wrapper$3 = styled.div.withConfig({
   displayName: "Wrapper",
   componentId: "sc-19tf6wk-0"
-})(["", ";", ";"], (props) => getContainerStyles(props), (props) => getStatesStyles(props));
+})(["", ";", ";"], (props) => getContainerStyles(props), (props) => getContainerStatesStyles(props));
 const Container$9 = memo((_a2) => {
   var _b = _a2, {
     alignment,
@@ -20930,6 +20925,7 @@ const Container$9 = memo((_a2) => {
     "className",
     "events"
   ]);
+  var _a3, _b2;
   const [eventHandlers, setEventHandlers] = useState({});
   useEffect(() => {
     if (events && Object.keys(events).length > 0) {
@@ -20944,7 +20940,7 @@ const Container$9 = memo((_a2) => {
     }, alignment),
     as,
     className: `${className} container`,
-    events
+    disabled: (_b2 = (_a3 = props == null ? void 0 : props.states) == null ? void 0 : _a3.state) == null ? void 0 : _b2.disabled
   }, props), eventHandlers), {
     children
   }));
@@ -21045,10 +21041,56 @@ const Icon = memo((_e2) => {
   }
   return /* @__PURE__ */ jsx$2(Fragment, {});
 });
+const getTextStyles = (props) => {
+  const {
+    bold,
+    cursor,
+    italic,
+    lineHeight,
+    lineWrap,
+    textOverflow,
+    selectable,
+    textAlign,
+    textColor,
+    textDecoration,
+    textSize,
+    textWeight
+  } = props;
+  return css$2(["color:", ";font-size:", ";line-height:", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:color 0.13s ease-in-out,font-size 0.13s ease-in-out,font-weight 0.13s ease-in-out,text-decoration 0.13s ease-in-out,text-decoration-color 0.13s ease-in-out,text-decoration-style 0.13s ease-in-out,text-decoration-thickness 0.13s ease-in-out;"], getCSSColorValue(textColor != null ? textColor : TextColors.Default), getCSSMeasurementValue(textSize != null ? textSize : TextSize.Default), getCSSMeasurementValue(lineHeight != null ? lineHeight : Sizes.Default), bold && css$2(["font-weight:bold;"]), cursor && css$2(["cursor:", ";"], cursor), italic && css$2(["font-style:italic;"]), lineWrap && css$2(["white-space:nowrap;"]), selectable && css$2(["user-select:text;"]), textAlign && css$2(["text-align:", ";"], textAlign), textDecoration && css$2(["text-decoration:", ";text-decoration-color:", ";text-decoration-style:", ";text-decoration-thickness:", ";"], textDecoration.line ? textDecoration.line : "none", getCSSColorValue(textDecoration.color), textDecoration.style ? textDecoration.style : "solid", getCSSMeasurementValue(textDecoration.thickness)), textOverflow && css$2(["text-overflow:", ";"], textOverflow), textWeight && css$2(["font-weight:", ";"], textWeight));
+};
+const TextStyles = css$2(["", ";"], (props) => getTextStyles(props));
+function getDisabledStateStyles() {
+  return css$2(["opacity:0.1 !important;background-color:yellow !important;"]);
+}
+function getTextStatesStyles(props) {
+  const _a2 = props, {
+    states
+  } = _a2, otherProps = __objRest(_a2, [
+    "states"
+  ]);
+  if (!states) {
+    return;
+  }
+  const {
+    active,
+    current,
+    disabled,
+    error,
+    focused,
+    hovered,
+    loading,
+    state,
+    success,
+    visible,
+    warning
+  } = states;
+  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";"], current && (state == null ? void 0 : state.current) && !(state == null ? void 0 : state.active) && css$2(["", ";"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), current))), disabled && css$2(["", ";"], (state == null ? void 0 : state.disabled) ? css$2(["", ";", ";"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles()) : css$2(["&:disabled{", ";", ";}"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles())), error && (state == null ? void 0 : state.error) && css$2(["", ";"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), error))), focused && css$2(["", ";"], (state == null ? void 0 : state.focused) ? css$2(["", ";"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), focused))) : css$2(["&:focus{", ";}"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), focused)))), hovered && !(state == null ? void 0 : state.active) && css$2(["", ";"], (state == null ? void 0 : state.hovered) ? css$2(["", ";"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), hovered))) : css$2(["&:hover{", ";}"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), hovered)))), active && css$2(["", ";"], (state == null ? void 0 : state.active) ? css$2(["", ";"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), active))) : css$2(["&::active{", ";}"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), active)))), loading && (state == null ? void 0 : state.loading) && css$2(["", ";"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), loading))), success && (state == null ? void 0 : state.success) && css$2(["", ";"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), success))), visible && (state == null ? void 0 : state.visible) && css$2(["", ";"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), visible))), warning && (state == null ? void 0 : state.warning) && css$2(["", ";"], getTextStyles(__spreadValues(__spreadValues({}, otherProps), warning))));
+}
+css$2(["", ";"], (props) => getTextStatesStyles(props));
 const Wrapper$1 = styled.span.withConfig({
   displayName: "Wrapper",
   componentId: "sc-196umx6-0"
-})(["", " ", ""], (props) => getTextStyles(props), (props) => getStatesStyles(props));
+})(["", ";", ";"], (props) => getTextStyles(props), (props) => getTextStatesStyles(props));
 const Text = memo((_g) => {
   var _h = _g, {
     as = "span",
@@ -21100,6 +21142,7 @@ const Label = memo((_i2) => {
     lineWrap = false,
     selectable = true,
     states = {},
+    textAlign = TextAlign.Default,
     textColor = TextColors.Default,
     textOverflow = TextOverflow.Ellipsis,
     textSize = TextSize.Default,
@@ -21114,6 +21157,7 @@ const Label = memo((_i2) => {
     "lineWrap",
     "selectable",
     "states",
+    "textAlign",
     "textColor",
     "textOverflow",
     "textSize",
@@ -21136,6 +21180,7 @@ const Label = memo((_i2) => {
       lineHeight,
       selectable,
       states,
+      textAlign,
       textColor,
       textOverflow,
       textSize,
@@ -23343,218 +23388,93 @@ function Ti$1(a, l2) {
       return { long: "Not a valid year string.", short: "Invalid year" };
   }
 }
-const InputContainer = memo((_m) => {
+function getInputStyles(props) {
+  return css$2(["", " ", ";background:transparent;border:none;width:100%;outline:none;padding:0 ", ";white-space:nowrap;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}&::-ms-clear{display:none;width:0;height:0;}&::-ms-reveal{display:none;width:0;height:0;}&::-webkit-search-decoration,&::-webkit-search-cancel-button,&::-webkit-search-results-button,&::-webkit-search-results-decoration{display:none;}&::-webkit-outer-spin-button,&::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}&[type='number']{-moz-appearance:textfield;}"], getSizeStyles(props.inputSize), getTextStyles(props), Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
+}
+css$2([""]);
+const Input$2 = memo((_m) => {
   var _n = _m, {
-    alignment = {},
+    autoComplete,
     background = {},
-    borderRadius = {},
     border = {},
-    children,
     className = "",
-    states = {}
-  } = _n, props = __objRest(_n, [
-    "alignment",
-    "background",
-    "borderRadius",
-    "border",
-    "children",
-    "className",
-    "states"
-  ]);
-  var _a2;
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
-    alignment: __spreadValues({
-      orientation: Orientation.Horizontal
-    }, alignment),
-    background: __spreadValues({
-      color: BackgroundColors.InputControl
-    }, background),
-    borderRadius: __spreadValues({
-      all: Amount.Least
-    }, borderRadius),
-    border: {
-      all: {
-        color: ((_a2 = states.state) == null ? void 0 : _a2.error) && Array.isArray(states.state.error) && states.state.error.length > 0 ? BorderColors.Error : (border == null ? void 0 : border.all) && typeof (border == null ? void 0 : border.all) == "object" ? border.all.color : BorderColors.InputControl,
-        style: BorderStyle.Solid,
-        width: 1
-      }
-    },
-    className: `${className} input-container`
-  }, props), {
-    children
-  }));
-});
-const TextInputStyles = css$2(["", ";outline:none;padding:0 ", ";white-space:nowrap;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}"], TextStyles, Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
-const VerificationCodeInput = memo((_o) => {
-  var _p = _o, {
-    as,
-    className = "",
+    cursor = Cursor.Text,
     defaultValue,
     events = {},
-    length = 4,
+    lineHeight = Sizes.Default,
     name: name2,
+    prefix: prefix2 = "",
     placeholder = "",
+    size = {},
     states = {},
-    textSize = TextSize.Larger,
-    textColor = TextColors.Dark,
-    codeType = "numeric"
-  } = _p, props = __objRest(_p, [
-    "as",
+    suffix: suffix2 = "",
+    textColor = TextColors.InputControl,
+    textWeight = TextWeight.Default,
+    type
+  } = _n, props = __objRest(_n, [
+    "autoComplete",
+    "background",
+    "border",
     "className",
+    "cursor",
     "defaultValue",
     "events",
-    "length",
+    "lineHeight",
     "name",
+    "prefix",
     "placeholder",
+    "size",
     "states",
-    "textSize",
+    "suffix",
     "textColor",
-    "codeType"
+    "textWeight",
+    "type"
   ]);
-  const [codeParts, setCodeParts] = useState({});
-  const [focusedKey, setFocusedKey] = useState(void 0);
-  const code = Object.values(codeParts).join("");
+  var _a2;
+  const [value2, setValue] = useState(defaultValue);
+  const [focused, setFocused] = useState(false);
   useEffect(() => {
-    var _a2, _b;
-    const typeCondition = () => {
-      if (codeType === "alpha") {
-        return {
-          [Condition.IsAlpha]: true
-        };
-      }
-      if (codeType === "alphanumeric") {
-        return {
-          [Condition.IsAlphanumeric]: true
-        };
-      }
-      return {
-        [Condition.IsNumber]: true
-      };
-    };
-    const validation = __spreadValues({
-      [Condition.IsRequired]: true,
-      [Condition.IsLengthEqual]: length
-    }, typeCondition);
-    const probs = Si$1(code, validation);
-    if ((_a2 = events.input) == null ? void 0 : _a2.onValueChange)
-      (_b = events.input) == null ? void 0 : _b.onValueChange({
-        validation: {
-          problems: probs,
-          validated: !probs.length
-        },
-        value: code
+    if (defaultValue !== value2) {
+      setValue(defaultValue);
+    }
+  }, [defaultValue]);
+  useEffect(() => {
+    var _a3;
+    if ((_a3 = events.input) == null ? void 0 : _a3.onValueChange)
+      events.input.onValueChange({
+        value: value2
       });
-  }, [code]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
-    alignment: {
-      horizontal: AlignHorizontal.Center,
-      orientation: Orientation.Horizontal,
-      vertical: AlignVertical.Center
+  }, [value2]);
+  return /* @__PURE__ */ jsx$2(InputElement, {
+    autoComplete,
+    defaultValue,
+    className: `${className} input`,
+    cursor,
+    lineHeight,
+    name: name2,
+    onBlur: () => setFocused(false),
+    onChange: (event) => {
+      var _a3;
+      setValue(prefix2 + ((_a3 = event.target) == null ? void 0 : _a3.value) + suffix2);
     },
-    className: `${className} verification-code-input`
-  }, props), {
-    children: Array.from(Array(length)).map((_, key) => {
-      var _a2;
-      return /* @__PURE__ */ jsx$2(InputContainer, {
-        background: {
-          color: BackgroundColors.InputControl
-        },
-        className: `${className} verification-code-input`,
-        margin: {
-          left: Amount.Less,
-          right: Amount.Less
-        },
-        states: {
-          state: {
-            focused: focusedKey === key
-          }
-        },
-        children: /* @__PURE__ */ jsx$2(Input$4, {
-          id: `${name2}-verification-code-input-${key}`,
-          max: codeType === "numeric" ? 9 : "unset",
-          min: codeType === "numeric" ? 0 : "unset",
-          name: name2,
-          onBlur: () => setFocusedKey(void 0),
-          onChange: (e2) => {
-            if (e2.nativeEvent.inputType !== "insertFromPaste") {
-              const currentCodePart = codeParts == null ? void 0 : codeParts[key];
-              if (e2.target.value.length === 1 || e2.target.value.length === 0) {
-                setCodeParts(__spreadProps(__spreadValues({}, codeParts), {
-                  [key]: e2.target.value
-                }));
-              } else {
-                setCodeParts(__spreadProps(__spreadValues({}, codeParts), {
-                  [key]: void 0
-                }));
-              }
-              if (e2.target.value.length === 1 && !currentCodePart) {
-                const nextElem = document.getElementById(`${name2}-verification-code-input-${key + 1}`);
-                if (nextElem) {
-                  nextElem.focus();
-                }
-              }
-            }
-          },
-          onFocus: () => {
-            setFocusedKey(key);
-          },
-          onKeyDown: (e2) => {
-            if (e2.key === "Delete" || e2.key === "Backspace" && !e2.target.value) {
-              const lastElem = document.getElementById(`${name2}-verification-code-input-${key - 1}`);
-              if (lastElem) {
-                lastElem.focus();
-              }
-            }
-          },
-          onPaste: (e2) => {
-            if (key === 0) {
-              const pastedText = e2.clipboardData.getData("Text");
-              if (pastedText && pastedText.length === length && !Number.isNaN(pastedText)) {
-                let obj = {};
-                let i2 = 0;
-                for (const val of [...pastedText]) {
-                  const prop = {
-                    [i2]: val
-                  };
-                  obj = __spreadValues(__spreadValues({}, obj), prop);
-                  i2 += 1;
-                }
-                setCodeParts(obj);
-              }
-            }
-          },
-          placeholder,
-          textColor,
-          type: codeType === "numeric" ? "number" : "text",
-          value: (_a2 = codeParts == null ? void 0 : codeParts[key]) != null ? _a2 : ""
-        })
-      }, key);
-    })
-  }));
+    onFocus: () => setFocused(true),
+    placeholder,
+    textColor,
+    textWeight,
+    inputSize: size,
+    states: __spreadValues({
+      state: {
+        error: (_a2 = states.state) == null ? void 0 : _a2.error,
+        focused
+      }
+    }, states),
+    type
+  });
 });
-const Input$4 = styled.input.withConfig({
-  displayName: "Input",
-  componentId: "sc-1a4moks-0"
-})(["", ";background:transparent;border:none;padding:calc(", " / 5);text-align:center;width:100%;&::-webkit-outer-spin-button,&::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}&[type='number']{-moz-appearance:textfield;}"], TextInputStyles, (props) => props.size);
-const InputRow = memo((_q) => {
-  var _r = _q, {
-    children,
-    className = "",
-    margin = {}
-  } = _r, props = __objRest(_r, [
-    "children",
-    "className",
-    "margin"
-  ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
-    className: `${className} input-row`,
-    margin: __spreadValues({
-      bottom: Amount.More
-    }, margin)
-  }, props), {
-    children
-  }));
-});
+const InputElement = styled.input.withConfig({
+  displayName: "InputElement",
+  componentId: "sc-19hbv63-0"
+})(["", ""], (props) => getInputStyles(props));
 const ProgressSpinner = memo(({
   size = {
     height: Sizes.Default,
@@ -23569,633 +23489,6 @@ const Container$8 = memo(styled.div.withConfig({
   displayName: "Container",
   componentId: "sc-1w3nox1-0"
 })(["animation:loop 0.8s infinite linear;border-top:calc(", " / 5) solid rgba(200,200,200,0.2);border-right:calc(", " / 5) solid rgba(200,200,200,0.2);border-bottom:calc(", " / 5) solid rgba(200,200,200,0.2);border-left:calc(", " / 5) solid rgba(0,0,0,0.2);border-radius:50%;display:inline-block;font-size:10px;height:", ";position:relative;text-indent:-9999em;transform:translateZ(0);width:", ";&:after{border-radius:50%;width:", ";height:calc(", " / 3);}@keyframes loop{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}"], (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => getCSSMeasurementValue(props.size.height), (props) => getCSSMeasurementValue(props.size.width), (props) => getCSSMeasurementValue(props.size.width), (props) => getCSSMeasurementValue(props.size.height)));
-const LoadingOverlay = memo((_s) => {
-  var _t = _s, {
-    background = {},
-    borderRadius = {},
-    className = "",
-    position = {},
-    spinnerSize,
-    visible
-  } = _t, props = __objRest(_t, [
-    "background",
-    "borderRadius",
-    "className",
-    "position",
-    "spinnerSize",
-    "visible"
-  ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
-    background: __spreadValues({
-      color: BackgroundColors.Dark,
-      opacity: 85
-    }, background),
-    borderRadius,
-    className: `${className} loading-overlay`,
-    position: __spreadValues({
-      behavior: PositionBehavior.Absolute,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      top: 0
-    }, position),
-    visibility: {
-      hidden: !visible
-    }
-  }, props), {
-    children: /* @__PURE__ */ jsx$2(ProgressSpinner, {
-      size: spinnerSize
-    })
-  }));
-});
-const LineBreak = memo((_u) => {
-  var _v = _u, {
-    className = "",
-    size = {
-      height: Sizes.Default
-    }
-  } = _v, props = __objRest(_v, [
-    "className",
-    "size"
-  ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadValues({
-    className: `${className} link-break`,
-    size
-  }, props));
-});
-const Paragraph = memo((_w) => {
-  var _x = _w, {
-    as = "p",
-    children,
-    className = "",
-    lineHeight = Sizes.Default,
-    textColor = TextColors.Paragraph,
-    textSize = TextSize.Default
-  } = _x, props = __objRest(_x, [
-    "as",
-    "children",
-    "className",
-    "lineHeight",
-    "textColor",
-    "textSize"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    as,
-    className: `${className} paragraph`,
-    lineHeight,
-    textColor,
-    textSize
-  }, props), {
-    children
-  }));
-});
-const Title = memo((_y) => {
-  var _z = _y, {
-    as = "h1",
-    children,
-    className = "",
-    lineHeight = Sizes.Larger,
-    textSize = TextSize.Larger,
-    textColor = TextColors.Title,
-    textWeight = TextWeight.Most
-  } = _z, props = __objRest(_z, [
-    "as",
-    "children",
-    "className",
-    "lineHeight",
-    "textSize",
-    "textColor",
-    "textWeight"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    alignment: {
-      vertical: AlignVertical.Top
-    },
-    as,
-    className: `${className} title`,
-    textColor,
-    lineHeight,
-    textSize,
-    textWeight
-  }, props), {
-    children
-  }));
-});
-const CodeVerificationForm = memo(({
-  background = {},
-  borderRadius = {},
-  onVerificationSuccess,
-  userId
-}) => {
-  var _a2;
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const verificationState = useSelector((state) => {
-    var _a3;
-    return (_a3 = state.user.authentication) == null ? void 0 : _a3.verification.code;
-  });
-  const [code, setCode] = useState();
-  const [problems, setProblems] = useState();
-  useEffect(() => {
-    if (userId) {
-      dispatch(getVerificationDetails({
-        userId
-      }));
-    }
-  }, []);
-  useEffect(() => {
-    if (onVerificationSuccess && verificationState.verify.success) {
-      onVerificationSuccess();
-    }
-  }, [verificationState.verify.success]);
-  return /* @__PURE__ */ jsxs$1(Container$9, {
-    className: "code-verification-form",
-    background: __spreadValues({
-      color: BackgroundColors.Darker
-    }, background),
-    borderRadius: __spreadValues({
-      all: Amount.More
-    }, borderRadius),
-    padding: {
-      all: Amount.Most
-    },
-    shadow: DepthShadow.Highest,
-    size: {
-      width: 420
-    },
-    children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
-      borderRadius,
-      visible: verificationState.status.inProgress || verificationState.resend.inProgress || verificationState.verify.inProgress
-    }), verificationState.verify.success || verificationState.status.state === UserVerificationStatus.Confirmed ? /* @__PURE__ */ jsxs$1(Container$9, {
-      padding: {
-        all: Amount.Default
-      },
-      children: [/* @__PURE__ */ jsx$2(Title, {
-        textAlign: TextAlign.Center,
-        children: "You're verified!"
-      }), /* @__PURE__ */ jsx$2(Container$9, {
-        margin: {
-          all: Amount.More
-        },
-        children: /* @__PURE__ */ jsx$2(Paragraph, {
-          textAlign: TextAlign.Center,
-          children: "Thank you for verifying your email address."
-        })
-      }), /* @__PURE__ */ jsx$2(Button$1, {
-        events: {
-          mouse: {
-            onClick: () => navigate("/")
-          }
-        },
-        type: ButtonType.Primary,
-        children: "Login"
-      })]
-    }) : /* @__PURE__ */ jsxs$1(Fragment, {
-      children: [/* @__PURE__ */ jsx$2(Title, {
-        textAlign: TextAlign.Center,
-        children: "Verification"
-      }), /* @__PURE__ */ jsx$2(Container$9, {
-        margin: {
-          all: Amount.More
-        },
-        children: /* @__PURE__ */ jsxs$1(Paragraph, {
-          textAlign: TextAlign.Center,
-          children: ["Enter the confirmation code sent to", " ", /* @__PURE__ */ jsx$2("b", {
-            children: (_a2 = verificationState.delivery) == null ? void 0 : _a2.destination
-          }), "."]
-        })
-      }), /* @__PURE__ */ jsxs$1(Container$9, {
-        padding: {
-          bottom: Amount.Default,
-          left: Amount.More,
-          right: Amount.More,
-          top: Amount.Default
-        },
-        children: [/* @__PURE__ */ jsx$2(InputRow, {
-          children: /* @__PURE__ */ jsx$2(VerificationCodeInput, {
-            autoComplete: AutoComplete.OneTimeCode,
-            events: {
-              input: {
-                onValueChange: ({
-                  validation,
-                  value: value2
-                }) => {
-                  setProblems(validation == null ? void 0 : validation.problems);
-                  if (validation && validation.validated || !validation) {
-                    setCode(value2);
-                  }
-                }
-              }
-            },
-            length: 6,
-            name: "verification_code"
-          })
-        }), /* @__PURE__ */ jsx$2(LineBreak, {
-          size: {
-            height: Sizes.Small
-          }
-        }), /* @__PURE__ */ jsx$2(Button$1, {
-          events: {
-            mouse: {
-              onClick: () => {
-                if (userId && code) {
-                  dispatch(verifyCode({
-                    code,
-                    userId
-                  }));
-                }
-              }
-            }
-          },
-          states: {
-            state: {
-              disabled: problems && problems.length > 0 || !code || verificationState.verify.inProgress || verificationState.resend.inProgress
-            }
-          },
-          type: ButtonType.Primary,
-          children: "Verify"
-        })]
-      }), /* @__PURE__ */ jsx$2(Container$9, {
-        alignment: {
-          horizontal: AlignHorizontal.Center
-        },
-        padding: {
-          all: Amount.Default
-        },
-        children: !verificationState.resend.success ? /* @__PURE__ */ jsx$2(Button$1, {
-          events: {
-            mouse: {
-              onClick: () => {
-                if (userId) {
-                  dispatch(resendVerificationCode({
-                    userId
-                  }));
-                }
-              }
-            }
-          },
-          type: ButtonType.Link,
-          children: "Resend verification code"
-        }) : /* @__PURE__ */ jsx$2(Label, {
-          icon: {
-            name: BasicIcons.Checkmark2,
-            size: {
-              height: Sizes.Smaller,
-              width: Sizes.Smaller
-            }
-          },
-          lineHeight: Sizes.Smaller,
-          textSize: TextSize.Default,
-          textColor: TextColors.Success,
-          textWeight: TextWeight.More,
-          children: "A new code has been sent"
-        })
-      })]
-    })]
-  });
-});
-const Orb = memo((_A) => {
-  var _B = _A, {
-    color = BackgroundColors.Default,
-    className = "",
-    size = {
-      height: Sizes.Smallest,
-      width: Sizes.Smallest
-    }
-  } = _B, props = __objRest(_B, [
-    "color",
-    "className",
-    "size"
-  ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadValues({
-    className: `${className} orb`,
-    background: {
-      color
-    },
-    borderRadius: {
-      all: Amount.All
-    },
-    size
-  }, props));
-});
-const NotificationLabel = memo((_C) => {
-  var _D = _C, {
-    alignment = {},
-    background = {},
-    borderRadius = {},
-    children,
-    className = "",
-    label = "",
-    padding = {},
-    showOrb = true,
-    type
-  } = _D, props = __objRest(_D, [
-    "alignment",
-    "background",
-    "borderRadius",
-    "children",
-    "className",
-    "label",
-    "padding",
-    "showOrb",
-    "type"
-  ]);
-  const getBackgroundColor = () => {
-    if (!type)
-      return background.color;
-    switch (type) {
-      case NotificationType.Error:
-        return BackgroundColors.Error;
-      case NotificationType.Info:
-        return BackgroundColors.Info;
-      case NotificationType.Success:
-        return BackgroundColors.Success;
-      case NotificationType.Warning:
-        return BackgroundColors.Warning;
-    }
-  };
-  const getTextColor = () => {
-    if (!type)
-      return TextColors.Default;
-    switch (type) {
-      case NotificationType.Error:
-        return TextColors.Error;
-      case NotificationType.Info:
-        return TextColors.Info;
-      case NotificationType.Success:
-        return TextColors.Success;
-      case NotificationType.Warning:
-        return TextColors.Warning;
-    }
-  };
-  const bgColor = getBackgroundColor();
-  const textColor = getTextColor();
-  console.log(__spreadValues({
-    horizontal: AlignHorizontal.Center,
-    orientation: Orientation.Horizontal,
-    vertical: AlignVertical.Center
-  }, alignment));
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
-    alignment: __spreadValues({
-      horizontal: AlignHorizontal.Center,
-      orientation: Orientation.Horizontal,
-      vertical: AlignVertical.Center
-    }, alignment),
-    background: __spreadValues({
-      color: BackgroundColors.Light,
-      opacity: type ? 10 : 100
-    }, background),
-    borderRadius: __spreadValues({
-      all: Amount.All
-    }, borderRadius),
-    className: `${className} notification-label`,
-    padding: __spreadValues({
-      all: Amount.Less
-    }, padding)
-  }, props), {
-    children: [showOrb && /* @__PURE__ */ jsx$2(Orb, {
-      background: {
-        color: bgColor
-      },
-      margin: {
-        right: Amount.Less
-      }
-    }), label && /* @__PURE__ */ jsx$2(Label, {
-      textColor,
-      lineHeight: Sizes.Small,
-      textWeight: TextWeight.Default,
-      children: label
-    }), children]
-  }));
-});
-const ErrorNotification = memo((_E) => {
-  var _F = _E, {
-    label,
-    showOrb = true
-  } = _F, props = __objRest(_F, [
-    "label",
-    "showOrb"
-  ]);
-  return /* @__PURE__ */ jsx$2(NotificationLabel, __spreadValues({
-    alignment: {
-      horizontal: AlignHorizontal.Center
-    },
-    label,
-    showOrb,
-    type: NotificationType.Error
-  }, props));
-});
-const FormActions = memo((_G) => {
-  var _H = _G, {
-    children
-  } = _H, props = __objRest(_H, [
-    "children"
-  ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
-    alignment: {
-      horizontal: AlignHorizontal.SpaceBetween,
-      orientation: Orientation.Horizontal
-    },
-    className: "form-actions",
-    margin: {
-      top: Amount.More
-    }
-  }, props), {
-    children
-  }));
-});
-const PropertyEditor = memo((_I) => {
-  var _J = _I, {
-    background = {},
-    borderRadius = {},
-    className = "",
-    defaultValue = {}
-  } = _J, props = __objRest(_J, [
-    "background",
-    "borderRadius",
-    "className",
-    "defaultValue"
-  ]);
-  const getValueLabel = (value2) => {
-    if (typeof value2 === "string") {
-      return value2;
-    }
-    if (typeof value2 === "number") {
-      return value2.toString();
-    }
-    if (typeof value2 === "boolean") {
-      return value2 ? "true" : "false";
-    }
-    if (value2 === null) {
-      return "null";
-    }
-    if (value2 === void 0) {
-      return "undefined";
-    }
-    if (typeof value2 === "object") {
-      return JSON.stringify(value2);
-    }
-    if (typeof value2 === "function") {
-      return value2.toString();
-    }
-    return value2;
-  };
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
-    background: __spreadValues({
-      color: BackgroundColors.Lightest
-    }, background),
-    border: {
-      all: {
-        color: BorderColors.Lighter
-      }
-    },
-    borderRadius: __spreadValues({
-      all: Amount.Least
-    }, borderRadius),
-    className: `${className} object-editor`,
-    shadow: DepthShadow.High
-  }, props), {
-    children: [/* @__PURE__ */ jsxs$1(Container$9, {
-      alignment: {
-        orientation: Orientation.Horizontal
-      },
-      borderRadius: __spreadValues({
-        all: Amount.Least,
-        bottomLeft: Amount.None,
-        bottomRight: Amount.None
-      }, borderRadius),
-      children: [/* @__PURE__ */ jsx$2(Container$9, {
-        alignment: {},
-        background: {
-          color: BackgroundColors.Lighter
-        },
-        border: {
-          right: {
-            color: BorderColors.Light
-          }
-        },
-        padding: {
-          left: Amount.Less,
-          right: Amount.Less
-        },
-        size: {
-          width: 180
-        },
-        children: /* @__PURE__ */ jsx$2(Label, {
-          lineHeight: Sizes.Large,
-          children: "Property"
-        })
-      }), /* @__PURE__ */ jsx$2(Container$9, {
-        alignment: {
-          fill: Fill.Horizontal
-        },
-        background: {
-          color: BackgroundColors.Lighter
-        },
-        padding: {
-          left: Amount.Less,
-          right: Amount.Less
-        },
-        children: /* @__PURE__ */ jsx$2(Label, {
-          lineHeight: Sizes.Large,
-          children: "Value"
-        })
-      })]
-    }), /* @__PURE__ */ jsx$2(Container$9, {
-      alignment: {
-        fill: Fill.Horizontal
-      },
-      border: {
-        top: {
-          color: BorderColors.Light
-        }
-      },
-      borderRadius: __spreadValues({
-        all: Amount.Least,
-        topLeft: Amount.None,
-        topRight: Amount.None
-      }, borderRadius),
-      children: Object.keys(defaultValue).map((key) => {
-        return /* @__PURE__ */ jsxs$1(Container$9, {
-          alignment: {
-            fill: Fill.Horizontal,
-            orientation: Orientation.Horizontal
-          },
-          children: [/* @__PURE__ */ jsx$2(Container$9, {
-            border: {
-              right: {
-                color: BorderColors.Lighter
-              }
-            },
-            padding: {
-              left: Amount.Less,
-              right: Amount.Less
-            },
-            size: {
-              width: 180
-            },
-            children: /* @__PURE__ */ jsx$2(Label, {
-              lineHeight: Sizes.Large,
-              children: key
-            })
-          }), /* @__PURE__ */ jsx$2(Container$9, {
-            alignment: {
-              fill: Fill.Horizontal
-            },
-            padding: {
-              left: Amount.Less,
-              right: Amount.Less
-            },
-            children: /* @__PURE__ */ jsx$2(Label, {
-              lineHeight: Sizes.Large,
-              children: getValueLabel(defaultValue[key])
-            })
-          })]
-        }, key);
-      })
-    })]
-  }));
-});
-const ErrorLabel = memo((_K) => {
-  var _L = _K, {
-    alignment = {},
-    children,
-    className = "",
-    icon: icon2 = {},
-    textColor = TextColors.Error,
-    textSize = TextSize.Small
-  } = _L, props = __objRest(_L, [
-    "alignment",
-    "children",
-    "className",
-    "icon",
-    "textColor",
-    "textSize"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    alignment: __spreadValues({
-      horizontal: AlignHorizontal.Center,
-      orientation: Orientation.Horizontal,
-      vertical: AlignVertical.Center
-    }, alignment),
-    className: `${className} error-label`,
-    icon: __spreadValues({
-      color: Colors.Error,
-      margin: {
-        right: Amount.Least
-      },
-      name: BasicIcons.Alert,
-      size: {
-        height: Sizes.Smaller,
-        width: Sizes.Smaller
-      }
-    }, icon2),
-    textColor,
-    textSize
-  }, props), {
-    children
-  }));
-});
 var cn = Object.defineProperty;
 var un = (a, u2, A2) => u2 in a ? cn(a, u2, { enumerable: true, configurable: true, writable: true, value: A2 }) : a[u2] = A2;
 var s$2 = (a, u2, A2) => (un(a, typeof u2 != "symbol" ? u2 + "" : u2, A2), A2);
@@ -25677,6 +24970,46 @@ var d$c = class extends Error {
   }
 };
 var T$1 = ((f2) => (f2.Simple = "simple", f2.ExponentialBackoff = "exponential", f2.CircuitBreaker = "circuit_breaker", f2))(T$1 || {});
+const ErrorLabel = memo((_o) => {
+  var _p = _o, {
+    alignment = {},
+    children,
+    className = "",
+    icon: icon2 = {},
+    textColor = TextColors.Error,
+    textSize = TextSize.Small
+  } = _p, props = __objRest(_p, [
+    "alignment",
+    "children",
+    "className",
+    "icon",
+    "textColor",
+    "textSize"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      horizontal: AlignHorizontal.Center,
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    }, alignment),
+    className: `${className} error-label`,
+    icon: __spreadValues({
+      color: Colors.Error,
+      margin: {
+        right: Amount.Least
+      },
+      name: BasicIcons.Alert,
+      size: {
+        height: Sizes.Smaller,
+        width: Sizes.Smaller
+      }
+    }, icon2),
+    textColor,
+    textSize
+  }, props), {
+    children
+  }));
+});
 function getErrorMessage(error) {
   if (error instanceof d$c) {
     return error.message;
@@ -25684,6 +25017,8 @@ function getErrorMessage(error) {
   if (Array.isArray(error) && error.length > 0) {
     if (error[0] instanceof d$c) {
       return error[0].message;
+    } else if (typeof error[0] === "object") {
+      return error[0].message.short;
     } else if (typeof error[0] === "string") {
       return error[0];
     }
@@ -25692,15 +25027,15 @@ function getErrorMessage(error) {
   }
   return null;
 }
-const InputLabel = memo((_M) => {
-  var _N = _M, {
+const InputLabel = memo((_q) => {
+  var _r = _q, {
     alignment = {},
     children,
     className = "",
     states = {},
     textColor = TextColors.InputLabel,
     textSize = TextSize.Small
-  } = _N, props = __objRest(_N, [
+  } = _r, props = __objRest(_r, [
     "alignment",
     "children",
     "className",
@@ -25733,6 +25068,889 @@ const InputLabel = memo((_M) => {
       children: getErrorMessage(states.state.error)
     })]
   });
+});
+const InputContainer = memo((_s) => {
+  var _t = _s, {
+    alignment = {},
+    background = {},
+    borderRadius = {},
+    border = {},
+    children,
+    className = "",
+    defaultValue,
+    events = {},
+    icon: icon2 = {},
+    label = void 0,
+    lineHeight = Sizes.Default,
+    name: name2,
+    shadow = DepthShadow.Low,
+    states = {},
+    textColor = TextColors.InputControl,
+    validation = {}
+  } = _t, props = __objRest(_t, [
+    "alignment",
+    "background",
+    "borderRadius",
+    "border",
+    "children",
+    "className",
+    "defaultValue",
+    "events",
+    "icon",
+    "label",
+    "lineHeight",
+    "name",
+    "shadow",
+    "states",
+    "textColor",
+    "validation"
+  ]);
+  var _a2, _b, _c;
+  const [value2, setValue] = useState(defaultValue);
+  const [valueChanged, setValueChanged] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [problems, setProblems] = useState();
+  const inputRef = useRef(null);
+  useEffect(() => {
+    var _a3, _b2, _c2, _d;
+    if (valueChanged && (validation == null ? void 0 : validation.conditions)) {
+      const probs = Si$1(value2, validation == null ? void 0 : validation.conditions);
+      setProblems(probs && probs.length > 0 ? probs : void 0);
+      if ((_a3 = events.input) == null ? void 0 : _a3.onValueChange)
+        (_b2 = events.input) == null ? void 0 : _b2.onValueChange({
+          validation: {
+            problems: probs,
+            validated: probs.length === 0
+          },
+          value: value2
+        });
+    } else {
+      if ((_c2 = events.input) == null ? void 0 : _c2.onValueChange)
+        (_d = events.input) == null ? void 0 : _d.onValueChange({
+          value: value2
+        });
+    }
+  }, [value2]);
+  return /* @__PURE__ */ jsxs$1(Container$9, {
+    className: `${className} input-container`,
+    events: {
+      mouse: {
+        onClick: () => () => {
+          var _a3;
+          (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
+        }
+      }
+    },
+    children: [(label || problems) && /* @__PURE__ */ jsx$2(InputLabel, {
+      states: {
+        state: {
+          error: problems
+        }
+      },
+      children: label
+    }), /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+      alignment: __spreadValues({
+        orientation: Orientation.Horizontal
+      }, alignment),
+      background: __spreadValues({
+        color: BackgroundColors.InputControl
+      }, background),
+      borderRadius: __spreadValues({
+        all: Amount.Least
+      }, borderRadius),
+      border: {
+        all: {
+          color: ((_a2 = states.state) == null ? void 0 : _a2.error) && Array.isArray(states.state.error) && states.state.error.length > 0 ? BorderColors.Error : (border == null ? void 0 : border.all) && typeof (border == null ? void 0 : border.all) == "object" ? border.all.color : BorderColors.InputControl,
+          style: BorderStyle.Solid,
+          width: 1
+        }
+      },
+      className: `${className} input-container-wrapper`,
+      shadow,
+      states: {
+        state: {
+          error: problems,
+          focused
+        }
+      }
+    }, props), {
+      children: [icon2 && /* @__PURE__ */ jsx$2(Icon, __spreadValues({
+        color: value2 === "" ? TextColors.InputPlaceholder : (_b = icon2.color) != null ? _b : textColor,
+        margin: {
+          left: Amount.Less
+        }
+      }, icon2)), /* @__PURE__ */ jsx$2(Input$2, __spreadValues({
+        events: __spreadProps(__spreadValues({}, events), {
+          input: __spreadProps(__spreadValues({}, events.input), {
+            onValueChange: ({
+              value: val
+            }) => {
+              setValueChanged(true);
+              setValue(val);
+            }
+          })
+        })
+      }, props)), ((_c = states.state) == null ? void 0 : _c.loading) && /* @__PURE__ */ jsx$2(ProgressSpinner, {
+        size: {
+          height: Sizes.Small,
+          width: Sizes.Small
+        }
+      })]
+    }))]
+  });
+});
+const NumberInput = memo((_u) => {
+  var _v = _u, {
+    className = "",
+    defaultValue = 0
+  } = _v, props = __objRest(_v, [
+    "className",
+    "defaultValue"
+  ]);
+  return /* @__PURE__ */ jsx$2(InputContainer, __spreadValues({
+    className: `${className} number-input`,
+    defaultValue,
+    type: InputType.Number
+  }, props));
+});
+const VerificationCodeInput = memo((_w) => {
+  var _x = _w, {
+    as,
+    className = "",
+    defaultValue,
+    events = {},
+    length = 4,
+    name: name2,
+    placeholder = "",
+    states = {},
+    textSize = TextSize.Larger,
+    textColor = TextColors.Dark,
+    codeType = "numeric"
+  } = _x, props = __objRest(_x, [
+    "as",
+    "className",
+    "defaultValue",
+    "events",
+    "length",
+    "name",
+    "placeholder",
+    "states",
+    "textSize",
+    "textColor",
+    "codeType"
+  ]);
+  const [codeParts, setCodeParts] = useState({});
+  useState(void 0);
+  const code = Object.values(codeParts).join("");
+  useEffect(() => {
+    var _a2, _b;
+    const typeCondition = () => {
+      if (codeType === "alpha") {
+        return {
+          [Condition.IsAlpha]: true
+        };
+      }
+      if (codeType === "alphanumeric") {
+        return {
+          [Condition.IsAlphanumeric]: true
+        };
+      }
+      return {
+        [Condition.IsNumber]: true
+      };
+    };
+    const validation = __spreadValues({
+      [Condition.IsRequired]: true,
+      [Condition.IsLengthEqual]: length
+    }, typeCondition);
+    const probs = Si$1(code, validation);
+    if ((_a2 = events.input) == null ? void 0 : _a2.onValueChange)
+      (_b = events.input) == null ? void 0 : _b.onValueChange({
+        validation: {
+          problems: probs,
+          validated: !probs.length
+        },
+        value: code
+      });
+  }, [code]);
+  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+    alignment: {
+      horizontal: AlignHorizontal.Center,
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    },
+    className: `${className} verification-code-input`
+  }, props), {
+    children: Array.from(Array(length)).map((_, key) => {
+      return /* @__PURE__ */ jsx$2(NumberInput, {
+        events: __spreadValues({
+          clipboard: {
+            onPaste: (e2) => {
+              if (key === 0) {
+                const pastedText = e2.clipboardData.getData("Text");
+                if (pastedText && pastedText.length === length && !Number.isNaN(pastedText)) {
+                  let obj = {};
+                  let i2 = 0;
+                  for (const val of [...pastedText]) {
+                    const prop = {
+                      [i2]: val
+                    };
+                    obj = __spreadValues(__spreadValues({}, obj), prop);
+                    i2 += 1;
+                  }
+                  setCodeParts(obj);
+                }
+              }
+            }
+          },
+          input: {
+            onChange: (e2) => {
+              if (e2.nativeEvent.inputType !== "insertFromPaste") {
+                const currentCodePart = codeParts == null ? void 0 : codeParts[key];
+                if (e2.target.value.length === 1 || e2.target.value.length === 0) {
+                  setCodeParts(__spreadProps(__spreadValues({}, codeParts), {
+                    [key]: e2.target.value
+                  }));
+                } else {
+                  setCodeParts(__spreadProps(__spreadValues({}, codeParts), {
+                    [key]: void 0
+                  }));
+                }
+                if (e2.target.value.length === 1 && !currentCodePart) {
+                  const nextElem = document.getElementById(`${name2}-verification-code-input-${key + 1}`);
+                  if (nextElem) {
+                    nextElem.focus();
+                  }
+                }
+              }
+            }
+          },
+          keyboard: {
+            onKeyDown: (e2) => {
+              if (e2.key === "Delete" || e2.key === "Backspace" && !e2.target.value) {
+                const lastElem = document.getElementById(`${name2}-verification-code-input-${key - 1}`);
+                if (lastElem) {
+                  lastElem.focus();
+                }
+              }
+            }
+          }
+        }, events),
+        lineHeight: Sizes.Largest,
+        margin: {
+          left: Amount.Least,
+          right: Amount.Least
+        },
+        max: 9,
+        maxLength: 1,
+        min: 0,
+        size: {
+          height: Sizes.Largest,
+          width: Sizes.Largest
+        },
+        textAlign: TextAlign.Center,
+        textSize: TextSize.Larger,
+        value: (codeParts == null ? void 0 : codeParts[key]) ? Number.parseInt(codeParts[key]) : void 0
+      }, key);
+    })
+  }));
+});
+const InputRow = memo((_y) => {
+  var _z = _y, {
+    children,
+    className = "",
+    margin = {}
+  } = _z, props = __objRest(_z, [
+    "children",
+    "className",
+    "margin"
+  ]);
+  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+    className: `${className} input-row`,
+    margin: __spreadValues({
+      bottom: Amount.More
+    }, margin)
+  }, props), {
+    children
+  }));
+});
+const LoadingOverlay = memo((_A) => {
+  var _B = _A, {
+    background = {},
+    borderRadius = {},
+    className = "",
+    position = {},
+    spinnerSize,
+    visible
+  } = _B, props = __objRest(_B, [
+    "background",
+    "borderRadius",
+    "className",
+    "position",
+    "spinnerSize",
+    "visible"
+  ]);
+  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+    background: __spreadValues({
+      color: BackgroundColors.Dark,
+      opacity: 85
+    }, background),
+    borderRadius,
+    className: `${className} loading-overlay`,
+    position: __spreadValues({
+      behavior: PositionBehavior.Absolute,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      top: 0
+    }, position),
+    visibility: {
+      hidden: !visible
+    }
+  }, props), {
+    children: /* @__PURE__ */ jsx$2(ProgressSpinner, {
+      size: spinnerSize
+    })
+  }));
+});
+const Paragraph = memo((_C) => {
+  var _D = _C, {
+    as = "p",
+    children,
+    className = "",
+    lineHeight = Sizes.Default,
+    textColor = TextColors.Paragraph,
+    textSize = TextSize.Default
+  } = _D, props = __objRest(_D, [
+    "as",
+    "children",
+    "className",
+    "lineHeight",
+    "textColor",
+    "textSize"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    as,
+    className: `${className} paragraph`,
+    lineHeight,
+    textColor,
+    textSize
+  }, props), {
+    children
+  }));
+});
+const Title = memo((_E) => {
+  var _F = _E, {
+    as = "h1",
+    children,
+    className = "",
+    lineHeight = Sizes.Larger,
+    textSize = TextSize.Larger,
+    textColor = TextColors.Title,
+    textWeight = TextWeight.Most
+  } = _F, props = __objRest(_F, [
+    "as",
+    "children",
+    "className",
+    "lineHeight",
+    "textSize",
+    "textColor",
+    "textWeight"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    alignment: {
+      vertical: AlignVertical.Top
+    },
+    as,
+    className: `${className} title`,
+    textColor,
+    lineHeight,
+    textSize,
+    textWeight
+  }, props), {
+    children
+  }));
+});
+const CodeVerificationForm = memo((_G) => {
+  var _H = _G, {
+    background = {},
+    borderRadius = {},
+    onVerificationSuccess,
+    userId
+  } = _H, props = __objRest(_H, [
+    "background",
+    "borderRadius",
+    "onVerificationSuccess",
+    "userId"
+  ]);
+  var _a2;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const verificationState = useSelector((state) => {
+    var _a3;
+    return (_a3 = state.user.authentication) == null ? void 0 : _a3.verification.code;
+  });
+  const [code, setCode] = useState();
+  const [problems, setProblems] = useState();
+  useEffect(() => {
+    if (userId) {
+      dispatch(getVerificationDetails({
+        userId
+      }));
+    }
+  }, []);
+  useEffect(() => {
+    if (onVerificationSuccess && verificationState.verify.success) {
+      onVerificationSuccess();
+    }
+  }, [verificationState.verify.success]);
+  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+    className: "code-verification-form",
+    background: __spreadValues({
+      color: BackgroundColors.Lighter
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.More
+    }, borderRadius),
+    padding: {
+      all: Amount.Most,
+      bottom: Amount.None
+    },
+    shadow: DepthShadow.Highest,
+    size: {
+      width: 450
+    }
+  }, props), {
+    children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
+      borderRadius,
+      visible: verificationState.status.inProgress || verificationState.resend.inProgress || verificationState.verify.inProgress
+    }), verificationState.verify.success || verificationState.status.state === UserVerificationStatus.Confirmed ? /* @__PURE__ */ jsxs$1(Container$9, {
+      padding: {
+        all: Amount.Default
+      },
+      children: [/* @__PURE__ */ jsx$2(Title, {
+        alignment: {
+          horizontal: AlignHorizontal.Center
+        },
+        children: "You're verified!"
+      }), /* @__PURE__ */ jsx$2(Paragraph, {
+        alignment: {
+          horizontal: AlignHorizontal.Center
+        },
+        padding: {
+          all: Amount.More
+        },
+        children: "Thank you for verifying your email address."
+      }), /* @__PURE__ */ jsx$2(Button$1, {
+        events: {
+          mouse: {
+            onClick: () => navigate("/")
+          }
+        },
+        type: ButtonType.Primary,
+        children: "Login"
+      })]
+    }) : /* @__PURE__ */ jsxs$1(Fragment, {
+      children: [/* @__PURE__ */ jsx$2(Title, {
+        alignment: {
+          horizontal: AlignHorizontal.Center
+        },
+        children: "Verification"
+      }), /* @__PURE__ */ jsxs$1(Paragraph, {
+        alignment: {
+          horizontal: AlignHorizontal.Center
+        },
+        padding: {
+          all: Amount.More,
+          bottom: Amount.Most
+        },
+        children: ["Enter the confirmation code sent to", " ", /* @__PURE__ */ jsx$2("b", {
+          children: (_a2 = verificationState.delivery) == null ? void 0 : _a2.destination
+        }), "."]
+      }), /* @__PURE__ */ jsxs$1(Container$9, {
+        children: [/* @__PURE__ */ jsx$2(InputRow, {
+          margin: {
+            bottom: Amount.All
+          },
+          children: /* @__PURE__ */ jsx$2(VerificationCodeInput, {
+            autoComplete: AutoComplete.OneTimeCode,
+            events: {
+              input: {
+                onValueChange: ({
+                  validation,
+                  value: value2
+                }) => {
+                  setProblems(validation == null ? void 0 : validation.problems);
+                  if (validation && validation.validated || !validation) {
+                    setCode(value2);
+                  }
+                }
+              }
+            },
+            length: 6,
+            name: "verification_code"
+          })
+        }), /* @__PURE__ */ jsx$2(Button$1, {
+          borderRadius: {
+            all: Amount.Least
+          },
+          events: {
+            mouse: {
+              onClick: () => {
+                if (userId && code) {
+                  dispatch(verifyCode({
+                    code,
+                    userId
+                  }));
+                }
+              }
+            }
+          },
+          lineHeight: Sizes.Large,
+          states: {
+            state: {
+              disabled: problems && problems.length > 0 || !code || verificationState.verify.inProgress || verificationState.resend.inProgress
+            }
+          },
+          type: ButtonType.Primary,
+          children: "Verify"
+        })]
+      }), /* @__PURE__ */ jsx$2(Container$9, {
+        alignment: {
+          horizontal: AlignHorizontal.Center
+        },
+        padding: {
+          all: Amount.Default
+        },
+        children: !verificationState.resend.success ? /* @__PURE__ */ jsx$2(Button$1, {
+          events: {
+            mouse: {
+              onClick: () => {
+                if (userId) {
+                  dispatch(resendVerificationCode({
+                    userId
+                  }));
+                }
+              }
+            }
+          },
+          type: ButtonType.Link,
+          children: "Resend verification code"
+        }) : /* @__PURE__ */ jsx$2(Label, {
+          icon: {
+            name: BasicIcons.Checkmark2,
+            size: {
+              height: Sizes.Smaller,
+              width: Sizes.Smaller
+            }
+          },
+          lineHeight: Sizes.Smaller,
+          textSize: TextSize.Default,
+          textColor: TextColors.Success,
+          textWeight: TextWeight.More,
+          children: "A new code has been sent"
+        })
+      })]
+    })]
+  }));
+});
+const Orb = memo((_I) => {
+  var _J = _I, {
+    color = BackgroundColors.Default,
+    className = "",
+    size = {
+      height: Sizes.Smallest,
+      width: Sizes.Smallest
+    }
+  } = _J, props = __objRest(_J, [
+    "color",
+    "className",
+    "size"
+  ]);
+  return /* @__PURE__ */ jsx$2(Container$9, __spreadValues({
+    className: `${className} orb`,
+    background: {
+      color
+    },
+    borderRadius: {
+      all: Amount.All
+    },
+    size
+  }, props));
+});
+const NotificationLabel = memo((_K) => {
+  var _L = _K, {
+    alignment = {},
+    background = {},
+    borderRadius = {},
+    children,
+    className = "",
+    label = "",
+    padding = {},
+    showOrb = true,
+    type
+  } = _L, props = __objRest(_L, [
+    "alignment",
+    "background",
+    "borderRadius",
+    "children",
+    "className",
+    "label",
+    "padding",
+    "showOrb",
+    "type"
+  ]);
+  const getBackgroundColor = () => {
+    if (!type)
+      return background.color;
+    switch (type) {
+      case NotificationType.Error:
+        return BackgroundColors.Error;
+      case NotificationType.Info:
+        return BackgroundColors.Info;
+      case NotificationType.Success:
+        return BackgroundColors.Success;
+      case NotificationType.Warning:
+        return BackgroundColors.Warning;
+    }
+  };
+  const getTextColor = () => {
+    if (!type)
+      return TextColors.Default;
+    switch (type) {
+      case NotificationType.Error:
+        return TextColors.Error;
+      case NotificationType.Info:
+        return TextColors.Info;
+      case NotificationType.Success:
+        return TextColors.Success;
+      case NotificationType.Warning:
+        return TextColors.Warning;
+    }
+  };
+  const bgColor = getBackgroundColor();
+  const textColor = getTextColor();
+  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      horizontal: AlignHorizontal.Center,
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    }, alignment),
+    background: __spreadValues({
+      color: BackgroundColors.Light,
+      opacity: type ? 10 : 100
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.All
+    }, borderRadius),
+    className: `${className} notification-label`,
+    padding: __spreadValues({
+      all: Amount.Less
+    }, padding)
+  }, props), {
+    children: [showOrb && /* @__PURE__ */ jsx$2(Orb, {
+      background: {
+        color: bgColor
+      },
+      margin: {
+        right: Amount.Less
+      }
+    }), label && /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+      textColor,
+      lineHeight: Sizes.Small,
+      textWeight: TextWeight.Default
+    }, props), {
+      children: label
+    })), children]
+  }));
+});
+const ErrorNotification = memo((_M) => {
+  var _N = _M, {
+    label,
+    showOrb = true
+  } = _N, props = __objRest(_N, [
+    "label",
+    "showOrb"
+  ]);
+  return /* @__PURE__ */ jsx$2(NotificationLabel, __spreadValues({
+    alignment: {
+      horizontal: AlignHorizontal.Center
+    },
+    label,
+    showOrb,
+    type: NotificationType.Error
+  }, props));
+});
+const FormActions = memo((_O) => {
+  var _P = _O, {
+    children
+  } = _P, props = __objRest(_P, [
+    "children"
+  ]);
+  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+    alignment: {
+      horizontal: AlignHorizontal.SpaceBetween,
+      orientation: Orientation.Horizontal
+    },
+    className: "form-actions",
+    margin: {
+      top: Amount.More
+    }
+  }, props), {
+    children
+  }));
+});
+const PropertyEditor = memo((_Q) => {
+  var _R = _Q, {
+    background = {},
+    borderRadius = {},
+    className = "",
+    defaultValue = {}
+  } = _R, props = __objRest(_R, [
+    "background",
+    "borderRadius",
+    "className",
+    "defaultValue"
+  ]);
+  const getValueLabel = (value2) => {
+    if (typeof value2 === "string") {
+      return value2;
+    }
+    if (typeof value2 === "number") {
+      return value2.toString();
+    }
+    if (typeof value2 === "boolean") {
+      return value2 ? "true" : "false";
+    }
+    if (value2 === null) {
+      return "null";
+    }
+    if (value2 === void 0) {
+      return "undefined";
+    }
+    if (typeof value2 === "object") {
+      return JSON.stringify(value2);
+    }
+    if (typeof value2 === "function") {
+      return value2.toString();
+    }
+    return value2;
+  };
+  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+    background: __spreadValues({
+      color: BackgroundColors.Lightest
+    }, background),
+    border: {
+      all: {
+        color: BorderColors.Lighter
+      }
+    },
+    borderRadius: __spreadValues({
+      all: Amount.Least
+    }, borderRadius),
+    className: `${className} object-editor`,
+    shadow: DepthShadow.High
+  }, props), {
+    children: [/* @__PURE__ */ jsxs$1(Container$9, {
+      alignment: {
+        orientation: Orientation.Horizontal
+      },
+      borderRadius: __spreadValues({
+        all: Amount.Least,
+        bottomLeft: Amount.None,
+        bottomRight: Amount.None
+      }, borderRadius),
+      children: [/* @__PURE__ */ jsx$2(Container$9, {
+        alignment: {},
+        background: {
+          color: BackgroundColors.Lighter
+        },
+        border: {
+          right: {
+            color: BorderColors.Light
+          }
+        },
+        padding: {
+          left: Amount.Less,
+          right: Amount.Less
+        },
+        size: {
+          width: 180
+        },
+        children: /* @__PURE__ */ jsx$2(Label, {
+          lineHeight: Sizes.Large,
+          children: "Property"
+        })
+      }), /* @__PURE__ */ jsx$2(Container$9, {
+        alignment: {
+          fill: Fill.Horizontal
+        },
+        background: {
+          color: BackgroundColors.Lighter
+        },
+        padding: {
+          left: Amount.Less,
+          right: Amount.Less
+        },
+        children: /* @__PURE__ */ jsx$2(Label, {
+          lineHeight: Sizes.Large,
+          children: "Value"
+        })
+      })]
+    }), /* @__PURE__ */ jsx$2(Container$9, {
+      alignment: {
+        fill: Fill.Horizontal
+      },
+      border: {
+        top: {
+          color: BorderColors.Light
+        }
+      },
+      borderRadius: __spreadValues({
+        all: Amount.Least,
+        topLeft: Amount.None,
+        topRight: Amount.None
+      }, borderRadius),
+      children: Object.keys(defaultValue).map((key) => {
+        return /* @__PURE__ */ jsxs$1(Container$9, {
+          alignment: {
+            fill: Fill.Horizontal,
+            orientation: Orientation.Horizontal
+          },
+          children: [/* @__PURE__ */ jsx$2(Container$9, {
+            border: {
+              right: {
+                color: BorderColors.Lighter
+              }
+            },
+            padding: {
+              left: Amount.Less,
+              right: Amount.Less
+            },
+            size: {
+              width: 180
+            },
+            children: /* @__PURE__ */ jsx$2(Label, {
+              lineHeight: Sizes.Large,
+              children: key
+            })
+          }), /* @__PURE__ */ jsx$2(Container$9, {
+            alignment: {
+              fill: Fill.Horizontal
+            },
+            padding: {
+              left: Amount.Less,
+              right: Amount.Less
+            },
+            children: /* @__PURE__ */ jsx$2(Label, {
+              lineHeight: Sizes.Large,
+              children: getValueLabel(defaultValue[key])
+            })
+          })]
+        }, key);
+      })
+    })]
+  }));
 });
 const ToggleInput = memo(({
   className = "",
@@ -25859,217 +26077,56 @@ const ToggleInput = memo(({
     })]
   });
 });
-var TextInputType = /* @__PURE__ */ ((TextInputType2) => {
-  TextInputType2["EmailAddress"] = "email";
-  TextInputType2["Text"] = "text";
-  TextInputType2["Password"] = "password";
-  TextInputType2["Search"] = "search";
-  return TextInputType2;
-})(TextInputType || {});
-const TextInput = memo((_O) => {
-  var _P = _O, {
-    autoComplete,
-    background = {},
-    border = {},
+const TextInput = memo((_S) => {
+  var _T = _S, {
     className = "",
     cursor = Cursor.Text,
-    defaultValue,
-    events = {},
-    icon: icon2,
-    inputType = "text",
-    label,
-    lineHeight = Sizes.Default,
     name: name2,
     prefix: prefix2 = "",
     placeholder = "",
     shadow = DepthShadow.Low,
-    spellCheck = true,
-    states = {},
-    suffix: suffix2 = "",
-    textColor = TextColors.InputControl,
-    textWeight = TextWeight.Default,
-    validation = {}
-  } = _P, props = __objRest(_P, [
-    "autoComplete",
-    "background",
-    "border",
+    spellCheck = true
+  } = _T, props = __objRest(_T, [
     "className",
     "cursor",
-    "defaultValue",
-    "events",
-    "icon",
-    "inputType",
-    "label",
-    "lineHeight",
     "name",
     "prefix",
     "placeholder",
     "shadow",
-    "spellCheck",
-    "states",
-    "suffix",
-    "textColor",
-    "textWeight",
-    "validation"
+    "spellCheck"
   ]);
-  var _a2, _b;
-  const [value2, setValue] = useState(defaultValue != null ? defaultValue : "");
-  const [focused, setFocused] = useState(false);
-  const [problems, setProblems] = useState();
-  const [valueChanged, setValueChanged] = useState(false);
-  const inputRef = useRef(null);
-  useEffect(() => {
-    var _a3, _b2, _c, _d;
-    if (valueChanged) {
-      if (validation == null ? void 0 : validation.conditions) {
-        const probs = Si$1(value2, validation == null ? void 0 : validation.conditions);
-        setProblems(probs && probs.length > 0 ? probs : void 0);
-        if ((_a3 = events.input) == null ? void 0 : _a3.onValueChange)
-          (_b2 = events.input) == null ? void 0 : _b2.onValueChange({
-            validation: {
-              problems: probs,
-              validated: probs.length === 0
-            },
-            value: value2
-          });
-      } else {
-        if ((_c = events.input) == null ? void 0 : _c.onValueChange)
-          (_d = events.input) == null ? void 0 : _d.onValueChange({
-            value: value2
-          });
-      }
-    }
-  }, [value2]);
-  useEffect(() => {
-    var _a3;
-    setValue((_a3 = defaultValue != null ? defaultValue : value2) != null ? _a3 : "");
-  }, [defaultValue]);
-  return /* @__PURE__ */ jsxs$1(Fragment, {
-    children: [(label || problems) && /* @__PURE__ */ jsx$2(InputLabel, {
-      states: {
-        state: {
-          error: problems
-        }
-      },
-      children: label
-    }), /* @__PURE__ */ jsxs$1(InputContainer, __spreadProps(__spreadValues({
-      background: __spreadValues({
-        color: BackgroundColors.InputControl
-      }, background),
-      border: __spreadValues({
-        all: {
-          color: BorderColors.InputControl,
-          style: BorderStyle.Solid,
-          width: 1
-        }
-      }, border),
-      className: `${className} text-input`,
-      cursor,
-      events: {
-        mouse: {
-          onClick: () => () => {
-            var _a3;
-            (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
-          }
-        }
-      },
-      states: {
-        state: {
-          error: problems,
-          focused
-        }
-      },
-      shadow
-    }, props), {
-      children: [icon2 && /* @__PURE__ */ jsx$2(Icon, __spreadProps(__spreadValues({}, icon2), {
-        color: value2 === "" ? TextColors.InputPlaceholder : (_a2 = icon2.color) != null ? _a2 : textColor,
-        margin: {
-          left: Amount.Less
-        }
-      })), /* @__PURE__ */ jsx$2(Input$3, {
-        autoComplete,
-        defaultValue,
-        lineHeight,
-        name: name2,
-        onBlur: () => setFocused(false),
-        onChange: (e2) => {
-          setValueChanged(true);
-          setValue(prefix2 + e2.target.value + suffix2);
-        },
-        onFocus: () => setFocused(true),
-        placeholder,
-        textColor,
-        textWeight,
-        type: inputType,
-        value: value2,
-        ref: inputRef,
-        spellCheck,
-        states
-      }), ((_b = states.state) == null ? void 0 : _b.loading) && /* @__PURE__ */ jsx$2(ProgressSpinner, {
-        size: {
-          height: Sizes.Small,
-          width: Sizes.Small
-        }
-      })]
-    }))]
-  });
-});
-const Input$3 = styled.input.withConfig({
-  displayName: "Input",
-  componentId: "sc-j32swv-0"
-})(["", ";background:transparent;border:none;width:100%;&::-ms-clear{display:none;width:0;height:0;}&::-ms-reveal{display:none;width:0;height:0;}&::-webkit-search-decoration,&::-webkit-search-cancel-button,&::-webkit-search-results-button,&::-webkit-search-results-decoration{display:none;}"], TextInputStyles);
-const EmailAddressInput = memo((_Q) => {
-  var _R = _Q, {
-    autoComplete,
-    defaultValue,
-    events = {},
-    validation = {}
-  } = _R, props = __objRest(_R, [
-    "autoComplete",
-    "defaultValue",
-    "events",
-    "validation"
-  ]);
-  const [inProgress, setInProgress] = useState(false);
-  const [emailAddress, setEmailAddress] = useState(defaultValue);
-  const [error, setError] = useState();
-  const validationProps = __spreadProps(__spreadValues({}, validation), {
-    [Condition.IsEmailAddress]: Boolean(emailAddress)
-  });
-  return /* @__PURE__ */ jsx$2(TextInput, __spreadValues({
-    autoComplete: autoComplete != null ? autoComplete : AutoComplete.EmailAddress,
-    events: {
-      input: {
-        onValueChange: async ({
-          validation: validation2,
-          value: value2
-        }) => {
-          var _a2, _b, _c;
-          if (validation2 == null ? void 0 : validation2.problems) {
-            setError(validation2.problems);
-          }
-          setEmailAddress(value2);
-          if ((_a2 = events.input) == null ? void 0 : _a2.onValueChange)
-            (_b = events.input) == null ? void 0 : _b.onValueChange({
-              validation: validation2,
-              value: value2
-            });
-          if ((validation2 == null ? void 0 : validation2.conditions) && Object.keys(validation2.conditions).includes(Condition.IsUsernameAvailable) && (validation2 == null ? void 0 : validation2.validated) && !((_c = validation2 == null ? void 0 : validation2.problems) == null ? void 0 : _c.length) && value2 && value2 !== "")
-            ;
-        }
-      }
-    },
-    states: {
-      state: {
-        error,
-        loading: inProgress
-      }
-    },
-    validation: validationProps
+  return /* @__PURE__ */ jsx$2(InputContainer, __spreadValues({
+    className: `${className} text-input`,
+    cursor
   }, props));
 });
-const PhoneNumberInput = memo((_S) => {
-  var props = __objRest(_S, []);
+const EmailAddressInput = memo((_U) => {
+  var _V = _U, {
+    autoComplete,
+    className = "",
+    defaultValue,
+    spellCheck = false,
+    validation = {}
+  } = _V, props = __objRest(_V, [
+    "autoComplete",
+    "className",
+    "defaultValue",
+    "spellCheck",
+    "validation"
+  ]);
+  return /* @__PURE__ */ jsx$2(TextInput, __spreadValues({
+    autoComplete: autoComplete != null ? autoComplete : AutoComplete.EmailAddress,
+    className: `email-address-input ${className}`,
+    spellCheck,
+    validation: __spreadValues({
+      conditions: __spreadValues({
+        [Condition.IsEmailAddress]: true
+      }, validation.conditions)
+    }, validation)
+  }, props));
+});
+const PhoneNumberInput = memo((_W) => {
+  var props = __objRest(_W, []);
   return /* @__PURE__ */ jsx$2(TextInput, __spreadValues({
     validation: {
       conditions: {
@@ -26095,15 +26152,14 @@ styled.div.withConfig({
   error: props.error,
   focused: props.focused
 }), Amount.Least, Amount.Least, Amount.Least, (props) => props.size, (props) => props.size, BackgroundColors.Dark, Sizes.Default, TextColors.Lighter, Cursor.Pointer, Sizes.Default, Amount.Least, Sizes.Default, BackgroundColors.Darker, Amount.All, TextColors.Default, Cursor.Pointer, TextWeight.More, Amount.Least, BackgroundColors.Darker, Amount.Least, TextColors.Default, Amount.Less, BackgroundColors.Darker, TextColors.Light, Cursor.Pointer, BackgroundColors.Primary, TextColors.InputControl, TextSize.Small, Amount.Least, TextColors.Darker);
-const DateInput = memo((_T) => {
-  var _U = _T, {
+const DateInput = memo((_X) => {
+  var _Y = _X, {
     background = {},
     border = {},
     className = "",
     events = {},
     defaultValue,
     label,
-    resetIcon,
     states = {},
     shadow = DepthShadow.Low,
     textSize = TextSize.Default,
@@ -26112,14 +26168,13 @@ const DateInput = memo((_T) => {
         [Condition.IsDate]: true
       }
     }
-  } = _U, props = __objRest(_U, [
+  } = _Y, props = __objRest(_Y, [
     "background",
     "border",
     "className",
     "events",
     "defaultValue",
     "label",
-    "resetIcon",
     "states",
     "shadow",
     "textSize",
@@ -26222,7 +26277,6 @@ const DateTimeInput = memo(({
   events = {},
   defaultValue = new Date().toISOString(),
   states = {},
-  resetIcon,
   validation = {
     conditions: {
       [Condition.IsDate]: true
@@ -26817,12 +26871,12 @@ const CurrencyAmountInput = memo(({
         }
       },
       shadow,
-      states: {
+      states: __spreadValues({
         state: {
           error: problems,
           focused
         }
-      },
+      }, states),
       children: [/* @__PURE__ */ jsx$2(Label, {
         margin: {
           left: Amount.Less,
@@ -26913,8 +26967,8 @@ var ReactCountryFlag = function ReactCountryFlag2(_ref) {
     }, style2)
   }), emoji);
 };
-const NavigationLink = memo((_V) => {
-  var _W = _V, {
+const NavigationLink = memo((_Z) => {
+  var __ = _Z, {
     activeClassName = "active",
     alignment = {},
     as = "span",
@@ -26938,7 +26992,7 @@ const NavigationLink = memo((_V) => {
     textSize,
     textWeight,
     to
-  } = _W, props = __objRest(_W, [
+  } = __, props = __objRest(__, [
     "activeClassName",
     "alignment",
     "as",
@@ -26979,7 +27033,7 @@ const NavigationLink = memo((_V) => {
       display: inline ? "inline-flex" : "flex",
       textDecoration: "unset"
     },
-    children: /* @__PURE__ */ jsx$2(Container$9, {
+    children: label ? /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
       alignment: __spreadValues({
         horizontal: menu ? AlignHorizontal.Stretch : AlignHorizontal.Left,
         orientation: menu ? Orientation.Vertical : Orientation.Horizontal,
@@ -26993,29 +27047,22 @@ const NavigationLink = memo((_V) => {
       padding: __spreadValues({
         bottom: menu ? padding == null ? void 0 : padding.left : padding == null ? void 0 : padding.bottom
       }, padding),
+      lineHeight,
       states: __spreadValues({
-        state: {
-          active: match2 ? true : false
-        }
+        state: __spreadValues({
+          current: match2 ? true : false
+        }, states.state)
       }, states),
-      children: label ? /* @__PURE__ */ jsx$2(Label, {
-        cursor,
-        lineHeight,
-        states: __spreadValues({
-          state: {
-            active: match2 ? true : false
-          }
-        }, states),
-        textColor,
-        textSize,
-        textWeight,
-        children: label
-      }) : children
-    })
+      textColor,
+      textSize,
+      textWeight
+    }, props), {
+      children: label
+    })) : children
   });
 });
-const MenuItem = memo((_X) => {
-  var _Y = _X, {
+const MenuItem = memo((_$) => {
+  var _aa = _$, {
     as = "button",
     background = {},
     borderRadius = {},
@@ -27030,7 +27077,7 @@ const MenuItem = memo((_X) => {
     title,
     to,
     value: value2
-  } = _Y, props = __objRest(_Y, [
+  } = _aa, props = __objRest(_aa, [
     "as",
     "background",
     "borderRadius",
@@ -27128,8 +27175,8 @@ const MenuItem = memo((_X) => {
     }))]
   });
 });
-const Menu = memo((_Z) => {
-  var __ = _Z, {
+const Menu = memo((_ba) => {
+  var _ca = _ba, {
     as = "nav",
     background = {},
     borderRadius = {},
@@ -27139,7 +27186,7 @@ const Menu = memo((_Z) => {
     onItemClick,
     padding = {},
     shadow = DepthShadow.Surface
-  } = __, props = __objRest(__, [
+  } = _ca, props = __objRest(_ca, [
     "as",
     "background",
     "borderRadius",
@@ -27244,8 +27291,8 @@ styled.button.withConfig({
   var _a2, _b;
   return ((_b = (_a2 = props.states) == null ? void 0 : _a2.state) == null ? void 0 : _b.focused) && props.menuVisible && css$2(["border-bottom-color:transparent;border-bottom-left-radius:0;border-bottom-right-radius:0;&:before{border-radius:calc(", " + 3px) calc(", " + 3px) 0 0;border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom:none;}"], Amount.Least, Amount.Least);
 });
-const DropdownControl = memo((_$) => {
-  var _aa = _$, {
+const DropdownControl = memo((_da) => {
+  var _ea = _da, {
     alignment = {},
     background = {},
     border = {},
@@ -27261,7 +27308,7 @@ const DropdownControl = memo((_$) => {
     size = {},
     textSize = TextSize.Default,
     textColor = TextColors.DropdownMenu
-  } = _aa, props = __objRest(_aa, [
+  } = _ea, props = __objRest(_ea, [
     "alignment",
     "background",
     "border",
@@ -27353,8 +27400,8 @@ const DropdownControl = memo((_$) => {
     })]
   }));
 });
-const DropdownPanel = memo((_ba) => {
-  var _ca = _ba, {
+const DropdownPanel = memo((_fa) => {
+  var _ga = _fa, {
     background = {},
     border = {},
     borderRadius = {},
@@ -27364,7 +27411,7 @@ const DropdownPanel = memo((_ba) => {
     position = {},
     size = {},
     states = {}
-  } = _ca, props = __objRest(_ca, [
+  } = _ga, props = __objRest(_ga, [
     "background",
     "border",
     "borderRadius",
@@ -27412,8 +27459,8 @@ const DropdownPanel = memo((_ba) => {
     children
   }));
 });
-const DropdownInput = memo((_da) => {
-  var _ea = _da, {
+const DropdownInput = memo((_ha) => {
+  var _ia = _ha, {
     background = {},
     border = {},
     borderRadius = {},
@@ -27427,7 +27474,7 @@ const DropdownInput = memo((_da) => {
     placeholder,
     size = {},
     validation
-  } = _ea, props = __objRest(_ea, [
+  } = _ia, props = __objRest(_ia, [
     "background",
     "border",
     "borderRadius",
@@ -27591,8 +27638,8 @@ const DropdownInput = memo((_da) => {
     }))]
   });
 });
-const CountryInput = memo((_fa) => {
-  var _ga = _fa, {
+const CountryInput = memo((_ja) => {
+  var _ka = _ja, {
     defaultValue = CountryCode.UnitedStates,
     menu = Object.entries(i18nIsoCountries.getAlpha2Codes()).map(([alpha2, alpha3]) => ({
       icon: {
@@ -27612,7 +27659,7 @@ const CountryInput = memo((_fa) => {
     })),
     name: name2 = "country",
     placeholder = "Select a country"
-  } = _ga, props = __objRest(_ga, [
+  } = _ka, props = __objRest(_ka, [
     "defaultValue",
     "menu",
     "name",
@@ -27625,12 +27672,12 @@ const CountryInput = memo((_fa) => {
     placeholder
   }, props));
 });
-const CurrencyInput = memo((_ha) => {
-  var _ia = _ha, {
+const CurrencyInput = memo((_la) => {
+  var _ma = _la, {
     defaultValue = CurrencyCode.UnitedStatesDollar,
     name: name2 = "language",
     placeholder = "Select a currency"
-  } = _ia, props = __objRest(_ia, [
+  } = _ma, props = __objRest(_ma, [
     "defaultValue",
     "name",
     "placeholder"
@@ -27656,12 +27703,12 @@ const CurrencyInput = memo((_ha) => {
     placeholder
   }, props));
 });
-const LanguageInput = memo((_ja) => {
-  var _ka = _ja, {
+const LanguageInput = memo((_na) => {
+  var _oa = _na, {
     defaultValue = LanguageCode.English,
     name: name2,
     placeholder = "Select a language"
-  } = _ka, props = __objRest(_ka, [
+  } = _oa, props = __objRest(_oa, [
     "defaultValue",
     "name",
     "placeholder"
@@ -28975,13 +29022,13 @@ function reducer(state, action) {
 }
 function noop$3() {
 }
-const CloseButton = memo((_la) => {
-  var _ma = _la, {
+const CloseButton = memo((_pa) => {
+  var _qa = _pa, {
     background = {},
     icon: icon2 = {},
     className = "",
     size = {}
-  } = _ma, props = __objRest(_ma, [
+  } = _qa, props = __objRest(_qa, [
     "background",
     "icon",
     "className",
@@ -29027,8 +29074,8 @@ const CloseButton = memo((_la) => {
     }, icon2))
   }));
 });
-const ImageInput = memo((_na) => {
-  var _oa = _na, {
+const ImageInput = memo((_ra) => {
+  var _sa = _ra, {
     background = {},
     border = {},
     borderRadius = {},
@@ -29040,7 +29087,7 @@ const ImageInput = memo((_na) => {
     maxImages = 1,
     name: name2 = "images",
     padding = {}
-  } = _oa, props = __objRest(_oa, [
+  } = _sa, props = __objRest(_sa, [
     "background",
     "border",
     "borderRadius",
@@ -29271,163 +29318,9 @@ const ImageInput = memo((_na) => {
     }))]
   });
 });
-const NumberInput = memo((_pa) => {
-  var _qa = _pa, {
-    as,
-    background = {},
-    border = {},
-    className = "",
-    cursor = Cursor.Text,
-    defaultValue,
-    events = {},
-    icon: icon2,
-    label,
-    name: name2,
-    placeholder = "",
-    prefix: prefix2 = "",
-    shadow = DepthShadow.Low,
-    textSize = TextSize.Default,
-    states = {},
-    suffix: suffix2 = "",
-    textColor = TextColors.InputControl,
-    textWeight = TextWeight.Default,
-    validation = {}
-  } = _qa, props = __objRest(_qa, [
-    "as",
-    "background",
-    "border",
-    "className",
-    "cursor",
-    "defaultValue",
-    "events",
-    "icon",
-    "label",
-    "name",
-    "placeholder",
-    "prefix",
-    "shadow",
-    "textSize",
-    "states",
-    "suffix",
-    "textColor",
-    "textWeight",
-    "validation"
-  ]);
-  var _a2, _b, _c;
-  const [value2, setValue] = useState(defaultValue);
-  const [valueChanged, setValueChanged] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const [problems, setProblems] = useState([]);
-  const inputRef = useRef(null);
-  useEffect(() => {
-    var _a3;
-    setValueChanged(true);
-    if (((_a3 = events.input) == null ? void 0 : _a3.onValueChange) && valueChanged) {
-      if (validation && validation.conditions) {
-        const probs = Si$1(value2, validation.conditions);
-        setProblems(probs);
-        events.input.onValueChange({
-          validation: {
-            problems: probs,
-            validated: probs.length === 0
-          },
-          value: value2
-        });
-      } else {
-        events.input.onValueChange({
-          value: value2
-        });
-      }
-    }
-  }, [value2]);
-  return /* @__PURE__ */ jsxs$1(Fragment, {
-    children: [/* @__PURE__ */ jsxs$1(Container$9, {
-      alignment: {
-        orientation: Orientation.Horizontal
-      },
-      children: [label && /* @__PURE__ */ jsx$2(InputLabel, {
-        children: label
-      }), problems.length > 0 ? /* @__PURE__ */ jsx$2(ErrorLabel, {
-        alignment: {
-          horizontal: AlignHorizontal.Right
-        },
-        children: (_a2 = problems[0]) == null ? void 0 : _a2.message.short
-      }) : null]
-    }), /* @__PURE__ */ jsxs$1(InputContainer, __spreadProps(__spreadValues({
-      alignment: {
-        orientation: Orientation.Horizontal
-      },
-      background: __spreadValues({
-        color: BackgroundColors.InputControl
-      }, background),
-      border: __spreadValues({
-        all: {
-          color: BorderColors.InputControl,
-          style: BorderStyle.Solid,
-          width: 1
-        }
-      }, border),
-      cursor,
-      className: `${className} number-input`,
-      events: {
-        mouse: {
-          onClick: () => {
-            var _a3;
-            return (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
-          }
-        }
-      },
-      shadow,
-      states: {
-        state: {
-          error: problems,
-          focused
-        }
-      }
-    }, props), {
-      children: [icon2 && /* @__PURE__ */ jsx$2(Fragment, {
-        children: icon2
-      }), /* @__PURE__ */ jsx$2(Input$2, {
-        defaultValue,
-        events: {
-          focus: {
-            onBlur: () => setFocused(false),
-            onFocus: () => setFocused(true)
-          },
-          input: {
-            onChange: (e2) => {
-              setValueChanged(true);
-              setValue(e2.target.value);
-            }
-          }
-        },
-        name: name2,
-        placeholder,
-        ref: inputRef,
-        states: {
-          state: {
-            visible: !((_b = states.state) == null ? void 0 : _b.visible)
-          }
-        },
-        textColor,
-        type: "number",
-        value: value2
-      }), ((_c = states.state) == null ? void 0 : _c.loading) && /* @__PURE__ */ jsx$2(ProgressSpinner, {
-        size: {
-          height: Sizes.Small,
-          width: Sizes.Small
-        }
-      })]
-    }))]
-  });
-});
-const Input$2 = styled.input.withConfig({
-  displayName: "Input",
-  componentId: "sc-wxjtmr-0"
-})(["", ";background:transparent;border:none;outline:none;padding:0 ", ";width:100%;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}&::-ms-clear{display:none;width:0;height:0;}&::-ms-reveal{display:none;width:0;height:0;}&::-webkit-search-decoration,&::-webkit-search-cancel-button,&::-webkit-search-results-button,&::-webkit-search-results-decoration{display:none;}"], TextStyles, Amount.Less, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
 const FocusStyles = css$2(["&:before{transition:opacity 0.2s ease-in-out;}", ";"], (props) => props.focused && css$2(["outline:none;&:before{", ";bottom:-4px;content:'';display:block;border-color:rgb(", ");border-style:solid;border-width:2px;opacity:", ";left:-4px;position:absolute;pointer-events:none;right:-4px;top:-4px;transition:opacity 0.2s ease-in-out;}&:focus{&:before{opacity:1;}}"], getBorderRadiusStyles(props.borderRadius), BorderColors.Primary, props.focused ? 1 : 0));
-const SSNInput = memo((_ra) => {
-  var _sa = _ra, {
+const SSNInput = memo((_ta) => {
+  var _ua = _ta, {
     as,
     background = {},
     border = {},
@@ -29449,7 +29342,7 @@ const SSNInput = memo((_ra) => {
         [Condition.IsSSN]: true
       }
     }
-  } = _sa, props = __objRest(_sa, [
+  } = _ua, props = __objRest(_ua, [
     "as",
     "background",
     "border",
@@ -30284,8 +30177,8 @@ var main = function(e2, a) {
   }, a.defaultProps = { className: void 0, style: void 0, scoreWordClassName: void 0, scoreWordStyle: void 0, password: "", userInputs: [], barColors: ["#ddd", "#ef4836", "#f6b44d", "#2b90ef", "#25c281"], scoreWords: ["weak", "weak", "okay", "good", "strong"], minLength: 4, shortScoreWord: "too short", onChangeScore: void 0 }, a;
 }(React__default.Component);
 var _default = dist.default = PasswordStrengthBar;
-const PasswordInput = memo((_ta) => {
-  var _ua = _ta, {
+const PasswordInput = memo((_va) => {
+  var _wa = _va, {
     autoComplete = AutoComplete.CurrentPassword,
     confirmPasswordLabel = "Confirm password",
     events = {},
@@ -30293,19 +30186,8 @@ const PasswordInput = memo((_ta) => {
     name: name2,
     showConfirmPassword = false,
     showPasswordStrength = false,
-    validation = {
-      conditions: {
-        [Condition.IsRequired]: true,
-        [Condition.HasLetterCount]: 2,
-        [Condition.HasNumberCount]: 1,
-        [Condition.HasSymbolCount]: 1,
-        [Condition.HasUppercaseCount]: 1,
-        [Condition.HasLowercaseCount]: 1,
-        [Condition.IsLengthGreaterThanOrEqual]: 8,
-        [Condition.IsLengthLessThanOrEqual]: 99
-      }
-    }
-  } = _ua, props = __objRest(_ua, [
+    validation = {}
+  } = _wa, props = __objRest(_wa, [
     "autoComplete",
     "confirmPasswordLabel",
     "events",
@@ -30317,54 +30199,13 @@ const PasswordInput = memo((_ta) => {
   ]);
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
-  useEffect(() => {
-    var _a2, _b;
-    if (showConfirmPassword) {
-      let problems = [];
-      if (validation && validation.conditions) {
-        problems = Si$1(password, validation == null ? void 0 : validation.conditions);
-      }
-      if (password !== confirmPassword) {
-        problems.push({
-          condition: Condition.IsEqual,
-          message: {
-            long: "Passwords do not match.",
-            short: "Passwords do not match"
-          }
-        });
-      }
-      if ((_a2 = events.input) == null ? void 0 : _a2.onValueChange)
-        events.input.onValueChange({
-          validation: {
-            problems,
-            validated: problems.length === 0
-          },
-          value: password
-        });
-    } else {
-      let problems = [];
-      if (validation && validation.conditions) {
-        problems = Si$1(password, validation == null ? void 0 : validation.conditions);
-      }
-      if ((_b = events.input) == null ? void 0 : _b.onValueChange)
-        events.input.onValueChange({
-          validation: {
-            problems,
-            validated: problems.length === 0
-          },
-          value: password
-        });
-    }
-  }, [password, confirmPassword]);
   return /* @__PURE__ */ jsxs$1(Fragment, {
     children: [showPasswordStrength && /* @__PURE__ */ jsx$2(_default, {
       className: "password-strength-label",
       password
     }), /* @__PURE__ */ jsx$2(TextInput, __spreadValues({
       autoComplete: showConfirmPassword ? AutoComplete.NewPassword : AutoComplete.CurrentPassword,
-      label,
-      name: name2,
-      events: {
+      events: __spreadValues({
         input: {
           onValueChange: ({
             validation: validation2,
@@ -30373,9 +30214,22 @@ const PasswordInput = memo((_ta) => {
             setPassword(value2);
           }
         }
-      },
-      inputType: TextInputType.Password,
-      validation
+      }, events),
+      label,
+      name: name2,
+      type: InputType.Password,
+      validation: __spreadProps(__spreadValues({}, validation), {
+        conditions: __spreadValues({
+          [Condition.IsRequired]: true,
+          [Condition.HasLetterCount]: 2,
+          [Condition.HasNumberCount]: 1,
+          [Condition.HasSymbolCount]: 1,
+          [Condition.HasUppercaseCount]: 1,
+          [Condition.HasLowercaseCount]: 1,
+          [Condition.IsLengthGreaterThanOrEqual]: 8,
+          [Condition.IsLengthLessThanOrEqual]: 99
+        }, validation.conditions)
+      })
     }, props)), showConfirmPassword && /* @__PURE__ */ jsxs$1(InputRow, {
       margin: {
         top: Amount.More
@@ -30394,7 +30248,7 @@ const PasswordInput = memo((_ta) => {
             }
           }
         },
-        inputType: TextInputType.Password,
+        type: InputType.Password,
         name: "confirmPassword",
         validation: {
           conditions: {
@@ -30513,12 +30367,12 @@ function getInputElementByFieldType(field) {
       });
   }
 }
-const FormFields = memo((_va) => {
-  var _wa = _va, {
+const FormFields = memo((_xa) => {
+  var _ya = _xa, {
     entity,
     fields,
     onChange
-  } = _wa, props = __objRest(_wa, [
+  } = _ya, props = __objRest(_ya, [
     "entity",
     "fields",
     "onChange"
@@ -30561,41 +30415,45 @@ const FormFields = memo((_va) => {
           visibility: field.type === Primitives.UUID ? "hidden" : "visible"
         },
         children: getInputElementByFieldType(__spreadProps(__spreadValues({}, field), {
-          onChange: ({
-            validation,
-            value: value2
-          }) => setFieldValues(__spreadProps(__spreadValues({}, fieldValues), {
-            [field.name]: __spreadProps(__spreadValues({}, field), {
-              validation,
-              value: value2
-            })
-          }))
+          events: __spreadValues({
+            input: {
+              onValueChange: ({
+                validation,
+                value: value2
+              }) => {
+                setFieldValues(__spreadProps(__spreadValues({}, fieldValues), {
+                  [field.name]: __spreadProps(__spreadValues({}, field), {
+                    validation,
+                    value: value2
+                  })
+                }));
+              }
+            }
+          }, field.events)
         }))
       }, field.name);
     })
   }));
 });
-const Form = memo((_xa) => {
-  var _ya = _xa, {
+const Form = memo((_za) => {
+  var _Aa = _za, {
     borderRadius = {},
     className = "",
     entity,
+    events = {},
     fields,
     inProgress = false,
-    onChange,
-    onSubmit,
     model,
     name: name2,
     padding = Amount.None,
     submitButton
-  } = _ya, props = __objRest(_ya, [
+  } = _Aa, props = __objRest(_Aa, [
     "borderRadius",
     "className",
     "entity",
+    "events",
     "fields",
     "inProgress",
-    "onChange",
-    "onSubmit",
     "model",
     "name",
     "padding",
@@ -30605,11 +30463,15 @@ const Form = memo((_xa) => {
   const [validationProblems, setValidationProblems] = useState();
   const [isValidated, setValidated] = useState(false);
   const [requiresValidation, setRequiresValidation] = useState(false);
+  const fieldValuesRef = useRef(fieldValues);
+  const requiresValidationRef = useRef(requiresValidation);
+  const validationProblemsRef = useRef(validationProblems);
+  const isValidatedRef = useRef(isValidated);
   const submitButtonProps = __spreadValues({
     label: "Submit",
     type: ButtonType.Primary
   }, submitButton);
-  useEffect(() => {
+  const checkValidation = () => {
     var _a2, _b;
     let problems = [];
     let validationRequired = false;
@@ -30621,26 +30483,48 @@ const Form = memo((_xa) => {
         problems = [...problems, ...(_b = field[1].validation) == null ? void 0 : _b.problems];
       }
     }
+    requiresValidationRef.current = validationRequired;
     setRequiresValidation(validationRequired);
+    validationProblemsRef.current = problems;
     setValidationProblems(problems);
-    const validated = requiresValidation && Object.values(fieldValues).filter((field) => {
+    const validated = Object.values(fieldValues).filter((field) => {
       var _a3;
       return field.validation && !((_a3 = field.validation) == null ? void 0 : _a3.validated);
     }).length === 0;
+    isValidatedRef.current = validated;
     setValidated(validated);
-    if (onChange)
-      onChange({
-        fields: fieldValues,
-        validation: {
-          problems,
-          validated
-        }
-      });
+  };
+  useEffect(() => {
+    checkValidation();
   }, [fieldValues]);
+  const submitForm = (event) => {
+    var _a2, _b;
+    if (requiresValidationRef.current) {
+      if ((_a2 = events.form) == null ? void 0 : _a2.onSubmitted)
+        events.form.onSubmitted({
+          fields: fieldValuesRef.current,
+          validation: {
+            problems: validationProblemsRef.current,
+            validated: isValidatedRef.current
+          }
+        });
+    } else {
+      if ((_b = events.form) == null ? void 0 : _b.onSubmitted)
+        events.form.onSubmitted({
+          fields: fieldValuesRef.current
+        });
+    }
+    event.preventDefault();
+  };
   return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
     as: "form",
     borderRadius,
     className: `${className} form`,
+    events: {
+      form: {
+        onSubmit: submitForm
+      }
+    },
     id: name2,
     name: name2,
     padding
@@ -30648,39 +30532,12 @@ const Form = memo((_xa) => {
     children: [fields && /* @__PURE__ */ jsx$2(FormFields, {
       entity,
       fields,
-      onChange: (ff) => setFieldValues(ff)
+      onChange: (ff) => {
+        fieldValuesRef.current = ff;
+        setFieldValues(ff);
+      }
     }), submitButton && /* @__PURE__ */ jsx$2(FormActions, {
       children: /* @__PURE__ */ jsx$2(Button$1, __spreadProps(__spreadValues({
-        events: {
-          keyboard: {
-            onKeyPress: (e2) => {
-              if (e2.key === "Enter" && onSubmit)
-                onSubmit({
-                  fields: fieldValues,
-                  validation: {
-                    problems: validationProblems,
-                    validated: isValidated
-                  }
-                });
-            }
-          },
-          mouse: {
-            onClick: (e2) => {
-              e2.preventDefault();
-              if (onSubmit)
-                onSubmit({
-                  fields: fieldValues,
-                  validation: {
-                    problems: validationProblems,
-                    validated: isValidated
-                  },
-                  values: Object.entries(fieldValues).map(([fieldName, field]) => ({
-                    [fieldName]: field.value
-                  }))
-                });
-            }
-          }
-        },
         form: name2,
         states: {
           state: {
@@ -30693,8 +30550,120 @@ const Form = memo((_xa) => {
     })]
   }));
 });
-const Link = memo((_za) => {
-  var _Aa = _za, {
+const ForgotPasswordForm = memo((_Ba) => {
+  var _Ca = _Ba, {
+    background = {},
+    borderRadius = {},
+    size = {},
+    title = "Forgot your password?",
+    showSignupLink,
+    signUpLinkLabel,
+    signInButtonLabel,
+    forgotPasswordLinkLabel
+  } = _Ca, props = __objRest(_Ca, [
+    "background",
+    "borderRadius",
+    "size",
+    "title",
+    "showSignupLink",
+    "signUpLinkLabel",
+    "signInButtonLabel",
+    "forgotPasswordLinkLabel"
+  ]);
+  const inProgress = useSelector((state) => {
+    var _a2;
+    return (_a2 = state.authentication) == null ? void 0 : _a2.in_progress;
+  });
+  const authError = useSelector((state) => {
+    var _a2;
+    return (_a2 = state.authentication) == null ? void 0 : _a2.error;
+  });
+  const startPasswordReset = async (email) => {
+  };
+  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+    className: "forgot-password-form",
+    background: __spreadValues({
+      color: BackgroundColors.Lighter
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.More
+    }, borderRadius),
+    padding: {
+      all: Amount.Most
+    },
+    shadow: DepthShadow.Highest,
+    size: __spreadValues({
+      width: 420
+    }, size)
+  }, props), {
+    children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
+      visible: inProgress
+    }), /* @__PURE__ */ jsx$2(Title, {
+      alignment: {
+        horizontal: AlignHorizontal.Center
+      },
+      children: title
+    }), /* @__PURE__ */ jsx$2(Paragraph, {
+      alignment: {
+        horizontal: AlignHorizontal.Center
+      },
+      lineHeight: Sizes.Small,
+      padding: {
+        all: Amount.More,
+        bottom: Amount.Most
+      },
+      textAlign: TextAlign.Center,
+      children: "Enter the email address associated with your account and we'll send instructions on how to reset your password."
+    }), authError && /* @__PURE__ */ jsx$2(ErrorNotification, {
+      label: authError.userFriendlyMessage
+    }), /* @__PURE__ */ jsx$2(Form, {
+      events: {
+        form: {
+          onSubmitted: ({
+            fields,
+            validation
+          }) => {
+            var _a2;
+            if (validation && validation.validated || !validation) {
+              startPasswordReset((_a2 = fields.emailAddress) == null ? void 0 : _a2.value);
+            }
+          }
+        }
+      },
+      fields: [{
+        autoComplete: AutoComplete.Username,
+        label: "Email address",
+        name: "emailAddress",
+        type: Primitives.EmailAddress,
+        validation: {
+          conditions: {
+            [Condition.IsRequired]: true,
+            [Condition.IsEmailAddress]: true
+          }
+        }
+      }],
+      name: "forgot-password-form",
+      states: {
+        state: {
+          loading: inProgress
+        }
+      },
+      submitButton: {
+        alignment: {
+          fill: Fill.Both,
+          horizontal: AlignHorizontal.Center
+        },
+        borderRadius: {
+          all: Amount.Least
+        },
+        label: "Send instructions",
+        lineHeight: Sizes.Large
+      }
+    })]
+  }));
+});
+const Link = memo((_Da) => {
+  var _Ea = _Da, {
     children,
     textColor = TextColors.Link,
     textDecoration = {
@@ -30704,7 +30673,7 @@ const Link = memo((_za) => {
     textSize = TextSize.Small,
     textWeight = TextWeight.Default,
     to
-  } = _Aa, props = __objRest(_Aa, [
+  } = _Ea, props = __objRest(_Ea, [
     "children",
     "textColor",
     "textDecoration",
@@ -30726,15 +30695,15 @@ const Link = memo((_za) => {
     }))
   });
 });
-const Small = memo((_Ba) => {
-  var _Ca = _Ba, {
+const Small = memo((_Fa) => {
+  var _Ga = _Fa, {
     as = "small",
     className = "",
     children,
     lineHeight = Sizes.Small,
     textColor = TextColors.Light,
     textSize = TextSize.Small
-  } = _Ca, props = __objRest(_Ca, [
+  } = _Ga, props = __objRest(_Ga, [
     "as",
     "className",
     "children",
@@ -30753,105 +30722,8 @@ const Small = memo((_Ba) => {
     children
   }));
 });
-const ForgotPasswordForm = memo(({
-  background = {},
-  borderRadius = {},
-  title = "Forgot your password?",
-  showSignupLink,
-  signUpLinkLabel,
-  signInButtonLabel,
-  forgotPasswordLinkLabel
-}) => {
-  const inProgress = useSelector((state) => {
-    var _a2;
-    return (_a2 = state.authentication) == null ? void 0 : _a2.in_progress;
-  });
-  const authError = useSelector((state) => {
-    var _a2;
-    return (_a2 = state.authentication) == null ? void 0 : _a2.error;
-  });
-  const startPasswordReset = async (email) => {
-  };
-  return /* @__PURE__ */ jsxs$1(Container$9, {
-    className: "forgot-password-form",
-    background: __spreadValues({
-      color: BackgroundColors.Darker
-    }, background),
-    borderRadius: __spreadValues({
-      all: Amount.More
-    }, borderRadius),
-    padding: {
-      all: Amount.Most
-    },
-    shadow: DepthShadow.Highest,
-    size: {
-      width: 420
-    },
-    children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
-      visible: inProgress
-    }), /* @__PURE__ */ jsx$2(Title, {
-      textAlign: TextAlign.Center,
-      children: title
-    }), /* @__PURE__ */ jsx$2(Container$9, {
-      children: /* @__PURE__ */ jsx$2(Paragraph, {
-        textAlign: TextAlign.Center,
-        children: "Enter the email address associated with your account and we'll send instructions on how to reset your password."
-      })
-    }), authError && /* @__PURE__ */ jsx$2(ErrorNotification, {
-      label: authError.userFriendlyMessage
-    }), /* @__PURE__ */ jsx$2(Form, {
-      name: "forgot-password-form",
-      fields: [{
-        autoComplete: AutoComplete.Username,
-        label: "Email address",
-        name: "emailAddress",
-        type: Primitives.EmailAddress,
-        validation: {
-          conditions: {
-            [Condition.IsRequired]: true,
-            [Condition.IsEmailAddress]: true
-          }
-        }
-      }],
-      inProgress,
-      onSubmit: ({
-        fields,
-        validation
-      }) => {
-        var _a2;
-        if (validation && validation.validated || !validation) {
-          startPasswordReset((_a2 = fields.emailAddress) == null ? void 0 : _a2.value);
-        }
-      },
-      submitButton: {
-        label: "Send instructions"
-      }
-    }), /* @__PURE__ */ jsx$2(Container$9, {
-      padding: {
-        all: Amount.Default
-      },
-      children: /* @__PURE__ */ jsx$2(Small, {
-        textAlign: TextAlign.Center,
-        children: /* @__PURE__ */ jsx$2(Link, {
-          states: {
-            hovered: {
-              textDecoration: {
-                line: TextDecorationLine.Underline
-              }
-            }
-          },
-          textDecoration: {
-            line: TextDecorationLine.Underline
-          },
-          to: "/login",
-          children: "Login"
-        })
-      })
-    })]
-  });
-});
-const LoginForm = memo((_Da) => {
-  var _Ea = _Da, {
+const LoginForm = memo((_Ha) => {
+  var _Ia = _Ha, {
     background = {},
     borderRadius = {},
     onLoginSuccess,
@@ -30861,7 +30733,7 @@ const LoginForm = memo((_Da) => {
     signUpLinkLabel,
     signInButtonLabel,
     forgotPasswordLinkLabel
-  } = _Ea, props = __objRest(_Ea, [
+  } = _Ia, props = __objRest(_Ia, [
     "background",
     "borderRadius",
     "onLoginSuccess",
@@ -30923,12 +30795,12 @@ const LoginForm = memo((_Da) => {
         bottom: Amount.Default
       },
       showOrb: false,
+      textAlign: TextAlign.Center,
       children: /* @__PURE__ */ jsxs$1(Paragraph, {
-        alignment: {
-          horizontal: AlignHorizontal.Center
-        },
+        lineHeight: Sizes.Small,
         textAlign: TextAlign.Center,
         children: ["Don't have an account yet?", /* @__PURE__ */ jsx$2("br", {}), /* @__PURE__ */ jsx$2(Link, {
+          lineHeight: Sizes.Small,
           to: "/signup",
           states: {
             hovered: {
@@ -30946,6 +30818,22 @@ const LoginForm = memo((_Da) => {
     }), error && /* @__PURE__ */ jsx$2(ErrorNotification, {
       label: (_a2 = error == null ? void 0 : error.friendlyMessage) != null ? _a2 : "An error occurred unfortunately."
     }), /* @__PURE__ */ jsx$2(Form, {
+      events: {
+        form: {
+          onSubmitted: ({
+            fields,
+            validation
+          }) => {
+            var _a3, _b;
+            if (validation && validation.validated || !validation) {
+              dispatch(login({
+                password: (_a3 = fields.password) == null ? void 0 : _a3.value,
+                username: (_b = fields.username) == null ? void 0 : _b.value
+              }));
+            }
+          }
+        }
+      },
       fields: [{
         autoComplete: AutoComplete.Username,
         label: "Email address",
@@ -30976,22 +30864,6 @@ const LoginForm = memo((_Da) => {
       }],
       inProgress,
       name: "login-form",
-      onSubmit: ({
-        fields,
-        validation
-      }) => {
-        var _a3, _b;
-        console.log({
-          fields,
-          validation
-        });
-        if (validation && validation.validated || !validation) {
-          dispatch(login({
-            password: (_a3 = fields.password) == null ? void 0 : _a3.value,
-            username: (_b = fields.username) == null ? void 0 : _b.value
-          }));
-        }
-      },
       submitButton: {
         alignment: {
           fill: Fill.Both,
@@ -31000,9 +30872,15 @@ const LoginForm = memo((_Da) => {
         borderRadius: {
           all: Amount.Least
         },
-        label: "Login"
+        label: "Login",
+        lineHeight: Sizes.Large
       }
     }), /* @__PURE__ */ jsx$2(Container$9, {
+      alignment: {
+        horizontal: AlignHorizontal.Center,
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.Center
+      },
       padding: {
         all: Amount.Default
       },
@@ -31026,12 +30904,20 @@ const LoginForm = memo((_Da) => {
     })]
   }));
 });
-const SignupForm = memo(({
-  background = {},
-  borderRadius = {},
-  onSignupSuccess,
-  title = "Sign up"
-}) => {
+const SignupForm = memo((_Ja) => {
+  var _Ka = _Ja, {
+    background = {},
+    borderRadius = {},
+    onSignupSuccess,
+    size = {},
+    title = "Sign up"
+  } = _Ka, props = __objRest(_Ka, [
+    "background",
+    "borderRadius",
+    "onSignupSuccess",
+    "size",
+    "title"
+  ]);
   var _a2;
   const dispatch = useDispatch();
   const signUpState = useSelector((state) => {
@@ -31050,38 +30936,49 @@ const SignupForm = memo(({
       });
     }
   }, [success]);
-  return /* @__PURE__ */ jsxs$1(Container$9, {
+  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
     className: "signup-form",
     background: __spreadValues({
-      color: BackgroundColors.Darker
+      color: BackgroundColors.Lighter
     }, background),
     borderRadius: __spreadValues({
       all: Amount.More
     }, borderRadius),
     padding: {
-      all: Amount.Most
+      all: Amount.Most,
+      bottom: Amount.None
     },
     shadow: DepthShadow.Highest,
-    size: {
+    size: __spreadValues({
       width: 420
-    },
+    }, size)
+  }, props), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
       borderRadius,
       visible: inProgress
     }), /* @__PURE__ */ jsx$2(Title, {
+      alignment: {
+        horizontal: AlignHorizontal.Center
+      },
       textAlign: TextAlign.Center,
       children: title
     }), /* @__PURE__ */ jsx$2(NotificationLabel, {
       alignment: {
-        horizontal: AlignHorizontal.Center
+        horizontal: AlignHorizontal.Center,
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.Center
       },
-      background: {
-        color: BackgroundColors.Darkest
+      margin: {
+        all: Amount.Most,
+        bottom: Amount.All
       },
       showOrb: false,
+      textAlign: TextAlign.Center,
       children: /* @__PURE__ */ jsxs$1(Paragraph, {
+        lineHeight: Sizes.Small,
         textAlign: TextAlign.Center,
         children: ["Already have an account?", /* @__PURE__ */ jsx$2("br", {}), /* @__PURE__ */ jsx$2(Link, {
+          lineHeight: Sizes.Small,
           states: {
             hovered: {
               textDecoration: {
@@ -31099,6 +30996,23 @@ const SignupForm = memo(({
     }), error && /* @__PURE__ */ jsx$2(ErrorNotification, {
       label: (_a2 = error == null ? void 0 : error.friendlyMessage) != null ? _a2 : "An error occurred unfortunately."
     }), /* @__PURE__ */ jsx$2(Form, {
+      events: {
+        form: {
+          onSubmitted: ({
+            fields,
+            validation
+          }) => {
+            var _a3, _b, _c, _d;
+            if (validation && validation.validated || !validation)
+              dispatch(signUp({
+                firstName: (_a3 = fields.firstName) == null ? void 0 : _a3.value,
+                lastName: (_b = fields.lastName) == null ? void 0 : _b.value,
+                password: (_c = fields.password) == null ? void 0 : _c.value,
+                username: (_d = fields.username) == null ? void 0 : _d.value
+              }));
+          }
+        }
+      },
       fields: [{
         autoComplete: AutoComplete.GivenName,
         label: "First name",
@@ -31150,26 +31064,20 @@ const SignupForm = memo(({
       }],
       inProgress,
       name: "signup-form",
-      onSubmit: ({
-        fields,
-        validation
-      }) => {
-        var _a3, _b, _c, _d;
-        if (validation && validation.validated || !validation)
-          dispatch(signUp({
-            firstName: (_a3 = fields.firstName) == null ? void 0 : _a3.value,
-            lastName: (_b = fields.lastName) == null ? void 0 : _b.value,
-            password: (_c = fields.password) == null ? void 0 : _c.value,
-            username: (_d = fields.username) == null ? void 0 : _d.value
-          }));
-      },
       submitButton: {
-        borderRadius: Amount.Least,
-        label: "Sign up"
+        alignment: {
+          fill: Fill.Both,
+          horizontal: AlignHorizontal.Center
+        },
+        borderRadius: {
+          all: Amount.Least
+        },
+        label: "Sign up",
+        lineHeight: Sizes.Large
       }
     }), /* @__PURE__ */ jsx$2(Container$9, {
       padding: {
-        all: Amount.Default
+        all: Amount.Most
       },
       children: /* @__PURE__ */ jsxs$1(Small, {
         textAlign: TextAlign.Center,
@@ -31189,7 +31097,7 @@ const SignupForm = memo(({
         }), "."]
       })
     })]
-  });
+  }));
 });
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -31763,8 +31671,8 @@ function formatCurrency({ amount, currency }) {
       return `$${amount.toFixed(amount % 1 !== 0 ? 2 : 0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
   }
 }
-const ProgressMeter = memo((_Fa) => {
-  var _Ga = _Fa, {
+const ProgressMeter = memo((_La) => {
+  var _Ma = _La, {
     amount,
     background = {},
     borderRadius = {},
@@ -31774,7 +31682,7 @@ const ProgressMeter = memo((_Fa) => {
       height: Sizes.Default
     },
     total
-  } = _Ga, props = __objRest(_Ga, [
+  } = _Ma, props = __objRest(_Ma, [
     "amount",
     "background",
     "borderRadius",
@@ -32093,8 +32001,8 @@ class ErrorBoundary extends Component {
     });
   }
 }
-const Card = memo((_Ha) => {
-  var _Ia = _Ha, {
+const Card = memo((_Na) => {
+  var _Oa = _Na, {
     background = {},
     borderRadius = {},
     children,
@@ -32103,7 +32011,7 @@ const Card = memo((_Ha) => {
     linkTo,
     shadow = DepthShadow.Higher,
     title
-  } = _Ia, props = __objRest(_Ia, [
+  } = _Oa, props = __objRest(_Oa, [
     "background",
     "borderRadius",
     "children",
@@ -32145,8 +32053,8 @@ const Card = memo((_Ha) => {
   }
   return content;
 });
-const TitleCard = memo((_Ja) => {
-  var _Ka = _Ja, {
+const TitleCard = memo((_Pa) => {
+  var _Qa = _Pa, {
     alignment = {},
     background = {},
     borderRadius = {},
@@ -32160,7 +32068,7 @@ const TitleCard = memo((_Ja) => {
     size = {
       width: 260
     }
-  } = _Ka, props = __objRest(_Ka, [
+  } = _Qa, props = __objRest(_Qa, [
     "alignment",
     "background",
     "borderRadius",
@@ -32213,14 +32121,14 @@ const TitleCard = memo((_Ja) => {
     })]
   }));
 });
-const PieChart = memo((_La) => {
-  var props = __objRest(_La, []);
+const PieChart = memo((_Ra) => {
+  var props = __objRest(_Ra, []);
   return /* @__PURE__ */ jsx$2(Container$9, __spreadValues({}, props));
 });
-const RadialChart = memo((_Ma) => {
-  var _Na = _Ma, {
+const RadialChart = memo((_Sa) => {
+  var _Ta = _Sa, {
     data: data2
-  } = _Na, props = __objRest(_Na, [
+  } = _Ta, props = __objRest(_Ta, [
     "data"
   ]);
   return /* @__PURE__ */ jsx$2(Container$9, __spreadValues({}, props));
@@ -32262,8 +32170,8 @@ function useTitle(title) {
     document.title = title;
   }, []);
 }
-const Page = memo((_Oa) => {
-  var _Pa = _Oa, {
+const Page = memo((_Ua) => {
+  var _Va = _Ua, {
     alignment = {},
     background = {},
     children,
@@ -32271,7 +32179,7 @@ const Page = memo((_Oa) => {
     layout: Layout,
     loading = false,
     title
-  } = _Pa, props = __objRest(_Pa, [
+  } = _Va, props = __objRest(_Va, [
     "alignment",
     "background",
     "children",
@@ -33383,8 +33291,8 @@ function useEntityEditor() {
     showEntityEditor
   };
 }
-const HoverPanel = memo((_Qa) => {
-  var _Ra = _Qa, {
+const HoverPanel = memo((_Wa) => {
+  var _Xa = _Wa, {
     background = {},
     border = {},
     borderRadius = {},
@@ -33395,7 +33303,7 @@ const HoverPanel = memo((_Qa) => {
     setMenuVisible,
     states = {},
     visible = true
-  } = _Ra, props = __objRest(_Ra, [
+  } = _Xa, props = __objRest(_Xa, [
     "background",
     "border",
     "borderRadius",
@@ -33435,8 +33343,8 @@ const HoverPanel = memo((_Qa) => {
     children
   }));
 });
-const MoreMenu = memo((_Sa) => {
-  var _Ta = _Sa, {
+const MoreMenu = memo((_Ya) => {
+  var _Za = _Ya, {
     alignment = {},
     background = {},
     className = "",
@@ -33446,7 +33354,7 @@ const MoreMenu = memo((_Sa) => {
       width: Sizes.Default
     },
     menu
-  } = _Ta, props = __objRest(_Ta, [
+  } = _Za, props = __objRest(_Za, [
     "alignment",
     "background",
     "className",
@@ -33688,8 +33596,8 @@ const SlideRight = {
     }
   }
 };
-const SlidePanel = memo((_Ua) => {
-  var _Va = _Ua, {
+const SlidePanel = memo((__a) => {
+  var _$a = __a, {
     as = "div",
     background = {},
     borderRadius = {},
@@ -33701,7 +33609,7 @@ const SlidePanel = memo((_Ua) => {
     shadow = DepthShadow.Highest,
     size = {},
     visible = false
-  } = _Va, props = __objRest(_Va, [
+  } = _$a, props = __objRest(_$a, [
     "as",
     "background",
     "borderRadius",
@@ -33814,33 +33722,37 @@ const EntityEditor = memo(({
         model
       }),
       entity: __spreadValues(__spreadValues({}, entity), entityFields),
+      events: {
+        form: {
+          onSubmitted: async ({
+            fields,
+            validation
+          }) => {
+            let fieldData = {};
+            for (const [key, props] of Object.entries(fields)) {
+              fieldData = __spreadProps(__spreadValues({}, fieldData), {
+                [key]: props.value
+              });
+            }
+            if (id2) {
+              const editFunction = actions == null ? void 0 : actions[`update${model.name}`];
+              if (editFunction)
+                await dispatch(editFunction(__spreadValues({
+                  id: id2
+                }, fieldData)));
+              hideEntityEditor();
+            } else {
+              const createFunction = actions == null ? void 0 : actions[`create${model.name}`];
+              if (createFunction)
+                await dispatch(createFunction(fieldData));
+              hideEntityEditor();
+            }
+          }
+        }
+      },
       inProgress,
       model,
       name: "entity-editor",
-      onSubmit: async ({
-        fields,
-        validation
-      }) => {
-        let fieldData = {};
-        for (const [key, props] of Object.entries(fields)) {
-          fieldData = __spreadProps(__spreadValues({}, fieldData), {
-            [key]: props.value
-          });
-        }
-        if (id2) {
-          const editFunction = actions == null ? void 0 : actions[`update${model.name}`];
-          if (editFunction)
-            await dispatch(editFunction(__spreadValues({
-              id: id2
-            }, fieldData)));
-          hideEntityEditor();
-        } else {
-          const createFunction = actions == null ? void 0 : actions[`create${model.name}`];
-          if (createFunction)
-            await dispatch(createFunction(fieldData));
-          hideEntityEditor();
-        }
-      },
       submitButton: {
         label: id2 ? "Update" : "Create"
       }
@@ -33858,10 +33770,10 @@ const EntityPreview = memo(({
     })
   });
 });
-const EntityPanel = memo((_Wa) => {
-  var _Xa = _Wa, {
+const EntityPanel = memo((_ab) => {
+  var _bb = _ab, {
     actions
-  } = _Xa, props = __objRest(_Xa, [
+  } = _bb, props = __objRest(_bb, [
     "actions"
   ]);
   const dispatch = useDispatch();
@@ -33963,8 +33875,8 @@ const EntityPanel = memo((_Wa) => {
     }))
   });
 });
-const Backdrop = memo((_Ya) => {
-  var _Za = _Ya, {
+const Backdrop = memo((_cb) => {
+  var _db = _cb, {
     as = "div",
     background = {},
     children,
@@ -33972,7 +33884,7 @@ const Backdrop = memo((_Ya) => {
     onClick,
     position = {},
     visible
-  } = _Za, props = __objRest(_Za, [
+  } = _db, props = __objRest(_db, [
     "as",
     "background",
     "children",
@@ -34001,8 +33913,8 @@ const Backdrop = memo((_Ya) => {
     children
   }));
 });
-const WebApplication = memo((__a) => {
-  var _$a = __a, {
+const WebApplication = memo((_eb) => {
+  var _fb = _eb, {
     actions,
     alignment = {},
     authentication = false,
@@ -34010,7 +33922,7 @@ const WebApplication = memo((__a) => {
     children,
     className = "",
     httpClient
-  } = _$a, props = __objRest(_$a, [
+  } = _fb, props = __objRest(_fb, [
     "actions",
     "alignment",
     "authentication",
@@ -34088,8 +34000,8 @@ const WebApplication = memo((__a) => {
     })
   }));
 });
-const SubTitle = memo((_ab) => {
-  var _bb = _ab, {
+const SubTitle = memo((_gb) => {
+  var _hb = _gb, {
     as = "h2",
     children,
     className = "",
@@ -34097,7 +34009,7 @@ const SubTitle = memo((_ab) => {
     textSize = TextSize.Large,
     textColor = TextColors.SubTitle,
     textWeight = TextWeight.More
-  } = _bb, props = __objRest(_bb, [
+  } = _hb, props = __objRest(_hb, [
     "as",
     "children",
     "className",
@@ -34118,8 +34030,8 @@ const SubTitle = memo((_ab) => {
     children: children != null ? children : ""
   }));
 });
-const Workspace = memo((_cb) => {
-  var _db = _cb, {
+const Workspace = memo((_ib) => {
+  var _jb = _ib, {
     alignment = {},
     background = {},
     className = "",
@@ -34130,7 +34042,7 @@ const Workspace = memo((_cb) => {
     loginRequired = false,
     padding = {},
     title
-  } = _db, props = __objRest(_db, [
+  } = _jb, props = __objRest(_jb, [
     "alignment",
     "background",
     "className",
@@ -34253,14 +34165,14 @@ function fetchFromObject(obj, prop) {
   }
   return obj[prop];
 }
-const StringLabel = memo((_eb) => {
-  var _fb = _eb, {
+const StringLabel = memo((_kb) => {
+  var _lb = _kb, {
     icon: icon2,
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _fb, props = __objRest(_fb, [
+  } = _lb, props = __objRest(_lb, [
     "icon",
     "lineHeight",
     "textColor",
@@ -34276,14 +34188,14 @@ const StringLabel = memo((_eb) => {
     children: value2
   }));
 });
-const NumberLabel = memo((_gb) => {
-  var _hb = _gb, {
+const NumberLabel = memo((_mb) => {
+  var _nb = _mb, {
     icon: icon2,
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _hb, props = __objRest(_hb, [
+  } = _nb, props = __objRest(_nb, [
     "icon",
     "lineHeight",
     "textColor",
@@ -34299,11 +34211,11 @@ const NumberLabel = memo((_gb) => {
     children: value2
   }));
 });
-const CurrencyAmountLabel = memo((_ib) => {
-  var _jb = _ib, {
+const CurrencyAmountLabel = memo((_ob) => {
+  var _pb = _ob, {
     amount,
     currency
-  } = _jb, props = __objRest(_jb, [
+  } = _pb, props = __objRest(_pb, [
     "amount",
     "currency"
   ]);
@@ -34311,10 +34223,10 @@ const CurrencyAmountLabel = memo((_ib) => {
     children: amount === 0 ? "$0" : amount ? `$${amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ""
   }));
 });
-const PercentLabel = memo((_kb) => {
-  var _lb = _kb, {
+const PercentLabel = memo((_qb) => {
+  var _rb = _qb, {
     value: value2
-  } = _lb, props = __objRest(_lb, [
+  } = _rb, props = __objRest(_rb, [
     "value"
   ]);
   return /* @__PURE__ */ jsxs$1(Label, __spreadProps(__spreadValues({}, props), {
@@ -38137,15 +38049,15 @@ function friendlyDateTime(dateTimeish) {
     throw new InvalidArgumentError(`Unknown datetime argument: ${dateTimeish}, of type ${typeof dateTimeish}`);
   }
 }
-const DateLabel = memo((_mb) => {
-  var _nb = _mb, {
+const DateLabel = memo((_sb) => {
+  var _tb = _sb, {
     className = "",
     format = DateTime.DATE_MED,
     icon: icon2,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _nb, props = __objRest(_nb, [
+  } = _tb, props = __objRest(_tb, [
     "className",
     "format",
     "icon",
@@ -38162,8 +38074,8 @@ const DateLabel = memo((_mb) => {
     children: DateTime.fromISO(value2).toLocaleString(format)
   }));
 });
-const MenuItemLabel = memo((_ob) => {
-  var _pb = _ob, {
+const MenuItemLabel = memo((_ub) => {
+  var _vb = _ub, {
     fieldName,
     icon: icon2,
     lineHeight = Sizes.Default,
@@ -38171,7 +38083,7 @@ const MenuItemLabel = memo((_ob) => {
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _pb, props = __objRest(_pb, [
+  } = _vb, props = __objRest(_vb, [
     "fieldName",
     "icon",
     "lineHeight",
@@ -38235,14 +38147,14 @@ function getLabelByFieldType({
       }, props));
   }
 }
-const DataGridCell = memo((_qb) => {
-  var _rb = _qb, {
+const DataGridCell = memo((_wb) => {
+  var _xb = _wb, {
     as = "label",
     fieldName,
     model,
     type,
     value: value2
-  } = _rb, props = __objRest(_rb, [
+  } = _xb, props = __objRest(_xb, [
     "as",
     "fieldName",
     "model",
@@ -38289,12 +38201,12 @@ const SearchInput = memo((props) => {
     icon: {
       name: BasicIcons.Search
     },
-    inputType: TextInputType.Search,
+    type: InputType.Search,
     spellCheck: false
   }, props));
 });
-const MenuButton = memo((_sb) => {
-  var _tb = _sb, {
+const MenuButton = memo((_yb) => {
+  var _zb = _yb, {
     background = {},
     border = {},
     borderRadius = {},
@@ -38304,7 +38216,7 @@ const MenuButton = memo((_sb) => {
     padding = {},
     size = {},
     textColor = TextColors.MenuButton
-  } = _tb, props = __objRest(_tb, [
+  } = _zb, props = __objRest(_zb, [
     "background",
     "border",
     "borderRadius",
@@ -38430,8 +38342,8 @@ const MenuButton = memo((_sb) => {
     })]
   }));
 });
-const DataGrid = memo((_ub) => {
-  var _vb = _ub, {
+const DataGrid = memo((_Ab) => {
+  var _Bb = _Ab, {
     background = {},
     borderRadius = {},
     className = "",
@@ -38448,7 +38360,7 @@ const DataGrid = memo((_ub) => {
     onItemClick,
     shadow = DepthShadow.Highest,
     template
-  } = _vb, props = __objRest(_vb, [
+  } = _Bb, props = __objRest(_Bb, [
     "background",
     "borderRadius",
     "className",
@@ -38730,14 +38642,14 @@ const NoResults = styled.div.withConfig({
   displayName: "NoResults",
   componentId: "sc-s798s5-0"
 })(["color:#9b9b9b;font-size:13px;font-weight:500;padding:50px 0;text-align:center;"]);
-const BooleanLabel = memo((_wb) => {
-  var _xb = _wb, {
+const BooleanLabel = memo((_Cb) => {
+  var _Db = _Cb, {
     icon: icon2,
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _xb, props = __objRest(_xb, [
+  } = _Db, props = __objRest(_Db, [
     "icon",
     "lineHeight",
     "textColor",
@@ -38756,84 +38668,84 @@ const BooleanLabel = memo((_wb) => {
     }), value2]
   }));
 });
-const ColorLabel = memo((_yb) => {
-  var _zb = _yb, {
-    icon: icon2,
-    lineHeight = Sizes.Default,
-    textColor = TextColors.Lighter,
-    textSize = TextSize.Default,
-    value: value2
-  } = _zb, props = __objRest(_zb, [
-    "icon",
-    "lineHeight",
-    "textColor",
-    "textSize",
-    "value"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    icon: icon2,
-    lineHeight,
-    textColor,
-    textSize
-  }, props), {
-    children: value2
-  }));
-});
-const EmailAddressLabel = memo((_Ab) => {
-  var _Bb = _Ab, {
-    icon: icon2,
-    lineHeight = Sizes.Default,
-    textColor = TextColors.Lighter,
-    textSize = TextSize.Default,
-    value: value2
-  } = _Bb, props = __objRest(_Bb, [
-    "icon",
-    "lineHeight",
-    "textColor",
-    "textSize",
-    "value"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    icon: icon2,
-    lineHeight,
-    textColor,
-    textSize
-  }, props), {
-    children: value2
-  }));
-});
-const PhoneNumberLabel = memo((_Cb) => {
-  var _Db = _Cb, {
-    icon: icon2,
-    lineHeight = Sizes.Default,
-    textColor = TextColors.Lighter,
-    textSize = TextSize.Default,
-    value: value2
-  } = _Db, props = __objRest(_Db, [
-    "icon",
-    "lineHeight",
-    "textColor",
-    "textSize",
-    "value"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    icon: icon2,
-    lineHeight,
-    textColor,
-    textSize
-  }, props), {
-    children: value2
-  }));
-});
-const ProgressLabel = memo((_Eb) => {
+const ColorLabel = memo((_Eb) => {
   var _Fb = _Eb, {
-    color,
     icon: icon2,
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
   } = _Fb, props = __objRest(_Fb, [
+    "icon",
+    "lineHeight",
+    "textColor",
+    "textSize",
+    "value"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    icon: icon2,
+    lineHeight,
+    textColor,
+    textSize
+  }, props), {
+    children: value2
+  }));
+});
+const EmailAddressLabel = memo((_Gb) => {
+  var _Hb = _Gb, {
+    icon: icon2,
+    lineHeight = Sizes.Default,
+    textColor = TextColors.Lighter,
+    textSize = TextSize.Default,
+    value: value2
+  } = _Hb, props = __objRest(_Hb, [
+    "icon",
+    "lineHeight",
+    "textColor",
+    "textSize",
+    "value"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    icon: icon2,
+    lineHeight,
+    textColor,
+    textSize
+  }, props), {
+    children: value2
+  }));
+});
+const PhoneNumberLabel = memo((_Ib) => {
+  var _Jb = _Ib, {
+    icon: icon2,
+    lineHeight = Sizes.Default,
+    textColor = TextColors.Lighter,
+    textSize = TextSize.Default,
+    value: value2
+  } = _Jb, props = __objRest(_Jb, [
+    "icon",
+    "lineHeight",
+    "textColor",
+    "textSize",
+    "value"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    icon: icon2,
+    lineHeight,
+    textColor,
+    textSize
+  }, props), {
+    children: value2
+  }));
+});
+const ProgressLabel = memo((_Kb) => {
+  var _Lb = _Kb, {
+    color,
+    icon: icon2,
+    lineHeight = Sizes.Default,
+    textColor = TextColors.Lighter,
+    textSize = TextSize.Default,
+    value: value2
+  } = _Lb, props = __objRest(_Lb, [
     "color",
     "icon",
     "lineHeight",
@@ -38858,14 +38770,14 @@ const ProgressLabel = memo((_Eb) => {
     })
   }));
 });
-const CountryLabel = memo((_Gb) => {
-  var _Hb = _Gb, {
+const CountryLabel = memo((_Mb) => {
+  var _Nb = _Mb, {
     icon: icon2,
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _Hb, props = __objRest(_Hb, [
+  } = _Nb, props = __objRest(_Nb, [
     "icon",
     "lineHeight",
     "textColor",
@@ -38881,14 +38793,14 @@ const CountryLabel = memo((_Gb) => {
     children: value2
   }));
 });
-const LanguageLabel = memo((_Ib) => {
-  var _Jb = _Ib, {
+const LanguageLabel = memo((_Ob) => {
+  var _Pb = _Ob, {
     icon: icon2,
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _Jb, props = __objRest(_Jb, [
+  } = _Pb, props = __objRest(_Pb, [
     "icon",
     "lineHeight",
     "textColor",
@@ -38904,12 +38816,12 @@ const LanguageLabel = memo((_Ib) => {
     children: value2
   }));
 });
-const PersonLabel = memo((_Kb) => {
-  var _Lb = _Kb, {
+const PersonLabel = memo((_Qb) => {
+  var _Rb = _Qb, {
     image,
     name: name2,
     textSize = TextSize.Large
-  } = _Lb, props = __objRest(_Lb, [
+  } = _Rb, props = __objRest(_Rb, [
     "image",
     "name",
     "textSize"
@@ -38993,12 +38905,12 @@ const UserLabel = memo(({
     })]
   });
 });
-const MarkdownEditor = memo((_Mb) => {
-  var props = __objRest(_Mb, []);
+const MarkdownEditor = memo((_Sb) => {
+  var props = __objRest(_Sb, []);
   return /* @__PURE__ */ jsx$2("div", {});
 });
-const ObjectPropertiesView = memo((_Nb) => {
-  var _Ob = _Nb, {
+const ObjectPropertiesView = memo((_Tb) => {
+  var _Ub = _Tb, {
     background = {},
     borderRadius = {},
     className = "",
@@ -39006,7 +38918,7 @@ const ObjectPropertiesView = memo((_Nb) => {
     properties: properties2,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default
-  } = _Ob, props = __objRest(_Ob, [
+  } = _Ub, props = __objRest(_Ub, [
     "background",
     "borderRadius",
     "className",
@@ -39163,13 +39075,13 @@ const ObjectPropertiesView = memo((_Nb) => {
     })
   }));
 });
-const StaticTypeLabel = memo((_Pb) => {
-  var _Qb = _Pb, {
+const StaticTypeLabel = memo((_Vb) => {
+  var _Wb = _Vb, {
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _Qb, props = __objRest(_Qb, [
+  } = _Wb, props = __objRest(_Wb, [
     "lineHeight",
     "textColor",
     "textSize",
@@ -39287,12 +39199,12 @@ const ActivityFeedItem = memo(({
     })]
   });
 });
-const ActivityFeed = memo((_Rb) => {
-  var _Sb = _Rb, {
+const ActivityFeed = memo((_Xb) => {
+  var _Yb = _Xb, {
     activities,
     className = "",
     dateFormat = DateTime.DATE_MED
-  } = _Sb, props = __objRest(_Sb, [
+  } = _Yb, props = __objRest(_Yb, [
     "activities",
     "className",
     "dateFormat"
@@ -39385,14 +39297,14 @@ const Content$1 = styled.div.withConfig({
 const InputHelper = memo(() => {
   return /* @__PURE__ */ jsx$2(Fragment, {});
 });
-const Checkbox = memo((_Tb) => {
-  var _Ub = _Tb, {
+const Checkbox = memo((_Zb) => {
+  var __b = _Zb, {
     className = "",
     defaultValue,
     events = {},
     size = {},
     validation = {}
-  } = _Ub, props = __objRest(_Ub, [
+  } = __b, props = __objRest(__b, [
     "className",
     "defaultValue",
     "events",
@@ -50604,11 +50516,11 @@ function rgbHex(red, green, blue, alpha) {
   return (blue | green << 8 | red << 16 | 1 << 24).toString(16).slice(1) + alpha;
 }
 const defaultColors = ["244,67,54", "233,30,99", "156,39,176", "103,58,183", "63,81,181", "33,150,243", "3,169,244", "0,188,212", "0,150,136", "76,175,80", "139,195,74", "205,220,57", "255,235,59", "255,193,7", "255,152,0", "255,87,34", "121,85,72", "96,125,139"];
-const ColorInput = memo((_Vb) => {
-  var _Wb = _Vb, {
+const ColorInput = memo((_$b) => {
+  var _ac = _$b, {
     defaultValue,
     events = {}
-  } = _Wb, props = __objRest(_Wb, [
+  } = _ac, props = __objRest(_ac, [
     "defaultValue",
     "events"
   ]);
@@ -50701,16 +50613,16 @@ const DynamicInput = memo(({
   };
   return getInputComponentByType();
 });
-const StreetAddressInput = memo((_Xb) => {
-  var props = __objRest(_Xb, []);
+const StreetAddressInput = memo((_bc) => {
+  var props = __objRest(_bc, []);
   return /* @__PURE__ */ jsx$2(TextInput, __spreadValues({}, props));
 });
-const Spacer = memo((_Yb) => {
-  var _Zb = _Yb, {
+const Spacer = memo((_cc) => {
+  var _dc = _cc, {
     alignment = {},
     as = "div",
     children
-  } = _Zb, props = __objRest(_Zb, [
+  } = _dc, props = __objRest(_dc, [
     "alignment",
     "as",
     "children"
@@ -50724,11 +50636,11 @@ const Spacer = memo((_Yb) => {
     children
   }));
 });
-const ListItem = memo((__b) => {
-  var _$b = __b, {
+const ListItem = memo((_ec) => {
+  var _fc = _ec, {
     as = "li",
     children
-  } = _$b, props = __objRest(_$b, [
+  } = _fc, props = __objRest(_fc, [
     "as",
     "children"
   ]);
@@ -50745,11 +50657,11 @@ const ListItem = memo((__b) => {
     children
   }));
 });
-const OrderedList = memo((_ac) => {
-  var _bc = _ac, {
+const OrderedList = memo((_gc) => {
+  var _hc = _gc, {
     as = "ul",
     children
-  } = _bc, props = __objRest(_bc, [
+  } = _hc, props = __objRest(_hc, [
     "as",
     "children"
   ]);
@@ -50759,12 +50671,12 @@ const OrderedList = memo((_ac) => {
     children
   }));
 });
-const UnorderedList = memo((_cc) => {
-  var _dc = _cc, {
+const UnorderedList = memo((_ic) => {
+  var _jc = _ic, {
     as = "ul",
     items,
     margin = {}
-  } = _dc, props = __objRest(_dc, [
+  } = _jc, props = __objRest(_jc, [
     "as",
     "items",
     "margin"
@@ -50793,11 +50705,11 @@ const UnorderedList = memo((_cc) => {
     }, index))
   }));
 });
-const Video = memo((_ec) => {
-  var _fc = _ec, {
+const Video = memo((_kc) => {
+  var _lc = _kc, {
     className = "",
     url
-  } = _fc, props = __objRest(_fc, [
+  } = _lc, props = __objRest(_lc, [
     "className",
     "url"
   ]);
@@ -50813,8 +50725,8 @@ const VideoElement = styled.video.withConfig({
   displayName: "VideoElement",
   componentId: "sc-1ai2qam-0"
 })([""]);
-const MediaGridItem = memo((_gc) => {
-  var _hc = _gc, {
+const MediaGridItem = memo((_mc) => {
+  var _nc = _mc, {
     background = {},
     borderRadius = {},
     description,
@@ -50824,7 +50736,7 @@ const MediaGridItem = memo((_gc) => {
     title,
     url,
     video
-  } = _hc, props = __objRest(_hc, [
+  } = _nc, props = __objRest(_nc, [
     "background",
     "borderRadius",
     "description",
@@ -50876,15 +50788,15 @@ const MediaGridItem = memo((_gc) => {
     children: content
   }));
 });
-const MediaGrid = memo((_ic) => {
-  var _jc = _ic, {
+const MediaGrid = memo((_oc) => {
+  var _pc = _oc, {
     borderRadius = {},
     children,
     columns = 3,
     className = "",
     items,
     loading
-  } = _jc, props = __objRest(_jc, [
+  } = _pc, props = __objRest(_pc, [
     "borderRadius",
     "children",
     "columns",
@@ -50928,13 +50840,13 @@ const MediaGrid = memo((_ic) => {
     })]
   }));
 });
-const MediaPreview = memo((_kc) => {
-  var _lc = _kc, {
+const MediaPreview = memo((_qc) => {
+  var _rc = _qc, {
     alignment = {},
     borderRadius = {},
     className = "",
     media
-  } = _lc, props = __objRest(_lc, [
+  } = _rc, props = __objRest(_rc, [
     "alignment",
     "borderRadius",
     "className",
@@ -50988,8 +50900,8 @@ styled.svg.withConfig({
   displayName: "SvgMedia",
   componentId: "sc-1xm40ad-0"
 })(["align-items:center;display:flex;justify-content:center;svg{fill:rgb(", ");}"], (props) => props.color);
-const Svg = memo((_mc) => {
-  var _nc = _mc, {
+const Svg = memo((_sc) => {
+  var _tc = _sc, {
     as = "span",
     children,
     className = "",
@@ -50997,7 +50909,7 @@ const Svg = memo((_mc) => {
       height: Sizes.Small,
       width: Sizes.Small
     }
-  } = _nc, props = __objRest(_nc, [
+  } = _tc, props = __objRest(_tc, [
     "as",
     "children",
     "className",
@@ -51011,8 +50923,8 @@ const Svg = memo((_mc) => {
     children
   }));
 });
-const MessagePreview = memo((_oc) => {
-  var _pc = _oc, {
+const MessagePreview = memo((_uc) => {
+  var _vc = _uc, {
     background = {},
     body,
     borderRadius = {},
@@ -51020,7 +50932,7 @@ const MessagePreview = memo((_oc) => {
     date,
     subject,
     sender
-  } = _pc, props = __objRest(_pc, [
+  } = _vc, props = __objRest(_vc, [
     "background",
     "body",
     "borderRadius",
@@ -51103,14 +51015,14 @@ const MessagePreview = memo((_oc) => {
     })]
   }));
 });
-const ConversationList = memo((_qc) => {
-  var _rc = _qc, {
+const ConversationList = memo((_wc) => {
+  var _xc = _wc, {
     alignment = {},
     background = {},
     borderRadius = {},
     className = "",
     size = {}
-  } = _rc, props = __objRest(_rc, [
+  } = _xc, props = __objRest(_xc, [
     "alignment",
     "background",
     "borderRadius",
@@ -51159,8 +51071,8 @@ const ConversationList = memo((_qc) => {
     })
   }));
 });
-const NavigationMenu = memo((_sc) => {
-  var _tc = _sc, {
+const NavigationMenu = memo((_yc) => {
+  var _zc = _yc, {
     alignment = {},
     background = {},
     className = "",
@@ -51169,7 +51081,7 @@ const NavigationMenu = memo((_sc) => {
     menu = [],
     padding = {},
     states = {}
-  } = _tc, props = __objRest(_tc, [
+  } = _zc, props = __objRest(_zc, [
     "alignment",
     "background",
     "className",
@@ -51219,7 +51131,7 @@ const NavigationMenu = memo((_sc) => {
           top: Amount.Least
         }, padding),
         states: __spreadValues({
-          active: {
+          current: {
             background: {
               color: BackgroundColors.Primary
             },
@@ -51232,8 +51144,7 @@ const NavigationMenu = memo((_sc) => {
             background: {
               color: BackgroundColors.Light
             },
-            textColor: TextColors.Light,
-            textSize: TextSize.Default
+            textColor: TextColors.Darker
           }
         }, states),
         textColor: TextColors.Default,
@@ -51242,8 +51153,8 @@ const NavigationMenu = memo((_sc) => {
     })
   }));
 });
-const ConversationNavigation = memo((_uc) => {
-  var props = __objRest(_uc, []);
+const ConversationNavigation = memo((_Ac) => {
+  var props = __objRest(_Ac, []);
   const navigate = useNavigate();
   return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({}, props), {
     children: [/* @__PURE__ */ jsx$2(Button$1, {
@@ -51336,8 +51247,8 @@ const Message$1 = memo(({
 }) => {
   return /* @__PURE__ */ jsx$2(Container$9, {});
 });
-const MessageComposer = memo((_vc) => {
-  var props = __objRest(_vc, []);
+const MessageComposer = memo((_Bc) => {
+  var props = __objRest(_Bc, []);
   return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
     background: {
       color: BackgroundColors.Default
@@ -51444,14 +51355,14 @@ const Content = styled.div.withConfig({
   displayName: "Content",
   componentId: "sc-gk61f6-1"
 })(["background:white;border-radius:15px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);padding:20px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;"]);
-const BreadcrumbNavigation = memo((_wc) => {
-  var _xc = _wc, {
+const BreadcrumbNavigation = memo((_Cc) => {
+  var _Dc = _Cc, {
     alignment = {},
     className = "",
     items = [],
     shadow = DepthShadow.Surface,
     textSize = TextSize.Default
-  } = _xc, props = __objRest(_xc, [
+  } = _Dc, props = __objRest(_Dc, [
     "alignment",
     "className",
     "items",
@@ -51597,12 +51508,12 @@ const NavigationBar = memo(({
     })]
   });
 });
-const ObjectLink = memo((_yc) => {
-  var _zc = _yc, {
+const ObjectLink = memo((_Ec) => {
+  var _Fc = _Ec, {
     children,
     disabled,
     onClick
-  } = _zc, props = __objRest(_zc, [
+  } = _Fc, props = __objRest(_Fc, [
     "children",
     "disabled",
     "onClick"
@@ -51649,12 +51560,12 @@ const IconWrapper$1 = styled.div.withConfig({
   displayName: "IconWrapper",
   componentId: "sc-10hsjyi-1"
 })(["flex-basis:20px;"]);
-const RouterView = memo((_Ac) => {
-  var _Bc = _Ac, {
+const RouterView = memo((_Gc) => {
+  var _Hc = _Gc, {
     alignment = {},
     className = "",
     routes = []
-  } = _Bc, props = __objRest(_Bc, [
+  } = _Hc, props = __objRest(_Hc, [
     "alignment",
     "className",
     "routes"
@@ -51676,12 +51587,12 @@ const RouterView = memo((_Ac) => {
     })
   }));
 });
-const Tab = memo((_Cc) => {
-  var _Dc = _Cc, {
+const Tab = memo((_Ic) => {
+  var _Jc = _Ic, {
     className = "",
     children,
     label
-  } = _Dc, props = __objRest(_Dc, [
+  } = _Jc, props = __objRest(_Jc, [
     "className",
     "children",
     "label"
@@ -51693,13 +51604,13 @@ const Tab = memo((_Cc) => {
     children
   }));
 });
-const Tabs = memo((_Ec) => {
-  var _Fc = _Ec, {
+const Tabs = memo((_Kc) => {
+  var _Lc = _Kc, {
     background = {},
     borderRadius = {},
     className = "",
     children
-  } = _Fc, props = __objRest(_Fc, [
+  } = _Lc, props = __objRest(_Lc, [
     "background",
     "borderRadius",
     "className",
@@ -51772,18 +51683,18 @@ const Tabs = memo((_Ec) => {
     })]
   }));
 });
-const ConnectionStatus = memo((_Gc) => {
-  var props = __objRest(_Gc, []);
+const ConnectionStatus = memo((_Mc) => {
+  var props = __objRest(_Mc, []);
   return /* @__PURE__ */ jsx$2(NotificationLabel, __spreadValues({
     type: NotificationType.Success,
     label: "Connected"
   }, props));
 });
-const Badge = memo((_Hc) => {
-  var _Ic = _Hc, {
+const Badge = memo((_Nc) => {
+  var _Oc = _Nc, {
     children,
     label
-  } = _Ic, props = __objRest(_Ic, [
+  } = _Oc, props = __objRest(_Oc, [
     "children",
     "label"
   ]);
@@ -51835,8 +51746,8 @@ const Close = styled.div.withConfig({
   displayName: "Close",
   componentId: "sc-hj2572-4"
 })(["float:right;height:60px;line-height:49px;text-align:center;width:60px;"]);
-const Heading = memo((_Jc) => {
-  var _Kc = _Jc, {
+const Heading = memo((_Pc) => {
+  var _Qc = _Pc, {
     as = "h3",
     children,
     className = "",
@@ -51844,7 +51755,7 @@ const Heading = memo((_Jc) => {
     textWeight = TextWeight.More,
     textColor = TextColors.Dark,
     textSize = TextSize.Large
-  } = _Kc, props = __objRest(_Kc, [
+  } = _Qc, props = __objRest(_Qc, [
     "as",
     "children",
     "className",
@@ -51919,10 +51830,10 @@ const SearchResults = styled.div.withConfig({
   displayName: "SearchResults",
   componentId: "sc-1rpv9xw-0"
 })(["backdrop-filter:blur(3px);background:var(--bg-color-depth-highest-opaque);border-radius:var(--border-radius);cursor:default;display:none;overflow:hidden;overflow-y:scroll;left:20px;max-height:390px;min-height:300px;position:absolute;opacity:0;pointer-events:none;top:80%;transform:translateY(-300px);transition:opacity 0.18s ease-in-out,transform 0.18s ease-in-out;min-width:500px;max-width:500px;z-index:3;.result{margin-bottom:3px;}", ";"], (props) => props.resultsVisible && css$2(["display:flex;opacity:1;pointer-events:all;transform:translateY(0);"]));
-const ThemeSelector = memo((_Lc) => {
-  var _Mc = _Lc, {
+const ThemeSelector = memo((_Rc) => {
+  var _Sc = _Rc, {
     showLabel = true
-  } = _Mc, props = __objRest(_Mc, [
+  } = _Sc, props = __objRest(_Sc, [
     "showLabel"
   ]);
   const dispatch = useDispatch();
@@ -72842,14 +72753,14 @@ var style = {
     "background": "linear-gradient(to right, rgba(224, 145, 66, 0.2) 70%, rgba(224, 145, 66, 0))"
   }
 };
-const CodeBlock = memo((_Nc) => {
-  var _Oc = _Nc, {
+const CodeBlock = memo((_Tc) => {
+  var _Uc = _Tc, {
     alignment = {},
     borderRadius = {},
     lineHeight = Sizes.Default,
     textSize = TextSize.Default,
     value: value2
-  } = _Oc, props = __objRest(_Oc, [
+  } = _Uc, props = __objRest(_Uc, [
     "alignment",
     "borderRadius",
     "lineHeight",
@@ -72878,14 +72789,29 @@ const CodeBlock = memo((_Nc) => {
     })
   }));
 });
-const LogoutButton = memo((_Pc) => {
-  var _Qc = _Pc, {
+const LineBreak = memo((_Vc) => {
+  var _Wc = _Vc, {
+    className = "",
+    size = {
+      height: Sizes.Default
+    }
+  } = _Wc, props = __objRest(_Wc, [
+    "className",
+    "size"
+  ]);
+  return /* @__PURE__ */ jsx$2(Container$9, __spreadValues({
+    className: `${className} link-break`,
+    size
+  }, props));
+});
+const LogoutButton = memo((_Xc) => {
+  var _Yc = _Xc, {
     icon: icon2,
     onLogoutSuccess,
     label,
     showArrow = false,
     textColor = TextColors.Error
-  } = _Qc, props = __objRest(_Qc, [
+  } = _Yc, props = __objRest(_Yc, [
     "icon",
     "onLogoutSuccess",
     "label",
@@ -73099,5 +73025,5 @@ async function init() {
   i18nIsoCountries.registerLocale(englishLanguage);
 }
 init();
-export { ActivityFeed, AddPaymentMethodForm, AlignHorizontal, AlignVertical, Amount, Animations, AutoComplete, Backdrop, BackgroundColorShade, BackgroundColors, BackgroundSize, Badge, BooleanLabel, BorderColorShade, BorderColors, BorderStyle, BreadcrumbNavigation, Button$1 as Button, ButtonType, Card, Checkbox, CloseButton, CodeBlock, CodeVerificationForm, ColorInput, ColorLabel, Colors, ConnectionStatus, Container$9 as Container, ContrastColors, ConversationList, ConversationNavigation, CountryInput, CountryLabel, CurrencyAmountInput, CurrencyAmountLabel, CurrencyInput, Cursor, DataGrid, DataGridCell, DateInput, DateLabel, Depth, DepthShadow, DropdownInput, DropdownPanel, DynamicInput, EmailAddressInput, EmailAddressLabel, EntityEditor, EntityPanel, EntityPreview, ErrorLabel, ErrorNotification, Fill, ForegroundColorShade, ForegroundColors, ForgotPasswordForm, Form, FormActions, FormFields, Heading, HelperButton, HoverPanel, Icon, Image, ImageInput, InputHelper, InputLabel, InputRow, Label, LanguageInput, LanguageLabel, LineBreak, LinearGauge, Link, ListItem, LoadingOverlay, LoginForm, LogoutButton, LongTextInput, MarkdownEditor, MediaGrid, MediaPreview, Menu, MenuButton, Message$1 as Message, MessageComposer, MessagePreview, Modal, ModalHeader, MoreMenu, NavigationBar, NavigationLink, NavigationMenu, NotificationLabel, Notifications, NumberInput, NumberLabel, ObjectLink, ObjectPropertiesView, Orb, OrderedList, Orientation, Overflow, Page, PageLink, Paragraph, PasswordInput, PaymentMethodModal, PersonLabel, PhoneNumberInput, PhoneNumberLabel, PieChart, PositionBehavior, ProgressLabel, ProgressMeter, ProgressSpinner, ProgressivePaymentStatus, PropertyEditor, RadialChart, RadialGauge, RouterView, SearchInput, SignupForm, Sizes, SlidePanel, Small, Spacer, StaticTypeLabel, StreetAddressInput, SubTitle, SubscriptionModal, Svg, Tab, Tabs, TextAlign, TextColors, TextDecorationLine, TextDecorationStyle, TextInput, TextOverflow, TextSize, TextWeight, ThemeSelector, Title, TitleCard, ToggleInput, UniversalSearch, UnorderedList, UserLabel, UserMenu, VerificationCodeInput, Video, WebApplication, Workspace, convertAmountToSize, convertSizeToAmount, convertSizeToTextSize, getCSSMeasurementValue, getFormFieldsFromModel, getInputElementByFieldType, getLabelByFieldType, getLargerAmount, getLargerSize, getSmallerAmount, getSmallerSize, useAuthentication, useEntityEditor };
+export { ActivityFeed, AddPaymentMethodForm, AlignHorizontal, AlignVertical, Amount, Animations, AutoComplete, Backdrop, BackgroundColorShade, BackgroundColors, BackgroundSize, Badge, BooleanLabel, BorderColorShade, BorderColors, BorderStyle, BreadcrumbNavigation, Button$1 as Button, ButtonType, Card, Checkbox, CloseButton, CodeBlock, CodeVerificationForm, ColorInput, ColorLabel, Colors, ConnectionStatus, Container$9 as Container, ContrastColors, ConversationList, ConversationNavigation, CountryInput, CountryLabel, CurrencyAmountInput, CurrencyAmountLabel, CurrencyInput, Cursor, DataGrid, DataGridCell, DateInput, DateLabel, Depth, DepthShadow, DropdownInput, DropdownPanel, DynamicInput, EmailAddressInput, EmailAddressLabel, EntityEditor, EntityPanel, EntityPreview, ErrorLabel, ErrorNotification, Fill, ForegroundColorShade, ForegroundColors, ForgotPasswordForm, Form, FormActions, FormFields, Heading, HelperButton, HoverPanel, Icon, Image, ImageInput, InputHelper, InputLabel, InputRow, InputType, Label, LanguageInput, LanguageLabel, LineBreak, LinearGauge, Link, ListItem, LoadingOverlay, LoginForm, LogoutButton, LongTextInput, MarkdownEditor, MediaGrid, MediaPreview, Menu, MenuButton, Message$1 as Message, MessageComposer, MessagePreview, Modal, ModalHeader, MoreMenu, NavigationBar, NavigationLink, NavigationMenu, NotificationLabel, Notifications, NumberInput, NumberLabel, ObjectLink, ObjectPropertiesView, Orb, OrderedList, Orientation, Overflow, Page, PageLink, Paragraph, PasswordInput, PaymentMethodModal, PersonLabel, PhoneNumberInput, PhoneNumberLabel, PieChart, PositionBehavior, ProgressLabel, ProgressMeter, ProgressSpinner, ProgressivePaymentStatus, PropertyEditor, RadialChart, RadialGauge, RouterView, SearchInput, SignupForm, Sizes, SlidePanel, Small, Spacer, StaticTypeLabel, StreetAddressInput, SubTitle, SubscriptionModal, Svg, Tab, Tabs, TextAlign, TextColors, TextDecorationLine, TextDecorationStyle, TextInput, TextOverflow, TextSize, TextWeight, ThemeSelector, Title, TitleCard, ToggleInput, UniversalSearch, UnorderedList, UserLabel, UserMenu, VerificationCodeInput, Video, WebApplication, Workspace, convertAmountToSize, convertSizeToAmount, convertSizeToTextSize, getCSSMeasurementValue, getFormFieldsFromModel, getInputElementByFieldType, getLabelByFieldType, getLargerAmount, getLargerSize, getSmallerAmount, getSmallerSize, useAuthentication, useEntityEditor };
 //# sourceMappingURL=index.js.map

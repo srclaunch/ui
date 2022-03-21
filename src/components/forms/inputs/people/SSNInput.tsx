@@ -25,7 +25,6 @@ import {
   BorderStyle,
   Cursor,
   DepthShadow,
-  InputProps,
   Orientation,
   Sizes,
   TextAlign,
@@ -35,18 +34,13 @@ import {
 } from '../../../../types';
 import { ErrorLabel } from '../../../errors/ErrorLabel';
 import { Container } from '../../../layout/Container';
-import { Icon } from '../../../media/Icon';
+
 import { ProgressSpinner } from '../../../progress/ProgressSpinner';
 import { Label } from '../../../typography/Label';
 import { InputLabel } from '../../labels/InputLabel';
 import { InputContainer, InputContainerProps } from '../shared/InputContainer';
-import { TextProps } from '../../../typography/Text';
 
-export type SSNInputProps = InputProps<SSN> &
-  InputContainerProps &
-  TextProps & {
-    readonly icon?: typeof Icon;
-  };
+export type SSNInputProps = InputContainerProps<SSN>;
 
 export const SSNInput = memo(
   ({

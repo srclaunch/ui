@@ -55,31 +55,35 @@ export const EntityEditor = memo(
         <Form
           fields={getFormFieldsFromModel({ model })}
           entity={{ ...entity, ...entityFields }}
+          events={{
+            form: {
+              onSubmitted: async ({ fields, validation }) => {
+                let fieldData = {};
+
+                for (const [key, props] of Object.entries(fields)) {
+                  fieldData = { ...fieldData, [key]: props.value };
+                }
+
+                if (id) {
+                  const editFunction = actions?.[`update${model.name}`];
+
+                  if (editFunction)
+                    await dispatch(editFunction({ id, ...fieldData }));
+
+                  hideEntityEditor();
+                } else {
+                  const createFunction = actions?.[`create${model.name}`];
+
+                  if (createFunction) await dispatch(createFunction(fieldData));
+
+                  hideEntityEditor();
+                }
+              },
+            },
+          }}
           inProgress={inProgress}
           model={model}
           name="entity-editor"
-          onSubmit={async ({ fields, validation }) => {
-            let fieldData = {};
-
-            for (const [key, props] of Object.entries(fields)) {
-              fieldData = { ...fieldData, [key]: props.value };
-            }
-
-            if (id) {
-              const editFunction = actions?.[`update${model.name}`];
-
-              if (editFunction)
-                await dispatch(editFunction({ id, ...fieldData }));
-
-              hideEntityEditor();
-            } else {
-              const createFunction = actions?.[`create${model.name}`];
-
-              if (createFunction) await dispatch(createFunction(fieldData));
-
-              hideEntityEditor();
-            }
-          }}
           submitButton={{
             label: id ? 'Update' : 'Create',
           }}

@@ -13,7 +13,7 @@ import {
   Fill,
   ForegroundColor,
   ForegroundColors,
-  InteractionStates,
+  States,
   Sizes,
   TextColor,
   TextColors,
@@ -29,7 +29,7 @@ export type IconProps = ContainerProps & {
   readonly svg?: ReactElement;
   readonly url?: string;
 } & {
-  readonly states?: InteractionStates<IconProps>;
+  readonly states?: States<IconProps>;
 };
 
 const Wrapper = styled.span<IconProps>`

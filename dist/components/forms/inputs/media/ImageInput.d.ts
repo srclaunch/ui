@@ -1,9 +1,9 @@
 import { Image as ImageType } from '@srclaunch/types';
 import { ReactElement } from 'react';
-import { InputProps } from '../../../../types';
 import { ContainerProps } from '../../../layout/Container';
 import { IconProps } from '../../../media/Icon';
 import { ButtonProps } from '../../buttons/Button';
+import { InputProps } from '../shared/Input';
 export declare type ImageInputProps = ContainerProps & InputProps<(File | ImageType)[]> & {
     readonly button?: ButtonProps;
     readonly icon?: IconProps;

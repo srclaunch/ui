@@ -16,6 +16,7 @@ import {
   Fill,
   FormField,
   Orientation,
+  Sizes,
   TextAlign,
   TextDecorationLine,
 } from '../../types';
@@ -99,16 +100,13 @@ export const LoginForm = memo(
             bottom: Amount.Default,
           }}
           showOrb={false}
+          textAlign={TextAlign.Center}
         >
-          <Paragraph
-            alignment={{
-              horizontal: AlignHorizontal.Center,
-            }}
-            textAlign={TextAlign.Center}
-          >
+          <Paragraph lineHeight={Sizes.Small} textAlign={TextAlign.Center}>
             Don't have an account yet?
             <br />
             <Link
+              lineHeight={Sizes.Small}
               to="/signup"
               states={{
                 hovered: {
@@ -135,6 +133,20 @@ export const LoginForm = memo(
         )}
 
         <Form
+          events={{
+            form: {
+              onSubmitted: ({ fields, validation }) => {
+                if ((validation && validation.validated) || !validation) {
+                  dispatch(
+                    login({
+                      password: fields.password?.value as string,
+                      username: fields.username?.value as string,
+                    }),
+                  );
+                }
+              },
+            },
+          }}
           fields={[
             {
               autoComplete: AutoComplete.Username,
@@ -168,17 +180,6 @@ export const LoginForm = memo(
           ]}
           inProgress={inProgress}
           name="login-form"
-          onSubmit={({ fields, validation }) => {
-            console.log({ fields, validation });
-            if ((validation && validation.validated) || !validation) {
-              dispatch(
-                login({
-                  password: fields.password?.value as string,
-                  username: fields.username?.value as string,
-                }),
-              );
-            }
-          }}
           submitButton={{
             alignment: {
               fill: Fill.Both,
@@ -186,10 +187,18 @@ export const LoginForm = memo(
             },
             borderRadius: { all: Amount.Least },
             label: 'Login',
+            lineHeight: Sizes.Large,
           }}
         />
 
-        <Container padding={{ all: Amount.Default }}>
+        <Container
+          alignment={{
+            horizontal: AlignHorizontal.Center,
+            orientation: Orientation.Horizontal,
+            vertical: AlignVertical.Center,
+          }}
+          padding={{ all: Amount.Default }}
+        >
           <Small textAlign={TextAlign.Center}>
             <Link
               states={{

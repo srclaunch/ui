@@ -27,15 +27,14 @@ import { Label } from '../../../typography/Label';
 import { Text, TextProps } from '../../../typography/Text';
 import { InputContainer, InputContainerProps } from './InputContainer';
 
-type DropdownControlProps = {
+type DropdownControlProps = InputContainerProps<string> & {
   readonly component?: ReactElement;
   readonly icon?: IconProps;
   readonly label?: string;
   readonly placeholder?: string;
   readonly menuVisible: boolean;
   readonly ref?: ComponentRef<any>;
-} & InputContainerProps &
-  TextProps;
+};
 
 const Wrapper = styled.button<DropdownControlProps>`
   ${InputContainerStyles};

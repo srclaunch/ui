@@ -9,7 +9,7 @@ import {
   BorderRadius,
   CommonComponentProps,
   Events,
-  InteractionStates,
+  States,
   Margin,
   Size,
 } from '../../types';
@@ -32,7 +32,7 @@ export type ImageProps<P = {}> = (CommonComponentProps & {
   readonly size?: Size;
   readonly url?: string;
 } & P) & {
-  readonly states?: InteractionStates<ImageProps>;
+  readonly states?: States<ImageProps>;
 };
 
 const Img = styled.img<ImageProps>`

@@ -1,14 +1,20 @@
 import { css, SimpleInterpolation } from 'styled-components';
-import { ContainerStyles, getContainerStyles } from './index';
-import { InteractionStates } from '../../types/states';
+import { getContainerStyles } from './index';
 import { ContainerProps } from '../../components/layout/Container';
 import { getTextStyles } from '../typography';
 import { TextProps } from '../../components/typography/Text';
 
-export function getStatesStyles(
+export function getDisabledStateStyles(): SimpleInterpolation {
+  return css`
+    opacity: 0.1 !important;
+    background-color: yellow !important;
+  `;
+}
+
+export function getContainerStatesStyles(
   props: ContainerProps & TextProps,
 ): SimpleInterpolation {
-  const { states } = props;
+  const { states, ...otherProps } = props;
 
   if (!states) {
     return;
@@ -32,21 +38,22 @@ export function getStatesStyles(
     ${current &&
     state?.current &&
     css`
-      ${getContainerStyles(current)};
-      ${getTextStyles(current)};
+      ${getContainerStyles({ ...otherProps, ...current })};
     `};
 
     ${disabled &&
     css`
       ${state?.disabled
         ? css`
-            ${getContainerStyles(disabled)};
-            ${getTextStyles(disabled)};
+            ${getContainerStyles({ ...otherProps, ...disabled })};
+
+            ${getDisabledStateStyles()};
           `
         : css`
             &:disabled {
-              ${getContainerStyles(disabled)};
-              ${getTextStyles(disabled)};
+              ${getContainerStyles({ ...otherProps, ...disabled })};
+
+              ${getDisabledStateStyles()};
             }
           `};
     `};
@@ -54,37 +61,32 @@ export function getStatesStyles(
     ${error &&
     state?.error &&
     css`
-      ${getContainerStyles(error)};
-      ${getTextStyles(error)};
+      ${getContainerStyles({ ...otherProps, ...error })};
     `};
 
     ${focused &&
     css`
       ${state?.focused
         ? css`
-            ${getContainerStyles(focused)};
-            ${getTextStyles(focused)};
+            ${getContainerStyles({ ...otherProps, ...focused })};
           `
         : css`
             &:focus {
-              ${getContainerStyles(focused)};
-              ${getTextStyles(focused)};
+              ${getContainerStyles({ ...otherProps, ...focused })};
             }
           `};
     `};
 
     ${hovered &&
-    !state?.active &&
+    !state?.current &&
     css`
       ${state?.hovered
         ? css`
-            ${getContainerStyles(hovered)};
-            ${getTextStyles(hovered)};
+            ${getContainerStyles({ ...otherProps, ...hovered })};
           `
         : css`
             &:hover {
-              ${getContainerStyles(hovered)};
-              ${getTextStyles(hovered)};
+              ${getContainerStyles({ ...otherProps, ...hovered })};
             }
           `};
     `};
@@ -93,13 +95,11 @@ export function getStatesStyles(
     css`
       ${state?.active
         ? css`
-            ${getContainerStyles(active)};
-            ${getTextStyles(active)};
+            ${getContainerStyles({ ...otherProps, ...active })};
           `
         : css`
             &::active {
-              ${getContainerStyles(active)};
-              ${getTextStyles(active)};
+              ${getContainerStyles({ ...otherProps, ...active })};
             }
           `};
     `};
@@ -107,33 +107,29 @@ export function getStatesStyles(
     ${loading &&
     state?.loading &&
     css`
-      ${getContainerStyles(loading)};
-      ${getTextStyles(loading)};
+      ${getContainerStyles({ ...otherProps, ...loading })};
     `};
 
     ${success &&
     state?.success &&
     css`
-      ${getContainerStyles(success)};
-      ${getTextStyles(success)};
+      ${getContainerStyles({ ...otherProps, ...success })};
     `};
 
     ${visible &&
     state?.visible &&
     css`
-      ${getContainerStyles(visible)};
-      ${getTextStyles(visible)};
+      ${getContainerStyles({ ...otherProps, ...visible })};
     `};
 
     ${warning &&
     state?.warning &&
     css`
-      ${getContainerStyles(warning)};
-      ${getTextStyles(warning)};
+      ${getContainerStyles({ ...otherProps, ...warning })};
     `};
   `;
 }
 
 export const StateStyles = css<ContainerProps & TextProps>`
-  ${props => getStatesStyles(props)};
+  ${props => getContainerStatesStyles(props)};
 `;

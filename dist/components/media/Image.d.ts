@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { Border, BorderRadius, CommonComponentProps, Events, InteractionStates, Margin, Size } from '../../types';
+import { Border, BorderRadius, CommonComponentProps, Events, States, Margin, Size } from '../../types';
 /**
  * Image component for displaying GIFs, JPGs or PNGs.
  *
@@ -18,7 +18,7 @@ export declare type ImageProps<P = {}> = (CommonComponentProps & {
     readonly size?: Size;
     readonly url?: string;
 } & P) & {
-    readonly states?: InteractionStates<ImageProps>;
+    readonly states?: States<ImageProps>;
 };
 export declare const Image: import("react").MemoExoticComponent<({ alt, className, description, path, url, size, ...props }: ImageProps) => ReactElement>;
 //# sourceMappingURL=Image.d.ts.map

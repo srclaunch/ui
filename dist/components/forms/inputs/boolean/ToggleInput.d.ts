@@ -1,6 +1,6 @@
 /// <reference types="react" />
-import { InputProps } from '../../../../types';
 import { ContainerProps } from '../../../layout/Container';
+import { InputProps } from '../shared/Input';
 export declare type ToggleInputProps = ContainerProps & InputProps<boolean> & {
     readonly trueLabel?: string;
     readonly falseLabel?: string;

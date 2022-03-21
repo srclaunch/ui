@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactElement } from 'react';
-import { Amount, CommonComponentProps, Cursor, InteractionStates, TextAlign, TextColor, TextOverflow, TextSize, TextWeight } from '../../types';
-import { TextDecorationLine, TextDecorationStyle } from '../../types/typography/text';
+import { Amount, CommonComponentProps, Cursor, States, TextAlign, TextColor, TextOverflow, TextSize, TextWeight } from '../../types';
+import { TextDecorationLine, TextDecorationStyle } from '../../types/typography';
 export declare type TextProps = PropsWithChildren<CommonComponentProps & {
     readonly bold?: boolean;
     readonly cursor?: Cursor;
@@ -20,7 +20,7 @@ export declare type TextProps = PropsWithChildren<CommonComponentProps & {
     readonly textSize?: TextSize | string | number;
     readonly textWeight?: TextWeight | string;
 }> & {
-    readonly states?: InteractionStates<TextProps>;
+    readonly states?: States<TextProps>;
 };
 export declare const Text: import("react").MemoExoticComponent<({ as, children, className, lineHeight, lineWrap, selectable, textAlign, textColor, textSize, textOverflow, textWeight, ...props }: TextProps) => ReactElement>;
 //# sourceMappingURL=Text.d.ts.map

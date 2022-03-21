@@ -1,15 +1,14 @@
 import { ComponentRef, ReactElement } from 'react';
 import { IconProps } from '../../../media/Icon';
-import { TextProps } from '../../../typography/Text';
 import { InputContainerProps } from './InputContainer';
-declare type DropdownControlProps = {
+declare type DropdownControlProps = InputContainerProps<string> & {
     readonly component?: ReactElement;
     readonly icon?: IconProps;
     readonly label?: string;
     readonly placeholder?: string;
     readonly menuVisible: boolean;
     readonly ref?: ComponentRef<any>;
-} & InputContainerProps & TextProps;
+};
 export declare const DropdownControl: import("react").MemoExoticComponent<({ alignment, background, border, borderRadius, className, component, depth, icon, label, menuVisible, placeholder, states, size, textSize, textColor, ...props }: DropdownControlProps) => ReactElement>;
 export {};
 //# sourceMappingURL=DropdownControl.d.ts.map

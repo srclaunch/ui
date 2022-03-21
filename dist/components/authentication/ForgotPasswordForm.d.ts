@@ -7,6 +7,6 @@ declare type ForgotPasswordFormProps = {
     readonly signInButtonLabel?: ReactElement;
     readonly forgotPasswordLinkLabel?: ReactElement;
 } & ContainerProps;
-export declare const ForgotPasswordForm: import("react").MemoExoticComponent<({ background, borderRadius, title, showSignupLink, signUpLinkLabel, signInButtonLabel, forgotPasswordLinkLabel, }: ForgotPasswordFormProps) => ReactElement>;
+export declare const ForgotPasswordForm: import("react").MemoExoticComponent<({ background, borderRadius, size, title, showSignupLink, signUpLinkLabel, signInButtonLabel, forgotPasswordLinkLabel, ...props }: ForgotPasswordFormProps) => ReactElement>;
 export {};
 //# sourceMappingURL=ForgotPasswordForm.d.ts.map
