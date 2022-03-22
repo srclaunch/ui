@@ -17,6 +17,7 @@ import {
   TextColors,
   TextDecorationLine,
   TextSize,
+  Fill,
 } from '../../../types/index';
 import { Container, ContainerProps } from '../../layout/Container';
 import { IconProps } from '../../media/Icon';
@@ -96,6 +97,7 @@ export const Button = memo(
     icon,
     label,
     lineHeight = Sizes.Default,
+    padding = {},
     states = {},
     textAlign = TextAlign.Center,
     textColor,
@@ -196,7 +198,7 @@ export const Button = memo(
         className={`${className} button`}
         cursor={cursor}
         form={form}
-        // padding={{ left: Amount.Less, right: Amount.Less, ...padding }}
+        padding={{ left: lineHeight, right: lineHeight, ...padding }}
         // shadow={{
         //   radius: 8,
         //   color: colors?.backgroundColor,

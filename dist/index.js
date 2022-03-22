@@ -20348,9 +20348,10 @@ var ForegroundColors = ((ForegroundColors2) => {
   return ForegroundColors2;
 })(ForegroundColors || {});
 var Fill = /* @__PURE__ */ ((Fill2) => {
-  Fill2["Horizontal"] = "horizontal";
-  Fill2["Vertical"] = "vertical";
   Fill2["Both"] = "both";
+  Fill2["Horizontal"] = "horizontal";
+  Fill2["None"] = "none";
+  Fill2["Vertical"] = "vertical";
   return Fill2;
 })(Fill || {});
 var PositionBehavior = /* @__PURE__ */ ((PositionBehavior2) => {
@@ -20517,6 +20518,9 @@ function getFillStyles(alignment) {
   }
   if ((alignment == null ? void 0 : alignment.fill) === Fill.Vertical) {
     return css$2(["flex-grow:1;"]);
+  }
+  if ((alignment == null ? void 0 : alignment.fill) === Fill.None) {
+    return css$2(["flex-grow:0;"]);
   }
   return css$2(["flex-grow:0;"]);
 }
@@ -21226,6 +21230,7 @@ const Button$1 = memo((_k) => {
     icon: icon2,
     label,
     lineHeight = Sizes.Default,
+    padding = {},
     states = {},
     textAlign = TextAlign.Center,
     textColor,
@@ -21246,6 +21251,7 @@ const Button$1 = memo((_k) => {
     "icon",
     "label",
     "lineHeight",
+    "padding",
     "states",
     "textAlign",
     "textColor",
@@ -21344,6 +21350,10 @@ const Button$1 = memo((_k) => {
     className: `${className} button`,
     cursor,
     form,
+    padding: __spreadValues({
+      left: lineHeight,
+      right: lineHeight
+    }, padding),
     states: __spreadValues({
       active: {
         background: {

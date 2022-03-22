@@ -28,6 +28,12 @@ export function getFillStyles(alignment?: Alignment): SimpleInterpolation {
     `;
   }
 
+  if (alignment?.fill === Fill.None) {
+    return css`
+      flex-grow: 0;
+    `;
+  }
+
   return css`
     flex-grow: 0;
   `;

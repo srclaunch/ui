@@ -194,7 +194,10 @@ export const ComponentPage = memo((): ReactElement => {
                         }}
                       >
                         <Container
-                          alignment={{ vertical: AlignVertical.Center }}
+                          alignment={{ 
+                            horizontal: AlignHorizontal.Center, 
+                            vertical: AlignVertical.Center
+                          }}
                           background={{ color: BackgroundColors.Lighter }}
                           borderRadius={{ all: Amount.Least }}
                           className="component-example-container"

@@ -1,6 +1,7 @@
 export declare enum Fill {
+    Both = "both",
     Horizontal = "horizontal",
-    Vertical = "vertical",
-    Both = "both"
+    None = "none",
+    Vertical = "vertical"
 }
 //# sourceMappingURL=fill.d.ts.map
