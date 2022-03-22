@@ -34,6 +34,7 @@ import { DataGridCell } from './DataGridCell';
 import { SearchInput } from '../../forms/inputs/text/SearchInput';
 import { MenuButton } from '../../forms/buttons/MenuButton';
 import { Button, ButtonType } from '../../forms/buttons/Button';
+import { Spacer } from '../../layout/Spacer';
 
 export enum DataGridDisplayType {
   Card = 'card',
@@ -198,7 +199,7 @@ export const DataGrid = memo(
               </Container>
             )}
 
-            <Container />
+            <Spacer />
 
             {header.export && (
               <Container size={header.export.size}>
@@ -221,6 +222,9 @@ export const DataGrid = memo(
                     },
                   ]}
                   label="Export"
+                  size={{
+                    width: 200
+                  }}
                 />
               </Container>
             )}
