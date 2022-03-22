@@ -20615,6 +20615,26 @@ function getAnimationStyles(animations) {
   }).join(", "));
 }
 css$2(["", ";"], (props) => getAnimationStyles(props.animations));
+const getBackgroundSize = (size) => {
+  switch (size) {
+    case BackgroundSize.Auto:
+      return "auto";
+    case BackgroundSize.Cover:
+      return "cover";
+    case BackgroundSize.Contain:
+      return "contain";
+    case BackgroundSize.Fill:
+      return "100% 100%";
+    case BackgroundSize.FillHorizontal:
+      return "100% 0";
+    case BackgroundSize.FillVertical:
+      return "0 100%";
+    default:
+      if (!size)
+        return "auto";
+      return size;
+  }
+};
 function getBackgroundColorValue(color, opacity) {
   if (color === BackgroundColors.Transparent)
     return "transparent";
@@ -20627,12 +20647,13 @@ function getBackgroundColorValue(color, opacity) {
   return color;
 }
 function getBackgroundStyles(background) {
+  var _a2, _b;
   const {
     color,
     image,
     opacity
   } = background || {};
-  return css$2(["background-color:", ";"], getBackgroundColorValue(color, opacity));
+  return css$2(["", ";", ";", ";", ";"], (background == null ? void 0 : background.color) && css$2(["background-color:", ";"], getBackgroundColorValue(color, opacity)), (background == null ? void 0 : background.image) && css$2(["background-image:url(", ");"], image), ((_a2 = background == null ? void 0 : background.image) == null ? void 0 : _a2.size) && css$2(["background-size:", ";"], getBackgroundSize(background.image.size)), ((_b = background == null ? void 0 : background.image) == null ? void 0 : _b.repeat) && css$2(["background-repeat:", ";"], background.image.repeat));
 }
 const BackgroundStyles = css$2(["", ";"], (props) => getBackgroundStyles(props.background));
 function getCSSMeasurementValue(val) {

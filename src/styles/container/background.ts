@@ -49,7 +49,21 @@ export function getBackgroundStyles(
   const { color, image, opacity } = background || {};
 
   return css`
-    background-color: ${getBackgroundColorValue(color, opacity)};
+    ${background?.color && css`
+      background-color: ${getBackgroundColorValue(color, opacity)};
+    `};
+
+    ${background?.image && css`
+      background-image: url(${image});
+    `};
+
+    ${background?.image?.size && css`
+      background-size: ${getBackgroundSize(background.image.size)};
+    `};
+
+    ${background?.image?.repeat && css`
+      background-repeat: ${background.image.repeat}; 
+    `};
   `;
 }
 
