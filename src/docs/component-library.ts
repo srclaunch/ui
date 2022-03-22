@@ -1,21 +1,23 @@
 import { Exception } from '@srclaunch/exceptions';
-import { CodeVerificationForm } from '../components/authentication/CodeVerificationForm';
-import { ForgotPasswordForm } from '../components/authentication/ForgotPasswordForm';
-import { LoginForm } from '../components/authentication/LoginForm';
-import { SignupForm } from '../components/authentication/SignupForm';
-import { DropdownInput } from '../components/forms/inputs/menu/DropdownInput';
-import { NumberInput } from '../components/forms/inputs/numbers/NumberInput';
-import { TextInput } from '../components/forms/inputs/text/TextInput';
+import { DualLightIcons } from '@srclaunch/icons';
 import {
   Amount,
   BreadcrumbNavigation,
   Button,
   ButtonType,
+  CodeVerificationForm,
+  DropdownInput,
+  ForgotPasswordForm,
   ImageInput,
   InputLabel,
+  LoginForm,
+  NumberInput,
+  TextInput,
+  TitleCard,
+  SignupForm,
+  Validation
 } from '../index';
-import { Validation } from '../types';
-
+import { Sizes } from '../types';
 import { ComponentLibrary } from './types/component';
 
 export default {
@@ -168,6 +170,41 @@ export default {
     {
       title: 'Cards',
       path: '/cards',
+      description: 'Cards for various purpose',
+      components: [
+        {
+    
+          component: TitleCard,
+          title: 'TitleCard',
+          path: '/cards/title-card',
+          description: 'A card with an icon, title, subtitle, and a metric or value',
+          examples: [
+            {
+              title: 'Default',
+              properties: {
+                icon: {
+                  name: DualLightIcons.Alarm,
+                  size: {
+                    height: Sizes.Default,
+                    width: Sizes.Default
+                  }
+                },
+                label: 'Title',
+                value: 43
+              },
+              code: `import { TitleCard } from '@srclaunch/ui';
+
+<TitleCard
+  icon: {
+    name: DualLightIcons.Alarm
+  },
+  label: 'Title',
+  value: 43
+/>`
+            }
+          ],
+        }
+      ]
     },
     {
       title: 'Charts',

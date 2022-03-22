@@ -32166,6 +32166,10 @@ const TitleCard = memo((_Na) => {
     }), icon2 && /* @__PURE__ */ jsx$2(Icon, __spreadValues({
       margin: {
         right: Amount.Default
+      },
+      size: {
+        height: Sizes.Large,
+        width: Sizes.Large
       }
     }, icon2)), !loading && /* @__PURE__ */ jsxs$1(Container$9, {
       alignment: {

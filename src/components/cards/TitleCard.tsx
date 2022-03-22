@@ -56,7 +56,7 @@ export const TitleCard = memo(
           }}
         />
 
-        {icon && <Icon margin={{ right: Amount.Default }} {...icon} />}
+        {icon && <Icon margin={{ right: Amount.Default }} size={{ height: Sizes.Large, width: Sizes.Large }} {...icon} />}
 
         {!loading && (
           <Container
