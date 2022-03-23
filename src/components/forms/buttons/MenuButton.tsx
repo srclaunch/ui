@@ -72,7 +72,7 @@ export const MenuButton = memo(
           minWidth: 180,
           ...size,
         }}
-        shadow={menuVisible ? DepthShadow.Highest : DepthShadow.Surface}
+        shadow={menuVisible ? DepthShadow.Higher : DepthShadow.Surface}
         {...props}
       >
         <DropdownControl
@@ -108,6 +108,7 @@ export const MenuButton = memo(
             },
             ...states,
           }}
+          textColor={menuVisible ? TextColors.BlackContrast : textColor}
         />
 
         <DropdownPanel
@@ -137,6 +138,7 @@ export const MenuButton = memo(
             }}
             padding={{ all: Amount.None }}
             shadow={DepthShadow.Surface}
+
             // {...props}
           />
         </DropdownPanel>

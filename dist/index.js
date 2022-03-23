@@ -22815,7 +22815,7 @@ const MenuButton = memo((_wb) => {
       height: Sizes.Default,
       minWidth: 180
     }, size),
-    shadow: menuVisible ? DepthShadow.Highest : DepthShadow.Surface
+    shadow: menuVisible ? DepthShadow.Higher : DepthShadow.Surface
   }, props), {
     children: [/* @__PURE__ */ jsx$2(DropdownControl, {
       background: {
@@ -22847,7 +22847,8 @@ const MenuButton = memo((_wb) => {
           },
           focused
         }
-      }, states)
+      }, states),
+      textColor: menuVisible ? TextColors.BlackContrast : textColor
     }), /* @__PURE__ */ jsx$2(DropdownPanel, __spreadProps(__spreadValues({
       background: {
         color: menuVisible ? BackgroundColors.Black : BackgroundColors.MenuButton
