@@ -183,7 +183,7 @@ export default {
               title: 'Default',
               properties: {
                 icon: {
-                  name: DualLightIcons.Alarm,
+                  name: DualLightIcons.Tool,
                   size: {
                     height: Sizes.Default,
                     width: Sizes.Default

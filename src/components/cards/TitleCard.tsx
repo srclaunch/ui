@@ -32,9 +32,7 @@ export const TitleCard = memo(
     value,
     icon,
     shadow = DepthShadow.High,
-    size = {
-      width: 260,
-    },
+    size = {},
     ...props
   }: TitleCardProps): ReactElement => {
     return (
@@ -45,7 +43,7 @@ export const TitleCard = memo(
         className={`${className} title-card`}
         padding={{ all: Amount.Default, ...padding }}
         shadow={shadow}
-        size={size}
+        size={{ width: 260, ...size }}
         {...props}
       >
         <LoadingOverlay
@@ -56,7 +54,13 @@ export const TitleCard = memo(
           }}
         />
 
-        {icon && <Icon margin={{ right: Amount.Default }} size={{ height: Sizes.Large, width: Sizes.Large }} {...icon} />}
+        {icon && (
+          <Icon
+            margin={{ right: Amount.Default }}
+            size={{ height: Sizes.Large, width: Sizes.Large }}
+            {...icon}
+          />
+        )}
 
         {!loading && (
           <Container
@@ -67,7 +71,7 @@ export const TitleCard = memo(
           >
             <Small>{label}</Small>
 
-            <Title>{value}</Title>
+            <Title lineHeight={Sizes.Default}>{value}</Title>
           </Container>
         )}
       </Container>

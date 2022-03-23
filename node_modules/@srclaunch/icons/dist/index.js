@@ -145,8 +145,8 @@ const Alert = memo((props) => {
 const CaretDownArrow = memo((props) => {
   return /* @__PURE__ */ jsx("svg", __spreadProps(__spreadValues({
     viewBox: "0 0 292.362 292.362",
-    width: "1em",
-    height: "1em"
+    width: "100%",
+    height: "100%"
   }, props), {
     children: /* @__PURE__ */ jsx("path", {
       d: "M286.935 69.377c-3.614-3.617-7.898-5.424-12.848-5.424H18.274c-4.952 0-9.233 1.807-12.85 5.424C1.807 72.998 0 77.279 0 82.228c0 4.948 1.807 9.229 5.424 12.847l127.907 127.907c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428L286.935 95.074c3.613-3.617 5.427-7.898 5.427-12.847 0-4.948-1.814-9.229-5.427-12.85z"
@@ -176,8 +176,8 @@ const Checkmark = memo((props) => {
 const Checkmark2 = memo((props) => {
   return /* @__PURE__ */ jsx("svg", __spreadProps(__spreadValues({
     viewBox: "0 0 442.533 442.533",
-    width: "1em",
-    height: "1em"
+    width: "100%",
+    height: "100%"
   }, props), {
     children: /* @__PURE__ */ jsx("path", {
       d: "M434.539 98.499l-38.828-38.828c-5.324-5.328-11.799-7.993-19.41-7.993-7.618 0-14.093 2.665-19.417 7.993L169.59 247.248l-83.939-84.225c-5.33-5.33-11.801-7.992-19.412-7.992-7.616 0-14.087 2.662-19.417 7.992L7.994 201.852C2.664 207.181 0 213.654 0 221.269c0 7.609 2.664 14.088 7.994 19.416l103.351 103.349 38.831 38.828c5.327 5.332 11.8 7.994 19.414 7.994 7.611 0 14.084-2.669 19.414-7.994l38.83-38.828L434.539 137.33c5.325-5.33 7.994-11.802 7.994-19.417.004-7.611-2.669-14.084-7.994-19.414z"
@@ -201,8 +201,8 @@ const Close = memo((props) => {
 const Exit = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
     viewBox: "0 0 512 512",
-    width: "1em",
-    height: "1em"
+    width: "100%",
+    height: "100%"
   }, props), {
     children: [/* @__PURE__ */ jsx("path", {
       d: "M361 396c-11.046 0-20 8.954-20 20v56H55V40h286v56c0 11.046 8.954 20 20 20s20-8.954 20-20V20c0-11.046-8.954-20-20-20H35C23.954 0 15 8.954 15 20v472c0 11.046 8.954 20 20 20h326c11.046 0 20-8.954 20-20v-76c0-11.046-8.954-20-20-20z"
@@ -223,8 +223,8 @@ const FileUpload = memo((props) => {
 const GearCog = memo((props) => {
   return /* @__PURE__ */ jsx("svg", __spreadProps(__spreadValues({
     viewBox: "0 0 512 512",
-    width: "1em",
-    height: "1em"
+    width: "100%",
+    height: "100%"
   }, props), {
     children: /* @__PURE__ */ jsx("path", {
       d: "M489.514 296.695l-21.3-17.534c-14.59-12.011-14.564-34.335.001-46.322l21.299-17.534a39.878 39.878 0 009.218-50.882l-42.058-72.846A39.88 39.88 0 00408 74.119l-25.835 9.679c-17.696 6.628-37.016-4.551-40.117-23.161l-4.535-27.214A39.874 39.874 0 00298.058 0h-84.115a39.874 39.874 0 00-39.456 33.424l-4.536 27.213c-3.107 18.643-22.453 29.778-40.116 23.162L104 74.119a39.88 39.88 0 00-48.674 17.458l-42.057 72.845a39.875 39.875 0 009.218 50.882l21.299 17.534c14.592 12.012 14.563 34.334 0 46.322l-21.3 17.534a39.876 39.876 0 00-9.218 50.882l42.058 72.846c9.818 17.003 30.286 24.344 48.674 17.458l25.834-9.679c17.699-6.631 37.015 4.556 40.116 23.161l4.536 27.212A39.875 39.875 0 00213.942 512h84.115a39.873 39.873 0 0039.455-33.424l4.535-27.212c3.106-18.638 22.451-29.781 40.117-23.161L408 437.881a39.876 39.876 0 0048.674-17.458l42.059-72.847a39.878 39.878 0 00-9.219-50.881zm-67.481 103.728l-25.835-9.679c-41.299-15.471-86.37 10.63-93.605 54.043L298.058 472h-84.115l-4.536-27.213c-7.249-43.497-52.386-69.484-93.605-54.043l-25.835 9.679-42.057-72.846 21.299-17.534c34.049-28.03 33.978-80.114 0-108.086L47.91 184.423l42.058-72.846 25.834 9.679c41.3 15.47 86.37-10.63 93.605-54.043L213.942 40h84.115l4.535 27.213c7.25 43.502 52.389 69.481 93.605 54.043l25.835-9.679 42.067 72.836-.011.009-21.298 17.534c-34.048 28.028-33.98 80.113-.001 108.086l21.3 17.534zM256 157.333c-54.405 0-98.667 44.262-98.667 98.667s44.262 98.667 98.667 98.667 98.667-44.262 98.667-98.667-44.262-98.667-98.667-98.667zm0 157.334c-32.349 0-58.667-26.318-58.667-58.667s26.318-58.667 58.667-58.667 58.667 26.318 58.667 58.667-26.318 58.667-58.667 58.667z"
@@ -333,8 +333,8 @@ var BasicIcons = /* @__PURE__ */ ((BasicIcons2) => {
 const Search = memo((props) => {
   return /* @__PURE__ */ jsx("svg", __spreadProps(__spreadValues({
     viewBox: "0 0 30.239 30.239",
-    width: "1em",
-    height: "1em"
+    width: "100%",
+    height: "100%"
   }, props), {
     children: /* @__PURE__ */ jsx("path", {
       d: "M20.194 3.46c-4.613-4.613-12.121-4.613-16.734 0-4.612 4.614-4.612 12.121 0 16.735 4.108 4.107 10.506 4.547 15.116 1.34.097.459.319.897.676 1.254l6.718 6.718a2.498 2.498 0 003.535 0 2.496 2.496 0 000-3.535l-6.718-6.72a2.5 2.5 0 00-1.253-.674c3.209-4.611 2.769-11.008-1.34-15.118zm-2.121 14.614c-3.444 3.444-9.049 3.444-12.492 0-3.442-3.444-3.442-9.048 0-12.492 3.443-3.443 9.048-3.443 12.492 0 3.444 3.444 3.444 9.048 0 12.492z"
@@ -374,8 +374,8 @@ const Upload$1 = memo((props) => {
 });
 const Add = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
@@ -422,8 +422,8 @@ const Add = memo((props) => {
 });
 const AddCircle = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", {
-    width: 24,
-    height: 24,
+    height: "100%",
+    width: "100%",
     fill: "none",
     children: [/* @__PURE__ */ jsx("circle", {
       cx: 12,
@@ -470,8 +470,8 @@ const AddCircle = memo((props) => {
 });
 const Building = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
@@ -586,8 +586,8 @@ const Building = memo((props) => {
 });
 const ChevronDoubleForward = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
@@ -634,8 +634,8 @@ const ChevronDoubleForward = memo((props) => {
 });
 const Dashboard = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
@@ -678,8 +678,8 @@ const Dashboard = memo((props) => {
 });
 const Document = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
@@ -758,8 +758,8 @@ const Document = memo((props) => {
 });
 const Gift = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
@@ -820,8 +820,8 @@ const Gift = memo((props) => {
 });
 const Group = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
@@ -900,8 +900,8 @@ const Group = memo((props) => {
 });
 const Growth = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
@@ -946,8 +946,8 @@ const Growth = memo((props) => {
 });
 const Home = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
@@ -992,8 +992,8 @@ const Home = memo((props) => {
 });
 const Inbox = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", {
-    width: "24",
-    height: "24",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1297,8 +1297,8 @@ var DualLightIcons = /* @__PURE__ */ ((DualLightIcons2) => {
 })(DualLightIcons || {});
 const Message = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
@@ -1361,8 +1361,8 @@ const Message = memo((props) => {
 });
 const Messages = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", {
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1423,8 +1423,8 @@ const Messages = memo((props) => {
 });
 const Note = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", {
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1485,8 +1485,8 @@ const Note = memo((props) => {
 });
 const Open = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", {
-    width: "24",
-    height: "24",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1531,8 +1531,8 @@ const Open = memo((props) => {
 });
 const Send = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", {
-    width: "24",
-    height: "24",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1577,8 +1577,8 @@ const Send = memo((props) => {
       }), /* @__PURE__ */ jsx("clipPath", {
         id: "clip0",
         children: /* @__PURE__ */ jsx("rect", {
-          width: "24",
-          height: "24",
+          width: "100%",
+          height: "100%",
           fill: "white"
         })
       })]
@@ -1587,8 +1587,8 @@ const Send = memo((props) => {
 });
 const Settings = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
@@ -1633,8 +1633,8 @@ const Settings = memo((props) => {
 });
 const Star = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", {
-    width: "24",
-    height: "24",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1661,8 +1661,8 @@ const Star = memo((props) => {
       }), /* @__PURE__ */ jsx("clipPath", {
         id: "clip0",
         children: /* @__PURE__ */ jsx("rect", {
-          width: "24",
-          height: "24",
+          width: "100%",
+          height: "100%",
           fill: "white"
         })
       })]
@@ -1671,8 +1671,8 @@ const Star = memo((props) => {
 });
 const Tool = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
@@ -1715,8 +1715,8 @@ const Tool = memo((props) => {
 });
 const Trash = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", {
-    width: "24",
-    height: "24",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1797,8 +1797,8 @@ const Trash = memo((props) => {
 });
 const Upload = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", {
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none",
     xmlns: "http://www.w3.org/2000/svg",
@@ -1843,8 +1843,8 @@ const Upload = memo((props) => {
 });
 const Warning = memo((props) => {
   return /* @__PURE__ */ jsxs("svg", __spreadProps(__spreadValues({
-    width: "1em",
-    height: "1em",
+    width: "100%",
+    height: "100%",
     viewBox: "0 0 24 24",
     fill: "none"
   }, props), {
