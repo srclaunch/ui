@@ -50,7 +50,9 @@ export const Menu = memo(
             return (
               <>
                 {item.title && (
-                  <Label textSize={TextSize.Smaller}>{item.title}</Label>
+                  <Label key={key} textSize={TextSize.Smaller}>
+                    {item.title}
+                  </Label>
                 )}
 
                 <MenuItem

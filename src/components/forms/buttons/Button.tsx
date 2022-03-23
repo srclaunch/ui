@@ -237,7 +237,7 @@ export const Button = memo(
             }}
             textSize={textSize}
             textWeight={textWeight}
-            states={states}
+            // states={states}
             {...props}
           >
             {children}

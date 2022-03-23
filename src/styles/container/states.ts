@@ -10,33 +10,11 @@ export function getDisabledStateStyles(): SimpleInterpolation {
 }
 
 /*
- &:before {
-    transition: opacity 0.2s ease-in-out;
-  }
 
   ${props =>
     props.focused &&
     css`
       outline: none;
-
-      &:before {
-        ${getBorderRadiusStyles(props.borderRadius)};
-
-        bottom: -4px;
-        content: '';
-        display: block;
-        border-color: rgb(${BorderColors.Primary});
-        border-style: solid;
-        border-width: 2px;
-        opacity: ${props.focused ? 1 : 0};
-        left: -4px;
-        position: absolute;
-        pointer-events: none;
-        right: -4px;
-        top: -4px;
-        transition: opacity 0.2s ease-in-out;
-        // z-index: 0; 
-      }
 
       & :focus {
         &:before {
@@ -48,7 +26,26 @@ export function getDisabledStateStyles(): SimpleInterpolation {
 export function getFocusedStyles(): SimpleInterpolation {
   return css`
     outline: none;
-    background: blue;
+    &:before {
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    &:before {
+      bottom: -4px;
+      content: '';
+      display: block;
+      border-color: blue;
+      border-style: solid;
+      border-width: 2px;
+      opacity: 1;
+      left: -4px;
+      position: absolute;
+      pointer-events: none;
+      right: -4px;
+      top: -4px;
+      transition: opacity 0.2s ease-in-out;
+      // z-index: 0;
+    }
   `;
 }
 

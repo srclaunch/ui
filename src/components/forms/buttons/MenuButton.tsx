@@ -1,4 +1,4 @@
-import { memo, ReactElement, useEffect, useState } from 'react';
+import { memo, ReactElement, useEffect, useState, useRef } from 'react';
 import {
   Amount,
   BackgroundColors,
@@ -32,146 +32,112 @@ export const MenuButton = memo(
     label,
     padding = {},
     size = {},
+    states = {},
     textColor = TextColors.MenuButton,
     ...props
   }: MenuButtonProps): ReactElement => {
     const [focused, setFocused] = useState(false);
-    const [menuVisible, setMenuVisible] = useState(false);
-
+    const [menuVisible, setMenuVisible] = useState(
+      states?.state?.dropdown?.visible ?? false,
+    );
+    const menuVisibleRef = useRef(menuVisible);
     useEffect(() => {
       setFocused(menuVisible);
     }, [menuVisible]);
 
     return (
       <Container
-        alignment={{
-          overflow: Overflow.Visible,
-        }}
-        borderRadius={{ all: Amount.Least, ...borderRadius }}
-        className={`${className} menu-button`}
-        depth={Depth.Higher}
+        borderRadius={Object.assign(
+          {},
+          { all: Amount.Least, ...borderRadius },
+          menuVisible
+            ? {
+                bottomLeft: Amount.None,
+                bottomRight: Amount.None,
+              }
+            : {},
+        )}
+        className={`${className} dropdown-input`}
+        depth={menuVisible ? Depth.Higher : Depth.Surface}
         events={{
           mouse: {
             onMouseLeave: () => {
+              menuVisibleRef.current = false;
               setMenuVisible(false);
             },
           },
         }}
         size={{
           height: Sizes.Default,
-          maxWidth: 300,
-          minWidth: 240,
+          minWidth: 180,
           ...size,
         }}
-        shadow={menuVisible ? DepthShadow.Higher : DepthShadow.Surface}
+        shadow={menuVisible ? DepthShadow.Highest : DepthShadow.Surface}
         {...props}
       >
         <DropdownControl
-          background={{ color: BackgroundColors.MenuButton, ...background }}
-          borderRadius={{ all: Amount.Least, ...borderRadius }}
-          border={{
-            all: {
-              color: BorderColors.InputControl,
-              style: BorderStyle.Solid,
-              width: 1,
-            },
-            ...border,
+          background={{
+            color: menuVisible
+              ? BackgroundColors.Black
+              : BackgroundColors.MenuButton,
           }}
-          depth={Depth.High}
           events={{
             focus: {
               onBlur: () => {
-                if (!menuVisible) setFocused(false);
+                setFocused(false);
               },
               onFocus: () => setFocused(true),
             },
             mouse: {
-              onClick: () => setMenuVisible(!menuVisible),
+              onClick: () => {
+                menuVisibleRef.current = !menuVisibleRef.current;
+                setMenuVisible(menuVisibleRef.current);
+              },
             },
           }}
-          label={label ?? ''}
-          // lineHeight={size}
-
-          name="menu-button-dropdown-control"
-          // onBlur={() => setMenuVisible(false)}
-
-          textColor={textColor}
+          label={label}
           shadow={DepthShadow.High}
-          states={{
-            state: {
-              focused,
-              visible: menuVisible,
-            },
-          }}
           size={{
             height: Sizes.Default,
             ...size,
+          }}
+          states={{
+            state: {
+              dropdown: { visible: menuVisibleRef.current },
+              focused,
+            },
+            ...states,
           }}
         />
 
-        {/* <HoverPanel
-          background={{ color: BackgroundColors.MenuButton, ...background }}
-          borderRadius={{ all: Amount.Least, ...borderRadius }}
-          detached={false}
-          focused={focused}
-          padding={{ all: 5, ...padding }}
-          visible={menuVisible}
-          setMenuVisible={setMenuVisible}
-        >
-          <Menu
-            background={{ color: BackgroundColors.Light }}
-            borderRadius={borderRadius}
-            // invertedColors={true}
-            menu={menu}
-            onClick={e => {
-              setMenuVisible(false);
-            }}
-          />
-        </HoverPanel> */}
-
         <DropdownPanel
-          background={{ color: BackgroundColors.DropdownMenu, ...background }}
-          border={{
-            all: {
-              color: BorderColors.InputControl,
-              style: BorderStyle.Solid,
-              width: 1,
-            },
-            top: {
-              color: BorderColors.InputControl,
-              style: BorderStyle.Solid,
-              width: 0,
-            },
-            ...border,
+          background={{
+            color: menuVisible
+              ? BackgroundColors.Black
+              : BackgroundColors.MenuButton,
           }}
-          borderRadius={{
-            all: Amount.Least,
-            // topLeft: Amount.None,
-            // topRight: Amount.None,
-            ...borderRadius,
-          }}
-          padding={padding}
-          position={{ top: `calc(${Sizes.Default} - 0px)` }}
-          size={{
-            height: Sizes.Default,
-            maxWidth: 300,
-            minWidth: 240,
-            ...size,
-          }}
+          padding={{ all: Amount.Least, ...padding }}
+          position={{ top: `calc(${Sizes.Default} - 3px)` }}
           states={{
-            state: {
-              focused,
-              visible: menuVisible,
-            },
+            state: { focused, dropdown: { visible: menuVisibleRef.current } },
+            ...states,
           }}
+          {...props}
         >
           <Menu
             background={{
-              color: BackgroundColors.Lightest,
+              color: menuVisible
+                ? BackgroundColors.Black
+                : BackgroundColors.MenuButton,
             }}
-            borderRadius={{ all: Amount.Least, ...borderRadius }}
             menu={menu}
-            padding={padding}
+            onItemClick={i => {
+              menuVisibleRef.current = false;
+              setMenuVisible(false);
+            }}
+            padding={{ all: Amount.None }}
+            shadow={DepthShadow.Surface}
+            // {...props}
           />
         </DropdownPanel>
       </Container>

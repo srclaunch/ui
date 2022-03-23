@@ -1,6 +1,7 @@
 import { memo, MouseEvent, ReactElement, useState } from 'react';
 
 import {
+  AlignHorizontal,
   AlignVertical,
   Amount,
   BackgroundColors,
@@ -27,6 +28,7 @@ export type MenuItemProps = ButtonProps & {
 
 export const MenuItem = memo(
   ({
+    alignment = {},
     as = 'button',
     background = {},
     borderRadius = {},
@@ -45,6 +47,9 @@ export const MenuItem = memo(
     if (to) {
       return (
         <NavigationLink
+          alignment={{
+            horizontal: AlignHorizontal.Left,
+          }}
           borderRadius={{ all: Amount.Least, ...borderRadius }}
           // background={{
           //   color: hovered
@@ -106,8 +111,7 @@ export const MenuItem = memo(
     return (
       <Button
         alignment={{
-          orientation: Orientation.Horizontal,
-          vertical: AlignVertical.Center,
+          horizontal: AlignHorizontal.Left,
         }}
         borderRadius={{ all: Amount.Least, ...borderRadius }}
         // background={{

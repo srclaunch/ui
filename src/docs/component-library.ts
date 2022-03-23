@@ -1,5 +1,6 @@
 import { Exception } from '@srclaunch/exceptions';
 import { DualLightIcons } from '@srclaunch/icons';
+import { MenuButton } from '../components/forms/buttons/MenuButton';
 import {
   Amount,
   BreadcrumbNavigation,
@@ -296,6 +297,33 @@ const Example = () => (
                 },
               },
               title: 'Button',
+            },
+            {
+              component: MenuButton,
+              title: 'MenuButton',
+              path: '/forms/buttons/menu-button',
+              description:
+                'A menu button is a button that opens a menu when clicked',
+              examples: [
+                {
+                  code: `import { MenuButton } from '@srclaunch/ui';
+
+const Example = () => (
+  <MenuButton>Click me</MenuButton>
+);`,
+                  description: 'A basic menu button',
+                  properties: {
+                    label: 'Click me',
+                    menu: [
+                      {
+                        label: 'Menu item',
+                        onClick: () => {},
+                      },
+                    ],
+                  },
+                  title: 'Basic',
+                },
+              ],
             },
           ],
         },

@@ -142,7 +142,7 @@ export const DropdownControl = memo(
           }}
           border={{
             left: {
-              color: BorderColors.Lighter,
+              color: BorderColors.Default,
               style: BorderStyle.Solid,
               width: 1,
             },

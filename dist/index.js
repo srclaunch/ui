@@ -5296,7 +5296,7 @@ function getDisabledStateStyles$1() {
   return css$2(["cursor:not-allowed !important;opacity:0.3;"]);
 }
 function getFocusedStyles() {
-  return css$2(["outline:none;background:blue;"]);
+  return css$2(["outline:none;&:before{transition:opacity 0.2s ease-in-out;}&:before{bottom:-4px;content:'';display:block;border-color:blue;border-style:solid;border-width:2px;opacity:1;left:-4px;position:absolute;pointer-events:none;right:-4px;top:-4px;transition:opacity 0.2s ease-in-out;}"]);
 }
 function getVisibleStateStyles() {
   return css$2(["opacity:1;pointer-events:all;visibility:visible;"]);
@@ -5910,8 +5910,7 @@ const Button$1 = memo((_k) => {
         line: TextDecorationLine.None
       }, textDecoration),
       textSize,
-      textWeight,
-      states
+      textWeight
     }, props), {
       children
     })) : /* @__PURE__ */ jsx$2(Fragment, {
@@ -11658,6 +11657,7 @@ const NavigationLink = memo((_V) => {
 });
 const MenuItem = memo((_X) => {
   var _Y = _X, {
+    alignment = {},
     as = "button",
     background = {},
     borderRadius = {},
@@ -11672,6 +11672,7 @@ const MenuItem = memo((_X) => {
     to,
     value: value2
   } = _Y, props = __objRest(_Y, [
+    "alignment",
     "as",
     "background",
     "borderRadius",
@@ -11689,6 +11690,9 @@ const MenuItem = memo((_X) => {
   var _a2;
   if (to) {
     return /* @__PURE__ */ jsx$2(NavigationLink, __spreadProps(__spreadValues({
+      alignment: {
+        horizontal: AlignHorizontal.Left
+      },
       borderRadius: __spreadValues({
         all: Amount.Least
       }, borderRadius),
@@ -11734,8 +11738,7 @@ const MenuItem = memo((_X) => {
   }
   return /* @__PURE__ */ jsx$2(Button$1, __spreadProps(__spreadValues({
     alignment: {
-      orientation: Orientation.Horizontal,
-      vertical: AlignVertical.Center
+      horizontal: AlignHorizontal.Left
     },
     borderRadius: __spreadValues({
       all: Amount.Least
@@ -11825,7 +11828,7 @@ const Menu = memo((_Z) => {
         children: [item.title && /* @__PURE__ */ jsx$2(Label, {
           textSize: TextSize.Smaller,
           children: item.title
-        }), /* @__PURE__ */ jsx$2(MenuItem, __spreadValues({
+        }, key), /* @__PURE__ */ jsx$2(MenuItem, __spreadValues({
           events: {
             mouse: {
               onClick: () => {
@@ -11933,7 +11936,7 @@ const DropdownControl = memo((_$) => {
       },
       border: {
         left: {
-          color: BorderColors.Lighter,
+          color: BorderColors.Default,
           style: BorderStyle.Solid,
           width: 1
         }
@@ -11979,7 +11982,7 @@ const DropdownPanel = memo((_ba) => {
     "size",
     "states"
   ]);
-  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o, _p;
+  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n;
   return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
     background: __spreadValues({
       color: BackgroundColors.DropdownMenu
@@ -12016,14 +12019,9 @@ const DropdownPanel = memo((_ba) => {
       minHeight: Sizes.Default,
       maxHeight: 300
     }, size),
-    states: {
-      state: {
-        focused: (_m = states.state) == null ? void 0 : _m.focused,
-        visible: (_n = states.state) == null ? void 0 : _n.visible
-      }
-    },
+    states,
     visibility: {
-      hidden: !((_p = (_o = states.state) == null ? void 0 : _o.dropdown) == null ? void 0 : _p.visible)
+      hidden: !((_n = (_m = states.state) == null ? void 0 : _m.dropdown) == null ? void 0 : _n.visible)
     }
   }, props), {
     children
@@ -12058,7 +12056,7 @@ const DropdownInput = memo((_da) => {
     "validation"
   ]);
   var _a2, _b, _c;
-  const [focused, setFocused] = useState(false);
+  const [focused, setFocused] = useState(true);
   const [menuVisible, setMenuVisible] = useState((_c = (_b = (_a2 = states == null ? void 0 : states.state) == null ? void 0 : _a2.dropdown) == null ? void 0 : _b.visible) != null ? _c : false);
   const menuVisibleRef = useRef(menuVisible);
   const [problems, setProblems] = useState([]);
@@ -22775,6 +22773,7 @@ const MenuButton = memo((_wb) => {
     label,
     padding = {},
     size = {},
+    states = {},
     textColor = TextColors.MenuButton
   } = _xb, props = __objRest(_xb, [
     "background",
@@ -22785,121 +22784,104 @@ const MenuButton = memo((_wb) => {
     "label",
     "padding",
     "size",
+    "states",
     "textColor"
   ]);
+  var _a2, _b, _c;
   const [focused, setFocused] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState((_c = (_b = (_a2 = states == null ? void 0 : states.state) == null ? void 0 : _a2.dropdown) == null ? void 0 : _b.visible) != null ? _c : false);
+  const menuVisibleRef = useRef(menuVisible);
   useEffect(() => {
     setFocused(menuVisible);
   }, [menuVisible]);
   return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
-    alignment: {
-      overflow: Overflow.Visible
-    },
-    borderRadius: __spreadValues({
+    borderRadius: Object.assign({}, __spreadValues({
       all: Amount.Least
-    }, borderRadius),
-    className: `${className} menu-button`,
-    depth: Depth.Higher,
+    }, borderRadius), menuVisible ? {
+      bottomLeft: Amount.None,
+      bottomRight: Amount.None
+    } : {}),
+    className: `${className} dropdown-input`,
+    depth: menuVisible ? Depth.Higher : Depth.Surface,
     events: {
       mouse: {
         onMouseLeave: () => {
+          menuVisibleRef.current = false;
           setMenuVisible(false);
         }
       }
     },
     size: __spreadValues({
       height: Sizes.Default,
-      maxWidth: 300,
-      minWidth: 240
+      minWidth: 180
     }, size),
-    shadow: menuVisible ? DepthShadow.Higher : DepthShadow.Surface
+    shadow: menuVisible ? DepthShadow.Highest : DepthShadow.Surface
   }, props), {
     children: [/* @__PURE__ */ jsx$2(DropdownControl, {
-      background: __spreadValues({
-        color: BackgroundColors.MenuButton
-      }, background),
-      borderRadius: __spreadValues({
-        all: Amount.Least
-      }, borderRadius),
-      border: __spreadValues({
-        all: {
-          color: BorderColors.InputControl,
-          style: BorderStyle.Solid,
-          width: 1
-        }
-      }, border),
-      depth: Depth.High,
+      background: {
+        color: menuVisible ? BackgroundColors.Black : BackgroundColors.MenuButton
+      },
       events: {
         focus: {
           onBlur: () => {
-            if (!menuVisible)
-              setFocused(false);
+            setFocused(false);
           },
           onFocus: () => setFocused(true)
         },
         mouse: {
-          onClick: () => setMenuVisible(!menuVisible)
+          onClick: () => {
+            menuVisibleRef.current = !menuVisibleRef.current;
+            setMenuVisible(menuVisibleRef.current);
+          }
         }
       },
-      label: label != null ? label : "",
-      name: "menu-button-dropdown-control",
-      textColor,
+      label,
       shadow: DepthShadow.High,
-      states: {
-        state: {
-          focused,
-          visible: menuVisible
-        }
-      },
       size: __spreadValues({
         height: Sizes.Default
-      }, size)
-    }), /* @__PURE__ */ jsx$2(DropdownPanel, {
-      background: __spreadValues({
-        color: BackgroundColors.DropdownMenu
-      }, background),
-      border: __spreadValues({
-        all: {
-          color: BorderColors.InputControl,
-          style: BorderStyle.Solid,
-          width: 1
-        },
-        top: {
-          color: BorderColors.InputControl,
-          style: BorderStyle.Solid,
-          width: 0
-        }
-      }, border),
-      borderRadius: __spreadValues({
-        all: Amount.Least
-      }, borderRadius),
-      padding,
-      position: {
-        top: `calc(${Sizes.Default} - 0px)`
-      },
-      size: __spreadValues({
-        height: Sizes.Default,
-        maxWidth: 300,
-        minWidth: 240
       }, size),
-      states: {
+      states: __spreadValues({
+        state: {
+          dropdown: {
+            visible: menuVisibleRef.current
+          },
+          focused
+        }
+      }, states)
+    }), /* @__PURE__ */ jsx$2(DropdownPanel, __spreadProps(__spreadValues({
+      background: {
+        color: menuVisible ? BackgroundColors.Black : BackgroundColors.MenuButton
+      },
+      padding: __spreadValues({
+        all: Amount.Least
+      }, padding),
+      position: {
+        top: `calc(${Sizes.Default} - 3px)`
+      },
+      states: __spreadValues({
         state: {
           focused,
-          visible: menuVisible
+          dropdown: {
+            visible: menuVisibleRef.current
+          }
         }
-      },
+      }, states)
+    }, props), {
       children: /* @__PURE__ */ jsx$2(Menu, {
         background: {
-          color: BackgroundColors.Lightest
+          color: menuVisible ? BackgroundColors.Black : BackgroundColors.MenuButton
         },
-        borderRadius: __spreadValues({
-          all: Amount.Least
-        }, borderRadius),
         menu,
-        padding
+        onItemClick: (i2) => {
+          menuVisibleRef.current = false;
+          setMenuVisible(false);
+        },
+        padding: {
+          all: Amount.None
+        },
+        shadow: DepthShadow.Surface
       })
-    })]
+    }))]
   }));
 });
 const Spacer = memo((_yb) => {
