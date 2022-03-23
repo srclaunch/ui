@@ -5155,13 +5155,13 @@ function getBackgroundColorValue(color, opacity) {
   return color;
 }
 function getBackgroundStyles(background) {
-  var _a2, _b;
+  var _a2, _b, _c;
   const {
     color,
     image,
     opacity
   } = background || {};
-  return css$2(["", ";", ";", ";", ";"], (background == null ? void 0 : background.color) && css$2(["background-color:", ";"], getBackgroundColorValue(color, opacity)), (background == null ? void 0 : background.image) && css$2(["background-image:url(", ");"], image), ((_a2 = background == null ? void 0 : background.image) == null ? void 0 : _a2.size) && css$2(["background-size:", ";"], getBackgroundSize(background.image.size)), ((_b = background == null ? void 0 : background.image) == null ? void 0 : _b.repeat) && css$2(["background-repeat:", ";"], background.image.repeat));
+  return css$2(["", ";", ";", ";", ";"], (background == null ? void 0 : background.color) && css$2(["background-color:", ";"], getBackgroundColorValue(color, opacity)), (background == null ? void 0 : background.image) && css$2(["background-image:url(", ");"], (_a2 = image == null ? void 0 : image.path) != null ? _a2 : image == null ? void 0 : image.url), ((_b = background == null ? void 0 : background.image) == null ? void 0 : _b.size) && css$2(["background-size:", ";"], getBackgroundSize(background.image.size)), ((_c = background == null ? void 0 : background.image) == null ? void 0 : _c.repeat) && css$2(["background-repeat:", ";"], background.image.repeat));
 }
 const BackgroundStyles = css$2(["", ";"], (props) => getBackgroundStyles(props.background));
 function getCSSMeasurementValue(val) {
