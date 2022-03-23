@@ -89,6 +89,9 @@ export default defineConfig(({ command, mode }) => {
     };
   } else if (command === 'serve') {
     return {
+      server: {
+        port: 3010,
+      },
       sourcemap: true,
       rollupOptions: {
         // Externalize deps that shouldn't be bundled

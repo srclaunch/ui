@@ -5,6 +5,7 @@ import {
   Amount,
   BackgroundColors,
   DepthShadow,
+  Orientation,
   Sizes,
   TextColors,
   TextSize,
@@ -37,77 +38,20 @@ export const MenuItem = memo(
     lineHeight = Sizes.Default,
     shadow = DepthShadow.Surface,
     states = {},
-    title,
     to,
     value,
     ...props
   }: MenuItemProps): ReactElement => {
-    const [hovered, setHovered] = useState(false);
-
-    const itemTitle = title ? (
-      <Label textSize={TextSize.Smaller}>{title}</Label>
-    ) : null;
-
     if (to) {
       return (
-        <Container>
-          {itemTitle}
-
-          <NavigationLink
-            borderRadius={{ all: Amount.Least, ...borderRadius }}
-            background={{
-              color: hovered
-                ? BackgroundColors.Primary
-                : BackgroundColors.Transparent,
-              ...background,
-            }}
-            events={{
-              mouse: {
-                onClick: e => {
-                  e.preventDefault();
-                  e.stopPropagation();
-
-                  if (events.mouse?.onClick) events.mouse?.onClick(e);
-                },
-              },
-            }}
-            icon={icon}
-            lineHeight={lineHeight}
-            padding={{
-              left: Amount.Less,
-              right: Amount.Less,
-            }}
-            states={{
-              state: {},
-            }}
-            textColor={props.textColor ?? TextColors.Default}
-            to={to}
-            {...props}
-          >
-            {component ?? label}
-          </NavigationLink>
-        </Container>
-      );
-    }
-
-    return (
-      <Container>
-        {itemTitle}
-
-        <Button
-          alignment={{
-            vertical: AlignVertical.Center,
-          }}
+        <NavigationLink
           borderRadius={{ all: Amount.Least, ...borderRadius }}
-          background={{
-            color: hovered
-              ? BackgroundColors.Primary
-              : BackgroundColors.Transparent,
-            ...background,
-          }}
-          form="null"
-          icon={icon}
-          lineHeight={lineHeight}
+          // background={{
+          //   color: hovered
+          //     ? BackgroundColors.Primary
+          //     : BackgroundColors.Transparent,
+          //   ...background,
+          // }}
           events={{
             mouse: {
               onClick: e => {
@@ -118,21 +62,108 @@ export const MenuItem = memo(
               },
             },
           }}
+          icon={icon}
+          lineHeight={lineHeight}
           padding={{
             left: Amount.Less,
             right: Amount.Less,
           }}
           states={{
-            hovered: {
-              type: ButtonType.Primary,
+            active: {
+              background: {
+                color: BackgroundColors.Primary,
+              },
+              // shadow: {
+              //   blur: 7,
+              //   color: BackgroundColors.Primary,
+              //   opacity: 35,
+              //   x: 0,
+              //   y: 2,
+              //   spread: 4,
+              // },
+              textColor: TextColors.PrimaryContrast,
             },
+            focused: {
+              textColor: TextColors.PrimaryContrast,
+            },
+            hovered: {
+              background: {
+                color: BackgroundColors.Primary,
+              },
+              textColor: TextColors.PrimaryContrast,
+            },
+            ...states,
           }}
-          type={ButtonType.Transparent}
+          textColor={props.textColor ?? TextColors.Default}
+          to={to}
           {...props}
         >
           {component ?? label}
-        </Button>
-      </Container>
+        </NavigationLink>
+      );
+    }
+
+    return (
+      <Button
+        alignment={{
+          orientation: Orientation.Horizontal,
+          vertical: AlignVertical.Center,
+        }}
+        borderRadius={{ all: Amount.Least, ...borderRadius }}
+        // background={{
+        //   color: hovered
+        //     ? BackgroundColors.Primary
+        //     : BackgroundColors.Transparent,
+        //   ...background,
+        // }}
+        form="null"
+        icon={icon}
+        lineHeight={lineHeight}
+        events={{
+          mouse: {
+            onClick: e => {
+              e.preventDefault();
+              e.stopPropagation();
+
+              if (events.mouse?.onClick) events.mouse?.onClick(e);
+            },
+          },
+        }}
+        padding={{
+          left: Amount.Less,
+          right: Amount.Less,
+        }}
+        states={{
+          active: {
+            background: {
+              color: BackgroundColors.Primary,
+            },
+            // shadow: {
+            //   blur: 7,
+            //   color: BackgroundColors.Primary,
+            //   opacity: 35,
+            //   x: 0,
+            //   y: 2,
+            //   spread: 4,
+            // },
+            textColor: TextColors.PrimaryContrast,
+          },
+          focused: {
+            textColor: TextColors.PrimaryContrast,
+          },
+          hovered: {
+            background: {
+              color: BackgroundColors.Primary,
+            },
+            textColor: TextColors.PrimaryContrast,
+          },
+          ...states,
+        }}
+        type={ButtonType.Transparent}
+        {...props}
+      >
+        {component ?? label}
+      </Button>
     );
     // return (
     //   <Container

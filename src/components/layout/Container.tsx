@@ -88,10 +88,6 @@ export const Container = memo(
       }
     }, []);
 
-    // if (as === 'button') {
-    //   console.log('props.states', states);
-    // }
-
     return (
       <Wrapper
         alignment={{

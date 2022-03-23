@@ -87,7 +87,10 @@ export const InputContainer = memo(
         events={{
           mouse: {
             onClick: e => () => {
-              inputRef.current?.focus();
+              if (children) {
+                inputRef.current?.focus();
+              }
+
               if (events.mouse?.onClick) {
                 events.mouse.onClick(e);
               }
@@ -128,6 +131,7 @@ export const InputContainer = memo(
               style: BorderStyle.Solid,
               width: 1,
             },
+            ...border,
           }}
           className={`${className} input-container-wrapper`}
           shadow={shadow}

@@ -14,7 +14,6 @@ import {
 } from 'react';
 import styled from 'styled-components';
 
-import { FocusStyles } from '../../../../styles/container/focus';
 import { TextStyles } from '../../../../styles/typography';
 import {
   AlignHorizontal,
@@ -285,7 +284,6 @@ export const SSNInput = memo(
 // `;
 
 const Input = styled.input<SSNInputProps>`
-  ${FocusStyles};
   ${TextStyles};
 
   background: transparent;

@@ -25,8 +25,6 @@ export type DropdownInputProps<V = unknown> = ContainerProps &
 
 export const DropdownInput = memo(
   ({
-    background = {},
-    border = {},
     borderRadius = {},
     className = '',
     defaultValue,
@@ -37,14 +35,16 @@ export const DropdownInput = memo(
     padding = {},
     placeholder,
     size = {},
+    states = {},
     validation,
     ...props
   }: DropdownInputProps): ReactElement => {
     // const [value, setValue] = useState(defaultValue);
-    const [focused, setFocused] = useState(false);
-    const [menuVisible, setMenuVisible] = useState(false);
+    const [focused, setFocused] = useState(true);
+    const [menuVisible, setMenuVisible] = useState(
+      states?.state?.dropdown?.visible ?? false,
+    );
     const menuVisibleRef = useRef(menuVisible);
-    menuVisibleRef.current = false;
     const [problems, setProblems] = useState<ValidationProblem[]>([]);
     const [item, setItem] = useState<MenuItemProps | undefined>(
       menu?.find((i: MenuItemProps) => i.value === defaultValue),
@@ -99,35 +99,36 @@ export const DropdownInput = memo(
         )}
 
         <Container
-          borderRadius={{ all: Amount.Least, ...borderRadius }}
+          borderRadius={Object.assign(
+            {},
+            { all: Amount.Least, ...borderRadius },
+            menuVisible
+              ? {
+                  bottomLeft: Amount.None,
+                  bottomRight: Amount.None,
+                }
+              : {},
+          )}
           className={`${className} dropdown-input`}
           depth={menuVisible ? Depth.Higher : Depth.Surface}
           events={{
             mouse: {
-              onMouseLeave: () => setMenuVisible(false),
+              onMouseLeave: () => {
+                menuVisibleRef.current = false;
+                setMenuVisible(false);
+              },
             },
           }}
           size={{
             height: Sizes.Default,
-            maxWidth: 300,
-            minWidth: 240,
+            minWidth: 180,
             ...size,
           }}
           shadow={menuVisible ? DepthShadow.Higher : DepthShadow.Surface}
           {...props}
         >
           <DropdownControl
-            background={{ color: BackgroundColors.DropdownMenu, ...background }}
-            border={{
-              all: {
-                color: BorderColors.InputControl,
-                style: BorderStyle.Solid,
-                width: 1,
-              },
-              ...border,
-            }}
             component={item?.component}
-            depth={Depth.High}
             events={{
               focus: {
                 onBlur: () => {
@@ -138,7 +139,7 @@ export const DropdownInput = memo(
               mouse: {
                 onClick: () => {
                   menuVisibleRef.current = !menuVisibleRef.current;
-                  setMenuVisible(!menuVisible);
+                  setMenuVisible(menuVisibleRef.current);
                 },
               },
             }}
@@ -146,8 +147,14 @@ export const DropdownInput = memo(
             label={item?.label}
             name={name}
             placeholder={placeholder}
-            shadow={DepthShadow.Low}
-            states={{ state: { error: problems, focused } }}
+            states={{
+              state: {
+                error: problems,
+                dropdown: { visible: menuVisibleRef.current },
+                focused,
+              },
+              ...states,
+            }}
             size={{
               height: Sizes.Default,
               ...size,
@@ -155,41 +162,15 @@ export const DropdownInput = memo(
           />
 
           <DropdownPanel
-            background={{ color: BackgroundColors.DropdownMenu, ...background }}
-            border={{
-              all: {
-                color: BorderColors.InputControl,
-                style: BorderStyle.Solid,
-                width: 1,
-              },
-              top: {
-                color: BorderColors.Transparent,
-                style: BorderStyle.Solid,
-                width: 0,
-              },
-              ...border,
+            padding={{ all: Amount.Least, ...padding }}
+            position={{ top: `calc(${Sizes.Default} - 3px)` }}
+            states={{
+              state: { focused, dropdown: { visible: menuVisibleRef.current } },
+              ...states,
             }}
-            borderRadius={{
-              all: Amount.Least,
-              // topLeft: Amount.None,
-              // topRight: Amount.None,
-              ...borderRadius,
-            }}
-            padding={padding}
-            position={{ top: `calc(${Sizes.Default} - 0px)` }}
-            size={{
-              height: Sizes.Default,
-              maxWidth: 300,
-              minWidth: 240,
-              ...size,
-            }}
-            states={{ state: { focused, visible: menuVisible } }}
+            {...props}
           >
             <Menu
-              background={{
-                color: BackgroundColors.Lightest,
-              }}
-              borderRadius={{ all: Amount.Least, ...borderRadius }}
               menu={menu}
               onItemClick={i => {
                 setValueChanged(true);
@@ -198,6 +179,7 @@ export const DropdownInput = memo(
                 setMenuVisible(false);
               }}
               padding={padding}
+              // {...props}
             />
           </DropdownPanel>
         </Container>

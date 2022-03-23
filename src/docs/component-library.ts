@@ -15,7 +15,7 @@ import {
   TextInput,
   TitleCard,
   SignupForm,
-  Validation
+  Validation,
 } from '../index';
 import { Sizes } from '../types';
 import { ComponentLibrary } from './types/component';
@@ -173,11 +173,11 @@ export default {
       description: 'Cards for various purpose',
       components: [
         {
-    
           component: TitleCard,
           title: 'TitleCard',
           path: '/cards/title-card',
-          description: 'A card with an icon, title, subtitle, and a metric or value',
+          description:
+            'A card with an icon, title, subtitle, and a metric or value',
           examples: [
             {
               title: 'Default',
@@ -186,11 +186,11 @@ export default {
                   name: DualLightIcons.Tool,
                   size: {
                     height: Sizes.Default,
-                    width: Sizes.Default
-                  }
+                    width: Sizes.Default,
+                  },
                 },
                 label: 'Title',
-                value: 43
+                value: 43,
               },
               code: `import { TitleCard } from '@srclaunch/ui';
 
@@ -200,11 +200,11 @@ export default {
   },
   label: 'Title',
   value: 43
-/>`
-            }
+/>`,
+            },
           ],
-        }
-      ]
+        },
+      ],
     },
     {
       title: 'Charts',
@@ -354,6 +354,25 @@ const Example = () => (
                       title: 'Default',
                       properties: {
                         label: 'Dropdown',
+                      },
+                    },
+                    {
+                      title: 'With a menu',
+                      properties: {
+                        label: 'Dropdown',
+                        menu: [
+                          {
+                            label: 'Menu item',
+                            value: 'menu-item',
+                          },
+                        ],
+                        states: {
+                          state: {
+                            dropdown: {
+                              visible: true,
+                            },
+                          },
+                        },
                       },
                     },
                   ],

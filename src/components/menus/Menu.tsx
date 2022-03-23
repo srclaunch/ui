@@ -4,10 +4,12 @@ import {
   BackgroundColors,
   DepthShadow,
   Overflow,
+  Sizes,
   TextColors,
   TextSize,
 } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
+import { Label } from '../typography/Label';
 import { MenuItem, MenuItemProps } from './MenuItem';
 
 export type MenuProps = ContainerProps & {
@@ -25,7 +27,6 @@ export const Menu = memo(
     events = {},
     onItemClick,
     padding = {},
-    shadow = DepthShadow.Surface,
     ...props
   }: MenuProps): ReactElement => {
     return (
@@ -34,61 +35,45 @@ export const Menu = memo(
           overflow: Overflow.ScrollVertical,
         }}
         as={as}
-        background={{ color: BackgroundColors.Lightest, ...background }}
+        background={{ color: BackgroundColors.Lighter, ...background }}
         borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} menu`}
         padding={{ all: Amount.Least, ...padding }}
-        shadow={shadow}
+        shadow={DepthShadow.Low}
+        size={{
+          minHeight: Sizes.Default,
+        }}
         {...props}
       >
         {menu &&
           menu.map((item, key: number) => {
             return (
-              <MenuItem
-                events={{
-                  mouse: {
-                    onClick: () => {
-                      if (onItemClick) {
-                        onItemClick(item);
-                      }
-                    },
-                  },
-                }}
-                key={key}
-                // borderRadius= {}
+              <>
+                {item.title && (
+                  <Label textSize={TextSize.Smaller}>{item.title}</Label>
+                )}
 
-                padding={{
-                  left: Amount.Less,
-                  right: Amount.Less,
-                }}
-                states={{
-                  active: {
-                    background: {
-                      color: BackgroundColors.Primary,
+                <MenuItem
+                  events={{
+                    mouse: {
+                      onClick: () => {
+                        if (onItemClick) {
+                          onItemClick(item);
+                        }
+                      },
                     },
-                    // shadow: {
-                    //   blur: 7,
-                    //   color: BackgroundColors.Primary,
-                    //   opacity: 35,
-                    //   x: 0,
-                    //   y: 2,
-                    //   spread: 4,
-                    // },
-                    textColor: TextColors.PrimaryContrast,
-                  },
-                  focused: {
-                    textColor: TextColors.PrimaryContrast,
-                  },
-                  hovered: {
-                    background: {
-                      color: BackgroundColors.Primary,
-                    },
-                    textColor: TextColors.PrimaryContrast,
-                  },
-                }}
-                textSize={TextSize.Small}
-                {...item}
-              />
+                  }}
+                  key={key}
+                  // borderRadius= {}
+
+                  padding={{
+                    left: Amount.Less,
+                    right: Amount.Less,
+                  }}
+                  textSize={TextSize.Small}
+                  {...item}
+                />
+              </>
             );
           })}
       </Container>

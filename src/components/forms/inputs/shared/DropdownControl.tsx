@@ -13,6 +13,7 @@ import {
   BorderStyle,
   Cursor,
   Depth,
+  DepthShadow,
   Fill,
   Orientation,
   Sizes,
@@ -43,7 +44,7 @@ export const DropdownControl = memo(
     borderRadius = {},
     className = '',
     component,
-    depth = Depth.Low,
+    cursor = Cursor.Pointer,
     icon,
     label,
     placeholder = 'Select an option',
@@ -63,28 +64,50 @@ export const DropdownControl = memo(
         }}
         as="button"
         background={{ color: BackgroundColors.DropdownMenu, ...background }}
-        borderRadius={{ all: Amount.Least, ...borderRadius }}
-        border={{
-          all: {
-            color:
-              states.state?.error &&
-              Array.isArray(states.state.error) &&
-              states?.state.error.length > 0
-                ? BorderColors.Error
-                : border.hasOwnProperty('color')
-                ? // @ts-ignore
-                  border?.color
-                : BorderColors.InputControl,
-            style: BorderStyle.Solid,
-            width: 1,
+        borderRadius={Object.assign(
+          {},
+          { all: Amount.Least, ...borderRadius },
+          states.state?.dropdown?.visible
+            ? {
+                bottomLeft: Amount.None,
+                bottomRight: Amount.None,
+              }
+            : {},
+        )}
+        border={Object.assign(
+          {},
+          {
+            all: {
+              color:
+                states.state?.error &&
+                Array.isArray(states.state.error) &&
+                states?.state.error.length > 0
+                  ? BorderColors.Error
+                  : border?.all?.color ?? BorderColors.InputControl,
+              style: BorderStyle.Solid,
+              width: 1,
+            },
+            ...border,
           },
-          ...border,
-        }}
-        depth={depth}
+          states.state?.dropdown?.visible
+            ? {
+                bottom: {
+                  color: BorderColors.Transparent,
+                  style: BorderStyle.None,
+                  width: 1,
+                },
+              }
+            : {},
+        )}
+        depth={states.state?.dropdown?.visible ? Depth.Highest : Depth.Surface}
         className={`${className} dropdown-control`}
-        cursor={Cursor.Pointer}
+        cursor={cursor}
         form="null"
-        size={{ height: Sizes.Default }}
+        shadow={
+          states.state?.dropdown?.visible
+            ? DepthShadow.Surface
+            : DepthShadow.Low
+        }
         states={states}
         {...props}
       >
@@ -95,10 +118,13 @@ export const DropdownControl = memo(
             alignment={{
               fill: Fill.Horizontal,
             }}
-            lineHeight={size?.height ?? Sizes.Default}
+            // lineHeight={`calc(${size?.height ?? Sizes.Default} - ${
+            //   states?.state?.dropdown?.visible ? 1 : 0
+            // }px)`}
             padding={{
               left: Amount.Less,
             }}
+            selectable={false}
             textSize={textSize}
             textColor={
               !label && placeholder ? TextColors.InputPlaceholder : textColor
@@ -127,7 +153,7 @@ export const DropdownControl = memo(
             right: Amount.Least,
           }}
           size={{
-            height: size?.height ?? Sizes.Default,
+            height: `calc(${size?.height ?? Sizes.Default} / 5 * 3)`,
             width: size?.height ?? Sizes.Default,
           }}
         >

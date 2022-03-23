@@ -79,9 +79,9 @@ export const NavigationLink = memo(
         {label ? (
           <Label
             alignment={{
-              horizontal: menu ? AlignHorizontal.Stretch : AlignHorizontal.Left,
-              orientation: menu ? Orientation.Vertical : Orientation.Horizontal,
-              vertical: AlignVertical.Center,
+              // horizontal: menu ? AlignHorizontal.Stretch : AlignHorizontal.Left,
+              // orientation: menu ? Orientation.Vertical : Orientation.Horizontal,
+              // vertical: AlignVertical.Center,
               ...alignment,
             }}
             as={as}
@@ -104,11 +104,11 @@ export const NavigationLink = memo(
 
             lineHeight={lineHeight}
             states={{
+              ...states,
               state: {
                 current: match ? true : false,
                 ...states.state,
               },
-              ...states,
             }}
             textColor={textColor}
             textSize={textSize}

@@ -8,6 +8,7 @@ import {
   BorderColors,
   BreadcrumbNavigation,
   CodeBlock,
+  Depth,
   DepthShadow,
   Fill,
   Heading,
@@ -194,18 +195,22 @@ export const ComponentPage = memo((): ReactElement => {
                         }}
                       >
                         <Container
-                          alignment={{ 
-                            horizontal: AlignHorizontal.Center, 
-                            vertical: AlignVertical.Center
+                          alignment={{
+                            fill: Fill.Horizontal,
+                            horizontal: AlignHorizontal.Center,
+                            vertical: AlignVertical.Center,
                           }}
                           background={{ color: BackgroundColors.Lighter }}
                           borderRadius={{ all: Amount.Least }}
                           className="component-example-container"
+                          depth={Depth.Higher}
                           margin={{ bottom: Amount.Default }}
                           padding={{ all: Amount.All }}
                           shadow={DepthShadow.Low}
                         >
-                          <matchedRoute.component {...properties} />
+                          <Container>
+                            <matchedRoute.component {...properties} />
+                          </Container>
                         </Container>
 
                         <Tabs>

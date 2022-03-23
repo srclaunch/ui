@@ -5295,6 +5295,9 @@ const ContainerStyles = css$2(["", ";"], (props) => getContainerStyles(props));
 function getDisabledStateStyles$1() {
   return css$2(["cursor:not-allowed !important;opacity:0.3;"]);
 }
+function getFocusedStyles() {
+  return css$2(["outline:none;background:blue;"]);
+}
 function getVisibleStateStyles() {
   return css$2(["opacity:1;pointer-events:all;visibility:visible;"]);
 }
@@ -5323,7 +5326,7 @@ function getContainerStatesStyles(props) {
     visible,
     warning
   } = states;
-  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";"], active && css$2(["", ";"], (state == null ? void 0 : state.active) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active))) : css$2(["&::active{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active)))), current && (state == null ? void 0 : state.current) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), current))), disabled && (state == null ? void 0 : state.disabled) ? css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()) : css$2(["&:disabled{", ";", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()), error && (state == null ? void 0 : state.error) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), error))), focused && css$2(["", ";"], (state == null ? void 0 : state.focused) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused))) : css$2(["&:focus{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)))), hovered && !(state == null ? void 0 : state.current) && css$2(["", ";"], (state == null ? void 0 : state.hovered) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered))) : css$2(["&:hover{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered)))), loading && (state == null ? void 0 : state.loading) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loading))), success && (state == null ? void 0 : state.success) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), success))), visible && (state == null ? void 0 : state.visible) && css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getVisibleStateStyles()), visible && (state == null ? void 0 : state.visible) === false && css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getHiddenStateStyles()), visible && (state == null ? void 0 : state.visible) === false && css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getHiddenStateStyles()), !visible && (state == null ? void 0 : state.visible) === false && css$2(["", ";"], getHiddenStateStyles()), warning && (state == null ? void 0 : state.warning) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), warning))));
+  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";"], active && css$2(["", ";"], (state == null ? void 0 : state.active) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active))) : css$2(["&::active{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active)))), current && (state == null ? void 0 : state.current) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), current))), disabled && (state == null ? void 0 : state.disabled) ? css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()) : css$2(["&:disabled{", ";", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()), error && (state == null ? void 0 : state.error) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), error))), focused && css$2(["", ";"], (state == null ? void 0 : state.focused) ? css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles()) : css$2(["&:focus{", ";", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles())), hovered && !(state == null ? void 0 : state.current) && css$2(["", ";"], (state == null ? void 0 : state.hovered) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered))) : css$2(["&:hover{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered)))), loading && (state == null ? void 0 : state.loading) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loading))), success && (state == null ? void 0 : state.success) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), success))), visible && (state == null ? void 0 : state.visible) && css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getVisibleStateStyles()), visible && (state == null ? void 0 : state.visible) === false && css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getHiddenStateStyles()), !visible && (state == null ? void 0 : state.visible) === false && css$2(["", ";"], getHiddenStateStyles()), warning && (state == null ? void 0 : state.warning) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), warning))));
 }
 const StateStyles = css$2(["", ";"], (props) => getContainerStatesStyles(props));
 function getEventHandlers(events) {
@@ -5898,7 +5901,7 @@ const Button$1 = memo((_k) => {
       }
     }, states)
   }, props), {
-    children: typeof children === "string" ? /* @__PURE__ */ jsx$2(Label, {
+    children: typeof children === "string" ? /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
       icon: icon2,
       lineHeight,
       textAlign,
@@ -5908,9 +5911,10 @@ const Button$1 = memo((_k) => {
       }, textDecoration),
       textSize,
       textWeight,
-      states,
+      states
+    }, props), {
       children
-    }) : /* @__PURE__ */ jsx$2(Fragment, {
+    })) : /* @__PURE__ */ jsx$2(Fragment, {
       children
     })
   }));
@@ -9723,7 +9727,9 @@ const InputContainer = memo((_s) => {
       mouse: {
         onClick: (e2) => () => {
           var _a3, _b2;
-          (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
+          if (children) {
+            (_a3 = inputRef.current) == null ? void 0 : _a3.focus();
+          }
           if ((_b2 = events.mouse) == null ? void 0 : _b2.onClick) {
             events.mouse.onClick(e2);
           }
@@ -9747,13 +9753,13 @@ const InputContainer = memo((_s) => {
       borderRadius: __spreadValues({
         all: Amount.Least
       }, borderRadius),
-      border: {
+      border: __spreadValues({
         all: {
           color: ((_a2 = states.state) == null ? void 0 : _a2.error) && Array.isArray(states.state.error) && states.state.error.length > 0 ? BorderColors.Error : (border == null ? void 0 : border.all) && typeof (border == null ? void 0 : border.all) == "object" ? border.all.color : BorderColors.InputControl,
           style: BorderStyle.Solid,
           width: 1
         }
-      },
+      }, border),
       className: `${className} input-container-wrapper`,
       shadow,
       states: {
@@ -11627,11 +11633,7 @@ const NavigationLink = memo((_V) => {
       textDecoration: "unset"
     },
     children: label ? /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-      alignment: __spreadValues({
-        horizontal: menu ? AlignHorizontal.Stretch : AlignHorizontal.Left,
-        orientation: menu ? Orientation.Vertical : Orientation.Horizontal,
-        vertical: AlignVertical.Center
-      }, alignment),
+      alignment: __spreadValues({}, alignment),
       as,
       borderRadius,
       className: `${className} ${match2 ? activeClassName : ""} link`,
@@ -11641,11 +11643,11 @@ const NavigationLink = memo((_V) => {
         bottom: menu ? padding == null ? void 0 : padding.left : padding == null ? void 0 : padding.bottom
       }, padding),
       lineHeight,
-      states: __spreadValues({
+      states: __spreadProps(__spreadValues({}, states), {
         state: __spreadValues({
           current: match2 ? true : false
         }, states.state)
-      }, states),
+      }),
       textColor,
       textSize,
       textWeight
@@ -11667,7 +11669,6 @@ const MenuItem = memo((_X) => {
     lineHeight = Sizes.Default,
     shadow = DepthShadow.Surface,
     states = {},
-    title,
     to,
     value: value2
   } = _Y, props = __objRest(_Y, [
@@ -11682,66 +11683,15 @@ const MenuItem = memo((_X) => {
     "lineHeight",
     "shadow",
     "states",
-    "title",
     "to",
     "value"
   ]);
   var _a2;
-  const [hovered, setHovered] = useState(false);
-  const itemTitle = title ? /* @__PURE__ */ jsx$2(Label, {
-    textSize: TextSize.Smaller,
-    children: title
-  }) : null;
   if (to) {
-    return /* @__PURE__ */ jsxs$1(Container$9, {
-      children: [itemTitle, /* @__PURE__ */ jsx$2(NavigationLink, __spreadProps(__spreadValues({
-        borderRadius: __spreadValues({
-          all: Amount.Least
-        }, borderRadius),
-        background: __spreadValues({
-          color: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent
-        }, background),
-        events: {
-          mouse: {
-            onClick: (e2) => {
-              var _a3, _b;
-              e2.preventDefault();
-              e2.stopPropagation();
-              if ((_a3 = events.mouse) == null ? void 0 : _a3.onClick)
-                (_b = events.mouse) == null ? void 0 : _b.onClick(e2);
-            }
-          }
-        },
-        icon: icon2,
-        lineHeight,
-        padding: {
-          left: Amount.Less,
-          right: Amount.Less
-        },
-        states: {
-          state: {}
-        },
-        textColor: (_a2 = props.textColor) != null ? _a2 : TextColors.Default,
-        to
-      }, props), {
-        children: component != null ? component : label
-      }))]
-    });
-  }
-  return /* @__PURE__ */ jsxs$1(Container$9, {
-    children: [itemTitle, /* @__PURE__ */ jsx$2(Button$1, __spreadProps(__spreadValues({
-      alignment: {
-        vertical: AlignVertical.Center
-      },
+    return /* @__PURE__ */ jsx$2(NavigationLink, __spreadProps(__spreadValues({
       borderRadius: __spreadValues({
         all: Amount.Least
       }, borderRadius),
-      background: __spreadValues({
-        color: hovered ? BackgroundColors.Primary : BackgroundColors.Transparent
-      }, background),
-      form: "null",
-      icon: icon2,
-      lineHeight,
       events: {
         mouse: {
           onClick: (e2) => {
@@ -11753,20 +11703,82 @@ const MenuItem = memo((_X) => {
           }
         }
       },
+      icon: icon2,
+      lineHeight,
       padding: {
         left: Amount.Less,
         right: Amount.Less
       },
-      states: {
+      states: __spreadValues({
+        active: {
+          background: {
+            color: BackgroundColors.Primary
+          },
+          textColor: TextColors.PrimaryContrast
+        },
+        focused: {
+          textColor: TextColors.PrimaryContrast
+        },
         hovered: {
-          type: ButtonType.Primary
+          background: {
+            color: BackgroundColors.Primary
+          },
+          textColor: TextColors.PrimaryContrast
         }
-      },
-      type: ButtonType.Transparent
+      }, states),
+      textColor: (_a2 = props.textColor) != null ? _a2 : TextColors.Default,
+      to
     }, props), {
       children: component != null ? component : label
-    }))]
-  });
+    }));
+  }
+  return /* @__PURE__ */ jsx$2(Button$1, __spreadProps(__spreadValues({
+    alignment: {
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Center
+    },
+    borderRadius: __spreadValues({
+      all: Amount.Least
+    }, borderRadius),
+    form: "null",
+    icon: icon2,
+    lineHeight,
+    events: {
+      mouse: {
+        onClick: (e2) => {
+          var _a3, _b;
+          e2.preventDefault();
+          e2.stopPropagation();
+          if ((_a3 = events.mouse) == null ? void 0 : _a3.onClick)
+            (_b = events.mouse) == null ? void 0 : _b.onClick(e2);
+        }
+      }
+    },
+    padding: {
+      left: Amount.Less,
+      right: Amount.Less
+    },
+    states: __spreadValues({
+      active: {
+        background: {
+          color: BackgroundColors.Primary
+        },
+        textColor: TextColors.PrimaryContrast
+      },
+      focused: {
+        textColor: TextColors.PrimaryContrast
+      },
+      hovered: {
+        background: {
+          color: BackgroundColors.Primary
+        },
+        textColor: TextColors.PrimaryContrast
+      }
+    }, states),
+    type: ButtonType.Transparent
+  }, props), {
+    children: component != null ? component : label
+  }));
 });
 const Menu = memo((_Z) => {
   var __ = _Z, {
@@ -11777,8 +11789,7 @@ const Menu = memo((_Z) => {
     menu,
     events = {},
     onItemClick,
-    padding = {},
-    shadow = DepthShadow.Surface
+    padding = {}
   } = __, props = __objRest(__, [
     "as",
     "background",
@@ -11787,8 +11798,7 @@ const Menu = memo((_Z) => {
     "menu",
     "events",
     "onItemClick",
-    "padding",
-    "shadow"
+    "padding"
   ]);
   return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
     alignment: {
@@ -11796,7 +11806,7 @@ const Menu = memo((_Z) => {
     },
     as,
     background: __spreadValues({
-      color: BackgroundColors.Lightest
+      color: BackgroundColors.Lighter
     }, background),
     borderRadius: __spreadValues({
       all: Amount.Least
@@ -11805,42 +11815,33 @@ const Menu = memo((_Z) => {
     padding: __spreadValues({
       all: Amount.Least
     }, padding),
-    shadow
+    shadow: DepthShadow.Low,
+    size: {
+      minHeight: Sizes.Default
+    }
   }, props), {
     children: menu && menu.map((item, key) => {
-      return /* @__PURE__ */ jsx$2(MenuItem, __spreadValues({
-        events: {
-          mouse: {
-            onClick: () => {
-              if (onItemClick) {
-                onItemClick(item);
+      return /* @__PURE__ */ jsxs$1(Fragment, {
+        children: [item.title && /* @__PURE__ */ jsx$2(Label, {
+          textSize: TextSize.Smaller,
+          children: item.title
+        }), /* @__PURE__ */ jsx$2(MenuItem, __spreadValues({
+          events: {
+            mouse: {
+              onClick: () => {
+                if (onItemClick) {
+                  onItemClick(item);
+                }
               }
             }
-          }
-        },
-        padding: {
-          left: Amount.Less,
-          right: Amount.Less
-        },
-        states: {
-          active: {
-            background: {
-              color: BackgroundColors.Primary
-            },
-            textColor: TextColors.PrimaryContrast
           },
-          focused: {
-            textColor: TextColors.PrimaryContrast
+          padding: {
+            left: Amount.Less,
+            right: Amount.Less
           },
-          hovered: {
-            background: {
-              color: BackgroundColors.Primary
-            },
-            textColor: TextColors.PrimaryContrast
-          }
-        },
-        textSize: TextSize.Small
-      }, item), key);
+          textSize: TextSize.Small
+        }, item), key)]
+      });
     })
   }));
 });
@@ -11852,7 +11853,7 @@ const DropdownControl = memo((_$) => {
     borderRadius = {},
     className = "",
     component,
-    depth = Depth.Low,
+    cursor = Cursor.Pointer,
     icon: icon2,
     label,
     placeholder = "Select an option",
@@ -11867,7 +11868,7 @@ const DropdownControl = memo((_$) => {
     "borderRadius",
     "className",
     "component",
-    "depth",
+    "cursor",
     "icon",
     "label",
     "placeholder",
@@ -11876,7 +11877,7 @@ const DropdownControl = memo((_$) => {
     "textSize",
     "textColor"
   ]);
-  var _a2, _b, _c, _d, _e2, _f, _g;
+  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o, _p;
   return /* @__PURE__ */ jsxs$1(InputContainer, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       fill: Fill.Horizontal,
@@ -11887,37 +11888,44 @@ const DropdownControl = memo((_$) => {
     background: __spreadValues({
       color: BackgroundColors.DropdownMenu
     }, background),
-    borderRadius: __spreadValues({
+    borderRadius: Object.assign({}, __spreadValues({
       all: Amount.Least
-    }, borderRadius),
-    border: __spreadValues({
+    }, borderRadius), ((_b = (_a2 = states.state) == null ? void 0 : _a2.dropdown) == null ? void 0 : _b.visible) ? {
+      bottomLeft: Amount.None,
+      bottomRight: Amount.None
+    } : {}),
+    border: Object.assign({}, __spreadValues({
       all: {
-        color: ((_a2 = states.state) == null ? void 0 : _a2.error) && Array.isArray(states.state.error) && (states == null ? void 0 : states.state.error.length) > 0 ? BorderColors.Error : border.hasOwnProperty("color") ? border == null ? void 0 : border.color : BorderColors.InputControl,
+        color: ((_c = states.state) == null ? void 0 : _c.error) && Array.isArray(states.state.error) && (states == null ? void 0 : states.state.error.length) > 0 ? BorderColors.Error : (_e2 = (_d = border == null ? void 0 : border.all) == null ? void 0 : _d.color) != null ? _e2 : BorderColors.InputControl,
         style: BorderStyle.Solid,
         width: 1
       }
-    }, border),
-    depth,
+    }, border), ((_g = (_f = states.state) == null ? void 0 : _f.dropdown) == null ? void 0 : _g.visible) ? {
+      bottom: {
+        color: BorderColors.Transparent,
+        style: BorderStyle.None,
+        width: 1
+      }
+    } : {}),
+    depth: ((_i2 = (_h = states.state) == null ? void 0 : _h.dropdown) == null ? void 0 : _i2.visible) ? Depth.Highest : Depth.Surface,
     className: `${className} dropdown-control`,
-    cursor: Cursor.Pointer,
+    cursor,
     form: "null",
-    size: {
-      height: Sizes.Default
-    },
+    shadow: ((_k = (_j = states.state) == null ? void 0 : _j.dropdown) == null ? void 0 : _k.visible) ? DepthShadow.Surface : DepthShadow.Low,
     states
   }, props), {
     children: [component ? component : /* @__PURE__ */ jsx$2(Label, {
       alignment: {
         fill: Fill.Horizontal
       },
-      lineHeight: (_b = size == null ? void 0 : size.height) != null ? _b : Sizes.Default,
       padding: {
         left: Amount.Less
       },
+      selectable: false,
       textSize,
       textColor: !label && placeholder ? TextColors.InputPlaceholder : textColor,
       textOverflow: TextOverflow.Ellipsis,
-      children: (_c = label != null ? label : placeholder) != null ? _c : ""
+      children: (_l = label != null ? label : placeholder) != null ? _l : ""
     }), /* @__PURE__ */ jsx$2(Container$9, {
       alignment: {
         horizontal: AlignHorizontal.Center,
@@ -11936,13 +11944,13 @@ const DropdownControl = memo((_$) => {
         right: Amount.Least
       },
       size: {
-        height: (_d = size == null ? void 0 : size.height) != null ? _d : Sizes.Default,
-        width: (_e2 = size == null ? void 0 : size.height) != null ? _e2 : Sizes.Default
+        height: `calc(${(_m = size == null ? void 0 : size.height) != null ? _m : Sizes.Default} / 5 * 3)`,
+        width: (_n = size == null ? void 0 : size.height) != null ? _n : Sizes.Default
       },
       children: /* @__PURE__ */ jsx$2(Icon, {
-        color: ((_f = states.state) == null ? void 0 : _f.visible) ? TextColors.Lightest : TextColors.Lighter,
+        color: ((_o = states.state) == null ? void 0 : _o.visible) ? TextColors.Lightest : TextColors.Lighter,
         name: BasicIcons.CaretDownArrow,
-        className: ((_g = states.state) == null ? void 0 : _g.visible) ? "up" : "down",
+        className: ((_p = states.state) == null ? void 0 : _p.visible) ? "up" : "down",
         size: {
           height: Sizes.Smallest,
           width: Sizes.Smallest
@@ -11958,7 +11966,6 @@ const DropdownPanel = memo((_ba) => {
     borderRadius = {},
     children,
     className = "",
-    depth = Depth.Highest,
     position = {},
     size = {},
     states = {}
@@ -11968,43 +11975,55 @@ const DropdownPanel = memo((_ba) => {
     "borderRadius",
     "children",
     "className",
-    "depth",
     "position",
     "size",
     "states"
   ]);
-  var _a2, _b, _c;
+  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o, _p;
   return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
     background: __spreadValues({
-      color: BackgroundColors.Lightest
+      color: BackgroundColors.DropdownMenu
     }, background),
-    border: __spreadValues({
+    borderRadius: Object.assign(__spreadValues({
+      all: Amount.Least
+    }, borderRadius), ((_b = (_a2 = states.state) == null ? void 0 : _a2.dropdown) == null ? void 0 : _b.visible) ? {
+      topLeft: Amount.None,
+      topRight: Amount.None
+    } : {}),
+    border: Object.assign({}, __spreadValues({
       all: {
-        color: BorderColors.Transparent,
+        color: ((_c = states.state) == null ? void 0 : _c.error) && Array.isArray(states.state.error) && (states == null ? void 0 : states.state.error.length) > 0 ? BorderColors.Error : (_e2 = (_d = border == null ? void 0 : border.all) == null ? void 0 : _d.color) != null ? _e2 : BorderColors.InputControl,
         style: BorderStyle.Solid,
         width: 1
       }
-    }, border),
-    borderRadius: __spreadValues({
-      all: Amount.Less
-    }, borderRadius),
+    }, border), ((_g = (_f = states.state) == null ? void 0 : _f.dropdown) == null ? void 0 : _g.visible) ? {
+      top: {
+        color: BorderColors.Transparent,
+        style: BorderStyle.None,
+        width: 1
+      }
+    } : {}),
     className: `${className} dropdown-panel`,
-    depth,
+    depth: ((_i2 = (_h = states.state) == null ? void 0 : _h.dropdown) == null ? void 0 : _i2.visible) ? Depth.Higher : Depth.Surface,
     position: __spreadValues({
       behavior: PositionBehavior.Absolute,
       left: 0,
       right: 0,
-      top: (_a2 = size == null ? void 0 : size.height) != null ? _a2 : Sizes.Default
+      top: (_j = size == null ? void 0 : size.height) != null ? _j : Sizes.Default
     }, position),
+    shadow: ((_l = (_k = states.state) == null ? void 0 : _k.dropdown) == null ? void 0 : _l.visible) ? DepthShadow.Higher : DepthShadow.Surface,
     size: __spreadValues({
-      minHeight: 80,
+      minHeight: Sizes.Default,
       maxHeight: 300
     }, size),
     states: {
       state: {
-        focused: (_b = states.state) == null ? void 0 : _b.focused,
-        visible: (_c = states.state) == null ? void 0 : _c.visible
+        focused: (_m = states.state) == null ? void 0 : _m.focused,
+        visible: (_n = states.state) == null ? void 0 : _n.visible
       }
+    },
+    visibility: {
+      hidden: !((_p = (_o = states.state) == null ? void 0 : _o.dropdown) == null ? void 0 : _p.visible)
     }
   }, props), {
     children
@@ -12012,8 +12031,6 @@ const DropdownPanel = memo((_ba) => {
 });
 const DropdownInput = memo((_da) => {
   var _ea = _da, {
-    background = {},
-    border = {},
     borderRadius = {},
     className = "",
     defaultValue,
@@ -12024,10 +12041,9 @@ const DropdownInput = memo((_da) => {
     padding = {},
     placeholder,
     size = {},
+    states = {},
     validation
   } = _ea, props = __objRest(_ea, [
-    "background",
-    "border",
     "borderRadius",
     "className",
     "defaultValue",
@@ -12038,22 +12054,23 @@ const DropdownInput = memo((_da) => {
     "padding",
     "placeholder",
     "size",
+    "states",
     "validation"
   ]);
+  var _a2, _b, _c;
   const [focused, setFocused] = useState(false);
-  const [menuVisible, setMenuVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState((_c = (_b = (_a2 = states == null ? void 0 : states.state) == null ? void 0 : _a2.dropdown) == null ? void 0 : _b.visible) != null ? _c : false);
   const menuVisibleRef = useRef(menuVisible);
-  menuVisibleRef.current = false;
   const [problems, setProblems] = useState([]);
   const [item, setItem] = useState(menu == null ? void 0 : menu.find((i2) => i2.value === defaultValue));
   const [valueChanged, setValueChanged] = useState(false);
   useEffect(() => {
-    var _a2, _b;
+    var _a3, _b2;
     if (valueChanged) {
       if (validation && (validation == null ? void 0 : validation.conditions)) {
         const probs = Si$1(item, validation.conditions);
         setProblems(probs);
-        if ((_a2 = events.input) == null ? void 0 : _a2.onValueChange)
+        if ((_a3 = events.input) == null ? void 0 : _a3.onValueChange)
           events.input.onValueChange({
             validation: {
               problems: probs,
@@ -12062,7 +12079,7 @@ const DropdownInput = memo((_da) => {
             value: item == null ? void 0 : item.value
           });
       } else {
-        if ((_b = events.input) == null ? void 0 : _b.onValueChange)
+        if ((_b2 = events.input) == null ? void 0 : _b2.onValueChange)
           events.input.onValueChange({
             value: item == null ? void 0 : item.value
           });
@@ -12070,8 +12087,8 @@ const DropdownInput = memo((_da) => {
     }
   }, [item]);
   useEffect(() => {
-    var _a2, _b;
-    setItem((_b = (_a2 = menu == null ? void 0 : menu.find((i2) => i2.value === defaultValue)) != null ? _a2 : item) != null ? _b : void 0);
+    var _a3, _b2;
+    setItem((_b2 = (_a3 = menu == null ? void 0 : menu.find((i2) => i2.value === defaultValue)) != null ? _a3 : item) != null ? _b2 : void 0);
   }, [defaultValue]);
   return /* @__PURE__ */ jsxs$1(Fragment, {
     children: [(label || problems.length > 0) && /* @__PURE__ */ jsx$2(InputLabel, {
@@ -12082,36 +12099,30 @@ const DropdownInput = memo((_da) => {
       },
       children: label
     }), /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
-      borderRadius: __spreadValues({
+      borderRadius: Object.assign({}, __spreadValues({
         all: Amount.Least
-      }, borderRadius),
+      }, borderRadius), menuVisible ? {
+        bottomLeft: Amount.None,
+        bottomRight: Amount.None
+      } : {}),
       className: `${className} dropdown-input`,
       depth: menuVisible ? Depth.Higher : Depth.Surface,
       events: {
         mouse: {
-          onMouseLeave: () => setMenuVisible(false)
+          onMouseLeave: () => {
+            menuVisibleRef.current = false;
+            setMenuVisible(false);
+          }
         }
       },
       size: __spreadValues({
         height: Sizes.Default,
-        maxWidth: 300,
-        minWidth: 240
+        minWidth: 180
       }, size),
       shadow: menuVisible ? DepthShadow.Higher : DepthShadow.Surface
     }, props), {
       children: [/* @__PURE__ */ jsx$2(DropdownControl, {
-        background: __spreadValues({
-          color: BackgroundColors.DropdownMenu
-        }, background),
-        border: __spreadValues({
-          all: {
-            color: BorderColors.InputControl,
-            style: BorderStyle.Solid,
-            width: 1
-          }
-        }, border),
         component: item == null ? void 0 : item.component,
-        depth: Depth.High,
         events: {
           focus: {
             onBlur: () => {
@@ -12122,7 +12133,7 @@ const DropdownInput = memo((_da) => {
           mouse: {
             onClick: () => {
               menuVisibleRef.current = !menuVisibleRef.current;
-              setMenuVisible(!menuVisible);
+              setMenuVisible(menuVisibleRef.current);
             }
           }
         },
@@ -12130,57 +12141,35 @@ const DropdownInput = memo((_da) => {
         label: item == null ? void 0 : item.label,
         name: name2,
         placeholder,
-        shadow: DepthShadow.Low,
-        states: {
+        states: __spreadValues({
           state: {
             error: problems,
+            dropdown: {
+              visible: menuVisibleRef.current
+            },
             focused
           }
-        },
+        }, states),
         size: __spreadValues({
           height: Sizes.Default
         }, size)
-      }), /* @__PURE__ */ jsx$2(DropdownPanel, {
-        background: __spreadValues({
-          color: BackgroundColors.DropdownMenu
-        }, background),
-        border: __spreadValues({
-          all: {
-            color: BorderColors.InputControl,
-            style: BorderStyle.Solid,
-            width: 1
-          },
-          top: {
-            color: BorderColors.Transparent,
-            style: BorderStyle.Solid,
-            width: 0
-          }
-        }, border),
-        borderRadius: __spreadValues({
+      }), /* @__PURE__ */ jsx$2(DropdownPanel, __spreadProps(__spreadValues({
+        padding: __spreadValues({
           all: Amount.Least
-        }, borderRadius),
-        padding,
+        }, padding),
         position: {
-          top: `calc(${Sizes.Default} - 0px)`
+          top: `calc(${Sizes.Default} - 3px)`
         },
-        size: __spreadValues({
-          height: Sizes.Default,
-          maxWidth: 300,
-          minWidth: 240
-        }, size),
-        states: {
+        states: __spreadValues({
           state: {
             focused,
-            visible: menuVisible
+            dropdown: {
+              visible: menuVisibleRef.current
+            }
           }
-        },
+        }, states)
+      }, props), {
         children: /* @__PURE__ */ jsx$2(Menu, {
-          background: {
-            color: BackgroundColors.Lightest
-          },
-          borderRadius: __spreadValues({
-            all: Amount.Least
-          }, borderRadius),
           menu,
           onItemClick: (i2) => {
             setValueChanged(true);
@@ -12190,7 +12179,7 @@ const DropdownInput = memo((_da) => {
           },
           padding
         })
-      })]
+      }))]
     }))]
   });
 });
@@ -13885,7 +13874,6 @@ const NumberInput = memo((_pa) => {
     type: InputType.Number
   }, props));
 });
-const FocusStyles = css$2(["&:before{transition:opacity 0.2s ease-in-out;}", ";"], (props) => props.focused && css$2(["outline:none;&:before{", ";bottom:-4px;content:'';display:block;border-color:rgb(", ");border-style:solid;border-width:2px;opacity:", ";left:-4px;position:absolute;pointer-events:none;right:-4px;top:-4px;transition:opacity 0.2s ease-in-out;}&:focus{&:before{opacity:1;}}"], getBorderRadiusStyles(props.borderRadius), BorderColors.Primary, props.focused ? 1 : 0));
 const SSNInput = memo((_ra) => {
   var _sa = _ra, {
     as,
@@ -14109,7 +14097,7 @@ const SSNInput = memo((_ra) => {
 const Input$1 = styled.input.withConfig({
   displayName: "Input",
   componentId: "sc-1kwp1c5-0"
-})(["", ";", ";background:transparent;border:none;outline:none;padding:0 ", ";-moz-appearance:textfield;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}&::-webkit-outer-spin-button,&::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}"], FocusStyles, TextStyles, Amount.Least, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
+})(["", ";background:transparent;border:none;outline:none;padding:0 ", ";-moz-appearance:textfield;&::placeholder{color:rgb(", ");}&::-webkit-input-placeholder{color:rgb(", ");}&::-moz-placeholder{color:rgb(", ");}&::-webkit-outer-spin-button,&::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}"], TextStyles, Amount.Least, TextColors.InputPlaceholder, TextColors.InputPlaceholder, TextColors.InputPlaceholder);
 const LongTextInput = memo(({
   background = {},
   border = {},

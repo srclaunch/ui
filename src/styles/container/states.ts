@@ -9,6 +9,49 @@ export function getDisabledStateStyles(): SimpleInterpolation {
   `;
 }
 
+/*
+ &:before {
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  ${props =>
+    props.focused &&
+    css`
+      outline: none;
+
+      &:before {
+        ${getBorderRadiusStyles(props.borderRadius)};
+
+        bottom: -4px;
+        content: '';
+        display: block;
+        border-color: rgb(${BorderColors.Primary});
+        border-style: solid;
+        border-width: 2px;
+        opacity: ${props.focused ? 1 : 0};
+        left: -4px;
+        position: absolute;
+        pointer-events: none;
+        right: -4px;
+        top: -4px;
+        transition: opacity 0.2s ease-in-out;
+        // z-index: 0; 
+      }
+
+      & :focus {
+        &:before {
+          opacity: 1;
+        }
+      }
+    `};
+    */
+export function getFocusedStyles(): SimpleInterpolation {
+  return css`
+    outline: none;
+    background: blue;
+  `;
+}
+
 export function getVisibleStateStyles(): SimpleInterpolation {
   return css`
     opacity: 1;
@@ -91,10 +134,12 @@ export function getContainerStatesStyles(
       ${state?.focused
         ? css`
             ${getContainerStyles({ ...otherProps, ...focused })};
+            ${getFocusedStyles()};
           `
         : css`
             &:focus {
               ${getContainerStyles({ ...otherProps, ...focused })};
+              ${getFocusedStyles()};
             }
           `};
     `};
@@ -130,13 +175,6 @@ export function getContainerStatesStyles(
     css`
       ${getContainerStyles({ ...otherProps, ...visible })};
       ${getVisibleStateStyles()};
-    `};
-
-    ${visible &&
-    state?.visible === false &&
-    css`
-      ${getContainerStyles({ ...otherProps, ...visible })};
-      ${getHiddenStateStyles()};
     `};
 
     ${visible &&

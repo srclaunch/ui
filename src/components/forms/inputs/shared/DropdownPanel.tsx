@@ -1,8 +1,5 @@
 import { memo, ReactElement } from 'react';
-import styled from 'styled-components';
 
-import { VisibilityStyles } from '../../../../styles/container/visibility';
-import { FocusStyles } from '../../../../styles/container/focus';
 // import { FocusedStyles } from '../../../../styles/focused';
 import {
   Amount,
@@ -10,6 +7,7 @@ import {
   BorderColors,
   BorderStyle,
   Depth,
+  DepthShadow,
   PositionBehavior,
   Sizes,
 } from '../../../../types';
@@ -27,7 +25,6 @@ export const DropdownPanel = memo(
     borderRadius = {},
     children,
     className = '',
-    depth = Depth.Highest,
     position = {},
     size = {},
     states = {},
@@ -35,18 +32,43 @@ export const DropdownPanel = memo(
   }: DropdownPanelProps): ReactElement => {
     return (
       <Container
-        background={{ color: BackgroundColors.Lightest, ...background }}
-        border={{
-          all: {
-            color: BorderColors.Transparent,
-            style: BorderStyle.Solid,
-            width: 1,
+        background={{ color: BackgroundColors.DropdownMenu, ...background }}
+        borderRadius={Object.assign(
+          { all: Amount.Least, ...borderRadius },
+          states.state?.dropdown?.visible
+            ? {
+                topLeft: Amount.None,
+                topRight: Amount.None,
+              }
+            : {},
+        )}
+        border={Object.assign(
+          {},
+          {
+            all: {
+              color:
+                states.state?.error &&
+                Array.isArray(states.state.error) &&
+                states?.state.error.length > 0
+                  ? BorderColors.Error
+                  : border?.all?.color ?? BorderColors.InputControl,
+              style: BorderStyle.Solid,
+              width: 1,
+            },
+            ...border,
           },
-          ...border,
-        }}
-        borderRadius={{ all: Amount.Less, ...borderRadius }}
+          states.state?.dropdown?.visible
+            ? {
+                top: {
+                  color: BorderColors.Transparent,
+                  style: BorderStyle.None,
+                  width: 1,
+                },
+              }
+            : {},
+        )}
         className={`${className} dropdown-panel`}
-        depth={depth}
+        depth={states.state?.dropdown?.visible ? Depth.Higher : Depth.Surface}
         position={{
           behavior: PositionBehavior.Absolute,
           left: 0,
@@ -54,12 +76,15 @@ export const DropdownPanel = memo(
           top: size?.height ?? Sizes.Default,
           ...position,
         }}
-        size={{ minHeight: 80, maxHeight: 300, ...size }}
-        states={{
-          state: {
-            focused: states.state?.focused,
-            visible: states.state?.visible,
-          },
+        shadow={
+          states.state?.dropdown?.visible
+            ? DepthShadow.Higher
+            : DepthShadow.Surface
+        }
+        size={{ minHeight: Sizes.Default, maxHeight: 300, ...size }}
+        states={states}
+        visibility={{
+          hidden: !states.state?.dropdown?.visible,
         }}
         {...props}
       >

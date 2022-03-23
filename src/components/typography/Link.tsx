@@ -1,8 +1,6 @@
 import { Link as RouterLink } from '@srclaunch/web-application-state';
 import { memo, MouseEvent, ReactElement, useState } from 'react';
-import styled from 'styled-components';
 
-import { FocusStyles } from '../../styles/container/focus';
 import { Amount, TextColors, TextSize, TextWeight } from '../../types';
 import {
   TextDecorationLine,
