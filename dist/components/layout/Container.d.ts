@@ -1,6 +1,6 @@
 import { PropsWithChildren, ReactElement } from 'react';
 import { Alignment, Background, Border, BorderRadius, CommonComponentProps, DepthShadow, Animation, Cursor, Depth, Events, States, Margin, Padding, Size, Shadow, Position, Visibility } from '../../types';
-import { Transform } from '../../types/appearance/animation';
+import { Transform } from '../../types/appearance/transform';
 export declare type ContainerProps = PropsWithChildren<CommonComponentProps & {
     readonly alignment?: Alignment;
     readonly animations?: Animation[];

@@ -48,11 +48,9 @@ export const Menu = memo(
         {menu &&
           menu.map((item, key: number) => {
             return (
-              <>
+              <Container key={key}>
                 {item.title && (
-                  <Label key={key} textSize={TextSize.Smaller}>
-                    {item.title}
-                  </Label>
+                  <Label textSize={TextSize.Smaller}>{item.title}</Label>
                 )}
 
                 <MenuItem
@@ -65,7 +63,6 @@ export const Menu = memo(
                       },
                     },
                   }}
-                  key={key}
                   // borderRadius= {}
 
                   padding={{
@@ -75,7 +72,7 @@ export const Menu = memo(
                   textSize={TextSize.Small}
                   {...item}
                 />
-              </>
+              </Container>
             );
           })}
       </Container>

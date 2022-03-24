@@ -11,10 +11,6 @@ export type {
   AnimationEasings,
   AnimationIterations,
   AnimationTiming,
-  Rotate,
-  Scale,
-  Skew,
-  Translate,
 } from './appearance/animation';
 export { Animations } from './appearance/animation';
 
@@ -51,6 +47,14 @@ export { PositionBehavior } from './appearance/position';
 export type { Shadow } from './appearance/shadow';
 export type { Size } from './appearance/size';
 export { Amount, Sizes } from './appearance/size';
+export type {
+  Rotate,
+  Scale,
+  Skew,
+  Translate,
+  Transform,
+} from './appearance/transform';
+export { TransformOrigin } from './appearance/transform';
 export type { Visibility } from './appearance/visibility';
 export type { CommonComponentProps } from './component';
 // export { DataGridDisplayType, Formatter } from './data/display';

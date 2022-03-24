@@ -82,6 +82,7 @@ export function getContainerStatesStyles(
     focused,
     hovered,
     loading,
+    on,
     state,
     success,
     visible,
@@ -159,6 +160,12 @@ export function getContainerStatesStyles(
     state?.loading &&
     css`
       ${getContainerStyles({ ...otherProps, ...loading })};
+    `};
+
+    ${on &&
+    state?.on &&
+    css`
+      ${getContainerStyles({ ...otherProps, ...on })};
     `};
 
     ${success &&

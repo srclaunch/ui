@@ -19,7 +19,7 @@ export declare const ButtonStyles: import("styled-components").FlattenInterpolat
     readonly position?: import("../../types").Position | undefined;
     readonly shadow?: import("../../types").DepthShadow | import("../../types").Shadow | undefined;
     readonly size?: Size | undefined;
-    readonly transform?: import("../../types/appearance/animation").Transform | undefined;
+    readonly transform?: import("../../types").Transform | undefined;
     readonly visibility?: import("../../types").Visibility | undefined;
     readonly states?: import("../../types").States<ContainerProps> | undefined;
 } & {

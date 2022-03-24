@@ -1,12 +1,16 @@
 import { BasicIcons } from '@srclaunch/icons';
 import { ValidationProblem } from '@srclaunch/types';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useState, useRef } from 'react';
 
 import {
   AlignHorizontal,
   AlignVertical,
   Amount,
+  BackgroundColors,
+  BorderColors,
+  BorderStyle,
   Colors,
+  Cursor,
   Depth,
   DepthShadow,
   ForegroundColors,
@@ -32,6 +36,7 @@ export type ToggleInputProps = ContainerProps &
 export const ToggleInput = memo(
   ({
     className = '',
+    cursor = Cursor.Pointer,
     defaultValue = false,
     events = {},
     falseLabel,
@@ -44,7 +49,8 @@ export const ToggleInput = memo(
   }: ToggleInputProps): React.ReactElement => {
     const [focused, setFocused] = useState(false);
     const [problems, setProblems] = useState<ValidationProblem[]>([]);
-    const [toggleValue, setToggleValue] = useState(defaultValue ?? false);
+    const [toggleValue, setToggleValue] = useState(defaultValue);
+    const toggleValueRef = useRef(toggleValue);
 
     useEffect(() => {
       if (events.input?.onValueChange)
@@ -77,10 +83,14 @@ export const ToggleInput = memo(
         >
           {falseLabel && (
             <Button
+              cursor={cursor}
               form="null"
               events={{
                 mouse: {
-                  onClick: () => setToggleValue(false),
+                  onClick: () => {
+                    toggleValueRef.current = false;
+                    setToggleValue(false);
+                  },
                 },
               }}
               type={ButtonType.Inline}
@@ -100,19 +110,37 @@ export const ToggleInput = memo(
               vertical: AlignVertical.Center,
             }}
             as="button"
+            background={{
+              color: BackgroundColors.InputControl,
+            }}
             borderRadius={{ all: Amount.All }}
+            border={{
+              all: {
+                color: BorderColors.InputControl,
+                style: BorderStyle.Solid,
+                width: 1,
+              },
+            }}
+            cursor={cursor}
             events={{
               focus: {
                 onBlur: () => setFocused(false),
                 onFocus: () => setFocused(true),
               },
               mouse: {
-                onClick: () => setToggleValue(!toggleValue),
+                onClick: e => {
+                  toggleValueRef.current = !toggleValueRef.current;
+                  setToggleValue(toggleValueRef.current);
+                },
               },
             }}
             form="null"
             padding={{ all: Amount.Least }}
             shadow={DepthShadow.Low}
+            size={{
+              height: size.height,
+              width: `calc(${size.width} * 2)`,
+            }}
           >
             <Container
               alignment={{
@@ -120,18 +148,40 @@ export const ToggleInput = memo(
                 vertical: AlignVertical.Center,
               }}
               background={{
-                color: toggleValue ? Colors.Primary : Colors.Error,
+                color:
+                  toggleValueRef.current === true
+                    ? Colors.Primary
+                    : Colors.Error,
               }}
+              borderRadius={{ all: Amount.All }}
+              cursor={cursor}
               depth={Depth.High}
-              states={{
-                state: { focused },
-              }}
               shadow={DepthShadow.High}
-              size={size}
+              size={{
+                height: `calc(${size.height} / 3 * 2)`,
+                width: `calc(${size.height} / 3 * 2)`,
+              }}
+              states={{
+                on: {
+                  transform: {
+                    translate: {
+                      x: `calc(${size.height} / 10 * 9)`,
+                    },
+                  },
+                },
+                state: {
+                  focused,
+                  on: toggleValue,
+                },
+              }}
             >
               <Icon
-                color={ForegroundColors.Lightest}
-                name={toggleValue ? BasicIcons.Checkmark2 : BasicIcons.Close}
+                color={ForegroundColors.White}
+                name={
+                  toggleValueRef.current === true
+                    ? BasicIcons.Checkmark2
+                    : BasicIcons.Close
+                }
                 size={{
                   height: Sizes.Smallest,
                   width: Sizes.Smallest,
@@ -142,10 +192,14 @@ export const ToggleInput = memo(
 
           {trueLabel && (
             <Button
+              cursor={cursor}
               form="null"
               events={{
                 mouse: {
-                  onClick: () => setToggleValue(true),
+                  onClick: () => {
+                    toggleValueRef.current = true;
+                    setToggleValue(true);
+                  },
                 },
               }}
               type={ButtonType.Inline}

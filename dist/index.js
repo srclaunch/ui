@@ -4890,6 +4890,18 @@ var Sizes = /* @__PURE__ */ ((Sizes2) => {
   Sizes2["Largest"] = "var(--size-largest)";
   return Sizes2;
 })(Sizes || {});
+var TransformOrigin = /* @__PURE__ */ ((TransformOrigin2) => {
+  TransformOrigin2["TopLeft"] = "top left";
+  TransformOrigin2["TopRight"] = "top right";
+  TransformOrigin2["Top"] = "top";
+  TransformOrigin2["BottomLeft"] = "bottom left";
+  TransformOrigin2["BottomRight"] = "bottom right";
+  TransformOrigin2["Bottom"] = "bottom";
+  TransformOrigin2["Left"] = "left";
+  TransformOrigin2["Right"] = "right";
+  TransformOrigin2["Center"] = "center";
+  return TransformOrigin2;
+})(TransformOrigin || {});
 var AutoComplete = /* @__PURE__ */ ((AutoComplete2) => {
   AutoComplete2["Birthday"] = "bday";
   AutoComplete2["BirthdayDay"] = "bday-day";
@@ -5284,12 +5296,62 @@ function getSizeStyles(size) {
   return css$2(["", ";", ";", ";", ";", ";", ";"], maxHeight && css$2(["max-height:", ";"], getCSSMeasurementValue(maxHeight)), minHeight && css$2(["min-height:", ";"], getCSSMeasurementValue(minHeight)), height && css$2(["height:", ";"], getCSSMeasurementValue(height)), maxWidth && css$2(["max-width:", ";"], getCSSMeasurementValue(maxWidth)), minWidth && css$2(["min-width:", ";"], getCSSMeasurementValue(minWidth)), width && css$2(["width:", ";"], getCSSMeasurementValue(width)));
 }
 const SizeStyles = css$2(["", ";"], (props) => getSizeStyles(props.size));
+function getTransformArgumentValue(transform) {
+  if (!transform)
+    return "";
+  let cssValue = "";
+  const {
+    rotate,
+    scale,
+    skew,
+    translate
+  } = transform;
+  if (rotate) {
+    if (rotate.x && rotate.y && rotate.z) {
+      cssValue += `rotate3d(${rotate.x}, ${rotate.y}, ${rotate.z}, ${rotate.angle}) `;
+    } else if (rotate.x && rotate.y) {
+      cssValue += `rotate3d(${rotate.x}, ${rotate.y}, ${rotate.angle}) `;
+    } else {
+      cssValue += `rotate(${rotate.angle}) `;
+    }
+  }
+  if (scale) {
+    if (scale.x && scale.y && scale.z) {
+      cssValue += `scale3d(${scale.x}, ${scale.y}, ${scale.z}) `;
+    } else if (scale.x && scale.y) {
+      cssValue += `scale3d(${scale.x}, ${scale.y}, ${scale.x}) `;
+    } else {
+      cssValue += `scale(${scale.x}) `;
+    }
+  }
+  if (skew) {
+    if (skew.x && skew.y) {
+      cssValue += `skew(${skew.x}, ${skew.y}) `;
+    } else {
+      cssValue += `skew(${skew.x}) `;
+    }
+  }
+  if (translate) {
+    if (translate.x && translate.y) {
+      cssValue += `translate(${getCSSMeasurementValue(translate.x)}, ${getCSSMeasurementValue(translate.y)}) `;
+    } else {
+      cssValue += `translate(${getCSSMeasurementValue(translate.x)}) `;
+    }
+  }
+  return cssValue;
+}
+function getTransformStyles(transform) {
+  if (!transform)
+    return;
+  return css$2(["", ";", ";"], (transform == null ? void 0 : transform.origin) && css$2(["transform-origin:", ";"], getCSSMeasurementValue(transform.origin)), ((transform == null ? void 0 : transform.rotate) || (transform == null ? void 0 : transform.scale) || (transform == null ? void 0 : transform.skew) || (transform == null ? void 0 : transform.translate)) && css$2(["transform:", ";"], getTransformArgumentValue(transform)));
+}
+css$2(["", ";"], (props) => getTransformStyles(props.transform));
 function getVisibilityStyles(visibility) {
   return css$2(["", ";", ";"], (visibility == null ? void 0 : visibility.hidden) === true && css$2(["visibility:hidden;"]), (visibility == null ? void 0 : visibility.opacity) && css$2(["opacity:", "%;"], visibility.opacity));
 }
 css$2(["", ";"], (props) => getVisibilityStyles(props.visibility));
 const getContainerStyles = (props) => {
-  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:opacity 0.13s ease-in-out,background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,transform 0.13s ease-in-out;"], getAlignmentStyles(props.alignment), getAnimationStyles(props.animations), getBackgroundStyles(props.background), getBorderStyles(props.border), getBorderRadiusStyles(props.borderRadius), getCursorStyles(props.cursor), getDepthStyles(props.depth), getEventStyles(props.events), getMarginStyles(props.margin), getPaddingStyles(props.padding), getPositionStyles(props.position), getShadowStyles(props.shadow), getSizeStyles(props.size), getVisibilityStyles(props.visibility));
+  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:opacity 0.13s ease-in-out,background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,transform 0.13s ease-in-out;"], getAlignmentStyles(props.alignment), getAnimationStyles(props.animations), getBackgroundStyles(props.background), getBorderStyles(props.border), getBorderRadiusStyles(props.borderRadius), getCursorStyles(props.cursor), getDepthStyles(props.depth), getEventStyles(props.events), getMarginStyles(props.margin), getPaddingStyles(props.padding), getPositionStyles(props.position), getShadowStyles(props.shadow), getSizeStyles(props.size), getTransformStyles(props.transform), getVisibilityStyles(props.visibility));
 };
 const ContainerStyles = css$2(["", ";"], (props) => getContainerStyles(props));
 function getDisabledStateStyles$1() {
@@ -5321,12 +5383,13 @@ function getContainerStatesStyles(props) {
     focused,
     hovered,
     loading,
+    on,
     state,
     success,
     visible,
     warning
   } = states;
-  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";"], active && css$2(["", ";"], (state == null ? void 0 : state.active) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active))) : css$2(["&::active{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active)))), current && (state == null ? void 0 : state.current) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), current))), disabled && (state == null ? void 0 : state.disabled) ? css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()) : css$2(["&:disabled{", ";", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()), error && (state == null ? void 0 : state.error) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), error))), focused && css$2(["", ";"], (state == null ? void 0 : state.focused) ? css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles()) : css$2(["&:focus{", ";", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles())), hovered && !(state == null ? void 0 : state.current) && css$2(["", ";"], (state == null ? void 0 : state.hovered) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered))) : css$2(["&:hover{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered)))), loading && (state == null ? void 0 : state.loading) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loading))), success && (state == null ? void 0 : state.success) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), success))), visible && (state == null ? void 0 : state.visible) && css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getVisibleStateStyles()), visible && (state == null ? void 0 : state.visible) === false && css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getHiddenStateStyles()), !visible && (state == null ? void 0 : state.visible) === false && css$2(["", ";"], getHiddenStateStyles()), warning && (state == null ? void 0 : state.warning) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), warning))));
+  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";"], active && css$2(["", ";"], (state == null ? void 0 : state.active) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active))) : css$2(["&::active{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active)))), current && (state == null ? void 0 : state.current) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), current))), disabled && (state == null ? void 0 : state.disabled) ? css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()) : css$2(["&:disabled{", ";", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()), error && (state == null ? void 0 : state.error) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), error))), focused && css$2(["", ";"], (state == null ? void 0 : state.focused) ? css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles()) : css$2(["&:focus{", ";", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles())), hovered && !(state == null ? void 0 : state.current) && css$2(["", ";"], (state == null ? void 0 : state.hovered) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered))) : css$2(["&:hover{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered)))), loading && (state == null ? void 0 : state.loading) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loading))), on && (state == null ? void 0 : state.on) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), on))), success && (state == null ? void 0 : state.success) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), success))), visible && (state == null ? void 0 : state.visible) && css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getVisibleStateStyles()), visible && (state == null ? void 0 : state.visible) === false && css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getHiddenStateStyles()), !visible && (state == null ? void 0 : state.visible) === false && css$2(["", ";"], getHiddenStateStyles()), warning && (state == null ? void 0 : state.warning) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), warning))));
 }
 const StateStyles = css$2(["", ";"], (props) => getContainerStatesStyles(props));
 function getEventHandlers(events) {
@@ -10575,6 +10638,7 @@ const PropertyEditor = memo((_O) => {
 });
 const ToggleInput = memo(({
   className = "",
+  cursor = Cursor.Pointer,
   defaultValue = false,
   events = {},
   falseLabel,
@@ -10588,7 +10652,8 @@ const ToggleInput = memo(({
   var _a2;
   const [focused, setFocused] = useState(false);
   const [problems, setProblems] = useState([]);
-  const [toggleValue, setToggleValue] = useState(defaultValue != null ? defaultValue : false);
+  const [toggleValue, setToggleValue] = useState(defaultValue);
+  const toggleValueRef = useRef(toggleValue);
   useEffect(() => {
     var _a3, _b;
     if ((_a3 = events.input) == null ? void 0 : _a3.onValueChange)
@@ -10621,10 +10686,14 @@ const ToggleInput = memo(({
       },
       className: `${className} toggle-input`,
       children: [falseLabel && /* @__PURE__ */ jsx$2(Button$1, {
+        cursor,
         form: "null",
         events: {
           mouse: {
-            onClick: () => setToggleValue(false)
+            onClick: () => {
+              toggleValueRef.current = false;
+              setToggleValue(false);
+            }
           }
         },
         type: ButtonType.Inline,
@@ -10639,16 +10708,30 @@ const ToggleInput = memo(({
           vertical: AlignVertical.Center
         },
         as: "button",
+        background: {
+          color: BackgroundColors.InputControl
+        },
         borderRadius: {
           all: Amount.All
         },
+        border: {
+          all: {
+            color: BorderColors.InputControl,
+            style: BorderStyle.Solid,
+            width: 1
+          }
+        },
+        cursor,
         events: {
           focus: {
             onBlur: () => setFocused(false),
             onFocus: () => setFocused(true)
           },
           mouse: {
-            onClick: () => setToggleValue(!toggleValue)
+            onClick: (e2) => {
+              toggleValueRef.current = !toggleValueRef.current;
+              setToggleValue(toggleValueRef.current);
+            }
           }
         },
         form: "null",
@@ -10656,25 +10739,44 @@ const ToggleInput = memo(({
           all: Amount.Least
         },
         shadow: DepthShadow.Low,
+        size: {
+          height: size.height,
+          width: `calc(${size.width} * 2)`
+        },
         children: /* @__PURE__ */ jsx$2(Container$9, {
           alignment: {
             horizontal: AlignHorizontal.Center,
             vertical: AlignVertical.Center
           },
           background: {
-            color: toggleValue ? Colors.Primary : Colors.Error
+            color: toggleValueRef.current === true ? Colors.Primary : Colors.Error
           },
+          borderRadius: {
+            all: Amount.All
+          },
+          cursor,
           depth: Depth.High,
+          shadow: DepthShadow.High,
+          size: {
+            height: `calc(${size.height} / 3 * 2)`,
+            width: `calc(${size.height} / 3 * 2)`
+          },
           states: {
+            on: {
+              transform: {
+                translate: {
+                  x: `calc(${size.height} / 10 * 9)`
+                }
+              }
+            },
             state: {
-              focused
+              focused,
+              on: toggleValue
             }
           },
-          shadow: DepthShadow.High,
-          size,
           children: /* @__PURE__ */ jsx$2(Icon, {
-            color: ForegroundColors.Lightest,
-            name: toggleValue ? BasicIcons.Checkmark2 : BasicIcons.Close,
+            color: ForegroundColors.White,
+            name: toggleValueRef.current === true ? BasicIcons.Checkmark2 : BasicIcons.Close,
             size: {
               height: Sizes.Smallest,
               width: Sizes.Smallest
@@ -10682,10 +10784,14 @@ const ToggleInput = memo(({
           })
         })
       }), trueLabel && /* @__PURE__ */ jsx$2(Button$1, {
+        cursor,
         form: "null",
         events: {
           mouse: {
-            onClick: () => setToggleValue(true)
+            onClick: () => {
+              toggleValueRef.current = true;
+              setToggleValue(true);
+            }
           }
         },
         type: ButtonType.Inline,
@@ -11824,11 +11930,11 @@ const Menu = memo((_Z) => {
     }
   }, props), {
     children: menu && menu.map((item, key) => {
-      return /* @__PURE__ */ jsxs$1(Fragment, {
+      return /* @__PURE__ */ jsxs$1(Container$9, {
         children: [item.title && /* @__PURE__ */ jsx$2(Label, {
           textSize: TextSize.Smaller,
           children: item.title
-        }, key), /* @__PURE__ */ jsx$2(MenuItem, __spreadValues({
+        }), /* @__PURE__ */ jsx$2(MenuItem, __spreadValues({
           events: {
             mouse: {
               onClick: () => {
@@ -11843,8 +11949,8 @@ const Menu = memo((_Z) => {
             right: Amount.Less
           },
           textSize: TextSize.Small
-        }, item), key)]
-      });
+        }, item))]
+      }, key);
     })
   }));
 });
@@ -57577,5 +57683,5 @@ async function init() {
   i18nIsoCountries.registerLocale(englishLanguage);
 }
 init();
-export { ActivityFeed, AddPaymentMethodForm, AlignHorizontal, AlignVertical, Amount, Animations, AutoComplete, Backdrop, BackgroundColorShade, BackgroundColors, BackgroundSize, Badge, BooleanLabel, BorderColorShade, BorderColors, BorderStyle, BreadcrumbNavigation, Button$1 as Button, ButtonType, Card, Checkbox, CloseButton, CodeBlock, CodeVerificationForm, ColorInput, ColorLabel, Colors, ConnectionStatus, Container$9 as Container, ContrastColors, ConversationList, ConversationNavigation, CountryInput, CountryLabel, CurrencyAmountInput, CurrencyAmountLabel, CurrencyInput, Cursor, DataGrid, DataGridCell, DateInput, DateLabel, Depth, DepthShadow, DropdownInput, DropdownPanel, DynamicInput, EmailAddressInput, EmailAddressLabel, EntityEditor, EntityPanel, EntityPreview, ErrorLabel, ErrorNotification, Fill, ForegroundColorShade, ForegroundColors, ForgotPasswordForm, Form, FormActions, FormFields, Heading, HelperButton, HoverPanel, Icon, Image, ImageInput, InputHelper, InputLabel, InputRow, InputType, Label, LanguageInput, LanguageLabel, LineBreak, LinearGauge, Link, ListItem, LoadingOverlay, LoginForm, LogoutButton, LongTextInput, MarkdownEditor, MediaGrid, MediaPreview, Menu, MenuButton, Message$1 as Message, MessageComposer, MessagePreview, Modal, ModalHeader, MoreMenu, NavigationBar, NavigationLink, NavigationMenu, NotificationLabel, Notifications, NumberInput, NumberLabel, ObjectLink, ObjectPropertiesView, Orb, OrderedList, Orientation, Overflow, Page, PageLink, Paragraph, PasswordInput, PaymentMethodModal, PersonLabel, PhoneNumberInput, PhoneNumberLabel, PieChart, PositionBehavior, ProgressLabel, ProgressMeter, ProgressSpinner, ProgressivePaymentStatus, PropertyEditor, RadialChart, RadialGauge, RouterView, SearchInput, SignupForm, Sizes, SlidePanel, Small, Spacer, StaticTypeLabel, StreetAddressInput, SubTitle, SubscriptionModal, Svg, Tab, Tabs, TextAlign, TextColors, TextDecorationLine, TextDecorationStyle, TextInput, TextOverflow, TextSize, TextWeight, ThemeSelector, Title, TitleCard, ToggleInput, UniversalSearch, UnorderedList, UserLabel, UserMenu, VerificationCodeInput, Video, WebApplication, Workspace, convertAmountToSize, convertSizeToAmount, convertSizeToTextSize, getCSSMeasurementValue, getFormFieldsFromModel, getInputElementByFieldType, getLabelByFieldType, getLargerAmount, getLargerSize, getSmallerAmount, getSmallerSize, useAuthentication, useEntityEditor };
+export { ActivityFeed, AddPaymentMethodForm, AlignHorizontal, AlignVertical, Amount, Animations, AutoComplete, Backdrop, BackgroundColorShade, BackgroundColors, BackgroundSize, Badge, BooleanLabel, BorderColorShade, BorderColors, BorderStyle, BreadcrumbNavigation, Button$1 as Button, ButtonType, Card, Checkbox, CloseButton, CodeBlock, CodeVerificationForm, ColorInput, ColorLabel, Colors, ConnectionStatus, Container$9 as Container, ContrastColors, ConversationList, ConversationNavigation, CountryInput, CountryLabel, CurrencyAmountInput, CurrencyAmountLabel, CurrencyInput, Cursor, DataGrid, DataGridCell, DateInput, DateLabel, Depth, DepthShadow, DropdownInput, DropdownPanel, DynamicInput, EmailAddressInput, EmailAddressLabel, EntityEditor, EntityPanel, EntityPreview, ErrorLabel, ErrorNotification, Fill, ForegroundColorShade, ForegroundColors, ForgotPasswordForm, Form, FormActions, FormFields, Heading, HelperButton, HoverPanel, Icon, Image, ImageInput, InputHelper, InputLabel, InputRow, InputType, Label, LanguageInput, LanguageLabel, LineBreak, LinearGauge, Link, ListItem, LoadingOverlay, LoginForm, LogoutButton, LongTextInput, MarkdownEditor, MediaGrid, MediaPreview, Menu, MenuButton, Message$1 as Message, MessageComposer, MessagePreview, Modal, ModalHeader, MoreMenu, NavigationBar, NavigationLink, NavigationMenu, NotificationLabel, Notifications, NumberInput, NumberLabel, ObjectLink, ObjectPropertiesView, Orb, OrderedList, Orientation, Overflow, Page, PageLink, Paragraph, PasswordInput, PaymentMethodModal, PersonLabel, PhoneNumberInput, PhoneNumberLabel, PieChart, PositionBehavior, ProgressLabel, ProgressMeter, ProgressSpinner, ProgressivePaymentStatus, PropertyEditor, RadialChart, RadialGauge, RouterView, SearchInput, SignupForm, Sizes, SlidePanel, Small, Spacer, StaticTypeLabel, StreetAddressInput, SubTitle, SubscriptionModal, Svg, Tab, Tabs, TextAlign, TextColors, TextDecorationLine, TextDecorationStyle, TextInput, TextOverflow, TextSize, TextWeight, ThemeSelector, Title, TitleCard, ToggleInput, TransformOrigin, UniversalSearch, UnorderedList, UserLabel, UserMenu, VerificationCodeInput, Video, WebApplication, Workspace, convertAmountToSize, convertSizeToAmount, convertSizeToTextSize, getCSSMeasurementValue, getFormFieldsFromModel, getInputElementByFieldType, getLabelByFieldType, getLargerAmount, getLargerSize, getSmallerAmount, getSmallerSize, useAuthentication, useEntityEditor };
 //# sourceMappingURL=index.js.map

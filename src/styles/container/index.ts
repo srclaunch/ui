@@ -13,6 +13,7 @@ import { getPaddingStyles } from './padding';
 import { getPositionStyles } from './position';
 import { getShadowStyles } from './shadow';
 import { getSizeStyles } from './size';
+import { getTransformStyles } from './transform';
 import { getVisibilityStyles } from './visibility';
 
 export const getContainerStyles = (
@@ -32,6 +33,7 @@ export const getContainerStyles = (
     ${getPositionStyles(props.position)};
     ${getShadowStyles(props.shadow)};
     ${getSizeStyles(props.size)};
+    ${getTransformStyles(props.transform)};
     ${getVisibilityStyles(props.visibility)};
 
     transition: opacity 0.13s ease-in-out, background 0.13s ease-in-out,

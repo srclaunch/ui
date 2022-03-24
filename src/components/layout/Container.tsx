@@ -33,7 +33,7 @@ import {
 import { getEventHandlers } from '../../lib/events';
 import { ReactEventHandler } from 'react';
 import { useEffect } from 'react';
-import { Transform } from '../../types/appearance/animation';
+import { Transform } from '../../types/appearance/transform';
 
 export type ContainerProps = PropsWithChildren<
   CommonComponentProps & {

@@ -1,6 +1,6 @@
-import { memo, ReactElement, useEffect, useRef, useState } from 'react';
+import { memo, ReactElement } from 'react';
 
-import { Cursor, DepthShadow, InputType } from '../../../../types';
+import { InputType } from '../../../../types';
 
 import { InputContainer, InputContainerProps } from '../shared/InputContainer';
 

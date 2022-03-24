@@ -1,24 +1,5 @@
 import { ContainerProps } from '../../components/layout/Container';
-export declare type Rotate = {
-    readonly x?: number | string;
-    readonly y?: number | string;
-    readonly z?: number | string;
-};
-export declare type Scale = {
-    readonly x?: number | string;
-    readonly y?: number | string;
-    readonly z?: number | string;
-};
-export declare type Skew = {
-    readonly x?: number | string;
-    readonly y?: number | string;
-    readonly z?: number | string;
-};
-export declare type Translate = {
-    readonly x?: number | string;
-    readonly y?: number | string;
-    readonly z?: number | string;
-};
+import { Transform } from './transform';
 export declare enum AnimationEasings {
     EaseInBack = "ease-in-back",
     EaseOutBack = "ease-out-back",
@@ -73,12 +54,6 @@ export declare type AnimationTiming = {
     readonly delay?: number;
     readonly easing?: AnimationEasings;
     readonly iterations?: number | string;
-};
-export declare type Transform = {
-    readonly rotate?: Rotate;
-    readonly scale?: Scale;
-    readonly skew?: Skew;
-    readonly translate?: Translate;
 };
 export declare type Animation = {
     readonly from?: ContainerProps & Transform;

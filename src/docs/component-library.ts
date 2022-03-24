@@ -1,6 +1,8 @@
 import { Exception } from '@srclaunch/exceptions';
 import { DualLightIcons } from '@srclaunch/icons';
 import { MenuButton } from '../components/forms/buttons/MenuButton';
+import { Checkbox } from '../components/forms/inputs/boolean/Checkbox';
+import { ToggleInput } from '../components/forms/inputs/boolean/ToggleInput';
 import {
   Amount,
   BreadcrumbNavigation,
@@ -334,6 +336,64 @@ const Example = () => (
             'Inputs are elements users interact with to collect user input',
           path: '/forms/inputs',
           components: [
+            {
+              title: 'Boolean',
+              description:
+                'True/false inputs are used to collect a boolean value',
+              path: '/forms/inputs/boolean',
+              components: [
+                {
+                  title: 'Checkbox',
+                  description:
+                    'A checkbox is a boolean input that can be checked or unchecked',
+                  component: Checkbox,
+                  path: '/forms/inputs/boolean/checkbox',
+                  examples: [
+                    {
+                      code: `import { Checkbox } from '@srclaunch/ui';
+
+const Example = () => (
+  <Checkbox
+    label="Enabled"
+    onChange={({ value }) => console.log(value)}
+  />
+);`,
+                      description: '',
+                      properties: {
+                        label: 'Enabled',
+                        onChange: ({ value }: { value: string }) =>
+                          console.log(value),
+                      },
+                    },
+                  ],
+                },
+                {
+                  title: 'ToggleInput',
+                  description:
+                    'A toggle input is a boolean input that can be turned on or off',
+                  component: ToggleInput,
+                  path: '/forms/inputs/boolean/toggle-input',
+                  examples: [
+                    {
+                      code: `import { ToggleInput } from '@srclaunch/ui';
+      
+      const Example = () => (
+        <ToggleInput
+          label="Enabled"
+          onChange={({ value }) => console.log(value)}
+        />
+      );`,
+                      description: '',
+                      properties: {
+                        label: 'Enabled',
+                        onChange: ({ value }: { value: string }) =>
+                          console.log(value),
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
             {
               title: 'Media',
               description:
