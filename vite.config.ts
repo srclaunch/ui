@@ -26,6 +26,7 @@ export default defineConfig(({ command, mode }) => {
             // '@srclaunch/react-hooks',
             // '@srclaunch/themes','
             // 'aws-sdk',
+            // '@srclaunch/icons',
             '@srclaunch/web-application-state',
             // '@srclaunch/transform',
             // '@srclaunch/types',

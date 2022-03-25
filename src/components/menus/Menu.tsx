@@ -27,6 +27,7 @@ export const Menu = memo(
     events = {},
     onItemClick,
     padding = {},
+    states = {},
     ...props
   }: MenuProps): ReactElement => {
     return (
@@ -35,7 +36,7 @@ export const Menu = memo(
           overflow: Overflow.ScrollVertical,
         }}
         as={as}
-        background={{ color: BackgroundColors.Lighter, ...background }}
+        background={{ color: BackgroundColors.Lightest, ...background }}
         borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} menu`}
         padding={{ all: Amount.Least, ...padding }}
@@ -54,6 +55,10 @@ export const Menu = memo(
                 )}
 
                 <MenuItem
+                  background={{
+                    color: BackgroundColors.Lightest,
+                    ...background,
+                  }}
                   events={{
                     mouse: {
                       onClick: () => {
@@ -63,11 +68,35 @@ export const Menu = memo(
                       },
                     },
                   }}
-                  // borderRadius= {}
-
                   padding={{
                     left: Amount.Less,
                     right: Amount.Less,
+                  }}
+                  states={{
+                    active: {
+                      background: {
+                        color: BackgroundColors.Primary,
+                      },
+                      // shadow: {
+                      //   blur: 7,
+                      //   color: BackgroundColors.Primary,
+                      //   opacity: 35,
+                      //   x: 0,
+                      //   y: 2,
+                      //   spread: 4,
+                      // },
+                      textColor: TextColors.PrimaryContrast,
+                    },
+                    focused: {
+                      textColor: TextColors.PrimaryContrast,
+                    },
+                    hovered: {
+                      background: {
+                        color: BackgroundColors.Primary,
+                      },
+                      textColor: TextColors.PrimaryContrast,
+                    },
+                    ...states,
                   }}
                   textSize={TextSize.Small}
                   {...item}

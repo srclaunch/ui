@@ -30,7 +30,7 @@ export const MenuItem = memo(
   ({
     alignment = {},
     as = 'button',
-    background = {},
+
     borderRadius = {},
     className = '',
     component,
@@ -67,8 +67,6 @@ export const MenuItem = memo(
               },
             },
           }}
-          icon={icon}
-          lineHeight={lineHeight}
           padding={{
             left: Amount.Less,
             right: Amount.Less,
@@ -99,11 +97,14 @@ export const MenuItem = memo(
             },
             ...states,
           }}
-          textColor={props.textColor ?? TextColors.Default}
           to={to}
           {...props}
         >
-          {component ?? label}
+          {component ?? (
+            <Label icon={icon} lineHeight={lineHeight} {...props}>
+              {label}
+            </Label>
+          )}
         </NavigationLink>
       );
     }
@@ -137,36 +138,21 @@ export const MenuItem = memo(
           left: Amount.Less,
           right: Amount.Less,
         }}
-        states={{
-          active: {
-            background: {
-              color: BackgroundColors.Primary,
-            },
-            // shadow: {
-            //   blur: 7,
-            //   color: BackgroundColors.Primary,
-            //   opacity: 35,
-            //   x: 0,
-            //   y: 2,
-            //   spread: 4,
-            // },
-            textColor: TextColors.PrimaryContrast,
-          },
-          focused: {
-            textColor: TextColors.PrimaryContrast,
-          },
-          hovered: {
-            background: {
-              color: BackgroundColors.Primary,
-            },
-            textColor: TextColors.PrimaryContrast,
-          },
-          ...states,
-        }}
+        states={states}
         type={ButtonType.Transparent}
         {...props}
       >
-        {component ?? label}
+        {component ?? (
+          <Label
+            icon={icon}
+            lineHeight={lineHeight}
+            textColor={props.textColor ?? TextColors.Default}
+            states={states}
+            // {...props}
+          >
+            {label}
+          </Label>
+        )}
       </Button>
     );
     // return (

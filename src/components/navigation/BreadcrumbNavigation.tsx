@@ -93,7 +93,7 @@ export const BreadcrumbNavigation = memo(
 
             {index !== items.length - 1 && (
               <Icon
-                name={DualLightIcons.ChevronDoubleForward}
+                name={DualLightIcons.ChevronDoubleRight}
                 margin={{ left: Amount.Less, right: Amount.Less }}
                 size={{ height: textSize, width: textSize }}
               />

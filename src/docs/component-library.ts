@@ -1,8 +1,9 @@
 import { Exception } from '@srclaunch/exceptions';
-import { DualLightIcons } from '@srclaunch/icons';
+import { BasicIcons, DualLightIcons } from '@srclaunch/icons';
 import { MenuButton } from '../components/forms/buttons/MenuButton';
 import { Checkbox } from '../components/forms/inputs/boolean/Checkbox';
 import { ToggleInput } from '../components/forms/inputs/boolean/ToggleInput';
+import { Menu } from '../components/menus/Menu';
 import {
   Amount,
   BreadcrumbNavigation,
@@ -20,7 +21,13 @@ import {
   SignupForm,
   Validation,
 } from '../index';
-import { Sizes } from '../types';
+import {
+  BackgroundColors,
+  Colors,
+  ForegroundColors,
+  Sizes,
+  TextColors,
+} from '../types';
 import { ComponentLibrary } from './types/component';
 
 export default {
@@ -649,7 +656,103 @@ const Example = () => (
     },
     {
       title: 'Menus',
+      description:
+        'Menu components for displaying lists of items that can be interacted with.',
       path: '/menus',
+      components: [
+        {
+          component: Menu,
+          description: 'Displays a list of items',
+          title: 'Menu',
+          path: '/menus/menu',
+          examples: [
+            {
+              title: 'Default',
+              properties: {
+                menu: [
+                  {
+                    label: 'Menu item',
+                    value: 'menu-item',
+                  },
+                  {
+                    label: 'Menu item 2',
+                    value: 'menu-item-2',
+                  },
+                ],
+                size: {
+                  minWidth: 200,
+                },
+              },
+            },
+            {
+              title: 'With a selected item',
+              properties: {
+                menu: [
+                  {
+                    label: 'Menu item',
+                    value: 'menu-item',
+                  },
+                  {
+                    label: 'Menu item 2',
+                    states: {
+                      current: {
+                        background: {
+                          color: BackgroundColors.Warning,
+                        },
+                      },
+                      state: {
+                        current: true,
+                      },
+                    },
+                    value: 'menu-item-2',
+                  },
+                ],
+                size: {
+                  minWidth: 200,
+                },
+              },
+            },
+            {
+              title: 'With an icon and background color',
+              properties: {
+                menu: [
+                  {
+                    label: 'Chi CHi',
+                    value: 'menu-item-3',
+                  },
+                  {
+                    label: 'Bogey',
+                    value: 'menu-item-2',
+                  },
+                  {
+                    label: "Lil' Bro",
+                    value: 'menu-item-3',
+                  },
+                  {
+                    background: {
+                      color: BackgroundColors.Error,
+                    },
+                    label: 'Kitters',
+                    value: 'menu-item',
+                    icon: {
+                      name: BasicIcons.Alert,
+                      size: {
+                        height: Sizes.Smaller,
+                        width: Sizes.Smaller,
+                      },
+                      color: Colors.White,
+                    },
+                    textColor: TextColors.White,
+                  },
+                ],
+                size: {
+                  minWidth: 200,
+                },
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       title: 'Messaging',
@@ -661,7 +764,6 @@ const Example = () => (
     },
     {
       title: 'Navigation',
-
       description: 'Components useful for navigating through the application.',
       path: '/navigation',
       components: [

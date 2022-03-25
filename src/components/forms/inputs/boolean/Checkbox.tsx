@@ -22,7 +22,10 @@ export const Checkbox = memo(
     className = '',
     defaultValue,
     events = {},
-    size = {},
+    size = {
+      height: Sizes.Default,
+      width: Sizes.Default,
+    },
     validation = {},
     ...props
   }: CheckboxProps): React.ReactElement => {
@@ -54,7 +57,7 @@ export const Checkbox = memo(
           vertical: AlignVertical.Center,
         }}
         as="button"
-        background={{ color: BackgroundColors.Transparent }}
+        // background={{ color: BackgroundColors.InputControl }}
         className={`${className} checkbox`}
         cursor={Cursor.Pointer}
         events={{
@@ -67,10 +70,11 @@ export const Checkbox = memo(
           },
         }}
         form="null"
-        states={{ state: { error: problems } }}
+        states={{ state: { error: problems, focused } }}
+        size={size}
         {...props}
       >
-        <Container size={size} states={{ state: { focused } }}>
+        <Container>
           <Icon
             color={value ? Colors.Success : Colors.White}
             name={BasicIcons.Checkmark2}

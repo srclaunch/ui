@@ -45,7 +45,7 @@ export const Label = memo(
       <Container
         alignment={{
           orientation: Orientation.Horizontal,
-          vertical: AlignVertical.Top,
+          vertical: AlignVertical.Center,
           ...alignment,
         }}
         as={as}
@@ -62,6 +62,7 @@ export const Label = memo(
             <Icon margin={{ right: Amount.Least, ...icon.margin }} {...icon} />
           )}
 
+        {console.log('icon', icon)}
         <Text
           lineHeight={lineHeight}
           selectable={selectable}

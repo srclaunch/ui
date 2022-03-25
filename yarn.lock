@@ -2049,13 +2049,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/icons@npm:^0.1.11":
-  version: 0.1.11
-  resolution: "@srclaunch/icons@npm:0.1.11"
+"@srclaunch/icons@npm:^0.1.27":
+  version: 0.1.27
+  resolution: "@srclaunch/icons@npm:0.1.27"
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: 69afccfb8182c0bda49185533b42f4016570c548baf5d4826c4b8f49033bcec5f50dace23fc98785ee1dcd39d92adc289d25ee2be04ac5ca6e9dc6eaa0959256
+  checksum: ed34dbd88b563ead19036040518196fea06c3ad9149b85e25148d1f0ea765f52fdb97f5127523b5057437fae3dcbc70c7daaa78a3847d49a5248cefde86d6d5b
   languageName: node
   linkType: hard
 
@@ -2121,7 +2121,7 @@ __metadata:
     "@srclaunch/exceptions": ^0.1.6
     "@srclaunch/http-client": ^0.1.2
     "@srclaunch/i18n": ^0.1.2
-    "@srclaunch/icons": ^0.1.11
+    "@srclaunch/icons": ^0.1.27
     "@srclaunch/logger": ^0.1.2
     "@srclaunch/react-hooks": ^0.1.3
     "@srclaunch/themes": ^0.1.15

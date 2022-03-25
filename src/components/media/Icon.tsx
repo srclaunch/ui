@@ -1,5 +1,5 @@
 import { getIcon, Icon as IconType } from '@srclaunch/icons';
-import { memo, ReactElement } from 'react';
+import { memo, ReactElement, useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { getContainerStyles } from '../../styles/container';
 import { AlignmentStyles } from '../../styles/container/alignment';
@@ -61,9 +61,25 @@ export const Icon = memo(
     ...props
   }: IconProps): ReactElement => {
     if (name) {
-      const Ico = getIcon(name);
+      const [Icon, setIcon] = useState<IconType | null>();
 
-      if (Ico)
+      const getIconByName = async () => {
+        const ico = await getIcon(name);
+        console.log('ico', ico);
+        setIcon(ico);
+      };
+
+      useEffect(() => {
+        if (name) {
+          getIconByName();
+        }
+
+        return () => {
+          setIcon(null);
+        };
+      }, [name]);
+
+      if (Icon)
         return (
           <Wrapper
             alignment={{
@@ -77,7 +93,8 @@ export const Icon = memo(
             size={{ height: Sizes.Default, width: Sizes.Default, ...size }}
             {...props}
           >
-            <Ico />
+            {/* @ts-ignore */}
+            {Icon && <Icon />}
           </Wrapper>
         );
     }
