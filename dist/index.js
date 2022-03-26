@@ -22644,21 +22644,8 @@ const Icon = memo((_e2) => {
     "url"
   ]);
   if (name2) {
-    const [Icon2, setIcon] = useState();
-    const getIconByName = async () => {
-      const ico = await getIcon(name2);
-      console.log("ico", ico);
-      setIcon(ico);
-    };
-    useEffect(() => {
-      if (name2) {
-        getIconByName();
-      }
-      return () => {
-        setIcon(null);
-      };
-    }, [name2]);
-    if (Icon2)
+    const IconComponent = getIcon(name2);
+    if (IconComponent)
       return /* @__PURE__ */ jsx$2(Wrapper$2, __spreadProps(__spreadValues({
         alignment: __spreadValues({
           horizontal: AlignHorizontal.Center,
@@ -22672,7 +22659,7 @@ const Icon = memo((_e2) => {
           width: Sizes.Default
         }, size)
       }, props), {
-        children: Icon2 && /* @__PURE__ */ jsx$2(Icon2, {})
+        children: IconComponent && /* @__PURE__ */ jsx$2(IconComponent, {})
       }));
   }
   if (component) {

@@ -1,18 +1,11 @@
 import { getIcon, Icon as IconType } from '@srclaunch/icons';
-import { memo, ReactElement, useEffect, useState } from 'react';
+import { memo, ReactElement } from 'react';
 import styled, { css } from 'styled-components';
 import { getContainerStyles } from '../../styles/container';
-import { AlignmentStyles } from '../../styles/container/alignment';
-import { MarginStyles } from '../../styles/container/margin';
-import { PaddingStyles } from '../../styles/container/padding';
-import { PositionStyles } from '../../styles/container/position';
-import { SizeStyles } from '../../styles/container/size';
 import {
   AlignHorizontal,
   AlignVertical,
-  Fill,
   ForegroundColor,
-  ForegroundColors,
   States,
   Sizes,
   TextColor,
@@ -61,25 +54,9 @@ export const Icon = memo(
     ...props
   }: IconProps): ReactElement => {
     if (name) {
-      const [Icon, setIcon] = useState<IconType | null>();
+      const IconComponent = getIcon(name);
 
-      const getIconByName = async () => {
-        const ico = await getIcon(name);
-        console.log('ico', ico);
-        setIcon(ico);
-      };
-
-      useEffect(() => {
-        if (name) {
-          getIconByName();
-        }
-
-        return () => {
-          setIcon(null);
-        };
-      }, [name]);
-
-      if (Icon)
+      if (IconComponent)
         return (
           <Wrapper
             alignment={{
@@ -94,7 +71,7 @@ export const Icon = memo(
             {...props}
           >
             {/* @ts-ignore */}
-            {Icon && <Icon />}
+            {IconComponent && <IconComponent />}
           </Wrapper>
         );
     }
