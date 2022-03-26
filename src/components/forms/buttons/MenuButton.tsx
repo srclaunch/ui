@@ -2,11 +2,8 @@ import { memo, ReactElement, useEffect, useState, useRef } from 'react';
 import {
   Amount,
   BackgroundColors,
-  BorderColors,
-  BorderStyle,
   Depth,
   DepthShadow,
-  Overflow,
   Sizes,
   TextColors,
 } from '../../../types';

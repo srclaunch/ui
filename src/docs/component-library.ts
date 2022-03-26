@@ -4,6 +4,7 @@ import { MenuButton } from '../components/forms/buttons/MenuButton';
 import { Checkbox } from '../components/forms/inputs/boolean/Checkbox';
 import { ToggleInput } from '../components/forms/inputs/boolean/ToggleInput';
 import { Menu } from '../components/menus/Menu';
+import { UserMenu } from '../components/user/UserMenu';
 import {
   Amount,
   BreadcrumbNavigation,
@@ -823,6 +824,28 @@ const Example = () => (
     {
       title: 'User',
       path: '/user',
+      description: 'Components for displaying user information.',
+      components: [
+        {
+          component: UserMenu,
+          title: 'UserMenu',
+          path: '/user/user-menu',
+          name: 'UserMenu',
+          description: 'A user menu component.',
+          examples: [
+            {
+              properties: {
+                states: {
+                  state: {
+                    authenticated: true,
+                  },
+                },
+              },
+              name: 'Basic',
+            },
+          ],
+        },
+      ],
     },
   ],
 } as ComponentLibrary;

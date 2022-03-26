@@ -53120,8 +53120,10 @@ const BreadcrumbNavigation = memo((_Ac) => {
   }));
 });
 const UserMenu = memo(({
-  onLogoutSuccess
+  onLogoutSuccess,
+  states = {}
 }) => {
+  var _a2;
   const [loggingOut, setLoggingOut] = useState(false);
   const dispatch = useDispatch();
   const attributes2 = useSelector((state) => state.user.details.attributes);
@@ -53130,7 +53132,7 @@ const UserMenu = memo(({
     if (loggingOut && !loggedIn && onLogoutSuccess)
       onLogoutSuccess();
   }, [loggedIn]);
-  if (!loggedIn) {
+  if (!loggedIn && !((_a2 = states.state) == null ? void 0 : _a2.authenticated)) {
     return /* @__PURE__ */ jsx$2(ErrorLabel, {
       children: "Not logged in"
     });
@@ -53138,7 +53140,11 @@ const UserMenu = memo(({
   return /* @__PURE__ */ jsx$2(MenuButton, {
     menu: [{
       icon: {
-        name: BasicIcons.GearCog
+        name: BasicIcons.GearCog,
+        size: {
+          height: Sizes.Smaller,
+          width: Sizes.Smaller
+        }
       },
       label: "Settings",
       to: "/settings"
@@ -53153,12 +53159,16 @@ const UserMenu = memo(({
       },
       icon: {
         color: Colors.Error,
-        name: BasicIcons.Exit
+        name: BasicIcons.Exit,
+        size: {
+          height: Sizes.Smaller,
+          width: Sizes.Smaller
+        }
       },
       label: "Logout",
       textColor: TextColors.Error
     }],
-    label: `${attributes2 == null ? void 0 : attributes2.given_name} ${attributes2 == null ? void 0 : attributes2.family_name}`
+    label: loggedIn ? `${attributes2 == null ? void 0 : attributes2.given_name} ${attributes2 == null ? void 0 : attributes2.family_name}` : "Not Authenticated"
   });
 });
 const NavigationBar = memo(({

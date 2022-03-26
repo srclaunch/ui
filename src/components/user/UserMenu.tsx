@@ -6,18 +6,16 @@ import {
   useSelector,
 } from '@srclaunch/web-application-state';
 import { memo, ReactElement, useEffect, useState } from 'react';
-
-import { Colors, Size, TextColors } from '../../types';
+import { Amount, Colors, Sizes, TextColors } from '../../types';
 import { ErrorLabel } from '../errors/ErrorLabel';
-import { MenuButton } from '../forms/buttons/MenuButton';
-import { Label } from '../typography/Label';
+import { MenuButton, MenuButtonProps } from '../forms/buttons/MenuButton';
 
-type UserMenuProps = {
+type UserMenuProps = MenuButtonProps & {
   readonly onLogoutSuccess?: () => unknown;
 };
 
 export const UserMenu = memo(
-  ({ onLogoutSuccess }: UserMenuProps): ReactElement => {
+  ({ onLogoutSuccess, states = {} }: UserMenuProps): ReactElement => {
     const [loggingOut, setLoggingOut] = useState(false);
     const dispatch = useDispatch();
 
@@ -32,7 +30,7 @@ export const UserMenu = memo(
       if (loggingOut && !loggedIn && onLogoutSuccess) onLogoutSuccess();
     }, [loggedIn]);
 
-    if (!loggedIn) {
+    if (!loggedIn && !states.state?.authenticated) {
       return <ErrorLabel>Not logged in</ErrorLabel>;
     }
 
@@ -42,7 +40,10 @@ export const UserMenu = memo(
           {
             icon: {
               name: BasicIcons.GearCog,
-              // size: Size.Smaller,
+              size: {
+                height: Sizes.Smaller,
+                width: Sizes.Smaller,
+              },
             },
             label: 'Settings',
             to: '/settings',
@@ -59,14 +60,21 @@ export const UserMenu = memo(
             icon: {
               color: Colors.Error,
               name: BasicIcons.Exit,
-              // size: Size.Smaller,
+              size: {
+                height: Sizes.Smaller,
+                width: Sizes.Smaller,
+              },
             },
             label: 'Logout',
 
             textColor: TextColors.Error,
           },
         ]}
-        label={`${attributes?.given_name} ${attributes?.family_name}`}
+        label={
+          loggedIn
+            ? `${attributes?.given_name} ${attributes?.family_name}`
+            : 'Not Authenticated'
+        }
       />
     );
   },

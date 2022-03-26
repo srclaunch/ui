@@ -1,7 +1,8 @@
 import { ReactElement } from 'react';
-declare type UserMenuProps = {
+import { MenuButtonProps } from '../forms/buttons/MenuButton';
+declare type UserMenuProps = MenuButtonProps & {
     readonly onLogoutSuccess?: () => unknown;
 };
-export declare const UserMenu: import("react").MemoExoticComponent<({ onLogoutSuccess }: UserMenuProps) => ReactElement>;
+export declare const UserMenu: import("react").MemoExoticComponent<({ onLogoutSuccess, states }: UserMenuProps) => ReactElement>;
 export {};
 //# sourceMappingURL=UserMenu.d.ts.map
