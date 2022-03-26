@@ -5,6 +5,8 @@ import { Checkbox } from '../components/forms/inputs/boolean/Checkbox';
 import { ToggleInput } from '../components/forms/inputs/boolean/ToggleInput';
 import { SearchInput } from '../components/forms/inputs/text/SearchInput';
 import { Menu } from '../components/menus/Menu';
+import { MoreMenu } from '../components/menus/MoreMenu';
+import { CloseButton } from '../components/modals/CloseButton';
 import { SlidePanel } from '../components/modals/SlidePanel';
 import { UserMenu } from '../components/user/UserMenu';
 import {
@@ -769,6 +771,29 @@ const Example = () => (
             },
           ],
         },
+        {
+          component: MoreMenu,
+          description: 'A button that displays a menu when clicked.',
+          title: 'MoreMenu',
+          path: '/menus/more-menu',
+          examples: [
+            {
+              title: 'Default',
+              properties: {
+                menu: [
+                  {
+                    label: 'Menu item',
+                    value: 'menu-item',
+                  },
+                  {
+                    label: 'Menu item 2',
+                    value: 'menu-item-2',
+                  },
+                ],
+              },
+            },
+          ],
+        },
       ],
     },
     {
@@ -780,6 +805,18 @@ const Example = () => (
       description: 'Modal components for displaying modal dialogs',
       path: '/modals',
       components: [
+        {
+          component: CloseButton,
+          title: 'CloseButton',
+          description: 'A button that can be used to close modals',
+          path: '/modals/close-button',
+          examples: [
+            {
+              title: 'Default',
+              properties: {},
+            },
+          ],
+        },
         {
           component: SlidePanel,
           title: 'SlidePanel',

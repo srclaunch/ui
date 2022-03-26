@@ -1,16 +1,14 @@
 import { BasicIcons } from '@srclaunch/icons';
-import { memo, ReactElement, useState } from 'react';
+import { DefaultValue } from '@srclaunch/types';
+import { memo, ReactElement } from 'react';
 
 import {
   AlignHorizontal,
-  Alignment,
   AlignVertical,
   Amount,
   BackgroundColors,
   Depth,
-  ForegroundColor,
   ForegroundColors,
-  Position,
   Sizes,
 } from '../../types';
 import { Button, ButtonProps } from '../forms/buttons/Button';
@@ -37,6 +35,14 @@ export const CloseButton = memo(
         className={`${className} close-button`}
         depth={Depth.Higher}
         form="null"
+        icon={{
+          name: BasicIcons.Close,
+          size: {
+            height: Sizes.Default,
+            width: Sizes.Default,
+          },
+          ...icon,
+        }}
         size={{
           height: Sizes.Default,
           width: Sizes.Default,
@@ -53,7 +59,7 @@ export const CloseButton = memo(
         <Icon
           color={ForegroundColors.CloseButton}
           name={BasicIcons.Close}
-          size={{ height: Sizes.Smallest, width: Sizes.Smallest }}
+          size={{ height: Sizes.Smaller, width: Sizes.Smaller }}
           states={
             {
               // hovered: {

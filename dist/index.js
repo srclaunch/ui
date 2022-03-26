@@ -22612,7 +22612,7 @@ const Image = memo((_c) => {
 const Wrapper$2 = styled.span.withConfig({
   displayName: "Wrapper",
   componentId: "sc-9vccki-0"
-})(["", ";svg{", ";transition:fill 0.13s ease-in-out;}"], (props) => getContainerStyles(props), (props) => props.color && css$2(["fill:", ";"], props.color === "inherit" ? "currentColor" : `rgb(${props.color})`));
+})(["", ";svg{", ";height:100%;width:100%;transition:fill 0.13s ease-in-out;}"], (props) => getContainerStyles(props), (props) => props.color && css$2(["fill:", ";"], props.color === "inherit" ? "currentColor" : `rgb(${props.color})`));
 const Icon = memo((_e2) => {
   var _f = _e2, {
     as = "i",
@@ -22971,10 +22971,10 @@ const Button$1 = memo((_k) => {
     className: `${className} button`,
     cursor,
     form,
-    padding: __spreadValues({
+    padding: typeof children === "string" ? __spreadValues({
       left: lineHeight,
       right: lineHeight
-    }, padding),
+    }, padding) : padding,
     states: __spreadValues({
       active: {
         background: {
@@ -30749,6 +30749,13 @@ const CloseButton = memo((_la) => {
     className: `${className} close-button`,
     depth: Depth.Higher,
     form: "null",
+    icon: __spreadValues({
+      name: BasicIcons.Close,
+      size: {
+        height: Sizes.Default,
+        width: Sizes.Default
+      }
+    }, icon2),
     size: __spreadValues({
       height: Sizes.Default,
       width: Sizes.Default
@@ -30768,8 +30775,8 @@ const CloseButton = memo((_la) => {
       color: ForegroundColors.CloseButton,
       name: BasicIcons.Close,
       size: {
-        height: Sizes.Smallest,
-        width: Sizes.Smallest
+        height: Sizes.Smaller,
+        width: Sizes.Smaller
       },
       states: {}
     }, icon2))
@@ -35068,6 +35075,9 @@ const HoverPanel = memo((_Ua) => {
     }, borderRadius),
     className: `${className} hover-panel`,
     depth,
+    position: {
+      top: "-6px"
+    },
     shadow: visible ? DepthShadow.Higher : DepthShadow.Surface,
     states: {
       state: {
@@ -35085,10 +35095,7 @@ const MoreMenu = memo((_Wa) => {
     background = {},
     className = "",
     dotColor = ForegroundColors.MoreMenu,
-    size = {
-      height: Sizes.Default,
-      width: Sizes.Default
-    },
+    size = {},
     menu
   } = _Xa, props = __objRest(_Xa, [
     "alignment",
@@ -35101,15 +35108,19 @@ const MoreMenu = memo((_Wa) => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
-  menuVisible || hovered ? ForegroundColors.PrimaryContrast : dotColor;
+  const menuVisibleRef = useRef(menuVisible);
+  const dotFillColor = menuVisible || hovered ? ForegroundColors.PrimaryContrast : dotColor;
   return /* @__PURE__ */ jsxs$1(Container$9, {
     className: `${className} more-menu`,
     events: {
       mouse: {
-        onMouseLeave: () => setMenuVisible(false)
+        onMouseLeave: () => {
+          menuVisibleRef.current = false;
+          setMenuVisible(false);
+        }
       }
     },
-    children: [/* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+    children: [/* @__PURE__ */ jsx$2(Button$1, __spreadProps(__spreadValues({
       alignment: __spreadValues({
         horizontal: AlignHorizontal.Center,
         orientation: Orientation.Horizontal,
@@ -35118,8 +35129,8 @@ const MoreMenu = memo((_Wa) => {
       as: "button",
       cursor: Cursor.Pointer,
       background: __spreadValues({
-        color: menuVisible ? BackgroundColors.Primary : BackgroundColors.MoreMenu,
-        opacity: menuVisible ? 70 : 100
+        color: menuVisibleRef.current ? BackgroundColors.Primary : BackgroundColors.MoreMenu,
+        opacity: menuVisibleRef.current ? 70 : 100
       }, background),
       borderRadius: {
         all: Amount.All
@@ -35134,13 +35145,17 @@ const MoreMenu = memo((_Wa) => {
           onClick: (e2) => {
             e2.stopPropagation();
             e2.preventDefault();
-            setMenuVisible(!menuVisible);
+            menuVisibleRef.current = !menuVisibleRef.current;
+            setMenuVisible(menuVisibleRef.current);
           },
           onMouseEnter: () => setHovered(true),
           onMouseLeave: () => setHovered(false)
         }
       },
-      size,
+      size: __spreadValues({
+        height: Sizes.Default,
+        width: Sizes.Default
+      }, size),
       states: {
         hovered: {
           background: {
@@ -35152,52 +35167,22 @@ const MoreMenu = memo((_Wa) => {
         }
       }
     }, props), {
-      children: [/* @__PURE__ */ jsx$2(Dot, {
+      children: new Array(3).fill(0).map((color, i2) => /* @__PURE__ */ jsx$2(Dot, {
         borderRadius: {
           all: Amount.All
         },
         background: {
-          color: BackgroundColors.Lighter
+          color: dotFillColor
         },
         margin: {
           left: 1,
           right: 1
         },
         size: {
-          height: 4,
-          width: 4
+          height: 5,
+          width: 5
         }
-      }), /* @__PURE__ */ jsx$2(Dot, {
-        borderRadius: {
-          all: Amount.All
-        },
-        background: {
-          color: BackgroundColors.Lighter
-        },
-        margin: {
-          left: 1,
-          right: 1
-        },
-        size: {
-          height: 4,
-          width: 4
-        }
-      }), /* @__PURE__ */ jsx$2(Dot, {
-        borderRadius: {
-          all: Amount.All
-        },
-        background: {
-          color: BackgroundColors.Lighter
-        },
-        margin: {
-          left: 1,
-          right: 1
-        },
-        size: {
-          height: 4,
-          width: 4
-        }
-      })]
+      }))
     })), /* @__PURE__ */ jsx$2(HoverPanel, {
       visible: menuVisible,
       setMenuVisible,
@@ -35205,7 +35190,10 @@ const MoreMenu = memo((_Wa) => {
         menu,
         events: {
           mouse: {
-            onClick: () => setMenuVisible(false)
+            onClick: () => {
+              menuVisibleRef.current = false;
+              setMenuVisible(false);
+            }
           }
         }
       })

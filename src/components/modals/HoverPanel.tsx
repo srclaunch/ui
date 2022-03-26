@@ -44,6 +44,9 @@ export const HoverPanel = memo(
         borderRadius={{ all: Amount.Less, ...borderRadius }}
         className={`${className} hover-panel`}
         depth={depth}
+        position={{
+          top: '-6px',
+        }}
         shadow={visible ? DepthShadow.Higher : DepthShadow.Surface}
         states={{
           state: { focused: states.state?.focused, visible },

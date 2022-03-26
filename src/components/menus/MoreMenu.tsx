@@ -1,4 +1,4 @@
-import { memo, ReactElement, useState } from 'react';
+import { memo, ReactElement, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { BackgroundStyles } from '../../styles/container/background';
 import { BorderRadiusStyles } from '../../styles/container/border-radius';
@@ -22,7 +22,9 @@ import {
   Size,
   Sizes,
 } from '../../types';
+import { Button } from '../forms/buttons/Button';
 import { Container } from '../layout/Container';
+import { Icon } from '../media/Icon';
 import { HoverPanel } from '../modals/HoverPanel';
 import { Menu, MenuProps } from './Menu';
 
@@ -36,17 +38,14 @@ export const MoreMenu = memo(
     background = {},
     className = '',
     dotColor = ForegroundColors.MoreMenu,
-    size = {
-      height: Sizes.Default,
-      width: Sizes.Default,
-    },
+    size = {},
     menu,
     ...props
   }: MoreMenuProps): ReactElement => {
     const [menuVisible, setMenuVisible] = useState(false);
     const [focused, setFocused] = useState(false);
     const [hovered, setHovered] = useState(false);
-
+    const menuVisibleRef = useRef(menuVisible);
     const dotFillColor =
       menuVisible || hovered ? ForegroundColors.PrimaryContrast : dotColor;
 
@@ -56,11 +55,14 @@ export const MoreMenu = memo(
         className={`${className} more-menu`}
         events={{
           mouse: {
-            onMouseLeave: () => setMenuVisible(false),
+            onMouseLeave: () => {
+              menuVisibleRef.current = false;
+              setMenuVisible(false);
+            },
           },
         }}
       >
-        <Container
+        <Button
           alignment={{
             horizontal: AlignHorizontal.Center,
             orientation: Orientation.Horizontal,
@@ -70,10 +72,10 @@ export const MoreMenu = memo(
           as="button"
           cursor={Cursor.Pointer}
           background={{
-            color: menuVisible
+            color: menuVisibleRef.current
               ? BackgroundColors.Primary
               : BackgroundColors.MoreMenu,
-            opacity: menuVisible ? 70 : 100,
+            opacity: menuVisibleRef.current ? 70 : 100,
             ...background,
           }}
           borderRadius={{ all: Amount.All }}
@@ -87,13 +89,14 @@ export const MoreMenu = memo(
               onClick: (e: any) => {
                 e.stopPropagation();
                 e.preventDefault();
-                setMenuVisible(!menuVisible);
+                menuVisibleRef.current = !menuVisibleRef.current;
+                setMenuVisible(menuVisibleRef.current);
               },
               onMouseEnter: () => setHovered(true),
               onMouseLeave: () => setHovered(false),
             },
           }}
-          size={size}
+          size={{ height: Sizes.Default, width: Sizes.Default, ...size }}
           states={{
             hovered: {
               background: {
@@ -106,50 +109,31 @@ export const MoreMenu = memo(
           }}
           {...props}
         >
-          <Dot
-            borderRadius={{ all: Amount.All }}
-            background={{ color: BackgroundColors.Lighter }}
-            margin={{
-              left: 1,
-              right: 1,
-            }}
-            size={{
-              height: 4,
-              width: 4,
-            }}
-          />
-          <Dot
-            borderRadius={{ all: Amount.All }}
-            background={{ color: BackgroundColors.Lighter }}
-            margin={{
-              left: 1,
-              right: 1,
-            }}
-            size={{
-              height: 4,
-              width: 4,
-            }}
-          />
-          <Dot
-            borderRadius={{ all: Amount.All }}
-            background={{ color: BackgroundColors.Lighter }}
-            margin={{
-              left: 1,
-              right: 1,
-            }}
-            size={{
-              height: 4,
-              width: 4,
-            }}
-          />
-        </Container>
+          {new Array(3).fill(0).map((color, i) => (
+            <Dot
+              borderRadius={{ all: Amount.All }}
+              background={{ color: dotFillColor }}
+              margin={{
+                left: 1,
+                right: 1,
+              }}
+              size={{
+                height: 5,
+                width: 5,
+              }}
+            />
+          ))}
+        </Button>
 
         <HoverPanel visible={menuVisible} setMenuVisible={setMenuVisible}>
           <Menu
             menu={menu}
             events={{
               mouse: {
-                onClick: () => setMenuVisible(false),
+                onClick: () => {
+                  menuVisibleRef.current = false;
+                  setMenuVisible(false);
+                },
               },
             }}
           />

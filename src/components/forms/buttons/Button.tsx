@@ -198,7 +198,11 @@ export const Button = memo(
         className={`${className} button`}
         cursor={cursor}
         form={form}
-        padding={{ left: lineHeight, right: lineHeight, ...padding }}
+        padding={
+          typeof children === 'string'
+            ? { left: lineHeight, right: lineHeight, ...padding }
+            : padding
+        }
         // shadow={{
         //   radius: 8,
         //   color: colors?.backgroundColor,
