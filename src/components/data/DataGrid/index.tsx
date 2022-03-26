@@ -61,6 +61,7 @@ export type DataGridProps = ContainerProps & {
     create?: {
       label: string;
       onClick: (e: SyntheticEvent) => void;
+      size?: Size;
     };
     search?: {
       placeholder?: string;
@@ -101,7 +102,6 @@ export const DataGrid = memo(
   ({
     background = {},
     borderRadius = {},
-
     className = '',
     columns,
     columnCount = 3,
@@ -164,7 +164,14 @@ export const DataGrid = memo(
         shadow={shadow}
         {...props}
       >
-        <LoadingOverlay borderRadius={borderRadius} visible={loading} />
+        <LoadingOverlay
+          borderRadius={borderRadius}
+          states={{
+            state: {
+              visible: loading,
+            },
+          }}
+        />
 
         {header && Object.keys(header).length > 0 && (
           <Container
@@ -183,7 +190,6 @@ export const DataGrid = memo(
           >
             {header.search && (
               <Container size={header.search.size}>
-                {/* @ts-ignore */}
                 <SearchInput
                   name="search-input"
                   events={{
@@ -194,7 +200,7 @@ export const DataGrid = memo(
                     },
                   }}
                   placeholder={header.search.placeholder}
-                  size={{ width: header.search.size?.width }}
+                  size={header.search.size}
                 />
               </Container>
             )}
@@ -222,9 +228,7 @@ export const DataGrid = memo(
                     },
                   ]}
                   label="Export"
-                  size={{
-                    width: 200
-                  }}
+                  size={header.export.size}
                 />
               </Container>
             )}
@@ -236,8 +240,8 @@ export const DataGrid = memo(
                     onClick: header.create.onClick,
                   },
                 }}
-                // size={Sizes.Small}
                 type={ButtonType.Secondary}
+                size={header.create.size}
               >
                 {header.create.label}
               </Button>

@@ -85,11 +85,14 @@ export const CodeVerificationForm = memo(
 
         <LoadingOverlay
           borderRadius={borderRadius}
-          visible={
-            verificationState.status.inProgress ||
-            verificationState.resend.inProgress ||
-            verificationState.verify.inProgress
-          }
+          states={{
+            state: {
+              visible:
+                verificationState.status.inProgress ||
+                verificationState.resend.inProgress ||
+                verificationState.verify.inProgress,
+            },
+          }}
         />
 
         {verificationState.verify.success ||

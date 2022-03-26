@@ -6,7 +6,6 @@ import { Container, ContainerProps } from '../layout/Container';
 
 type LoadingOverlayProps = ContainerProps & {
   readonly spinnerSize?: Size;
-  readonly visible?: boolean;
 };
 
 export const LoadingOverlay = memo(
@@ -16,7 +15,7 @@ export const LoadingOverlay = memo(
     className = '',
     position = {},
     spinnerSize,
-    visible,
+    states = {},
     ...props
   }: LoadingOverlayProps): ReactElement => {
     return (
@@ -36,8 +35,15 @@ export const LoadingOverlay = memo(
           top: 0,
           ...position,
         }}
+        states={{
+          visible: {
+            visibility: {
+              opacity: 1,
+            },
+          },
+        }}
         visibility={{
-          hidden: !visible,
+          opacity: 0,
         }}
         {...props}
       >

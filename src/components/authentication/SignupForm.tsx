@@ -72,7 +72,14 @@ export const SignupForm = memo(
         }}
         {...props}
       >
-        <LoadingOverlay borderRadius={borderRadius} visible={inProgress} />
+        <LoadingOverlay
+          borderRadius={borderRadius}
+          states={{
+            state: {
+              visible: inProgress,
+            },
+          }}
+        />
 
         {/* 
       <Illustration>

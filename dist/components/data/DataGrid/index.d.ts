@@ -25,6 +25,7 @@ export declare type DataGridProps = ContainerProps & {
         create?: {
             label: string;
             onClick: (e: SyntheticEvent) => void;
+            size?: Size;
         };
         search?: {
             placeholder?: string;

@@ -83,7 +83,13 @@ export const ForgotPasswordForm = memo(
         }}
         {...props}
       >
-        <LoadingOverlay visible={inProgress} />
+        <LoadingOverlay
+          states={{
+            state: {
+              visible: inProgress,
+            },
+          }}
+        />
         {/* <Illustration>
         <img alt={'Login'} src="/illustrations/total_debt.svg" />
       </Illustration> */}

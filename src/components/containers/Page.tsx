@@ -36,7 +36,13 @@ export const Page = memo(
         className={`${className} page`}
         {...props}
       >
-        <LoadingOverlay visible={loading} />
+        <LoadingOverlay
+          states={{
+            state: {
+              visible: loading,
+            },
+          }}
+        />
 
         {children}
       </Container>

@@ -77,7 +77,14 @@ export const LoginForm = memo(
         }}
         {...props}
       >
-        <LoadingOverlay borderRadius={borderRadius} visible={inProgress} />
+        <LoadingOverlay
+          borderRadius={borderRadius}
+          states={{
+            state: {
+              visible: inProgress,
+            },
+          }}
+        />
 
         {/* <Illustration>
         <img alt={'Login'} src="/illustrations/total_debt.svg" />

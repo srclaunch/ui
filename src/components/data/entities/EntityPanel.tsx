@@ -123,7 +123,7 @@ export const EntityPanel = memo(
     return (
       <SlidePanel visible={visible}>
         <Container borderRadius={{ all: Amount.Default }} {...props}>
-          <LoadingOverlay visible={inProgress} />
+          <LoadingOverlay states={{ state: { visible: inProgress } }} />
 
           <ModalHeader
             onCloseClick={() => hideEntityEditor()}

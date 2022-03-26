@@ -56,7 +56,7 @@ export const Workspace = memo(
         {...props}
         {...props2}
       >
-        <LoadingOverlay visible={loading} />
+        <LoadingOverlay states={{ state: { visible: loading } }} />
 
         {(header?.title || header?.actions) && (
           <Container

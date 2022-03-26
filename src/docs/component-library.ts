@@ -3,7 +3,9 @@ import { BasicIcons, DualLightIcons } from '@srclaunch/icons';
 import { MenuButton } from '../components/forms/buttons/MenuButton';
 import { Checkbox } from '../components/forms/inputs/boolean/Checkbox';
 import { ToggleInput } from '../components/forms/inputs/boolean/ToggleInput';
+import { SearchInput } from '../components/forms/inputs/text/SearchInput';
 import { Menu } from '../components/menus/Menu';
+import { SlidePanel } from '../components/modals/SlidePanel';
 import { UserMenu } from '../components/user/UserMenu';
 import {
   Amount,
@@ -22,13 +24,7 @@ import {
   SignupForm,
   Validation,
 } from '../index';
-import {
-  BackgroundColors,
-  Colors,
-  ForegroundColors,
-  Sizes,
-  TextColors,
-} from '../types';
+import { BackgroundColors, Colors, Sizes, TextColors } from '../types';
 import { ComponentLibrary } from './types/component';
 
 export default {
@@ -592,6 +588,26 @@ const Example = () => (
                     },
                   ],
                 },
+                {
+                  title: 'SearchInput',
+                  description: 'A search input',
+                  path: '/forms/inputs/text/search-input',
+                  component: SearchInput,
+                  examples: [
+                    {
+                      code: `import { SearchInput } from '@srclaunch/ui';
+                      
+    <SearchInput
+      onChange={({ value }) => console.log(value)}
+    />`,
+                      description: '',
+                      properties: {
+                        onChange: ({ value }: { value: string }) =>
+                          console.log(value),
+                      },
+                    },
+                  ],
+                },
               ],
             },
           ],
@@ -761,7 +777,30 @@ const Example = () => (
     },
     {
       title: 'Modals',
+      description: 'Modal components for displaying modal dialogs',
       path: '/modals',
+      components: [
+        {
+          component: SlidePanel,
+          title: 'SlidePanel',
+          description:
+            'A modal panel that slides out from the edge of thes screen.',
+          path: '/modals/slide-panel',
+          examples: [
+            {
+              title: 'Default',
+              properties: {
+                states: {
+                  state: {
+                    visible: true,
+                  },
+                },
+                visible: true,
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       title: 'Navigation',

@@ -36,6 +36,7 @@ const Wrapper = styled.span<IconProps>`
           ? 'currentColor'
           : `rgb(${props.color})`};
       `};
+    transition: fill 0.13s ease-in-out;
   }
 `;
 

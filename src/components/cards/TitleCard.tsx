@@ -47,10 +47,12 @@ export const TitleCard = memo(
         {...props}
       >
         <LoadingOverlay
-          visible={loading}
           spinnerSize={{
             height: Sizes.Small,
             width: Sizes.Small,
+          }}
+          states={{
+            state: { visible: loading },
           }}
         />
 

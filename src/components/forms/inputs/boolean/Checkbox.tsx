@@ -1,8 +1,9 @@
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { BasicIcons } from '@srclaunch/icons';
 
 import { Container } from '../../../layout/Container';
 import {
+  AlignHorizontal,
   AlignVertical,
   BackgroundColors,
   Colors,
@@ -22,16 +23,14 @@ export const Checkbox = memo(
     className = '',
     defaultValue,
     events = {},
-    size = {
-      height: Sizes.Default,
-      width: Sizes.Default,
-    },
+    size = {},
     validation = {},
     ...props
   }: CheckboxProps): React.ReactElement => {
     const [focused, setFocused] = useState(false);
     const [problems, setProblems] = useState<ValidationProblem[]>([]);
     const [value, setValue] = useState(defaultValue);
+    const valueRef = useRef(value);
 
     useEffect(() => {
       if (validation?.conditions) {
@@ -54,6 +53,7 @@ export const Checkbox = memo(
       <InputContainer
         alignment={{
           orientation: Orientation.Horizontal,
+          horizontal: AlignHorizontal.Center,
           vertical: AlignVertical.Center,
         }}
         as="button"
@@ -66,17 +66,24 @@ export const Checkbox = memo(
             onFocus: () => setFocused(true),
           },
           mouse: {
-            onClick: () => setValue(!value),
+            onClick: () => {
+              valueRef.current = !valueRef.current;
+              setValue(valueRef.current);
+            },
           },
         }}
         form="null"
         states={{ state: { error: problems, focused } }}
-        size={size}
+        size={{
+          height: Sizes.Default,
+          width: Sizes.Default,
+          ...size,
+        }}
         {...props}
       >
         <Container>
           <Icon
-            color={value ? Colors.Success : Colors.White}
+            color={valueRef.current ? Colors.Success : Colors.White}
             name={BasicIcons.Checkmark2}
             size={{
               height: Sizes.Smaller,

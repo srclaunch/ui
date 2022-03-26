@@ -117,7 +117,13 @@ export const WebApplication = memo(
         {...props}
       >
         <ThemeProvider theme={current} themes={list}>
-          <LoadingOverlay visible={!showOutlet} />
+          <LoadingOverlay
+            states={{
+              state: {
+                visible: !showOutlet,
+              },
+            }}
+          />
 
           <Backdrop visible={false} />
 

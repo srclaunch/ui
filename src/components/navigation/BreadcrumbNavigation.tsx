@@ -1,16 +1,12 @@
-import { PageRoute } from '@srclaunch/types';
 import { DualLightIcons } from '@srclaunch/icons';
 
 import { memo, ReactElement } from 'react';
 import {
   AlignVertical,
   Amount,
-  BackgroundColors,
   DepthShadow,
   Fill,
   Orientation,
-  Overflow,
-  Sizes,
   TextColors,
   TextDecorationLine,
   TextSize,

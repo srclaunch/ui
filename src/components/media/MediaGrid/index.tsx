@@ -34,7 +34,11 @@ export const MediaGrid = memo(
         <LoadingOverlay
           background={{ color: BackgroundColors.Transparent }}
           borderRadius={borderRadius}
-          visible={loading}
+          states={{
+            state: {
+              visible: loading,
+            },
+          }}
         />
 
         {rows.map((x, row) => {

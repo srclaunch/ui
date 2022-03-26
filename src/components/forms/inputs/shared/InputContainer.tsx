@@ -1,5 +1,6 @@
 import { memo, useEffect, useRef, useState, ReactElement } from 'react';
 import {
+  AlignVertical,
   Amount,
   BackgroundColors,
   BorderColors,
@@ -112,7 +113,11 @@ export const InputContainer = memo(
         )}
 
         <Container
-          alignment={{ orientation: Orientation.Horizontal, ...alignment }}
+          alignment={{
+            orientation: Orientation.Horizontal,
+            vertical: AlignVertical.Center,
+            ...alignment,
+          }}
           background={{
             color: BackgroundColors.InputControl,
             ...background,
@@ -146,7 +151,7 @@ export const InputContainer = memo(
           {icon && (
             <Icon
               color={
-                value === ''
+                value === '' || value === undefined
                   ? TextColors.InputPlaceholder
                   : icon.color ?? textColor
               }

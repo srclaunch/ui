@@ -3,10 +3,7 @@ import { memo, ReactElement } from 'react';
 import {
   AlignVertical,
   Amount,
-  CommonComponentProps,
-  Fill,
   Orientation,
-  Overflow,
   Sizes,
   TextAlign,
   TextColors,
@@ -62,7 +59,6 @@ export const Label = memo(
             <Icon margin={{ right: Amount.Least, ...icon.margin }} {...icon} />
           )}
 
-        {console.log('icon', icon)}
         <Text
           lineHeight={lineHeight}
           selectable={selectable}

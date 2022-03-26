@@ -1,15 +1,7 @@
 import { ValidationProblem } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
 import { memo, ReactElement, useEffect, useRef, useState } from 'react';
-import {
-  Amount,
-  BackgroundColors,
-  BorderColors,
-  BorderStyle,
-  Depth,
-  DepthShadow,
-  Sizes,
-} from '../../../../types';
+import { Amount, Depth, DepthShadow, Sizes } from '../../../../types';
 import { Container, ContainerProps } from '../../../layout/Container';
 import { Menu, MenuProps } from '../../../menus/Menu';
 import { MenuItemProps } from '../../../menus/MenuItem';

@@ -16,7 +16,6 @@ type SlidePanelProps = ContainerProps & {
 
 export const SlidePanel = memo(
   ({
-    as = 'div',
     background = {},
     borderRadius = {},
     children,
@@ -32,7 +31,6 @@ export const SlidePanel = memo(
     return (
       <Container
         background={{ color: BackgroundColors.SlidePanel, ...background }}
-        as={as}
         borderRadius={{ all: Amount.Most, ...borderRadius }}
         className={`${className} slide-panel`}
         depth={depth}
@@ -48,7 +46,19 @@ export const SlidePanel = memo(
         size={{ width: 380, ...size }}
         states={{
           visible: {
-            animations: visible ? [SlideLeft] : [SlideRight],
+            transform: {
+              translate: {
+                x: 0,
+              },
+            },
+          },
+          state: {
+            visible,
+          },
+        }}
+        transform={{
+          translate: {
+            x: 100,
           },
         }}
         visibility={{ hidden: !visible, ...props.visibility }}

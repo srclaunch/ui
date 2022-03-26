@@ -4125,14 +4125,14 @@ const ServiceVan = memo((props) => {
   return /* @__PURE__ */ jsx$3("svg", __spreadProps2(__spreadValues2({
     id: "applab-icon-basic-service-van",
     version: "1.1",
-    xmlns: "http://www.w3.org/2000/svg"
-  }, props), {
+    xmlns: "http://www.w3.org/2000/svg",
     xmlnsXlink: "http://www.w3.org/1999/xlink",
     x: "0px",
     y: "0px",
     viewBox: "0 0 226.334 226.334",
     enableBackground: "new 0 0 226.334 226.334",
-    xmlSpace: "preserve",
+    xmlSpace: "preserve"
+  }, props), {
     children: /* @__PURE__ */ jsx$3("path", {
       d: "M221.334,127.223h-1V70.251c0-7.98-6.492-14.472-14.473-14.472H100.167H65.704c-0.055,0-0.11,0.001-0.166,0.003\nc-0.429-0.012-0.867,0.027-1.295,0.126c-1.396,0.324-2.586,1.232-3.268,2.494l-6.944,12.85l-9.78,17.281\nc-0.35,0.213-0.739,0.367-1.157,0.409l-21.139,2.173C15.14,91.816,10,97.511,10,104.362v22.86H5c-1.484,0-2.892,0.66-3.842,1.8\nc-0.95,1.141-1.344,2.644-1.076,4.104l3,16.313c0.437,2.373,2.505,4.096,4.917,4.096h14.126c2.271,9.74,11.018,17.02,21.44,17.02\ns19.169-7.28,21.44-17.02h91.201c2.271,9.74,11.018,17.02,21.44,17.02s19.169-7.28,21.44-17.02h22.247c2.762,0,5-2.239,5-5v-16.313\nC226.334,129.461,224.095,127.223,221.334,127.223z M43.566,160.555c-6.627,0-12.02-5.392-12.02-12.02s5.392-12.02,12.02-12.02\ns12.02,5.392,12.02,12.02S50.194,160.555,43.566,160.555z M95.167,82.973c0,2.16-1.757,3.917-3.917,3.917H56.671l11.948-21.111\nh26.547V82.973z M145.118,124.894c-1.126,1.126-2.623,1.746-4.215,1.746s-3.089-0.62-4.215-1.746c-2.324-2.324-2.324-6.105,0-8.43\nl21.284-21.285c-2.343-5.704-1.076-12.387,3.363-16.826c3.094-3.092,7.309-4.707,11.698-4.501c0.988,0.048,1.854,0.674,2.211,1.597\nc0.356,0.922,0.135,1.969-0.564,2.668l-6.087,6.087c-0.276,0.276-0.317,0.598-0.317,0.766s0.041,0.489,0.317,0.765l7.253,7.253\nc0.276,0.275,0.598,0.317,0.766,0.317c0.167,0,0.489-0.042,0.766-0.317l6.087-6.086c0.7-0.701,1.746-0.921,2.668-0.564\nc0.923,0.356,1.549,1.223,1.597,2.211c0.211,4.363-1.43,8.627-4.501,11.698c-2.919,2.918-6.8,4.526-10.929,4.526\nc-2.027,0-4.034-0.398-5.896-1.163L145.118,124.894z M177.647,160.555c-6.628,0-12.02-5.392-12.02-12.02s5.392-12.02,12.02-12.02\ns12.02,5.392,12.02,12.02S184.275,160.555,177.647,160.555z"
     })
@@ -21539,21 +21539,15 @@ var DualLight = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   ZoomOut
 }, Symbol.toStringTag, { value: "Module" }));
 function getIcon(name2) {
-  console.log("name", name2);
   const _a2 = Basic, otherBasicIcons = __objRest2(_a2, [
     "BasicIcons"
   ]);
   const _b = DualLight, otherDualLightIcons = __objRest2(_b, [
     "DualLightIcons"
   ]);
-  const icons = __spreadValues2(__spreadValues2({}, otherBasicIcons), otherDualLightIcons);
-  console.log("icons", icons);
-  const matchedIcon = [...Object.entries(__spreadValues2(__spreadValues2({}, BasicIcons), DualLightIcons))].find(([key, value2]) => value2 === name2);
-  console.log("matchedIcon", matchedIcon);
-  console.log("Basic", Basic);
+  const matchedIcon = [...Object.entries(name2.includes("basic/") ? __spreadValues2({}, BasicIcons) : __spreadValues2({}, DualLightIcons))].find(([key, value2]) => value2 === name2);
   if (matchedIcon && matchedIcon[0]) {
-    const icon2 = icons[matchedIcon[0]];
-    return icon2;
+    return name2.includes("basic/") ? otherBasicIcons[matchedIcon[0]] : otherDualLightIcons[matchedIcon[0]];
   }
   return null;
 }
@@ -22618,7 +22612,7 @@ const Image = memo((_c) => {
 const Wrapper$2 = styled.span.withConfig({
   displayName: "Wrapper",
   componentId: "sc-9vccki-0"
-})(["", ";svg{", ";}"], (props) => getContainerStyles(props), (props) => props.color && css$2(["fill:", ";"], props.color === "inherit" ? "currentColor" : `rgb(${props.color})`));
+})(["", ";svg{", ";transition:fill 0.13s ease-in-out;}"], (props) => getContainerStyles(props), (props) => props.color && css$2(["fill:", ";"], props.color === "inherit" ? "currentColor" : `rgb(${props.color})`));
 const Icon = memo((_e2) => {
   var _f = _e2, {
     as = "i",
@@ -22816,7 +22810,7 @@ const Label = memo((_i2) => {
       margin: __spreadValues({
         right: Amount.Least
       }, icon2.margin)
-    }, icon2)), console.log("icon", icon2), /* @__PURE__ */ jsx$2(Text, {
+    }, icon2)), /* @__PURE__ */ jsx$2(Text, {
       lineHeight,
       selectable,
       states,
@@ -26839,7 +26833,8 @@ const InputContainer = memo((_s) => {
       children: label
     }), /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
       alignment: __spreadValues({
-        orientation: Orientation.Horizontal
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.Center
       }, alignment),
       background: __spreadValues({
         color: BackgroundColors.InputControl
@@ -26864,7 +26859,7 @@ const InputContainer = memo((_s) => {
       }
     }, props), {
       children: [icon2 && /* @__PURE__ */ jsx$2(Icon, __spreadValues({
-        color: value2 === "" ? TextColors.InputPlaceholder : (_b = icon2.color) != null ? _b : textColor,
+        color: value2 === "" || value2 === void 0 ? TextColors.InputPlaceholder : (_b = icon2.color) != null ? _b : textColor,
         margin: {
           left: Amount.Less
         }
@@ -27107,14 +27102,14 @@ const LoadingOverlay = memo((_A) => {
     className = "",
     position = {},
     spinnerSize,
-    visible
+    states = {}
   } = _B, props = __objRest(_B, [
     "background",
     "borderRadius",
     "className",
     "position",
     "spinnerSize",
-    "visible"
+    "states"
   ]);
   return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
     background: __spreadValues({
@@ -27130,8 +27125,15 @@ const LoadingOverlay = memo((_A) => {
       right: 0,
       top: 0
     }, position),
+    states: {
+      visible: {
+        visibility: {
+          opacity: 1
+        }
+      }
+    },
     visibility: {
-      hidden: !visible
+      opacity: 0
     }
   }, props), {
     children: /* @__PURE__ */ jsx$2(ProgressSpinner, {
@@ -27242,7 +27244,11 @@ const CodeVerificationForm = memo(({
     },
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
       borderRadius,
-      visible: verificationState.status.inProgress || verificationState.resend.inProgress || verificationState.verify.inProgress
+      states: {
+        state: {
+          visible: verificationState.status.inProgress || verificationState.resend.inProgress || verificationState.verify.inProgress
+        }
+      }
     }), verificationState.verify.success || verificationState.status.state === Ie$2.Confirmed ? /* @__PURE__ */ jsxs$1(Container$9, {
       padding: {
         all: Amount.Default
@@ -32300,7 +32306,11 @@ const ForgotPasswordForm = memo((_za) => {
     }, size)
   }, props), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
-      visible: inProgress
+      states: {
+        state: {
+          visible: inProgress
+        }
+      }
     }), /* @__PURE__ */ jsx$2(Title, {
       alignment: {
         horizontal: AlignHorizontal.Center
@@ -32482,7 +32492,11 @@ const LoginForm = memo((_Fa) => {
   }, props), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
       borderRadius,
-      visible: inProgress
+      states: {
+        state: {
+          visible: inProgress
+        }
+      }
     }), /* @__PURE__ */ jsx$2(Title, {
       alignment: {
         horizontal: AlignHorizontal.Center
@@ -32658,7 +32672,11 @@ const SignupForm = memo((_Ha) => {
   }, props), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
       borderRadius,
-      visible: inProgress
+      states: {
+        state: {
+          visible: inProgress
+        }
+      }
     }), /* @__PURE__ */ jsx$2(Title, {
       alignment: {
         horizontal: AlignHorizontal.Center
@@ -33802,10 +33820,14 @@ const TitleCard = memo((_Na) => {
     }, size)
   }, props), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
-      visible: loading,
       spinnerSize: {
         height: Sizes.Small,
         width: Sizes.Small
+      },
+      states: {
+        state: {
+          visible: loading
+        }
       }
     }), icon2 && /* @__PURE__ */ jsx$2(Icon, __spreadValues({
       margin: {
@@ -33909,7 +33931,11 @@ const Page = memo((_Sa) => {
     className: `${className} page`
   }, props), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
-      visible: loading
+      states: {
+        state: {
+          visible: loading
+        }
+      }
     }), children]
   }));
   const Child = () => Layout2 ? cloneElement(/* @__PURE__ */ jsx$2(Layout2, __spreadValues({}, props)), props, /* @__PURE__ */ jsx$2(PageComp, {})) : /* @__PURE__ */ jsx$2(PageComp, {});
@@ -35227,86 +35253,8 @@ const ModalHeader = memo(({
     })]
   });
 });
-({
-  name: Animations.FadeIn,
-  from: {
-    visibility: {
-      opacity: 0
-    }
-  },
-  to: {
-    visibility: {
-      opacity: 1
-    }
-  }
-});
-({
-  name: Animations.FadeOut,
-  from: {
-    visibility: {
-      opacity: 1
-    }
-  },
-  to: {
-    visibility: {
-      opacity: 0
-    }
-  }
-});
-({
-  name: Animations.SlideDown,
-  from: {
-    transform: {
-      translate: {
-        y: "-100%"
-      }
-    }
-  },
-  to: {
-    transform: {
-      translate: {
-        y: 0
-      }
-    }
-  }
-});
-const SlideLeft = {
-  name: Animations.SlideLeft,
-  from: {
-    transform: {
-      translate: {
-        x: "-100%"
-      }
-    }
-  },
-  to: {
-    transform: {
-      translate: {
-        x: 0
-      }
-    }
-  }
-};
-const SlideRight = {
-  name: Animations.SlideRight,
-  from: {
-    transform: {
-      translate: {
-        x: "100%"
-      }
-    }
-  },
-  to: {
-    transform: {
-      translate: {
-        x: 0
-      }
-    }
-  }
-};
 const SlidePanel = memo((_Ya) => {
   var _Za = _Ya, {
-    as = "div",
     background = {},
     borderRadius = {},
     children,
@@ -35318,7 +35266,6 @@ const SlidePanel = memo((_Ya) => {
     size = {},
     visible = false
   } = _Za, props = __objRest(_Za, [
-    "as",
     "background",
     "borderRadius",
     "children",
@@ -35334,7 +35281,6 @@ const SlidePanel = memo((_Ya) => {
     background: __spreadValues({
       color: BackgroundColors.SlidePanel
     }, background),
-    as,
     borderRadius: __spreadValues({
       all: Amount.Most
     }, borderRadius),
@@ -35355,7 +35301,19 @@ const SlidePanel = memo((_Ya) => {
     }, size),
     states: {
       visible: {
-        animations: visible ? [SlideLeft] : [SlideRight]
+        transform: {
+          translate: {
+            x: 0
+          }
+        }
+      },
+      state: {
+        visible
+      }
+    },
+    transform: {
+      translate: {
+        x: 100
       }
     },
     visibility: __spreadValues({
@@ -35474,7 +35432,11 @@ const EntityPreview = memo(({
   return /* @__PURE__ */ jsx$2(Container$9, {
     "data-testid": "account-pane",
     children: /* @__PURE__ */ jsx$2(LoadingOverlay, {
-      visible: false
+      states: {
+        state: {
+          visible: false
+        }
+      }
     })
   });
 });
@@ -35546,7 +35508,11 @@ const EntityPanel = memo((__a) => {
       }
     }, props), {
       children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
-        visible: inProgress
+        states: {
+          state: {
+            visible: inProgress
+          }
+        }
       }), /* @__PURE__ */ jsx$2(ModalHeader, {
         onCloseClick: () => hideEntityEditor(),
         moreMenu: (entity == null ? void 0 : entity.id) ? {
@@ -35698,7 +35664,11 @@ const WebApplication = memo((_cb) => {
       theme: current,
       themes: list,
       children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
-        visible: !showOutlet
+        states: {
+          state: {
+            visible: !showOutlet
+          }
+        }
       }), /* @__PURE__ */ jsx$2(Backdrop, {
         visible: false
       }), showOutlet && /* @__PURE__ */ jsx$2(Outlet, {}), /* @__PURE__ */ jsx$2(EntityPanel, {
@@ -35778,7 +35748,11 @@ const Workspace = memo((_gb) => {
     }, padding)
   }, props), props2), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
-      visible: loading
+      states: {
+        state: {
+          visible: loading
+        }
+      }
     }), ((header == null ? void 0 : header.title) || (header == null ? void 0 : header.actions)) && /* @__PURE__ */ jsxs$1(Container$9, {
       alignment: {
         orientation: Orientation.Horizontal,
@@ -39907,7 +39881,11 @@ const DataGridCell = memo((_ub) => {
 const SearchInput = memo((props) => {
   return /* @__PURE__ */ jsx$2(TextInput, __spreadValues({
     icon: {
-      name: BasicIcons.Search
+      name: BasicIcons.Search,
+      size: {
+        height: Sizes.Smaller,
+        width: Sizes.Smaller
+      }
     },
     type: InputType.Search,
     spellCheck: false
@@ -40090,7 +40068,6 @@ const DataGrid = memo((_Ab) => {
     "shadow",
     "template"
   ]);
-  var _a2;
   const [searchTerm, setSearchTerm] = useState("");
   const [hoveredRow, setHoveredRow] = useState();
   const MIN_COLUMN_WIDTH = 150;
@@ -40125,7 +40102,11 @@ const DataGrid = memo((_Ab) => {
   }, props), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
       borderRadius,
-      visible: loading
+      states: {
+        state: {
+          visible: loading
+        }
+      }
     }), header && Object.keys(header).length > 0 && /* @__PURE__ */ jsxs$1(Container$9, {
       alignment: {
         orientation: Orientation.Horizontal
@@ -40155,9 +40136,7 @@ const DataGrid = memo((_Ab) => {
             }
           },
           placeholder: header.search.placeholder,
-          size: {
-            width: (_a2 = header.search.size) == null ? void 0 : _a2.width
-          }
+          size: header.search.size
         })
       }), /* @__PURE__ */ jsx$2(Spacer, {}), header.export && /* @__PURE__ */ jsx$2(Container$9, {
         size: header.export.size,
@@ -40176,9 +40155,7 @@ const DataGrid = memo((_Ab) => {
             label: "Export to CSV"
           }],
           label: "Export",
-          size: {
-            width: 200
-          }
+          size: header.export.size
         })
       }), header.create && /* @__PURE__ */ jsx$2(Button$1, {
         events: {
@@ -40187,6 +40164,7 @@ const DataGrid = memo((_Ab) => {
           }
         },
         type: ButtonType.Secondary,
+        size: header.create.size,
         children: header.create.label
       })]
     }), /* @__PURE__ */ jsx$2(Container$9, {
@@ -40215,7 +40193,7 @@ const DataGrid = memo((_Ab) => {
             top: Amount.Least
           },
           children: columns.map((column, key) => {
-            var _a3, _b, _c, _d, _e2;
+            var _a2, _b, _c, _d, _e2;
             return /* @__PURE__ */ jsx$2(Container$9, {
               alignment: {
                 horizontal: column.align,
@@ -40242,7 +40220,7 @@ const DataGrid = memo((_Ab) => {
                 right: Amount.Default
               },
               size: {
-                maxWidth: (_b = (_a3 = column.size) == null ? void 0 : _a3.maxWidth) != null ? _b : MAX_COLUMN_WIDTH,
+                maxWidth: (_b = (_a2 = column.size) == null ? void 0 : _a2.maxWidth) != null ? _b : MAX_COLUMN_WIDTH,
                 minWidth: (_d = (_c = column.size) == null ? void 0 : _c.minWidth) != null ? _d : MIN_COLUMN_WIDTH,
                 width: (_e2 = column.size) == null ? void 0 : _e2.width
               },
@@ -40296,7 +40274,7 @@ const DataGrid = memo((_Ab) => {
                 }
               },
               children: columns.map((column, columnKey) => {
-                var _a3, _b, _c, _d, _e2;
+                var _a2, _b, _c, _d, _e2;
                 return /* @__PURE__ */ jsx$2(DataGridCell, {
                   alignment: {
                     horizontal: column.align,
@@ -40311,7 +40289,7 @@ const DataGrid = memo((_Ab) => {
                   type: column.type,
                   value: fetchFromObject(row, column.field),
                   size: {
-                    maxWidth: (_b = (_a3 = column.size) == null ? void 0 : _a3.maxWidth) != null ? _b : MAX_COLUMN_WIDTH,
+                    maxWidth: (_b = (_a2 = column.size) == null ? void 0 : _a2.maxWidth) != null ? _b : MAX_COLUMN_WIDTH,
                     minWidth: (_d = (_c = column.size) == null ? void 0 : _c.minWidth) != null ? _d : MIN_COLUMN_WIDTH,
                     width: (_e2 = column.size) == null ? void 0 : _e2.width
                   }
@@ -41017,10 +40995,7 @@ const Checkbox = memo((_Zb) => {
     className = "",
     defaultValue,
     events = {},
-    size = {
-      height: Sizes.Default,
-      width: Sizes.Default
-    },
+    size = {},
     validation = {}
   } = __b, props = __objRest(__b, [
     "className",
@@ -41032,6 +41007,7 @@ const Checkbox = memo((_Zb) => {
   const [focused, setFocused] = useState(false);
   const [problems, setProblems] = useState([]);
   const [value2, setValue] = useState(defaultValue);
+  const valueRef = useRef(value2);
   useEffect(() => {
     var _a2, _b;
     if (validation == null ? void 0 : validation.conditions) {
@@ -41050,6 +41026,7 @@ const Checkbox = memo((_Zb) => {
   return /* @__PURE__ */ jsx$2(InputContainer, __spreadProps(__spreadValues({
     alignment: {
       orientation: Orientation.Horizontal,
+      horizontal: AlignHorizontal.Center,
       vertical: AlignVertical.Center
     },
     as: "button",
@@ -41061,7 +41038,10 @@ const Checkbox = memo((_Zb) => {
         onFocus: () => setFocused(true)
       },
       mouse: {
-        onClick: () => setValue(!value2)
+        onClick: () => {
+          valueRef.current = !valueRef.current;
+          setValue(valueRef.current);
+        }
       }
     },
     form: "null",
@@ -41071,11 +41051,14 @@ const Checkbox = memo((_Zb) => {
         focused
       }
     },
-    size
+    size: __spreadValues({
+      height: Sizes.Default,
+      width: Sizes.Default
+    }, size)
   }, props), {
     children: /* @__PURE__ */ jsx$2(Container$9, {
       children: /* @__PURE__ */ jsx$2(Icon, {
-        color: value2 ? Colors.Success : Colors.White,
+        color: valueRef.current ? Colors.Success : Colors.White,
         name: BasicIcons.Checkmark2,
         size: __spreadValues({
           height: Sizes.Smaller,
@@ -52510,7 +52493,11 @@ const MediaGrid = memo((_mc) => {
         color: BackgroundColors.Transparent
       },
       borderRadius,
-      visible: loading
+      states: {
+        state: {
+          visible: loading
+        }
+      }
     }), rows.map((x2, row) => {
       return /* @__PURE__ */ jsx$2(Container$9, {
         alignment: {

@@ -14,7 +14,13 @@ export const EntityPreview = memo(
   ({ id, model }: { id?: string; model: Model }): ReactElement => {
     return (
       <Container data-testid="account-pane">
-        <LoadingOverlay visible={false} />
+        <LoadingOverlay
+          states={{
+            state: {
+              visible: false,
+            },
+          }}
+        />
       </Container>
     );
   },
