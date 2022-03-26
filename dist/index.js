@@ -26752,6 +26752,7 @@ const InputContainer = memo((_s) => {
     maxLength,
     min,
     name: name2,
+    placeholder = "",
     shadow = DepthShadow.Low,
     states = {},
     textAlign = TextAlign.Left,
@@ -26775,6 +26776,7 @@ const InputContainer = memo((_s) => {
     "maxLength",
     "min",
     "name",
+    "placeholder",
     "shadow",
     "states",
     "textAlign",
@@ -26884,6 +26886,7 @@ const InputContainer = memo((_s) => {
         max: max2,
         maxLength,
         min,
+        placeholder,
         textAlign,
         textColor,
         textSize,
@@ -29270,8 +29273,7 @@ const DropdownInput = memo((_da) => {
         }
       },
       size: __spreadValues({
-        height: Sizes.Default,
-        minWidth: 180
+        height: Sizes.Default
       }, size),
       shadow: menuVisible ? DepthShadow.Higher : DepthShadow.Surface
     }, props), {
@@ -39940,8 +39942,7 @@ const MenuButton = memo((_wb) => {
       }
     },
     size: __spreadValues({
-      height: Sizes.Default,
-      minWidth: 180
+      height: Sizes.Default
     }, size),
     shadow: menuVisible ? DepthShadow.Higher : DepthShadow.Surface
   }, props), {

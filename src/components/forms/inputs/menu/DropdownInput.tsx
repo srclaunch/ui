@@ -113,7 +113,6 @@ export const DropdownInput = memo(
           }}
           size={{
             height: Sizes.Default,
-            minWidth: 180,
             ...size,
           }}
           shadow={menuVisible ? DepthShadow.Higher : DepthShadow.Surface}

@@ -45,6 +45,7 @@ export const InputContainer = memo(
     maxLength,
     min,
     name,
+    placeholder = '',
     shadow = DepthShadow.Low,
     states = {},
     textAlign = TextAlign.Left,
@@ -184,6 +185,7 @@ export const InputContainer = memo(
               max={max}
               maxLength={maxLength}
               min={min}
+              placeholder={placeholder}
               textAlign={textAlign}
               textColor={textColor}
               textSize={textSize}
