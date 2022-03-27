@@ -59,19 +59,20 @@ export const Text = memo(
     selectable = true,
     textAlign = TextAlign.Left,
     textColor = TextColors.Default,
-    textSize = TextSize.Default,
     textOverflow = TextOverflow.Ellipsis,
+    textSize = TextSize.Default,
     textWeight = TextWeight.Default,
     ...props
   }: TextProps): ReactElement => {
     return (
       <Wrapper
-        textAlign={textAlign}
-        textColor={textColor}
         as={as}
         className={`${className} text`}
-        selectable={selectable}
         lineHeight={lineHeight}
+        lineWrap={lineWrap}
+        selectable={selectable}
+        textAlign={textAlign}
+        textColor={textColor}
         textOverflow={textOverflow}
         textSize={textSize}
         textWeight={textWeight}

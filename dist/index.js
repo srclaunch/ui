@@ -22855,7 +22855,7 @@ const getTextStyles = (props) => {
     textSize,
     textWeight
   } = props;
-  return css$2(["color:", ";font-size:", ";line-height:", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:color 0.13s ease-in-out,font-size 0.13s ease-in-out,font-weight 0.13s ease-in-out,text-decoration 0.13s ease-in-out,text-decoration-color 0.13s ease-in-out,text-decoration-style 0.13s ease-in-out,text-decoration-thickness 0.13s ease-in-out;"], getCSSColorValue(textColor != null ? textColor : TextColors.Default), getCSSMeasurementValue(textSize != null ? textSize : TextSize.Default), getCSSMeasurementValue(lineHeight != null ? lineHeight : Sizes.Default), bold && css$2(["font-weight:bold;"]), cursor && css$2(["cursor:", ";"], cursor), italic && css$2(["font-style:italic;"]), lineWrap && css$2(["white-space:nowrap;"]), selectable && css$2(["user-select:text;"]), textAlign && css$2(["text-align:", ";"], textAlign), textDecoration && css$2(["text-decoration:", ";text-decoration-color:", ";text-decoration-style:", ";text-decoration-thickness:", ";"], textDecoration.line ? textDecoration.line : "none", getCSSColorValue(textDecoration.color), textDecoration.style ? textDecoration.style : "solid", getCSSMeasurementValue(textDecoration.thickness)), textOverflow && css$2(["text-overflow:", ";"], textOverflow), textWeight && css$2(["font-weight:", ";"], textWeight));
+  return css$2(["color:", ";font-size:", ";line-height:", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:color 0.13s ease-in-out,font-size 0.13s ease-in-out,font-weight 0.13s ease-in-out,text-decoration 0.13s ease-in-out,text-decoration-color 0.13s ease-in-out,text-decoration-style 0.13s ease-in-out,text-decoration-thickness 0.13s ease-in-out;"], getCSSColorValue(textColor != null ? textColor : TextColors.Default), getCSSMeasurementValue(textSize != null ? textSize : TextSize.Default), getCSSMeasurementValue(lineHeight != null ? lineHeight : Sizes.Default), bold && css$2(["font-weight:bold;"]), cursor && css$2(["cursor:", ";"], cursor), italic && css$2(["font-style:italic;"]), lineWrap && lineWrap === true && css$2(["white-space:wrap;"]), lineWrap !== void 0 && lineWrap === false && css$2(["white-space:nowrap;"]), selectable && css$2(["user-select:text;"]), textAlign && css$2(["text-align:", ";"], textAlign), textDecoration && css$2(["text-decoration:", ";text-decoration-color:", ";text-decoration-style:", ";text-decoration-thickness:", ";"], textDecoration.line ? textDecoration.line : "none", getCSSColorValue(textDecoration.color), textDecoration.style ? textDecoration.style : "solid", getCSSMeasurementValue(textDecoration.thickness)), textOverflow && css$2(["overflow:hidden;text-overflow:", ";"], textOverflow), textWeight && css$2(["font-weight:", ";"], textWeight));
 };
 const TextStyles = css$2(["", ";"], (props) => getTextStyles(props));
 function getDisabledStateStyles() {
@@ -22900,8 +22900,8 @@ const Text = memo((_g) => {
     selectable = true,
     textAlign = TextAlign.Left,
     textColor = TextColors.Default,
-    textSize = TextSize.Default,
     textOverflow = TextOverflow.Ellipsis,
+    textSize = TextSize.Default,
     textWeight = TextWeight.Default
   } = _h, props = __objRest(_h, [
     "as",
@@ -22912,17 +22912,18 @@ const Text = memo((_g) => {
     "selectable",
     "textAlign",
     "textColor",
-    "textSize",
     "textOverflow",
+    "textSize",
     "textWeight"
   ]);
   return /* @__PURE__ */ jsx$2(Wrapper$1, __spreadProps(__spreadValues({
-    textAlign,
-    textColor,
     as,
     className: `${className} text`,
-    selectable,
     lineHeight,
+    lineWrap,
+    selectable,
+    textAlign,
+    textColor,
     textOverflow,
     textSize,
     textWeight
@@ -22977,6 +22978,7 @@ const Label = memo((_i2) => {
       }, icon2.margin)
     }, icon2)), /* @__PURE__ */ jsx$2(Text, {
       lineHeight,
+      lineWrap,
       selectable,
       states,
       textAlign,
@@ -28899,6 +28901,20 @@ var ReactCountryFlag = function ReactCountryFlag2(_ref) {
     }, style2)
   }), emoji);
 };
+function getDropdownMinHeight(count, padding) {
+  switch (count) {
+    case 0:
+      return 0;
+    case 1:
+      return `calc((${Sizes.Default}) + (${padding != null ? padding : Amount.Less} * 2) + 2px)`;
+    case 2:
+      return `calc((${Sizes.Default} * 2) + (${padding != null ? padding : Amount.Less} * 2)  + 2px)`;
+    case 3:
+      return `calc((${Sizes.Default} * 3) + (${padding != null ? padding : Amount.Less} * 2)  + 2px)`;
+    default:
+      return `calc((${Sizes.Default} * 3.5) + (${padding != null ? padding : Amount.Less} * 2)  + 2px)`;
+  }
+}
 const Scrollable = (_V) => {
   var _W = _V, {
     alignment = {},
@@ -29089,7 +29105,9 @@ const MenuItem = memo((_Z) => {
     }, props), {
       children: component != null ? component : /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
         icon: icon2,
-        lineHeight
+        lineHeight,
+        lineWrap: false,
+        textOverflow: TextOverflow.Ellipsis
       }, props), {
         children: label
       }))
@@ -29166,7 +29184,7 @@ const Menu = memo((_$) => {
     }, borderRadius),
     className: `${className} menu`,
     size: __spreadValues({
-      minHeight: Sizes.Largest
+      fill: Fill.Both
     }, size),
     shadow: DepthShadow.Low
   }, props), {
@@ -29277,7 +29295,7 @@ const DropdownControl = memo((_ba) => {
     }, border), ((_g = (_f = states.state) == null ? void 0 : _f.dropdown) == null ? void 0 : _g.visible) ? {
       bottom: {
         color: BorderColors.Transparent,
-        style: BorderStyle.None,
+        style: BorderStyle.Solid,
         width: 1
       }
     } : {}),
@@ -29293,7 +29311,8 @@ const DropdownControl = memo((_ba) => {
   }, props), {
     children: [component ? component : /* @__PURE__ */ jsx$2(Label, {
       padding: {
-        left: Amount.Less
+        left: Amount.Less,
+        right: Amount.Less
       },
       selectable: false,
       size: {
@@ -29356,7 +29375,7 @@ const DropdownPanel = memo((_da) => {
     "size",
     "states"
   ]);
-  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n;
+  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l;
   return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     background: __spreadValues({
       color: BackgroundColors.DropdownMenu
@@ -29373,29 +29392,22 @@ const DropdownPanel = memo((_da) => {
         style: BorderStyle.Solid,
         width: 1
       }
-    }, border), ((_g = (_f = states.state) == null ? void 0 : _f.dropdown) == null ? void 0 : _g.visible) ? {
-      top: {
-        color: BorderColors.Transparent,
-        style: BorderStyle.None,
-        width: 1
-      }
-    } : {}),
+    }, border)),
     className: `${className} dropdown-panel`,
-    depth: ((_i2 = (_h = states.state) == null ? void 0 : _h.dropdown) == null ? void 0 : _i2.visible) ? Depth.Higher : Depth.Surface,
+    depth: ((_g = (_f = states.state) == null ? void 0 : _f.dropdown) == null ? void 0 : _g.visible) ? Depth.Higher : Depth.Surface,
     position: __spreadValues({
       behavior: PositionBehavior.Absolute,
       left: 0,
       right: 0,
-      top: (_j = size == null ? void 0 : size.height) != null ? _j : Sizes.Default
+      top: (_h = size == null ? void 0 : size.height) != null ? _h : Sizes.Default
     }, position),
-    shadow: ((_l = (_k = states.state) == null ? void 0 : _k.dropdown) == null ? void 0 : _l.visible) ? DepthShadow.Higher : DepthShadow.Surface,
+    shadow: ((_j = (_i2 = states.state) == null ? void 0 : _i2.dropdown) == null ? void 0 : _j.visible) ? DepthShadow.Higher : DepthShadow.Surface,
     size: __spreadValues({
-      minHeight: Sizes.Default,
-      maxHeight: 300
+      minHeight: Sizes.Default
     }, size),
     states,
     visibility: {
-      hidden: !((_n = (_m = states.state) == null ? void 0 : _m.dropdown) == null ? void 0 : _n.visible)
+      hidden: !((_l = (_k = states.state) == null ? void 0 : _k.dropdown) == null ? void 0 : _l.visible)
     }
   }, props), {
     children
@@ -29429,7 +29441,7 @@ const DropdownInput = memo((_fa) => {
     "states",
     "validation"
   ]);
-  var _a2, _b, _c;
+  var _a2, _b, _c, _d;
   const [focused, setFocused] = useState(true);
   const [menuVisible, setMenuVisible] = useState((_c = (_b = (_a2 = states == null ? void 0 : states.state) == null ? void 0 : _a2.dropdown) == null ? void 0 : _b.visible) != null ? _c : false);
   const menuVisibleRef = useRef(menuVisible);
@@ -29530,6 +29542,10 @@ const DropdownInput = memo((_fa) => {
         }, padding),
         position: {
           top: `calc(${Sizes.Default} - 3px)`
+        },
+        size: {
+          maxHeight: 320,
+          minHeight: getDropdownMinHeight((_d = menu == null ? void 0 : menu.length) != null ? _d : 1, Amount.Less)
         },
         states: __spreadValues({
           state: {
@@ -40175,7 +40191,7 @@ const MenuButton = memo((_Cb) => {
     "states",
     "textColor"
   ]);
-  var _a2, _b, _c;
+  var _a2, _b, _c, _d;
   const [focused, setFocused] = useState(false);
   const [menuVisible, setMenuVisible] = useState((_c = (_b = (_a2 = states == null ? void 0 : states.state) == null ? void 0 : _a2.dropdown) == null ? void 0 : _b.visible) != null ? _c : false);
   const menuVisibleRef = useRef(menuVisible);
@@ -40223,7 +40239,6 @@ const MenuButton = memo((_Cb) => {
         }
       },
       label,
-      shadow: DepthShadow.High,
       size: __spreadValues({
         height: Sizes.Default
       }, size),
@@ -40246,6 +40261,10 @@ const MenuButton = memo((_Cb) => {
       position: {
         top: `calc(${Sizes.Default} - 3px)`
       },
+      size: {
+        maxHeight: 320,
+        minHeight: getDropdownMinHeight((_d = menu == null ? void 0 : menu.length) != null ? _d : 1, Amount.Less)
+      },
       states: __spreadValues({
         state: {
           focused,
@@ -40256,16 +40275,16 @@ const MenuButton = memo((_Cb) => {
       }, states)
     }, props), {
       children: /* @__PURE__ */ jsx$2(Menu, {
-        background: {
-          color: menuVisible ? BackgroundColors.Black : BackgroundColors.MenuButton
-        },
+        background: menuVisible ? {
+          color: BackgroundColors.Black
+        } : void 0,
         menu,
         onItemClick: (i2) => {
           menuVisibleRef.current = false;
           setMenuVisible(false);
         },
         padding: {
-          all: Amount.None
+          all: Amount.Least
         },
         shadow: DepthShadow.Surface
       })

@@ -320,11 +320,7 @@ const Example = () => (
                 'A menu button is a button that opens a menu when clicked',
               examples: [
                 {
-                  code: `import { MenuButton } from '@srclaunch/ui';
-
-const Example = () => (
-  <MenuButton>Click me</MenuButton>
-);`,
+                  title: 'Basic',
                   description: 'A basic menu button',
                   properties: {
                     label: 'Click me',
@@ -335,7 +331,36 @@ const Example = () => (
                       },
                     ],
                   },
-                  title: 'Basic',
+                  code: `import { MenuButton } from '@srclaunch/ui';
+
+                  const Example = () => (
+                    <MenuButton>Click me</MenuButton>
+                  );`,
+                },
+                {
+                  title: 'With menu visible',
+                  description: 'With menu visible',
+                  properties: {
+                    label: 'Click me',
+                    menu: [
+                      {
+                        label: 'Menu item',
+                        onClick: () => {},
+                      },
+                    ],
+                    states: {
+                      state: {
+                        dropdown: {
+                          visible: true,
+                        },
+                      },
+                    },
+                  },
+                  code: `import { MenuButton } from '@srclaunch/ui';
+
+                  const Example = () => (
+                    <MenuButton>Click me</MenuButton>
+                  );`,
                 },
               ],
             },

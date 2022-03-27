@@ -5,7 +5,7 @@ import {
   getCSSMeasurementValue,
 } from '../../lib/css/properties';
 
-import { Sizes, TextColors, TextSize } from '../../types';
+import { Sizes, TextColors, TextOverflow, TextSize } from '../../types';
 
 /*
     readonly bold?: boolean;
@@ -64,6 +64,13 @@ export const getTextStyles = (props: TextProps): SimpleInterpolation => {
     `};
 
     ${lineWrap &&
+    lineWrap === true &&
+    css`
+      white-space: wrap;
+    `};
+
+    ${lineWrap !== undefined &&
+    lineWrap === false &&
     css`
       white-space: nowrap;
     `};
@@ -92,6 +99,7 @@ export const getTextStyles = (props: TextProps): SimpleInterpolation => {
 
     ${textOverflow &&
     css`
+      overflow: hidden;
       text-overflow: ${textOverflow};
     `};
 

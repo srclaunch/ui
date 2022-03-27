@@ -22,5 +22,5 @@ export declare type TextProps = PropsWithChildren<CommonComponentProps & {
 }> & {
     readonly states?: States<TextProps>;
 };
-export declare const Text: import("react").MemoExoticComponent<({ as, children, className, lineHeight, lineWrap, selectable, textAlign, textColor, textSize, textOverflow, textWeight, ...props }: TextProps) => ReactElement>;
+export declare const Text: import("react").MemoExoticComponent<({ as, children, className, lineHeight, lineWrap, selectable, textAlign, textColor, textOverflow, textSize, textWeight, ...props }: TextProps) => ReactElement>;
 //# sourceMappingURL=Text.d.ts.map

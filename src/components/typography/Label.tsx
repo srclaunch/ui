@@ -61,6 +61,7 @@ export const Label = memo(
 
         <Text
           lineHeight={lineHeight}
+          lineWrap={lineWrap}
           selectable={selectable}
           states={states}
           textAlign={textAlign}

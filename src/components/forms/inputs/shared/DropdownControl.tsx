@@ -92,7 +92,7 @@ export const DropdownControl = memo(
             ? {
                 bottom: {
                   color: BorderColors.Transparent,
-                  style: BorderStyle.None,
+                  style: BorderStyle.Solid,
                   width: 1,
                 },
               }
@@ -123,6 +123,7 @@ export const DropdownControl = memo(
             // }px)`}
             padding={{
               left: Amount.Less,
+              right: Amount.Less,
             }}
             selectable={false}
             size={{

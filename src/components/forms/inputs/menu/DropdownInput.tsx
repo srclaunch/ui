@@ -1,6 +1,7 @@
 import { ValidationProblem } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
 import { memo, ReactElement, useEffect, useRef, useState } from 'react';
+import { getDropdownMinHeight } from '../../../../lib/forms/dropdowns';
 import { Amount, Depth, DepthShadow, Sizes } from '../../../../types';
 import { Container, ContainerProps } from '../../../layout/Container';
 import { Menu, MenuProps } from '../../../menus/Menu';
@@ -155,6 +156,10 @@ export const DropdownInput = memo(
           <DropdownPanel
             padding={{ all: Amount.Least, ...padding }}
             position={{ top: `calc(${Sizes.Default} - 3px)` }}
+            size={{
+              maxHeight: 320,
+              minHeight: getDropdownMinHeight(menu?.length ?? 1, Amount.Less),
+            }}
             states={{
               state: { focused, dropdown: { visible: menuVisibleRef.current } },
               ...states,

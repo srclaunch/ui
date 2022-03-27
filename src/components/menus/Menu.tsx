@@ -3,6 +3,7 @@ import {
   Amount,
   BackgroundColors,
   DepthShadow,
+  Fill,
   Overflow,
   Sizes,
   TextColors,
@@ -39,7 +40,7 @@ export const Menu = memo(
         borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} menu`}
         size={{
-          minHeight: Sizes.Largest,
+          fill: Fill.Both,
           ...size,
         }}
         shadow={DepthShadow.Low}

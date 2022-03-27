@@ -12,6 +12,7 @@ import { Menu, MenuProps } from '../../menus/Menu';
 import { DropdownControl } from '../inputs/shared/DropdownControl';
 import { DropdownPanel } from '../inputs/shared/DropdownPanel';
 import { TextProps } from '../../typography/Text';
+import { getDropdownMinHeight } from '../../../lib/forms/dropdowns';
 
 export type MenuButtonProps = ContainerProps &
   MenuProps &
@@ -92,7 +93,7 @@ export const MenuButton = memo(
             },
           }}
           label={label}
-          shadow={DepthShadow.High}
+          // shadow={DepthShadow.High}
           size={{
             height: Sizes.Default,
             ...size,
@@ -115,6 +116,10 @@ export const MenuButton = memo(
           }}
           padding={{ all: Amount.Least, ...padding }}
           position={{ top: `calc(${Sizes.Default} - 3px)` }}
+          size={{
+            maxHeight: 320,
+            minHeight: getDropdownMinHeight(menu?.length ?? 1, Amount.Less),
+          }}
           states={{
             state: { focused, dropdown: { visible: menuVisibleRef.current } },
             ...states,
@@ -122,17 +127,19 @@ export const MenuButton = memo(
           {...props}
         >
           <Menu
-            background={{
-              color: menuVisible
-                ? BackgroundColors.Black
-                : BackgroundColors.MenuButton,
-            }}
+            background={
+              menuVisible
+                ? {
+                    color: BackgroundColors.Black,
+                  }
+                : undefined
+            }
             menu={menu}
             onItemClick={i => {
               menuVisibleRef.current = false;
               setMenuVisible(false);
             }}
-            padding={{ all: Amount.None }}
+            padding={{ all: Amount.Least }}
             shadow={DepthShadow.Surface}
 
             // {...props}

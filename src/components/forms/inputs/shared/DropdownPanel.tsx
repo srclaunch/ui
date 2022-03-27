@@ -57,15 +57,15 @@ export const DropdownPanel = memo(
             },
             ...border,
           },
-          states.state?.dropdown?.visible
-            ? {
-                top: {
-                  color: BorderColors.Transparent,
-                  style: BorderStyle.None,
-                  width: 1,
-                },
-              }
-            : {},
+          // states.state?.dropdown?.visible
+          //   ? {
+          //       top: {
+          //         color: BorderColors.Transparent,
+          //         style: BorderStyle.None,
+          //         width: 1,
+          //       },
+          //     }
+          //   : {},
         )}
         className={`${className} dropdown-panel`}
         depth={states.state?.dropdown?.visible ? Depth.Higher : Depth.Surface}
@@ -81,7 +81,7 @@ export const DropdownPanel = memo(
             ? DepthShadow.Higher
             : DepthShadow.Surface
         }
-        size={{ minHeight: Sizes.Default, maxHeight: 300, ...size }}
+        size={{ minHeight: Sizes.Default, ...size }}
         states={states}
         visibility={{
           hidden: !states.state?.dropdown?.visible,

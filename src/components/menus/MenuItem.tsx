@@ -1,21 +1,17 @@
-import { memo, MouseEvent, ReactElement, useState } from 'react';
-
+import { memo, ReactElement } from 'react';
 import {
   AlignHorizontal,
-  AlignVertical,
   Amount,
   BackgroundColors,
   DepthShadow,
-  Orientation,
   Sizes,
   TextColors,
-  TextSize,
+  TextOverflow,
 } from '../../types';
 import { Button, ButtonProps, ButtonType } from '../forms/buttons/Button';
-import { Container, ContainerProps } from '../layout/Container';
 import { IconProps } from '../media/Icon';
 import { NavigationLink } from '../navigation/NavigationLink';
-import { Label, LabelProps } from '../typography/Label';
+import { Label } from '../typography/Label';
 
 export type MenuItemProps = ButtonProps & {
   readonly component?: ReactElement;
@@ -30,7 +26,6 @@ export const MenuItem = memo(
   ({
     alignment = {},
     as = 'button',
-
     borderRadius = {},
     className = '',
     component,
@@ -101,7 +96,13 @@ export const MenuItem = memo(
           {...props}
         >
           {component ?? (
-            <Label icon={icon} lineHeight={lineHeight} {...props}>
+            <Label
+              icon={icon}
+              lineHeight={lineHeight}
+              lineWrap={false}
+              textOverflow={TextOverflow.Ellipsis}
+              {...props}
+            >
               {label}
             </Label>
           )}
