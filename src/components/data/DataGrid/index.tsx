@@ -111,10 +111,10 @@ export const DataGrid = memo(
     header,
     hideOnProp,
     loaded,
-    loading,
     model,
     onItemClick,
     shadow = DepthShadow.Highest,
+    states = {},
     template,
     ...props
   }: DataGridProps): ReactElement => {
@@ -146,6 +146,7 @@ export const DataGrid = memo(
           borderRadius={{ all: Amount.Least, ...borderRadius }}
           className={`${className} data-grid`}
           shadow={shadow}
+          states={states}
           {...props}
         >
           <Label>No columns defined</Label>
@@ -162,13 +163,14 @@ export const DataGrid = memo(
         borderRadius={borderRadius}
         className={`${className} data-grid`}
         shadow={shadow}
+        states={states}
         {...props}
       >
         <LoadingOverlay
           borderRadius={borderRadius}
           states={{
             state: {
-              visible: loading,
+              visible: states.state?.loading,
             },
           }}
         />
@@ -409,7 +411,10 @@ export const DataGrid = memo(
             </>
           ) : (
             <Container>
-              {!loading && loaded && data && data.length === 0 ? (
+              {!states.state?.loading &&
+              states.state?.loaded &&
+              data &&
+              data.length === 0 ? (
                 <NoResults as={Container}>
                   <Label>No results</Label>
                 </NoResults>

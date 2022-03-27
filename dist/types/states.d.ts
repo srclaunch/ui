@@ -12,6 +12,7 @@ export declare type States<P = {}> = {
     readonly focused?: P;
     readonly hidden?: P;
     readonly hovered?: P;
+    readonly loaded?: P;
     readonly loading?: P;
     readonly on?: P;
     readonly success?: P;
@@ -30,6 +31,7 @@ export declare type States<P = {}> = {
         readonly focused?: boolean;
         readonly hidden?: boolean;
         readonly hovered?: boolean;
+        readonly loaded?: boolean;
         readonly loading?: boolean;
         readonly on?: boolean;
         readonly success?: boolean;

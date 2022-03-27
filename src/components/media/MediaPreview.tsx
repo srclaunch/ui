@@ -23,8 +23,6 @@ export const MediaPreview = memo(
   }: MediaPreviewProps): ReactElement => {
     if (!media || media.length === 0) return <Container>No media</Container>;
 
-    console.log('media', media);
-
     return (
       <Container className={`${className} media-preview`} {...props}>
         {media && media.length > 0 && media[0] && (
@@ -39,6 +37,7 @@ export const MediaPreview = memo(
           //   overflow={Overflow.Hidden}
           // />
           <Image
+            {...media[0]}
             alt={media[0].description}
             borderRadius={{ all: Amount.Less, ...borderRadius }}
             // height="100%"
@@ -61,6 +60,7 @@ export const MediaPreview = memo(
             {media.slice(1).map((item, k) => {
               return (
                 <Image
+                  {...item}
                   alt={item.description}
                   borderRadius={{ all: Amount.Least }}
                   key={k}
@@ -75,16 +75,6 @@ export const MediaPreview = memo(
                         : Amount.None,
                   }}
                   url={item.url}
-                  size={{
-                    height:
-                      alignment.orientation === Orientation.Horizontal
-                        ? '47%'
-                        : 'auto',
-                    width:
-                      alignment.orientation === Orientation.Vertical
-                        ? '31%'
-                        : 'auto',
-                  }}
                 />
               );
             })}

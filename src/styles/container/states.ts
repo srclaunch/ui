@@ -81,6 +81,7 @@ export function getContainerStatesStyles(
     error,
     focused,
     hovered,
+    loaded,
     loading,
     on,
     state,
@@ -154,6 +155,12 @@ export function getContainerStatesStyles(
               ${getContainerStyles({ ...otherProps, ...hovered })}
             }
           `}
+    `}
+
+    ${loaded &&
+    state?.loaded &&
+    css`
+      ${getContainerStyles({ ...otherProps, ...loaded })}
     `}
 
     ${loading &&

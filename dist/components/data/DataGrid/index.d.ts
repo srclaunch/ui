@@ -53,6 +53,6 @@ export declare type DataGridProps = ContainerProps & {
         } & ContainerProps) => ReactElement;
     };
 };
-export declare const DataGrid: import("react").MemoExoticComponent<({ background, borderRadius, className, columns, columnCount, data, depth, display, header, hideOnProp, loaded, loading, model, onItemClick, shadow, template, ...props }: DataGridProps) => ReactElement>;
+export declare const DataGrid: import("react").MemoExoticComponent<({ background, borderRadius, className, columns, columnCount, data, depth, display, header, hideOnProp, loaded, model, onItemClick, shadow, states, template, ...props }: DataGridProps) => ReactElement>;
 export default DataGrid;
 //# sourceMappingURL=index.d.ts.map
