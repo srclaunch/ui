@@ -160,7 +160,7 @@ export const DataGrid = memo(
           vertical: AlignVertical.Top,
         }}
         background={background}
-        borderRadius={borderRadius}
+        borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} data-grid`}
         shadow={shadow}
         states={states}
@@ -255,7 +255,9 @@ export const DataGrid = memo(
           alignment={{
             overflow: Overflow.ScrollBoth,
           }}
-          borderRadius={!header ? borderRadius : undefined}
+          borderRadius={
+            !header ? { all: Amount.Least, ...borderRadius } : undefined
+          }
           className="data-grid-grid"
           events={{
             ui: {
@@ -302,8 +304,8 @@ export const DataGrid = memo(
                       borderRadius={
                         !header
                           ? {
-                              topLeft: header ? 0 : Amount.Default,
-                              topRight: header ? 0 : Amount.Default,
+                              topLeft: header ? 0 : Amount.Least,
+                              topRight: header ? 0 : Amount.Least,
                             }
                           : undefined
                       }
@@ -340,8 +342,8 @@ export const DataGrid = memo(
                   color: BackgroundColors.DataGridRow,
                 }}
                 borderRadius={{
-                  bottomLeft: Amount.Default,
-                  bottomRight: Amount.Default,
+                  bottomLeft: Amount.Least,
+                  bottomRight: Amount.Least,
                 }}
                 className="data-grid-rows"
               >
@@ -411,10 +413,7 @@ export const DataGrid = memo(
             </>
           ) : (
             <Container>
-              {!states.state?.loading &&
-              states.state?.loaded &&
-              data &&
-              data.length === 0 ? (
+              {!states.state?.loading && data && data.length === 0 ? (
                 <NoResults as={Container}>
                   <Label>No results</Label>
                 </NoResults>
