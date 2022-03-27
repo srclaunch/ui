@@ -35446,26 +35446,6 @@ const SlidePanel = memo((_ab) => {
     "states"
   ]);
   return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
-    animations: [{
-      from: {
-        transform: {
-          translate: {
-            x: origin
-          }
-        }
-      },
-      timing: {
-        duration: 0.13,
-        iterations: 1
-      },
-      to: {
-        transform: {
-          translate: {
-            x: 0
-          }
-        }
-      }
-    }],
     background: __spreadValues({
       color: BackgroundColors.SlidePanel
     }, background),
