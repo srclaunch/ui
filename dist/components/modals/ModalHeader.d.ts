@@ -6,5 +6,5 @@ export declare type ModalHeaderProps = ContainerProps & {
     readonly moreMenu?: MoreMenuProps;
     readonly title?: string | ComponentType;
 };
-export declare const ModalHeader: import("react").MemoExoticComponent<({ alignment, className, onCloseClick, margin, moreMenu, padding, title, }: ModalHeaderProps) => ReactElement>;
+export declare const ModalHeader: import("react").MemoExoticComponent<({ alignment, className, onCloseClick, moreMenu, padding, title, ...props }: ModalHeaderProps) => ReactElement>;
 //# sourceMappingURL=ModalHeader.d.ts.map

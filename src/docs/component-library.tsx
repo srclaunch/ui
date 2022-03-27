@@ -7,6 +7,7 @@ import { SearchInput } from '../components/forms/inputs/text/SearchInput';
 import { Menu } from '../components/menus/Menu';
 import { MoreMenu } from '../components/menus/MoreMenu';
 import { CloseButton } from '../components/modals/CloseButton';
+import { ModalHeader } from '../components/modals/ModalHeader';
 import { SlidePanel } from '../components/modals/SlidePanel';
 import { Tab, Tabs } from '../components/navigation/Tabs';
 import { LoadingOverlay } from '../components/progress/LoadingOverlay';
@@ -816,6 +817,23 @@ const Example = () => (
             {
               title: 'Default',
               properties: {},
+            },
+          ],
+        },
+        {
+          component: ModalHeader,
+          title: 'ModalHeader',
+          description: 'A header for a modal',
+          path: '/modals/modal-header',
+          examples: [
+            {
+              title: 'Default',
+              properties: {
+                size: {
+                  width: 300,
+                },
+                title: 'Example Title',
+              },
             },
           ],
         },

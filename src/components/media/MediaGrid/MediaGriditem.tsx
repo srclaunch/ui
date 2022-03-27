@@ -38,6 +38,7 @@ export const MediaGridItem = memo(
     images,
     minHeight,
     moreMenu,
+    size = {},
     title,
     url,
     video,
@@ -89,6 +90,7 @@ export const MediaGridItem = memo(
         linkTo={url}
         size={{
           minHeight: minHeight ?? 220,
+          ...size,
         }}
         {...props}
       >

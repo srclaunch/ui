@@ -1,7 +1,13 @@
 import { ComponentType, memo, ReactElement } from 'react';
 
-import { AlignHorizontal, Amount, Orientation } from '../../types';
+import {
+  AlignHorizontal,
+  AlignVertical,
+  Amount,
+  Orientation,
+} from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
+import { Spacer } from '../layout/Spacer';
 import { MoreMenu, MoreMenuProps } from '../menus/MoreMenu';
 import { Title } from '../typography/Title';
 import { CloseButton } from './CloseButton';
@@ -17,25 +23,26 @@ export const ModalHeader = memo(
     alignment = {},
     className = '',
     onCloseClick,
-    margin = {},
     moreMenu,
     padding = {},
     title,
+    ...props
   }: ModalHeaderProps): ReactElement => {
     return (
       <Container
         alignment={{
-          horizontal: AlignHorizontal.Center,
+          horizontal: AlignHorizontal.Stretch,
           orientation: Orientation.Horizontal,
+          vertical: AlignVertical.Center,
           ...alignment,
         }}
         className={`${className} modal-header`}
-        margin={{ bottom: Amount.Most, ...margin }}
         padding={{ all: Amount.Default, ...padding }}
+        {...props}
       >
-        <Title>{title}</Title>
+        {title && <Title>{title}</Title>}
 
-        <Container />
+        <Spacer />
 
         {moreMenu && (
           <MoreMenu
