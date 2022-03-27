@@ -10,32 +10,32 @@ export function getPositionStyles(position?: Position): SimpleInterpolation {
     ${position?.behavior &&
     css`
       position: ${position.behavior};
-    `};
+    `}
 
     ${(position?.bottom || position?.bottom === 0) &&
     css`
       bottom: ${getCSSMeasurementValue(position.bottom)};
-    `};
+    `}
 
     ${(position?.left || position?.left === 0) &&
     css`
       left: ${getCSSMeasurementValue(position.left)};
-    `};
+    `}
 
     ${(position?.right || position?.right === 0) &&
     css`
       right: ${getCSSMeasurementValue(position.right)};
-    `};
+    `}
 
     ${(position?.top || position?.top === 0) &&
     css`
       top: ${getCSSMeasurementValue(position.top)};
-    `};
+    `}
   `;
 }
 
 export const PositionStyles = css<{
   position?: Position;
 }>`
-  ${props => getPositionStyles(props.position)};
+  ${props => getPositionStyles(props.position)}
 `;

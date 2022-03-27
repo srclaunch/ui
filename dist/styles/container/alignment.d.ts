@@ -4,6 +4,7 @@ export declare function getFillStyles(alignment?: Alignment): SimpleInterpolatio
 export declare function getHorizontalAlignStyle(alignment?: Alignment): SimpleInterpolation;
 export declare function getVerticalAlignStyle(alignment?: Alignment): SimpleInterpolation;
 export declare function getOverflowStyle(overflow?: Overflow): SimpleInterpolation;
+export declare function getFlexDirection(alignment: Alignment): SimpleInterpolation;
 export declare function getAlignmentStyles(alignment?: Alignment): SimpleInterpolation;
 export declare const AlignmentStyles: import("styled-components").FlattenInterpolation<import("styled-components").ThemedStyledProps<{
     readonly alignment?: Alignment | undefined;

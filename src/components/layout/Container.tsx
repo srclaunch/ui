@@ -34,6 +34,7 @@ import { getEventHandlers } from '../../lib/events';
 import { ReactEventHandler } from 'react';
 import { useEffect } from 'react';
 import { Transform } from '../../types/appearance/transform';
+import { getAnimationStyles } from '../../styles/container/animation';
 
 export type ContainerProps = PropsWithChildren<
   CommonComponentProps & {
@@ -56,17 +57,11 @@ export type ContainerProps = PropsWithChildren<
   }
 >;
 
-// ${props =>
-//   props.transform?.rotate &&
-//   css`
-//     transform: rotate(${`${props.transform?.rotate}deg` ?? 'none'});
-//   `};
-
 const Wrapper = styled.div<ContainerProps>`
   ${props => getContainerStyles(props)};
   ${props => getContainerStatesStyles(props)};
+  /* ${props => getAnimationStyles(props)} */
 `;
-/* ${StateStyles}; */
 
 export const Container = memo(
   ({

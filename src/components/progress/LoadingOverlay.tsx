@@ -1,6 +1,14 @@
 import { memo, ReactElement } from 'react';
 
-import { Amount, BackgroundColors, PositionBehavior, Size } from '../../types';
+import {
+  AlignHorizontal,
+  AlignVertical,
+  Amount,
+  BackgroundColors,
+  Depth,
+  PositionBehavior,
+  Size,
+} from '../../types';
 import { ProgressSpinner } from './ProgressSpinner';
 import { Container, ContainerProps } from '../layout/Container';
 
@@ -20,6 +28,10 @@ export const LoadingOverlay = memo(
   }: LoadingOverlayProps): ReactElement => {
     return (
       <Container
+        alignment={{
+          horizontal: AlignHorizontal.Center,
+          vertical: AlignVertical.Center,
+        }}
         background={{
           color: BackgroundColors.Dark,
           opacity: 85,
@@ -41,9 +53,13 @@ export const LoadingOverlay = memo(
               opacity: 1,
             },
           },
+          ...states,
         }}
         visibility={{
           opacity: 0,
+        }}
+        style={{
+          zIndex: 10,
         }}
         {...props}
       >

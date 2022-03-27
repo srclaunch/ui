@@ -1,5 +1,4 @@
 import { ContainerProps } from '../../components/layout/Container';
-import { Transform } from './transform';
 export declare enum AnimationEasings {
     EaseInBack = "ease-in-back",
     EaseOutBack = "ease-out-back",
@@ -56,10 +55,10 @@ export declare type AnimationTiming = {
     readonly iterations?: number | string;
 };
 export declare type Animation = {
-    readonly from?: ContainerProps & Transform;
+    readonly from?: ContainerProps;
     readonly name?: Animations;
     readonly paused?: boolean;
-    readonly to?: ContainerProps & Transform;
+    readonly to?: ContainerProps;
     readonly timing?: AnimationTiming;
 };
 //# sourceMappingURL=animation.d.ts.map

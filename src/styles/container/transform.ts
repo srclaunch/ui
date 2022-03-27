@@ -2,8 +2,10 @@ import { css, SimpleInterpolation } from 'styled-components';
 import { getCSSMeasurementValue } from '../../lib/css/properties';
 import { Transform } from '../../types/appearance/transform';
 
-export function getTransformArgumentValue(transform?: Transform): string {
-  if (!transform) return '';
+export function getTransformArgumentValue(
+  transform?: Transform,
+): string | null {
+  if (!transform) return null;
 
   let cssValue = '';
 
@@ -11,11 +13,11 @@ export function getTransformArgumentValue(transform?: Transform): string {
 
   if (rotate) {
     if (rotate.x && rotate.y && rotate.z) {
-      cssValue += `rotate3d(${rotate.x}, ${rotate.y}, ${rotate.z}, ${rotate.angle}) `;
+      cssValue += `rotate3d(${rotate.x}, ${rotate.y}, ${rotate.z}, ${rotate.angle}deg) `;
     } else if (rotate.x && rotate.y) {
-      cssValue += `rotate3d(${rotate.x}, ${rotate.y}, ${rotate.angle}) `;
+      cssValue += `rotate3d(${rotate.x}, ${rotate.y}, ${rotate.angle}deg) `;
     } else {
-      cssValue += `rotate(${rotate.angle}) `;
+      cssValue += `rotate(${rotate.angle}deg) `;
     }
   }
 
@@ -23,7 +25,7 @@ export function getTransformArgumentValue(transform?: Transform): string {
     if (scale.x && scale.y && scale.z) {
       cssValue += `scale3d(${scale.x}, ${scale.y}, ${scale.z}) `;
     } else if (scale.x && scale.y) {
-      cssValue += `scale3d(${scale.x}, ${scale.y}, ${scale.x}) `;
+      cssValue += `scale3d(${scale.x}, ${scale.y}) `;
     } else {
       cssValue += `scale(${scale.x}) `;
     }
@@ -42,6 +44,10 @@ export function getTransformArgumentValue(transform?: Transform): string {
       cssValue += `translate(${getCSSMeasurementValue(
         translate.x,
       )}, ${getCSSMeasurementValue(translate.y)}) `;
+    } else if (translate.x && !translate.y) {
+      cssValue += `translateX(${getCSSMeasurementValue(translate.x)}) `;
+    } else if (translate.y && !translate.x) {
+      cssValue += `translateY(${getCSSMeasurementValue(translate.y)}) `;
     } else {
       cssValue += `translate(${getCSSMeasurementValue(translate.x)}) `;
     }
@@ -57,19 +63,19 @@ export function getTransformStyles(transform?: Transform): SimpleInterpolation {
     ${transform?.origin &&
     css`
       transform-origin: ${getCSSMeasurementValue(transform.origin)};
-    `};
+    `}
 
     ${(transform?.rotate ||
       transform?.scale ||
       transform?.skew ||
       transform?.translate) &&
     css`
-      transform: ${getTransformArgumentValue(transform)};
-    `};
+      transform: ${getTransformArgumentValue(transform) ?? 'none'};
+    `}
   `;
 }
 export const TransformStyles = css<{
   transform?: Transform;
 }>`
-  ${props => getTransformStyles(props.transform)};
+  ${props => getTransformStyles(props.transform)}
 `;

@@ -8,17 +8,17 @@ export function getVisibilityStyles(
     ${visibility?.hidden === true &&
     css`
       visibility: hidden;
-    `};
+    `}
 
     ${visibility?.opacity &&
     css`
       opacity: ${visibility.opacity}%;
-    `};
+    `}
   `;
 }
 
 export const VisibilityStyles = css<{
   visibility?: Visibility;
 }>`
-  ${props => getVisibilityStyles(props.visibility)};
+  ${props => getVisibilityStyles(props.visibility)}
 `;

@@ -3,81 +3,43 @@ import { css, SimpleInterpolation } from 'styled-components';
 import { getCSSMeasurementValue } from '../../lib/css/properties';
 import { BorderRadius } from '../../types';
 
-// export function getBorderRadius(
-//   borderRadius: BorderRadius
-// ): string | null | undefined {
-//   if (!borderRadius) return null;
-
-//   if (typeof borderRadius === 'number') {
-//     return getCSSMeasurementValue(borderRadius);
-//   }
-
-//   if (typeof borderRadius === 'object') {
-//     const topLeft =
-//       typeof borderRadius.topLeft === 'number'
-//         ? getCSSMeasurementValue(borderRadius.topLeft)
-//         : borderRadius.topLeft ?? 'initial';
-//     const topRight =
-//       typeof borderRadius.topRight === 'number'
-//         ? getCSSMeasurementValue(borderRadius.topRight)
-//         : borderRadius.topRight ?? 'initial';
-//     const bottomRight =
-//       typeof borderRadius.bottomRight === 'number'
-//         ? getCSSMeasurementValue(borderRadius.bottomRight)
-//         : borderRadius.bottomRight ?? 'initial';
-//     const bottomLeft =
-//       typeof borderRadius.bottomLeft === 'number'
-//         ? getCSSMeasurementValue(borderRadius.bottomLeft)
-//         : borderRadius.bottomLeft ?? 'initial';
-
-//     return `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`;
-//   }
-
-//   return borderRadius;
-// }
-
 export function getBorderRadiusStyles(
   borderRadius?: BorderRadius,
 ): SimpleInterpolation {
+  if (!borderRadius) return;
+
+  const { all, bottomLeft, bottomRight, topLeft, topRight } = borderRadius;
+
   return css`
-    ${borderRadius &&
-    borderRadius.all &&
+    ${all &&
     css`
-      border-radius: ${getCSSMeasurementValue(borderRadius.all)};
-    `};
+      border-radius: ${getCSSMeasurementValue(all)};
+    `}
 
-    ${borderRadius &&
-    borderRadius.bottomLeft &&
+    ${bottomLeft &&
     css`
-      border-bottom-left-radius: ${getCSSMeasurementValue(
-        borderRadius.bottomLeft,
-      )};
-    `};
+      border-bottom-left-radius: ${getCSSMeasurementValue(bottomLeft)};
+    `}
 
-    ${borderRadius &&
-    borderRadius.bottomRight &&
+    ${bottomRight &&
     css`
-      border-bottom-right-radius: ${getCSSMeasurementValue(
-        borderRadius.bottomRight,
-      )};
-    `};
+      border-bottom-right-radius: ${getCSSMeasurementValue(bottomRight)};
+    `}
 
-    ${borderRadius &&
-    borderRadius.topLeft &&
+    ${topLeft &&
     css`
-      border-top-left-radius: ${getCSSMeasurementValue(borderRadius.topLeft)};
-    `};
+      border-top-left-radius: ${getCSSMeasurementValue(topLeft)};
+    `}
 
-    ${borderRadius &&
-    borderRadius.topRight &&
+    ${topRight &&
     css`
-      border-top-right-radius: ${getCSSMeasurementValue(borderRadius.topRight)};
-    `};
+      border-top-right-radius: ${getCSSMeasurementValue(topRight)};
+    `}
   `;
 }
 
 export const BorderRadiusStyles = css<{ readonly borderRadius?: BorderRadius }>`
-  ${props => getBorderRadiusStyles(props.borderRadius)};
+  ${props => getBorderRadiusStyles(props.borderRadius)}
 `;
 
 // ${props =>

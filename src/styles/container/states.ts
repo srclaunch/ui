@@ -94,114 +94,114 @@ export function getContainerStatesStyles(
     css`
       ${state?.active
         ? css`
-            ${getContainerStyles({ ...otherProps, ...active })};
+            ${getContainerStyles({ ...otherProps, ...active })}
           `
         : css`
             &::active {
-              ${getContainerStyles({ ...otherProps, ...active })};
+              ${getContainerStyles({ ...otherProps, ...active })}
             }
-          `};
-    `};
+          `}
+    `}
 
     ${current &&
     state?.current &&
     css`
-      ${getContainerStyles({ ...otherProps, ...current })};
-    `};
+      ${getContainerStyles({ ...otherProps, ...current })}
+    `}
 
     ${disabled && state?.disabled
       ? css`
-          ${getContainerStyles({ ...otherProps, ...disabled })};
-          ${getDisabledStateStyles()};
+          ${getContainerStyles({ ...otherProps, ...disabled })}
+          ${getDisabledStateStyles()}
         `
       : css`
           &:disabled {
-            ${getContainerStyles({ ...otherProps, ...disabled })};
-            ${getDisabledStateStyles()};
+            ${getContainerStyles({ ...otherProps, ...disabled })}
+            ${getDisabledStateStyles()}
           }
-        `};
+        `}
 
     ${error &&
     state?.error &&
     css`
-      ${getContainerStyles({ ...otherProps, ...error })};
-    `};
+      ${getContainerStyles({ ...otherProps, ...error })}
+    `}
 
     ${focused &&
     css`
       ${state?.focused
         ? css`
-            ${getContainerStyles({ ...otherProps, ...focused })};
-            ${getFocusedStyles()};
+            ${getContainerStyles({ ...otherProps, ...focused })}
+            ${getFocusedStyles()}
           `
         : css`
             &:focus {
-              ${getContainerStyles({ ...otherProps, ...focused })};
-              ${getFocusedStyles()};
+              ${getContainerStyles({ ...otherProps, ...focused })}
+              ${getFocusedStyles()}
             }
-          `};
-    `};
+          `}
+    `}
 
     ${hovered &&
     !state?.current &&
     css`
       ${state?.hovered
         ? css`
-            ${getContainerStyles({ ...otherProps, ...hovered })};
+            ${getContainerStyles({ ...otherProps, ...hovered })}
           `
         : css`
             &:hover {
-              ${getContainerStyles({ ...otherProps, ...hovered })};
+              ${getContainerStyles({ ...otherProps, ...hovered })}
             }
-          `};
-    `};
+          `}
+    `}
 
     ${loading &&
     state?.loading &&
     css`
-      ${getContainerStyles({ ...otherProps, ...loading })};
-    `};
+      ${getContainerStyles({ ...otherProps, ...loading })}
+    `}
 
     ${on &&
     state?.on &&
     css`
-      ${getContainerStyles({ ...otherProps, ...on })};
-    `};
+      ${getContainerStyles({ ...otherProps, ...on })}
+    `}
 
     ${success &&
     state?.success &&
     css`
-      ${getContainerStyles({ ...otherProps, ...success })};
-    `};
+      ${getContainerStyles({ ...otherProps, ...success })}
+    `}
 
     ${visible &&
     state?.visible &&
     css`
-      ${getContainerStyles({ ...otherProps, ...visible })};
-      ${getVisibleStateStyles()};
-    `};
+      ${getContainerStyles({ ...otherProps, ...visible })}
+      ${getVisibleStateStyles()}
+    `}
 
     ${visible &&
     state?.visible === false &&
     css`
-      ${getContainerStyles({ ...otherProps, ...visible })};
-      ${getHiddenStateStyles()};
-    `};
+      ${getContainerStyles({ ...otherProps, ...visible })}
+      ${getHiddenStateStyles()}
+    `}
 
     ${!visible &&
     state?.visible === false &&
     css`
-      ${getHiddenStateStyles()};
-    `};
+      ${getHiddenStateStyles()}
+    `}
 
     ${warning &&
     state?.warning &&
     css`
-      ${getContainerStyles({ ...otherProps, ...warning })};
-    `};
+      ${getContainerStyles({ ...otherProps, ...warning })}
+    `}
   `;
 }
 
 export const StateStyles = css<ContainerProps>`
-  ${props => getContainerStatesStyles(props)};
+  ${props => getContainerStatesStyles(props)}
 `;

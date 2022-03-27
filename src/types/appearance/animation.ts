@@ -70,9 +70,9 @@ export type AnimationTiming = {
 };
 
 export type Animation = {
-  readonly from?: ContainerProps & Transform;
+  readonly from?: ContainerProps;
   readonly name?: Animations;
   readonly paused?: boolean;
-  readonly to?: ContainerProps & Transform;
+  readonly to?: ContainerProps;
   readonly timing?: AnimationTiming;
 };

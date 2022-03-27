@@ -23,16 +23,19 @@ export function getZIndexValue(depth?: Depth): number {
   }
 }
 
+export function getZIndexStyle(depth?: Depth): SimpleInterpolation {
+  return css`
+    z-index: ${getZIndexValue(depth)};
+  `;
+}
+
 export function getDepthStyles(depth?: Depth): SimpleInterpolation {
   return css`
-    ${depth &&
-    css`
-      z-index: ${getZIndexValue(depth)};
-    `};
+    ${depth && getZIndexStyle(depth)}
   `;
 }
 export const DepthStyles = css<{
   readonly depth?: Depth;
 }>`
-  ${props => getDepthStyles(props.depth)};
+  ${props => getDepthStyles(props.depth)}
 `;

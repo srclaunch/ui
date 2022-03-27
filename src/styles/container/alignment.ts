@@ -1,5 +1,4 @@
 import { css, SimpleInterpolation } from 'styled-components';
-
 import {
   Alignment,
   AlignHorizontal,
@@ -7,7 +6,6 @@ import {
   Orientation,
   Overflow,
   Fill,
-  Size,
 } from '../../types';
 
 export function getFillStyles(alignment?: Alignment): SimpleInterpolation {
@@ -171,45 +169,37 @@ export function getOverflowStyle(overflow?: Overflow): SimpleInterpolation {
         overflow: hidden;
       `;
     default:
-      return;
+      return null;
+  }
+}
+
+export function getFlexDirection(alignment: Alignment): SimpleInterpolation {
+  switch (alignment?.orientation) {
+    case Orientation.Horizontal:
+      return css`
+        flex-direction: row;
+      `;
+    case Orientation.Vertical:
+    default:
+      return css`
+        flex-direction: column;
+      `;
   }
 }
 
 export function getAlignmentStyles(alignment?: Alignment): SimpleInterpolation {
   return css`
     display: flex;
-
-    ${alignment?.orientation &&
-    css`
-      flex-direction: ${alignment.orientation === Orientation.Horizontal
-        ? 'row'
-        : 'column'};
-    `};
-
-    ${alignment?.horizontal &&
-    css`
-      ${getHorizontalAlignStyle(alignment)};
-    `};
-
-    ${alignment?.vertical &&
-    css`
-      ${getVerticalAlignStyle(alignment)};
-    `};
-
-    ${alignment?.fill &&
-    css`
-      ${getFillStyles(alignment)};
-    `};
-
-    ${alignment?.overflow &&
-    css`
-      ${getOverflowStyle(alignment.overflow)};
-    `};
+    ${alignment?.orientation && getFlexDirection(alignment)}
+    ${alignment?.horizontal && getHorizontalAlignStyle(alignment)}
+    ${alignment?.vertical && getVerticalAlignStyle(alignment)}
+    ${alignment?.fill && getFillStyles(alignment)} 
+    ${alignment?.overflow && getOverflowStyle(alignment.overflow)}
   `;
 }
 
 export const AlignmentStyles = css<{
   readonly alignment?: Alignment;
 }>`
-  ${props => getAlignmentStyles(props.alignment)};
+  ${props => getAlignmentStyles(props.alignment)}
 `;

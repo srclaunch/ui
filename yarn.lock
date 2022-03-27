@@ -2180,6 +2180,7 @@ __metadata:
     jest-dom: ^4.0.0
     jest-junit: ^13.0.0
     luxon: ^2.3.0
+    nanoid: ^3.3.1
     pluralize: ^8.0.0
     prettier: ^2.5.1
     prettier-eslint: ^13.0.0

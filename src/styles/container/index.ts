@@ -7,7 +7,6 @@ import { getBorderStyles } from './border';
 import { getBorderRadiusStyles } from './border-radius';
 import { getCursorStyles } from './cursor';
 import { getDepthStyles } from './depth';
-import { getEventStyles } from './events';
 import { getMarginStyles } from './margin';
 import { getPaddingStyles } from './padding';
 import { getPositionStyles } from './position';
@@ -20,21 +19,20 @@ export const getContainerStyles = (
   props: ContainerProps,
 ): SimpleInterpolation => {
   return css`
-    ${getAlignmentStyles(props.alignment)};
-    ${getAnimationStyles(props.animations)};
-    ${getBackgroundStyles(props.background)};
-    ${getBorderStyles(props.border)};
-    ${getBorderRadiusStyles(props.borderRadius)};
-    ${getCursorStyles(props.cursor)};
-    ${getDepthStyles(props.depth)};
-    ${getEventStyles(props.events)};
-    ${getMarginStyles(props.margin)};
-    ${getPaddingStyles(props.padding)};
-    ${getPositionStyles(props.position)};
-    ${getShadowStyles(props.shadow)};
-    ${getSizeStyles(props.size)};
-    ${getTransformStyles(props.transform)};
-    ${getVisibilityStyles(props.visibility)};
+    ${getAlignmentStyles(props.alignment)}
+    ${getAnimationStyles(props)}
+    ${getBackgroundStyles(props.background)}
+    ${getBorderStyles(props.border)}
+    ${getBorderRadiusStyles(props.borderRadius)}
+    ${getCursorStyles(props.cursor)}
+    ${getDepthStyles(props.depth)}
+    ${getMarginStyles(props.margin)}
+    ${getPaddingStyles(props.padding)}
+    ${getPositionStyles(props.position)}
+    ${getShadowStyles(props.shadow)}
+    ${getSizeStyles(props.size)}
+    ${getTransformStyles(props.transform)}
+    ${getVisibilityStyles(props.visibility)}
 
     transition: opacity 0.13s ease-in-out, background 0.13s ease-in-out,
       background-color 0.13s ease-in-out, border-radius 0.13s ease-in-out,
@@ -48,5 +46,5 @@ export const getContainerStyles = (
 };
 
 export const ContainerStyles = css<ContainerProps>`
-  ${props => getContainerStyles(props)};
+  ${props => getContainerStyles(props)}
 `;

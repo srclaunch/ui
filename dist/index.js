@@ -22145,63 +22145,114 @@ function getOverflowStyle(overflow) {
     case Overflow.Hidden:
       return css$2(["overflow:hidden;"]);
     default:
-      return;
+      return null;
+  }
+}
+function getFlexDirection(alignment) {
+  switch (alignment == null ? void 0 : alignment.orientation) {
+    case Orientation.Horizontal:
+      return css$2(["flex-direction:row;"]);
+    case Orientation.Vertical:
+    default:
+      return css$2(["flex-direction:column;"]);
   }
 }
 function getAlignmentStyles(alignment) {
-  return css$2(["display:flex;", ";", ";", ";", ";", ";"], (alignment == null ? void 0 : alignment.orientation) && css$2(["flex-direction:", ";"], alignment.orientation === Orientation.Horizontal ? "row" : "column"), (alignment == null ? void 0 : alignment.horizontal) && css$2(["", ";"], getHorizontalAlignStyle(alignment)), (alignment == null ? void 0 : alignment.vertical) && css$2(["", ";"], getVerticalAlignStyle(alignment)), (alignment == null ? void 0 : alignment.fill) && css$2(["", ";"], getFillStyles(alignment)), (alignment == null ? void 0 : alignment.overflow) && css$2(["", ";"], getOverflowStyle(alignment.overflow)));
+  return css$2(["display:flex;", " ", " ", " ", "  ", ""], (alignment == null ? void 0 : alignment.orientation) && getFlexDirection(alignment), (alignment == null ? void 0 : alignment.horizontal) && getHorizontalAlignStyle(alignment), (alignment == null ? void 0 : alignment.vertical) && getVerticalAlignStyle(alignment), (alignment == null ? void 0 : alignment.fill) && getFillStyles(alignment), (alignment == null ? void 0 : alignment.overflow) && getOverflowStyle(alignment.overflow));
 }
-css$2(["", ";"], (props) => getAlignmentStyles(props.alignment));
-function getAnimationStyles(animations) {
-  if (!animations || !animations.length)
-    return;
-  return css$2(["animation:", ";"], animations.map((animation) => {
-    var _a2, _b, _c;
-    return `${animation.name} ${(_a2 = animation.timing) == null ? void 0 : _a2.duration} ${(_b = animation.timing) == null ? void 0 : _b.easing} ${(_c = animation.timing) == null ? void 0 : _c.delay}`;
-  }).join(", "));
+css$2(["", ""], (props) => getAlignmentStyles(props.alignment));
+let nanoid = (size = 21) => {
+  let id2 = "";
+  let bytes = crypto.getRandomValues(new Uint8Array(size));
+  while (size--) {
+    let byte = bytes[size] & 63;
+    if (byte < 36) {
+      id2 += byte.toString(36);
+    } else if (byte < 62) {
+      id2 += (byte - 26).toString(36).toUpperCase();
+    } else if (byte < 63) {
+      id2 += "_";
+    } else {
+      id2 += "-";
+    }
+  }
+  return id2;
+};
+function getAnimationKeyframes(animation, name2) {
+  return css$2(["@keyframes ", "{from{", "}to{", "}}"], name2, getContainerStyles(__spreadValues({}, animation.from)), getContainerStyles(__spreadValues({}, animation.to)));
 }
-css$2(["", ";"], (props) => getAnimationStyles(props.animations));
-const getBackgroundSize = (size) => {
+function getAnimationStyles(props) {
+  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o;
+  if (!props.animations || !((_a2 = props.animations) == null ? void 0 : _a2.length))
+    return null;
+  const animations = props.animations;
+  let names = [];
+  let keyframes = [];
+  let iterations = [];
+  let delays = [];
+  let durations = [];
+  let easings = [];
+  for (const animation of animations) {
+    if (animation.from && animation.to) {
+      const name2 = (_b = animation.name) != null ? _b : `animation_${nanoid()}`;
+      names = [...names, name2];
+      keyframes = [...keyframes, getAnimationKeyframes(animation, name2)];
+      delays = [...delays, (_d = (_c = animation.timing) == null ? void 0 : _c.delay) != null ? _d : 0];
+      durations = [...durations, (_f = (_e2 = animation.timing) == null ? void 0 : _e2.duration) != null ? _f : 3];
+      iterations = [...iterations, (_h = (_g = animation.timing) == null ? void 0 : _g.iterations) != null ? _h : "infinite"];
+      easings = [...easings, (_j = (_i2 = animation.timing) == null ? void 0 : _i2.easing) != null ? _j : "linear"];
+    }
+  }
+  return css$2(["", " ", " ", " ", " ", " ", ""], keyframes, names && names.length > 0 && css$2(["animation:", ";"], (_k = names.join(", ").trim()) != null ? _k : "none"), durations && durations.length > 0 && css$2(["animation-duration:", "s;"], (_l = durations.join(", ").trim()) != null ? _l : 3), iterations && iterations.length > 0 && css$2(["animation-iteration-count:", ";"], (_m = iterations.join(", ").trim()) != null ? _m : "infinite"), easings && easings.length > 0 && css$2(["animation-timing-function:", ";"], (_n = easings.join(", ").trim()) != null ? _n : "linear"), delays && delays.length > 0 && css$2(["animation-delay:", "s;"], (_o = delays.join(", ").trim()) != null ? _o : 0));
+}
+css$2(["", ""], (props) => getAnimationStyles(props));
+function getBackgroundColorStyle(color, opacity) {
+  if (color === BackgroundColors.Transparent)
+    return css$2(["background-color:transparent;"]);
+  if (color && !opacity)
+    return css$2(["background-color:rgb(", ");"], color);
+  if (color && opacity)
+    return css$2(["background-color:rgba(", ",", "%);"], color, opacity);
+  if (!color && opacity)
+    return css$2(["background-color:rgba(initial,", "%);"], opacity);
+  return css$2(["background-color:", ";"], color);
+}
+const getBackgroundImageSizeStyle = (size) => {
+  if (!size)
+    return css$2(["background-size:auto;"]);
   switch (size) {
     case BackgroundSize.Auto:
-      return "auto";
+      return css$2(["background-size:auto;"]);
     case BackgroundSize.Cover:
-      return "cover";
+      return css$2(["background-size:cover;"]);
     case BackgroundSize.Contain:
-      return "contain";
+      return css$2(["background-size:contain;"]);
     case BackgroundSize.Fill:
-      return "100% 100%";
+      return css$2(["background-size:'100% 100%';"]);
     case BackgroundSize.FillHorizontal:
-      return "100% 0";
+      return css$2(["background-size:'100% 0';"]);
     case BackgroundSize.FillVertical:
-      return "0 100%";
+      return css$2(["background-size:'0 100%';"]);
     default:
-      if (!size)
-        return "auto";
-      return size;
+      return css$2(["background-size:", ";"], size);
   }
 };
-function getBackgroundColorValue(color, opacity) {
-  if (color === BackgroundColors.Transparent)
-    return "transparent";
-  if (color && !opacity)
-    return `rgb(${color})`;
-  if (color && opacity)
-    return `rgba(${color}, ${opacity}%)`;
-  if (!color && opacity)
-    return `rgba(initial, ${opacity}%)`;
-  return color;
+function getBackgroundImageRepeatStyle(repeat) {
+  return css$2(["background-repeat:", ";"], repeat);
+}
+function getBackgroundImageStyle(image) {
+  var _a2;
+  return css$2(["background-image:url(", ");", " ", ""], (_a2 = image == null ? void 0 : image.path) != null ? _a2 : image == null ? void 0 : image.url, (image == null ? void 0 : image.size) && getBackgroundImageSizeStyle(image.size), (image == null ? void 0 : image.repeat) && getBackgroundImageSizeStyle(image.size));
 }
 function getBackgroundStyles(background) {
-  var _a2, _b, _c;
   const {
     color,
     image,
     opacity
   } = background || {};
-  return css$2(["", ";", ";", ";", ";"], (background == null ? void 0 : background.color) && css$2(["background-color:", ";"], getBackgroundColorValue(color, opacity)), (background == null ? void 0 : background.image) && css$2(["background-image:url(", ");"], (_a2 = image == null ? void 0 : image.path) != null ? _a2 : image == null ? void 0 : image.url), ((_b = background == null ? void 0 : background.image) == null ? void 0 : _b.size) && css$2(["background-size:", ";"], getBackgroundSize(background.image.size)), ((_c = background == null ? void 0 : background.image) == null ? void 0 : _c.repeat) && css$2(["background-repeat:", ";"], background.image.repeat));
+  return css$2(["", " ", " ", " ", ""], color && getBackgroundColorStyle(color, opacity), image && getBackgroundImageStyle(image), (image == null ? void 0 : image.size) && getBackgroundImageSizeStyle(image.size), (image == null ? void 0 : image.repeat) && getBackgroundImageRepeatStyle(image == null ? void 0 : image.repeat));
 }
-const BackgroundStyles = css$2(["", ";"], (props) => getBackgroundStyles(props.background));
+const BackgroundStyles = css$2(["", ""], (props) => getBackgroundStyles(props.background));
 function getCSSMeasurementValue(val) {
   if (typeof val === "string" && val.includes("var(")) {
     return val;
@@ -22222,19 +22273,47 @@ function getCSSColorValue(val) {
   }
   return `rgb(${val})`;
 }
+function getBorderDirectionProperty(direction) {
+  return `border${direction === "all" ? "" : `-${direction}`}`;
+}
+function getBorderColorStyle(color, direction) {
+  return css$2(["", "-color:", ";"], getBorderDirectionProperty(direction), getCSSColorValue(color != null ? color : BorderColors.Default));
+}
+function getBorderStyleStyle(style2, direction) {
+  return css$2(["", "-style:", ";"], getBorderDirectionProperty(direction), style2);
+}
+function getBorderWidthStyle(width, direction) {
+  return css$2(["", "-width:", ";"], getBorderDirectionProperty(direction), getCSSMeasurementValue(width != null ? width : 0));
+}
+function getBorderStyle(border, direction) {
+  if (!border || !direction)
+    return;
+  return css$2(["", " ", " ", ""], border.color && getBorderColorStyle(border == null ? void 0 : border.color, direction), border.style && getBorderStyleStyle(border == null ? void 0 : border.style, direction), border.width && getBorderWidthStyle(border == null ? void 0 : border.width, direction));
+}
 function getBorderStyles(border) {
-  var _a2, _b, _c, _d, _e2, _f;
-  return css$2(["", ";", ";", ";", ";", ";"], (border == null ? void 0 : border.all) && css$2(["border:", " ", " ", ";"], getCSSMeasurementValue((_a2 = border.all.width) != null ? _a2 : 0), (_b = border.all.style) != null ? _b : "solid", border.all.color ? getCSSColorValue(border.all.color) : BorderColors.Default), (border == null ? void 0 : border.bottom) && css$2(["border-bottom:", " ", " ", ";"], getCSSMeasurementValue(border.bottom.width !== void 0 ? border.bottom.width : 1), (_c = border.bottom.style) != null ? _c : "solid", border.bottom.color ? getCSSColorValue(border.bottom.color) : BorderColors.Default), (border == null ? void 0 : border.left) && css$2(["border-left:", " ", " ", ";"], getCSSMeasurementValue(border.left.width !== void 0 ? border.left.width : 1), (_d = border.left.style) != null ? _d : "solid", border.left.color ? getCSSColorValue(border.left.color) : BorderColors.Default), (border == null ? void 0 : border.right) && css$2(["border-right:", " ", " ", ";"], getCSSMeasurementValue(border.right.width !== void 0 ? border.right.width : 1), (_e2 = border.right.style) != null ? _e2 : "solid", border.right.color ? getCSSColorValue(border.right.color) : BorderColors.Default), (border == null ? void 0 : border.top) && css$2(["border-top:", " ", " ", ";"], getCSSMeasurementValue(border.top.width !== void 0 ? border.top.width : 1), (_f = border.top.style) != null ? _f : "solid", border.top.color ? getCSSColorValue(border.top.color) : BorderColors.Default));
+  return css$2(["", " ", " ", " ", " ", ""], (border == null ? void 0 : border.all) && getBorderStyle(border.all, "all"), (border == null ? void 0 : border.bottom) && getBorderStyle(border.bottom, "bottom"), (border == null ? void 0 : border.left) && getBorderStyle(border.left, "left"), (border == null ? void 0 : border.right) && getBorderStyle(border.right, "right"), (border == null ? void 0 : border.top) && getBorderStyle(border.top, "top"));
 }
-css$2(["", ";"], (props) => getBorderStyles(props.border));
+css$2(["", ""], (props) => getBorderStyles(props.border));
 function getBorderRadiusStyles(borderRadius) {
-  return css$2(["", ";", ";", ";", ";", ";"], borderRadius && borderRadius.all && css$2(["border-radius:", ";"], getCSSMeasurementValue(borderRadius.all)), borderRadius && borderRadius.bottomLeft && css$2(["border-bottom-left-radius:", ";"], getCSSMeasurementValue(borderRadius.bottomLeft)), borderRadius && borderRadius.bottomRight && css$2(["border-bottom-right-radius:", ";"], getCSSMeasurementValue(borderRadius.bottomRight)), borderRadius && borderRadius.topLeft && css$2(["border-top-left-radius:", ";"], getCSSMeasurementValue(borderRadius.topLeft)), borderRadius && borderRadius.topRight && css$2(["border-top-right-radius:", ";"], getCSSMeasurementValue(borderRadius.topRight)));
+  if (!borderRadius)
+    return;
+  const {
+    all,
+    bottomLeft,
+    bottomRight,
+    topLeft,
+    topRight
+  } = borderRadius;
+  return css$2(["", " ", " ", " ", " ", ""], all && css$2(["border-radius:", ";"], getCSSMeasurementValue(all)), bottomLeft && css$2(["border-bottom-left-radius:", ";"], getCSSMeasurementValue(bottomLeft)), bottomRight && css$2(["border-bottom-right-radius:", ";"], getCSSMeasurementValue(bottomRight)), topLeft && css$2(["border-top-left-radius:", ";"], getCSSMeasurementValue(topLeft)), topRight && css$2(["border-top-right-radius:", ";"], getCSSMeasurementValue(topRight)));
 }
-const BorderRadiusStyles = css$2(["", ";"], (props) => getBorderRadiusStyles(props.borderRadius));
+const BorderRadiusStyles = css$2(["", ""], (props) => getBorderRadiusStyles(props.borderRadius));
+function getCursorStyle(cursor) {
+  return css$2(["cursor:", ";"], cursor);
+}
 function getCursorStyles(cursor) {
-  return css$2(["", ";"], cursor && css$2(["cursor:", ";"], cursor));
+  return css$2(["", ""], cursor && getCursorStyle(cursor));
 }
-css$2(["", ";"], (props) => getCursorStyles(props.cursor));
+css$2(["", ""], (props) => getCursorStyles(props.cursor));
 function getZIndexValue(depth) {
   switch (depth) {
     case Depth.Lowest:
@@ -22255,42 +22334,46 @@ function getZIndexValue(depth) {
       return 0;
   }
 }
+function getZIndexStyle(depth) {
+  return css$2(["z-index:", ";"], getZIndexValue(depth));
+}
 function getDepthStyles(depth) {
-  return css$2(["", ";"], depth && css$2(["z-index:", ";"], getZIndexValue(depth)));
+  return css$2(["", ""], depth && getZIndexStyle(depth));
 }
-css$2(["", ";"], (props) => getDepthStyles(props.depth));
-function getEventStyles(events) {
-  if (events) {
-    const keys2 = Object.keys(events);
-    const styles = keys2.map((key) => {
-      var _a2;
-      switch (key) {
-        case "mouse":
-          if ((_a2 = events.mouse) == null ? void 0 : _a2.disabled) {
-            return css$2(["pointer-events:none;"]);
-          }
-      }
-    });
-    return styles;
-  }
-  return;
-}
-css$2(["", ""], (props) => getEventStyles(props.events));
+css$2(["", ""], (props) => getDepthStyles(props.depth));
 function getMarginStyles(margin) {
-  return css$2(["", ""], margin && css$2(["", ";", ";", ";", ";", ";"], (margin == null ? void 0 : margin.all) && css$2(["margin:", ";"], getCSSMeasurementValue(margin.all)), (margin == null ? void 0 : margin.bottom) && css$2(["margin-bottom:", ";"], getCSSMeasurementValue(margin.bottom)), (margin == null ? void 0 : margin.left) && css$2(["margin-left:", ";"], getCSSMeasurementValue(margin.left)), (margin == null ? void 0 : margin.right) && css$2(["margin-right:", ";"], getCSSMeasurementValue(margin.right)), (margin == null ? void 0 : margin.top) && css$2(["margin-top:", ";"], getCSSMeasurementValue(margin.top))));
+  if (!margin)
+    return;
+  const {
+    all,
+    bottom,
+    left,
+    right,
+    top
+  } = margin;
+  return css$2(["", " ", " ", " ", " ", ""], all && css$2(["margin:", ";"], getCSSMeasurementValue(margin.all)), bottom && css$2(["margin-bottom:", ";"], getCSSMeasurementValue(margin.bottom)), left && css$2(["margin-left:", ";"], getCSSMeasurementValue(margin.left)), right && css$2(["margin-right:", ";"], getCSSMeasurementValue(margin.right)), top && css$2(["margin-top:", ";"], getCSSMeasurementValue(margin.top)));
 }
-const MarginStyles = css$2(["", ";"], (props) => getMarginStyles(props.margin));
+const MarginStyles = css$2(["", ""], (props) => getMarginStyles(props.margin));
 function getPaddingStyles(padding) {
-  return css$2(["", ";", ";", ";", ";", ";"], (padding == null ? void 0 : padding.all) && css$2(["padding:", ";"], getCSSMeasurementValue(padding.all)), (padding == null ? void 0 : padding.bottom) && css$2(["padding-bottom:", ";"], getCSSMeasurementValue(padding.bottom)), (padding == null ? void 0 : padding.left) && css$2(["padding-left:", ";"], getCSSMeasurementValue(padding.left)), (padding == null ? void 0 : padding.right) && css$2(["padding-right:", ";"], getCSSMeasurementValue(padding.right)), (padding == null ? void 0 : padding.top) && css$2(["padding-top:", ";"], getCSSMeasurementValue(padding.top)));
+  if (!padding)
+    return;
+  const {
+    all,
+    bottom,
+    left,
+    right,
+    top
+  } = padding;
+  return css$2(["", " ", " ", " ", " ", ""], all && css$2(["padding:", ";"], getCSSMeasurementValue(padding.all)), bottom && css$2(["padding-bottom:", ";"], getCSSMeasurementValue(padding.bottom)), left && css$2(["padding-left:", ";"], getCSSMeasurementValue(padding.left)), right && css$2(["padding-right:", ";"], getCSSMeasurementValue(padding.right)), top && css$2(["padding-top:", ";"], getCSSMeasurementValue(padding.top)));
 }
 css$2(["", ""], (props) => getPaddingStyles(props.padding));
 function getPositionStyles(position) {
-  return css$2(["position:relative;", ";", ";", ";", ";", ";"], (position == null ? void 0 : position.behavior) && css$2(["position:", ";"], position.behavior), ((position == null ? void 0 : position.bottom) || (position == null ? void 0 : position.bottom) === 0) && css$2(["bottom:", ";"], getCSSMeasurementValue(position.bottom)), ((position == null ? void 0 : position.left) || (position == null ? void 0 : position.left) === 0) && css$2(["left:", ";"], getCSSMeasurementValue(position.left)), ((position == null ? void 0 : position.right) || (position == null ? void 0 : position.right) === 0) && css$2(["right:", ";"], getCSSMeasurementValue(position.right)), ((position == null ? void 0 : position.top) || (position == null ? void 0 : position.top) === 0) && css$2(["top:", ";"], getCSSMeasurementValue(position.top)));
+  return css$2(["position:relative;", " ", " ", " ", " ", ""], (position == null ? void 0 : position.behavior) && css$2(["position:", ";"], position.behavior), ((position == null ? void 0 : position.bottom) || (position == null ? void 0 : position.bottom) === 0) && css$2(["bottom:", ";"], getCSSMeasurementValue(position.bottom)), ((position == null ? void 0 : position.left) || (position == null ? void 0 : position.left) === 0) && css$2(["left:", ";"], getCSSMeasurementValue(position.left)), ((position == null ? void 0 : position.right) || (position == null ? void 0 : position.right) === 0) && css$2(["right:", ";"], getCSSMeasurementValue(position.right)), ((position == null ? void 0 : position.top) || (position == null ? void 0 : position.top) === 0) && css$2(["top:", ";"], getCSSMeasurementValue(position.top)));
 }
-css$2(["", ";"], (props) => getPositionStyles(props.position));
+css$2(["", ""], (props) => getPositionStyles(props.position));
 function getShadowStyles(shadow) {
   if (!shadow) {
-    return;
+    return null;
   }
   if (typeof shadow === "string") {
     return css$2(["box-shadow:", ";"], shadow);
@@ -22309,7 +22392,7 @@ function getShadowStyles(shadow) {
     return css$2(["box-shadow:", " ", " ", " ", " ", ";"], blur, x2, y2, spread, color);
   }
 }
-const ShadowStyles = css$2(["", ";"], (props) => getShadowStyles(props.shadow));
+const ShadowStyles = css$2(["", ""], (props) => getShadowStyles(props.shadow));
 function getSizeStyles(size) {
   const {
     maxHeight,
@@ -22319,12 +22402,12 @@ function getSizeStyles(size) {
     width,
     height
   } = size != null ? size : {};
-  return css$2(["", ";", ";", ";", ";", ";", ";"], maxHeight && css$2(["max-height:", ";"], getCSSMeasurementValue(maxHeight)), minHeight && css$2(["min-height:", ";"], getCSSMeasurementValue(minHeight)), height && css$2(["height:", ";"], getCSSMeasurementValue(height)), maxWidth && css$2(["max-width:", ";"], getCSSMeasurementValue(maxWidth)), minWidth && css$2(["min-width:", ";"], getCSSMeasurementValue(minWidth)), width && css$2(["width:", ";"], getCSSMeasurementValue(width)));
+  return css$2(["", " ", " ", " ", " ", " ", ""], maxHeight && css$2(["max-height:", ";"], getCSSMeasurementValue(maxHeight)), minHeight && css$2(["min-height:", ";"], getCSSMeasurementValue(minHeight)), height && css$2(["height:", ";"], getCSSMeasurementValue(height)), maxWidth && css$2(["max-width:", ";"], getCSSMeasurementValue(maxWidth)), minWidth && css$2(["min-width:", ";"], getCSSMeasurementValue(minWidth)), width && css$2(["width:", ";"], getCSSMeasurementValue(width)));
 }
-const SizeStyles = css$2(["", ";"], (props) => getSizeStyles(props.size));
+const SizeStyles = css$2(["", ""], (props) => getSizeStyles(props.size));
 function getTransformArgumentValue(transform) {
   if (!transform)
-    return "";
+    return null;
   let cssValue = "";
   const {
     rotate,
@@ -22334,18 +22417,18 @@ function getTransformArgumentValue(transform) {
   } = transform;
   if (rotate) {
     if (rotate.x && rotate.y && rotate.z) {
-      cssValue += `rotate3d(${rotate.x}, ${rotate.y}, ${rotate.z}, ${rotate.angle}) `;
+      cssValue += `rotate3d(${rotate.x}, ${rotate.y}, ${rotate.z}, ${rotate.angle}deg) `;
     } else if (rotate.x && rotate.y) {
-      cssValue += `rotate3d(${rotate.x}, ${rotate.y}, ${rotate.angle}) `;
+      cssValue += `rotate3d(${rotate.x}, ${rotate.y}, ${rotate.angle}deg) `;
     } else {
-      cssValue += `rotate(${rotate.angle}) `;
+      cssValue += `rotate(${rotate.angle}deg) `;
     }
   }
   if (scale) {
     if (scale.x && scale.y && scale.z) {
       cssValue += `scale3d(${scale.x}, ${scale.y}, ${scale.z}) `;
     } else if (scale.x && scale.y) {
-      cssValue += `scale3d(${scale.x}, ${scale.y}, ${scale.x}) `;
+      cssValue += `scale3d(${scale.x}, ${scale.y}) `;
     } else {
       cssValue += `scale(${scale.x}) `;
     }
@@ -22360,6 +22443,10 @@ function getTransformArgumentValue(transform) {
   if (translate) {
     if (translate.x && translate.y) {
       cssValue += `translate(${getCSSMeasurementValue(translate.x)}, ${getCSSMeasurementValue(translate.y)}) `;
+    } else if (translate.x && !translate.y) {
+      cssValue += `translateX(${getCSSMeasurementValue(translate.x)}) `;
+    } else if (translate.y && !translate.x) {
+      cssValue += `translateY(${getCSSMeasurementValue(translate.y)}) `;
     } else {
       cssValue += `translate(${getCSSMeasurementValue(translate.x)}) `;
     }
@@ -22367,19 +22454,20 @@ function getTransformArgumentValue(transform) {
   return cssValue;
 }
 function getTransformStyles(transform) {
+  var _a2;
   if (!transform)
     return;
-  return css$2(["", ";", ";"], (transform == null ? void 0 : transform.origin) && css$2(["transform-origin:", ";"], getCSSMeasurementValue(transform.origin)), ((transform == null ? void 0 : transform.rotate) || (transform == null ? void 0 : transform.scale) || (transform == null ? void 0 : transform.skew) || (transform == null ? void 0 : transform.translate)) && css$2(["transform:", ";"], getTransformArgumentValue(transform)));
+  return css$2(["", " ", ""], (transform == null ? void 0 : transform.origin) && css$2(["transform-origin:", ";"], getCSSMeasurementValue(transform.origin)), ((transform == null ? void 0 : transform.rotate) || (transform == null ? void 0 : transform.scale) || (transform == null ? void 0 : transform.skew) || (transform == null ? void 0 : transform.translate)) && css$2(["transform:", ";"], (_a2 = getTransformArgumentValue(transform)) != null ? _a2 : "none"));
 }
-css$2(["", ";"], (props) => getTransformStyles(props.transform));
+css$2(["", ""], (props) => getTransformStyles(props.transform));
 function getVisibilityStyles(visibility) {
-  return css$2(["", ";", ";"], (visibility == null ? void 0 : visibility.hidden) === true && css$2(["visibility:hidden;"]), (visibility == null ? void 0 : visibility.opacity) && css$2(["opacity:", "%;"], visibility.opacity));
+  return css$2(["", " ", ""], (visibility == null ? void 0 : visibility.hidden) === true && css$2(["visibility:hidden;"]), (visibility == null ? void 0 : visibility.opacity) && css$2(["opacity:", "%;"], visibility.opacity));
 }
-css$2(["", ";"], (props) => getVisibilityStyles(props.visibility));
+css$2(["", ""], (props) => getVisibilityStyles(props.visibility));
 const getContainerStyles = (props) => {
-  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:opacity 0.13s ease-in-out,background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,transform 0.13s ease-in-out;"], getAlignmentStyles(props.alignment), getAnimationStyles(props.animations), getBackgroundStyles(props.background), getBorderStyles(props.border), getBorderRadiusStyles(props.borderRadius), getCursorStyles(props.cursor), getDepthStyles(props.depth), getEventStyles(props.events), getMarginStyles(props.margin), getPaddingStyles(props.padding), getPositionStyles(props.position), getShadowStyles(props.shadow), getSizeStyles(props.size), getTransformStyles(props.transform), getVisibilityStyles(props.visibility));
+  return css$2(["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " transition:opacity 0.13s ease-in-out,background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,transform 0.13s ease-in-out;"], getAlignmentStyles(props.alignment), getAnimationStyles(props), getBackgroundStyles(props.background), getBorderStyles(props.border), getBorderRadiusStyles(props.borderRadius), getCursorStyles(props.cursor), getDepthStyles(props.depth), getMarginStyles(props.margin), getPaddingStyles(props.padding), getPositionStyles(props.position), getShadowStyles(props.shadow), getSizeStyles(props.size), getTransformStyles(props.transform), getVisibilityStyles(props.visibility));
 };
-const ContainerStyles = css$2(["", ";"], (props) => getContainerStyles(props));
+const ContainerStyles = css$2(["", ""], (props) => getContainerStyles(props));
 function getDisabledStateStyles$1() {
   return css$2(["cursor:not-allowed !important;opacity:0.3;"]);
 }
@@ -22415,9 +22503,9 @@ function getContainerStatesStyles(props) {
     visible,
     warning
   } = states;
-  return css$2(["", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";"], active && css$2(["", ";"], (state == null ? void 0 : state.active) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active))) : css$2(["&::active{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active)))), current && (state == null ? void 0 : state.current) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), current))), disabled && (state == null ? void 0 : state.disabled) ? css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()) : css$2(["&:disabled{", ";", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()), error && (state == null ? void 0 : state.error) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), error))), focused && css$2(["", ";"], (state == null ? void 0 : state.focused) ? css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles()) : css$2(["&:focus{", ";", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles())), hovered && !(state == null ? void 0 : state.current) && css$2(["", ";"], (state == null ? void 0 : state.hovered) ? css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered))) : css$2(["&:hover{", ";}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered)))), loading && (state == null ? void 0 : state.loading) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loading))), on && (state == null ? void 0 : state.on) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), on))), success && (state == null ? void 0 : state.success) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), success))), visible && (state == null ? void 0 : state.visible) && css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getVisibleStateStyles()), visible && (state == null ? void 0 : state.visible) === false && css$2(["", ";", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getHiddenStateStyles()), !visible && (state == null ? void 0 : state.visible) === false && css$2(["", ";"], getHiddenStateStyles()), warning && (state == null ? void 0 : state.warning) && css$2(["", ";"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), warning))));
+  return css$2(["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""], active && css$2(["", ""], (state == null ? void 0 : state.active) ? css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active))) : css$2(["&::active{", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active)))), current && (state == null ? void 0 : state.current) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), current))), disabled && (state == null ? void 0 : state.disabled) ? css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()) : css$2(["&:disabled{", " ", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()), error && (state == null ? void 0 : state.error) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), error))), focused && css$2(["", ""], (state == null ? void 0 : state.focused) ? css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles()) : css$2(["&:focus{", " ", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles())), hovered && !(state == null ? void 0 : state.current) && css$2(["", ""], (state == null ? void 0 : state.hovered) ? css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered))) : css$2(["&:hover{", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered)))), loading && (state == null ? void 0 : state.loading) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loading))), on && (state == null ? void 0 : state.on) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), on))), success && (state == null ? void 0 : state.success) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), success))), visible && (state == null ? void 0 : state.visible) && css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getVisibleStateStyles()), visible && (state == null ? void 0 : state.visible) === false && css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getHiddenStateStyles()), !visible && (state == null ? void 0 : state.visible) === false && css$2(["", ""], getHiddenStateStyles()), warning && (state == null ? void 0 : state.warning) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), warning))));
 }
-const StateStyles = css$2(["", ";"], (props) => getContainerStatesStyles(props));
+const StateStyles = css$2(["", ""], (props) => getContainerStatesStyles(props));
 function getEventHandlers(events) {
   const entries = [...Object.entries(events)];
   let handlers = {};
@@ -22542,7 +22630,7 @@ const Wrapper$3 = styled.div.withConfig({
   displayName: "Wrapper",
   componentId: "sc-19tf6wk-0"
 })(["", ";", ";"], (props) => getContainerStyles(props), (props) => getContainerStatesStyles(props));
-const Container$9 = memo((_a2) => {
+const Container$8 = memo((_a2) => {
   var _b = _a2, {
     alignment,
     as = "div",
@@ -22797,7 +22885,7 @@ const Label = memo((_i2) => {
     "textSize",
     "textWeight"
   ]);
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       orientation: Orientation.Horizontal,
       vertical: AlignVertical.Center
@@ -22947,7 +23035,7 @@ const Button$1 = memo((_k) => {
     }
   };
   const colors = getColors();
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       horizontal: AlignHorizontal.Center,
       orientation: Orientation.Horizontal,
@@ -25142,19 +25230,38 @@ const InputElement = styled.input.withConfig({
   componentId: "sc-19hbv63-0"
 })(["", ""], (props) => getInputStyles(props));
 const ProgressSpinner = memo(({
-  size = {
-    height: Sizes.Default,
-    width: Sizes.Default
-  }
+  size = {}
 }) => {
   return /* @__PURE__ */ jsx$2(Container$8, {
-    size
+    animations: [{
+      from: {
+        transform: {
+          rotate: {
+            angle: 0
+          }
+        }
+      },
+      timing: {
+        duration: 1.5,
+        iterations: "infinite"
+      },
+      to: {
+        transform: {
+          rotate: {
+            angle: 360
+          }
+        }
+      }
+    }],
+    size: __spreadValues({
+      height: Sizes.Default,
+      width: Sizes.Default
+    }, size),
+    children: /* @__PURE__ */ jsx$2(Icon, {
+      name: DualLightIcons.Loader
+    })
   });
 });
-const Container$8 = memo(styled.div.withConfig({
-  displayName: "Container",
-  componentId: "sc-1w3nox1-0"
-})(["animation:loop 0.8s infinite linear;border-top:calc(", " / 5) solid rgba(200,200,200,0.2);border-right:calc(", " / 5) solid rgba(200,200,200,0.2);border-bottom:calc(", " / 5) solid rgba(200,200,200,0.2);border-left:calc(", " / 5) solid rgba(0,0,0,0.2);border-radius:50%;display:inline-block;font-size:10px;height:", ";position:relative;text-indent:-9999em;transform:translateZ(0);width:", ";&:after{border-radius:50%;width:", ";height:calc(", " / 3);}@keyframes loop{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}"], (props) => props.size, (props) => props.size, (props) => props.size, (props) => props.size, (props) => getCSSMeasurementValue(props.size.height), (props) => getCSSMeasurementValue(props.size.width), (props) => getCSSMeasurementValue(props.size.width), (props) => getCSSMeasurementValue(props.size.height)));
 var cn = Object.defineProperty;
 var un = (a, u2, A2) => u2 in a ? cn(a, u2, { enumerable: true, configurable: true, writable: true, value: A2 }) : a[u2] = A2;
 var s$2 = (a, u2, A2) => (un(a, typeof u2 != "symbol" ? u2 + "" : u2, A2), A2);
@@ -26710,7 +26817,7 @@ const InputLabel = memo((_q) => {
     "textSize"
   ]);
   var _a2, _b, _c;
-  return /* @__PURE__ */ jsxs$1(Container$9, {
+  return /* @__PURE__ */ jsxs$1(Container$8, {
     alignment: {
       orientation: Orientation.Horizontal,
       vertical: AlignVertical.Center
@@ -26811,7 +26918,7 @@ const InputContainer = memo((_s) => {
         });
     }
   }, [value2]);
-  return /* @__PURE__ */ jsxs$1(Container$9, {
+  return /* @__PURE__ */ jsxs$1(Container$8, {
     className: `${className} input-container`,
     events: __spreadValues({
       mouse: {
@@ -26833,7 +26940,7 @@ const InputContainer = memo((_s) => {
         }
       },
       children: label
-    }), /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+    }), /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
       alignment: __spreadValues({
         orientation: Orientation.Horizontal,
         vertical: AlignVertical.Center
@@ -26977,7 +27084,7 @@ const VerificationCodeInput = memo((_w) => {
   }, [code]);
   console.log("coeParts", codeParts);
   console.log("code", code);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: {
       horizontal: AlignHorizontal.Center,
       orientation: Orientation.Horizontal,
@@ -27089,7 +27196,7 @@ const InputRow = memo((_y) => {
     "className",
     "margin"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     className: `${className} input-row`,
     margin: __spreadValues({
       bottom: Amount.More
@@ -27114,7 +27221,11 @@ const LoadingOverlay = memo((_A) => {
     "spinnerSize",
     "states"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
+    alignment: {
+      horizontal: AlignHorizontal.Center,
+      vertical: AlignVertical.Center
+    },
     background: __spreadValues({
       color: BackgroundColors.Dark,
       opacity: 85
@@ -27128,15 +27239,18 @@ const LoadingOverlay = memo((_A) => {
       right: 0,
       top: 0
     }, position),
-    states: {
+    states: __spreadValues({
       visible: {
         visibility: {
           opacity: 1
         }
       }
-    },
+    }, states),
     visibility: {
       opacity: 0
+    },
+    style: {
+      zIndex: 10
     }
   }, props), {
     children: /* @__PURE__ */ jsx$2(ProgressSpinner, {
@@ -27229,7 +27343,7 @@ const CodeVerificationForm = memo(({
       onVerificationSuccess();
     }
   }, [verificationState.verify.success]);
-  return /* @__PURE__ */ jsxs$1(Container$9, {
+  return /* @__PURE__ */ jsxs$1(Container$8, {
     className: "code-verification-form",
     background: __spreadValues({
       color: BackgroundColors.Lighter
@@ -27252,7 +27366,7 @@ const CodeVerificationForm = memo(({
           visible: verificationState.status.inProgress || verificationState.resend.inProgress || verificationState.verify.inProgress
         }
       }
-    }), verificationState.verify.success || verificationState.status.state === Ie$2.Confirmed ? /* @__PURE__ */ jsxs$1(Container$9, {
+    }), verificationState.verify.success || verificationState.status.state === Ie$2.Confirmed ? /* @__PURE__ */ jsxs$1(Container$8, {
       padding: {
         all: Amount.Default
       },
@@ -27294,7 +27408,7 @@ const CodeVerificationForm = memo(({
         children: ["Enter the confirmation code sent to", " ", /* @__PURE__ */ jsx$2("b", {
           children: (_a2 = verificationState.delivery) == null ? void 0 : _a2.destination
         }), "."]
-      }), /* @__PURE__ */ jsxs$1(Container$9, {
+      }), /* @__PURE__ */ jsxs$1(Container$8, {
         children: [/* @__PURE__ */ jsx$2(InputRow, {
           children: /* @__PURE__ */ jsx$2(VerificationCodeInput, {
             autoComplete: AutoComplete.OneTimeCode,
@@ -27340,7 +27454,7 @@ const CodeVerificationForm = memo(({
           type: ButtonType.Primary,
           children: "Verify"
         })]
-      }), /* @__PURE__ */ jsx$2(Container$9, {
+      }), /* @__PURE__ */ jsx$2(Container$8, {
         alignment: {
           horizontal: AlignHorizontal.Center
         },
@@ -27392,7 +27506,7 @@ const Orb = memo((_G) => {
     "className",
     "size"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadValues({
     className: `${className} orb`,
     background: {
       color
@@ -27455,7 +27569,7 @@ const NotificationLabel = memo((_I) => {
   };
   const bgColor = getBackgroundColor();
   const textColor = getTextColor();
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       horizontal: AlignHorizontal.Center,
       orientation: Orientation.Horizontal,
@@ -27512,7 +27626,7 @@ const FormActions = memo((_M) => {
   } = _N, props = __objRest(_N, [
     "children"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: {
       horizontal: AlignHorizontal.SpaceBetween,
       orientation: Orientation.Horizontal
@@ -27561,7 +27675,7 @@ const PropertyEditor = memo((_O) => {
     }
     return value2;
   };
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     background: __spreadValues({
       color: BackgroundColors.Lightest
     }, background),
@@ -27576,7 +27690,7 @@ const PropertyEditor = memo((_O) => {
     className: `${className} object-editor`,
     shadow: DepthShadow.High
   }, props), {
-    children: [/* @__PURE__ */ jsxs$1(Container$9, {
+    children: [/* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal
       },
@@ -27585,7 +27699,7 @@ const PropertyEditor = memo((_O) => {
         bottomLeft: Amount.None,
         bottomRight: Amount.None
       }, borderRadius),
-      children: [/* @__PURE__ */ jsx$2(Container$9, {
+      children: [/* @__PURE__ */ jsx$2(Container$8, {
         alignment: {},
         background: {
           color: BackgroundColors.Lighter
@@ -27606,7 +27720,7 @@ const PropertyEditor = memo((_O) => {
           lineHeight: Sizes.Large,
           children: "Property"
         })
-      }), /* @__PURE__ */ jsx$2(Container$9, {
+      }), /* @__PURE__ */ jsx$2(Container$8, {
         alignment: {
           fill: Fill.Horizontal
         },
@@ -27622,7 +27736,7 @@ const PropertyEditor = memo((_O) => {
           children: "Value"
         })
       })]
-    }), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         fill: Fill.Horizontal
       },
@@ -27637,12 +27751,12 @@ const PropertyEditor = memo((_O) => {
         topRight: Amount.None
       }, borderRadius),
       children: Object.keys(defaultValue).map((key) => {
-        return /* @__PURE__ */ jsxs$1(Container$9, {
+        return /* @__PURE__ */ jsxs$1(Container$8, {
           alignment: {
             fill: Fill.Horizontal,
             orientation: Orientation.Horizontal
           },
-          children: [/* @__PURE__ */ jsx$2(Container$9, {
+          children: [/* @__PURE__ */ jsx$2(Container$8, {
             border: {
               right: {
                 color: BorderColors.Lighter
@@ -27659,7 +27773,7 @@ const PropertyEditor = memo((_O) => {
               lineHeight: Sizes.Large,
               children: key
             })
-          }), /* @__PURE__ */ jsx$2(Container$9, {
+          }), /* @__PURE__ */ jsx$2(Container$8, {
             alignment: {
               fill: Fill.Horizontal
             },
@@ -27707,7 +27821,7 @@ const ToggleInput = memo(({
     setToggleValue((_a3 = defaultValue != null ? defaultValue : toggleValue) != null ? _a3 : "");
   }, [defaultValue]);
   return /* @__PURE__ */ jsxs$1(Fragment, {
-    children: [/* @__PURE__ */ jsxs$1(Container$9, {
+    children: [/* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal
       },
@@ -27719,7 +27833,7 @@ const ToggleInput = memo(({
         },
         children: (_a2 = problems[0]) == null ? void 0 : _a2.message.short
       }) : null]
-    }), /* @__PURE__ */ jsxs$1(Container$9, {
+    }), /* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         horizontal: AlignHorizontal.Left,
         orientation: Orientation.Horizontal,
@@ -27743,7 +27857,7 @@ const ToggleInput = memo(({
           textColor: !toggleValue ? TextColors.Light : TextColors.Lighter,
           children: falseLabel
         })
-      }), /* @__PURE__ */ jsx$2(Container$9, {
+      }), /* @__PURE__ */ jsx$2(Container$8, {
         alignment: {
           orientation: Orientation.Horizontal,
           vertical: AlignVertical.Center
@@ -27784,7 +27898,7 @@ const ToggleInput = memo(({
           height: size.height,
           width: `calc(${size.width} * 2)`
         },
-        children: /* @__PURE__ */ jsx$2(Container$9, {
+        children: /* @__PURE__ */ jsx$2(Container$8, {
           alignment: {
             horizontal: AlignHorizontal.Center,
             vertical: AlignVertical.Center
@@ -27988,7 +28102,7 @@ const DateInput = memo((_T) => {
       },
       shadow: !focused ? shadow : DepthShadow.Higher
     }, props), {
-      children: /* @__PURE__ */ jsx$2(Container$9, {
+      children: /* @__PURE__ */ jsx$2(Container$8, {
         alignment: {
           horizontal: AlignHorizontal.Center,
           vertical: AlignVertical.Center
@@ -28942,7 +29056,7 @@ const Menu = memo((_Z) => {
     "padding",
     "states"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: {
       overflow: Overflow.ScrollVertical
     },
@@ -28963,7 +29077,7 @@ const Menu = memo((_Z) => {
     }
   }, props), {
     children: menu && menu.map((item, key) => {
-      return /* @__PURE__ */ jsxs$1(Container$9, {
+      return /* @__PURE__ */ jsxs$1(Container$8, {
         children: [item.title && /* @__PURE__ */ jsx$2(Label, {
           textSize: TextSize.Smaller,
           children: item.title
@@ -29088,7 +29202,7 @@ const DropdownControl = memo((_$) => {
       textColor: !label && placeholder ? TextColors.InputPlaceholder : textColor,
       textOverflow: TextOverflow.Ellipsis,
       children: (_l = label != null ? label : placeholder) != null ? _l : ""
-    }), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         horizontal: AlignHorizontal.Center,
         vertical: AlignVertical.Center
@@ -29142,7 +29256,7 @@ const DropdownPanel = memo((_ba) => {
     "states"
   ]);
   var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n;
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     background: __spreadValues({
       color: BackgroundColors.DropdownMenu
     }, background),
@@ -29255,7 +29369,7 @@ const DropdownInput = memo((_da) => {
         }
       },
       children: label
-    }), /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+    }), /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
       borderRadius: Object.assign({}, __spreadValues({
         all: Amount.Least
       }, borderRadius), menuVisible ? {
@@ -30898,7 +31012,7 @@ const ImageInput = memo((_na) => {
         }
       },
       children: [label, maxImages > 1 && ` (${previewImages.length} of ${maxImages})`]
-    }), /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues(__spreadValues({
+    }), /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues(__spreadValues({
       alignment: {
         horizontal: AlignHorizontal.Center,
         vertical: AlignVertical.Center
@@ -30921,7 +31035,7 @@ const ImageInput = memo((_na) => {
       }, padding),
       shadow: DepthShadow.Low
     }, props), getRootProps()), {
-      children: /* @__PURE__ */ jsxs$1(Container$9, {
+      children: /* @__PURE__ */ jsxs$1(Container$8, {
         alignment: {
           horizontal: AlignHorizontal.Center,
           vertical: AlignVertical.Center
@@ -30941,7 +31055,7 @@ const ImageInput = memo((_na) => {
           name: name2
         }, getInputProps())), errorMessage && /* @__PURE__ */ jsx$2(ErrorLabel, {
           children: errorMessage
-        }), previewImages && previewImages.length > 0 ? /* @__PURE__ */ jsx$2(Container$9, {
+        }), previewImages && previewImages.length > 0 ? /* @__PURE__ */ jsx$2(Container$8, {
           alignment: {
             horizontal: AlignHorizontal.Center,
             orientation: Orientation.Horizontal,
@@ -30962,7 +31076,7 @@ const ImageInput = memo((_na) => {
           visibility: {
             opacity: isDragActive ? 50 : 100
           },
-          children: previewImages.map((image, index) => /* @__PURE__ */ jsxs$1(Container$9, {
+          children: previewImages.map((image, index) => /* @__PURE__ */ jsxs$1(Container$8, {
             margin: {
               all: Amount.Least
             },
@@ -30998,7 +31112,7 @@ const ImageInput = memo((_na) => {
             height: Sizes.Default,
             width: Sizes.Default
           }
-        }, icon2)), /* @__PURE__ */ jsxs$1(Container$9, {
+        }, icon2)), /* @__PURE__ */ jsxs$1(Container$8, {
           alignment: {
             vertical: AlignVertical.Center
           },
@@ -31111,7 +31225,7 @@ const SSNInput = memo((_ra) => {
     }
   }, [value2]);
   return /* @__PURE__ */ jsxs$1(Fragment, {
-    children: [/* @__PURE__ */ jsxs$1(Container$9, {
+    children: [/* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal
       },
@@ -31310,7 +31424,7 @@ const LongTextInput = memo(({
     setValue((_a3 = defaultValue != null ? defaultValue : value2) != null ? _a3 : "");
   }, [defaultValue]);
   return /* @__PURE__ */ jsxs$1(Fragment, {
-    children: [/* @__PURE__ */ jsxs$1(Container$9, {
+    children: [/* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal
       },
@@ -32117,7 +32231,7 @@ const FormFields = memo((_va) => {
       })];
     })));
   }, [entity]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     className: "form-fields",
     borderRadius: {
       all: Amount.More
@@ -32234,7 +32348,7 @@ const Form = memo((_xa) => {
     }
     event.preventDefault();
   };
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     as: "form",
     borderRadius,
     className: `${className} form`,
@@ -32298,7 +32412,7 @@ const ForgotPasswordForm = memo((_za) => {
   });
   const startPasswordReset = async (email) => {
   };
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     className: "forgot-password-form",
     background: __spreadValues({
       color: BackgroundColors.Lighter
@@ -32482,7 +32596,7 @@ const LoginForm = memo((_Fa) => {
       onLoginSuccess();
     }
   }, [success]);
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     className: "login-form",
     background: __spreadValues({
       color: BackgroundColors.Lighter
@@ -32601,7 +32715,7 @@ const LoginForm = memo((_Fa) => {
         label: "Login",
         lineHeight: Sizes.Large
       }
-    }), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         horizontal: AlignHorizontal.Center,
         orientation: Orientation.Horizontal,
@@ -32662,7 +32776,7 @@ const SignupForm = memo((_Ha) => {
       });
     }
   }, [success]);
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     className: "signup-form",
     background: __spreadValues({
       color: BackgroundColors.Lighter
@@ -32805,7 +32919,7 @@ const SignupForm = memo((_Ha) => {
         label: "Sign up",
         lineHeight: Sizes.Large
       }
-    }), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Container$8, {
       padding: {
         all: Amount.Most
       },
@@ -33422,7 +33536,7 @@ const ProgressMeter = memo((_Ja) => {
     "total"
   ]);
   const progressPercent = amount === 0 ? 0 : Number.parseInt(((amount != null ? amount : 0) / (total != null ? total : 0) * 100).toFixed(0));
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     background: __spreadValues({
       color: BackgroundColors.Primary
     }, background),
@@ -33430,7 +33544,7 @@ const ProgressMeter = memo((_Ja) => {
       all: Amount.Less
     }, borderRadius)
   }, props), {
-    children: /* @__PURE__ */ jsxs$1(Container$9, {
+    children: /* @__PURE__ */ jsxs$1(Container$8, {
       background: __spreadValues({
         color: BackgroundColors.Primary
       }, background),
@@ -33480,12 +33594,12 @@ const LinearGauge = memo(({
 }) => {
   const progressPercent = amount === 0 ? 0 : Number.parseInt((amount / total * 100).toFixed(0));
   const tickPercent = total / tickCount;
-  return /* @__PURE__ */ jsxs$1(Container$9, {
-    children: [showTicks && /* @__PURE__ */ jsxs$1(Container$9, {
+  return /* @__PURE__ */ jsxs$1(Container$8, {
+    children: [showTicks && /* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal
       },
-      children: [showValue && /* @__PURE__ */ jsx$2(Container$9, {
+      children: [showValue && /* @__PURE__ */ jsx$2(Container$8, {
         size: {
           height: Sizes.Small
         },
@@ -33511,7 +33625,7 @@ const LinearGauge = memo(({
       }), new Array(tickCount).fill(0).map((_, index) => {
         const tickValue = tickPercent * index;
         const tickValueFormatted = formatter ? formatValue(tickValue, formatter) : tickValue;
-        return /* @__PURE__ */ jsx$2(Container$9, {
+        return /* @__PURE__ */ jsx$2(Container$8, {
           size: {
             height: 6
           },
@@ -33526,7 +33640,7 @@ const LinearGauge = memo(({
             children: tickValueFormatted
           })
         }, index);
-      }), /* @__PURE__ */ jsx$2(Container$9, {
+      }), /* @__PURE__ */ jsx$2(Container$8, {
         size: {
           height: 6
         },
@@ -33542,14 +33656,14 @@ const LinearGauge = memo(({
           children: formatter ? formatValue(total, formatter) : total
         })
       })]
-    }), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Container$8, {
       background: {
         color: BackgroundColors.Lightest
       },
       size: {
         height: 1
       },
-      children: /* @__PURE__ */ jsx$2(Container$9, {
+      children: /* @__PURE__ */ jsx$2(Container$8, {
         size: {
           height: 1,
           width: `${progressPercent}%`
@@ -33564,7 +33678,7 @@ const ProgressivePaymentStatus = memo(({
   totalDue = 0
 }) => {
   amountPaid >= totalDue ? BackgroundColors.Success : BackgroundColors.Warning;
-  return /* @__PURE__ */ jsxs$1(Container$9, {
+  return /* @__PURE__ */ jsxs$1(Container$8, {
     padding: {
       bottom: Amount.Default
     },
@@ -33751,7 +33865,7 @@ const Card = memo((_La) => {
     "shadow",
     "title"
   ]);
-  const content = /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  const content = /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     background: __spreadValues({
       color: BackgroundColors.Card
     }, background),
@@ -33768,7 +33882,7 @@ const Card = memo((_La) => {
     })]
   }));
   if (draggable) {
-    return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
       className: "draggable-card"
     }, props), {
       children: content
@@ -33809,7 +33923,7 @@ const TitleCard = memo((_Na) => {
     "shadow",
     "size"
   ]);
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       orientation: Orientation.Horizontal
     }, alignment),
@@ -33846,7 +33960,7 @@ const TitleCard = memo((_Na) => {
         height: Sizes.Large,
         width: Sizes.Large
       }
-    }, icon2)), !loading && /* @__PURE__ */ jsxs$1(Container$9, {
+    }, icon2)), !loading && /* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         orientation: Orientation.Vertical,
         vertical: AlignVertical.Center
@@ -33862,7 +33976,7 @@ const TitleCard = memo((_Na) => {
 });
 const PieChart = memo((_Pa) => {
   var props = __objRest(_Pa, []);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadValues({}, props));
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadValues({}, props));
 });
 const RadialChart = memo((_Qa) => {
   var _Ra = _Qa, {
@@ -33870,7 +33984,7 @@ const RadialChart = memo((_Qa) => {
   } = _Ra, props = __objRest(_Ra, [
     "data"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadValues({}, props));
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadValues({}, props));
 });
 const RadialGauge = memo(({
   color,
@@ -33928,7 +34042,7 @@ const Page = memo((_Sa) => {
     "title"
   ]);
   useTitle(title);
-  const PageComp = () => /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  const PageComp = () => /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       fill: Fill.Both,
       overflow: Overflow.ScrollVertical,
@@ -35059,7 +35173,7 @@ const HoverPanel = memo((_Ua) => {
     "visible"
   ]);
   var _a2;
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     background: __spreadValues({
       color: BackgroundColors.Lightest
     }, background),
@@ -35110,7 +35224,7 @@ const MoreMenu = memo((_Wa) => {
   const [hovered, setHovered] = useState(false);
   const menuVisibleRef = useRef(menuVisible);
   const dotFillColor = menuVisible || hovered ? ForegroundColors.PrimaryContrast : dotColor;
-  return /* @__PURE__ */ jsxs$1(Container$9, {
+  return /* @__PURE__ */ jsxs$1(Container$8, {
     className: `${className} more-menu`,
     events: {
       mouse: {
@@ -35213,7 +35327,7 @@ const ModalHeader = memo(({
   padding = {},
   title
 }) => {
-  return /* @__PURE__ */ jsxs$1(Container$9, {
+  return /* @__PURE__ */ jsxs$1(Container$8, {
     alignment: __spreadValues({
       horizontal: AlignHorizontal.Center,
       orientation: Orientation.Horizontal
@@ -35227,7 +35341,7 @@ const ModalHeader = memo(({
     }, padding),
     children: [/* @__PURE__ */ jsx$2(Title, {
       children: title
-    }), /* @__PURE__ */ jsx$2(Container$9, {}), moreMenu && /* @__PURE__ */ jsx$2(MoreMenu, __spreadValues({
+    }), /* @__PURE__ */ jsx$2(Container$8, {}), moreMenu && /* @__PURE__ */ jsx$2(MoreMenu, __spreadValues({
       alignment: {
         horizontal: AlignHorizontal.Right
       }
@@ -35267,7 +35381,7 @@ const SlidePanel = memo((_Ya) => {
     "size",
     "visible"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     background: __spreadValues({
       color: BackgroundColors.SlidePanel
     }, background),
@@ -35361,7 +35475,7 @@ const EntityEditor = memo(({
     }
   }, [id2, entity]);
   if (id2 && !entity && !inProgress) {
-    return /* @__PURE__ */ jsx$2(Container$9, {
+    return /* @__PURE__ */ jsx$2(Container$8, {
       className: `${className} entity-editor`,
       padding: {
         all: Amount.More
@@ -35371,7 +35485,7 @@ const EntityEditor = memo(({
       })
     });
   }
-  return /* @__PURE__ */ jsx$2(Container$9, {
+  return /* @__PURE__ */ jsx$2(Container$8, {
     className: `${className} entity-editor`,
     children: /* @__PURE__ */ jsx$2(Form, {
       fields: getFormFieldsFromModel({
@@ -35419,7 +35533,7 @@ const EntityPreview = memo(({
   id: id2,
   model
 }) => {
-  return /* @__PURE__ */ jsx$2(Container$9, {
+  return /* @__PURE__ */ jsx$2(Container$8, {
     "data-testid": "account-pane",
     children: /* @__PURE__ */ jsx$2(LoadingOverlay, {
       states: {
@@ -35492,7 +35606,7 @@ const EntityPanel = memo((__a) => {
   };
   return /* @__PURE__ */ jsx$2(SlidePanel, {
     visible,
-    children: /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+    children: /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
       borderRadius: {
         all: Amount.Default
       }
@@ -35527,7 +35641,7 @@ const EntityPanel = memo((__a) => {
           }]
         } : void 0,
         title: getHeaderTitle()
-      }), /* @__PURE__ */ jsx$2(Container$9, {
+      }), /* @__PURE__ */ jsx$2(Container$8, {
         padding: {
           all: Amount.Default
         },
@@ -35557,7 +35671,7 @@ const Backdrop = memo((_ab) => {
     "position",
     "visible"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     as,
     background: __spreadValues({
       color: BackgroundColors.Darker
@@ -35641,7 +35755,7 @@ const WebApplication = memo((_cb) => {
   } = useSelector((state) => state.ui.themes);
   const loginCondition = authentication ? loggedIn && (loginRequired || !loginRequired) || !loggedIn && !loginRequired : true;
   const showOutlet = !inProgress && loginCondition;
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       fill: Fill.Both
     }, alignment),
@@ -35723,7 +35837,7 @@ const Workspace = memo((_gb) => {
     "title"
   ]);
   useTitle(title);
-  const WorkspaceComp = (props2) => /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues(__spreadValues({
+  const WorkspaceComp = (props2) => /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues(__spreadValues({
     alignment: __spreadValues({
       fill: Fill.Both,
       overflow: Overflow.ScrollVertical,
@@ -35743,7 +35857,7 @@ const Workspace = memo((_gb) => {
           visible: loading
         }
       }
-    }), ((header == null ? void 0 : header.title) || (header == null ? void 0 : header.actions)) && /* @__PURE__ */ jsxs$1(Container$9, {
+    }), ((header == null ? void 0 : header.title) || (header == null ? void 0 : header.actions)) && /* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal,
         vertical: AlignVertical.Center
@@ -35752,11 +35866,11 @@ const Workspace = memo((_gb) => {
       margin: {
         bottom: Amount.All
       },
-      children: [/* @__PURE__ */ jsxs$1(Container$9, {
+      children: [/* @__PURE__ */ jsxs$1(Container$8, {
         alignment: {
           fill: Fill.Horizontal
         },
-        children: [(header == null ? void 0 : header.title) && /* @__PURE__ */ jsx$2(Container$9, {
+        children: [(header == null ? void 0 : header.title) && /* @__PURE__ */ jsx$2(Container$8, {
           alignment: {
             orientation: Orientation.Horizontal,
             vertical: AlignVertical.Center
@@ -35765,7 +35879,7 @@ const Workspace = memo((_gb) => {
           children: typeof header.title === "string" ? /* @__PURE__ */ jsx$2(Title, {
             children: header.title
           }) : header.title
-        }), (header == null ? void 0 : header.subTitle) && /* @__PURE__ */ jsx$2(Container$9, {
+        }), (header == null ? void 0 : header.subTitle) && /* @__PURE__ */ jsx$2(Container$8, {
           className: "workspace-sub-title",
           alignment: {
             orientation: Orientation.Horizontal,
@@ -35775,7 +35889,7 @@ const Workspace = memo((_gb) => {
             children: header.subTitle
           })
         })]
-      }), (header == null ? void 0 : header.actions) && /* @__PURE__ */ jsx$2(Container$9, {
+      }), (header == null ? void 0 : header.actions) && /* @__PURE__ */ jsx$2(Container$8, {
         alignment: {
           horizontal: AlignHorizontal.Right
         },
@@ -39841,7 +39955,7 @@ const DataGridCell = memo((_ub) => {
     textWeight,
     size
   } = props;
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: {
       orientation: Orientation.Horizontal,
       vertical: AlignVertical.Center
@@ -39912,7 +40026,7 @@ const MenuButton = memo((_wb) => {
   useEffect(() => {
     setFocused(menuVisible);
   }, [menuVisible]);
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     borderRadius: Object.assign({}, __spreadValues({
       all: Amount.Least
     }, borderRadius), menuVisible ? {
@@ -40012,7 +40126,7 @@ const Spacer = memo((_yb) => {
     "as",
     "children"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       fill: Fill.Both
     }, alignment),
@@ -40062,7 +40176,7 @@ const DataGrid = memo((_Ab) => {
   const MIN_COLUMN_WIDTH = 150;
   const MAX_COLUMN_WIDTH = 300;
   if (!columns) {
-    return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+    return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
       alignment: {
         vertical: AlignVertical.Top
       },
@@ -40080,7 +40194,7 @@ const DataGrid = memo((_Ab) => {
       })
     }));
   }
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     alignment: {
       vertical: AlignVertical.Top
     },
@@ -40096,7 +40210,7 @@ const DataGrid = memo((_Ab) => {
           visible: loading
         }
       }
-    }), header && Object.keys(header).length > 0 && /* @__PURE__ */ jsxs$1(Container$9, {
+    }), header && Object.keys(header).length > 0 && /* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal
       },
@@ -40111,7 +40225,7 @@ const DataGrid = memo((_Ab) => {
       padding: {
         all: Amount.Less
       },
-      children: [header.search && /* @__PURE__ */ jsx$2(Container$9, {
+      children: [header.search && /* @__PURE__ */ jsx$2(Container$8, {
         size: header.search.size,
         children: /* @__PURE__ */ jsx$2(SearchInput, {
           name: "search-input",
@@ -40127,7 +40241,7 @@ const DataGrid = memo((_Ab) => {
           placeholder: header.search.placeholder,
           size: header.search.size
         })
-      }), /* @__PURE__ */ jsx$2(Spacer, {}), header.export && /* @__PURE__ */ jsx$2(Container$9, {
+      }), /* @__PURE__ */ jsx$2(Spacer, {}), header.export && /* @__PURE__ */ jsx$2(Container$8, {
         size: header.export.size,
         children: /* @__PURE__ */ jsx$2(MenuButton, {
           menu: [{
@@ -40156,7 +40270,7 @@ const DataGrid = memo((_Ab) => {
         size: header.create.size,
         children: header.create.label
       })]
-    }), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         overflow: Overflow.ScrollBoth
       },
@@ -40168,7 +40282,7 @@ const DataGrid = memo((_Ab) => {
         }
       },
       children: display === "table" ? /* @__PURE__ */ jsxs$1(Fragment, {
-        children: [/* @__PURE__ */ jsx$2(Container$9, {
+        children: [/* @__PURE__ */ jsx$2(Container$8, {
           alignment: {
             horizontal: AlignHorizontal.Left,
             orientation: Orientation.Horizontal
@@ -40183,7 +40297,7 @@ const DataGrid = memo((_Ab) => {
           },
           children: columns.map((column, key) => {
             var _a2, _b, _c, _d, _e2;
-            return /* @__PURE__ */ jsx$2(Container$9, {
+            return /* @__PURE__ */ jsx$2(Container$8, {
               alignment: {
                 horizontal: column.align,
                 orientation: Orientation.Horizontal,
@@ -40225,7 +40339,7 @@ const DataGrid = memo((_Ab) => {
               })
             }, key);
           })
-        }), /* @__PURE__ */ jsx$2(Container$9, {
+        }), /* @__PURE__ */ jsx$2(Container$8, {
           background: {
             color: BackgroundColors.DataGridRow
           },
@@ -40235,7 +40349,7 @@ const DataGrid = memo((_Ab) => {
           },
           className: "data-grid-rows",
           children: data2 && data2.map((row, key) => {
-            return /* @__PURE__ */ jsx$2(Container$9, {
+            return /* @__PURE__ */ jsx$2(Container$8, {
               alignment: {
                 orientation: Orientation.Horizontal
               },
@@ -40287,9 +40401,9 @@ const DataGrid = memo((_Ab) => {
             }, key);
           })
         })]
-      }) : /* @__PURE__ */ jsx$2(Container$9, {
+      }) : /* @__PURE__ */ jsx$2(Container$8, {
         children: !loading && loaded && data2 && data2.length === 0 ? /* @__PURE__ */ jsx$2(NoResults, {
-          as: Container$9,
+          as: Container$8,
           children: /* @__PURE__ */ jsx$2(Label, {
             children: "No results"
           })
@@ -40508,7 +40622,7 @@ const PersonLabel = memo((_Qb) => {
     "name",
     "textSize"
   ]);
-  return /* @__PURE__ */ jsxs$1(Container$9, {
+  return /* @__PURE__ */ jsxs$1(Container$8, {
     alignment: {
       orientation: Orientation.Horizontal,
       vertical: AlignVertical.Center
@@ -40643,7 +40757,7 @@ const ObjectPropertiesView = memo((_Tb) => {
         };
     }
   };
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     background: __spreadValues({
       color: BackgroundColors.Lightest
     }, background),
@@ -40658,7 +40772,7 @@ const ObjectPropertiesView = memo((_Tb) => {
     className: `${className} object-editor`,
     shadow: DepthShadow.High
   }, props), {
-    children: /* @__PURE__ */ jsx$2(Container$9, {
+    children: /* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         fill: Fill.Horizontal
       },
@@ -40669,7 +40783,7 @@ const ObjectPropertiesView = memo((_Tb) => {
       }, borderRadius),
       children: Object.keys(properties2).map((property, key) => {
         var _a2, _b;
-        return /* @__PURE__ */ jsxs$1(Container$9, {
+        return /* @__PURE__ */ jsxs$1(Container$8, {
           alignment: {
             fill: Fill.Horizontal,
             orientation: Orientation.Horizontal
@@ -40679,7 +40793,7 @@ const ObjectPropertiesView = memo((_Tb) => {
               color: BorderColors.Lighter
             }
           },
-          children: [/* @__PURE__ */ jsx$2(Container$9, {
+          children: [/* @__PURE__ */ jsx$2(Container$8, {
             border: {
               right: {
                 color: BorderColors.Lighter
@@ -40696,7 +40810,7 @@ const ObjectPropertiesView = memo((_Tb) => {
               lineHeight: Sizes.Large,
               children: property
             })
-          }), /* @__PURE__ */ jsxs$1(Container$9, {
+          }), /* @__PURE__ */ jsxs$1(Container$8, {
             alignment: {
               orientation: Orientation.Horizontal,
               vertical: AlignVertical.Center
@@ -40820,7 +40934,7 @@ const ActivityFeedItem = memo(({
   what,
   where
 }) => {
-  return /* @__PURE__ */ jsxs$1(Container$9, {
+  return /* @__PURE__ */ jsxs$1(Container$8, {
     alignment: {
       orientation: Orientation.Horizontal
     },
@@ -40830,7 +40944,7 @@ const ActivityFeedItem = memo(({
       menu: null,
       name: who.name,
       to: who.to
-    }), what && /* @__PURE__ */ jsxs$1(Container$9, {
+    }), what && /* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal
       },
@@ -40891,12 +41005,12 @@ const ActivityFeed = memo((_Xb) => {
     "className",
     "dateFormat"
   ]);
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     className: `${className} activity-feed`
   }, props), {
     children: [activities.map((activity, key) => {
-      return /* @__PURE__ */ jsxs$1(Container$9, {
-        children: [key !== 0 && key !== activities.length && /* @__PURE__ */ jsx$2(Container$9, {
+      return /* @__PURE__ */ jsxs$1(Container$8, {
+        children: [key !== 0 && key !== activities.length && /* @__PURE__ */ jsx$2(Container$8, {
           background: {
             color: BackgroundColors.Lighter
           },
@@ -40916,7 +41030,7 @@ const ActivityFeed = memo((_Xb) => {
           }
         }), /* @__PURE__ */ jsx$2(ActivityFeedItem, __spreadValues({}, activity))]
       }, key);
-    }), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         horizontal: AlignHorizontal.Center,
         vertical: AlignVertical.Center
@@ -41045,7 +41159,7 @@ const Checkbox = memo((_Zb) => {
       width: Sizes.Default
     }, size)
   }, props), {
-    children: /* @__PURE__ */ jsx$2(Container$9, {
+    children: /* @__PURE__ */ jsx$2(Container$8, {
       children: /* @__PURE__ */ jsx$2(Icon, {
         color: valueRef.current ? Colors.Success : Colors.White,
         name: BasicIcons.Checkmark2,
@@ -52308,7 +52422,7 @@ const ListItem = memo((_cc) => {
     "as",
     "children"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: {
       orientation: Orientation.Horizontal,
       overflow: Overflow.Visible
@@ -52329,7 +52443,7 @@ const OrderedList = memo((_ec) => {
     "as",
     "children"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     as
   }, props), {
     children
@@ -52345,10 +52459,10 @@ const UnorderedList = memo((_gc) => {
     "items",
     "margin"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     as
   }, props), {
-    children: items.map((item, index) => item.props.items ? /* @__PURE__ */ jsx$2(Container$9, {
+    children: items.map((item, index) => item.props.items ? /* @__PURE__ */ jsx$2(Container$8, {
       margin: __spreadValues({
         left: Amount.Default
       }, margin),
@@ -52377,7 +52491,7 @@ const Video = memo((_ic) => {
     "className",
     "url"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     className: `${className} video`
   }, props), {
     children: /* @__PURE__ */ jsx$2(VideoElement, __spreadValues({
@@ -52412,7 +52526,7 @@ const MediaGridItem = memo((_kc) => {
     "video"
   ]);
   var _a2, _b, _c;
-  const content = images ? /* @__PURE__ */ jsxs$1(Container$9, {
+  const content = images ? /* @__PURE__ */ jsxs$1(Container$8, {
     alignment: {
       orientation: Orientation.Horizontal,
       vertical: AlignVertical.Bottom
@@ -52425,13 +52539,13 @@ const MediaGridItem = memo((_kc) => {
       textSize: TextSize.Large,
       textWeight: TextWeight.Most,
       children: title
-    }), /* @__PURE__ */ jsx$2(Container$9, {}), moreMenu && /* @__PURE__ */ jsx$2(MoreMenu, __spreadValues({}, moreMenu))]
+    }), /* @__PURE__ */ jsx$2(Container$8, {}), moreMenu && /* @__PURE__ */ jsx$2(MoreMenu, __spreadValues({}, moreMenu))]
   }) : video ? /* @__PURE__ */ jsx$2(Video, {
     className: "media-grid-video",
     description: video.description,
     path: video.path,
     url: video.url
-  }) : /* @__PURE__ */ jsx$2(Container$9, {
+  }) : /* @__PURE__ */ jsx$2(Container$8, {
     children: "Image not found"
   });
   return /* @__PURE__ */ jsx$2(Card, __spreadProps(__spreadValues({
@@ -52471,7 +52585,7 @@ const MediaGrid = memo((_mc) => {
   const rows = Array.from({
     length: Math.ceil(items.length / columns)
   }).fill(0);
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     borderRadius: __spreadValues({
       all: Amount.Default
     }, borderRadius),
@@ -52488,7 +52602,7 @@ const MediaGrid = memo((_mc) => {
         }
       }
     }), rows.map((x2, row) => {
-      return /* @__PURE__ */ jsx$2(Container$9, {
+      return /* @__PURE__ */ jsx$2(Container$8, {
         alignment: {
           orientation: Orientation.Horizontal
         },
@@ -52522,11 +52636,11 @@ const MediaPreview = memo((_oc) => {
   ]);
   var _a2, _b;
   if (!media || media.length === 0)
-    return /* @__PURE__ */ jsx$2(Container$9, {
+    return /* @__PURE__ */ jsx$2(Container$8, {
       children: "No media"
     });
   console.log("media", media);
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     className: `${className} media-preview`
   }, props), {
     children: [media && media.length > 0 && media[0] && /* @__PURE__ */ jsx$2(Image, {
@@ -52538,7 +52652,7 @@ const MediaPreview = memo((_oc) => {
         maxWidth: 300
       },
       url: (_b = media[0].url) != null ? _b : (_a2 = media == null ? void 0 : media[0]) == null ? void 0 : _a2.path
-    }), media && media.slice(1).length > 0 && /* @__PURE__ */ jsx$2(Container$9, {
+    }), media && media.slice(1).length > 0 && /* @__PURE__ */ jsx$2(Container$8, {
       alignment: __spreadValues({
         horizontal: AlignHorizontal.SpaceBetween,
         orientation: Orientation.Horizontal,
@@ -52583,7 +52697,7 @@ const Svg = memo((_qc) => {
     "className",
     "size"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     as,
     className: `${className} svg`,
     size
@@ -52609,7 +52723,7 @@ const MessagePreview = memo((_sc) => {
     "subject",
     "sender"
   ]);
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     background: __spreadValues({
       color: BackgroundColors.Light
     }, background),
@@ -52624,7 +52738,7 @@ const MessagePreview = memo((_sc) => {
       top: Amount.Default
     }
   }, props), {
-    children: [/* @__PURE__ */ jsxs$1(Container$9, {
+    children: [/* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal,
         vertical: AlignVertical.Top
@@ -52655,18 +52769,18 @@ const MessagePreview = memo((_sc) => {
         textColor: TextColors.Lighter,
         textSize: TextSize.Smaller
       })]
-    }), /* @__PURE__ */ jsxs$1(Container$9, {
+    }), /* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal
       },
-      children: [/* @__PURE__ */ jsx$2(Container$9, {
+      children: [/* @__PURE__ */ jsx$2(Container$8, {
         borderRadius: {
           all: Amount.All
         },
         margin: {
           right: Amount.More
         }
-      }), /* @__PURE__ */ jsxs$1(Container$9, {
+      }), /* @__PURE__ */ jsxs$1(Container$8, {
         alignment: {
           horizontal: AlignHorizontal.Left,
           vertical: AlignVertical.Top
@@ -52698,7 +52812,7 @@ const ConversationList = memo((_uc) => {
     "size"
   ]);
   const items = new Array(5).fill(0);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       overflow: Overflow.ScrollVertical
     }, alignment),
@@ -52759,7 +52873,7 @@ const NavigationMenu = memo((_wc) => {
     "padding",
     "states"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       horizontal: AlignHorizontal.Stretch,
       vertical: AlignVertical.Top
@@ -52830,7 +52944,7 @@ const NavigationMenu = memo((_wc) => {
 const ConversationNavigation = memo((_yc) => {
   var props = __objRest(_yc, []);
   const navigate = useNavigate();
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({}, props), {
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({}, props), {
     children: [/* @__PURE__ */ jsx$2(Button$1, {
       alignment: {
         fill: Fill.Horizontal,
@@ -52919,16 +53033,16 @@ const Message$1 = memo(({
   subject,
   sender
 }) => {
-  return /* @__PURE__ */ jsx$2(Container$9, {});
+  return /* @__PURE__ */ jsx$2(Container$8, {});
 });
 const MessageComposer = memo((_zc) => {
   var props = __objRest(_zc, []);
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     background: {
       color: BackgroundColors.Default
     }
   }, props), {
-    children: [/* @__PURE__ */ jsx$2(Container$9, {
+    children: [/* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         horizontal: AlignHorizontal.Center
       },
@@ -52945,7 +53059,7 @@ const MessageComposer = memo((_zc) => {
       children: /* @__PURE__ */ jsx$2(Label, {
         children: "Title"
       })
-    }), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         horizontal: AlignHorizontal.Center
       },
@@ -52962,7 +53076,7 @@ const MessageComposer = memo((_zc) => {
       children: /* @__PURE__ */ jsx$2(Label, {
         children: "Recipients"
       })
-    }), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         horizontal: AlignHorizontal.Center
       },
@@ -52979,7 +53093,7 @@ const MessageComposer = memo((_zc) => {
       children: /* @__PURE__ */ jsx$2(Label, {
         children: "Subject"
       })
-    }), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         horizontal: AlignHorizontal.Left,
         vertical: AlignVertical.Bottom
@@ -52990,7 +53104,7 @@ const MessageComposer = memo((_zc) => {
       children: /* @__PURE__ */ jsx$2(Label, {
         children: "Message"
       })
-    }), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         horizontal: AlignHorizontal.Left,
         vertical: AlignVertical.Bottom
@@ -53043,7 +53157,7 @@ const BreadcrumbNavigation = memo((_Ac) => {
     "shadow",
     "textSize"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       fill: Fill.Both,
       orientation: Orientation.Horizontal
@@ -53054,7 +53168,7 @@ const BreadcrumbNavigation = memo((_Ac) => {
     children: items.map(({
       label,
       path
-    }, index) => /* @__PURE__ */ jsxs$1(Container$9, {
+    }, index) => /* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal,
         vertical: AlignVertical.Center
@@ -53155,7 +53269,7 @@ const NavigationBar = memo(({
   padding = {}
 }) => {
   const navigate = useNavigate();
-  return /* @__PURE__ */ jsxs$1(Container$9, {
+  return /* @__PURE__ */ jsxs$1(Container$8, {
     alignment: __spreadValues({
       orientation: Orientation.Horizontal,
       vertical: AlignVertical.Center
@@ -53176,13 +53290,13 @@ const NavigationBar = memo(({
       right: Amount.Most,
       top: Amount.Default
     }, padding),
-    children: [/* @__PURE__ */ jsx$2(Container$9, {
+    children: [/* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal,
         vertical: AlignVertical.Center
       },
       children: logo
-    }), /* @__PURE__ */ jsx$2(Spacer, {}), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Spacer, {}), /* @__PURE__ */ jsx$2(Container$8, {
       size: {
         width: 200
       },
@@ -53254,7 +53368,7 @@ const RouterView = memo((_Ec) => {
     "className",
     "routes"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       fill: Fill.Both,
       overflow: Overflow.ScrollVertical
@@ -53281,7 +53395,7 @@ const Tab = memo((_Gc) => {
     "children",
     "label"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     className: `${className} tab`,
     "data-label": label
   }, props), {
@@ -53307,13 +53421,13 @@ const Tabs = memo((_Ic) => {
       initialIndex = key;
   });
   const [currentTabIndex, setTabIndex] = useState(initialIndex);
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     alignment: {
       vertical: AlignVertical.Stretch
     },
     className: `${className} tabs`
   }, props), {
-    children: [/* @__PURE__ */ jsx$2(Container$9, {
+    children: [/* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
         orientation: Orientation.Horizontal,
         horizontal: AlignHorizontal.Center
@@ -53357,7 +53471,7 @@ const Tabs = memo((_Ic) => {
           })
         }, key);
       })
-    }), /* @__PURE__ */ jsx$2(Container$9, {
+    }), /* @__PURE__ */ jsx$2(Container$8, {
       className: "tab-content",
       children: Children.map(children, (c2, key) => {
         if (key !== currentTabIndex)
@@ -53383,7 +53497,7 @@ const Badge = memo((_Lc) => {
     "label"
   ]);
   var _a2;
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({}, props), {
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({}, props), {
     children: (_a2 = label == null ? void 0 : label.toString()) != null ? _a2 : children
   }));
 });
@@ -53469,7 +53583,7 @@ const UniversalSearch = memo((props) => {
       setResultsVisible(false);
     }
   }, [isFocused, searchValue]);
-  return /* @__PURE__ */ jsxs$1(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     className: "universal-search"
   }, props), {
     children: [/* @__PURE__ */ jsx$2(SearchInput, {
@@ -53492,7 +53606,7 @@ const UniversalSearch = memo((props) => {
       placeholder: "Search everything",
       spellCheck: false
     }), /* @__PURE__ */ jsxs$1(SearchResults, {
-      as: Container$9,
+      as: Container$8,
       resultsVisible,
       depth: Depth.Highest,
       padding: {
@@ -74451,7 +74565,7 @@ const CodeBlock = memo((_Rc) => {
     "textSize",
     "value"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       overflow: Overflow.Hidden
     }, alignment),
@@ -74483,7 +74597,7 @@ const LineBreak = memo((_Tc) => {
     "className",
     "size"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$9, __spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadValues({
     className: `${className} link-break`,
     size
   }, props));
@@ -74709,5 +74823,5 @@ async function init() {
   i18nIsoCountries.registerLocale(englishLanguage);
 }
 init();
-export { ActivityFeed, AddPaymentMethodForm, AlignHorizontal, AlignVertical, Amount, Animations, AutoComplete, Backdrop, BackgroundColorShade, BackgroundColors, BackgroundSize, Badge, BooleanLabel, BorderColorShade, BorderColors, BorderStyle, BreadcrumbNavigation, Button$1 as Button, ButtonType, Card, Checkbox, CloseButton, CodeBlock, CodeVerificationForm, ColorInput, ColorLabel, Colors, ConnectionStatus, Container$9 as Container, ContrastColors, ConversationList, ConversationNavigation, CountryInput, CountryLabel, CurrencyAmountInput, CurrencyAmountLabel, CurrencyInput, Cursor, DataGrid, DataGridCell, DateInput, DateLabel, Depth, DepthShadow, DropdownInput, DropdownPanel, DynamicInput, EmailAddressInput, EmailAddressLabel, EntityEditor, EntityPanel, EntityPreview, ErrorLabel, ErrorNotification, Fill, ForegroundColorShade, ForegroundColors, ForgotPasswordForm, Form, FormActions, FormFields, Heading, HelperButton, HoverPanel, Icon, Image, ImageInput, InputHelper, InputLabel, InputRow, InputType, Label, LanguageInput, LanguageLabel, LineBreak, LinearGauge, Link, ListItem, LoadingOverlay, LoginForm, LogoutButton, LongTextInput, MarkdownEditor, MediaGrid, MediaPreview, Menu, MenuButton, Message$1 as Message, MessageComposer, MessagePreview, Modal, ModalHeader, MoreMenu, NavigationBar, NavigationLink, NavigationMenu, NotificationLabel, Notifications, NumberInput, NumberLabel, ObjectLink, ObjectPropertiesView, Orb, OrderedList, Orientation, Overflow, Page, PageLink, Paragraph, PasswordInput, PaymentMethodModal, PersonLabel, PhoneNumberInput, PhoneNumberLabel, PieChart, PositionBehavior, ProgressLabel, ProgressMeter, ProgressSpinner, ProgressivePaymentStatus, PropertyEditor, RadialChart, RadialGauge, RouterView, SearchInput, SignupForm, Sizes, SlidePanel, Small, Spacer, StaticTypeLabel, StreetAddressInput, SubTitle, SubscriptionModal, Svg, Tab, Tabs, TextAlign, TextColors, TextDecorationLine, TextDecorationStyle, TextInput, TextOverflow, TextSize, TextWeight, ThemeSelector, Title, TitleCard, ToggleInput, TransformOrigin, UniversalSearch, UnorderedList, UserLabel, UserMenu, VerificationCodeInput, Video, WebApplication, Workspace, convertAmountToSize, convertSizeToAmount, convertSizeToTextSize, getCSSMeasurementValue, getFormFieldsFromModel, getInputElementByFieldType, getLabelByFieldType, getLargerAmount, getLargerSize, getSmallerAmount, getSmallerSize, useAuthentication, useEntityEditor };
+export { ActivityFeed, AddPaymentMethodForm, AlignHorizontal, AlignVertical, Amount, Animations, AutoComplete, Backdrop, BackgroundColorShade, BackgroundColors, BackgroundSize, Badge, BooleanLabel, BorderColorShade, BorderColors, BorderStyle, BreadcrumbNavigation, Button$1 as Button, ButtonType, Card, Checkbox, CloseButton, CodeBlock, CodeVerificationForm, ColorInput, ColorLabel, Colors, ConnectionStatus, Container$8 as Container, ContrastColors, ConversationList, ConversationNavigation, CountryInput, CountryLabel, CurrencyAmountInput, CurrencyAmountLabel, CurrencyInput, Cursor, DataGrid, DataGridCell, DateInput, DateLabel, Depth, DepthShadow, DropdownInput, DropdownPanel, DynamicInput, EmailAddressInput, EmailAddressLabel, EntityEditor, EntityPanel, EntityPreview, ErrorLabel, ErrorNotification, Fill, ForegroundColorShade, ForegroundColors, ForgotPasswordForm, Form, FormActions, FormFields, Heading, HelperButton, HoverPanel, Icon, Image, ImageInput, InputHelper, InputLabel, InputRow, InputType, Label, LanguageInput, LanguageLabel, LineBreak, LinearGauge, Link, ListItem, LoadingOverlay, LoginForm, LogoutButton, LongTextInput, MarkdownEditor, MediaGrid, MediaPreview, Menu, MenuButton, Message$1 as Message, MessageComposer, MessagePreview, Modal, ModalHeader, MoreMenu, NavigationBar, NavigationLink, NavigationMenu, NotificationLabel, Notifications, NumberInput, NumberLabel, ObjectLink, ObjectPropertiesView, Orb, OrderedList, Orientation, Overflow, Page, PageLink, Paragraph, PasswordInput, PaymentMethodModal, PersonLabel, PhoneNumberInput, PhoneNumberLabel, PieChart, PositionBehavior, ProgressLabel, ProgressMeter, ProgressSpinner, ProgressivePaymentStatus, PropertyEditor, RadialChart, RadialGauge, RouterView, SearchInput, SignupForm, Sizes, SlidePanel, Small, Spacer, StaticTypeLabel, StreetAddressInput, SubTitle, SubscriptionModal, Svg, Tab, Tabs, TextAlign, TextColors, TextDecorationLine, TextDecorationStyle, TextInput, TextOverflow, TextSize, TextWeight, ThemeSelector, Title, TitleCard, ToggleInput, TransformOrigin, UniversalSearch, UnorderedList, UserLabel, UserMenu, VerificationCodeInput, Video, WebApplication, Workspace, convertAmountToSize, convertSizeToAmount, convertSizeToTextSize, getCSSMeasurementValue, getFormFieldsFromModel, getInputElementByFieldType, getLabelByFieldType, getLargerAmount, getLargerSize, getSmallerAmount, getSmallerSize, useAuthentication, useEntityEditor };
 //# sourceMappingURL=index.js.map
