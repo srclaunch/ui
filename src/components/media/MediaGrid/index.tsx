@@ -8,17 +8,16 @@ export type MediaGridProps = ContainerProps & {
   readonly className?: string;
   readonly columns?: number;
   readonly items: readonly MediaGridItem[];
-  readonly loading?: boolean;
 };
 
 export const MediaGrid = memo(
   ({
     borderRadius = {},
     children,
-    columns = 3,
+    columns = 5,
     className = '',
     items,
-    loading,
+    states = {},
     ...props
   }: MediaGridProps): ReactElement => {
     const rows = Array.from({ length: Math.ceil(items.length / columns) }).fill(
@@ -27,6 +26,9 @@ export const MediaGrid = memo(
 
     return (
       <Container
+        alignment={{
+          fill: Fill.Both,
+        }}
         borderRadius={{ all: Amount.Default, ...borderRadius }}
         className={`${className} media-grid`}
         {...props}
@@ -36,7 +38,7 @@ export const MediaGrid = memo(
           borderRadius={borderRadius}
           states={{
             state: {
-              visible: loading,
+              visible: states.state?.loading ?? false,
             },
           }}
         />
@@ -59,7 +61,8 @@ export const MediaGrid = memo(
                     margin={{ right: Amount.Default }}
                     key={key}
                     size={{
-                      width: `calc(100% / ${columns ?? 1} - ${Amount.Default})`,
+                      minHeight: 200,
+                      minWidth: 260,
                     }}
                     {...i}
                   />

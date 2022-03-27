@@ -35494,7 +35494,7 @@ const SlidePanel = memo((_ab) => {
           from: {
             transform: {
               translate: {
-                x: origin
+                x: 0
               }
             }
           },
@@ -35505,7 +35505,7 @@ const SlidePanel = memo((_ab) => {
           to: {
             transform: {
               translate: {
-                x: 0
+                x: origin
               }
             }
           }
@@ -52595,24 +52595,24 @@ const VideoElement = styled.video.withConfig({
 })([""]);
 const MediaGridItem = memo((_mc) => {
   var _nc = _mc, {
+    alignment = {},
     background = {},
     borderRadius = {},
     description,
     images,
     minHeight,
     moreMenu,
-    size = {},
     title,
     url,
     video
   } = _nc, props = __objRest(_nc, [
+    "alignment",
     "background",
     "borderRadius",
     "description",
     "images",
     "minHeight",
     "moreMenu",
-    "size",
     "title",
     "url",
     "video"
@@ -52637,10 +52637,18 @@ const MediaGridItem = memo((_mc) => {
     description: video.description,
     path: video.path,
     url: video.url
-  }) : /* @__PURE__ */ jsx$2(Container$8, {
+  }) : /* @__PURE__ */ jsx$2(Label, {
+    padding: {
+      all: Amount.Default
+    },
     children: "Image not found"
   });
   return /* @__PURE__ */ jsx$2(Card, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      horizontal: AlignHorizontal.Center,
+      orientation: Orientation.Vertical,
+      vertical: AlignVertical.Center
+    }, alignment),
     background: __spreadValues({
       color: BackgroundColors.Dark,
       image: {
@@ -52648,12 +52656,9 @@ const MediaGridItem = memo((_mc) => {
       }
     }, background),
     borderRadius: __spreadValues({
-      all: Amount.Default
+      all: Amount.Less
     }, borderRadius),
-    linkTo: url,
-    size: __spreadValues({
-      minHeight: minHeight != null ? minHeight : 220
-    }, size)
+    linkTo: url
   }, props), {
     children: content
   }));
@@ -52662,22 +52667,26 @@ const MediaGrid = memo((_oc) => {
   var _pc = _oc, {
     borderRadius = {},
     children,
-    columns = 3,
+    columns = 5,
     className = "",
     items,
-    loading
+    states = {}
   } = _pc, props = __objRest(_pc, [
     "borderRadius",
     "children",
     "columns",
     "className",
     "items",
-    "loading"
+    "states"
   ]);
+  var _a2, _b;
   const rows = Array.from({
     length: Math.ceil(items.length / columns)
   }).fill(0);
   return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
+    alignment: {
+      fill: Fill.Both
+    },
     borderRadius: __spreadValues({
       all: Amount.Default
     }, borderRadius),
@@ -52690,7 +52699,7 @@ const MediaGrid = memo((_oc) => {
       borderRadius,
       states: {
         state: {
-          visible: loading
+          visible: (_b = (_a2 = states.state) == null ? void 0 : _a2.loading) != null ? _b : false
         }
       }
     }), rows.map((x, row) => {
@@ -52708,7 +52717,8 @@ const MediaGrid = memo((_oc) => {
             right: Amount.Default
           },
           size: {
-            width: `calc(100% / ${columns != null ? columns : 1} - ${Amount.Default})`
+            minHeight: 200,
+            minWidth: 260
           }
         }, i2), key))
       }, row);

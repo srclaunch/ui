@@ -73,7 +73,7 @@ export const SlidePanel = memo(
                 from: {
                   transform: {
                     translate: {
-                      x: origin,
+                      x: 0,
                     },
                   },
                 },
@@ -84,7 +84,7 @@ export const SlidePanel = memo(
                 to: {
                   transform: {
                     translate: {
-                      x: 0,
+                      x: origin,
                     },
                   },
                 },

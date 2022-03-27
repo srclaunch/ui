@@ -2,6 +2,7 @@ import { Image as ImageType, Video as VideoType } from '@srclaunch/types';
 import { memo, MouseEventHandler, ReactElement } from 'react';
 
 import {
+  AlignHorizontal,
   Alignment,
   AlignVertical,
   Amount,
@@ -32,13 +33,13 @@ export type MediaGridItem = ContainerProps & {
 
 export const MediaGridItem = memo(
   ({
+    alignment = {},
     background = {},
     borderRadius = {},
     description,
     images,
     minHeight,
     moreMenu,
-    size = {},
     title,
     url,
     video,
@@ -72,11 +73,17 @@ export const MediaGridItem = memo(
         url={video.url}
       />
     ) : (
-      <Container>Image not found</Container>
+      <Label padding={{ all: Amount.Default }}>Image not found</Label>
     );
 
     return (
       <Card
+        alignment={{
+          horizontal: AlignHorizontal.Center,
+          orientation: Orientation.Vertical,
+          vertical: AlignVertical.Center,
+          ...alignment,
+        }}
         background={{
           color: BackgroundColors.Dark,
 
@@ -86,12 +93,8 @@ export const MediaGridItem = memo(
           },
           ...background,
         }}
-        borderRadius={{ all: Amount.Default, ...borderRadius }}
+        borderRadius={{ all: Amount.Less, ...borderRadius }}
         linkTo={url}
-        size={{
-          minHeight: minHeight ?? 220,
-          ...size,
-        }}
         {...props}
       >
         {content}

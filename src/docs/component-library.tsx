@@ -4,6 +4,7 @@ import { MenuButton } from '../components/forms/buttons/MenuButton';
 import { Checkbox } from '../components/forms/inputs/boolean/Checkbox';
 import { ToggleInput } from '../components/forms/inputs/boolean/ToggleInput';
 import { SearchInput } from '../components/forms/inputs/text/SearchInput';
+import { MediaGrid } from '../components/media/MediaGrid';
 import { Menu } from '../components/menus/Menu';
 import { MoreMenu } from '../components/menus/MoreMenu';
 import { CloseButton } from '../components/modals/CloseButton';
@@ -675,6 +676,28 @@ const Example = () => (
     {
       title: 'Media',
       path: '/media',
+      description: 'Components used for displaying different media types',
+      components: [
+        {
+          component: MediaGrid,
+          title: 'MediaGrid',
+          path: '/media/media-grid',
+          description: 'A grid of media',
+          examples: [
+            {
+              title: 'Basic',
+              code: `import { MediaGrid } from '@srclaunch/ui';
+
+              const Example = () => (
+                <MediaGrid items={[{ path: '/asdfasfd', }]} />
+              );`,
+              properties: {
+                items: [{ path: '/asdfasfd' }],
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       title: 'Menus',
