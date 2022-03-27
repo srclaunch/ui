@@ -40276,9 +40276,9 @@ const MenuButton = memo((_Cb) => {
       }, states)
     }, props), {
       children: /* @__PURE__ */ jsx$2(Menu, {
-        background: menuVisible ? {
-          color: BackgroundColors.Black
-        } : void 0,
+        background: {
+          color: BackgroundColors.Transparent
+        },
         menu,
         onItemClick: (i2) => {
           menuVisibleRef.current = false;

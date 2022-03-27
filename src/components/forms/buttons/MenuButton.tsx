@@ -127,13 +127,9 @@ export const MenuButton = memo(
           {...props}
         >
           <Menu
-            background={
-              menuVisible
-                ? {
-                    color: BackgroundColors.Black,
-                  }
-                : undefined
-            }
+            background={{
+              color: BackgroundColors.Transparent,
+            }}
             menu={menu}
             onItemClick={i => {
               menuVisibleRef.current = false;
