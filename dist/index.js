@@ -22135,11 +22135,11 @@ function getOverflowStyle(overflow) {
     case Overflow.ClipVertical:
       return css$2(["overflow-y:clip;"]);
     case Overflow.ScrollBoth:
-      return css$2(["overflow:scroll;"]);
+      return css$2(["bottom:0;left:0;overflow:scroll;position:absolute;right:0;top:0;"]);
     case Overflow.ScrollHorizontal:
-      return css$2(["overflow:hidden;overflow-x:scroll;"]);
+      return css$2(["bottom:0;left:0;overflow:hidden;overflow-x:scroll;position:absolute;right:0;top:0;"]);
     case Overflow.ScrollVertical:
-      return css$2(["overflow:hidden;overflow-y:scroll;"]);
+      return css$2(["bottom:0;left:0;overflow:hidden;overflow-y:scroll;position:absolute;right:0;top:0;"]);
     case Overflow.Visible:
       return css$2(["overflow:visible;"]);
     case Overflow.Hidden:

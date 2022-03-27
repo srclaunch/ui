@@ -146,19 +146,33 @@ export function getOverflowStyle(overflow?: Overflow): SimpleInterpolation {
 
     case Overflow.ScrollBoth:
       return css`
+        bottom: 0;
+        left: 0;
         overflow: scroll;
+        position: absolute;
+        right: 0;
+        top: 0;
       `;
     case Overflow.ScrollHorizontal:
       return css`
+        bottom: 0;
+        left: 0;
         overflow: hidden;
         overflow-x: scroll;
+        position: absolute;
+        right: 0;
+        top: 0;
       `;
     case Overflow.ScrollVertical:
       return css`
-        /* position: absolute !important; */
+        bottom: 0;
+        left: 0;
         /* height: min-content; */
         overflow: hidden;
         overflow-y: scroll;
+        position: absolute;
+        right: 0;
+        top: 0;
       `;
     case Overflow.Visible:
       return css`
