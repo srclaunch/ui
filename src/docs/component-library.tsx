@@ -914,7 +914,13 @@ const Example = () => (
           examples: [
             {
               title: 'Default',
-              properties: {},
+              properties: {
+                states: {
+                  state: {
+                    visible: true,
+                  },
+                },
+              },
             },
           ],
         },

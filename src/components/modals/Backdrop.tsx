@@ -30,15 +30,11 @@ export const Backdrop = memo(
           ...position,
         }}
         states={{
-          visible: {
-            visibility: {
-              opacity: 1,
-            },
+          state: {
+            visible: false,
+            ...states.state,
           },
           ...states,
-        }}
-        visibility={{
-          opacity: 0,
         }}
         {...props}
       >

@@ -22498,7 +22498,7 @@ function getVisibilityStyles(visibility) {
 }
 css$2(["", ""], (props) => getVisibilityStyles(props.visibility));
 const getContainerStyles = (props) => {
-  return css$2(["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " transition:opacity 0.13s ease-in-out,background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,transform 0.13s ease-in-out;"], getAlignmentStyles(props.alignment), getAnimationStyles(props), getBackgroundStyles(props.background), getBorderStyles(props.border), getBorderRadiusStyles(props.borderRadius), getCursorStyles(props.cursor), getDepthStyles(props.depth), getMarginStyles(props.margin), getPaddingStyles(props.padding), getPositionStyles(props.position), getShadowStyles(props.shadow), getSizeStyles(props.size), getTransformStyles(props.transform), getVisibilityStyles(props.visibility));
+  return css$2(["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " transition:background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,opacity 0.13s ease-in-out,transform 0.13s ease-in-out;"], getAlignmentStyles(props.alignment), getAnimationStyles(props), getBackgroundStyles(props.background), getBorderStyles(props.border), getBorderRadiusStyles(props.borderRadius), getCursorStyles(props.cursor), getDepthStyles(props.depth), getMarginStyles(props.margin), getPaddingStyles(props.padding), getPositionStyles(props.position), getShadowStyles(props.shadow), getSizeStyles(props.size), getTransformStyles(props.transform), getVisibilityStyles(props.visibility));
 };
 const ContainerStyles = css$2(["", ""], (props) => getContainerStyles(props));
 function getDisabledStateStyles$1() {
@@ -27272,15 +27272,10 @@ const LoadingOverlay = memo((_A) => {
       top: 0
     }, position),
     states: __spreadValues({
-      visible: {
-        visibility: {
-          opacity: 1
-        }
-      }
+      state: __spreadValues({
+        visible: false
+      }, states.state)
     }, states),
-    visibility: {
-      opacity: 0
-    },
     style: {
       zIndex: 10
     }
@@ -35717,15 +35712,10 @@ const Backdrop = memo((_ab) => {
       top: 0
     }, position),
     states: __spreadValues({
-      visible: {
-        visibility: {
-          opacity: 1
-        }
-      }
-    }, states),
-    visibility: {
-      opacity: 0
-    }
+      state: __spreadValues({
+        visible: false
+      }, states.state)
+    }, states)
   }, props), {
     children
   }));

@@ -48,15 +48,11 @@ export const LoadingOverlay = memo(
           ...position,
         }}
         states={{
-          visible: {
-            visibility: {
-              opacity: 1,
-            },
+          state: {
+            visible: false,
+            ...states.state,
           },
           ...states,
-        }}
-        visibility={{
-          opacity: 0,
         }}
         style={{
           zIndex: 10,
