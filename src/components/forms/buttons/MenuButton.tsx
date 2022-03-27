@@ -118,7 +118,7 @@ export const MenuButton = memo(
           position={{ top: `calc(${Sizes.Default} - 3px)` }}
           size={{
             maxHeight: 320,
-            minHeight: getDropdownMinHeight(menu?.length ?? 1, Amount.Less),
+            minHeight: getDropdownMinHeight(menu?.length ?? 1, Amount.Least),
           }}
           states={{
             state: { focused, dropdown: { visible: menuVisibleRef.current } },
@@ -139,7 +139,7 @@ export const MenuButton = memo(
               menuVisibleRef.current = false;
               setMenuVisible(false);
             }}
-            padding={{ all: Amount.Least }}
+            padding={{ all: Amount.None }}
             shadow={DepthShadow.Surface}
 
             // {...props}

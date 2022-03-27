@@ -40264,7 +40264,7 @@ const MenuButton = memo((_Cb) => {
       },
       size: {
         maxHeight: 320,
-        minHeight: getDropdownMinHeight((_d = menu == null ? void 0 : menu.length) != null ? _d : 1, Amount.Less)
+        minHeight: getDropdownMinHeight((_d = menu == null ? void 0 : menu.length) != null ? _d : 1, Amount.Least)
       },
       states: __spreadValues({
         state: {
@@ -40285,7 +40285,7 @@ const MenuButton = memo((_Cb) => {
           setMenuVisible(false);
         },
         padding: {
-          all: Amount.Least
+          all: Amount.None
         },
         shadow: DepthShadow.Surface
       })
