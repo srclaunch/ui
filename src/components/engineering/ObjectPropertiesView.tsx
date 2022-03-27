@@ -97,21 +97,20 @@ export const ObjectPropertiesView = memo(
         {...props}
       >
         <Container
-          alignment={{
-            fill: Fill.Horizontal,
-          }}
           borderRadius={{
             all: Amount.Least,
             topLeft: Amount.None,
             topRight: Amount.None,
             ...borderRadius,
           }}
+          size={{
+            fill: Fill.Horizontal,
+          }}
         >
           {Object.keys(properties).map((property, key) => {
             return (
               <Container
                 alignment={{
-                  fill: Fill.Horizontal,
                   orientation: Orientation.Horizontal,
                 }}
                 border={{
@@ -120,6 +119,9 @@ export const ObjectPropertiesView = memo(
                   },
                 }}
                 key={key}
+                size={{
+                  fill: Fill.Horizontal,
+                }}
               >
                 <Container
                   border={{

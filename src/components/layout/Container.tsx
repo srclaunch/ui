@@ -29,6 +29,8 @@ import {
   Shadow,
   Position,
   Visibility,
+  Fill,
+  Overflow,
 } from '../../types';
 import { getEventHandlers } from '../../lib/events';
 import { ReactEventHandler } from 'react';
@@ -85,6 +87,7 @@ export const Container = memo(
     return (
       <Wrapper
         alignment={{
+          fill: Fill.Horizontal,
           horizontal: AlignHorizontal.Stretch,
           orientation: Orientation.Vertical,
           vertical: AlignVertical.Stretch,

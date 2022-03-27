@@ -39,14 +39,13 @@ export {
   ForegroundColorShade,
 } from './appearance/foreground';
 
-export { Fill } from './appearance/fill';
 export type { Margin } from './appearance/margin';
 export type { Padding } from './appearance/padding';
 export type { Position } from './appearance/position';
 export { PositionBehavior } from './appearance/position';
 export type { Shadow } from './appearance/shadow';
 export type { Size } from './appearance/size';
-export { Amount, Sizes } from './appearance/size';
+export { Amount, Fill, Sizes } from './appearance/size';
 export type {
   Rotate,
   Scale,

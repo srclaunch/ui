@@ -18,7 +18,15 @@ export enum Sizes {
   Largest = 'var(--size-largest)',
 }
 
+export enum Fill {
+  Both = 'both',
+  Horizontal = 'horizontal',
+  None = 'none',
+  Vertical = 'vertical',
+}
+
 export type Size = {
+  readonly fill?: Fill;
   readonly height?: string | number;
   readonly maxHeight?: string | number;
   readonly maxWidth?: string | number;

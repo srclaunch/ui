@@ -1,9 +1,11 @@
 import { Exception } from '@srclaunch/exceptions';
 import { BasicIcons, DualLightIcons } from '@srclaunch/icons';
+import { useState } from 'react';
 import { MenuButton } from '../components/forms/buttons/MenuButton';
 import { Checkbox } from '../components/forms/inputs/boolean/Checkbox';
 import { ToggleInput } from '../components/forms/inputs/boolean/ToggleInput';
 import { SearchInput } from '../components/forms/inputs/text/SearchInput';
+import { Container } from '../components/layout/Container';
 import { MediaGrid } from '../components/media/MediaGrid';
 import { Menu } from '../components/menus/Menu';
 import { MoreMenu } from '../components/menus/MoreMenu';
@@ -918,6 +920,34 @@ const Example = () => (
                     visible: true,
                   },
                 },
+              },
+              render: () => {
+                const [slidePanelVisible, setSlidePanelVisible] =
+                  useState(false);
+
+                return (
+                  <Container>
+                    <SlidePanel
+                      states={{ state: { visible: slidePanelVisible } }}
+                    >
+                      <ModalHeader
+                        title="Example"
+                        onCloseClick={() => setSlidePanelVisible(false)}
+                      />
+                    </SlidePanel>
+                    <Button
+                      events={{
+                        mouse: {
+                          onClick: () => {
+                            setSlidePanelVisible(true);
+                          },
+                        },
+                      }}
+                    >
+                      Open SlidePanel
+                    </Button>
+                  </Container>
+                );
               },
             },
           ],

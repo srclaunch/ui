@@ -21881,13 +21881,6 @@ var ForegroundColors = ((ForegroundColors2) => {
   ForegroundColors2[ForegroundColors2["WhiteContrast"] = ContrastColors.White] = "WhiteContrast";
   return ForegroundColors2;
 })(ForegroundColors || {});
-var Fill = /* @__PURE__ */ ((Fill2) => {
-  Fill2["Both"] = "both";
-  Fill2["Horizontal"] = "horizontal";
-  Fill2["None"] = "none";
-  Fill2["Vertical"] = "vertical";
-  return Fill2;
-})(Fill || {});
 var PositionBehavior = /* @__PURE__ */ ((PositionBehavior2) => {
   PositionBehavior2["Absolute"] = "absolute";
   PositionBehavior2["Fixed"] = "fixed";
@@ -21916,6 +21909,13 @@ var Sizes = /* @__PURE__ */ ((Sizes2) => {
   Sizes2["Largest"] = "var(--size-largest)";
   return Sizes2;
 })(Sizes || {});
+var Fill = /* @__PURE__ */ ((Fill2) => {
+  Fill2["Both"] = "both";
+  Fill2["Horizontal"] = "horizontal";
+  Fill2["None"] = "none";
+  Fill2["Vertical"] = "vertical";
+  return Fill2;
+})(Fill || {});
 var TransformOrigin = /* @__PURE__ */ ((TransformOrigin2) => {
   TransformOrigin2["TopLeft"] = "top left";
   TransformOrigin2["TopRight"] = "top right";
@@ -22055,21 +22055,6 @@ var TextSize = /* @__PURE__ */ ((TextSize2) => {
   TextSize2["Largest"] = "var(--text-size-largest)";
   return TextSize2;
 })(TextSize || {});
-function getFillStyles(alignment) {
-  if ((alignment == null ? void 0 : alignment.fill) === Fill.Both) {
-    return css$2(["flex-grow:1;"]);
-  }
-  if ((alignment == null ? void 0 : alignment.fill) === Fill.Horizontal) {
-    return css$2(["flex-grow:1;"]);
-  }
-  if ((alignment == null ? void 0 : alignment.fill) === Fill.Vertical) {
-    return css$2(["flex-grow:1;"]);
-  }
-  if ((alignment == null ? void 0 : alignment.fill) === Fill.None) {
-    return css$2(["flex-grow:0;"]);
-  }
-  return css$2(["flex-grow:0;"]);
-}
 function getHorizontalAlignStyle(alignment) {
   const {
     horizontal,
@@ -22135,11 +22120,11 @@ function getOverflowStyle(overflow) {
     case Overflow.ClipVertical:
       return css$2(["overflow-y:clip;"]);
     case Overflow.ScrollBoth:
-      return css$2(["bottom:0;left:0;overflow:scroll;position:absolute;right:0;top:0;"]);
+      return css$2(["bottom:0;left:0;overflow:scroll;position:absolute !important;right:0;top:0;"]);
     case Overflow.ScrollHorizontal:
-      return css$2(["bottom:0;left:0;overflow:hidden;overflow-x:scroll;position:absolute;right:0;top:0;"]);
+      return css$2(["bottom:0;left:0;overflow:hidden;overflow-x:scroll;position:absolute !important;right:0;top:0;"]);
     case Overflow.ScrollVertical:
-      return css$2(["bottom:0;left:0;overflow:hidden;overflow-y:scroll;position:absolute;right:0;top:0;"]);
+      return css$2(["bottom:0;left:0;overflow:hidden;overflow-y:scroll;position:absolute !important;right:0;top:0;"]);
     case Overflow.Visible:
       return css$2(["overflow:visible;"]);
     case Overflow.Hidden:
@@ -22158,7 +22143,7 @@ function getFlexDirection(alignment) {
   }
 }
 function getAlignmentStyles(alignment) {
-  return css$2(["display:flex;", " ", " ", " ", "  ", ""], (alignment == null ? void 0 : alignment.orientation) && getFlexDirection(alignment), (alignment == null ? void 0 : alignment.horizontal) && getHorizontalAlignStyle(alignment), (alignment == null ? void 0 : alignment.vertical) && getVerticalAlignStyle(alignment), (alignment == null ? void 0 : alignment.fill) && getFillStyles(alignment), (alignment == null ? void 0 : alignment.overflow) && getOverflowStyle(alignment.overflow));
+  return css$2(["display:flex;", " ", " ", " ", ""], (alignment == null ? void 0 : alignment.orientation) && getFlexDirection(alignment), (alignment == null ? void 0 : alignment.horizontal) && getHorizontalAlignStyle(alignment), (alignment == null ? void 0 : alignment.vertical) && getVerticalAlignStyle(alignment), (alignment == null ? void 0 : alignment.overflow) && getOverflowStyle(alignment.overflow));
 }
 css$2(["", ""], (props) => getAlignmentStyles(props.alignment));
 let nanoid = (size = 21) => {
@@ -22368,7 +22353,14 @@ function getPaddingStyles(padding) {
 }
 css$2(["", ""], (props) => getPaddingStyles(props.padding));
 function getPositionStyles(position) {
-  return css$2(["position:relative;", " ", " ", " ", " ", ""], (position == null ? void 0 : position.behavior) && css$2(["position:", ";"], position.behavior), ((position == null ? void 0 : position.bottom) || (position == null ? void 0 : position.bottom) === 0) && css$2(["bottom:", ";"], getCSSMeasurementValue(position.bottom)), ((position == null ? void 0 : position.left) || (position == null ? void 0 : position.left) === 0) && css$2(["left:", ";"], getCSSMeasurementValue(position.left)), ((position == null ? void 0 : position.right) || (position == null ? void 0 : position.right) === 0) && css$2(["right:", ";"], getCSSMeasurementValue(position.right)), ((position == null ? void 0 : position.top) || (position == null ? void 0 : position.top) === 0) && css$2(["top:", ";"], getCSSMeasurementValue(position.top)));
+  const {
+    behavior,
+    bottom,
+    left,
+    right,
+    top
+  } = position || {};
+  return css$2(["position:relative;", " ", " ", " ", " ", ""], behavior && css$2(["position:", ";"], behavior), (bottom || bottom === 0) && css$2(["bottom:", ";"], getCSSMeasurementValue(bottom)), (left || left === 0) && css$2(["left:", ";"], getCSSMeasurementValue(left)), (right || right === 0) && css$2(["right:", ";"], getCSSMeasurementValue(right)), (top || top === 0) && css$2(["top:", ";"], getCSSMeasurementValue(top)));
 }
 css$2(["", ""], (props) => getPositionStyles(props.position));
 function getShadowStyles(shadow) {
@@ -22393,8 +22385,54 @@ function getShadowStyles(shadow) {
   }
 }
 const ShadowStyles = css$2(["", ""], (props) => getShadowStyles(props.shadow));
+function getFillStyles(fill) {
+  if (!fill)
+    return null;
+  switch (fill) {
+    case Fill.Both:
+    case Fill.Horizontal:
+    case Fill.Vertical:
+      return css$2(["flex-grow:1;"]);
+    case Fill.None:
+    default:
+      return css$2(["flex-grow:0;"]);
+  }
+}
+function getMaxHeightStyle(maxHeight) {
+  if (!maxHeight)
+    return null;
+  return css$2(["max-height:", ";"], getCSSMeasurementValue(maxHeight));
+}
+function getMinHeightStyle(minHeight) {
+  if (!minHeight)
+    return null;
+  return css$2(["min-height:", ";"], getCSSMeasurementValue(minHeight));
+}
+function getHeightStyle(height) {
+  if (!height)
+    return null;
+  return css$2(["height:", ";"], getCSSMeasurementValue(height));
+}
+function getMaxWidthStyle(maxWidth) {
+  if (!maxWidth)
+    return null;
+  return css$2(["max-width:", ";"], getCSSMeasurementValue(maxWidth));
+}
+function getMinWidthStyle(minWidth) {
+  if (!minWidth)
+    return null;
+  return css$2(["min-width:", ";"], getCSSMeasurementValue(minWidth));
+}
+function getWidthStyle(width) {
+  if (!width)
+    return null;
+  return css$2(["width:", ";"], getCSSMeasurementValue(width));
+}
 function getSizeStyles(size) {
+  if (!size)
+    return null;
   const {
+    fill,
     maxHeight,
     minHeight,
     maxWidth,
@@ -22402,7 +22440,7 @@ function getSizeStyles(size) {
     width,
     height
   } = size != null ? size : {};
-  return css$2(["", " ", " ", " ", " ", " ", ""], maxHeight && css$2(["max-height:", ";"], getCSSMeasurementValue(maxHeight)), minHeight && css$2(["min-height:", ";"], getCSSMeasurementValue(minHeight)), height && css$2(["height:", ";"], getCSSMeasurementValue(height)), maxWidth && css$2(["max-width:", ";"], getCSSMeasurementValue(maxWidth)), minWidth && css$2(["min-width:", ";"], getCSSMeasurementValue(minWidth)), width && css$2(["width:", ";"], getCSSMeasurementValue(width)));
+  return css$2(["", " ", " ", " ", " ", " ", " ", ""], fill && getFillStyles(fill), maxHeight && getMaxHeightStyle(maxHeight), minHeight && getMinHeightStyle(minHeight), height && getHeightStyle(height), maxWidth && getMaxWidthStyle(maxWidth), minWidth && getMinWidthStyle(minWidth), width && getWidthStyle(width));
 }
 const SizeStyles = css$2(["", ""], (props) => getSizeStyles(props.size));
 function getTransformArgumentValue(transform) {
@@ -22689,6 +22727,7 @@ const Container$8 = memo((_a2) => {
   }, []);
   return /* @__PURE__ */ jsx$2(Wrapper$3, __spreadProps(__spreadValues(__spreadValues({
     alignment: __spreadValues({
+      fill: Fill.Horizontal,
       horizontal: AlignHorizontal.Stretch,
       orientation: Orientation.Vertical,
       vertical: AlignVertical.Stretch
@@ -23077,7 +23116,6 @@ const Button$1 = memo((_k) => {
     alignment: __spreadValues({
       horizontal: AlignHorizontal.Center,
       orientation: Orientation.Horizontal,
-      overflow: Overflow.Visible,
       vertical: AlignVertical.Center
     }, alignment),
     as,
@@ -23086,8 +23124,7 @@ const Button$1 = memo((_k) => {
     }, background),
     border: __spreadValues({
       all: {
-        style: BorderStyle.None,
-        width: 0
+        style: BorderStyle.None
       }
     }, border),
     borderRadius: __spreadValues({
@@ -23115,7 +23152,7 @@ const Button$1 = memo((_k) => {
       }
     }, states)
   }, props), {
-    children: typeof children === "string" ? /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    children: typeof children === "string" ? /* @__PURE__ */ jsx$2(Label, {
       icon: icon2,
       lineHeight,
       textAlign,
@@ -23124,10 +23161,10 @@ const Button$1 = memo((_k) => {
         line: TextDecorationLine.None
       }, textDecoration),
       textSize,
-      textWeight
-    }, props), {
+      textWeight,
+      states,
       children
-    })) : /* @__PURE__ */ jsx$2(Fragment, {
+    }) : /* @__PURE__ */ jsx$2(Fragment, {
       children
     })
   }));
@@ -26871,8 +26908,10 @@ const InputLabel = memo((_q) => {
       children
     })), states.state && (((_a2 = states.state) == null ? void 0 : _a2.error) instanceof d$d || Array.isArray((_b = states.state) == null ? void 0 : _b.error) && ((_c = states.state) == null ? void 0 : _c.error.length) > 0) && /* @__PURE__ */ jsx$2(ErrorLabel, {
       alignment: {
-        fill: Fill.Horizontal,
         horizontal: AlignHorizontal.Right
+      },
+      size: {
+        fill: Fill.Horizontal
       },
       textSize,
       children: getErrorMessage(states.state.error)
@@ -27753,9 +27792,6 @@ const PropertyEditor = memo((_O) => {
           children: "Property"
         })
       }), /* @__PURE__ */ jsx$2(Container$8, {
-        alignment: {
-          fill: Fill.Horizontal
-        },
         background: {
           color: BackgroundColors.Lighter
         },
@@ -27763,15 +27799,15 @@ const PropertyEditor = memo((_O) => {
           left: Amount.Less,
           right: Amount.Less
         },
+        size: {
+          fill: Fill.Horizontal
+        },
         children: /* @__PURE__ */ jsx$2(Label, {
           lineHeight: Sizes.Large,
           children: "Value"
         })
       })]
     }), /* @__PURE__ */ jsx$2(Container$8, {
-      alignment: {
-        fill: Fill.Horizontal
-      },
       border: {
         top: {
           color: BorderColors.Light
@@ -27782,11 +27818,16 @@ const PropertyEditor = memo((_O) => {
         topLeft: Amount.None,
         topRight: Amount.None
       }, borderRadius),
+      size: {
+        fill: Fill.Horizontal
+      },
       children: Object.keys(defaultValue).map((key) => {
         return /* @__PURE__ */ jsxs$1(Container$8, {
           alignment: {
-            fill: Fill.Horizontal,
             orientation: Orientation.Horizontal
+          },
+          size: {
+            fill: Fill.Horizontal
           },
           children: [/* @__PURE__ */ jsx$2(Container$8, {
             border: {
@@ -27806,12 +27847,12 @@ const PropertyEditor = memo((_O) => {
               children: key
             })
           }), /* @__PURE__ */ jsx$2(Container$8, {
-            alignment: {
-              fill: Fill.Horizontal
-            },
             padding: {
               left: Amount.Less,
               right: Amount.Less
+            },
+            size: {
+              fill: Fill.Horizontal
             },
             children: /* @__PURE__ */ jsx$2(Label, {
               lineHeight: Sizes.Large,
@@ -28858,12 +28899,38 @@ var ReactCountryFlag = function ReactCountryFlag2(_ref) {
     }, style2)
   }), emoji);
 };
-const NavigationLink = memo((_V) => {
+const Scrollable = (_V) => {
   var _W = _V, {
+    alignment = {},
+    children,
+    className = "",
+    size = {}
+  } = _W, props = __objRest(_W, [
+    "alignment",
+    "children",
+    "className",
+    "size"
+  ]);
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      overflow: Overflow.ScrollVertical
+    }, alignment),
+    background: {
+      color: BackgroundColors.Transparent
+    },
+    className: `${className} scrollable`,
+    size: __spreadValues({
+      fill: Fill.Both
+    }, size)
+  }, props), {
+    children
+  }));
+};
+const NavigationLink = memo((_X) => {
+  var _Y = _X, {
     activeClassName = "active",
     alignment = {},
     as = "span",
-    background = {},
     borderRadius = {},
     children,
     className = "",
@@ -28883,11 +28950,10 @@ const NavigationLink = memo((_V) => {
     textSize,
     textWeight,
     to
-  } = _W, props = __objRest(_W, [
+  } = _Y, props = __objRest(_Y, [
     "activeClassName",
     "alignment",
     "as",
-    "background",
     "borderRadius",
     "children",
     "className",
@@ -28948,8 +29014,8 @@ const NavigationLink = memo((_V) => {
     })) : children
   });
 });
-const MenuItem = memo((_X) => {
-  var _Y = _X, {
+const MenuItem = memo((_Z) => {
+  var __ = _Z, {
     alignment = {},
     as = "button",
     borderRadius = {},
@@ -28963,7 +29029,7 @@ const MenuItem = memo((_X) => {
     states = {},
     to,
     value: value2
-  } = _Y, props = __objRest(_Y, [
+  } = __, props = __objRest(__, [
     "alignment",
     "as",
     "borderRadius",
@@ -29066,8 +29132,8 @@ const MenuItem = memo((_X) => {
     })
   }));
 });
-const Menu = memo((_Z) => {
-  var __ = _Z, {
+const Menu = memo((_$) => {
+  var _aa = _$, {
     as = "nav",
     background = {},
     borderRadius = {},
@@ -29076,8 +29142,9 @@ const Menu = memo((_Z) => {
     events = {},
     onItemClick,
     padding = {},
+    size = {},
     states = {}
-  } = __, props = __objRest(__, [
+  } = _aa, props = __objRest(_aa, [
     "as",
     "background",
     "borderRadius",
@@ -29086,75 +29153,75 @@ const Menu = memo((_Z) => {
     "events",
     "onItemClick",
     "padding",
+    "size",
     "states"
   ]);
   return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
-    alignment: {
-      overflow: Overflow.ScrollVertical
-    },
     as,
     background: __spreadValues({
-      color: BackgroundColors.Lightest
+      color: BackgroundColors.Lighter
     }, background),
     borderRadius: __spreadValues({
       all: Amount.Least
     }, borderRadius),
     className: `${className} menu`,
-    padding: __spreadValues({
-      all: Amount.Least
-    }, padding),
-    shadow: DepthShadow.Low,
-    size: {
-      minHeight: Sizes.Default
-    }
+    size: __spreadValues({
+      minHeight: Sizes.Largest
+    }, size),
+    shadow: DepthShadow.Low
   }, props), {
-    children: menu && menu.map((item, key) => {
-      return /* @__PURE__ */ jsxs$1(Container$8, {
-        children: [item.title && /* @__PURE__ */ jsx$2(Label, {
-          textSize: TextSize.Smaller,
-          children: item.title
-        }), /* @__PURE__ */ jsx$2(MenuItem, __spreadValues({
-          background: __spreadValues({
-            color: BackgroundColors.Lightest
-          }, background),
-          events: {
-            mouse: {
-              onClick: () => {
-                if (onItemClick) {
-                  onItemClick(item);
+    children: /* @__PURE__ */ jsx$2(Scrollable, {
+      alignment: {
+        overflow: Overflow.ScrollVertical
+      },
+      padding: __spreadValues({
+        all: Amount.Least
+      }, padding),
+      children: menu && menu.map((item, key) => {
+        return /* @__PURE__ */ jsxs$1(Container$8, {
+          children: [item.title && /* @__PURE__ */ jsx$2(Label, {
+            textSize: TextSize.Smaller,
+            children: item.title
+          }), /* @__PURE__ */ jsx$2(MenuItem, __spreadValues({
+            events: {
+              mouse: {
+                onClick: () => {
+                  if (onItemClick) {
+                    onItemClick(item);
+                  }
                 }
               }
-            }
-          },
-          padding: {
-            left: Amount.Less,
-            right: Amount.Less
-          },
-          states: __spreadValues({
-            active: {
-              background: {
-                color: BackgroundColors.Primary
-              },
-              textColor: TextColors.PrimaryContrast
             },
-            focused: {
-              textColor: TextColors.PrimaryContrast
+            padding: {
+              left: Amount.Less,
+              right: Amount.Less
             },
-            hovered: {
-              background: {
-                color: BackgroundColors.Primary
+            states: __spreadValues({
+              active: {
+                background: {
+                  color: BackgroundColors.Primary
+                },
+                textColor: TextColors.PrimaryContrast
               },
-              textColor: TextColors.PrimaryContrast
-            }
-          }, states),
-          textSize: TextSize.Small
-        }, item))]
-      }, key);
+              focused: {
+                textColor: TextColors.PrimaryContrast
+              },
+              hovered: {
+                background: {
+                  color: BackgroundColors.Primary
+                },
+                textColor: TextColors.PrimaryContrast
+              }
+            }, states),
+            textSize: TextSize.Small
+          }, item))]
+        }, key);
+      })
     })
   }));
 });
-const DropdownControl = memo((_$) => {
-  var _aa = _$, {
+const DropdownControl = memo((_ba) => {
+  var _ca = _ba, {
     alignment = {},
     background = {},
     border = {},
@@ -29169,7 +29236,7 @@ const DropdownControl = memo((_$) => {
     size = {},
     textSize = TextSize.Default,
     textColor = TextColors.DropdownMenu
-  } = _aa, props = __objRest(_aa, [
+  } = _ca, props = __objRest(_ca, [
     "alignment",
     "background",
     "border",
@@ -29188,7 +29255,6 @@ const DropdownControl = memo((_$) => {
   var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o, _p;
   return /* @__PURE__ */ jsxs$1(InputContainer, __spreadProps(__spreadValues({
     alignment: __spreadValues({
-      fill: Fill.Horizontal,
       orientation: Orientation.Horizontal,
       vertical: AlignVertical.Center
     }, alignment),
@@ -29220,16 +29286,19 @@ const DropdownControl = memo((_$) => {
     cursor,
     form: "null",
     shadow: ((_k = (_j = states.state) == null ? void 0 : _j.dropdown) == null ? void 0 : _k.visible) ? DepthShadow.Surface : DepthShadow.Low,
+    size: __spreadValues({
+      fill: Fill.Horizontal
+    }, size),
     states
   }, props), {
     children: [component ? component : /* @__PURE__ */ jsx$2(Label, {
-      alignment: {
-        fill: Fill.Horizontal
-      },
       padding: {
         left: Amount.Less
       },
       selectable: false,
+      size: {
+        fill: Fill.Horizontal
+      },
       textSize,
       textColor: !label && placeholder ? TextColors.InputPlaceholder : textColor,
       textOverflow: TextOverflow.Ellipsis,
@@ -29267,8 +29336,8 @@ const DropdownControl = memo((_$) => {
     })]
   }));
 });
-const DropdownPanel = memo((_ba) => {
-  var _ca = _ba, {
+const DropdownPanel = memo((_da) => {
+  var _ea = _da, {
     background = {},
     border = {},
     borderRadius = {},
@@ -29277,7 +29346,7 @@ const DropdownPanel = memo((_ba) => {
     position = {},
     size = {},
     states = {}
-  } = _ca, props = __objRest(_ca, [
+  } = _ea, props = __objRest(_ea, [
     "background",
     "border",
     "borderRadius",
@@ -29332,8 +29401,8 @@ const DropdownPanel = memo((_ba) => {
     children
   }));
 });
-const DropdownInput = memo((_da) => {
-  var _ea = _da, {
+const DropdownInput = memo((_fa) => {
+  var _ga = _fa, {
     borderRadius = {},
     className = "",
     defaultValue,
@@ -29346,7 +29415,7 @@ const DropdownInput = memo((_da) => {
     size = {},
     states = {},
     validation
-  } = _ea, props = __objRest(_ea, [
+  } = _ga, props = __objRest(_ga, [
     "borderRadius",
     "className",
     "defaultValue",
@@ -29485,8 +29554,8 @@ const DropdownInput = memo((_da) => {
     }))]
   });
 });
-const CountryInput = memo((_fa) => {
-  var _ga = _fa, {
+const CountryInput = memo((_ha) => {
+  var _ia = _ha, {
     defaultValue = k$3.UnitedStates,
     menu = Object.entries(i18nIsoCountries.getAlpha2Codes()).map(([alpha2, alpha3]) => ({
       icon: {
@@ -29506,7 +29575,7 @@ const CountryInput = memo((_fa) => {
     })),
     name: name2 = "country",
     placeholder = "Select a country"
-  } = _ga, props = __objRest(_ga, [
+  } = _ia, props = __objRest(_ia, [
     "defaultValue",
     "menu",
     "name",
@@ -29519,12 +29588,12 @@ const CountryInput = memo((_fa) => {
     placeholder
   }, props));
 });
-const CurrencyInput = memo((_ha) => {
-  var _ia = _ha, {
+const CurrencyInput = memo((_ja) => {
+  var _ka = _ja, {
     defaultValue = D$2.UnitedStatesDollar,
     name: name2 = "language",
     placeholder = "Select a currency"
-  } = _ia, props = __objRest(_ia, [
+  } = _ka, props = __objRest(_ka, [
     "defaultValue",
     "name",
     "placeholder"
@@ -29550,12 +29619,12 @@ const CurrencyInput = memo((_ha) => {
     placeholder
   }, props));
 });
-const LanguageInput = memo((_ja) => {
-  var _ka = _ja, {
+const LanguageInput = memo((_la) => {
+  var _ma = _la, {
     defaultValue = G$3.English,
     name: name2,
     placeholder = "Select a language"
-  } = _ka, props = __objRest(_ka, [
+  } = _ma, props = __objRest(_ma, [
     "defaultValue",
     "name",
     "placeholder"
@@ -30869,13 +30938,13 @@ function reducer(state, action) {
 }
 function noop$3() {
 }
-const CloseButton = memo((_la) => {
-  var _ma = _la, {
+const CloseButton = memo((_na) => {
+  var _oa = _na, {
     background = {},
     icon: icon2 = {},
     className = "",
     size = {}
-  } = _ma, props = __objRest(_ma, [
+  } = _oa, props = __objRest(_oa, [
     "background",
     "icon",
     "className",
@@ -30928,8 +30997,8 @@ const CloseButton = memo((_la) => {
     }, icon2))
   }));
 });
-const ImageInput = memo((_na) => {
-  var _oa = _na, {
+const ImageInput = memo((_pa) => {
+  var _qa = _pa, {
     background = {},
     border = {},
     borderRadius = {},
@@ -30941,7 +31010,7 @@ const ImageInput = memo((_na) => {
     maxImages = 1,
     name: name2 = "images",
     padding = {}
-  } = _oa, props = __objRest(_oa, [
+  } = _qa, props = __objRest(_qa, [
     "background",
     "border",
     "borderRadius",
@@ -31172,10 +31241,10 @@ const ImageInput = memo((_na) => {
     }))]
   });
 });
-const NumberInput = memo((_pa) => {
-  var _qa = _pa, {
+const NumberInput = memo((_ra) => {
+  var _sa = _ra, {
     className = ""
-  } = _qa, props = __objRest(_qa, [
+  } = _sa, props = __objRest(_sa, [
     "className"
   ]);
   return /* @__PURE__ */ jsx$2(InputContainer, __spreadValues({
@@ -31183,8 +31252,8 @@ const NumberInput = memo((_pa) => {
     type: InputType.Number
   }, props));
 });
-const SSNInput = memo((_ra) => {
-  var _sa = _ra, {
+const SSNInput = memo((_ta) => {
+  var _ua = _ta, {
     as,
     background = {},
     border = {},
@@ -31206,7 +31275,7 @@ const SSNInput = memo((_ra) => {
         [x$4.IsSSN]: true
       }
     }
-  } = _sa, props = __objRest(_sa, [
+  } = _ua, props = __objRest(_ua, [
     "as",
     "background",
     "border",
@@ -32041,8 +32110,8 @@ var main = function(e2, a) {
   }, a.defaultProps = { className: void 0, style: void 0, scoreWordClassName: void 0, scoreWordStyle: void 0, password: "", userInputs: [], barColors: ["#ddd", "#ef4836", "#f6b44d", "#2b90ef", "#25c281"], scoreWords: ["weak", "weak", "okay", "good", "strong"], minLength: 4, shortScoreWord: "too short", onChangeScore: void 0 }, a;
 }(React__default.Component);
 var _default = dist.default = PasswordStrengthBar;
-const PasswordInput = memo((_ta) => {
-  var _ua = _ta, {
+const PasswordInput = memo((_va) => {
+  var _wa = _va, {
     autoComplete = AutoComplete.CurrentPassword,
     confirmPasswordLabel = "Confirm password",
     events = {},
@@ -32051,7 +32120,7 @@ const PasswordInput = memo((_ta) => {
     showConfirmPassword = false,
     showPasswordStrength = false,
     validation = {}
-  } = _ua, props = __objRest(_ua, [
+  } = _wa, props = __objRest(_wa, [
     "autoComplete",
     "confirmPasswordLabel",
     "events",
@@ -32231,12 +32300,12 @@ function getInputElementByFieldType(field) {
       });
   }
 }
-const FormFields = memo((_va) => {
-  var _wa = _va, {
+const FormFields = memo((_xa) => {
+  var _ya = _xa, {
     entity,
     fields,
     onChange
-  } = _wa, props = __objRest(_wa, [
+  } = _ya, props = __objRest(_ya, [
     "entity",
     "fields",
     "onChange"
@@ -32299,8 +32368,8 @@ const FormFields = memo((_va) => {
     })
   }));
 });
-const Form = memo((_xa) => {
-  var _ya = _xa, {
+const Form = memo((_za) => {
+  var _Aa = _za, {
     borderRadius = {},
     className = "",
     entity,
@@ -32311,7 +32380,7 @@ const Form = memo((_xa) => {
     name: name2,
     padding = Amount.None,
     submitButton
-  } = _ya, props = __objRest(_ya, [
+  } = _Aa, props = __objRest(_Aa, [
     "borderRadius",
     "className",
     "entity",
@@ -32414,8 +32483,8 @@ const Form = memo((_xa) => {
     })]
   }));
 });
-const ForgotPasswordForm = memo((_za) => {
-  var _Aa = _za, {
+const ForgotPasswordForm = memo((_Ba) => {
+  var _Ca = _Ba, {
     background = {},
     borderRadius = {},
     size = {},
@@ -32424,7 +32493,7 @@ const ForgotPasswordForm = memo((_za) => {
     signUpLinkLabel,
     signInButtonLabel,
     forgotPasswordLinkLabel
-  } = _Aa, props = __objRest(_Aa, [
+  } = _Ca, props = __objRest(_Ca, [
     "background",
     "borderRadius",
     "size",
@@ -32461,9 +32530,12 @@ const ForgotPasswordForm = memo((_za) => {
     }, size)
   }, props), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
+      borderRadius: __spreadValues({
+        all: Amount.More
+      }, borderRadius),
       states: {
         state: {
-          visible: inProgress
+          visible: inProgress != null ? inProgress : false
         }
       }
     }), /* @__PURE__ */ jsx$2(Title, {
@@ -32518,20 +32590,22 @@ const ForgotPasswordForm = memo((_za) => {
       },
       submitButton: {
         alignment: {
-          fill: Fill.Both,
           horizontal: AlignHorizontal.Center
         },
         borderRadius: {
           all: Amount.Least
         },
         label: "Send instructions",
-        lineHeight: Sizes.Large
+        lineHeight: Sizes.Large,
+        size: {
+          fill: Fill.Both
+        }
       }
     })]
   }));
 });
-const Link = memo((_Ba) => {
-  var _Ca = _Ba, {
+const Link = memo((_Da) => {
+  var _Ea = _Da, {
     children,
     textColor = TextColors.Link,
     textDecoration = {
@@ -32541,7 +32615,7 @@ const Link = memo((_Ba) => {
     textSize = TextSize.Small,
     textWeight = TextWeight.Default,
     to
-  } = _Ca, props = __objRest(_Ca, [
+  } = _Ea, props = __objRest(_Ea, [
     "children",
     "textColor",
     "textDecoration",
@@ -32563,15 +32637,15 @@ const Link = memo((_Ba) => {
     }))
   });
 });
-const Small = memo((_Da) => {
-  var _Ea = _Da, {
+const Small = memo((_Fa) => {
+  var _Ga = _Fa, {
     as = "small",
     className = "",
     children,
     lineHeight = Sizes.Small,
     textColor = TextColors.Light,
     textSize = TextSize.Small
-  } = _Ea, props = __objRest(_Ea, [
+  } = _Ga, props = __objRest(_Ga, [
     "as",
     "className",
     "children",
@@ -32590,8 +32664,8 @@ const Small = memo((_Da) => {
     children
   }));
 });
-const LoginForm = memo((_Fa) => {
-  var _Ga = _Fa, {
+const LoginForm = memo((_Ha) => {
+  var _Ia = _Ha, {
     background = {},
     borderRadius = {},
     onLoginSuccess,
@@ -32601,7 +32675,7 @@ const LoginForm = memo((_Fa) => {
     signUpLinkLabel,
     signInButtonLabel,
     forgotPasswordLinkLabel
-  } = _Ga, props = __objRest(_Ga, [
+  } = _Ia, props = __objRest(_Ia, [
     "background",
     "borderRadius",
     "onLoginSuccess",
@@ -32738,14 +32812,17 @@ const LoginForm = memo((_Fa) => {
       name: "login-form",
       submitButton: {
         alignment: {
-          fill: Fill.Both,
           horizontal: AlignHorizontal.Center
         },
         borderRadius: {
           all: Amount.Least
         },
         label: "Login",
-        lineHeight: Sizes.Large
+        lineHeight: Sizes.Large,
+        size: {
+          fill: Fill.Both
+        },
+        textAlign: TextAlign.Center
       }
     }), /* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
@@ -32776,14 +32853,14 @@ const LoginForm = memo((_Fa) => {
     })]
   }));
 });
-const SignupForm = memo((_Ha) => {
-  var _Ia = _Ha, {
+const SignupForm = memo((_Ja) => {
+  var _Ka = _Ja, {
     background = {},
     borderRadius = {},
     onSignupSuccess,
     size = {},
     title = "Sign up"
-  } = _Ia, props = __objRest(_Ia, [
+  } = _Ka, props = __objRest(_Ka, [
     "background",
     "borderRadius",
     "onSignupSuccess",
@@ -32942,14 +33019,16 @@ const SignupForm = memo((_Ha) => {
       name: "signup-form",
       submitButton: {
         alignment: {
-          fill: Fill.Both,
           horizontal: AlignHorizontal.Center
         },
         borderRadius: {
           all: Amount.Least
         },
         label: "Sign up",
-        lineHeight: Sizes.Large
+        lineHeight: Sizes.Large,
+        size: {
+          fill: Fill.Both
+        }
       }
     }), /* @__PURE__ */ jsx$2(Container$8, {
       padding: {
@@ -33547,8 +33626,8 @@ function formatCurrency({ amount, currency }) {
       return `$${amount.toFixed(amount % 1 !== 0 ? 2 : 0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
   }
 }
-const ProgressMeter = memo((_Ja) => {
-  var _Ka = _Ja, {
+const ProgressMeter = memo((_La) => {
+  var _Ma = _La, {
     amount,
     background = {},
     borderRadius = {},
@@ -33558,7 +33637,7 @@ const ProgressMeter = memo((_Ja) => {
       height: Sizes.Default
     },
     total
-  } = _Ka, props = __objRest(_Ka, [
+  } = _Ma, props = __objRest(_Ma, [
     "amount",
     "background",
     "borderRadius",
@@ -33877,8 +33956,8 @@ class ErrorBoundary extends Component {
     });
   }
 }
-const Card = memo((_La) => {
-  var _Ma = _La, {
+const Card = memo((_Na) => {
+  var _Oa = _Na, {
     background = {},
     borderRadius = {},
     children,
@@ -33887,7 +33966,7 @@ const Card = memo((_La) => {
     linkTo,
     shadow = DepthShadow.Higher,
     title
-  } = _Ma, props = __objRest(_Ma, [
+  } = _Oa, props = __objRest(_Oa, [
     "background",
     "borderRadius",
     "children",
@@ -33929,8 +34008,8 @@ const Card = memo((_La) => {
   }
   return content;
 });
-const TitleCard = memo((_Na) => {
-  var _Oa = _Na, {
+const TitleCard = memo((_Pa) => {
+  var _Qa = _Pa, {
     alignment = {},
     background = {},
     borderRadius = {},
@@ -33942,7 +34021,7 @@ const TitleCard = memo((_Na) => {
     icon: icon2,
     shadow = DepthShadow.High,
     size = {}
-  } = _Oa, props = __objRest(_Oa, [
+  } = _Qa, props = __objRest(_Qa, [
     "alignment",
     "background",
     "borderRadius",
@@ -34006,14 +34085,14 @@ const TitleCard = memo((_Na) => {
     })]
   }));
 });
-const PieChart = memo((_Pa) => {
-  var props = __objRest(_Pa, []);
+const PieChart = memo((_Ra) => {
+  var props = __objRest(_Ra, []);
   return /* @__PURE__ */ jsx$2(Container$8, __spreadValues({}, props));
 });
-const RadialChart = memo((_Qa) => {
-  var _Ra = _Qa, {
+const RadialChart = memo((_Sa) => {
+  var _Ta = _Sa, {
     data: data2
-  } = _Ra, props = __objRest(_Ra, [
+  } = _Ta, props = __objRest(_Ta, [
     "data"
   ]);
   return /* @__PURE__ */ jsx$2(Container$8, __spreadValues({}, props));
@@ -34055,35 +34134,39 @@ function useTitle(title) {
     document.title = title;
   }, []);
 }
-const Page = memo((_Sa) => {
-  var _Ta = _Sa, {
+const Page = memo((_Ua) => {
+  var _Va = _Ua, {
     alignment = {},
     background = {},
     children,
     className = "",
     layout: Layout2,
     loading = false,
+    size = {},
     title
-  } = _Ta, props = __objRest(_Ta, [
+  } = _Va, props = __objRest(_Va, [
     "alignment",
     "background",
     "children",
     "className",
     "layout",
     "loading",
+    "size",
     "title"
   ]);
   useTitle(title);
   const PageComp = () => /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
-      fill: Fill.Both,
       overflow: Overflow.ScrollVertical,
       vertical: AlignVertical.Top
     }, alignment),
     background: __spreadValues({
       color: BackgroundColors.Page
     }, background),
-    className: `${className} page`
+    className: `${className} page`,
+    size: __spreadValues({
+      fill: Fill.Both
+    }, size)
   }, props), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
       states: {
@@ -35180,27 +35263,30 @@ function useEntityEditor() {
     showEntityEditor
   };
 }
-const Spacer = memo((_Ua) => {
-  var _Va = _Ua, {
+const Spacer = memo((_Wa) => {
+  var _Xa = _Wa, {
     alignment = {},
     as = "div",
-    children
-  } = _Va, props = __objRest(_Va, [
+    children,
+    size = {}
+  } = _Xa, props = __objRest(_Xa, [
     "alignment",
     "as",
-    "children"
+    "children",
+    "size"
   ]);
   return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
-    alignment: __spreadValues({
+    alignment: __spreadValues({}, alignment),
+    as,
+    size: __spreadValues({
       fill: Fill.Both
-    }, alignment),
-    as
+    }, size)
   }, props), {
     children
   }));
 });
-const HoverPanel = memo((_Wa) => {
-  var _Xa = _Wa, {
+const HoverPanel = memo((_Ya) => {
+  var _Za = _Ya, {
     background = {},
     border = {},
     borderRadius = {},
@@ -35209,7 +35295,7 @@ const HoverPanel = memo((_Wa) => {
     depth = Depth.Higher,
     size = {},
     states = {}
-  } = _Xa, props = __objRest(_Xa, [
+  } = _Za, props = __objRest(_Za, [
     "background",
     "border",
     "borderRadius",
@@ -35250,8 +35336,8 @@ const HoverPanel = memo((_Wa) => {
     children
   }));
 });
-const MoreMenu = memo((_Ya) => {
-  var _Za = _Ya, {
+const MoreMenu = memo((__a) => {
+  var _$a = __a, {
     alignment = {},
     background = {},
     className = "",
@@ -35259,7 +35345,7 @@ const MoreMenu = memo((_Ya) => {
     size = {},
     states = {},
     menu
-  } = _Za, props = __objRest(_Za, [
+  } = _$a, props = __objRest(_$a, [
     "alignment",
     "background",
     "className",
@@ -35370,15 +35456,15 @@ const Dot = styled.span.withConfig({
   displayName: "Dot",
   componentId: "sc-ycayhd-0"
 })(["", ";", ";", ";", ";display:inline-block;"], BackgroundStyles, BorderRadiusStyles, MarginStyles, SizeStyles);
-const ModalHeader = memo((__a) => {
-  var _$a = __a, {
+const ModalHeader = memo((_ab) => {
+  var _bb = _ab, {
     alignment = {},
     className = "",
     onCloseClick,
     moreMenu,
     padding = {},
     title
-  } = _$a, props = __objRest(_$a, [
+  } = _bb, props = __objRest(_bb, [
     "alignment",
     "className",
     "onCloseClick",
@@ -35415,8 +35501,8 @@ const ModalHeader = memo((__a) => {
     })]
   }));
 });
-const SlidePanel = memo((_ab) => {
-  var _bb = _ab, {
+const SlidePanel = memo((_cb) => {
+  var _db = _cb, {
     background = {},
     borderRadius = {},
     children,
@@ -35428,7 +35514,7 @@ const SlidePanel = memo((_ab) => {
     shadow = DepthShadow.Highest,
     size = {},
     states = {}
-  } = _bb, props = __objRest(_bb, [
+  } = _db, props = __objRest(_db, [
     "background",
     "borderRadius",
     "children",
@@ -35598,10 +35684,10 @@ const EntityPreview = memo(({
     })
   });
 });
-const EntityPanel = memo((_cb) => {
-  var _db = _cb, {
+const EntityPanel = memo((_eb) => {
+  var _fb = _eb, {
     actions
-  } = _db, props = __objRest(_db, [
+  } = _fb, props = __objRest(_fb, [
     "actions"
   ]);
   const dispatch = useDispatch();
@@ -35711,15 +35797,15 @@ const EntityPanel = memo((_cb) => {
     }))
   });
 });
-const Backdrop = memo((_eb) => {
-  var _fb = _eb, {
+const Backdrop = memo((_gb) => {
+  var _hb = _gb, {
     as = "div",
     background = {},
     children,
     className = "",
     position = {},
     states = {}
-  } = _fb, props = __objRest(_fb, [
+  } = _hb, props = __objRest(_hb, [
     "as",
     "background",
     "children",
@@ -35749,23 +35835,23 @@ const Backdrop = memo((_eb) => {
     children
   }));
 });
-const WebApplication = memo((_gb) => {
-  var _hb = _gb, {
+const WebApplication = memo((_ib) => {
+  var _jb = _ib, {
     actions,
-    alignment = {},
     authentication = false,
     background = {},
     children,
     className = "",
-    httpClient
-  } = _hb, props = __objRest(_hb, [
+    httpClient,
+    size = {}
+  } = _jb, props = __objRest(_jb, [
     "actions",
-    "alignment",
     "authentication",
     "background",
     "children",
     "className",
-    "httpClient"
+    "httpClient",
+    "size"
   ]);
   var _a2, _b, _c, _d;
   const [loginRequired, setLoginRequired] = useState(true);
@@ -35814,13 +35900,20 @@ const WebApplication = memo((_gb) => {
   const loginCondition = authentication ? loggedIn && (loginRequired || !loginRequired) || !loggedIn && !loginRequired : true;
   const showOutlet = !inProgress && loginCondition;
   return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
-    alignment: __spreadValues({
-      fill: Fill.Both
-    }, alignment),
     background: __spreadValues({
       color: BackgroundColors.Lightest
     }, background),
-    className: `${className} web-application`
+    className: `${className} web-application`,
+    position: {
+      behavior: PositionBehavior.Absolute,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      top: 0
+    },
+    size: __spreadValues({
+      fill: Fill.Both
+    }, size)
   }, props), {
     children: /* @__PURE__ */ jsxs$1(ThemeProvider, {
       theme: current,
@@ -35844,8 +35937,8 @@ const WebApplication = memo((_gb) => {
     })
   }));
 });
-const SubTitle = memo((_ib) => {
-  var _jb = _ib, {
+const SubTitle = memo((_kb) => {
+  var _lb = _kb, {
     as = "h2",
     children,
     className = "",
@@ -35853,7 +35946,7 @@ const SubTitle = memo((_ib) => {
     textSize = TextSize.Large,
     textColor = TextColors.SubTitle,
     textWeight = TextWeight.More
-  } = _jb, props = __objRest(_jb, [
+  } = _lb, props = __objRest(_lb, [
     "as",
     "children",
     "className",
@@ -35874,8 +35967,8 @@ const SubTitle = memo((_ib) => {
     children: children != null ? children : ""
   }));
 });
-const Workspace = memo((_kb) => {
-  var _lb = _kb, {
+const Workspace = memo((_mb) => {
+  var _nb = _mb, {
     alignment = {},
     background = {},
     className = "",
@@ -35885,8 +35978,9 @@ const Workspace = memo((_kb) => {
     loading = false,
     loginRequired = false,
     padding = {},
+    size = {},
     title
-  } = _lb, props = __objRest(_lb, [
+  } = _nb, props = __objRest(_nb, [
     "alignment",
     "background",
     "className",
@@ -35896,12 +35990,12 @@ const Workspace = memo((_kb) => {
     "loading",
     "loginRequired",
     "padding",
+    "size",
     "title"
   ]);
   useTitle(title);
   const WorkspaceComp = (props2) => /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues(__spreadValues({
     alignment: __spreadValues({
-      fill: Fill.Both,
       overflow: Overflow.ScrollVertical,
       vertical: AlignVertical.Top
     }, alignment),
@@ -35911,7 +36005,10 @@ const Workspace = memo((_kb) => {
     className: `${className} workspace`,
     padding: __spreadValues({
       all: Amount.Most
-    }, padding)
+    }, padding),
+    size: __spreadValues({
+      fill: Fill.Both
+    }, size)
   }, props), props2), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
       states: {
@@ -35929,9 +36026,6 @@ const Workspace = memo((_kb) => {
         bottom: Amount.All
       },
       children: [/* @__PURE__ */ jsxs$1(Container$8, {
-        alignment: {
-          fill: Fill.Horizontal
-        },
         children: [(header == null ? void 0 : header.title) && /* @__PURE__ */ jsx$2(Container$8, {
           alignment: {
             orientation: Orientation.Horizontal,
@@ -36013,30 +36107,7 @@ function fetchFromObject(obj, prop) {
   }
   return obj[prop];
 }
-const StringLabel = memo((_mb) => {
-  var _nb = _mb, {
-    icon: icon2,
-    lineHeight = Sizes.Default,
-    textColor = TextColors.Lighter,
-    textSize = TextSize.Default,
-    value: value2
-  } = _nb, props = __objRest(_nb, [
-    "icon",
-    "lineHeight",
-    "textColor",
-    "textSize",
-    "value"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    icon: icon2,
-    lineHeight,
-    textColor,
-    textSize
-  }, props), {
-    children: value2
-  }));
-});
-const NumberLabel = memo((_ob) => {
+const StringLabel = memo((_ob) => {
   var _pb = _ob, {
     icon: icon2,
     lineHeight = Sizes.Default,
@@ -36059,11 +36130,34 @@ const NumberLabel = memo((_ob) => {
     children: value2
   }));
 });
-const CurrencyAmountLabel = memo((_qb) => {
+const NumberLabel = memo((_qb) => {
   var _rb = _qb, {
+    icon: icon2,
+    lineHeight = Sizes.Default,
+    textColor = TextColors.Lighter,
+    textSize = TextSize.Default,
+    value: value2
+  } = _rb, props = __objRest(_rb, [
+    "icon",
+    "lineHeight",
+    "textColor",
+    "textSize",
+    "value"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    icon: icon2,
+    lineHeight,
+    textColor,
+    textSize
+  }, props), {
+    children: value2
+  }));
+});
+const CurrencyAmountLabel = memo((_sb) => {
+  var _tb = _sb, {
     amount,
     currency
-  } = _rb, props = __objRest(_rb, [
+  } = _tb, props = __objRest(_tb, [
     "amount",
     "currency"
   ]);
@@ -36071,10 +36165,10 @@ const CurrencyAmountLabel = memo((_qb) => {
     children: amount === 0 ? "$0" : amount ? `$${amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ""
   }));
 });
-const PercentLabel = memo((_sb) => {
-  var _tb = _sb, {
+const PercentLabel = memo((_ub) => {
+  var _vb = _ub, {
     value: value2
-  } = _tb, props = __objRest(_tb, [
+  } = _vb, props = __objRest(_vb, [
     "value"
   ]);
   return /* @__PURE__ */ jsxs$1(Label, __spreadProps(__spreadValues({}, props), {
@@ -39897,15 +39991,15 @@ function friendlyDateTime(dateTimeish) {
     throw new InvalidArgumentError(`Unknown datetime argument: ${dateTimeish}, of type ${typeof dateTimeish}`);
   }
 }
-const DateLabel = memo((_ub) => {
-  var _vb = _ub, {
+const DateLabel = memo((_wb) => {
+  var _xb = _wb, {
     className = "",
     format = DateTime.DATE_MED,
     icon: icon2,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _vb, props = __objRest(_vb, [
+  } = _xb, props = __objRest(_xb, [
     "className",
     "format",
     "icon",
@@ -39922,8 +40016,8 @@ const DateLabel = memo((_ub) => {
     children: DateTime.fromISO(value2).toLocaleString(format)
   }));
 });
-const MenuItemLabel = memo((_wb) => {
-  var _xb = _wb, {
+const MenuItemLabel = memo((_yb) => {
+  var _zb = _yb, {
     fieldName,
     icon: icon2,
     lineHeight = Sizes.Default,
@@ -39931,7 +40025,7 @@ const MenuItemLabel = memo((_wb) => {
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _xb, props = __objRest(_xb, [
+  } = _zb, props = __objRest(_zb, [
     "fieldName",
     "icon",
     "lineHeight",
@@ -39995,14 +40089,14 @@ function getLabelByFieldType({
       }, props));
   }
 }
-const DataGridCell = memo((_yb) => {
-  var _zb = _yb, {
+const DataGridCell = memo((_Ab) => {
+  var _Bb = _Ab, {
     as = "label",
     fieldName,
     model,
     type,
     value: value2
-  } = _zb, props = __objRest(_zb, [
+  } = _Bb, props = __objRest(_Bb, [
     "as",
     "fieldName",
     "model",
@@ -40057,8 +40151,8 @@ const SearchInput = memo((props) => {
     spellCheck: false
   }, props));
 });
-const MenuButton = memo((_Ab) => {
-  var _Bb = _Ab, {
+const MenuButton = memo((_Cb) => {
+  var _Db = _Cb, {
     background = {},
     border = {},
     borderRadius = {},
@@ -40069,7 +40163,7 @@ const MenuButton = memo((_Ab) => {
     size = {},
     states = {},
     textColor = TextColors.MenuButton
-  } = _Bb, props = __objRest(_Bb, [
+  } = _Db, props = __objRest(_Db, [
     "background",
     "border",
     "borderRadius",
@@ -40178,8 +40272,8 @@ const MenuButton = memo((_Ab) => {
     }))]
   }));
 });
-const DataGrid = memo((_Cb) => {
-  var _Db = _Cb, {
+const DataGrid = memo((_Eb) => {
+  var _Fb = _Eb, {
     background = {},
     borderRadius = {},
     className = "",
@@ -40196,7 +40290,7 @@ const DataGrid = memo((_Cb) => {
     shadow = DepthShadow.Highest,
     states = {},
     template
-  } = _Db, props = __objRest(_Db, [
+  } = _Fb, props = __objRest(_Fb, [
     "background",
     "borderRadius",
     "className",
@@ -40488,14 +40582,14 @@ const NoResults = styled.div.withConfig({
   displayName: "NoResults",
   componentId: "sc-s798s5-0"
 })(["color:#9b9b9b;font-size:13px;font-weight:500;padding:50px 0;text-align:center;"]);
-const BooleanLabel = memo((_Eb) => {
-  var _Fb = _Eb, {
+const BooleanLabel = memo((_Gb) => {
+  var _Hb = _Gb, {
     icon: icon2,
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _Fb, props = __objRest(_Fb, [
+  } = _Hb, props = __objRest(_Hb, [
     "icon",
     "lineHeight",
     "textColor",
@@ -40514,30 +40608,7 @@ const BooleanLabel = memo((_Eb) => {
     }), value2]
   }));
 });
-const ColorLabel = memo((_Gb) => {
-  var _Hb = _Gb, {
-    icon: icon2,
-    lineHeight = Sizes.Default,
-    textColor = TextColors.Lighter,
-    textSize = TextSize.Default,
-    value: value2
-  } = _Hb, props = __objRest(_Hb, [
-    "icon",
-    "lineHeight",
-    "textColor",
-    "textSize",
-    "value"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    icon: icon2,
-    lineHeight,
-    textColor,
-    textSize
-  }, props), {
-    children: value2
-  }));
-});
-const EmailAddressLabel = memo((_Ib) => {
+const ColorLabel = memo((_Ib) => {
   var _Jb = _Ib, {
     icon: icon2,
     lineHeight = Sizes.Default,
@@ -40560,7 +40631,7 @@ const EmailAddressLabel = memo((_Ib) => {
     children: value2
   }));
 });
-const PhoneNumberLabel = memo((_Kb) => {
+const EmailAddressLabel = memo((_Kb) => {
   var _Lb = _Kb, {
     icon: icon2,
     lineHeight = Sizes.Default,
@@ -40583,15 +40654,38 @@ const PhoneNumberLabel = memo((_Kb) => {
     children: value2
   }));
 });
-const ProgressLabel = memo((_Mb) => {
+const PhoneNumberLabel = memo((_Mb) => {
   var _Nb = _Mb, {
-    color,
     icon: icon2,
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
   } = _Nb, props = __objRest(_Nb, [
+    "icon",
+    "lineHeight",
+    "textColor",
+    "textSize",
+    "value"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    icon: icon2,
+    lineHeight,
+    textColor,
+    textSize
+  }, props), {
+    children: value2
+  }));
+});
+const ProgressLabel = memo((_Ob) => {
+  var _Pb = _Ob, {
+    color,
+    icon: icon2,
+    lineHeight = Sizes.Default,
+    textColor = TextColors.Lighter,
+    textSize = TextSize.Default,
+    value: value2
+  } = _Pb, props = __objRest(_Pb, [
     "color",
     "icon",
     "lineHeight",
@@ -40616,30 +40710,7 @@ const ProgressLabel = memo((_Mb) => {
     })
   }));
 });
-const CountryLabel = memo((_Ob) => {
-  var _Pb = _Ob, {
-    icon: icon2,
-    lineHeight = Sizes.Default,
-    textColor = TextColors.Lighter,
-    textSize = TextSize.Default,
-    value: value2
-  } = _Pb, props = __objRest(_Pb, [
-    "icon",
-    "lineHeight",
-    "textColor",
-    "textSize",
-    "value"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    icon: icon2,
-    lineHeight,
-    textColor,
-    textSize
-  }, props), {
-    children: value2
-  }));
-});
-const LanguageLabel = memo((_Qb) => {
+const CountryLabel = memo((_Qb) => {
   var _Rb = _Qb, {
     icon: icon2,
     lineHeight = Sizes.Default,
@@ -40662,12 +40733,35 @@ const LanguageLabel = memo((_Qb) => {
     children: value2
   }));
 });
-const PersonLabel = memo((_Sb) => {
+const LanguageLabel = memo((_Sb) => {
   var _Tb = _Sb, {
+    icon: icon2,
+    lineHeight = Sizes.Default,
+    textColor = TextColors.Lighter,
+    textSize = TextSize.Default,
+    value: value2
+  } = _Tb, props = __objRest(_Tb, [
+    "icon",
+    "lineHeight",
+    "textColor",
+    "textSize",
+    "value"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    icon: icon2,
+    lineHeight,
+    textColor,
+    textSize
+  }, props), {
+    children: value2
+  }));
+});
+const PersonLabel = memo((_Ub) => {
+  var _Vb = _Ub, {
     image,
     name: name2,
     textSize = TextSize.Large
-  } = _Tb, props = __objRest(_Tb, [
+  } = _Vb, props = __objRest(_Vb, [
     "image",
     "name",
     "textSize"
@@ -40751,12 +40845,12 @@ const UserLabel = memo(({
     })]
   });
 });
-const MarkdownEditor = memo((_Ub) => {
-  var props = __objRest(_Ub, []);
+const MarkdownEditor = memo((_Wb) => {
+  var props = __objRest(_Wb, []);
   return /* @__PURE__ */ jsx$2("div", {});
 });
-const ObjectPropertiesView = memo((_Vb) => {
-  var _Wb = _Vb, {
+const ObjectPropertiesView = memo((_Xb) => {
+  var _Yb = _Xb, {
     background = {},
     borderRadius = {},
     className = "",
@@ -40764,7 +40858,7 @@ const ObjectPropertiesView = memo((_Vb) => {
     properties: properties2,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default
-  } = _Wb, props = __objRest(_Wb, [
+  } = _Yb, props = __objRest(_Yb, [
     "background",
     "borderRadius",
     "className",
@@ -40823,25 +40917,27 @@ const ObjectPropertiesView = memo((_Vb) => {
     shadow: DepthShadow.High
   }, props), {
     children: /* @__PURE__ */ jsx$2(Container$8, {
-      alignment: {
-        fill: Fill.Horizontal
-      },
       borderRadius: __spreadValues({
         all: Amount.Least,
         topLeft: Amount.None,
         topRight: Amount.None
       }, borderRadius),
+      size: {
+        fill: Fill.Horizontal
+      },
       children: Object.keys(properties2).map((property, key) => {
         var _a2, _b;
         return /* @__PURE__ */ jsxs$1(Container$8, {
           alignment: {
-            fill: Fill.Horizontal,
             orientation: Orientation.Horizontal
           },
           border: {
             bottom: {
               color: BorderColors.Lighter
             }
+          },
+          size: {
+            fill: Fill.Horizontal
           },
           children: [/* @__PURE__ */ jsx$2(Container$8, {
             border: {
@@ -40921,13 +41017,13 @@ const ObjectPropertiesView = memo((_Vb) => {
     })
   }));
 });
-const StaticTypeLabel = memo((_Xb) => {
-  var _Yb = _Xb, {
+const StaticTypeLabel = memo((_Zb) => {
+  var __b = _Zb, {
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _Yb, props = __objRest(_Yb, [
+  } = __b, props = __objRest(__b, [
     "lineHeight",
     "textColor",
     "textSize",
@@ -41045,12 +41141,12 @@ const ActivityFeedItem = memo(({
     })]
   });
 });
-const ActivityFeed = memo((_Zb) => {
-  var __b = _Zb, {
+const ActivityFeed = memo((_$b) => {
+  var _ac = _$b, {
     activities,
     className = "",
     dateFormat = DateTime.DATE_MED
-  } = __b, props = __objRest(__b, [
+  } = _ac, props = __objRest(_ac, [
     "activities",
     "className",
     "dateFormat"
@@ -41143,14 +41239,14 @@ const Content$1 = styled.div.withConfig({
 const InputHelper = memo(() => {
   return /* @__PURE__ */ jsx$2(Fragment, {});
 });
-const Checkbox = memo((_$b) => {
-  var _ac = _$b, {
+const Checkbox = memo((_bc) => {
+  var _cc = _bc, {
     className = "",
     defaultValue,
     events = {},
     size = {},
     validation = {}
-  } = _ac, props = __objRest(_ac, [
+  } = _cc, props = __objRest(_cc, [
     "className",
     "defaultValue",
     "events",
@@ -52363,11 +52459,11 @@ function rgbHex(red, green, blue, alpha) {
   return (blue | green << 8 | red << 16 | 1 << 24).toString(16).slice(1) + alpha;
 }
 const defaultColors = ["244,67,54", "233,30,99", "156,39,176", "103,58,183", "63,81,181", "33,150,243", "3,169,244", "0,188,212", "0,150,136", "76,175,80", "139,195,74", "205,220,57", "255,235,59", "255,193,7", "255,152,0", "255,87,34", "121,85,72", "96,125,139"];
-const ColorInput = memo((_bc) => {
-  var _cc = _bc, {
+const ColorInput = memo((_dc) => {
+  var _ec = _dc, {
     defaultValue,
     events = {}
-  } = _cc, props = __objRest(_cc, [
+  } = _ec, props = __objRest(_ec, [
     "defaultValue",
     "events"
   ]);
@@ -52460,15 +52556,15 @@ const DynamicInput = memo(({
   };
   return getInputComponentByType();
 });
-const StreetAddressInput = memo((_dc) => {
-  var props = __objRest(_dc, []);
+const StreetAddressInput = memo((_fc) => {
+  var props = __objRest(_fc, []);
   return /* @__PURE__ */ jsx$2(TextInput, __spreadValues({}, props));
 });
-const ListItem = memo((_ec) => {
-  var _fc = _ec, {
+const ListItem = memo((_gc) => {
+  var _hc = _gc, {
     as = "li",
     children
-  } = _fc, props = __objRest(_fc, [
+  } = _hc, props = __objRest(_hc, [
     "as",
     "children"
   ]);
@@ -52485,11 +52581,11 @@ const ListItem = memo((_ec) => {
     children
   }));
 });
-const OrderedList = memo((_gc) => {
-  var _hc = _gc, {
+const OrderedList = memo((_ic) => {
+  var _jc = _ic, {
     as = "ul",
     children
-  } = _hc, props = __objRest(_hc, [
+  } = _jc, props = __objRest(_jc, [
     "as",
     "children"
   ]);
@@ -52499,12 +52595,12 @@ const OrderedList = memo((_gc) => {
     children
   }));
 });
-const UnorderedList = memo((_ic) => {
-  var _jc = _ic, {
+const UnorderedList = memo((_kc) => {
+  var _lc = _kc, {
     as = "ul",
     items,
     margin = {}
-  } = _jc, props = __objRest(_jc, [
+  } = _lc, props = __objRest(_lc, [
     "as",
     "items",
     "margin"
@@ -52533,11 +52629,11 @@ const UnorderedList = memo((_ic) => {
     }, index))
   }));
 });
-const Video = memo((_kc) => {
-  var _lc = _kc, {
+const Video = memo((_mc) => {
+  var _nc = _mc, {
     className = "",
     url
-  } = _lc, props = __objRest(_lc, [
+  } = _nc, props = __objRest(_nc, [
     "className",
     "url"
   ]);
@@ -52553,8 +52649,8 @@ const VideoElement = styled.video.withConfig({
   displayName: "VideoElement",
   componentId: "sc-1ai2qam-0"
 })([""]);
-const MediaGridItem = memo((_mc) => {
-  var _nc = _mc, {
+const MediaGridItem = memo((_oc) => {
+  var _pc = _oc, {
     alignment = {},
     background = {},
     borderRadius = {},
@@ -52565,7 +52661,7 @@ const MediaGridItem = memo((_mc) => {
     title,
     url,
     video
-  } = _nc, props = __objRest(_nc, [
+  } = _pc, props = __objRest(_pc, [
     "alignment",
     "background",
     "borderRadius",
@@ -52625,20 +52721,22 @@ const MediaGridItem = memo((_mc) => {
     children: content
   }));
 });
-const MediaGrid = memo((_oc) => {
-  var _pc = _oc, {
+const MediaGrid = memo((_qc) => {
+  var _rc = _qc, {
     borderRadius = {},
     children,
     columns = 5,
     className = "",
     items = [],
+    size = {},
     states = {}
-  } = _pc, props = __objRest(_pc, [
+  } = _rc, props = __objRest(_rc, [
     "borderRadius",
     "children",
     "columns",
     "className",
     "items",
+    "size",
     "states"
   ]);
   var _a2, _b;
@@ -52646,13 +52744,13 @@ const MediaGrid = memo((_oc) => {
     length: Math.ceil(items.length / columns)
   }).fill(0);
   return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
-    alignment: {
-      fill: Fill.Both
-    },
     borderRadius: __spreadValues({
       all: Amount.Default
     }, borderRadius),
-    className: `${className} media-grid`
+    className: `${className} media-grid`,
+    size: __spreadValues({
+      fill: Fill.Both
+    }, size)
   }, props), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
       background: {
@@ -52667,12 +52765,14 @@ const MediaGrid = memo((_oc) => {
     }), rows.map((x, row) => {
       return /* @__PURE__ */ jsx$2(Container$8, {
         alignment: {
-          fill: Fill.Both,
           orientation: Orientation.Horizontal
         },
         className: "media-grid-row",
         margin: {
           bottom: Amount.Default
+        },
+        size: {
+          fill: Fill.Both
         },
         children: items.slice(columns * row, columns * row + columns).map((i2, key) => /* @__PURE__ */ createElement$1(MediaGridItem, __spreadProps(__spreadValues({}, i2), {
           margin: __spreadValues({
@@ -52688,13 +52788,13 @@ const MediaGrid = memo((_oc) => {
     })]
   }));
 });
-const MediaPreview = memo((_qc) => {
-  var _rc = _qc, {
+const MediaPreview = memo((_sc) => {
+  var _tc = _sc, {
     alignment = {},
     borderRadius = {},
     className = "",
     media
-  } = _rc, props = __objRest(_rc, [
+  } = _tc, props = __objRest(_tc, [
     "alignment",
     "borderRadius",
     "className",
@@ -52744,8 +52844,8 @@ styled.svg.withConfig({
   displayName: "SvgMedia",
   componentId: "sc-1xm40ad-0"
 })(["align-items:center;display:flex;justify-content:center;svg{fill:rgb(", ");}"], (props) => props.color);
-const Svg = memo((_sc) => {
-  var _tc = _sc, {
+const Svg = memo((_uc) => {
+  var _vc = _uc, {
     as = "span",
     children,
     className = "",
@@ -52753,7 +52853,7 @@ const Svg = memo((_sc) => {
       height: Sizes.Small,
       width: Sizes.Small
     }
-  } = _tc, props = __objRest(_tc, [
+  } = _vc, props = __objRest(_vc, [
     "as",
     "children",
     "className",
@@ -52767,8 +52867,8 @@ const Svg = memo((_sc) => {
     children
   }));
 });
-const MessagePreview = memo((_uc) => {
-  var _vc = _uc, {
+const MessagePreview = memo((_wc) => {
+  var _xc = _wc, {
     background = {},
     body,
     borderRadius = {},
@@ -52776,7 +52876,7 @@ const MessagePreview = memo((_uc) => {
     date,
     subject,
     sender
-  } = _vc, props = __objRest(_vc, [
+  } = _xc, props = __objRest(_xc, [
     "background",
     "body",
     "borderRadius",
@@ -52859,14 +52959,14 @@ const MessagePreview = memo((_uc) => {
     })]
   }));
 });
-const ConversationList = memo((_wc) => {
-  var _xc = _wc, {
+const ConversationList = memo((_yc) => {
+  var _zc = _yc, {
     alignment = {},
     background = {},
     borderRadius = {},
     className = "",
     size = {}
-  } = _xc, props = __objRest(_xc, [
+  } = _zc, props = __objRest(_zc, [
     "alignment",
     "background",
     "borderRadius",
@@ -52915,8 +53015,8 @@ const ConversationList = memo((_wc) => {
     })
   }));
 });
-const NavigationMenu = memo((_yc) => {
-  var _zc = _yc, {
+const NavigationMenu = memo((_Ac) => {
+  var _Bc = _Ac, {
     alignment = {},
     background = {},
     className = "",
@@ -52924,8 +53024,9 @@ const NavigationMenu = memo((_yc) => {
     matchExactPath = false,
     menu = [],
     padding = {},
+    size = {},
     states = {}
-  } = _zc, props = __objRest(_zc, [
+  } = _Bc, props = __objRest(_Bc, [
     "alignment",
     "background",
     "className",
@@ -52933,6 +53034,7 @@ const NavigationMenu = memo((_yc) => {
     "matchExactPath",
     "menu",
     "padding",
+    "size",
     "states"
   ]);
   return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
@@ -52945,72 +53047,76 @@ const NavigationMenu = memo((_yc) => {
       color: BackgroundColors.NavigationMenu
     }, background),
     className: `${className} navigation-menu`,
-    padding: __spreadValues({
-      all: Amount.Less
-    }, padding)
+    size: __spreadValues({
+      width: 280
+    }, size)
   }, props), {
-    children: menu.map((item, key) => {
-      var _a2, _b, _c, _d;
-      return /* @__PURE__ */ jsx$2(NavigationLink, {
-        alignment: {
-          fill: Fill.Horizontal
-        },
-        background: __spreadValues({
-          color: (_b = (_a2 = item == null ? void 0 : item.background) == null ? void 0 : _a2.color) != null ? _b : BackgroundColors.Transparent
-        }, background),
-        borderRadius: (_c = item.borderRadius) != null ? _c : {
-          all: Amount.Least
-        },
-        className: "navigation-menu-item",
-        icon: item.icon,
-        label: item.label,
-        lineHeight: Sizes.Large,
-        margin: __spreadValues({
-          bottom: Amount.Least
-        }, margin),
-        matchExactPath,
-        padding: __spreadValues({
-          bottom: Amount.Least,
-          left: Amount.Default,
-          right: Amount.Default,
-          top: Amount.Least
-        }, padding),
-        states: __spreadValues({
-          active: {
-            background: {
-              color: BackgroundColors.Dark
-            },
-            textColor: TextColors.Darker
+    children: /* @__PURE__ */ jsx$2(Scrollable, {
+      padding: __spreadValues({
+        all: Amount.Less
+      }, padding),
+      children: menu.map((item, key) => {
+        var _a2, _b, _c, _d;
+        return /* @__PURE__ */ jsx$2(NavigationLink, {
+          background: {
+            color: (_b = (_a2 = item == null ? void 0 : item.background) == null ? void 0 : _a2.color) != null ? _b : BackgroundColors.Transparent
           },
-          current: {
-            background: {
-              color: BackgroundColors.Primary
-            },
-            textColor: TextColors.PrimaryContrast
+          borderRadius: (_c = item.borderRadius) != null ? _c : {
+            all: Amount.Least
           },
-          focused: {
-            textColor: TextColors.PrimaryContrast
+          className: "navigation-menu-item",
+          icon: item.icon,
+          label: item.label,
+          lineHeight: Sizes.Large,
+          margin: __spreadValues({
+            bottom: Amount.Least
+          }, margin),
+          matchExactPath,
+          padding: __spreadValues({
+            bottom: Amount.Least,
+            left: Amount.Default,
+            right: Amount.Default,
+            top: Amount.Least
+          }, padding),
+          size: {
+            fill: Fill.Horizontal
           },
-          hovered: {
-            background: {
-              color: BackgroundColors.Light
+          states: __spreadValues({
+            active: {
+              background: {
+                color: BackgroundColors.Dark
+              },
+              textColor: TextColors.Darker
             },
-            textColor: TextColors.Darker
-          }
-        }, states),
-        textColor: TextColors.Default,
-        to: (_d = item.to) != null ? _d : "#"
-      }, key);
+            current: {
+              background: {
+                color: BackgroundColors.Primary
+              },
+              textColor: TextColors.PrimaryContrast
+            },
+            focused: {
+              textColor: TextColors.PrimaryContrast
+            },
+            hovered: {
+              background: {
+                color: BackgroundColors.Light
+              },
+              textColor: TextColors.Darker
+            }
+          }, states),
+          textColor: TextColors.Default,
+          to: (_d = item.to) != null ? _d : "#"
+        }, key);
+      })
     })
   }));
 });
-const ConversationNavigation = memo((_Ac) => {
-  var props = __objRest(_Ac, []);
+const ConversationNavigation = memo((_Cc) => {
+  var props = __objRest(_Cc, []);
   const navigate = useNavigate();
   return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({}, props), {
     children: [/* @__PURE__ */ jsx$2(Button$1, {
       alignment: {
-        fill: Fill.Horizontal,
         vertical: AlignVertical.Center
       },
       borderRadius: {
@@ -53030,6 +53136,9 @@ const ConversationNavigation = memo((_Ac) => {
       },
       margin: {
         bottom: Amount.Default
+      },
+      size: {
+        fill: Fill.Horizontal
       },
       type: ButtonType.Primary,
       children: "New Message"
@@ -53098,8 +53207,8 @@ const Message$1 = memo(({
 }) => {
   return /* @__PURE__ */ jsx$2(Container$8, {});
 });
-const MessageComposer = memo((_Bc) => {
-  var props = __objRest(_Bc, []);
+const MessageComposer = memo((_Dc) => {
+  var props = __objRest(_Dc, []);
   return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     background: {
       color: BackgroundColors.Default
@@ -53206,27 +53315,31 @@ const Content = styled.div.withConfig({
   displayName: "Content",
   componentId: "sc-gk61f6-1"
 })(["background:white;border-radius:15px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);padding:20px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;"]);
-const BreadcrumbNavigation = memo((_Cc) => {
-  var _Dc = _Cc, {
+const BreadcrumbNavigation = memo((_Ec) => {
+  var _Fc = _Ec, {
     alignment = {},
     className = "",
     items = [],
     shadow = DepthShadow.Surface,
+    size = {},
     textSize = TextSize.Default
-  } = _Dc, props = __objRest(_Dc, [
+  } = _Fc, props = __objRest(_Fc, [
     "alignment",
     "className",
     "items",
     "shadow",
+    "size",
     "textSize"
   ]);
   return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
-      fill: Fill.Both,
       orientation: Orientation.Horizontal
     }, alignment),
     className: `${className} menu`,
-    shadow
+    shadow,
+    size: __spreadValues({
+      fill: Fill.Both
+    }, size)
   }, props), {
     children: items.map(({
       label,
@@ -53369,12 +53482,12 @@ const NavigationBar = memo(({
     })]
   });
 });
-const ObjectLink = memo((_Ec) => {
-  var _Fc = _Ec, {
+const ObjectLink = memo((_Gc) => {
+  var _Hc = _Gc, {
     children,
     disabled,
     onClick
-  } = _Fc, props = __objRest(_Fc, [
+  } = _Hc, props = __objRest(_Hc, [
     "children",
     "disabled",
     "onClick"
@@ -53421,32 +53534,24 @@ const IconWrapper$1 = styled.div.withConfig({
   displayName: "IconWrapper",
   componentId: "sc-10hsjyi-1"
 })(["flex-basis:20px;"]);
-const RouterView = memo((_Gc) => {
-  var _Hc = _Gc, {
+const RouterView = memo((_Ic) => {
+  var _Jc = _Ic, {
     alignment = {},
     className = "",
     routes = []
-  } = _Hc, props = __objRest(_Hc, [
+  } = _Jc, props = __objRest(_Jc, [
     "alignment",
     "className",
     "routes"
   ]);
-  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
-    alignment: __spreadValues({
-      fill: Fill.Both,
-      overflow: Overflow.ScrollVertical
-    }, alignment),
-    className: `${className} router-view`
-  }, props), {
-    children: /* @__PURE__ */ jsx$2(Routes, {
-      children: routes.map((route, key) => {
-        return /* @__PURE__ */ jsx$2(Route, __spreadValues({
-          element: /* @__PURE__ */ jsx$2(route.component, {}),
-          path: route.path
-        }, route), key);
-      })
+  return /* @__PURE__ */ jsx$2(Routes, {
+    children: routes.map((route, key) => {
+      return /* @__PURE__ */ jsx$2(Route, __spreadValues({
+        element: /* @__PURE__ */ jsx$2(route.component, {}),
+        path: route.path
+      }, route), key);
     })
-  }));
+  });
 });
 var reactIs = { exports: {} };
 var reactIs_production_min = {};
@@ -53566,12 +53671,12 @@ reactIs_production_min.typeOf = y;
 {
   reactIs.exports = reactIs_production_min;
 }
-const Tab = memo((_Ic) => {
-  var _Jc = _Ic, {
+const Tab = memo((_Kc) => {
+  var _Lc = _Kc, {
     className = "",
     children,
     label
-  } = _Jc, props = __objRest(_Jc, [
+  } = _Lc, props = __objRest(_Lc, [
     "className",
     "children",
     "label"
@@ -53583,13 +53688,13 @@ const Tab = memo((_Ic) => {
     children
   }));
 });
-const Tabs = memo((_Kc) => {
-  var _Lc = _Kc, {
+const Tabs = memo((_Mc) => {
+  var _Nc = _Mc, {
     background = {},
     borderRadius = {},
     className = "",
     children
-  } = _Lc, props = __objRest(_Lc, [
+  } = _Nc, props = __objRest(_Nc, [
     "background",
     "borderRadius",
     "className",
@@ -53662,18 +53767,18 @@ const Tabs = memo((_Kc) => {
     })]
   }));
 });
-const ConnectionStatus = memo((_Mc) => {
-  var props = __objRest(_Mc, []);
+const ConnectionStatus = memo((_Oc) => {
+  var props = __objRest(_Oc, []);
   return /* @__PURE__ */ jsx$2(NotificationLabel, __spreadValues({
     type: C$2.Success,
     label: "Connected"
   }, props));
 });
-const Badge = memo((_Nc) => {
-  var _Oc = _Nc, {
+const Badge = memo((_Pc) => {
+  var _Qc = _Pc, {
     children,
     label
-  } = _Oc, props = __objRest(_Oc, [
+  } = _Qc, props = __objRest(_Qc, [
     "children",
     "label"
   ]);
@@ -53725,8 +53830,8 @@ const Close = styled.div.withConfig({
   displayName: "Close",
   componentId: "sc-hj2572-4"
 })(["float:right;height:60px;line-height:49px;text-align:center;width:60px;"]);
-const Heading = memo((_Pc) => {
-  var _Qc = _Pc, {
+const Heading = memo((_Rc) => {
+  var _Sc = _Rc, {
     as = "h3",
     children,
     className = "",
@@ -53734,7 +53839,7 @@ const Heading = memo((_Pc) => {
     textWeight = TextWeight.More,
     textColor = TextColors.Dark,
     textSize = TextSize.Large
-  } = _Qc, props = __objRest(_Qc, [
+  } = _Sc, props = __objRest(_Sc, [
     "as",
     "children",
     "className",
@@ -53809,11 +53914,11 @@ const SearchResults = styled.div.withConfig({
   displayName: "SearchResults",
   componentId: "sc-1rpv9xw-0"
 })(["backdrop-filter:blur(3px);background:var(--bg-color-depth-highest-opaque);border-radius:var(--border-radius);cursor:default;display:none;overflow:hidden;overflow-y:scroll;left:20px;max-height:390px;min-height:300px;position:absolute;opacity:0;pointer-events:none;top:80%;transform:translateY(-300px);transition:opacity 0.18s ease-in-out,transform 0.18s ease-in-out;min-width:500px;max-width:500px;z-index:3;.result{margin-bottom:3px;}", ";"], (props) => props.resultsVisible && css$2(["display:flex;opacity:1;pointer-events:all;transform:translateY(0);"]));
-const ThemeSelector = memo((_Rc) => {
-  var _Sc = _Rc, {
-    showLabel = true
-  } = _Sc, props = __objRest(_Sc, [
-    "showLabel"
+const ThemeSelector = memo((_Tc) => {
+  var _Uc = _Tc, {
+    label
+  } = _Uc, props = __objRest(_Uc, [
+    "label"
   ]);
   const dispatch = useDispatch();
   const {
@@ -53821,8 +53926,8 @@ const ThemeSelector = memo((_Rc) => {
     list
   } = useSelector((state) => state.ui.themes);
   return /* @__PURE__ */ jsxs$1(Fragment, {
-    children: [showLabel && /* @__PURE__ */ jsx$2(InputLabel, {
-      children: "Theme"
+    children: [label && /* @__PURE__ */ jsx$2(InputLabel, {
+      children: label
     }), /* @__PURE__ */ jsx$2(DropdownInput, __spreadValues({
       defaultValue: current,
       events: {
@@ -74732,14 +74837,14 @@ var style = {
     "background": "linear-gradient(to right, rgba(224, 145, 66, 0.2) 70%, rgba(224, 145, 66, 0))"
   }
 };
-const CodeBlock = memo((_Tc) => {
-  var _Uc = _Tc, {
+const CodeBlock = memo((_Vc) => {
+  var _Wc = _Vc, {
     alignment = {},
     borderRadius = {},
     lineHeight = Sizes.Default,
     textSize = TextSize.Default,
     value: value2
-  } = _Uc, props = __objRest(_Uc, [
+  } = _Wc, props = __objRest(_Wc, [
     "alignment",
     "borderRadius",
     "lineHeight",
@@ -74768,13 +74873,13 @@ const CodeBlock = memo((_Tc) => {
     })
   }));
 });
-const LineBreak = memo((_Vc) => {
-  var _Wc = _Vc, {
+const LineBreak = memo((_Xc) => {
+  var _Yc = _Xc, {
     className = "",
     size = {
       height: Sizes.Default
     }
-  } = _Wc, props = __objRest(_Wc, [
+  } = _Yc, props = __objRest(_Yc, [
     "className",
     "size"
   ]);
@@ -74783,14 +74888,14 @@ const LineBreak = memo((_Vc) => {
     size
   }, props));
 });
-const LogoutButton = memo((_Xc) => {
-  var _Yc = _Xc, {
+const LogoutButton = memo((_Zc) => {
+  var __c = _Zc, {
     icon: icon2,
     onLogoutSuccess,
     label,
     showArrow = false,
     textColor = TextColors.Error
-  } = _Yc, props = __objRest(_Yc, [
+  } = __c, props = __objRest(__c, [
     "icon",
     "onLogoutSuccess",
     "label",
@@ -75004,5 +75109,5 @@ async function init() {
   i18nIsoCountries.registerLocale(englishLanguage);
 }
 init();
-export { ActivityFeed, AddPaymentMethodForm, AlignHorizontal, AlignVertical, Amount, Animations, AutoComplete, Backdrop, BackgroundColorShade, BackgroundColors, BackgroundSize, Badge, BooleanLabel, BorderColorShade, BorderColors, BorderStyle, BreadcrumbNavigation, Button$1 as Button, ButtonType, Card, Checkbox, CloseButton, CodeBlock, CodeVerificationForm, ColorInput, ColorLabel, Colors, ConnectionStatus, Container$8 as Container, ContrastColors, ConversationList, ConversationNavigation, CountryInput, CountryLabel, CurrencyAmountInput, CurrencyAmountLabel, CurrencyInput, Cursor, DataGrid, DataGridCell, DateInput, DateLabel, Depth, DepthShadow, DropdownInput, DropdownPanel, DynamicInput, EmailAddressInput, EmailAddressLabel, EntityEditor, EntityPanel, EntityPreview, ErrorLabel, ErrorNotification, Fill, ForegroundColorShade, ForegroundColors, ForgotPasswordForm, Form, FormActions, FormFields, Heading, HelperButton, HoverPanel, Icon, Image, ImageInput, InputHelper, InputLabel, InputRow, InputType, Label, LanguageInput, LanguageLabel, LineBreak, LinearGauge, Link, ListItem, LoadingOverlay, LoginForm, LogoutButton, LongTextInput, MarkdownEditor, MediaGrid, MediaPreview, Menu, MenuButton, Message$1 as Message, MessageComposer, MessagePreview, Modal, ModalHeader, MoreMenu, NavigationBar, NavigationLink, NavigationMenu, NotificationLabel, Notifications, NumberInput, NumberLabel, ObjectLink, ObjectPropertiesView, Orb, OrderedList, Orientation, Overflow, Page, PageLink, Paragraph, PasswordInput, PaymentMethodModal, PersonLabel, PhoneNumberInput, PhoneNumberLabel, PieChart, PositionBehavior, ProgressLabel, ProgressMeter, ProgressSpinner, ProgressivePaymentStatus, PropertyEditor, RadialChart, RadialGauge, RouterView, SearchInput, SignupForm, Sizes, SlidePanel, Small, Spacer, StaticTypeLabel, StreetAddressInput, SubTitle, SubscriptionModal, Svg, Tab, Tabs, TextAlign, TextColors, TextDecorationLine, TextDecorationStyle, TextInput, TextOverflow, TextSize, TextWeight, ThemeSelector, Title, TitleCard, ToggleInput, TransformOrigin, UniversalSearch, UnorderedList, UserLabel, UserMenu, VerificationCodeInput, Video, WebApplication, Workspace, convertAmountToSize, convertSizeToAmount, convertSizeToTextSize, getCSSMeasurementValue, getFormFieldsFromModel, getInputElementByFieldType, getLabelByFieldType, getLargerAmount, getLargerSize, getSmallerAmount, getSmallerSize, useAuthentication, useEntityEditor };
+export { ActivityFeed, AddPaymentMethodForm, AlignHorizontal, AlignVertical, Amount, Animations, AutoComplete, Backdrop, BackgroundColorShade, BackgroundColors, BackgroundSize, Badge, BooleanLabel, BorderColorShade, BorderColors, BorderStyle, BreadcrumbNavigation, Button$1 as Button, ButtonType, Card, Checkbox, CloseButton, CodeBlock, CodeVerificationForm, ColorInput, ColorLabel, Colors, ConnectionStatus, Container$8 as Container, ContrastColors, ConversationList, ConversationNavigation, CountryInput, CountryLabel, CurrencyAmountInput, CurrencyAmountLabel, CurrencyInput, Cursor, DataGrid, DataGridCell, DateInput, DateLabel, Depth, DepthShadow, DropdownInput, DropdownPanel, DynamicInput, EmailAddressInput, EmailAddressLabel, EntityEditor, EntityPanel, EntityPreview, ErrorLabel, ErrorNotification, Fill, ForegroundColorShade, ForegroundColors, ForgotPasswordForm, Form, FormActions, FormFields, Heading, HelperButton, HoverPanel, Icon, Image, ImageInput, InputHelper, InputLabel, InputRow, InputType, Label, LanguageInput, LanguageLabel, LineBreak, LinearGauge, Link, ListItem, LoadingOverlay, LoginForm, LogoutButton, LongTextInput, MarkdownEditor, MediaGrid, MediaPreview, Menu, MenuButton, Message$1 as Message, MessageComposer, MessagePreview, Modal, ModalHeader, MoreMenu, NavigationBar, NavigationLink, NavigationMenu, NotificationLabel, Notifications, NumberInput, NumberLabel, ObjectLink, ObjectPropertiesView, Orb, OrderedList, Orientation, Overflow, Page, PageLink, Paragraph, PasswordInput, PaymentMethodModal, PersonLabel, PhoneNumberInput, PhoneNumberLabel, PieChart, PositionBehavior, ProgressLabel, ProgressMeter, ProgressSpinner, ProgressivePaymentStatus, PropertyEditor, RadialChart, RadialGauge, RouterView, Scrollable, SearchInput, SignupForm, Sizes, SlidePanel, Small, Spacer, StaticTypeLabel, StreetAddressInput, SubTitle, SubscriptionModal, Svg, Tab, Tabs, TextAlign, TextColors, TextDecorationLine, TextDecorationStyle, TextInput, TextOverflow, TextSize, TextWeight, ThemeSelector, Title, TitleCard, ToggleInput, TransformOrigin, UniversalSearch, UnorderedList, UserLabel, UserMenu, VerificationCodeInput, Video, WebApplication, Workspace, convertAmountToSize, convertSizeToAmount, convertSizeToTextSize, getCSSMeasurementValue, getFormFieldsFromModel, getInputElementByFieldType, getLabelByFieldType, getLargerAmount, getLargerSize, getSmallerAmount, getSmallerSize, useAuthentication, useEntityEditor };
 //# sourceMappingURL=index.js.map

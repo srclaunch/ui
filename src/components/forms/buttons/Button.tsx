@@ -180,7 +180,6 @@ export const Button = memo(
         alignment={{
           horizontal: AlignHorizontal.Center,
           orientation: Orientation.Horizontal,
-          overflow: Overflow.Visible,
           vertical: AlignVertical.Center,
           ...alignment,
         }}
@@ -188,9 +187,7 @@ export const Button = memo(
         background={{ color: colors?.backgroundColor, ...background }}
         border={{
           all: {
-            // color: BorderColors.Transparent,
             style: BorderStyle.None,
-            width: 0,
           },
           ...border,
         }}
@@ -241,8 +238,8 @@ export const Button = memo(
             }}
             textSize={textSize}
             textWeight={textWeight}
-            // states={states}
-            {...props}
+            states={states}
+            // {...props}
           >
             {children}
           </Label>

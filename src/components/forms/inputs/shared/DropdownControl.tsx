@@ -57,7 +57,6 @@ export const DropdownControl = memo(
     return (
       <InputContainer
         alignment={{
-          fill: Fill.Horizontal,
           orientation: Orientation.Horizontal,
           vertical: AlignVertical.Center,
           ...alignment,
@@ -108,6 +107,10 @@ export const DropdownControl = memo(
             ? DepthShadow.Surface
             : DepthShadow.Low
         }
+        size={{
+          fill: Fill.Horizontal,
+          ...size,
+        }}
         states={states}
         {...props}
       >
@@ -115,9 +118,6 @@ export const DropdownControl = memo(
           component
         ) : (
           <Label
-            alignment={{
-              fill: Fill.Horizontal,
-            }}
             // lineHeight={`calc(${size?.height ?? Sizes.Default} - ${
             //   states?.state?.dropdown?.visible ? 1 : 0
             // }px)`}
@@ -125,6 +125,9 @@ export const DropdownControl = memo(
               left: Amount.Less,
             }}
             selectable={false}
+            size={{
+              fill: Fill.Horizontal,
+            }}
             textSize={textSize}
             textColor={
               !label && placeholder ? TextColors.InputPlaceholder : textColor

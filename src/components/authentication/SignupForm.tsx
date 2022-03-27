@@ -210,12 +210,14 @@ export const SignupForm = memo(
           name="signup-form"
           submitButton={{
             alignment: {
-              fill: Fill.Both,
               horizontal: AlignHorizontal.Center,
             },
             borderRadius: { all: Amount.Least },
             label: 'Sign up',
             lineHeight: Sizes.Large,
+            size: {
+              fill: Fill.Both,
+            },
           }}
         />
 

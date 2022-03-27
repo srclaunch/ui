@@ -17,6 +17,7 @@ export const MediaGrid = memo(
     columns = 5,
     className = '',
     items = [],
+    size = {},
     states = {},
     ...props
   }: MediaGridProps): ReactElement => {
@@ -26,11 +27,12 @@ export const MediaGrid = memo(
 
     return (
       <Container
-        alignment={{
-          fill: Fill.Both,
-        }}
         borderRadius={{ all: Amount.Default, ...borderRadius }}
         className={`${className} media-grid`}
+        size={{
+          fill: Fill.Both,
+          ...size,
+        }}
         {...props}
       >
         <LoadingOverlay
@@ -47,12 +49,14 @@ export const MediaGrid = memo(
           return (
             <Container
               alignment={{
-                fill: Fill.Both,
                 orientation: Orientation.Horizontal,
               }}
               className="media-grid-row"
               key={row}
               margin={{ bottom: Amount.Default }}
+              size={{
+                fill: Fill.Both,
+              }}
             >
               {items
                 .slice(columns * row, columns * row + columns)

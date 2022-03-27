@@ -32,18 +32,22 @@ export const BreadcrumbNavigation = memo(
     className = '',
     items = [],
     shadow = DepthShadow.Surface,
+    size = {},
     textSize = TextSize.Default,
     ...props
   }: BreadcrumbNavigationProps): ReactElement => {
     return (
       <Container
         alignment={{
-          fill: Fill.Both,
           orientation: Orientation.Horizontal,
           ...alignment,
         }}
         className={`${className} menu`}
         shadow={shadow}
+        size={{
+          fill: Fill.Both,
+          ...size,
+        }}
         {...props}
       >
         {items.map(({ label, path }, index) => (

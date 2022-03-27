@@ -6,6 +6,6 @@ declare type PageProps = ContainerProps & {
     readonly loginRequired?: boolean;
     readonly title?: string | null;
 };
-export declare const Page: import("react").MemoExoticComponent<({ alignment, background, children, className, layout: Layout, loading, title, ...props }: PageProps) => ReactElement>;
+export declare const Page: import("react").MemoExoticComponent<({ alignment, background, children, className, layout: Layout, loading, size, title, ...props }: PageProps) => ReactElement>;
 export {};
 //# sourceMappingURL=Page.d.ts.map

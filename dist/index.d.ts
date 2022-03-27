@@ -71,6 +71,7 @@ export { TextInput } from './components/forms/inputs/text/TextInput';
 export { InputLabel } from './components/forms/labels/InputLabel';
 export { InputRow } from './components/forms/layout/InputRow';
 export { Container } from './components/layout/Container';
+export { Scrollable } from './components/layout/Scrollable';
 export { Spacer } from './components/layout/Spacer';
 export { ListItem } from './components/lists/ListItem';
 export { OrderedList } from './components/lists/OrderedList';

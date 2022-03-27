@@ -90,8 +90,10 @@ export const ComponentPage = memo((): ReactElement => {
         title: (
           <Container
             alignment={{
-              fill: Fill.Horizontal,
               horizontal: AlignHorizontal.Left,
+            }}
+            size={{
+              fill: Fill.Horizontal,
             }}
           >
             <BreadcrumbNavigation
@@ -174,7 +176,16 @@ export const ComponentPage = memo((): ReactElement => {
 
             <Container>
               {matchedRoute?.examples.map(
-                ({ code, description, properties, title }, key) => (
+                (
+                  {
+                    code,
+                    description,
+                    properties,
+                    render: RenderComponent,
+                    title,
+                  },
+                  key,
+                ) => (
                   <Container
                     className="component-example"
                     key={key}
@@ -196,7 +207,6 @@ export const ComponentPage = memo((): ReactElement => {
                       >
                         <Container
                           alignment={{
-                            fill: Fill.Horizontal,
                             horizontal: AlignHorizontal.Center,
                             vertical: AlignVertical.Center,
                           }}
@@ -207,9 +217,16 @@ export const ComponentPage = memo((): ReactElement => {
                           margin={{ bottom: Amount.Default }}
                           padding={{ all: Amount.All }}
                           shadow={DepthShadow.Low}
+                          size={{
+                            fill: Fill.Horizontal,
+                          }}
                         >
                           <Container>
-                            <matchedRoute.component {...properties} />
+                            {RenderComponent ? (
+                              <RenderComponent />
+                            ) : (
+                              <matchedRoute.component {...properties} />
+                            )}
                           </Container>
                         </Container>
 

@@ -7,6 +7,7 @@ import {
   BorderStyle,
   DepthShadow,
   Orientation,
+  Overflow,
   Sizes,
   TextAlign,
   TextColors,

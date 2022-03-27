@@ -1,4 +1,4 @@
-import { ElementType } from 'react';
+import { ReactElement, ElementType } from 'react';
 
 export type Component = {
   component?: ElementType;
@@ -9,6 +9,7 @@ export type Component = {
       code?: string;
       description?: string;
       properties?: Record<string, any>;
+      render?: () => ReactElement;
       title: string;
     },
   ];

@@ -11,6 +11,6 @@ declare type WorkspaceProps = ContainerProps & {
     readonly loginRequired?: boolean;
     readonly title?: string | null;
 };
-export declare const Workspace: import("react").MemoExoticComponent<({ alignment, background, className, children, header, layout: Layout, loading, loginRequired, padding, title, ...props }: WorkspaceProps) => ReactElement>;
+export declare const Workspace: import("react").MemoExoticComponent<({ alignment, background, className, children, header, layout: Layout, loading, loginRequired, padding, size, title, ...props }: WorkspaceProps) => ReactElement>;
 export {};
 //# sourceMappingURL=Workspace.d.ts.map

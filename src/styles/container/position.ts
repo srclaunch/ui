@@ -1,35 +1,37 @@
 import { css, SimpleInterpolation } from 'styled-components';
 import { getCSSMeasurementValue } from '../../lib/css/properties';
 
-import { Position } from '../../types';
+import { Overflow, Position } from '../../types';
 
 export function getPositionStyles(position?: Position): SimpleInterpolation {
+  const { behavior, bottom, left, right, top } = position || {};
+
   return css`
     position: relative;
 
-    ${position?.behavior &&
+    ${behavior &&
     css`
-      position: ${position.behavior};
+      position: ${behavior};
     `}
 
-    ${(position?.bottom || position?.bottom === 0) &&
+    ${(bottom || bottom === 0) &&
     css`
-      bottom: ${getCSSMeasurementValue(position.bottom)};
+      bottom: ${getCSSMeasurementValue(bottom)};
     `}
 
-    ${(position?.left || position?.left === 0) &&
+    ${(left || left === 0) &&
     css`
-      left: ${getCSSMeasurementValue(position.left)};
+      left: ${getCSSMeasurementValue(left)};
     `}
 
-    ${(position?.right || position?.right === 0) &&
+    ${(right || right === 0) &&
     css`
-      right: ${getCSSMeasurementValue(position.right)};
+      right: ${getCSSMeasurementValue(right)};
     `}
 
-    ${(position?.top || position?.top === 0) &&
+    ${(top || top === 0) &&
     css`
-      top: ${getCSSMeasurementValue(position.top)};
+      top: ${getCSSMeasurementValue(top)};
     `}
   `;
 }

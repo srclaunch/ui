@@ -17,11 +17,11 @@ import { Container, ContainerProps } from '../layout/Container';
 
 export type ThemeSelectorProps = ContainerProps &
   DropdownInputProps & {
-    readonly showLabel?: boolean;
+    readonly label?: string;
   };
 
 export const ThemeSelector = memo(
-  ({ showLabel = true, ...props }: ThemeSelectorProps): ReactElement => {
+  ({ label, ...props }: ThemeSelectorProps): ReactElement => {
     const dispatch = useDispatch();
 
     const { current, list } = useSelector(
@@ -30,7 +30,7 @@ export const ThemeSelector = memo(
 
     return (
       <>
-        {showLabel && <InputLabel>Theme</InputLabel>}
+        {label && <InputLabel>{label}</InputLabel>}
 
         <DropdownInput
           defaultValue={current}

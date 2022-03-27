@@ -10,15 +10,19 @@ export const Spacer = memo(
     alignment = {},
     as = 'div',
     children,
+    size = {},
     ...props
   }: SpacerProps): ReactElement => {
     return (
       <Container
         alignment={{
-          fill: Fill.Both,
           ...alignment,
         }}
         as={as}
+        size={{
+          fill: Fill.Both,
+          ...size,
+        }}
         {...props}
       >
         {children}

@@ -1,4 +1,3 @@
-import { Fill } from './fill';
 export declare enum AlignHorizontal {
     Baseline = "baseline",
     Center = "center",
@@ -36,7 +35,6 @@ export declare enum Overflow {
     Visible = "visible"
 }
 export declare type Alignment = {
-    readonly fill?: Fill;
     readonly orientation?: Orientation;
     readonly overflow?: Overflow;
     readonly horizontal?: AlignHorizontal;

@@ -23,7 +23,6 @@ export const ConversationNavigation = memo(
       <Container {...props}>
         <Button
           alignment={{
-            fill: Fill.Horizontal,
             vertical: AlignVertical.Center,
           }}
           borderRadius={{ all: Amount.Least }}
@@ -42,7 +41,9 @@ export const ConversationNavigation = memo(
           margin={{
             bottom: Amount.Default,
           }}
-          // size={Sizes.Large}
+          size={{
+            fill: Fill.Horizontal,
+          }}
           type={ButtonType.Primary}
         >
           New Message

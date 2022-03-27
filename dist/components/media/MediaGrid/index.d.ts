@@ -6,5 +6,5 @@ export declare type MediaGridProps = ContainerProps & {
     readonly columns?: number;
     readonly items: readonly MediaGridItemProps[];
 };
-export declare const MediaGrid: import("react").MemoExoticComponent<({ borderRadius, children, columns, className, items, states, ...props }: MediaGridProps) => ReactElement>;
+export declare const MediaGrid: import("react").MemoExoticComponent<({ borderRadius, children, columns, className, items, size, states, ...props }: MediaGridProps) => ReactElement>;
 //# sourceMappingURL=index.d.ts.map

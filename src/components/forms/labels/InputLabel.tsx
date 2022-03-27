@@ -53,8 +53,10 @@ export const InputLabel = memo(
               states.state?.error.length > 0)) && (
             <ErrorLabel
               alignment={{
-                fill: Fill.Horizontal,
                 horizontal: AlignHorizontal.Right,
+              }}
+              size={{
+                fill: Fill.Horizontal,
               }}
               textSize={textSize}
             >

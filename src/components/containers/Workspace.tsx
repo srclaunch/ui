@@ -37,6 +37,7 @@ export const Workspace = memo(
     loading = false,
     loginRequired = false,
     padding = {},
+    size = {},
     title,
     ...props
   }: WorkspaceProps): ReactElement => {
@@ -45,7 +46,6 @@ export const Workspace = memo(
     const WorkspaceComp = (props2: any) => (
       <Container
         alignment={{
-          fill: Fill.Both,
           overflow: Overflow.ScrollVertical,
           vertical: AlignVertical.Top,
           ...alignment,
@@ -53,6 +53,10 @@ export const Workspace = memo(
         background={{ color: BackgroundColors.Workspace, ...background }}
         className={`${className} workspace`}
         padding={{ all: Amount.Most, ...padding }}
+        size={{
+          fill: Fill.Both,
+          ...size,
+        }}
         {...props}
         {...props2}
       >
@@ -69,11 +73,7 @@ export const Workspace = memo(
               bottom: Amount.All,
             }}
           >
-            <Container
-              alignment={{
-                fill: Fill.Horizontal,
-              }}
-            >
+            <Container>
               {header?.title && (
                 <Container
                   alignment={{

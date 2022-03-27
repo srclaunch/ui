@@ -1,4 +1,4 @@
-import { ElementType } from 'react';
+import { ReactElement, ElementType } from 'react';
 export declare type Component = {
     component?: ElementType;
     components?: Component[];
@@ -8,6 +8,7 @@ export declare type Component = {
             code?: string;
             description?: string;
             properties?: Record<string, any>;
+            render?: () => ReactElement;
             title: string;
         }
     ];

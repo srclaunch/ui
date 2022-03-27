@@ -189,12 +189,15 @@ export const LoginForm = memo(
           name="login-form"
           submitButton={{
             alignment: {
-              fill: Fill.Both,
               horizontal: AlignHorizontal.Center,
             },
             borderRadius: { all: Amount.Least },
             label: 'Login',
             lineHeight: Sizes.Large,
+            size: {
+              fill: Fill.Both,
+            },
+            textAlign: TextAlign.Center,
           }}
         />
 

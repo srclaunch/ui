@@ -1,6 +1,5 @@
 import { SimpleInterpolation } from 'styled-components';
 import { Alignment, Overflow } from '../../types';
-export declare function getFillStyles(alignment?: Alignment): SimpleInterpolation;
 export declare function getHorizontalAlignStyle(alignment?: Alignment): SimpleInterpolation;
 export declare function getVerticalAlignStyle(alignment?: Alignment): SimpleInterpolation;
 export declare function getOverflowStyle(overflow?: Overflow): SimpleInterpolation;

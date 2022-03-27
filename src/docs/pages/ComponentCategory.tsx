@@ -85,8 +85,10 @@ export const ComponentCategoryPage = memo((): ReactElement => {
         title: (
           <Container
             alignment={{
-              fill: Fill.Horizontal,
               horizontal: AlignHorizontal.Left,
+            }}
+            size={{
+              fill: Fill.Horizontal,
             }}
           >
             <BreadcrumbNavigation

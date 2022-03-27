@@ -59,9 +59,11 @@ export const Documentation = memo(
   ({ children }: ContainerProps): ReactElement => {
     return (
       <Container
-        alignment={{ fill: Fill.Both }}
         background={{ color: BackgroundColors.Darker }}
         className="documentation-layout"
+        size={{
+          fill: Fill.Both,
+        }}
       >
         <Container
           alignment={{
@@ -76,6 +78,7 @@ export const Documentation = memo(
               width: 1,
             },
           }}
+          className="navigation-bar"
           padding={{
             all: Amount.Least,
             left: Amount.Default,
@@ -86,157 +89,30 @@ export const Documentation = memo(
 
           <Spacer />
 
-          <ThemeSelector showLabel={false} size={{ width: 200 }} />
+          <ThemeSelector size={{ width: 200 }} />
         </Container>
 
-        <Container alignment={{ orientation: Orientation.Horizontal }}>
-          <Container
-            background={{ color: BackgroundColors.Lightest }}
-            size={{ width: 260 }}
-          >
-            <NavigationMenu
-              menu={[
-                ...(componentLibrary.components?.map(component => {
-                  return {
-                    label: component.title,
-                    to: component.path,
-                  };
-                }) as MenuItemProps[]),
-              ]}
-              size={{ width: 260 }}
-            />
-            {/* <NavigationMenu
-              alignment={{
-                overflow: Overflow.ScrollVertical,
-              }}
-              // itemProps={{
-              //   active: {
-              //     backgroundColor: BackgroundColor.Primary,
-              //     textColor: TextColor.White,
-              //   },
-              //   hover: {
-              //     backgroundColor: BackgroundColor.Darker,
-              //     textColor: TextColor.White,
-              //   },
-              // }}
-              menu={[
-                {
-                  label: 'Introduction',
-                  to: '/',
-                },
-                {
-                  label: 'Animation',
-                  to: '/animation',
-                },
-                {
-                  label: 'Authentication',
-                  to: '/authentication',
-                },
-                {
-                  label: 'Billing',
-                  to: '/billing',
-                },
-                {
-                  label: 'Cards',
-                  to: '/cards',
-                },
+        <Container
+          className="bottom"
+          alignment={{ orientation: Orientation.Horizontal }}
+          size={{
+            fill: Fill.Both,
+          }}
+        >
+          <NavigationMenu
+            menu={[
+              ...(componentLibrary.components?.map(component => {
+                return {
+                  label: component.title,
+                  to: component.path,
+                };
+              }) as MenuItemProps[]),
+            ]}
+          />
 
-                {
-                  label: 'Charts',
-                  to: '/charts',
-                },
-                {
-                  label: 'Containers',
-                  to: '/containers',
-                },
-                {
-                  label: 'Data',
-                  to: '/data',
-                },
-                {
-                  label: 'Editors',
-                  to: '/editors',
-                },
-                {
-                  label: 'Errors',
-                  to: '/errors',
-                },
-                {
-                  label: 'Feeds',
-                  to: '/feeds',
-                },
-                {
-                  label: 'Forms',
-                  to: '/forms',
-                },
-                {
-                  label: 'Layout',
-                  to: '/layout',
-                },
-                {
-                  label: 'Media',
-                  to: '/media',
-                },
-                {
-                  label: 'Menus',
-                  to: '/menus',
-                },
-                {
-                  label: 'Messaging',
-                  to: '/messaging',
-                },
-                {
-                  label: 'Modals',
-                  to: '/modals',
-                },
-                {
-                  label: 'Navigation',
-                  to: '/navigation',
-                },
-                {
-                  label: 'Network',
-                  to: '/network',
-                },
-                {
-                  label: 'Notifications',
-                  to: '/notifications',
-                },
-                {
-                  label: 'Progress',
-                  to: '/progress',
-                },
-                {
-                  label: 'Search',
-                  to: '/search',
-                },
-                {
-                  label: 'Themes',
-                  to: '/themes',
-                },
-                {
-                  label: 'Typography',
-                  to: '/typography',
-                },
-                {
-                  label: 'User',
-                  to: '/user',
-                },
-                {
-                  label: 'Workspaces',
-                  to: '/workspaces',
-                },
-              ]}
-            /> */}
-          </Container>
-
-          <Container
-            alignment={{ fill: Fill.Both, overflow: Overflow.ScrollBoth }}
-          >
-            {children}
-          </Container>
+          <Container size={{ fill: Fill.Both }}>{children}</Container>
         </Container>
       </Container>
-      // </WebApplication>
     );
   },
 );

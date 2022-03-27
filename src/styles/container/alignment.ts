@@ -8,35 +8,6 @@ import {
   Fill,
 } from '../../types';
 
-export function getFillStyles(alignment?: Alignment): SimpleInterpolation {
-  if (alignment?.fill === Fill.Both) {
-    return css`
-      flex-grow: 1;
-    `;
-  }
-  if (alignment?.fill === Fill.Horizontal) {
-    return css`
-      flex-grow: 1;
-    `;
-  }
-
-  if (alignment?.fill === Fill.Vertical) {
-    return css`
-      flex-grow: 1;
-    `;
-  }
-
-  if (alignment?.fill === Fill.None) {
-    return css`
-      flex-grow: 0;
-    `;
-  }
-
-  return css`
-    flex-grow: 0;
-  `;
-}
-
 export function getHorizontalAlignStyle(
   alignment?: Alignment,
 ): SimpleInterpolation {
@@ -149,7 +120,7 @@ export function getOverflowStyle(overflow?: Overflow): SimpleInterpolation {
         bottom: 0;
         left: 0;
         overflow: scroll;
-        position: absolute;
+        position: absolute !important;
         right: 0;
         top: 0;
       `;
@@ -159,7 +130,7 @@ export function getOverflowStyle(overflow?: Overflow): SimpleInterpolation {
         left: 0;
         overflow: hidden;
         overflow-x: scroll;
-        position: absolute;
+        position: absolute !important;
         right: 0;
         top: 0;
       `;
@@ -167,10 +138,9 @@ export function getOverflowStyle(overflow?: Overflow): SimpleInterpolation {
       return css`
         bottom: 0;
         left: 0;
-        /* height: min-content; */
         overflow: hidden;
         overflow-y: scroll;
-        position: absolute;
+        position: absolute !important;
         right: 0;
         top: 0;
       `;
@@ -204,10 +174,10 @@ export function getFlexDirection(alignment: Alignment): SimpleInterpolation {
 export function getAlignmentStyles(alignment?: Alignment): SimpleInterpolation {
   return css`
     display: flex;
+
     ${alignment?.orientation && getFlexDirection(alignment)}
     ${alignment?.horizontal && getHorizontalAlignStyle(alignment)}
     ${alignment?.vertical && getVerticalAlignStyle(alignment)}
-    ${alignment?.fill && getFillStyles(alignment)} 
     ${alignment?.overflow && getOverflowStyle(alignment.overflow)}
   `;
 }

@@ -38,7 +38,7 @@ export const NavigationLink = memo(
     activeClassName = 'active',
     alignment = {},
     as = 'span',
-    background = {},
+    // background = {},
     borderRadius = {},
     children,
     className = '',

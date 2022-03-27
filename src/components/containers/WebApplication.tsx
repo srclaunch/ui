@@ -10,7 +10,7 @@ import {
   useSelector,
 } from '@srclaunch/web-application-state';
 import { PageRole, PageRoute } from '@srclaunch/types';
-import { BackgroundColors, Fill } from '../../types';
+import { BackgroundColors, Fill, PositionBehavior } from '../../types';
 import { EntityPanel } from '../data/entities/EntityPanel';
 import { Container, ContainerProps } from '../layout/Container';
 import { Backdrop } from '../modals/Backdrop';
@@ -25,12 +25,12 @@ type WebApplicationProps = ContainerProps & {
 export const WebApplication = memo(
   ({
     actions,
-    alignment = {},
     authentication = false,
     background = {},
     children,
     className = '',
     httpClient,
+    size = {},
     ...props
   }: WebApplicationProps): ReactElement => {
     const [loginRequired, setLoginRequired] = useState(true);
@@ -111,9 +111,19 @@ export const WebApplication = memo(
 
     return (
       <Container
-        alignment={{ fill: Fill.Both, ...alignment }}
         background={{ color: BackgroundColors.Lightest, ...background }}
         className={`${className} web-application`}
+        position={{
+          behavior: PositionBehavior.Absolute,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: 0,
+        }}
+        size={{
+          fill: Fill.Both,
+          ...size,
+        }}
         {...props}
       >
         <ThemeProvider theme={current} themes={list}>

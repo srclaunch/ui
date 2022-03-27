@@ -22,28 +22,18 @@ export const RouterView = memo(
     ...props
   }: RouterViewProps): ReactElement => {
     return (
-      <Container
-        alignment={{
-          fill: Fill.Both,
-          overflow: Overflow.ScrollVertical,
-          ...alignment,
-        }}
-        className={`${className} router-view`}
-        {...props}
-      >
-        <Routes>
-          {routes.map((route, key) => {
-            return (
-              <Route
-                element={<route.component />}
-                path={route.path}
-                key={key}
-                {...route}
-              />
-            );
-          })}
-        </Routes>
-      </Container>
+      <Routes>
+        {routes.map((route, key) => {
+          return (
+            <Route
+              element={<route.component />}
+              path={route.path}
+              key={key}
+              {...route}
+            />
+          );
+        })}
+      </Routes>
     );
   },
 );

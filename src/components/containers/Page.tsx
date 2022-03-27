@@ -19,6 +19,7 @@ export const Page = memo(
     className = '',
     layout: Layout,
     loading = false,
+    size = {},
     title,
     ...props
   }: PageProps): ReactElement => {
@@ -27,13 +28,16 @@ export const Page = memo(
     const PageComp = () => (
       <Container
         alignment={{
-          fill: Fill.Both,
           overflow: Overflow.ScrollVertical,
           vertical: AlignVertical.Top,
           ...alignment,
         }}
         background={{ color: BackgroundColors.Page, ...background }}
         className={`${className} page`}
+        size={{
+          fill: Fill.Both,
+          ...size,
+        }}
         {...props}
       >
         <LoadingOverlay

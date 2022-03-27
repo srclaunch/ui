@@ -7,5 +7,5 @@ export declare type BreadcrumbNavigationProps = ContainerProps & TextProps & {
         path?: string;
     }[];
 };
-export declare const BreadcrumbNavigation: import("react").MemoExoticComponent<({ alignment, className, items, shadow, textSize, ...props }: BreadcrumbNavigationProps) => ReactElement>;
+export declare const BreadcrumbNavigation: import("react").MemoExoticComponent<({ alignment, className, items, shadow, size, textSize, ...props }: BreadcrumbNavigationProps) => ReactElement>;
 //# sourceMappingURL=BreadcrumbNavigation.d.ts.map

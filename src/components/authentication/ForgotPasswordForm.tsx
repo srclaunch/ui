@@ -84,9 +84,10 @@ export const ForgotPasswordForm = memo(
         {...props}
       >
         <LoadingOverlay
+          borderRadius={{ all: Amount.More, ...borderRadius }}
           states={{
             state: {
-              visible: inProgress,
+              visible: inProgress ?? false,
             },
           }}
         />
@@ -150,12 +151,14 @@ export const ForgotPasswordForm = memo(
           }}
           submitButton={{
             alignment: {
-              fill: Fill.Both,
               horizontal: AlignHorizontal.Center,
             },
             borderRadius: { all: Amount.Least },
             label: 'Send instructions',
             lineHeight: Sizes.Large,
+            size: {
+              fill: Fill.Both,
+            },
           }}
         />
         {/* 

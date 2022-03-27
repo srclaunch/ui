@@ -106,13 +106,13 @@ export const PropertyEditor = memo(
           </Container>
 
           <Container
-            alignment={{
-              fill: Fill.Horizontal,
-            }}
             background={{ color: BackgroundColors.Lighter }}
             padding={{
               left: Amount.Less,
               right: Amount.Less,
+            }}
+            size={{
+              fill: Fill.Horizontal,
             }}
           >
             <Label lineHeight={Sizes.Large}>Value</Label>
@@ -120,9 +120,6 @@ export const PropertyEditor = memo(
         </Container>
 
         <Container
-          alignment={{
-            fill: Fill.Horizontal,
-          }}
           border={{
             top: {
               color: BorderColors.Light,
@@ -134,15 +131,20 @@ export const PropertyEditor = memo(
             topRight: Amount.None,
             ...borderRadius,
           }}
+          size={{
+            fill: Fill.Horizontal,
+          }}
         >
           {Object.keys(defaultValue).map(key => {
             return (
               <Container
                 alignment={{
-                  fill: Fill.Horizontal,
                   orientation: Orientation.Horizontal,
                 }}
                 key={key}
+                size={{
+                  fill: Fill.Horizontal,
+                }}
               >
                 <Container
                   border={{
@@ -162,12 +164,12 @@ export const PropertyEditor = memo(
                 </Container>
 
                 <Container
-                  alignment={{
-                    fill: Fill.Horizontal,
-                  }}
                   padding={{
                     left: Amount.Less,
                     right: Amount.Less,
+                  }}
+                  size={{
+                    fill: Fill.Horizontal,
                   }}
                 >
                   <Label lineHeight={Sizes.Large}>
