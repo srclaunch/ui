@@ -52620,8 +52620,9 @@ const MediaGridItem = memo((_mc) => {
   var _a2, _b, _c;
   const content = images ? /* @__PURE__ */ jsxs$1(Container$8, {
     alignment: {
+      horizontal: AlignHorizontal.Stretch,
       orientation: Orientation.Horizontal,
-      vertical: AlignVertical.Bottom
+      vertical: AlignVertical.Center
     },
     padding: {
       all: Amount.Default
@@ -52631,7 +52632,7 @@ const MediaGridItem = memo((_mc) => {
       textSize: TextSize.Large,
       textWeight: TextWeight.Most,
       children: title
-    }), /* @__PURE__ */ jsx$2(Container$8, {}), moreMenu && /* @__PURE__ */ jsx$2(MoreMenu, __spreadValues({}, moreMenu))]
+    }), /* @__PURE__ */ jsx$2(Spacer, {}), moreMenu && /* @__PURE__ */ jsx$2(MoreMenu, __spreadValues({}, moreMenu))]
   }) : video ? /* @__PURE__ */ jsx$2(Video, {
     className: "media-grid-video",
     description: video.description,
@@ -52647,12 +52648,13 @@ const MediaGridItem = memo((_mc) => {
     alignment: __spreadValues({
       horizontal: AlignHorizontal.Center,
       orientation: Orientation.Vertical,
-      vertical: AlignVertical.Center
+      vertical: AlignVertical.Bottom
     }, alignment),
     background: __spreadValues({
       color: BackgroundColors.Dark,
       image: {
-        url: (_c = (_a2 = images == null ? void 0 : images[0]) == null ? void 0 : _a2.url) != null ? _c : (_b = images == null ? void 0 : images[0]) == null ? void 0 : _b.path
+        url: (_c = (_a2 = images == null ? void 0 : images[0]) == null ? void 0 : _a2.url) != null ? _c : (_b = images == null ? void 0 : images[0]) == null ? void 0 : _b.path,
+        size: BackgroundSize.Cover
       }
     }, background),
     borderRadius: __spreadValues({
@@ -52713,13 +52715,13 @@ const MediaGrid = memo((_oc) => {
           bottom: Amount.Default
         },
         children: items.slice(columns * row, columns * row + columns).map((i2, key) => /* @__PURE__ */ jsx$2(MediaGridItem, __spreadValues({
-          margin: {
+          margin: __spreadValues({
             right: Amount.Default
-          },
-          size: {
+          }, i2.margin),
+          size: __spreadValues({
             minHeight: 200,
             minWidth: 260
-          }
+          }, i2.size)
         }, i2), key))
       }, row);
     })]

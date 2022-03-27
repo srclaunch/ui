@@ -16,6 +16,7 @@ import {
 } from '../../../types';
 import { Card } from '../../cards/Card';
 import { Container, ContainerProps } from '../../layout/Container';
+import { Spacer } from '../../layout/Spacer';
 import { Video } from '../../media/Video';
 import { MoreMenu, MoreMenuProps } from '../../menus/MoreMenu';
 import { Label } from '../../typography/Label';
@@ -48,8 +49,9 @@ export const MediaGridItem = memo(
     const content = images ? (
       <Container
         alignment={{
+          horizontal: AlignHorizontal.Stretch,
           orientation: Orientation.Horizontal,
-          vertical: AlignVertical.Bottom,
+          vertical: AlignVertical.Center,
         }}
         padding={{ all: Amount.Default }}
       >
@@ -61,7 +63,7 @@ export const MediaGridItem = memo(
           {title}
         </Label>
 
-        <Container />
+        <Spacer />
 
         {moreMenu && <MoreMenu {...moreMenu} />}
       </Container>
@@ -81,7 +83,7 @@ export const MediaGridItem = memo(
         alignment={{
           horizontal: AlignHorizontal.Center,
           orientation: Orientation.Vertical,
-          vertical: AlignVertical.Center,
+          vertical: AlignVertical.Bottom,
           ...alignment,
         }}
         background={{
@@ -89,7 +91,7 @@ export const MediaGridItem = memo(
 
           image: {
             url: images?.[0]?.url ?? images?.[0]?.path,
-            // size: BackgroundSize.Cover,
+            size: BackgroundSize.Cover,
           },
           ...background,
         }}
