@@ -35488,28 +35488,6 @@ const SlidePanel = memo((_ab) => {
       width: 380
     }, size),
     states: __spreadValues({
-      hidden: {
-        animations: [{
-          from: {
-            transform: {
-              translate: {
-                x: 0
-              }
-            }
-          },
-          timing: {
-            duration: 0.13,
-            iterations: 1
-          },
-          to: {
-            transform: {
-              translate: {
-                x: origin
-              }
-            }
-          }
-        }]
-      },
       visible: {
         transform: {
           translate: {
