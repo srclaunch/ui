@@ -10,6 +10,7 @@ export declare type States<P = {}> = {
     };
     readonly error?: P;
     readonly focused?: P;
+    readonly hidden?: P;
     readonly hovered?: P;
     readonly loading?: P;
     readonly on?: P;
@@ -27,6 +28,7 @@ export declare type States<P = {}> = {
         };
         readonly error?: Exception | Exception[] | ValidationProblem | ValidationProblem[] | string | boolean;
         readonly focused?: boolean;
+        readonly hidden?: boolean;
         readonly hovered?: boolean;
         readonly loading?: boolean;
         readonly on?: boolean;

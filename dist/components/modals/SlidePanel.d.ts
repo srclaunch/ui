@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import { ContainerProps } from '../layout/Container';
 declare type SlidePanelProps = ContainerProps & {
-    readonly visible?: boolean;
+    readonly origin?: number;
 };
-export declare const SlidePanel: import("react").MemoExoticComponent<({ background, borderRadius, children, className, depth, padding, position, shadow, size, visible, ...props }: SlidePanelProps) => ReactElement>;
+export declare const SlidePanel: import("react").MemoExoticComponent<({ background, borderRadius, children, className, depth, origin, padding, position, shadow, size, states, ...props }: SlidePanelProps) => ReactElement>;
 export {};
 //# sourceMappingURL=SlidePanel.d.ts.map

@@ -8,10 +8,9 @@ import {
   PositionBehavior,
 } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
-import { SlideLeft, SlideRight } from '../../lib/animation/library';
 
 type SlidePanelProps = ContainerProps & {
-  readonly visible?: boolean;
+  readonly origin?: number;
 };
 
 export const SlidePanel = memo(
@@ -21,15 +20,38 @@ export const SlidePanel = memo(
     children,
     className = '',
     depth = Depth.Highest,
+    origin = 500,
     padding = {},
     position = {},
     shadow = DepthShadow.Highest,
     size = {},
-    visible = false,
+    states = {},
     ...props
   }: SlidePanelProps): ReactElement => {
     return (
       <Container
+        animations={[
+          {
+            from: {
+              transform: {
+                translate: {
+                  x: origin,
+                },
+              },
+            },
+            timing: {
+              duration: 0.13,
+              iterations: 1,
+            },
+            to: {
+              transform: {
+                translate: {
+                  x: 0,
+                },
+              },
+            },
+          },
+        ]}
         background={{ color: BackgroundColors.SlidePanel, ...background }}
         borderRadius={{ all: Amount.Most, ...borderRadius }}
         className={`${className} slide-panel`}
@@ -45,6 +67,30 @@ export const SlidePanel = memo(
         shadow={shadow}
         size={{ width: 380, ...size }}
         states={{
+          hidden: {
+            animations: [
+              {
+                from: {
+                  transform: {
+                    translate: {
+                      x: origin,
+                    },
+                  },
+                },
+                timing: {
+                  duration: 0.13,
+                  iterations: 1,
+                },
+                to: {
+                  transform: {
+                    translate: {
+                      x: 0,
+                    },
+                  },
+                },
+              },
+            ],
+          },
           visible: {
             transform: {
               translate: {
@@ -52,16 +98,13 @@ export const SlidePanel = memo(
               },
             },
           },
-          state: {
-            visible,
-          },
+          ...states,
         }}
         transform={{
           translate: {
-            x: 100,
+            x: origin,
           },
         }}
-        visibility={{ hidden: !visible, ...props.visibility }}
         {...props}
       >
         {children}

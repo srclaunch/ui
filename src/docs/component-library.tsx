@@ -847,12 +847,16 @@ const Example = () => (
             {
               title: 'Default',
               properties: {
+                children: (
+                  <>
+                    <ModalHeader title="Example Title" />
+                  </>
+                ),
                 states: {
                   state: {
                     visible: true,
                   },
                 },
-                visible: true,
               },
             },
           ],

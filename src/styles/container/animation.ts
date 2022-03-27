@@ -7,15 +7,18 @@ import { nanoid } from 'nanoid';
 export function getAnimationKeyframes(
   animation: Animation,
   name: string,
+  props: ContainerProps,
 ): SimpleInterpolation {
+  const { animations: unused, ...otherContainerProps } = props;
+
   return css`
     @keyframes ${name} {
       from {
-        ${getContainerStyles({ ...animation.from })}
+        ${getContainerStyles({ ...otherContainerProps, ...animation.from })}
       }
 
       to {
-        ${getContainerStyles({ ...animation.to })}
+        ${getContainerStyles({ ...otherContainerProps, ...animation.to })}
       }
     }
   `;
@@ -38,8 +41,7 @@ export function getAnimationStyles(props: ContainerProps): SimpleInterpolation {
       const name = animation.name ?? `animation_${nanoid()}`;
 
       names = [...names, name];
-      keyframes = [...keyframes, getAnimationKeyframes(animation, name)];
-
+      keyframes = [...keyframes, getAnimationKeyframes(animation, name, props)];
       delays = [...delays, animation.timing?.delay ?? 0];
       durations = [...durations, animation.timing?.duration ?? 3];
       iterations = [...iterations, animation.timing?.iterations ?? 'infinite'];

@@ -121,7 +121,13 @@ export const EntityPanel = memo(
     };
 
     return (
-      <SlidePanel visible={visible}>
+      <SlidePanel
+        states={{
+          state: {
+            visible,
+          },
+        }}
+      >
         <Container borderRadius={{ all: Amount.Default }} {...props}>
           <LoadingOverlay states={{ state: { visible: inProgress } }} />
 

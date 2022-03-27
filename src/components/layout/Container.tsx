@@ -60,7 +60,6 @@ export type ContainerProps = PropsWithChildren<
 const Wrapper = styled.div<ContainerProps>`
   ${props => getContainerStyles(props)};
   ${props => getContainerStatesStyles(props)};
-  /* ${props => getAnimationStyles(props)} */
 `;
 
 export const Container = memo(
@@ -94,7 +93,13 @@ export const Container = memo(
         as={as}
         className={`${className} container`}
         disabled={states?.state?.disabled}
-        states={states}
+        states={{
+          ...states,
+          state: {
+            ...states.state,
+            hidden: states?.state?.visible === false,
+          },
+        }}
         {...props}
         {...eventHandlers}
       >

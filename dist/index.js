@@ -22178,8 +22178,13 @@ let nanoid = (size = 21) => {
   }
   return id2;
 };
-function getAnimationKeyframes(animation, name2) {
-  return css$2(["@keyframes ", "{from{", "}to{", "}}"], name2, getContainerStyles(__spreadValues({}, animation.from)), getContainerStyles(__spreadValues({}, animation.to)));
+function getAnimationKeyframes(animation, name2, props) {
+  const _a2 = props, {
+    animations: unused
+  } = _a2, otherContainerProps = __objRest(_a2, [
+    "animations"
+  ]);
+  return css$2(["@keyframes ", "{from{", "}to{", "}}"], name2, getContainerStyles(__spreadValues(__spreadValues({}, otherContainerProps), animation.from)), getContainerStyles(__spreadValues(__spreadValues({}, otherContainerProps), animation.to)));
 }
 function getAnimationStyles(props) {
   var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o;
@@ -22196,7 +22201,7 @@ function getAnimationStyles(props) {
     if (animation.from && animation.to) {
       const name2 = (_b = animation.name) != null ? _b : `animation_${nanoid()}`;
       names = [...names, name2];
-      keyframes = [...keyframes, getAnimationKeyframes(animation, name2)];
+      keyframes = [...keyframes, getAnimationKeyframes(animation, name2, props)];
       delays = [...delays, (_d = (_c = animation.timing) == null ? void 0 : _c.delay) != null ? _d : 0];
       durations = [...durations, (_f = (_e2 = animation.timing) == null ? void 0 : _e2.duration) != null ? _f : 3];
       iterations = [...iterations, (_h = (_g = animation.timing) == null ? void 0 : _g.iterations) != null ? _h : "infinite"];
@@ -22679,7 +22684,7 @@ const Container$8 = memo((_a2) => {
     "events",
     "states"
   ]);
-  var _a3;
+  var _a3, _b2;
   const [eventHandlers, setEventHandlers] = useState({});
   useEffect(() => {
     if (events && Object.keys(events).length > 0) {
@@ -22695,7 +22700,11 @@ const Container$8 = memo((_a2) => {
     as,
     className: `${className} container`,
     disabled: (_a3 = states == null ? void 0 : states.state) == null ? void 0 : _a3.disabled,
-    states
+    states: __spreadProps(__spreadValues({}, states), {
+      state: __spreadProps(__spreadValues({}, states.state), {
+        hidden: ((_b2 = states == null ? void 0 : states.state) == null ? void 0 : _b2.visible) === false
+      })
+    })
   }, props), eventHandlers), {
     children
   }));
@@ -35418,24 +35427,46 @@ const SlidePanel = memo((_ab) => {
     children,
     className = "",
     depth = Depth.Highest,
+    origin = 500,
     padding = {},
     position = {},
     shadow = DepthShadow.Highest,
     size = {},
-    visible = false
+    states = {}
   } = _bb, props = __objRest(_bb, [
     "background",
     "borderRadius",
     "children",
     "className",
     "depth",
+    "origin",
     "padding",
     "position",
     "shadow",
     "size",
-    "visible"
+    "states"
   ]);
   return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
+    animations: [{
+      from: {
+        transform: {
+          translate: {
+            x: origin
+          }
+        }
+      },
+      timing: {
+        duration: 0.13,
+        iterations: 1
+      },
+      to: {
+        transform: {
+          translate: {
+            x: 0
+          }
+        }
+      }
+    }],
     background: __spreadValues({
       color: BackgroundColors.SlidePanel
     }, background),
@@ -35457,26 +35488,42 @@ const SlidePanel = memo((_ab) => {
     size: __spreadValues({
       width: 380
     }, size),
-    states: {
+    states: __spreadValues({
+      hidden: {
+        animations: [{
+          from: {
+            transform: {
+              translate: {
+                x: origin
+              }
+            }
+          },
+          timing: {
+            duration: 0.13,
+            iterations: 1
+          },
+          to: {
+            transform: {
+              translate: {
+                x: 0
+              }
+            }
+          }
+        }]
+      },
       visible: {
         transform: {
           translate: {
             x: 0
           }
         }
-      },
-      state: {
-        visible
       }
-    },
+    }, states),
     transform: {
       translate: {
-        x: 100
+        x: origin
       }
-    },
-    visibility: __spreadValues({
-      hidden: !visible
-    }, props.visibility)
+    }
   }, props), {
     children
   }));
@@ -35659,7 +35706,11 @@ const EntityPanel = memo((_cb) => {
     return "";
   };
   return /* @__PURE__ */ jsx$2(SlidePanel, {
-    visible,
+    states: {
+      state: {
+        visible
+      }
+    },
     children: /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
       borderRadius: {
         all: Amount.Default
@@ -52645,6 +52696,7 @@ const MediaGrid = memo((_oc) => {
     }), rows.map((x, row) => {
       return /* @__PURE__ */ jsx$2(Container$8, {
         alignment: {
+          fill: Fill.Both,
           orientation: Orientation.Horizontal
         },
         className: "media-grid-row",

@@ -1,5 +1,5 @@
 import { memo, ReactElement } from 'react';
-import { Amount, BackgroundColors, Orientation } from '../../../types';
+import { Amount, BackgroundColors, Fill, Orientation } from '../../../types';
 import { Container, ContainerProps } from '../../layout/Container';
 import { LoadingOverlay } from '../../progress/LoadingOverlay';
 import { MediaGridItem } from './MediaGriditem';
@@ -45,6 +45,7 @@ export const MediaGrid = memo(
           return (
             <Container
               alignment={{
+                fill: Fill.Both,
                 orientation: Orientation.Horizontal,
               }}
               className="media-grid-row"
