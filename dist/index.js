@@ -40214,7 +40214,7 @@ const DataGrid = memo((_Cb) => {
     "states",
     "template"
   ]);
-  var _a2, _b;
+  var _a2, _b, _c;
   const [searchTerm, setSearchTerm] = useState("");
   const [hoveredRow, setHoveredRow] = useState();
   const MIN_COLUMN_WIDTH = 150;
@@ -40255,7 +40255,7 @@ const DataGrid = memo((_Cb) => {
       borderRadius,
       states: {
         state: {
-          visible: (_a2 = states.state) == null ? void 0 : _a2.loading
+          visible: (_b = (_a2 = states.state) == null ? void 0 : _a2.loading) != null ? _b : false
         }
       }
     }), header && Object.keys(header).length > 0 && /* @__PURE__ */ jsxs$1(Container$8, {
@@ -40346,7 +40346,7 @@ const DataGrid = memo((_Cb) => {
             top: Amount.Least
           },
           children: columns.map((column, key) => {
-            var _a3, _b2, _c, _d, _e2;
+            var _a3, _b2, _c2, _d, _e2;
             return /* @__PURE__ */ jsx$2(Container$8, {
               alignment: {
                 horizontal: column.align,
@@ -40374,7 +40374,7 @@ const DataGrid = memo((_Cb) => {
               },
               size: {
                 maxWidth: (_b2 = (_a3 = column.size) == null ? void 0 : _a3.maxWidth) != null ? _b2 : MAX_COLUMN_WIDTH,
-                minWidth: (_d = (_c = column.size) == null ? void 0 : _c.minWidth) != null ? _d : MIN_COLUMN_WIDTH,
+                minWidth: (_d = (_c2 = column.size) == null ? void 0 : _c2.minWidth) != null ? _d : MIN_COLUMN_WIDTH,
                 width: (_e2 = column.size) == null ? void 0 : _e2.width
               },
               children: /* @__PURE__ */ jsx$2(Label, {
@@ -40427,7 +40427,7 @@ const DataGrid = memo((_Cb) => {
                 }
               },
               children: columns.map((column, columnKey) => {
-                var _a3, _b2, _c, _d, _e2;
+                var _a3, _b2, _c2, _d, _e2;
                 return /* @__PURE__ */ jsx$2(DataGridCell, {
                   alignment: {
                     horizontal: column.align,
@@ -40443,7 +40443,7 @@ const DataGrid = memo((_Cb) => {
                   value: fetchFromObject(row, column.field),
                   size: {
                     maxWidth: (_b2 = (_a3 = column.size) == null ? void 0 : _a3.maxWidth) != null ? _b2 : MAX_COLUMN_WIDTH,
-                    minWidth: (_d = (_c = column.size) == null ? void 0 : _c.minWidth) != null ? _d : MIN_COLUMN_WIDTH,
+                    minWidth: (_d = (_c2 = column.size) == null ? void 0 : _c2.minWidth) != null ? _d : MIN_COLUMN_WIDTH,
                     width: (_e2 = column.size) == null ? void 0 : _e2.width
                   }
                 });
@@ -40452,7 +40452,7 @@ const DataGrid = memo((_Cb) => {
           })
         })]
       }) : /* @__PURE__ */ jsx$2(Container$8, {
-        children: !((_b = states.state) == null ? void 0 : _b.loading) && data2 && data2.length === 0 ? /* @__PURE__ */ jsx$2(NoResults, {
+        children: !((_c = states.state) == null ? void 0 : _c.loading) && data2 && data2.length === 0 ? /* @__PURE__ */ jsx$2(NoResults, {
           as: Container$8,
           children: /* @__PURE__ */ jsx$2(Label, {
             children: "No results"

@@ -170,7 +170,7 @@ export const DataGrid = memo(
           borderRadius={borderRadius}
           states={{
             state: {
-              visible: states.state?.loading,
+              visible: states.state?.loading ?? false,
             },
           }}
         />
