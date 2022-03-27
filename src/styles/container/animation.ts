@@ -14,11 +14,11 @@ export function getAnimationKeyframes(
   return css`
     @keyframes ${name} {
       from {
-        ${getContainerStyles({ ...otherContainerProps, ...animation.from })}
+        ${getContainerStyles({ ...animation.from })}
       }
 
       to {
-        ${getContainerStyles({ ...otherContainerProps, ...animation.to })}
+        ${getContainerStyles({ ...animation.to })}
       }
     }
   `;

@@ -22179,12 +22179,7 @@ let nanoid = (size = 21) => {
   return id2;
 };
 function getAnimationKeyframes(animation, name2, props) {
-  const _a2 = props, {
-    animations: unused
-  } = _a2, otherContainerProps = __objRest(_a2, [
-    "animations"
-  ]);
-  return css$2(["@keyframes ", "{from{", "}to{", "}}"], name2, getContainerStyles(__spreadValues(__spreadValues({}, otherContainerProps), animation.from)), getContainerStyles(__spreadValues(__spreadValues({}, otherContainerProps), animation.to)));
+  return css$2(["@keyframes ", "{from{", "}to{", "}}"], name2, getContainerStyles(__spreadValues({}, animation.from)), getContainerStyles(__spreadValues({}, animation.to)));
 }
 function getAnimationStyles(props) {
   var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o;
@@ -22201,7 +22196,7 @@ function getAnimationStyles(props) {
     if (animation.from && animation.to) {
       const name2 = (_b = animation.name) != null ? _b : `animation_${nanoid()}`;
       names = [...names, name2];
-      keyframes = [...keyframes, getAnimationKeyframes(animation, name2, props)];
+      keyframes = [...keyframes, getAnimationKeyframes(animation, name2)];
       delays = [...delays, (_d = (_c = animation.timing) == null ? void 0 : _c.delay) != null ? _d : 0];
       durations = [...durations, (_f = (_e2 = animation.timing) == null ? void 0 : _e2.duration) != null ? _f : 3];
       iterations = [...iterations, (_h = (_g = animation.timing) == null ? void 0 : _g.iterations) != null ? _h : "infinite"];
