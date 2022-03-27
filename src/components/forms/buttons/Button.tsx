@@ -188,7 +188,7 @@ export const Button = memo(
         background={{ color: colors?.backgroundColor, ...background }}
         border={{
           all: {
-            color: BorderColors.Transparent,
+            // color: BorderColors.Transparent,
             style: BorderStyle.None,
             width: 0,
           },

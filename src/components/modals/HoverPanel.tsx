@@ -41,7 +41,7 @@ export const HoverPanel = memo(
           },
           ...border,
         }}
-        borderRadius={{ all: Amount.Less, ...borderRadius }}
+        borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} hover-panel`}
         depth={depth}
         position={{

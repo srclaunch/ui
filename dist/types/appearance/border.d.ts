@@ -53,27 +53,27 @@ export declare enum BorderStyle {
 }
 export declare type Border = {
     readonly all?: {
-        readonly color: BorderColor;
+        readonly color?: BorderColor;
         readonly style?: BorderStyle;
         readonly width?: number | string;
     };
     readonly bottom?: {
-        readonly color: BorderColor;
+        readonly color?: BorderColor;
         readonly style?: BorderStyle;
         readonly width?: number | string;
     };
     readonly left?: {
-        readonly color: BorderColor;
+        readonly color?: BorderColor;
         readonly style?: BorderStyle;
         readonly width?: number | string;
     };
     readonly right?: {
-        readonly color: BorderColor;
+        readonly color?: BorderColor;
         readonly style?: BorderStyle;
         readonly width?: number | string;
     };
     readonly top?: {
-        readonly color: BorderColor;
+        readonly color?: BorderColor;
         readonly style?: BorderStyle;
         readonly width?: number | string;
     };

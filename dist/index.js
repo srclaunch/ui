@@ -22288,7 +22288,7 @@ function getBorderWidthStyle(width, direction) {
 function getBorderStyle(border, direction) {
   if (!border || !direction)
     return;
-  return css$2(["", " ", " ", ""], border.color && getBorderColorStyle(border == null ? void 0 : border.color, direction), border.style && getBorderStyleStyle(border == null ? void 0 : border.style, direction), border.width && getBorderWidthStyle(border == null ? void 0 : border.width, direction));
+  return css$2(["", " ", " ", ""], border.color && getBorderColorStyle(border.color, direction), border.style && getBorderStyleStyle(border.style, direction), border.width !== void 0 && getBorderWidthStyle(border.width, direction));
 }
 function getBorderStyles(border) {
   return css$2(["", " ", " ", " ", " ", ""], (border == null ? void 0 : border.all) && getBorderStyle(border.all, "all"), (border == null ? void 0 : border.bottom) && getBorderStyle(border.bottom, "bottom"), (border == null ? void 0 : border.left) && getBorderStyle(border.left, "left"), (border == null ? void 0 : border.right) && getBorderStyle(border.right, "right"), (border == null ? void 0 : border.top) && getBorderStyle(border.top, "top"));
@@ -23048,7 +23048,6 @@ const Button$1 = memo((_k) => {
     }, background),
     border: __spreadValues({
       all: {
-        color: BorderColors.Transparent,
         style: BorderStyle.None,
         width: 0
       }
@@ -35185,7 +35184,7 @@ const HoverPanel = memo((_Ua) => {
       }
     }, border),
     borderRadius: __spreadValues({
-      all: Amount.Less
+      all: Amount.Least
     }, borderRadius),
     className: `${className} hover-panel`,
     depth,
@@ -35210,6 +35209,7 @@ const MoreMenu = memo((_Wa) => {
     className = "",
     dotColor = ForegroundColors.MoreMenu,
     size = {},
+    states = {},
     menu
   } = _Xa, props = __objRest(_Xa, [
     "alignment",
@@ -35217,6 +35217,7 @@ const MoreMenu = memo((_Wa) => {
     "className",
     "dotColor",
     "size",
+    "states",
     "menu"
   ]);
   const [menuVisible, setMenuVisible] = useState(false);
@@ -35270,7 +35271,7 @@ const MoreMenu = memo((_Wa) => {
         height: Sizes.Default,
         width: Sizes.Default
       }, size),
-      states: {
+      states: __spreadValues({
         hovered: {
           background: {
             color: BackgroundColors.Primary
@@ -35279,7 +35280,7 @@ const MoreMenu = memo((_Wa) => {
         state: {
           focused
         }
-      }
+      }, states)
     }, props), {
       children: new Array(3).fill(0).map((color, i2) => /* @__PURE__ */ jsx$2(Dot, {
         borderRadius: {
@@ -35296,7 +35297,7 @@ const MoreMenu = memo((_Wa) => {
           height: 5,
           width: 5
         }
-      }))
+      }, i2))
     })), /* @__PURE__ */ jsx$2(HoverPanel, {
       visible: menuVisible,
       setMenuVisible,

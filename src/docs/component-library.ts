@@ -8,6 +8,7 @@ import { Menu } from '../components/menus/Menu';
 import { MoreMenu } from '../components/menus/MoreMenu';
 import { CloseButton } from '../components/modals/CloseButton';
 import { SlidePanel } from '../components/modals/SlidePanel';
+import { LoadingOverlay } from '../components/progress/LoadingOverlay';
 import { UserMenu } from '../components/user/UserMenu';
 import {
   Amount,
@@ -884,6 +885,20 @@ const Example = () => (
     {
       title: 'Progress',
       path: '/progress',
+      description: 'Components for displaying progress states.',
+      components: [
+        {
+          component: LoadingOverlay,
+          title: 'LoadingOverlay',
+          path: '/progress/loading-overlay',
+          examples: [
+            {
+              title: 'Default',
+              properties: {},
+            },
+          ],
+        },
+      ],
     },
     {
       title: 'Search',

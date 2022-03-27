@@ -39,6 +39,7 @@ export const MoreMenu = memo(
     className = '',
     dotColor = ForegroundColors.MoreMenu,
     size = {},
+    states = {},
     menu,
     ...props
   }: MoreMenuProps): ReactElement => {
@@ -106,6 +107,7 @@ export const MoreMenu = memo(
             state: {
               focused,
             },
+            ...states,
           }}
           {...props}
         >
@@ -113,6 +115,7 @@ export const MoreMenu = memo(
             <Dot
               borderRadius={{ all: Amount.All }}
               background={{ color: dotFillColor }}
+              key={i}
               margin={{
                 left: 1,
                 right: 1,

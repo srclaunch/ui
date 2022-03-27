@@ -50,9 +50,10 @@ export function getBorderStyle(
   if (!border || !direction) return;
 
   return css`
-    ${border.color && getBorderColorStyle(border?.color, direction)}
-    ${border.style && getBorderStyleStyle(border?.style, direction)}
-    ${border.width && getBorderWidthStyle(border?.width, direction)}
+    ${border.color && getBorderColorStyle(border.color, direction)}
+    ${border.style && getBorderStyleStyle(border.style, direction)}
+    ${border.width !== undefined &&
+    getBorderWidthStyle(border.width, direction)}
   `;
 }
 
