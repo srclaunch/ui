@@ -35211,10 +35211,8 @@ const HoverPanel = memo((_Wa) => {
     children,
     className = "",
     depth = Depth.Higher,
-    detached = true,
-    setMenuVisible,
-    states = {},
-    visible = true
+    size = {},
+    states = {}
   } = _Xa, props = __objRest(_Xa, [
     "background",
     "border",
@@ -35222,10 +35220,8 @@ const HoverPanel = memo((_Wa) => {
     "children",
     "className",
     "depth",
-    "detached",
-    "setMenuVisible",
-    "states",
-    "visible"
+    "size",
+    "states"
   ]);
   var _a2;
   return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
@@ -35245,15 +35241,15 @@ const HoverPanel = memo((_Wa) => {
     className: `${className} hover-panel`,
     depth,
     position: {
-      top: "-6px"
+      behavior: PositionBehavior.Absolute,
+      right: -6,
+      top: `calc(100% - 6px)`
     },
-    shadow: visible ? DepthShadow.Higher : DepthShadow.Surface,
-    states: {
-      state: {
-        focused: (_a2 = states.state) == null ? void 0 : _a2.focused,
-        visible
-      }
-    }
+    shadow: ((_a2 = states.state) == null ? void 0 : _a2.visible) ? DepthShadow.Higher : DepthShadow.Surface,
+    size: __spreadValues({
+      minWidth: 140
+    }, size),
+    states
   }, props), {
     children
   }));
@@ -35355,8 +35351,11 @@ const MoreMenu = memo((_Ya) => {
         }
       }, i2))
     })), /* @__PURE__ */ jsx$2(HoverPanel, {
-      visible: menuVisible,
-      setMenuVisible,
+      states: {
+        state: {
+          visible: menuVisibleRef.current
+        }
+      },
       children: /* @__PURE__ */ jsx$2(Menu, {
         menu,
         events: {
@@ -52599,9 +52598,9 @@ const MediaGridItem = memo((_mc) => {
     background = {},
     borderRadius = {},
     description,
-    images,
+    image,
     minHeight,
-    moreMenu,
+    menu,
     title,
     url,
     video
@@ -52610,15 +52609,15 @@ const MediaGridItem = memo((_mc) => {
     "background",
     "borderRadius",
     "description",
-    "images",
+    "image",
     "minHeight",
-    "moreMenu",
+    "menu",
     "title",
     "url",
     "video"
   ]);
-  var _a2, _b, _c;
-  const content = images ? /* @__PURE__ */ jsxs$1(Container$8, {
+  var _a2;
+  const content = image ? /* @__PURE__ */ jsxs$1(Container$8, {
     alignment: {
       horizontal: AlignHorizontal.Stretch,
       orientation: Orientation.Horizontal,
@@ -52632,7 +52631,7 @@ const MediaGridItem = memo((_mc) => {
       textSize: TextSize.Large,
       textWeight: TextWeight.Most,
       children: title
-    }), /* @__PURE__ */ jsx$2(Spacer, {}), moreMenu && /* @__PURE__ */ jsx$2(MoreMenu, __spreadValues({}, moreMenu))]
+    }), /* @__PURE__ */ jsx$2(Spacer, {}), menu && /* @__PURE__ */ jsx$2(MoreMenu, __spreadValues({}, menu))]
   }) : video ? /* @__PURE__ */ jsx$2(Video, {
     className: "media-grid-video",
     description: video.description,
@@ -52646,14 +52645,14 @@ const MediaGridItem = memo((_mc) => {
   });
   return /* @__PURE__ */ jsx$2(Card, __spreadProps(__spreadValues({
     alignment: __spreadValues({
-      horizontal: AlignHorizontal.Center,
+      horizontal: AlignHorizontal.Stretch,
       orientation: Orientation.Vertical,
       vertical: AlignVertical.Bottom
     }, alignment),
     background: __spreadValues({
       color: BackgroundColors.Dark,
       image: {
-        url: (_c = (_a2 = images == null ? void 0 : images[0]) == null ? void 0 : _a2.url) != null ? _c : (_b = images == null ? void 0 : images[0]) == null ? void 0 : _b.path,
+        url: (_a2 = image == null ? void 0 : image.url) != null ? _a2 : image == null ? void 0 : image.path,
         size: BackgroundSize.Cover
       }
     }, background),
@@ -52671,7 +52670,7 @@ const MediaGrid = memo((_oc) => {
     children,
     columns = 5,
     className = "",
-    items,
+    items = [],
     states = {}
   } = _pc, props = __objRest(_pc, [
     "borderRadius",

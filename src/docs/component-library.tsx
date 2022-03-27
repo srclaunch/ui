@@ -692,7 +692,45 @@ const Example = () => (
                 <MediaGrid items={[{ path: '/asdfasfd', }]} />
               );`,
               properties: {
-                items: [{ path: '/asdfasfd' }],
+                items: [
+                  {
+                    image: { path: 'asdfasdf' },
+                    title: 'Example',
+                  },
+                ],
+              },
+            },
+            {
+              title: 'With titles',
+              code: `import { MediaGrid } from '@srclaunch/ui';
+
+              const Example = () => (
+                <MediaGrid items={[{ path: '/asdfasfd', title: 'Example 1', }]} />
+              );`,
+              properties: {
+                items: [
+                  {
+                    image: { path: 'asdfasdf' },
+                    title: 'Example 1',
+                  },
+                ],
+              },
+            },
+            {
+              title: 'With titles and more menu',
+              code: `import { MediaGrid } from '@srclaunch/ui';
+
+              const Example = () => (
+                <MediaGrid items={[{ path: '/asdfasfd', title: 'Example 1',}]} />
+              );`,
+              properties: {
+                items: [
+                  {
+                    image: { path: 'asdfasdf' },
+                    title: 'Example',
+                    menu: [{ label: 'Edit' }],
+                  },
+                ],
               },
             },
           ],

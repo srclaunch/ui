@@ -128,7 +128,13 @@ export const MoreMenu = memo(
           ))}
         </Button>
 
-        <HoverPanel visible={menuVisible} setMenuVisible={setMenuVisible}>
+        <HoverPanel
+          states={{
+            state: {
+              visible: menuVisibleRef.current,
+            },
+          }}
+        >
           <Menu
             menu={menu}
             events={{

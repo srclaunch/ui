@@ -1,9 +1,7 @@
 import { Image as ImageType, Video as VideoType } from '@srclaunch/types';
-import { memo, MouseEventHandler, ReactElement } from 'react';
-
+import { memo, ReactElement } from 'react';
 import {
   AlignHorizontal,
-  Alignment,
   AlignVertical,
   Amount,
   BackgroundColors,
@@ -21,12 +19,12 @@ import { Video } from '../../media/Video';
 import { MoreMenu, MoreMenuProps } from '../../menus/MoreMenu';
 import { Label } from '../../typography/Label';
 
-export type MediaGridItem = ContainerProps & {
+export type MediaGridItemProps = ContainerProps & {
   readonly description?: string | null;
   readonly element?: ReactElement;
-  readonly images?: readonly ImageType[];
+  readonly image?: ImageType;
   readonly minHeight?: Amount | number;
-  readonly moreMenu?: MoreMenuProps;
+  readonly menu?: MoreMenuProps;
   readonly title?: string;
   readonly url?: string;
   readonly video?: VideoType;
@@ -38,15 +36,15 @@ export const MediaGridItem = memo(
     background = {},
     borderRadius = {},
     description,
-    images,
+    image,
     minHeight,
-    moreMenu,
+    menu,
     title,
     url,
     video,
     ...props
-  }: MediaGridItem) => {
-    const content = images ? (
+  }: MediaGridItemProps) => {
+    const content = image ? (
       <Container
         alignment={{
           horizontal: AlignHorizontal.Stretch,
@@ -65,7 +63,7 @@ export const MediaGridItem = memo(
 
         <Spacer />
 
-        {moreMenu && <MoreMenu {...moreMenu} />}
+        {menu && <MoreMenu {...menu} />}
       </Container>
     ) : video ? (
       <Video
@@ -81,7 +79,7 @@ export const MediaGridItem = memo(
     return (
       <Card
         alignment={{
-          horizontal: AlignHorizontal.Center,
+          horizontal: AlignHorizontal.Stretch,
           orientation: Orientation.Vertical,
           vertical: AlignVertical.Bottom,
           ...alignment,
@@ -90,7 +88,7 @@ export const MediaGridItem = memo(
           color: BackgroundColors.Dark,
 
           image: {
-            url: images?.[0]?.url ?? images?.[0]?.path,
+            url: image?.url ?? image?.path,
             size: BackgroundSize.Cover,
           },
           ...background,

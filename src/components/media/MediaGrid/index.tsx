@@ -2,12 +2,12 @@ import { memo, ReactElement } from 'react';
 import { Amount, BackgroundColors, Fill, Orientation } from '../../../types';
 import { Container, ContainerProps } from '../../layout/Container';
 import { LoadingOverlay } from '../../progress/LoadingOverlay';
-import { MediaGridItem } from './MediaGriditem';
+import { MediaGridItem, MediaGridItemProps } from './MediaGriditem';
 
 export type MediaGridProps = ContainerProps & {
   readonly className?: string;
   readonly columns?: number;
-  readonly items: readonly MediaGridItem[];
+  readonly items: readonly MediaGridItemProps[];
 };
 
 export const MediaGrid = memo(
@@ -16,7 +16,7 @@ export const MediaGrid = memo(
     children,
     columns = 5,
     className = '',
-    items,
+    items = [],
     states = {},
     ...props
   }: MediaGridProps): ReactElement => {
