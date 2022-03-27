@@ -24,11 +24,11 @@ export function getBorderColorStyle(
 }
 
 export function getBorderStyleStyle(
-  style: BorderStyle,
   direction: 'all' | 'top' | 'right' | 'bottom' | 'left',
+  style?: BorderStyle,
 ): SimpleInterpolation {
   return css`
-    ${getBorderDirectionProperty(direction)}-style: ${style};
+    ${getBorderDirectionProperty(direction)}-style: ${style ?? 'solid'};
   `;
 }
 
@@ -51,7 +51,7 @@ export function getBorderStyle(
 
   return css`
     ${border.color && getBorderColorStyle(border.color, direction)}
-    ${border.style && getBorderStyleStyle(border.style, direction)}
+    ${getBorderStyleStyle(direction, border.style)}
     ${border.width !== undefined &&
     getBorderWidthStyle(border.width, direction)}
   `;

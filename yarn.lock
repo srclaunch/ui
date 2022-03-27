@@ -2141,6 +2141,7 @@ __metadata:
     "@types/pluralize": ^0.0.29
     "@types/react": ^17.0.40
     "@types/react-dom": ^17.0.11
+    "@types/react-is": ^17
     "@types/react-router": ^5.1.18
     "@types/react-router-dom": ^5.3.3
     "@types/styled-components": ^5.1.24
@@ -2192,6 +2193,7 @@ __metadata:
     react-date-picker: 8.3.6
     react-dom: ^17.0.2
     react-dropzone: ^11.7.0
+    react-is: ^17.0.2
     react-password-strength-bar: ^0.4.0
     react-redux: ^7.2.6
     react-router: ^6.2.1
@@ -2611,6 +2613,15 @@ __metadata:
   dependencies:
     "@types/react": "*"
   checksum: b54cd0ef573236b3d87fe7493e6d1c36d8b4ca37a3b46364272a5c91ac178e3296b68ea1aeb299ce68f12ad663c5720ee890d0539b14881c6754bdcbdb0befa0
+  languageName: node
+  linkType: hard
+
+"@types/react-is@npm:^17":
+  version: 17.0.3
+  resolution: "@types/react-is@npm:17.0.3"
+  dependencies:
+    "@types/react": "*"
+  checksum: 6abb7c47d54f012272650df8a962a28bd82f219291e5ef8b4dfa7fe0bb98ae243b060bf9fbe8ceff6213141794855a006db194b490b00ffd15842ae19d0ce1f0
   languageName: node
   linkType: hard
 

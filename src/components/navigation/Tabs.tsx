@@ -2,11 +2,13 @@ import {
   Children,
   cloneElement,
   memo,
+  Fragment,
   ReactElement,
   ReactNode,
   useState,
 } from 'react';
 import styled, { css } from 'styled-components';
+import { isFragment } from 'react-is';
 
 import {
   AlignHorizontal,
@@ -55,11 +57,13 @@ export const Tabs = memo(
   }: TabsProps): ReactElement => {
     let initialIndex = 0;
 
-    // @ts-ignore
-    Children.forEach(children, (child: React.ReactNode, key) => {
-      // @ts-ignore
-      if (child.props?.selected) initialIndex = key;
-    });
+    Children.forEach(
+      isFragment(children) ? children.props.children : children,
+      (child: React.ReactNode, key) => {
+        // @ts-ignore
+        if (child.props?.selected) initialIndex = key;
+      },
+    );
 
     const [currentTabIndex, setTabIndex] = useState(initialIndex);
 
@@ -81,60 +85,66 @@ export const Tabs = memo(
           }}
         >
           {/* @ts-ignore */}
-          {Children.map(children, (c: ReactElement, key) => {
-            if (c.props.visible === false) return null;
+          {Children.map(
+            isFragment(children) ? children.props.children : children,
+            (c: ReactElement, key) => {
+              if (c.props.visible === false) return null;
 
-            return (
-              <Button
-                background={{ color: BackgroundColors.Transparent }}
-                borderRadius={{ all: Amount.None }}
-                border={{
-                  bottom: {
-                    color:
-                      currentTabIndex === key
-                        ? BorderColors.Primary
-                        : BorderColors.Transparent,
-                    width: 2,
-                  },
-                }}
-                className={c.props.className}
-                events={{
-                  mouse: {
-                    onClick: () => {
-                      setTabIndex(key);
-
-                      if (
-                        c.props.onClick &&
-                        typeof c.props.onClick === 'function'
-                      )
-                        c.props.onClick();
+              return (
+                <Button
+                  background={{ color: BackgroundColors.Transparent }}
+                  borderRadius={{ all: Amount.None }}
+                  border={{
+                    bottom: {
+                      color:
+                        currentTabIndex === key
+                          ? BorderColors.Primary
+                          : BorderColors.Transparent,
+                      width: 2,
                     },
-                  },
-                }}
-                padding={{ left: Amount.Less, right: Amount.Less }}
-                key={key}
-              >
-                <Label
-                  textColor={
-                    currentTabIndex === key
-                      ? TextColors.Primary
-                      : TextColors.Default
-                  }
+                  }}
+                  className={c.props.className}
+                  events={{
+                    mouse: {
+                      onClick: () => {
+                        setTabIndex(key);
+
+                        if (
+                          c.props.onClick &&
+                          typeof c.props.onClick === 'function'
+                        )
+                          c.props.onClick();
+                      },
+                    },
+                  }}
+                  padding={{ left: Amount.Less, right: Amount.Less }}
+                  key={key}
                 >
-                  {c.props.label}
-                </Label>
-              </Button>
-            );
-          })}
+                  <Label
+                    textColor={
+                      currentTabIndex === key
+                        ? TextColors.Primary
+                        : TextColors.Default
+                    }
+                  >
+                    {c.props.label}
+                  </Label>
+                </Button>
+              );
+            },
+          )}
         </Container>
 
         <Container className="tab-content">
-          {Children.map(children, (c: ReactNode, key) => {
-            if (key !== currentTabIndex) return null;
+          {Children.map(
+            isFragment(children) ? children.props.children : children,
+            (c: ReactNode, key) => {
+              if (key !== currentTabIndex) return null;
 
-            // @ts-ignore
-            return cloneElement(c);
-          })}
+              // @ts-ignore
+              return cloneElement(c);
+            },
+          )}
         </Container>
       </Container>
     );
