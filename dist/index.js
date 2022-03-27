@@ -22460,8 +22460,41 @@ function getTransformStyles(transform) {
   return css$2(["", " ", ""], (transform == null ? void 0 : transform.origin) && css$2(["transform-origin:", ";"], getCSSMeasurementValue(transform.origin)), ((transform == null ? void 0 : transform.rotate) || (transform == null ? void 0 : transform.scale) || (transform == null ? void 0 : transform.skew) || (transform == null ? void 0 : transform.translate)) && css$2(["transform:", ";"], (_a2 = getTransformArgumentValue(transform)) != null ? _a2 : "none"));
 }
 css$2(["", ""], (props) => getTransformStyles(props.transform));
+function getOpacityStyle(visibility) {
+  if (!visibility)
+    return null;
+  if ((visibility == null ? void 0 : visibility.hidden) === true || (visibility == null ? void 0 : visibility.visible) === false) {
+    return css$2(["opacity:0;"]);
+  }
+  if (visibility == null ? void 0 : visibility.opacity) {
+    return css$2(["opacity:", "%;"], visibility.opacity);
+  }
+  return css$2(["opacity:1;"]);
+}
+function getPointerEventsStyle(visibility) {
+  if (!visibility)
+    return null;
+  if ((visibility == null ? void 0 : visibility.hidden) === true || (visibility == null ? void 0 : visibility.visible) === false) {
+    return css$2(["pointer-events:none;"]);
+  }
+  if ((visibility == null ? void 0 : visibility.opacity) && visibility.opacity === 0) {
+    return css$2(["pointer-events:none;"]);
+  }
+  return css$2(["pointer-events:all;"]);
+}
+function getVisibilityStyle(visibility) {
+  if (!visibility)
+    return null;
+  if ((visibility == null ? void 0 : visibility.hidden) === true || (visibility == null ? void 0 : visibility.visible) === false) {
+    return css$2(["visibility:hidden;"]);
+  }
+  if ((visibility == null ? void 0 : visibility.opacity) && visibility.opacity === 0) {
+    return css$2(["visibility:hidden;"]);
+  }
+  return css$2(["visibility:visible;"]);
+}
 function getVisibilityStyles(visibility) {
-  return css$2(["", " ", ""], (visibility == null ? void 0 : visibility.hidden) === true && css$2(["visibility:hidden;"]), (visibility == null ? void 0 : visibility.opacity) && css$2(["opacity:", "%;"], visibility.opacity));
+  return css$2(["", " ", " ", ""], getOpacityStyle(visibility), getPointerEventsStyle(visibility), getVisibilityStyle(visibility));
 }
 css$2(["", ""], (props) => getVisibilityStyles(props.visibility));
 const getContainerStyles = (props) => {
@@ -35660,17 +35693,15 @@ const Backdrop = memo((_ab) => {
     background = {},
     children,
     className = "",
-    onClick,
     position = {},
-    visible
+    states = {}
   } = _bb, props = __objRest(_bb, [
     "as",
     "background",
     "children",
     "className",
-    "onClick",
     "position",
-    "visible"
+    "states"
   ]);
   return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     as,
@@ -35685,8 +35716,15 @@ const Backdrop = memo((_ab) => {
       right: 0,
       top: 0
     }, position),
+    states: __spreadValues({
+      visible: {
+        visibility: {
+          opacity: 1
+        }
+      }
+    }, states),
     visibility: {
-      hidden: !visible
+      opacity: 0
     }
   }, props), {
     children
@@ -35775,7 +35813,11 @@ const WebApplication = memo((_cb) => {
           }
         }
       }), /* @__PURE__ */ jsx$2(Backdrop, {
-        visible: false
+        states: {
+          state: {
+            visible: !showOutlet
+          }
+        }
       }), showOutlet && /* @__PURE__ */ jsx$2(Outlet, {}), /* @__PURE__ */ jsx$2(EntityPanel, {
         actions,
         httpClient

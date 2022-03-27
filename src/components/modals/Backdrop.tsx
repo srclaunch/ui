@@ -4,10 +4,7 @@ import styled, { css } from 'styled-components';
 import { BackgroundColors, PositionBehavior } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
 
-type BackdropProps = {
-  onClick?: () => unknown;
-  visible: boolean;
-} & ContainerProps;
+type BackdropProps = ContainerProps;
 
 export const Backdrop = memo(
   ({
@@ -15,9 +12,8 @@ export const Backdrop = memo(
     background = {},
     children,
     className = '',
-    onClick,
     position = {},
-    visible,
+    states = {},
     ...props
   }: BackdropProps): ReactElement => {
     return (
@@ -33,8 +29,16 @@ export const Backdrop = memo(
           top: 0,
           ...position,
         }}
+        states={{
+          visible: {
+            visibility: {
+              opacity: 1,
+            },
+          },
+          ...states,
+        }}
         visibility={{
-          hidden: !visible,
+          opacity: 0,
         }}
         {...props}
       >

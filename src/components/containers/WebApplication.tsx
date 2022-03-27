@@ -125,7 +125,13 @@ export const WebApplication = memo(
             }}
           />
 
-          <Backdrop visible={false} />
+          <Backdrop
+            states={{
+              state: {
+                visible: !showOutlet,
+              },
+            }}
+          />
 
           {showOutlet && <Outlet />}
 
