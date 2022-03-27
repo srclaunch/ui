@@ -29270,7 +29270,7 @@ const DropdownControl = memo((_ba) => {
     "textSize",
     "textColor"
   ]);
-  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o, _p;
+  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o, _p, _q, _r;
   return /* @__PURE__ */ jsxs$1(InputContainer, __spreadProps(__spreadValues({
     alignment: __spreadValues({
       orientation: Orientation.Horizontal,
@@ -29316,7 +29316,8 @@ const DropdownControl = memo((_ba) => {
       },
       selectable: false,
       size: {
-        fill: Fill.Horizontal
+        fill: Fill.Horizontal,
+        minWidth: 100
       },
       textSize,
       textColor: !label && placeholder ? TextColors.InputPlaceholder : textColor,
@@ -29329,7 +29330,7 @@ const DropdownControl = memo((_ba) => {
       },
       border: {
         left: {
-          color: BorderColors.Default,
+          color: ((_n = (_m = states.state) == null ? void 0 : _m.dropdown) == null ? void 0 : _n.visible) ? BorderColors.Transparent : BorderColors.Light,
           style: BorderStyle.Solid,
           width: 1
         }
@@ -29340,13 +29341,13 @@ const DropdownControl = memo((_ba) => {
         right: Amount.Least
       },
       size: {
-        height: `calc(${(_m = size == null ? void 0 : size.height) != null ? _m : Sizes.Default} / 5 * 3)`,
-        width: (_n = size == null ? void 0 : size.height) != null ? _n : Sizes.Default
+        height: `calc(${(_o = size == null ? void 0 : size.height) != null ? _o : Sizes.Default} / 100 * 60)`,
+        width: `calc(${(_p = size == null ? void 0 : size.height) != null ? _p : Sizes.Default} / 100 * 90)`
       },
       children: /* @__PURE__ */ jsx$2(Icon, {
-        color: ((_o = states.state) == null ? void 0 : _o.visible) ? TextColors.Lightest : TextColors.Lighter,
+        color: ((_q = states.state) == null ? void 0 : _q.visible) ? TextColors.Lightest : TextColors.Lighter,
         name: BasicIcons.CaretDownArrow,
-        className: ((_p = states.state) == null ? void 0 : _p.visible) ? "up" : "down",
+        className: ((_r = states.state) == null ? void 0 : _r.visible) ? "up" : "down",
         size: {
           height: Sizes.Smallest,
           width: Sizes.Smallest

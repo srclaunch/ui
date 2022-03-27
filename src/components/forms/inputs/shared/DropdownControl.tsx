@@ -128,6 +128,7 @@ export const DropdownControl = memo(
             selectable={false}
             size={{
               fill: Fill.Horizontal,
+              minWidth: 100,
             }}
             textSize={textSize}
             textColor={
@@ -146,7 +147,10 @@ export const DropdownControl = memo(
           }}
           border={{
             left: {
-              color: BorderColors.Default,
+              color: states.state?.dropdown?.visible
+                ? BorderColors.Transparent
+                : BorderColors.Light,
+
               style: BorderStyle.Solid,
               width: 1,
             },
@@ -157,8 +161,8 @@ export const DropdownControl = memo(
             right: Amount.Least,
           }}
           size={{
-            height: `calc(${size?.height ?? Sizes.Default} / 5 * 3)`,
-            width: size?.height ?? Sizes.Default,
+            height: `calc(${size?.height ?? Sizes.Default} / 100 * 60)`,
+            width: `calc(${size?.height ?? Sizes.Default} / 100 * 90)`,
           }}
         >
           <Icon
