@@ -52671,15 +52671,16 @@ const MediaGrid = memo((_oc) => {
         margin: {
           bottom: Amount.Default
         },
-        children: items.slice(columns * row, columns * row + columns).map((i2, key) => /* @__PURE__ */ jsx$2(MediaGridItem, __spreadValues({
+        children: items.slice(columns * row, columns * row + columns).map((i2, key) => /* @__PURE__ */ createElement$1(MediaGridItem, __spreadProps(__spreadValues({}, i2), {
           margin: __spreadValues({
             right: Amount.Default
           }, i2.margin),
+          key,
           size: __spreadValues({
             minHeight: 200,
             minWidth: 260
           }, i2.size)
-        }, i2), key))
+        })))
       }, row);
     })]
   }));

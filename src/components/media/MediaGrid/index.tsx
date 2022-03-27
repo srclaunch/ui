@@ -58,6 +58,7 @@ export const MediaGrid = memo(
                 .slice(columns * row, columns * row + columns)
                 .map((i, key) => (
                   <MediaGridItem
+                    {...i}
                     margin={{ right: Amount.Default, ...i.margin }}
                     key={key}
                     size={{
@@ -65,7 +66,6 @@ export const MediaGrid = memo(
                       minWidth: 260,
                       ...i.size,
                     }}
-                    {...i}
                   />
                 ))}
             </Container>
