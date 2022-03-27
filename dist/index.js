@@ -52949,6 +52949,7 @@ const NavigationMenu = memo((_wc) => {
         margin: __spreadValues({
           bottom: Amount.Least
         }, margin),
+        matchExactPath,
         padding: __spreadValues({
           bottom: Amount.Least,
           left: Amount.Default,

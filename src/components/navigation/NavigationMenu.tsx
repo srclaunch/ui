@@ -66,6 +66,7 @@ export const NavigationMenu = memo(
                 bottom: Amount.Least,
                 ...margin,
               }}
+              matchExactPath={matchExactPath}
               padding={{
                 bottom: Amount.Least,
                 left: Amount.Default,
