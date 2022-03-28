@@ -33,7 +33,8 @@ export const DropdownInput = memo(
     ...props
   }: DropdownInputProps): ReactElement => {
     // const [value, setValue] = useState(defaultValue);
-    const [focused, setFocused] = useState(true);
+    const [focused, setFocused] = useState(states.state?.focused ?? false);
+    const focusedRef = useRef(focused);
     const [menuVisible, setMenuVisible] = useState(
       states?.state?.dropdown?.visible ?? false,
     );
@@ -103,7 +104,7 @@ export const DropdownInput = memo(
               : {},
           )}
           className={`${className} dropdown-input`}
-          depth={menuVisible ? Depth.Higher : Depth.Surface}
+          // depth={menuVisible ? Depth.Higher : Depth.Surface}
           events={{
             mouse: {
               onMouseLeave: () => {
@@ -124,9 +125,13 @@ export const DropdownInput = memo(
             events={{
               focus: {
                 onBlur: () => {
+                  focusedRef.current = false;
                   setFocused(false);
                 },
-                onFocus: () => setFocused(true),
+                onFocus: () => {
+                  focusedRef.current = true;
+                  setFocused(true);
+                },
               },
               mouse: {
                 onClick: () => {
@@ -143,7 +148,7 @@ export const DropdownInput = memo(
               state: {
                 error: problems,
                 dropdown: { visible: menuVisibleRef.current },
-                focused,
+                // focused: focusedRef.current,
               },
               ...states,
             }}
@@ -161,8 +166,12 @@ export const DropdownInput = memo(
               minHeight: getDropdownMinHeight(menu?.length ?? 1, Amount.Less),
             }}
             states={{
-              state: { focused, dropdown: { visible: menuVisibleRef.current } },
               ...states,
+              state: {
+                ...states.state,
+                dropdown: { visible: menuVisibleRef.current },
+                // focused: focusedRef.current,
+              },
             }}
             {...props}
           >

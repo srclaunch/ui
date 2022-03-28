@@ -1,5 +1,12 @@
 import { BasicIcons } from '@srclaunch/icons';
-import { ComponentRef, ForwardedRef, memo, ReactElement } from 'react';
+import {
+  ComponentRef,
+  ForwardedRef,
+  memo,
+  ReactElement,
+  useRef,
+  useState,
+} from 'react';
 import styled, { css } from 'styled-components';
 
 import { getDepthZIndex } from '../../../../lib/css/depth/z-index';
@@ -45,6 +52,7 @@ export const DropdownControl = memo(
     className = '',
     component,
     cursor = Cursor.Pointer,
+    events = {},
     icon,
     label,
     placeholder = 'Select an option',
@@ -54,6 +62,9 @@ export const DropdownControl = memo(
     textColor = TextColors.DropdownMenu,
     ...props
   }: DropdownControlProps): ReactElement => {
+    const [focused, setFocused] = useState(false);
+    const focusedRef = useRef(focused);
+
     return (
       <InputContainer
         alignment={{
@@ -101,6 +112,28 @@ export const DropdownControl = memo(
         depth={states.state?.dropdown?.visible ? Depth.Highest : Depth.Surface}
         className={`${className} dropdown-control`}
         cursor={cursor}
+        events={{
+          ...events,
+          focus: {
+            onBlur: e => {
+              // focusedRef.current = false;
+              // setFocused(false);
+
+              if (events.focus?.onBlur) {
+                events.focus.onBlur(e);
+              }
+            },
+
+            onFocus: e => {
+              // focusedRef.current = true;
+              // setFocused(true);
+
+              if (events.focus?.onFocus) {
+                events.focus.onFocus(e);
+              }
+            },
+          },
+        }}
         form="null"
         shadow={
           states.state?.dropdown?.visible
@@ -111,7 +144,15 @@ export const DropdownControl = memo(
           fill: Fill.Horizontal,
           ...size,
         }}
-        states={states}
+        states={{
+          state: {
+            focused:
+              states.state?.focused !== undefined
+                ? states.state.focused
+                : focusedRef.current,
+          },
+          ...states,
+        }}
         {...props}
       >
         {component ? (

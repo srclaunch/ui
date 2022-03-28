@@ -31,6 +31,7 @@ export function getFocusedOutlineColor(backgroundColor?: Background['color']) {
   if (backgroundColor) {
     switch (backgroundColor) {
       case BackgroundColors.DropdownMenu:
+        return getCSSColorValue(BorderColors.Transparent);
       case BackgroundColors.InputControl:
       case BackgroundColors.Transparent:
       case BackgroundColors.Lightest:
@@ -55,7 +56,7 @@ export function getFocusedStyles(): SimpleInterpolation {
     &:before {
       opacity: 1;
       transition: opacity 0.13s ease-in-out;
-      z-index: 11;
+      z-index: 2;
     }
   `;
 }

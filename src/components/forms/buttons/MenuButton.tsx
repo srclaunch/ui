@@ -34,7 +34,8 @@ export const MenuButton = memo(
     textColor = TextColors.MenuButton,
     ...props
   }: MenuButtonProps): ReactElement => {
-    const [focused, setFocused] = useState(false);
+    const [focused, setFocused] = useState(states.state?.focused ?? false);
+    const focusedRef = useRef(focused);
     const [menuVisible, setMenuVisible] = useState(
       states?.state?.dropdown?.visible ?? false,
     );
@@ -58,6 +59,16 @@ export const MenuButton = memo(
         className={`${className} dropdown-input`}
         depth={menuVisible ? Depth.Higher : Depth.Surface}
         events={{
+          focus: {
+            onBlur: () => {
+              focusedRef.current = false;
+              setFocused(false);
+            },
+            onFocus: () => {
+              focusedRef.current = true;
+              setFocused(true);
+            },
+          },
           mouse: {
             onMouseLeave: () => {
               menuVisibleRef.current = false;
@@ -79,12 +90,6 @@ export const MenuButton = memo(
               : BackgroundColors.MenuButton,
           }}
           events={{
-            focus: {
-              onBlur: () => {
-                setFocused(false);
-              },
-              onFocus: () => setFocused(true),
-            },
             mouse: {
               onClick: () => {
                 menuVisibleRef.current = !menuVisibleRef.current;
@@ -101,7 +106,7 @@ export const MenuButton = memo(
           states={{
             state: {
               dropdown: { visible: menuVisibleRef.current },
-              focused,
+              // focused: focusedRef.current,
             },
             ...states,
           }}
@@ -121,8 +126,12 @@ export const MenuButton = memo(
             minHeight: getDropdownMinHeight(menu?.length ?? 1, Amount.Least),
           }}
           states={{
-            state: { focused, dropdown: { visible: menuVisibleRef.current } },
             ...states,
+            state: {
+              ...states.state,
+              dropdown: { visible: menuVisibleRef.current },
+              // focused: focusedRef.current,
+            },
           }}
           {...props}
         >

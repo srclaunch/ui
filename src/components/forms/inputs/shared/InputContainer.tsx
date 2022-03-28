@@ -148,7 +148,10 @@ export const InputContainer = memo(
             state: {
               ...states.state,
               error: problems,
-              focused: focusedRef.current ?? states.state?.focused,
+              focused:
+                states.state?.focused !== undefined
+                  ? states.state.focused
+                  : focusedRef.current,
             },
           }}
           {...props}
@@ -173,13 +176,21 @@ export const InputContainer = memo(
             <Input
               events={{
                 focus: {
-                  onBlur: () => {
+                  onBlur: e => {
                     focusedRef.current = false;
                     setFocused(false);
+
+                    if (events.focus?.onBlur) {
+                      events.focus.onBlur(e);
+                    }
                   },
-                  onFocus: () => {
+                  onFocus: e => {
                     focusedRef.current = true;
                     setFocused(true);
+
+                    if (events.focus?.onFocus) {
+                      events.focus.onFocus(e);
+                    }
                   },
                 },
                 input: {

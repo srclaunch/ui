@@ -30,6 +30,7 @@ export const DropdownPanel = memo(
     states = {},
     ...props
   }: DropdownPanelProps): ReactElement => {
+    console.log('states', states);
     return (
       <Container
         background={{ color: BackgroundColors.DropdownMenu, ...background }}
