@@ -38,7 +38,6 @@ export const DataGridCell = memo(
     value,
     ...props
   }: DataGridCellProps): ReactElement => {
-    console.log('props', props);
     return getLabelByFieldType({
       fieldName,
       model,

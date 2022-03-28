@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement } from 'react';
+import { PropsWithChildren } from 'react';
 import { Alignment, Background, Border, BorderRadius, CommonComponentProps, DepthShadow, Animation, Cursor, Depth, Events, States, Margin, Padding, Size, Shadow, Position, Visibility } from '../../types';
 import { Transform } from '../../types/appearance/transform';
 export declare type ContainerProps = PropsWithChildren<CommonComponentProps & {
@@ -19,5 +19,5 @@ export declare type ContainerProps = PropsWithChildren<CommonComponentProps & {
     readonly visibility?: Visibility;
     readonly states?: States<ContainerProps>;
 }>;
-export declare const Container: import("react").MemoExoticComponent<({ alignment, as, children, className, events, states, ...props }: ContainerProps) => ReactElement>;
+export declare const Container: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<Pick<ContainerProps, "form" | "style" | "size" | "border" | "padding" | "name" | "children" | "className" | "id" | "cursor" | "transform" | "visibility" | "as" | "alignment" | "animations" | "background" | "borderRadius" | "depth" | "events" | "margin" | "position" | "shadow" | "states"> & import("react").RefAttributes<unknown>>>;
 //# sourceMappingURL=Container.d.ts.map

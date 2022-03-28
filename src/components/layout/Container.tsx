@@ -1,4 +1,11 @@
-import { memo, useState, PropsWithChildren, ReactElement } from 'react';
+import {
+  memo,
+  useState,
+  forwardRef,
+  PropsWithChildren,
+  ReactElement,
+  RefCallback,
+} from 'react';
 import styled from 'styled-components';
 import { getContainerStyles } from '../../styles/container';
 import { getContainerStatesStyles } from '../../styles/container/states';
@@ -57,49 +64,55 @@ const Wrapper = styled.div<ContainerProps>`
 `;
 
 export const Container = memo(
-  ({
-    alignment,
-    as = 'div',
-    children,
-    className = '',
-    events = {},
-    states = {},
-    ...props
-  }: ContainerProps): ReactElement => {
-    const [eventHandlers, setEventHandlers] = useState<{
-      [key: string]: ReactEventHandler;
-    }>({});
+  forwardRef<unknown, ContainerProps>(
+    (
+      {
+        alignment,
+        as = 'div',
+        children,
+        className = '',
+        events = {},
+        states = {},
+        ...props
+      },
+      ref,
+    ): ReactElement => {
+      const [eventHandlers, setEventHandlers] = useState<{
+        [key: string]: ReactEventHandler;
+      }>({});
 
-    useEffect(() => {
-      if (events && Object.keys(events).length > 0) {
-        setEventHandlers(getEventHandlers(events));
-      }
-    }, []);
+      useEffect(() => {
+        if (events && Object.keys(events).length > 0) {
+          setEventHandlers(getEventHandlers(events));
+        }
+      }, []);
 
-    return (
-      <Wrapper
-        alignment={{
-          fill: Fill.Both,
-          horizontal: AlignHorizontal.Stretch,
-          orientation: Orientation.Vertical,
-          vertical: AlignVertical.Stretch,
-          ...alignment,
-        }}
-        as={as}
-        className={`${className} container`}
-        disabled={states?.state?.disabled}
-        states={{
-          ...states,
-          state: {
-            ...states.state,
-            hidden: states?.state?.visible === false,
-          },
-        }}
-        {...props}
-        {...eventHandlers}
-      >
-        {children}
-      </Wrapper>
-    );
-  },
+      return (
+        <Wrapper
+          alignment={{
+            fill: Fill.Both,
+            horizontal: AlignHorizontal.Stretch,
+            orientation: Orientation.Vertical,
+            vertical: AlignVertical.Stretch,
+            ...alignment,
+          }}
+          as={as}
+          className={`${className} container`}
+          disabled={states?.state?.disabled}
+          states={{
+            ...states,
+            state: {
+              ...states.state,
+              hidden: states?.state?.visible === false,
+            },
+          }}
+          {...props}
+          {...eventHandlers}
+          ref={ref}
+        >
+          {children}
+        </Wrapper>
+      );
+    },
+  ),
 );

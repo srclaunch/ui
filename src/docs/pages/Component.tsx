@@ -209,7 +209,7 @@ export const ComponentPage = memo((): ReactElement => {
                         <Container
                           alignment={{
                             vertical: AlignVertical.Center,
-                            horizontal: AlignHorizontal.Center,
+                            horizontal: AlignHorizontal.Stretch,
                             overflow: Overflow.Hidden,
                           }}
                           background={{ color: BackgroundColors.Lighter }}

@@ -3,6 +3,7 @@ import { Image as ImageType, ValidationProblem } from '@srclaunch/types';
 import {
   memo,
   // useRef,
+  forwardRef,
   ReactElement,
   useCallback,
   useEffect,
@@ -161,7 +162,7 @@ export const ImageInput = memo(
 
     const dragLabel = `Drag ${maxImages > 1 ? 'images' : 'an image'} here...`;
     const buttonLabel = `Browse files`;
-    console.log('getRootProps(),', getRootProps());
+
     return (
       <>
         {(label || problems.length > 0) && (

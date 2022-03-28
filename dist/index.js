@@ -29,7 +29,7 @@ var __objRest = (source, exclude) => {
     }
   return target;
 };
-import e$3, { memo, useState, useEffect, useRef, forwardRef, useMemo, createElement as createElement$1, useReducer, useCallback, useImperativeHandle, Component, cloneElement, useLayoutEffect, Children } from "react";
+import e$3, { memo, forwardRef, useState, useEffect, useRef, useMemo, createElement as createElement$1, useReducer, useCallback, useImperativeHandle, Component, cloneElement, useLayoutEffect, Children } from "react";
 import { useNavigate, useDispatch, useSelector, getVerificationDetails, verifyCode, resendVerificationCode, useResolvedPath, useMatch, useLocation, NavLink, Link as Link$2, login, signUp, getPaymentMethods, getSubscriptions, useSearchParams, Outlet, matchPath, logout, Routes, Route, setTheme } from "@srclaunch/web-application-state";
 import styled, { css as css$2, createGlobalStyle } from "styled-components";
 import ReactDOM from "react-dom";
@@ -22722,7 +22722,7 @@ const Wrapper$3 = styled.div.withConfig({
   displayName: "Wrapper",
   componentId: "sc-19tf6wk-0"
 })(["", ";", ";"], (props) => getContainerStyles(props), (props) => getContainerStatesStyles(props));
-const Container$8 = memo((_a2) => {
+const Container$8 = memo(forwardRef((_a2, ref) => {
   var _b = _a2, {
     alignment,
     as = "div",
@@ -22761,9 +22761,10 @@ const Container$8 = memo((_a2) => {
       })
     })
   }, props), eventHandlers), {
+    ref,
     children
   }));
-});
+}));
 const Img = styled.img.withConfig({
   displayName: "Img",
   componentId: "sc-152mfqb-0"
@@ -31142,7 +31143,6 @@ const ImageInput = memo((_pa) => {
   }, [previewImages]);
   const dragLabel = `Drag ${maxImages > 1 ? "images" : "an image"} here...`;
   const buttonLabel = `Browse files`;
-  console.log("getRootProps(),", getRootProps());
   return /* @__PURE__ */ jsxs$1(Fragment, {
     children: [(label || problems.length > 0) && /* @__PURE__ */ jsxs$1(InputLabel, {
       states: {
@@ -40089,7 +40089,6 @@ const DataGridCell = memo((_yb) => {
     "type",
     "value"
   ]);
-  console.log("props", props);
   return getLabelByFieldType({
     fieldName,
     model,
