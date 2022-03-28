@@ -107,6 +107,7 @@ export const Button = memo(
     type = ButtonType.Default,
     ...props
   }: ButtonProps): ReactElement => {
+    const [focused, setFocused] = useState(false);
     const getColors = () => {
       if (!type)
         return {
@@ -194,6 +195,16 @@ export const Button = memo(
         borderRadius={{ all: Amount.All, ...borderRadius }}
         className={`${className} button`}
         cursor={cursor}
+        events={{
+          focus: {
+            onBlur: () => {
+              setFocused(false);
+            },
+            onFocus: () => {
+              setFocused(true);
+            },
+          },
+        }}
         form={form}
         padding={
           typeof children === 'string'
@@ -226,6 +237,10 @@ export const Button = memo(
             },
           },
           ...states,
+          state: {
+            ...states.state,
+            focused,
+          },
         }}
         {...props}
       >
@@ -233,6 +248,7 @@ export const Button = memo(
           <Label
             icon={icon}
             lineHeight={lineHeight}
+            selectable={false}
             textAlign={textAlign}
             textColor={colors?.textColor}
             textDecoration={{

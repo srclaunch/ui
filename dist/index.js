@@ -22442,6 +22442,69 @@ function getSizeStyles(size) {
   return css$2(["", " ", " ", " ", " ", " ", " ", ""], fill && getFillStyles(fill), maxHeight && getMaxHeightStyle(maxHeight), minHeight && getMinHeightStyle(minHeight), height && getHeightStyle(height), maxWidth && getMaxWidthStyle(maxWidth), minWidth && getMinWidthStyle(minWidth), width && getWidthStyle(width));
 }
 const SizeStyles = css$2(["", ""], (props) => getSizeStyles(props.size));
+function getDisabledStateStyles$1() {
+  return css$2(["cursor:not-allowed !important;opacity:0.3;"]);
+}
+function getFocusedOutlineColor(backgroundColor) {
+  if (backgroundColor) {
+    switch (backgroundColor) {
+      case BackgroundColors.DropdownMenu:
+      case BackgroundColors.InputControl:
+      case BackgroundColors.Transparent:
+      case BackgroundColors.Lightest:
+      case BackgroundColors.Lighter:
+      case BackgroundColors.Light:
+      case BackgroundColors.Default:
+      case BackgroundColors.Dark:
+      case BackgroundColors.Darker:
+      case BackgroundColors.Darkest:
+        return getCSSColorValue(BorderColors.Primary);
+      default:
+        return getCSSColorValue(backgroundColor);
+    }
+  }
+}
+function getFocusedStyles() {
+  return css$2(["border-color:transparent;outline:none;&:before{opacity:1;transition:opacity 0.13s ease-in-out;z-index:11;}"]);
+}
+function getVisibleStateStyles() {
+  return css$2(["opacity:1;pointer-events:all;visibility:visible;"]);
+}
+function getHiddenStateStyles() {
+  return css$2(["opacity:0;pointer-events:none;visibility:hidden;"]);
+}
+function getContainerStatesStyles(props) {
+  const _a2 = props, {
+    animations,
+    events,
+    states
+  } = _a2, otherProps = __objRest(_a2, [
+    "animations",
+    "events",
+    "states"
+  ]);
+  if (!states) {
+    return;
+  }
+  const {
+    active,
+    current,
+    disabled,
+    error,
+    focused,
+    hovered,
+    hidden,
+    loaded,
+    loading,
+    on,
+    state,
+    success,
+    visible,
+    warning
+  } = states;
+  return css$2(["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""], active && css$2(["", ""], (state == null ? void 0 : state.active) ? css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active))) : css$2(["&::active{", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active)))), current && (state == null ? void 0 : state.current) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), current))), disabled && css$2(["", ""], (state == null ? void 0 : state.disabled) ? css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()) : css$2(["&:disabled{", " ", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1())), error && (state == null ? void 0 : state.error) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), error))), focused && css$2(["", ""], (state == null ? void 0 : state.focused) ? css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles()) : css$2(["&:focus{", " ", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles())), !focused && (state == null ? void 0 : state.focused) && css$2(["", ""], getFocusedStyles()), hovered && !(state == null ? void 0 : state.current) && css$2(["", ""], (state == null ? void 0 : state.hovered) ? css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered))) : css$2(["&:hover{", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered)))), loaded && (state == null ? void 0 : state.loaded) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loaded))), loading && (state == null ? void 0 : state.loading) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loading))), on && (state == null ? void 0 : state.on) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), on))), success && (state == null ? void 0 : state.success) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), success))), visible && (state == null ? void 0 : state.visible) && css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getVisibleStateStyles()), hidden && ((state == null ? void 0 : state.visible) === false || (state == null ? void 0 : state.hidden)) && css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hidden)), getHiddenStateStyles()), !visible && (state == null ? void 0 : state.visible) === false && css$2(["", ""], getHiddenStateStyles()), warning && (state == null ? void 0 : state.warning) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), warning))));
+}
+const StateStyles = css$2(["", ""], (props) => getContainerStatesStyles(props));
 function getTransformArgumentValue(transform) {
   if (!transform)
     return null;
@@ -22551,53 +22614,11 @@ const getContainerStyles = (props) => {
     transform,
     visibility
   } = props || {};
-  return css$2(["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " transition:background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-bottom 0.13s ease-in-out,border-left 0.13s ease-in-out,border-right 0.13s ease-in-out,border-top 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,opacity 0.13s ease-in-out,transform 0.13s ease-in-out;"], alignment && getAlignmentStyles(alignment), animations && getAnimationStyles(animations), background && getBackgroundStyles(background), border && getBorderStyles(border), borderRadius && getBorderRadiusStyles(borderRadius), cursor && getCursorStyles(cursor), depth && getDepthStyles(depth), margin && getMarginStyles(margin), padding && getPaddingStyles(padding), getPositionStyles(position), shadow && getShadowStyles(shadow), size && getSizeStyles(size), transform && getTransformStyles(transform), visibility && getVisibilityStyles(visibility));
+  return css$2(["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " &:before{bottom:-4px;border-style:solid;border-width:2px;", " border-color:", ";content:'';display:block;content:'';opacity:0;left:-4px;position:absolute;pointer-events:none;right:-4px;top:-4px;transition:opacity 0.13s ease-in-out;z-index:0;}transition:background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-bottom 0.13s ease-in-out,border-left 0.13s ease-in-out,border-right 0.13s ease-in-out,border-top 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,opacity 0.13s ease-in-out,transform 0.13s ease-in-out;"], alignment && getAlignmentStyles(alignment), animations && getAnimationStyles(animations), background && getBackgroundStyles(background), border && getBorderStyles(border), borderRadius && getBorderRadiusStyles(borderRadius), cursor && getCursorStyles(cursor), depth && getDepthStyles(depth), margin && getMarginStyles(margin), padding && getPaddingStyles(padding), getPositionStyles(position), shadow && getShadowStyles(shadow), size && getSizeStyles(size), transform && getTransformStyles(transform), visibility && getVisibilityStyles(visibility), getBorderRadiusStyles(borderRadius != null ? borderRadius : {
+    all: Amount.All
+  }), getFocusedOutlineColor(background == null ? void 0 : background.color));
 };
 const ContainerStyles = css$2(["", ""], (props) => getContainerStyles(props));
-function getDisabledStateStyles$1() {
-  return css$2(["cursor:not-allowed !important;opacity:0.3;"]);
-}
-function getFocusedStyles() {
-  return css$2(["outline:none;&:before{transition:opacity 0.2s ease-in-out;}&:before{bottom:-4px;content:'';display:block;border-color:blue;border-style:solid;border-width:2px;opacity:1;left:-4px;position:absolute;pointer-events:none;right:-4px;top:-4px;transition:opacity 0.2s ease-in-out;}"]);
-}
-function getVisibleStateStyles() {
-  return css$2(["opacity:1;pointer-events:all;visibility:visible;"]);
-}
-function getHiddenStateStyles() {
-  return css$2(["opacity:0;pointer-events:none;visibility:hidden;"]);
-}
-function getContainerStatesStyles(props) {
-  const _a2 = props, {
-    animations,
-    events,
-    states
-  } = _a2, otherProps = __objRest(_a2, [
-    "animations",
-    "events",
-    "states"
-  ]);
-  if (!states) {
-    return;
-  }
-  const {
-    active,
-    current,
-    disabled,
-    error,
-    focused,
-    hovered,
-    hidden,
-    loaded,
-    loading,
-    on,
-    state,
-    success,
-    visible,
-    warning
-  } = states;
-  return css$2(["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""], active && css$2(["", ""], (state == null ? void 0 : state.active) ? css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active))) : css$2(["&::active{", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active)))), current && (state == null ? void 0 : state.current) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), current))), disabled && css$2(["", ""], (state == null ? void 0 : state.disabled) ? css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()) : css$2(["&:disabled{", " ", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1())), error && (state == null ? void 0 : state.error) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), error))), focused && css$2(["", ""], (state == null ? void 0 : state.focused) ? css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles()) : css$2(["&:focus{", " ", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles())), hovered && !(state == null ? void 0 : state.current) && css$2(["", ""], (state == null ? void 0 : state.hovered) ? css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered))) : css$2(["&:hover{", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered)))), loaded && (state == null ? void 0 : state.loaded) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loaded))), loading && (state == null ? void 0 : state.loading) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loading))), on && (state == null ? void 0 : state.on) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), on))), success && (state == null ? void 0 : state.success) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), success))), visible && (state == null ? void 0 : state.visible) && css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getVisibleStateStyles()), hidden && ((state == null ? void 0 : state.visible) === false || (state == null ? void 0 : state.hidden)) && css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hidden)), getHiddenStateStyles()), !visible && (state == null ? void 0 : state.visible) === false && css$2(["", ""], getHiddenStateStyles()), warning && (state == null ? void 0 : state.warning) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), warning))));
-}
-const StateStyles = css$2(["", ""], (props) => getContainerStatesStyles(props));
 function getEventHandlers(events) {
   const entries = [...Object.entries(events)];
   let handlers = {};
@@ -22876,7 +22897,7 @@ const getTextStyles = (props) => {
     textSize,
     textWeight
   } = props;
-  return css$2(["color:", ";font-size:", ";line-height:", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:color 0.13s ease-in-out,font-size 0.13s ease-in-out,font-weight 0.13s ease-in-out,text-decoration 0.13s ease-in-out,text-decoration-color 0.13s ease-in-out,text-decoration-style 0.13s ease-in-out,text-decoration-thickness 0.13s ease-in-out;"], getCSSColorValue(textColor != null ? textColor : TextColors.Default), getCSSMeasurementValue(textSize != null ? textSize : TextSize.Default), getCSSMeasurementValue(lineHeight != null ? lineHeight : Sizes.Default), bold && css$2(["font-weight:bold;"]), cursor && css$2(["cursor:", ";"], cursor), italic && css$2(["font-style:italic;"]), lineWrap && lineWrap === true && css$2(["white-space:wrap;"]), lineWrap !== void 0 && lineWrap === false && css$2(["white-space:nowrap;"]), selectable && css$2(["user-select:text;"]), textAlign && css$2(["text-align:", ";"], textAlign), textDecoration && css$2(["text-decoration:", ";text-decoration-color:", ";text-decoration-style:", ";text-decoration-thickness:", ";"], textDecoration.line ? textDecoration.line : "none", getCSSColorValue(textDecoration.color), textDecoration.style ? textDecoration.style : "solid", getCSSMeasurementValue(textDecoration.thickness)), textOverflow && css$2(["overflow:hidden;text-overflow:", ";"], textOverflow), textWeight && css$2(["font-weight:", ";"], textWeight));
+  return css$2(["color:", ";font-size:", ";line-height:", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";", ";transition:color 0.13s ease-in-out,font-size 0.13s ease-in-out,font-weight 0.13s ease-in-out,text-decoration 0.13s ease-in-out,text-decoration-color 0.13s ease-in-out,text-decoration-style 0.13s ease-in-out,text-decoration-thickness 0.13s ease-in-out;"], getCSSColorValue(textColor != null ? textColor : TextColors.Default), getCSSMeasurementValue(textSize != null ? textSize : TextSize.Default), getCSSMeasurementValue(lineHeight != null ? lineHeight : Sizes.Default), bold && css$2(["font-weight:bold;"]), cursor && css$2(["cursor:", ";"], cursor), italic && css$2(["font-style:italic;"]), lineWrap && lineWrap === true && css$2(["white-space:wrap;"]), lineWrap !== void 0 && lineWrap === false && css$2(["white-space:nowrap;"]), selectable !== void 0 && css$2(["user-select:", ";"], selectable ? "text" : "none"), textAlign && css$2(["text-align:", ";"], textAlign), textDecoration && css$2(["text-decoration:", ";text-decoration-color:", ";text-decoration-style:", ";text-decoration-thickness:", ";"], textDecoration.line ? textDecoration.line : "none", getCSSColorValue(textDecoration.color), textDecoration.style ? textDecoration.style : "solid", getCSSMeasurementValue(textDecoration.thickness)), textOverflow && css$2(["overflow:hidden;text-overflow:", ";"], textOverflow), textWeight && css$2(["font-weight:", ";"], textWeight));
 };
 const TextStyles = css$2(["", ";"], (props) => getTextStyles(props));
 function getDisabledStateStyles() {
@@ -23070,6 +23091,7 @@ const Button$1 = memo((_k) => {
     "type"
   ]);
   var _a2, _b;
+  const [focused, setFocused] = useState(false);
   const getColors = () => {
     if (!type)
       return {
@@ -23155,12 +23177,22 @@ const Button$1 = memo((_k) => {
     }, borderRadius),
     className: `${className} button`,
     cursor,
+    events: {
+      focus: {
+        onBlur: () => {
+          setFocused(false);
+        },
+        onFocus: () => {
+          setFocused(true);
+        }
+      }
+    },
     form,
     padding: typeof children === "string" ? __spreadValues({
       left: `calc((${lineHeight} / 4) * 2)`,
       right: `calc((${lineHeight} / 4) * 2)`
     }, padding) : padding,
-    states: __spreadValues({
+    states: __spreadProps(__spreadValues({
       active: {
         background: {
           color: (_a2 = background == null ? void 0 : background.color) != null ? _a2 : colors == null ? void 0 : colors.backgroundColor,
@@ -23173,11 +23205,16 @@ const Button$1 = memo((_k) => {
           opacity: 90
         }
       }
-    }, states)
+    }, states), {
+      state: __spreadProps(__spreadValues({}, states.state), {
+        focused
+      })
+    })
   }, props), {
     children: typeof children === "string" ? /* @__PURE__ */ jsx$2(Label, {
       icon: icon2,
       lineHeight,
+      selectable: false,
       textAlign,
       textColor: colors == null ? void 0 : colors.textColor,
       textDecoration: __spreadValues({
@@ -26991,10 +27028,11 @@ const InputContainer = memo((_s) => {
     "type",
     "validation"
   ]);
-  var _a2, _b, _c, _d;
+  var _a2, _b, _c, _d, _e2, _f;
   const [value2, setValue] = useState(defaultValue);
   const [valueChanged, setValueChanged] = useState(false);
   const [focused, setFocused] = useState(false);
+  const focusedRef = useRef(focused);
   const [problems, setProblems] = useState();
   const inputRef = useRef(null);
   useEffect(() => {
@@ -27059,22 +27097,32 @@ const InputContainer = memo((_s) => {
       }, border),
       className: `${className} input-container-wrapper`,
       shadow,
-      states: {
-        state: {
+      states: __spreadProps(__spreadValues({}, states), {
+        state: __spreadProps(__spreadValues({}, states.state), {
           error: problems,
-          focused
-        }
-      }
+          focused: (_c = focusedRef.current) != null ? _c : (_b = states.state) == null ? void 0 : _b.focused
+        })
+      })
     }, props), {
       children: [icon2 && /* @__PURE__ */ jsx$2(Icon, __spreadValues({
-        color: value2 === "" || value2 === void 0 ? TextColors.InputPlaceholder : (_b = icon2.color) != null ? _b : textColor,
+        color: value2 === "" || value2 === void 0 ? TextColors.InputPlaceholder : (_d = icon2.color) != null ? _d : textColor,
         margin: {
           left: Amount.Less
         }
       }, icon2)), children ? children : /* @__PURE__ */ jsx$2(Input$2, {
         events: {
+          focus: {
+            onBlur: () => {
+              focusedRef.current = false;
+              setFocused(false);
+            },
+            onFocus: () => {
+              focusedRef.current = true;
+              setFocused(true);
+            }
+          },
           input: {
-            onChange: (_c = events.input) == null ? void 0 : _c.onChange,
+            onChange: (_e2 = events.input) == null ? void 0 : _e2.onChange,
             onValueChange: ({
               value: val
             }) => {
@@ -27097,7 +27145,7 @@ const InputContainer = memo((_s) => {
         textColor,
         textSize,
         type
-      }), ((_d = states.state) == null ? void 0 : _d.loading) && /* @__PURE__ */ jsx$2(ProgressSpinner, {
+      }), ((_f = states.state) == null ? void 0 : _f.loading) && /* @__PURE__ */ jsx$2(ProgressSpinner, {
         size: {
           height: Sizes.Small,
           width: Sizes.Small
@@ -29405,7 +29453,7 @@ const DropdownPanel = memo((_da) => {
     "size",
     "states"
   ]);
-  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l;
+  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n;
   return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     background: __spreadValues({
       color: BackgroundColors.DropdownMenu
@@ -29422,22 +29470,28 @@ const DropdownPanel = memo((_da) => {
         style: BorderStyle.Solid,
         width: 1
       }
-    }, border)),
+    }, border), ((_g = (_f = states.state) == null ? void 0 : _f.dropdown) == null ? void 0 : _g.visible) ? {
+      top: {
+        color: BorderColors.Transparent,
+        style: BorderStyle.Solid,
+        width: 1
+      }
+    } : {}),
     className: `${className} dropdown-panel`,
-    depth: ((_g = (_f = states.state) == null ? void 0 : _f.dropdown) == null ? void 0 : _g.visible) ? Depth.Higher : Depth.Surface,
+    depth: ((_i2 = (_h = states.state) == null ? void 0 : _h.dropdown) == null ? void 0 : _i2.visible) ? Depth.Higher : Depth.Surface,
     position: __spreadValues({
       behavior: PositionBehavior.Absolute,
       left: 0,
       right: 0,
-      top: (_h = size == null ? void 0 : size.height) != null ? _h : Sizes.Default
+      top: (_j = size == null ? void 0 : size.height) != null ? _j : Sizes.Default
     }, position),
-    shadow: ((_j = (_i2 = states.state) == null ? void 0 : _i2.dropdown) == null ? void 0 : _j.visible) ? DepthShadow.Higher : DepthShadow.Surface,
+    shadow: ((_l = (_k = states.state) == null ? void 0 : _k.dropdown) == null ? void 0 : _l.visible) ? DepthShadow.Higher : DepthShadow.Surface,
     size: __spreadValues({
       minHeight: Sizes.Default
     }, size),
     states,
     visibility: {
-      hidden: !((_l = (_k = states.state) == null ? void 0 : _k.dropdown) == null ? void 0 : _l.visible)
+      hidden: !((_n = (_m = states.state) == null ? void 0 : _m.dropdown) == null ? void 0 : _n.visible)
     }
   }, props), {
     children

@@ -1,6 +1,9 @@
 import { css, SimpleInterpolation } from 'styled-components';
 import { getContainerStyles } from './index';
 import { ContainerProps } from '../../components/layout/Container';
+import { Background, BackgroundColors, BorderColors } from '../../types';
+
+import { getCSSColorValue } from '../../lib/css/properties';
 
 export function getDisabledStateStyles(): SimpleInterpolation {
   return css`
@@ -23,28 +26,36 @@ export function getDisabledStateStyles(): SimpleInterpolation {
       }
     `};
     */
+
+export function getFocusedOutlineColor(backgroundColor?: Background['color']) {
+  if (backgroundColor) {
+    switch (backgroundColor) {
+      case BackgroundColors.DropdownMenu:
+      case BackgroundColors.InputControl:
+      case BackgroundColors.Transparent:
+      case BackgroundColors.Lightest:
+      case BackgroundColors.Lighter:
+      case BackgroundColors.Light:
+      case BackgroundColors.Default:
+      case BackgroundColors.Dark:
+      case BackgroundColors.Darker:
+      case BackgroundColors.Darkest:
+        return getCSSColorValue(BorderColors.Primary);
+      default:
+        return getCSSColorValue(backgroundColor);
+    }
+  }
+}
+
 export function getFocusedStyles(): SimpleInterpolation {
   return css`
+    border-color: transparent;
     outline: none;
-    &:before {
-      transition: opacity 0.2s ease-in-out;
-    }
 
     &:before {
-      bottom: -4px;
-      content: '';
-      display: block;
-      border-color: blue;
-      border-style: solid;
-      border-width: 2px;
       opacity: 1;
-      left: -4px;
-      position: absolute;
-      pointer-events: none;
-      right: -4px;
-      top: -4px;
-      transition: opacity 0.2s ease-in-out;
-      // z-index: 0;
+      transition: opacity 0.13s ease-in-out;
+      z-index: 11;
     }
   `;
 }
@@ -145,6 +156,12 @@ export function getContainerStatesStyles(
               ${getFocusedStyles()}
             }
           `}
+    `}
+
+    ${!focused &&
+    state?.focused &&
+    css`
+      ${getFocusedStyles()}
     `}
 
     ${hovered &&

@@ -212,7 +212,6 @@ export const ComponentPage = memo((): ReactElement => {
                           background={{ color: BackgroundColors.Lighter }}
                           borderRadius={{ all: Amount.Least }}
                           className="component-example-container"
-                          depth={Depth.Higher}
                           margin={{ bottom: Amount.Default }}
                           padding={{ all: Amount.All }}
                           shadow={DepthShadow.Low}

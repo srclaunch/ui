@@ -19,5 +19,5 @@ export declare type ContainerProps = PropsWithChildren<CommonComponentProps & {
     readonly visibility?: Visibility;
     readonly states?: States<ContainerProps>;
 }>;
-export declare const Container: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<Pick<ContainerProps, "form" | "style" | "size" | "border" | "padding" | "name" | "children" | "className" | "id" | "cursor" | "transform" | "visibility" | "as" | "alignment" | "animations" | "background" | "borderRadius" | "depth" | "events" | "margin" | "position" | "shadow" | "states"> & import("react").RefAttributes<unknown>>>;
+export declare const Container: import("react").MemoExoticComponent<import("react").ForwardRefExoticComponent<Pick<ContainerProps, "form" | "style" | "size" | "border" | "padding" | "name" | "children" | "className" | "id" | "cursor" | "transform" | "visibility" | "as" | "animations" | "events" | "states" | "alignment" | "background" | "borderRadius" | "depth" | "margin" | "position" | "shadow"> & import("react").RefAttributes<unknown>>>;
 //# sourceMappingURL=Container.d.ts.map

@@ -1,6 +1,8 @@
 import { SimpleInterpolation } from 'styled-components';
 import { ContainerProps } from '../../components/layout/Container';
+import { Background } from '../../types';
 export declare function getDisabledStateStyles(): SimpleInterpolation;
+export declare function getFocusedOutlineColor(backgroundColor?: Background['color']): string | number | undefined;
 export declare function getFocusedStyles(): SimpleInterpolation;
 export declare function getVisibleStateStyles(): SimpleInterpolation;
 export declare function getHiddenStateStyles(): SimpleInterpolation;

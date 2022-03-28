@@ -1,5 +1,6 @@
 import { css, SimpleInterpolation } from 'styled-components';
 import { ContainerProps } from '../../components/layout/Container';
+import { Amount } from '../../types';
 import { getAlignmentStyles } from './alignment';
 import { getAnimationStyles } from './animation';
 import { getBackgroundStyles } from './background';
@@ -12,6 +13,7 @@ import { getPaddingStyles } from './padding';
 import { getPositionStyles } from './position';
 import { getShadowStyles } from './shadow';
 import { getSizeStyles } from './size';
+import { getFocusedOutlineColor } from './states';
 import { getTransformStyles } from './transform';
 import { getVisibilityStyles } from './visibility';
 
@@ -51,17 +53,37 @@ export const getContainerStyles = (
     ${transform && getTransformStyles(transform)}
     ${visibility && getVisibilityStyles(visibility)}
 
-    transition: background 0.13s ease-in-out,
-      background-color 0.13s ease-in-out, border-radius 0.13s ease-in-out,
+    /* Focused outline */
+    &:before {
+      bottom: -4px;
+      border-style: solid;
+      border-width: 2px;
+      ${getBorderRadiusStyles(borderRadius ?? { all: Amount.All })}
+      border-color: ${getFocusedOutlineColor(background?.color)};
+      content: '';
+      display: block;
+      content: '';
+      opacity: 0;
+      left: -4px;
+      position: absolute;
+      pointer-events: none;
+      right: -4px;
+      top: -4px;
+      transition: opacity 0.13s ease-in-out;
+      z-index: 0;
+    }
+
+    transition: background 0.13s ease-in-out, background-color 0.13s ease-in-out,
+      border-radius 0.13s ease-in-out,
       border-bottom-left-radius 0.13s ease-in-out,
       border-bottom-right-radius 0.13s ease-in-out,
       border-top-left-radius 0.13s ease-in-out,
       border-top-right-radius 0.13s ease-in-out, border 0.13s ease-in-out,
       border-bottom 0.13s ease-in-out, border-left 0.13s ease-in-out,
-      border-right 0.13s ease-in-out,
-      border-top 0.13s ease-in-out,
+      border-right 0.13s ease-in-out, border-top 0.13s ease-in-out,
       border-color 0.13s ease-in-out, box-shadow 0.13s ease-in-out,
-      color 0.13s ease-in, opacity 0.13s ease-in-out, transform 0.13s ease-in-out;
+      color 0.13s ease-in, opacity 0.13s ease-in-out,
+      transform 0.13s ease-in-out;
   `;
 };
 

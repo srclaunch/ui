@@ -57,15 +57,15 @@ export const DropdownPanel = memo(
             },
             ...border,
           },
-          // states.state?.dropdown?.visible
-          //   ? {
-          //       top: {
-          //         color: BorderColors.Transparent,
-          //         style: BorderStyle.None,
-          //         width: 1,
-          //       },
-          //     }
-          //   : {},
+          states.state?.dropdown?.visible
+            ? {
+                top: {
+                  color: BorderColors.Transparent,
+                  style: BorderStyle.Solid,
+                  width: 1,
+                },
+              }
+            : {},
         )}
         className={`${className} dropdown-panel`}
         depth={states.state?.dropdown?.visible ? Depth.Higher : Depth.Surface}

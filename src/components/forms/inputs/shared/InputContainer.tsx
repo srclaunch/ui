@@ -59,6 +59,7 @@ export const InputContainer = memo(
     const [value, setValue] = useState(defaultValue);
     const [valueChanged, setValueChanged] = useState(false);
     const [focused, setFocused] = useState(false);
+    const focusedRef = useRef(focused);
     const [problems, setProblems] = useState<ValidationProblem[]>();
     const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -143,9 +144,11 @@ export const InputContainer = memo(
           className={`${className} input-container-wrapper`}
           shadow={shadow}
           states={{
+            ...states,
             state: {
+              ...states.state,
               error: problems,
-              focused,
+              focused: focusedRef.current ?? states.state?.focused,
             },
           }}
           {...props}
@@ -169,6 +172,16 @@ export const InputContainer = memo(
           ) : (
             <Input
               events={{
+                focus: {
+                  onBlur: () => {
+                    focusedRef.current = false;
+                    setFocused(false);
+                  },
+                  onFocus: () => {
+                    focusedRef.current = true;
+                    setFocused(true);
+                  },
+                },
                 input: {
                   onChange: events.input?.onChange,
                   onValueChange: ({ value: val }) => {

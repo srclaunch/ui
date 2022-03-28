@@ -75,9 +75,9 @@ export const getTextStyles = (props: TextProps): SimpleInterpolation => {
       white-space: nowrap;
     `};
 
-    ${selectable &&
+    ${selectable !== undefined &&
     css`
-      user-select: text;
+      user-select: ${selectable ? 'text' : 'none'};
     `};
 
     ${textAlign &&
