@@ -1,6 +1,8 @@
 import { Exception } from '@srclaunch/exceptions';
 import { BasicIcons, DualLightIcons } from '@srclaunch/icons';
+import { Primitives } from '@srclaunch/types';
 import { useState } from 'react';
+import DataGrid from '../components/data/DataGrid';
 import { MenuButton } from '../components/forms/buttons/MenuButton';
 import { Checkbox } from '../components/forms/inputs/boolean/Checkbox';
 import { ToggleInput } from '../components/forms/inputs/boolean/ToggleInput';
@@ -32,7 +34,7 @@ import {
   SignupForm,
   Validation,
 } from '../index';
-import { BackgroundColors, Colors, Sizes, TextColors } from '../types';
+import { BackgroundColors, Colors, Fill, Sizes, TextColors } from '../types';
 import { ComponentLibrary } from './types/component';
 
 export default {
@@ -231,8 +233,268 @@ export default {
     },
     {
       title: 'Data',
+      description: 'Components for displaying data of various types.',
       path: '/data',
+      components: [
+        {
+          component: DataGrid,
+          title: 'DataGrid',
+          path: '/data/data-grid',
+          description: 'A grid of data',
+          examples: [
+            {
+              title: 'Default',
+              properties: {
+                columns: [
+                  {
+                    label: 'Name',
+                    field: 'name',
+                    type: Primitives.String,
+                  },
+                  {
+                    label: 'Age',
+                    field: 'age',
+                    type: Primitives.Number,
+                  },
+                ],
+                data: [
+                  {
+                    name: 'John',
+                    age: '42',
+                  },
+                  {
+                    name: 'Jane',
+                    age: '43',
+                  },
+                ],
+              },
+              code: `import { DataGrid } from '@srclaunch/ui';
+
+<DataGrid
+  columns: [
+    {
+      label: 'Name',
+      field: 'name',
+      type: Primitives.String,
     },
+    {
+      label: 'Age',
+      field: 'age',
+      type: Primitives.Number,
+    },
+  ],
+  data: [
+    {
+      name: 'John',
+      age: '42',
+    },
+    {
+      name: 'Jane',
+      age: '43',
+    },
+  ]
+/>`,
+            },
+            {
+              title: 'With header and search',
+              properties: {
+                columns: [
+                  {
+                    label: 'Name',
+                    field: 'name',
+                    type: Primitives.String,
+                  },
+                  {
+                    label: 'Age',
+                    field: 'age',
+                    type: Primitives.Number,
+                  },
+                ],
+                data: [
+                  {
+                    name: 'John',
+                    age: '42',
+                  },
+                  {
+                    name: 'Jane',
+                    age: '43',
+                  },
+                ],
+                header: {
+                  search: {
+                    placeholder: 'Search examples',
+                  },
+                },
+              },
+              code: `import { DataGrid } from '@srclaunch/ui';
+
+<DataGrid
+  columns={[
+    {
+      label: 'Name',
+      field: 'name',
+      type: Primitives.String,
+    },
+    {
+      label: 'Age',
+      field: 'age',
+      type: Primitives.Number,
+    },
+  ]]}
+  data={[
+    {
+      name: 'John',
+      age: '42',
+    },
+    {
+      name: 'Jane',
+      age: '43',
+    },
+  ]}
+  header={{
+    search: {
+      placeholder: 'Search examples',
+    },
+  }}
+/>`,
+            },
+            {
+              title: 'With search input and export button',
+              properties: {
+                columns: [
+                  {
+                    label: 'Name',
+                    field: 'name',
+                    type: Primitives.String,
+                  },
+                  {
+                    label: 'Age',
+                    field: 'age',
+                    type: Primitives.Number,
+                  },
+                ],
+                data: [
+                  {
+                    name: 'John',
+                    age: '42',
+                  },
+                  {
+                    name: 'Jane',
+                    age: '43',
+                  },
+                ],
+                header: {
+                  export: true,
+                  search: {
+                    placeholder: 'Search examples',
+                  },
+                },
+              },
+              code: `import { DataGrid } from '@srclaunch/ui';
+    
+    <DataGrid
+      columns={[
+        {
+          label: 'Name',
+          field: 'name',
+          type: Primitives.String,
+        },
+        {
+          label: 'Age',
+          field: 'age',
+          type: Primitives.Number,
+        },
+      ]]}
+      data={[
+        {
+          name: 'John',
+          age: '42',
+        },
+        {
+          name: 'Jane',
+          age: '43',
+        },
+      ]}
+      header={{
+        export: true,
+        search: {
+          placeholder: 'Search examples',
+        },
+      }}
+    />`,
+            },
+            {
+              title: 'With search input and create button',
+              properties: {
+                columns: [
+                  {
+                    label: 'Name',
+                    field: 'name',
+                    type: Primitives.String,
+                  },
+                  {
+                    label: 'Age',
+                    field: 'age',
+                    type: Primitives.Number,
+                  },
+                ],
+                data: [
+                  {
+                    name: 'John',
+                    age: '42',
+                  },
+                  {
+                    name: 'Jane',
+                    age: '43',
+                  },
+                ],
+                header: {
+                  create: {
+                    label: 'Create new example',
+                  },
+                  search: {
+                    placeholder: 'Search examples',
+                  },
+                },
+              },
+              code: `import { DataGrid } from '@srclaunch/ui';
+    
+              <DataGrid
+                columns={[
+                  {
+                    label: 'Name',
+                    field: 'name',
+                    type: Primitives.String,
+                  },
+                  {
+                    label: 'Age',
+                    field: 'age',
+                    type: Primitives.Number,
+                  },
+                ]]}
+                data={[
+                  {
+                    name: 'John',
+                    age: '42',
+                  },
+                  {
+                    name: 'Jane',
+                    age: '43',
+                  },
+                ]}
+                header={{
+                  export: true,
+                  search: {
+                    placeholder: 'Search examples',
+                  },
+                }}
+              />`,
+            },
+          ],
+        },
+      ],
+    },
+
     {
       title: 'Editors',
       path: '/editors',
@@ -266,33 +528,59 @@ export default {
                 'A button is a clickable element that performs an action',
               examples: [
                 {
-                  code: `import { Button } from '@srclaunch/ui';
+                  title: 'Basic',
 
-const Example = () => (
-  <Button>Click me</Button>
-);`,
                   description: 'A basic button',
                   properties: {
                     children: 'Click me',
                   },
-                  title: 'Basic',
+                  code: `import { Button } from '@srclaunch/ui';
+
+                  const Example = () => (
+                    <Button>Click me</Button>
+                  );`,
                 },
                 {
-                  description: 'A primary button',
-                  properties: {
-                    children: 'Click me',
-                    type: ButtonType.Primary,
-                  },
                   title: 'Primary',
-                },
-                {
                   description: 'A primary button',
                   properties: {
-                    borderRadius: { all: Amount.Least },
                     children: 'Hi ARI!!!',
                     type: ButtonType.Primary,
                   },
-                  title: 'Primary',
+                  code: `import { Button } from '@srclaunch/ui';
+
+                  const Example = () => (
+                    <Button>Click me</Button>
+                  );`,
+                },
+                {
+                  title: 'Secondary',
+                  description: 'A secondary button',
+                  properties: {
+                    borderRadius: { all: Amount.Least },
+                    children: 'Click me',
+                    type: ButtonType.Secondary,
+                  },
+                  code: `import { Button } from '@srclaunch/ui';
+
+                  const Example = () => (
+                    <Button>Click me</Button>
+                  );`,
+                },
+                {
+                  title: 'Inline',
+                  description: 'An inline button',
+                  properties: {
+                    children: 'Do something',
+                    size: {
+                      fill: Fill.None,
+                    },
+                  },
+                  code: `import { Button } from '@srclaunch/ui';
+
+                  const Example = () => (
+                    <Button>Click me</Button>
+                  );`,
                 },
               ],
               path: '/forms/buttons/button',
@@ -934,18 +1222,6 @@ const Example = () => (
           examples: [
             {
               title: 'Default',
-              properties: {
-                children: (
-                  <>
-                    <ModalHeader title="Example Title" />
-                  </>
-                ),
-                states: {
-                  state: {
-                    visible: true,
-                  },
-                },
-              },
               render: () => {
                 const [slidePanelVisible, setSlidePanelVisible] =
                   useState(false);

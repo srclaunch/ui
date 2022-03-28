@@ -31,10 +31,14 @@ import { Container, ContainerProps } from '../../layout/Container';
 import { Label } from '../../typography/Label';
 import { LoadingOverlay } from '../../progress/LoadingOverlay';
 import { DataGridCell } from './DataGridCell';
-import { SearchInput } from '../../forms/inputs/text/SearchInput';
-import { MenuButton } from '../../forms/buttons/MenuButton';
-import { Button, ButtonType } from '../../forms/buttons/Button';
+import {
+  SearchInput,
+  SearchInputProps,
+} from '../../forms/inputs/text/SearchInput';
+import { MenuButton, MenuButtonProps } from '../../forms/buttons/MenuButton';
+import { Button, ButtonProps, ButtonType } from '../../forms/buttons/Button';
 import { Spacer } from '../../layout/Spacer';
+import { Scrollable } from '../../layout/Scrollable';
 
 export enum DataGridDisplayType {
   Card = 'card',
@@ -58,22 +62,9 @@ export type DataGridProps = ContainerProps & {
   data?: Record<string, Primitives | any>[];
   display?: DataGridDisplayType;
   header?: {
-    create?: {
-      label: string;
-      onClick: (e: SyntheticEvent) => void;
-      size?: Size;
-    };
-    search?: {
-      placeholder?: string;
-      onChange?: (event: SyntheticEvent<HTMLInputElement>) => void;
-      size?: Size;
-      value?: string;
-    };
-    export?: {
-      label?: string;
-      onClick?: (e: SyntheticEvent) => void;
-      size?: Size;
-    };
+    create?: ButtonProps;
+    search?: SearchInputProps;
+    export?: MenuButtonProps;
   };
   hideOnProp?: string;
   loading?: boolean;
@@ -114,6 +105,7 @@ export const DataGrid = memo(
     model,
     onItemClick,
     shadow = DepthShadow.Highest,
+    size = {},
     states = {},
     template,
     ...props
@@ -154,6 +146,8 @@ export const DataGrid = memo(
       );
     }
 
+    const minHeight = `calc(${data?.length ?? 1 + 1} * ${Sizes.Large})`;
+
     return (
       <Container
         alignment={{
@@ -163,6 +157,9 @@ export const DataGrid = memo(
         borderRadius={{ all: Amount.Least, ...borderRadius }}
         className={`${className} data-grid`}
         shadow={shadow}
+        size={{
+          ...size,
+        }}
         states={states}
         {...props}
       >
@@ -179,71 +176,73 @@ export const DataGrid = memo(
           <Container
             alignment={{
               orientation: Orientation.Horizontal,
+              vertical: AlignVertical.Center,
             }}
             background={{
-              color: BackgroundColors.DataGridHeader,
+              color: BackgroundColors.Lighter,
             }}
             borderRadius={{
-              topLeft: Amount.Less,
-              topRight: Amount.Less,
+              topLeft: Amount.Least,
+              topRight: Amount.Least,
+              ...borderRadius,
             }}
             className="data-grid-header"
-            padding={{ all: Amount.Less }}
+            padding={{ left: Amount.Less, right: Amount.Less }}
+            size={{ height: Sizes.Larger }}
           >
             {header.search && (
-              <Container size={header.search.size}>
-                <SearchInput
-                  name="search-input"
-                  events={{
-                    input: {
-                      onValueChange: ({ value }) => {
-                        setSearchTerm(value ?? '');
-                      },
+              <SearchInput
+                name="search-input"
+                events={{
+                  input: {
+                    onValueChange: ({ value }) => {
+                      setSearchTerm(value ?? '');
                     },
-                  }}
-                  placeholder={header.search.placeholder}
-                  size={header.search.size}
-                />
-              </Container>
+                  },
+                }}
+                placeholder={header.search.placeholder}
+                size={header.search.size}
+                {...header.search}
+              />
             )}
 
             <Spacer />
 
             {header.export && (
-              <Container size={header.export.size}>
-                <MenuButton
-                  menu={[
-                    {
-                      events: {
-                        mouse: {
-                          onClick: () =>
-                            downloadDataAsFile({
-                              data: formatObjectToCSVData({
-                                // data: [],
-                                objectType: 'EXPENSE',
-                              }),
-                              fileName: 'expenses',
+              <MenuButton
+                menu={[
+                  {
+                    events: {
+                      mouse: {
+                        onClick: () =>
+                          downloadDataAsFile({
+                            data: formatObjectToCSVData({
+                              // data: [],
+                              objectType: 'EXPENSE',
                             }),
-                        },
+                            fileName: 'expenses',
+                          }),
                       },
-                      label: 'Export to CSV',
                     },
-                  ]}
-                  label="Export"
-                  size={header.export.size}
-                />
-              </Container>
+                    label: 'Export to CSV',
+                  },
+                ]}
+                label="Export"
+                size={header.export.size}
+                {...header.export}
+              />
             )}
 
             {header.create && (
               <Button
-                events={{
-                  mouse: {
-                    onClick: header.create.onClick,
-                  },
-                }}
-                type={ButtonType.Secondary}
-                size={header.create.size}
+                lineHeight={Sizes.Small}
+                textSize={header.create.textSize ?? TextSize.Small}
+                type={header.create.type ?? ButtonType.Default}
+                // size={{
+                //   height: Sizes.Small,
+                //   ...header.create.size,
+                // }}
+                {...header.create}
               >
                 {header.create.label}
               </Button>
@@ -252,9 +251,6 @@ export const DataGrid = memo(
         )}
 
         <Container
-          alignment={{
-            overflow: Overflow.ScrollBoth,
-          }}
           borderRadius={
             !header ? { all: Amount.Least, ...borderRadius } : undefined
           }
@@ -272,12 +268,16 @@ export const DataGrid = memo(
                   horizontal: AlignHorizontal.Left,
                   orientation: Orientation.Horizontal,
                 }}
-                background={{ color: BackgroundColors.DataGridColumnHeaders }}
+                background={{ color: BackgroundColors.Default }}
+                borderRadius={
+                  !header
+                    ? {
+                        topLeft: Amount.Least,
+                        topRight: Amount.Least,
+                      }
+                    : undefined
+                }
                 className="data-grid-headers"
-                padding={{
-                  bottom: Amount.Least,
-                  top: Amount.Least,
-                }}
               >
                 {columns.map((column, key) => {
                   return (
@@ -287,25 +287,14 @@ export const DataGrid = memo(
                         orientation: Orientation.Horizontal,
                         vertical: AlignVertical.Center,
                       }}
-                      background={{
-                        color: BackgroundColors.DataGridColumnHeaders,
-                      }}
                       border={
                         key !== columns.length - 1
                           ? {
                               right: {
-                                color: BorderColors.Default,
+                                color: BorderColors.Light,
                                 style: BorderStyle.Solid,
                                 width: 1,
                               },
-                            }
-                          : undefined
-                      }
-                      borderRadius={
-                        !header
-                          ? {
-                              topLeft: header ? 0 : Amount.Least,
-                              topRight: header ? 0 : Amount.Least,
                             }
                           : undefined
                       }
@@ -327,7 +316,7 @@ export const DataGrid = memo(
                           vertical: AlignVertical.Center,
                         }}
                         lineHeight={Sizes.Large}
-                        textColor={TextColors.DataGridColumnHeaders}
+                        textColor={TextColors.Light}
                         textSize={TextSize.Smaller}
                       >
                         {column.label}
@@ -346,74 +335,85 @@ export const DataGrid = memo(
                   bottomRight: Amount.Least,
                 }}
                 className="data-grid-rows"
+                size={{ minHeight }}
               >
-                {data &&
-                  data.map((row, key) => {
-                    return (
-                      <Container
-                        alignment={{
-                          orientation: Orientation.Horizontal,
-                        }}
-                        background={{
-                          color: BackgroundColors.DataGridCell,
-                        }}
-                        className="data-grid-row"
-                        cursor={Cursor.Pointer}
-                        events={{
-                          mouse: {
-                            onClick: () => {
-                              if (onItemClick) onItemClick(row);
+                <Scrollable size={{ minHeight }}>
+                  {data &&
+                    data.map((row, key) => {
+                      return (
+                        <Container
+                          alignment={{
+                            orientation: Orientation.Horizontal,
+                          }}
+                          background={{
+                            color: BackgroundColors.DataGridCell,
+                          }}
+                          borderRadius={
+                            data.length === key + 1
+                              ? {
+                                  bottomLeft: Amount.Least,
+                                  bottomRight: Amount.Least,
+                                }
+                              : undefined
+                          }
+                          className="data-grid-row"
+                          cursor={Cursor.Pointer}
+                          events={{
+                            mouse: {
+                              onClick: () => {
+                                if (onItemClick) onItemClick(row);
+                              },
                             },
-                          },
-                        }}
-                        key={key}
-                        padding={{ all: Amount.Least }}
-                        states={{
-                          hovered: {
-                            background: {
-                              color: BackgroundColors.Primary,
+                          }}
+                          key={key}
+                          states={{
+                            hovered: {
+                              background: {
+                                color: BackgroundColors.Primary,
+                              },
                             },
-                          },
-                        }}
-                      >
-                        {columns.map((column, columnKey) => {
-                          return (
-                            <DataGridCell
-                              alignment={{
-                                horizontal: column.align,
-                                orientation: Orientation.Horizontal,
-                                vertical: AlignVertical.Center,
-                              }}
-                              // backgroundColor={BackgroundColors.DataGridCell}
-                              fieldName={column.field}
-                              lineHeight={Sizes.Large}
-                              lineWrap={true}
-                              model={model}
-                              textColor={
-                                hoveredRow === key
-                                  ? TextColors.PrimaryContrast
-                                  : TextColors.DataGridCell
-                              }
-                              type={column.type}
-                              value={fetchFromObject(row, column.field)}
-                              size={{
-                                maxWidth:
-                                  column.size?.maxWidth ?? MAX_COLUMN_WIDTH,
-                                minWidth:
-                                  column.size?.minWidth ?? MIN_COLUMN_WIDTH,
-                                width: column.size?.width,
-                              }}
-                            />
-                          );
-                        })}
-                      </Container>
-                    );
-                  })}
+                          }}
+                        >
+                          {columns.map((column, columnKey) => {
+                            return (
+                              <DataGridCell
+                                alignment={{
+                                  horizontal: column.align,
+                                  orientation: Orientation.Horizontal,
+                                  vertical: AlignVertical.Center,
+                                }}
+                                fieldName={column.field}
+                                key={columnKey}
+                                lineHeight={Sizes.Large}
+                                lineWrap={true}
+                                model={model}
+                                size={{
+                                  maxWidth:
+                                    column.size?.maxWidth ?? MAX_COLUMN_WIDTH,
+                                  minWidth:
+                                    column.size?.minWidth ?? MIN_COLUMN_WIDTH,
+                                  width: column.size?.width,
+                                }}
+                                states={{
+                                  hovered: {
+                                    textColor: TextColors.PrimaryContrast,
+                                  },
+                                }}
+                                textColor={TextColors.Default}
+                                type={column.type}
+                                value={fetchFromObject(row, column.field)}
+                              />
+                            );
+                          })}
+                        </Container>
+                      );
+                    })}
+                </Scrollable>
               </Container>
             </>
           ) : (
             <Container>
-              {!states.state?.loading && data && data.length === 0 ? (
+              {!states.state?.loading === true && data && data.length === 0 ? (
                 <NoResults as={Container}>
                   <Label>No results</Label>
                 </NoResults>

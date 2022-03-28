@@ -112,7 +112,6 @@ export type Events<V = undefined> = {
     readonly onWaiting?: ReactEventHandler;
   };
   mouse?: {
-    readonly disabled?: boolean;
     readonly onClick?: MouseEventHandler;
     readonly onContextMenu?: MouseEventHandler;
     readonly onDoubleClick?: MouseEventHandler;

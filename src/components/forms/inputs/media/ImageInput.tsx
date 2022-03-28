@@ -206,11 +206,6 @@ export const ImageInput = memo(
               horizontal: AlignHorizontal.Center,
               vertical: AlignVertical.Center,
             }}
-            events={{
-              mouse: {
-                disabled: isDragActive,
-              },
-            }}
             padding={{
               bottom: Amount.Default,
               left: Amount.Default,

@@ -7,9 +7,8 @@ import { nanoid } from 'nanoid';
 export function getAnimationKeyframes(
   animation: Animation,
   name: string,
-  props: ContainerProps,
 ): SimpleInterpolation {
-  const { animations: unused, ...otherContainerProps } = props;
+  // const { animations: unused, ...otherContainerProps } = props;
 
   return css`
     @keyframes ${name} {
@@ -24,10 +23,10 @@ export function getAnimationKeyframes(
   `;
 }
 
-export function getAnimationStyles(props: ContainerProps): SimpleInterpolation {
-  if (!props.animations || !props.animations?.length) return null;
-
-  const animations = props.animations;
+export function getAnimationStyles(
+  animations?: Animation[],
+): SimpleInterpolation {
+  if (!animations || !animations?.length) return null;
 
   let names: string[] = [];
   let keyframes: SimpleInterpolation[] = [];
@@ -41,7 +40,7 @@ export function getAnimationStyles(props: ContainerProps): SimpleInterpolation {
       const name = animation.name ?? `animation_${nanoid()}`;
 
       names = [...names, name];
-      keyframes = [...keyframes, getAnimationKeyframes(animation, name, props)];
+      keyframes = [...keyframes, getAnimationKeyframes(animation, name)];
       delays = [...delays, animation.timing?.delay ?? 0];
       durations = [...durations, animation.timing?.duration ?? 3];
       iterations = [...iterations, animation.timing?.iterations ?? 'infinite'];
@@ -84,6 +83,6 @@ export function getAnimationStyles(props: ContainerProps): SimpleInterpolation {
   `;
 }
 
-export const AnimationStyles = css<ContainerProps>`
-  ${props => getAnimationStyles(props)}
+export const AnimationStyles = css<{ readonly animation?: Animation[] }>`
+  ${props => getAnimationStyles(props.animation)}
 `;

@@ -81,6 +81,9 @@ export const Workspace = memo(
                     vertical: AlignVertical.Center,
                   }}
                   className="workspace-title"
+                  size={{
+                    fill: Fill.Horizontal,
+                  }}
                 >
                   {typeof header.title === 'string' ? (
                     <Title>{header.title}</Title>

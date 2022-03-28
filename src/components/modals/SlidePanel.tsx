@@ -30,28 +30,7 @@ export const SlidePanel = memo(
   }: SlidePanelProps): ReactElement => {
     return (
       <Container
-        // animations={[
-        //   {
-        //     from: {
-        //       transform: {
-        //         translate: {
-        //           x: origin,
-        //         },
-        //       },
-        //     },
-        //     timing: {
-        //       duration: 0.13,
-        //       iterations: 1,
-        //     },
-        //     to: {
-        //       transform: {
-        //         translate: {
-        //           x: 0,
-        //         },
-        //       },
-        //     },
-        //   },
-        // ]}
+        // animations={}
         background={{ color: BackgroundColors.SlidePanel, ...background }}
         borderRadius={{ all: Amount.Most, ...borderRadius }}
         className={`${className} slide-panel`}
@@ -62,12 +41,33 @@ export const SlidePanel = memo(
           bottom: Amount.Default,
           right: Amount.Default,
           top: Amount.Default,
-          ...position,
         }}
         shadow={shadow}
         size={{ width: 380, ...size }}
         states={{
           visible: {
+            // animations: [
+            //   {
+            //     from: {
+            //       transform: {
+            //         translate: {
+            //           x: origin,
+            //         },
+            //       },
+            //     },
+            //     timing: {
+            //       duration: 0.13,
+            //       iterations: 1,
+            //     },
+            //     to: {
+            //       transform: {
+            //         translate: {
+            //           x: 0,
+            //         },
+            //       },
+            //     },
+            //   },
+            // ],
             transform: {
               translate: {
                 x: 0,

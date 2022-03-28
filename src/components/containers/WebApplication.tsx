@@ -135,14 +135,6 @@ export const WebApplication = memo(
             }}
           />
 
-          <Backdrop
-            states={{
-              state: {
-                visible: !showOutlet,
-              },
-            }}
-          />
-
           {showOutlet && <Outlet />}
 
           <EntityPanel actions={actions} httpClient={httpClient} />

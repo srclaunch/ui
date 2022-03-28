@@ -22163,14 +22163,13 @@ let nanoid = (size = 21) => {
   }
   return id2;
 };
-function getAnimationKeyframes(animation, name2, props) {
+function getAnimationKeyframes(animation, name2) {
   return css$2(["@keyframes ", "{from{", "}to{", "}}"], name2, getContainerStyles(__spreadValues({}, animation.from)), getContainerStyles(__spreadValues({}, animation.to)));
 }
-function getAnimationStyles(props) {
-  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n, _o;
-  if (!props.animations || !((_a2 = props.animations) == null ? void 0 : _a2.length))
+function getAnimationStyles(animations) {
+  var _a2, _b, _c, _d, _e2, _f, _g, _h, _i2, _j, _k, _l, _m, _n;
+  if (!animations || !(animations == null ? void 0 : animations.length))
     return null;
-  const animations = props.animations;
   let names = [];
   let keyframes = [];
   let iterations = [];
@@ -22179,18 +22178,18 @@ function getAnimationStyles(props) {
   let easings = [];
   for (const animation of animations) {
     if (animation.from && animation.to) {
-      const name2 = (_b = animation.name) != null ? _b : `animation_${nanoid()}`;
+      const name2 = (_a2 = animation.name) != null ? _a2 : `animation_${nanoid()}`;
       names = [...names, name2];
       keyframes = [...keyframes, getAnimationKeyframes(animation, name2)];
-      delays = [...delays, (_d = (_c = animation.timing) == null ? void 0 : _c.delay) != null ? _d : 0];
-      durations = [...durations, (_f = (_e2 = animation.timing) == null ? void 0 : _e2.duration) != null ? _f : 3];
-      iterations = [...iterations, (_h = (_g = animation.timing) == null ? void 0 : _g.iterations) != null ? _h : "infinite"];
-      easings = [...easings, (_j = (_i2 = animation.timing) == null ? void 0 : _i2.easing) != null ? _j : "linear"];
+      delays = [...delays, (_c = (_b = animation.timing) == null ? void 0 : _b.delay) != null ? _c : 0];
+      durations = [...durations, (_e2 = (_d = animation.timing) == null ? void 0 : _d.duration) != null ? _e2 : 3];
+      iterations = [...iterations, (_g = (_f = animation.timing) == null ? void 0 : _f.iterations) != null ? _g : "infinite"];
+      easings = [...easings, (_i2 = (_h = animation.timing) == null ? void 0 : _h.easing) != null ? _i2 : "linear"];
     }
   }
-  return css$2(["", " ", " ", " ", " ", " ", ""], keyframes, names && names.length > 0 && css$2(["animation:", ";"], (_k = names.join(", ").trim()) != null ? _k : "none"), durations && durations.length > 0 && css$2(["animation-duration:", "s;"], (_l = durations.join(", ").trim()) != null ? _l : 3), iterations && iterations.length > 0 && css$2(["animation-iteration-count:", ";"], (_m = iterations.join(", ").trim()) != null ? _m : "infinite"), easings && easings.length > 0 && css$2(["animation-timing-function:", ";"], (_n = easings.join(", ").trim()) != null ? _n : "linear"), delays && delays.length > 0 && css$2(["animation-delay:", "s;"], (_o = delays.join(", ").trim()) != null ? _o : 0));
+  return css$2(["", " ", " ", " ", " ", " ", ""], keyframes, names && names.length > 0 && css$2(["animation:", ";"], (_j = names.join(", ").trim()) != null ? _j : "none"), durations && durations.length > 0 && css$2(["animation-duration:", "s;"], (_k = durations.join(", ").trim()) != null ? _k : 3), iterations && iterations.length > 0 && css$2(["animation-iteration-count:", ";"], (_l = iterations.join(", ").trim()) != null ? _l : "infinite"), easings && easings.length > 0 && css$2(["animation-timing-function:", ";"], (_m = easings.join(", ").trim()) != null ? _m : "linear"), delays && delays.length > 0 && css$2(["animation-delay:", "s;"], (_n = delays.join(", ").trim()) != null ? _n : 0));
 }
-css$2(["", ""], (props) => getAnimationStyles(props));
+css$2(["", ""], (props) => getAnimationStyles(props.animation));
 function getBackgroundColorStyle(color, opacity) {
   if (color === BackgroundColors.Transparent)
     return css$2(["background-color:transparent;"]);
@@ -22360,7 +22359,7 @@ function getPositionStyles(position) {
     right,
     top
   } = position || {};
-  return css$2(["position:relative;", " ", " ", " ", " ", ""], behavior && css$2(["position:", ";"], behavior), (bottom || bottom === 0) && css$2(["bottom:", ";"], getCSSMeasurementValue(bottom)), (left || left === 0) && css$2(["left:", ";"], getCSSMeasurementValue(left)), (right || right === 0) && css$2(["right:", ";"], getCSSMeasurementValue(right)), (top || top === 0) && css$2(["top:", ";"], getCSSMeasurementValue(top)));
+  return css$2(["position:", ";", " ", " ", " ", ""], behavior != null ? behavior : "relative", (bottom || bottom === 0) && css$2(["bottom:", ";"], getCSSMeasurementValue(bottom)), (left || left === 0) && css$2(["left:", ";"], getCSSMeasurementValue(left)), (right || right === 0) && css$2(["right:", ";"], getCSSMeasurementValue(right)), (top || top === 0) && css$2(["top:", ";"], getCSSMeasurementValue(top)));
 }
 css$2(["", ""], (props) => getPositionStyles(props.position));
 function getShadowStyles(shadow) {
@@ -22536,7 +22535,23 @@ function getVisibilityStyles(visibility) {
 }
 css$2(["", ""], (props) => getVisibilityStyles(props.visibility));
 const getContainerStyles = (props) => {
-  return css$2(["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " transition:background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,opacity 0.13s ease-in-out,transform 0.13s ease-in-out;"], getAlignmentStyles(props.alignment), getAnimationStyles(props), getBackgroundStyles(props.background), getBorderStyles(props.border), getBorderRadiusStyles(props.borderRadius), getCursorStyles(props.cursor), getDepthStyles(props.depth), getMarginStyles(props.margin), getPaddingStyles(props.padding), getPositionStyles(props.position), getShadowStyles(props.shadow), getSizeStyles(props.size), getTransformStyles(props.transform), getVisibilityStyles(props.visibility));
+  const {
+    alignment,
+    animations,
+    background,
+    border,
+    borderRadius,
+    cursor,
+    depth,
+    margin,
+    padding,
+    position,
+    shadow,
+    size,
+    transform,
+    visibility
+  } = props || {};
+  return css$2(["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " transition:background 0.13s ease-in-out,background-color 0.13s ease-in-out,border-radius 0.13s ease-in-out,border-bottom-left-radius 0.13s ease-in-out,border-bottom-right-radius 0.13s ease-in-out,border-top-left-radius 0.13s ease-in-out,border-top-right-radius 0.13s ease-in-out,border 0.13s ease-in-out,border-bottom 0.13s ease-in-out,border-left 0.13s ease-in-out,border-right 0.13s ease-in-out,border-top 0.13s ease-in-out,border-color 0.13s ease-in-out,box-shadow 0.13s ease-in-out,color 0.13s ease-in,opacity 0.13s ease-in-out,transform 0.13s ease-in-out;"], alignment && getAlignmentStyles(alignment), animations && getAnimationStyles(animations), background && getBackgroundStyles(background), border && getBorderStyles(border), borderRadius && getBorderRadiusStyles(borderRadius), cursor && getCursorStyles(cursor), depth && getDepthStyles(depth), margin && getMarginStyles(margin), padding && getPaddingStyles(padding), getPositionStyles(position), shadow && getShadowStyles(shadow), size && getSizeStyles(size), transform && getTransformStyles(transform), visibility && getVisibilityStyles(visibility));
 };
 const ContainerStyles = css$2(["", ""], (props) => getContainerStyles(props));
 function getDisabledStateStyles$1() {
@@ -22553,8 +22568,12 @@ function getHiddenStateStyles() {
 }
 function getContainerStatesStyles(props) {
   const _a2 = props, {
+    animations,
+    events,
     states
   } = _a2, otherProps = __objRest(_a2, [
+    "animations",
+    "events",
     "states"
   ]);
   if (!states) {
@@ -22567,6 +22586,7 @@ function getContainerStatesStyles(props) {
     error,
     focused,
     hovered,
+    hidden,
     loaded,
     loading,
     on,
@@ -22575,7 +22595,7 @@ function getContainerStatesStyles(props) {
     visible,
     warning
   } = states;
-  return css$2(["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""], active && css$2(["", ""], (state == null ? void 0 : state.active) ? css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active))) : css$2(["&::active{", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active)))), current && (state == null ? void 0 : state.current) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), current))), disabled && (state == null ? void 0 : state.disabled) ? css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()) : css$2(["&:disabled{", " ", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()), error && (state == null ? void 0 : state.error) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), error))), focused && css$2(["", ""], (state == null ? void 0 : state.focused) ? css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles()) : css$2(["&:focus{", " ", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles())), hovered && !(state == null ? void 0 : state.current) && css$2(["", ""], (state == null ? void 0 : state.hovered) ? css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered))) : css$2(["&:hover{", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered)))), loaded && (state == null ? void 0 : state.loaded) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loaded))), loading && (state == null ? void 0 : state.loading) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loading))), on && (state == null ? void 0 : state.on) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), on))), success && (state == null ? void 0 : state.success) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), success))), visible && (state == null ? void 0 : state.visible) && css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getVisibleStateStyles()), visible && (state == null ? void 0 : state.visible) === false && css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getHiddenStateStyles()), !visible && (state == null ? void 0 : state.visible) === false && css$2(["", ""], getHiddenStateStyles()), warning && (state == null ? void 0 : state.warning) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), warning))));
+  return css$2(["", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", ""], active && css$2(["", ""], (state == null ? void 0 : state.active) ? css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active))) : css$2(["&::active{", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), active)))), current && (state == null ? void 0 : state.current) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), current))), disabled && css$2(["", ""], (state == null ? void 0 : state.disabled) ? css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1()) : css$2(["&:disabled{", " ", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), disabled)), getDisabledStateStyles$1())), error && (state == null ? void 0 : state.error) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), error))), focused && css$2(["", ""], (state == null ? void 0 : state.focused) ? css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles()) : css$2(["&:focus{", " ", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), focused)), getFocusedStyles())), hovered && !(state == null ? void 0 : state.current) && css$2(["", ""], (state == null ? void 0 : state.hovered) ? css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered))) : css$2(["&:hover{", "}"], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hovered)))), loaded && (state == null ? void 0 : state.loaded) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loaded))), loading && (state == null ? void 0 : state.loading) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), loading))), on && (state == null ? void 0 : state.on) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), on))), success && (state == null ? void 0 : state.success) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), success))), visible && (state == null ? void 0 : state.visible) && css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), visible)), getVisibleStateStyles()), hidden && ((state == null ? void 0 : state.visible) === false || (state == null ? void 0 : state.hidden)) && css$2(["", " ", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), hidden)), getHiddenStateStyles()), !visible && (state == null ? void 0 : state.visible) === false && css$2(["", ""], getHiddenStateStyles()), warning && (state == null ? void 0 : state.warning) && css$2(["", ""], getContainerStyles(__spreadValues(__spreadValues({}, otherProps), warning))));
 }
 const StateStyles = css$2(["", ""], (props) => getContainerStatesStyles(props));
 function getEventHandlers(events) {
@@ -22727,7 +22747,7 @@ const Container$8 = memo((_a2) => {
   }, []);
   return /* @__PURE__ */ jsx$2(Wrapper$3, __spreadProps(__spreadValues(__spreadValues({
     alignment: __spreadValues({
-      fill: Fill.Horizontal,
+      fill: Fill.Both,
       horizontal: AlignHorizontal.Stretch,
       orientation: Orientation.Vertical,
       vertical: AlignVertical.Stretch
@@ -23136,8 +23156,8 @@ const Button$1 = memo((_k) => {
     cursor,
     form,
     padding: typeof children === "string" ? __spreadValues({
-      left: lineHeight,
-      right: lineHeight
+      left: `calc((${lineHeight} / 4) * 2)`,
+      right: `calc((${lineHeight} / 4) * 2)`
     }, padding) : padding,
     states: __spreadValues({
       active: {
@@ -31158,11 +31178,6 @@ const ImageInput = memo((_pa) => {
           horizontal: AlignHorizontal.Center,
           vertical: AlignVertical.Center
         },
-        events: {
-          mouse: {
-            disabled: isDragActive
-          }
-        },
         padding: {
           bottom: Amount.Default,
           left: Amount.Default,
@@ -35556,12 +35571,12 @@ const SlidePanel = memo((_cb) => {
     padding: __spreadValues({
       all: Amount.Less
     }, padding),
-    position: __spreadValues({
+    position: {
       behavior: PositionBehavior.Fixed,
       bottom: Amount.Default,
       right: Amount.Default,
       top: Amount.Default
-    }, position),
+    },
     shadow,
     size: __spreadValues({
       width: 380
@@ -35814,46 +35829,8 @@ const EntityPanel = memo((_eb) => {
     }))
   });
 });
-const Backdrop = memo((_gb) => {
+const WebApplication = memo((_gb) => {
   var _hb = _gb, {
-    as = "div",
-    background = {},
-    children,
-    className = "",
-    position = {},
-    states = {}
-  } = _hb, props = __objRest(_hb, [
-    "as",
-    "background",
-    "children",
-    "className",
-    "position",
-    "states"
-  ]);
-  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
-    as,
-    background: __spreadValues({
-      color: BackgroundColors.Darker
-    }, background),
-    className: `${className} backdrop`,
-    position: __spreadValues({
-      behavior: PositionBehavior.Absolute,
-      bottom: 0,
-      left: 0,
-      right: 0,
-      top: 0
-    }, position),
-    states: __spreadValues({
-      state: __spreadValues({
-        visible: false
-      }, states.state)
-    }, states)
-  }, props), {
-    children
-  }));
-});
-const WebApplication = memo((_ib) => {
-  var _jb = _ib, {
     actions,
     authentication = false,
     background = {},
@@ -35861,7 +35838,7 @@ const WebApplication = memo((_ib) => {
     className = "",
     httpClient,
     size = {}
-  } = _jb, props = __objRest(_jb, [
+  } = _hb, props = __objRest(_hb, [
     "actions",
     "authentication",
     "background",
@@ -35941,12 +35918,6 @@ const WebApplication = memo((_ib) => {
             visible: !showOutlet
           }
         }
-      }), /* @__PURE__ */ jsx$2(Backdrop, {
-        states: {
-          state: {
-            visible: !showOutlet
-          }
-        }
       }), showOutlet && /* @__PURE__ */ jsx$2(Outlet, {}), /* @__PURE__ */ jsx$2(EntityPanel, {
         actions,
         httpClient
@@ -35954,8 +35925,8 @@ const WebApplication = memo((_ib) => {
     })
   }));
 });
-const SubTitle = memo((_kb) => {
-  var _lb = _kb, {
+const SubTitle = memo((_ib) => {
+  var _jb = _ib, {
     as = "h2",
     children,
     className = "",
@@ -35963,7 +35934,7 @@ const SubTitle = memo((_kb) => {
     textSize = TextSize.Large,
     textColor = TextColors.SubTitle,
     textWeight = TextWeight.More
-  } = _lb, props = __objRest(_lb, [
+  } = _jb, props = __objRest(_jb, [
     "as",
     "children",
     "className",
@@ -35984,8 +35955,8 @@ const SubTitle = memo((_kb) => {
     children: children != null ? children : ""
   }));
 });
-const Workspace = memo((_mb) => {
-  var _nb = _mb, {
+const Workspace = memo((_kb) => {
+  var _lb = _kb, {
     alignment = {},
     background = {},
     className = "",
@@ -35997,7 +35968,7 @@ const Workspace = memo((_mb) => {
     padding = {},
     size = {},
     title
-  } = _nb, props = __objRest(_nb, [
+  } = _lb, props = __objRest(_lb, [
     "alignment",
     "background",
     "className",
@@ -36049,6 +36020,9 @@ const Workspace = memo((_mb) => {
             vertical: AlignVertical.Center
           },
           className: "workspace-title",
+          size: {
+            fill: Fill.Horizontal
+          },
           children: typeof header.title === "string" ? /* @__PURE__ */ jsx$2(Title, {
             children: header.title
           }) : header.title
@@ -36124,7 +36098,30 @@ function fetchFromObject(obj, prop) {
   }
   return obj[prop];
 }
-const StringLabel = memo((_ob) => {
+const StringLabel = memo((_mb) => {
+  var _nb = _mb, {
+    icon: icon2,
+    lineHeight = Sizes.Default,
+    textColor = TextColors.Lighter,
+    textSize = TextSize.Default,
+    value: value2
+  } = _nb, props = __objRest(_nb, [
+    "icon",
+    "lineHeight",
+    "textColor",
+    "textSize",
+    "value"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    icon: icon2,
+    lineHeight,
+    textColor,
+    textSize
+  }, props), {
+    children: value2
+  }));
+});
+const NumberLabel = memo((_ob) => {
   var _pb = _ob, {
     icon: icon2,
     lineHeight = Sizes.Default,
@@ -36147,34 +36144,11 @@ const StringLabel = memo((_ob) => {
     children: value2
   }));
 });
-const NumberLabel = memo((_qb) => {
+const CurrencyAmountLabel = memo((_qb) => {
   var _rb = _qb, {
-    icon: icon2,
-    lineHeight = Sizes.Default,
-    textColor = TextColors.Lighter,
-    textSize = TextSize.Default,
-    value: value2
-  } = _rb, props = __objRest(_rb, [
-    "icon",
-    "lineHeight",
-    "textColor",
-    "textSize",
-    "value"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    icon: icon2,
-    lineHeight,
-    textColor,
-    textSize
-  }, props), {
-    children: value2
-  }));
-});
-const CurrencyAmountLabel = memo((_sb) => {
-  var _tb = _sb, {
     amount,
     currency
-  } = _tb, props = __objRest(_tb, [
+  } = _rb, props = __objRest(_rb, [
     "amount",
     "currency"
   ]);
@@ -36182,10 +36156,10 @@ const CurrencyAmountLabel = memo((_sb) => {
     children: amount === 0 ? "$0" : amount ? `$${amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}` : ""
   }));
 });
-const PercentLabel = memo((_ub) => {
-  var _vb = _ub, {
+const PercentLabel = memo((_sb) => {
+  var _tb = _sb, {
     value: value2
-  } = _vb, props = __objRest(_vb, [
+  } = _tb, props = __objRest(_tb, [
     "value"
   ]);
   return /* @__PURE__ */ jsxs$1(Label, __spreadProps(__spreadValues({}, props), {
@@ -40008,15 +39982,15 @@ function friendlyDateTime(dateTimeish) {
     throw new InvalidArgumentError(`Unknown datetime argument: ${dateTimeish}, of type ${typeof dateTimeish}`);
   }
 }
-const DateLabel = memo((_wb) => {
-  var _xb = _wb, {
+const DateLabel = memo((_ub) => {
+  var _vb = _ub, {
     className = "",
     format = DateTime.DATE_MED,
     icon: icon2,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _xb, props = __objRest(_xb, [
+  } = _vb, props = __objRest(_vb, [
     "className",
     "format",
     "icon",
@@ -40033,8 +40007,8 @@ const DateLabel = memo((_wb) => {
     children: DateTime.fromISO(value2).toLocaleString(format)
   }));
 });
-const MenuItemLabel = memo((_yb) => {
-  var _zb = _yb, {
+const MenuItemLabel = memo((_wb) => {
+  var _xb = _wb, {
     fieldName,
     icon: icon2,
     lineHeight = Sizes.Default,
@@ -40042,7 +40016,7 @@ const MenuItemLabel = memo((_yb) => {
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _zb, props = __objRest(_zb, [
+  } = _xb, props = __objRest(_xb, [
     "fieldName",
     "icon",
     "lineHeight",
@@ -40106,54 +40080,33 @@ function getLabelByFieldType({
       }, props));
   }
 }
-const DataGridCell = memo((_Ab) => {
-  var _Bb = _Ab, {
+const DataGridCell = memo((_yb) => {
+  var _zb = _yb, {
     as = "label",
     fieldName,
     model,
     type,
     value: value2
-  } = _Bb, props = __objRest(_Bb, [
+  } = _zb, props = __objRest(_zb, [
     "as",
     "fieldName",
     "model",
     "type",
     "value"
   ]);
-  const {
-    alignment,
-    textColor,
-    textOverflow,
-    textSize,
-    textWeight,
-    size
-  } = props;
-  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
-    alignment: {
-      orientation: Orientation.Horizontal,
-      vertical: AlignVertical.Center
-    },
-    as,
-    padding: {
-      left: Amount.Less,
-      right: Amount.Less
-    },
-    size
-  }, props), {
-    children: getLabelByFieldType({
-      fieldName,
-      model,
-      props: {
-        alignment,
-        textColor,
-        textOverflow,
-        textSize,
-        textWeight
-      },
-      type,
-      value: value2
-    })
-  }));
+  console.log("props", props);
+  return getLabelByFieldType({
+    fieldName,
+    model,
+    props: __spreadValues({
+      padding: {
+        left: Amount.Default,
+        right: Amount.Default
+      }
+    }, props),
+    type,
+    value: value2
+  });
 });
 const SearchInput = memo((props) => {
   return /* @__PURE__ */ jsx$2(TextInput, __spreadValues({
@@ -40168,8 +40121,8 @@ const SearchInput = memo((props) => {
     spellCheck: false
   }, props));
 });
-const MenuButton = memo((_Cb) => {
-  var _Db = _Cb, {
+const MenuButton = memo((_Ab) => {
+  var _Bb = _Ab, {
     background = {},
     border = {},
     borderRadius = {},
@@ -40180,7 +40133,7 @@ const MenuButton = memo((_Cb) => {
     size = {},
     states = {},
     textColor = TextColors.MenuButton
-  } = _Db, props = __objRest(_Db, [
+  } = _Bb, props = __objRest(_Bb, [
     "background",
     "border",
     "borderRadius",
@@ -40240,6 +40193,7 @@ const MenuButton = memo((_Cb) => {
         }
       },
       label,
+      shadow: DepthShadow.High,
       size: __spreadValues({
         height: Sizes.Default
       }, size),
@@ -40292,8 +40246,8 @@ const MenuButton = memo((_Cb) => {
     }))]
   }));
 });
-const DataGrid = memo((_Eb) => {
-  var _Fb = _Eb, {
+const DataGrid = memo((_Cb) => {
+  var _Db = _Cb, {
     background = {},
     borderRadius = {},
     className = "",
@@ -40308,9 +40262,10 @@ const DataGrid = memo((_Eb) => {
     model,
     onItemClick,
     shadow = DepthShadow.Highest,
+    size = {},
     states = {},
     template
-  } = _Fb, props = __objRest(_Fb, [
+  } = _Db, props = __objRest(_Db, [
     "background",
     "borderRadius",
     "className",
@@ -40325,12 +40280,13 @@ const DataGrid = memo((_Eb) => {
     "model",
     "onItemClick",
     "shadow",
+    "size",
     "states",
     "template"
   ]);
-  var _a2, _b, _c;
+  var _a2, _b, _c, _d, _e2, _f;
   const [searchTerm, setSearchTerm] = useState("");
-  const [hoveredRow, setHoveredRow] = useState();
+  useState();
   const MIN_COLUMN_WIDTH = 150;
   const MAX_COLUMN_WIDTH = 300;
   if (!columns) {
@@ -40353,6 +40309,7 @@ const DataGrid = memo((_Eb) => {
       })
     }));
   }
+  const minHeight = `calc(${(_a2 = data2 == null ? void 0 : data2.length) != null ? _a2 : 1 + 1} * ${Sizes.Large})`;
   return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     alignment: {
       vertical: AlignVertical.Top
@@ -40363,79 +40320,73 @@ const DataGrid = memo((_Eb) => {
     }, borderRadius),
     className: `${className} data-grid`,
     shadow,
+    size: __spreadValues({}, size),
     states
   }, props), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
       borderRadius,
       states: {
         state: {
-          visible: (_b = (_a2 = states.state) == null ? void 0 : _a2.loading) != null ? _b : false
+          visible: (_c = (_b = states.state) == null ? void 0 : _b.loading) != null ? _c : false
         }
       }
     }), header && Object.keys(header).length > 0 && /* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
-        orientation: Orientation.Horizontal
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.Center
       },
       background: {
-        color: BackgroundColors.DataGridHeader
+        color: BackgroundColors.Lighter
       },
-      borderRadius: {
-        topLeft: Amount.Less,
-        topRight: Amount.Less
-      },
+      borderRadius: __spreadValues({
+        topLeft: Amount.Least,
+        topRight: Amount.Least
+      }, borderRadius),
       className: "data-grid-header",
       padding: {
-        all: Amount.Less
+        left: Amount.Less,
+        right: Amount.Less
       },
-      children: [header.search && /* @__PURE__ */ jsx$2(Container$8, {
-        size: header.search.size,
-        children: /* @__PURE__ */ jsx$2(SearchInput, {
-          name: "search-input",
-          events: {
-            input: {
-              onValueChange: ({
-                value: value2
-              }) => {
-                setSearchTerm(value2 != null ? value2 : "");
-              }
-            }
-          },
-          placeholder: header.search.placeholder,
-          size: header.search.size
-        })
-      }), /* @__PURE__ */ jsx$2(Spacer, {}), header.export && /* @__PURE__ */ jsx$2(Container$8, {
-        size: header.export.size,
-        children: /* @__PURE__ */ jsx$2(MenuButton, {
-          menu: [{
-            events: {
-              mouse: {
-                onClick: () => downloadDataAsFile({
-                  data: formatObjectToCSVData({
-                    objectType: "EXPENSE"
-                  }),
-                  fileName: "expenses"
-                })
-              }
-            },
-            label: "Export to CSV"
-          }],
-          label: "Export",
-          size: header.export.size
-        })
-      }), header.create && /* @__PURE__ */ jsx$2(Button$1, {
+      size: {
+        height: Sizes.Larger
+      },
+      children: [header.search && /* @__PURE__ */ jsx$2(SearchInput, __spreadValues({
+        name: "search-input",
         events: {
-          mouse: {
-            onClick: header.create.onClick
+          input: {
+            onValueChange: ({
+              value: value2
+            }) => {
+              setSearchTerm(value2 != null ? value2 : "");
+            }
           }
         },
-        type: ButtonType.Secondary,
-        size: header.create.size,
+        placeholder: header.search.placeholder,
+        size: header.search.size
+      }, header.search)), /* @__PURE__ */ jsx$2(Spacer, {}), header.export && /* @__PURE__ */ jsx$2(MenuButton, __spreadValues({
+        menu: [{
+          events: {
+            mouse: {
+              onClick: () => downloadDataAsFile({
+                data: formatObjectToCSVData({
+                  objectType: "EXPENSE"
+                }),
+                fileName: "expenses"
+              })
+            }
+          },
+          label: "Export to CSV"
+        }],
+        label: "Export",
+        size: header.export.size
+      }, header.export)), header.create && /* @__PURE__ */ jsx$2(Button$1, __spreadProps(__spreadValues({
+        lineHeight: Sizes.Small,
+        textSize: (_d = header.create.textSize) != null ? _d : TextSize.Small,
+        type: (_e2 = header.create.type) != null ? _e2 : ButtonType.Default
+      }, header.create), {
         children: header.create.label
-      })]
+      }))]
     }), /* @__PURE__ */ jsx$2(Container$8, {
-      alignment: {
-        overflow: Overflow.ScrollBoth
-      },
       borderRadius: !header ? __spreadValues({
         all: Amount.Least
       }, borderRadius) : void 0,
@@ -40452,34 +40403,27 @@ const DataGrid = memo((_Eb) => {
             orientation: Orientation.Horizontal
           },
           background: {
-            color: BackgroundColors.DataGridColumnHeaders
+            color: BackgroundColors.Default
           },
+          borderRadius: !header ? {
+            topLeft: Amount.Least,
+            topRight: Amount.Least
+          } : void 0,
           className: "data-grid-headers",
-          padding: {
-            bottom: Amount.Least,
-            top: Amount.Least
-          },
           children: columns.map((column, key) => {
-            var _a3, _b2, _c2, _d, _e2;
+            var _a3, _b2, _c2, _d2, _e3;
             return /* @__PURE__ */ jsx$2(Container$8, {
               alignment: {
                 horizontal: column.align,
                 orientation: Orientation.Horizontal,
                 vertical: AlignVertical.Center
               },
-              background: {
-                color: BackgroundColors.DataGridColumnHeaders
-              },
               border: key !== columns.length - 1 ? {
                 right: {
-                  color: BorderColors.Default,
+                  color: BorderColors.Light,
                   style: BorderStyle.Solid,
                   width: 1
                 }
-              } : void 0,
-              borderRadius: !header ? {
-                topLeft: header ? 0 : Amount.Least,
-                topRight: header ? 0 : Amount.Least
               } : void 0,
               className: "data-grid-header-cell",
               padding: {
@@ -40488,8 +40432,8 @@ const DataGrid = memo((_Eb) => {
               },
               size: {
                 maxWidth: (_b2 = (_a3 = column.size) == null ? void 0 : _a3.maxWidth) != null ? _b2 : MAX_COLUMN_WIDTH,
-                minWidth: (_d = (_c2 = column.size) == null ? void 0 : _c2.minWidth) != null ? _d : MIN_COLUMN_WIDTH,
-                width: (_e2 = column.size) == null ? void 0 : _e2.width
+                minWidth: (_d2 = (_c2 = column.size) == null ? void 0 : _c2.minWidth) != null ? _d2 : MIN_COLUMN_WIDTH,
+                width: (_e3 = column.size) == null ? void 0 : _e3.width
               },
               children: /* @__PURE__ */ jsx$2(Label, {
                 alignment: {
@@ -40497,7 +40441,7 @@ const DataGrid = memo((_Eb) => {
                   vertical: AlignVertical.Center
                 },
                 lineHeight: Sizes.Large,
-                textColor: TextColors.DataGridColumnHeaders,
+                textColor: TextColors.Light,
                 textSize: TextSize.Smaller,
                 children: column.label
               })
@@ -40512,61 +40456,75 @@ const DataGrid = memo((_Eb) => {
             bottomRight: Amount.Least
           },
           className: "data-grid-rows",
-          children: data2 && data2.map((row, key) => {
-            return /* @__PURE__ */ jsx$2(Container$8, {
-              alignment: {
-                orientation: Orientation.Horizontal
-              },
-              background: {
-                color: BackgroundColors.DataGridCell
-              },
-              className: "data-grid-row",
-              cursor: Cursor.Pointer,
-              events: {
-                mouse: {
-                  onClick: () => {
-                    if (onItemClick)
-                      onItemClick(row);
+          size: {
+            minHeight
+          },
+          children: /* @__PURE__ */ jsx$2(Scrollable, {
+            size: {
+              minHeight
+            },
+            children: data2 && data2.map((row, key) => {
+              return /* @__PURE__ */ jsx$2(Container$8, {
+                alignment: {
+                  orientation: Orientation.Horizontal
+                },
+                background: {
+                  color: BackgroundColors.DataGridCell
+                },
+                borderRadius: data2.length === key + 1 ? {
+                  bottomLeft: Amount.Least,
+                  bottomRight: Amount.Least
+                } : void 0,
+                className: "data-grid-row",
+                cursor: Cursor.Pointer,
+                events: {
+                  mouse: {
+                    onClick: () => {
+                      if (onItemClick)
+                        onItemClick(row);
+                    }
                   }
-                }
-              },
-              padding: {
-                all: Amount.Least
-              },
-              states: {
-                hovered: {
-                  background: {
-                    color: BackgroundColors.Primary
+                },
+                states: {
+                  hovered: {
+                    background: {
+                      color: BackgroundColors.Primary
+                    }
                   }
-                }
-              },
-              children: columns.map((column, columnKey) => {
-                var _a3, _b2, _c2, _d, _e2;
-                return /* @__PURE__ */ jsx$2(DataGridCell, {
-                  alignment: {
-                    horizontal: column.align,
-                    orientation: Orientation.Horizontal,
-                    vertical: AlignVertical.Center
-                  },
-                  fieldName: column.field,
-                  lineHeight: Sizes.Large,
-                  lineWrap: true,
-                  model,
-                  textColor: hoveredRow === key ? TextColors.PrimaryContrast : TextColors.DataGridCell,
-                  type: column.type,
-                  value: fetchFromObject(row, column.field),
-                  size: {
-                    maxWidth: (_b2 = (_a3 = column.size) == null ? void 0 : _a3.maxWidth) != null ? _b2 : MAX_COLUMN_WIDTH,
-                    minWidth: (_d = (_c2 = column.size) == null ? void 0 : _c2.minWidth) != null ? _d : MIN_COLUMN_WIDTH,
-                    width: (_e2 = column.size) == null ? void 0 : _e2.width
-                  }
-                });
-              })
-            }, key);
+                },
+                children: columns.map((column, columnKey) => {
+                  var _a3, _b2, _c2, _d2, _e3;
+                  return /* @__PURE__ */ jsx$2(DataGridCell, {
+                    alignment: {
+                      horizontal: column.align,
+                      orientation: Orientation.Horizontal,
+                      vertical: AlignVertical.Center
+                    },
+                    fieldName: column.field,
+                    lineHeight: Sizes.Large,
+                    lineWrap: true,
+                    model,
+                    size: {
+                      maxWidth: (_b2 = (_a3 = column.size) == null ? void 0 : _a3.maxWidth) != null ? _b2 : MAX_COLUMN_WIDTH,
+                      minWidth: (_d2 = (_c2 = column.size) == null ? void 0 : _c2.minWidth) != null ? _d2 : MIN_COLUMN_WIDTH,
+                      width: (_e3 = column.size) == null ? void 0 : _e3.width
+                    },
+                    states: {
+                      hovered: {
+                        textColor: TextColors.PrimaryContrast
+                      }
+                    },
+                    textColor: TextColors.Default,
+                    type: column.type,
+                    value: fetchFromObject(row, column.field)
+                  }, columnKey);
+                })
+              }, key);
+            })
           })
         })]
       }) : /* @__PURE__ */ jsx$2(Container$8, {
-        children: !((_c = states.state) == null ? void 0 : _c.loading) && data2 && data2.length === 0 ? /* @__PURE__ */ jsx$2(NoResults, {
+        children: !((_f = states.state) == null ? void 0 : _f.loading) === true && data2 && data2.length === 0 ? /* @__PURE__ */ jsx$2(NoResults, {
           as: Container$8,
           children: /* @__PURE__ */ jsx$2(Label, {
             children: "No results"
@@ -40602,14 +40560,14 @@ const NoResults = styled.div.withConfig({
   displayName: "NoResults",
   componentId: "sc-s798s5-0"
 })(["color:#9b9b9b;font-size:13px;font-weight:500;padding:50px 0;text-align:center;"]);
-const BooleanLabel = memo((_Gb) => {
-  var _Hb = _Gb, {
+const BooleanLabel = memo((_Eb) => {
+  var _Fb = _Eb, {
     icon: icon2,
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _Hb, props = __objRest(_Hb, [
+  } = _Fb, props = __objRest(_Fb, [
     "icon",
     "lineHeight",
     "textColor",
@@ -40628,7 +40586,30 @@ const BooleanLabel = memo((_Gb) => {
     }), value2]
   }));
 });
-const ColorLabel = memo((_Ib) => {
+const ColorLabel = memo((_Gb) => {
+  var _Hb = _Gb, {
+    icon: icon2,
+    lineHeight = Sizes.Default,
+    textColor = TextColors.Lighter,
+    textSize = TextSize.Default,
+    value: value2
+  } = _Hb, props = __objRest(_Hb, [
+    "icon",
+    "lineHeight",
+    "textColor",
+    "textSize",
+    "value"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    icon: icon2,
+    lineHeight,
+    textColor,
+    textSize
+  }, props), {
+    children: value2
+  }));
+});
+const EmailAddressLabel = memo((_Ib) => {
   var _Jb = _Ib, {
     icon: icon2,
     lineHeight = Sizes.Default,
@@ -40651,7 +40632,7 @@ const ColorLabel = memo((_Ib) => {
     children: value2
   }));
 });
-const EmailAddressLabel = memo((_Kb) => {
+const PhoneNumberLabel = memo((_Kb) => {
   var _Lb = _Kb, {
     icon: icon2,
     lineHeight = Sizes.Default,
@@ -40674,38 +40655,15 @@ const EmailAddressLabel = memo((_Kb) => {
     children: value2
   }));
 });
-const PhoneNumberLabel = memo((_Mb) => {
+const ProgressLabel = memo((_Mb) => {
   var _Nb = _Mb, {
-    icon: icon2,
-    lineHeight = Sizes.Default,
-    textColor = TextColors.Lighter,
-    textSize = TextSize.Default,
-    value: value2
-  } = _Nb, props = __objRest(_Nb, [
-    "icon",
-    "lineHeight",
-    "textColor",
-    "textSize",
-    "value"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    icon: icon2,
-    lineHeight,
-    textColor,
-    textSize
-  }, props), {
-    children: value2
-  }));
-});
-const ProgressLabel = memo((_Ob) => {
-  var _Pb = _Ob, {
     color,
     icon: icon2,
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = _Pb, props = __objRest(_Pb, [
+  } = _Nb, props = __objRest(_Nb, [
     "color",
     "icon",
     "lineHeight",
@@ -40730,7 +40688,30 @@ const ProgressLabel = memo((_Ob) => {
     })
   }));
 });
-const CountryLabel = memo((_Qb) => {
+const CountryLabel = memo((_Ob) => {
+  var _Pb = _Ob, {
+    icon: icon2,
+    lineHeight = Sizes.Default,
+    textColor = TextColors.Lighter,
+    textSize = TextSize.Default,
+    value: value2
+  } = _Pb, props = __objRest(_Pb, [
+    "icon",
+    "lineHeight",
+    "textColor",
+    "textSize",
+    "value"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    icon: icon2,
+    lineHeight,
+    textColor,
+    textSize
+  }, props), {
+    children: value2
+  }));
+});
+const LanguageLabel = memo((_Qb) => {
   var _Rb = _Qb, {
     icon: icon2,
     lineHeight = Sizes.Default,
@@ -40753,35 +40734,12 @@ const CountryLabel = memo((_Qb) => {
     children: value2
   }));
 });
-const LanguageLabel = memo((_Sb) => {
+const PersonLabel = memo((_Sb) => {
   var _Tb = _Sb, {
-    icon: icon2,
-    lineHeight = Sizes.Default,
-    textColor = TextColors.Lighter,
-    textSize = TextSize.Default,
-    value: value2
-  } = _Tb, props = __objRest(_Tb, [
-    "icon",
-    "lineHeight",
-    "textColor",
-    "textSize",
-    "value"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    icon: icon2,
-    lineHeight,
-    textColor,
-    textSize
-  }, props), {
-    children: value2
-  }));
-});
-const PersonLabel = memo((_Ub) => {
-  var _Vb = _Ub, {
     image,
     name: name2,
     textSize = TextSize.Large
-  } = _Vb, props = __objRest(_Vb, [
+  } = _Tb, props = __objRest(_Tb, [
     "image",
     "name",
     "textSize"
@@ -40865,12 +40823,12 @@ const UserLabel = memo(({
     })]
   });
 });
-const MarkdownEditor = memo((_Wb) => {
-  var props = __objRest(_Wb, []);
+const MarkdownEditor = memo((_Ub) => {
+  var props = __objRest(_Ub, []);
   return /* @__PURE__ */ jsx$2("div", {});
 });
-const ObjectPropertiesView = memo((_Xb) => {
-  var _Yb = _Xb, {
+const ObjectPropertiesView = memo((_Vb) => {
+  var _Wb = _Vb, {
     background = {},
     borderRadius = {},
     className = "",
@@ -40878,7 +40836,7 @@ const ObjectPropertiesView = memo((_Xb) => {
     properties: properties2,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default
-  } = _Yb, props = __objRest(_Yb, [
+  } = _Wb, props = __objRest(_Wb, [
     "background",
     "borderRadius",
     "className",
@@ -41037,13 +40995,13 @@ const ObjectPropertiesView = memo((_Xb) => {
     })
   }));
 });
-const StaticTypeLabel = memo((_Zb) => {
-  var __b = _Zb, {
+const StaticTypeLabel = memo((_Xb) => {
+  var _Yb = _Xb, {
     lineHeight = Sizes.Default,
     textColor = TextColors.Lighter,
     textSize = TextSize.Default,
     value: value2
-  } = __b, props = __objRest(__b, [
+  } = _Yb, props = __objRest(_Yb, [
     "lineHeight",
     "textColor",
     "textSize",
@@ -41161,12 +41119,12 @@ const ActivityFeedItem = memo(({
     })]
   });
 });
-const ActivityFeed = memo((_$b) => {
-  var _ac = _$b, {
+const ActivityFeed = memo((_Zb) => {
+  var __b = _Zb, {
     activities,
     className = "",
     dateFormat = DateTime.DATE_MED
-  } = _ac, props = __objRest(_ac, [
+  } = __b, props = __objRest(__b, [
     "activities",
     "className",
     "dateFormat"
@@ -41259,14 +41217,14 @@ const Content$1 = styled.div.withConfig({
 const InputHelper = memo(() => {
   return /* @__PURE__ */ jsx$2(Fragment, {});
 });
-const Checkbox = memo((_bc) => {
-  var _cc = _bc, {
+const Checkbox = memo((_$b) => {
+  var _ac = _$b, {
     className = "",
     defaultValue,
     events = {},
     size = {},
     validation = {}
-  } = _cc, props = __objRest(_cc, [
+  } = _ac, props = __objRest(_ac, [
     "className",
     "defaultValue",
     "events",
@@ -52479,11 +52437,11 @@ function rgbHex(red, green, blue, alpha) {
   return (blue | green << 8 | red << 16 | 1 << 24).toString(16).slice(1) + alpha;
 }
 const defaultColors = ["244,67,54", "233,30,99", "156,39,176", "103,58,183", "63,81,181", "33,150,243", "3,169,244", "0,188,212", "0,150,136", "76,175,80", "139,195,74", "205,220,57", "255,235,59", "255,193,7", "255,152,0", "255,87,34", "121,85,72", "96,125,139"];
-const ColorInput = memo((_dc) => {
-  var _ec = _dc, {
+const ColorInput = memo((_bc) => {
+  var _cc = _bc, {
     defaultValue,
     events = {}
-  } = _ec, props = __objRest(_ec, [
+  } = _cc, props = __objRest(_cc, [
     "defaultValue",
     "events"
   ]);
@@ -52576,15 +52534,15 @@ const DynamicInput = memo(({
   };
   return getInputComponentByType();
 });
-const StreetAddressInput = memo((_fc) => {
-  var props = __objRest(_fc, []);
+const StreetAddressInput = memo((_dc) => {
+  var props = __objRest(_dc, []);
   return /* @__PURE__ */ jsx$2(TextInput, __spreadValues({}, props));
 });
-const ListItem = memo((_gc) => {
-  var _hc = _gc, {
+const ListItem = memo((_ec) => {
+  var _fc = _ec, {
     as = "li",
     children
-  } = _hc, props = __objRest(_hc, [
+  } = _fc, props = __objRest(_fc, [
     "as",
     "children"
   ]);
@@ -52601,11 +52559,11 @@ const ListItem = memo((_gc) => {
     children
   }));
 });
-const OrderedList = memo((_ic) => {
-  var _jc = _ic, {
+const OrderedList = memo((_gc) => {
+  var _hc = _gc, {
     as = "ul",
     children
-  } = _jc, props = __objRest(_jc, [
+  } = _hc, props = __objRest(_hc, [
     "as",
     "children"
   ]);
@@ -52615,12 +52573,12 @@ const OrderedList = memo((_ic) => {
     children
   }));
 });
-const UnorderedList = memo((_kc) => {
-  var _lc = _kc, {
+const UnorderedList = memo((_ic) => {
+  var _jc = _ic, {
     as = "ul",
     items,
     margin = {}
-  } = _lc, props = __objRest(_lc, [
+  } = _jc, props = __objRest(_jc, [
     "as",
     "items",
     "margin"
@@ -52649,11 +52607,11 @@ const UnorderedList = memo((_kc) => {
     }, index))
   }));
 });
-const Video = memo((_mc) => {
-  var _nc = _mc, {
+const Video = memo((_kc) => {
+  var _lc = _kc, {
     className = "",
     url
-  } = _nc, props = __objRest(_nc, [
+  } = _lc, props = __objRest(_lc, [
     "className",
     "url"
   ]);
@@ -52669,8 +52627,8 @@ const VideoElement = styled.video.withConfig({
   displayName: "VideoElement",
   componentId: "sc-1ai2qam-0"
 })([""]);
-const MediaGridItem = memo((_oc) => {
-  var _pc = _oc, {
+const MediaGridItem = memo((_mc) => {
+  var _nc = _mc, {
     alignment = {},
     background = {},
     borderRadius = {},
@@ -52681,7 +52639,7 @@ const MediaGridItem = memo((_oc) => {
     title,
     url,
     video
-  } = _pc, props = __objRest(_pc, [
+  } = _nc, props = __objRest(_nc, [
     "alignment",
     "background",
     "borderRadius",
@@ -52741,8 +52699,8 @@ const MediaGridItem = memo((_oc) => {
     children: content
   }));
 });
-const MediaGrid = memo((_qc) => {
-  var _rc = _qc, {
+const MediaGrid = memo((_oc) => {
+  var _pc = _oc, {
     borderRadius = {},
     children,
     columns = 5,
@@ -52750,7 +52708,7 @@ const MediaGrid = memo((_qc) => {
     items = [],
     size = {},
     states = {}
-  } = _rc, props = __objRest(_rc, [
+  } = _pc, props = __objRest(_pc, [
     "borderRadius",
     "children",
     "columns",
@@ -52808,13 +52766,13 @@ const MediaGrid = memo((_qc) => {
     })]
   }));
 });
-const MediaPreview = memo((_sc) => {
-  var _tc = _sc, {
+const MediaPreview = memo((_qc) => {
+  var _rc = _qc, {
     alignment = {},
     borderRadius = {},
     className = "",
     media
-  } = _tc, props = __objRest(_tc, [
+  } = _rc, props = __objRest(_rc, [
     "alignment",
     "borderRadius",
     "className",
@@ -52864,8 +52822,8 @@ styled.svg.withConfig({
   displayName: "SvgMedia",
   componentId: "sc-1xm40ad-0"
 })(["align-items:center;display:flex;justify-content:center;svg{fill:rgb(", ");}"], (props) => props.color);
-const Svg = memo((_uc) => {
-  var _vc = _uc, {
+const Svg = memo((_sc) => {
+  var _tc = _sc, {
     as = "span",
     children,
     className = "",
@@ -52873,7 +52831,7 @@ const Svg = memo((_uc) => {
       height: Sizes.Small,
       width: Sizes.Small
     }
-  } = _vc, props = __objRest(_vc, [
+  } = _tc, props = __objRest(_tc, [
     "as",
     "children",
     "className",
@@ -52887,8 +52845,8 @@ const Svg = memo((_uc) => {
     children
   }));
 });
-const MessagePreview = memo((_wc) => {
-  var _xc = _wc, {
+const MessagePreview = memo((_uc) => {
+  var _vc = _uc, {
     background = {},
     body,
     borderRadius = {},
@@ -52896,7 +52854,7 @@ const MessagePreview = memo((_wc) => {
     date,
     subject,
     sender
-  } = _xc, props = __objRest(_xc, [
+  } = _vc, props = __objRest(_vc, [
     "background",
     "body",
     "borderRadius",
@@ -52979,14 +52937,14 @@ const MessagePreview = memo((_wc) => {
     })]
   }));
 });
-const ConversationList = memo((_yc) => {
-  var _zc = _yc, {
+const ConversationList = memo((_wc) => {
+  var _xc = _wc, {
     alignment = {},
     background = {},
     borderRadius = {},
     className = "",
     size = {}
-  } = _zc, props = __objRest(_zc, [
+  } = _xc, props = __objRest(_xc, [
     "alignment",
     "background",
     "borderRadius",
@@ -53035,8 +52993,8 @@ const ConversationList = memo((_yc) => {
     })
   }));
 });
-const NavigationMenu = memo((_Ac) => {
-  var _Bc = _Ac, {
+const NavigationMenu = memo((_yc) => {
+  var _zc = _yc, {
     alignment = {},
     background = {},
     className = "",
@@ -53046,7 +53004,7 @@ const NavigationMenu = memo((_Ac) => {
     padding = {},
     size = {},
     states = {}
-  } = _Bc, props = __objRest(_Bc, [
+  } = _zc, props = __objRest(_zc, [
     "alignment",
     "background",
     "className",
@@ -53131,8 +53089,8 @@ const NavigationMenu = memo((_Ac) => {
     })
   }));
 });
-const ConversationNavigation = memo((_Cc) => {
-  var props = __objRest(_Cc, []);
+const ConversationNavigation = memo((_Ac) => {
+  var props = __objRest(_Ac, []);
   const navigate = useNavigate();
   return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({}, props), {
     children: [/* @__PURE__ */ jsx$2(Button$1, {
@@ -53227,8 +53185,8 @@ const Message$1 = memo(({
 }) => {
   return /* @__PURE__ */ jsx$2(Container$8, {});
 });
-const MessageComposer = memo((_Dc) => {
-  var props = __objRest(_Dc, []);
+const MessageComposer = memo((_Bc) => {
+  var props = __objRest(_Bc, []);
   return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     background: {
       color: BackgroundColors.Default
@@ -53309,6 +53267,44 @@ const MessageComposer = memo((_Dc) => {
         children: "Send"
       })
     })]
+  }));
+});
+const Backdrop = memo((_Cc) => {
+  var _Dc = _Cc, {
+    as = "div",
+    background = {},
+    children,
+    className = "",
+    position = {},
+    states = {}
+  } = _Dc, props = __objRest(_Dc, [
+    "as",
+    "background",
+    "children",
+    "className",
+    "position",
+    "states"
+  ]);
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
+    as,
+    background: __spreadValues({
+      color: BackgroundColors.Darker
+    }, background),
+    className: `${className} backdrop`,
+    position: __spreadValues({
+      behavior: PositionBehavior.Absolute,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      top: 0
+    }, position),
+    states: __spreadValues({
+      state: __spreadValues({
+        visible: false
+      }, states.state)
+    }, states)
+  }, props), {
+    children
   }));
 });
 const Modal = memo(({

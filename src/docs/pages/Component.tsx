@@ -206,10 +206,6 @@ export const ComponentPage = memo((): ReactElement => {
                         }}
                       >
                         <Container
-                          alignment={{
-                            horizontal: AlignHorizontal.Center,
-                            vertical: AlignVertical.Center,
-                          }}
                           background={{ color: BackgroundColors.Lighter }}
                           borderRadius={{ all: Amount.Least }}
                           className="component-example-container"
@@ -217,17 +213,12 @@ export const ComponentPage = memo((): ReactElement => {
                           margin={{ bottom: Amount.Default }}
                           padding={{ all: Amount.All }}
                           shadow={DepthShadow.Low}
-                          size={{
-                            fill: Fill.Horizontal,
-                          }}
                         >
-                          <Container>
-                            {RenderComponent ? (
-                              <RenderComponent />
-                            ) : (
-                              <matchedRoute.component {...properties} />
-                            )}
-                          </Container>
+                          {RenderComponent ? (
+                            <RenderComponent />
+                          ) : (
+                            <matchedRoute.component {...properties} />
+                          )}
                         </Container>
 
                         <Tabs>

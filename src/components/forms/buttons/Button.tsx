@@ -197,7 +197,11 @@ export const Button = memo(
         form={form}
         padding={
           typeof children === 'string'
-            ? { left: lineHeight, right: lineHeight, ...padding }
+            ? {
+                left: `calc((${lineHeight} / 4) * 2)`,
+                right: `calc((${lineHeight} / 4) * 2)`,
+                ...padding,
+              }
             : padding
         }
         // shadow={{
@@ -227,7 +231,6 @@ export const Button = memo(
       >
         {typeof children === 'string' ? (
           <Label
-            // cursor={cursor}
             icon={icon}
             lineHeight={lineHeight}
             textAlign={textAlign}
@@ -239,7 +242,6 @@ export const Button = memo(
             textSize={textSize}
             textWeight={textWeight}
             states={states}
-            // {...props}
           >
             {children}
           </Label>

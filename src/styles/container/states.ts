@@ -68,7 +68,7 @@ export function getHiddenStateStyles(): SimpleInterpolation {
 export function getContainerStatesStyles(
   props: ContainerProps,
 ): SimpleInterpolation {
-  const { states, ...otherProps } = props;
+  const { animations, events, states, ...otherProps } = props;
 
   if (!states) {
     return;
@@ -81,6 +81,7 @@ export function getContainerStatesStyles(
     error,
     focused,
     hovered,
+    hidden,
     loaded,
     loading,
     on,
@@ -110,17 +111,20 @@ export function getContainerStatesStyles(
       ${getContainerStyles({ ...otherProps, ...current })}
     `}
 
-    ${disabled && state?.disabled
-      ? css`
-          ${getContainerStyles({ ...otherProps, ...disabled })}
-          ${getDisabledStateStyles()}
-        `
-      : css`
-          &:disabled {
+    ${disabled &&
+    css`
+      ${state?.disabled
+        ? css`
             ${getContainerStyles({ ...otherProps, ...disabled })}
             ${getDisabledStateStyles()}
-          }
-        `}
+          `
+        : css`
+            &:disabled {
+              ${getContainerStyles({ ...otherProps, ...disabled })}
+              ${getDisabledStateStyles()}
+            }
+          `}
+    `}
 
     ${error &&
     state?.error &&
@@ -188,10 +192,10 @@ export function getContainerStatesStyles(
       ${getVisibleStateStyles()}
     `}
 
-    ${visible &&
-    state?.visible === false &&
+    ${hidden &&
+    (state?.visible === false || state?.hidden) &&
     css`
-      ${getContainerStyles({ ...otherProps, ...visible })}
+      ${getContainerStyles({ ...otherProps, ...hidden })}
       ${getHiddenStateStyles()}
     `}
 

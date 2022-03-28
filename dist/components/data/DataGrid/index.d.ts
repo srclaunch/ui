@@ -1,7 +1,10 @@
-import { ReactElement, SyntheticEvent } from 'react';
+import { ReactElement } from 'react';
 import { Model, Primitives } from '@srclaunch/types';
 import { Size, AlignHorizontal } from '../../../types';
 import { ContainerProps } from '../../layout/Container';
+import { SearchInputProps } from '../../forms/inputs/text/SearchInput';
+import { MenuButtonProps } from '../../forms/buttons/MenuButton';
+import { ButtonProps } from '../../forms/buttons/Button';
 export declare enum DataGridDisplayType {
     Card = "card",
     Table = "table"
@@ -22,22 +25,9 @@ export declare type DataGridProps = ContainerProps & {
     data?: Record<string, Primitives | any>[];
     display?: DataGridDisplayType;
     header?: {
-        create?: {
-            label: string;
-            onClick: (e: SyntheticEvent) => void;
-            size?: Size;
-        };
-        search?: {
-            placeholder?: string;
-            onChange?: (event: SyntheticEvent<HTMLInputElement>) => void;
-            size?: Size;
-            value?: string;
-        };
-        export?: {
-            label?: string;
-            onClick?: (e: SyntheticEvent) => void;
-            size?: Size;
-        };
+        create?: ButtonProps;
+        search?: SearchInputProps;
+        export?: MenuButtonProps;
     };
     hideOnProp?: string;
     loading?: boolean;
@@ -53,6 +43,6 @@ export declare type DataGridProps = ContainerProps & {
         } & ContainerProps) => ReactElement;
     };
 };
-export declare const DataGrid: import("react").MemoExoticComponent<({ background, borderRadius, className, columns, columnCount, data, depth, display, header, hideOnProp, loaded, model, onItemClick, shadow, states, template, ...props }: DataGridProps) => ReactElement>;
+export declare const DataGrid: import("react").MemoExoticComponent<({ background, borderRadius, className, columns, columnCount, data, depth, display, header, hideOnProp, loaded, model, onItemClick, shadow, size, states, template, ...props }: DataGridProps) => ReactElement>;
 export default DataGrid;
 //# sourceMappingURL=index.d.ts.map

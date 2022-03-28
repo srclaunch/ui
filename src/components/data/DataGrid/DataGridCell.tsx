@@ -38,37 +38,19 @@ export const DataGridCell = memo(
     value,
     ...props
   }: DataGridCellProps): ReactElement => {
-    const { alignment, textColor, textOverflow, textSize, textWeight, size } =
-      props;
-    return (
-      <Container
-        alignment={{
-          orientation: Orientation.Horizontal,
-          vertical: AlignVertical.Center,
-        }}
-        as={as}
-        padding={{
-          left: Amount.Less,
-          right: Amount.Less,
-        }}
-        size={size}
-        {...props}
-      >
-        {getLabelByFieldType({
-          fieldName,
-          model,
-          props: {
-            alignment,
-
-            textColor,
-            textOverflow,
-            textSize,
-            textWeight,
-          },
-          type,
-          value,
-        })}
-      </Container>
-    );
+    console.log('props', props);
+    return getLabelByFieldType({
+      fieldName,
+      model,
+      props: {
+        padding: {
+          left: Amount.Default,
+          right: Amount.Default,
+        },
+        ...props,
+      },
+      type,
+      value,
+    });
   },
 );

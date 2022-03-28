@@ -1,10 +1,4 @@
-import {
-  memo,
-  forwardRef,
-  useState,
-  PropsWithChildren,
-  ReactElement,
-} from 'react';
+import { memo, useState, PropsWithChildren, ReactElement } from 'react';
 import styled from 'styled-components';
 import { getContainerStyles } from '../../styles/container';
 import { getContainerStatesStyles } from '../../styles/container/states';
@@ -30,13 +24,11 @@ import {
   Position,
   Visibility,
   Fill,
-  Overflow,
 } from '../../types';
 import { getEventHandlers } from '../../lib/events';
 import { ReactEventHandler } from 'react';
 import { useEffect } from 'react';
 import { Transform } from '../../types/appearance/transform';
-import { getAnimationStyles } from '../../styles/container/animation';
 
 export type ContainerProps = PropsWithChildren<
   CommonComponentProps & {
@@ -87,7 +79,7 @@ export const Container = memo(
     return (
       <Wrapper
         alignment={{
-          fill: Fill.Horizontal,
+          fill: Fill.Both,
           horizontal: AlignHorizontal.Stretch,
           orientation: Orientation.Vertical,
           vertical: AlignVertical.Stretch,

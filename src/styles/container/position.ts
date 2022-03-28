@@ -7,12 +7,7 @@ export function getPositionStyles(position?: Position): SimpleInterpolation {
   const { behavior, bottom, left, right, top } = position || {};
 
   return css`
-    position: relative;
-
-    ${behavior &&
-    css`
-      position: ${behavior};
-    `}
+    position: ${behavior ?? 'relative'};
 
     ${(bottom || bottom === 0) &&
     css`
