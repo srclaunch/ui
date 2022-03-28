@@ -40362,7 +40362,11 @@ const DataGrid = memo((_Cb) => {
         size: __spreadValues({
           width: 160
         }, header.search.size)
-      }, header.search)), header.export && /* @__PURE__ */ jsx$2(MenuButton, __spreadValues({
+      }, header.search)), /* @__PURE__ */ jsx$2(Spacer, {
+        size: {
+          fill: Fill.Horizontal
+        }
+      }), header.export && /* @__PURE__ */ jsx$2(MenuButton, __spreadValues({
         menu: [{
           events: {
             mouse: {

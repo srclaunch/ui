@@ -69,7 +69,6 @@ export const Label = memo(
           textOverflow={textOverflow}
           textSize={textSize}
           textWeight={textWeight}
-          // {...props}
         >
           {children}
         </Text>

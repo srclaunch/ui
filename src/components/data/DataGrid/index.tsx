@@ -25,6 +25,7 @@ import {
   AlignVertical,
   AlignHorizontal,
   TextSize,
+  Fill,
 } from '../../../types';
 import { fetchFromObject } from '../../../lib/data/object';
 import { Container, ContainerProps } from '../../layout/Container';
@@ -211,6 +212,12 @@ export const DataGrid = memo(
                 {...header.search}
               />
             )}
+
+            <Spacer
+              size={{
+                fill: Fill.Horizontal,
+              }}
+            />
 
             {header.export && (
               <MenuButton
