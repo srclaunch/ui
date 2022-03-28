@@ -1,5 +1,11 @@
 import { ReactElement } from 'react';
-import { BackgroundColors, Fill, Overflow } from '../../types';
+import {
+  AlignHorizontal,
+  AlignVertical,
+  BackgroundColors,
+  Fill,
+  Overflow,
+} from '../../types';
 import { Container, ContainerProps } from './Container';
 
 type ScrollableProps = ContainerProps & {
@@ -16,7 +22,9 @@ export const Scrollable = ({
   return (
     <Container
       alignment={{
+        horizontal: AlignHorizontal.Stretch,
         overflow: Overflow.ScrollVertical,
+        vertical: AlignVertical.Stretch,
         ...alignment,
       }}
       background={{

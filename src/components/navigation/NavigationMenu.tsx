@@ -1,22 +1,18 @@
 import { memo, ReactElement } from 'react';
 
-import { Label } from '../..';
 import {
   AlignHorizontal,
-  Alignment,
   AlignVertical,
   Amount,
   BackgroundColors,
   Fill,
-  Overflow,
+  Orientation,
   Sizes,
   TextColors,
-  TextSize,
-  TextWeight,
 } from '../../types';
-import { Container, ContainerProps } from '../layout/Container';
+import { Container } from '../layout/Container';
 import { Scrollable } from '../layout/Scrollable';
-import { Menu, MenuProps } from '../menus/Menu';
+import { MenuProps } from '../menus/Menu';
 import { NavigationLink } from './NavigationLink';
 
 export type NavigationMenuProps = MenuProps & {
@@ -40,14 +36,14 @@ export const NavigationMenu = memo(
       <Container
         alignment={{
           horizontal: AlignHorizontal.Stretch,
-          vertical: AlignVertical.Top,
+          vertical: AlignVertical.Stretch,
           ...alignment,
         }}
         as="nav"
         background={{ color: BackgroundColors.NavigationMenu, ...background }}
         className={`${className} navigation-menu`}
         size={{
-          width: 280,
+          width: 160,
           ...size,
         }}
         {...props}
@@ -56,6 +52,10 @@ export const NavigationMenu = memo(
           {menu.map((item, key) => {
             return (
               <NavigationLink
+                alignment={{
+                  horizontal: AlignHorizontal.Left,
+                  orientation: Orientation.Horizontal,
+                }}
                 background={{
                   color:
                     item?.background?.color ?? BackgroundColors.Transparent,

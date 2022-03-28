@@ -12,6 +12,8 @@ import { Container } from '../components/layout/Container';
 import { MediaGrid } from '../components/media/MediaGrid';
 import { Menu } from '../components/menus/Menu';
 import { MoreMenu } from '../components/menus/MoreMenu';
+import { MessageComposer } from '../components/messaging/MessageComposer';
+import { Inbox } from '../components/messaging/Inbox';
 import { CloseButton } from '../components/modals/CloseButton';
 import { ModalHeader } from '../components/modals/ModalHeader';
 import { SlidePanel } from '../components/modals/SlidePanel';
@@ -1267,7 +1269,38 @@ const Example = () => (
     },
     {
       title: 'Messaging',
+      description: 'Components related to messaging.',
       path: '/messaging',
+      components: [
+        {
+          component: Inbox,
+          title: 'Inbox',
+          description:
+            'A combined navigation, message list and composition view.',
+          path: '/messaging/inbox',
+          examples: [
+            {
+              title: 'Default',
+              properties: {},
+              size: {
+                minHeight: 800,
+              },
+            },
+          ],
+        },
+        {
+          component: MessageComposer,
+          title: 'MessageComposer',
+          description: 'Message composition component',
+          path: '/messaging/message-composer',
+          examples: [
+            {
+              title: 'Default',
+              properties: {},
+            },
+          ],
+        },
+      ],
     },
     {
       title: 'Modals',

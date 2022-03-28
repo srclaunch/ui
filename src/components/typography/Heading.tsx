@@ -21,6 +21,7 @@ export const Heading = memo(
       <Label
         as={as}
         className={`${className} heading`}
+        lineHeight={lineHeight}
         textColor={textColor}
         textWeight={textWeight}
         textSize={textSize}

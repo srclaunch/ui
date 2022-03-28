@@ -30,7 +30,7 @@ var __objRest = (source, exclude) => {
   return target;
 };
 import e$3, { memo, forwardRef, useState, useEffect, useRef, useMemo, createElement as createElement$1, useReducer, useCallback, useImperativeHandle, Component, cloneElement, useLayoutEffect, Children } from "react";
-import { useNavigate, useDispatch, useSelector, getVerificationDetails, verifyCode, resendVerificationCode, useResolvedPath, useMatch, useLocation, NavLink, Link as Link$2, login, signUp, getPaymentMethods, getSubscriptions, useSearchParams, Outlet, matchPath, logout, Routes, Route, setTheme } from "@srclaunch/web-application-state";
+import { useNavigate, useDispatch, useSelector, getVerificationDetails, verifyCode, resendVerificationCode, useResolvedPath, useMatch, useLocation, NavLink, Link as Link$2, login, signUp, getPaymentMethods, getSubscriptions, useSearchParams, Outlet, matchPath, Routes, Route, logout, setTheme } from "@srclaunch/web-application-state";
 import styled, { css as css$2, createGlobalStyle } from "styled-components";
 import ReactDOM from "react-dom";
 var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
@@ -11753,7 +11753,7 @@ const Image$1 = memo((props) => {
     })]
   }));
 });
-const Inbox = memo((props) => {
+const Inbox$1 = memo((props) => {
   return /* @__PURE__ */ jsxs$2("svg", __spreadProps2(__spreadValues2({
     width: "100%",
     height: "100%",
@@ -21393,7 +21393,7 @@ var DualLight = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePrope
   Home,
   Hourglass,
   Image: Image$1,
-  Inbox,
+  Inbox: Inbox$1,
   Info: Info$4,
   Instagram,
   Internet,
@@ -27747,7 +27747,9 @@ const Scrollable = (_O) => {
   ]);
   return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
     alignment: __spreadValues({
-      overflow: Overflow.ScrollVertical
+      horizontal: AlignHorizontal.Stretch,
+      overflow: Overflow.ScrollVertical,
+      vertical: AlignVertical.Stretch
     }, alignment),
     background: {
       color: BackgroundColors.Transparent
@@ -52871,348 +52873,12 @@ const Svg = memo((_sc) => {
     children
   }));
 });
-const MessagePreview = memo((_uc) => {
+const MessageComposer = memo((_uc) => {
   var _vc = _uc, {
-    background = {},
-    body,
-    borderRadius = {},
-    className = "",
-    date,
-    subject,
-    sender
-  } = _vc, props = __objRest(_vc, [
-    "background",
-    "body",
-    "borderRadius",
-    "className",
-    "date",
-    "subject",
-    "sender"
-  ]);
-  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
-    background: __spreadValues({
-      color: BackgroundColors.Light
-    }, background),
-    borderRadius: __spreadValues({
-      all: Amount.Least
-    }, borderRadius),
-    className: `${className} message-preview`,
-    padding: {
-      bottom: Amount.Default,
-      left: Amount.More,
-      right: Amount.More,
-      top: Amount.Default
-    }
-  }, props), {
-    children: [/* @__PURE__ */ jsxs$1(Container$8, {
-      alignment: {
-        orientation: Orientation.Horizontal,
-        vertical: AlignVertical.Top
-      },
-      children: [/* @__PURE__ */ jsx$2(Image, {
-        borderRadius: {
-          all: Amount.All
-        },
-        margin: {
-          right: Amount.More
-        },
-        url: "http://localhost:3000/public/assets/images/placeholders/people/person1.png"
-      }), /* @__PURE__ */ jsx$2(Label, {
-        lineHeight: Amount.Default,
-        margin: {
-          bottom: Amount.None
-        },
-        textColor: TextColors.Light,
-        textSize: TextSize.Small,
-        textWeight: TextWeight.Default,
-        children: "Samanatha Baskin"
-      }), /* @__PURE__ */ jsx$2(DateLabel, {
-        alignment: {
-          horizontal: AlignHorizontal.Right
-        },
-        lineHeight: Amount.Default,
-        value: date,
-        textColor: TextColors.Lighter,
-        textSize: TextSize.Smaller
-      })]
-    }), /* @__PURE__ */ jsxs$1(Container$8, {
-      alignment: {
-        orientation: Orientation.Horizontal
-      },
-      children: [/* @__PURE__ */ jsx$2(Container$8, {
-        borderRadius: {
-          all: Amount.All
-        },
-        margin: {
-          right: Amount.More
-        }
-      }), /* @__PURE__ */ jsxs$1(Container$8, {
-        alignment: {
-          horizontal: AlignHorizontal.Left,
-          vertical: AlignVertical.Top
-        },
-        children: [/* @__PURE__ */ jsx$2(Title, {
-          lineHeight: Amount.Less,
-          textSize: TextSize.Large,
-          textWeight: TextWeight.More,
-          children: subject
-        }), /* @__PURE__ */ jsx$2(Paragraph, {
-          children: body
-        })]
-      })]
-    })]
-  }));
-});
-const ConversationList = memo((_wc) => {
-  var _xc = _wc, {
-    alignment = {},
-    background = {},
-    borderRadius = {},
-    className = "",
     size = {}
-  } = _xc, props = __objRest(_xc, [
-    "alignment",
-    "background",
-    "borderRadius",
-    "className",
+  } = _vc, props = __objRest(_vc, [
     "size"
   ]);
-  const items = new Array(5).fill(0);
-  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
-    alignment: __spreadValues({
-      overflow: Overflow.ScrollVertical
-    }, alignment),
-    background: __spreadValues({
-      color: BackgroundColors.Default
-    }, background),
-    borderRadius: __spreadValues({
-      all: Amount.Least
-    }, borderRadius),
-    className: `${className} conversation-list`,
-    size: __spreadValues({
-      width: 350
-    }, size)
-  }, props), {
-    children: items.map((_, index) => {
-      return /* @__PURE__ */ jsx$2(NavigationLink, {
-        to: `conversation/${index}`,
-        children: /* @__PURE__ */ jsx$2(MessagePreview, {
-          background: {
-            color: BackgroundColors.Default
-          },
-          body: "Lorem ipsum",
-          border: index !== items.length - 1 ? {
-            bottom: {
-              color: BorderColors.Light,
-              style: BorderStyle.Solid,
-              width: 1
-            }
-          } : void 0,
-          date: new Date().toISOString(),
-          sender: {
-            id: "0",
-            name: "Yippy James"
-          },
-          subject: "Lorem ipsum "
-        })
-      });
-    })
-  }));
-});
-const NavigationMenu = memo((_yc) => {
-  var _zc = _yc, {
-    alignment = {},
-    background = {},
-    className = "",
-    margin = {},
-    matchExactPath = false,
-    menu = [],
-    padding = {},
-    size = {},
-    states = {}
-  } = _zc, props = __objRest(_zc, [
-    "alignment",
-    "background",
-    "className",
-    "margin",
-    "matchExactPath",
-    "menu",
-    "padding",
-    "size",
-    "states"
-  ]);
-  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
-    alignment: __spreadValues({
-      horizontal: AlignHorizontal.Stretch,
-      vertical: AlignVertical.Top
-    }, alignment),
-    as: "nav",
-    background: __spreadValues({
-      color: BackgroundColors.NavigationMenu
-    }, background),
-    className: `${className} navigation-menu`,
-    size: __spreadValues({
-      width: 280
-    }, size)
-  }, props), {
-    children: /* @__PURE__ */ jsx$2(Scrollable, {
-      padding: __spreadValues({
-        all: Amount.Less
-      }, padding),
-      children: menu.map((item, key) => {
-        var _a2, _b, _c, _d;
-        return /* @__PURE__ */ jsx$2(NavigationLink, {
-          background: {
-            color: (_b = (_a2 = item == null ? void 0 : item.background) == null ? void 0 : _a2.color) != null ? _b : BackgroundColors.Transparent
-          },
-          borderRadius: (_c = item.borderRadius) != null ? _c : {
-            all: Amount.Least
-          },
-          className: "navigation-menu-item",
-          icon: item.icon,
-          label: item.label,
-          lineHeight: Sizes.Large,
-          margin: __spreadValues({
-            bottom: Amount.Least
-          }, margin),
-          matchExactPath,
-          padding: __spreadValues({
-            bottom: Amount.Least,
-            left: Amount.Default,
-            right: Amount.Default,
-            top: Amount.Least
-          }, padding),
-          size: {
-            fill: Fill.Horizontal
-          },
-          states: __spreadValues({
-            active: {
-              background: {
-                color: BackgroundColors.Dark
-              },
-              textColor: TextColors.Darker
-            },
-            current: {
-              background: {
-                color: BackgroundColors.Primary
-              },
-              textColor: TextColors.PrimaryContrast
-            },
-            focused: {
-              textColor: TextColors.PrimaryContrast
-            },
-            hovered: {
-              background: {
-                color: BackgroundColors.Light
-              },
-              textColor: TextColors.Darker
-            }
-          }, states),
-          textColor: TextColors.Default,
-          to: (_d = item.to) != null ? _d : "#"
-        }, key);
-      })
-    })
-  }));
-});
-const ConversationNavigation = memo((_Ac) => {
-  var props = __objRest(_Ac, []);
-  const navigate = useNavigate();
-  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({}, props), {
-    children: [/* @__PURE__ */ jsx$2(Button$1, {
-      alignment: {
-        vertical: AlignVertical.Center
-      },
-      borderRadius: {
-        all: Amount.Least
-      },
-      events: {
-        mouse: {
-          onClick: () => navigate("/messages/new")
-        }
-      },
-      icon: {
-        name: DualLightIcons.AddCircle,
-        size: {
-          height: Sizes.Small,
-          width: Sizes.Small
-        }
-      },
-      margin: {
-        bottom: Amount.Default
-      },
-      size: {
-        fill: Fill.Horizontal
-      },
-      type: ButtonType.Primary,
-      children: "New Message"
-    }), /* @__PURE__ */ jsx$2(NavigationMenu, {
-      background: {
-        color: BackgroundColors.Transparent
-      },
-      menu: [{
-        icon: {
-          name: DualLightIcons.Inbox,
-          size: {
-            height: Sizes.Small,
-            width: Sizes.Small
-          }
-        },
-        label: "Inbox",
-        to: "/messages/inbox"
-      }, {
-        icon: {
-          name: DualLightIcons.Star,
-          size: {
-            height: Sizes.Small,
-            width: Sizes.Small
-          }
-        },
-        label: "Starred",
-        to: "/messages/starred"
-      }, {
-        icon: {
-          name: DualLightIcons.Send,
-          size: {
-            height: Sizes.Small,
-            width: Sizes.Small
-          }
-        },
-        label: "Sent",
-        to: "/messages/sent"
-      }, {
-        icon: {
-          name: DualLightIcons.Note,
-          size: {
-            height: Sizes.Small,
-            width: Sizes.Small
-          }
-        },
-        label: "Drafts",
-        to: "/messages/drafts"
-      }, {
-        icon: {
-          name: DualLightIcons.Trash,
-          size: {
-            height: Sizes.Small,
-            width: Sizes.Small
-          }
-        },
-        label: "Trash",
-        to: "/messages/trash"
-      }]
-    })]
-  }));
-});
-const Message$1 = memo(({
-  body,
-  subject,
-  sender
-}) => {
-  return /* @__PURE__ */ jsx$2(Container$8, {});
-});
-const MessageComposer = memo((_Bc) => {
-  var props = __objRest(_Bc, []);
   return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     alignment: {
       horizontal: AlignHorizontal.Stretch,
@@ -53220,7 +52886,10 @@ const MessageComposer = memo((_Bc) => {
     },
     background: {
       color: BackgroundColors.Default
-    }
+    },
+    size: __spreadValues({
+      fill: Fill.Both
+    }, size)
   }, props), {
     children: [/* @__PURE__ */ jsx$2(Container$8, {
       alignment: {
@@ -53299,15 +52968,524 @@ const MessageComposer = memo((_Bc) => {
     })]
   }));
 });
-const Backdrop = memo((_Cc) => {
+const RouterView = memo((_wc) => {
+  var _xc = _wc, {
+    alignment = {},
+    className = "",
+    routes = []
+  } = _xc, props = __objRest(_xc, [
+    "alignment",
+    "className",
+    "routes"
+  ]);
+  return /* @__PURE__ */ jsx$2(Routes, {
+    children: routes.map((route, key) => {
+      return /* @__PURE__ */ jsx$2(Route, __spreadValues({
+        element: /* @__PURE__ */ jsx$2(route.component, {}),
+        path: route.path
+      }, route), key);
+    })
+  });
+});
+const Heading = memo((_yc) => {
+  var _zc = _yc, {
+    as = "h3",
+    children,
+    className = "",
+    lineHeight = Sizes.Large,
+    textWeight = TextWeight.More,
+    textColor = TextColors.Dark,
+    textSize = TextSize.Large
+  } = _zc, props = __objRest(_zc, [
+    "as",
+    "children",
+    "className",
+    "lineHeight",
+    "textWeight",
+    "textColor",
+    "textSize"
+  ]);
+  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
+    as,
+    className: `${className} heading`,
+    lineHeight,
+    textColor,
+    textWeight,
+    textSize
+  }, props), {
+    children
+  }));
+});
+const MessagePreview = memo((_Ac) => {
+  var _Bc = _Ac, {
+    body,
+    borderRadius = {},
+    className = "",
+    date,
+    subject,
+    sender
+  } = _Bc, props = __objRest(_Bc, [
+    "body",
+    "borderRadius",
+    "className",
+    "date",
+    "subject",
+    "sender"
+  ]);
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
+    alignment: {
+      horizontal: AlignHorizontal.Stretch,
+      vertical: AlignVertical.Top
+    },
+    borderRadius: __spreadValues({
+      all: Amount.Least
+    }, borderRadius),
+    className: `${className} message-preview`,
+    padding: {
+      bottom: Amount.Default,
+      left: Amount.More,
+      right: Amount.More,
+      top: Amount.Default
+    },
+    size: {
+      fill: Fill.Horizontal
+    }
+  }, props), {
+    children: [/* @__PURE__ */ jsxs$1(Container$8, {
+      alignment: {
+        horizontal: AlignHorizontal.Stretch,
+        orientation: Orientation.Horizontal,
+        vertical: AlignVertical.Center
+      },
+      margin: {
+        bottom: Amount.Default
+      },
+      children: [/* @__PURE__ */ jsx$2(Heading, {
+        lineHeight: Amount.Default,
+        textColor: TextColors.Light,
+        textSize: TextSize.Small,
+        textWeight: TextWeight.Default,
+        children: "Samanatha Baskin"
+      }), /* @__PURE__ */ jsx$2(Spacer, {
+        size: {
+          fill: Fill.Horizontal
+        }
+      }), /* @__PURE__ */ jsx$2(DateLabel, {
+        alignment: {
+          horizontal: AlignHorizontal.Right
+        },
+        lineHeight: Amount.Default,
+        value: date,
+        textColor: TextColors.Lighter,
+        textSize: TextSize.Smaller
+      })]
+    }), /* @__PURE__ */ jsx$2(Container$8, {
+      alignment: {
+        orientation: Orientation.Horizontal
+      },
+      children: /* @__PURE__ */ jsxs$1(Container$8, {
+        alignment: {
+          horizontal: AlignHorizontal.Left,
+          vertical: AlignVertical.Top
+        },
+        children: [/* @__PURE__ */ jsx$2(Title, {
+          lineHeight: Sizes.Default,
+          textSize: TextSize.Large,
+          textWeight: TextWeight.More,
+          children: subject
+        }), /* @__PURE__ */ jsx$2(Paragraph, {
+          children: body
+        })]
+      })
+    })]
+  }));
+});
+const ConversationList = memo((_Cc) => {
   var _Dc = _Cc, {
+    alignment = {},
+    background = {},
+    borderRadius = {},
+    className = "",
+    padding = {},
+    size = {}
+  } = _Dc, props = __objRest(_Dc, [
+    "alignment",
+    "background",
+    "borderRadius",
+    "className",
+    "padding",
+    "size"
+  ]);
+  const items = new Array(5).fill(0);
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
+    background: __spreadValues({
+      color: BackgroundColors.Light
+    }, background),
+    borderRadius: __spreadValues({
+      all: Amount.Least
+    }, borderRadius),
+    className: `${className} conversation-list`,
+    size: __spreadValues({
+      width: 350
+    }, size),
+    shadow: DepthShadow.Low
+  }, props), {
+    children: /* @__PURE__ */ jsx$2(Scrollable, {
+      alignment: __spreadValues({
+        overflow: Overflow.ScrollVertical
+      }, alignment),
+      padding: __spreadValues({
+        all: Amount.Less
+      }, padding),
+      children: items.map((_, index) => {
+        return /* @__PURE__ */ jsx$2(NavigationLink, {
+          to: `conversation/${index}`,
+          children: /* @__PURE__ */ jsx$2(MessagePreview, {
+            background: {
+              color: BackgroundColors.Lightest
+            },
+            body: "Lorem ipsum",
+            border: index !== items.length - 1 ? {
+              bottom: {
+                color: BorderColors.Light,
+                style: BorderStyle.Solid,
+                width: 1
+              }
+            } : void 0,
+            date: new Date().toISOString(),
+            margin: {
+              bottom: Amount.Least
+            },
+            sender: {
+              id: "0",
+              name: "Yippy James"
+            },
+            subject: "Lorem ipsum "
+          })
+        });
+      })
+    })
+  }));
+});
+const NavigationMenu = memo((_Ec) => {
+  var _Fc = _Ec, {
+    alignment = {},
+    background = {},
+    className = "",
+    margin = {},
+    matchExactPath = false,
+    menu = [],
+    padding = {},
+    size = {},
+    states = {}
+  } = _Fc, props = __objRest(_Fc, [
+    "alignment",
+    "background",
+    "className",
+    "margin",
+    "matchExactPath",
+    "menu",
+    "padding",
+    "size",
+    "states"
+  ]);
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      horizontal: AlignHorizontal.Stretch,
+      vertical: AlignVertical.Stretch
+    }, alignment),
+    as: "nav",
+    background: __spreadValues({
+      color: BackgroundColors.NavigationMenu
+    }, background),
+    className: `${className} navigation-menu`,
+    size: __spreadValues({
+      width: 160
+    }, size)
+  }, props), {
+    children: /* @__PURE__ */ jsx$2(Scrollable, {
+      padding: __spreadValues({
+        all: Amount.Less
+      }, padding),
+      children: menu.map((item, key) => {
+        var _a2, _b, _c, _d;
+        return /* @__PURE__ */ jsx$2(NavigationLink, {
+          alignment: {
+            horizontal: AlignHorizontal.Left,
+            orientation: Orientation.Horizontal
+          },
+          background: {
+            color: (_b = (_a2 = item == null ? void 0 : item.background) == null ? void 0 : _a2.color) != null ? _b : BackgroundColors.Transparent
+          },
+          borderRadius: (_c = item.borderRadius) != null ? _c : {
+            all: Amount.Least
+          },
+          className: "navigation-menu-item",
+          icon: item.icon,
+          label: item.label,
+          lineHeight: Sizes.Large,
+          margin: __spreadValues({
+            bottom: Amount.Least
+          }, margin),
+          matchExactPath,
+          padding: __spreadValues({
+            bottom: Amount.Least,
+            left: Amount.Default,
+            right: Amount.Default,
+            top: Amount.Least
+          }, padding),
+          size: {
+            fill: Fill.Horizontal
+          },
+          states: __spreadValues({
+            active: {
+              background: {
+                color: BackgroundColors.Dark
+              },
+              textColor: TextColors.Darker
+            },
+            current: {
+              background: {
+                color: BackgroundColors.Primary
+              },
+              textColor: TextColors.PrimaryContrast
+            },
+            focused: {
+              textColor: TextColors.PrimaryContrast
+            },
+            hovered: {
+              background: {
+                color: BackgroundColors.Light
+              },
+              textColor: TextColors.Darker
+            }
+          }, states),
+          textColor: TextColors.Default,
+          to: (_d = item.to) != null ? _d : "#"
+        }, key);
+      })
+    })
+  }));
+});
+const ConversationNavigation = memo((_Gc) => {
+  var props = __objRest(_Gc, []);
+  const navigate = useNavigate();
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({}, props), {
+    children: [/* @__PURE__ */ jsx$2(Button$1, {
+      alignment: {
+        vertical: AlignVertical.Center
+      },
+      borderRadius: {
+        all: Amount.Least
+      },
+      events: {
+        mouse: {
+          onClick: () => navigate("/messages/new")
+        }
+      },
+      icon: {
+        name: DualLightIcons.AddCircle,
+        size: {
+          height: Sizes.Small,
+          width: Sizes.Small
+        }
+      },
+      lineHeight: Sizes.Large,
+      margin: {
+        bottom: Amount.Default
+      },
+      type: ButtonType.Primary,
+      children: "New Message"
+    }), /* @__PURE__ */ jsx$2(NavigationMenu, {
+      background: {
+        color: BackgroundColors.Transparent
+      },
+      menu: [{
+        icon: {
+          name: DualLightIcons.Inbox,
+          size: {
+            height: Sizes.Small,
+            width: Sizes.Small
+          }
+        },
+        label: "Inbox",
+        to: "/messages/inbox"
+      }, {
+        icon: {
+          name: DualLightIcons.Star,
+          size: {
+            height: Sizes.Small,
+            width: Sizes.Small
+          }
+        },
+        label: "Starred",
+        to: "/messages/starred"
+      }, {
+        icon: {
+          name: DualLightIcons.Send,
+          size: {
+            height: Sizes.Small,
+            width: Sizes.Small
+          }
+        },
+        label: "Sent",
+        to: "/messages/sent"
+      }, {
+        icon: {
+          name: DualLightIcons.Note,
+          size: {
+            height: Sizes.Small,
+            width: Sizes.Small
+          }
+        },
+        label: "Drafts",
+        to: "/messages/drafts"
+      }, {
+        icon: {
+          name: DualLightIcons.Trash,
+          size: {
+            height: Sizes.Small,
+            width: Sizes.Small
+          }
+        },
+        label: "Trash",
+        to: "/messages/trash"
+      }],
+      padding: {
+        all: Amount.None
+      },
+      size: {
+        fill: Fill.Vertical
+      }
+    })]
+  }));
+});
+const Inbox = memo(({
+  className = "",
+  size = {}
+}) => {
+  return /* @__PURE__ */ jsxs$1(Container$8, {
+    className: `${className} inbox`,
+    alignment: {
+      horizontal: AlignHorizontal.Stretch,
+      orientation: Orientation.Horizontal,
+      vertical: AlignVertical.Stretch
+    },
+    size: __spreadValues({
+      fill: Fill.Both
+    }, size),
+    children: [/* @__PURE__ */ jsx$2(ConversationNavigation, {
+      borderRadius: {
+        all: Amount.More
+      },
+      size: {
+        width: 160
+      }
+    }), /* @__PURE__ */ jsx$2(ConversationList, {
+      margin: {
+        left: Amount.More
+      },
+      size: {
+        width: 280
+      }
+    }), /* @__PURE__ */ jsx$2(RouterView, {
+      routes: [{
+        component: () => /* @__PURE__ */ jsx$2(Container$8, {
+          children: "Select a message"
+        }),
+        path: "inbox"
+      }, {
+        component: () => /* @__PURE__ */ jsx$2(MessageComposer, {
+          borderRadius: {
+            all: Amount.Least
+          },
+          margin: {
+            left: Amount.More
+          }
+        }),
+        path: "new"
+      }, {
+        component: () => /* @__PURE__ */ jsx$2(Container$8, {
+          children: "Starred"
+        }),
+        path: "starred"
+      }, {
+        component: () => /* @__PURE__ */ jsx$2(Container$8, {
+          children: "Sent"
+        }),
+        path: "sent"
+      }, {
+        component: () => /* @__PURE__ */ jsx$2(Container$8, {
+          children: "Drafts"
+        }),
+        path: "drafts"
+      }, {
+        component: () => /* @__PURE__ */ jsx$2(Container$8, {
+          children: "Trash"
+        }),
+        path: "trash"
+      }, {
+        component: () => /* @__PURE__ */ jsx$2(Container$8, {
+          children: "Chat thread"
+        }),
+        path: "conversation/:id"
+      }]
+    })]
+  });
+});
+const Conversation = memo(({
+  background = {},
+  borderRadius = {},
+  className = ""
+}) => {
+  const items = new Array(5).fill(0);
+  return /* @__PURE__ */ jsx$2(Container$8, {
+    borderRadius: __spreadValues({
+      all: Amount.Less
+    }, borderRadius),
+    className: `${className} conversation-list`,
+    size: {
+      width: 350
+    },
+    children: items.map((_, index) => {
+      return /* @__PURE__ */ jsx$2(MessagePreview, {
+        background: __spreadValues({
+          color: BackgroundColors.Lightest
+        }, background),
+        body: "Lorem ipsum ",
+        border: {
+          bottom: {
+            color: BorderColors.Light,
+            style: BorderStyle.Solid,
+            width: 1
+          }
+        },
+        date: new Date().toISOString(),
+        sender: {
+          id: "0",
+          name: "Yippy James"
+        },
+        subject: "Lorem ipsum "
+      });
+    })
+  });
+});
+const Message$1 = memo(({
+  body,
+  subject,
+  sender
+}) => {
+  return /* @__PURE__ */ jsx$2(Container$8, {});
+});
+const Backdrop = memo((_Hc) => {
+  var _Ic = _Hc, {
     as = "div",
     background = {},
     children,
     className = "",
     position = {},
     states = {}
-  } = _Dc, props = __objRest(_Dc, [
+  } = _Ic, props = __objRest(_Ic, [
     "as",
     "background",
     "children",
@@ -53361,15 +53539,15 @@ const Content = styled.div.withConfig({
   displayName: "Content",
   componentId: "sc-gk61f6-1"
 })(["background:white;border-radius:15px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);padding:20px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;"]);
-const BreadcrumbNavigation = memo((_Ec) => {
-  var _Fc = _Ec, {
+const BreadcrumbNavigation = memo((_Jc) => {
+  var _Kc = _Jc, {
     alignment = {},
     className = "",
     items = [],
     shadow = DepthShadow.Surface,
     size = {},
     textSize = TextSize.Default
-  } = _Fc, props = __objRest(_Fc, [
+  } = _Kc, props = __objRest(_Kc, [
     "alignment",
     "className",
     "items",
@@ -53530,12 +53708,12 @@ const NavigationBar = memo(({
     })]
   });
 });
-const ObjectLink = memo((_Gc) => {
-  var _Hc = _Gc, {
+const ObjectLink = memo((_Lc) => {
+  var _Mc = _Lc, {
     children,
     disabled,
     onClick
-  } = _Hc, props = __objRest(_Hc, [
+  } = _Mc, props = __objRest(_Mc, [
     "children",
     "disabled",
     "onClick"
@@ -53582,25 +53760,6 @@ const IconWrapper$1 = styled.div.withConfig({
   displayName: "IconWrapper",
   componentId: "sc-10hsjyi-1"
 })(["flex-basis:20px;"]);
-const RouterView = memo((_Ic) => {
-  var _Jc = _Ic, {
-    alignment = {},
-    className = "",
-    routes = []
-  } = _Jc, props = __objRest(_Jc, [
-    "alignment",
-    "className",
-    "routes"
-  ]);
-  return /* @__PURE__ */ jsx$2(Routes, {
-    children: routes.map((route, key) => {
-      return /* @__PURE__ */ jsx$2(Route, __spreadValues({
-        element: /* @__PURE__ */ jsx$2(route.component, {}),
-        path: route.path
-      }, route), key);
-    })
-  });
-});
 var reactIs = { exports: {} };
 var reactIs_production_min = {};
 /** @license React v17.0.2
@@ -53719,12 +53878,12 @@ reactIs_production_min.typeOf = y;
 {
   reactIs.exports = reactIs_production_min;
 }
-const Tab = memo((_Kc) => {
-  var _Lc = _Kc, {
+const Tab = memo((_Nc) => {
+  var _Oc = _Nc, {
     className = "",
     children,
     label
-  } = _Lc, props = __objRest(_Lc, [
+  } = _Oc, props = __objRest(_Oc, [
     "className",
     "children",
     "label"
@@ -53736,13 +53895,13 @@ const Tab = memo((_Kc) => {
     children
   }));
 });
-const Tabs = memo((_Mc) => {
-  var _Nc = _Mc, {
+const Tabs = memo((_Pc) => {
+  var _Qc = _Pc, {
     background = {},
     borderRadius = {},
     className = "",
     children
-  } = _Nc, props = __objRest(_Nc, [
+  } = _Qc, props = __objRest(_Qc, [
     "background",
     "borderRadius",
     "className",
@@ -53815,18 +53974,18 @@ const Tabs = memo((_Mc) => {
     })]
   }));
 });
-const ConnectionStatus = memo((_Oc) => {
-  var props = __objRest(_Oc, []);
+const ConnectionStatus = memo((_Rc) => {
+  var props = __objRest(_Rc, []);
   return /* @__PURE__ */ jsx$2(NotificationLabel, __spreadValues({
     type: C$2.Success,
     label: "Connected"
   }, props));
 });
-const Badge = memo((_Pc) => {
-  var _Qc = _Pc, {
+const Badge = memo((_Sc) => {
+  var _Tc = _Sc, {
     children,
     label
-  } = _Qc, props = __objRest(_Qc, [
+  } = _Tc, props = __objRest(_Tc, [
     "children",
     "label"
   ]);
@@ -53878,34 +54037,6 @@ const Close = styled.div.withConfig({
   displayName: "Close",
   componentId: "sc-hj2572-4"
 })(["float:right;height:60px;line-height:49px;text-align:center;width:60px;"]);
-const Heading = memo((_Rc) => {
-  var _Sc = _Rc, {
-    as = "h3",
-    children,
-    className = "",
-    lineHeight = Sizes.Large,
-    textWeight = TextWeight.More,
-    textColor = TextColors.Dark,
-    textSize = TextSize.Large
-  } = _Sc, props = __objRest(_Sc, [
-    "as",
-    "children",
-    "className",
-    "lineHeight",
-    "textWeight",
-    "textColor",
-    "textSize"
-  ]);
-  return /* @__PURE__ */ jsx$2(Label, __spreadProps(__spreadValues({
-    as,
-    className: `${className} heading`,
-    textColor,
-    textWeight,
-    textSize
-  }, props), {
-    children
-  }));
-});
 const UniversalSearch = memo((props) => {
   const [resultsVisible, setResultsVisible] = useState(false);
   const [searchValue, setSearchValue] = useState();
@@ -53962,10 +54093,10 @@ const SearchResults = styled.div.withConfig({
   displayName: "SearchResults",
   componentId: "sc-1rpv9xw-0"
 })(["backdrop-filter:blur(3px);background:var(--bg-color-depth-highest-opaque);border-radius:var(--border-radius);cursor:default;display:none;overflow:hidden;overflow-y:scroll;left:20px;max-height:390px;min-height:300px;position:absolute;opacity:0;pointer-events:none;top:80%;transform:translateY(-300px);transition:opacity 0.18s ease-in-out,transform 0.18s ease-in-out;min-width:500px;max-width:500px;z-index:3;.result{margin-bottom:3px;}", ";"], (props) => props.resultsVisible && css$2(["display:flex;opacity:1;pointer-events:all;transform:translateY(0);"]));
-const ThemeSelector = memo((_Tc) => {
-  var _Uc = _Tc, {
+const ThemeSelector = memo((_Uc) => {
+  var _Vc = _Uc, {
     label
-  } = _Uc, props = __objRest(_Uc, [
+  } = _Vc, props = __objRest(_Vc, [
     "label"
   ]);
   const dispatch = useDispatch();
@@ -74885,14 +75016,14 @@ var style = {
     "background": "linear-gradient(to right, rgba(224, 145, 66, 0.2) 70%, rgba(224, 145, 66, 0))"
   }
 };
-const CodeBlock = memo((_Vc) => {
-  var _Wc = _Vc, {
+const CodeBlock = memo((_Wc) => {
+  var _Xc = _Wc, {
     alignment = {},
     borderRadius = {},
     lineHeight = Sizes.Default,
     textSize = TextSize.Default,
     value: value2
-  } = _Wc, props = __objRest(_Wc, [
+  } = _Xc, props = __objRest(_Xc, [
     "alignment",
     "borderRadius",
     "lineHeight",
@@ -74921,13 +75052,13 @@ const CodeBlock = memo((_Vc) => {
     })
   }));
 });
-const LineBreak = memo((_Xc) => {
-  var _Yc = _Xc, {
+const LineBreak = memo((_Yc) => {
+  var _Zc = _Yc, {
     className = "",
     size = {
       height: Sizes.Default
     }
-  } = _Yc, props = __objRest(_Yc, [
+  } = _Zc, props = __objRest(_Zc, [
     "className",
     "size"
   ]);
@@ -74936,14 +75067,14 @@ const LineBreak = memo((_Xc) => {
     size
   }, props));
 });
-const LogoutButton = memo((_Zc) => {
-  var __c = _Zc, {
+const LogoutButton = memo((__c) => {
+  var _$c = __c, {
     icon: icon2,
     onLogoutSuccess,
     label,
     showArrow = false,
     textColor = TextColors.Error
-  } = __c, props = __objRest(__c, [
+  } = _$c, props = __objRest(_$c, [
     "icon",
     "onLogoutSuccess",
     "label",
@@ -75157,5 +75288,5 @@ async function init() {
   i18nIsoCountries.registerLocale(englishLanguage);
 }
 init();
-export { ActivityFeed, AddPaymentMethodForm, AlignHorizontal, AlignVertical, Amount, Animations, AutoComplete, Backdrop, BackgroundColorShade, BackgroundColors, BackgroundSize, Badge, BooleanLabel, BorderColorShade, BorderColors, BorderStyle, BreadcrumbNavigation, Button$1 as Button, ButtonType, Card, Checkbox, CloseButton, CodeBlock, CodeVerificationForm, ColorInput, ColorLabel, Colors, ConnectionStatus, Container$8 as Container, ContrastColors, ConversationList, ConversationNavigation, CountryInput, CountryLabel, CurrencyAmountInput, CurrencyAmountLabel, CurrencyInput, Cursor, DataGrid, DataGridCell, DateInput, DateLabel, Depth, DepthShadow, DropdownInput, DropdownPanel, DynamicInput, EmailAddressInput, EmailAddressLabel, EntityEditor, EntityPanel, EntityPreview, ErrorLabel, ErrorNotification, Fill, ForegroundColorShade, ForegroundColors, ForgotPasswordForm, Form, FormActions, FormFields, Heading, HelperButton, HoverPanel, Icon, Image, ImageInput, InputHelper, InputLabel, InputRow, InputType, Label, LanguageInput, LanguageLabel, LineBreak, LinearGauge, Link, ListItem, LoadingOverlay, LoginForm, LogoutButton, LongTextInput, MarkdownEditor, MediaGrid, MediaPreview, Menu, MenuButton, Message$1 as Message, MessageComposer, MessagePreview, Modal, ModalHeader, MoreMenu, NavigationBar, NavigationLink, NavigationMenu, NotificationLabel, Notifications, NumberInput, NumberLabel, ObjectLink, ObjectPropertiesView, Orb, OrderedList, Orientation, Overflow, Page, PageLink, Paragraph, PasswordInput, PaymentMethodModal, PersonLabel, PhoneNumberInput, PhoneNumberLabel, PieChart, PositionBehavior, ProgressLabel, ProgressMeter, ProgressSpinner, ProgressivePaymentStatus, PropertyEditor, RadialChart, RadialGauge, RouterView, Scrollable, SearchInput, SignupForm, Sizes, SlidePanel, Small, Spacer, StaticTypeLabel, StreetAddressInput, SubTitle, SubscriptionModal, Svg, Tab, Tabs, TextAlign, TextColors, TextDecorationLine, TextDecorationStyle, TextInput, TextOverflow, TextSize, TextWeight, ThemeSelector, Title, TitleCard, ToggleInput, TransformOrigin, UniversalSearch, UnorderedList, UserLabel, UserMenu, VerificationCodeInput, Video, WebApplication, Workspace, convertAmountToSize, convertSizeToAmount, convertSizeToTextSize, getCSSMeasurementValue, getFormFieldsFromModel, getInputElementByFieldType, getLabelByFieldType, getLargerAmount, getLargerSize, getSmallerAmount, getSmallerSize, useAuthentication, useEntityEditor };
+export { ActivityFeed, AddPaymentMethodForm, AlignHorizontal, AlignVertical, Amount, Animations, AutoComplete, Backdrop, BackgroundColorShade, BackgroundColors, BackgroundSize, Badge, BooleanLabel, BorderColorShade, BorderColors, BorderStyle, BreadcrumbNavigation, Button$1 as Button, ButtonType, Card, Checkbox, CloseButton, CodeBlock, CodeVerificationForm, ColorInput, ColorLabel, Colors, ConnectionStatus, Container$8 as Container, ContrastColors, Conversation, ConversationList, ConversationNavigation, CountryInput, CountryLabel, CurrencyAmountInput, CurrencyAmountLabel, CurrencyInput, Cursor, DataGrid, DataGridCell, DateInput, DateLabel, Depth, DepthShadow, DropdownInput, DropdownPanel, DynamicInput, EmailAddressInput, EmailAddressLabel, EntityEditor, EntityPanel, EntityPreview, ErrorLabel, ErrorNotification, Fill, ForegroundColorShade, ForegroundColors, ForgotPasswordForm, Form, FormActions, FormFields, Heading, HelperButton, HoverPanel, Icon, Image, ImageInput, Inbox, InputHelper, InputLabel, InputRow, InputType, Label, LanguageInput, LanguageLabel, LineBreak, LinearGauge, Link, ListItem, LoadingOverlay, LoginForm, LogoutButton, LongTextInput, MarkdownEditor, MediaGrid, MediaPreview, Menu, MenuButton, Message$1 as Message, MessageComposer, MessagePreview, Modal, ModalHeader, MoreMenu, NavigationBar, NavigationLink, NavigationMenu, NotificationLabel, Notifications, NumberInput, NumberLabel, ObjectLink, ObjectPropertiesView, Orb, OrderedList, Orientation, Overflow, Page, PageLink, Paragraph, PasswordInput, PaymentMethodModal, PersonLabel, PhoneNumberInput, PhoneNumberLabel, PieChart, PositionBehavior, ProgressLabel, ProgressMeter, ProgressSpinner, ProgressivePaymentStatus, PropertyEditor, RadialChart, RadialGauge, RouterView, Scrollable, SearchInput, SignupForm, Sizes, SlidePanel, Small, Spacer, StaticTypeLabel, StreetAddressInput, SubTitle, SubscriptionModal, Svg, Tab, Tabs, TextAlign, TextColors, TextDecorationLine, TextDecorationStyle, TextInput, TextOverflow, TextSize, TextWeight, ThemeSelector, Title, TitleCard, ToggleInput, TransformOrigin, UniversalSearch, UnorderedList, UserLabel, UserMenu, VerificationCodeInput, Video, WebApplication, Workspace, convertAmountToSize, convertSizeToAmount, convertSizeToTextSize, getCSSMeasurementValue, getFormFieldsFromModel, getInputElementByFieldType, getLabelByFieldType, getLargerAmount, getLargerSize, getSmallerAmount, getSmallerSize, useAuthentication, useEntityEditor };
 //# sourceMappingURL=index.js.map

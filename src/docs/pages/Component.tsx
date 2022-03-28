@@ -183,6 +183,7 @@ export const ComponentPage = memo((): ReactElement => {
                     description,
                     properties,
                     render: RenderComponent,
+                    size,
                     title,
                   },
                   key,
@@ -202,15 +203,11 @@ export const ComponentPage = memo((): ReactElement => {
                       <Container
                         className="component-example-preview"
                         key={key}
-                        size={{
-                          minHeight: 260,
-                        }}
                       >
                         <Container
                           alignment={{
-                            vertical: AlignVertical.Center,
+                            vertical: AlignVertical.Stretch,
                             horizontal: AlignHorizontal.Stretch,
-                            overflow: Overflow.Hidden,
                           }}
                           background={{ color: BackgroundColors.Lighter }}
                           borderRadius={{ all: Amount.Least }}
@@ -220,7 +217,8 @@ export const ComponentPage = memo((): ReactElement => {
                           padding={{ all: Amount.All }}
                           shadow={DepthShadow.Low}
                           size={{
-                            minHeight: 200,
+                            fill: Fill.Both,
+                            ...size,
                           }}
                         >
                           {RenderComponent ? (

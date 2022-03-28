@@ -1,4 +1,5 @@
 import { ReactElement, ElementType } from 'react';
+import { Size } from '../../index';
 
 export type Component = {
   component?: ElementType;
@@ -10,6 +11,7 @@ export type Component = {
       description?: string;
       properties?: Record<string, any>;
       render?: () => ReactElement;
+      size?: Size;
       title: string;
     },
   ];

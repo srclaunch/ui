@@ -108,6 +108,9 @@ export const Documentation = memo(
                 };
               }) as MenuItemProps[]),
             ]}
+            size={{
+              width: 240,
+            }}
           />
 
           <Container size={{ fill: Fill.Both }}>{children}</Container>
