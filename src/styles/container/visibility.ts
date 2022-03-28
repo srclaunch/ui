@@ -50,12 +50,14 @@ export function getVisibilityStyle(
 
   if (visibility?.hidden === true || visibility?.visible === false) {
     return css`
+      display: none;
       visibility: hidden;
     `;
   }
 
   if (visibility?.opacity && visibility.opacity === 0) {
     return css`
+      display: none;
       visibility: hidden;
     `;
   }

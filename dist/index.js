@@ -22523,10 +22523,10 @@ function getVisibilityStyle(visibility) {
   if (!visibility)
     return null;
   if ((visibility == null ? void 0 : visibility.hidden) === true || (visibility == null ? void 0 : visibility.visible) === false) {
-    return css$2(["visibility:hidden;"]);
+    return css$2(["display:none;visibility:hidden;"]);
   }
   if ((visibility == null ? void 0 : visibility.opacity) && visibility.opacity === 0) {
-    return css$2(["visibility:hidden;"]);
+    return css$2(["display:none;visibility:hidden;"]);
   }
   return css$2(["visibility:visible;"]);
 }
@@ -52694,7 +52694,9 @@ const MediaGridItem = memo((_mc) => {
       textSize: TextSize.Large,
       textWeight: TextWeight.Most,
       children: title
-    }), /* @__PURE__ */ jsx$2(Spacer, {}), menu && /* @__PURE__ */ jsx$2(MoreMenu, __spreadValues({}, menu))]
+    }), /* @__PURE__ */ jsx$2(Spacer, {}), menu && /* @__PURE__ */ jsx$2(MoreMenu, {
+      menu
+    })]
   }) : video ? /* @__PURE__ */ jsx$2(Video, {
     className: "media-grid-video",
     description: video.description,

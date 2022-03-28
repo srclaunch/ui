@@ -16,6 +16,8 @@ import { Card } from '../../cards/Card';
 import { Container, ContainerProps } from '../../layout/Container';
 import { Spacer } from '../../layout/Spacer';
 import { Video } from '../../media/Video';
+import { MenuProps } from '../../menus/Menu';
+import { MenuItemProps } from '../../menus/MenuItem';
 import { MoreMenu, MoreMenuProps } from '../../menus/MoreMenu';
 import { Label } from '../../typography/Label';
 
@@ -24,7 +26,7 @@ export type MediaGridItemProps = ContainerProps & {
   readonly element?: ReactElement;
   readonly image?: ImageType;
   readonly minHeight?: Amount | number;
-  readonly menu?: MoreMenuProps;
+  readonly menu?: MenuItemProps[];
   readonly title?: string;
   readonly url?: string;
   readonly video?: VideoType;
@@ -63,7 +65,7 @@ export const MediaGridItem = memo(
 
         <Spacer />
 
-        {menu && <MoreMenu {...menu} />}
+        {menu && <MoreMenu menu={menu} />}
       </Container>
     ) : video ? (
       <Video
