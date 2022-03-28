@@ -16,6 +16,7 @@ import {
   Color,
   Cursor,
   Depth,
+  DepthShadow,
   ForegroundColor,
   ForegroundColors,
   Margin,
@@ -144,6 +145,7 @@ export const MoreMenu = memo(
           {...props}
         >
           <Menu
+            background={{ color: BackgroundColors.Transparent }}
             menu={menu}
             events={{
               mouse: {
@@ -153,6 +155,7 @@ export const MoreMenu = memo(
                 },
               },
             }}
+            shadow={DepthShadow.Surface}
           />
         </HoverPanel>
       </Container>

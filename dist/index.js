@@ -35491,6 +35491,9 @@ const MoreMenu = memo((__a) => {
       }, states)
     }, props), {
       children: /* @__PURE__ */ jsx$2(Menu, {
+        background: {
+          color: BackgroundColors.Transparent
+        },
         menu,
         events: {
           mouse: {
@@ -35499,7 +35502,8 @@ const MoreMenu = memo((__a) => {
               setMenuVisible(false);
             }
           }
-        }
+        },
+        shadow: DepthShadow.Surface
       })
     }))]
   });
