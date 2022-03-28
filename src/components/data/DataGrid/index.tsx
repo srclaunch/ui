@@ -192,7 +192,6 @@ export const DataGrid = memo(
           >
             {header.search && (
               <SearchInput
-                name="search-input"
                 events={{
                   input: {
                     onValueChange: ({ value }) => {
@@ -200,13 +199,18 @@ export const DataGrid = memo(
                     },
                   },
                 }}
+                margin={{
+                  right: Amount.Less,
+                }}
+                name="search-input"
                 placeholder={header.search.placeholder}
-                size={header.search.size}
+                size={{
+                  width: 160,
+                  ...header.search.size,
+                }}
                 {...header.search}
               />
             )}
-
-            <Spacer />
 
             {header.export && (
               <MenuButton
@@ -228,16 +232,18 @@ export const DataGrid = memo(
                   },
                 ]}
                 label="Export"
-                size={header.export.size}
+                size={{
+                  ...header.export.size,
+                }}
                 {...header.export}
               />
             )}
 
             {header.create && (
               <Button
-                lineHeight={Sizes.Small}
-                textSize={header.create.textSize ?? TextSize.Small}
-                type={header.create.type ?? ButtonType.Default}
+                lineHeight={Sizes.Default}
+                textSize={header.create.textSize ?? TextSize.Default}
+                type={header.create.type ?? ButtonType.Primary}
                 // size={{
                 //   height: Sizes.Small,
                 //   ...header.create.size,

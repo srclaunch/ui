@@ -31,6 +31,7 @@ import componentLibrary from '../component-library';
 import { getRoutes } from '../routes';
 import { Container } from '../../components/layout/Container';
 import { Component } from '../types/component';
+import { Overflow } from '../../types';
 
 export const ComponentPage = memo((): ReactElement => {
   const location = useLocation();
@@ -206,6 +207,11 @@ export const ComponentPage = memo((): ReactElement => {
                         }}
                       >
                         <Container
+                          alignment={{
+                            vertical: AlignVertical.Center,
+                            horizontal: AlignHorizontal.Center,
+                            overflow: Overflow.Hidden,
+                          }}
                           background={{ color: BackgroundColors.Lighter }}
                           borderRadius={{ all: Amount.Least }}
                           className="component-example-container"
@@ -213,6 +219,9 @@ export const ComponentPage = memo((): ReactElement => {
                           margin={{ bottom: Amount.Default }}
                           padding={{ all: Amount.All }}
                           shadow={DepthShadow.Low}
+                          size={{
+                            minHeight: 200,
+                          }}
                         >
                           {RenderComponent ? (
                             <RenderComponent />

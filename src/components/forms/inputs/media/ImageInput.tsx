@@ -161,7 +161,7 @@ export const ImageInput = memo(
 
     const dragLabel = `Drag ${maxImages > 1 ? 'images' : 'an image'} here...`;
     const buttonLabel = `Browse files`;
-
+    console.log('getRootProps(),', getRootProps());
     return (
       <>
         {(label || problems.length > 0) && (

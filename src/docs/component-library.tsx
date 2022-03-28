@@ -2,6 +2,7 @@ import { Exception } from '@srclaunch/exceptions';
 import { BasicIcons, DualLightIcons } from '@srclaunch/icons';
 import { Primitives } from '@srclaunch/types';
 import { useState } from 'react';
+import { Workspace } from '../components/containers/Workspace';
 import DataGrid from '../components/data/DataGrid';
 import { MenuButton } from '../components/forms/buttons/MenuButton';
 import { Checkbox } from '../components/forms/inputs/boolean/Checkbox';
@@ -229,7 +230,85 @@ export default {
     },
     {
       title: 'Containers',
+      description: 'Containers for various purpose',
       path: '/containers',
+      components: [
+        {
+          component: Workspace,
+          title: 'Workspace',
+          description:
+            'A container that provides functionality for dashboard workspaces.',
+          path: '/containers/workspace',
+          examples: [
+            {
+              title: 'Default',
+              properties: {
+                header: {
+                  title: 'Workspace',
+                },
+              },
+              code: `import { Workspace } from '@srclaunch/ui';
+
+const Example = () => (
+  <Workspace
+    header: {
+      title: 'Workspace',
+    },
+  >
+    Some Page content
+  </Workspace>
+);
+`,
+            },
+            {
+              title: 'With Subtitle',
+              properties: {
+                header: {
+                  title: 'Workspace',
+                  subTitle: 'SubTitle',
+                },
+              },
+              code: `import { Workspace } from '@srclaunch/ui';
+
+const Example = () => (
+  <Workspace
+    header: {
+      title: 'Workspace',
+      subTitle: 'SubTitle'
+    },
+  >
+    Some Page content
+  </Workspace>
+);
+`,
+            },
+            {
+              title: 'With action',
+              properties: {
+                header: {
+                  actions: <Button type={ButtonType.Primary}>Action</Button>,
+                  title: 'Workspace',
+                  subTitle: 'SubTitle',
+                },
+              },
+              code: `import { Workspace } from '@srclaunch/ui';
+
+const Example = () => (
+  <Workspace
+    header: {
+      actions: <Button>Action</Button>,
+      title: 'Workspace',
+      subTitle: 'SubTitle',
+    },
+  >
+    Some Page content
+  </Workspace>
+);
+`,
+            },
+          ],
+        },
+      ],
     },
     {
       title: 'Data',

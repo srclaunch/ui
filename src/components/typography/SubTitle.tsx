@@ -10,9 +10,9 @@ export const SubTitle = memo(
     as = 'h2',
     children,
     className = '',
-    lineHeight = Sizes.Small,
+    lineHeight = Sizes.Default,
     textSize = TextSize.Large,
-    textColor = TextColors.SubTitle,
+    textColor = TextColors.Light,
     textWeight = TextWeight.More,
     ...props
   }: SubTitleProps): ReactElement => {

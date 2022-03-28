@@ -31142,6 +31142,7 @@ const ImageInput = memo((_pa) => {
   }, [previewImages]);
   const dragLabel = `Drag ${maxImages > 1 ? "images" : "an image"} here...`;
   const buttonLabel = `Browse files`;
+  console.log("getRootProps(),", getRootProps());
   return /* @__PURE__ */ jsxs$1(Fragment, {
     children: [(label || problems.length > 0) && /* @__PURE__ */ jsxs$1(InputLabel, {
       states: {
@@ -35930,9 +35931,9 @@ const SubTitle = memo((_ib) => {
     as = "h2",
     children,
     className = "",
-    lineHeight = Sizes.Small,
+    lineHeight = Sizes.Default,
     textSize = TextSize.Large,
-    textColor = TextColors.SubTitle,
+    textColor = TextColors.Light,
     textWeight = TextWeight.More
   } = _jb, props = __objRest(_jb, [
     "as",
@@ -36006,32 +36007,26 @@ const Workspace = memo((_kb) => {
       }
     }), ((header == null ? void 0 : header.title) || (header == null ? void 0 : header.actions)) && /* @__PURE__ */ jsxs$1(Container$8, {
       alignment: {
+        horizontal: AlignHorizontal.Stretch,
         orientation: Orientation.Horizontal,
-        vertical: AlignVertical.Center
+        vertical: AlignVertical.Top
       },
       className: "workspace-header",
       margin: {
         bottom: Amount.All
       },
-      children: [/* @__PURE__ */ jsxs$1(Container$8, {
+      children: [((header == null ? void 0 : header.title) || header.subTitle) && /* @__PURE__ */ jsxs$1(Container$8, {
+        size: {
+          fill: Fill.Horizontal
+        },
         children: [(header == null ? void 0 : header.title) && /* @__PURE__ */ jsx$2(Container$8, {
-          alignment: {
-            orientation: Orientation.Horizontal,
-            vertical: AlignVertical.Center
-          },
           className: "workspace-title",
-          size: {
-            fill: Fill.Horizontal
-          },
           children: typeof header.title === "string" ? /* @__PURE__ */ jsx$2(Title, {
+            lineHeight: Sizes.Default,
             children: header.title
           }) : header.title
         }), (header == null ? void 0 : header.subTitle) && /* @__PURE__ */ jsx$2(Container$8, {
           className: "workspace-sub-title",
-          alignment: {
-            orientation: Orientation.Horizontal,
-            vertical: AlignVertical.Center
-          },
           children: /* @__PURE__ */ jsx$2(SubTitle, {
             children: header.subTitle
           })
@@ -40351,7 +40346,6 @@ const DataGrid = memo((_Cb) => {
         height: Sizes.Larger
       },
       children: [header.search && /* @__PURE__ */ jsx$2(SearchInput, __spreadValues({
-        name: "search-input",
         events: {
           input: {
             onValueChange: ({
@@ -40361,9 +40355,15 @@ const DataGrid = memo((_Cb) => {
             }
           }
         },
+        margin: {
+          right: Amount.Less
+        },
+        name: "search-input",
         placeholder: header.search.placeholder,
-        size: header.search.size
-      }, header.search)), /* @__PURE__ */ jsx$2(Spacer, {}), header.export && /* @__PURE__ */ jsx$2(MenuButton, __spreadValues({
+        size: __spreadValues({
+          width: 160
+        }, header.search.size)
+      }, header.search)), header.export && /* @__PURE__ */ jsx$2(MenuButton, __spreadValues({
         menu: [{
           events: {
             mouse: {
@@ -40378,11 +40378,11 @@ const DataGrid = memo((_Cb) => {
           label: "Export to CSV"
         }],
         label: "Export",
-        size: header.export.size
+        size: __spreadValues({}, header.export.size)
       }, header.export)), header.create && /* @__PURE__ */ jsx$2(Button$1, __spreadProps(__spreadValues({
-        lineHeight: Sizes.Small,
-        textSize: (_d = header.create.textSize) != null ? _d : TextSize.Small,
-        type: (_e2 = header.create.type) != null ? _e2 : ButtonType.Default
+        lineHeight: Sizes.Default,
+        textSize: (_d = header.create.textSize) != null ? _d : TextSize.Default,
+        type: (_e2 = header.create.type) != null ? _e2 : ButtonType.Primary
       }, header.create), {
         children: header.create.label
       }))]
