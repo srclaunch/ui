@@ -17,7 +17,14 @@ type MessageComposerProps = ContainerProps;
 export const MessageComposer = memo(
   ({ ...props }: MessageComposerProps): ReactElement => {
     return (
-      <Container background={{ color: BackgroundColors.Default }} {...props}>
+      <Container
+        alignment={{
+          horizontal: AlignHorizontal.Stretch,
+          vertical: AlignVertical.Stretch,
+        }}
+        background={{ color: BackgroundColors.Default }}
+        {...props}
+      >
         <Container
           alignment={{
             horizontal: AlignHorizontal.Center,

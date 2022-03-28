@@ -3,7 +3,7 @@ declare const _default: import("redux").Reducer<import("redux").CombinedState<{
     notifications: import("@reduxjs/toolkit").EntityState<{
         color?: string | undefined;
         id: number;
-        icon?: any;
+        icon?: string | undefined;
         message: string;
         timed: boolean;
         type?: import("@srclaunch/types").NotificationType | undefined;

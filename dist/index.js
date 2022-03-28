@@ -53214,6 +53214,10 @@ const Message$1 = memo(({
 const MessageComposer = memo((_Bc) => {
   var props = __objRest(_Bc, []);
   return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
+    alignment: {
+      horizontal: AlignHorizontal.Stretch,
+      vertical: AlignVertical.Stretch
+    },
     background: {
       color: BackgroundColors.Default
     }

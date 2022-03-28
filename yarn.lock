@@ -2128,7 +2128,7 @@ __metadata:
     "@srclaunch/transform": ^0.1.2
     "@srclaunch/types": ^0.1.21
     "@srclaunch/validation": ^0.1.2
-    "@srclaunch/web-application-state": ^0.1.53
+    "@srclaunch/web-application-state": ^0.1.54
     "@stripe/react-stripe-js": ^1.7.0
     "@stripe/stripe-js": ^1.22.0
     "@testing-library/jest-dom": ^5.16.2
@@ -2236,9 +2236,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/web-application-state@npm:^0.1.53":
-  version: 0.1.53
-  resolution: "@srclaunch/web-application-state@npm:0.1.53"
+"@srclaunch/web-application-state@npm:^0.1.54":
+  version: 0.1.54
+  resolution: "@srclaunch/web-application-state@npm:0.1.54"
   dependencies:
     "@reduxjs/toolkit": ^1.7.2
     "@srclaunch/exceptions": ^0.1.6
@@ -2247,7 +2247,7 @@ __metadata:
     "@srclaunch/logger": ^0.1.2
     "@srclaunch/themes": ^0.1.15
     "@srclaunch/validation": ^0.1.2
-    "@srclaunch/web-environment": ^0.1.2
+    "@srclaunch/web-environment": ^0.1.7
     amazon-cognito-identity-js: ^5.2.8
     crypto-js: ^4.1.1
     history: 5.2.0
@@ -2260,11 +2260,11 @@ __metadata:
   peerDependencies:
     react: ^17.0.2
     react-dom: ^17.0.2
-  checksum: a68415a385d23b98ff124b30c61cb88ee7bb593ec11afba907163d907a61b13aad30dd2c0cc83b2e85d98f1e70189b91420b0bba46db4be7a6b34e3c11b47c91
+  checksum: ad609d9fb3ecf2ddbef8aab66628860896bc6a89536ca38700b54d6c59fb105f49f7586d65447fde1e1ca3bcde0222830d15a4e7fd26e764d903597112a09cd7
   languageName: node
   linkType: hard
 
-"@srclaunch/web-environment@npm:^0.1.2":
+"@srclaunch/web-environment@npm:^0.1.7":
   version: 0.1.7
   resolution: "@srclaunch/web-environment@npm:0.1.7"
   checksum: 9392150a381f0aa548f72a27670b700f82856ca7ef3b19b0f5412ff636ceca50deb458a5925d7420c735482fe487df3a8e185093a2690a41b17812ef857eece6
