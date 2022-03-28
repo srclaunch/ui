@@ -36,7 +36,6 @@ export const MediaGrid = memo(
         {...props}
       >
         <LoadingOverlay
-          background={{ color: BackgroundColors.Transparent }}
           borderRadius={borderRadius}
           states={{
             state: {

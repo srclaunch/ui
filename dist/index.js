@@ -52761,9 +52761,6 @@ const MediaGrid = memo((_oc) => {
     }, size)
   }, props), {
     children: [/* @__PURE__ */ jsx$2(LoadingOverlay, {
-      background: {
-        color: BackgroundColors.Transparent
-      },
       borderRadius,
       states: {
         state: {
@@ -53362,11 +53359,15 @@ const ConversationNavigation = memo((_Gc) => {
     })]
   }));
 });
-const Inbox = memo(({
-  className = "",
-  size = {}
-}) => {
-  return /* @__PURE__ */ jsxs$1(Container$8, {
+const Inbox = memo((_Hc) => {
+  var _Ic = _Hc, {
+    className = "",
+    size = {}
+  } = _Ic, props = __objRest(_Ic, [
+    "className",
+    "size"
+  ]);
+  return /* @__PURE__ */ jsxs$1(Container$8, __spreadProps(__spreadValues({
     className: `${className} inbox`,
     alignment: {
       horizontal: AlignHorizontal.Stretch,
@@ -53375,7 +53376,8 @@ const Inbox = memo(({
     },
     size: __spreadValues({
       fill: Fill.Both
-    }, size),
+    }, size)
+  }, props), {
     children: [/* @__PURE__ */ jsx$2(ConversationNavigation, {
       borderRadius: {
         all: Amount.More
@@ -53433,7 +53435,7 @@ const Inbox = memo(({
         path: "conversation/:id"
       }]
     })]
-  });
+  }));
 });
 const Conversation = memo(({
   background = {},
@@ -53479,15 +53481,15 @@ const Message$1 = memo(({
 }) => {
   return /* @__PURE__ */ jsx$2(Container$8, {});
 });
-const Backdrop = memo((_Hc) => {
-  var _Ic = _Hc, {
+const Backdrop = memo((_Jc) => {
+  var _Kc = _Jc, {
     as = "div",
     background = {},
     children,
     className = "",
     position = {},
     states = {}
-  } = _Ic, props = __objRest(_Ic, [
+  } = _Kc, props = __objRest(_Kc, [
     "as",
     "background",
     "children",
@@ -53541,15 +53543,15 @@ const Content = styled.div.withConfig({
   displayName: "Content",
   componentId: "sc-gk61f6-1"
 })(["background:white;border-radius:15px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.25);padding:20px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;"]);
-const BreadcrumbNavigation = memo((_Jc) => {
-  var _Kc = _Jc, {
+const BreadcrumbNavigation = memo((_Lc) => {
+  var _Mc = _Lc, {
     alignment = {},
     className = "",
     items = [],
     shadow = DepthShadow.Surface,
     size = {},
     textSize = TextSize.Default
-  } = _Kc, props = __objRest(_Kc, [
+  } = _Mc, props = __objRest(_Mc, [
     "alignment",
     "className",
     "items",
@@ -53710,12 +53712,12 @@ const NavigationBar = memo(({
     })]
   });
 });
-const ObjectLink = memo((_Lc) => {
-  var _Mc = _Lc, {
+const ObjectLink = memo((_Nc) => {
+  var _Oc = _Nc, {
     children,
     disabled,
     onClick
-  } = _Mc, props = __objRest(_Mc, [
+  } = _Oc, props = __objRest(_Oc, [
     "children",
     "disabled",
     "onClick"
@@ -53880,12 +53882,12 @@ reactIs_production_min.typeOf = y;
 {
   reactIs.exports = reactIs_production_min;
 }
-const Tab = memo((_Nc) => {
-  var _Oc = _Nc, {
+const Tab = memo((_Pc) => {
+  var _Qc = _Pc, {
     className = "",
     children,
     label
-  } = _Oc, props = __objRest(_Oc, [
+  } = _Qc, props = __objRest(_Qc, [
     "className",
     "children",
     "label"
@@ -53897,13 +53899,13 @@ const Tab = memo((_Nc) => {
     children
   }));
 });
-const Tabs = memo((_Pc) => {
-  var _Qc = _Pc, {
+const Tabs = memo((_Rc) => {
+  var _Sc = _Rc, {
     background = {},
     borderRadius = {},
     className = "",
     children
-  } = _Qc, props = __objRest(_Qc, [
+  } = _Sc, props = __objRest(_Sc, [
     "background",
     "borderRadius",
     "className",
@@ -53976,18 +53978,18 @@ const Tabs = memo((_Pc) => {
     })]
   }));
 });
-const ConnectionStatus = memo((_Rc) => {
-  var props = __objRest(_Rc, []);
+const ConnectionStatus = memo((_Tc) => {
+  var props = __objRest(_Tc, []);
   return /* @__PURE__ */ jsx$2(NotificationLabel, __spreadValues({
     type: C$2.Success,
     label: "Connected"
   }, props));
 });
-const Badge = memo((_Sc) => {
-  var _Tc = _Sc, {
+const Badge = memo((_Uc) => {
+  var _Vc = _Uc, {
     children,
     label
-  } = _Tc, props = __objRest(_Tc, [
+  } = _Vc, props = __objRest(_Vc, [
     "children",
     "label"
   ]);
@@ -54095,10 +54097,10 @@ const SearchResults = styled.div.withConfig({
   displayName: "SearchResults",
   componentId: "sc-1rpv9xw-0"
 })(["backdrop-filter:blur(3px);background:var(--bg-color-depth-highest-opaque);border-radius:var(--border-radius);cursor:default;display:none;overflow:hidden;overflow-y:scroll;left:20px;max-height:390px;min-height:300px;position:absolute;opacity:0;pointer-events:none;top:80%;transform:translateY(-300px);transition:opacity 0.18s ease-in-out,transform 0.18s ease-in-out;min-width:500px;max-width:500px;z-index:3;.result{margin-bottom:3px;}", ";"], (props) => props.resultsVisible && css$2(["display:flex;opacity:1;pointer-events:all;transform:translateY(0);"]));
-const ThemeSelector = memo((_Uc) => {
-  var _Vc = _Uc, {
+const ThemeSelector = memo((_Wc) => {
+  var _Xc = _Wc, {
     label
-  } = _Vc, props = __objRest(_Vc, [
+  } = _Xc, props = __objRest(_Xc, [
     "label"
   ]);
   const dispatch = useDispatch();
@@ -75018,14 +75020,14 @@ var style = {
     "background": "linear-gradient(to right, rgba(224, 145, 66, 0.2) 70%, rgba(224, 145, 66, 0))"
   }
 };
-const CodeBlock = memo((_Wc) => {
-  var _Xc = _Wc, {
+const CodeBlock = memo((_Yc) => {
+  var _Zc = _Yc, {
     alignment = {},
     borderRadius = {},
     lineHeight = Sizes.Default,
     textSize = TextSize.Default,
     value: value2
-  } = _Xc, props = __objRest(_Xc, [
+  } = _Zc, props = __objRest(_Zc, [
     "alignment",
     "borderRadius",
     "lineHeight",
@@ -75054,13 +75056,13 @@ const CodeBlock = memo((_Wc) => {
     })
   }));
 });
-const LineBreak = memo((_Yc) => {
-  var _Zc = _Yc, {
+const LineBreak = memo((__c) => {
+  var _$c = __c, {
     className = "",
     size = {
       height: Sizes.Default
     }
-  } = _Zc, props = __objRest(_Zc, [
+  } = _$c, props = __objRest(_$c, [
     "className",
     "size"
   ]);
@@ -75069,14 +75071,14 @@ const LineBreak = memo((_Yc) => {
     size
   }, props));
 });
-const LogoutButton = memo((__c) => {
-  var _$c = __c, {
+const LogoutButton = memo((_ad) => {
+  var _bd = _ad, {
     icon: icon2,
     onLogoutSuccess,
     label,
     showArrow = false,
     textColor = TextColors.Error
-  } = _$c, props = __objRest(_$c, [
+  } = _bd, props = __objRest(_bd, [
     "icon",
     "onLogoutSuccess",
     "label",

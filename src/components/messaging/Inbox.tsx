@@ -16,7 +16,7 @@ import { ConversationNavigation } from './ConversationNavigation';
 export type InboxProps = ContainerProps;
 
 export const Inbox = memo(
-  ({ className = '', size = {} }: InboxProps): ReactElement => {
+  ({ className = '', size = {}, ...props }: InboxProps): ReactElement => {
     return (
       <Container
         className={`${className} inbox`}
@@ -29,6 +29,7 @@ export const Inbox = memo(
           fill: Fill.Both,
           ...size,
         }}
+        {...props}
       >
         <ConversationNavigation
           borderRadius={{ all: Amount.More }}
