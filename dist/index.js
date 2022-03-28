@@ -40210,7 +40210,7 @@ const MenuButton = memo((_Ab) => {
         }
       },
       label,
-      shadow: DepthShadow.High,
+      shadow: menuVisible ? DepthShadow.Surface : DepthShadow.High,
       size: __spreadValues({
         height: Sizes.Default
       }, size),

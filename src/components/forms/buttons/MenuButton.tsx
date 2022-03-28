@@ -93,7 +93,7 @@ export const MenuButton = memo(
             },
           }}
           label={label}
-          shadow={DepthShadow.High}
+          shadow={menuVisible ? DepthShadow.Surface : DepthShadow.High}
           size={{
             height: Sizes.Default,
             ...size,
