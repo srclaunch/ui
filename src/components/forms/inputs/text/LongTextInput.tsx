@@ -1,6 +1,13 @@
 import { ValidationProblem } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
-import { memo, ReactElement, useEffect, useRef, useState } from 'react';
+import {
+  memo,
+  ChangeEvent,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 
 import { TextStyles } from '../../../../styles/typography';
@@ -33,12 +40,12 @@ export const LongTextInput = memo(
     lineHeight = Amount.More,
     name,
     placeholder = '',
-    // size = Size.Default,
     shadow = DepthShadow.Low,
     spellCheck = true,
     states = {},
     textColor = TextColors.InputControl,
     validation = {},
+    ...props
   }: LongTextInputProps): ReactElement => {
     const [value, setValue] = useState(defaultValue ?? '');
     const [focused, setFocused] = useState(false);
@@ -119,16 +126,15 @@ export const LongTextInput = memo(
               focused,
             },
           }}
-          // size={size}
+          {...props}
         >
           <Input
             name={name}
             onBlur={() => setFocused(false)}
-            onChange={(e: any) => {
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => {
               setValueChanged(true);
 
-              // @ts-ignore
-              setValue(prefix + e.target.value + suffix);
+              setValue(e.target.value);
             }}
             onFocus={() => setFocused(true)}
             placeholder={placeholder}

@@ -118,9 +118,7 @@ export const DropdownControl = memo(
           component
         ) : (
           <Label
-            // lineHeight={`calc(${size?.height ?? Sizes.Default} - ${
-            //   states?.state?.dropdown?.visible ? 1 : 0
-            // }px)`}
+            lineHeight={size?.height ?? Sizes.Default}
             padding={{
               left: Amount.Less,
               right: Amount.Less,
