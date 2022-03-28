@@ -27733,13 +27733,40 @@ const FormActions = memo((_M) => {
     children
   }));
 });
-const PropertyEditor = memo((_O) => {
+const Scrollable = (_O) => {
   var _P = _O, {
+    alignment = {},
+    children,
+    className = "",
+    size = {}
+  } = _P, props = __objRest(_P, [
+    "alignment",
+    "children",
+    "className",
+    "size"
+  ]);
+  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
+    alignment: __spreadValues({
+      overflow: Overflow.ScrollVertical
+    }, alignment),
+    background: {
+      color: BackgroundColors.Transparent
+    },
+    className: `${className} scrollable`,
+    size: __spreadValues({
+      fill: Fill.Both
+    }, size)
+  }, props), {
+    children
+  }));
+};
+const PropertyEditor = memo((_Q) => {
+  var _R = _Q, {
     background = {},
     borderRadius = {},
     className = "",
     defaultValue = {}
-  } = _P, props = __objRest(_P, [
+  } = _R, props = __objRest(_R, [
     "background",
     "borderRadius",
     "className",
@@ -27762,7 +27789,7 @@ const PropertyEditor = memo((_O) => {
       return "undefined";
     }
     if (typeof value2 === "object") {
-      return JSON.stringify(value2);
+      return JSON.stringify(value2, null, 2);
     }
     if (typeof value2 === "function") {
       return value2.toString();
@@ -27870,16 +27897,21 @@ const PropertyEditor = memo((_O) => {
               children: key
             })
           }), /* @__PURE__ */ jsx$2(Container$8, {
-            padding: {
-              left: Amount.Less,
-              right: Amount.Less
-            },
             size: {
               fill: Fill.Horizontal
             },
-            children: /* @__PURE__ */ jsx$2(Label, {
-              lineHeight: Sizes.Large,
-              children: getValueLabel(defaultValue[key])
+            children: /* @__PURE__ */ jsx$2(Scrollable, {
+              alignment: {
+                overflow: Overflow.ScrollVertical
+              },
+              padding: {
+                left: Amount.Less,
+                right: Amount.Less
+              },
+              children: /* @__PURE__ */ jsx$2(Label, {
+                lineHeight: Sizes.Large,
+                children: getValueLabel(defaultValue[key])
+              })
             })
           })]
         }, key);
@@ -28055,14 +28087,14 @@ const ToggleInput = memo(({
     })]
   });
 });
-const EmailAddressInput = memo((_Q) => {
-  var _R = _Q, {
+const EmailAddressInput = memo((_S) => {
+  var _T = _S, {
     autoComplete = AutoComplete.EmailAddress,
     className = "",
     defaultValue,
     spellCheck = false,
     validation = {}
-  } = _R, props = __objRest(_R, [
+  } = _T, props = __objRest(_T, [
     "autoComplete",
     "className",
     "defaultValue",
@@ -28080,8 +28112,8 @@ const EmailAddressInput = memo((_Q) => {
     }, validation)
   }, props));
 });
-const PhoneNumberInput = memo((_S) => {
-  var props = __objRest(_S, []);
+const PhoneNumberInput = memo((_U) => {
+  var props = __objRest(_U, []);
   return /* @__PURE__ */ jsx$2(TextInput, __spreadValues({
     validation: {
       conditions: {
@@ -28107,8 +28139,8 @@ styled.div.withConfig({
   error: props.error,
   focused: props.focused
 }), Amount.Least, Amount.Least, Amount.Least, (props) => props.size, (props) => props.size, BackgroundColors.Dark, Sizes.Default, TextColors.Lighter, Cursor.Pointer, Sizes.Default, Amount.Least, Sizes.Default, BackgroundColors.Darker, Amount.All, TextColors.Default, Cursor.Pointer, TextWeight.More, Amount.Least, BackgroundColors.Darker, Amount.Least, TextColors.Default, Amount.Less, BackgroundColors.Darker, TextColors.Light, Cursor.Pointer, BackgroundColors.Primary, TextColors.InputControl, TextSize.Small, Amount.Least, TextColors.Darker);
-const DateInput = memo((_T) => {
-  var _U = _T, {
+const DateInput = memo((_V) => {
+  var _W = _V, {
     background = {},
     border = {},
     className = "",
@@ -28123,7 +28155,7 @@ const DateInput = memo((_T) => {
         [x$4.IsDate]: true
       }
     }
-  } = _U, props = __objRest(_U, [
+  } = _W, props = __objRest(_W, [
     "background",
     "border",
     "className",
@@ -28936,33 +28968,6 @@ function getDropdownMinHeight(count, padding) {
       return `calc((${Sizes.Default} * 3.5) + (${padding != null ? padding : Amount.Less} * 2)  + 2px)`;
   }
 }
-const Scrollable = (_V) => {
-  var _W = _V, {
-    alignment = {},
-    children,
-    className = "",
-    size = {}
-  } = _W, props = __objRest(_W, [
-    "alignment",
-    "children",
-    "className",
-    "size"
-  ]);
-  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
-    alignment: __spreadValues({
-      overflow: Overflow.ScrollVertical
-    }, alignment),
-    background: {
-      color: BackgroundColors.Transparent
-    },
-    className: `${className} scrollable`,
-    size: __spreadValues({
-      fill: Fill.Both
-    }, size)
-  }, props), {
-    children
-  }));
-};
 const NavigationLink = memo((_X) => {
   var _Y = _X, {
     activeClassName = "active",
@@ -35248,7 +35253,7 @@ function useEntityEditor() {
       setModelName(null);
       setEntity(void 0);
     };
-  }, [location.search]);
+  }, [location]);
   useEffect(() => {
     if (models && modelName) {
       const model = models[modelName];

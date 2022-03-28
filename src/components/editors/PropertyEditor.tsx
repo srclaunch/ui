@@ -8,9 +8,11 @@ import {
   Fill,
   InputValueChangeHandler,
   Orientation,
+  Overflow,
   Sizes,
 } from '../../types';
 import { Container, ContainerProps } from '../layout/Container';
+import { Scrollable } from '../layout/Scrollable';
 import { Label } from '../typography/Label';
 
 type PropertyEditorProps = ContainerProps & {
@@ -49,7 +51,7 @@ export const PropertyEditor = memo(
         return 'undefined';
       }
       if (typeof value === 'object') {
-        return JSON.stringify(value);
+        return JSON.stringify(value, null, 2);
       }
       if (typeof value === 'function') {
         return value.toString();
@@ -164,17 +166,23 @@ export const PropertyEditor = memo(
                 </Container>
 
                 <Container
-                  padding={{
-                    left: Amount.Less,
-                    right: Amount.Less,
-                  }}
                   size={{
                     fill: Fill.Horizontal,
                   }}
                 >
-                  <Label lineHeight={Sizes.Large}>
-                    {getValueLabel(defaultValue[key])}
-                  </Label>
+                  <Scrollable
+                    alignment={{
+                      overflow: Overflow.ScrollVertical,
+                    }}
+                    padding={{
+                      left: Amount.Less,
+                      right: Amount.Less,
+                    }}
+                  >
+                    <Label lineHeight={Sizes.Large}>
+                      {getValueLabel(defaultValue[key])}
+                    </Label>
+                  </Scrollable>
                 </Container>
               </Container>
             );

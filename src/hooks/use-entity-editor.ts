@@ -85,7 +85,7 @@ export function useEntityEditor() {
       // eslint-disable-next-line unicorn/no-useless-undefined
       setEntity(undefined);
     };
-  }, [location.search]);
+  }, [location]);
 
   useEffect(() => {
     if (models && modelName) {

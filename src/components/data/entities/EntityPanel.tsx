@@ -1,9 +1,13 @@
-// import { Model } from '@srclaunch/types';
-// import { RootState, useSearchParams, useSelector } from '@srclaunch/web-application-state';
+import { Model } from '@srclaunch/types';
 // import { Entity } from '@srclaunch/actions';
 import { HttpClient } from '@srclaunch/http-client';
 import { BasicIcons } from '@srclaunch/icons';
-import { useDispatch, useSelector } from '@srclaunch/web-application-state';
+import {
+  RootState,
+  useSearchParams,
+  useDispatch,
+  useSelector,
+} from '@srclaunch/web-application-state';
 import { camelCase, capitalCase } from 'change-case';
 import pluralize from 'pluralize';
 import { memo, ReactElement, useEffect, useState } from 'react';
@@ -45,8 +49,8 @@ export const EntityPanel = memo(
       }
     }, [model]);
 
-    // const id = searchParams.get('id');
-    // const newEntity = searchParams.get('new');
+    // const id = entity?.id;
+    // const newEntity = !id;
     // const edit = searchParams.get('edit');
 
     // console.log('newEntity', newEntity);
@@ -72,7 +76,7 @@ export const EntityPanel = memo(
     //   label: 'Edit',
     //   onClick: () => dispatch(showModelPanel({ edit: true, id, model })),
     // };
-    //
+
     // const detailsItem = {
     //   label: 'Details',
     //   onClick: () => dispatch(showModelPanel({ id, model })),
