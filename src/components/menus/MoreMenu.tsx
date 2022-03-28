@@ -1,5 +1,6 @@
 import { memo, ReactElement, useRef, useState } from 'react';
 import styled from 'styled-components';
+import { getDropdownMinHeight } from '../../lib/forms/dropdowns';
 import { BackgroundStyles } from '../../styles/container/background';
 import { BorderRadiusStyles } from '../../styles/container/border-radius';
 import { MarginStyles } from '../../styles/container/margin';
@@ -38,6 +39,7 @@ export const MoreMenu = memo(
     background = {},
     className = '',
     dotColor = ForegroundColors.MoreMenu,
+    padding = {},
     size = {},
     states = {},
     menu,
@@ -129,11 +131,17 @@ export const MoreMenu = memo(
         </Button>
 
         <HoverPanel
-          states={{
-            state: {
-              visible: menuVisibleRef.current,
-            },
+          padding={{ all: Amount.Least, ...padding }}
+          position={{ top: `calc(${Sizes.Default} - 3px)` }}
+          size={{
+            maxHeight: 320,
+            minHeight: getDropdownMinHeight(menu?.length ?? 1, Amount.Least),
           }}
+          states={{
+            state: { focused, visible: menuVisibleRef.current },
+            ...states,
+          }}
+          {...props}
         >
           <Menu
             menu={menu}

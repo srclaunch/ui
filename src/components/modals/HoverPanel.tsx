@@ -54,7 +54,6 @@ export const HoverPanel = memo(
           ...size,
         }}
         states={states}
-        {...props}
       >
         {children}
       </Container>

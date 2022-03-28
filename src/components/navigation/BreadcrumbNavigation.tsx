@@ -7,6 +7,7 @@ import {
   DepthShadow,
   Fill,
   Orientation,
+  Sizes,
   TextColors,
   TextDecorationLine,
   TextSize,
@@ -61,7 +62,6 @@ export const BreadcrumbNavigation = memo(
             {path ? (
               <NavigationLink
                 to={path}
-                key={index}
                 states={{
                   hovered: {
                     textDecoration: {
@@ -74,6 +74,7 @@ export const BreadcrumbNavigation = memo(
                 }}
               >
                 <Title
+                  lineHeight={Sizes.Default}
                   textColor={TextColors.Primary}
                   textSize={textSize}
                   textWeight={TextWeight.Most}
@@ -83,7 +84,7 @@ export const BreadcrumbNavigation = memo(
               </NavigationLink>
             ) : (
               <Title
-                key={index}
+                lineHeight={Sizes.Default}
                 textSize={textSize}
                 textWeight={TextWeight.Most}
               >

@@ -35,7 +35,14 @@ import {
   SignupForm,
   Validation,
 } from '../index';
-import { BackgroundColors, Colors, Fill, Sizes, TextColors } from '../types';
+import {
+  AlignHorizontal,
+  BackgroundColors,
+  Colors,
+  Fill,
+  Sizes,
+  TextColors,
+} from '../types';
 import { ComponentLibrary } from './types/component';
 
 export default {
@@ -1237,18 +1244,22 @@ const Example = () => (
           examples: [
             {
               title: 'Default',
-              properties: {
-                menu: [
-                  {
-                    label: 'Menu item',
-                    value: 'menu-item',
-                  },
-                  {
-                    label: 'Menu item 2',
-                    value: 'menu-item-2',
-                  },
-                ],
-              },
+              render: () => (
+                <Container alignment={{ horizontal: AlignHorizontal.Center }}>
+                  <MoreMenu
+                    menu={[
+                      {
+                        label: 'Menu item',
+                        value: 'menu-item',
+                      },
+                      {
+                        label: 'Menu item 2',
+                        value: 'menu-item-2',
+                      },
+                    ]}
+                  />
+                </Container>
+              ),
             },
           ],
         },

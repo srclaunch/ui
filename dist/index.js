@@ -35344,7 +35344,7 @@ const HoverPanel = memo((_Ya) => {
     "states"
   ]);
   var _a2;
-  return /* @__PURE__ */ jsx$2(Container$8, __spreadProps(__spreadValues({
+  return /* @__PURE__ */ jsx$2(Container$8, {
     background: __spreadValues({
       color: BackgroundColors.Lightest
     }, background),
@@ -35369,10 +35369,9 @@ const HoverPanel = memo((_Ya) => {
     size: __spreadValues({
       minWidth: 140
     }, size),
-    states
-  }, props), {
+    states,
     children
-  }));
+  });
 });
 const MoreMenu = memo((__a) => {
   var _$a = __a, {
@@ -35380,6 +35379,7 @@ const MoreMenu = memo((__a) => {
     background = {},
     className = "",
     dotColor = ForegroundColors.MoreMenu,
+    padding = {},
     size = {},
     states = {},
     menu
@@ -35388,10 +35388,12 @@ const MoreMenu = memo((__a) => {
     "background",
     "className",
     "dotColor",
+    "padding",
     "size",
     "states",
     "menu"
   ]);
+  var _a2;
   const [menuVisible, setMenuVisible] = useState(false);
   const [focused, setFocused] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -35470,12 +35472,24 @@ const MoreMenu = memo((__a) => {
           width: 5
         }
       }, i2))
-    })), /* @__PURE__ */ jsx$2(HoverPanel, {
-      states: {
+    })), /* @__PURE__ */ jsx$2(HoverPanel, __spreadProps(__spreadValues({
+      padding: __spreadValues({
+        all: Amount.Least
+      }, padding),
+      position: {
+        top: `calc(${Sizes.Default} - 3px)`
+      },
+      size: {
+        maxHeight: 320,
+        minHeight: getDropdownMinHeight((_a2 = menu == null ? void 0 : menu.length) != null ? _a2 : 1, Amount.Least)
+      },
+      states: __spreadValues({
         state: {
+          focused,
           visible: menuVisibleRef.current
         }
-      },
+      }, states)
+    }, props), {
       children: /* @__PURE__ */ jsx$2(Menu, {
         menu,
         events: {
@@ -35487,7 +35501,7 @@ const MoreMenu = memo((__a) => {
           }
         }
       })
-    })]
+    }))]
   });
 });
 const Dot = styled.span.withConfig({
@@ -53386,16 +53400,18 @@ const BreadcrumbNavigation = memo((_Ec) => {
           line: TextDecorationLine.None
         },
         children: /* @__PURE__ */ jsx$2(Title, {
+          lineHeight: Sizes.Default,
           textColor: TextColors.Primary,
           textSize,
           textWeight: TextWeight.Most,
           children: label
         })
-      }, index) : /* @__PURE__ */ jsx$2(Title, {
+      }) : /* @__PURE__ */ jsx$2(Title, {
+        lineHeight: Sizes.Default,
         textSize,
         textWeight: TextWeight.Most,
         children: label
-      }, index), index !== items.length - 1 && /* @__PURE__ */ jsx$2(Icon, {
+      }), index !== items.length - 1 && /* @__PURE__ */ jsx$2(Icon, {
         name: DualLightIcons.ChevronDoubleRight,
         margin: {
           left: Amount.Less,
