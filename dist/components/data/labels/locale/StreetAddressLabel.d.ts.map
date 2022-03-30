@@ -1,0 +1,1 @@
+{"version":3,"file":"StreetAddressLabel.d.ts","sourceRoot":"","sources":["../../../../../src/components/data/labels/locale/StreetAddressLabel.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAQ,YAAY,EAAE,MAAM,OAAO,CAAC;AAE3C,OAAO,EAAS,UAAU,EAAE,MAAM,2BAA2B,CAAC;AAI9D,aAAK,uBAAuB,GAAG,UAAU,GAAG;IAC1C,KAAK,EAAE,MAAM,CAAC;CACf,CAAC;AAEF,eAAO,MAAM,kBAAkB,mGAQ1B,uBAAuB,KAAG,YAAY,CAa1C,CAAC"}

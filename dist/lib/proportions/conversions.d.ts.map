@@ -1,0 +1,1 @@
+{"version":3,"file":"conversions.d.ts","sourceRoot":"","sources":["../../../src/lib/proportions/conversions.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,KAAK,EAAE,QAAQ,EAAE,MAAM,aAAa,CAAC;AAEtD,wBAAgB,mBAAmB,CAAC,MAAM,EAAE,MAAM,GAAG,KAAK,CAiBzD;AAED,wBAAgB,mBAAmB,CAAC,IAAI,CAAC,EAAE,KAAK,GAAG,MAAM,CAmBxD;AAED,wBAAgB,qBAAqB,CAAC,IAAI,CAAC,EAAE,KAAK,GAAG,QAAQ,CAmB5D"}

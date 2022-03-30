@@ -1,0 +1,1 @@
+{"version":3,"file":"PostalCodeLabel.d.ts","sourceRoot":"","sources":["../../../../../src/components/data/labels/locale/PostalCodeLabel.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAQ,YAAY,EAAE,MAAM,OAAO,CAAC;AAE3C,OAAO,EAAS,UAAU,EAAE,MAAM,2BAA2B,CAAC;AAI9D,aAAK,oBAAoB,GAAG,UAAU,GAAG;IACvC,KAAK,EAAE,MAAM,CAAC;CACf,CAAC;AAEF,eAAO,MAAM,eAAe,mGAQvB,oBAAoB,KAAG,YAAY,CAavC,CAAC"}
