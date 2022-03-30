@@ -1,1 +1,0 @@
-{"version":3,"file":"ProgressSpinner.d.ts","sourceRoot":"","sources":["../../../src/components/progress/ProgressSpinner.tsx"],"names":[],"mappings":"AACA,OAAO,EAAQ,YAAY,EAAE,MAAM,OAAO,CAAC;AAI3C,OAAO,EAAE,IAAI,EAAS,MAAM,aAAa,CAAC;AAI1C,aAAK,oBAAoB,GAAG;IAC1B,IAAI,CAAC,EAAE,IAAI,CAAC;CACb,CAAC;AAEF,eAAO,MAAM,eAAe,iDACV,oBAAoB,KAAG,YAAY,CA+BpD,CAAC"}

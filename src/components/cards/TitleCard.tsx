@@ -27,12 +27,12 @@ export const TitleCard = memo(
     borderRadius = {},
     className = '',
     label,
-    loading = false,
     padding = {},
     value,
     icon,
     shadow = DepthShadow.High,
     size = {},
+    states = {},
     ...props
   }: TitleCardProps): ReactElement => {
     return (
@@ -52,7 +52,7 @@ export const TitleCard = memo(
             width: Sizes.Small,
           }}
           states={{
-            state: { visible: loading },
+            state: { visible: Boolean(states.state?.loading) },
           }}
         />
 
@@ -64,7 +64,7 @@ export const TitleCard = memo(
           />
         )}
 
-        {!loading && (
+        {!Boolean(states.state?.loading) && (
           <Container
             alignment={{
               orientation: Orientation.Vertical,

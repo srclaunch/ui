@@ -46,6 +46,7 @@ import {
   TextColors,
 } from '../types';
 import { ComponentLibrary } from './types/component';
+import { PricingPlans } from '../components/billing/subscriptions/plans/PricingPlans';
 
 export default {
   name: 'AppLab UI',
@@ -192,7 +193,21 @@ export default {
     },
     {
       title: 'Billing',
+      description: 'Billing, payments, and subscription related components.',
       path: '/billing',
+      components: [
+        {
+          component: PricingPlans,
+          title: 'PricingPlans',
+          description: 'A list of pricing plans',
+          path: '/billing/pricing-plans',
+          examples: [
+            {
+              properties: {},
+            },
+          ],
+        },
+      ],
     },
     {
       title: 'Cards',

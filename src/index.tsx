@@ -11,6 +11,7 @@ export { CodeVerificationForm } from './components/authentication/CodeVerificati
 export { ForgotPasswordForm } from './components/authentication/ForgotPasswordForm';
 export { LoginForm } from './components/authentication/LoginForm';
 export { SignupForm } from './components/authentication/SignupForm';
+export { PricingPlans } from './components/billing/subscriptions/plans/PricingPlans';
 export { AddPaymentMethodForm } from './components/billing/payments/AddPaymentMethodForm';
 export { PaymentMethodModal } from './components/billing/payments/PaymentMethodModal';
 export { ProgressivePaymentStatus } from './components/billing/payments/ProgressivePaymentStatus';

@@ -18,7 +18,7 @@ export const Page = memo(
     children,
     className = '',
     layout: Layout,
-    loading = false,
+    states = {},
     size = {},
     title,
     ...props
@@ -34,6 +34,7 @@ export const Page = memo(
         }}
         background={{ color: BackgroundColors.Page, ...background }}
         className={`${className} page`}
+        states={states}
         size={{
           fill: Fill.Both,
           ...size,
@@ -43,7 +44,7 @@ export const Page = memo(
         <LoadingOverlay
           states={{
             state: {
-              visible: loading,
+              visible: Boolean(states.state?.loading),
             },
           }}
         />

@@ -22,7 +22,6 @@ type WorkspaceProps = ContainerProps & {
     readonly subTitle?: string;
   };
   readonly layout?: ElementType;
-  readonly loading?: boolean;
   readonly loginRequired?: boolean;
   readonly title?: string | null;
 };
@@ -35,10 +34,10 @@ export const Workspace = memo(
     children,
     header,
     layout: Layout,
-    loading = false,
     loginRequired = false,
     padding = {},
     size = {},
+    states = {},
     title,
     ...props
   }: WorkspaceProps): ReactElement => {
@@ -58,10 +57,13 @@ export const Workspace = memo(
           fill: Fill.Both,
           ...size,
         }}
+        states={states}
         {...props}
         {...props2}
       >
-        <LoadingOverlay states={{ state: { visible: loading } }} />
+        <LoadingOverlay
+          states={{ state: { visible: Boolean(states.state?.loading) } }}
+        />
 
         {(header?.title || header?.actions) && (
           <Container

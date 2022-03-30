@@ -1,5 +1,5 @@
-const base = require('@srclaunch/dx/.stylelintrc.ui');
+import base from '@srclaunch/dx/.stylelintrc.ui';
 
-module.exports = {
-  ...base
+export default {
+  ...base,
 };
