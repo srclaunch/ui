@@ -1,9 +1,9 @@
 import { css, SimpleInterpolation } from 'styled-components';
-import { getContainerStyles } from './index';
-import { ContainerProps } from '../../components/layout/Container';
-import { Background, BackgroundColors, BorderColors } from '../../types';
 
+import { ContainerProps } from '../../components/layout/Container';
 import { getCSSColorValue } from '../../lib/css/properties';
+import { Background, BackgroundColors, BorderColors } from '../../types';
+import { getContainerStyles } from './index';
 
 export function getDisabledStateStyles(): SimpleInterpolation {
   return css`

@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { NotificationType } from '@srclaunch/types';
+import { NotificationType } from '@srclaunch/web-application-state';
 import { ContainerProps } from '../layout/Container';
 import { TextProps } from '../typography/Text';
 export declare type NotificationLabelProps = ContainerProps & TextProps & {

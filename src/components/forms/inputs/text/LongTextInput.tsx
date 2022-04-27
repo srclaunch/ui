@@ -56,7 +56,10 @@ export const LongTextInput = memo(
     useEffect(() => {
       if (valueChanged) {
         if (validation && validation.conditions) {
-          const probs = validate(value, validation.conditions);
+          const probs = validate(
+            value,
+            validation.conditions,
+          ) as ValidationProblem[];
 
           setProblems(probs);
 

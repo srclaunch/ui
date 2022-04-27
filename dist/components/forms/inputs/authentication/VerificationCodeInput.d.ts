@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import { ReactElement } from 'react';
 import { ContainerProps } from '../../../layout/Container';
 export declare enum VerificationCodeType {
     Alpha = "alpha",
@@ -7,9 +7,9 @@ export declare enum VerificationCodeType {
 }
 import { InputProps } from '../shared/Input';
 declare type VerificationCodeInputProps = ContainerProps & InputProps<string> & {
-    length?: number;
-    codeType?: VerificationCodeType;
+    readonly length?: number;
+    readonly codeType?: VerificationCodeType;
 };
-export declare const VerificationCodeInput: import("react").MemoExoticComponent<({ as, className, defaultValue, events, length, name, placeholder, states, textSize, textColor, codeType, ...props }: VerificationCodeInputProps) => React.ReactElement>;
+export declare const VerificationCodeInput: import("react").MemoExoticComponent<({ as, className, defaultValue, events, length, name, placeholder, states, textSize, textColor, codeType, ...props }: VerificationCodeInputProps) => ReactElement>;
 export {};
 //# sourceMappingURL=VerificationCodeInput.d.ts.map

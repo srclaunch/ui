@@ -105,7 +105,7 @@ export const ImageInput = memo(
       return null;
     };
 
-    const onDrop = useCallback(files => {
+    const onDrop = useCallback((files: any) => {
       for (const file of files) {
         if (validateFileType(file)) {
           if (maxImages > 1) {

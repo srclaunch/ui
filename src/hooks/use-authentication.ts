@@ -8,7 +8,7 @@ import {
   useMatch,
   useResolvedPath,
 } from '@srclaunch/web-application-state';
-import { PageRole, PageRoute } from '@srclaunch/types';
+import { RouteRole, Route } from '@srclaunch/types';
 
 export function useAuthentication({
   enabled = true,
@@ -28,14 +28,14 @@ export function useAuthentication({
   const loggedIn = useSelector(
     (state: RootState) => state.user.authentication.state.loggedIn,
   );
-  const routes: PageRoute[] = useSelector(
+  const routes: Route[] = useSelector(
     (state: RootState) => state.app.routes.list,
   );
 
   const indexPagePath =
-    routes.find(r => r.role === PageRole.Index)?.path ?? '/';
+    routes.find(r => r.role === RouteRole.Index)?.path ?? '/';
   const loginPagePath =
-    routes.find(r => r.role === PageRole.Login)?.path ?? 'login';
+    routes.find(r => r.role === RouteRole.Login)?.path ?? 'login';
 
   const checkAuth = () => {
     routes.forEach(route => {

@@ -26,7 +26,7 @@ export const PageLink = memo(
     return (
       <Container showUnderline={showUnderline}>
         <Link to={to}>
-          <IconWrapper>{icon}</IconWrapper>
+          {icon && <Icon {...icon} />}
 
           <Label
             textColor={textColor ?? TextColors.Primary}

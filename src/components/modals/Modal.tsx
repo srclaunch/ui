@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 type ModalProps = {
-  children: React.ReactChildren;
+  children: ReactElement;
   visible: boolean;
   setVisible: (visible: boolean) => unknown;
 };

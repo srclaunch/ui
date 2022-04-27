@@ -5,7 +5,7 @@ import { Label, LabelProps } from '../typography/Label';
 import { Sizes, TextColors, TextSize } from '../../types';
 
 type StaticTypeLabelProps = LabelProps & {
-  readonly value?: Record<string, object>;
+  readonly value?: ReactElement;
 };
 
 export const StaticTypeLabel = memo(

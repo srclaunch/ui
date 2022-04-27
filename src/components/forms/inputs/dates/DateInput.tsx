@@ -228,13 +228,18 @@ export const DateInput = memo(
   }: DateInputProps): ReactElement => {
     const [value, setValue] = useState<ISO8601String | undefined>(defaultValue);
     const [focused, setFocused] = useState(false);
-    const [problems, setProblems] = useState<ValidationProblem[]>([]);
+    const [problems, setProblems] = useState<ValidationProblem[] | undefined>(
+      [],
+    );
     const [valueChanged, setValueChanged] = useState(false);
 
     useEffect(() => {
       if (valueChanged) {
         if (validation?.conditions) {
-          const probs = validate(value, validation.conditions);
+          const probs = validate(
+            value,
+            validation.conditions,
+          ) as ValidationProblem[];
 
           setProblems(probs);
 
@@ -261,7 +266,7 @@ export const DateInput = memo(
 
     return (
       <>
-        {(label || problems.length > 0) && (
+        {(label || (problems && problems.length > 0)) && (
           <InputLabel states={{ state: { error: problems } }}>
             {label}
           </InputLabel>

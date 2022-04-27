@@ -1,4 +1,3 @@
-import { memo, ReactElement, useEffect, useState } from 'react';
 import { BasicIcons } from '@srclaunch/icons';
 import { UserVerificationStatus, ValidationProblem } from '@srclaunch/types';
 import {
@@ -11,6 +10,8 @@ import {
   useSelector,
   verifyCode,
 } from '@srclaunch/web-application-state';
+import { memo, ReactElement, useEffect, useState } from 'react';
+
 import {
   AlignHorizontal,
   Amount,
@@ -99,7 +100,7 @@ export const CodeVerificationForm = memo(
         verificationState.status.state === UserVerificationStatus.Confirmed ? (
           <Container padding={{ all: Amount.Default }}>
             <Title alignment={{ horizontal: AlignHorizontal.Center }}>
-              You're verified!
+              You&apos;re verified!
             </Title>
 
             <Paragraph
@@ -134,14 +135,7 @@ export const CodeVerificationForm = memo(
               <b>{verificationState.delivery?.destination}</b>.
             </Paragraph>
 
-            <Container
-            // padding={{
-            //   bottom: Amount.None,
-            //   left: Amount.More,
-            //   right: Amount.More,
-            //   top: Amount.Default,
-            // }}
-            >
+            <Container>
               <InputRow>
                 <VerificationCodeInput
                   autoComplete={AutoComplete.OneTimeCode}
@@ -149,6 +143,9 @@ export const CodeVerificationForm = memo(
                     input: {
                       onValueChange: ({ validation, value }) => {
                         setProblems(validation?.problems);
+
+                        console.log('validation', validation);
+                        console.log('value', value);
 
                         if (
                           (validation && validation.validated) ||

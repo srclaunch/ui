@@ -9,15 +9,15 @@ import {
   BorderColors,
   BorderStyle,
   Cursor,
-  States,
+  Fill,
   Orientation,
   Overflow,
   Sizes,
+  States,
   TextAlign,
   TextColors,
   TextDecorationLine,
   TextSize,
-  Fill,
 } from '../../../types/index';
 import { Container, ContainerProps } from '../../layout/Container';
 import { IconProps } from '../../media/Icon';
@@ -93,6 +93,7 @@ export const Button = memo(
     children,
     className = '',
     cursor = Cursor.Pointer,
+    events = {},
     form,
     icon,
     label,
@@ -204,6 +205,7 @@ export const Button = memo(
               setFocused(true);
             },
           },
+          ...events,
         }}
         form={form}
         padding={
@@ -224,6 +226,7 @@ export const Button = memo(
         //   spread: 4,
         // }}
         states={{
+          ...states,
           active: {
             background: {
               color: background?.color ?? colors?.backgroundColor,
@@ -236,7 +239,6 @@ export const Button = memo(
               opacity: 90,
             },
           },
-          ...states,
           state: {
             ...states.state,
             focused,

@@ -167,7 +167,7 @@ export const EntityPanel = memo(
                   }
                 : undefined
             }
-            title={getHeaderTitle()}
+            title={<>{getHeaderTitle()}</>}
           />
 
           <Container

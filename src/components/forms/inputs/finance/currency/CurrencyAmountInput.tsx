@@ -44,7 +44,10 @@ export const CurrencyAmountInput = memo(
     useEffect(() => {
       if (valueChanged) {
         if (validation?.conditions) {
-          const probs = validate(value, validation.conditions);
+          const probs = validate(
+            value,
+            validation.conditions,
+          ) as ValidationProblem[];
 
           setProblems(probs);
 

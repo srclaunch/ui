@@ -1,1 +1,0 @@
-{"version":3,"file":"HexadecimalLabel.d.ts","sourceRoot":"","sources":["../../../../../src/components/data/labels/data/HexadecimalLabel.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAQ,YAAY,EAAE,MAAM,OAAO,CAAC;AAE3C,OAAO,EAAS,UAAU,EAAE,MAAM,2BAA2B,CAAC;AAI9D,aAAK,qBAAqB,GAAG,UAAU,GAAG;IACxC,KAAK,EAAE,MAAM,CAAC;CACf,CAAC;AAEF,eAAO,MAAM,gBAAgB,mGAQxB,qBAAqB,KAAG,YAAY,CAaxC,CAAC"}

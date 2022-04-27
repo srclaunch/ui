@@ -1,5 +1,8 @@
-import { Notification } from '@srclaunch/types';
-import { RootState, useSelector } from '@srclaunch/web-application-state';
+import {
+  RootState,
+  useSelector,
+  Notification,
+} from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
 import styled from 'styled-components';
 
@@ -17,7 +20,9 @@ export const Notifications = memo((): ReactElement => {
       {notifications.map((notification: Notification) => {
         return (
           <NotificationContainer key={notification.id}>
-            <IconWrapper color={notification.color}>
+            <IconWrapper
+            // color={notification.color}
+            >
               {/* <Icon name={notification.icon} /> */}
             </IconWrapper>
             <Close>
@@ -31,7 +36,7 @@ export const Notifications = memo((): ReactElement => {
                 }}
               />
             </Close>
-            <Message>{notification.message}</Message>
+            <Message>{notification.label}</Message>
           </NotificationContainer>
         );
       })}

@@ -1,4 +1,4 @@
-import { PageRoute } from '@srclaunch/types';
+import { Route as RouteType } from '@srclaunch/types';
 import { memo, ReactElement } from 'react';
 import { Router, Routes, Route } from '@srclaunch/web-application-state';
 import {
@@ -11,7 +11,7 @@ import {
 import { Container, ContainerProps } from '../layout/Container';
 
 export type RouterViewProps = {
-  routes: PageRoute[];
+  routes: RouteType[];
 } & Omit<ContainerProps, 'children'>;
 
 export const RouterView = memo(

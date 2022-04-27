@@ -1,5 +1,5 @@
 import { memo, ReactElement } from 'react';
-import { NotificationType } from '@srclaunch/types';
+import { NotificationType } from '@srclaunch/web-application-state';
 import {
   AlignHorizontal,
   AlignVertical,

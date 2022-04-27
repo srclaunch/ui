@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 declare type ModalProps = {
-    children: React.ReactChildren;
+    children: ReactElement;
     visible: boolean;
     setVisible: (visible: boolean) => unknown;
 };

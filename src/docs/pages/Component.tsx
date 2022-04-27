@@ -1,5 +1,7 @@
+import { useLocation, useMatch } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
-import { useMatch, useLocation } from '@srclaunch/web-application-state';
+
+import { Container } from '../../components/layout/Container';
 import {
   AlignHorizontal,
   AlignVertical,
@@ -12,12 +14,12 @@ import {
   DepthShadow,
   Fill,
   Heading,
-  NavigationLink,
-  PropertyEditor,
-  ObjectPropertiesView,
   Label,
   LineBreak,
+  NavigationLink,
+  ObjectPropertiesView,
   Paragraph,
+  PropertyEditor,
   Sizes,
   Tab,
   Tabs,
@@ -26,12 +28,11 @@ import {
   UnorderedList,
   Workspace,
 } from '../../index';
-import { Documentation } from '../layouts/Documentation';
-import componentLibrary from '../component-library';
-import { getRoutes } from '../routes';
-import { Container } from '../../components/layout/Container';
-import { Component } from '../types/component';
 import { Overflow } from '../../types';
+import componentLibrary from '../component-library';
+import { Documentation } from '../layouts/Documentation';
+import { getRoutes } from '../routes';
+import { Component } from '../types/component';
 
 export const ComponentPage = memo((): ReactElement => {
   const location = useLocation();
@@ -206,8 +207,8 @@ export const ComponentPage = memo((): ReactElement => {
                       >
                         <Container
                           alignment={{
-                            vertical: AlignVertical.Stretch,
                             horizontal: AlignHorizontal.Stretch,
+                            vertical: AlignVertical.Stretch,
                           }}
                           background={{ color: BackgroundColors.Lighter }}
                           borderRadius={{ all: Amount.Least }}

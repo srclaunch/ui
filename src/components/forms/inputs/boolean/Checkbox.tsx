@@ -34,7 +34,10 @@ export const Checkbox = memo(
 
     useEffect(() => {
       if (validation?.conditions) {
-        const probs = validate(value, validation.conditions);
+        const probs = validate(
+          value,
+          validation.conditions,
+        ) as ValidationProblem[];
 
         setProblems(probs);
 

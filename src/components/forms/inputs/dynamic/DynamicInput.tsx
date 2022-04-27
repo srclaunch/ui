@@ -1,4 +1,5 @@
-import { NotificationType, Primitives } from '@srclaunch/types';
+import { Primitives } from '@srclaunch/types';
+import { NotificationType } from '@srclaunch/web-application-state';
 import { memo, ReactElement } from 'react';
 
 import { NotificationLabel } from '../../../notifications/NotificationLabel';

@@ -15,7 +15,7 @@ import { CloseButton } from './CloseButton';
 export type ModalHeaderProps = ContainerProps & {
   readonly onCloseClick?: () => unknown;
   readonly moreMenu?: MoreMenuProps;
-  readonly title?: string | ComponentType;
+  readonly title?: ReactElement;
 };
 
 export const ModalHeader = memo(

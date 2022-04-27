@@ -10,6 +10,7 @@ export const TextInput = memo(
   ({ className = '', ...props }: TextInputProps): ReactElement => {
     return (
       <InputContainer
+      
         className={`${className} text-input`}
         type={InputType.Text}
         {...props}

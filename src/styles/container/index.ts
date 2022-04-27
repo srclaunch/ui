@@ -1,4 +1,5 @@
 import { css, SimpleInterpolation } from 'styled-components';
+
 import { ContainerProps } from '../../components/layout/Container';
 import { Amount } from '../../types';
 import { getAlignmentStyles } from './alignment';

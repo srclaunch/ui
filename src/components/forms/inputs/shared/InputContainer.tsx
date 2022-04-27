@@ -1,4 +1,7 @@
-import { memo, useEffect, useRef, useState, ReactElement } from 'react';
+import { ValidationProblem } from '@srclaunch/types';
+import { validate } from '@srclaunch/validation';
+import { memo, ReactElement, useEffect, useRef, useState } from 'react';
+
 import {
   AlignVertical,
   Amount,
@@ -14,12 +17,10 @@ import {
   TextSize,
 } from '../../../../types';
 import { Container, ContainerProps } from '../../../layout/Container';
-import { Input, InputProps } from './Input';
 import { Icon, IconProps } from '../../../media/Icon';
 import { ProgressSpinner } from '../../../progress/ProgressSpinner';
 import { InputLabel } from '../../labels/InputLabel';
-import { ValidationProblem } from '@srclaunch/types';
-import { validate } from '@srclaunch/validation';
+import { Input, InputProps } from './Input';
 
 export type InputContainerProps<V> = ContainerProps &
   InputProps<V> & {
@@ -40,7 +41,7 @@ export const InputContainer = memo(
     defaultValue,
     events = {},
     icon = {},
-    label = undefined,
+    label,
     lineHeight = Sizes.Default,
     max,
     maxLength,
@@ -65,7 +66,10 @@ export const InputContainer = memo(
 
     useEffect(() => {
       if (valueChanged && validation?.conditions) {
-        const probs = validate(value, validation?.conditions);
+        const probs = validate(
+          value,
+          validation?.conditions,
+        ) as ValidationProblem[];
 
         setProblems(probs && probs.length > 0 ? probs : undefined);
 
@@ -77,12 +81,10 @@ export const InputContainer = memo(
             },
             value,
           });
-      } else {
-        if (events.input?.onValueChange)
-          events.input?.onValueChange({
-            value,
-          });
-      }
+      } else if (events.input?.onValueChange)
+        events.input?.onValueChange({
+          value,
+        });
     }, [value]);
 
     return (
@@ -174,6 +176,7 @@ export const InputContainer = memo(
             children
           ) : (
             <Input
+              defaultValue={defaultValue}
               events={{
                 focus: {
                   onBlur: e => {

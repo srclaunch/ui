@@ -55,7 +55,10 @@ export const DropdownInput = memo(
     useEffect(() => {
       if (valueChanged) {
         if (validation && validation?.conditions) {
-          const probs = validate(item, validation.conditions);
+          const probs = validate(
+            item,
+            validation.conditions,
+          ) as ValidationProblem[];
 
           setProblems(probs);
 

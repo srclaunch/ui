@@ -1,6 +1,6 @@
 import { memo, ReactElement } from 'react';
+import { NotificationType } from '@srclaunch/web-application-state';
 import { NotificationLabel } from '../notifications/NotificationLabel';
-import { NotificationType } from '@srclaunch/types';
 
 export type ConnectionStatusProps = {
   pollingInterval?: number;

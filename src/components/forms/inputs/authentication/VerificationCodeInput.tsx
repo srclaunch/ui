@@ -1,9 +1,13 @@
-import { ChangeEvent, memo, useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
-import { Condition } from '@srclaunch/types';
+import { Condition, ValidationProblem } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
-import { Container, ContainerProps } from '../../../layout/Container';
-import { InputContainer } from '../shared/InputContainer';
+import {
+  ChangeEvent,
+  memo,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import {
   AlignHorizontal,
@@ -16,6 +20,7 @@ import {
   TextColors,
   TextSize,
 } from '../../../../types';
+import { Container, ContainerProps } from '../../../layout/Container';
 
 export enum VerificationCodeType {
   Alpha = 'alpha',
@@ -23,15 +28,13 @@ export enum VerificationCodeType {
   Numeric = 'numeric',
 }
 
-import { TextInput, TextInputProps } from '../text/TextInput';
-import { NumberInput } from '../numbers/NumberInput';
-import { TextProps } from '../../../typography/Text';
 import { InputProps } from '../shared/Input';
+import { TextInput } from '../text/TextInput';
 
 type VerificationCodeInputProps = ContainerProps &
   InputProps<string> & {
-    length?: number;
-    codeType?: VerificationCodeType;
+    readonly length?: number;
+    readonly codeType?: VerificationCodeType;
   };
 
 export const VerificationCodeInput = memo(
@@ -48,16 +51,17 @@ export const VerificationCodeInput = memo(
     textColor = TextColors.Dark,
     codeType = VerificationCodeType.Numeric,
     ...props
-  }: VerificationCodeInputProps): React.ReactElement => {
+  }: VerificationCodeInputProps): ReactElement => {
     const [codeParts, setCodeParts] = useState<{
       [key: number]: string | undefined;
     }>({});
-    const [code, setCode] = useState<undefined | string>();
     const codePartsRef = useRef(codeParts);
-    const [focusedKey, setFocusedKey] = useState<number | undefined>(undefined);
+    const [code, setCode] = useState<undefined | string>();
+    const codeRef = useRef(code);
 
     useEffect(() => {
-      setCode(Object.values(codeParts).join(''));
+      codeRef.current = Object.values(codePartsRef.current).join('');
+      setCode(codeRef.current);
     }, [codeParts]);
 
     useEffect(() => {
@@ -85,20 +89,17 @@ export const VerificationCodeInput = memo(
         ...typeCondition,
       };
 
-      const probs = validate(code, validation);
+      const probs = validate(codeRef, validation) as ValidationProblem[];
 
       if (events.input?.onValueChange)
         events.input?.onValueChange({
           validation: {
             problems: probs,
-            validated: !probs.length,
+            validated: probs.length === 0,
           },
-          value: code as VerificationCodeType,
+          value: codeRef.current,
         });
     }, [code]);
-
-    console.log('coeParts', codeParts);
-    console.log('code', code);
 
     return (
       <Container
@@ -110,13 +111,18 @@ export const VerificationCodeInput = memo(
         className={`${className} verification-code-input`}
         {...props}
       >
-        {Array.from(Array(length)).map((_, key) => {
+        {Array.from(new Array(length)).map((_, key) => {
           return (
             <TextInput
+              defaultValue={codeParts[key]}
               id={`${name}-verification-code-input-${key}`}
               events={{
+                ...events,
                 clipboard: {
+                  ...events.clipboard,
                   onPaste: e => {
+                    console.log('onPaste', e);
+
                     if (key === 0) {
                       const pastedText = e.clipboardData.getData('Text');
 
@@ -127,7 +133,8 @@ export const VerificationCodeInput = memo(
                       ) {
                         let obj = {};
                         let i = 0;
-                        for (const val of [...pastedText]) {
+
+                        for (const val of pastedText) {
                           const prop = { [i]: val };
 
                           obj = { ...obj, ...prop };
@@ -139,18 +146,13 @@ export const VerificationCodeInput = memo(
                       }
                     }
                   },
-                  ...events.clipboard,
                 },
                 input: {
                   onChange: (e: ChangeEvent<HTMLInputElement>) => {
-                    console.log('codePartsRef,', codePartsRef);
-                    console.log('e', e);
-
                     // @ts-ignore
                     if (e.nativeEvent.inputType !== 'insertFromPaste') {
                       const currentCodePart = codePartsRef.current?.[key];
 
-                      console.log('curentCodePart', currentCodePart);
                       if (
                         e.target.value.length === 1 ||
                         e.target.value.length === 0
@@ -187,14 +189,9 @@ export const VerificationCodeInput = memo(
                       }
                     }
                   },
-                  onValueChange: ({ value }) => {
-                    console.log('VALUE', value);
-                  },
                 },
                 keyboard: {
-                  onKeyPress: e => {
-                    console.log('e', e);
-                  },
+                  ...events.keyboard,
                   onKeyDown: e => {
                     if (
                       e.key === 'Delete' ||
@@ -210,9 +207,7 @@ export const VerificationCodeInput = memo(
                       }
                     }
                   },
-                  ...events.keyboard,
                 },
-                ...events,
               }}
               key={key}
               lineHeight={Sizes.Largest}
@@ -220,20 +215,12 @@ export const VerificationCodeInput = memo(
                 left: Amount.Least,
                 right: Amount.Least,
               }}
-              // max={codeType === VerificationCodeType.Numeric ? 9 : 'unset'}
-              // min={codeType === VerificationCodeType.Numeric ? 0 : 'unset'}
               max={9}
               maxLength={1}
               min={0}
               size={{ height: Sizes.Largest, width: Sizes.Largest }}
               textAlign={TextAlign.Center}
               textSize={TextSize.Larger}
-              value={
-                codePartsRef.current[key]
-                  ? codePartsRef.current[key]
-                  : undefined
-              }
-              // {...props}
             />
           );
         })}
