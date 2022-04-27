@@ -3,7 +3,7 @@
   "description": "SrcLaunch UI React component library",
   "author": "Steven Bennett <steven@srclaunch.com>",
   "license": "MIT",
-  "version": "0.1.197",
+  "version": "0.1.198",
   "engines": {
     "node": ">=16"
   },
