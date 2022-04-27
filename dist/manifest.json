@@ -1,7 +1,0 @@
-{
-  "src/index.tsx": {
-    "file": "index.umd.js",
-    "src": "src/index.tsx",
-    "isEntry": true
-  }
-}

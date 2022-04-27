@@ -1,1 +1,0 @@
-{"version":3,"file":"UserMenu.d.ts","sourceRoot":"","sources":["../../../src/components/user/UserMenu.tsx"],"names":[],"mappings":"AAOA,OAAO,EAAQ,YAAY,EAAuB,MAAM,OAAO,CAAC;AAGhE,OAAO,EAAc,eAAe,EAAE,MAAM,6BAA6B,CAAC;AAE1E,aAAK,aAAa,GAAG,eAAe,GAAG;IACrC,QAAQ,CAAC,eAAe,CAAC,EAAE,MAAM,OAAO,CAAC;CAC1C,CAAC;AAEF,eAAO,MAAM,QAAQ,oEACgB,aAAa,KAAG,YAAY,CA+DhE,CAAC"}
