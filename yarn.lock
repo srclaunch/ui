@@ -2150,7 +2150,7 @@ __metadata:
     "@srclaunch/transform": ^0.1.5
     "@srclaunch/types": ^0.1.99
     "@srclaunch/validation": ^0.1.26
-    "@srclaunch/web-application-state": ^0.1.58
+    "@srclaunch/web-application-state": ^0.1.60
     "@stripe/react-stripe-js": ^1.7.2
     "@stripe/stripe-js": ^1.29.0
     "@testing-library/jest-dom": ^5.16.4
@@ -2162,7 +2162,7 @@ __metadata:
     "@types/node": ^17.0.29
     "@types/pluralize": ^0.0.29
     "@types/react": ^18.0.8
-    "@types/react-dom": ^18.0.0
+    "@types/react-dom": ^18.0.2
     "@types/react-is": ^17.0.3
     "@types/react-router": ^5.1.18
     "@types/react-router-dom": ^5.3.3
@@ -2259,9 +2259,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@srclaunch/web-application-state@npm:^0.1.58":
-  version: 0.1.58
-  resolution: "@srclaunch/web-application-state@npm:0.1.58"
+"@srclaunch/web-application-state@npm:^0.1.60":
+  version: 0.1.60
+  resolution: "@srclaunch/web-application-state@npm:0.1.60"
   dependencies:
     "@reduxjs/toolkit": ^1.8.1
     "@srclaunch/exceptions": ^0.1.58
@@ -2283,7 +2283,7 @@ __metadata:
   peerDependencies:
     react: ^18.1.0
     react-dom: ^18.1.0
-  checksum: 4f00f2c4df53c82bdea39fa121802ea3e78305673fd0e9cefda3789be2902d3bb6761eecdae9a0ea99d77d97b319f59319f5f6da83dcd0f8f2c3e7939420de53
+  checksum: f250594e85c8a806f76fe028133b964e4d602895fd520ec1dd05dee801eb8651a2afb730f648c1a2f1a4c5eff7ca53376cf488de3fd8055804e8140fc38594d6
   languageName: node
   linkType: hard
 
@@ -2656,7 +2656,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.0":
+"@types/react-dom@npm:^18.0.0, @types/react-dom@npm:^18.0.2":
   version: 18.0.2
   resolution: "@types/react-dom@npm:18.0.2"
   dependencies:
