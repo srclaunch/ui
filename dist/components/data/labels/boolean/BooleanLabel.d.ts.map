@@ -1,0 +1,1 @@
+{"version":3,"file":"BooleanLabel.d.ts","sourceRoot":"","sources":["../../../../../src/components/data/labels/boolean/BooleanLabel.tsx"],"names":[],"mappings":"AAAA,OAAO,EAAQ,YAAY,EAAE,MAAM,OAAO,CAAC;AAE3C,OAAO,EAAS,UAAU,EAAE,MAAM,2BAA2B,CAAC;AAI9D,aAAK,iBAAiB,GAAG,UAAU,GAAG;IACpC,KAAK,EAAE,OAAO,CAAC;CAChB,CAAC;AAEF,eAAO,MAAM,YAAY,mGAQpB,iBAAiB,KAAG,YAAY,CAkBpC,CAAC"}
