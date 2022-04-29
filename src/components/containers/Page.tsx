@@ -23,7 +23,7 @@ export const Page = memo(
     title,
     ...props
   }: PageProps): ReactElement => {
-    useTitle(title);
+    useTitle(title ?? '');
 
     const PageComp = () => (
       <Container

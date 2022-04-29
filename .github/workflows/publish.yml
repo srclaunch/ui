@@ -41,6 +41,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.x'
+          cache: 'yarn'
 
       - name: Enable corepack
         run: corepack enable
@@ -75,6 +76,7 @@ jobs:
             dist
             package.json
             README.md
+            LICENSE.md
             yarn.lock
 
   test:
@@ -89,6 +91,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '16.x'
+          cache: 'yarn'
 
       - name: Enable corepack
         run: corepack enable

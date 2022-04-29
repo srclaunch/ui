@@ -1,7 +1,7 @@
 import { Condition, CurrencyAmount, ValidationProblem } from '@srclaunch/types';
 import { validate } from '@srclaunch/validation';
 import { memo, ReactElement, useEffect, useRef, useState } from 'react';
-import CurrencyInputField from 'react-currency-input-field';
+// import CurrencyInputField from 'react-currency-input-field';
 
 import {
   Amount,
@@ -109,7 +109,7 @@ export const CurrencyAmountInput = memo(
           >
             $
           </Label>
-
+          {/* 
           <CurrencyInputField
             className="currency-input"
             onBlur={() => setFocused(false)}
@@ -130,7 +130,7 @@ export const CurrencyAmountInput = memo(
 
               fontWeight: textWeight,
             }}
-          />
+          /> */}
         </InputContainer>
       </>
     );

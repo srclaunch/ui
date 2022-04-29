@@ -41,7 +41,7 @@ export const Workspace = memo(
     title,
     ...props
   }: WorkspaceProps): ReactElement => {
-    useTitle(title);
+    useTitle(title ?? '');
 
     const WorkspaceComp = (props2: any) => (
       <Container

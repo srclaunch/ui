@@ -4,7 +4,7 @@ import {
   validate,
 } from '@srclaunch/validation';
 import { memo, ReactElement, useEffect, useState } from 'react';
-import PasswordStrengthBar from 'react-password-strength-bar';
+// import PasswordStrengthBar from 'react-password-strength-bar';
 
 import { Amount, AutoComplete, InputType } from '../../../../types';
 import { InputLabel } from '../../labels/InputLabel';
@@ -39,12 +39,12 @@ export const PasswordInput = memo(
 
     return (
       <>
-        {showPasswordStrength && (
+        {/* {showPasswordStrength && (
           <PasswordStrengthBar
             className="password-strength-label"
             password={password}
           />
-        )}
+        )} */}
 
         <TextInput
           autoComplete={

@@ -1,4 +1,4 @@
-import { PageRole, PageRoute } from '@srclaunch/types';
+import { RouteRole, Route } from '@srclaunch/types';
 import { memo, ReactElement } from 'react';
 
 import { Introduction } from './pages/Introduction';
@@ -35,7 +35,7 @@ export const getRoutes = (components?: Component[]): Component[] => {
   return routes;
 };
 
-export const ComponentLibraryPage = memo(({ children }): ReactElement => {
+export const ComponentLibraryPage = memo((): ReactElement => {
   const routes = getRoutes(componentLibrary.components);
 
   return (
@@ -48,7 +48,7 @@ export const ComponentLibraryPage = memo(({ children }): ReactElement => {
         {
           component: PageNotFound,
           path: '*',
-          role: PageRole.PageNotFound,
+          role: RouteRole.PageNotFound,
         },
       ]}
     />
@@ -62,6 +62,6 @@ export default [
   },
   {
     component: Introduction,
-    role: PageRole.Index,
+    role: RouteRole.Index,
   },
-] as PageRoute[];
+] as Route[];

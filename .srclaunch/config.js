@@ -4,6 +4,7 @@ import {
   BuildTarget,
   BuildTool,
   ProjectType,
+  RunTool,
   TestReporter,
   TestTool,
 } from '@srclaunch/types';
@@ -14,7 +15,11 @@ export default {
   type: ProjectType.Library,
   build: {
     bundle: {
-      exclude: ['react'],
+      exclude: ['react', 'react-dom', 'styled-components'],
+      globals: {
+        react: 'React',
+        'styled-components': 'styled',
+      },
     },
     input: {
       directory: 'src',
@@ -24,6 +29,21 @@ export default {
     platform: BuildPlatform.Browser,
     target: BuildTarget.ESNext,
     tool: BuildTool.Vite,
+  },
+  run: {
+    development: {
+      ssr: false,
+      tool: RunTool.Vite,
+    },
+    preview: {
+      ssr: false,
+    },
+    qa: {
+      ssr: false,
+    },
+    production: {
+      ssr: false,
+    },
   },
   test: {
     coverage: {
