@@ -18,6 +18,7 @@ export default {
       exclude: ['react', 'react-dom', 'styled-components'],
       globals: {
         react: 'React',
+        'react-dom': 'ReactDOM',
         'styled-components': 'styled',
       },
     },
@@ -50,6 +51,5 @@ export default {
       reporters: [TestReporter.Lcov, TestReporter.JSONSummary],
     },
     tool: TestTool.Jest,
-    verbose: true,
   },
 };
