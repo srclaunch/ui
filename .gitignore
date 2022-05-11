@@ -1,20 +1,8 @@
-
-# dotenv file
 .env
-
-# Mac OS artifacts
 .DS_Store
-
-# NPM dependencies
-node_modules
-
-# Build output
-dist
-
-# Test coverage
 coverage
-
-# Yarn 2 files
+dist
+node_modules
 .yarn/*
 !.yarn/cache
 !.yarn/patches
