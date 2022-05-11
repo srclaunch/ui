@@ -1,0 +1,89 @@
+# import {
+#   BrowserPackage,
+#   BuildFormat,
+#   BuildPlatform,
+#   BuildTarget,
+#   BuildTool,
+#   CodeFormatterTool,
+#   CodeLinterTool,
+#   License,
+#   Project,
+#   ProjectType,
+#   PublishAccess,
+#   RunTool,
+#   StaticTypingTool,
+#   TestReporter,
+#   TestTool,
+#   UniversalPackage,
+# } from '@srclaunch/types';
+# const config: Project = {
+name: '@srclaunch/ui'
+description: SrcLaunch UI React component library
+type: library
+build:
+  bundle:
+    exclude:
+      - react
+      - react-dom
+      - styled-components
+    globals:
+      react: React
+      react-dom: ReactDOM
+      styled-components: styled
+  input:
+    directory: src
+    file: index.tsx
+  formats:
+    - esm
+    - umd
+  platform: browser
+  target: esnext
+  tool: vite
+environments:
+  development:
+    formatters:
+      - prettier
+    linters:
+      - eslint
+      - stylelint
+    staticTyping:
+      - typescript
+test:
+  coverage:
+    reporters:
+      - lcov
+      - json-summary
+  tool: jest
+release:
+  publish:
+    access: public
+    license: MIT
+    registry: https://registry.npmjs.org/
+requirements:
+  node: '>=16'
+  yarn: '>=3.2.0'
+  packages:
+    - amazon-cognito-identity-js
+    - history
+    - crypto-js
+    - 'luxon'
+    - 'nanoid'
+    - '@srclaunch/exceptions'
+    - '@srclaunch/http-client'
+    - '@srclaunch/i18n'
+    - '@srclaunch/logger'
+    - '@srclaunch/themes'
+    - '@srclaunch/web-environment'
+    - '@srclaunch/validation'
+  peerPackages:
+    - react
+    - react-dom
+    - react-redux
+    - react-router
+    - redux
+    - '@reduxjs/toolkit'
+    - styled-components
+  srclaunch:
+    dx: true
+    cli: true
+    types: true
