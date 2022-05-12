@@ -17,7 +17,7 @@ import {
 export default <Project>{
   name: "@srclaunch/ui",
   description: "SrcLaunch UI React component library",
-  type: ProjectType.Library,
+  type: ProjectType.ComponentLibrary,
   build: {
     bundle: {
       exclude: ["react", "react-dom", "styled-components"],
