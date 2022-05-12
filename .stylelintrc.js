@@ -1,1 +1,1 @@
-"import base from '@srclaunch/dx/.stylelintrc';\n\nexport default {\n  ...base\n};"
+"import base from '@srclaunch/dx/.stylelintrc.ui';\n\nexport default {\n  ...base\n};"

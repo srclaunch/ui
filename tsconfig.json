@@ -1,4 +1,4 @@
 {
-  "extends": "@srclaunch/dx/tsconfig.json",
+  "extends": "@srclaunch/dx/tsconfig.ui.json",
   "include": ["src"]
 }
