@@ -17,7 +17,7 @@
 #   UniversalPackage,
 # } from '@srclaunch/types';
 # const config: Project = {
-name: '@srclaunch/ui'
+name: "@srclaunch/ui"
 description: SrcLaunch UI React component library
 type: library
 build:
@@ -60,29 +60,29 @@ release:
     license: MIT
     registry: https://registry.npmjs.org/
 requirements:
-  node: '>=16'
-  yarn: '>=3.2.0'
+  node: ">=16"
+  yarn: ">=3.2.0"
   packages:
     - amazon-cognito-identity-js
     - history
     - crypto-js
-    - 'luxon'
-    - 'nanoid'
-    - '@srclaunch/exceptions'
-    - '@srclaunch/http-client'
-    - '@srclaunch/i18n'
-    - '@srclaunch/logger'
-    - '@srclaunch/themes'
-    - '@srclaunch/web-environment'
-    - '@srclaunch/validation'
+    - "luxon"
+    - "nanoid"
+    - "@srclaunch/exceptions"
+    - "@srclaunch/http-client"
+    - "@srclaunch/i18n"
+    - "@srclaunch/logger"
+    - "@srclaunch/themes"
+    - "@srclaunch/web-environment"
+    - "@srclaunch/validation"
+    - styled-components
   peerPackages:
     - react
     - react-dom
     - react-redux
     - react-router
     - redux
-    - '@reduxjs/toolkit'
-    - styled-components
+    - "@reduxjs/toolkit"
   srclaunch:
     dx: true
     cli: true

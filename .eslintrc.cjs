@@ -1,5 +1,1 @@
-const base = require('@srclaunch/dx/.eslintrc.ui');
-
-module.exports = {
-  ...base,
-};
+"const base = require('@srclaunch/dx/.eslintrc');\n\nmodule.exports = {\n  ...base\n};"

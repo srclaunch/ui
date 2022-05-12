@@ -1,5 +1,4 @@
 {
-  "extends": "@srclaunch/dx/tsconfig.ui.json",
-  "include": ["src"],
-  "exclude": ["src/components/__deprecated__"]
+  "extends": "@srclaunch/dx/tsconfig.json",
+  "include": ["src"]
 }

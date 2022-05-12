@@ -1,5 +1,1 @@
-const base = require('@srclaunch/dx/.prettierrc');
-
-module.exports = {
-  ...base,
-};
+"const base = require('@srclaunch/dx/.prettierrc');\n\nmodule.exports = {\n  ...base,\n};\n"
