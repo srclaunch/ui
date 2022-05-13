@@ -35,7 +35,11 @@
     "test:coverage": "yarn srclaunch test --coverage",
     "release": "yarn srclaunch release"
   },
-  "dependencies": {},
+  "dependencies": {
+    "history": "5.3.0"
+  },
   "devDependencies": {},
-  "peerDependencies": {}
+  "peerDependencies": {
+    "history": "5.3.0"
+  }
 }
