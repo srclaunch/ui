@@ -81,63 +81,10 @@
               yarn.lock
 
 
-    test:
-      name: Run tests
-      runs-on: ubuntu-latest
-      needs: [env-vars, build]
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
-
-        - name: Use Node.js 16.x
-          uses: actions/setup-node@v3
-          with:
-            node-version: '16.x'
-            cache: 'yarn'
-
-        - name: Enable corepack
-          run: corepack enable
-  
-        - name: Enable Yarn Berry
-          run: yarn set version stable
-  
-        - uses: actions/cache@v3
-          id: yarn-cache
-          with:
-            path: |
-              .yarn/cache
-              .yarn/patches
-              .yarn/plugins
-              .yarn/releases
-              .yarn/sdks
-              .yarn/versions
-            key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-            restore-keys: |
-              ${{ runner.os }}-yarn-
-
-        - name: Install dependencies
-          run: yarn install
-          env:
-            NODE_ENV: test
-
-        - name: Run tests and collect testing coverage
-          run: yarn test:coverage
-
-        - name: Archive code coverage results
-          uses: actions/upload-artifact@v3
-          with:
-            name: '${{ github.event.repository.owner.login }}-${{ github.event.repository.name }}-${{ needs.env-vars.outputs.branch }}-code-coverage.json'
-            path: coverage/coverage-summary.json
-
-        - name: Upload test coverage to Coveralls
-          uses: coverallsapp/github-action@master
-          with:
-            github-token: ${{ secrets.GITHUB_TOKEN }}
-
 
     publish:
       name: Publish package
-      needs: [env-vars, build, test]
+      needs: [env-vars, build]
       runs-on: ubuntu-latest
       steps:
         - name: Download a single artifact
