@@ -12,6 +12,7 @@ import {
   PublishAccess,
   TestReporter,
   TestTool,
+  RunTool,
 } from "@srclaunch/types";
 
 export default <Project>{
@@ -43,12 +44,13 @@ export default <Project>{
       staticTyping: [StaticTypingTool.TypeScript],
     },
   },
-  test: {
-    coverage: {
-      reporters: [TestReporter.Lcov, TestReporter.JSONSummary],
-    },
-    tool: TestTool.Jest,
-  },
+  peerPackages: [
+    "@reduxjs/toolkit",
+    "react-dom",
+    "react-redux",
+    "react-router",
+    "redux",
+  ],
   release: {
     publish: {
       access: PublishAccess.Public,
@@ -75,17 +77,21 @@ export default <Project>{
       "react",
       "styled-components",
     ],
-    peerPackages: [
-      "@reduxjs/toolkit",
-      "react-dom",
-      "react-redux",
-      "react-router",
-      "redux",
-    ],
+    run: {
+      development: {
+        tool: RunTool.Vite,
+      },
+    },
     srclaunch: {
       dx: true,
       cli: true,
       types: true,
+    },
+    test: {
+      coverage: {
+        reporters: [TestReporter.Lcov, TestReporter.JSONSummary],
+      },
+      tool: TestTool.Jest,
     },
   },
 };
